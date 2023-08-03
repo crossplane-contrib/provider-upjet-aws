@@ -118,6 +118,21 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.ForProvider.EndpointDetails[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingRole),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.LoggingRoleRef,
+		Selector:     mg.Spec.ForProvider.LoggingRoleSelector,
+		To: reference.To{
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoggingRole")
+	}
+	mg.Spec.ForProvider.LoggingRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoggingRoleRef = rsp.ResolvedReference
 
 	return nil
 }

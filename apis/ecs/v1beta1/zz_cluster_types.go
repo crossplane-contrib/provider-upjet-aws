@@ -18,9 +18,6 @@ type ClusterInitParameters struct {
 	// The execute command configuration for the cluster. Detailed below.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// Configuration block for capacity provider strategy to use by default for the cluster. Can be one or more. Detailed below.
-	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyInitParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
-
 	// Configures a default Service Connect namespace. Detailed below.
 	ServiceConnectDefaults []ServiceConnectDefaultsInitParameters `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
 
@@ -36,14 +33,8 @@ type ClusterObservation struct {
 	// ARN that identifies the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// List of short names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
-	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
-
 	// The execute command configuration for the cluster. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
-
-	// Configuration block for capacity provider strategy to use by default for the cluster. Can be one or more. Detailed below.
-	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyObservation `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
 	// ARN that identifies the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -66,10 +57,6 @@ type ClusterParameters struct {
 	// The execute command configuration for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
-
-	// Configuration block for capacity provider strategy to use by default for the cluster. Can be one or more. Detailed below.
-	// +kubebuilder:validation:Optional
-	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -106,45 +93,6 @@ type ConfigurationParameters struct {
 	// The details of the execute command configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	ExecuteCommandConfiguration []ExecuteCommandConfigurationParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
-}
-
-type DefaultCapacityProviderStrategyInitParameters struct {
-
-	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
-
-	// The short name of the capacity provider.
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
-
-	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
-type DefaultCapacityProviderStrategyObservation struct {
-
-	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
-
-	// The short name of the capacity provider.
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
-
-	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
-type DefaultCapacityProviderStrategyParameters struct {
-
-	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
-	// +kubebuilder:validation:Optional
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
-
-	// The short name of the capacity provider.
-	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
-
-	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
-	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ExecuteCommandConfigurationInitParameters struct {

@@ -462,6 +462,36 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  offPeakWindowOptions:
+                    description: Configuration to add Off Peak update options. (documentation).
+                      Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enabled disabled toggle for off-peak update
+                            window.
+                          type: boolean
+                        offPeakWindow:
+                          items:
+                            properties:
+                              windowStartTime:
+                                description: 10h window for updates
+                                items:
+                                  properties:
+                                    hours:
+                                      description: Starting hour of the 10-hour window
+                                        for updates
+                                      type: number
+                                    minutes:
+                                      description: Starting minute of the 10-hour
+                                        window for updates
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -814,6 +844,36 @@ spec:
                             of a new domain requires an engine_version of OpenSearch_X.Y
                             or Elasticsearch_6.0 or greater.
                           type: boolean
+                      type: object
+                    type: array
+                  offPeakWindowOptions:
+                    description: Configuration to add Off Peak update options. (documentation).
+                      Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enabled disabled toggle for off-peak update
+                            window.
+                          type: boolean
+                        offPeakWindow:
+                          items:
+                            properties:
+                              windowStartTime:
+                                description: 10h window for updates
+                                items:
+                                  properties:
+                                    hours:
+                                      description: Starting hour of the 10-hour window
+                                        for updates
+                                      type: number
+                                    minutes:
+                                      description: Starting minute of the 10-hour
+                                        window for updates
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                       type: object
                     type: array
                   snapshotOptions:
@@ -1347,9 +1407,8 @@ spec:
                   id:
                     type: string
                   kibanaEndpoint:
-                    description: Domain-specific endpoint for kibana without https
-                      scheme. OpenSearch Dashboards do not use Kibana, so this attribute
-                      will be DEPRECATED in a future version.
+                    description: (Deprecated) Domain-specific endpoint for kibana
+                      without https scheme. Use the dashboard_endpoint attribute instead.
                     type: string
                   logPublishingOptions:
                     description: Configuration block for publishing slow and application
@@ -1384,6 +1443,36 @@ spec:
                             of a new domain requires an engine_version of OpenSearch_X.Y
                             or Elasticsearch_6.0 or greater.
                           type: boolean
+                      type: object
+                    type: array
+                  offPeakWindowOptions:
+                    description: Configuration to add Off Peak update options. (documentation).
+                      Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enabled disabled toggle for off-peak update
+                            window.
+                          type: boolean
+                        offPeakWindow:
+                          items:
+                            properties:
+                              windowStartTime:
+                                description: 10h window for updates
+                                items:
+                                  properties:
+                                    hours:
+                                      description: Starting hour of the 10-hour window
+                                        for updates
+                                      type: number
+                                    minutes:
+                                      description: Starting minute of the 10-hour
+                                        window for updates
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                       type: object
                     type: array
                   snapshotOptions:

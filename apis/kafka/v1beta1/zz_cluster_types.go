@@ -49,9 +49,6 @@ type BrokerNodeGroupInfoInitParameters struct {
 	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	ConnectivityInfo []ConnectivityInfoInitParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
-	// The size in GiB of the EBS volume for the data drive on each broker node.
-	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
-
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -69,9 +66,6 @@ type BrokerNodeGroupInfoObservation struct {
 
 	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	ConnectivityInfo []ConnectivityInfoObservation `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
-
-	// The size in GiB of the EBS volume for the data drive on each broker node.
-	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -105,10 +99,6 @@ type BrokerNodeGroupInfoParameters struct {
 	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	// +kubebuilder:validation:Optional
 	ConnectivityInfo []ConnectivityInfoParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
-
-	// The size in GiB of the EBS volume for the data drive on each broker node.
-	// +kubebuilder:validation:Optional
-	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	// +kubebuilder:validation:Optional

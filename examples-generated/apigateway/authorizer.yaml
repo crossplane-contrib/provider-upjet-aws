@@ -47,7 +47,7 @@ metadata:
   name: invocation-role
 spec:
   forProvider:
-    assumeRolePolicy: ${data.aws_iam_role_policy_document.assume_role.json}
+    assumeRolePolicy: ${data.aws_iam_policy_document.invocation_assume_role.json}
     path: /
 
 ---

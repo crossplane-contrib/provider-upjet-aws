@@ -95,7 +95,7 @@ spec:
                   instanceId:
                     description: The instance ID to apply an SSM document to. Use
                       targets with key InstanceIds for document schema versions 2.0
-                      and above.
+                      and above. Use the targets attribute instead.
                     type: string
                   maxConcurrency:
                     description: The maximum number of targets allowed to run the
@@ -282,7 +282,7 @@ spec:
                   instanceId:
                     description: The instance ID to apply an SSM document to. Use
                       targets with key InstanceIds for document schema versions 2.0
-                      and above.
+                      and above. Use the targets attribute instead.
                     type: string
                   maxConcurrency:
                     description: The maximum number of targets allowed to run the
@@ -584,7 +584,7 @@ spec:
                   instanceId:
                     description: The instance ID to apply an SSM document to. Use
                       targets with key InstanceIds for document schema versions 2.0
-                      and above.
+                      and above. Use the targets attribute instead.
                     type: string
                   maxConcurrency:
                     description: The maximum number of targets allowed to run the

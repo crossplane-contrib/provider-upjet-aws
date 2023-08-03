@@ -84,24 +84,25 @@ type NodeGroupInitParameters struct {
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Configuration block with Launch Template settings. Detailed below.
+	// Configuration block with Launch Template settings. See launch_template below for details.
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
-	// Configuration block with remote access settings. Detailed below.
+	// Configuration block with remote access settings. See remote_access below for details.
 	RemoteAccess []RemoteAccessInitParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
-	// Configuration block with scaling settings. Detailed below.
+	// Configuration block with scaling settings. See scaling_config below for details.
 	ScalingConfig []ScalingConfigInitParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
+	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. See taint below for details.
 	Taint []TaintInitParameters `json:"taint,omitempty" tf:"taint,omitempty"`
 
+	// Configuration block with update settings. See update_config below for details.
 	UpdateConfig []UpdateConfigInitParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 }
 
@@ -134,7 +135,7 @@ type NodeGroupObservation struct {
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Configuration block with Launch Template settings. Detailed below.
+	// Configuration block with Launch Template settings. See launch_template below for details.
 	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
@@ -143,13 +144,13 @@ type NodeGroupObservation struct {
 	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
-	// Configuration block with remote access settings. Detailed below.
+	// Configuration block with remote access settings. See remote_access below for details.
 	RemoteAccess []RemoteAccessObservation `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
 	// List of objects containing information about underlying resources.
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Configuration block with scaling settings. Detailed below.
+	// Configuration block with scaling settings. See scaling_config below for details.
 	ScalingConfig []ScalingConfigObservation `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
 	// Status of the EKS Node Group.
@@ -164,9 +165,10 @@ type NodeGroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
+	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. See taint below for details.
 	Taint []TaintObservation `json:"taint,omitempty" tf:"taint,omitempty"`
 
+	// Configuration block with update settings. See update_config below for details.
 	UpdateConfig []UpdateConfigObservation `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 
 	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
@@ -213,7 +215,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Configuration block with Launch Template settings. Detailed below.
+	// Configuration block with Launch Template settings. See launch_template below for details.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
@@ -240,11 +242,11 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
-	// Configuration block with remote access settings. Detailed below.
+	// Configuration block with remote access settings. See remote_access below for details.
 	// +kubebuilder:validation:Optional
 	RemoteAccess []RemoteAccessParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
-	// Configuration block with scaling settings. Detailed below.
+	// Configuration block with scaling settings. See scaling_config below for details.
 	// +kubebuilder:validation:Optional
 	ScalingConfig []ScalingConfigParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
@@ -267,10 +269,11 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
+	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. See taint below for details.
 	// +kubebuilder:validation:Optional
 	Taint []TaintParameters `json:"taint,omitempty" tf:"taint,omitempty"`
 
+	// Configuration block with update settings. See update_config below for details.
 	// +kubebuilder:validation:Optional
 	UpdateConfig []UpdateConfigParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
 

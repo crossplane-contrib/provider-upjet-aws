@@ -70,10 +70,6 @@ spec:
                   assignGeneratedIpv6CidrBlock:
                     description: and instance_tenancy arguments become computed attributes
                     type: boolean
-                  enableClassiclink:
-                    type: boolean
-                  enableClassiclinkDnsSupport:
-                    type: boolean
                   enableDnsHostnames:
                     description: is true
                     type: boolean
@@ -120,10 +116,6 @@ spec:
                 properties:
                   assignGeneratedIpv6CidrBlock:
                     description: and instance_tenancy arguments become computed attributes
-                    type: boolean
-                  enableClassiclink:
-                    type: boolean
-                  enableClassiclinkDnsSupport:
                     type: boolean
                   enableDnsHostnames:
                     description: is true
@@ -368,10 +360,6 @@ spec:
                     type: string
                   dhcpOptionsId:
                     type: string
-                  enableClassiclink:
-                    type: boolean
-                  enableClassiclinkDnsSupport:
-                    type: boolean
                   enableDnsHostnames:
                     description: is true
                     type: boolean

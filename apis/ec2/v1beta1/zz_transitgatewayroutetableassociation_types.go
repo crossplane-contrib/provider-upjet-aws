@@ -14,12 +14,18 @@ import (
 )
 
 type TransitGatewayRouteTableAssociationInitParameters struct {
+
+	// Boolean whether the Gateway Attachment should remove any current Route Table association before associating with the specified Route Table. Default value: false. This argument is intended for use with EC2 Transit Gateways shared into the current account, otherwise the transit_gateway_default_route_table_association argument of the aws_ec2_transit_gateway_vpc_attachment resource should be used.
+	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
 }
 
 type TransitGatewayRouteTableAssociationObservation struct {
 
 	// EC2 Transit Gateway Route Table identifier combined with EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Boolean whether the Gateway Attachment should remove any current Route Table association before associating with the specified Route Table. Default value: false. This argument is intended for use with EC2 Transit Gateways shared into the current account, otherwise the transit_gateway_default_route_table_association argument of the aws_ec2_transit_gateway_vpc_attachment resource should be used.
+	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
 
 	// Identifier of the resource
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -40,6 +46,10 @@ type TransitGatewayRouteTableAssociationParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Boolean whether the Gateway Attachment should remove any current Route Table association before associating with the specified Route Table. Default value: false. This argument is intended for use with EC2 Transit Gateways shared into the current account, otherwise the transit_gateway_default_route_table_association argument of the aws_ec2_transit_gateway_vpc_attachment resource should be used.
+	// +kubebuilder:validation:Optional
+	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment

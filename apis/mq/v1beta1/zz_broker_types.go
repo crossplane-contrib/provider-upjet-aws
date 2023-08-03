@@ -517,6 +517,9 @@ type UserInitParameters struct {
 	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	// Whether to set set replication user. Defaults to false.
+	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
+
 	// Username of the user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -528,6 +531,9 @@ type UserObservation struct {
 
 	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+
+	// Whether to set set replication user. Defaults to false.
+	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	// Username of the user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -546,6 +552,10 @@ type UserParameters struct {
 	// Password of the user. It must be 12 to 250 characters long, at least 4 unique characters, and must not contain commas.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Whether to set set replication user. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	// Username of the user.
 	// +kubebuilder:validation:Optional

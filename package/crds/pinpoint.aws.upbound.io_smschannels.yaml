@@ -34,8 +34,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SMSChannel is the Schema for the SMSChannels API. Provides a
-          Pinpoint SMS Channel resource.
+        description: SMSChannel is the Schema for the SMSChannels API. Use the
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,7 +67,7 @@ spec:
               forProvider:
                 properties:
                   applicationId:
-                    description: The application ID.
+                    description: ID of the application.
                     type: string
                   applicationIdRef:
                     description: Reference to a App in pinpoint to populate applicationId.
@@ -144,18 +143,18 @@ spec:
                         type: object
                     type: object
                   enabled:
-                    description: Whether the channel is enabled or disabled. Defaults
-                      to true.
+                    description: Whether the channel is enabled or disabled. By default,
+                      it is set to true.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   senderId:
-                    description: Sender identifier of your messages.
+                    description: Identifier of the sender for your messages.
                     type: string
                   shortCode:
-                    description: The Short Code registered with the phone provider.
+                    description: Short Code registered with the phone provider.
                     type: string
                 required:
                 - region
@@ -174,14 +173,14 @@ spec:
                   them, like an autoscaler.
                 properties:
                   enabled:
-                    description: Whether the channel is enabled or disabled. Defaults
-                      to true.
+                    description: Whether the channel is enabled or disabled. By default,
+                      it is set to true.
                     type: boolean
                   senderId:
-                    description: Sender identifier of your messages.
+                    description: Identifier of the sender for your messages.
                     type: string
                   shortCode:
-                    description: The Short Code registered with the phone provider.
+                    description: Short Code registered with the phone provider.
                     type: string
                 type: object
               managementPolicies:
@@ -387,25 +386,27 @@ spec:
               atProvider:
                 properties:
                   applicationId:
-                    description: The application ID.
+                    description: ID of the application.
                     type: string
                   enabled:
-                    description: Whether the channel is enabled or disabled. Defaults
-                      to true.
+                    description: Whether the channel is enabled or disabled. By default,
+                      it is set to true.
                     type: boolean
                   id:
                     type: string
                   promotionalMessagesPerSecond:
-                    description: Promotional messages per second that can be sent.
+                    description: Maximum number of promotional messages that can be
+                      sent per second.
                     type: number
                   senderId:
-                    description: Sender identifier of your messages.
+                    description: Identifier of the sender for your messages.
                     type: string
                   shortCode:
-                    description: The Short Code registered with the phone provider.
+                    description: Short Code registered with the phone provider.
                     type: string
                   transactionalMessagesPerSecond:
-                    description: Transactional messages per second that can be sent.
+                    description: Maximum number of transactional messages per second
+                      that can be sent.
                     type: number
                 type: object
               conditions:

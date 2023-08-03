@@ -503,6 +503,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   verifiedForSendingStatus:
                     description: Specifies whether or not the identity is verified.

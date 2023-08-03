@@ -628,11 +628,6 @@ spec:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
                           type: number
-                        ignoreHeadersRow:
-                          description: Deprecated. This setting has no effect. Will
-                            be removed in a future version. This setting has no effect,
-                            is deprecated, and will be removed in a future version
-                          type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
                             operations to the .csv output files only to indicate how
@@ -1284,11 +1279,6 @@ spec:
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
-                        ignoreHeadersRow:
-                          description: Deprecated. This setting has no effect. Will
-                            be removed in a future version. This setting has no effect,
-                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
@@ -1999,11 +1989,6 @@ spec:
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
-                        ignoreHeadersRow:
-                          description: Deprecated. This setting has no effect. Will
-                            be removed in a future version. This setting has no effect,
-                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT

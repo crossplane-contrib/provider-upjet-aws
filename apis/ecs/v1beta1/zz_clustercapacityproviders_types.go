@@ -13,52 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ClusterCapacityProvidersDefaultCapacityProviderStrategyInitParameters struct {
-
-	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
-
-	// Name of the capacity provider.
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
-
-	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
-type ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation struct {
-
-	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
-
-	// Name of the capacity provider.
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
-
-	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
-type ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters struct {
-
-	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
-	// +kubebuilder:validation:Optional
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
-
-	// Name of the capacity provider.
-	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
-
-	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
-	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
 type ClusterCapacityProvidersInitParameters struct {
 
 	// Set of names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
-	DefaultCapacityProviderStrategy []ClusterCapacityProvidersDefaultCapacityProviderStrategyInitParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
+	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyInitParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 }
 
 type ClusterCapacityProvidersObservation struct {
@@ -70,7 +31,7 @@ type ClusterCapacityProvidersObservation struct {
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
-	DefaultCapacityProviderStrategy []ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
+	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyObservation `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
 	// Same as cluster_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -97,12 +58,51 @@ type ClusterCapacityProvidersParameters struct {
 
 	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
 	// +kubebuilder:validation:Optional
-	DefaultCapacityProviderStrategy []ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
+	DefaultCapacityProviderStrategy []DefaultCapacityProviderStrategyParameters `json:"defaultCapacityProviderStrategy,omitempty" tf:"default_capacity_provider_strategy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+}
+
+type DefaultCapacityProviderStrategyInitParameters struct {
+
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type DefaultCapacityProviderStrategyObservation struct {
+
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Name of the capacity provider.
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
+type DefaultCapacityProviderStrategyParameters struct {
+
+	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+
+	// Name of the capacity provider.
+	// +kubebuilder:validation:Optional
+	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+
+	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 // ClusterCapacityProvidersSpec defines the desired state of ClusterCapacityProviders

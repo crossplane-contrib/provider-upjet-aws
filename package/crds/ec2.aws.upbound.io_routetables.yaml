@@ -420,9 +420,6 @@ spec:
                           description: Identifier of a VPC internet gateway or a virtual
                             private gateway.
                           type: string
-                        instanceId:
-                          description: Identifier of an EC2 instance.
-                          type: string
                         ipv6CidrBlock:
                           description: The Ipv6 CIDR block of the route.
                           type: string

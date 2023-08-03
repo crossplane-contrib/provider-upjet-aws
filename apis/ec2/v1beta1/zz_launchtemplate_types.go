@@ -393,33 +393,66 @@ type IAMInstanceProfileParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
-type InstanceMarketOptionsInitParameters struct {
+type InstanceMarketOptionsSpotOptionsInitParameters struct {
 
-	// The market type. Can be spot.
-	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+	// The required duration in minutes. This value must be a multiple of 60.
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
-	// The options for Spot Instance
-	SpotOptions []SpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
-type InstanceMarketOptionsObservation struct {
+type InstanceMarketOptionsSpotOptionsObservation struct {
 
-	// The market type. Can be spot.
-	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+	// The required duration in minutes. This value must be a multiple of 60.
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
-	// The options for Spot Instance
-	SpotOptions []SpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
-type InstanceMarketOptionsParameters struct {
+type InstanceMarketOptionsSpotOptionsParameters struct {
 
-	// The market type. Can be spot.
+	// The required duration in minutes. This value must be a multiple of 60.
 	// +kubebuilder:validation:Optional
-	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
-	// The options for Spot Instance
+	// The behavior when a Spot Instance is interrupted. Can be hibernate,
+	// stop, or terminate. (Default: terminate).
 	// +kubebuilder:validation:Optional
-	SpotOptions []SpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	// +kubebuilder:validation:Optional
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Can be one-time, or persistent.
+	// +kubebuilder:validation:Optional
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request.
+	// +kubebuilder:validation:Optional
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
 type InstanceRequirementsInitParameters struct {
@@ -840,7 +873,7 @@ type LaunchTemplateInitParameters_2 struct {
 
 	// The market (purchasing) option for the instance. See Market Options
 	// below for details.
-	InstanceMarketOptions []InstanceMarketOptionsInitParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
+	InstanceMarketOptions []LaunchTemplateInstanceMarketOptionsInitParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
 
 	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
 	InstanceRequirements []InstanceRequirementsInitParameters `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
@@ -895,6 +928,35 @@ type LaunchTemplateInitParameters_2 struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 }
 
+type LaunchTemplateInstanceMarketOptionsInitParameters struct {
+
+	// The market type. Can be spot.
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// The options for Spot Instance
+	SpotOptions []InstanceMarketOptionsSpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type LaunchTemplateInstanceMarketOptionsObservation struct {
+
+	// The market type. Can be spot.
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// The options for Spot Instance
+	SpotOptions []InstanceMarketOptionsSpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type LaunchTemplateInstanceMarketOptionsParameters struct {
+
+	// The market type. Can be spot.
+	// +kubebuilder:validation:Optional
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// The options for Spot Instance
+	// +kubebuilder:validation:Optional
+	SpotOptions []InstanceMarketOptionsSpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
 type LaunchTemplateMaintenanceOptionsInitParameters struct {
 
 	// Disables the automatic recovery behavior of your instance or sets it to default. Can be "default" or "disabled". See Recover your instance for more details.
@@ -916,59 +978,59 @@ type LaunchTemplateMaintenanceOptionsParameters struct {
 
 type LaunchTemplateMetadataOptionsInitParameters struct {
 
-	// Whether the metadata service is available. Can be enabled or disabled.
+	// Whether the metadata service is available. Can be "enabled" or "disabled". (Default: "enabled").
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
-	// Enables or disables the IPv6 endpoint for the instance metadata service. (Default: disabled).
+	// Enables or disables the IPv6 endpoint for the instance metadata service. Can be "enabled" or "disabled".
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64.
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. (Default: 1).
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be optional or required.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be "optional" or "required". (Default: "optional").
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
-	// Enables or disables access to instance tags from the instance metadata service. (Default: disabled).
+	// Enables or disables access to instance tags from the instance metadata service. Can be "enabled" or "disabled".
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
 type LaunchTemplateMetadataOptionsObservation struct {
 
-	// Whether the metadata service is available. Can be enabled or disabled.
+	// Whether the metadata service is available. Can be "enabled" or "disabled". (Default: "enabled").
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
-	// Enables or disables the IPv6 endpoint for the instance metadata service. (Default: disabled).
+	// Enables or disables the IPv6 endpoint for the instance metadata service. Can be "enabled" or "disabled".
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64.
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. (Default: 1).
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be optional or required.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be "optional" or "required". (Default: "optional").
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
-	// Enables or disables access to instance tags from the instance metadata service. (Default: disabled).
+	// Enables or disables access to instance tags from the instance metadata service. Can be "enabled" or "disabled".
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
 
 type LaunchTemplateMetadataOptionsParameters struct {
 
-	// Whether the metadata service is available. Can be enabled or disabled.
+	// Whether the metadata service is available. Can be "enabled" or "disabled". (Default: "enabled").
 	// +kubebuilder:validation:Optional
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
-	// Enables or disables the IPv6 endpoint for the instance metadata service. (Default: disabled).
+	// Enables or disables the IPv6 endpoint for the instance metadata service. Can be "enabled" or "disabled".
 	// +kubebuilder:validation:Optional
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64.
+	// The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Can be an integer from 1 to 64. (Default: 1).
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be optional or required.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Can be "optional" or "required". (Default: "optional").
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
-	// Enables or disables access to instance tags from the instance metadata service. (Default: disabled).
+	// Enables or disables access to instance tags from the instance metadata service. Can be "enabled" or "disabled".
 	// +kubebuilder:validation:Optional
 	InstanceMetadataTags *string `json:"instanceMetadataTags,omitempty" tf:"instance_metadata_tags,omitempty"`
 }
@@ -1037,7 +1099,7 @@ type LaunchTemplateObservation_2 struct {
 
 	// The market (purchasing) option for the instance. See Market Options
 	// below for details.
-	InstanceMarketOptions []InstanceMarketOptionsObservation `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
+	InstanceMarketOptions []LaunchTemplateInstanceMarketOptionsObservation `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
 
 	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
 	InstanceRequirements []InstanceRequirementsObservation `json:"instanceRequirements,omitempty" tf:"instance_requirements,omitempty"`
@@ -1180,7 +1242,7 @@ type LaunchTemplateParameters_2 struct {
 	// The market (purchasing) option for the instance. See Market Options
 	// below for details.
 	// +kubebuilder:validation:Optional
-	InstanceMarketOptions []InstanceMarketOptionsParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
+	InstanceMarketOptions []LaunchTemplateInstanceMarketOptionsParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
 
 	// The attribute requirements for the type of instance. If present then instance_type cannot be present.
 	// +kubebuilder:validation:Optional
@@ -1796,68 +1858,6 @@ type PlacementParameters struct {
 	// The tenancy of the instance (if the instance is running in a VPC). Can be default, dedicated, or host.
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
-}
-
-type SpotOptionsInitParameters struct {
-
-	// The required duration in minutes. This value must be a multiple of 60.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. (Default: terminate).
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price you're willing to pay for the Spot Instances.
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Can be one-time, or persistent.
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request.
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
-}
-
-type SpotOptionsObservation struct {
-
-	// The required duration in minutes. This value must be a multiple of 60.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. (Default: terminate).
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price you're willing to pay for the Spot Instances.
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Can be one-time, or persistent.
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request.
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
-}
-
-type SpotOptionsParameters struct {
-
-	// The required duration in minutes. This value must be a multiple of 60.
-	// +kubebuilder:validation:Optional
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	// The behavior when a Spot Instance is interrupted. Can be hibernate,
-	// stop, or terminate. (Default: terminate).
-	// +kubebuilder:validation:Optional
-	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
-
-	// The maximum hourly price you're willing to pay for the Spot Instances.
-	// +kubebuilder:validation:Optional
-	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
-
-	// The Spot Instance request type. Can be one-time, or persistent.
-	// +kubebuilder:validation:Optional
-	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
-
-	// The end date of the request.
-	// +kubebuilder:validation:Optional
-	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
 type TagSpecificationsInitParameters struct {

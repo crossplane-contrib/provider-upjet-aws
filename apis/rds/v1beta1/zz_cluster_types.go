@@ -27,10 +27,10 @@ type ClusterInitParameters struct {
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
+	// Target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
 	BacktrackWindow *float64 `json:"backtrackWindow,omitempty" tf:"backtrack_window,omitempty"`
 
-	// The days to retain backups for. Default 1
+	// Days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// – List of RDS Instances that are a part of this cluster
@@ -42,7 +42,6 @@ type ClusterInitParameters struct {
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance classes are available in all AWS Regions, or for all database engines. For the full list of DB instance classes and availability for your engine, see DB instance class in the Amazon RDS User Guide.
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
-	// A cluster parameter group to associate with the cluster.
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
@@ -63,25 +62,25 @@ type ClusterInitParameters struct {
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The name of the database engine to be used for this DB cluster. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
+	// Name of the database engine to be used for this DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
-	// The database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attributes Reference below.
+	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
+	// Name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The global cluster identifier specified on aws_rds_global_cluster.
+	// Global cluster identifier specified on aws_rds_global_cluster.
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
 	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled. Please see AWS Documentation for availability and limitations.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
+	// Amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. (This setting is required to create a Multi-AZ DB cluster). Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.
@@ -90,16 +89,16 @@ type ClusterInitParameters struct {
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
-	// The network type of the cluster. Valid values: IPV4, DUAL.
+	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// The port on which the DB accepts connections
+	// Port on which the DB accepts connections
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
+	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// ARN of a source DB cluster or DB instance if this DB cluster is to be created as a Read Replica.
@@ -108,7 +107,7 @@ type ClusterInitParameters struct {
 	// Nested attribute for point in time restore. More details below.
 	RestoreToPointInTime []ClusterRestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
-	// The port on which the DB accepts connections
+	// Port on which the DB accepts connections
 	S3Import []ClusterS3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
@@ -141,13 +140,13 @@ type ClusterMasterUserSecretInitParameters struct {
 
 type ClusterMasterUserSecretObservation struct {
 
-	// The Amazon Web Services KMS key identifier that is used to encrypt the secret.
+	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the secret.
+	// Amazon Resource Name (ARN) of the secret.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
-	// The status of the secret. Valid Values: creating | active | rotating | impaired.
+	// Status of the secret. Valid Values: creating | active | rotating | impaired.
 	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
 }
 
@@ -171,16 +170,16 @@ type ClusterObservation struct {
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created. We recommend specifying 3 AZs or using the  if necessary. A maximum of 3 AZs can be configured.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
+	// Target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
 	BacktrackWindow *float64 `json:"backtrackWindow,omitempty" tf:"backtrack_window,omitempty"`
 
-	// The days to retain backups for. Default 1
+	// Days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// – List of RDS Instances that are a part of this cluster
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
-	// The RDS Cluster Resource ID
+	// RDS Cluster Resource ID
 	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
 
 	// –  Copy all Cluster tags to snapshots. Default is false.
@@ -189,13 +188,12 @@ type ClusterObservation struct {
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance classes are available in all AWS Regions, or for all database engines. For the full list of DB instance classes and availability for your engine, see DB instance class in the Amazon RDS User Guide.
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
-	// A cluster parameter group to associate with the cluster.
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
 	DBInstanceParameterGroupName *string `json:"dbInstanceParameterGroupName,omitempty" tf:"db_instance_parameter_group_name,omitempty"`
 
-	// A DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
+	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
 	// Name for an automatically created database on cluster creation. There are different naming restrictions per database engine: RDS Naming Constraints
@@ -213,70 +211,70 @@ type ClusterObservation struct {
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The DNS address of the RDS instance
+	// DNS address of the RDS instance
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The name of the database engine to be used for this DB cluster. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
+	// Name of the database engine to be used for this DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
-	// The database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attributes Reference below.
+	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The running version of the database.
+	// Running version of the database.
 	EngineVersionActual *string `json:"engineVersionActual,omitempty" tf:"engine_version_actual,omitempty"`
 
-	// The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
+	// Name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The global cluster identifier specified on aws_rds_global_cluster.
+	// Global cluster identifier specified on aws_rds_global_cluster.
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
-	// The Route53 Hosted Zone ID of the endpoint
+	// Route53 Hosted Zone ID of the endpoint
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
 	// Specifies whether or not mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled. Please see AWS Documentation for availability and limitations.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// A List of ARNs for the IAM roles to associate to the RDS Cluster.
+	// List of ARNs for the IAM roles to associate to the RDS Cluster.
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
-	// The RDS Cluster Identifier
+	// RDS Cluster Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
+	// Amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. (This setting is required to create a Multi-AZ DB cluster). Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
+	// ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if master_password is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
-	// A block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
+	// Block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
 	MasterUserSecret []ClusterMasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
 
-	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
+	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
 
 	// Username for the master DB user. Please refer to the RDS Naming Constraints. This argument does not support in-place updates and cannot be changed during a restore from snapshot.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
-	// The network type of the cluster. Valid values: IPV4, DUAL.
+	// Network type of the cluster. Valid values: IPV4, DUAL.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// The port on which the DB accepts connections
+	// Port on which the DB accepts connections
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
+	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
-	// A read-only endpoint for the Aurora cluster, automatically
+	// Read-only endpoint for the Aurora cluster, automatically
 	// load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
@@ -286,7 +284,7 @@ type ClusterObservation struct {
 	// Nested attribute for point in time restore. More details below.
 	RestoreToPointInTime []ClusterRestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
-	// The port on which the DB accepts connections
+	// Port on which the DB accepts connections
 	S3Import []ClusterS3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
@@ -313,7 +311,7 @@ type ClusterObservation struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// List of VPC security groups to associate with the Cluster
@@ -338,11 +336,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
-	// The target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
+	// Target backtrack window, in seconds. Only available for aurora and aurora-mysql engines currently. To disable backtracking, set this value to 0. Defaults to 0. Must be between 0 and 259200 (72 hours)
 	// +kubebuilder:validation:Optional
 	BacktrackWindow *float64 `json:"backtrackWindow,omitempty" tf:"backtrack_window,omitempty"`
 
-	// The days to retain backups for. Default 1
+	// Days to retain backups for. Default 1
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
@@ -358,7 +356,6 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
-	// A cluster parameter group to associate with the cluster.
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
@@ -366,7 +363,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DBInstanceParameterGroupName *string `json:"dbInstanceParameterGroupName,omitempty" tf:"db_instance_parameter_group_name,omitempty"`
 
-	// A DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
+	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
 	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -399,23 +396,23 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The name of the database engine to be used for this DB cluster. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
+	// Name of the database engine to be used for this DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
+	// Database engine mode. Valid values: global (only valid for Aurora MySQL 1.21 and earlier), multimaster, parallelquery, provisioned, serverless. Defaults to: provisioned. See the RDS User Guide for limitations when using serverless.
 	// +kubebuilder:validation:Optional
 	EngineMode *string `json:"engineMode,omitempty" tf:"engine_mode,omitempty"`
 
-	// The database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attributes Reference below.
+	// Database engine version. Updating this argument results in an outage. See the Aurora MySQL and Aurora Postgres documentation for your configured engine to determine this value, or by running aws rds describe-db-engine-versions. For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. The value can contain a partial version where supported by the API. The actual engine version used is returned in the attribute engine_version_actual, , see Attribute Reference below.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
+	// Name of your final DB snapshot when this DB cluster is deleted. If omitted, no final snapshot will be made.
 	// +kubebuilder:validation:Optional
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
-	// The global cluster identifier specified on aws_rds_global_cluster.
+	// Global cluster identifier specified on aws_rds_global_cluster.
 	// +kubebuilder:validation:Optional
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
@@ -423,11 +420,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
+	// Amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster. For information about valid Iops values, see Amazon RDS Provisioned IOPS storage to improve performance in the Amazon RDS User Guide. (This setting is required to create a Multi-AZ DB cluster). Must be a multiple between .5 and 50 of the storage amount for the DB cluster.
 	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// The ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
+	// ARN for the KMS encryption key. When specifying kms_key_id, storage_encrypted needs to be set to true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -448,7 +445,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
-	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
+	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("key_id",true)
 	// +kubebuilder:validation:Optional
@@ -466,19 +463,19 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
-	// The network type of the cluster. Valid values: IPV4, DUAL.
+	// Network type of the cluster. Valid values: IPV4, DUAL.
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// The port on which the DB accepts connections
+	// Port on which the DB accepts connections
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
+	// Daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC. Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
+	// Weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
@@ -495,7 +492,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreToPointInTime []ClusterRestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
-	// The port on which the DB accepts connections
+	// Port on which the DB accepts connections
 	// +kubebuilder:validation:Optional
 	S3Import []ClusterS3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
@@ -569,7 +566,7 @@ type ClusterRestoreToPointInTimeObservation struct {
 	// Valid options are full-copy (default) and copy-on-write.
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
-	// The identifier of the source database cluster from which to restore.
+	// Identifier of the source database cluster from which to restore.
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
 	// Set to true to restore the database cluster to the latest restorable backup time. Defaults to false. Conflicts with restore_to_time.
@@ -587,7 +584,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
-	// The identifier of the source database cluster from which to restore.
+	// Identifier of the source database cluster from which to restore.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
@@ -622,7 +619,7 @@ type ClusterS3ImportInitParameters struct {
 
 type ClusterS3ImportObservation struct {
 
-	// The bucket name where your backup is stored
+	// Bucket name where your backup is stored
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Can be blank, but is the path to your backup
@@ -640,7 +637,7 @@ type ClusterS3ImportObservation struct {
 
 type ClusterS3ImportParameters struct {
 
-	// The bucket name where your backup is stored
+	// Bucket name where your backup is stored
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -675,16 +672,16 @@ type ScalingConfigurationInitParameters struct {
 	// Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. Defaults to true.
 	AutoPause *bool `json:"autoPause,omitempty" tf:"auto_pause,omitempty"`
 
-	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
+	// Maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
+	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
-	// The time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
 	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 
-	// The action to take when the timeout is reached. Valid values: ForceApplyCapacityChange, RollbackCapacityChange. Defaults to RollbackCapacityChange. See documentation.
+	// Action to take when the timeout is reached. Valid values: ForceApplyCapacityChange, RollbackCapacityChange. Defaults to RollbackCapacityChange. See documentation.
 	TimeoutAction *string `json:"timeoutAction,omitempty" tf:"timeout_action,omitempty"`
 }
 
@@ -693,16 +690,16 @@ type ScalingConfigurationObservation struct {
 	// Whether to enable automatic pause. A DB cluster can be paused only when it's idle (it has no connections). If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. In this case, the DB cluster is restored when there is a request to connect to it. Defaults to true.
 	AutoPause *bool `json:"autoPause,omitempty" tf:"auto_pause,omitempty"`
 
-	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
+	// Maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
+	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
-	// The time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
 	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 
-	// The action to take when the timeout is reached. Valid values: ForceApplyCapacityChange, RollbackCapacityChange. Defaults to RollbackCapacityChange. See documentation.
+	// Action to take when the timeout is reached. Valid values: ForceApplyCapacityChange, RollbackCapacityChange. Defaults to RollbackCapacityChange. See documentation.
 	TimeoutAction *string `json:"timeoutAction,omitempty" tf:"timeout_action,omitempty"`
 }
 
@@ -712,48 +709,48 @@ type ScalingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoPause *bool `json:"autoPause,omitempty" tf:"auto_pause,omitempty"`
 
-	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
+	// Maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	// +kubebuilder:validation:Optional
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
+	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
-	// The time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
+	// Time, in seconds, before an Aurora DB cluster in serverless mode is paused. Valid values are 300 through 86400. Defaults to 300.
 	// +kubebuilder:validation:Optional
 	SecondsUntilAutoPause *float64 `json:"secondsUntilAutoPause,omitempty" tf:"seconds_until_auto_pause,omitempty"`
 
-	// The action to take when the timeout is reached. Valid values: ForceApplyCapacityChange, RollbackCapacityChange. Defaults to RollbackCapacityChange. See documentation.
+	// Action to take when the timeout is reached. Valid values: ForceApplyCapacityChange, RollbackCapacityChange. Defaults to RollbackCapacityChange. See documentation.
 	// +kubebuilder:validation:Optional
 	TimeoutAction *string `json:"timeoutAction,omitempty" tf:"timeout_action,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationInitParameters struct {
 
-	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
+	// Maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
+	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationObservation struct {
 
-	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
+	// Maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
+	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type Serverlessv2ScalingConfigurationParameters struct {
 
-	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
+	// Maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	// +kubebuilder:validation:Optional
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
-	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
+	// Minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
@@ -794,8 +791,9 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engine) || has(self.initProvider.engine)",message="engine is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

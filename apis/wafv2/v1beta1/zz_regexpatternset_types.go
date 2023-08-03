@@ -21,7 +21,7 @@ type RegexPatternSetInitParameters struct {
 	// A friendly name of the regular expression pattern set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details.
+	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details. A maximum of 10 regular_expression blocks may be specified.
 	RegularExpression []RegularExpressionInitParameters `json:"regularExpression,omitempty" tf:"regular_expression,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
@@ -47,7 +47,7 @@ type RegexPatternSetObservation struct {
 	// A friendly name of the regular expression pattern set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details.
+	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details. A maximum of 10 regular_expression blocks may be specified.
 	RegularExpression []RegularExpressionObservation `json:"regularExpression,omitempty" tf:"regular_expression,omitempty"`
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional application. Valid values are CLOUDFRONT or REGIONAL. To work with CloudFront, you must also specify the region us-east-1 (N. Virginia) on the AWS provider.
@@ -75,7 +75,7 @@ type RegexPatternSetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details.
+	// One or more blocks of regular expression patterns that you want AWS WAF to search for, such as B[a@]dB[o0]t. See Regular Expression below for details. A maximum of 10 regular_expression blocks may be specified.
 	// +kubebuilder:validation:Optional
 	RegularExpression []RegularExpressionParameters `json:"regularExpression,omitempty" tf:"regular_expression,omitempty"`
 

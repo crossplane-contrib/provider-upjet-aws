@@ -593,7 +593,7 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
 		To: reference.To{
@@ -765,7 +765,7 @@ func (mg *ProxyTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
 		To: reference.To{
@@ -807,7 +807,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
 		To: reference.To{

@@ -137,11 +137,6 @@ func (in *BrokerNodeGroupInfoInitParameters) DeepCopyInto(out *BrokerNodeGroupIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.EBSVolumeSize != nil {
-		in, out := &in.EBSVolumeSize, &out.EBSVolumeSize
-		*out = new(float64)
-		**out = **in
-	}
 	if in.InstanceType != nil {
 		in, out := &in.InstanceType, &out.InstanceType
 		*out = new(string)
@@ -191,11 +186,6 @@ func (in *BrokerNodeGroupInfoObservation) DeepCopyInto(out *BrokerNodeGroupInfoO
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.EBSVolumeSize != nil {
-		in, out := &in.EBSVolumeSize, &out.EBSVolumeSize
-		*out = new(float64)
-		**out = **in
 	}
 	if in.InstanceType != nil {
 		in, out := &in.InstanceType, &out.InstanceType
@@ -269,11 +259,6 @@ func (in *BrokerNodeGroupInfoParameters) DeepCopyInto(out *BrokerNodeGroupInfoPa
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.EBSVolumeSize != nil {
-		in, out := &in.EBSVolumeSize, &out.EBSVolumeSize
-		*out = new(float64)
-		**out = **in
 	}
 	if in.InstanceType != nil {
 		in, out := &in.InstanceType, &out.InstanceType

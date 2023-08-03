@@ -102,7 +102,7 @@ type ConditionInitParameters struct {
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	ConditionOnValue []ConditionOnValueInitParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
@@ -114,7 +114,7 @@ type ConditionObservation struct {
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	ConditionOnValue []ConditionOnValueObservation `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
@@ -173,7 +173,7 @@ type ConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	// +kubebuilder:validation:Optional
 	ConditionOnValue []ConditionOnValueParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
@@ -262,7 +262,7 @@ type CustomDocumentEnrichmentConfigurationParameters struct {
 
 type DataSourceInitParameters struct {
 
-	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration argument when the type parameter is set to CUSTOM. Detailed below.
+	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration block when the type parameter is set to CUSTOM. Detailed below.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// A block with the configuration information for altering document metadata and content during the document ingestion process. For more information on how to create, modify and delete document metadata, or make other content alterations when you ingest documents into Amazon Kendra, see Customizing document metadata during the ingestion process. Detailed below.
@@ -274,7 +274,7 @@ type DataSourceInitParameters struct {
 	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// A name for your Data Source connector.
+	// A name for your data source connector.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
@@ -292,7 +292,7 @@ type DataSourceObservation struct {
 	// ARN of the Data Source.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration argument when the type parameter is set to CUSTOM. Detailed below.
+	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration block when the type parameter is set to CUSTOM. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// The Unix timestamp of when the Data Source was created.
@@ -313,13 +313,13 @@ type DataSourceObservation struct {
 	// The unique identifiers of the Data Source and index separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifier of the index for your Amazon Kendra data_source.
+	// The identifier of the index for your Amazon Kendra data source.
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
 	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// A name for your Data Source connector.
+	// A name for your data source connector.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
@@ -346,7 +346,7 @@ type DataSourceObservation struct {
 
 type DataSourceParameters struct {
 
-	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration argument when the type parameter is set to CUSTOM. Detailed below.
+	// A block with the configuration information to connect to your Data Source repository. You can't specify the configuration block when the type parameter is set to CUSTOM. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -358,7 +358,7 @@ type DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier of the index for your Amazon Kendra data_source.
+	// The identifier of the index for your Amazon Kendra data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -376,7 +376,7 @@ type DataSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// A name for your Data Source connector.
+	// A name for your data source connector.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -433,7 +433,7 @@ type DocumentsMetadataConfigurationParameters struct {
 
 type InlineConfigurationsInitParameters struct {
 
-	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See Document Attribute Condition.
+	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See condition.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// TRUE to delete content if the condition used for the target attribute is met.
@@ -445,7 +445,7 @@ type InlineConfigurationsInitParameters struct {
 
 type InlineConfigurationsObservation struct {
 
-	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See Document Attribute Condition.
+	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See condition.
 	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// TRUE to delete content if the condition used for the target attribute is met.
@@ -457,7 +457,7 @@ type InlineConfigurationsObservation struct {
 
 type InlineConfigurationsParameters struct {
 
-	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See Document Attribute Condition.
+	// Configuration of the condition used for the target document attribute or metadata field when ingesting documents into Amazon Kendra. See condition.
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -521,7 +521,7 @@ type InvocationConditionInitParameters struct {
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	ConditionOnValue []InvocationConditionConditionOnValueInitParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
@@ -533,7 +533,7 @@ type InvocationConditionObservation struct {
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	ConditionOnValue []InvocationConditionConditionOnValueObservation `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
@@ -546,7 +546,7 @@ type InvocationConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	// +kubebuilder:validation:Optional
 	ConditionOnValue []InvocationConditionConditionOnValueParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
@@ -557,7 +557,7 @@ type InvocationConditionParameters struct {
 
 type PostExtractionHookConfigurationInitParameters struct {
 
-	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition []InvocationConditionInitParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
@@ -569,7 +569,7 @@ type PostExtractionHookConfigurationInitParameters struct {
 
 type PostExtractionHookConfigurationObservation struct {
 
-	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition []InvocationConditionObservation `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
@@ -581,7 +581,7 @@ type PostExtractionHookConfigurationObservation struct {
 
 type PostExtractionHookConfigurationParameters struct {
 
-	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	// +kubebuilder:validation:Optional
 	InvocationCondition []InvocationConditionParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
@@ -596,7 +596,7 @@ type PostExtractionHookConfigurationParameters struct {
 
 type PreExtractionHookConfigurationInitParameters struct {
 
-	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition []PreExtractionHookConfigurationInvocationConditionInitParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
@@ -657,7 +657,7 @@ type PreExtractionHookConfigurationInvocationConditionInitParameters struct {
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	ConditionOnValue []PreExtractionHookConfigurationInvocationConditionConditionOnValueInitParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
@@ -669,7 +669,7 @@ type PreExtractionHookConfigurationInvocationConditionObservation struct {
 	// The identifier of the document attribute used for the condition. For example, _source_uri could be an identifier for the attribute or metadata field that contains source URIs associated with the documents. Amazon Kendra currently does not support _document_body as an attribute key used for the condition.
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	ConditionOnValue []PreExtractionHookConfigurationInvocationConditionConditionOnValueObservation `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
 	// The condition operator. For example, you can use Contains to partially match a string. Valid Values: GreaterThan | GreaterThanOrEquals | LessThan | LessThanOrEquals | Equals | NotEquals | Contains | NotContains | Exists | NotExists | BeginsWith.
@@ -682,7 +682,7 @@ type PreExtractionHookConfigurationInvocationConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConditionDocumentAttributeKey *string `json:"conditionDocumentAttributeKey,omitempty" tf:"condition_document_attribute_key,omitempty"`
 
-	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See Document Attribute Value.
+	// The value used by the operator. For example, you can specify the value 'financial' for strings in the _source_uri field that partially match or contain this value. See condition_on_value.
 	// +kubebuilder:validation:Optional
 	ConditionOnValue []PreExtractionHookConfigurationInvocationConditionConditionOnValueParameters `json:"conditionOnValue,omitempty" tf:"condition_on_value,omitempty"`
 
@@ -693,7 +693,7 @@ type PreExtractionHookConfigurationInvocationConditionParameters struct {
 
 type PreExtractionHookConfigurationObservation struct {
 
-	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	InvocationCondition []PreExtractionHookConfigurationInvocationConditionObservation `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
 	// The Amazon Resource Name (ARN) of a Lambda Function that can manipulate your document metadata fields or attributes and content.
@@ -705,7 +705,7 @@ type PreExtractionHookConfigurationObservation struct {
 
 type PreExtractionHookConfigurationParameters struct {
 
-	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See Document Attribute Condition.
+	// A block that specifies the condition used for when a Lambda function should be invoked. For example, you can specify a condition that if there are empty date-time values, then Amazon Kendra should invoke a function that inserts the current date-time. See invocation_condition.
 	// +kubebuilder:validation:Optional
 	InvocationCondition []PreExtractionHookConfigurationInvocationConditionParameters `json:"invocationCondition,omitempty" tf:"invocation_condition,omitempty"`
 
@@ -939,8 +939,7 @@ type TargetInitParameters struct {
 	// The identifier of the target document attribute or metadata field. For example, 'Department' could be an identifier for the target attribute or metadata field that includes the department names associated with the documents.
 	TargetDocumentAttributeKey *string `json:"targetDocumentAttributeKey,omitempty" tf:"target_document_attribute_key,omitempty"`
 
-	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'.
-	// See Document Attribute Value.
+	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'. See target_document_attribute_value.
 	TargetDocumentAttributeValue []TargetDocumentAttributeValueInitParameters `json:"targetDocumentAttributeValue,omitempty" tf:"target_document_attribute_value,omitempty"`
 
 	// TRUE to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to TRUE. To create a target value (TargetDocumentAttributeValue), set this to FALSE.
@@ -952,8 +951,7 @@ type TargetObservation struct {
 	// The identifier of the target document attribute or metadata field. For example, 'Department' could be an identifier for the target attribute or metadata field that includes the department names associated with the documents.
 	TargetDocumentAttributeKey *string `json:"targetDocumentAttributeKey,omitempty" tf:"target_document_attribute_key,omitempty"`
 
-	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'.
-	// See Document Attribute Value.
+	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'. See target_document_attribute_value.
 	TargetDocumentAttributeValue []TargetDocumentAttributeValueObservation `json:"targetDocumentAttributeValue,omitempty" tf:"target_document_attribute_value,omitempty"`
 
 	// TRUE to delete the existing target value for your specified target attribute key. You cannot create a target value and set this to TRUE. To create a target value (TargetDocumentAttributeValue), set this to FALSE.
@@ -966,8 +964,7 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetDocumentAttributeKey *string `json:"targetDocumentAttributeKey,omitempty" tf:"target_document_attribute_key,omitempty"`
 
-	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'.
-	// See Document Attribute Value.
+	// The target value you want to create for the target attribute. For example, 'Finance' could be the target value for the target attribute key 'Department'. See target_document_attribute_value.
 	// +kubebuilder:validation:Optional
 	TargetDocumentAttributeValue []TargetDocumentAttributeValueParameters `json:"targetDocumentAttributeValue,omitempty" tf:"target_document_attribute_value,omitempty"`
 

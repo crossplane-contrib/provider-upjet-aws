@@ -705,8 +705,8 @@ spec:
                                 type: number
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
-                                  By default, AWS enforces a limit of 60. But you
-                                  can request an increase.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 5.
                                 type: number
                               originProtocolPolicy:
                                 description: Origin protocol policy to apply to your
@@ -714,8 +714,8 @@ spec:
                                 type: string
                               originReadTimeout:
                                 description: The Custom Read timeout, in seconds.
-                                  By default, AWS enforces a limit of 60. But you
-                                  can request an increase.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 30.
                                 type: number
                               originSslProtocols:
                                 description: SSL/TLS protocols that you want CloudFront
@@ -1559,8 +1559,8 @@ spec:
                                 type: number
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
-                                  By default, AWS enforces a limit of 60. But you
-                                  can request an increase.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 5.
                                 type: number
                               originProtocolPolicy:
                                 description: Origin protocol policy to apply to your
@@ -1568,8 +1568,8 @@ spec:
                                 type: string
                               originReadTimeout:
                                 description: The Custom Read timeout, in seconds.
-                                  By default, AWS enforces a limit of 60. But you
-                                  can request an increase.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 30.
                                 type: number
                               originSslProtocols:
                                 description: SSL/TLS protocols that you want CloudFront
@@ -2486,8 +2486,8 @@ spec:
                                 type: number
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
-                                  By default, AWS enforces a limit of 60. But you
-                                  can request an increase.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 5.
                                 type: number
                               originProtocolPolicy:
                                 description: Origin protocol policy to apply to your
@@ -2495,8 +2495,8 @@ spec:
                                 type: string
                               originReadTimeout:
                                 description: The Custom Read timeout, in seconds.
-                                  By default, AWS enforces a limit of 60. But you
-                                  can request an increase.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 30.
                                 type: number
                               originSslProtocols:
                                 description: SSL/TLS protocols that you want CloudFront

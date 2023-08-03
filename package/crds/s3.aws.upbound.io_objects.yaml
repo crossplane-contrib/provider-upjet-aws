@@ -70,7 +70,7 @@ spec:
                   acl:
                     description: Canned ACL to apply. Valid values are private, public-read,
                       public-read-write, aws-exec-read, authenticated-read, bucket-owner-read,
-                      and bucket-owner-full-control. Defaults to private.
+                      and bucket-owner-full-control.
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in. Alternatively,
@@ -349,7 +349,7 @@ spec:
                   acl:
                     description: Canned ACL to apply. Valid values are private, public-read,
                       public-read-write, aws-exec-read, authenticated-read, bucket-owner-read,
-                      and bucket-owner-full-control. Defaults to private.
+                      and bucket-owner-full-control.
                     type: string
                   bucketKeyEnabled:
                     description: Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -659,7 +659,7 @@ spec:
                   acl:
                     description: Canned ACL to apply. Valid values are private, public-read,
                       public-read-write, aws-exec-read, authenticated-read, bucket-owner-read,
-                      and bucket-owner-full-control. Defaults to private.
+                      and bucket-owner-full-control.
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in. Alternatively,

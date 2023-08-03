@@ -91,13 +91,13 @@ type CustomOriginConfigInitParameters struct {
 	// HTTPS port the custom origin listens on.
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
-	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
+	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
@@ -112,13 +112,13 @@ type CustomOriginConfigObservation struct {
 	// HTTPS port the custom origin listens on.
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
-	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
+	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
@@ -135,7 +135,7 @@ type CustomOriginConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
 	// +kubebuilder:validation:Optional
 	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
@@ -143,7 +143,7 @@ type CustomOriginConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
-	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
+	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
 	// +kubebuilder:validation:Optional
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 

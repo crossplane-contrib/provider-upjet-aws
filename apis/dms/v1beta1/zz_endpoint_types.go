@@ -873,10 +873,6 @@ type S3SettingsInitParameters struct {
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
 
-	// Deprecated. This setting has no effect. Will be removed in a future version.
-	// This setting has no effect, is deprecated, and will be removed in a future version
-	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
-
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
 
@@ -990,10 +986,6 @@ type S3SettingsObservation struct {
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
-
-	// Deprecated. This setting has no effect. Will be removed in a future version.
-	// This setting has no effect, is deprecated, and will be removed in a future version
-	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
@@ -1133,11 +1125,6 @@ type S3SettingsParameters struct {
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	// +kubebuilder:validation:Optional
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
-
-	// Deprecated. This setting has no effect. Will be removed in a future version.
-	// This setting has no effect, is deprecated, and will be removed in a future version
-	// +kubebuilder:validation:Optional
-	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	// +kubebuilder:validation:Optional

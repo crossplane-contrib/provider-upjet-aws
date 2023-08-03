@@ -15,39 +15,34 @@ import (
 
 type ClusterInstanceInitParameters struct {
 
-	// Specifies whether any database modifications
-	// are applied immediately, or during the next maintenance window. Default isfalse.
+	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
+	// EC2 Availability Zone that the DB instance is created in. See docs about the details.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The identifier of the CA certificate for the DB instance.
+	// Identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// defined tags from the DB instance to snapshots of the DB instance. Default false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// The name of the DB parameter group to associate with this instance.
+	// Name of the DB parameter group to associate with this instance.
 	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
 
-	// The name of the database engine to be used for the RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql.
-	// For information on the difference between the available Aurora MySQL engines
-	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
-	// in the Amazon RDS User Guide.
+	// Name of the database engine to be used for the RDS instance. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine version.
+	// Database engine version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The instance class to use. For details on CPU
-	// and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
+	// Instance class to use. For details on CPU and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
-	// The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// Interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
 	// Specifies whether Performance Insights is enabled or not.
@@ -56,19 +51,16 @@ type ClusterInstanceInitParameters struct {
 	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
+	// Daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The window to perform maintenance in.
-	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	// Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoted to writer.
 	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
-	// Bool to control if instance is publicly accessible.
-	// Default false. See the documentation on Creating DB Instances for more
-	// details on controlling this property.
+	// Bool to control if instance is publicly accessible. Default false. See the documentation on Creating DB Instances for more details on controlling this property.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
 	// Key-value map of resource tags.
@@ -77,8 +69,7 @@ type ClusterInstanceInitParameters struct {
 
 type ClusterInstanceObservation struct {
 
-	// Specifies whether any database modifications
-	// are applied immediately, or during the next maintenance window. Default isfalse.
+	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// Amazon Resource Name (ARN) of cluster instance
@@ -87,61 +78,55 @@ type ClusterInstanceObservation struct {
 	// Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Default true.
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
+	// EC2 Availability Zone that the DB instance is created in. See docs about the details.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The identifier of the CA certificate for the DB instance.
+	// Identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The identifier of the aws_rds_cluster in which to launch this instance.
+	// Identifier of the aws_rds_cluster in which to launch this instance.
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// defined tags from the DB instance to snapshots of the DB instance. Default false.
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// The name of the DB parameter group to associate with this instance.
+	// Name of the DB parameter group to associate with this instance.
 	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
 
-	// A DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
+	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// The region-unique, immutable identifier for the DB instance.
+	// Region-unique, immutable identifier for the DB instance.
 	DbiResourceID *string `json:"dbiResourceId,omitempty" tf:"dbi_resource_id,omitempty"`
 
-	// The DNS address for this instance. May not be writable
+	// DNS address for this instance. May not be writable
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The name of the database engine to be used for the RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql.
-	// For information on the difference between the available Aurora MySQL engines
-	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
-	// in the Amazon RDS User Guide.
+	// Name of the database engine to be used for the RDS instance. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine version.
+	// Database engine version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The database engine version
+	// Database engine version
 	EngineVersionActual *string `json:"engineVersionActual,omitempty" tf:"engine_version_actual,omitempty"`
 
-	// The Instance identifier
+	// Instance identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The instance class to use. For details on CPU
-	// and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
+	// Instance class to use. For details on CPU and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
-	// The ARN for the KMS encryption key if one is set to the cluster.
+	// ARN for the KMS encryption key if one is set to the cluster.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// Interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
-	// The ARN for the IAM role that permits RDS to send
-	// enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation
-	// what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
 	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
 
-	// The network type of the DB instance.
+	// Network type of the DB instance.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Specifies whether Performance Insights is enabled or not.
@@ -153,22 +138,19 @@ type ClusterInstanceObservation struct {
 	// Amount of time in days to retain Performance Insights data. Valid values are 7, 731 (2 years) or a multiple of 31. When specifying performance_insights_retention_period, performance_insights_enabled needs to be set to true. Defaults to '7'.
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// The database port
+	// Database port
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
+	// Daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The window to perform maintenance in.
-	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	// Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoted to writer.
 	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
-	// Bool to control if instance is publicly accessible.
-	// Default false. See the documentation on Creating DB Instances for more
-	// details on controlling this property.
+	// Bool to control if instance is publicly accessible. Default false. See the documentation on Creating DB Instances for more details on controlling this property.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
 	// Specifies whether the DB cluster is encrypted.
@@ -177,7 +159,7 @@ type ClusterInstanceObservation struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// – Boolean indicating if this instance is writable. False indicates this instance is a read replica.
@@ -186,8 +168,7 @@ type ClusterInstanceObservation struct {
 
 type ClusterInstanceParameters struct {
 
-	// Specifies whether any database modifications
-	// are applied immediately, or during the next maintenance window. Default isfalse.
+	// Specifies whether any database modifications are applied immediately, or during the next maintenance window. Default isfalse.
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
@@ -195,15 +176,15 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *bool `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
-	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
+	// EC2 Availability Zone that the DB instance is created in. See docs about the details.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The identifier of the CA certificate for the DB instance.
+	// Identifier of the CA certificate for the DB instance.
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The identifier of the aws_rds_cluster in which to launch this instance.
+	// Identifier of the aws_rds_cluster in which to launch this instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -221,11 +202,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
-	// The name of the DB parameter group to associate with this instance.
+	// Name of the DB parameter group to associate with this instance.
 	// +kubebuilder:validation:Optional
 	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
 
-	// A DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
+	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -238,29 +219,23 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
-	// The name of the database engine to be used for the RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql, aurora-postgresql.
-	// For information on the difference between the available Aurora MySQL engines
-	// see Comparison between Aurora MySQL 1 and Aurora MySQL 2
-	// in the Amazon RDS User Guide.
+	// Name of the database engine to be used for the RDS instance. Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The database engine version.
+	// Database engine version.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
-	// The instance class to use. For details on CPU
-	// and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
+	// Instance class to use. For details on CPU and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details.
 	// +kubebuilder:validation:Optional
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
-	// The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
+	// Interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.
 	// +kubebuilder:validation:Optional
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
 
-	// The ARN for the IAM role that permits RDS to send
-	// enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation
-	// what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+	// ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. You can find more information on the AWS Documentation what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -295,12 +270,11 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PerformanceInsightsRetentionPeriod *float64 `json:"performanceInsightsRetentionPeriod,omitempty" tf:"performance_insights_retention_period,omitempty"`
 
-	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
+	// Daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00". NOTE: If preferred_backup_window is set at the cluster level, this argument must be omitted.
 	// +kubebuilder:validation:Optional
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
 
-	// The window to perform maintenance in.
-	// Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
+	// Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi". Eg: "Mon:00:00-Mon:03:00".
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
@@ -308,9 +282,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
-	// Bool to control if instance is publicly accessible.
-	// Default false. See the documentation on Creating DB Instances for more
-	// details on controlling this property.
+	// Bool to control if instance is publicly accessible. Default false. See the documentation on Creating DB Instances for more details on controlling this property.
 	// +kubebuilder:validation:Optional
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
@@ -360,6 +332,7 @@ type ClusterInstanceStatus struct {
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engine) || has(self.initProvider.engine)",message="engine is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceClass) || has(self.initProvider.instanceClass)",message="instanceClass is a required parameter"
 	Spec   ClusterInstanceSpec   `json:"spec"`
 	Status ClusterInstanceStatus `json:"status,omitempty"`

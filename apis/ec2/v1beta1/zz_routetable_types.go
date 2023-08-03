@@ -98,9 +98,6 @@ type RouteTableRouteObservation_2 struct {
 	// The Ipv6 CIDR block of the route.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
-	// Identifier of an EC2 instance.
-	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
-
 	// Identifier of a Outpost local gateway.
 	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
 

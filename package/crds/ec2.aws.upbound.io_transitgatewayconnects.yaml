@@ -68,7 +68,7 @@ spec:
               forProvider:
                 properties:
                   protocol:
-                    description: 'The tunnel protocol. Valida values: gre. Default
+                    description: 'The tunnel protocol. Valid values: gre. Default
                       is gre.'
                     type: string
                   region:
@@ -265,7 +265,7 @@ spec:
                   them, like an autoscaler.
                 properties:
                   protocol:
-                    description: 'The tunnel protocol. Valida values: gre. Default
+                    description: 'The tunnel protocol. Valid values: gre. Default
                       is gre.'
                     type: string
                   tags:
@@ -493,7 +493,7 @@ spec:
                     description: EC2 Transit Gateway Attachment identifier
                     type: string
                   protocol:
-                    description: 'The tunnel protocol. Valida values: gre. Default
+                    description: 'The tunnel protocol. Valid values: gre. Default
                       is gre.'
                     type: string
                   tags:
