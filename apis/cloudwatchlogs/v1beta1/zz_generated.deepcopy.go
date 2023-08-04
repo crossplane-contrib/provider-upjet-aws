@@ -1691,11 +1691,6 @@ func (in *SubscriptionFilterInitParameters) DeepCopyInto(out *SubscriptionFilter
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -1827,6 +1822,16 @@ func (in *SubscriptionFilterParameters) DeepCopyInto(out *SubscriptionFilterPara
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

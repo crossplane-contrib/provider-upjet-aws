@@ -245,7 +245,7 @@ func (mg *Zone) ResolveReferences(ctx context.Context, c client.Reader) error {
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPC); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPC[i3].VPCID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VPC[i3].VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPC[i3].VPCIDSelector,
 			To: reference.To{

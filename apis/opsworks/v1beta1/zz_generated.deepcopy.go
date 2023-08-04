@@ -639,11 +639,6 @@ func (in *CloudwatchConfigurationLogStreamsInitParameters) DeepCopyInto(out *Clo
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -783,6 +778,16 @@ func (in *CloudwatchConfigurationLogStreamsParameters) DeepCopyInto(out *Cloudwa
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -3436,11 +3441,6 @@ func (in *GangliaLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyI
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -3580,6 +3580,16 @@ func (in *GangliaLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -5049,11 +5059,6 @@ func (in *HAProxyLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyI
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -5193,6 +5198,16 @@ func (in *HAProxyLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -7442,11 +7457,6 @@ func (in *JavaAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyI
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -7586,6 +7596,16 @@ func (in *JavaAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -9469,11 +9489,6 @@ func (in *LogStreamsInitParameters) DeepCopyInto(out *LogStreamsInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -9614,6 +9629,16 @@ func (in *LogStreamsParameters) DeepCopyInto(out *LogStreamsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -9730,11 +9755,6 @@ func (in *MemcachedLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCop
 	}
 	if in.InitialPosition != nil {
 		in, out := &in.InitialPosition, &out.InitialPosition
-		*out = new(string)
-		**out = **in
-	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
 	}
@@ -9877,6 +9897,16 @@ func (in *MemcachedLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInt
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -11316,11 +11346,6 @@ func (in *MySQLLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -11460,6 +11485,16 @@ func (in *MySQLLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(ou
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -12914,11 +12949,6 @@ func (in *NodeJSAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCop
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -13058,6 +13088,16 @@ func (in *NodeJSAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInt
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -14497,11 +14537,6 @@ func (in *PHPAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyIn
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -14641,6 +14676,16 @@ func (in *PHPAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(o
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -16494,11 +16539,6 @@ func (in *RailsAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopy
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -16638,6 +16678,16 @@ func (in *RailsAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
@@ -18883,11 +18933,6 @@ func (in *StaticWebLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCop
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern
 		*out = new(string)
@@ -19027,6 +19072,16 @@ func (in *StaticWebLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInt
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MultilineStartPattern != nil {
 		in, out := &in.MultilineStartPattern, &out.MultilineStartPattern

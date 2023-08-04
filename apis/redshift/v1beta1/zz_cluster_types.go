@@ -495,10 +495,6 @@ type ClusterParameters struct {
 
 type LoggingInitParameters struct {
 
-	// The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions.
-	// For more information on the permissions required for the bucket, please read the AWS documentation
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 
@@ -535,8 +531,17 @@ type LoggingParameters struct {
 
 	// The name of an existing S3 bucket where the log files are to be stored. Must be in the same region as the cluster and the cluster must have read bucket and put object permissions.
 	// For more information on the permissions required for the bucket, please read the AWS documentation
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
 	// +kubebuilder:validation:Optional

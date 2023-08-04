@@ -79,11 +79,6 @@ func (in *ActionInitParameters) DeepCopyInto(out *ActionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.RoleArn != nil {
-		in, out := &in.RoleArn, &out.RoleArn
-		*out = new(string)
-		**out = **in
-	}
 	if in.RunOrder != nil {
 		in, out := &in.RunOrder, &out.RunOrder
 		*out = new(float64)
@@ -277,6 +272,16 @@ func (in *ActionParameters) DeepCopyInto(out *ActionParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RunOrder != nil {
 		in, out := &in.RunOrder, &out.RunOrder

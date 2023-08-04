@@ -533,9 +533,6 @@ type DynatraceParameters struct {
 
 type ErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -558,8 +555,17 @@ type ErrorHandlingConfigObservation struct {
 type ErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -571,9 +577,6 @@ type ErrorHandlingConfigParameters struct {
 }
 
 type EventBridgeErrorHandlingConfigInitParameters struct {
-
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
@@ -597,8 +600,17 @@ type EventBridgeErrorHandlingConfigObservation struct {
 type EventBridgeErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -751,9 +763,6 @@ type GoogleAnalyticsParameters struct {
 
 type HoneycodeErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -776,8 +785,17 @@ type HoneycodeErrorHandlingConfigObservation struct {
 type HoneycodeErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -866,9 +884,6 @@ type LookoutMetricsParameters struct {
 
 type MarketoErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -891,8 +906,17 @@ type MarketoErrorHandlingConfigObservation struct {
 type MarketoErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -963,9 +987,6 @@ type PrefixConfigParameters struct {
 
 type RedshiftErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -988,8 +1009,17 @@ type RedshiftErrorHandlingConfigObservation struct {
 type RedshiftErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -1007,9 +1037,6 @@ type RedshiftInitParameters struct {
 
 	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	ErrorHandlingConfig []RedshiftErrorHandlingConfigInitParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
-
-	// Intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
-	IntermediateBucketName *string `json:"intermediateBucketName,omitempty" tf:"intermediate_bucket_name,omitempty"`
 
 	// Object specified in the flow destination.
 	Object *string `json:"object,omitempty" tf:"object,omitempty"`
@@ -1041,8 +1068,17 @@ type RedshiftParameters struct {
 	ErrorHandlingConfig []RedshiftErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
 	// Intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	IntermediateBucketName *string `json:"intermediateBucketName,omitempty" tf:"intermediate_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate intermediateBucketName.
+	// +kubebuilder:validation:Optional
+	IntermediateBucketNameRef *v1.Reference `json:"intermediateBucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate intermediateBucketName.
+	// +kubebuilder:validation:Optional
+	IntermediateBucketNameSelector *v1.Selector `json:"intermediateBucketNameSelector,omitempty" tf:"-"`
 
 	// Object specified in the flow destination.
 	// +kubebuilder:validation:Optional
@@ -1189,16 +1225,15 @@ type S3OutputFormatConfigPrefixConfigParameters struct {
 type S3Parameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.BucketPolicy
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Reference to a BucketPolicy in s3 to populate bucketName.
+	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
 	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
-	// Selector for a BucketPolicy in s3 to populate bucketName.
+	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
@@ -1212,9 +1247,6 @@ type S3Parameters struct {
 }
 
 type SalesforceErrorHandlingConfigInitParameters struct {
-
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
@@ -1238,8 +1270,17 @@ type SalesforceErrorHandlingConfigObservation struct {
 type SalesforceErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -1301,9 +1342,6 @@ type SalesforceParameters struct {
 
 type SapoDataErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -1326,8 +1364,17 @@ type SapoDataErrorHandlingConfigObservation struct {
 type SapoDataErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -1535,9 +1582,6 @@ type SlackParameters struct {
 
 type SnowflakeErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -1560,8 +1604,17 @@ type SnowflakeErrorHandlingConfigObservation struct {
 type SnowflakeErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -1579,9 +1632,6 @@ type SnowflakeInitParameters struct {
 
 	// Settings that determine how Amazon AppFlow handles an error when placing data in the destination. See Error Handling Config for more details.
 	ErrorHandlingConfig []SnowflakeErrorHandlingConfigInitParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
-
-	// Intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
-	IntermediateBucketName *string `json:"intermediateBucketName,omitempty" tf:"intermediate_bucket_name,omitempty"`
 
 	// Object specified in the flow destination.
 	Object *string `json:"object,omitempty" tf:"object,omitempty"`
@@ -1613,8 +1663,17 @@ type SnowflakeParameters struct {
 	ErrorHandlingConfig []SnowflakeErrorHandlingConfigParameters `json:"errorHandlingConfig,omitempty" tf:"error_handling_config,omitempty"`
 
 	// Intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	IntermediateBucketName *string `json:"intermediateBucketName,omitempty" tf:"intermediate_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate intermediateBucketName.
+	// +kubebuilder:validation:Optional
+	IntermediateBucketNameRef *v1.Reference `json:"intermediateBucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate intermediateBucketName.
+	// +kubebuilder:validation:Optional
+	IntermediateBucketNameSelector *v1.Selector `json:"intermediateBucketNameSelector,omitempty" tf:"-"`
 
 	// Object specified in the flow destination.
 	// +kubebuilder:validation:Optional
@@ -1862,16 +1921,15 @@ type SourceConnectorPropertiesS3Observation struct {
 type SourceConnectorPropertiesS3Parameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.BucketPolicy
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Reference to a BucketPolicy in s3 to populate bucketName.
+	// Reference to a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
 	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
 
-	// Selector for a BucketPolicy in s3 to populate bucketName.
+	// Selector for a Bucket in s3 to populate bucketName.
 	// +kubebuilder:validation:Optional
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
@@ -2022,9 +2080,6 @@ type SourceFlowConfigParameters struct {
 
 type SuccessResponseHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 }
@@ -2041,8 +2096,17 @@ type SuccessResponseHandlingConfigObservation struct {
 type SuccessResponseHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -2172,9 +2236,6 @@ type TriggerPropertiesParameters struct {
 
 type UpsolverInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -2197,8 +2258,17 @@ type UpsolverObservation struct {
 type UpsolverParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
@@ -2309,9 +2379,6 @@ type VeevaParameters struct {
 
 type ZendeskErrorHandlingConfigInitParameters struct {
 
-	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
 
@@ -2334,8 +2401,17 @@ type ZendeskErrorHandlingConfigObservation struct {
 type ZendeskErrorHandlingConfigParameters struct {
 
 	// Amazon S3 bucket name in which Amazon AppFlow places the transferred data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional

@@ -9,9 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/acm/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/acm/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -228,6 +230,64 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnRef,
+				Selector:     mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta11.FunctionList{},
+					Managed: &v1beta11.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArn")
+			}
+			mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnRef,
+				Selector:     mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta11.FunctionList{},
+					Managed: &v1beta11.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArn")
+			}
+			mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta12.KeyList{},
+				Managed: &v1beta12.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SMSConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArn),
@@ -264,8 +324,8 @@ func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDSelector,
 			To: reference.To{
-				List:    &v1beta11.AppList{},
-				Managed: &v1beta11.App{},
+				List:    &v1beta13.AppList{},
+				Managed: &v1beta13.App{},
 			},
 		})
 		if err != nil {
@@ -278,7 +338,7 @@ func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.AnalyticsConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnSelector,
 			To: reference.To{
@@ -325,8 +385,8 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.CertificateArnRef,
 		Selector:     mg.Spec.ForProvider.CertificateArnSelector,
 		To: reference.To{
-			List:    &v1beta12.CertificateList{},
-			Managed: &v1beta12.Certificate{},
+			List:    &v1beta14.CertificateList{},
+			Managed: &v1beta14.Certificate{},
 		},
 	})
 	if err != nil {

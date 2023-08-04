@@ -9,9 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -45,6 +46,35 @@ func (mg *Plan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this ReportPlan.
+func (mg *ReportPlan) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ReportDeliveryChannel); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReportDeliveryChannel[i3].S3BucketName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ReportDeliveryChannel[i3].S3BucketNameRef,
+			Selector:     mg.Spec.ForProvider.ReportDeliveryChannel[i3].S3BucketNameSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ReportDeliveryChannel[i3].S3BucketName")
+		}
+		mg.Spec.ForProvider.ReportDeliveryChannel[i3].S3BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ReportDeliveryChannel[i3].S3BucketNameRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Selection.
 func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -58,8 +88,8 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.IAMRoleArnRef,
 		Selector:     mg.Spec.ForProvider.IAMRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
 		},
 	})
 	if err != nil {
@@ -100,8 +130,8 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
 		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
 		},
 	})
 	if err != nil {
@@ -168,8 +198,8 @@ func (mg *VaultNotifications) ResolveReferences(ctx context.Context, c client.Re
 		Reference:    mg.Spec.ForProvider.SnsTopicArnRef,
 		Selector:     mg.Spec.ForProvider.SnsTopicArnSelector,
 		To: reference.To{
-			List:    &v1beta12.TopicList{},
-			Managed: &v1beta12.Topic{},
+			List:    &v1beta13.TopicList{},
+			Managed: &v1beta13.Topic{},
 		},
 	})
 	if err != nil {

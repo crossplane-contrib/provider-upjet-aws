@@ -41,7 +41,7 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SubnetMapping); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetMapping[i3].SubnetID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetMapping[i3].SubnetIDSelector,
 			To: reference.To{

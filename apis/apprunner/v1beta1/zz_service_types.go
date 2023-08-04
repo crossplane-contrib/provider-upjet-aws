@@ -14,9 +14,6 @@ import (
 )
 
 type AuthenticationConfigurationInitParameters struct {
-
-	// ARN of the IAM role that grants the App Runner service access to a source repository. Required for ECR image repositories (but not for ECR Public)
-	AccessRoleArn *string `json:"accessRoleArn,omitempty" tf:"access_role_arn,omitempty"`
 }
 
 type AuthenticationConfigurationObservation struct {
@@ -31,8 +28,18 @@ type AuthenticationConfigurationObservation struct {
 type AuthenticationConfigurationParameters struct {
 
 	// ARN of the IAM role that grants the App Runner service access to a source repository. Required for ECR image repositories (but not for ECR Public)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AccessRoleArn *string `json:"accessRoleArn,omitempty" tf:"access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate accessRoleArn.
+	// +kubebuilder:validation:Optional
+	AccessRoleArnRef *v1.Reference `json:"accessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate accessRoleArn.
+	// +kubebuilder:validation:Optional
+	AccessRoleArnSelector *v1.Selector `json:"accessRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the App Runner connection that enables the App Runner service to connect to a source repository. Required for GitHub code repositories.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.Connection
@@ -223,9 +230,6 @@ type EgressConfigurationParameters struct {
 }
 
 type EncryptionConfigurationInitParameters struct {
-
-	// ARN of the KMS key used for encryption.
-	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -237,8 +241,17 @@ type EncryptionConfigurationObservation struct {
 type EncryptionConfigurationParameters struct {
 
 	// ARN of the KMS key used for encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
 type HealthCheckConfigurationInitParameters struct {
@@ -425,9 +438,6 @@ type InstanceConfigurationInitParameters struct {
 	// Number of CPU units reserved for each instance of your App Runner service represented as a String. Defaults to 1024. Valid values: 256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// ARN of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
-	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
-
 	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
@@ -451,8 +461,18 @@ type InstanceConfigurationParameters struct {
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// ARN of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate instanceRoleArn.
+	// +kubebuilder:validation:Optional
+	InstanceRoleArnRef *v1.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate instanceRoleArn.
+	// +kubebuilder:validation:Optional
+	InstanceRoleArnSelector *v1.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
 	// Amount of memory, in MB or GB, reserved for each instance of your App Runner service. Defaults to 2048. Valid values: 512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB.
 	// +kubebuilder:validation:Optional

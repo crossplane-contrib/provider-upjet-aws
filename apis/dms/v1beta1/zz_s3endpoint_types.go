@@ -24,9 +24,6 @@ type S3EndpointInitParameters struct {
 	// S3 object prefix.
 	BucketFolder *string `json:"bucketFolder,omitempty" tf:"bucket_folder,omitempty"`
 
-	// S3 bucket name.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
 	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Default is none.
 	CannedACLForObjects *string `json:"cannedAclForObjects,omitempty" tf:"canned_acl_for_objects,omitempty"`
 
@@ -318,8 +315,17 @@ type S3EndpointParameters struct {
 	BucketFolder *string `json:"bucketFolder,omitempty" tf:"bucket_folder,omitempty"`
 
 	// S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// Predefined (canned) access control list for objects created in an S3 bucket. Valid values include none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Default is none.
 	// +kubebuilder:validation:Optional
@@ -481,7 +487,6 @@ type S3EndpointParameters struct {
 
 	// When encryption_mode is SSE_KMS, ARN for the AWS KMS key. (Ignored for source endpoints -- only SSE_S3 encryption_mode is valid.)
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
 
@@ -560,7 +565,6 @@ type S3EndpointStatus struct {
 type S3Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bucketName) || has(self.initProvider.bucketName)",message="bucketName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType) || has(self.initProvider.endpointType)",message="endpointType is a required parameter"
 	Spec   S3EndpointSpec   `json:"spec"`
 	Status S3EndpointStatus `json:"status,omitempty"`

@@ -9,10 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/elb/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta14 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -101,6 +101,24 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.InitialLifecycleHook); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialLifecycleHook[i3].RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.InitialLifecycleHook[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.InitialLifecycleHook[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.InitialLifecycleHook[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.InitialLifecycleHook[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.InitialLifecycleHook[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchConfiguration),
 		Extract:      reference.ExternalName(),
@@ -124,8 +142,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 			Reference:    mg.Spec.ForProvider.LaunchTemplate[i3].IDRef,
 			Selector:     mg.Spec.ForProvider.LaunchTemplate[i3].IDSelector,
 			To: reference.To{
-				List:    &v1beta12.LaunchTemplateList{},
-				Managed: &v1beta12.LaunchTemplate{},
+				List:    &v1beta13.LaunchTemplateList{},
+				Managed: &v1beta13.LaunchTemplate{},
 			},
 		})
 		if err != nil {
@@ -144,8 +162,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 					Reference:    mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateIDRef,
 					Selector:     mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].LaunchTemplateSpecification[i5].LaunchTemplateIDSelector,
 					To: reference.To{
-						List:    &v1beta12.LaunchTemplateList{},
-						Managed: &v1beta12.LaunchTemplate{},
+						List:    &v1beta13.LaunchTemplateList{},
+						Managed: &v1beta13.LaunchTemplate{},
 					},
 				})
 				if err != nil {
@@ -167,8 +185,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 						Reference:    mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateIDRef,
 						Selector:     mg.Spec.ForProvider.MixedInstancesPolicy[i3].LaunchTemplate[i4].Override[i5].LaunchTemplateSpecification[i6].LaunchTemplateIDSelector,
 						To: reference.To{
-							List:    &v1beta12.LaunchTemplateList{},
-							Managed: &v1beta12.LaunchTemplate{},
+							List:    &v1beta13.LaunchTemplateList{},
+							Managed: &v1beta13.LaunchTemplate{},
 						},
 					})
 					if err != nil {
@@ -187,8 +205,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.PlacementGroupRef,
 		Selector:     mg.Spec.ForProvider.PlacementGroupSelector,
 		To: reference.To{
-			List:    &v1beta12.PlacementGroupList{},
-			Managed: &v1beta12.PlacementGroup{},
+			List:    &v1beta13.PlacementGroupList{},
+			Managed: &v1beta13.PlacementGroup{},
 		},
 	})
 	if err != nil {
@@ -203,8 +221,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.ServiceLinkedRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ServiceLinkedRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta13.RoleList{},
-			Managed: &v1beta13.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -219,8 +237,8 @@ func (mg *AutoscalingGroup) ResolveReferences(ctx context.Context, c client.Read
 		References:    mg.Spec.ForProvider.VPCZoneIdentifierRefs,
 		Selector:      mg.Spec.ForProvider.VPCZoneIdentifierSelector,
 		To: reference.To{
-			List:    &v1beta12.SubnetList{},
-			Managed: &v1beta12.Subnet{},
+			List:    &v1beta13.SubnetList{},
+			Managed: &v1beta13.Subnet{},
 		},
 	})
 	if err != nil {
@@ -287,8 +305,8 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta13.RoleList{},
-			Managed: &v1beta13.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {

@@ -160,6 +160,22 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.DestinationArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LogGroupNameRef,
+		Selector:     mg.Spec.ForProvider.LogGroupNameSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogGroupName")
+	}
+	mg.Spec.ForProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.RoleArnRef,

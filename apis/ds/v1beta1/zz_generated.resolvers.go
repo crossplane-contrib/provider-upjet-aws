@@ -69,7 +69,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConnectSettings); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectSettings[i3].VPCID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ConnectSettings[i3].VPCIDRef,
 			Selector:     mg.Spec.ForProvider.ConnectSettings[i3].VPCIDSelector,
 			To: reference.To{
@@ -105,7 +105,7 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCSettings); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCSettings[i3].VPCID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VPCSettings[i3].VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPCSettings[i3].VPCIDSelector,
 			To: reference.To{

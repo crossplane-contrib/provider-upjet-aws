@@ -29,7 +29,9 @@ spec:
       - volumeSize: "300"
         volumeType: gp2
       spotPrice: "1.117"
-      subnetId: subnet-1234
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       tags:
         Name: spot-fleet-example
       weightedCapacity: 35

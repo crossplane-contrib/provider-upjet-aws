@@ -9,7 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -21,6 +24,42 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKey),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyRef,
+			Selector:     mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeySelector,
+			To: reference.To{
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKey")
+		}
+		mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKey = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.InstanceConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceConfiguration[i3].InstanceRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.InstanceConfiguration[i3].InstanceRoleArnRef,
+			Selector:     mg.Spec.ForProvider.InstanceConfiguration[i3].InstanceRoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.InstanceConfiguration[i3].InstanceRoleArn")
+		}
+		mg.Spec.ForProvider.InstanceConfiguration[i3].InstanceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.InstanceConfiguration[i3].InstanceRoleArnRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkConfiguration[i3].EgressConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -62,6 +101,26 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SourceConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].AccessRoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].AccessRoleArnRef,
+				Selector:     mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].AccessRoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].AccessRoleArn")
+			}
+			mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].AccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].AccessRoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SourceConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn),
 				Extract:      resource.ExtractParamPath("arn", true),
 				Reference:    mg.Spec.ForProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef,
@@ -96,8 +155,8 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		References:    mg.Spec.ForProvider.SecurityGroupRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta12.SecurityGroupList{},
+			Managed: &v1beta12.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -112,8 +171,8 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 		References:    mg.Spec.ForProvider.SubnetRefs,
 		Selector:      mg.Spec.ForProvider.SubnetSelector,
 		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {

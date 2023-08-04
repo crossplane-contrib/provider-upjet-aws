@@ -70,6 +70,28 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 		mg.Spec.ForProvider.Component[i3].ComponentArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.InstanceConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS[i5].KMSKeyID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS[i5].KMSKeyIDRef,
+					Selector:     mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS[i5].KMSKeyIDSelector,
+					To: reference.To{
+						List:    &v1beta1.KeyList{},
+						Managed: &v1beta1.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS[i5].KMSKeyID")
+				}
+				mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS[i5].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.InstanceConfiguration[i3].BlockDeviceMapping[i4].EBS[i5].KMSKeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 		Extract:      reference.ExternalName(),
@@ -103,6 +125,37 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 		mg.Spec.ForProvider.TargetRepository[i3].RepositoryName = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.TargetRepository[i3].RepositoryNameRef = rsp.ResolvedReference
 
+	}
+
+	return nil
+}
+
+// ResolveReferences of this DistributionConfiguration.
+func (mg *DistributionConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Distribution); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Distribution[i3].AMIDistributionConfiguration[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
 	}
 
 	return nil
@@ -215,6 +268,26 @@ func (mg *ImageRecipe) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.BlockDeviceMapping); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.BlockDeviceMapping[i3].EBS[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Component); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Component[i3].ComponentArn),

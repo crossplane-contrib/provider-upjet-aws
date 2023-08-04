@@ -130,7 +130,7 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.RoleMapping[i3].MappingRule); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
 				To: reference.To{

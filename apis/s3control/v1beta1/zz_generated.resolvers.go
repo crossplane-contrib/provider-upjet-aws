@@ -12,6 +12,7 @@ import (
 	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -42,7 +43,7 @@ func (mg *AccessPoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfiguration[i3].VPCID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VPCConfiguration[i3].VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPCConfiguration[i3].VPCIDSelector,
 			To: reference.To{
@@ -149,7 +150,7 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 				for i6 := 0; i6 < len(mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda); i6++ {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn),
-						Extract:      resource.ExtractParamPath("arn", true),
+						Extract:      common.ARNExtractor(),
 						Reference:    mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnRef,
 						Selector:     mg.Spec.ForProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnSelector,
 						To: reference.To{

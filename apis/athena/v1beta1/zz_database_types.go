@@ -130,9 +130,6 @@ type EncryptionConfigurationInitParameters struct {
 
 	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
-
-	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
-	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -151,8 +148,17 @@ type EncryptionConfigurationParameters struct {
 	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
 
 	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
 // DatabaseSpec defines the desired state of Database

@@ -587,6 +587,22 @@ func (mg *FlowLog) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.LogDestinationRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.LogGroupNameRef,
+		Selector:     mg.Spec.ForProvider.LogGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta12.GroupList{},
+			Managed: &v1beta12.Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogGroupName")
+	}
+	mg.Spec.ForProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
@@ -1712,8 +1728,29 @@ func (mg *SpotFleetRequest) ResolveReferences(ctx context.Context, c client.Read
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchSpecification); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchSpecification[i3].EBSBlockDevice[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchSpecification); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArn),
@@ -1730,6 +1767,62 @@ func (mg *SpotFleetRequest) ResolveReferences(ctx context.Context, c client.Read
 		}
 		mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.LaunchSpecification[i3].IAMInstanceProfileArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchSpecification); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta1.KeyList{},
+					Managed: &v1beta1.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchSpecification[i3].RootBlockDevice[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchSpecification); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchSpecification[i3].SubnetID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.LaunchSpecification[i3].SubnetIDRef,
+			Selector:     mg.Spec.ForProvider.LaunchSpecification[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &SubnetList{},
+				Managed: &Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LaunchSpecification[i3].SubnetID")
+		}
+		mg.Spec.ForProvider.LaunchSpecification[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LaunchSpecification[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchSpecification); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.LaunchSpecification[i3].VPCSecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.LaunchSpecification[i3].VPCSecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.LaunchSpecification[i3].VPCSecurityGroupIDSelector,
+			To: reference.To{
+				List:    &SecurityGroupList{},
+				Managed: &SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LaunchSpecification[i3].VPCSecurityGroupIds")
+		}
+		mg.Spec.ForProvider.LaunchSpecification[i3].VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.LaunchSpecification[i3].VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplateConfig); i3++ {
@@ -1772,6 +1865,26 @@ func (mg *SpotFleetRequest) ResolveReferences(ctx context.Context, c client.Read
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplateConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides[i4].SubnetID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides[i4].SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &SubnetList{},
+					Managed: &Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].Overrides[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -1784,6 +1897,42 @@ func (mg *SpotInstanceRequest) ResolveReferences(ctx context.Context, c client.R
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EBSBlockDevice); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EBSBlockDevice[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RootBlockDevice); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.RootBlockDevice[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 		Extract:      reference.ExternalName(),

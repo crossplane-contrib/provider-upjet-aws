@@ -186,6 +186,24 @@ func (mg *ReplicationConfiguration) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Destination); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destination[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Destination[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.Destination[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Destination[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.Destination[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Destination[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceFileSystemID),
 		Extract:      resource.ExtractResourceID(),

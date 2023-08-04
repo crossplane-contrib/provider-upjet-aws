@@ -13,6 +13,7 @@ import (
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -64,7 +65,7 @@ func (mg *ConfigurationSetEventDestination) ResolveReferences(ctx context.Contex
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArnRef,
 				Selector:     mg.Spec.ForProvider.EventDestination[i3].KinesisFirehoseDestination[i4].IAMRoleArnSelector,
 				To: reference.To{

@@ -27,9 +27,6 @@ type AppMonitorConfigurationInitParameters struct {
 	// A list of pages in the CloudWatch RUM console that are to be displayed with a "favorite" icon.
 	FavoritePages []*string `json:"favoritePages,omitempty" tf:"favorite_pages,omitempty"`
 
-	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
-	GuestRoleArn *string `json:"guestRoleArn,omitempty" tf:"guest_role_arn,omitempty"`
-
 	// The ID of the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
@@ -92,8 +89,18 @@ type AppMonitorConfigurationParameters struct {
 	FavoritePages []*string `json:"favoritePages,omitempty" tf:"favorite_pages,omitempty"`
 
 	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	GuestRoleArn *string `json:"guestRoleArn,omitempty" tf:"guest_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate guestRoleArn.
+	// +kubebuilder:validation:Optional
+	GuestRoleArnRef *v1.Reference `json:"guestRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate guestRoleArn.
+	// +kubebuilder:validation:Optional
+	GuestRoleArnSelector *v1.Selector `json:"guestRoleArnSelector,omitempty" tf:"-"`
 
 	// The ID of the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
 	// +kubebuilder:validation:Optional

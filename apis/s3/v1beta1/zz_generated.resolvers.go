@@ -581,6 +581,28 @@ func (mg *BucketReplicationConfiguration) ResolveReferences(ctx context.Context,
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Rule[i3].Destination); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration[i5].ReplicaKMSKeyID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration[i5].ReplicaKMSKeyIDRef,
+					Selector:     mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration[i5].ReplicaKMSKeyIDSelector,
+					To: reference.To{
+						List:    &v1beta12.KeyList{},
+						Managed: &v1beta12.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration[i5].ReplicaKMSKeyID")
+				}
+				mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration[i5].ReplicaKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Rule[i3].Destination[i4].EncryptionConfiguration[i5].ReplicaKMSKeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

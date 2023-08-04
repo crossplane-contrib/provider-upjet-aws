@@ -768,9 +768,6 @@ type LambdaFunctionAssociationInitParameters struct {
 
 	// When set to true it exposes the request body to the lambda function. Defaults to false. Valid values: true, false.
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
-
-	// ARN of the Lambda function.
-	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 }
 
 type LambdaFunctionAssociationObservation struct {
@@ -796,8 +793,18 @@ type LambdaFunctionAssociationParameters struct {
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
 
 	// ARN of the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type LoggingConfigInitParameters struct {
@@ -1068,7 +1075,7 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
 	// ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 

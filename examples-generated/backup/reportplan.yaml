@@ -15,7 +15,9 @@ spec:
     - formats:
       - CSV
       - JSON
-      s3BucketName: example-bucket-name
+      s3BucketNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     reportSetting:
     - reportTemplate: RESTORE_JOB_REPORT
     tags:

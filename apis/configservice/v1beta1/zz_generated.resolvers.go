@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
@@ -56,7 +57,7 @@ func (mg *ConfigurationAggregator) ResolveReferences(ctx context.Context, c clie
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrganizationAggregationSource); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArnSelector,
 			To: reference.To{
@@ -123,6 +124,22 @@ func (mg *DeliveryChannel) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.S3BucketName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.S3BucketNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.S3KMSKeyArnRef,
+		Selector:     mg.Spec.ForProvider.S3KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta13.KeyList{},
+			Managed: &v1beta13.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.S3KMSKeyArn")
+	}
+	mg.Spec.ForProvider.S3KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.S3KMSKeyArnRef = rsp.ResolvedReference
 
 	return nil
 }

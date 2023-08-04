@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    bucketName: beckut_name
+    bucketNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     endpointType: target
     region: us-west-1
     serviceAccessRoleArnSelector:

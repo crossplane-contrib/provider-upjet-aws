@@ -39,9 +39,6 @@ type ActionInitParameters struct {
 	// The provider of the service being called by the action. Valid providers are determined by the action category. Provider names are listed in the Action Structure Reference documentation.
 	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
 
-	// The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
-
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
@@ -127,8 +124,18 @@ type ActionParameters struct {
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The ARN of the IAM service role that will perform the declared action. This is assumed through the roleArn for the pipeline.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The order in which actions are run.
 	// +kubebuilder:validation:Optional

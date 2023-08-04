@@ -10,7 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	resource "github.com/upbound/upjet/pkg/resource"
+	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -24,7 +24,7 @@ func (mg *LanguageModel) ResolveReferences(ctx context.Context, c client.Reader)
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.InputDataConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArnRef,
 			Selector:     mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArnSelector,
 			To: reference.To{

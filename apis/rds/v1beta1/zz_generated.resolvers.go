@@ -62,7 +62,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
-		Extract:      resource.ExtractParamPath("key_id", true),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
 		To: reference.To{
@@ -519,7 +519,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
-		Extract:      resource.ExtractParamPath("key_id", true),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
 		To: reference.To{
@@ -550,6 +550,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.MonitoringRoleArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PerformanceInsightsKMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDRef,
+		Selector:     mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PerformanceInsightsKMSKeyID")
+	}
+	mg.Spec.ForProvider.PerformanceInsightsKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PerformanceInsightsKMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicateSourceDB),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ReplicateSourceDBRef,
@@ -565,6 +581,24 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ReplicateSourceDB = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ReplicateSourceDBRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Import); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Import[i3].BucketName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.S3Import[i3].BucketNameRef,
+			Selector:     mg.Spec.ForProvider.S3Import[i3].BucketNameSelector,
+			To: reference.To{
+				List:    &v1beta11.BucketList{},
+				Managed: &v1beta11.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Import[i3].BucketName")
+		}
+		mg.Spec.ForProvider.S3Import[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Import[i3].BucketNameRef = rsp.ResolvedReference
+
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 		Extract:       reference.ExternalName(),

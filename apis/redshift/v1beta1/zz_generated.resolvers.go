@@ -9,10 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -74,14 +75,32 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Logging); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Logging[i3].BucketName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Logging[i3].BucketNameRef,
+			Selector:     mg.Spec.ForProvider.Logging[i3].BucketNameSelector,
+			To: reference.To{
+				List:    &v1beta12.BucketList{},
+				Managed: &v1beta12.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Logging[i3].BucketName")
+		}
+		mg.Spec.ForProvider.Logging[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Logging[i3].BucketNameRef = rsp.ResolvedReference
+
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta12.SecurityGroupList{},
-			Managed: &v1beta12.SecurityGroup{},
+			List:    &v1beta13.SecurityGroupList{},
+			Managed: &v1beta13.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -106,8 +125,8 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.SnsTopicArnRef,
 		Selector:     mg.Spec.ForProvider.SnsTopicArnSelector,
 		To: reference.To{
-			List:    &v1beta13.TopicList{},
-			Managed: &v1beta13.Topic{},
+			List:    &v1beta14.TopicList{},
+			Managed: &v1beta14.Topic{},
 		},
 	})
 	if err != nil {
@@ -226,8 +245,8 @@ func (mg *SubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 		References:    mg.Spec.ForProvider.SubnetIDRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta12.SubnetList{},
-			Managed: &v1beta12.Subnet{},
+			List:    &v1beta13.SubnetList{},
+			Managed: &v1beta13.Subnet{},
 		},
 	})
 	if err != nil {

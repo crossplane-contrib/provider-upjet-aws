@@ -9,8 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -22,6 +23,22 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AwsKMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AwsKMSKeyArnRef,
+		Selector:     mg.Spec.ForProvider.AwsKMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AwsKMSKeyArn")
+	}
+	mg.Spec.ForProvider.AwsKMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AwsKMSKeyArnRef = rsp.ResolvedReference
+
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ContentConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContentConfig[i3].Bucket),
@@ -29,8 +46,8 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.ContentConfig[i3].BucketRef,
 			Selector:     mg.Spec.ForProvider.ContentConfig[i3].BucketSelector,
 			To: reference.To{
-				List:    &v1beta1.BucketList{},
-				Managed: &v1beta1.Bucket{},
+				List:    &v1beta11.BucketList{},
+				Managed: &v1beta11.Bucket{},
 			},
 		})
 		if err != nil {
@@ -46,8 +63,8 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.InputBucketRef,
 		Selector:     mg.Spec.ForProvider.InputBucketSelector,
 		To: reference.To{
-			List:    &v1beta1.BucketList{},
-			Managed: &v1beta1.Bucket{},
+			List:    &v1beta11.BucketList{},
+			Managed: &v1beta11.Bucket{},
 		},
 	})
 	if err != nil {
@@ -62,8 +79,8 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.RoleRef,
 		Selector:     mg.Spec.ForProvider.RoleSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -79,8 +96,8 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.ThumbnailConfig[i3].BucketRef,
 			Selector:     mg.Spec.ForProvider.ThumbnailConfig[i3].BucketSelector,
 			To: reference.To{
-				List:    &v1beta1.BucketList{},
-				Managed: &v1beta1.Bucket{},
+				List:    &v1beta11.BucketList{},
+				Managed: &v1beta11.Bucket{},
 			},
 		})
 		if err != nil {

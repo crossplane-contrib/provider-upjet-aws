@@ -3261,11 +3261,6 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
-	if in.BucketName != nil {
-		in, out := &in.BucketName, &out.BucketName
-		*out = new(string)
-		**out = **in
-	}
 	if in.CannedACLForObjects != nil {
 		in, out := &in.CannedACLForObjects, &out.CannedACLForObjects
 		*out = new(string)
@@ -3832,6 +3827,16 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 		in, out := &in.BucketName, &out.BucketName
 		*out = new(string)
 		**out = **in
+	}
+	if in.BucketNameRef != nil {
+		in, out := &in.BucketNameRef, &out.BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketNameSelector != nil {
+		in, out := &in.BucketNameSelector, &out.BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CannedACLForObjects != nil {
 		in, out := &in.CannedACLForObjects, &out.CannedACLForObjects

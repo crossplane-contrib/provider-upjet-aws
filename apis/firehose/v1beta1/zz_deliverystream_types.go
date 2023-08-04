@@ -18,9 +18,6 @@ type CloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -44,8 +41,17 @@ type CloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -495,7 +501,7 @@ type ElasticsearchConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -525,9 +531,6 @@ type ExtendedS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -551,8 +554,17 @@ type ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -582,10 +594,6 @@ type ExtendedS3ConfigurationInitParameters struct {
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
-
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -694,8 +702,17 @@ type ExtendedS3ConfigurationParameters struct {
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
@@ -762,9 +779,6 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -788,8 +802,17 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -895,7 +918,7 @@ type HTTPEndpointConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -1016,9 +1039,6 @@ type KinesisSourceConfigurationInitParameters struct {
 
 	// The kinesis stream used as the source of the firehose delivery stream.
 	KinesisStreamArn *string `json:"kinesisStreamArn,omitempty" tf:"kinesis_stream_arn,omitempty"`
-
-	// The ARN of the AWS credentials.
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type KinesisSourceConfigurationObservation struct {
@@ -1037,8 +1057,18 @@ type KinesisSourceConfigurationParameters struct {
 	KinesisStreamArn *string `json:"kinesisStreamArn,omitempty" tf:"kinesis_stream_arn,omitempty"`
 
 	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OpenXJSONSerDeInitParameters struct {
@@ -1085,9 +1115,6 @@ type OpensearchConfigurationCloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -1111,8 +1138,17 @@ type OpensearchConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -1247,7 +1283,7 @@ type OpensearchConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -1360,12 +1396,6 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameter
 }
 
 type OpensearchConfigurationVPCConfigInitParameters struct {
-
-	// A list of security group IDs to associate with Kinesis Firehose.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// A list of subnet IDs to associate with Kinesis Firehose.
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type OpensearchConfigurationVPCConfigObservation struct {
@@ -1386,7 +1416,7 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -1398,11 +1428,33 @@ type OpensearchConfigurationVPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
@@ -1783,9 +1835,6 @@ type RedshiftConfigurationCloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -1809,8 +1858,17 @@ type RedshiftConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -1922,7 +1980,7 @@ type RedshiftConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -2039,9 +2097,6 @@ type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsInitParam
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -2065,8 +2120,17 @@ type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameter
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -2090,10 +2154,6 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
-
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -2170,8 +2230,17 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
@@ -2179,7 +2248,7 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -2226,9 +2295,6 @@ type S3BackupConfigurationCloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -2252,8 +2318,17 @@ type S3BackupConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -2281,15 +2356,8 @@ type S3BackupConfigurationInitParameters struct {
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
 
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
-
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// The ARN of the AWS credentials.
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
 type S3BackupConfigurationObservation struct {
@@ -2353,25 +2421,41 @@ type S3BackupConfigurationParameters struct {
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
@@ -2396,8 +2480,17 @@ type S3ConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -2421,10 +2514,6 @@ type S3ConfigurationInitParameters struct {
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
-
-	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
-	// be used.
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -2501,8 +2590,17 @@ type S3ConfigurationParameters struct {
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	// +kubebuilder:validation:Optional
@@ -2572,7 +2670,7 @@ type SchemaConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -2675,9 +2773,6 @@ type SplunkConfigurationCloudwatchLoggingOptionsInitParameters struct {
 	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The CloudWatch group name for logging. This value is required if enabled is true.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
 }
@@ -2701,8 +2796,17 @@ type SplunkConfigurationCloudwatchLoggingOptionsParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatch log stream name for logging. This value is required if enabled is true.
 	// +kubebuilder:validation:Optional
@@ -2880,12 +2984,6 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters st
 }
 
 type VPCConfigInitParameters struct {
-
-	// A list of security group IDs to associate with Kinesis Firehose.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// A list of subnet IDs to associate with Kinesis Firehose.
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCConfigObservation struct {
@@ -2906,7 +3004,7 @@ type VPCConfigParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -2918,11 +3016,33 @@ type VPCConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }

@@ -113,7 +113,7 @@ func (mg *TestGridProject) ResolveReferences(ctx context.Context, c client.Reade
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCConfig[i3].VPCID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.VPCConfig[i3].VPCIDRef,
 			Selector:     mg.Spec.ForProvider.VPCConfig[i3].VPCIDSelector,
 			To: reference.To{

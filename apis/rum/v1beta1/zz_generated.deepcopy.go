@@ -76,11 +76,6 @@ func (in *AppMonitorConfigurationInitParameters) DeepCopyInto(out *AppMonitorCon
 			}
 		}
 	}
-	if in.GuestRoleArn != nil {
-		in, out := &in.GuestRoleArn, &out.GuestRoleArn
-		*out = new(string)
-		**out = **in
-	}
 	if in.IdentityPoolID != nil {
 		in, out := &in.IdentityPoolID, &out.IdentityPoolID
 		*out = new(string)
@@ -248,6 +243,16 @@ func (in *AppMonitorConfigurationParameters) DeepCopyInto(out *AppMonitorConfigu
 		in, out := &in.GuestRoleArn, &out.GuestRoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.GuestRoleArnRef != nil {
+		in, out := &in.GuestRoleArnRef, &out.GuestRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GuestRoleArnSelector != nil {
+		in, out := &in.GuestRoleArnSelector, &out.GuestRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IdentityPoolID != nil {
 		in, out := &in.IdentityPoolID, &out.IdentityPoolID

@@ -43,7 +43,7 @@ func (mg *LocationS3) ResolveReferences(ctx context.Context, c client.Reader) er
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Config); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Config[i3].BucketAccessRoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.S3Config[i3].BucketAccessRoleArnRef,
 			Selector:     mg.Spec.ForProvider.S3Config[i3].BucketAccessRoleArnSelector,
 			To: reference.To{

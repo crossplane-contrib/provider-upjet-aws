@@ -193,7 +193,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Monitor); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Monitor[i3].AlarmRoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.Monitor[i3].AlarmRoleArnRef,
 			Selector:     mg.Spec.ForProvider.Monitor[i3].AlarmRoleArnSelector,
 			To: reference.To{
@@ -223,7 +223,7 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ActionPoint[i3].Action); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.ActionPoint[i3].Action[i4].RoleArnSelector,
 				To: reference.To{

@@ -9,9 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/dynamodb/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -110,14 +111,32 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.DynamodbConfig[i3].TableNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig[i3].FunctionArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].FunctionArnRef,
+			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].FunctionArnSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LambdaConfig[i3].FunctionArn")
+		}
+		mg.Spec.ForProvider.LambdaConfig[i3].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LambdaConfig[i3].FunctionArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -181,12 +200,12 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfig[i3].CloudwatchLogsRoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.LogConfig[i3].CloudwatchLogsRoleArnRef,
 			Selector:     mg.Spec.ForProvider.LogConfig[i3].CloudwatchLogsRoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -203,8 +222,8 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 			Reference:    mg.Spec.ForProvider.UserPoolConfig[i3].UserPoolIDRef,
 			Selector:     mg.Spec.ForProvider.UserPoolConfig[i3].UserPoolIDSelector,
 			To: reference.To{
-				List:    &v1beta12.UserPoolList{},
-				Managed: &v1beta12.UserPool{},
+				List:    &v1beta13.UserPoolList{},
+				Managed: &v1beta13.UserPool{},
 			},
 		})
 		if err != nil {

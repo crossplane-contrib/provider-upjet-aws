@@ -431,9 +431,6 @@ type HTTPEndpointConfigParameters struct {
 }
 
 type LambdaConfigInitParameters struct {
-
-	// ARN for the Lambda function.
-	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 }
 
 type LambdaConfigObservation struct {
@@ -445,8 +442,18 @@ type LambdaConfigObservation struct {
 type LambdaConfigParameters struct {
 
 	// ARN for the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OpensearchserviceConfigInitParameters struct {

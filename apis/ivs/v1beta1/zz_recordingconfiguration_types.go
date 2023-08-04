@@ -108,9 +108,6 @@ type RecordingConfigurationParameters struct {
 }
 
 type S3InitParameters struct {
-
-	// S3 bucket name where recorded videos will be stored.
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 }
 
 type S3Observation struct {
@@ -122,8 +119,17 @@ type S3Observation struct {
 type S3Parameters struct {
 
 	// S3 bucket name where recorded videos will be stored.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 }
 
 type ThumbnailConfigurationInitParameters struct {

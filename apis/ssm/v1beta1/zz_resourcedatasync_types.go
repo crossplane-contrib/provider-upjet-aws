@@ -41,9 +41,6 @@ type ResourceDataSyncParameters struct {
 
 type S3DestinationInitParameters struct {
 
-	// ARN of an encryption key for a destination in Amazon S3.
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
-
 	// Prefix for the bucket.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -85,8 +82,17 @@ type S3DestinationParameters struct {
 	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// ARN of an encryption key for a destination in Amazon S3.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Prefix for the bucket.
 	// +kubebuilder:validation:Optional

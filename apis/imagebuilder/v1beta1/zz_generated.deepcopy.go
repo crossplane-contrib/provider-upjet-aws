@@ -37,11 +37,6 @@ func (in *AMIDistributionConfigurationInitParameters) DeepCopyInto(out *AMIDistr
 		*out = new(string)
 		**out = **in
 	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.LaunchPermission != nil {
 		in, out := &in.LaunchPermission, &out.LaunchPermission
 		*out = make([]LaunchPermissionInitParameters, len(*in))
@@ -168,6 +163,16 @@ func (in *AMIDistributionConfigurationParameters) DeepCopyInto(out *AMIDistribut
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LaunchPermission != nil {
 		in, out := &in.LaunchPermission, &out.LaunchPermission
 		*out = make([]LaunchPermissionParameters, len(*in))
@@ -291,11 +296,6 @@ func (in *BlockDeviceMappingEBSInitParameters) DeepCopyInto(out *BlockDeviceMapp
 		*out = new(float64)
 		**out = **in
 	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
 		*out = new(string)
@@ -405,6 +405,16 @@ func (in *BlockDeviceMappingEBSParameters) DeepCopyInto(out *BlockDeviceMappingE
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
@@ -2284,11 +2294,6 @@ func (in *EBSInitParameters) DeepCopyInto(out *EBSInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
 		*out = new(string)
@@ -2398,6 +2403,16 @@ func (in *EBSParameters) DeepCopyInto(out *EBSParameters) {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID

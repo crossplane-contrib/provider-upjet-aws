@@ -21,9 +21,6 @@ type SubscriptionFilterInitParameters struct {
 	// A valid CloudWatch Logs filter pattern for subscribing to a filtered stream of log events. Use empty string "" to match everything. For more information, see the Amazon CloudWatch Logs User Guide.
 	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
-	// The name of the log group to associate the subscription filter with
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// A name for the subscription filter
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -76,8 +73,17 @@ type SubscriptionFilterParameters struct {
 	FilterPattern *string `json:"filterPattern,omitempty" tf:"filter_pattern,omitempty"`
 
 	// The name of the log group to associate the subscription filter with
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// A name for the subscription filter
 	// +kubebuilder:validation:Optional
@@ -140,7 +146,6 @@ type SubscriptionFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterPattern) || has(self.initProvider.filterPattern)",message="filterPattern is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.logGroupName) || has(self.initProvider.logGroupName)",message="logGroupName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SubscriptionFilterSpec   `json:"spec"`
 	Status SubscriptionFilterStatus `json:"status,omitempty"`

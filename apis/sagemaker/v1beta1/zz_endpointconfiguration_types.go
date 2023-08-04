@@ -33,9 +33,6 @@ type AsyncInferenceConfigObservation struct {
 
 type AsyncInferenceConfigOutputConfigInitParameters struct {
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
-
 	// Specifies the configuration for notifications of inference results for asynchronous inference.
 	NotificationConfig []NotificationConfigInitParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
 
@@ -64,8 +61,17 @@ type AsyncInferenceConfigOutputConfigObservation struct {
 type AsyncInferenceConfigOutputConfigParameters struct {
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the configuration for notifications of inference results for asynchronous inference.
 	// +kubebuilder:validation:Optional
@@ -162,9 +168,6 @@ type CoreDumpConfigInitParameters struct {
 
 	// The Amazon S3 bucket to send the core dump to.
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
-
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type CoreDumpConfigObservation struct {
@@ -183,8 +186,17 @@ type CoreDumpConfigParameters struct {
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type DataCaptureConfigInitParameters struct {
@@ -203,9 +215,6 @@ type DataCaptureConfigInitParameters struct {
 
 	// Portion of data to capture. Should be between 0 and 100.
 	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
-
-	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type DataCaptureConfigObservation struct {
@@ -252,8 +261,17 @@ type DataCaptureConfigParameters struct {
 	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
 
 	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EndpointConfigurationInitParameters struct {
@@ -551,9 +569,6 @@ type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
 
 	// The Amazon S3 bucket to send the core dump to.
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
-
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ShadowProductionVariantsCoreDumpConfigObservation struct {
@@ -572,8 +587,17 @@ type ShadowProductionVariantsCoreDumpConfigParameters struct {
 	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type ShadowProductionVariantsInitParameters struct {

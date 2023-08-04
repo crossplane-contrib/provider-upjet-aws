@@ -139,9 +139,6 @@ type NotificationsParameters struct {
 
 type PipelineInitParameters struct {
 
-	// The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.
-	AwsKMSKeyArn *string `json:"awsKmsKeyArn,omitempty" tf:"aws_kms_key_arn,omitempty"`
-
 	// The ContentConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. (documented below)
 	ContentConfig []ContentConfigInitParameters `json:"contentConfig,omitempty" tf:"content_config,omitempty"`
 
@@ -206,8 +203,17 @@ type PipelineObservation struct {
 type PipelineParameters struct {
 
 	// The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	AwsKMSKeyArn *string `json:"awsKmsKeyArn,omitempty" tf:"aws_kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate awsKmsKeyArn.
+	// +kubebuilder:validation:Optional
+	AwsKMSKeyArnRef *v1.Reference `json:"awsKmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate awsKmsKeyArn.
+	// +kubebuilder:validation:Optional
+	AwsKMSKeyArnSelector *v1.Selector `json:"awsKmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The ContentConfig object specifies information about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded files and playlists. (documented below)
 	// +kubebuilder:validation:Optional

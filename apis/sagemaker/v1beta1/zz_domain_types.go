@@ -610,9 +610,6 @@ type DomainSettingsInitParameters struct {
 
 	// A collection of settings that configure the RStudioServerPro Domain-level app. see RStudioServerProDomainSettings below.
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsInitParameters `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
-
-	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
 
 type DomainSettingsObservation struct {
@@ -637,7 +634,18 @@ type DomainSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsParameters `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
@@ -891,9 +899,6 @@ type KernelGatewayAppSettingsParameters struct {
 
 type ModelRegisterSettingsInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
-	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
-
 	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application.. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -910,8 +915,18 @@ type ModelRegisterSettingsObservation struct {
 type ModelRegisterSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate crossAccountModelRegisterRoleArn.
+	// +kubebuilder:validation:Optional
+	CrossAccountModelRegisterRoleArnRef *v1.Reference `json:"crossAccountModelRegisterRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate crossAccountModelRegisterRoleArn.
+	// +kubebuilder:validation:Optional
+	CrossAccountModelRegisterRoleArnSelector *v1.Selector `json:"crossAccountModelRegisterRoleArnSelector,omitempty" tf:"-"`
 
 	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application.. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
@@ -1118,9 +1133,6 @@ type RStudioServerProDomainSettingsInitParameters struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
-	// The ARN of the execution role for the RStudioServerPro Domain-level app.
-	DomainExecutionRoleArn *string `json:"domainExecutionRoleArn,omitempty" tf:"domain_execution_role_arn,omitempty"`
-
 	// A URL pointing to an RStudio Connect server.
 	RStudioConnectURL *string `json:"rStudioConnectUrl,omitempty" tf:"r_studio_connect_url,omitempty"`
 
@@ -1150,8 +1162,18 @@ type RStudioServerProDomainSettingsParameters struct {
 	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The ARN of the execution role for the RStudioServerPro Domain-level app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	DomainExecutionRoleArn *string `json:"domainExecutionRoleArn,omitempty" tf:"domain_execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate domainExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	DomainExecutionRoleArnRef *v1.Reference `json:"domainExecutionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate domainExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	DomainExecutionRoleArnSelector *v1.Selector `json:"domainExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// A URL pointing to an RStudio Connect server.
 	// +kubebuilder:validation:Optional
@@ -1186,9 +1208,6 @@ type SharingSettingsInitParameters struct {
 	// Whether to include the notebook cell output when sharing the notebook. The default is Disabled. Valid values are Allowed and Disabled.
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
-	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
-	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
-
 	// When notebook_output_option is Allowed, the Amazon S3 bucket used to save the notebook cell output.
 	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
 }
@@ -1212,8 +1231,17 @@ type SharingSettingsParameters struct {
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
 	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate s3KmsKeyId.
+	// +kubebuilder:validation:Optional
+	S3KMSKeyIDRef *v1.Reference `json:"s3KmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate s3KmsKeyId.
+	// +kubebuilder:validation:Optional
+	S3KMSKeyIDSelector *v1.Selector `json:"s3KmsKeyIdSelector,omitempty" tf:"-"`
 
 	// When notebook_output_option is Allowed, the Amazon S3 bucket used to save the notebook cell output.
 	// +kubebuilder:validation:Optional
@@ -1290,9 +1318,6 @@ type TensorBoardAppSettingsParameters struct {
 
 type TimeSeriesForecastingSettingsInitParameters struct {
 
-	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
-	AmazonForecastRoleArn *string `json:"amazonForecastRoleArn,omitempty" tf:"amazon_forecast_role_arn,omitempty"`
-
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -1309,8 +1334,18 @@ type TimeSeriesForecastingSettingsObservation struct {
 type TimeSeriesForecastingSettingsParameters struct {
 
 	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AmazonForecastRoleArn *string `json:"amazonForecastRoleArn,omitempty" tf:"amazon_forecast_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate amazonForecastRoleArn.
+	// +kubebuilder:validation:Optional
+	AmazonForecastRoleArnRef *v1.Reference `json:"amazonForecastRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate amazonForecastRoleArn.
+	// +kubebuilder:validation:Optional
+	AmazonForecastRoleArnSelector *v1.Selector `json:"amazonForecastRoleArnSelector,omitempty" tf:"-"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional

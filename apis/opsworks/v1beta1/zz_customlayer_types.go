@@ -518,9 +518,6 @@ type LogStreamsInitParameters struct {
 	// Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file.
 	InitialPosition *string `json:"initialPosition,omitempty" tf:"initial_position,omitempty"`
 
-	// Specifies the destination log group. A log group is created automatically if it doesn't already exist.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// Specifies the pattern for identifying the start of a log message.
 	MultilineStartPattern *string `json:"multilineStartPattern,omitempty" tf:"multiline_start_pattern,omitempty"`
 
@@ -599,8 +596,17 @@ type LogStreamsParameters struct {
 	InitialPosition *string `json:"initialPosition,omitempty" tf:"initial_position,omitempty"`
 
 	// Specifies the destination log group. A log group is created automatically if it doesn't already exist.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the pattern for identifying the start of a log message.
 	// +kubebuilder:validation:Optional

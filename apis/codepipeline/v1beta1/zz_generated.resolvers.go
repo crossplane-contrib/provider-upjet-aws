@@ -56,6 +56,27 @@ func (mg *Codepipeline) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Stage); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Stage[i3].Action); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Stage[i3].Action[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Stage[i3].Action[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Stage[i3].Action[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Stage[i3].Action[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.Stage[i3].Action[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Stage[i3].Action[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+
 	return nil
 }
 

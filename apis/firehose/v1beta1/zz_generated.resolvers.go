@@ -9,11 +9,14 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/elasticsearch/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/glue/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta14 "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/elasticsearch/v1beta1"
+	v1beta15 "github.com/upbound/provider-aws/apis/glue/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta16 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta17 "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -24,8 +27,29 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].DomainArn),
@@ -33,8 +57,8 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].DomainArnRef,
 			Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration[i3].DomainArnSelector,
 			To: reference.To{
-				List:    &v1beta1.DomainList{},
-				Managed: &v1beta1.Domain{},
+				List:    &v1beta11.DomainList{},
+				Managed: &v1beta11.Domain{},
 			},
 		})
 		if err != nil {
@@ -47,12 +71,12 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -66,12 +90,12 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].RoleArnSelector,
 				To: reference.To{
-					List:    &v1beta11.RoleList{},
-					Managed: &v1beta11.Role{},
+					List:    &v1beta12.RoleList{},
+					Managed: &v1beta12.Role{},
 				},
 			})
 			if err != nil {
@@ -82,6 +106,46 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SecurityGroupIDRefs,
+				Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SecurityGroupIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SecurityGroupList{},
+					Managed: &v1beta13.SecurityGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SubnetIDRefs,
+				Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].SubnetIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].BucketArn),
@@ -89,8 +153,8 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].BucketArnRef,
 			Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].BucketArnSelector,
 			To: reference.To{
-				List:    &v1beta12.BucketList{},
-				Managed: &v1beta12.Bucket{},
+				List:    &v1beta14.BucketList{},
+				Managed: &v1beta14.Bucket{},
 			},
 		})
 		if err != nil {
@@ -101,16 +165,36 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ExtendedS3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration); i5++ {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].RoleArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].RoleArnRef,
 					Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].RoleArnSelector,
 					To: reference.To{
-						List:    &v1beta11.RoleList{},
-						Managed: &v1beta11.Role{},
+						List:    &v1beta12.RoleList{},
+						Managed: &v1beta12.Role{},
 					},
 				})
 				if err != nil {
@@ -131,8 +215,8 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 					Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].TableNameRef,
 					Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].DataFormatConversionConfiguration[i4].SchemaConfiguration[i5].TableNameSelector,
 					To: reference.To{
-						List:    &v1beta13.CatalogTableList{},
-						Managed: &v1beta13.CatalogTable{},
+						List:    &v1beta15.CatalogTableList{},
+						Managed: &v1beta15.CatalogTable{},
 					},
 				})
 				if err != nil {
@@ -146,13 +230,31 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].KMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta16.KeyList{},
+				Managed: &v1beta16.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ExtendedS3Configuration[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.ExtendedS3Configuration[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ExtendedS3Configuration[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].RoleArn),
 			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -162,15 +264,97 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.ExtendedS3Configuration[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupNameRef,
+					Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupNameSelector,
+					To: reference.To{
+						List:    &v1beta1.GroupList{},
+						Managed: &v1beta1.Group{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupName")
+				}
+				mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].KMSKeyArn),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta16.KeyList{},
+					Managed: &v1beta16.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].KMSKeyArn")
+			}
+			mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ExtendedS3Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta12.RoleList{},
+					Managed: &v1beta12.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ExtendedS3Configuration[i3].S3BackupConfiguration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -180,6 +364,44 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KinesisSourceConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisSourceConfiguration[i3].RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.KinesisSourceConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.KinesisSourceConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.KinesisSourceConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.KinesisSourceConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KinesisSourceConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArn),
@@ -187,8 +409,8 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArnRef,
 			Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArnSelector,
 			To: reference.To{
-				List:    &v1beta14.DomainList{},
-				Managed: &v1beta14.Domain{},
+				List:    &v1beta17.DomainList{},
+				Managed: &v1beta17.Domain{},
 			},
 		})
 		if err != nil {
@@ -201,12 +423,12 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -220,12 +442,12 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnSelector,
 				To: reference.To{
-					List:    &v1beta11.RoleList{},
-					Managed: &v1beta11.Role{},
+					List:    &v1beta12.RoleList{},
+					Managed: &v1beta12.Role{},
 				},
 			})
 			if err != nil {
@@ -236,15 +458,75 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SecurityGroupIDRefs,
+				Selector:      mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SecurityGroupIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SecurityGroupList{},
+					Managed: &v1beta13.SecurityGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SubnetIDRefs,
+				Selector:      mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].SubnetIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -262,8 +544,8 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnRef,
 				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnSelector,
 				To: reference.To{
-					List:    &v1beta12.BucketList{},
-					Managed: &v1beta12.Bucket{},
+					List:    &v1beta14.BucketList{},
+					Managed: &v1beta14.Bucket{},
 				},
 			})
 			if err != nil {
@@ -276,14 +558,56 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupNameRef,
+					Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupNameSelector,
+					To: reference.To{
+						List:    &v1beta1.GroupList{},
+						Managed: &v1beta1.Group{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupName")
+				}
+				mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].CloudwatchLoggingOptions[i5].LogGroupNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].KMSKeyArn),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta16.KeyList{},
+					Managed: &v1beta16.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].KMSKeyArn")
+			}
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].RoleArnSelector,
 				To: reference.To{
-					List:    &v1beta11.RoleList{},
-					Managed: &v1beta11.Role{},
+					List:    &v1beta12.RoleList{},
+					Managed: &v1beta12.Role{},
 				},
 			})
 			if err != nil {
@@ -301,8 +625,8 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.S3Configuration[i3].BucketArnRef,
 			Selector:     mg.Spec.ForProvider.S3Configuration[i3].BucketArnSelector,
 			To: reference.To{
-				List:    &v1beta12.BucketList{},
-				Managed: &v1beta12.Bucket{},
+				List:    &v1beta14.BucketList{},
+				Managed: &v1beta14.Bucket{},
 			},
 		})
 		if err != nil {
@@ -313,14 +637,52 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.S3Configuration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.S3Configuration[i3].KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.S3Configuration[i3].KMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta16.KeyList{},
+				Managed: &v1beta16.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Configuration[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.S3Configuration[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Configuration[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].RoleArn),
 			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.S3Configuration[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.S3Configuration[i3].RoleArnSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -329,6 +691,26 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.S3Configuration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.S3Configuration[i3].RoleArnRef = rsp.ResolvedReference
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SplunkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SplunkConfiguration[i3].CloudwatchLoggingOptions[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
 	}
 
 	return nil

@@ -24,9 +24,6 @@ type BlockDeviceMappingEBSInitParameters struct {
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
-
 	// Identifier of the EC2 Volume Snapshot.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
@@ -82,8 +79,17 @@ type BlockDeviceMappingEBSParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Identifier of the EC2 Volume Snapshot.
 	// +kubebuilder:validation:Optional

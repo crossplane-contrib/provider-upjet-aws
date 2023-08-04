@@ -84,6 +84,53 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 	return nil
 }
 
+// ResolveReferences of this Table.
+func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Replica); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Replica[i3].KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Replica[i3].KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.Replica[i3].KMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Replica[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.Replica[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Replica[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ServerSideEncryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryption[i3].KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ServerSideEncryption[i3].KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.ServerSideEncryption[i3].KMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryption[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.ServerSideEncryption[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ServerSideEncryption[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this TableItem.
 func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

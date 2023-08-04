@@ -12,6 +12,7 @@ import (
 	v1beta13 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -253,6 +254,22 @@ func (mg *S3Endpoint) ResolveReferences(ctx context.Context, c client.Reader) er
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BucketName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.BucketNameRef,
+		Selector:     mg.Spec.ForProvider.BucketNameSelector,
+		To: reference.To{
+			List:    &v1beta14.BucketList{},
+			Managed: &v1beta14.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BucketName")
+	}
+	mg.Spec.ForProvider.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BucketNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
@@ -270,7 +287,7 @@ func (mg *S3Endpoint) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryptionKMSKeyID),
-		Extract:      resource.ExtractParamPath("arn", true),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ServerSideEncryptionKMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.ServerSideEncryptionKMSKeyIDSelector,
 		To: reference.To{

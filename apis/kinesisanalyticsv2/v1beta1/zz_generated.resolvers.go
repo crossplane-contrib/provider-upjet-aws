@@ -9,9 +9,10 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta14 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
+	v1beta15 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
-	v1beta15 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta16 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
@@ -25,6 +26,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
@@ -171,6 +173,46 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDRefs,
+				Selector:      mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDSelector,
+				To: reference.To{
+					List:    &v1beta14.SecurityGroupList{},
+					Managed: &v1beta14.SecurityGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDRefs,
+				Selector:      mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta14.SubnetList{},
+					Managed: &v1beta14.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArn),
@@ -178,8 +220,8 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 			Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].LogStreamArnSelector,
 			To: reference.To{
-				List:    &v1beta14.StreamList{},
-				Managed: &v1beta14.Stream{},
+				List:    &v1beta15.StreamList{},
+				Managed: &v1beta15.Stream{},
 			},
 		})
 		if err != nil {
@@ -195,8 +237,8 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.ServiceExecutionRoleRef,
 		Selector:     mg.Spec.ForProvider.ServiceExecutionRoleSelector,
 		To: reference.To{
-			List:    &v1beta15.RoleList{},
-			Managed: &v1beta15.Role{},
+			List:    &v1beta16.RoleList{},
+			Managed: &v1beta16.Role{},
 		},
 	})
 	if err != nil {

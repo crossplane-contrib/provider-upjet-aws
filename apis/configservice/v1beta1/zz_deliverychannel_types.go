@@ -15,9 +15,6 @@ import (
 
 type DeliveryChannelInitParameters struct {
 
-	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
-	S3KMSKeyArn *string `json:"s3KmsKeyArn,omitempty" tf:"s3_kms_key_arn,omitempty"`
-
 	// The prefix for the specified S3 bucket.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
@@ -70,8 +67,17 @@ type DeliveryChannelParameters struct {
 	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	S3KMSKeyArn *string `json:"s3KmsKeyArn,omitempty" tf:"s3_kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate s3KmsKeyArn.
+	// +kubebuilder:validation:Optional
+	S3KMSKeyArnRef *v1.Reference `json:"s3KmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate s3KmsKeyArn.
+	// +kubebuilder:validation:Optional
+	S3KMSKeyArnSelector *v1.Selector `json:"s3KmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The prefix for the specified S3 bucket.
 	// +kubebuilder:validation:Optional

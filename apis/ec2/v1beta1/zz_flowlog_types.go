@@ -69,9 +69,6 @@ type FlowLogInitParameters struct {
 	// The fields to include in the flow log record, in the order in which they should appear.
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
-	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
-
 	// The maximum interval of time
 	// during which a flow of packets is captured and aggregated into a flow
 	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
@@ -202,8 +199,17 @@ type FlowLogParameters struct {
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
 	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The maximum interval of time
 	// during which a flow of packets is captured and aggregated into a flow

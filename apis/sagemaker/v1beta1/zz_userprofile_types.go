@@ -15,9 +15,6 @@ import (
 
 type CanvasAppSettingsModelRegisterSettingsInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
-	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
-
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -34,8 +31,18 @@ type CanvasAppSettingsModelRegisterSettingsObservation struct {
 type CanvasAppSettingsModelRegisterSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate crossAccountModelRegisterRoleArn.
+	// +kubebuilder:validation:Optional
+	CrossAccountModelRegisterRoleArnRef *v1.Reference `json:"crossAccountModelRegisterRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate crossAccountModelRegisterRoleArn.
+	// +kubebuilder:validation:Optional
+	CrossAccountModelRegisterRoleArnSelector *v1.Selector `json:"crossAccountModelRegisterRoleArnSelector,omitempty" tf:"-"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
@@ -43,9 +50,6 @@ type CanvasAppSettingsModelRegisterSettingsParameters struct {
 }
 
 type CanvasAppSettingsTimeSeriesForecastingSettingsInitParameters struct {
-
-	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
-	AmazonForecastRoleArn *string `json:"amazonForecastRoleArn,omitempty" tf:"amazon_forecast_role_arn,omitempty"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -63,8 +67,18 @@ type CanvasAppSettingsTimeSeriesForecastingSettingsObservation struct {
 type CanvasAppSettingsTimeSeriesForecastingSettingsParameters struct {
 
 	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting. By default, Canvas uses the execution role specified in the UserProfile that launches the Canvas app. If an execution role is not specified in the UserProfile, Canvas uses the execution role specified in the Domain that owns the UserProfile. To allow time series forecasting, this IAM role should have the AmazonSageMakerCanvasForecastAccess policy attached and forecast.amazonaws.com added in the trust relationship as a service principal.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	AmazonForecastRoleArn *string `json:"amazonForecastRoleArn,omitempty" tf:"amazon_forecast_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate amazonForecastRoleArn.
+	// +kubebuilder:validation:Optional
+	AmazonForecastRoleArnRef *v1.Reference `json:"amazonForecastRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate amazonForecastRoleArn.
+	// +kubebuilder:validation:Optional
+	AmazonForecastRoleArnSelector *v1.Selector `json:"amazonForecastRoleArnSelector,omitempty" tf:"-"`
 
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
@@ -677,9 +691,6 @@ type UserSettingsSharingSettingsInitParameters struct {
 	// Whether to include the notebook cell output when sharing the notebook. The default is Disabled. Valid values are Allowed and Disabled.
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
-	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
-	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
-
 	// When notebook_output_option is Allowed, the Amazon S3 bucket used to save the notebook cell output.
 	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
 }
@@ -703,8 +714,17 @@ type UserSettingsSharingSettingsParameters struct {
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
 	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate s3KmsKeyId.
+	// +kubebuilder:validation:Optional
+	S3KMSKeyIDRef *v1.Reference `json:"s3KmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate s3KmsKeyId.
+	// +kubebuilder:validation:Optional
+	S3KMSKeyIDSelector *v1.Selector `json:"s3KmsKeyIdSelector,omitempty" tf:"-"`
 
 	// When notebook_output_option is Allowed, the Amazon S3 bucket used to save the notebook cell output.
 	// +kubebuilder:validation:Optional

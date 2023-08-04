@@ -14,6 +14,35 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AppMonitor.
+func (mg *AppMonitor) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AppMonitorConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AppMonitorConfiguration[i3].GuestRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.AppMonitorConfiguration[i3].GuestRoleArnRef,
+			Selector:     mg.Spec.ForProvider.AppMonitorConfiguration[i3].GuestRoleArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AppMonitorConfiguration[i3].GuestRoleArn")
+		}
+		mg.Spec.ForProvider.AppMonitorConfiguration[i3].GuestRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AppMonitorConfiguration[i3].GuestRoleArnRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this MetricsDestination.
 func (mg *MetricsDestination) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

@@ -21,9 +21,6 @@ type AMIDistributionConfigurationInitParameters struct {
 	// Description to apply to the distributed AMI.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
-
 	// Configuration block of EC2 launch permissions to apply to the distributed AMI. Detailed below.
 	LaunchPermission []LaunchPermissionInitParameters `json:"launchPermission,omitempty" tf:"launch_permission,omitempty"`
 
@@ -66,8 +63,17 @@ type AMIDistributionConfigurationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key to encrypt the distributed AMI.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Configuration block of EC2 launch permissions to apply to the distributed AMI. Detailed below.
 	// +kubebuilder:validation:Optional

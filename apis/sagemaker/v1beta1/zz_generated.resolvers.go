@@ -11,8 +11,8 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta14 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -123,14 +123,32 @@ func (mg *DeviceFleet) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OutputConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputConfig[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.OutputConfig[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.OutputConfig[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OutputConfig[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.OutputConfig[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OutputConfig[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -151,14 +169,58 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.DefaultUserSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArnRef,
+					Selector:     mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArnSelector,
+					To: reference.To{
+						List:    &v1beta12.RoleList{},
+						Managed: &v1beta12.Role{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArn")
+				}
+				mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DefaultUserSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArnRef,
+					Selector:     mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArnSelector,
+					To: reference.To{
+						List:    &v1beta12.RoleList{},
+						Managed: &v1beta12.Role{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArn")
+				}
+				mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DefaultUserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DefaultUserSettings); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultUserSettings[i3].ExecutionRole),
 			Extract:      resource.ExtractParamPath("arn", true),
 			Reference:    mg.Spec.ForProvider.DefaultUserSettings[i3].ExecutionRoleRef,
 			Selector:     mg.Spec.ForProvider.DefaultUserSettings[i3].ExecutionRoleSelector,
 			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
 			},
 		})
 		if err != nil {
@@ -212,14 +274,72 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DefaultUserSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings[i4].S3KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings[i4].S3KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings[i4].S3KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings[i4].S3KMSKeyID")
+			}
+			mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings[i4].S3KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.DefaultUserSettings[i3].SharingSettings[i4].S3KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DomainSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings[i4].DomainExecutionRoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings[i4].DomainExecutionRoleArnRef,
+				Selector:     mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings[i4].DomainExecutionRoleArnSelector,
+				To: reference.To{
+					List:    &v1beta12.RoleList{},
+					Managed: &v1beta12.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings[i4].DomainExecutionRoleArn")
+			}
+			mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings[i4].DomainExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.DomainSettings[i3].RStudioServerProDomainSettings[i4].DomainExecutionRoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DomainSettings); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.DomainSettings[i3].SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.DomainSettings[i3].SecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.DomainSettings[i3].SecurityGroupIDSelector,
+			To: reference.To{
+				List:    &v1beta13.SecurityGroupList{},
+				Managed: &v1beta13.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DomainSettings[i3].SecurityGroupIds")
+		}
+		mg.Spec.ForProvider.DomainSettings[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.DomainSettings[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta12.KeyList{},
-			Managed: &v1beta12.Key{},
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
 		},
 	})
 	if err != nil {
@@ -270,14 +390,52 @@ func (mg *EndpointConfiguration) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AsyncInferenceConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.AsyncInferenceConfig[i3].OutputConfig[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DataCaptureConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCaptureConfig[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DataCaptureConfig[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.DataCaptureConfig[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DataCaptureConfig[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.DataCaptureConfig[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DataCaptureConfig[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
 		To: reference.To{
-			List:    &v1beta12.KeyList{},
-			Managed: &v1beta12.Key{},
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
 		},
 	})
 	if err != nil {
@@ -286,6 +444,26 @@ func (mg *EndpointConfiguration) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ProductionVariants); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ProductionVariants[i3].CoreDumpConfig[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ProductionVariants); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProductionVariants[i3].ModelName),
@@ -304,6 +482,26 @@ func (mg *EndpointConfiguration) ResolveReferences(ctx context.Context, c client
 		mg.Spec.ForProvider.ProductionVariants[i3].ModelNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ShadowProductionVariants); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ShadowProductionVariants[i3].CoreDumpConfig[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -315,14 +513,54 @@ func (mg *FeatureGroup) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OfflineStoreConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OfflineStoreConfig[i3].S3StorageConfig[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OnlineStoreConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig[i4].KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig[i4].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig[i4].KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig[i4].KMSKeyID")
+			}
+			mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig[i4].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OnlineStoreConfig[i3].SecurityConfig[i4].KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -347,8 +585,8 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -391,6 +629,7 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -399,8 +638,8 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.ExecutionRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ExecutionRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -408,6 +647,25 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDSelector,
+			To: reference.To{
+				List:    &v1beta13.SecurityGroupList{},
+				Managed: &v1beta13.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds")
+		}
+		mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }
@@ -467,8 +725,8 @@ func (mg *NotebookInstance) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta12.KeyList{},
-			Managed: &v1beta12.Key{},
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
 		},
 	})
 	if err != nil {
@@ -483,8 +741,8 @@ func (mg *NotebookInstance) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -561,6 +819,71 @@ func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.DomainID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.UserSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArnRef,
+					Selector:     mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArnSelector,
+					To: reference.To{
+						List:    &v1beta12.RoleList{},
+						Managed: &v1beta12.Role{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArn")
+				}
+				mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].ModelRegisterSettings[i5].CrossAccountModelRegisterRoleArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.UserSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArnRef,
+					Selector:     mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArnSelector,
+					To: reference.To{
+						List:    &v1beta12.RoleList{},
+						Managed: &v1beta12.Role{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArn")
+				}
+				mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.UserSettings[i3].CanvasAppSettings[i4].TimeSeriesForecastingSettings[i5].AmazonForecastRoleArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.UserSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.UserSettings[i3].SharingSettings); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserSettings[i3].SharingSettings[i4].S3KMSKeyID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.UserSettings[i3].SharingSettings[i4].S3KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.UserSettings[i3].SharingSettings[i4].S3KMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta11.KeyList{},
+					Managed: &v1beta11.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.UserSettings[i3].SharingSettings[i4].S3KMSKeyID")
+			}
+			mg.Spec.ForProvider.UserSettings[i3].SharingSettings[i4].S3KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.UserSettings[i3].SharingSettings[i4].S3KMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+
 	return nil
 }
 
@@ -569,6 +892,7 @@ func (mg *Workforce) ResolveReferences(ctx context.Context, c client.Reader) err
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CognitoConfig); i3++ {
@@ -605,6 +929,42 @@ func (mg *Workforce) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 		mg.Spec.ForProvider.CognitoConfig[i3].UserPool = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.CognitoConfig[i3].UserPoolRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.WorkforceVPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.WorkforceVPCConfig[i3].SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.WorkforceVPCConfig[i3].SecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.WorkforceVPCConfig[i3].SecurityGroupIDSelector,
+			To: reference.To{
+				List:    &v1beta13.SecurityGroupList{},
+				Managed: &v1beta13.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.WorkforceVPCConfig[i3].SecurityGroupIds")
+		}
+		mg.Spec.ForProvider.WorkforceVPCConfig[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.WorkforceVPCConfig[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.WorkforceVPCConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkforceVPCConfig[i3].VPCID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.WorkforceVPCConfig[i3].VPCIDRef,
+			Selector:     mg.Spec.ForProvider.WorkforceVPCConfig[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta13.VPCList{},
+				Managed: &v1beta13.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.WorkforceVPCConfig[i3].VPCID")
+		}
+		mg.Spec.ForProvider.WorkforceVPCConfig[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.WorkforceVPCConfig[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
 

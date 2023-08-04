@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -61,6 +62,51 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.MagneticStoreWriteProperties); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].BucketName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].BucketNameRef,
+					Selector:     mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].BucketNameSelector,
+					To: reference.To{
+						List:    &v1beta11.BucketList{},
+						Managed: &v1beta11.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].BucketName")
+				}
+				mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].BucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.MagneticStoreWriteProperties); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].KMSKeyID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].KMSKeyIDRef,
+					Selector:     mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].KMSKeyIDSelector,
+					To: reference.To{
+						List:    &v1beta1.KeyList{},
+						Managed: &v1beta1.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].KMSKeyID")
+				}
+				mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.MagneticStoreWriteProperties[i3].MagneticStoreRejectedDataLocation[i4].S3Configuration[i5].KMSKeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

@@ -19,6 +19,8 @@ spec:
     region: us-west-1
     ruleSetName: default-rule-set
     s3Action:
-    - bucketName: emails
+    - bucketNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       position: 2
     scanEnabled: true

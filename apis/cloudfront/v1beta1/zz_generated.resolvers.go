@@ -24,6 +24,26 @@ func (mg *Distribution) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DefaultCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
+				Selector:     mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta1.FunctionList{},
+					Managed: &v1beta1.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn")
+			}
+			mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.DefaultCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OrderedCacheBehavior); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.OrderedCacheBehavior[i3].FunctionAssociation); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -48,7 +68,7 @@ func (mg *Distribution) ResolveReferences(ctx context.Context, c client.Reader) 
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
-				Extract:      resource.ExtractParamPath("qualified_arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
 				Selector:     mg.Spec.ForProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
 				To: reference.To{
@@ -233,7 +253,7 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnSelector,
 				To: reference.To{

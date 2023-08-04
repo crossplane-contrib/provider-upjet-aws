@@ -10,7 +10,6 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -23,15 +22,157 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].CustomConnector[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].EventBridge[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Honeycode[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Marketo[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].IntermediateBucketName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].IntermediateBucketNameRef,
+					Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].IntermediateBucketNameSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].IntermediateBucketName")
+				}
+				mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].IntermediateBucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Redshift[i5].IntermediateBucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3); i5++ {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketName),
-					Extract:      resource.ExtractParamPath("bucket", false),
+					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameRef,
 					Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameSelector,
 					To: reference.To{
-						List:    &v1beta1.BucketPolicyList{},
-						Managed: &v1beta1.BucketPolicy{},
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
 					},
 				})
 				if err != nil {
@@ -43,17 +184,181 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Salesforce[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].SapoData[i5].SuccessResponseHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].IntermediateBucketName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].IntermediateBucketNameRef,
+					Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].IntermediateBucketNameSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].IntermediateBucketName")
+				}
+				mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].IntermediateBucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Snowflake[i5].IntermediateBucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver[i5].BucketName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver[i5].BucketNameRef,
+					Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver[i5].BucketNameSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver[i5].BucketName")
+				}
+				mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver[i5].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Upsolver[i5].BucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig[i6].BucketName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig[i6].BucketNameRef,
+						Selector:     mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig[i6].BucketNameSelector,
+						To: reference.To{
+							List:    &v1beta1.BucketList{},
+							Managed: &v1beta1.Bucket{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig[i6].BucketName")
+					}
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig[i6].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].Zendesk[i5].ErrorHandlingConfig[i6].BucketNameRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SourceFlowConfig); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3); i5++ {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketName),
-					Extract:      resource.ExtractParamPath("bucket", false),
+					Extract:      reference.ExternalName(),
 					Reference:    mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameRef,
 					Selector:     mg.Spec.ForProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameSelector,
 					To: reference.To{
-						List:    &v1beta1.BucketPolicyList{},
-						Managed: &v1beta1.BucketPolicy{},
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
 					},
 				})
 				if err != nil {

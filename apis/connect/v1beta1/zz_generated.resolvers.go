@@ -258,7 +258,7 @@ func (mg *InstanceStorageConfig) ResolveReferences(ctx context.Context, c client
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.StorageConfig[i3].S3Config); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageConfig[i3].S3Config[i4].BucketName),
-				Extract:      resource.ExtractResourceID(),
+				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.StorageConfig[i3].S3Config[i4].BucketNameRef,
 				Selector:     mg.Spec.ForProvider.StorageConfig[i3].S3Config[i4].BucketNameSelector,
 				To: reference.To{

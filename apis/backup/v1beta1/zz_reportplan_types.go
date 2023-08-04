@@ -18,9 +18,6 @@ type ReportDeliveryChannelInitParameters struct {
 	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
 	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
 
-	// The unique name of the S3 bucket that receives your reports.
-	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
-
 	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
@@ -44,8 +41,17 @@ type ReportDeliveryChannelParameters struct {
 	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
 
 	// The unique name of the S3 bucket that receives your reports.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
 	// +kubebuilder:validation:Optional

@@ -13,7 +13,6 @@ import (
 	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -84,7 +83,7 @@ func (mg *Trail) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3BucketName),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.S3BucketNameRef,
 		Selector:     mg.Spec.ForProvider.S3BucketNameSelector,
 		To: reference.To{

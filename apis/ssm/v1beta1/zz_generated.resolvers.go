@@ -10,9 +10,10 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/s3/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -66,6 +67,25 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OutputLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputLocation[i3].S3BucketName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.OutputLocation[i3].S3BucketNameRef,
+			Selector:     mg.Spec.ForProvider.OutputLocation[i3].S3BucketNameSelector,
+			To: reference.To{
+				List:    &v1beta11.BucketList{},
+				Managed: &v1beta11.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OutputLocation[i3].S3BucketName")
+		}
+		mg.Spec.ForProvider.OutputLocation[i3].S3BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OutputLocation[i3].S3BucketNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -167,8 +187,8 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		Reference:    mg.Spec.ForProvider.TaskArnRef,
 		Selector:     mg.Spec.ForProvider.TaskArnSelector,
 		To: reference.To{
-			List:    &v1beta11.FunctionList{},
-			Managed: &v1beta11.Function{},
+			List:    &v1beta12.FunctionList{},
+			Managed: &v1beta12.Function{},
 		},
 	})
 	if err != nil {
@@ -186,8 +206,8 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 					Reference:    mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArnRef,
 					Selector:     mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArnSelector,
 					To: reference.To{
-						List:    &v1beta12.TopicList{},
-						Managed: &v1beta12.Topic{},
+						List:    &v1beta13.TopicList{},
+						Managed: &v1beta13.Topic{},
 					},
 				})
 				if err != nil {
@@ -207,8 +227,8 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 				Reference:    mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketRef,
 				Selector:     mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketSelector,
 				To: reference.To{
-					List:    &v1beta13.BucketList{},
-					Managed: &v1beta13.Bucket{},
+					List:    &v1beta11.BucketList{},
+					Managed: &v1beta11.Bucket{},
 				},
 			})
 			if err != nil {
@@ -223,7 +243,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArnRef,
 				Selector:     mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArnSelector,
 				To: reference.To{
@@ -298,8 +318,8 @@ func (mg *ResourceDataSync) ResolveReferences(ctx context.Context, c client.Read
 			Reference:    mg.Spec.ForProvider.S3Destination[i3].BucketNameRef,
 			Selector:     mg.Spec.ForProvider.S3Destination[i3].BucketNameSelector,
 			To: reference.To{
-				List:    &v1beta13.BucketList{},
-				Managed: &v1beta13.Bucket{},
+				List:    &v1beta11.BucketList{},
+				Managed: &v1beta11.Bucket{},
 			},
 		})
 		if err != nil {
@@ -311,13 +331,31 @@ func (mg *ResourceDataSync) ResolveReferences(ctx context.Context, c client.Read
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Destination); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Destination[i3].KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.S3Destination[i3].KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.S3Destination[i3].KMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta14.KeyList{},
+				Managed: &v1beta14.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Destination[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.S3Destination[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Destination[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Destination); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Destination[i3].Region),
 			Extract:      resource.ExtractParamPath("region", false),
 			Reference:    mg.Spec.ForProvider.S3Destination[i3].RegionRef,
 			Selector:     mg.Spec.ForProvider.S3Destination[i3].RegionSelector,
 			To: reference.To{
-				List:    &v1beta13.BucketList{},
-				Managed: &v1beta13.Bucket{},
+				List:    &v1beta11.BucketList{},
+				Managed: &v1beta11.Bucket{},
 			},
 		})
 		if err != nil {

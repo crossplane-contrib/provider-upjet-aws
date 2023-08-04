@@ -156,6 +156,79 @@ spec:
                       delivered by AWS Config. Must belong to the same Region as the
                       destination S3 bucket.
                     type: string
+                  s3KmsKeyArnRef:
+                    description: Reference to a Key in kms to populate s3KmsKeyArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  s3KmsKeyArnSelector:
+                    description: Selector for a Key in kms to populate s3KmsKeyArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   snapshotDeliveryProperties:
                     description: Options for how AWS Config delivers configuration
                       snapshots. See below
@@ -190,11 +263,6 @@ spec:
                 properties:
                   s3KeyPrefix:
                     description: The prefix for the specified S3 bucket.
-                    type: string
-                  s3KmsKeyArn:
-                    description: The ARN of the AWS KMS key used to encrypt objects
-                      delivered by AWS Config. Must belong to the same Region as the
-                      destination S3 bucket.
                     type: string
                   snapshotDeliveryProperties:
                     description: Options for how AWS Config delivers configuration

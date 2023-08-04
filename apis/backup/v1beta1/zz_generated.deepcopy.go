@@ -1584,11 +1584,6 @@ func (in *ReportDeliveryChannelInitParameters) DeepCopyInto(out *ReportDeliveryC
 			}
 		}
 	}
-	if in.S3BucketName != nil {
-		in, out := &in.S3BucketName, &out.S3BucketName
-		*out = new(string)
-		**out = **in
-	}
 	if in.S3KeyPrefix != nil {
 		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix
 		*out = new(string)
@@ -1660,6 +1655,16 @@ func (in *ReportDeliveryChannelParameters) DeepCopyInto(out *ReportDeliveryChann
 		in, out := &in.S3BucketName, &out.S3BucketName
 		*out = new(string)
 		**out = **in
+	}
+	if in.S3BucketNameRef != nil {
+		in, out := &in.S3BucketNameRef, &out.S3BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketNameSelector != nil {
+		in, out := &in.S3BucketNameSelector, &out.S3BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3KeyPrefix != nil {
 		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix

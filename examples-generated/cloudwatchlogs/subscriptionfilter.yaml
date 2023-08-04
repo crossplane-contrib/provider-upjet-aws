@@ -13,7 +13,9 @@ spec:
         testing.upbound.io/example-name: test_logstream
     distribution: Random
     filterPattern: logtype test
-    logGroupName: /aws/lambda/example_lambda_name
+    logGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: test_lambdafunction_logfilter
     region: us-west-1
     roleArnSelector:

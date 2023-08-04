@@ -46,7 +46,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnSelector,
 			To: reference.To{
@@ -60,6 +60,26 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.CloudwatchLoggingOptions[i3].RoleArnRef = rsp.ResolvedReference
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Inputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Inputs[i3].KinesisFirehose); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Inputs[i3].KinesisFirehose[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Inputs[i3].KinesisFirehose[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Inputs[i3].KinesisFirehose[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Inputs[i3].KinesisFirehose[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.Inputs[i3].KinesisFirehose[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Inputs[i3].KinesisFirehose[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Inputs); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Inputs[i3].KinesisStream); i4++ {
@@ -101,6 +121,28 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Inputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda[i5].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda[i5].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda[i5].RoleArnSelector,
+					To: reference.To{
+						List:    &v1beta11.RoleList{},
+						Managed: &v1beta11.Role{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda[i5].RoleArn")
+				}
+				mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda[i5].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.Inputs[i3].ProcessingConfiguration[i4].Lambda[i5].RoleArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Outputs); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Outputs[i3].KinesisFirehose); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -125,7 +167,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Outputs[i3].KinesisFirehose); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnSelector,
 				To: reference.To{
@@ -138,6 +180,66 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 			}
 			mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Outputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Outputs[i3].KinesisStream); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Outputs[i3].KinesisStream[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Outputs[i3].KinesisStream[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Outputs[i3].KinesisStream[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Outputs[i3].KinesisStream[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.Outputs[i3].KinesisStream[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Outputs[i3].KinesisStream[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Outputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Outputs[i3].Lambda); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Outputs[i3].Lambda[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Outputs[i3].Lambda[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Outputs[i3].Lambda[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Outputs[i3].Lambda[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.Outputs[i3].Lambda[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Outputs[i3].Lambda[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ReferenceDataSources); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ReferenceDataSources[i3].S3); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReferenceDataSources[i3].S3[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.ReferenceDataSources[i3].S3[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.ReferenceDataSources[i3].S3[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ReferenceDataSources[i3].S3[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ReferenceDataSources[i3].S3[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ReferenceDataSources[i3].S3[i4].RoleArnRef = rsp.ResolvedReference
 
 		}
 	}

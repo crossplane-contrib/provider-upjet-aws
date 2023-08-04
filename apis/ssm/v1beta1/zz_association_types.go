@@ -183,9 +183,6 @@ type AssociationParameters struct {
 
 type OutputLocationInitParameters struct {
 
-	// The S3 bucket name.
-	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
-
 	// The S3 bucket prefix. Results stored in the root if not configured.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
@@ -208,8 +205,17 @@ type OutputLocationObservation struct {
 type OutputLocationParameters struct {
 
 	// The S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// The S3 bucket prefix. Results stored in the root if not configured.
 	// +kubebuilder:validation:Optional

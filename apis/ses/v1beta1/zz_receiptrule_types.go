@@ -123,9 +123,6 @@ type BounceActionParameters struct {
 
 type LambdaActionInitParameters struct {
 
-	// The ARN of the Lambda function to invoke
-	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
-
 	// Event or RequestResponse
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 
@@ -154,8 +151,18 @@ type LambdaActionObservation struct {
 type LambdaActionParameters struct {
 
 	// The ARN of the Lambda function to invoke
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 
 	// Event or RequestResponse
 	// +kubebuilder:validation:Optional
@@ -332,12 +339,6 @@ type ReceiptRuleParameters struct {
 
 type S3ActionInitParameters struct {
 
-	// The name of the S3 bucket
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
-
-	// The ARN of the KMS key
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
-
 	// The key prefix of the S3 bucket
 	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
 
@@ -369,12 +370,30 @@ type S3ActionObservation struct {
 type S3ActionParameters struct {
 
 	// The name of the S3 bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
+
 	// The ARN of the KMS key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The key prefix of the S3 bucket
 	// +kubebuilder:validation:Optional

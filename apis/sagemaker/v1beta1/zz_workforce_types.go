@@ -223,14 +223,8 @@ type WorkforceParameters struct {
 
 type WorkforceVPCConfigInitParameters struct {
 
-	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
 	// The ID of the subnets in the VPC that you want to connect.
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
-
-	// The ID of the VPC that the workforce uses for communication.
-	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
 }
 
 type WorkforceVPCConfigObservation struct {
@@ -250,7 +244,18 @@ type WorkforceVPCConfigObservation struct {
 
 type WorkforceVPCConfigParameters struct {
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -259,8 +264,17 @@ type WorkforceVPCConfigParameters struct {
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// The ID of the VPC that the workforce uses for communication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
 	// +kubebuilder:validation:Optional
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 // WorkforceSpec defines the desired state of Workforce

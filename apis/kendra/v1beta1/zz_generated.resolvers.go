@@ -9,7 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
@@ -28,7 +30,7 @@ func (mg *DataSource) ResolveReferences(ctx context.Context, c client.Reader) er
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Configuration[i3].S3Configuration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].S3Configuration[i4].BucketName),
-				Extract:      resource.ExtractResourceID(),
+				Extract:      reference.ExternalName(),
 				Reference:    mg.Spec.ForProvider.Configuration[i3].S3Configuration[i4].BucketNameRef,
 				Selector:     mg.Spec.ForProvider.Configuration[i3].S3Configuration[i4].BucketNameSelector,
 				To: reference.To{
@@ -90,6 +92,64 @@ func (mg *DataSource) ResolveReferences(ctx context.Context, c client.Reader) er
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration[i4].LambdaArnRef,
+				Selector:     mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta12.FunctionList{},
+					Managed: &v1beta12.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration[i4].LambdaArn")
+			}
+			mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PostExtractionHookConfiguration[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration[i4].LambdaArnRef,
+				Selector:     mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta12.FunctionList{},
+					Managed: &v1beta12.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration[i4].LambdaArn")
+			}
+			mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].PreExtractionHookConfiguration[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta13.RoleList{},
+				Managed: &v1beta13.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CustomDocumentEnrichmentConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IndexID),
 		Extract:      resource.ExtractResourceID(),
@@ -112,8 +172,8 @@ func (mg *DataSource) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -154,8 +214,8 @@ func (mg *Experience) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -180,8 +240,8 @@ func (mg *Index) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -189,6 +249,25 @@ func (mg *Index) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta14.KeyList{},
+				Managed: &v1beta14.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -222,8 +301,8 @@ func (mg *QuerySuggestionsBlockList) ResolveReferences(ctx context.Context, c cl
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -283,8 +362,8 @@ func (mg *Thesaurus) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.RoleArnRef,
 		Selector:     mg.Spec.ForProvider.RoleArnSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {

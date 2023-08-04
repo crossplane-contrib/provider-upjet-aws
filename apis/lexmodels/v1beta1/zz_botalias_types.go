@@ -83,9 +83,6 @@ type BotAliasParameters struct {
 
 type ConversationLogsInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
-	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
-
 	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
 	LogSettings []LogSettingsInitParameters `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
 }
@@ -102,8 +99,18 @@ type ConversationLogsObservation struct {
 type ConversationLogsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used to write your logs to CloudWatch Logs or an S3 bucket. Must be between 20 and 2048 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
 	// The settings for your conversation logs. You can log text, audio, or both. Attributes are documented under log_settings.
 	// +kubebuilder:validation:Optional
@@ -114,9 +121,6 @@ type LogSettingsInitParameters struct {
 
 	// The destination where logs are delivered. Options are CLOUDWATCH_LOGS or S3.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
-	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The type of logging that is enabled. Options are AUDIO or TEXT.
 	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
@@ -150,8 +154,17 @@ type LogSettingsParameters struct {
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3 bucket. This can only be specified when destination is set to S3. Must be between 20 and 2048 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// The type of logging that is enabled. Options are AUDIO or TEXT.
 	// +kubebuilder:validation:Optional

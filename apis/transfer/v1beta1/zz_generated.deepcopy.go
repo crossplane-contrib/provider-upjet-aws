@@ -1231,28 +1231,6 @@ func (in *EndpointDetailsInitParameters) DeepCopyInto(out *EndpointDetailsInitPa
 			}
 		}
 	}
-	if in.SecurityGroupIds != nil {
-		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
-	if in.SubnetIds != nil {
-		in, out := &in.SubnetIds, &out.SubnetIds
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.VPCEndpointID != nil {
 		in, out := &in.VPCEndpointID, &out.VPCEndpointID
 		*out = new(string)
@@ -1342,6 +1320,18 @@ func (in *EndpointDetailsParameters) DeepCopyInto(out *EndpointDetailsParameters
 			}
 		}
 	}
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -1352,6 +1342,18 @@ func (in *EndpointDetailsParameters) DeepCopyInto(out *EndpointDetailsParameters
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds

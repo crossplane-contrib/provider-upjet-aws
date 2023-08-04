@@ -9,7 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -40,14 +41,32 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.ForProvider.Configuration[i3].IDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionOptions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionOptions[i3].KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.EncryptionOptions[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.EncryptionOptions[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionOptions[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.EncryptionOptions[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EncryptionOptions[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.SecurityGroupRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -62,8 +81,8 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 		References:    mg.Spec.ForProvider.SubnetIDRefs,
 		Selector:      mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
 		},
 	})
 	if err != nil {

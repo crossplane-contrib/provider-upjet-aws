@@ -11,7 +11,11 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta15 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -68,7 +72,7 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.KinesisDestination); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KinesisDestination[i3].RoleArn),
-			Extract:      resource.ExtractParamPath("arn", true),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.KinesisDestination[i3].RoleArnRef,
 			Selector:     mg.Spec.ForProvider.KinesisDestination[i3].RoleArnSelector,
 			To: reference.To{
@@ -187,6 +191,71 @@ func (mg *IdentityPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.Identity = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentityRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ReceiptRule.
+func (mg *ReceiptRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaAction); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaAction[i3].FunctionArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.LambdaAction[i3].FunctionArnRef,
+			Selector:     mg.Spec.ForProvider.LambdaAction[i3].FunctionArnSelector,
+			To: reference.To{
+				List:    &v1beta13.FunctionList{},
+				Managed: &v1beta13.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LambdaAction[i3].FunctionArn")
+		}
+		mg.Spec.ForProvider.LambdaAction[i3].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LambdaAction[i3].FunctionArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Action); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Action[i3].BucketName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.S3Action[i3].BucketNameRef,
+			Selector:     mg.Spec.ForProvider.S3Action[i3].BucketNameSelector,
+			To: reference.To{
+				List:    &v1beta14.BucketList{},
+				Managed: &v1beta14.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Action[i3].BucketName")
+		}
+		mg.Spec.ForProvider.S3Action[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Action[i3].BucketNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Action); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Action[i3].KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.S3Action[i3].KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.S3Action[i3].KMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta15.KeyList{},
+				Managed: &v1beta15.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Action[i3].KMSKeyArn")
+		}
+		mg.Spec.ForProvider.S3Action[i3].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Action[i3].KMSKeyArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

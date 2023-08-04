@@ -60,7 +60,7 @@ type KinesisStreamConfigParameters struct {
 	// The ARN of an IAM role that CloudFront can use to send real-time log data to the Kinesis data stream.
 	// See the AWS documentation for more information.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 

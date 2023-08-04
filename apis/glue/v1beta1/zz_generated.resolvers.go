@@ -17,6 +17,35 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this CatalogDatabase.
+func (mg *CatalogDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.TargetDatabase); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetDatabase[i3].DatabaseName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.TargetDatabase[i3].DatabaseNameRef,
+			Selector:     mg.Spec.ForProvider.TargetDatabase[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &CatalogDatabaseList{},
+				Managed: &CatalogDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.TargetDatabase[i3].DatabaseName")
+		}
+		mg.Spec.ForProvider.TargetDatabase[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.TargetDatabase[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this CatalogTable.
 func (mg *CatalogTable) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -39,6 +68,25 @@ func (mg *CatalogTable) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.TargetTable); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetTable[i3].DatabaseName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.TargetTable[i3].DatabaseNameRef,
+			Selector:     mg.Spec.ForProvider.TargetTable[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &CatalogDatabaseList{},
+				Managed: &CatalogDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.TargetTable[i3].DatabaseName")
+		}
+		mg.Spec.ForProvider.TargetTable[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.TargetTable[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -71,7 +119,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PhysicalConnectionRequirements); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetID),
-			Extract:      resource.ExtractResourceID(),
+			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDSelector,
 			To: reference.To{

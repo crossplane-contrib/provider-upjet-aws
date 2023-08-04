@@ -622,6 +622,79 @@ spec:
                       needs to be set to true. Once KMS key is set, it can never be
                       changed.
                     type: string
+                  performanceInsightsKmsKeyIdRef:
+                    description: Reference to a Key in kms to populate performanceInsightsKmsKeyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  performanceInsightsKmsKeyIdSelector:
+                    description: Selector for a Key in kms to populate performanceInsightsKmsKeyId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   performanceInsightsRetentionPeriod:
                     description: Amount of time in days to retain Performance Insights
                       data. Valid values are 7, 731 (2 years) or a multiple of 31.
@@ -774,6 +847,82 @@ spec:
                         bucketName:
                           description: The bucket name where your backup is stored
                           type: string
+                        bucketNameRef:
+                          description: Reference to a Bucket in s3 to populate bucketName.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        bucketNameSelector:
+                          description: Selector for a Bucket in s3 to populate bucketName.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         bucketPrefix:
                           description: Can be blank, but is the path to your backup
                           type: string
@@ -1139,12 +1288,6 @@ spec:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
                     type: boolean
-                  performanceInsightsKmsKeyId:
-                    description: The ARN for the KMS key to encrypt Performance Insights
-                      data. When specifying performance_insights_kms_key_id, performance_insights_enabled
-                      needs to be set to true. Once KMS key is set, it can never be
-                      changed.
-                    type: string
                   performanceInsightsRetentionPeriod:
                     description: Amount of time in days to retain Performance Insights
                       data. Valid values are 7, 731 (2 years) or a multiple of 31.
@@ -1206,9 +1349,6 @@ spec:
                       Data into an Amazon RDS MySQL DB Instance
                     items:
                       properties:
-                        bucketName:
-                          description: The bucket name where your backup is stored
-                          type: string
                         bucketPrefix:
                           description: Can be blank, but is the path to your backup
                           type: string

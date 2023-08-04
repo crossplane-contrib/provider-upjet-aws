@@ -10,6 +10,8 @@ spec:
   forProvider:
     destinationConfiguration:
     - s3:
-      - bucketName: ivs-stream-archive
+      - bucketNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
     name: recording_configuration-1
     region: us-west-1

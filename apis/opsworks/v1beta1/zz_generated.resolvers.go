@@ -9,10 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/ecs/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/rds/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/ecs/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -52,14 +53,34 @@ func (mg *CustomLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -95,14 +116,34 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -117,8 +158,8 @@ func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.EcsClusterArnRef,
 		Selector:     mg.Spec.ForProvider.EcsClusterArnSelector,
 		To: reference.To{
-			List:    &v1beta11.ClusterList{},
-			Managed: &v1beta11.Cluster{},
+			List:    &v1beta12.ClusterList{},
+			Managed: &v1beta12.Cluster{},
 		},
 	})
 	if err != nil {
@@ -154,14 +195,34 @@ func (mg *GangliaLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -197,14 +258,34 @@ func (mg *HAProxyLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -262,8 +343,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		References:    mg.Spec.ForProvider.SecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.SecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -294,8 +375,8 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
 		},
 	})
 	if err != nil {
@@ -315,14 +396,34 @@ func (mg *JavaAppLayer) ResolveReferences(ctx context.Context, c client.Reader) 
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -358,14 +459,34 @@ func (mg *MemcachedLayer) ResolveReferences(ctx context.Context, c client.Reader
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -401,14 +522,34 @@ func (mg *MySQLLayer) ResolveReferences(ctx context.Context, c client.Reader) er
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -444,14 +585,34 @@ func (mg *NodeJSAppLayer) ResolveReferences(ctx context.Context, c client.Reader
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -487,14 +648,34 @@ func (mg *PHPAppLayer) ResolveReferences(ctx context.Context, c client.Reader) e
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -551,8 +732,8 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.UserArnRef,
 		Selector:     mg.Spec.ForProvider.UserArnSelector,
 		To: reference.To{
-			List:    &v1beta12.UserList{},
-			Managed: &v1beta12.User{},
+			List:    &v1beta13.UserList{},
+			Managed: &v1beta13.User{},
 		},
 	})
 	if err != nil {
@@ -577,8 +758,8 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.RDSDBInstanceArnRef,
 		Selector:     mg.Spec.ForProvider.RDSDBInstanceArnSelector,
 		To: reference.To{
-			List:    &v1beta13.InstanceList{},
-			Managed: &v1beta13.Instance{},
+			List:    &v1beta14.InstanceList{},
+			Managed: &v1beta14.Instance{},
 		},
 	})
 	if err != nil {
@@ -614,14 +795,34 @@ func (mg *RailsAppLayer) ResolveReferences(ctx context.Context, c client.Reader)
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -662,8 +863,8 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.DefaultInstanceProfileArnRef,
 		Selector:     mg.Spec.ForProvider.DefaultInstanceProfileArnSelector,
 		To: reference.To{
-			List:    &v1beta12.InstanceProfileList{},
-			Managed: &v1beta12.InstanceProfile{},
+			List:    &v1beta13.InstanceProfileList{},
+			Managed: &v1beta13.InstanceProfile{},
 		},
 	})
 	if err != nil {
@@ -678,8 +879,8 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.DefaultSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.DefaultSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
 		},
 	})
 	if err != nil {
@@ -694,8 +895,8 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta12.RoleList{},
-			Managed: &v1beta12.Role{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
@@ -710,8 +911,8 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.VPCIDRef,
 		Selector:     mg.Spec.ForProvider.VPCIDSelector,
 		To: reference.To{
-			List:    &v1beta1.VPCList{},
-			Managed: &v1beta1.VPC{},
+			List:    &v1beta11.VPCList{},
+			Managed: &v1beta11.VPC{},
 		},
 	})
 	if err != nil {
@@ -731,14 +932,34 @@ func (mg *StaticWebLayer) ResolveReferences(ctx context.Context, c client.Reader
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameSelector,
+				To: reference.To{
+					List:    &v1beta1.GroupList{},
+					Managed: &v1beta1.Group{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CloudwatchConfiguration[i3].LogStreams[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
 		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
 		To: reference.To{
-			List:    &v1beta1.SecurityGroupList{},
-			Managed: &v1beta1.SecurityGroup{},
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
 		},
 	})
 	if err != nil {
@@ -779,8 +1000,8 @@ func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.UserArnRef,
 		Selector:     mg.Spec.ForProvider.UserArnSelector,
 		To: reference.To{
-			List:    &v1beta12.UserList{},
-			Managed: &v1beta12.User{},
+			List:    &v1beta13.UserList{},
+			Managed: &v1beta13.User{},
 		},
 	})
 	if err != nil {

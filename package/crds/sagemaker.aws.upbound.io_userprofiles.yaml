@@ -191,6 +191,90 @@ spec:
                                         the AWS account in which SageMaker model registry
                                         is set up.
                                       type: string
+                                    crossAccountModelRegisterRoleArnRef:
+                                      description: Reference to a Role in iam to populate
+                                        crossAccountModelRegisterRoleArn.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    crossAccountModelRegisterRoleArnSelector:
+                                      description: Selector for a Role in iam to populate
+                                        crossAccountModelRegisterRoleArn.
+                                      properties:
+                                        matchControllerRef:
+                                          description: MatchControllerRef ensures
+                                            an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     status:
                                       description: Describes whether time series forecasting
                                         is enabled or disabled in the Canvas app.
@@ -218,6 +302,90 @@ spec:
                                         attached and forecast.amazonaws.com added
                                         in the trust relationship as a service principal.
                                       type: string
+                                    amazonForecastRoleArnRef:
+                                      description: Reference to a Role in iam to populate
+                                        amazonForecastRoleArn.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    amazonForecastRoleArnSelector:
+                                      description: Selector for a Role in iam to populate
+                                        amazonForecastRoleArn.
+                                      properties:
+                                        matchControllerRef:
+                                          description: MatchControllerRef ensures
+                                            an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     status:
                                       description: Describes whether time series forecasting
                                         is enabled or disabled in the Canvas app.
@@ -423,6 +591,86 @@ spec:
                                   key ID used to encrypt the notebook cell output
                                   in the Amazon S3 bucket.
                                 type: string
+                              s3KmsKeyIdRef:
+                                description: Reference to a Key in kms to populate
+                                  s3KmsKeyId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              s3KmsKeyIdSelector:
+                                description: Selector for a Key in kms to populate
+                                  s3KmsKeyId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               s3OutputPath:
                                 description: When notebook_output_option is Allowed,
                                   the Amazon S3 bucket used to save the notebook cell
@@ -515,14 +763,6 @@ spec:
                                   below.
                                 items:
                                   properties:
-                                    crossAccountModelRegisterRoleArn:
-                                      description: The Amazon Resource Name (ARN)
-                                        of the SageMaker model registry account. Required
-                                        only to register model versions created by
-                                        a different SageMaker Canvas AWS account than
-                                        the AWS account in which SageMaker model registry
-                                        is set up.
-                                      type: string
                                     status:
                                       description: Describes whether time series forecasting
                                         is enabled or disabled in the Canvas app.
@@ -536,20 +776,6 @@ spec:
                                   below.
                                 items:
                                   properties:
-                                    amazonForecastRoleArn:
-                                      description: The IAM role that Canvas passes
-                                        to Amazon Forecast for time series forecasting.
-                                        By default, Canvas uses the execution role
-                                        specified in the UserProfile that launches
-                                        the Canvas app. If an execution role is not
-                                        specified in the UserProfile, Canvas uses
-                                        the execution role specified in the Domain
-                                        that owns the UserProfile. To allow time series
-                                        forecasting, this IAM role should have the
-                                        AmazonSageMakerCanvasForecastAccess policy
-                                        attached and forecast.amazonaws.com added
-                                        in the trust relationship as a service principal.
-                                      type: string
                                     status:
                                       description: Describes whether time series forecasting
                                         is enabled or disabled in the Canvas app.
@@ -748,12 +974,6 @@ spec:
                                 description: Whether to include the notebook cell
                                   output when sharing the notebook. The default is
                                   Disabled. Valid values are Allowed and Disabled.
-                                type: string
-                              s3KmsKeyId:
-                                description: When notebook_output_option is Allowed,
-                                  the AWS Key Management Service (KMS) encryption
-                                  key ID used to encrypt the notebook cell output
-                                  in the Amazon S3 bucket.
                                 type: string
                               s3OutputPath:
                                 description: When notebook_output_option is Allowed,

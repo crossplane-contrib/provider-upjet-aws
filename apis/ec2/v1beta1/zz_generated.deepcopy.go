@@ -11407,11 +11407,6 @@ func (in *FlowLogInitParameters) DeepCopyInto(out *FlowLogInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.LogGroupName != nil {
-		in, out := &in.LogGroupName, &out.LogGroupName
-		*out = new(string)
-		**out = **in
-	}
 	if in.MaxAggregationInterval != nil {
 		in, out := &in.MaxAggregationInterval, &out.MaxAggregationInterval
 		*out = new(float64)
@@ -11682,6 +11677,16 @@ func (in *FlowLogParameters) DeepCopyInto(out *FlowLogParameters) {
 		in, out := &in.LogGroupName, &out.LogGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MaxAggregationInterval != nil {
 		in, out := &in.MaxAggregationInterval, &out.MaxAggregationInterval
@@ -17258,11 +17263,6 @@ func (in *LaunchSpecificationEBSBlockDeviceInitParameters) DeepCopyInto(out *Lau
 		*out = new(float64)
 		**out = **in
 	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
 		*out = new(string)
@@ -17382,6 +17382,16 @@ func (in *LaunchSpecificationEBSBlockDeviceParameters) DeepCopyInto(out *LaunchS
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
@@ -17569,11 +17579,6 @@ func (in *LaunchSpecificationInitParameters) DeepCopyInto(out *LaunchSpecificati
 		*out = new(string)
 		**out = **in
 	}
-	if in.SubnetID != nil {
-		in, out := &in.SubnetID, &out.SubnetID
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -17593,17 +17598,6 @@ func (in *LaunchSpecificationInitParameters) DeepCopyInto(out *LaunchSpecificati
 		in, out := &in.UserData, &out.UserData
 		*out = new(string)
 		**out = **in
-	}
-	if in.VPCSecurityGroupIds != nil {
-		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
 	}
 	if in.WeightedCapacity != nil {
 		in, out := &in.WeightedCapacity, &out.WeightedCapacity
@@ -17858,6 +17852,16 @@ func (in *LaunchSpecificationParameters) DeepCopyInto(out *LaunchSpecificationPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -17877,6 +17881,18 @@ func (in *LaunchSpecificationParameters) DeepCopyInto(out *LaunchSpecificationPa
 		in, out := &in.UserData, &out.UserData
 		*out = new(string)
 		**out = **in
+	}
+	if in.VPCSecurityGroupIDRefs != nil {
+		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.VPCSecurityGroupIDSelector != nil {
+		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCSecurityGroupIds != nil {
 		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
@@ -17922,11 +17938,6 @@ func (in *LaunchSpecificationRootBlockDeviceInitParameters) DeepCopyInto(out *La
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
 		*out = new(float64)
-		**out = **in
-	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
 		**out = **in
 	}
 	if in.Throughput != nil {
@@ -18028,6 +18039,16 @@ func (in *LaunchSpecificationRootBlockDeviceParameters) DeepCopyInto(out *Launch
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
@@ -24793,11 +24814,6 @@ func (in *OverridesInitParameters) DeepCopyInto(out *OverridesInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.SubnetID != nil {
-		in, out := &in.SubnetID, &out.SubnetID
-		*out = new(string)
-		**out = **in
-	}
 	if in.WeightedCapacity != nil {
 		in, out := &in.WeightedCapacity, &out.WeightedCapacity
 		*out = new(float64)
@@ -25489,6 +25505,16 @@ func (in *OverridesParameters) DeepCopyInto(out *OverridesParameters) {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.WeightedCapacity != nil {
 		in, out := &in.WeightedCapacity, &out.WeightedCapacity
@@ -32275,11 +32301,6 @@ func (in *SpotInstanceRequestEBSBlockDeviceInitParameters) DeepCopyInto(out *Spo
 		*out = new(float64)
 		**out = **in
 	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
 		*out = new(string)
@@ -32434,6 +32455,16 @@ func (in *SpotInstanceRequestEBSBlockDeviceParameters) DeepCopyInto(out *SpotIns
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotID != nil {
 		in, out := &in.SnapshotID, &out.SnapshotID
@@ -34262,11 +34293,6 @@ func (in *SpotInstanceRequestRootBlockDeviceInitParameters) DeepCopyInto(out *Sp
 		*out = new(float64)
 		**out = **in
 	}
-	if in.KMSKeyID != nil {
-		in, out := &in.KMSKeyID, &out.KMSKeyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -34406,6 +34432,16 @@ func (in *SpotInstanceRequestRootBlockDeviceParameters) DeepCopyInto(out *SpotIn
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
