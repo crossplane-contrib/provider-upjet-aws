@@ -25,6 +25,11 @@ type ProviderConfigSpec struct {
 	// This can be useful for testing and for AWS API implementations that do not have STS available.
 	// +optional
 	SkipCredsValidation bool `json:"skip_credentials_validation,omitempty"`
+	// Whether to skip validation of provided region name.
+	// Useful for AWS-like implementations that use their own region names or to bypass the validation for
+	// regions that aren't publicly available yet.
+	// +optional
+	SkipRegionValidation bool `json:"skip_region_validation,omitempty"`
 	// Whether to enable the request to use path-style addressing, i.e., https://s3.amazonaws.com/BUCKET/KEY.
 	// +optional
 	S3UsePathStyle bool `json:"s3_use_path_style,omitempty"`
