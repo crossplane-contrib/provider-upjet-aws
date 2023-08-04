@@ -123,6 +123,21 @@ func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) 
 				Type: "github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase",
 			}
 			fmt.Println(cr.Name, prefix + k, "glue.CatalogDatabase")
+		case strings.HasSuffix(k, "kms_key_id"):
+			cr.References[prefix+k] = config.Reference{
+				Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			}
+			fmt.Println(cr.Name, prefix + k, "kms.Key")
+		case strings.HasSuffix(k, "kms_key_arn"):
+			cr.References[prefix+k] = config.Reference{
+				Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			}
+			fmt.Println(cr.Name, prefix + k, "kms.Key")
+		case strings.HasSuffix(k, "kms_key"):
+			cr.References[prefix+k] = config.Reference{
+				Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			}
+			fmt.Println(cr.Name, prefix + k, "kms.Key")
 		default:
 			switch k {
 			case "vpc_id":
@@ -154,24 +169,10 @@ func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) 
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
 				fmt.Println(cr.Name, prefix + k, "ec2.SecurityGroup")
-			case "kms_key_id":
-				cr.References[prefix+k] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-				}
-				fmt.Println(cr.Name, prefix + k, "kms.Key")
-			case "kms_key_arn":
-				cr.References[prefix+k] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-				}
-				fmt.Println(cr.Name, prefix + k, "kms.Key")
-			case "kms_key":
-				cr.References[prefix+k] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-				}
-				fmt.Println(cr.Name, prefix + k, "kms.Key")
 			}
 		}
 	}
+
 }
 
 // AddExternalTagsField adds ExternalTagsFieldName configuration for resources that have tags field.
