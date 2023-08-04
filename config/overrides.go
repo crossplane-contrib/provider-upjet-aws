@@ -5,6 +5,7 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -109,54 +110,65 @@ func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) 
 				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 				Extractor: common.PathARNExtractor,
 			}
+			fmt.Println(cr.Name, prefix + k, "iam.Role")
 		case strings.HasSuffix(k, "security_group_ids"):
 			cr.References[prefix+k] = config.Reference{
 				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				RefFieldName:      name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Refs",
 				SelectorFieldName: name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Selector",
 			}
+			fmt.Println(cr.Name, prefix + k, "ec2.SecurityGroups")
 		case cr.ShortGroup == "glue" && k == "database_name":
 			cr.References[prefix+"database_name"] = config.Reference{
 				Type: "github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase",
 			}
+			fmt.Println(cr.Name, prefix + k, "glue.CatalogDatabase")
 		default:
 			switch k {
 			case "vpc_id":
 				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC",
 				}
+				fmt.Println(cr.Name, prefix + k, "ec2.VPC")
 			case "subnet_ids":
 				cr.References[prefix+k] = config.Reference{
 					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 					RefFieldName:      "SubnetIDRefs",
 					SelectorFieldName: "SubnetIDSelector",
 				}
+				fmt.Println(cr.Name, prefix + k, "ec2.Subnets")
 			case "subnet_id":
 				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 				}
+				fmt.Println(cr.Name, prefix + k, "ec2.Subnet")
 			case "iam_roles":
 				cr.References[prefix+k] = config.Reference{
 					Type:              "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 					RefFieldName:      "IAMRoleRefs",
 					SelectorFieldName: "IAMRoleSelector",
 				}
+				fmt.Println(cr.Name, prefix + k, "iam.Role")
 			case "security_group_id":
 				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
+				fmt.Println(cr.Name, prefix + k, "ec2.SecurityGroup")
 			case "kms_key_id":
 				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 				}
+				fmt.Println(cr.Name, prefix + k, "kms.Key")
 			case "kms_key_arn":
 				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 				}
+				fmt.Println(cr.Name, prefix + k, "kms.Key")
 			case "kms_key":
 				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 				}
+				fmt.Println(cr.Name, prefix + k, "kms.Key")
 			}
 		}
 	}
