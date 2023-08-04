@@ -61,6 +61,6 @@ spec:
 EOF
 
 printf "Checking AWS bucket creation (this only takes a minute)...\n"
-kubectl wait "$(kubectl get buckets -o name)" --for=condition=Ready --timeout=180s
+kubectl wait "$(kubectl get buckets.s3 -o name)" --for=condition=Ready --timeout=180s
 
-kubectl get buckets
+kubectl get buckets.s3
