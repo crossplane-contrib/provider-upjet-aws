@@ -173,6 +173,31 @@ func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) 
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
 				fmt.Println(cr.Name, prefix + k, "ec2.SecurityGroup")
+			case "lambda_arn", "lambda_function_arn":
+				cr.References[prefix+k] = config.Reference{
+					Type:      "github.com/upbound/provider-aws/apis/lambda/v1beta1.Function",
+					Extractor: common.PathARNExtractor,
+				}
+				fmt.Println(cr.Name, prefix + k, "lambda.Function")
+			case "function_arn":
+				if strings.Contains(prefix, "lambda") {
+					cr.References[prefix+k] = config.Reference{
+						Type:      "github.com/upbound/provider-aws/apis/lambda/v1beta1.Function",
+						Extractor: common.PathARNExtractor,
+					}
+					fmt.Println(cr.Name, prefix + k, "lambda.Function")
+				}
+			case "queue_url":
+				cr.References[prefix+k] = config.Reference{
+					Type:      "github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue",
+					Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("url",true)`,
+				}
+				fmt.Println(cr.Name, prefix + k, "sqs.Queue")
+			case "log_group_name":
+				cr.References[prefix+k] = config.Reference{
+					Type: "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group",
+				}
+				fmt.Println(cr.Name, prefix + k, "cloudwatchlogs.Group")
 			}
 		}
 	}
