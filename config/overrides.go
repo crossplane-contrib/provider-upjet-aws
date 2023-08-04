@@ -90,66 +90,71 @@ func NamePrefixRemoval() config.ResourceOption {
 
 // KnownReferencers adds referencers for fields that are known and common among
 // more than a few resources.
-func KnownReferencers() config.ResourceOption { //nolint:gocyclo
+func KnownReferencers() config.ResourceOption {
 	return func(r *config.Resource) {
-		for k, s := range r.TerraformResource.Schema {
-			// We shouldn't add referencers for status fields and sensitive fields
-			// since they already have secret referencer.
-			if (s.Computed && !s.Optional) || s.Sensitive {
-				continue
+		_knownReferencers("", r.TerraformResource, r)
+	}
+}
+
+func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) { //nolint: gocyclo
+	for k, s := range sr.Schema {
+		// We shouldn't add referencers for status fields and sensitive fields
+		// since they already have secret referencer.
+		if (s.Computed && !s.Optional) || s.Sensitive {
+			continue
+		}
+		switch {
+		case strings.HasSuffix(k, "role_arn"):
+			cr.References[prefix+k] = config.Reference{
+				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+				Extractor: common.PathARNExtractor,
 			}
-			switch {
-			case strings.HasSuffix(k, "role_arn"):
-				r.References[k] = config.Reference{
-					Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-					Extractor: common.PathARNExtractor,
-				}
-			case strings.HasSuffix(k, "security_group_ids"):
-				r.References[k] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
-					RefFieldName:      name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Refs",
-					SelectorFieldName: name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Selector",
-				}
-			case r.ShortGroup == "glue" && k == "database_name":
-				r.References["database_name"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase",
-				}
+		case strings.HasSuffix(k, "security_group_ids"):
+			cr.References[prefix+k] = config.Reference{
+				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+				RefFieldName:      name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Refs",
+				SelectorFieldName: name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Selector",
 			}
+		case cr.ShortGroup == "glue" && k == "database_name":
+			cr.References[prefix+"database_name"] = config.Reference{
+				Type: "github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase",
+			}
+		default:
 			switch k {
 			case "vpc_id":
-				r.References["vpc_id"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC",
 				}
 			case "subnet_ids":
-				r.References["subnet_ids"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 					RefFieldName:      "SubnetIDRefs",
 					SelectorFieldName: "SubnetIDSelector",
 				}
 			case "subnet_id":
-				r.References["subnet_id"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 				}
 			case "iam_roles":
-				r.References["iam_roles"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type:              "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 					RefFieldName:      "IAMRoleRefs",
 					SelectorFieldName: "IAMRoleSelector",
 				}
 			case "security_group_id":
-				r.References["security_group_id"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 				}
 			case "kms_key_id":
-				r.References["kms_key_id"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 				}
 			case "kms_key_arn":
-				r.References["kms_key_arn"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 				}
 			case "kms_key":
-				r.References["kms_key"] = config.Reference{
+				cr.References[prefix+k] = config.Reference{
 					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 				}
 			}
