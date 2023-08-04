@@ -104,6 +104,10 @@ func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) 
 		if (s.Computed && !s.Optional) || s.Sensitive {
 			continue
 		}
+		if sub, ok := s.Elem.(*schema.Resource); ok {
+			_knownReferencers(prefix+k+".", sub, cr)
+			continue
+		}
 		switch {
 		case strings.HasSuffix(k, "role_arn"):
 			cr.References[prefix+k] = config.Reference{
