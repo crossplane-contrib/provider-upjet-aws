@@ -142,6 +142,11 @@ func _knownReferencers(prefix string, sr *schema.Resource, cr *config.Resource) 
 				Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
 			}
 			fmt.Println(cr.Name, prefix + k, "kms.Key")
+		case strings.HasSuffix(k, "bucket_name"):
+			cr.References[prefix+k] = config.Reference{
+				Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+			}
+			fmt.Println(cr.Name, prefix + k, "s3.Bucket")
 		default:
 			switch k {
 			case "vpc_id":
