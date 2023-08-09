@@ -1131,6 +1131,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ram_resource_association": FormattedIdentifierFromProvider(",", "resource_share_arn", "resource_arn"),
 	// Resource shares can be imported using the id
 	"aws_ram_resource_share": config.IdentifierFromProvider,
+	// Resource share accepters can be imported using the resource share ARN:
+	// arn:aws:ram:us-east-1:123456789012:resource-share/c4b56393-e8d9-89d9-6dc9-883752de4767
+	"aws_ram_resource_share_accepter": config.IdentifierFromProvider,
 
 	// redshift
 	//

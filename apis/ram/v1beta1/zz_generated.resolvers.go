@@ -81,3 +81,29 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 
 	return nil
 }
+
+// ResolveReferences of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareArn),
+		Extract:      resource.ExtractParamPath("resource_share_arn", false),
+		Reference:    mg.Spec.ForProvider.ShareArnRef,
+		Selector:     mg.Spec.ForProvider.ShareArnSelector,
+		To: reference.To{
+			List:    &PrincipalAssociationList{},
+			Managed: &PrincipalAssociation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ShareArn")
+	}
+	mg.Spec.ForProvider.ShareArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareArnRef = rsp.ResolvedReference
+
+	return nil
+}

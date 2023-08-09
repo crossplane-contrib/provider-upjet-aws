@@ -225,13 +225,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// userGoupId1,userId
 	"aws_elasticache_user_group_association": FormattedIdentifierFromProvider(",", "user_group_id", "user_id"),
 
-	// ram
-	//
-
-	// Resource share accepters can be imported using the resource share ARN:
-	// arn:aws:ram:us-east-1:123456789012:resource-share/c4b56393-e8d9-89d9-6dc9-883752de4767
-	"aws_ram_resource_share_accepter": FormattedIdentifierFromProvider("", "share_arn"),
-
 	// ecs
 	//
 	// ECS Task Sets can be imported via the task_set_id, service, and cluster separated by commas (,):

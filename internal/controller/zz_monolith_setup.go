@@ -676,6 +676,7 @@ import (
 	principalassociation "github.com/upbound/provider-aws/internal/controller/ram/principalassociation"
 	resourceassociation "github.com/upbound/provider-aws/internal/controller/ram/resourceassociation"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
+	resourceshareaccepter "github.com/upbound/provider-aws/internal/controller/ram/resourceshareaccepter"
 	clusterrds "github.com/upbound/provider-aws/internal/controller/rds/cluster"
 	clusteractivitystream "github.com/upbound/provider-aws/internal/controller/rds/clusteractivitystream"
 	clusterendpointrds "github.com/upbound/provider-aws/internal/controller/rds/clusterendpoint"
@@ -1584,6 +1585,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		principalassociation.Setup,
 		resourceassociation.Setup,
 		resourceshare.Setup,
+		resourceshareaccepter.Setup,
 		clusterrds.Setup,
 		clusteractivitystream.Setup,
 		clusterendpointrds.Setup,

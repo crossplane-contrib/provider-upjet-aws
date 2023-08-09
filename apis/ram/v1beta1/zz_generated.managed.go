@@ -234,3 +234,79 @@ func (mg *ResourceShare) SetPublishConnectionDetailsTo(r *xpv1.PublishConnection
 func (mg *ResourceShare) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ResourceShareAccepter.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ResourceShareAccepter) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ResourceShareAccepter.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ResourceShareAccepter) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ResourceShareAccepter.
+func (mg *ResourceShareAccepter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

@@ -25,6 +25,15 @@ func (l *ResourceAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ResourceShareAccepterList.
+func (l *ResourceShareAccepterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ResourceShareList.
 func (l *ResourceShareList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
