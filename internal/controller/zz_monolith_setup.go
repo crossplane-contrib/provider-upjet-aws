@@ -673,6 +673,7 @@ import (
 	streamqldb "github.com/upbound/provider-aws/internal/controller/qldb/stream"
 	groupquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/group"
 	userquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/user"
+	principalassociation "github.com/upbound/provider-aws/internal/controller/ram/principalassociation"
 	resourceassociation "github.com/upbound/provider-aws/internal/controller/ram/resourceassociation"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
 	clusterrds "github.com/upbound/provider-aws/internal/controller/rds/cluster"
@@ -1580,6 +1581,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		streamqldb.Setup,
 		groupquicksight.Setup,
 		userquicksight.Setup,
+		principalassociation.Setup,
 		resourceassociation.Setup,
 		resourceshare.Setup,
 		clusterrds.Setup,

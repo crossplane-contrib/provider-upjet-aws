@@ -9,6 +9,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	principalassociation "github.com/upbound/provider-aws/internal/controller/ram/principalassociation"
 	resourceassociation "github.com/upbound/provider-aws/internal/controller/ram/resourceassociation"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
 )
@@ -17,6 +18,7 @@ import (
 // the supplied manager.
 func Setup_ram(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		principalassociation.Setup,
 		resourceassociation.Setup,
 		resourceshare.Setup,
 	} {

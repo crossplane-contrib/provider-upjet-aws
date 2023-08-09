@@ -9,9 +9,52 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta1 "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this PrincipalAssociation.
+func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Principal),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.PrincipalRef,
+		Selector:     mg.Spec.ForProvider.PrincipalSelector,
+		To: reference.To{
+			List:    &v1beta1.OrganizationList{},
+			Managed: &v1beta1.Organization{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Principal")
+	}
+	mg.Spec.ForProvider.Principal = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrincipalRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceShareArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ResourceShareArnRef,
+		Selector:     mg.Spec.ForProvider.ResourceShareArnSelector,
+		To: reference.To{
+			List:    &ResourceShareList{},
+			Managed: &ResourceShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceShareArn")
+	}
+	mg.Spec.ForProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceShareArnRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this ResourceAssociation.
 func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
