@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
   labels:
-    testing.upbound.io/example-name: receiver_accept
+    testing.upbound.io/example-name: example
   name: receiver-accept
 spec:
   forProvider:
     region: us-west-1
     shareArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: sender_invite
+        testing.upbound.io/example-name: example
 
 ---
 apiVersion: ram.aws.upbound.io/v1beta1
@@ -19,8 +19,9 @@ kind: PrincipalAssociation
 metadata:
   annotations:
     meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+    uptest.upbound.io/pre-delete-hook: testhooks/pre-delete-principal.sh
   labels:
-    testing.upbound.io/example-name: sender_invite
+    testing.upbound.io/example-name: example
   name: sender-invite
 spec:
   providerConfigRef:
@@ -30,7 +31,7 @@ spec:
     region: us-west-1
     resourceShareArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: sender_share
+        testing.upbound.io/example-name: example
 
 ---
 apiVersion: ram.aws.upbound.io/v1beta1
@@ -38,8 +39,9 @@ kind: ResourceShare
 metadata:
   annotations:
     meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+    uptest.upbound.io/pre-delete-hook: testhooks/pre-delete-resourceshare.sh
   labels:
-    testing.upbound.io/example-name: sender_share
+    testing.upbound.io/example-name: example
   name: sender-share
 spec:
   providerConfigRef:
