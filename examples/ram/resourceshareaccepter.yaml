@@ -1,0 +1,54 @@
+apiVersion: ram.aws.upbound.io/v1beta1
+kind: ResourceShareAccepter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+  labels:
+    testing.upbound.io/example-name: example
+  name: receiver-accept
+spec:
+  forProvider:
+    region: us-west-1
+    shareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+apiVersion: ram.aws.upbound.io/v1beta1
+kind: PrincipalAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+    uptest.upbound.io/pre-delete-hook: testhooks/pre-delete-principal.sh
+  labels:
+    testing.upbound.io/example-name: example
+  name: sender-invite
+spec:
+  providerConfigRef:
+    name: peer
+  forProvider:
+    principal: "${data.aws_account_id}"
+    region: us-west-1
+    resourceShareArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+apiVersion: ram.aws.upbound.io/v1beta1
+kind: ResourceShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1beta1/resourceshareaccepter
+    uptest.upbound.io/pre-delete-hook: testhooks/pre-delete-resourceshare.sh
+  labels:
+    testing.upbound.io/example-name: example
+  name: sender-share
+spec:
+  providerConfigRef:
+    name: peer
+  forProvider:
+    allowExternalPrincipals: true
+    name: tf-test-resource-share
+    region: us-west-1
+    tags:
+      Name: tf-test-resource-share
