@@ -95,6 +95,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ecs_task_definition", func(r *config.Resource) {
+		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+			// expected id format: arn:aws:ecs:us-east-2:123456789123:targetgroup/sample-tg:1
+			return tfstate["arn"].(string), nil
+		}
 		r.References = config.References{
 			"execution_role_arn": config.Reference{
 				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
