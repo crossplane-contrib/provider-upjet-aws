@@ -178,9 +178,6 @@ type LoadBalancerInitParameters struct {
 
 	// Name of the ELB (Classic) to associate with the service.
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
-
-	// ARN of the Load Balancer target group to associate with the service.
-	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 }
 
 type LoadBalancerObservation struct {
@@ -213,8 +210,17 @@ type LoadBalancerParameters struct {
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
 
 	// ARN of the Load Balancer target group to associate with the service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 }
 
 type NetworkConfigurationInitParameters struct {

@@ -18,7 +18,9 @@ spec:
     loadBalancer:
     - containerName: mongo
       containerPort: 8080
-      targetGroupArn: ${aws_lb_target_group.foo.arn}
+      targetGroupArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: foo
     orderedPlacementStrategy:
     - field: cpu
       type: binpack
