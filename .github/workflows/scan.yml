@@ -1,0 +1,48 @@
+name: Scan
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      supported_releases_number:
+        description: 'Number of supported releases'
+        type: number
+        default: 1
+  schedule:
+    # run every day at 3:07am UTC
+    - cron: '7 3 * * *'
+
+permissions:
+  security-events: write
+
+env:
+  SUPPORTED_RELEASES_NUMBER: '1'
+  # comma separated list of images, without tag
+  IMAGES: "xpkg.upbound.io/upbound/provider-aws"
+
+jobs:
+  setup-vars:
+    runs-on: ubuntu-22.04
+    outputs:
+      supported_releases_number: ${{ steps.setup.outputs.supported_releases_number }}
+      images: ${{ steps.setup.outputs.images }}
+    steps:
+      - name: Setup outputs
+        shell: bash
+        id: setup
+        run: |
+          supported_releases_number="${{ fromJSON(inputs.supported_releases_number || env.SUPPORTED_RELEASES_NUMBER) }}"
+          echo "supported_releases_number=${supported_releases_number}" >> $GITHUB_OUTPUT
+
+          images="${{ env.IMAGES }}"
+          echo "images=${images}" >> $GITHUB_OUTPUT
+
+          echo "We are going to scan the last ${supported_releases_number} releases for: ${images}"
+
+  scan:
+    uses: upbound/uptest/.github/workflows/scan.yml@main
+    needs:
+      - setup-vars
+    with:
+      images: ${{ needs.setup-vars.outputs.images }}
+      supported_releases: ${{ fromJSON(needs.setup-vars.outputs.supported_releases_number) }}
