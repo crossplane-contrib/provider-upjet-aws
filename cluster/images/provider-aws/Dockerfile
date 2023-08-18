@@ -12,7 +12,7 @@ ARG TERRAFORM_PROVIDER_VERSION
 ARG TERRAFORM_PROVIDER_DOWNLOAD_NAME
 ## End of - Provider-dependent configuration
 
-RUN curl -L -o /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
+RUN curl -L -o /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip https://github.com/upbound/terraform/releases/download/v${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
   && unzip /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d /tmp/ \
   && chmod +x /tmp/terraform \
   && rm /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
