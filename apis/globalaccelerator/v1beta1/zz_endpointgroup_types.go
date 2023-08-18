@@ -200,11 +200,11 @@ type PortOverrideParameters struct {
 
 	// The endpoint port that you want a listener port to be mapped to. This is the port on the endpoint, such as the Application Load Balancer or Amazon EC2 instance.
 	// +kubebuilder:validation:Optional
-	EndpointPort *float64 `json:"endpointPort,omitempty" tf:"endpoint_port,omitempty"`
+	EndpointPort *float64 `json:"endpointPort" tf:"endpoint_port,omitempty"`
 
 	// The listener port that you want to map to a specific endpoint port. This is the port that user traffic arrives to the Global Accelerator on.
 	// +kubebuilder:validation:Optional
-	ListenerPort *float64 `json:"listenerPort,omitempty" tf:"listener_port,omitempty"`
+	ListenerPort *float64 `json:"listenerPort" tf:"listener_port,omitempty"`
 }
 
 // EndpointGroupSpec defines the desired state of EndpointGroup

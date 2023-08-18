@@ -110,7 +110,7 @@ type ByteMatchTuplesParameters struct {
 
 	// The part of a web request that you want to search, such as a specified header or a query string.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []FieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []FieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// Within the portion of a web request that you want to search
 	// (for example, in the query string, if any), specify where you want to search.
@@ -118,7 +118,7 @@ type ByteMatchTuplesParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	PositionalConstraint *string `json:"positionalConstraint,omitempty" tf:"positional_constraint,omitempty"`
+	PositionalConstraint *string `json:"positionalConstraint" tf:"positional_constraint,omitempty"`
 
 	// The value that you want to search for within the field specified by field_to_match, e.g., badrefer1.
 	// See docs
@@ -132,7 +132,7 @@ type ByteMatchTuplesParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
 
 type FieldToMatchInitParameters struct {
@@ -173,7 +173,7 @@ type FieldToMatchParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ByteMatchSetSpec defines the desired state of ByteMatchSet

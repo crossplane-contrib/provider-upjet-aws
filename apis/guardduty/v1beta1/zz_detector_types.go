@@ -32,7 +32,7 @@ type AuditLogsParameters struct {
 	// If true, enables Malware Protection as data source for the detector.
 	// Defaults to true.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 }
 
 type DatasourcesInitParameters struct {
@@ -168,7 +168,7 @@ type EBSVolumesParameters struct {
 	// If true, enables Malware Protection as data source for the detector.
 	// Defaults to true.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 }
 
 type KubernetesInitParameters struct {
@@ -190,7 +190,7 @@ type KubernetesParameters struct {
 	// Configures Kubernetes audit logs as a data source for Kubernetes protection.
 	// See Kubernetes Audit Logs below for more details.
 	// +kubebuilder:validation:Optional
-	AuditLogs []AuditLogsParameters `json:"auditLogs,omitempty" tf:"audit_logs,omitempty"`
+	AuditLogs []AuditLogsParameters `json:"auditLogs" tf:"audit_logs,omitempty"`
 }
 
 type MalwareProtectionInitParameters struct {
@@ -212,7 +212,7 @@ type MalwareProtectionParameters struct {
 	// Configure whether Malware Protection is enabled as data source for EC2 instances with findings for the detector.
 	// See Scan EC2 instance with findings below for more details.
 	// +kubebuilder:validation:Optional
-	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsParameters `json:"scanEc2InstanceWithFindings,omitempty" tf:"scan_ec2_instance_with_findings,omitempty"`
+	ScanEC2InstanceWithFindings []ScanEC2InstanceWithFindingsParameters `json:"scanEc2InstanceWithFindings" tf:"scan_ec2_instance_with_findings,omitempty"`
 }
 
 type S3LogsInitParameters struct {
@@ -234,7 +234,7 @@ type S3LogsParameters struct {
 	// If true, enables S3 protection.
 	// Defaults to true.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 }
 
 type ScanEC2InstanceWithFindingsInitParameters struct {
@@ -256,7 +256,7 @@ type ScanEC2InstanceWithFindingsParameters struct {
 	// Configure whether scanning EBS volumes is enabled as data source for the detector for instances with findings.
 	// See EBS volumes below for more details.
 	// +kubebuilder:validation:Optional
-	EBSVolumes []EBSVolumesParameters `json:"ebsVolumes,omitempty" tf:"ebs_volumes,omitempty"`
+	EBSVolumes []EBSVolumesParameters `json:"ebsVolumes" tf:"ebs_volumes,omitempty"`
 }
 
 // DetectorSpec defines the desired state of Detector

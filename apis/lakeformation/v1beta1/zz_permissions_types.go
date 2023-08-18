@@ -106,11 +106,11 @@ type ExpressionParameters struct {
 
 	// name of an LF-Tag.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// A list of possible values of an LF-Tag.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type LfTagInitParameters struct {
@@ -145,11 +145,11 @@ type LfTagParameters struct {
 
 	// name for the tag.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// A list of possible values an attribute can take.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type LfTagPolicyInitParameters struct {
@@ -184,11 +184,11 @@ type LfTagPolicyParameters struct {
 
 	// A list of tag conditions that apply to the resource's tag policy. Configuration block for tag conditions that apply to the policy. See expression below.
 	// +kubebuilder:validation:Optional
-	Expression []ExpressionParameters `json:"expression,omitempty" tf:"expression,omitempty"`
+	Expression []ExpressionParameters `json:"expression" tf:"expression,omitempty"`
 
 	// –  The resource type for which the tag policy applies. Valid values are DATABASE and TABLE.
 	// +kubebuilder:validation:Optional
-	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 }
 
 type PermissionsInitParameters struct {
@@ -355,7 +355,7 @@ type TableParameters struct {
 
 	// –  Name of the database for the table. Unique to a Data Catalog.
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// Name of the table.
 	// +kubebuilder:validation:Optional
@@ -417,7 +417,7 @@ type TableWithColumnsParameters struct {
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// Set of column names for the table to exclude.
 	// +kubebuilder:validation:Optional

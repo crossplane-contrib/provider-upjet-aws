@@ -239,11 +239,11 @@ type ResolverRuntimeParameters struct {
 
 	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
 	// +kubebuilder:validation:Optional
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+	RuntimeVersion *string `json:"runtimeVersion" tf:"runtime_version,omitempty"`
 }
 
 type ResolverSyncConfigInitParameters struct {

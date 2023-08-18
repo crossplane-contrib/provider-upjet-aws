@@ -35,7 +35,7 @@ type AccessEndpointParameters struct {
 
 	// Type of interface endpoint.
 	// +kubebuilder:validation:Optional
-	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
 	// Identifier (ID) of the VPC in which the interface endpoint is used.
 	// +kubebuilder:validation:Optional

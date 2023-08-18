@@ -187,7 +187,7 @@ type GrokClassifierParameters struct {
 
 	// An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
 	// +kubebuilder:validation:Optional
-	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+	Classification *string `json:"classification" tf:"classification,omitempty"`
 
 	// Custom grok patterns used by this classifier.
 	// +kubebuilder:validation:Optional
@@ -195,7 +195,7 @@ type GrokClassifierParameters struct {
 
 	// The grok pattern used by this classifier.
 	// +kubebuilder:validation:Optional
-	GrokPattern *string `json:"grokPattern,omitempty" tf:"grok_pattern,omitempty"`
+	GrokPattern *string `json:"grokPattern" tf:"grok_pattern,omitempty"`
 }
 
 type JSONClassifierInitParameters struct {
@@ -214,7 +214,7 @@ type JSONClassifierParameters struct {
 
 	// A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
 	// +kubebuilder:validation:Optional
-	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
+	JSONPath *string `json:"jsonPath" tf:"json_path,omitempty"`
 }
 
 type XMLClassifierInitParameters struct {
@@ -239,11 +239,11 @@ type XMLClassifierParameters struct {
 
 	// An identifier of the data format that the classifier matches.
 	// +kubebuilder:validation:Optional
-	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+	Classification *string `json:"classification" tf:"classification,omitempty"`
 
 	// The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by />). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row> is okay, but <row item_a="A" item_b="B" /> is not).
 	// +kubebuilder:validation:Optional
-	RowTag *string `json:"rowTag,omitempty" tf:"row_tag,omitempty"`
+	RowTag *string `json:"rowTag" tf:"row_tag,omitempty"`
 }
 
 // ClassifierSpec defines the desired state of Classifier

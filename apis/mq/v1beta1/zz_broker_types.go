@@ -498,15 +498,15 @@ type MaintenanceWindowStartTimeParameters struct {
 
 	// Day of the week, e.g., MONDAY, TUESDAY, or WEDNESDAY.
 	// +kubebuilder:validation:Optional
-	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
+	DayOfWeek *string `json:"dayOfWeek" tf:"day_of_week,omitempty"`
 
 	// Time, in 24-hour format, e.g., 02:00.
 	// +kubebuilder:validation:Optional
-	TimeOfDay *string `json:"timeOfDay,omitempty" tf:"time_of_day,omitempty"`
+	TimeOfDay *string `json:"timeOfDay" tf:"time_of_day,omitempty"`
 
 	// Time zone in either the Country/City format or the UTC offset format, e.g., CET.
 	// +kubebuilder:validation:Optional
-	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
 }
 
 type UserInitParameters struct {
@@ -549,7 +549,7 @@ type UserParameters struct {
 
 	// Username of the user.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 // BrokerSpec defines the desired state of Broker

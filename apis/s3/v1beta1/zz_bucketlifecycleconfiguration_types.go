@@ -211,7 +211,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Configuration block that specifies when noncurrent object versions expire. See below.
 	// +kubebuilder:validation:Optional
@@ -227,7 +227,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 
 	// Whether the rule is currently being applied. Valid values: Enabled or Disabled.
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 
 	// Set of configuration blocks that specify when an Amazon S3 object transitions to a specified storage class. See below.
 	// +kubebuilder:validation:Optional
@@ -397,7 +397,7 @@ type RuleNoncurrentVersionTransitionParameters struct {
 
 	// Class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Optional
-	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }
 
 type RuleTransitionInitParameters struct {
@@ -436,7 +436,7 @@ type RuleTransitionParameters struct {
 
 	// Class of storage used to store the object. Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
 	// +kubebuilder:validation:Optional
-	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
+	StorageClass *string `json:"storageClass" tf:"storage_class,omitempty"`
 }
 
 type TagInitParameters struct {
@@ -461,11 +461,11 @@ type TagParameters struct {
 
 	// Name of the object key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Value of the tag.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // BucketLifecycleConfigurationSpec defines the desired state of BucketLifecycleConfiguration

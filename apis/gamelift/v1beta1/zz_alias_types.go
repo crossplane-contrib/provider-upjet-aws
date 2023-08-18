@@ -112,7 +112,7 @@ type RoutingStrategyParameters struct {
 
 	// Type of routing strategyE.g., SIMPLE or TERMINAL
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // AliasSpec defines the desired state of Alias

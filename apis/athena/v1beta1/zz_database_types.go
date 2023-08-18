@@ -29,7 +29,7 @@ type ACLConfigurationParameters struct {
 
 	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
 	// +kubebuilder:validation:Optional
-	S3ACLOption *string `json:"s3AclOption,omitempty" tf:"s3_acl_option,omitempty"`
+	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
 }
 
 type DatabaseInitParameters struct {
@@ -148,7 +148,7 @@ type EncryptionConfigurationParameters struct {
 
 	// Type of key; one of SSE_S3, SSE_KMS, CSE_KMS
 	// +kubebuilder:validation:Optional
-	EncryptionOption *string `json:"encryptionOption,omitempty" tf:"encryption_option,omitempty"`
+	EncryptionOption *string `json:"encryptionOption" tf:"encryption_option,omitempty"`
 
 	// KMS key ARN or ID; required for key types SSE_KMS and CSE_KMS.
 	// +kubebuilder:validation:Optional

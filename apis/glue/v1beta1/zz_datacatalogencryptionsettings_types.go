@@ -46,7 +46,7 @@ type ConnectionPasswordEncryptionParameters struct {
 
 	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
 	// +kubebuilder:validation:Optional
-	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted,omitempty" tf:"return_connection_password_encrypted,omitempty"`
+	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted" tf:"return_connection_password_encrypted,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsInitParameters struct {
@@ -71,11 +71,11 @@ type DataCatalogEncryptionSettingsDataCatalogEncryptionSettingsParameters struct
 
 	// When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption. see Connection Password Encryption.
 	// +kubebuilder:validation:Optional
-	ConnectionPasswordEncryption []ConnectionPasswordEncryptionParameters `json:"connectionPasswordEncryption,omitempty" tf:"connection_password_encryption,omitempty"`
+	ConnectionPasswordEncryption []ConnectionPasswordEncryptionParameters `json:"connectionPasswordEncryption" tf:"connection_password_encryption,omitempty"`
 
 	// Specifies the encryption-at-rest configuration for the Data Catalog. see Encryption At Rest.
 	// +kubebuilder:validation:Optional
-	EncryptionAtRest []EncryptionAtRestParameters `json:"encryptionAtRest,omitempty" tf:"encryption_at_rest,omitempty"`
+	EncryptionAtRest []EncryptionAtRestParameters `json:"encryptionAtRest" tf:"encryption_at_rest,omitempty"`
 }
 
 type DataCatalogEncryptionSettingsInitParameters struct {
@@ -134,7 +134,7 @@ type EncryptionAtRestParameters struct {
 
 	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
 	// +kubebuilder:validation:Optional
-	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
+	CatalogEncryptionMode *string `json:"catalogEncryptionMode" tf:"catalog_encryption_mode,omitempty"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key

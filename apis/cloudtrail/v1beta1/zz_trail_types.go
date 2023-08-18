@@ -35,7 +35,7 @@ type AdvancedEventSelectorParameters struct {
 
 	// Specifies the selector statements in an advanced event selector. Fields documented below.
 	// +kubebuilder:validation:Optional
-	FieldSelector []FieldSelectorParameters `json:"fieldSelector,omitempty" tf:"field_selector,omitempty"`
+	FieldSelector []FieldSelectorParameters `json:"fieldSelector" tf:"field_selector,omitempty"`
 
 	// Name of the trail.
 	// +kubebuilder:validation:Optional
@@ -64,11 +64,11 @@ type DataResourceParameters struct {
 
 	// Resource type in which you want to log data events. You can specify only the following value: "AWS::S3::Object", "AWS::Lambda::Function" and "AWS::DynamoDB::Table".
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// List of ARN strings or partial ARN strings to specify selectors for data audit events over data resources. ARN list is specific to single-valued type. For example, arn:aws:s3:::<bucket name>/ for all objects in a bucket, arn:aws:s3:::<bucket name>/key for specific objects, arn:aws:lambda for all lambda events within an account, arn:aws:lambda:<region>:<account number>:function:<function name> for a specific Lambda function, arn:aws:dynamodb for all DDB events for all tables within an account, or arn:aws:dynamodb:<region>:<account number>:table/<table name> for a specific DynamoDB table.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type EventSelectorInitParameters struct {
@@ -180,7 +180,7 @@ type FieldSelectorParameters struct {
 
 	// Field in an event record on which to filter events to be logged. You can specify only the following values: readOnly, eventSource, eventName, eventCategory, resources.type, resources.ARN.
 	// +kubebuilder:validation:Optional
-	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+	Field *string `json:"field" tf:"field,omitempty"`
 
 	// A list of values that excludes events that match the last few characters of the event record field specified as the value of field.
 	// +kubebuilder:validation:Optional
@@ -215,7 +215,7 @@ type InsightSelectorParameters struct {
 
 	// Type of insights to log on a trail. Valid values are: ApiCallRateInsight and ApiErrorRateInsight.
 	// +kubebuilder:validation:Optional
-	InsightType *string `json:"insightType,omitempty" tf:"insight_type,omitempty"`
+	InsightType *string `json:"insightType" tf:"insight_type,omitempty"`
 }
 
 type TrailInitParameters struct {

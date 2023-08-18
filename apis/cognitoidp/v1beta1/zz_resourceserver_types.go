@@ -97,11 +97,11 @@ type ScopeParameters struct {
 
 	// The scope description.
 	// +kubebuilder:validation:Optional
-	ScopeDescription *string `json:"scopeDescription,omitempty" tf:"scope_description,omitempty"`
+	ScopeDescription *string `json:"scopeDescription" tf:"scope_description,omitempty"`
 
 	// The scope name.
 	// +kubebuilder:validation:Optional
-	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
+	ScopeName *string `json:"scopeName" tf:"scope_name,omitempty"`
 }
 
 // ResourceServerSpec defines the desired state of ResourceServer

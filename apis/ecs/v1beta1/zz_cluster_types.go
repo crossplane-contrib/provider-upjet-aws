@@ -140,7 +140,7 @@ type DefaultCapacityProviderStrategyParameters struct {
 
 	// The short name of the capacity provider.
 	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
 	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
 	// +kubebuilder:validation:Optional
@@ -261,7 +261,7 @@ type ServiceConnectDefaultsParameters struct {
 
 	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 type SettingInitParameters struct {
@@ -286,11 +286,11 @@ type SettingParameters struct {
 
 	// Name of the setting to manage. Valid values: containerInsights.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value to assign to the setting. Valid values are enabled and disabled.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

@@ -75,7 +75,7 @@ type CatalogTargetParameters struct {
 
 	// A list of catalog tables to be synchronized.
 	// +kubebuilder:validation:Optional
-	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
+	Tables []*string `json:"tables" tf:"tables,omitempty"`
 }
 
 type CrawlerInitParameters struct {
@@ -339,11 +339,11 @@ type DeltaTargetParameters struct {
 
 	// A list of the Amazon S3 paths to the Delta tables.
 	// +kubebuilder:validation:Optional
-	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
+	DeltaTables []*string `json:"deltaTables" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.
 	// +kubebuilder:validation:Optional
-	WriteManifest *bool `json:"writeManifest,omitempty" tf:"write_manifest,omitempty"`
+	WriteManifest *bool `json:"writeManifest" tf:"write_manifest,omitempty"`
 }
 
 type DynamodbTargetInitParameters struct {
@@ -374,7 +374,7 @@ type DynamodbTargetParameters struct {
 
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.  defaults to true.
 	// +kubebuilder:validation:Optional
@@ -437,7 +437,7 @@ type JdbcTargetParameters struct {
 
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type LakeFormationConfigurationInitParameters struct {
@@ -526,7 +526,7 @@ type MongodbTargetParameters struct {
 
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.  defaults to true.
 	// +kubebuilder:validation:Optional
@@ -614,7 +614,7 @@ type S3TargetParameters struct {
 
 	// The name of the DynamoDB table to crawl.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
 	// +kubebuilder:validation:Optional

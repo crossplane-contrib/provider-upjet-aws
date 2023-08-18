@@ -76,7 +76,7 @@ type XSSMatchTupleFieldToMatchParameters struct {
 
 	// The part of the web request that you want AWS WAF to search for a specified stringE.g., HEADER or METHOD
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type XSSMatchTupleInitParameters struct {
@@ -101,11 +101,11 @@ type XSSMatchTupleParameters struct {
 
 	// Specifies where in a web request to look for cross-site scripting attacks.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []XSSMatchTupleFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []XSSMatchTupleFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// Which text transformation, if any, to perform on the web request before inspecting the request for cross-site scripting attacks.
 	// +kubebuilder:validation:Optional
-	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
 
 // XSSMatchSetSpec defines the desired state of XSSMatchSet

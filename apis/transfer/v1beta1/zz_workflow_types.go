@@ -341,7 +341,7 @@ type DecryptStepDetailsParameters struct {
 
 	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DeleteStepDetailsInitParameters struct {
@@ -555,7 +555,7 @@ type OnExceptionStepsParameters struct {
 
 	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type S3FileLocationInitParameters struct {
@@ -777,7 +777,7 @@ type StepsDecryptStepDetailsParameters struct {
 
 	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type StepsDeleteStepDetailsInitParameters struct {
@@ -875,7 +875,7 @@ type StepsParameters struct {
 
 	// One of the following step types are supported. COPY, CUSTOM, DECRYPT, DELETE, and TAG.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type StepsTagStepDetailsInitParameters struct {
@@ -978,11 +978,11 @@ type TagStepDetailsTagsParameters struct {
 
 	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The value that corresponds to the key.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TagsInitParameters struct {
@@ -1007,11 +1007,11 @@ type TagsParameters struct {
 
 	// The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The value that corresponds to the key.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type WorkflowInitParameters struct {

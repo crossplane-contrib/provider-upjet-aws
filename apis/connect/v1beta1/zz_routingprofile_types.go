@@ -35,11 +35,11 @@ type MediaConcurrenciesParameters struct {
 
 	// Specifies the channels that agents can handle in the Contact Control Panel (CCP). Valid values are VOICE, CHAT, TASK.
 	// +kubebuilder:validation:Optional
-	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
+	Channel *string `json:"channel" tf:"channel,omitempty"`
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
-	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+	Concurrency *float64 `json:"concurrency" tf:"concurrency,omitempty"`
 }
 
 type QueueConfigsAssociatedInitParameters struct {
@@ -109,19 +109,19 @@ type QueueConfigsParameters struct {
 
 	// Specifies the channels agents can handle in the Contact Control Panel (CCP) for this routing profile. Valid values are VOICE, CHAT, TASK.
 	// +kubebuilder:validation:Optional
-	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
+	Channel *string `json:"channel" tf:"channel,omitempty"`
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
 	// +kubebuilder:validation:Optional
-	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
+	Delay *float64 `json:"delay" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// Specifies the identifier for the queue.
 	// +kubebuilder:validation:Optional
-	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
+	QueueID *string `json:"queueId" tf:"queue_id,omitempty"`
 }
 
 type RoutingProfileInitParameters struct {

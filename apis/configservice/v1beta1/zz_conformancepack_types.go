@@ -104,11 +104,11 @@ type InputParameterParameters struct {
 
 	// The input key.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// The input value.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 // ConformancePackSpec defines the desired state of ConformancePack

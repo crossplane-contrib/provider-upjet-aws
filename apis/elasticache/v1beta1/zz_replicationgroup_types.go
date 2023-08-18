@@ -196,19 +196,19 @@ type ReplicationGroupLogDeliveryConfigurationParameters struct {
 
 	// Name of either the CloudWatch Logs LogGroup or Kinesis Data Firehose resource.
 	// +kubebuilder:validation:Optional
-	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination *string `json:"destination" tf:"destination,omitempty"`
 
 	// For CloudWatch Logs use cloudwatch-logs or for Kinesis Data Firehose use kinesis-firehose.
 	// +kubebuilder:validation:Optional
-	DestinationType *string `json:"destinationType,omitempty" tf:"destination_type,omitempty"`
+	DestinationType *string `json:"destinationType" tf:"destination_type,omitempty"`
 
 	// Valid values are json or text
 	// +kubebuilder:validation:Optional
-	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
+	LogFormat *string `json:"logFormat" tf:"log_format,omitempty"`
 
 	// Valid values are  slow-log or engine-log. Max 1 of each.
 	// +kubebuilder:validation:Optional
-	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+	LogType *string `json:"logType" tf:"log_type,omitempty"`
 }
 
 type ReplicationGroupObservation struct {

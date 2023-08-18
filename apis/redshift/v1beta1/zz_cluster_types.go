@@ -540,7 +540,7 @@ type LoggingParameters struct {
 
 	// Enables logging information such as queries and connection attempts, for the specified Amazon Redshift cluster.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
 	// The log destination type. An enum with possible values of s3 and cloudwatch.
 	// +kubebuilder:validation:Optional
@@ -583,7 +583,7 @@ type SnapshotCopyParameters struct {
 
 	// The destination region that you want to copy snapshots to.
 	// +kubebuilder:validation:Optional
-	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
+	DestinationRegion *string `json:"destinationRegion" tf:"destination_region,omitempty"`
 
 	// The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
 	// +kubebuilder:validation:Optional

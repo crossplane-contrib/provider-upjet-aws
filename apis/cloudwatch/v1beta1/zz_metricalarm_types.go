@@ -328,7 +328,7 @@ type MetricParameters struct {
 	// The name for this metric.
 	// See docs for supported metrics.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// The namespace for this metric. See docs for the list of namespaces.
 	// See docs for supported metrics.
@@ -339,12 +339,12 @@ type MetricParameters struct {
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *float64 `json:"period" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
 	// See docs for supported statistics.
 	// +kubebuilder:validation:Optional
-	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+	Stat *string `json:"stat" tf:"stat,omitempty"`
 
 	// The unit for this metric.
 	// +kubebuilder:validation:Optional
@@ -415,7 +415,7 @@ type MetricQueryParameters struct {
 
 	// A short name used to tie this object to the results in the response. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents.
 	// +kubebuilder:validation:Optional

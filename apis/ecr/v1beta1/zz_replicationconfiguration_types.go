@@ -36,7 +36,7 @@ type DestinationParameters struct {
 
 	// The account ID of the destination registry to replicate to.
 	// +kubebuilder:validation:Optional
-	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+	RegistryID *string `json:"registryId" tf:"registry_id,omitempty"`
 }
 
 type ReplicationConfigurationInitParameters struct {
@@ -84,7 +84,7 @@ type ReplicationConfigurationReplicationConfigurationParameters struct {
 
 	// The replication rules for a replication configuration. A maximum of 10 are allowed per replication_configuration. See Rule
 	// +kubebuilder:validation:Optional
-	Rule []ReplicationConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule []ReplicationConfigurationRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
 
 type ReplicationConfigurationRuleInitParameters struct {
@@ -109,7 +109,7 @@ type ReplicationConfigurationRuleParameters struct {
 
 	// the details of a replication destination. A maximum of 25 are allowed per rule. See Destination.
 	// +kubebuilder:validation:Optional
-	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
 
 	// filters for a replication rule. See Repository Filter.
 	// +kubebuilder:validation:Optional
@@ -138,11 +138,11 @@ type RuleRepositoryFilterParameters struct {
 
 	// The repository filter details.
 	// +kubebuilder:validation:Optional
-	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *string `json:"filter" tf:"filter,omitempty"`
 
 	// The repository filter type. The only supported value is PREFIX_MATCH, which is a repository name prefix specified with the filter parameter.
 	// +kubebuilder:validation:Optional
-	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
 }
 
 // ReplicationConfigurationSpec defines the desired state of ReplicationConfiguration

@@ -35,11 +35,11 @@ type SpecListenerPortMappingParameters struct {
 
 	// Port used for the port mapping.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 type VirtualRouterInitParameters struct {
@@ -153,7 +153,7 @@ type VirtualRouterSpecListenerParameters struct {
 
 	// Port mapping information for the listener.
 	// +kubebuilder:validation:Optional
-	PortMapping []SpecListenerPortMappingParameters `json:"portMapping,omitempty" tf:"port_mapping,omitempty"`
+	PortMapping []SpecListenerPortMappingParameters `json:"portMapping" tf:"port_mapping,omitempty"`
 }
 
 type VirtualRouterSpecObservation struct {

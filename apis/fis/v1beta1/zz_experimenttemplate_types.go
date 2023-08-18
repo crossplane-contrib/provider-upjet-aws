@@ -59,7 +59,7 @@ type ActionParameters struct {
 
 	// ID of the action. To find out what actions are supported see AWS FIS actions reference.
 	// +kubebuilder:validation:Optional
-	ActionID *string `json:"actionId,omitempty" tf:"action_id,omitempty"`
+	ActionID *string `json:"actionId" tf:"action_id,omitempty"`
 
 	// Description of the action.
 	// +kubebuilder:validation:Optional
@@ -67,7 +67,7 @@ type ActionParameters struct {
 
 	// Friendly name of the action.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Parameter(s) for the action, if applicable. See below.
 	// +kubebuilder:validation:Optional
@@ -218,7 +218,7 @@ type ExperimentTemplateTargetParameters struct {
 
 	// Friendly name given to the target.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
 	// +kubebuilder:validation:Optional
@@ -230,11 +230,11 @@ type ExperimentTemplateTargetParameters struct {
 
 	// AWS resource type. The resource type must be supported for the specified action. To find out what resource types are supported, see Targets for AWS FIS.
 	// +kubebuilder:validation:Optional
-	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 
 	// Scopes the identified resources. Valid values are ALL (all identified resources), COUNT(n) (randomly select n of the identified resources), PERCENT(n) (randomly select n percent of the identified resources).
 	// +kubebuilder:validation:Optional
-	SelectionMode *string `json:"selectionMode,omitempty" tf:"selection_mode,omitempty"`
+	SelectionMode *string `json:"selectionMode" tf:"selection_mode,omitempty"`
 }
 
 type FilterInitParameters struct {
@@ -259,11 +259,11 @@ type FilterParameters struct {
 
 	// Attribute path for the filter.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// Set of attribute values for the filter.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ParameterInitParameters struct {
@@ -288,11 +288,11 @@ type ParameterParameters struct {
 
 	// Parameter name.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Parameter value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ResourceTagInitParameters struct {
@@ -317,11 +317,11 @@ type ResourceTagParameters struct {
 
 	// Tag key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Tag value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type StopConditionInitParameters struct {
@@ -346,7 +346,7 @@ type StopConditionParameters struct {
 
 	// Source of the condition. One of none, aws:cloudwatch:alarm.
 	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+	Source *string `json:"source" tf:"source,omitempty"`
 
 	// ARN of the CloudWatch alarm. Required if the source is a CloudWatch alarm.
 	// +kubebuilder:validation:Optional
@@ -375,11 +375,11 @@ type TargetParameters struct {
 
 	// Tag key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Target name, referencing a corresponding target.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // ExperimentTemplateSpec defines the desired state of ExperimentTemplate

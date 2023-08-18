@@ -63,11 +63,11 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 
 	// Set of HTTP methods that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
 	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Set of origins you want customers to be able to access the bucket from.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Set of headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
 	// +kubebuilder:validation:Optional

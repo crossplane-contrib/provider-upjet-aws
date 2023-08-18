@@ -38,7 +38,7 @@ type DetailsParameters struct {
 
 	// The name of the Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Configuration block to manage the PublicAccessBlock configuration that you want to apply to this Multi-Region Access Point. You can enable the configuration options in any combination. See Public Access Block Configuration below for more details.
 	// +kubebuilder:validation:Optional

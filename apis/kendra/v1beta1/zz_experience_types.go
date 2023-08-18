@@ -205,7 +205,7 @@ type UserIdentityConfigurationParameters struct {
 
 	// The AWS SSO field name that contains the identifiers of your users, such as their emails.
 	// +kubebuilder:validation:Optional
-	IdentityAttributeName *string `json:"identityAttributeName,omitempty" tf:"identity_attribute_name,omitempty"`
+	IdentityAttributeName *string `json:"identityAttributeName" tf:"identity_attribute_name,omitempty"`
 }
 
 // ExperienceSpec defines the desired state of Experience

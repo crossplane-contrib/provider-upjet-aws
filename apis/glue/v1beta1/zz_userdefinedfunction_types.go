@@ -35,11 +35,11 @@ type ResourceUrisParameters struct {
 
 	// The type of the resource. can be one of JAR, FILE, and ARCHIVE.
 	// +kubebuilder:validation:Optional
-	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 
 	// The URI for accessing the resource.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type UserDefinedFunctionInitParameters struct {

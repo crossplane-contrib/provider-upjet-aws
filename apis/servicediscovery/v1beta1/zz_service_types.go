@@ -38,7 +38,7 @@ type DNSConfigParameters struct {
 
 	// An array that contains one DnsRecord object for each resource record set.
 	// +kubebuilder:validation:Optional
-	DNSRecords []DNSRecordsParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
+	DNSRecords []DNSRecordsParameters `json:"dnsRecords" tf:"dns_records,omitempty"`
 
 	// The ID of the namespace to use for DNS configuration.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicediscovery/v1beta1.PrivateDNSNamespace
@@ -81,11 +81,11 @@ type DNSRecordsParameters struct {
 
 	// The amount of time, in seconds, that you want DNS resolvers to cache the settings for this resource record set.
 	// +kubebuilder:validation:Optional
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
 	// The type of the resource, which indicates the value that Amazon Route 53 returns in response to DNS queries. Valid Values: A, AAAA, SRV, CNAME
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type HealthCheckConfigInitParameters struct {

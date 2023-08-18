@@ -39,7 +39,7 @@ type ApplicationCodeConfigurationParameters struct {
 
 	// Specifies whether the code content is in text or zip format. Valid values: PLAINTEXT, ZIPFILE.
 	// +kubebuilder:validation:Optional
-	CodeContentType *string `json:"codeContentType,omitempty" tf:"code_content_type,omitempty"`
+	CodeContentType *string `json:"codeContentType" tf:"code_content_type,omitempty"`
 }
 
 type ApplicationConfigurationInitParameters struct {
@@ -94,7 +94,7 @@ type ApplicationConfigurationParameters struct {
 
 	// The code location and type parameters for the application.
 	// +kubebuilder:validation:Optional
-	ApplicationCodeConfiguration []ApplicationCodeConfigurationParameters `json:"applicationCodeConfiguration,omitempty" tf:"application_code_configuration,omitempty"`
+	ApplicationCodeConfiguration []ApplicationCodeConfigurationParameters `json:"applicationCodeConfiguration" tf:"application_code_configuration,omitempty"`
 
 	// Describes whether snapshots are enabled for a Flink-based application.
 	// +kubebuilder:validation:Optional
@@ -288,7 +288,7 @@ type ApplicationSnapshotConfigurationParameters struct {
 
 	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
 	// +kubebuilder:validation:Optional
-	SnapshotsEnabled *bool `json:"snapshotsEnabled,omitempty" tf:"snapshots_enabled,omitempty"`
+	SnapshotsEnabled *bool `json:"snapshotsEnabled" tf:"snapshots_enabled,omitempty"`
 }
 
 type CheckpointConfigurationInitParameters struct {
@@ -333,7 +333,7 @@ type CheckpointConfigurationParameters struct {
 
 	// Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. Valid values: CUSTOM, DEFAULT. Set this attribute to CUSTOM in order for any specified checkpointing_enabled, checkpoint_interval, or min_pause_between_checkpoints attribute values to be effective. If this attribute is set to DEFAULT, the application will always use the following values:
 	// +kubebuilder:validation:Optional
-	ConfigurationType *string `json:"configurationType,omitempty" tf:"configuration_type,omitempty"`
+	ConfigurationType *string `json:"configurationType" tf:"configuration_type,omitempty"`
 
 	// Describes the minimum time in milliseconds after a checkpoint operation completes that a new checkpoint operation can start.
 	// +kubebuilder:validation:Optional
@@ -420,11 +420,11 @@ type CsvMappingParametersParameters struct {
 
 	// The column delimiter. For example, in a CSV format, a comma (,) is the typical column delimiter.
 	// +kubebuilder:validation:Optional
-	RecordColumnDelimiter *string `json:"recordColumnDelimiter,omitempty" tf:"record_column_delimiter,omitempty"`
+	RecordColumnDelimiter *string `json:"recordColumnDelimiter" tf:"record_column_delimiter,omitempty"`
 
 	// The row delimiter. For example, in a CSV format, \n is the typical row delimiter.
 	// +kubebuilder:validation:Optional
-	RecordRowDelimiter *string `json:"recordRowDelimiter,omitempty" tf:"record_row_delimiter,omitempty"`
+	RecordRowDelimiter *string `json:"recordRowDelimiter" tf:"record_row_delimiter,omitempty"`
 }
 
 type DestinationSchemaInitParameters struct {
@@ -443,7 +443,7 @@ type DestinationSchemaParameters struct {
 
 	// The type of record format. Valid values: CSV, JSON.
 	// +kubebuilder:validation:Optional
-	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
+	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
 
 type EnvironmentPropertiesInitParameters struct {
@@ -462,7 +462,7 @@ type EnvironmentPropertiesParameters struct {
 
 	// Describes the execution property groups.
 	// +kubebuilder:validation:Optional
-	PropertyGroup []PropertyGroupParameters `json:"propertyGroup,omitempty" tf:"property_group,omitempty"`
+	PropertyGroup []PropertyGroupParameters `json:"propertyGroup" tf:"property_group,omitempty"`
 }
 
 type FlinkApplicationConfigurationInitParameters struct {
@@ -564,7 +564,7 @@ type InputLambdaProcessorParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +kubebuilder:validation:Optional
-	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
 
 type InputObservation struct {
@@ -628,7 +628,7 @@ type InputParameters struct {
 
 	// Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.
 	// +kubebuilder:validation:Optional
-	InputSchema []InputSchemaParameters `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
+	InputSchema []InputSchemaParameters `json:"inputSchema" tf:"input_schema,omitempty"`
 
 	// The point at which the application starts processing records from the streaming source.
 	// +kubebuilder:validation:Optional
@@ -644,7 +644,7 @@ type InputParameters struct {
 
 	// The name prefix to use when creating an in-application stream.
 	// +kubebuilder:validation:Optional
-	NamePrefix *string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	NamePrefix *string `json:"namePrefix" tf:"name_prefix,omitempty"`
 }
 
 type InputProcessingConfigurationInitParameters struct {
@@ -663,7 +663,7 @@ type InputProcessingConfigurationParameters struct {
 
 	// Describes the Lambda function that is used to preprocess the records in the stream before being processed by your application code.
 	// +kubebuilder:validation:Optional
-	InputLambdaProcessor []InputLambdaProcessorParameters `json:"inputLambdaProcessor,omitempty" tf:"input_lambda_processor,omitempty"`
+	InputLambdaProcessor []InputLambdaProcessorParameters `json:"inputLambdaProcessor" tf:"input_lambda_processor,omitempty"`
 }
 
 type InputSchemaInitParameters struct {
@@ -694,7 +694,7 @@ type InputSchemaParameters struct {
 
 	// Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.
 	// +kubebuilder:validation:Optional
-	RecordColumn []RecordColumnParameters `json:"recordColumn,omitempty" tf:"record_column,omitempty"`
+	RecordColumn []RecordColumnParameters `json:"recordColumn" tf:"record_column,omitempty"`
 
 	// Specifies the encoding of the records in the streaming source. For example, UTF-8.
 	// +kubebuilder:validation:Optional
@@ -702,7 +702,7 @@ type InputSchemaParameters struct {
 
 	// Specifies the format of the records on the streaming source.
 	// +kubebuilder:validation:Optional
-	RecordFormat []RecordFormatParameters `json:"recordFormat,omitempty" tf:"record_format,omitempty"`
+	RecordFormat []RecordFormatParameters `json:"recordFormat" tf:"record_format,omitempty"`
 }
 
 type InputStartingPositionConfigurationInitParameters struct {
@@ -740,7 +740,7 @@ type JSONMappingParametersParameters struct {
 
 	// The path to the top-level parent that contains the records.
 	// +kubebuilder:validation:Optional
-	RecordRowPath *string `json:"recordRowPath,omitempty" tf:"record_row_path,omitempty"`
+	RecordRowPath *string `json:"recordRowPath" tf:"record_row_path,omitempty"`
 }
 
 type KinesisFirehoseInputInitParameters struct {
@@ -759,7 +759,7 @@ type KinesisFirehoseInputParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +kubebuilder:validation:Optional
-	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
 
 type KinesisFirehoseOutputInitParameters struct {
@@ -830,7 +830,7 @@ type KinesisStreamsOutputParameters struct {
 
 	// The ARN of the Lambda function that operates on records in the stream.
 	// +kubebuilder:validation:Optional
-	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+	ResourceArn *string `json:"resourceArn" tf:"resource_arn,omitempty"`
 }
 
 type LambdaOutputInitParameters struct {
@@ -881,11 +881,11 @@ type MappingParametersCsvMappingParametersParameters struct {
 
 	// The column delimiter. For example, in a CSV format, a comma (,) is the typical column delimiter.
 	// +kubebuilder:validation:Optional
-	RecordColumnDelimiter *string `json:"recordColumnDelimiter,omitempty" tf:"record_column_delimiter,omitempty"`
+	RecordColumnDelimiter *string `json:"recordColumnDelimiter" tf:"record_column_delimiter,omitempty"`
 
 	// The row delimiter. For example, in a CSV format, \n is the typical row delimiter.
 	// +kubebuilder:validation:Optional
-	RecordRowDelimiter *string `json:"recordRowDelimiter,omitempty" tf:"record_row_delimiter,omitempty"`
+	RecordRowDelimiter *string `json:"recordRowDelimiter" tf:"record_row_delimiter,omitempty"`
 }
 
 type MappingParametersInitParameters struct {
@@ -913,7 +913,7 @@ type MappingParametersJSONMappingParametersParameters struct {
 
 	// The path to the top-level parent that contains the records.
 	// +kubebuilder:validation:Optional
-	RecordRowPath *string `json:"recordRowPath,omitempty" tf:"record_row_path,omitempty"`
+	RecordRowPath *string `json:"recordRowPath" tf:"record_row_path,omitempty"`
 }
 
 type MappingParametersObservation struct {
@@ -964,7 +964,7 @@ type MonitoringConfigurationParameters struct {
 
 	// Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. Valid values: CUSTOM, DEFAULT. Set this attribute to CUSTOM in order for any specified checkpointing_enabled, checkpoint_interval, or min_pause_between_checkpoints attribute values to be effective. If this attribute is set to DEFAULT, the application will always use the following values:
 	// +kubebuilder:validation:Optional
-	ConfigurationType *string `json:"configurationType,omitempty" tf:"configuration_type,omitempty"`
+	ConfigurationType *string `json:"configurationType" tf:"configuration_type,omitempty"`
 
 	// Describes the verbosity of the CloudWatch Logs for an application. Valid values: DEBUG, ERROR, INFO, WARN.
 	// +kubebuilder:validation:Optional
@@ -1018,7 +1018,7 @@ type OutputParameters struct {
 
 	// Describes the data format when records are written to the destination.
 	// +kubebuilder:validation:Optional
-	DestinationSchema []DestinationSchemaParameters `json:"destinationSchema,omitempty" tf:"destination_schema,omitempty"`
+	DestinationSchema []DestinationSchemaParameters `json:"destinationSchema" tf:"destination_schema,omitempty"`
 
 	// Identifies a Kinesis Data Firehose delivery stream as the destination.
 	// +kubebuilder:validation:Optional
@@ -1034,7 +1034,7 @@ type OutputParameters struct {
 
 	// The name of the application.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ParallelismConfigurationInitParameters struct {
@@ -1075,7 +1075,7 @@ type ParallelismConfigurationParameters struct {
 
 	// Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. Valid values: CUSTOM, DEFAULT. Set this attribute to CUSTOM in order for any specified checkpointing_enabled, checkpoint_interval, or min_pause_between_checkpoints attribute values to be effective. If this attribute is set to DEFAULT, the application will always use the following values:
 	// +kubebuilder:validation:Optional
-	ConfigurationType *string `json:"configurationType,omitempty" tf:"configuration_type,omitempty"`
+	ConfigurationType *string `json:"configurationType" tf:"configuration_type,omitempty"`
 
 	// Describes the initial number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform.
 	// +kubebuilder:validation:Optional
@@ -1108,11 +1108,11 @@ type PropertyGroupParameters struct {
 
 	// The key of the application execution property key-value map.
 	// +kubebuilder:validation:Optional
-	PropertyGroupID *string `json:"propertyGroupId,omitempty" tf:"property_group_id,omitempty"`
+	PropertyGroupID *string `json:"propertyGroupId" tf:"property_group_id,omitempty"`
 
 	// Application execution property key-value map.
 	// +kubebuilder:validation:Optional
-	PropertyMap map[string]*string `json:"propertyMap,omitempty" tf:"property_map,omitempty"`
+	PropertyMap map[string]*string `json:"propertyMap" tf:"property_map,omitempty"`
 }
 
 type RecordColumnInitParameters struct {
@@ -1147,11 +1147,11 @@ type RecordColumnParameters struct {
 
 	// The name of the application.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The type of column created in the in-application input stream or reference table.
 	// +kubebuilder:validation:Optional
-	SQLType *string `json:"sqlType,omitempty" tf:"sql_type,omitempty"`
+	SQLType *string `json:"sqlType" tf:"sql_type,omitempty"`
 }
 
 type RecordFormatInitParameters struct {
@@ -1205,11 +1205,11 @@ type RecordFormatParameters struct {
 
 	// Provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.
 	// +kubebuilder:validation:Optional
-	MappingParameters []MappingParametersParameters `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
+	MappingParameters []MappingParametersParameters `json:"mappingParameters" tf:"mapping_parameters,omitempty"`
 
 	// The type of record format. Valid values: CSV, JSON.
 	// +kubebuilder:validation:Optional
-	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
+	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
 
 type ReferenceDataSourceInitParameters struct {
@@ -1243,15 +1243,15 @@ type ReferenceDataSourceParameters struct {
 
 	// Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.
 	// +kubebuilder:validation:Optional
-	ReferenceSchema []ReferenceSchemaParameters `json:"referenceSchema,omitempty" tf:"reference_schema,omitempty"`
+	ReferenceSchema []ReferenceSchemaParameters `json:"referenceSchema" tf:"reference_schema,omitempty"`
 
 	// Identifies the S3 bucket and object that contains the reference data.
 	// +kubebuilder:validation:Optional
-	S3ReferenceDataSource []S3ReferenceDataSourceParameters `json:"s3ReferenceDataSource,omitempty" tf:"s3_reference_data_source,omitempty"`
+	S3ReferenceDataSource []S3ReferenceDataSourceParameters `json:"s3ReferenceDataSource" tf:"s3_reference_data_source,omitempty"`
 
 	// The name of the in-application table to create.
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName" tf:"table_name,omitempty"`
 }
 
 type ReferenceSchemaInitParameters struct {
@@ -1282,7 +1282,7 @@ type ReferenceSchemaParameters struct {
 
 	// Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.
 	// +kubebuilder:validation:Optional
-	RecordColumn []ReferenceSchemaRecordColumnParameters `json:"recordColumn,omitempty" tf:"record_column,omitempty"`
+	RecordColumn []ReferenceSchemaRecordColumnParameters `json:"recordColumn" tf:"record_column,omitempty"`
 
 	// Specifies the encoding of the records in the streaming source. For example, UTF-8.
 	// +kubebuilder:validation:Optional
@@ -1290,7 +1290,7 @@ type ReferenceSchemaParameters struct {
 
 	// Specifies the format of the records on the streaming source.
 	// +kubebuilder:validation:Optional
-	RecordFormat []ReferenceSchemaRecordFormatParameters `json:"recordFormat,omitempty" tf:"record_format,omitempty"`
+	RecordFormat []ReferenceSchemaRecordFormatParameters `json:"recordFormat" tf:"record_format,omitempty"`
 }
 
 type ReferenceSchemaRecordColumnInitParameters struct {
@@ -1325,11 +1325,11 @@ type ReferenceSchemaRecordColumnParameters struct {
 
 	// The name of the application.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The type of column created in the in-application input stream or reference table.
 	// +kubebuilder:validation:Optional
-	SQLType *string `json:"sqlType,omitempty" tf:"sql_type,omitempty"`
+	SQLType *string `json:"sqlType" tf:"sql_type,omitempty"`
 }
 
 type ReferenceSchemaRecordFormatInitParameters struct {
@@ -1354,11 +1354,11 @@ type ReferenceSchemaRecordFormatParameters struct {
 
 	// Provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.
 	// +kubebuilder:validation:Optional
-	MappingParameters []RecordFormatMappingParametersParameters `json:"mappingParameters,omitempty" tf:"mapping_parameters,omitempty"`
+	MappingParameters []RecordFormatMappingParametersParameters `json:"mappingParameters" tf:"mapping_parameters,omitempty"`
 
 	// The type of record format. Valid values: CSV, JSON.
 	// +kubebuilder:validation:Optional
-	RecordFormatType *string `json:"recordFormatType,omitempty" tf:"record_format_type,omitempty"`
+	RecordFormatType *string `json:"recordFormatType" tf:"record_format_type,omitempty"`
 }
 
 type RunConfigurationInitParameters struct {
@@ -1476,7 +1476,7 @@ type S3ReferenceDataSourceParameters struct {
 
 	// The file key for the object containing the application code.
 	// +kubebuilder:validation:Optional
-	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
+	FileKey *string `json:"fileKey" tf:"file_key,omitempty"`
 }
 
 type SQLApplicationConfigurationInitParameters struct {
@@ -1546,11 +1546,11 @@ type VPCConfigurationParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
 	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 // ApplicationSpec defines the desired state of Application

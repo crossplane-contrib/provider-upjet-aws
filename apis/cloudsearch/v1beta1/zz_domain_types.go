@@ -196,7 +196,7 @@ type IndexFieldParameters struct {
 
 	// The name of the CloudSearch domain.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// You can enable returning the value of all searchable fields.
 	// +kubebuilder:validation:Optional
@@ -216,7 +216,7 @@ type IndexFieldParameters struct {
 
 	// The field type. Valid values: date, date-array, double, double-array, int, int-array, literal, literal-array, text, text-array.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ScalingParametersInitParameters struct {

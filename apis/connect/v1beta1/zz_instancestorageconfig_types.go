@@ -32,7 +32,7 @@ type EncryptionConfigParameters struct {
 
 	// The type of encryption. Valid Values: KMS.
 	// +kubebuilder:validation:Optional
-	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+	EncryptionType *string `json:"encryptionType" tf:"encryption_type,omitempty"`
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -186,15 +186,15 @@ type KinesisVideoStreamConfigParameters struct {
 
 	// The encryption configuration. Documented below.
 	// +kubebuilder:validation:Optional
-	EncryptionConfig []EncryptionConfigParameters `json:"encryptionConfig,omitempty" tf:"encryption_config,omitempty"`
+	EncryptionConfig []EncryptionConfigParameters `json:"encryptionConfig" tf:"encryption_config,omitempty"`
 
 	// The prefix of the video stream. Minimum length of 1. Maximum length of 128. When read from the state, the value returned is <prefix>-connect-<connect_instance_alias>-contact- since the API appends additional details to the prefix.
 	// +kubebuilder:validation:Optional
-	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 
 	// The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. Minimum value of 0. Maximum value of 87600. A value of 0, indicates that the stream does not persist data.
 	// +kubebuilder:validation:Optional
-	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
+	RetentionPeriodHours *float64 `json:"retentionPeriodHours" tf:"retention_period_hours,omitempty"`
 }
 
 type S3ConfigEncryptionConfigInitParameters struct {
@@ -216,7 +216,7 @@ type S3ConfigEncryptionConfigParameters struct {
 
 	// The type of encryption. Valid Values: KMS.
 	// +kubebuilder:validation:Optional
-	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+	EncryptionType *string `json:"encryptionType" tf:"encryption_type,omitempty"`
 
 	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -272,7 +272,7 @@ type S3ConfigParameters struct {
 
 	// The S3 bucket prefix.
 	// +kubebuilder:validation:Optional
-	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
+	BucketPrefix *string `json:"bucketPrefix" tf:"bucket_prefix,omitempty"`
 
 	// The encryption configuration. Documented below.
 	// +kubebuilder:validation:Optional
@@ -335,7 +335,7 @@ type StorageConfigParameters struct {
 
 	// A valid storage type. Valid Values: S3 | KINESIS_VIDEO_STREAM | KINESIS_STREAM | KINESIS_FIREHOSE.
 	// +kubebuilder:validation:Optional
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+	StorageType *string `json:"storageType" tf:"storage_type,omitempty"`
 }
 
 // InstanceStorageConfigSpec defines the desired state of InstanceStorageConfig

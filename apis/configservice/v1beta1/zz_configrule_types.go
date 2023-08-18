@@ -130,11 +130,11 @@ type CustomPolicyDetailsParameters struct {
 
 	// The runtime system for your Config Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by Config Custom Policy rules. For more information about Guard, see the Guard GitHub Repository.
 	// +kubebuilder:validation:Optional
-	PolicyRuntime *string `json:"policyRuntime,omitempty" tf:"policy_runtime,omitempty"`
+	PolicyRuntime *string `json:"policyRuntime" tf:"policy_runtime,omitempty"`
 
 	// The policy definition containing the logic for your Config Custom Policy rule.
 	// +kubebuilder:validation:Optional
-	PolicyText *string `json:"policyText,omitempty" tf:"policy_text,omitempty"`
+	PolicyText *string `json:"policyText" tf:"policy_text,omitempty"`
 }
 
 type ScopeInitParameters struct {
@@ -260,7 +260,7 @@ type SourceParameters struct {
 
 	// Indicates whether AWS or the customer owns and manages the AWS Config rule. Valid values are AWS, CUSTOM_LAMBDA or CUSTOM_POLICY. For more information about managed rules, see the AWS Config Managed Rules documentation. For more information about custom rules, see the AWS Config Custom Rules documentation. Custom Lambda Functions require permissions to allow the AWS Config service to invoke them, e.g., via the aws_lambda_permission resource.
 	// +kubebuilder:validation:Optional
-	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+	Owner *string `json:"owner" tf:"owner,omitempty"`
 
 	// Provides the source and type of the event that causes AWS Config to evaluate your AWS resources. Only valid if owner is CUSTOM_LAMBDA or CUSTOM_POLICY. See Source Detail Below.
 	// +kubebuilder:validation:Optional

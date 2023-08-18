@@ -77,7 +77,7 @@ type AsyncInferenceConfigOutputConfigParameters struct {
 
 	// The Amazon S3 location to upload inference responses to.
 	// +kubebuilder:validation:Optional
-	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
+	S3OutputPath *string `json:"s3OutputPath" tf:"s3_output_path,omitempty"`
 }
 
 type AsyncInferenceConfigParameters struct {
@@ -88,7 +88,7 @@ type AsyncInferenceConfigParameters struct {
 
 	// Specifies the configuration for asynchronous inference invocation outputs.
 	// +kubebuilder:validation:Optional
-	OutputConfig []AsyncInferenceConfigOutputConfigParameters `json:"outputConfig,omitempty" tf:"output_config,omitempty"`
+	OutputConfig []AsyncInferenceConfigOutputConfigParameters `json:"outputConfig" tf:"output_config,omitempty"`
 }
 
 type CaptureContentTypeHeaderInitParameters struct {
@@ -136,7 +136,7 @@ type CaptureOptionsParameters struct {
 
 	// Specifies the data to be captured. Should be one of Input or Output.
 	// +kubebuilder:validation:Optional
-	CaptureMode *string `json:"captureMode,omitempty" tf:"capture_mode,omitempty"`
+	CaptureMode *string `json:"captureMode" tf:"capture_mode,omitempty"`
 }
 
 type ClientConfigInitParameters struct {
@@ -180,7 +180,7 @@ type CoreDumpConfigParameters struct {
 
 	// The Amazon S3 bucket to send the core dump to.
 	// +kubebuilder:validation:Optional
-	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
+	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	// +kubebuilder:validation:Optional
@@ -237,11 +237,11 @@ type DataCaptureConfigParameters struct {
 
 	// Specifies what data to capture. Fields are documented below.
 	// +kubebuilder:validation:Optional
-	CaptureOptions []CaptureOptionsParameters `json:"captureOptions,omitempty" tf:"capture_options,omitempty"`
+	CaptureOptions []CaptureOptionsParameters `json:"captureOptions" tf:"capture_options,omitempty"`
 
 	// The URL for S3 location where the captured data is stored.
 	// +kubebuilder:validation:Optional
-	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
+	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
 
 	// Flag to enable data capture. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -249,7 +249,7 @@ type DataCaptureConfigParameters struct {
 
 	// Portion of data to capture. Should be between 0 and 100.
 	// +kubebuilder:validation:Optional
-	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
+	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage" tf:"initial_sampling_percentage,omitempty"`
 
 	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
 	// +kubebuilder:validation:Optional
@@ -540,11 +540,11 @@ type ServerlessConfigParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
 	// +kubebuilder:validation:Optional
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *float64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	// +kubebuilder:validation:Optional
-	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
 }
 
 type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
@@ -569,11 +569,11 @@ type ShadowProductionVariantsCoreDumpConfigParameters struct {
 
 	// The Amazon S3 bucket to send the core dump to.
 	// +kubebuilder:validation:Optional
-	DestinationS3URI *string `json:"destinationS3Uri,omitempty" tf:"destination_s3_uri,omitempty"`
+	DestinationS3URI *string `json:"destinationS3Uri" tf:"destination_s3_uri,omitempty"`
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption.
 	// +kubebuilder:validation:Optional
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+	KMSKeyID *string `json:"kmsKeyId" tf:"kms_key_id,omitempty"`
 }
 
 type ShadowProductionVariantsInitParameters struct {
@@ -690,7 +690,7 @@ type ShadowProductionVariantsParameters struct {
 
 	// The name of the model to use.
 	// +kubebuilder:validation:Optional
-	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
+	ModelName *string `json:"modelName" tf:"model_name,omitempty"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	// +kubebuilder:validation:Optional
@@ -727,11 +727,11 @@ type ShadowProductionVariantsServerlessConfigParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
 	// +kubebuilder:validation:Optional
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *float64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	// +kubebuilder:validation:Optional
-	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
 }
 
 // EndpointConfigurationSpec defines the desired state of EndpointConfiguration

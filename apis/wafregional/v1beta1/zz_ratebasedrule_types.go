@@ -61,11 +61,11 @@ type PredicateParameters struct {
 	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address.
 	// If set to true, AWS WAF will allow, block, or count requests based on all IP addresses except 192.0.2.44.
 	// +kubebuilder:validation:Optional
-	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
+	Negated *bool `json:"negated" tf:"negated,omitempty"`
 
 	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RateBasedRuleInitParameters struct {

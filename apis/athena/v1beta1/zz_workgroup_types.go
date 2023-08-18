@@ -130,7 +130,7 @@ type ResultConfigurationACLConfigurationParameters struct {
 
 	// Amazon S3 canned ACL that Athena should specify when storing query results. Valid value is BUCKET_OWNER_FULL_CONTROL.
 	// +kubebuilder:validation:Optional
-	S3ACLOption *string `json:"s3AclOption,omitempty" tf:"s3_acl_option,omitempty"`
+	S3ACLOption *string `json:"s3AclOption" tf:"s3_acl_option,omitempty"`
 }
 
 type ResultConfigurationEncryptionConfigurationInitParameters struct {

@@ -197,11 +197,11 @@ type ActionAuthenticateOidcParameters struct {
 
 	// The authorization endpoint of the IdP.
 	// +kubebuilder:validation:Optional
-	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+	AuthorizationEndpoint *string `json:"authorizationEndpoint" tf:"authorization_endpoint,omitempty"`
 
 	// The OAuth 2.0 client identifier.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret.
 	// +kubebuilder:validation:Required
@@ -209,7 +209,7 @@ type ActionAuthenticateOidcParameters struct {
 
 	// The OIDC issuer identifier of the IdP.
 	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
 	// +kubebuilder:validation:Optional
@@ -229,11 +229,11 @@ type ActionAuthenticateOidcParameters struct {
 
 	// The token endpoint of the IdP.
 	// +kubebuilder:validation:Optional
-	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+	TokenEndpoint *string `json:"tokenEndpoint" tf:"token_endpoint,omitempty"`
 
 	// The user info endpoint of the IdP.
 	// +kubebuilder:validation:Optional
-	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
+	UserInfoEndpoint *string `json:"userInfoEndpoint" tf:"user_info_endpoint,omitempty"`
 }
 
 type ActionFixedResponseInitParameters struct {
@@ -264,7 +264,7 @@ type ActionFixedResponseParameters struct {
 
 	// The content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// The message body.
 	// +kubebuilder:validation:Optional
@@ -301,7 +301,7 @@ type ActionForwardParameters struct {
 
 	// One or more target groups block.
 	// +kubebuilder:validation:Optional
-	TargetGroup []ForwardTargetGroupParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
+	TargetGroup []ForwardTargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
 }
 
 type ActionInitParameters struct {
@@ -394,7 +394,7 @@ type ActionParameters struct {
 
 	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ActionRedirectInitParameters struct {
@@ -463,7 +463,7 @@ type ActionRedirectParameters struct {
 
 	// The HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
 	// +kubebuilder:validation:Optional
-	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type ConditionInitParameters struct {
@@ -557,7 +557,7 @@ type ForwardStickinessParameters struct {
 
 	// The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
 	// +kubebuilder:validation:Optional
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *float64 `json:"duration" tf:"duration,omitempty"`
 
 	// Indicates whether target group stickiness is enabled.
 	// +kubebuilder:validation:Optional
@@ -622,11 +622,11 @@ type HTTPHeaderParameters struct {
 
 	// Name of HTTP header to search. The maximum size is 40 characters. Comparison is case insensitive. Only RFC7240 characters are supported. Wildcards are not supported. You cannot use HTTP header condition to specify the host header, use a host-header condition instead.
 	// +kubebuilder:validation:Optional
-	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
+	HTTPHeaderName *string `json:"httpHeaderName" tf:"http_header_name,omitempty"`
 
 	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodInitParameters struct {
@@ -645,7 +645,7 @@ type HTTPRequestMethodParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type HostHeaderInitParameters struct {
@@ -664,7 +664,7 @@ type HostHeaderParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type LBListenerRuleInitParameters struct {
@@ -763,7 +763,7 @@ type PathPatternParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type QueryStringInitParameters struct {
@@ -792,7 +792,7 @@ type QueryStringParameters struct {
 
 	// Query string value pattern to match.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type SourceIPInitParameters struct {
@@ -811,7 +811,7 @@ type SourceIPParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 // LBListenerRuleSpec defines the desired state of LBListenerRule

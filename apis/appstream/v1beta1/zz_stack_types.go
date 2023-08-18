@@ -38,7 +38,7 @@ type AccessEndpointsParameters struct {
 	// Type of the interface endpoint.
 	// See the AccessEndpoint AWS API documentation for valid values.
 	// +kubebuilder:validation:Optional
-	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
 	// ID of the VPC in which the interface endpoint is used.
 	// +kubebuilder:validation:Optional
@@ -71,7 +71,7 @@ type ApplicationSettingsParameters struct {
 
 	// Whether application settings should be persisted.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Name of the settings group.
 	// Required when enabled is true.
@@ -271,7 +271,7 @@ type StorageConnectorsParameters struct {
 	// Type of storage connector.
 	// Valid values are HOMEFOLDERS, GOOGLE_DRIVE, or ONE_DRIVE.
 	// +kubebuilder:validation:Optional
-	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
+	ConnectorType *string `json:"connectorType" tf:"connector_type,omitempty"`
 
 	// Names of the domains for the account.
 	// +kubebuilder:validation:Optional
@@ -331,12 +331,12 @@ type UserSettingsParameters struct {
 	// Action that is enabled or disabled.
 	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// Whether the action is enabled or disabled.
 	// Valid values are ENABLED or DISABLED.
 	// +kubebuilder:validation:Optional
-	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
 
 // StackSpec defines the desired state of Stack

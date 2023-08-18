@@ -346,7 +346,7 @@ type LaunchSpecificationEBSBlockDeviceParameters struct {
 
 	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
@@ -394,11 +394,11 @@ type LaunchSpecificationEphemeralBlockDeviceParameters struct {
 
 	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
-	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
+	VirtualName *string `json:"virtualName" tf:"virtual_name,omitempty"`
 }
 
 type LaunchSpecificationInitParameters struct {
@@ -501,7 +501,7 @@ type LaunchSpecificationObservation struct {
 type LaunchSpecificationParameters struct {
 
 	// +kubebuilder:validation:Optional
-	AMI *string `json:"ami,omitempty" tf:"ami,omitempty"`
+	AMI *string `json:"ami" tf:"ami,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *bool `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
@@ -538,7 +538,7 @@ type LaunchSpecificationParameters struct {
 
 	// The type of instance to request.
 	// +kubebuilder:validation:Optional
-	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
 
 	// The name of the launch template. Conflicts with id.
 	// +kubebuilder:validation:Optional
@@ -660,7 +660,7 @@ type LaunchTemplateConfigParameters struct {
 
 	// Launch template specification. See Launch Template Specification below for more details.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateSpecification []LaunchTemplateSpecificationParameters `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
+	LaunchTemplateSpecification []LaunchTemplateSpecificationParameters `json:"launchTemplateSpecification" tf:"launch_template_specification,omitempty"`
 
 	// One or more override configurations. See Overrides below for more details.
 	// +kubebuilder:validation:Optional

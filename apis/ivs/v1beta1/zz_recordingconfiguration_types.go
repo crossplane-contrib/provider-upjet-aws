@@ -29,7 +29,7 @@ type DestinationConfigurationParameters struct {
 
 	// S3 destination configuration where recorded videos will be stored.
 	// +kubebuilder:validation:Optional
-	S3 []S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+	S3 []S3Parameters `json:"s3" tf:"s3,omitempty"`
 }
 
 type RecordingConfigurationInitParameters struct {
@@ -123,7 +123,7 @@ type S3Parameters struct {
 
 	// S3 bucket name where recorded videos will be stored.
 	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 }
 
 type ThumbnailConfigurationInitParameters struct {

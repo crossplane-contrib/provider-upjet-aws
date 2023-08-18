@@ -59,7 +59,7 @@ type ReplicaParameters struct {
 
 	// AWS region name of replica DynamoDB TableE.g., us-east-1
 	// +kubebuilder:validation:Optional
-	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
 }
 
 // GlobalTableSpec defines the desired state of GlobalTable

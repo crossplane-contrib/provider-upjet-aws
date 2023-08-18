@@ -96,7 +96,7 @@ type TargetParameters struct {
 
 	// Identifier of the directory consumer account.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Type of identifier to be used in the id field. Valid value is ACCOUNT. Default is ACCOUNT.
 	// +kubebuilder:validation:Optional

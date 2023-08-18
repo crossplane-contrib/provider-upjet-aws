@@ -239,7 +239,7 @@ type UserSettingsJupyterServerAppSettingsCodeRepositoryParameters struct {
 
 	// The URL of the Git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 }
 
 type UserSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters struct {
@@ -358,11 +358,11 @@ type UserSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 	// The name of the App Image Config.
 	// +kubebuilder:validation:Optional
-	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -495,7 +495,7 @@ type UserSettingsParameters struct {
 
 	// The execution role ARN for the user.
 	// +kubebuilder:validation:Optional
-	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
 	// The Jupyter server's app settings. See Jupyter Server App Settings below.
 	// +kubebuilder:validation:Optional
@@ -554,11 +554,11 @@ type UserSettingsRSessionAppSettingsCustomImageParameters struct {
 
 	// The name of the App Image Config.
 	// +kubebuilder:validation:Optional
-	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -776,7 +776,7 @@ type UserSettingsTensorBoardAppSettingsParameters struct {
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
-	DefaultResourceSpec []UserSettingsTensorBoardAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+	DefaultResourceSpec []UserSettingsTensorBoardAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 }
 
 // UserProfileSpec defines the desired state of UserProfile

@@ -91,15 +91,15 @@ type AuthenticateCognitoParameters struct {
 
 	// ARN of the Cognito user pool.
 	// +kubebuilder:validation:Optional
-	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
+	UserPoolArn *string `json:"userPoolArn" tf:"user_pool_arn,omitempty"`
 
 	// ID of the Cognito user pool client.
 	// +kubebuilder:validation:Optional
-	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
+	UserPoolClientID *string `json:"userPoolClientId" tf:"user_pool_client_id,omitempty"`
 
 	// Domain prefix or fully-qualified domain name of the Cognito user pool.
 	// +kubebuilder:validation:Optional
-	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
+	UserPoolDomain *string `json:"userPoolDomain" tf:"user_pool_domain,omitempty"`
 }
 
 type AuthenticateOidcInitParameters struct {
@@ -176,11 +176,11 @@ type AuthenticateOidcParameters struct {
 
 	// Authorization endpoint of the IdP.
 	// +kubebuilder:validation:Optional
-	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+	AuthorizationEndpoint *string `json:"authorizationEndpoint" tf:"authorization_endpoint,omitempty"`
 
 	// OAuth 2.0 client identifier.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// OAuth 2.0 client secret.
 	// +kubebuilder:validation:Required
@@ -188,7 +188,7 @@ type AuthenticateOidcParameters struct {
 
 	// OIDC issuer identifier of the IdP.
 	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values: deny, allow and authenticate
 	// +kubebuilder:validation:Optional
@@ -208,11 +208,11 @@ type AuthenticateOidcParameters struct {
 
 	// Token endpoint of the IdP.
 	// +kubebuilder:validation:Optional
-	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+	TokenEndpoint *string `json:"tokenEndpoint" tf:"token_endpoint,omitempty"`
 
 	// User info endpoint of the IdP.
 	// +kubebuilder:validation:Optional
-	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
+	UserInfoEndpoint *string `json:"userInfoEndpoint" tf:"user_info_endpoint,omitempty"`
 }
 
 type DefaultActionInitParameters struct {
@@ -307,7 +307,7 @@ type DefaultActionParameters struct {
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FixedResponseInitParameters struct {
@@ -338,7 +338,7 @@ type FixedResponseParameters struct {
 
 	// Content type. Valid values are text/plain, text/css, text/html, application/javascript and application/json.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Message body.
 	// +kubebuilder:validation:Optional
@@ -375,7 +375,7 @@ type ForwardParameters struct {
 
 	// Set of 1-5 target group blocks. Detailed below.
 	// +kubebuilder:validation:Optional
-	TargetGroup []TargetGroupParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
+	TargetGroup []TargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
 }
 
 type LBListenerInitParameters struct {
@@ -553,7 +553,7 @@ type RedirectParameters struct {
 
 	// HTTP redirect code. The redirect is either permanent (HTTP_301) or temporary (HTTP_302).
 	// +kubebuilder:validation:Optional
-	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type StickinessInitParameters struct {
@@ -578,7 +578,7 @@ type StickinessParameters struct {
 
 	// Time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
 	// +kubebuilder:validation:Optional
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *float64 `json:"duration" tf:"duration,omitempty"`
 
 	// Whether target group stickiness is enabled. Default is false.
 	// +kubebuilder:validation:Optional

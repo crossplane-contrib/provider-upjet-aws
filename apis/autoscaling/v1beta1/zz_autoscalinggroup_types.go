@@ -602,11 +602,11 @@ type InitialLifecycleHookParameters struct {
 	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
+	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
 
 	// Name of the Auto Scaling Group. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NotificationMetadata *string `json:"notificationMetadata,omitempty" tf:"notification_metadata,omitempty"`
@@ -652,7 +652,7 @@ type InstanceRefreshParameters struct {
 
 	// Strategy to use for instance refresh. The only allowed value is Rolling. See StartInstanceRefresh Action for more information.
 	// +kubebuilder:validation:Optional
-	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
+	Strategy *string `json:"strategy" tf:"strategy,omitempty"`
 
 	// Set of additional property names that will trigger an Instance Refresh. A refresh will always be triggered by a change in any of launch_configuration, launch_template, or mixed_instances_policy.
 	// +kubebuilder:validation:Optional
@@ -1167,7 +1167,7 @@ type MixedInstancesPolicyLaunchTemplateParameters struct {
 
 	// Nested argument defines the Launch Template. Defined below.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateSpecification []LaunchTemplateSpecificationParameters `json:"launchTemplateSpecification,omitempty" tf:"launch_template_specification,omitempty"`
+	LaunchTemplateSpecification []LaunchTemplateSpecificationParameters `json:"launchTemplateSpecification" tf:"launch_template_specification,omitempty"`
 
 	// List of nested arguments provides the ability to specify multiple instance types. This will override the same parameter in the launch template. For on-demand instances, Auto Scaling considers the order of preference of instance types to launch based on the order specified in the overrides list. Defined below.
 	// +kubebuilder:validation:Optional
@@ -1191,7 +1191,7 @@ type MixedInstancesPolicyParameters struct {
 
 	// Nested argument containing launch template settings along with the overrides to specify multiple instance types and weights. Defined below.
 	// +kubebuilder:validation:Optional
-	LaunchTemplate []MixedInstancesPolicyLaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+	LaunchTemplate []MixedInstancesPolicyLaunchTemplateParameters `json:"launchTemplate" tf:"launch_template,omitempty"`
 }
 
 type NetworkBandwidthGbpsInitParameters struct {
@@ -1446,16 +1446,16 @@ type TagParameters struct {
 
 	// Key
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Enables propagation of the tag to
 	// Amazon EC2 instances launched via this ASG
 	// +kubebuilder:validation:Optional
-	PropagateAtLaunch *bool `json:"propagateAtLaunch,omitempty" tf:"propagate_at_launch,omitempty"`
+	PropagateAtLaunch *bool `json:"propagateAtLaunch" tf:"propagate_at_launch,omitempty"`
 
 	// Value
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TotalLocalStorageGbInitParameters struct {

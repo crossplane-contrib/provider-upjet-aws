@@ -105,7 +105,7 @@ type ApprovalRuleParameters struct {
 	// Valid combinations of these Keys and the operating_system value can be found in the SSM DescribePatchProperties API Reference.
 	// Valid Values are exact values for the patch property given as the key, or a wildcard *, which matches all values.
 	// +kubebuilder:validation:Optional
-	PatchFilter []PatchFilterParameters `json:"patchFilter,omitempty" tf:"patch_filter,omitempty"`
+	PatchFilter []PatchFilterParameters `json:"patchFilter" tf:"patch_filter,omitempty"`
 }
 
 type GlobalFilterInitParameters struct {
@@ -123,10 +123,10 @@ type GlobalFilterObservation struct {
 type GlobalFilterParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type PatchBaselineInitParameters struct {
@@ -368,10 +368,10 @@ type PatchFilterObservation struct {
 type PatchFilterParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type SourceInitParameters struct {
@@ -407,16 +407,16 @@ type SourceParameters struct {
 	// The value of the yum repo configuration.
 	// For information about other options available for your yum repository configuration, see the dnf.conf documentation
 	// +kubebuilder:validation:Optional
-	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+	Configuration *string `json:"configuration" tf:"configuration,omitempty"`
 
 	// The name specified to identify the patch source.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
 	// For lists of supported product values, see PatchFilter.
 	// +kubebuilder:validation:Optional
-	Products []*string `json:"products,omitempty" tf:"products,omitempty"`
+	Products []*string `json:"products" tf:"products,omitempty"`
 }
 
 // PatchBaselineSpec defines the desired state of PatchBaseline

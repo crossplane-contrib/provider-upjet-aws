@@ -35,11 +35,11 @@ type RequestParameterParameters struct {
 
 	// Request parameter key. This is a request data mapping parameter.
 	// +kubebuilder:validation:Optional
-	RequestParameterKey *string `json:"requestParameterKey,omitempty" tf:"request_parameter_key,omitempty"`
+	RequestParameterKey *string `json:"requestParameterKey" tf:"request_parameter_key,omitempty"`
 
 	// Boolean whether or not the parameter is required.
 	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	Required *bool `json:"required" tf:"required,omitempty"`
 }
 
 type RouteInitParameters struct {

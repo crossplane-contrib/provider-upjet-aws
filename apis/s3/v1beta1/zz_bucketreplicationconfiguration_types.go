@@ -186,7 +186,7 @@ type BucketReplicationConfigurationRuleParameters struct {
 
 	// Specifies the destination for the rule. See below.
 	// +kubebuilder:validation:Optional
-	Destination []RuleDestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination []RuleDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
 	// Replicate existing objects in the source bucket according to the rule configurations. See below.
 	// +kubebuilder:validation:Optional
@@ -214,7 +214,7 @@ type BucketReplicationConfigurationRuleParameters struct {
 
 	// Status of the rule. Either "Enabled" or "Disabled". The rule is ignored if status is not "Enabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type DeleteMarkerReplicationInitParameters struct {
@@ -233,7 +233,7 @@ type DeleteMarkerReplicationParameters struct {
 
 	// Whether delete markers should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type DestinationAccessControlTranslationInitParameters struct {
@@ -252,7 +252,7 @@ type DestinationAccessControlTranslationParameters struct {
 
 	// Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. Valid values: Destination.
 	// +kubebuilder:validation:Optional
-	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+	Owner *string `json:"owner" tf:"owner,omitempty"`
 }
 
 type DestinationMetricsInitParameters struct {
@@ -281,7 +281,7 @@ type DestinationMetricsParameters struct {
 
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type DestinationReplicationTimeInitParameters struct {
@@ -306,11 +306,11 @@ type DestinationReplicationTimeParameters struct {
 
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 
 	// Configuration block specifying the time by which replication should be complete for all objects and operations on objects. See below.
 	// +kubebuilder:validation:Optional
-	Time []TimeParameters `json:"time,omitempty" tf:"time,omitempty"`
+	Time []TimeParameters `json:"time" tf:"time,omitempty"`
 }
 
 type EncryptionConfigurationInitParameters struct {
@@ -329,7 +329,7 @@ type EncryptionConfigurationParameters struct {
 
 	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
 	// +kubebuilder:validation:Optional
-	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
+	ReplicaKMSKeyID *string `json:"replicaKmsKeyId" tf:"replica_kms_key_id,omitempty"`
 }
 
 type EventThresholdInitParameters struct {
@@ -348,7 +348,7 @@ type EventThresholdParameters struct {
 
 	// Time in minutes. Valid values: 15.
 	// +kubebuilder:validation:Optional
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *float64 `json:"minutes" tf:"minutes,omitempty"`
 }
 
 type ExistingObjectReplicationInitParameters struct {
@@ -367,7 +367,7 @@ type ExistingObjectReplicationParameters struct {
 
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type FilterAndInitParameters struct {
@@ -421,11 +421,11 @@ type FilterTagParameters struct {
 
 	// Name of the object key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Value of the tag.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ReplicaModificationsInitParameters struct {
@@ -444,7 +444,7 @@ type ReplicaModificationsParameters struct {
 
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type RuleDestinationInitParameters struct {
@@ -578,7 +578,7 @@ type SourceSelectionCriteriaSseKMSEncryptedObjectsParameters struct {
 
 	// Whether the existing objects should be replicated. Either "Enabled" or "Disabled".
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type TimeInitParameters struct {
@@ -597,7 +597,7 @@ type TimeParameters struct {
 
 	// Time in minutes. Valid values: 15.
 	// +kubebuilder:validation:Optional
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *float64 `json:"minutes" tf:"minutes,omitempty"`
 }
 
 // BucketReplicationConfigurationSpec defines the desired state of BucketReplicationConfiguration

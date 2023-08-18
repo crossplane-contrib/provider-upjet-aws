@@ -55,11 +55,11 @@ type BatchTargetParameters struct {
 
 	// The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
 	// +kubebuilder:validation:Optional
-	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
+	JobDefinition *string `json:"jobDefinition" tf:"job_definition,omitempty"`
 
 	// The name to use for this execution of the job, if the target is an AWS Batch job.
 	// +kubebuilder:validation:Optional
-	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+	JobName *string `json:"jobName" tf:"job_name,omitempty"`
 }
 
 type CapacityProviderStrategyInitParameters struct {
@@ -94,7 +94,7 @@ type CapacityProviderStrategyParameters struct {
 
 	// Short name of the capacity provider.
 	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
 	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
 	// +kubebuilder:validation:Optional
@@ -331,7 +331,7 @@ type InputTransformerParameters struct {
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
 	// +kubebuilder:validation:Optional
-	InputTemplate *string `json:"inputTemplate,omitempty" tf:"input_template,omitempty"`
+	InputTemplate *string `json:"inputTemplate" tf:"input_template,omitempty"`
 }
 
 type KinesisTargetInitParameters struct {
@@ -389,7 +389,7 @@ type NetworkConfigurationParameters struct {
 
 	// The subnets associated with the task or service.
 	// +kubebuilder:validation:Optional
-	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 
 type OrderedPlacementStrategyInitParameters struct {
@@ -418,7 +418,7 @@ type OrderedPlacementStrategyParameters struct {
 
 	// Type of placement strategy. The only valid values at this time are binpack, random and spread.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PlacementConstraintInitParameters struct {
@@ -447,7 +447,7 @@ type PlacementConstraintParameters struct {
 
 	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedshiftTargetInitParameters struct {
@@ -500,7 +500,7 @@ type RedshiftTargetParameters struct {
 
 	// The name of the database.
 	// +kubebuilder:validation:Optional
-	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+	Database *string `json:"database" tf:"database,omitempty"`
 
 	// The SQL statement text to run.
 	// +kubebuilder:validation:Optional
@@ -570,11 +570,11 @@ type RunCommandTargetsParameters struct {
 
 	// Can be either tag:tag-key or InstanceIds.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// If Key is tag:tag-key, Values is a list of tag values. If Key is InstanceIds, Values is a list of Amazon EC2 instance IDs.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type SqsTargetInitParameters struct {

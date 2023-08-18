@@ -45,7 +45,7 @@ type ReportDeliveryChannelParameters struct {
 
 	// The unique name of the S3 bucket that receives your reports.
 	// +kubebuilder:validation:Optional
-	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+	S3BucketName *string `json:"s3BucketName" tf:"s3_bucket_name,omitempty"`
 
 	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
 	// +kubebuilder:validation:Optional
@@ -197,7 +197,7 @@ type ReportSettingParameters struct {
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
 	// +kubebuilder:validation:Optional
-	ReportTemplate *string `json:"reportTemplate,omitempty" tf:"report_template,omitempty"`
+	ReportTemplate *string `json:"reportTemplate" tf:"report_template,omitempty"`
 }
 
 // ReportPlanSpec defines the desired state of ReportPlan

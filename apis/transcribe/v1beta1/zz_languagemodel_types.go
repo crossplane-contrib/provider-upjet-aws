@@ -52,7 +52,7 @@ type InputDataConfigParameters struct {
 
 	// S3 URI where training data is located.
 	// +kubebuilder:validation:Optional
-	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 
 	// S3 URI where tuning data is located.
 	// +kubebuilder:validation:Optional

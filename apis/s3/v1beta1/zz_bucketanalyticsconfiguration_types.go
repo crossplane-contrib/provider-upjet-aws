@@ -121,7 +121,7 @@ type DataExportDestinationParameters struct {
 
 	// Analytics data export currently only supports an S3 bucket destination (documented below).
 	// +kubebuilder:validation:Optional
-	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination,omitempty" tf:"s3_bucket_destination,omitempty"`
+	S3BucketDestination []S3BucketDestinationParameters `json:"s3BucketDestination" tf:"s3_bucket_destination,omitempty"`
 }
 
 type DataExportInitParameters struct {
@@ -146,7 +146,7 @@ type DataExportParameters struct {
 
 	// Specifies the destination for the exported analytics data (documented below).
 	// +kubebuilder:validation:Optional
-	Destination []DataExportDestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination []DataExportDestinationParameters `json:"destination" tf:"destination,omitempty"`
 
 	// Schema version of exported analytics data. Allowed values: V_1. Default value: V_1.
 	// +kubebuilder:validation:Optional
@@ -225,7 +225,7 @@ type StorageClassAnalysisParameters struct {
 
 	// Data export configuration (documented below).
 	// +kubebuilder:validation:Optional
-	DataExport []DataExportParameters `json:"dataExport,omitempty" tf:"data_export,omitempty"`
+	DataExport []DataExportParameters `json:"dataExport" tf:"data_export,omitempty"`
 }
 
 // BucketAnalyticsConfigurationSpec defines the desired state of BucketAnalyticsConfiguration

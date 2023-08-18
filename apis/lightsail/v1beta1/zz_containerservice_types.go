@@ -211,10 +211,10 @@ type PublicDomainNamesCertificateParameters struct {
 	// The name for the container service. Names must be of length 1 to 63, and be
 	// unique within each AWS Region in your Lightsail account.
 	// +kubebuilder:validation:Optional
-	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
+	CertificateName *string `json:"certificateName" tf:"certificate_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DomainNames []*string `json:"domainNames,omitempty" tf:"domain_names,omitempty"`
+	DomainNames []*string `json:"domainNames" tf:"domain_names,omitempty"`
 }
 
 type PublicDomainNamesInitParameters struct {
@@ -228,7 +228,7 @@ type PublicDomainNamesObservation struct {
 type PublicDomainNamesParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Certificate []PublicDomainNamesCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []PublicDomainNamesCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 }
 
 // ContainerServiceSpec defines the desired state of ContainerService

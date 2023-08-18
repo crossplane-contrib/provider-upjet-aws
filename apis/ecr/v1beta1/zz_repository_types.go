@@ -65,7 +65,7 @@ type ImageScanningConfigurationParameters struct {
 
 	// Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).
 	// +kubebuilder:validation:Optional
-	ScanOnPush *bool `json:"scanOnPush,omitempty" tf:"scan_on_push,omitempty"`
+	ScanOnPush *bool `json:"scanOnPush" tf:"scan_on_push,omitempty"`
 }
 
 type RepositoryInitParameters struct {

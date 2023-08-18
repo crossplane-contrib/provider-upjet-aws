@@ -41,15 +41,15 @@ type LogDestinationConfigParameters struct {
 
 	// A map describing the logging destination for the chosen log_destination_type.
 	// +kubebuilder:validation:Optional
-	LogDestination map[string]*string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+	LogDestination map[string]*string `json:"logDestination" tf:"log_destination,omitempty"`
 
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
 	// +kubebuilder:validation:Optional
-	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
+	LogDestinationType *string `json:"logDestinationType" tf:"log_destination_type,omitempty"`
 
 	// The type of log to send. Valid values: ALERT or FLOW. Alert logs report traffic that matches a StatefulRule with an action setting that sends a log message. Flow logs are standard network traffic flow logs.
 	// +kubebuilder:validation:Optional
-	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+	LogType *string `json:"logType" tf:"log_type,omitempty"`
 }
 
 type LoggingConfigurationInitParameters struct {
@@ -74,7 +74,7 @@ type LoggingConfigurationLoggingConfigurationParameters struct {
 
 	// Set of configuration blocks describing the logging details for a firewall. See Log Destination Config below for details. At most, only two blocks can be specified; one for FLOW logs and one for ALERT logs.
 	// +kubebuilder:validation:Optional
-	LogDestinationConfig []LogDestinationConfigParameters `json:"logDestinationConfig,omitempty" tf:"log_destination_config,omitempty"`
+	LogDestinationConfig []LogDestinationConfigParameters `json:"logDestinationConfig" tf:"log_destination_config,omitempty"`
 }
 
 type LoggingConfigurationObservation struct {

@@ -59,11 +59,11 @@ type CustomCookbooksSourceParameters struct {
 
 	// The type of source to use. For example, "archive".
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The URL where the cookbooks resource can be found.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 
 	// Username to use when authenticating to the source.
 	// +kubebuilder:validation:Optional

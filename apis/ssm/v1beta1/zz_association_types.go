@@ -209,7 +209,7 @@ type OutputLocationParameters struct {
 
 	// The S3 bucket name.
 	// +kubebuilder:validation:Optional
-	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+	S3BucketName *string `json:"s3BucketName" tf:"s3_bucket_name,omitempty"`
 
 	// The S3 bucket prefix. Results stored in the root if not configured.
 	// +kubebuilder:validation:Optional
@@ -242,11 +242,11 @@ type TargetsParameters struct {
 
 	// Either InstanceIds or tag:Tag Name to specify an EC2 tag.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// A list of instance IDs or tag values. AWS currently limits this list size to one value.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 // AssociationSpec defines the desired state of Association

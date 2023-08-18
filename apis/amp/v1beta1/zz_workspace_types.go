@@ -29,7 +29,7 @@ type LoggingConfigurationParameters struct {
 
 	// The ARN of the CloudWatch log group to which the vended log data will be published. This log group must exist.
 	// +kubebuilder:validation:Optional
-	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
 }
 
 type WorkspaceInitParameters struct {

@@ -63,7 +63,7 @@ type EBSBlockDeviceParameters struct {
 
 	// Name of the device to mount.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
 	// +kubebuilder:validation:Optional
@@ -104,11 +104,11 @@ type EphemeralBlockDeviceParameters struct {
 
 	// Name of the block device to mount on the instance.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// The Instance Store Device Name (e.g., ephemeral0).
 	// +kubebuilder:validation:Optional
-	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
+	VirtualName *string `json:"virtualName" tf:"virtual_name,omitempty"`
 }
 
 type InstanceInitParameters struct {

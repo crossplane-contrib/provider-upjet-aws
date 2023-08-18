@@ -66,7 +66,7 @@ type ParameterParameters struct {
 
 	// Name of the attribute.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Value is dynamic and changes at run-time.
 	// +kubebuilder:validation:Optional

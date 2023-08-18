@@ -29,7 +29,7 @@ type PhoneConfigParameters struct {
 
 	// Specifies the phone number in in E.164 format.
 	// +kubebuilder:validation:Optional
-	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
 
 type QueueConfigInitParameters struct {
@@ -54,11 +54,11 @@ type QueueConfigParameters struct {
 
 	// Specifies the identifier of the contact flow.
 	// +kubebuilder:validation:Optional
-	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
+	ContactFlowID *string `json:"contactFlowId" tf:"contact_flow_id,omitempty"`
 
 	// Specifies the identifier for the queue.
 	// +kubebuilder:validation:Optional
-	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
+	QueueID *string `json:"queueId" tf:"queue_id,omitempty"`
 }
 
 type QuickConnectConfigInitParameters struct {
@@ -103,7 +103,7 @@ type QuickConnectConfigParameters struct {
 
 	// Specifies the configuration type of the quick connect. valid values are PHONE_NUMBER, QUEUE, USER.
 	// +kubebuilder:validation:Optional
-	QuickConnectType *string `json:"quickConnectType,omitempty" tf:"quick_connect_type,omitempty"`
+	QuickConnectType *string `json:"quickConnectType" tf:"quick_connect_type,omitempty"`
 
 	// Specifies the user configuration of the Quick Connect. This is required only if quick_connect_type is USER. The user_config block is documented below.
 	// +kubebuilder:validation:Optional
@@ -215,11 +215,11 @@ type UserConfigParameters struct {
 
 	// Specifies the identifier of the contact flow.
 	// +kubebuilder:validation:Optional
-	ContactFlowID *string `json:"contactFlowId,omitempty" tf:"contact_flow_id,omitempty"`
+	ContactFlowID *string `json:"contactFlowId" tf:"contact_flow_id,omitempty"`
 
 	// Specifies the identifier for the user.
 	// +kubebuilder:validation:Optional
-	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+	UserID *string `json:"userId" tf:"user_id,omitempty"`
 }
 
 // QuickConnectSpec defines the desired state of QuickConnect

@@ -73,7 +73,7 @@ type BucketOwnershipControlsRuleParameters struct {
 
 	// Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced
 	// +kubebuilder:validation:Optional
-	ObjectOwnership *string `json:"objectOwnership,omitempty" tf:"object_ownership,omitempty"`
+	ObjectOwnership *string `json:"objectOwnership" tf:"object_ownership,omitempty"`
 }
 
 // BucketOwnershipControlsSpec defines the desired state of BucketOwnershipControls

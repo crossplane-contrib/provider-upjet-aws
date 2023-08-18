@@ -124,7 +124,7 @@ type PlayerLatencyPolicyParameters struct {
 
 	// Maximum latency value that is allowed for any player.
 	// +kubebuilder:validation:Optional
-	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds,omitempty" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
+	MaximumIndividualPlayerLatencyMilliseconds *float64 `json:"maximumIndividualPlayerLatencyMilliseconds" tf:"maximum_individual_player_latency_milliseconds,omitempty"`
 
 	// Length of time that the policy is enforced while placing a new game session. Absence of value for this attribute means that the policy is enforced until the queue times out.
 	// +kubebuilder:validation:Optional

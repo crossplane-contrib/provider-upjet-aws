@@ -45,7 +45,7 @@ type CapacityProviderStrategyParameters struct {
 
 	// Short name of the capacity provider.
 	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
 	// Designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Ranges from from 0 to 1000.
 	// +kubebuilder:validation:Optional
@@ -68,7 +68,7 @@ type DeadLetterConfigParameters struct {
 
 	// ARN of the target of this schedule, such as a SQS queue or ECS cluster. For universal targets, this is a Service ARN specific to the target service.
 	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+	Arn *string `json:"arn" tf:"arn,omitempty"`
 }
 
 type EcsParametersInitParameters struct {
@@ -217,7 +217,7 @@ type EcsParametersParameters struct {
 
 	// ARN of the task definition to use.
 	// +kubebuilder:validation:Optional
-	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
+	TaskDefinitionArn *string `json:"taskDefinitionArn" tf:"task_definition_arn,omitempty"`
 }
 
 type EventbridgeParametersInitParameters struct {
@@ -242,11 +242,11 @@ type EventbridgeParametersParameters struct {
 
 	// Free-form string used to decide what fields to expect in the event detail. Up to 128 characters.
 	// +kubebuilder:validation:Optional
-	DetailType *string `json:"detailType,omitempty" tf:"detail_type,omitempty"`
+	DetailType *string `json:"detailType" tf:"detail_type,omitempty"`
 
 	// Source of the event.
 	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+	Source *string `json:"source" tf:"source,omitempty"`
 }
 
 type FlexibleTimeWindowInitParameters struct {
@@ -275,7 +275,7 @@ type FlexibleTimeWindowParameters struct {
 
 	// Determines whether the schedule is invoked within a flexible time window. One of: OFF, FLEXIBLE.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type KinesisParametersInitParameters struct {
@@ -294,7 +294,7 @@ type KinesisParametersParameters struct {
 
 	// Specifies the shard to which EventBridge Scheduler sends the event. Up to 256 characters.
 	// +kubebuilder:validation:Optional
-	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+	PartitionKey *string `json:"partitionKey" tf:"partition_key,omitempty"`
 }
 
 type NetworkConfigurationInitParameters struct {
@@ -333,7 +333,7 @@ type NetworkConfigurationParameters struct {
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
 	// +kubebuilder:validation:Optional
-	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 
 type PipelineParameterInitParameters struct {
@@ -358,11 +358,11 @@ type PipelineParameterParameters struct {
 
 	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type PlacementConstraintsInitParameters struct {
@@ -391,7 +391,7 @@ type PlacementConstraintsParameters struct {
 
 	// The type of placement strategy. One of: random, spread, binpack.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PlacementStrategyInitParameters struct {
@@ -420,7 +420,7 @@ type PlacementStrategyParameters struct {
 
 	// The type of placement strategy. One of: random, spread, binpack.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RetryPolicyInitParameters struct {

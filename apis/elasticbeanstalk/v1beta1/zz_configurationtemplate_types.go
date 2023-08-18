@@ -128,11 +128,11 @@ type SettingParameters struct {
 
 	// A unique name for this Template.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// unique namespace identifying the option's associated AWS resource
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
 	// resource name for scheduled action
 	// +kubebuilder:validation:Optional
@@ -140,7 +140,7 @@ type SettingParameters struct {
 
 	// value for the configuration option
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // ConfigurationTemplateSpec defines the desired state of ConfigurationTemplate

@@ -137,11 +137,11 @@ type TieringParameters struct {
 
 	// S3 Intelligent-Tiering access tier. Valid values: ARCHIVE_ACCESS, DEEP_ARCHIVE_ACCESS.
 	// +kubebuilder:validation:Optional
-	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
+	AccessTier *string `json:"accessTier" tf:"access_tier,omitempty"`
 
 	// Number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
 	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *float64 `json:"days" tf:"days,omitempty"`
 }
 
 // BucketIntelligentTieringConfigurationSpec defines the desired state of BucketIntelligentTieringConfiguration

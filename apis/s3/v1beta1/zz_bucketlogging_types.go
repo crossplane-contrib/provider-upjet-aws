@@ -137,7 +137,7 @@ type TargetGrantGranteeParameters struct {
 
 	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// URI of the grantee group.
 	// +kubebuilder:validation:Optional
@@ -166,11 +166,11 @@ type TargetGrantParameters struct {
 
 	// Configuration block for the person being granted permissions. See below.
 	// +kubebuilder:validation:Optional
-	Grantee []TargetGrantGranteeParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
+	Grantee []TargetGrantGranteeParameters `json:"grantee" tf:"grantee,omitempty"`
 
 	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, READ, WRITE.
 	// +kubebuilder:validation:Optional
-	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
 
 // BucketLoggingSpec defines the desired state of BucketLogging

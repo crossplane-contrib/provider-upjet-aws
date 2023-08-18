@@ -39,7 +39,7 @@ type ExcludeFilterParameters struct {
 
 	// Name of the metric namespace in the filter.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 type IncludeFilterInitParameters struct {
@@ -68,7 +68,7 @@ type IncludeFilterParameters struct {
 
 	// Name of the metric namespace in the filter.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 type IncludeMetricInitParameters struct {
@@ -93,11 +93,11 @@ type IncludeMetricParameters struct {
 
 	// The name of the metric.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// The namespace of the metric.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 type MetricStreamInitParameters struct {
@@ -257,11 +257,11 @@ type StatisticsConfigurationParameters struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
 	// +kubebuilder:validation:Optional
-	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
+	AdditionalStatistics []*string `json:"additionalStatistics" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.
 	// +kubebuilder:validation:Optional
-	IncludeMetric []IncludeMetricParameters `json:"includeMetric,omitempty" tf:"include_metric,omitempty"`
+	IncludeMetric []IncludeMetricParameters `json:"includeMetric" tf:"include_metric,omitempty"`
 }
 
 // MetricStreamSpec defines the desired state of MetricStream

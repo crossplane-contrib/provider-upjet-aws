@@ -41,7 +41,7 @@ type AttachmentsSourceParameters struct {
 
 	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The name of the document attachment file
 	// +kubebuilder:validation:Optional
@@ -49,7 +49,7 @@ type AttachmentsSourceParameters struct {
 
 	// The value describing the location of an attachment to a document
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type DocumentInitParameters struct {

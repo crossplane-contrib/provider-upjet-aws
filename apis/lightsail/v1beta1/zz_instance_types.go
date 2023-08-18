@@ -41,15 +41,15 @@ type AddOnParameters struct {
 
 	// The daily time when an automatic snapshot will be created. Must be in HH:00 format, and in an hourly increment and specified in Coordinated Universal Time (UTC). The snapshot will be automatically created between the time specified and up to 45 minutes after.
 	// +kubebuilder:validation:Optional
-	SnapshotTime *string `json:"snapshotTime,omitempty" tf:"snapshot_time,omitempty"`
+	SnapshotTime *string `json:"snapshotTime" tf:"snapshot_time,omitempty"`
 
 	// The status of the add on. Valid Values: Enabled, Disabled.
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 
 	// The add-on type. There is currently only one valid type AutoSnapshot.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type InstanceInitParameters struct {

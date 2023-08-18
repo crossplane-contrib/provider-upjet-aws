@@ -127,7 +127,7 @@ type LambdaFunctionParameters struct {
 
 	// Event for which to send notifications.
 	// +kubebuilder:validation:Optional
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// Object key name prefix.
 	// +kubebuilder:validation:Optional
@@ -183,7 +183,7 @@ type QueueParameters struct {
 
 	// Specifies event for which to send notifications.
 	// +kubebuilder:validation:Optional
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// Object key name prefix.
 	// +kubebuilder:validation:Optional
@@ -249,7 +249,7 @@ type TopicParameters struct {
 
 	// Event for which to send notifications.
 	// +kubebuilder:validation:Optional
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// Object key name prefix.
 	// +kubebuilder:validation:Optional

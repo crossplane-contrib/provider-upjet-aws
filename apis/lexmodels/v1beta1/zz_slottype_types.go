@@ -39,7 +39,7 @@ type EnumerationValueParameters struct {
 
 	// The value of the slot type. Must be less than or equal to 140 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type SlotTypeInitParameters struct {

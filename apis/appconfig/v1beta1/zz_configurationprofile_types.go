@@ -153,7 +153,7 @@ type ValidatorParameters struct {
 
 	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ConfigurationProfileSpec defines the desired state of ConfigurationProfile

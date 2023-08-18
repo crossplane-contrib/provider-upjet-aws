@@ -83,11 +83,11 @@ type CustomEmailSenderParameters struct {
 
 	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
 	// +kubebuilder:validation:Optional
-	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
 	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
 	// +kubebuilder:validation:Optional
-	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
+	LambdaVersion *string `json:"lambdaVersion" tf:"lambda_version,omitempty"`
 }
 
 type CustomSMSSenderInitParameters struct {
@@ -112,11 +112,11 @@ type CustomSMSSenderParameters struct {
 
 	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
 	// +kubebuilder:validation:Optional
-	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
 
 	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
 	// +kubebuilder:validation:Optional
-	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
+	LambdaVersion *string `json:"lambdaVersion" tf:"lambda_version,omitempty"`
 }
 
 type DeviceConfigurationInitParameters struct {
@@ -505,11 +505,11 @@ type RecoveryMechanismParameters struct {
 
 	// Name of the user pool.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Positive integer specifying priority of a method with 1 being the highest priority.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
 
 type SMSConfigurationInitParameters struct {
@@ -537,7 +537,7 @@ type SMSConfigurationParameters struct {
 
 	// External ID used in IAM role trust relationships. For more information about using external IDs, see How to Use an External ID When Granting Access to Your AWS Resources to a Third Party.
 	// +kubebuilder:validation:Optional
-	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
+	ExternalID *string `json:"externalId" tf:"external_id,omitempty"`
 
 	// ARN of the Amazon SNS caller. This is usually the IAM role that you've given Cognito permission to assume.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -610,7 +610,7 @@ type SchemaParameters struct {
 
 	// Attribute data type. Must be one of Boolean, Number, String, DateTime.
 	// +kubebuilder:validation:Optional
-	AttributeDataType *string `json:"attributeDataType,omitempty" tf:"attribute_data_type,omitempty"`
+	AttributeDataType *string `json:"attributeDataType" tf:"attribute_data_type,omitempty"`
 
 	// Whether the attribute type is developer only.
 	// +kubebuilder:validation:Optional
@@ -622,7 +622,7 @@ type SchemaParameters struct {
 
 	// Name of the user pool.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Configuration block for the constraints for an attribute of the number type. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -653,7 +653,7 @@ type SoftwareTokenMfaConfigurationParameters struct {
 
 	// Boolean whether to enable software token Multi-Factor (MFA) tokens, such as Time-based One-Time Password (TOTP). To disable software token MFA When sms_configuration is not present, the mfa_configuration argument must be set to OFF and the software_token_mfa_configuration configuration block must be fully removed.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type StringAttributeConstraintsInitParameters struct {
@@ -701,7 +701,7 @@ type UserAttributeUpdateSettingsParameters struct {
 
 	// A list of attributes requiring verification before update. If set, the provided value(s) must also be set in auto_verified_attributes. Valid values: email, phone_number.
 	// +kubebuilder:validation:Optional
-	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate,omitempty" tf:"attributes_require_verification_before_update,omitempty"`
+	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate" tf:"attributes_require_verification_before_update,omitempty"`
 }
 
 type UserPoolAddOnsInitParameters struct {
@@ -720,7 +720,7 @@ type UserPoolAddOnsParameters struct {
 
 	// Mode for advanced security, must be one of OFF, AUDIT or ENFORCED.
 	// +kubebuilder:validation:Optional
-	AdvancedSecurityMode *string `json:"advancedSecurityMode,omitempty" tf:"advanced_security_mode,omitempty"`
+	AdvancedSecurityMode *string `json:"advancedSecurityMode" tf:"advanced_security_mode,omitempty"`
 }
 
 type UserPoolInitParameters struct {
@@ -1020,7 +1020,7 @@ type UsernameConfigurationParameters struct {
 
 	// Whether username case sensitivity will be applied for all users in the user pool through Cognito APIs.
 	// +kubebuilder:validation:Optional
-	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
+	CaseSensitive *bool `json:"caseSensitive" tf:"case_sensitive,omitempty"`
 }
 
 type VerificationMessageTemplateInitParameters struct {

@@ -101,11 +101,11 @@ type OnPartialUploadParameters struct {
 
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources.
 	// +kubebuilder:validation:Optional
-	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
 	// A unique identifier for the workflow.
 	// +kubebuilder:validation:Optional
-	WorkflowID *string `json:"workflowId,omitempty" tf:"workflow_id,omitempty"`
+	WorkflowID *string `json:"workflowId" tf:"workflow_id,omitempty"`
 }
 
 type OnUploadInitParameters struct {
@@ -130,11 +130,11 @@ type OnUploadParameters struct {
 
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources.
 	// +kubebuilder:validation:Optional
-	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
 	// A unique identifier for the workflow.
 	// +kubebuilder:validation:Optional
-	WorkflowID *string `json:"workflowId,omitempty" tf:"workflow_id,omitempty"`
+	WorkflowID *string `json:"workflowId" tf:"workflow_id,omitempty"`
 }
 
 type ProtocolDetailsInitParameters struct {

@@ -29,7 +29,7 @@ type ActionDefinitionParameters struct {
 
 	// A configuration block describing the stateless inspection criteria that publishes the specified metrics to Amazon CloudWatch for the matching packet. You can pair this custom action with any of the standard stateless rule actions. See Publish Metric Action below for details.
 	// +kubebuilder:validation:Optional
-	PublishMetricAction []PublishMetricActionParameters `json:"publishMetricAction,omitempty" tf:"publish_metric_action,omitempty"`
+	PublishMetricAction []PublishMetricActionParameters `json:"publishMetricAction" tf:"publish_metric_action,omitempty"`
 }
 
 type DimensionInitParameters struct {
@@ -48,7 +48,7 @@ type DimensionParameters struct {
 
 	// The string value to use in the custom metric dimension.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type FirewallPolicyEncryptionConfigurationInitParameters struct {
@@ -77,7 +77,7 @@ type FirewallPolicyEncryptionConfigurationParameters struct {
 
 	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FirewallPolicyFirewallPolicyInitParameters struct {
@@ -153,12 +153,12 @@ type FirewallPolicyFirewallPolicyParameters struct {
 	// Set of actions to take on a packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
 	// +kubebuilder:validation:Optional
-	StatelessDefaultActions []*string `json:"statelessDefaultActions,omitempty" tf:"stateless_default_actions,omitempty"`
+	StatelessDefaultActions []*string `json:"statelessDefaultActions" tf:"stateless_default_actions,omitempty"`
 
 	// Set of actions to take on a fragmented packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
 	// +kubebuilder:validation:Optional
-	StatelessFragmentDefaultActions []*string `json:"statelessFragmentDefaultActions,omitempty" tf:"stateless_fragment_default_actions,omitempty"`
+	StatelessFragmentDefaultActions []*string `json:"statelessFragmentDefaultActions" tf:"stateless_fragment_default_actions,omitempty"`
 
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
 	// +kubebuilder:validation:Optional
@@ -266,7 +266,7 @@ type PublishMetricActionParameters struct {
 
 	// Set of configuration blocks describing dimension settings to use for Amazon CloudWatch custom metrics. See Dimension below for more details.
 	// +kubebuilder:validation:Optional
-	Dimension []DimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
+	Dimension []DimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 }
 
 type StatefulEngineOptionsInitParameters struct {
@@ -285,7 +285,7 @@ type StatefulEngineOptionsParameters struct {
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	// +kubebuilder:validation:Optional
-	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
+	RuleOrder *string `json:"ruleOrder" tf:"rule_order,omitempty"`
 }
 
 type StatefulRuleGroupReferenceInitParameters struct {
@@ -356,11 +356,11 @@ type StatelessCustomActionParameters struct {
 
 	// A configuration block describing the custom action associated with the action_name. See Action Definition below for details.
 	// +kubebuilder:validation:Optional
-	ActionDefinition []ActionDefinitionParameters `json:"actionDefinition,omitempty" tf:"action_definition,omitempty"`
+	ActionDefinition []ActionDefinitionParameters `json:"actionDefinition" tf:"action_definition,omitempty"`
 
 	// A friendly name of the custom action.
 	// +kubebuilder:validation:Optional
-	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
+	ActionName *string `json:"actionName" tf:"action_name,omitempty"`
 }
 
 type StatelessRuleGroupReferenceInitParameters struct {
@@ -382,7 +382,7 @@ type StatelessRuleGroupReferenceParameters struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.RuleGroup

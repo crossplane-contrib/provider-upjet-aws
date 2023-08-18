@@ -204,7 +204,7 @@ type ColumnsParameters struct {
 
 	// Name of the Column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Key-value pairs defining properties associated with the column.
 	// +kubebuilder:validation:Optional
@@ -239,11 +239,11 @@ type PartitionIndexParameters struct {
 
 	// Name of the partition index.
 	// +kubebuilder:validation:Optional
-	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
 	// Keys for the partition index.
 	// +kubebuilder:validation:Optional
-	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
+	Keys []*string `json:"keys" tf:"keys,omitempty"`
 }
 
 type PartitionKeysInitParameters struct {
@@ -278,7 +278,7 @@ type PartitionKeysParameters struct {
 
 	// Name of the Partition Key.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Datatype of data in the Partition Key.
 	// +kubebuilder:validation:Optional
@@ -360,7 +360,7 @@ type SchemaReferenceParameters struct {
 
 	// Version number of the schema.
 	// +kubebuilder:validation:Optional
-	SchemaVersionNumber *float64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
+	SchemaVersionNumber *float64 `json:"schemaVersionNumber" tf:"schema_version_number,omitempty"`
 }
 
 type SerDeInfoInitParameters struct {
@@ -463,11 +463,11 @@ type SortColumnsParameters struct {
 
 	// Name of the column.
 	// +kubebuilder:validation:Optional
-	Column *string `json:"column,omitempty" tf:"column,omitempty"`
+	Column *string `json:"column" tf:"column,omitempty"`
 
 	// Whether the column is sorted in ascending (1) or descending order (0).
 	// +kubebuilder:validation:Optional
-	SortOrder *float64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+	SortOrder *float64 `json:"sortOrder" tf:"sort_order,omitempty"`
 }
 
 type StorageDescriptorInitParameters struct {
@@ -639,7 +639,7 @@ type TargetTableParameters struct {
 
 	// Name of the target table.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // CatalogTableSpec defines the desired state of CatalogTable

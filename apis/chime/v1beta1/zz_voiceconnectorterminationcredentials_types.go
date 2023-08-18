@@ -33,7 +33,7 @@ type CredentialsParameters struct {
 
 	// RFC2617 compliant username associated with the SIP credentials.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type VoiceConnectorTerminationCredentialsInitParameters struct {

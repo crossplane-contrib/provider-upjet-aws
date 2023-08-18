@@ -147,7 +147,7 @@ type SourceS3PathParameters struct {
 
 	// The name of the file.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 }
 
 // QuerySuggestionsBlockListSpec defines the desired state of QuerySuggestionsBlockList

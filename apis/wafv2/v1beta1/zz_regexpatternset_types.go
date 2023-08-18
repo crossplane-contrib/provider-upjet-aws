@@ -104,7 +104,7 @@ type RegularExpressionParameters struct {
 
 	// The string representing the regular expression, see the AWS WAF documentation for more information.
 	// +kubebuilder:validation:Optional
-	RegexString *string `json:"regexString,omitempty" tf:"regex_string,omitempty"`
+	RegexString *string `json:"regexString" tf:"regex_string,omitempty"`
 }
 
 // RegexPatternSetSpec defines the desired state of RegexPatternSet

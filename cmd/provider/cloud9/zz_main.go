@@ -18,7 +18,6 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	tjcontroller "github.com/upbound/upjet/pkg/controller"
-	"github.com/upbound/upjet/pkg/controller/handler"
 	"github.com/upbound/upjet/pkg/terraform"
 	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
@@ -84,7 +83,6 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add AWS APIs to scheme")
 
-	eventHandler := handler.NewEventHandler()
 	// if the native Terraform provider plugin's path is not configured via
 	// the env. variable TERRAFORM_NATIVE_PROVIDER_PATH or
 	// the `--terraform-native-provider-path` command-line option,
@@ -105,9 +103,8 @@ func main() {
 			MaxConcurrentReconciles: *maxReconcileRate,
 			Features:                &feature.Flags{},
 		},
-		Provider:     config.GetProvider(),
-		SetupFn:      clients.SelectTerraformSetup(log, setupConfig),
-		EventHandler: eventHandler,
+		Provider: config.GetProvider(),
+		SetupFn:  clients.SelectTerraformSetup(log, setupConfig),
 	}
 
 	if *enableManagementPolicies {

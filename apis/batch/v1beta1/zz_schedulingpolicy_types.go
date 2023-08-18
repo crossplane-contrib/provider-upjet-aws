@@ -109,7 +109,7 @@ type ShareDistributionParameters struct {
 
 	// A fair share identifier or fair share identifier prefix. For more information, see ShareAttributes.
 	// +kubebuilder:validation:Optional
-	ShareIdentifier *string `json:"shareIdentifier,omitempty" tf:"share_identifier,omitempty"`
+	ShareIdentifier *string `json:"shareIdentifier" tf:"share_identifier,omitempty"`
 
 	// The weight factor for the fair share identifier. For more information, see ShareAttributes.
 	// +kubebuilder:validation:Optional

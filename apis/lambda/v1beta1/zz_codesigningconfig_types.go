@@ -110,7 +110,7 @@ type PoliciesParameters struct {
 
 	// Code signing configuration policy for deployment validation failure. If you set the policy to Enforce, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to Warn, Lambda allows the deployment and creates a CloudWatch log. Valid values: Warn, Enforce. Default value: Warn.
 	// +kubebuilder:validation:Optional
-	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment,omitempty" tf:"untrusted_artifact_on_deployment,omitempty"`
+	UntrustedArtifactOnDeployment *string `json:"untrustedArtifactOnDeployment" tf:"untrusted_artifact_on_deployment,omitempty"`
 }
 
 // CodeSigningConfigSpec defines the desired state of CodeSigningConfig

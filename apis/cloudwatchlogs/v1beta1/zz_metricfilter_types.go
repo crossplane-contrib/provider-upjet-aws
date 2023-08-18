@@ -123,11 +123,11 @@ type MetricTransformationParameters struct {
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The destination namespace of the CloudWatch metric.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
 	// The unit to assign to the metric. If you omit this, the unit is set as None.
 	// +kubebuilder:validation:Optional
@@ -135,7 +135,7 @@ type MetricTransformationParameters struct {
 
 	// What to publish to the metric. For example, if you're counting the occurrences of a particular term like "Error", the value will be "1" for each occurrence. If you're counting the bytes transferred the published value will be the value in the log event.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // MetricFilterSpec defines the desired state of MetricFilter

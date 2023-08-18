@@ -53,7 +53,7 @@ type DNSTargetResourceParameters struct {
 
 	// DNS Name that acts as the ingress point to a portion of application.
 	// +kubebuilder:validation:Optional
-	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
 	// Hosted Zone ARN that contains the DNS record with the provided name of target resource.
 	// +kubebuilder:validation:Optional

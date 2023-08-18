@@ -41,7 +41,7 @@ type AccountAggregationSourceParameters struct {
 
 	// List of 12-digit account IDs of the account(s) being aggregated.
 	// +kubebuilder:validation:Optional
-	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
+	AccountIds []*string `json:"accountIds" tf:"account_ids,omitempty"`
 
 	// If true, aggregate existing AWS Config regions and future regions.
 	// +kubebuilder:validation:Optional

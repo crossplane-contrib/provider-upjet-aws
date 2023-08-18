@@ -102,7 +102,7 @@ type ConfigurationParameters struct {
 
 	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
 	// +kubebuilder:validation:Optional
-	TransformationConfiguration []TransformationConfigurationParameters `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`
+	TransformationConfiguration []TransformationConfigurationParameters `json:"transformationConfiguration" tf:"transformation_configuration,omitempty"`
 }
 
 type ContentTransformationInitParameters struct {
@@ -121,7 +121,7 @@ type ContentTransformationParameters struct {
 
 	// Configuration for an AWS Lambda function. See AWS Lambda below for more details.
 	// +kubebuilder:validation:Optional
-	AwsLambda []AwsLambdaParameters `json:"awsLambda,omitempty" tf:"aws_lambda,omitempty"`
+	AwsLambda []AwsLambdaParameters `json:"awsLambda" tf:"aws_lambda,omitempty"`
 }
 
 type ObjectLambdaAccessPointInitParameters struct {
@@ -196,11 +196,11 @@ type TransformationConfigurationParameters struct {
 
 	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
 	// +kubebuilder:validation:Optional
-	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+	Actions []*string `json:"actions" tf:"actions,omitempty"`
 
 	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
 	// +kubebuilder:validation:Optional
-	ContentTransformation []ContentTransformationParameters `json:"contentTransformation,omitempty" tf:"content_transformation,omitempty"`
+	ContentTransformation []ContentTransformationParameters `json:"contentTransformation" tf:"content_transformation,omitempty"`
 }
 
 // ObjectLambdaAccessPointSpec defines the desired state of ObjectLambdaAccessPoint

@@ -37,12 +37,12 @@ type AccessLogSettingsParameters struct {
 
 	// ARN of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. Automatically removes trailing :* if present.
 	// +kubebuilder:validation:Optional
-	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
 	// Formatting and values recorded in the logs.
 	// For more information on configuring the log format rules visit the AWS documentation
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 }
 
 type CanarySettingsInitParameters struct {

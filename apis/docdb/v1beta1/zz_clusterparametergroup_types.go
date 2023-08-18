@@ -108,11 +108,11 @@ type ParameterParameters struct {
 
 	// The name of the DocumentDB cluster parameter group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the DocumentDB parameter.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // ClusterParameterGroupSpec defines the desired state of ClusterParameterGroup

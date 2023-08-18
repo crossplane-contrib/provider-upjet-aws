@@ -47,7 +47,7 @@ type ElasticsearchSettingsParameters struct {
 
 	// Endpoint for the OpenSearch cluster.
 	// +kubebuilder:validation:Optional
-	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+	EndpointURI *string `json:"endpointUri" tf:"endpoint_uri,omitempty"`
 
 	// Maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster. Default is 300.
 	// +kubebuilder:validation:Optional
@@ -59,7 +59,7 @@ type ElasticsearchSettingsParameters struct {
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	// +kubebuilder:validation:Optional
-	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn" tf:"service_access_role_arn,omitempty"`
 }
 
 type EndpointInitParameters struct {
@@ -425,7 +425,7 @@ type KafkaSettingsParameters struct {
 
 	// Kafka broker location. Specify in the form broker-hostname-or-ip:port.
 	// +kubebuilder:validation:Optional
-	Broker *string `json:"broker,omitempty" tf:"broker,omitempty"`
+	Broker *string `json:"broker" tf:"broker,omitempty"`
 
 	// Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. Default is false.
 	// +kubebuilder:validation:Optional
@@ -714,7 +714,7 @@ type RedisSettingsParameters struct {
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
 	// +kubebuilder:validation:Optional
-	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`
+	AuthType *string `json:"authType" tf:"auth_type,omitempty"`
 
 	// The username provided with the auth-role option of the AuthType setting for a Redis target endpoint.
 	// +kubebuilder:validation:Optional
@@ -722,7 +722,7 @@ type RedisSettingsParameters struct {
 
 	// Port used by the endpoint database.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	// +kubebuilder:validation:Optional
@@ -734,7 +734,7 @@ type RedisSettingsParameters struct {
 
 	// Host name of the server.
 	// +kubebuilder:validation:Optional
-	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+	ServerName *string `json:"serverName" tf:"server_name,omitempty"`
 }
 
 type RedshiftSettingsInitParameters struct {

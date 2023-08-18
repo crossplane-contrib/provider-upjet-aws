@@ -35,11 +35,11 @@ type ActionParameters struct {
 
 	// The rule for copying shared snapshots across Regions. See the cross_region_copy configuration block.
 	// +kubebuilder:validation:Optional
-	CrossRegionCopy []CrossRegionCopyParameters `json:"crossRegionCopy,omitempty" tf:"cross_region_copy,omitempty"`
+	CrossRegionCopy []CrossRegionCopyParameters `json:"crossRegionCopy" tf:"cross_region_copy,omitempty"`
 
 	// A descriptive name for the action.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type CreateRuleInitParameters struct {
@@ -129,7 +129,7 @@ type CrossRegionCopyParameters struct {
 
 	// The encryption settings for the copied snapshot. See the encryption_configuration block. Max of 1 per action.
 	// +kubebuilder:validation:Optional
-	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
+	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration" tf:"encryption_configuration,omitempty"`
 
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	// +kubebuilder:validation:Optional
@@ -137,7 +137,7 @@ type CrossRegionCopyParameters struct {
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+	Target *string `json:"target" tf:"target,omitempty"`
 }
 
 type CrossRegionCopyRuleInitParameters struct {
@@ -205,7 +205,7 @@ type CrossRegionCopyRuleParameters struct {
 
 	// To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.
 	// +kubebuilder:validation:Optional
-	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+	Encrypted *bool `json:"encrypted" tf:"encrypted,omitempty"`
 
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	// +kubebuilder:validation:Optional
@@ -213,7 +213,7 @@ type CrossRegionCopyRuleParameters struct {
 
 	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+	Target *string `json:"target" tf:"target,omitempty"`
 }
 
 type CrossRegionCopyRuleRetainRuleInitParameters struct {
@@ -238,11 +238,11 @@ type CrossRegionCopyRuleRetainRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
-	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
 }
 
 type DeprecateRuleInitParameters struct {
@@ -267,11 +267,11 @@ type DeprecateRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
-	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
 }
 
 type EncryptionConfigurationInitParameters struct {
@@ -325,11 +325,11 @@ type EventSourceParameters struct {
 
 	// A set of optional parameters for snapshot and AMI lifecycle policies. See the parameters configuration block.
 	// +kubebuilder:validation:Optional
-	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters []ParametersParameters `json:"parameters" tf:"parameters,omitempty"`
 
 	// The source of the event. Currently only managed CloudWatch Events rules are supported. Valid values are MANAGED_CWE.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FastRestoreRuleInitParameters struct {
@@ -366,7 +366,7 @@ type FastRestoreRuleParameters struct {
 
 	// The Availability Zones in which to enable fast snapshot restore.
 	// +kubebuilder:validation:Optional
-	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
+	AvailabilityZones []*string `json:"availabilityZones" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
 	// +kubebuilder:validation:Optional
@@ -489,15 +489,15 @@ type ParametersParameters struct {
 
 	// The snapshot description that can trigger the policy. The description pattern is specified using a regular expression. The policy runs only if a snapshot with a description that matches the specified pattern is shared with your account.
 	// +kubebuilder:validation:Optional
-	DescriptionRegex *string `json:"descriptionRegex,omitempty" tf:"description_regex,omitempty"`
+	DescriptionRegex *string `json:"descriptionRegex" tf:"description_regex,omitempty"`
 
 	// The type of event. Currently, only shareSnapshot events are supported.
 	// +kubebuilder:validation:Optional
-	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+	EventType *string `json:"eventType" tf:"event_type,omitempty"`
 
 	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
 	// +kubebuilder:validation:Optional
-	SnapshotOwner []*string `json:"snapshotOwner,omitempty" tf:"snapshot_owner,omitempty"`
+	SnapshotOwner []*string `json:"snapshotOwner" tf:"snapshot_owner,omitempty"`
 }
 
 type PolicyDetailsInitParameters struct {
@@ -640,11 +640,11 @@ type RetainRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
-	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
+	IntervalUnit *string `json:"intervalUnit" tf:"interval_unit,omitempty"`
 }
 
 type ScheduleDeprecateRuleInitParameters struct {
@@ -760,7 +760,7 @@ type ScheduleParameters struct {
 
 	// See the create_rule block. Max of 1 per schedule.
 	// +kubebuilder:validation:Optional
-	CreateRule []CreateRuleParameters `json:"createRule,omitempty" tf:"create_rule,omitempty"`
+	CreateRule []CreateRuleParameters `json:"createRule" tf:"create_rule,omitempty"`
 
 	// See the cross_region_copy_rule block. Max of 3 per schedule.
 	// +kubebuilder:validation:Optional
@@ -776,11 +776,11 @@ type ScheduleParameters struct {
 
 	// A descriptive name for the action.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the retention rule for cross-Region snapshot copies. See the retain_rule block. Max of 1 per action.
 	// +kubebuilder:validation:Optional
-	RetainRule []ScheduleRetainRuleParameters `json:"retainRule,omitempty" tf:"retain_rule,omitempty"`
+	RetainRule []ScheduleRetainRuleParameters `json:"retainRule" tf:"retain_rule,omitempty"`
 
 	// See the share_rule block. Max of 1 per schedule.
 	// +kubebuilder:validation:Optional
@@ -862,7 +862,7 @@ type ShareRuleParameters struct {
 
 	// The IDs of the AWS accounts with which to share the snapshots.
 	// +kubebuilder:validation:Optional
-	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
+	TargetAccounts []*string `json:"targetAccounts" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional

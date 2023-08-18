@@ -84,15 +84,15 @@ type GroupTagTagParameters struct {
 
 	// Tag name.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Whether to propagate the tags to instances launched by the ASG.
 	// +kubebuilder:validation:Optional
-	PropagateAtLaunch *bool `json:"propagateAtLaunch,omitempty" tf:"propagate_at_launch,omitempty"`
+	PropagateAtLaunch *bool `json:"propagateAtLaunch" tf:"propagate_at_launch,omitempty"`
 
 	// Tag value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // GroupTagSpec defines the desired state of GroupTag

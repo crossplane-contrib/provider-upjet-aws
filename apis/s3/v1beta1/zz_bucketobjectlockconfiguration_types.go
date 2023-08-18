@@ -98,7 +98,7 @@ type BucketObjectLockConfigurationRuleParameters struct {
 
 	// Configuration block for specifying the default Object Lock retention settings for new objects placed in the specified bucket. See below.
 	// +kubebuilder:validation:Optional
-	DefaultRetention []RuleDefaultRetentionParameters `json:"defaultRetention,omitempty" tf:"default_retention,omitempty"`
+	DefaultRetention []RuleDefaultRetentionParameters `json:"defaultRetention" tf:"default_retention,omitempty"`
 }
 
 type RuleDefaultRetentionInitParameters struct {

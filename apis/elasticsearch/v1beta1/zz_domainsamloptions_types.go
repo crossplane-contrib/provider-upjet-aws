@@ -62,11 +62,11 @@ type IdpParameters struct {
 
 	// The unique Entity ID of the application in SAML Identity Provider.
 	// +kubebuilder:validation:Optional
-	EntityID *string `json:"entityId,omitempty" tf:"entity_id,omitempty"`
+	EntityID *string `json:"entityId" tf:"entity_id,omitempty"`
 
 	// The Metadata of the SAML application in xml format.
 	// +kubebuilder:validation:Optional
-	MetadataContent *string `json:"metadataContent,omitempty" tf:"metadata_content,omitempty"`
+	MetadataContent *string `json:"metadataContent" tf:"metadata_content,omitempty"`
 }
 
 type SAMLOptionsInitParameters struct {

@@ -88,7 +88,7 @@ type EBSBlockDeviceParameters struct {
 
 	// The name of the device to mount.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Whether the volume should be encrypted or not. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -149,7 +149,7 @@ type EphemeralBlockDeviceParameters struct {
 
 	// The name of the block device to mount on the instance.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Whether the device in the block device mapping of the AMI is suppressed.
 	// +kubebuilder:validation:Optional

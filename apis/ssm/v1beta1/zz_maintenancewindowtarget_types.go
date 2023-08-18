@@ -115,10 +115,10 @@ type MaintenanceWindowTargetTargetsObservation struct {
 type MaintenanceWindowTargetTargetsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 // MaintenanceWindowTargetSpec defines the desired state of MaintenanceWindowTarget

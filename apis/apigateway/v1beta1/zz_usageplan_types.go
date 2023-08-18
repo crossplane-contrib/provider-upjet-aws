@@ -94,7 +94,7 @@ type QuotaSettingsParameters struct {
 
 	// Maximum number of requests that can be made in a given time period.
 	// +kubebuilder:validation:Optional
-	Limit *float64 `json:"limit,omitempty" tf:"limit,omitempty"`
+	Limit *float64 `json:"limit" tf:"limit,omitempty"`
 
 	// Number of requests subtracted from the given limit in the initial time period.
 	// +kubebuilder:validation:Optional
@@ -102,7 +102,7 @@ type QuotaSettingsParameters struct {
 
 	// Time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
 	// +kubebuilder:validation:Optional
-	Period *string `json:"period,omitempty" tf:"period,omitempty"`
+	Period *string `json:"period" tf:"period,omitempty"`
 }
 
 type ThrottleInitParameters struct {
@@ -137,7 +137,7 @@ type ThrottleParameters struct {
 
 	// Method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// The API request steady-state rate limit.
 	// +kubebuilder:validation:Optional

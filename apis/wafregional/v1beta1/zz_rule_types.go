@@ -115,11 +115,11 @@ type RulePredicateParameters struct {
 
 	// Whether to use the settings or the negated settings that you specified in the objects.
 	// +kubebuilder:validation:Optional
-	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`
+	Negated *bool `json:"negated" tf:"negated,omitempty"`
 
 	// The type of predicate in a rule. Valid values: ByteMatch, GeoMatch, IPMatch, RegexMatch, SizeConstraint, SqlInjectionMatch, or XssMatch
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // RuleSpec defines the desired state of Rule

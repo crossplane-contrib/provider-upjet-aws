@@ -233,7 +233,7 @@ type UserPhoneConfigParameters struct {
 
 	// The phone type. Valid values are DESK_PHONE and SOFT_PHONE.
 	// +kubebuilder:validation:Optional
-	PhoneType *string `json:"phoneType,omitempty" tf:"phone_type,omitempty"`
+	PhoneType *string `json:"phoneType" tf:"phone_type,omitempty"`
 }
 
 // UserSpec defines the desired state of User

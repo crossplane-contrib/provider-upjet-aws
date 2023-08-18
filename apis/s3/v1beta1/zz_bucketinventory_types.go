@@ -29,7 +29,7 @@ type BucketInventoryDestinationParameters struct {
 
 	// Name of the source bucket that inventory lists the objects for.
 	// +kubebuilder:validation:Optional
-	Bucket []DestinationBucketParameters `json:"bucket,omitempty" tf:"bucket,omitempty"`
+	Bucket []DestinationBucketParameters `json:"bucket" tf:"bucket,omitempty"`
 }
 
 type BucketInventoryFilterInitParameters struct {
@@ -213,7 +213,7 @@ type DestinationBucketParameters struct {
 
 	// Specifies the output format of the inventory results. Can be CSV, ORC or Parquet.
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 
 	// Prefix that an object must have to be included in the inventory results.
 	// +kubebuilder:validation:Optional
@@ -265,7 +265,7 @@ type ScheduleParameters struct {
 
 	// Specifies how frequently inventory results are produced. Valid values: Daily, Weekly.
 	// +kubebuilder:validation:Optional
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 }
 
 type SseKMSInitParameters struct {
@@ -284,7 +284,7 @@ type SseKMSParameters struct {
 
 	// ARN of the KMS customer master key (CMK) used to encrypt the inventory file.
 	// +kubebuilder:validation:Optional
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 }
 
 type SseS3InitParameters struct {

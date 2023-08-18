@@ -69,7 +69,7 @@ type CriterionParameters struct {
 
 	// The name of the field to be evaluated. The full list of field names can be found in AWS documentation.
 	// +kubebuilder:validation:Optional
-	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+	Field *string `json:"field" tf:"field,omitempty"`
 
 	// A value to be evaluated. Accepts either an integer or a date in RFC 3339 format.
 	// +kubebuilder:validation:Optional
@@ -193,7 +193,7 @@ type FindingCriteriaObservation struct {
 type FindingCriteriaParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Criterion []CriterionParameters `json:"criterion,omitempty" tf:"criterion,omitempty"`
+	Criterion []CriterionParameters `json:"criterion" tf:"criterion,omitempty"`
 }
 
 // FilterSpec defines the desired state of Filter

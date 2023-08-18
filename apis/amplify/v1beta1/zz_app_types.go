@@ -352,7 +352,7 @@ type CustomRuleParameters struct {
 
 	// Source pattern for a URL rewrite or redirect rule.
 	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+	Source *string `json:"source" tf:"source,omitempty"`
 
 	// Status code for a URL rewrite or redirect rule. Valid values: 200, 301, 302, 404, 404-200.
 	// +kubebuilder:validation:Optional
@@ -360,7 +360,7 @@ type CustomRuleParameters struct {
 
 	// Target pattern for a URL rewrite or redirect rule.
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+	Target *string `json:"target" tf:"target,omitempty"`
 }
 
 type ProductionBranchInitParameters struct {

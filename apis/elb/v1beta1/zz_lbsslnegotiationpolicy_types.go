@@ -35,11 +35,11 @@ type AttributeParameters struct {
 
 	// The name of the SSL negotiation policy.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the attribute
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type LBSSLNegotiationPolicyInitParameters struct {

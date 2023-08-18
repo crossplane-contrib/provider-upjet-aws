@@ -29,7 +29,7 @@ type APIKeyParameters struct {
 
 	// Header Name.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Required
@@ -105,7 +105,7 @@ type BasicParameters struct {
 
 	// A username for the authorization.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type BodyInitParameters struct {
@@ -157,7 +157,7 @@ type ClientParametersParameters struct {
 
 	// The client ID for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The client secret for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Required
@@ -460,7 +460,7 @@ type OauthParameters struct {
 
 	// The URL to the authorization endpoint.
 	// +kubebuilder:validation:Optional
-	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+	AuthorizationEndpoint *string `json:"authorizationEndpoint" tf:"authorization_endpoint,omitempty"`
 
 	// Contains the client parameters for OAuth authorization. Contains the following two parameters.
 	// +kubebuilder:validation:Optional
@@ -468,11 +468,11 @@ type OauthParameters struct {
 
 	// A password for the authorization. Created and stored in AWS Secrets Manager.
 	// +kubebuilder:validation:Optional
-	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+	HTTPMethod *string `json:"httpMethod" tf:"http_method,omitempty"`
 
 	// OAuth Http Parameters are additional credentials used to sign the request to the authorization endpoint to exchange the OAuth Client information for an access token. Secret values are stored and managed by AWS Secrets Manager. A maximum of 1 are allowed. Documented below.
 	// +kubebuilder:validation:Optional
-	OauthHTTPParameters []OauthHTTPParametersParameters `json:"oauthHttpParameters,omitempty" tf:"oauth_http_parameters,omitempty"`
+	OauthHTTPParameters []OauthHTTPParametersParameters `json:"oauthHttpParameters" tf:"oauth_http_parameters,omitempty"`
 }
 
 type QueryStringInitParameters struct {

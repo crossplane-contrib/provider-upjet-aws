@@ -161,7 +161,7 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
@@ -224,7 +224,7 @@ type SpotInstanceRequestEphemeralBlockDeviceObservation struct {
 type SpotInstanceRequestEphemeralBlockDeviceParameters struct {
 
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
@@ -465,14 +465,14 @@ type SpotInstanceRequestNetworkInterfaceParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
-	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+	NetworkInterfaceID *string `json:"networkInterfaceId" tf:"network_interface_id,omitempty"`
 }
 
 type SpotInstanceRequestObservation struct {

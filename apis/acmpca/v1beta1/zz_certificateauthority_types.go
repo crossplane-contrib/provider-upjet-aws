@@ -41,15 +41,15 @@ type CertificateAuthorityConfigurationParameters struct {
 
 	// Type of the public key algorithm and size, in bits, of the key pair that your key pair creates when it issues a certificate. Valid values can be found in the ACM PCA Documentation.
 	// +kubebuilder:validation:Optional
-	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
+	KeyAlgorithm *string `json:"keyAlgorithm" tf:"key_algorithm,omitempty"`
 
 	// Name of the algorithm your private CA uses to sign certificate requests. Valid values can be found in the ACM PCA Documentation.
 	// +kubebuilder:validation:Optional
-	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
+	SigningAlgorithm *string `json:"signingAlgorithm" tf:"signing_algorithm,omitempty"`
 
 	// Nested argument that contains X.500 distinguished name information. At least one nested attribute must be specified.
 	// +kubebuilder:validation:Optional
-	Subject []SubjectParameters `json:"subject,omitempty" tf:"subject,omitempty"`
+	Subject []SubjectParameters `json:"subject" tf:"subject,omitempty"`
 }
 
 type CertificateAuthorityInitParameters struct {
@@ -257,7 +257,7 @@ type OcspConfigurationParameters struct {
 
 	// Boolean value that specifies whether a custom OCSP responder is enabled.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// CNAME specifying a customized OCSP domain. Note: The value of the CNAME must not include a protocol prefix such as "http://" or "https://".
 	// +kubebuilder:validation:Optional

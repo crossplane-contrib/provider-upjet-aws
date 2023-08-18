@@ -74,11 +74,11 @@ type ClusteringKeyParameters struct {
 
 	// The name of the column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The order modifier. Valid values: ASC, DESC.
 	// +kubebuilder:validation:Optional
-	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
+	OrderBy *string `json:"orderBy" tf:"order_by,omitempty"`
 }
 
 type ColumnInitParameters struct {
@@ -103,11 +103,11 @@ type ColumnParameters struct {
 
 	// The name of the column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The encryption option specified for the table. Valid values: AWS_OWNED_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY. The default value is AWS_OWNED_KMS_KEY.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CommentInitParameters struct {
@@ -174,7 +174,7 @@ type PartitionKeyParameters struct {
 
 	// The name of the column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PointInTimeRecoveryInitParameters struct {
@@ -234,11 +234,11 @@ type SchemaDefinitionParameters struct {
 
 	// The regular columns of the table.
 	// +kubebuilder:validation:Optional
-	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
+	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
 	// The columns that are part of the partition key of the table .
 	// +kubebuilder:validation:Optional
-	PartitionKey []PartitionKeyParameters `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+	PartitionKey []PartitionKeyParameters `json:"partitionKey" tf:"partition_key,omitempty"`
 
 	// The columns that have been defined as STATIC. Static columns store values that are shared by all rows in the same partition.
 	// +kubebuilder:validation:Optional
@@ -261,7 +261,7 @@ type StaticColumnParameters struct {
 
 	// The name of the column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type TTLInitParameters struct {
@@ -280,7 +280,7 @@ type TTLParameters struct {
 
 	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type TableInitParameters struct {

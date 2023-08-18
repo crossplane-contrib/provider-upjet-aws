@@ -236,7 +236,7 @@ type ScheduleParameters struct {
 
 	// Specifies the schedule you want your task to use for repeated executions. For more information, see Schedule Expressions for Rules.
 	// +kubebuilder:validation:Optional
-	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+	ScheduleExpression *string `json:"scheduleExpression" tf:"schedule_expression,omitempty"`
 }
 
 type TaskInitParameters struct {

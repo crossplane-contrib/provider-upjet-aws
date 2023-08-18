@@ -91,11 +91,11 @@ type ContentSecurityPolicyParameters struct {
 
 	// The policy directives and their values that CloudFront includes as values for the Content-Security-Policy HTTP response header. See Content Security Policy for more information.
 	// +kubebuilder:validation:Optional
-	ContentSecurityPolicy *string `json:"contentSecurityPolicy,omitempty" tf:"content_security_policy,omitempty"`
+	ContentSecurityPolicy *string `json:"contentSecurityPolicy" tf:"content_security_policy,omitempty"`
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 }
 
 type ContentTypeOptionsInitParameters struct {
@@ -114,7 +114,7 @@ type ContentTypeOptionsParameters struct {
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 }
 
 type CorsConfigInitParameters struct {
@@ -169,19 +169,19 @@ type CorsConfigParameters struct {
 
 	// A Boolean value that CloudFront uses as the value for the Access-Control-Allow-Credentials HTTP response header.
 	// +kubebuilder:validation:Optional
-	AccessControlAllowCredentials *bool `json:"accessControlAllowCredentials,omitempty" tf:"access_control_allow_credentials,omitempty"`
+	AccessControlAllowCredentials *bool `json:"accessControlAllowCredentials" tf:"access_control_allow_credentials,omitempty"`
 
 	// Object that contains an attribute items that contains a list of HTTP header names that CloudFront includes as values for the Access-Control-Allow-Headers HTTP response header.
 	// +kubebuilder:validation:Optional
-	AccessControlAllowHeaders []AccessControlAllowHeadersParameters `json:"accessControlAllowHeaders,omitempty" tf:"access_control_allow_headers,omitempty"`
+	AccessControlAllowHeaders []AccessControlAllowHeadersParameters `json:"accessControlAllowHeaders" tf:"access_control_allow_headers,omitempty"`
 
 	// Object that contains an attribute items that contains a list of HTTP methods that CloudFront includes as values for the Access-Control-Allow-Methods HTTP response header. Valid values: GET | POST | OPTIONS | PUT | DELETE | HEAD | ALL
 	// +kubebuilder:validation:Optional
-	AccessControlAllowMethods []AccessControlAllowMethodsParameters `json:"accessControlAllowMethods,omitempty" tf:"access_control_allow_methods,omitempty"`
+	AccessControlAllowMethods []AccessControlAllowMethodsParameters `json:"accessControlAllowMethods" tf:"access_control_allow_methods,omitempty"`
 
 	// Object that contains an attribute items that contains a list of origins that CloudFront can use as the value for the Access-Control-Allow-Origin HTTP response header.
 	// +kubebuilder:validation:Optional
-	AccessControlAllowOrigins []AccessControlAllowOriginsParameters `json:"accessControlAllowOrigins,omitempty" tf:"access_control_allow_origins,omitempty"`
+	AccessControlAllowOrigins []AccessControlAllowOriginsParameters `json:"accessControlAllowOrigins" tf:"access_control_allow_origins,omitempty"`
 
 	// Object that contains an attribute items that contains a list of HTTP headers that CloudFront includes as values for the Access-Control-Expose-Headers HTTP response header.
 	// +kubebuilder:validation:Optional
@@ -193,7 +193,7 @@ type CorsConfigParameters struct {
 
 	// A Boolean value that determines how CloudFront behaves for the HTTP response header.
 	// +kubebuilder:validation:Optional
-	OriginOverride *bool `json:"originOverride,omitempty" tf:"origin_override,omitempty"`
+	OriginOverride *bool `json:"originOverride" tf:"origin_override,omitempty"`
 }
 
 type CustomHeadersConfigInitParameters struct {
@@ -228,15 +228,15 @@ type CustomHeadersConfigItemsParameters struct {
 
 	// The HTTP response header name.
 	// +kubebuilder:validation:Optional
-	Header *string `json:"header,omitempty" tf:"header,omitempty"`
+	Header *string `json:"header" tf:"header,omitempty"`
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 
 	// The value for the HTTP response header.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type CustomHeadersConfigObservation struct {
@@ -271,11 +271,11 @@ type FrameOptionsParameters struct {
 
 	// The value of the X-Frame-Options HTTP response header. Valid values: DENY | SAMEORIGIN
 	// +kubebuilder:validation:Optional
-	FrameOption *string `json:"frameOption,omitempty" tf:"frame_option,omitempty"`
+	FrameOption *string `json:"frameOption" tf:"frame_option,omitempty"`
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 }
 
 type ReferrerPolicyInitParameters struct {
@@ -300,11 +300,11 @@ type ReferrerPolicyParameters struct {
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 
 	// Determines whether CloudFront includes the Referrer-Policy HTTP response header and the header’s value. See Referrer Policy for more information.
 	// +kubebuilder:validation:Optional
-	ReferrerPolicy *string `json:"referrerPolicy,omitempty" tf:"referrer_policy,omitempty"`
+	ReferrerPolicy *string `json:"referrerPolicy" tf:"referrer_policy,omitempty"`
 }
 
 type RemoveHeadersConfigInitParameters struct {
@@ -327,7 +327,7 @@ type RemoveHeadersConfigItemsParameters struct {
 
 	// The HTTP response header name.
 	// +kubebuilder:validation:Optional
-	Header *string `json:"header,omitempty" tf:"header,omitempty"`
+	Header *string `json:"header" tf:"header,omitempty"`
 }
 
 type RemoveHeadersConfigObservation struct {
@@ -528,11 +528,11 @@ type ServerTimingHeadersConfigParameters struct {
 
 	// A Whether CloudFront adds the Server-Timing header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A number 0–100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the Server-Timing header to. Valid range: Minimum value of 0.0. Maximum value of 100.0.
 	// +kubebuilder:validation:Optional
-	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+	SamplingRate *float64 `json:"samplingRate" tf:"sampling_rate,omitempty"`
 }
 
 type StrictTransportSecurityInitParameters struct {
@@ -569,7 +569,7 @@ type StrictTransportSecurityParameters struct {
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
 	// +kubebuilder:validation:Optional
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec" tf:"access_control_max_age_sec,omitempty"`
 
 	// Whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
 	// +kubebuilder:validation:Optional
@@ -577,7 +577,7 @@ type StrictTransportSecurityParameters struct {
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 
 	// Whether CloudFront includes the preload directive in the Strict-Transport-Security HTTP response header.
 	// +kubebuilder:validation:Optional
@@ -622,11 +622,11 @@ type XSSProtectionParameters struct {
 
 	// Whether CloudFront overrides a response header with the same name received from the origin with the header specifies here.
 	// +kubebuilder:validation:Optional
-	Override *bool `json:"override,omitempty" tf:"override,omitempty"`
+	Override *bool `json:"override" tf:"override,omitempty"`
 
 	// A Boolean value that determines the value of the X-XSS-Protection HTTP response header. When this setting is true, the value of the X-XSS-Protection header is 1. When this setting is false, the value of the X-XSS-Protection header is 0.
 	// +kubebuilder:validation:Optional
-	Protection *bool `json:"protection,omitempty" tf:"protection,omitempty"`
+	Protection *bool `json:"protection" tf:"protection,omitempty"`
 
 	// A reporting URI, which CloudFront uses as the value of the report directive in the X-XSS-Protection header. You cannot specify a report_uri when mode_block is true.
 	// +kubebuilder:validation:Optional

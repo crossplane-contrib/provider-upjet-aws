@@ -99,7 +99,7 @@ type RulesParameters struct {
 
 	// The IP address range, in CIDR notation, e.g., 10.0.0.0/16
 	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+	Source *string `json:"source" tf:"source,omitempty"`
 }
 
 // IPGroupSpec defines the desired state of IPGroup

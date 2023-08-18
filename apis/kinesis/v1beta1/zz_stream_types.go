@@ -54,7 +54,7 @@ type StreamModeDetailsParameters struct {
 
 	// Specifies the capacity mode of the stream. Must be either PROVISIONED or ON_DEMAND.
 	// +kubebuilder:validation:Optional
-	StreamMode *string `json:"streamMode,omitempty" tf:"stream_mode,omitempty"`
+	StreamMode *string `json:"streamMode" tf:"stream_mode,omitempty"`
 }
 
 type StreamObservation struct {

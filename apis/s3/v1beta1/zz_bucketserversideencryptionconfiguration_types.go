@@ -129,7 +129,7 @@ type RuleApplyServerSideEncryptionByDefaultParameters struct {
 
 	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
 	// +kubebuilder:validation:Optional
-	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
+	SseAlgorithm *string `json:"sseAlgorithm" tf:"sse_algorithm,omitempty"`
 }
 
 // BucketServerSideEncryptionConfigurationSpec defines the desired state of BucketServerSideEncryptionConfiguration

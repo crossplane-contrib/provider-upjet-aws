@@ -47,7 +47,7 @@ type AccessLogsParameters struct {
 
 	// The S3 bucket name to store the logs in.
 	// +kubebuilder:validation:Optional
-	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
 	// The S3 bucket prefix. Logs are stored in the root if not configured.
 	// +kubebuilder:validation:Optional
@@ -309,24 +309,24 @@ type HealthCheckParameters struct {
 
 	// The number of checks before the instance is declared healthy.
 	// +kubebuilder:validation:Optional
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The target of the check. Valid pattern is "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL
 	// values are:
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+	Target *string `json:"target" tf:"target,omitempty"`
 
 	// The length of time before the check times out.
 	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout" tf:"timeout,omitempty"`
 
 	// The number of checks before the instance is declared unhealthy.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ListenerInitParameters struct {
@@ -375,21 +375,21 @@ type ListenerParameters struct {
 
 	// The port on the instance to route to
 	// +kubebuilder:validation:Optional
-	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+	InstancePort *float64 `json:"instancePort" tf:"instance_port,omitempty"`
 
 	// The protocol to use to the instance. Valid
 	// values are HTTP, HTTPS, TCP, or SSL
 	// +kubebuilder:validation:Optional
-	InstanceProtocol *string `json:"instanceProtocol,omitempty" tf:"instance_protocol,omitempty"`
+	InstanceProtocol *string `json:"instanceProtocol" tf:"instance_protocol,omitempty"`
 
 	// The port to listen on for the load balancer
 	// +kubebuilder:validation:Optional
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
 
 	// The protocol to listen on. Valid values are HTTP,
 	// HTTPS, TCP, or SSL
 	// +kubebuilder:validation:Optional
-	LBProtocol *string `json:"lbProtocol,omitempty" tf:"lb_protocol,omitempty"`
+	LBProtocol *string `json:"lbProtocol" tf:"lb_protocol,omitempty"`
 
 	// The ARN of an SSL certificate you have
 	// uploaded to AWS IAM. Note ECDSA-specific restrictions below.  Only valid when

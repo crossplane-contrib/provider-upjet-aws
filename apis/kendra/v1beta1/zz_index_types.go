@@ -76,7 +76,7 @@ type DocumentMetadataConfigurationUpdatesParameters struct {
 
 	// The name of the index field. Minimum length of 1. Maximum length of 30.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A block that provides manual tuning parameters to determine how the field affects the search results. Detailed below
 	// +kubebuilder:validation:Optional
@@ -88,7 +88,7 @@ type DocumentMetadataConfigurationUpdatesParameters struct {
 
 	// The data type of the index field. Valid values are STRING_VALUE, STRING_LIST_VALUE, LONG_VALUE, DATE_VALUE.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FaqStatisticsInitParameters struct {
@@ -295,11 +295,11 @@ type JSONTokenTypeConfigurationParameters struct {
 
 	// The group attribute field. Minimum length of 1. Maximum length of 2048.
 	// +kubebuilder:validation:Optional
-	GroupAttributeField *string `json:"groupAttributeField,omitempty" tf:"group_attribute_field,omitempty"`
+	GroupAttributeField *string `json:"groupAttributeField" tf:"group_attribute_field,omitempty"`
 
 	// The user name attribute field. Minimum length of 1. Maximum length of 2048.
 	// +kubebuilder:validation:Optional
-	UserNameAttributeField *string `json:"userNameAttributeField,omitempty" tf:"user_name_attribute_field,omitempty"`
+	UserNameAttributeField *string `json:"userNameAttributeField" tf:"user_name_attribute_field,omitempty"`
 }
 
 type JwtTokenTypeConfigurationInitParameters struct {
@@ -366,7 +366,7 @@ type JwtTokenTypeConfigurationParameters struct {
 
 	// The location of the key. Valid values are URL or SECRET_MANAGER
 	// +kubebuilder:validation:Optional
-	KeyLocation *string `json:"keyLocation,omitempty" tf:"key_location,omitempty"`
+	KeyLocation *string `json:"keyLocation" tf:"key_location,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the secret.
 	// +kubebuilder:validation:Optional
@@ -539,7 +539,7 @@ type UserGroupResolutionConfigurationParameters struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of groups and users. AWS Single Sign-On is currently the only available mode. Your users and groups must exist in an AWS SSO identity source in order to use this mode. Valid Values are AWS_SSO or NONE.
 	// +kubebuilder:validation:Optional
-	UserGroupResolutionMode *string `json:"userGroupResolutionMode,omitempty" tf:"user_group_resolution_mode,omitempty"`
+	UserGroupResolutionMode *string `json:"userGroupResolutionMode" tf:"user_group_resolution_mode,omitempty"`
 }
 
 type UserTokenConfigurationsInitParameters struct {
