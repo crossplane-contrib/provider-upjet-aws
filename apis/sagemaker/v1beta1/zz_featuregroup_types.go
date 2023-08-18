@@ -232,7 +232,7 @@ type OfflineStoreConfigParameters struct {
 
 	// The Amazon Simple Storage (Amazon S3) location of OfflineStore. See S3 Storage Config Below.
 	// +kubebuilder:validation:Optional
-	S3StorageConfig []S3StorageConfigParameters `json:"s3StorageConfig,omitempty" tf:"s3_storage_config,omitempty"`
+	S3StorageConfig []S3StorageConfigParameters `json:"s3StorageConfig" tf:"s3_storage_config,omitempty"`
 
 	// Format for the offline store table. Supported formats are Glue (Default) and Apache Iceberg (https://iceberg.apache.org/).
 	// +kubebuilder:validation:Optional
@@ -294,7 +294,7 @@ type S3StorageConfigParameters struct {
 
 	// The S3 URI, or location in Amazon S3, of OfflineStore.
 	// +kubebuilder:validation:Optional
-	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 }
 
 type SecurityConfigInitParameters struct {

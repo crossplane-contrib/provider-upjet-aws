@@ -112,7 +112,7 @@ type BrokerNodeGroupInfoParameters struct {
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	// +kubebuilder:validation:Optional
-	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
 
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
@@ -190,7 +190,7 @@ type CloudwatchLogsParameters struct {
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Name of the Cloudwatch Log Group to deliver logs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
@@ -400,11 +400,11 @@ type ConfigurationInfoParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
 	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+	Arn *string `json:"arn" tf:"arn,omitempty"`
 
 	// Revision of the MSK Configuration to use in the cluster.
 	// +kubebuilder:validation:Optional
-	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision" tf:"revision,omitempty"`
 }
 
 type ConnectivityInfoInitParameters struct {
@@ -553,7 +553,7 @@ type FirehoseParameters struct {
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type JmxExporterInitParameters struct {
@@ -572,7 +572,7 @@ type JmxExporterParameters struct {
 
 	// Indicates whether you want to enable or disable the JMX Exporter.
 	// +kubebuilder:validation:Optional
-	EnabledInBroker *bool `json:"enabledInBroker,omitempty" tf:"enabled_in_broker,omitempty"`
+	EnabledInBroker *bool `json:"enabledInBroker" tf:"enabled_in_broker,omitempty"`
 }
 
 type LoggingInfoInitParameters struct {
@@ -591,7 +591,7 @@ type LoggingInfoParameters struct {
 
 	// Configuration block for Broker Logs settings for logging info. See below.
 	// +kubebuilder:validation:Optional
-	BrokerLogs []BrokerLogsParameters `json:"brokerLogs,omitempty" tf:"broker_logs,omitempty"`
+	BrokerLogs []BrokerLogsParameters `json:"brokerLogs" tf:"broker_logs,omitempty"`
 }
 
 type NodeExporterInitParameters struct {
@@ -610,7 +610,7 @@ type NodeExporterParameters struct {
 
 	// Indicates whether you want to enable or disable the JMX Exporter.
 	// +kubebuilder:validation:Optional
-	EnabledInBroker *bool `json:"enabledInBroker,omitempty" tf:"enabled_in_broker,omitempty"`
+	EnabledInBroker *bool `json:"enabledInBroker" tf:"enabled_in_broker,omitempty"`
 }
 
 type OpenMonitoringInitParameters struct {
@@ -629,7 +629,7 @@ type OpenMonitoringParameters struct {
 
 	// Configuration block for Prometheus settings for open monitoring. See below.
 	// +kubebuilder:validation:Optional
-	Prometheus []PrometheusParameters `json:"prometheus,omitempty" tf:"prometheus,omitempty"`
+	Prometheus []PrometheusParameters `json:"prometheus" tf:"prometheus,omitempty"`
 }
 
 type PrometheusInitParameters struct {
@@ -747,7 +747,7 @@ type S3Parameters struct {
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Prefix to append to the folder name.
 	// +kubebuilder:validation:Optional

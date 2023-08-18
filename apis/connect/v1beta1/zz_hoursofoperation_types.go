@@ -41,15 +41,15 @@ type ConfigParameters struct {
 
 	// Specifies the day that the hours of operation applies to.
 	// +kubebuilder:validation:Optional
-	Day *string `json:"day,omitempty" tf:"day,omitempty"`
+	Day *string `json:"day" tf:"day,omitempty"`
 
 	// A end time block specifies the time that your contact center closes. The end_time is documented below.
 	// +kubebuilder:validation:Optional
-	EndTime []EndTimeParameters `json:"endTime,omitempty" tf:"end_time,omitempty"`
+	EndTime []EndTimeParameters `json:"endTime" tf:"end_time,omitempty"`
 
 	// A start time block specifies the time that your contact center opens. The start_time is documented below.
 	// +kubebuilder:validation:Optional
-	StartTime []StartTimeParameters `json:"startTime,omitempty" tf:"start_time,omitempty"`
+	StartTime []StartTimeParameters `json:"startTime" tf:"start_time,omitempty"`
 }
 
 type EndTimeInitParameters struct {
@@ -74,11 +74,11 @@ type EndTimeParameters struct {
 
 	// Specifies the hour of closing.
 	// +kubebuilder:validation:Optional
-	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours *float64 `json:"hours" tf:"hours,omitempty"`
 
 	// Specifies the minute of closing.
 	// +kubebuilder:validation:Optional
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *float64 `json:"minutes" tf:"minutes,omitempty"`
 }
 
 type HoursOfOperationInitParameters struct {
@@ -199,11 +199,11 @@ type StartTimeParameters struct {
 
 	// Specifies the hour of opening.
 	// +kubebuilder:validation:Optional
-	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours *float64 `json:"hours" tf:"hours,omitempty"`
 
 	// Specifies the minute of opening.
 	// +kubebuilder:validation:Optional
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *float64 `json:"minutes" tf:"minutes,omitempty"`
 }
 
 // HoursOfOperationSpec defines the desired state of HoursOfOperation

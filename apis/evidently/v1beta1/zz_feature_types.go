@@ -214,11 +214,11 @@ type VariationsParameters struct {
 
 	// The name of the variation. Minimum length of 1. Maximum length of 127.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A block that specifies the value assigned to this variation. Detailed below
 	// +kubebuilder:validation:Optional
-	Value []ValueParameters `json:"value,omitempty" tf:"value,omitempty"`
+	Value []ValueParameters `json:"value" tf:"value,omitempty"`
 }
 
 // FeatureSpec defines the desired state of Feature

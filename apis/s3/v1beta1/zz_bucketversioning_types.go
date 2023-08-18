@@ -103,7 +103,7 @@ type VersioningConfigurationParameters struct {
 
 	// Versioning state of the bucket. Valid values: Enabled, Suspended, or Disabled. Disabled should only be used when creating or importing resources that correspond to unversioned S3 buckets.
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 // BucketVersioningSpec defines the desired state of BucketVersioning

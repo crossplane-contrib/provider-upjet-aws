@@ -53,7 +53,7 @@ type RouteParameters struct {
 
 	// The FQDN or IP address to contact for origination traffic.
 	// +kubebuilder:validation:Optional
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+	Host *string `json:"host" tf:"host,omitempty"`
 
 	// The designated origination route port. Defaults to 5060.
 	// +kubebuilder:validation:Optional
@@ -61,15 +61,15 @@ type RouteParameters struct {
 
 	// The priority associated with the host, with 1 being the highest priority. Higher priority hosts are attempted first.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// The protocol to use for the origination route. Encryption-enabled Amazon Chime Voice Connectors use TCP protocol by default.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The weight associated with the host. If hosts are equal in priority, calls are redistributed among them based on their relative weight.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
 
 type VoiceConnectorOriginationInitParameters struct {

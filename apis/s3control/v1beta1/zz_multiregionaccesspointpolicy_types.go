@@ -35,11 +35,11 @@ type MultiRegionAccessPointPolicyDetailsParameters struct {
 
 	// The name of the Multi-Region Access Point.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A valid JSON document that specifies the policy that you want to associate with this Multi-Region Access Point. Once applied, the policy can be edited, but not deleted. For more information, see the documentation on Multi-Region Access Point Permissions.
 	// +kubebuilder:validation:Optional
-	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+	Policy *string `json:"policy" tf:"policy,omitempty"`
 }
 
 type MultiRegionAccessPointPolicyInitParameters struct {

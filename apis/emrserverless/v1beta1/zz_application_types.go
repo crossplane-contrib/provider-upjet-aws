@@ -210,7 +210,7 @@ type ImageConfigurationParameters struct {
 
 	// The image URI.
 	// +kubebuilder:validation:Optional
-	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
+	ImageURI *string `json:"imageUri" tf:"image_uri,omitempty"`
 }
 
 type InitialCapacityConfigInitParameters struct {
@@ -239,7 +239,7 @@ type InitialCapacityConfigParameters struct {
 
 	// The number of workers in the initial capacity configuration.
 	// +kubebuilder:validation:Optional
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+	WorkerCount *float64 `json:"workerCount" tf:"worker_count,omitempty"`
 }
 
 type InitialCapacityInitParameters struct {
@@ -268,7 +268,7 @@ type InitialCapacityParameters struct {
 
 	// The worker type for an analytics framework. For Spark applications, the key can either be set to Driver or Executor. For Hive applications, it can be set to HiveDriver or TezTask.
 	// +kubebuilder:validation:Optional
-	InitialCapacityType *string `json:"initialCapacityType,omitempty" tf:"initial_capacity_type,omitempty"`
+	InitialCapacityType *string `json:"initialCapacityType" tf:"initial_capacity_type,omitempty"`
 }
 
 type MaximumCapacityInitParameters struct {
@@ -299,7 +299,7 @@ type MaximumCapacityParameters struct {
 
 	// The maximum allowed CPU for an application.
 	// +kubebuilder:validation:Optional
-	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+	CPU *string `json:"cpu" tf:"cpu,omitempty"`
 
 	// The maximum allowed disk for an application.
 	// +kubebuilder:validation:Optional
@@ -307,7 +307,7 @@ type MaximumCapacityParameters struct {
 
 	// The maximum allowed resources for an application.
 	// +kubebuilder:validation:Optional
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory *string `json:"memory" tf:"memory,omitempty"`
 }
 
 type NetworkConfigurationInitParameters struct {
@@ -367,7 +367,7 @@ type WorkerConfigurationParameters struct {
 
 	// The maximum allowed CPU for an application.
 	// +kubebuilder:validation:Optional
-	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+	CPU *string `json:"cpu" tf:"cpu,omitempty"`
 
 	// The maximum allowed disk for an application.
 	// +kubebuilder:validation:Optional
@@ -375,7 +375,7 @@ type WorkerConfigurationParameters struct {
 
 	// The maximum allowed resources for an application.
 	// +kubebuilder:validation:Optional
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+	Memory *string `json:"memory" tf:"memory,omitempty"`
 }
 
 // ApplicationSpec defines the desired state of Application

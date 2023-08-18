@@ -380,7 +380,7 @@ type LBTargetGroupStickinessParameters struct {
 
 	// The type of sticky sessions. The only current possible values are lb_cookie, app_cookie for ALBs, source_ip for NLBs, and source_ip_dest_ip, source_ip_dest_ip_proto for GWLBs.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type TargetFailoverInitParameters struct {
@@ -405,11 +405,11 @@ type TargetFailoverParameters struct {
 
 	// Indicates how the GWLB handles existing flows when a target is deregistered. Possible values are rebalance and no_rebalance. Must match the attribute value set for on_unhealthy. Default: no_rebalance.
 	// +kubebuilder:validation:Optional
-	OnDeregistration *string `json:"onDeregistration,omitempty" tf:"on_deregistration,omitempty"`
+	OnDeregistration *string `json:"onDeregistration" tf:"on_deregistration,omitempty"`
 
 	// Indicates how the GWLB handles existing flows when a target is unhealthy. Possible values are rebalance and no_rebalance. Must match the attribute value set for on_deregistration. Default: no_rebalance.
 	// +kubebuilder:validation:Optional
-	OnUnhealthy *string `json:"onUnhealthy,omitempty" tf:"on_unhealthy,omitempty"`
+	OnUnhealthy *string `json:"onUnhealthy" tf:"on_unhealthy,omitempty"`
 }
 
 // LBTargetGroupSpec defines the desired state of LBTargetGroup

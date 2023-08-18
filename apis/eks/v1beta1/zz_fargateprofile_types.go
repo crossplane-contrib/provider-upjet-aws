@@ -136,7 +136,7 @@ type SelectorParameters struct {
 
 	// Kubernetes namespace for selection.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 // FargateProfileSpec defines the desired state of FargateProfile

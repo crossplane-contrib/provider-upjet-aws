@@ -79,7 +79,7 @@ type CriterionParameters struct {
 
 	// The name of the field to be evaluated.
 	// +kubebuilder:validation:Optional
-	Field *string `json:"field,omitempty" tf:"field,omitempty"`
+	Field *string `json:"field" tf:"field,omitempty"`
 
 	// The value for the property is greater than the specified value.
 	// +kubebuilder:validation:Optional

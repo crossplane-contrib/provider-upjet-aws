@@ -142,7 +142,7 @@ type ThingGroupIndexingConfigurationParameters struct {
 
 	// Thing group indexing mode. Valid values: OFF, ON.
 	// +kubebuilder:validation:Optional
-	ThingGroupIndexingMode *string `json:"thingGroupIndexingMode,omitempty" tf:"thing_group_indexing_mode,omitempty"`
+	ThingGroupIndexingMode *string `json:"thingGroupIndexingMode" tf:"thing_group_indexing_mode,omitempty"`
 }
 
 type ThingIndexingConfigurationCustomFieldInitParameters struct {
@@ -269,7 +269,7 @@ type ThingIndexingConfigurationParameters struct {
 
 	// Thing indexing mode. Valid values: REGISTRY, REGISTRY_AND_SHADOW, OFF.
 	// +kubebuilder:validation:Optional
-	ThingIndexingMode *string `json:"thingIndexingMode,omitempty" tf:"thing_indexing_mode,omitempty"`
+	ThingIndexingMode *string `json:"thingIndexingMode" tf:"thing_indexing_mode,omitempty"`
 }
 
 // IndexingConfigurationSpec defines the desired state of IndexingConfiguration

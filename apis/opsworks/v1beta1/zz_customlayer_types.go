@@ -434,11 +434,11 @@ type EBSVolumeParameters struct {
 
 	// The path to mount the EBS volume on the layer's instances.
 	// +kubebuilder:validation:Optional
-	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
+	MountPoint *string `json:"mountPoint" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
 	// +kubebuilder:validation:Optional
-	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *float64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	// +kubebuilder:validation:Optional
@@ -446,7 +446,7 @@ type EBSVolumeParameters struct {
 
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *float64 `json:"size" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional
@@ -588,7 +588,7 @@ type LogStreamsParameters struct {
 
 	// Specifies log files that you want to push to CloudWatch Logs. File can point to a specific file or multiple files (by using wild card characters such as /var/log/system.log*).
 	// +kubebuilder:validation:Optional
-	File *string `json:"file,omitempty" tf:"file,omitempty"`
+	File *string `json:"file" tf:"file,omitempty"`
 
 	// Specifies the range of lines for identifying a file. The valid values are one number, or two dash-delimited numbers, such as 1, 2-5. The default value is 1.
 	// +kubebuilder:validation:Optional
@@ -600,7 +600,7 @@ type LogStreamsParameters struct {
 
 	// Specifies the destination log group. A log group is created automatically if it doesn't already exist.
 	// +kubebuilder:validation:Optional
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
 
 	// Specifies the pattern for identifying the start of a log message.
 	// +kubebuilder:validation:Optional

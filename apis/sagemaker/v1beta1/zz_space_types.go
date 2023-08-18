@@ -111,7 +111,7 @@ type SpaceSettingsJupyterServerAppSettingsCodeRepositoryParameters struct {
 
 	// The URL of the Git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 }
 
 type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters struct {
@@ -195,7 +195,7 @@ type SpaceSettingsJupyterServerAppSettingsParameters struct {
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
-	DefaultResourceSpec []SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+	DefaultResourceSpec []SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
@@ -230,11 +230,11 @@ type SpaceSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 	// The name of the App Image Config.
 	// +kubebuilder:validation:Optional
-	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -322,7 +322,7 @@ type SpaceSettingsKernelGatewayAppSettingsParameters struct {
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
-	DefaultResourceSpec []SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+	DefaultResourceSpec []SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional

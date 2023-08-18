@@ -29,7 +29,7 @@ type InputDestinationsParameters struct {
 
 	// A unique name for the location the RTMP stream is being pushed to.
 	// +kubebuilder:validation:Optional
-	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
 }
 
 type InputDevicesInitParameters struct {
@@ -48,7 +48,7 @@ type InputDevicesParameters struct {
 
 	// The unique ID for the device.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type InputInitParameters struct {
@@ -218,7 +218,7 @@ type InputVPCParameters struct {
 
 	// A list of 2 VPC subnet IDs from the same VPC.
 	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 type MediaConnectFlowsInitParameters struct {
@@ -237,7 +237,7 @@ type MediaConnectFlowsParameters struct {
 
 	// The ARN of the MediaConnect Flow
 	// +kubebuilder:validation:Optional
-	FlowArn *string `json:"flowArn,omitempty" tf:"flow_arn,omitempty"`
+	FlowArn *string `json:"flowArn" tf:"flow_arn,omitempty"`
 }
 
 type SourcesInitParameters struct {
@@ -268,15 +268,15 @@ type SourcesParameters struct {
 
 	// The key used to extract the password from EC2 Parameter store.
 	// +kubebuilder:validation:Optional
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+	PasswordParam *string `json:"passwordParam" tf:"password_param,omitempty"`
 
 	// The URL where the stream is pulled from.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 
 	// The username for the input source.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 // InputSpec defines the desired state of Input

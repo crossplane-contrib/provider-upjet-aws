@@ -121,7 +121,7 @@ type EventSubscriptionParameters struct {
 
 	// The event for which you want to receive SNS notifications. Valid values are ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, and FINDING_REPORTED.
 	// +kubebuilder:validation:Optional
-	Event *string `json:"event,omitempty" tf:"event,omitempty"`
+	Event *string `json:"event" tf:"event,omitempty"`
 
 	// The ARN of the SNS topic to which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic

@@ -418,11 +418,11 @@ type ParameterParameters struct {
 
 	// The name of the component parameter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value for the named component parameter.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TargetRepositoryInitParameters struct {
@@ -457,7 +457,7 @@ type TargetRepositoryParameters struct {
 
 	// The service in which this image is registered. Valid values: ECR.
 	// +kubebuilder:validation:Optional
-	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+	Service *string `json:"service" tf:"service,omitempty"`
 }
 
 // ContainerRecipeSpec defines the desired state of ContainerRecipe

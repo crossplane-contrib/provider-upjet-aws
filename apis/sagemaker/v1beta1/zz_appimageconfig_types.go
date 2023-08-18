@@ -121,7 +121,7 @@ type KernelGatewayImageConfigParameters struct {
 
 	// The default branch for the Git repository. See Kernel Spec details below.
 	// +kubebuilder:validation:Optional
-	KernelSpec []KernelSpecParameters `json:"kernelSpec,omitempty" tf:"kernel_spec,omitempty"`
+	KernelSpec []KernelSpecParameters `json:"kernelSpec" tf:"kernel_spec,omitempty"`
 }
 
 type KernelSpecInitParameters struct {
@@ -150,7 +150,7 @@ type KernelSpecParameters struct {
 
 	// The name of the kernel.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // AppImageConfigSpec defines the desired state of AppImageConfig

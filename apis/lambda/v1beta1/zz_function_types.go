@@ -29,7 +29,7 @@ type DeadLetterConfigParameters struct {
 
 	// ARN of an SNS topic or SQS queue to notify when an invocation fails. If this option is used, the function's IAM role must be granted suitable access to write to the target object, which means allowing either the sns:Publish or sqs:SendMessage action on this ARN, depending on which service is targeted.
 	// +kubebuilder:validation:Optional
-	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+	TargetArn *string `json:"targetArn" tf:"target_arn,omitempty"`
 }
 
 type EnvironmentInitParameters struct {
@@ -103,7 +103,7 @@ type FileSystemConfigParameters struct {
 
 	// Path where the function can access the file system, starting with /mnt/.
 	// +kubebuilder:validation:Optional
-	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
+	LocalMountPath *string `json:"localMountPath" tf:"local_mount_path,omitempty"`
 }
 
 type FunctionInitParameters struct {
@@ -534,7 +534,7 @@ type SnapStartParameters struct {
 
 	// Conditions where snap start is enabled. Valid values are PublishedVersions.
 	// +kubebuilder:validation:Optional
-	ApplyOn *string `json:"applyOn,omitempty" tf:"apply_on,omitempty"`
+	ApplyOn *string `json:"applyOn" tf:"apply_on,omitempty"`
 }
 
 type TracingConfigInitParameters struct {
@@ -553,7 +553,7 @@ type TracingConfigParameters struct {
 
 	// Whether to sample and trace a subset of incoming requests with AWS X-Ray. Valid values are PassThrough and Active. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1". If Active, Lambda will respect any tracing header it receives from an upstream service. If no tracing header is received, Lambda will call X-Ray for a tracing decision.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type VPCConfigInitParameters struct {

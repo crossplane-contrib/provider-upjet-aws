@@ -45,7 +45,7 @@ type ActionParameters struct {
 
 	// The action name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -98,11 +98,11 @@ type ActionPointParameters struct {
 
 	// An action defines the tasks the extension performs during the AppConfig workflow. Detailed below.
 	// +kubebuilder:validation:Optional
-	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
+	Action []ActionParameters `json:"action" tf:"action,omitempty"`
 
 	// The point at which to perform the defined actions. Valid points are PRE_CREATE_HOSTED_CONFIGURATION_VERSION, PRE_START_DEPLOYMENT, ON_DEPLOYMENT_START, ON_DEPLOYMENT_STEP, ON_DEPLOYMENT_BAKING, ON_DEPLOYMENT_COMPLETE, ON_DEPLOYMENT_ROLLED_BACK.
 	// +kubebuilder:validation:Optional
-	Point *string `json:"point,omitempty" tf:"point,omitempty"`
+	Point *string `json:"point" tf:"point,omitempty"`
 }
 
 type ExtensionInitParameters struct {
@@ -212,7 +212,7 @@ type ParameterParameters struct {
 
 	// The parameter name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Determines if a parameter value must be specified in the extension association.
 	// +kubebuilder:validation:Optional

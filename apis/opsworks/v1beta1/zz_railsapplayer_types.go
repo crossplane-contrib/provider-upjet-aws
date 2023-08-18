@@ -87,7 +87,7 @@ type RailsAppLayerCloudwatchConfigurationLogStreamsParameters struct {
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	File *string `json:"file,omitempty" tf:"file,omitempty"`
+	File *string `json:"file" tf:"file,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FileFingerprintLines *string `json:"fileFingerprintLines,omitempty" tf:"file_fingerprint_lines,omitempty"`
@@ -97,7 +97,7 @@ type RailsAppLayerCloudwatchConfigurationLogStreamsParameters struct {
 
 	// A human-readable name for the layer.
 	// +kubebuilder:validation:Optional
-	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MultilineStartPattern *string `json:"multilineStartPattern,omitempty" tf:"multiline_start_pattern,omitempty"`
@@ -176,11 +176,11 @@ type RailsAppLayerEBSVolumeParameters struct {
 
 	// The path to mount the EBS volume on the layer's instances.
 	// +kubebuilder:validation:Optional
-	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
+	MountPoint *string `json:"mountPoint" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
 	// +kubebuilder:validation:Optional
-	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *float64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	// +kubebuilder:validation:Optional
@@ -188,7 +188,7 @@ type RailsAppLayerEBSVolumeParameters struct {
 
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *float64 `json:"size" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional

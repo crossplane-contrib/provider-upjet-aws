@@ -29,7 +29,7 @@ type OperatingRegionsParameters struct {
 
 	// The name of the Region you want to add to the IPAM.
 	// +kubebuilder:validation:Optional
-	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
 }
 
 type VPCIpamInitParameters struct {

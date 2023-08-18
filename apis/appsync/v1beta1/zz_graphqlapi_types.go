@@ -47,7 +47,7 @@ type AdditionalAuthenticationProviderParameters struct {
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	// +kubebuilder:validation:Optional
-	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
 
 	// Nested argument containing Lambda authorizer configuration. Defined below.
 	// +kubebuilder:validation:Optional
@@ -127,7 +127,7 @@ type GraphQLAPILambdaAuthorizerConfigParameters struct {
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	// +kubebuilder:validation:Optional
-	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
+	AuthorizerURI *string `json:"authorizerUri" tf:"authorizer_uri,omitempty"`
 
 	// Regular expression for validation of tokens before the Lambda function is called.
 	// +kubebuilder:validation:Optional
@@ -225,7 +225,7 @@ type GraphQLAPIOpenIDConnectConfigParameters struct {
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 }
 
 type GraphQLAPIParameters struct {
@@ -315,7 +315,7 @@ type GraphQLAPIUserPoolConfigParameters struct {
 
 	// Action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
 	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
 	// User pool ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
@@ -364,7 +364,7 @@ type LambdaAuthorizerConfigParameters struct {
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	// +kubebuilder:validation:Optional
-	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
+	AuthorizerURI *string `json:"authorizerUri" tf:"authorizer_uri,omitempty"`
 
 	// Regular expression for validation of tokens before the Lambda function is called.
 	// +kubebuilder:validation:Optional
@@ -414,7 +414,7 @@ type LogConfigParameters struct {
 
 	// Field logging level. Valid values: ALL, ERROR, NONE.
 	// +kubebuilder:validation:Optional
-	FieldLogLevel *string `json:"fieldLogLevel,omitempty" tf:"field_log_level,omitempty"`
+	FieldLogLevel *string `json:"fieldLogLevel" tf:"field_log_level,omitempty"`
 }
 
 type OpenIDConnectConfigInitParameters struct {
@@ -463,7 +463,7 @@ type OpenIDConnectConfigParameters struct {
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 }
 
 type UserPoolConfigInitParameters struct {
@@ -502,7 +502,7 @@ type UserPoolConfigParameters struct {
 
 	// User pool ID.
 	// +kubebuilder:validation:Optional
-	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
 }
 
 // GraphQLAPISpec defines the desired state of GraphQLAPI

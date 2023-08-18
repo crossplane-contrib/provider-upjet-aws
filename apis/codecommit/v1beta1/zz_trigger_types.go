@@ -113,11 +113,11 @@ type TriggerTriggerParameters struct {
 
 	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
 	// +kubebuilder:validation:Optional
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// The name of the trigger.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // TriggerSpec defines the desired state of Trigger

@@ -29,7 +29,7 @@ type PauseClusterParameters struct {
 
 	// The identifier of the cluster to be paused.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+	ClusterIdentifier *string `json:"clusterIdentifier" tf:"cluster_identifier,omitempty"`
 }
 
 type ResizeClusterInitParameters struct {
@@ -76,7 +76,7 @@ type ResizeClusterParameters struct {
 
 	// The unique identifier for the cluster to resize.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+	ClusterIdentifier *string `json:"clusterIdentifier" tf:"cluster_identifier,omitempty"`
 
 	// The new cluster type for the specified cluster.
 	// +kubebuilder:validation:Optional
@@ -107,7 +107,7 @@ type ResumeClusterParameters struct {
 
 	// The identifier of the cluster to be resumed.
 	// +kubebuilder:validation:Optional
-	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+	ClusterIdentifier *string `json:"clusterIdentifier" tf:"cluster_identifier,omitempty"`
 }
 
 type ScheduledActionInitParameters struct {

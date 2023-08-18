@@ -41,15 +41,15 @@ type AliasParameters struct {
 
 	// Set to true if you want Route 53 to determine whether to respond to DNS queries using this resource record set by checking the health of the resource record set. Some resources have special requirements, see related part of documentation.
 	// +kubebuilder:validation:Optional
-	EvaluateTargetHealth *bool `json:"evaluateTargetHealth,omitempty" tf:"evaluate_target_health,omitempty"`
+	EvaluateTargetHealth *bool `json:"evaluateTargetHealth" tf:"evaluate_target_health,omitempty"`
 
 	// The name of the record.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the hosted zone to contain this record.
 	// +kubebuilder:validation:Optional
-	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
+	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
 }
 
 type CidrRoutingPolicyInitParameters struct {
@@ -74,11 +74,11 @@ type CidrRoutingPolicyParameters struct {
 
 	// The CIDR collection ID. See the aws_route53_cidr_collection resource for more details.
 	// +kubebuilder:validation:Optional
-	CollectionID *string `json:"collectionId,omitempty" tf:"collection_id,omitempty"`
+	CollectionID *string `json:"collectionId" tf:"collection_id,omitempty"`
 
 	// The CIDR collection location name. See the aws_route53_cidr_location resource for more details. A location_name with an asterisk "*" can be used to create a default CIDR record. collection_id is still required for default record.
 	// +kubebuilder:validation:Optional
-	LocationName *string `json:"locationName,omitempty" tf:"location_name,omitempty"`
+	LocationName *string `json:"locationName" tf:"location_name,omitempty"`
 }
 
 type FailoverRoutingPolicyInitParameters struct {
@@ -97,7 +97,7 @@ type FailoverRoutingPolicyParameters struct {
 
 	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type GeolocationRoutingPolicyInitParameters struct {
@@ -356,7 +356,7 @@ type WeightedRoutingPolicyParameters struct {
 
 	// A numeric value indicating the relative weight of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
 
 // RecordSpec defines the desired state of Record

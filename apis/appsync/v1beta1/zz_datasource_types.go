@@ -240,7 +240,7 @@ type DeltaSyncConfigParameters struct {
 
 	// User-supplied name for the data source.
 	// +kubebuilder:validation:Optional
-	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
+	DeltaSyncTableName *string `json:"deltaSyncTableName" tf:"delta_sync_table_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
@@ -319,7 +319,7 @@ type ElasticsearchConfigParameters struct {
 
 	// HTTP endpoint of the Elasticsearch domain.
 	// +kubebuilder:validation:Optional
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// AWS region of Elasticsearch domain. Defaults to current region.
 	// +kubebuilder:validation:Optional
@@ -342,7 +342,7 @@ type EventBridgeConfigParameters struct {
 
 	// ARN for the EventBridge bus.
 	// +kubebuilder:validation:Optional
-	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
+	EventBusArn *string `json:"eventBusArn" tf:"event_bus_arn,omitempty"`
 }
 
 type HTTPConfigInitParameters struct {
@@ -371,7 +371,7 @@ type HTTPConfigParameters struct {
 
 	// HTTP URL.
 	// +kubebuilder:validation:Optional
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 }
 
 type HTTPEndpointConfigInitParameters struct {
@@ -411,11 +411,11 @@ type HTTPEndpointConfigParameters struct {
 
 	// AWS secret store ARN for database credentials.
 	// +kubebuilder:validation:Optional
-	AwsSecretStoreArn *string `json:"awsSecretStoreArn,omitempty" tf:"aws_secret_store_arn,omitempty"`
+	AwsSecretStoreArn *string `json:"awsSecretStoreArn" tf:"aws_secret_store_arn,omitempty"`
 
 	// Amazon RDS cluster identifier.
 	// +kubebuilder:validation:Optional
-	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+	DBClusterIdentifier *string `json:"dbClusterIdentifier" tf:"db_cluster_identifier,omitempty"`
 
 	// Logical database name.
 	// +kubebuilder:validation:Optional
@@ -446,7 +446,7 @@ type LambdaConfigParameters struct {
 
 	// ARN for the Lambda function.
 	// +kubebuilder:validation:Optional
-	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
 }
 
 type OpensearchserviceConfigInitParameters struct {
@@ -468,7 +468,7 @@ type OpensearchserviceConfigParameters struct {
 
 	// HTTP endpoint of the OpenSearch domain.
 	// +kubebuilder:validation:Optional
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// AWS region of the OpenSearch domain. Defaults to current region.
 	// +kubebuilder:validation:Optional

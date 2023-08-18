@@ -69,11 +69,11 @@ type MultiplexMultiplexSettingsParameters struct {
 
 	// Transport stream bit rate.
 	// +kubebuilder:validation:Optional
-	TransportStreamBitrate *float64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
+	TransportStreamBitrate *float64 `json:"transportStreamBitrate" tf:"transport_stream_bitrate,omitempty"`
 
 	// Unique ID for each multiplex.
 	// +kubebuilder:validation:Optional
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *float64 `json:"transportStreamId" tf:"transport_stream_id,omitempty"`
 
 	// Transport stream reserved bit rate.
 	// +kubebuilder:validation:Optional

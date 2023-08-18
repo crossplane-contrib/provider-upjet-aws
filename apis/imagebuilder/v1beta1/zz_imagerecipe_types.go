@@ -124,11 +124,11 @@ type ComponentParameterParameters struct {
 
 	// The name of the component parameter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value for the named component parameter.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ImageRecipeBlockDeviceMappingInitParameters struct {
@@ -363,7 +363,7 @@ type SystemsManagerAgentParameters struct {
 
 	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
 	// +kubebuilder:validation:Optional
-	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
+	UninstallAfterBuild *bool `json:"uninstallAfterBuild" tf:"uninstall_after_build,omitempty"`
 }
 
 // ImageRecipeSpec defines the desired state of ImageRecipe

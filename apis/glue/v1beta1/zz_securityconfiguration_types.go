@@ -70,14 +70,14 @@ type EncryptionConfigurationObservation struct {
 type EncryptionConfigurationParameters struct {
 
 	// +kubebuilder:validation:Optional
-	CloudwatchEncryption []CloudwatchEncryptionParameters `json:"cloudwatchEncryption,omitempty" tf:"cloudwatch_encryption,omitempty"`
+	CloudwatchEncryption []CloudwatchEncryptionParameters `json:"cloudwatchEncryption" tf:"cloudwatch_encryption,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	JobBookmarksEncryption []JobBookmarksEncryptionParameters `json:"jobBookmarksEncryption,omitempty" tf:"job_bookmarks_encryption,omitempty"`
+	JobBookmarksEncryption []JobBookmarksEncryptionParameters `json:"jobBookmarksEncryption" tf:"job_bookmarks_encryption,omitempty"`
 
 	// A s3_encryption  block as described below, which contains encryption configuration for S3 data.
 	// +kubebuilder:validation:Optional
-	S3Encryption []S3EncryptionParameters `json:"s3Encryption,omitempty" tf:"s3_encryption,omitempty"`
+	S3Encryption []S3EncryptionParameters `json:"s3Encryption" tf:"s3_encryption,omitempty"`
 }
 
 type JobBookmarksEncryptionInitParameters struct {

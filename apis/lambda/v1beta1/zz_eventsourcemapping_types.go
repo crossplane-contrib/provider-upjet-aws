@@ -83,7 +83,7 @@ type DocumentDBEventSourceConfigParameters struct {
 
 	// The name of the database to consume within the DocumentDB cluster.
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes. Valid values: UpdateLookup, Default.
 	// +kubebuilder:validation:Optional
@@ -415,7 +415,7 @@ type OnFailureParameters struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
 	// +kubebuilder:validation:Optional
-	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 }
 
 type ScalingConfigInitParameters struct {
@@ -453,7 +453,7 @@ type SelfManagedEventSourceParameters struct {
 
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
 	// +kubebuilder:validation:Optional
-	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
+	Endpoints map[string]*string `json:"endpoints" tf:"endpoints,omitempty"`
 }
 
 type SelfManagedKafkaEventSourceConfigInitParameters struct {
@@ -497,11 +497,11 @@ type SourceAccessConfigurationParameters struct {
 
 	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The URI for this configuration.  For type VPC_SUBNET the value should be subnet:subnet_id where subnet_id is the value you would find in an aws_subnet resource's id attribute.  For type VPC_SECURITY_GROUP the value should be security_group:security_group_id where security_group_id is the value you would find in an aws_security_group resource's id attribute.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 // EventSourceMappingSpec defines the desired state of EventSourceMapping

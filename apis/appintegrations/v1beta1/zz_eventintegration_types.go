@@ -29,7 +29,7 @@ type EventFilterParameters struct {
 
 	// Source of the events.
 	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+	Source *string `json:"source" tf:"source,omitempty"`
 }
 
 type EventIntegrationInitParameters struct {

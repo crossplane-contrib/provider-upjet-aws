@@ -35,11 +35,11 @@ type ActionThresholdParameters struct {
 
 	// The type of threshold for a notification. Valid values are PERCENTAGE or ABSOLUTE_VALUE.
 	// +kubebuilder:validation:Optional
-	ActionThresholdType *string `json:"actionThresholdType,omitempty" tf:"action_threshold_type,omitempty"`
+	ActionThresholdType *string `json:"actionThresholdType" tf:"action_threshold_type,omitempty"`
 
 	// The threshold of a notification.
 	// +kubebuilder:validation:Optional
-	ActionThresholdValue *float64 `json:"actionThresholdValue,omitempty" tf:"action_threshold_value,omitempty"`
+	ActionThresholdValue *float64 `json:"actionThresholdValue" tf:"action_threshold_value,omitempty"`
 }
 
 type BudgetActionInitParameters struct {
@@ -289,11 +289,11 @@ type ScpActionDefinitionParameters struct {
 
 	// The policy ID attached.
 	// +kubebuilder:validation:Optional
-	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
+	PolicyID *string `json:"policyId" tf:"policy_id,omitempty"`
 
 	// A list of target IDs.
 	// +kubebuilder:validation:Optional
-	TargetIds []*string `json:"targetIds,omitempty" tf:"target_ids,omitempty"`
+	TargetIds []*string `json:"targetIds" tf:"target_ids,omitempty"`
 }
 
 type SsmActionDefinitionInitParameters struct {
@@ -321,11 +321,11 @@ type SsmActionDefinitionParameters struct {
 
 	// The action subType. Valid values are STOP_EC2_INSTANCES or STOP_RDS_INSTANCES.
 	// +kubebuilder:validation:Optional
-	ActionSubType *string `json:"actionSubType,omitempty" tf:"action_sub_type,omitempty"`
+	ActionSubType *string `json:"actionSubType" tf:"action_sub_type,omitempty"`
 
 	// The EC2 and RDS instance IDs.
 	// +kubebuilder:validation:Optional
-	InstanceIds []*string `json:"instanceIds,omitempty" tf:"instance_ids,omitempty"`
+	InstanceIds []*string `json:"instanceIds" tf:"instance_ids,omitempty"`
 
 	// The Region to run the SSM document.
 	// +kubebuilder:validation:Required
@@ -354,11 +354,11 @@ type SubscriberParameters struct {
 
 	// The address that AWS sends budget notifications to, either an SNS topic or an email.
 	// +kubebuilder:validation:Optional
-	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+	Address *string `json:"address" tf:"address,omitempty"`
 
 	// The type of notification that AWS sends to a subscriber. Valid values are SNS or EMAIL.
 	// +kubebuilder:validation:Optional
-	SubscriptionType *string `json:"subscriptionType,omitempty" tf:"subscription_type,omitempty"`
+	SubscriptionType *string `json:"subscriptionType" tf:"subscription_type,omitempty"`
 }
 
 // BudgetActionSpec defines the desired state of BudgetAction

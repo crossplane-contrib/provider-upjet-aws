@@ -35,11 +35,11 @@ type ContentTypeProfileConfigParameters struct {
 
 	// Object that contains an attribute items that contains the list of configurations for a field-level encryption content type-profile. See Content Type Profile.
 	// +kubebuilder:validation:Optional
-	ContentTypeProfiles []ContentTypeProfilesParameters `json:"contentTypeProfiles,omitempty" tf:"content_type_profiles,omitempty"`
+	ContentTypeProfiles []ContentTypeProfilesParameters `json:"contentTypeProfiles" tf:"content_type_profiles,omitempty"`
 
 	// specifies what to do when an unknown content type is provided for the profile. If true, content is forwarded without being encrypted when the content type is unknown. If false (the default), an error is returned when the content type is unknown.
 	// +kubebuilder:validation:Optional
-	ForwardWhenContentTypeIsUnknown *bool `json:"forwardWhenContentTypeIsUnknown,omitempty" tf:"forward_when_content_type_is_unknown,omitempty"`
+	ForwardWhenContentTypeIsUnknown *bool `json:"forwardWhenContentTypeIsUnknown" tf:"forward_when_content_type_is_unknown,omitempty"`
 }
 
 type ContentTypeProfilesInitParameters struct {
@@ -74,11 +74,11 @@ type ContentTypeProfilesItemsParameters struct {
 
 	// he content type for a field-level encryption content type-profile mapping. Valid value is application/x-www-form-urlencoded.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// The format for a field-level encryption content type-profile mapping. Valid value is URLEncoded.
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 
 	// The profile ID for a field-level encryption content type-profile mapping.
 	// +kubebuilder:validation:Optional
@@ -92,7 +92,7 @@ type ContentTypeProfilesObservation struct {
 type ContentTypeProfilesParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Items []ContentTypeProfilesItemsParameters `json:"items,omitempty" tf:"items,omitempty"`
+	Items []ContentTypeProfilesItemsParameters `json:"items" tf:"items,omitempty"`
 }
 
 type FieldLevelEncryptionConfigInitParameters struct {
@@ -170,7 +170,7 @@ type QueryArgProfileConfigParameters struct {
 
 	// Flag to set if you want a request to be forwarded to the origin even if the profile specified by the field-level encryption query argument, fle-profile, is unknown.
 	// +kubebuilder:validation:Optional
-	ForwardWhenQueryArgProfileIsUnknown *bool `json:"forwardWhenQueryArgProfileIsUnknown,omitempty" tf:"forward_when_query_arg_profile_is_unknown,omitempty"`
+	ForwardWhenQueryArgProfileIsUnknown *bool `json:"forwardWhenQueryArgProfileIsUnknown" tf:"forward_when_query_arg_profile_is_unknown,omitempty"`
 
 	// Object that contains an attribute items that contains the list ofrofiles specified for query argument-profile mapping for field-level encryption. see Query Arg Profile.
 	// +kubebuilder:validation:Optional
@@ -214,7 +214,7 @@ type QueryArgProfilesItemsParameters struct {
 
 	// Query argument for field-level encryption query argument-profile mapping.
 	// +kubebuilder:validation:Optional
-	QueryArg *string `json:"queryArg,omitempty" tf:"query_arg,omitempty"`
+	QueryArg *string `json:"queryArg" tf:"query_arg,omitempty"`
 }
 
 type QueryArgProfilesObservation struct {

@@ -123,7 +123,7 @@ type LocationParameters struct {
 
 	// Type of API entity to which the documentation content appliesE.g., API, METHOD or REQUEST_BODY
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // DocumentationPartSpec defines the desired state of DocumentationPart

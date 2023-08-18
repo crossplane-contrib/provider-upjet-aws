@@ -136,7 +136,7 @@ type OptionParameters struct {
 
 	// The Name of the Option (e.g., MEMCACHED).
 	// +kubebuilder:validation:Optional
-	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
+	OptionName *string `json:"optionName" tf:"option_name,omitempty"`
 
 	// A list of option settings to apply.
 	// +kubebuilder:validation:Optional
@@ -177,11 +177,11 @@ type OptionSettingsParameters struct {
 
 	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Value of the setting.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // OptionGroupSpec defines the desired state of OptionGroup

@@ -35,11 +35,11 @@ type IPSetDescriptorParameters struct {
 
 	// The string like IPV4 or IPV6.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The CIDR notation.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type IPSetInitParameters struct {

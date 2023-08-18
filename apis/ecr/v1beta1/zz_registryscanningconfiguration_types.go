@@ -66,10 +66,10 @@ type RepositoryFilterObservation struct {
 type RepositoryFilterParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+	Filter *string `json:"filter" tf:"filter,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
 }
 
 type RuleInitParameters struct {
@@ -94,11 +94,11 @@ type RuleParameters struct {
 
 	// One or more repository filter blocks, containing a filter  and a filter_type .
 	// +kubebuilder:validation:Optional
-	RepositoryFilter []RepositoryFilterParameters `json:"repositoryFilter,omitempty" tf:"repository_filter,omitempty"`
+	RepositoryFilter []RepositoryFilterParameters `json:"repositoryFilter" tf:"repository_filter,omitempty"`
 
 	// The frequency that scans are performed at for a private registry. Can be SCAN_ON_PUSH, CONTINUOUS_SCAN, or MANUAL.
 	// +kubebuilder:validation:Optional
-	ScanFrequency *string `json:"scanFrequency,omitempty" tf:"scan_frequency,omitempty"`
+	ScanFrequency *string `json:"scanFrequency" tf:"scan_frequency,omitempty"`
 }
 
 // RegistryScanningConfigurationSpec defines the desired state of RegistryScanningConfiguration

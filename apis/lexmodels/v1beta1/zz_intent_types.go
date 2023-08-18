@@ -41,11 +41,11 @@ type CodeHookParameters struct {
 	// to invoke your Lambda function. For more information, see
 	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	// +kubebuilder:validation:Optional
-	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
+	MessageVersion *string `json:"messageVersion" tf:"message_version,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lambda function.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type ConclusionStatementInitParameters struct {
@@ -91,11 +91,11 @@ type ConclusionStatementMessageParameters struct {
 
 	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The content type of the message string.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
@@ -122,7 +122,7 @@ type ConclusionStatementParameters struct {
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message. Must contain between 1 and 15 messages.
 	// +kubebuilder:validation:Optional
-	Message []ConclusionStatementMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
+	Message []ConclusionStatementMessageParameters `json:"message" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -177,11 +177,11 @@ type ConfirmationPromptMessageParameters struct {
 
 	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The content type of the message string.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
@@ -209,13 +209,13 @@ type ConfirmationPromptParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message. Must contain between 1 and 15 messages.
 	// +kubebuilder:validation:Optional
-	Message []ConfirmationPromptMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
+	Message []ConfirmationPromptMessageParameters `json:"message" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -252,11 +252,11 @@ type DialogCodeHookParameters struct {
 	// to invoke your Lambda function. For more information, see
 	// Using Lambda Functions. Must be less than or equal to 5 characters in length.
 	// +kubebuilder:validation:Optional
-	MessageVersion *string `json:"messageVersion,omitempty" tf:"message_version,omitempty"`
+	MessageVersion *string `json:"messageVersion" tf:"message_version,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lambda function.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type FollowUpPromptInitParameters struct {
@@ -285,13 +285,13 @@ type FollowUpPromptParameters struct {
 
 	// Prompts for information from the user. Attributes are documented under prompt.
 	// +kubebuilder:validation:Optional
-	Prompt []PromptParameters `json:"prompt,omitempty" tf:"prompt,omitempty"`
+	Prompt []PromptParameters `json:"prompt" tf:"prompt,omitempty"`
 
 	// If the user answers "no" to the question defined in the prompt field,
 	// Amazon Lex responds with this statement to acknowledge that the intent was canceled. Attributes are
 	// documented below under statement.
 	// +kubebuilder:validation:Optional
-	RejectionStatement []RejectionStatementParameters `json:"rejectionStatement,omitempty" tf:"rejection_statement,omitempty"`
+	RejectionStatement []RejectionStatementParameters `json:"rejectionStatement" tf:"rejection_statement,omitempty"`
 }
 
 type FulfillmentActivityInitParameters struct {
@@ -326,7 +326,7 @@ type FulfillmentActivityParameters struct {
 	// How the intent should be fulfilled, either by running a Lambda function or by
 	// returning the slot data to the client application. Type can be either ReturnIntent or CodeHook, as documented here.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type IntentInitParameters_2 struct {
@@ -580,11 +580,11 @@ type IntentRejectionStatementMessageParameters struct {
 
 	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The content type of the message string.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
@@ -611,7 +611,7 @@ type IntentRejectionStatementParameters struct {
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message. Must contain between 1 and 15 messages.
 	// +kubebuilder:validation:Optional
-	Message []IntentRejectionStatementMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
+	Message []IntentRejectionStatementMessageParameters `json:"message" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -666,11 +666,11 @@ type PromptMessageParameters struct {
 
 	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The content type of the message string.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
@@ -698,13 +698,13 @@ type PromptParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message. Must contain between 1 and 15 messages.
 	// +kubebuilder:validation:Optional
-	Message []PromptMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
+	Message []PromptMessageParameters `json:"message" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -756,11 +756,11 @@ type RejectionStatementMessageParameters struct {
 
 	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The content type of the message string.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
@@ -787,7 +787,7 @@ type RejectionStatementParameters struct {
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message. Must contain between 1 and 15 messages.
 	// +kubebuilder:validation:Optional
-	Message []RejectionStatementMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
+	Message []RejectionStatementMessageParameters `json:"message" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -882,7 +882,7 @@ type SlotParameters struct {
 
 	// The name of the intent slot that you want to create. The name is case sensitive. Must be less than or equal to 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Directs Lex the order in which to elicit this slot value from the user.
 	// For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for
@@ -905,12 +905,12 @@ type SlotParameters struct {
 
 	// Specifies whether the slot is required or optional.
 	// +kubebuilder:validation:Optional
-	SlotConstraint *string `json:"slotConstraint,omitempty" tf:"slot_constraint,omitempty"`
+	SlotConstraint *string `json:"slotConstraint" tf:"slot_constraint,omitempty"`
 
 	// The type of the slot, either a custom slot type that you defined or one of
 	// the built-in slot types. Must be less than or equal to 100 characters in length.
 	// +kubebuilder:validation:Optional
-	SlotType *string `json:"slotType,omitempty" tf:"slot_type,omitempty"`
+	SlotType *string `json:"slotType" tf:"slot_type,omitempty"`
 
 	// The version of the slot type. Must be less than or equal to 64 characters in length.
 	// +kubebuilder:validation:Optional
@@ -968,11 +968,11 @@ type ValueElicitationPromptMessageParameters struct {
 
 	// The text of the message. Must be less than or equal to 1000 characters in length.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The content type of the message string.
 	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
@@ -1000,13 +1000,13 @@ type ValueElicitationPromptParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
 	// Attributes are documented under message. Must contain between 1 and 15 messages.
 	// +kubebuilder:validation:Optional
-	Message []ValueElicitationPromptMessageParameters `json:"message,omitempty" tf:"message,omitempty"`
+	Message []ValueElicitationPromptMessageParameters `json:"message" tf:"message,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see

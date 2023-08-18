@@ -70,11 +70,11 @@ type CustomImageParameters struct {
 
 	// The name of the App Image Config.
 	// +kubebuilder:validation:Optional
-	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -164,7 +164,7 @@ type DefaultSpaceSettingsParameters struct {
 
 	// The execution role for the space.
 	// +kubebuilder:validation:Optional
-	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
 	// The Jupyter server's app settings. See Jupyter Server App Settings below.
 	// +kubebuilder:validation:Optional
@@ -222,7 +222,7 @@ type DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters struct 
 
 	// The URL of the Git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 }
 
 type DefaultUserSettingsJupyterServerAppSettingsInitParameters struct {
@@ -658,7 +658,7 @@ type JupyterServerAppSettingsCodeRepositoryParameters struct {
 
 	// The URL of the Git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 }
 
 type JupyterServerAppSettingsDefaultResourceSpecInitParameters struct {
@@ -946,11 +946,11 @@ type RSessionAppSettingsCustomImageParameters struct {
 
 	// The name of the App Image Config.
 	// +kubebuilder:validation:Optional
-	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
 
 	// The name of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
@@ -1151,7 +1151,7 @@ type RStudioServerProDomainSettingsParameters struct {
 
 	// The ARN of the execution role for the RStudioServerPro Domain-level app.
 	// +kubebuilder:validation:Optional
-	DomainExecutionRoleArn *string `json:"domainExecutionRoleArn,omitempty" tf:"domain_execution_role_arn,omitempty"`
+	DomainExecutionRoleArn *string `json:"domainExecutionRoleArn" tf:"domain_execution_role_arn,omitempty"`
 
 	// A URL pointing to an RStudio Connect server.
 	// +kubebuilder:validation:Optional

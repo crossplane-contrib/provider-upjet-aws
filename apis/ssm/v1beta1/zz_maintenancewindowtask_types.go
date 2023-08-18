@@ -53,11 +53,11 @@ type AutomationParametersParameterParameters struct {
 
 	// The name of the maintenance window task.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The array of strings.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type AutomationParametersParameters struct {
@@ -314,11 +314,11 @@ type MaintenanceWindowTaskTargetsObservation struct {
 type MaintenanceWindowTaskTargetsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The array of strings.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type NotificationConfigInitParameters struct {
@@ -455,11 +455,11 @@ type RunCommandParametersParameterParameters struct {
 
 	// The name of the maintenance window task.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The array of strings.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type RunCommandParametersParameters struct {

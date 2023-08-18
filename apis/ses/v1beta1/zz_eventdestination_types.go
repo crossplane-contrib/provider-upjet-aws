@@ -41,15 +41,15 @@ type CloudwatchDestinationParameters struct {
 
 	// The default value for the event
 	// +kubebuilder:validation:Optional
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+	DefaultValue *string `json:"defaultValue" tf:"default_value,omitempty"`
 
 	// The name for the dimension
 	// +kubebuilder:validation:Optional
-	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
+	DimensionName *string `json:"dimensionName" tf:"dimension_name,omitempty"`
 
 	// The source for the value. May be any of "messageTag", "emailHeader" or "linkTag".
 	// +kubebuilder:validation:Optional
-	ValueSource *string `json:"valueSource,omitempty" tf:"value_source,omitempty"`
+	ValueSource *string `json:"valueSource" tf:"value_source,omitempty"`
 }
 
 type EventDestinationInitParameters struct {

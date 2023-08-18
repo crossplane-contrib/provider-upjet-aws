@@ -91,7 +91,7 @@ type SizeConstraintsFieldToMatchParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SizeConstraintsInitParameters struct {
@@ -146,16 +146,16 @@ type SizeConstraintsParameters struct {
 	// e.g., EQ, NE, LT, GT.
 	// See docs for all supported values.
 	// +kubebuilder:validation:Optional
-	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
+	ComparisonOperator *string `json:"comparisonOperator" tf:"comparison_operator,omitempty"`
 
 	// Specifies where in a web request to look for the size constraint.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []SizeConstraintsFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []SizeConstraintsFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// The size in bytes that you want to compare against the size of the specified field_to_match.
 	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
 	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *float64 `json:"size" tf:"size,omitempty"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
@@ -164,7 +164,7 @@ type SizeConstraintsParameters struct {
 	// for all supported values.
 	// Note: if you choose BODY as type, you must choose NONE because CloudFront forwards only the first 8192 bytes for inspection.
 	// +kubebuilder:validation:Optional
-	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
 
 // SizeConstraintSetSpec defines the desired state of SizeConstraintSet

@@ -61,11 +61,11 @@ type ObjectCopyGrantParameters struct {
 
 	// List of permissions to grant to grantee. Valid values are READ, READ_ACP, WRITE_ACP, FULL_CONTROL.
 	// +kubebuilder:validation:Optional
-	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 
 	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// URI of the grantee group. Used only when type is Group.
 	// +kubebuilder:validation:Optional

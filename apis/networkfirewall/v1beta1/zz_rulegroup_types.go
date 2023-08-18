@@ -29,7 +29,7 @@ type ActionDefinitionPublishMetricActionParameters struct {
 
 	// Set of configuration blocks containing the dimension settings to use for Amazon CloudWatch custom metrics. See Dimension below for details.
 	// +kubebuilder:validation:Optional
-	Dimension []PublishMetricActionDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
+	Dimension []PublishMetricActionDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 }
 
 type CustomActionActionDefinitionInitParameters struct {
@@ -48,7 +48,7 @@ type CustomActionActionDefinitionParameters struct {
 
 	// A configuration block describing the stateless inspection criteria that publishes the specified metrics to Amazon CloudWatch for the matching packet. You can pair this custom action with any of the standard stateless rule actions. See Publish Metric Action below for details.
 	// +kubebuilder:validation:Optional
-	PublishMetricAction []ActionDefinitionPublishMetricActionParameters `json:"publishMetricAction,omitempty" tf:"publish_metric_action,omitempty"`
+	PublishMetricAction []ActionDefinitionPublishMetricActionParameters `json:"publishMetricAction" tf:"publish_metric_action,omitempty"`
 }
 
 type CustomActionInitParameters struct {
@@ -73,11 +73,11 @@ type CustomActionParameters struct {
 
 	// A configuration block describing the custom action associated with the action_name. See Action Definition below for details.
 	// +kubebuilder:validation:Optional
-	ActionDefinition []CustomActionActionDefinitionParameters `json:"actionDefinition,omitempty" tf:"action_definition,omitempty"`
+	ActionDefinition []CustomActionActionDefinitionParameters `json:"actionDefinition" tf:"action_definition,omitempty"`
 
 	// A friendly name of the custom action.
 	// +kubebuilder:validation:Optional
-	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
+	ActionName *string `json:"actionName" tf:"action_name,omitempty"`
 }
 
 type DestinationInitParameters struct {
@@ -96,7 +96,7 @@ type DestinationParameters struct {
 
 	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
 	// +kubebuilder:validation:Optional
-	AddressDefinition *string `json:"addressDefinition,omitempty" tf:"address_definition,omitempty"`
+	AddressDefinition *string `json:"addressDefinition" tf:"address_definition,omitempty"`
 }
 
 type DestinationPortInitParameters struct {
@@ -121,7 +121,7 @@ type DestinationPortParameters struct {
 
 	// The lower limit of the port range. This must be less than or equal to the to_port.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// The upper limit of the port range. This must be greater than or equal to the from_port.
 	// +kubebuilder:validation:Optional
@@ -174,27 +174,27 @@ type HeaderParameters struct {
 
 	// Set of configuration blocks describing the destination IP address and address ranges to inspect for, in CIDR notation. If not specified, this matches with any destination address. See Destination below for details.
 	// +kubebuilder:validation:Optional
-	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination *string `json:"destination" tf:"destination,omitempty"`
 
 	// Set of configuration blocks describing the destination ports to inspect for. If not specified, this matches with any destination port. See Destination Port below for details.
 	// +kubebuilder:validation:Optional
-	DestinationPort *string `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+	DestinationPort *string `json:"destinationPort" tf:"destination_port,omitempty"`
 
 	// The direction of traffic flow to inspect. Valid values: ANY or FORWARD.
 	// +kubebuilder:validation:Optional
-	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+	Direction *string `json:"direction" tf:"direction,omitempty"`
 
 	// The protocol to inspect. Valid values: IP, TCP, UDP, ICMP, HTTP, FTP, TLS, SMB, DNS, DCERPC, SSH, SMTP, IMAP, MSN, KRB5, IKEV2, TFTP, NTP, DHCP.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Set of configuration blocks describing the source IP address and address ranges to inspect for, in CIDR notation. If not specified, this matches with any source address. See Source below for details.
 	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+	Source *string `json:"source" tf:"source,omitempty"`
 
 	// Set of configuration blocks describing the source ports to inspect for. If not specified, this matches with any source port. See Source Port below for details.
 	// +kubebuilder:validation:Optional
-	SourcePort *string `json:"sourcePort,omitempty" tf:"source_port,omitempty"`
+	SourcePort *string `json:"sourcePort" tf:"source_port,omitempty"`
 }
 
 type IPSetInitParameters struct {
@@ -213,7 +213,7 @@ type IPSetParameters struct {
 
 	// Set of port ranges.
 	// +kubebuilder:validation:Optional
-	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
+	Definition []*string `json:"definition" tf:"definition,omitempty"`
 }
 
 type IPSetReferenceInitParameters struct {
@@ -264,11 +264,11 @@ type IPSetReferencesParameters struct {
 
 	// Set of configuration blocks that define the IP Reference information. See IP Set Reference below for details.
 	// +kubebuilder:validation:Optional
-	IPSetReference []IPSetReferenceParameters `json:"ipSetReference,omitempty" tf:"ip_set_reference,omitempty"`
+	IPSetReference []IPSetReferenceParameters `json:"ipSetReference" tf:"ip_set_reference,omitempty"`
 
 	// An unique alphanumeric string to identify the port_set.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 }
 
 type IPSetsInitParameters struct {
@@ -293,11 +293,11 @@ type IPSetsParameters struct {
 
 	// A configuration block that defines a set of IP addresses. See IP Set below for details.
 	// +kubebuilder:validation:Optional
-	IPSet []IPSetParameters `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
+	IPSet []IPSetParameters `json:"ipSet" tf:"ip_set,omitempty"`
 
 	// An unique alphanumeric string to identify the port_set.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 }
 
 type MatchAttributesInitParameters struct {
@@ -385,7 +385,7 @@ type PortSetParameters struct {
 
 	// Set of port ranges.
 	// +kubebuilder:validation:Optional
-	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
+	Definition []*string `json:"definition" tf:"definition,omitempty"`
 }
 
 type PortSetsInitParameters struct {
@@ -410,11 +410,11 @@ type PortSetsParameters struct {
 
 	// An unique alphanumeric string to identify the port_set.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// A configuration block that defines a set of port ranges. See Port Set below for details.
 	// +kubebuilder:validation:Optional
-	PortSet []PortSetParameters `json:"portSet,omitempty" tf:"port_set,omitempty"`
+	PortSet []PortSetParameters `json:"portSet" tf:"port_set,omitempty"`
 }
 
 type PublishMetricActionDimensionInitParameters struct {
@@ -433,7 +433,7 @@ type PublishMetricActionDimensionParameters struct {
 
 	// The value to use in the custom metric dimension.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ReferenceSetsInitParameters struct {
@@ -472,11 +472,11 @@ type RuleDefinitionParameters struct {
 
 	// Set of actions to take on a packet that matches one of the stateless rule definition's match_attributes. For every rule you must specify 1 standard action, and you can add custom actions. Standard actions include: aws:pass, aws:drop, aws:forward_to_sfe.
 	// +kubebuilder:validation:Optional
-	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+	Actions []*string `json:"actions" tf:"actions,omitempty"`
 
 	// A configuration block containing criteria for AWS Network Firewall to use to inspect an individual packet in stateless rule inspection. See Match Attributes below for details.
 	// +kubebuilder:validation:Optional
-	MatchAttributes []MatchAttributesParameters `json:"matchAttributes,omitempty" tf:"match_attributes,omitempty"`
+	MatchAttributes []MatchAttributesParameters `json:"matchAttributes" tf:"match_attributes,omitempty"`
 }
 
 type RuleGroupEncryptionConfigurationInitParameters struct {
@@ -505,7 +505,7 @@ type RuleGroupEncryptionConfigurationParameters struct {
 
 	// The type of AWS KMS key to use for encryption of your Network Firewall resources. Valid values are CUSTOMER_KMS and AWS_OWNED_KMS_KEY.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RuleGroupInitParameters struct {
@@ -656,7 +656,7 @@ type RuleGroupRuleGroupParameters struct {
 
 	// A configuration block that defines the stateful or stateless rules for the rule group. See Rules Source below for details.
 	// +kubebuilder:validation:Optional
-	RulesSource []RulesSourceParameters `json:"rulesSource,omitempty" tf:"rules_source,omitempty"`
+	RulesSource []RulesSourceParameters `json:"rulesSource" tf:"rules_source,omitempty"`
 
 	// A configuration block that defines stateful rule options for the rule group. See Stateful Rule Options below for details.
 	// +kubebuilder:validation:Optional
@@ -688,7 +688,7 @@ type RuleOptionParameters struct {
 	// Keyword defined by open source detection systems like Snort or Suricata for stateful rule inspection.
 	// See Snort General Rule Options or Suricata Rule Options for more details.
 	// +kubebuilder:validation:Optional
-	Keyword *string `json:"keyword,omitempty" tf:"keyword,omitempty"`
+	Keyword *string `json:"keyword" tf:"keyword,omitempty"`
 
 	// Set of strings for additional settings to use in stateful rule inspection.
 	// +kubebuilder:validation:Optional
@@ -767,15 +767,15 @@ type RulesSourceListParameters struct {
 
 	// String value to specify whether domains in the target list are allowed or denied access. Valid values: ALLOWLIST, DENYLIST.
 	// +kubebuilder:validation:Optional
-	GeneratedRulesType *string `json:"generatedRulesType,omitempty" tf:"generated_rules_type,omitempty"`
+	GeneratedRulesType *string `json:"generatedRulesType" tf:"generated_rules_type,omitempty"`
 
 	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
 	// +kubebuilder:validation:Optional
-	TargetTypes []*string `json:"targetTypes,omitempty" tf:"target_types,omitempty"`
+	TargetTypes []*string `json:"targetTypes" tf:"target_types,omitempty"`
 
 	// Set of domains that you want to inspect for in your traffic flows.
 	// +kubebuilder:validation:Optional
-	Targets []*string `json:"targets,omitempty" tf:"targets,omitempty"`
+	Targets []*string `json:"targets" tf:"targets,omitempty"`
 }
 
 type RulesSourceObservation struct {
@@ -828,7 +828,7 @@ type SourceParameters struct {
 
 	// An IP address or a block of IP addresses in CIDR notation. AWS Network Firewall supports all address ranges for IPv4.
 	// +kubebuilder:validation:Optional
-	AddressDefinition *string `json:"addressDefinition,omitempty" tf:"address_definition,omitempty"`
+	AddressDefinition *string `json:"addressDefinition" tf:"address_definition,omitempty"`
 }
 
 type SourcePortInitParameters struct {
@@ -853,7 +853,7 @@ type SourcePortParameters struct {
 
 	// The lower limit of the port range. This must be less than or equal to the to_port.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// The upper limit of the port range. This must be greater than or equal to the from_port.
 	// +kubebuilder:validation:Optional
@@ -900,22 +900,22 @@ type StatefulRuleOptionsParameters struct {
 
 	// Indicates how to manage the order of the rule evaluation for the rule group. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	// +kubebuilder:validation:Optional
-	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
+	RuleOrder *string `json:"ruleOrder" tf:"rule_order,omitempty"`
 }
 
 type StatefulRuleParameters struct {
 
 	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP or PASS.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// A configuration block containing the stateful 5-tuple inspection criteria for the rule, used to inspect traffic flows. See Header below for details.
 	// +kubebuilder:validation:Optional
-	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
+	Header []HeaderParameters `json:"header" tf:"header,omitempty"`
 
 	// Set of configuration blocks containing additional settings for a stateful rule. See Rule Option below for details.
 	// +kubebuilder:validation:Optional
-	RuleOption []RuleOptionParameters `json:"ruleOption,omitempty" tf:"rule_option,omitempty"`
+	RuleOption []RuleOptionParameters `json:"ruleOption" tf:"rule_option,omitempty"`
 }
 
 type StatelessRuleInitParameters struct {
@@ -940,11 +940,11 @@ type StatelessRuleParameters struct {
 
 	// A setting that indicates the order in which to run this rule relative to all of the rules that are defined for a stateless rule group. AWS Network Firewall evaluates the rules in a rule group starting with the lowest priority setting.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// A configuration block defining the stateless 5-tuple packet inspection criteria and the action to take on a packet that matches the criteria. See Rule Definition below for details.
 	// +kubebuilder:validation:Optional
-	RuleDefinition []RuleDefinitionParameters `json:"ruleDefinition,omitempty" tf:"rule_definition,omitempty"`
+	RuleDefinition []RuleDefinitionParameters `json:"ruleDefinition" tf:"rule_definition,omitempty"`
 }
 
 type StatelessRulesAndCustomActionsInitParameters struct {
@@ -973,7 +973,7 @@ type StatelessRulesAndCustomActionsParameters struct {
 
 	// Set of configuration blocks containing the stateless rules for use in the stateless rule group. See Stateless Rule below for details.
 	// +kubebuilder:validation:Optional
-	StatelessRule []StatelessRuleParameters `json:"statelessRule,omitempty" tf:"stateless_rule,omitempty"`
+	StatelessRule []StatelessRuleParameters `json:"statelessRule" tf:"stateless_rule,omitempty"`
 }
 
 type TCPFlagInitParameters struct {
@@ -1003,7 +1003,7 @@ type TCPFlagParameters struct {
 	// Set of flags to look for in a packet. This setting can only specify values that are also specified in masks.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
 	// +kubebuilder:validation:Optional
-	Flags []*string `json:"flags,omitempty" tf:"flags,omitempty"`
+	Flags []*string `json:"flags" tf:"flags,omitempty"`
 
 	// Set of flags to consider in the inspection. To inspect all flags, leave this empty.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.

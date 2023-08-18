@@ -30,7 +30,7 @@ type AutoAdjustDataObservation struct {
 type AutoAdjustDataParameters struct {
 
 	// +kubebuilder:validation:Optional
-	AutoAdjustType *string `json:"autoAdjustType,omitempty" tf:"auto_adjust_type,omitempty"`
+	AutoAdjustType *string `json:"autoAdjustType" tf:"auto_adjust_type,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	HistoricalOptions []HistoricalOptionsParameters `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
@@ -206,10 +206,10 @@ type CostFilterParameters struct {
 
 	// The name of a budget. Unique within accounts.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type CostTypesInitParameters struct {
@@ -344,7 +344,7 @@ type HistoricalOptionsObservation struct {
 type HistoricalOptionsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
+	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod" tf:"budget_adjustment_period,omitempty"`
 }
 
 type NotificationInitParameters struct {
@@ -393,11 +393,11 @@ type NotificationParameters struct {
 
 	// Comparison operator to use to evaluate the condition. Can be LESS_THAN, EQUAL_TO or GREATER_THAN.
 	// +kubebuilder:validation:Optional
-	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
+	ComparisonOperator *string `json:"comparisonOperator" tf:"comparison_operator,omitempty"`
 
 	// What kind of budget value to notify on. Can be ACTUAL or FORECASTED
 	// +kubebuilder:validation:Optional
-	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+	NotificationType *string `json:"notificationType" tf:"notification_type,omitempty"`
 
 	// E-Mail addresses to notify. Either this or subscriber_sns_topic_arns is required.
 	// +kubebuilder:validation:Optional
@@ -409,11 +409,11 @@ type NotificationParameters struct {
 
 	// Threshold when the notification should be sent.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
 	// What kind of threshold is defined. Can be PERCENTAGE OR ABSOLUTE_VALUE.
 	// +kubebuilder:validation:Optional
-	ThresholdType *string `json:"thresholdType,omitempty" tf:"threshold_type,omitempty"`
+	ThresholdType *string `json:"thresholdType" tf:"threshold_type,omitempty"`
 }
 
 type PlannedLimitInitParameters struct {
@@ -444,15 +444,15 @@ type PlannedLimitParameters struct {
 
 	// The amount of cost or usage being measured for a budget.
 	// +kubebuilder:validation:Optional
-	Amount *string `json:"amount,omitempty" tf:"amount,omitempty"`
+	Amount *string `json:"amount" tf:"amount,omitempty"`
 
 	// The start time of the budget limit. Format: 2017-01-01_12:00. See PlannedBudgetLimits documentation.
 	// +kubebuilder:validation:Optional
-	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+	StartTime *string `json:"startTime" tf:"start_time,omitempty"`
 
 	// The unit of measurement used for the budget forecast, actual spend, or budget threshold, such as dollars or GB. See Spend documentation.
 	// +kubebuilder:validation:Optional
-	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+	Unit *string `json:"unit" tf:"unit,omitempty"`
 }
 
 // BudgetSpec defines the desired state of Budget

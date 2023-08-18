@@ -285,11 +285,11 @@ type ResponseParametersParameters struct {
 	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
 	// See the Amazon API Gateway Developer Guide for details.
 	// +kubebuilder:validation:Optional
-	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
+	Mappings map[string]*string `json:"mappings" tf:"mappings,omitempty"`
 
 	// HTTP status code in the range 200-599.
 	// +kubebuilder:validation:Optional
-	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type TLSConfigInitParameters struct {

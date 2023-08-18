@@ -74,7 +74,7 @@ type WhitelistRulesParameters struct {
 
 	// The IPv4 CIDR that's whitelisted.
 	// +kubebuilder:validation:Optional
-	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+	Cidr *string `json:"cidr" tf:"cidr,omitempty"`
 }
 
 // InputSecurityGroupSpec defines the desired state of InputSecurityGroup

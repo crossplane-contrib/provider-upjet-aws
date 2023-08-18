@@ -39,13 +39,13 @@ type GeoMatchConstraintParameters struct {
 
 	// The type of geographical area you want AWS WAF to search for. Currently Country is the only valid value.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The country that you want AWS WAF to search for.
 	// This is the two-letter country code, e.g., US, CA, RU, CN, etc.
 	// See docs for all supported values.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type GeoMatchSetInitParameters struct {

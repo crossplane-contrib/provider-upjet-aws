@@ -205,7 +205,7 @@ type EndpointConfigurationParameters struct {
 
 	// List of endpoint types. This resource currently only supports managing a single value. Valid values: EDGE or REGIONAL. If unspecified, defaults to EDGE. Must be declared as REGIONAL in non-Commercial partitions. Refer to the documentation for more information on the difference between edge-optimized and regional APIs.
 	// +kubebuilder:validation:Optional
-	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
+	Types []*string `json:"types" tf:"types,omitempty"`
 }
 
 type MutualTLSAuthenticationInitParameters struct {
@@ -230,7 +230,7 @@ type MutualTLSAuthenticationParameters struct {
 
 	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
 	// +kubebuilder:validation:Optional
-	TruststoreURI *string `json:"truststoreUri,omitempty" tf:"truststore_uri,omitempty"`
+	TruststoreURI *string `json:"truststoreUri" tf:"truststore_uri,omitempty"`
 
 	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
 	// +kubebuilder:validation:Optional

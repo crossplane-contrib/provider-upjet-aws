@@ -108,11 +108,11 @@ type OidcConfigParameters struct {
 
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
+	AuthorizationEndpoint *string `json:"authorizationEndpoint" tf:"authorization_endpoint,omitempty"`
 
 	// The client ID for your Amazon Cognito user pool.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OIDC IdP client secret used to configure your private workforce.
 	// +kubebuilder:validation:Required
@@ -120,23 +120,23 @@ type OidcConfigParameters struct {
 
 	// The OIDC IdP issuer used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 
 	// The OIDC IdP JSON Web Key Set (Jwks) URI used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	JwksURI *string `json:"jwksUri,omitempty" tf:"jwks_uri,omitempty"`
+	JwksURI *string `json:"jwksUri" tf:"jwks_uri,omitempty"`
 
 	// The OIDC IdP logout endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
+	LogoutEndpoint *string `json:"logoutEndpoint" tf:"logout_endpoint,omitempty"`
 
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
+	TokenEndpoint *string `json:"tokenEndpoint" tf:"token_endpoint,omitempty"`
 
 	// The OIDC IdP user information endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
-	UserInfoEndpoint *string `json:"userInfoEndpoint,omitempty" tf:"user_info_endpoint,omitempty"`
+	UserInfoEndpoint *string `json:"userInfoEndpoint" tf:"user_info_endpoint,omitempty"`
 }
 
 type SourceIPConfigInitParameters struct {
@@ -155,7 +155,7 @@ type SourceIPConfigParameters struct {
 
 	// A list of up to 10 CIDR values.
 	// +kubebuilder:validation:Optional
-	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+	Cidrs []*string `json:"cidrs" tf:"cidrs,omitempty"`
 }
 
 type WorkforceInitParameters struct {

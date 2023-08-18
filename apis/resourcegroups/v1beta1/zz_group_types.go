@@ -39,7 +39,7 @@ type ConfigurationParameters struct {
 
 	// Specifies the type of group configuration item.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type GroupInitParameters struct {
@@ -126,11 +126,11 @@ type ParametersParameters struct {
 
 	// The name of the group configuration parameter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value or values to be used for the specified parameter.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ResourceQueryInitParameters struct {
@@ -155,7 +155,7 @@ type ResourceQueryParameters struct {
 
 	// The resource query as a JSON string.
 	// +kubebuilder:validation:Optional
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+	Query *string `json:"query" tf:"query,omitempty"`
 
 	// The type of the resource query. Defaults to TAG_FILTERS_1_0.
 	// +kubebuilder:validation:Optional

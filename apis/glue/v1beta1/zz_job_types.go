@@ -49,7 +49,7 @@ type CommandParameters struct {
 
 	// Specifies the S3 path to a script that executes a job.
 	// +kubebuilder:validation:Optional
-	ScriptLocation *string `json:"scriptLocation,omitempty" tf:"script_location,omitempty"`
+	ScriptLocation *string `json:"scriptLocation" tf:"script_location,omitempty"`
 }
 
 type ExecutionPropertyInitParameters struct {

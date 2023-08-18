@@ -114,15 +114,15 @@ type ReservationPlanSettingsParameters struct {
 
 	// The length of the term of your reserved queue pricing plan commitment. Valid value is ONE_YEAR.
 	// +kubebuilder:validation:Optional
-	Commitment *string `json:"commitment,omitempty" tf:"commitment,omitempty"`
+	Commitment *string `json:"commitment" tf:"commitment,omitempty"`
 
 	// Specifies whether the term of your reserved queue pricing plan. Valid values are AUTO_RENEW or EXPIRE.
 	// +kubebuilder:validation:Optional
-	RenewalType *string `json:"renewalType,omitempty" tf:"renewal_type,omitempty"`
+	RenewalType *string `json:"renewalType" tf:"renewal_type,omitempty"`
 
 	// Specifies the number of reserved transcode slots (RTS) for queue.
 	// +kubebuilder:validation:Optional
-	ReservedSlots *float64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
+	ReservedSlots *float64 `json:"reservedSlots" tf:"reserved_slots,omitempty"`
 }
 
 // QueueSpec defines the desired state of Queue

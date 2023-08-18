@@ -1061,7 +1061,7 @@ type S3ImportParameters struct {
 
 	// The bucket name where your backup is stored
 	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
 	// Can be blank, but is the path to your backup
 	// +kubebuilder:validation:Optional
@@ -1069,15 +1069,15 @@ type S3ImportParameters struct {
 
 	// Role applied to load the data.
 	// +kubebuilder:validation:Optional
-	IngestionRole *string `json:"ingestionRole,omitempty" tf:"ingestion_role,omitempty"`
+	IngestionRole *string `json:"ingestionRole" tf:"ingestion_role,omitempty"`
 
 	// Source engine for the backup
 	// +kubebuilder:validation:Optional
-	SourceEngine *string `json:"sourceEngine,omitempty" tf:"source_engine,omitempty"`
+	SourceEngine *string `json:"sourceEngine" tf:"source_engine,omitempty"`
 
 	// Version of the source engine used to make the backup
 	// +kubebuilder:validation:Optional
-	SourceEngineVersion *string `json:"sourceEngineVersion,omitempty" tf:"source_engine_version,omitempty"`
+	SourceEngineVersion *string `json:"sourceEngineVersion" tf:"source_engine_version,omitempty"`
 }
 
 // InstanceSpec defines the desired state of Instance

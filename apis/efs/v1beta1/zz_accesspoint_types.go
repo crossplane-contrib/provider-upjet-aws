@@ -116,15 +116,15 @@ type CreationInfoParameters struct {
 
 	// POSIX group ID to apply to the root_directory.
 	// +kubebuilder:validation:Optional
-	OwnerGID *float64 `json:"ownerGid,omitempty" tf:"owner_gid,omitempty"`
+	OwnerGID *float64 `json:"ownerGid" tf:"owner_gid,omitempty"`
 
 	// POSIX user ID to apply to the root_directory.
 	// +kubebuilder:validation:Optional
-	OwnerUID *float64 `json:"ownerUid,omitempty" tf:"owner_uid,omitempty"`
+	OwnerUID *float64 `json:"ownerUid" tf:"owner_uid,omitempty"`
 
 	// POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
 	// +kubebuilder:validation:Optional
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 }
 
 type PosixUserInitParameters struct {
@@ -155,7 +155,7 @@ type PosixUserParameters struct {
 
 	// POSIX group ID used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
-	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
+	GID *float64 `json:"gid" tf:"gid,omitempty"`
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
@@ -163,7 +163,7 @@ type PosixUserParameters struct {
 
 	// POSIX user ID used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
-	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
+	UID *float64 `json:"uid" tf:"uid,omitempty"`
 }
 
 type RootDirectoryInitParameters struct {

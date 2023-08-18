@@ -45,7 +45,7 @@ type ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters struct {
 
 	// Name of the capacity provider.
 	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
 	// The relative percentage of the total number of launched tasks that should use the specified capacity provider. The weight value is taken into consideration after the base count of tasks has been satisfied. Defaults to 0.
 	// +kubebuilder:validation:Optional

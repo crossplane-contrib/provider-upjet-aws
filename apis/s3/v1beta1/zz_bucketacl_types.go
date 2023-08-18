@@ -39,7 +39,7 @@ type AccessControlPolicyGrantParameters struct {
 
 	// Logging permissions assigned to the grantee for the bucket.
 	// +kubebuilder:validation:Optional
-	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
 
 type AccessControlPolicyInitParameters struct {
@@ -68,7 +68,7 @@ type AccessControlPolicyParameters struct {
 
 	// Configuration block of the bucket owner's display name and ID. See below.
 	// +kubebuilder:validation:Optional
-	Owner []OwnerParameters `json:"owner,omitempty" tf:"owner,omitempty"`
+	Owner []OwnerParameters `json:"owner" tf:"owner,omitempty"`
 }
 
 type BucketACLInitParameters struct {
@@ -180,7 +180,7 @@ type GranteeParameters struct {
 
 	// Type of grantee. Valid values: CanonicalUser, AmazonCustomerByEmail, Group.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// URI of the grantee group.
 	// +kubebuilder:validation:Optional
@@ -213,7 +213,7 @@ type OwnerParameters struct {
 
 	// ID of the owner.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 // BucketACLSpec defines the desired state of BucketACL

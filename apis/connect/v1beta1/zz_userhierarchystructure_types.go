@@ -94,7 +94,7 @@ type LevelFiveParameters struct {
 
 	// The name of the user hierarchy level. Must not be more than 50 characters.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type LevelFourInitParameters struct {
@@ -119,7 +119,7 @@ type LevelFourParameters struct {
 
 	// The name of the user hierarchy level. Must not be more than 50 characters.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type LevelOneInitParameters struct {
@@ -144,7 +144,7 @@ type LevelOneParameters struct {
 
 	// The name of the user hierarchy level. Must not be more than 50 characters.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type LevelThreeInitParameters struct {
@@ -169,7 +169,7 @@ type LevelThreeParameters struct {
 
 	// The name of the user hierarchy level. Must not be more than 50 characters.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type LevelTwoInitParameters struct {
@@ -194,7 +194,7 @@ type LevelTwoParameters struct {
 
 	// The name of the user hierarchy level. Must not be more than 50 characters.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type UserHierarchyStructureInitParameters struct {

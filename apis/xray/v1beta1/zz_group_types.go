@@ -98,7 +98,7 @@ type InsightsConfigurationParameters struct {
 
 	// Specifies whether insights are enabled.
 	// +kubebuilder:validation:Optional
-	InsightsEnabled *bool `json:"insightsEnabled,omitempty" tf:"insights_enabled,omitempty"`
+	InsightsEnabled *bool `json:"insightsEnabled" tf:"insights_enabled,omitempty"`
 
 	// Specifies whether insight notifications are enabled.
 	// +kubebuilder:validation:Optional

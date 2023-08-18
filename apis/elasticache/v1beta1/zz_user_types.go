@@ -34,7 +34,7 @@ type AuthenticationModeParameters struct {
 
 	// Specifies the authentication type. Possible options are: password, no-password-required or iam.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type UserInitParameters struct {

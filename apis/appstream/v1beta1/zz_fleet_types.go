@@ -38,7 +38,7 @@ type ComputeCapacityParameters struct {
 
 	// Desired number of streaming instances.
 	// +kubebuilder:validation:Optional
-	DesiredInstances *float64 `json:"desiredInstances,omitempty" tf:"desired_instances,omitempty"`
+	DesiredInstances *float64 `json:"desiredInstances" tf:"desired_instances,omitempty"`
 }
 
 type DomainJoinInfoInitParameters struct {

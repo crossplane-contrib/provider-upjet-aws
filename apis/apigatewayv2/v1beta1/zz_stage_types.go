@@ -35,11 +35,11 @@ type AccessLogSettingsParameters struct {
 
 	// ARN of the CloudWatch Logs log group to receive access logs. Any trailing :* is trimmed from the ARN.
 	// +kubebuilder:validation:Optional
-	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
 
 	// Single line format of the access logs of data. Refer to log settings for HTTP or Websocket.
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 }
 
 type DefaultRouteSettingsInitParameters struct {
@@ -171,7 +171,7 @@ type RouteSettingsParameters struct {
 
 	// Route key.
 	// +kubebuilder:validation:Optional
-	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
+	RouteKey *string `json:"routeKey" tf:"route_key,omitempty"`
 
 	// Throttling burst limit for the route.
 	// +kubebuilder:validation:Optional

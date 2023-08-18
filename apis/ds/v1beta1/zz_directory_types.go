@@ -45,11 +45,11 @@ type ConnectSettingsParameters struct {
 
 	// The DNS IP addresses of the domain to connect to.
 	// +kubebuilder:validation:Optional
-	CustomerDNSIps []*string `json:"customerDnsIps,omitempty" tf:"customer_dns_ips,omitempty"`
+	CustomerDNSIps []*string `json:"customerDnsIps" tf:"customer_dns_ips,omitempty"`
 
 	// The username corresponding to the password provided.
 	// +kubebuilder:validation:Optional
-	CustomerUsername *string `json:"customerUsername,omitempty" tf:"customer_username,omitempty"`
+	CustomerUsername *string `json:"customerUsername" tf:"customer_username,omitempty"`
 
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet

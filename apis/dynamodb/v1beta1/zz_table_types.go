@@ -35,11 +35,11 @@ type AttributeParameters struct {
 
 	// Name of the attribute
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Attribute type. Valid values are S (string), N (number), B (binary).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type GlobalSecondaryIndexInitParameters struct {
@@ -94,11 +94,11 @@ type GlobalSecondaryIndexParameters struct {
 
 	// Name of the hash key in the index; must be defined as an attribute in the resource.
 	// +kubebuilder:validation:Optional
-	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+	HashKey *string `json:"hashKey" tf:"hash_key,omitempty"`
 
 	// Name of the index.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
@@ -106,7 +106,7 @@ type GlobalSecondaryIndexParameters struct {
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	// +kubebuilder:validation:Optional
-	ProjectionType *string `json:"projectionType,omitempty" tf:"projection_type,omitempty"`
+	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
 	// Name of the range key; must be defined
 	// +kubebuilder:validation:Optional
@@ -155,7 +155,7 @@ type LocalSecondaryIndexParameters struct {
 
 	// Name of the index
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
@@ -163,11 +163,11 @@ type LocalSecondaryIndexParameters struct {
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	// +kubebuilder:validation:Optional
-	ProjectionType *string `json:"projectionType,omitempty" tf:"projection_type,omitempty"`
+	ProjectionType *string `json:"projectionType" tf:"projection_type,omitempty"`
 
 	// Name of the range key.
 	// +kubebuilder:validation:Optional
-	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
+	RangeKey *string `json:"rangeKey" tf:"range_key,omitempty"`
 }
 
 type PointInTimeRecoveryInitParameters struct {
@@ -186,7 +186,7 @@ type PointInTimeRecoveryParameters struct {
 
 	// Whether to enable point-in-time recovery. It can take 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided, this defaults to false.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type ServerSideEncryptionInitParameters struct {
@@ -211,7 +211,7 @@ type ServerSideEncryptionParameters struct {
 
 	// Whether or not to enable encryption at rest using an AWS managed KMS customer master key (CMK). If enabled is false then server-side encryption is set to AWS-owned key (shown as DEFAULT in the AWS console). Potentially confusingly, if enabled is true and no kms_key_arn is specified then server-side encryption is set to the default KMS-managed key (shown as KMS in the AWS console). The AWS KMS documentation explains the difference between AWS-owned and KMS-managed keys.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
 	// +kubebuilder:validation:Optional
@@ -240,7 +240,7 @@ type TTLParameters struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
 	// +kubebuilder:validation:Optional
-	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
+	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
 	// +kubebuilder:validation:Optional
@@ -537,7 +537,7 @@ type TableReplicaParameters struct {
 
 	// Region name of the replica.
 	// +kubebuilder:validation:Optional
-	RegionName *string `json:"regionName,omitempty" tf:"region_name,omitempty"`
+	RegionName *string `json:"regionName" tf:"region_name,omitempty"`
 }
 
 // TableSpec defines the desired state of Table

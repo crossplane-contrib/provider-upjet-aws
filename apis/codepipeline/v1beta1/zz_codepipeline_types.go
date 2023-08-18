@@ -92,7 +92,7 @@ type ActionParameters struct {
 
 	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
 	// +kubebuilder:validation:Optional
-	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+	Category *string `json:"category" tf:"category,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
 	// +kubebuilder:validation:Optional
@@ -104,7 +104,7 @@ type ActionParameters struct {
 
 	// The action declaration's name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The namespace all output variables will be accessed from.
 	// +kubebuilder:validation:Optional
@@ -116,11 +116,11 @@ type ActionParameters struct {
 
 	// The creator of the action being called. Possible values are AWS, Custom and ThirdParty.
 	// +kubebuilder:validation:Optional
-	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+	Owner *string `json:"owner" tf:"owner,omitempty"`
 
 	// The provider of the service being called by the action. Valid providers are determined by the action category. Provider names are listed in the Action Structure Reference documentation.
 	// +kubebuilder:validation:Optional
-	Provider *string `json:"provider,omitempty" tf:"provider,omitempty"`
+	Provider *string `json:"provider" tf:"provider,omitempty"`
 
 	// The region in which to run the action.
 	// +kubebuilder:validation:Optional
@@ -136,7 +136,7 @@ type ActionParameters struct {
 
 	// A string that identifies the action type.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type ArtifactStoreInitParameters struct {
@@ -188,7 +188,7 @@ type ArtifactStoreParameters struct {
 
 	// The type of the artifact store, such as Amazon S3
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CodepipelineInitParameters struct {
@@ -284,11 +284,11 @@ type EncryptionKeyParameters struct {
 
 	// The KMS key ARN or ID
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// The type of key; currently only KMS is supported
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type StageInitParameters struct {
@@ -313,11 +313,11 @@ type StageParameters struct {
 
 	// The action(s) to include in the stage. Defined as an action block below
 	// +kubebuilder:validation:Optional
-	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
+	Action []ActionParameters `json:"action" tf:"action,omitempty"`
 
 	// The name of the stage.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // CodepipelineSpec defines the desired state of Codepipeline

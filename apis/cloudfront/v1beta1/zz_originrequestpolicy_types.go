@@ -56,7 +56,7 @@ type OriginRequestPolicyCookiesConfigObservation struct {
 type OriginRequestPolicyCookiesConfigParameters struct {
 
 	// +kubebuilder:validation:Optional
-	CookieBehavior *string `json:"cookieBehavior,omitempty" tf:"cookie_behavior,omitempty"`
+	CookieBehavior *string `json:"cookieBehavior" tf:"cookie_behavior,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Cookies []CookiesConfigCookiesParameters `json:"cookies,omitempty" tf:"cookies,omitempty"`
@@ -158,7 +158,7 @@ type OriginRequestPolicyQueryStringsConfigObservation struct {
 type OriginRequestPolicyQueryStringsConfigParameters struct {
 
 	// +kubebuilder:validation:Optional
-	QueryStringBehavior *string `json:"queryStringBehavior,omitempty" tf:"query_string_behavior,omitempty"`
+	QueryStringBehavior *string `json:"queryStringBehavior" tf:"query_string_behavior,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	QueryStrings []QueryStringsConfigQueryStringsParameters `json:"queryStrings,omitempty" tf:"query_strings,omitempty"`

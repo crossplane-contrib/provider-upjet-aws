@@ -29,7 +29,7 @@ type CloudWatchDestinationParameters struct {
 
 	// An array of objects that define the dimensions to use when you send email events to Amazon CloudWatch. See dimension_configuration below.
 	// +kubebuilder:validation:Optional
-	DimensionConfiguration []DimensionConfigurationParameters `json:"dimensionConfiguration,omitempty" tf:"dimension_configuration,omitempty"`
+	DimensionConfiguration []DimensionConfigurationParameters `json:"dimensionConfiguration" tf:"dimension_configuration,omitempty"`
 }
 
 type ConfigurationSetEventDestinationInitParameters struct {
@@ -114,14 +114,14 @@ type DimensionConfigurationParameters struct {
 	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
 	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	// +kubebuilder:validation:Optional
-	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
+	DefaultDimensionValue *string `json:"defaultDimensionValue" tf:"default_dimension_value,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
+	DimensionName *string `json:"dimensionName" tf:"dimension_name,omitempty"`
 
 	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
 	// +kubebuilder:validation:Optional
-	DimensionValueSource *string `json:"dimensionValueSource,omitempty" tf:"dimension_value_source,omitempty"`
+	DimensionValueSource *string `json:"dimensionValueSource" tf:"dimension_value_source,omitempty"`
 }
 
 type EventDestinationInitParameters struct {
@@ -182,7 +182,7 @@ type EventDestinationParameters struct {
 
 	// - An array that specifies which events the Amazon SES API v2 should send to the destinations. Valid values: SEND, REJECT, BOUNCE, COMPLAINT, DELIVERY, OPEN, CLICK, RENDERING_FAILURE, DELIVERY_DELAY, SUBSCRIPTION.
 	// +kubebuilder:validation:Optional
-	MatchingEventTypes []*string `json:"matchingEventTypes,omitempty" tf:"matching_event_types,omitempty"`
+	MatchingEventTypes []*string `json:"matchingEventTypes" tf:"matching_event_types,omitempty"`
 
 	// An object that defines an Amazon Pinpoint project destination for email events. See pinpoint_destination below.
 	// +kubebuilder:validation:Optional

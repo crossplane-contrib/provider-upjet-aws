@@ -35,11 +35,11 @@ type AccountTakeoverRiskConfigurationParameters struct {
 
 	// Account takeover risk configuration actions. See details below.
 	// +kubebuilder:validation:Optional
-	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
+	Actions []ActionsParameters `json:"actions" tf:"actions,omitempty"`
 
 	// The notify configuration used to construct email notifications. See details below.
 	// +kubebuilder:validation:Optional
-	NotifyConfiguration []NotifyConfigurationParameters `json:"notifyConfiguration,omitempty" tf:"notify_configuration,omitempty"`
+	NotifyConfiguration []NotifyConfigurationParameters `json:"notifyConfiguration" tf:"notify_configuration,omitempty"`
 }
 
 type ActionsInitParameters struct {
@@ -109,15 +109,15 @@ type BlockEmailParameters struct {
 
 	// The email HTML body.
 	// +kubebuilder:validation:Optional
-	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+	HTMLBody *string `json:"htmlBody" tf:"html_body,omitempty"`
 
 	// The email subject.
 	// +kubebuilder:validation:Optional
-	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+	Subject *string `json:"subject" tf:"subject,omitempty"`
 
 	// The email text body.
 	// +kubebuilder:validation:Optional
-	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+	TextBody *string `json:"textBody" tf:"text_body,omitempty"`
 }
 
 type CompromisedCredentialsRiskConfigurationActionsInitParameters struct {
@@ -136,7 +136,7 @@ type CompromisedCredentialsRiskConfigurationActionsParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
 	// +kubebuilder:validation:Optional
-	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
 }
 
 type CompromisedCredentialsRiskConfigurationInitParameters struct {
@@ -161,7 +161,7 @@ type CompromisedCredentialsRiskConfigurationParameters struct {
 
 	// The compromised credentials risk configuration actions. See details below.
 	// +kubebuilder:validation:Optional
-	Actions []CompromisedCredentialsRiskConfigurationActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
+	Actions []CompromisedCredentialsRiskConfigurationActionsParameters `json:"actions" tf:"actions,omitempty"`
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
 	// +kubebuilder:validation:Optional
@@ -190,11 +190,11 @@ type HighActionParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
 	// +kubebuilder:validation:Optional
-	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
 
 	// Whether to send a notification.
 	// +kubebuilder:validation:Optional
-	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
+	Notify *bool `json:"notify" tf:"notify,omitempty"`
 }
 
 type LowActionInitParameters struct {
@@ -219,11 +219,11 @@ type LowActionParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
 	// +kubebuilder:validation:Optional
-	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
 
 	// Whether to send a notification.
 	// +kubebuilder:validation:Optional
-	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
+	Notify *bool `json:"notify" tf:"notify,omitempty"`
 }
 
 type MediumActionInitParameters struct {
@@ -248,11 +248,11 @@ type MediumActionParameters struct {
 
 	// The action to take in response to the account takeover action. Valid values are BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED and NO_ACTION.
 	// +kubebuilder:validation:Optional
-	EventAction *string `json:"eventAction,omitempty" tf:"event_action,omitempty"`
+	EventAction *string `json:"eventAction" tf:"event_action,omitempty"`
 
 	// Whether to send a notification.
 	// +kubebuilder:validation:Optional
-	Notify *bool `json:"notify,omitempty" tf:"notify,omitempty"`
+	Notify *bool `json:"notify" tf:"notify,omitempty"`
 }
 
 type MfaEmailInitParameters struct {
@@ -283,15 +283,15 @@ type MfaEmailParameters struct {
 
 	// The email HTML body.
 	// +kubebuilder:validation:Optional
-	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+	HTMLBody *string `json:"htmlBody" tf:"html_body,omitempty"`
 
 	// The email subject.
 	// +kubebuilder:validation:Optional
-	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+	Subject *string `json:"subject" tf:"subject,omitempty"`
 
 	// The email text body.
 	// +kubebuilder:validation:Optional
-	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+	TextBody *string `json:"textBody" tf:"text_body,omitempty"`
 }
 
 type NoActionEmailInitParameters struct {
@@ -322,15 +322,15 @@ type NoActionEmailParameters struct {
 
 	// The email HTML body.
 	// +kubebuilder:validation:Optional
-	HTMLBody *string `json:"htmlBody,omitempty" tf:"html_body,omitempty"`
+	HTMLBody *string `json:"htmlBody" tf:"html_body,omitempty"`
 
 	// The email subject.
 	// +kubebuilder:validation:Optional
-	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+	Subject *string `json:"subject" tf:"subject,omitempty"`
 
 	// The email text body.
 	// +kubebuilder:validation:Optional
-	TextBody *string `json:"textBody,omitempty" tf:"text_body,omitempty"`
+	TextBody *string `json:"textBody" tf:"text_body,omitempty"`
 }
 
 type NotifyConfigurationInitParameters struct {
@@ -399,7 +399,7 @@ type NotifyConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the identity that is associated with the sending authorization policy. This identity permits Amazon Cognito to send for the email address specified in the From parameter.
 	// +kubebuilder:validation:Optional
-	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+	SourceArn *string `json:"sourceArn" tf:"source_arn,omitempty"`
 }
 
 type RiskConfigurationInitParameters struct {

@@ -41,15 +41,15 @@ type RuleConfigParameters struct {
 
 	// Logical negation of the rule.
 	// +kubebuilder:validation:Optional
-	Inverted *bool `json:"inverted,omitempty" tf:"inverted,omitempty"`
+	Inverted *bool `json:"inverted" tf:"inverted,omitempty"`
 
 	// Number of controls that must be set when you specify an ATLEAST type rule.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
 	// Rule type. Valid values are ATLEAST, AND, and OR.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SafetyRuleInitParameters struct {

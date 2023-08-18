@@ -29,7 +29,7 @@ type ActionParameters struct {
 
 	// Specifies how you want AWS WAF Regional to respond to requests that match the settings in a rule. Valid values for action are ALLOW, BLOCK or COUNT. Valid values for override_action are COUNT and NONE.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DefaultActionInitParameters struct {
@@ -48,7 +48,7 @@ type DefaultActionParameters struct {
 
 	// Specifies how you want AWS WAF Regional to respond to requests that match the settings in a ruleE.g., ALLOW, BLOCK or COUNT
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type LoggingConfigurationInitParameters struct {
@@ -103,7 +103,7 @@ type OverrideActionParameters struct {
 
 	// Specifies how you want AWS WAF Regional to respond to requests that match the settings in a rule. Valid values for action are ALLOW, BLOCK or COUNT. Valid values for override_action are COUNT and NONE.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedactedFieldsFieldToMatchInitParameters struct {
@@ -132,7 +132,7 @@ type RedactedFieldsFieldToMatchParameters struct {
 
 	// Specifies how you want AWS WAF Regional to respond to requests that match the settings in a rule. Valid values for action are ALLOW, BLOCK or COUNT. Valid values for override_action are COUNT and NONE.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedactedFieldsInitParameters struct {
@@ -151,7 +151,7 @@ type RedactedFieldsParameters struct {
 
 	// Set of configuration blocks for fields to redact. Detailed below.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []RedactedFieldsFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []RedactedFieldsFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 }
 
 type WebACLInitParameters struct {
@@ -285,7 +285,7 @@ type WebACLRuleParameters struct {
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Regional) rule (e.g., aws_wafregional_rule). WAF (Global) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.Rule

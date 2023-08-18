@@ -74,11 +74,11 @@ type CommonAttributesParameters struct {
 
 	// The HTTP endpoint name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the HTTP endpoint common attribute.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type DataFormatConversionConfigurationInitParameters struct {
@@ -119,15 +119,15 @@ type DataFormatConversionConfigurationParameters struct {
 
 	// Nested argument that specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. More details below.
 	// +kubebuilder:validation:Optional
-	InputFormatConfiguration []InputFormatConfigurationParameters `json:"inputFormatConfiguration,omitempty" tf:"input_format_configuration,omitempty"`
+	InputFormatConfiguration []InputFormatConfigurationParameters `json:"inputFormatConfiguration" tf:"input_format_configuration,omitempty"`
 
 	// Nested argument that specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. More details below.
 	// +kubebuilder:validation:Optional
-	OutputFormatConfiguration []OutputFormatConfigurationParameters `json:"outputFormatConfiguration,omitempty" tf:"output_format_configuration,omitempty"`
+	OutputFormatConfiguration []OutputFormatConfigurationParameters `json:"outputFormatConfiguration" tf:"output_format_configuration,omitempty"`
 
 	// Nested argument that specifies the AWS Glue Data Catalog table that contains the column information. More details below.
 	// +kubebuilder:validation:Optional
-	SchemaConfiguration []SchemaConfigurationParameters `json:"schemaConfiguration,omitempty" tf:"schema_configuration,omitempty"`
+	SchemaConfiguration []SchemaConfigurationParameters `json:"schemaConfiguration" tf:"schema_configuration,omitempty"`
 }
 
 type DeliveryStreamInitParameters struct {
@@ -479,7 +479,7 @@ type ElasticsearchConfigurationParameters struct {
 
 	// The Elasticsearch index name.
 	// +kubebuilder:validation:Optional
-	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
 	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	// +kubebuilder:validation:Optional
@@ -913,7 +913,7 @@ type HTTPEndpointConfigurationParameters struct {
 
 	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationInitParameters struct {
@@ -971,7 +971,7 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters struct
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type HiveJSONSerDeInitParameters struct {
@@ -1009,7 +1009,7 @@ type InputFormatConfigurationParameters struct {
 
 	// Nested argument that specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. More details below.
 	// +kubebuilder:validation:Optional
-	Deserializer []DeserializerParameters `json:"deserializer,omitempty" tf:"deserializer,omitempty"`
+	Deserializer []DeserializerParameters `json:"deserializer" tf:"deserializer,omitempty"`
 }
 
 type KinesisSourceConfigurationInitParameters struct {
@@ -1034,11 +1034,11 @@ type KinesisSourceConfigurationParameters struct {
 
 	// The kinesis stream used as the source of the firehose delivery stream.
 	// +kubebuilder:validation:Optional
-	KinesisStreamArn *string `json:"kinesisStreamArn,omitempty" tf:"kinesis_stream_arn,omitempty"`
+	KinesisStreamArn *string `json:"kinesisStreamArn" tf:"kinesis_stream_arn,omitempty"`
 
 	// The ARN of the AWS credentials.
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type OpenXJSONSerDeInitParameters struct {
@@ -1231,7 +1231,7 @@ type OpensearchConfigurationParameters struct {
 
 	// The Elasticsearch index name.
 	// +kubebuilder:validation:Optional
-	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
 	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	// +kubebuilder:validation:Optional
@@ -1327,7 +1327,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParameters struct {
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
@@ -1352,11 +1352,11 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameter
 
 	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 type OpensearchConfigurationVPCConfigInitParameters struct {
@@ -1400,11 +1400,11 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 type OrcSerDeInitParameters struct {
@@ -1532,7 +1532,7 @@ type OutputFormatConfigurationParameters struct {
 
 	// Nested argument that specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. More details below.
 	// +kubebuilder:validation:Optional
-	Serializer []SerializerParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
+	Serializer []SerializerParameters `json:"serializer" tf:"serializer,omitempty"`
 }
 
 type ParametersInitParameters struct {
@@ -1557,11 +1557,11 @@ type ParametersParameters struct {
 
 	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 type ParquetSerDeInitParameters struct {
@@ -1688,7 +1688,7 @@ type ProcessingConfigurationProcessorsParameters struct {
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ProcessingConfigurationProcessorsParametersInitParameters struct {
@@ -1713,11 +1713,11 @@ type ProcessingConfigurationProcessorsParametersParameters struct {
 
 	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 type ProcessorsInitParameters struct {
@@ -1746,7 +1746,7 @@ type ProcessorsParameters struct {
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ProcessorsParametersInitParameters struct {
@@ -1771,11 +1771,11 @@ type ProcessorsParametersParameters struct {
 
 	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 type RedshiftConfigurationCloudwatchLoggingOptionsInitParameters struct {
@@ -1894,7 +1894,7 @@ type RedshiftConfigurationParameters struct {
 
 	// The jdbcurl of the redshift cluster.
 	// +kubebuilder:validation:Optional
-	ClusterJdbcurl *string `json:"clusterJdbcurl,omitempty" tf:"cluster_jdbcurl,omitempty"`
+	ClusterJdbcurl *string `json:"clusterJdbcurl" tf:"cluster_jdbcurl,omitempty"`
 
 	// Copy options for copying the data from the s3 intermediate bucket into redshift, for example to change the default delimiter. For valid values, see the AWS documentation
 	// +kubebuilder:validation:Optional
@@ -1906,7 +1906,7 @@ type RedshiftConfigurationParameters struct {
 
 	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	// +kubebuilder:validation:Optional
-	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
+	DataTableName *string `json:"dataTableName" tf:"data_table_name,omitempty"`
 
 	// The password for the username above.
 	// +kubebuilder:validation:Required
@@ -1944,7 +1944,7 @@ type RedshiftConfigurationParameters struct {
 
 	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationInitParameters struct {
@@ -2002,7 +2002,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParameters struct {
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
@@ -2027,11 +2027,11 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters 
 
 	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsInitParameters struct {
@@ -2328,7 +2328,7 @@ type S3BackupConfigurationParameters struct {
 
 	// The ARN of the S3 bucket
 	// +kubebuilder:validation:Optional
-	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+	BucketArn *string `json:"bucketArn" tf:"bucket_arn,omitempty"`
 
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	// +kubebuilder:validation:Optional
@@ -2362,7 +2362,7 @@ type S3BackupConfigurationParameters struct {
 
 	// The ARN of the AWS credentials.
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
 type S3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
@@ -2564,7 +2564,7 @@ type SchemaConfigurationParameters struct {
 
 	// Specifies the name of the AWS Glue database that contains the schema for the output data.
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// If you don't specify an AWS Region, the default is the current region.
 	// +kubebuilder:validation:Optional
@@ -2769,7 +2769,7 @@ type SplunkConfigurationParameters struct {
 
 	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Optional
-	HecEndpoint *string `json:"hecEndpoint,omitempty" tf:"hec_endpoint,omitempty"`
+	HecEndpoint *string `json:"hecEndpoint" tf:"hec_endpoint,omitempty"`
 
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	// +kubebuilder:validation:Optional
@@ -2847,7 +2847,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsParameters struct {
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
@@ -2872,11 +2872,11 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters st
 
 	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
-	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
 	// +kubebuilder:validation:Optional
-	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
 }
 
 type VPCConfigInitParameters struct {
@@ -2920,11 +2920,11 @@ type VPCConfigParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 // DeliveryStreamSpec defines the desired state of DeliveryStream

@@ -98,7 +98,7 @@ type IdentityProviderConfigOidcParameters struct {
 
 	// –  Client ID for the OpenID Connect identity provider.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The JWT claim that the provider will use to return groups.
 	// +kubebuilder:validation:Optional
@@ -110,7 +110,7 @@ type IdentityProviderConfigOidcParameters struct {
 
 	// Issuer URL for the OpenID Connect identity provider.
 	// +kubebuilder:validation:Optional
-	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
+	IssuerURL *string `json:"issuerUrl" tf:"issuer_url,omitempty"`
 
 	// The key value pairs that describe required claims in the identity token.
 	// +kubebuilder:validation:Optional

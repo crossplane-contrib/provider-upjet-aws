@@ -35,7 +35,7 @@ type MonitoringSubscriptionMonitoringSubscriptionParameters struct {
 
 	// A subscription configuration for additional CloudWatch metrics. See below.
 	// +kubebuilder:validation:Optional
-	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigParameters `json:"realtimeMetricsSubscriptionConfig,omitempty" tf:"realtime_metrics_subscription_config,omitempty"`
+	RealtimeMetricsSubscriptionConfig []RealtimeMetricsSubscriptionConfigParameters `json:"realtimeMetricsSubscriptionConfig" tf:"realtime_metrics_subscription_config,omitempty"`
 }
 
 type MonitoringSubscriptionObservation struct {
@@ -92,7 +92,7 @@ type RealtimeMetricsSubscriptionConfigParameters struct {
 
 	// A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution. Valid values are Enabled and Disabled. See below.
 	// +kubebuilder:validation:Optional
-	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus,omitempty" tf:"realtime_metrics_subscription_status,omitempty"`
+	RealtimeMetricsSubscriptionStatus *string `json:"realtimeMetricsSubscriptionStatus" tf:"realtime_metrics_subscription_status,omitempty"`
 }
 
 // MonitoringSubscriptionSpec defines the desired state of MonitoringSubscription

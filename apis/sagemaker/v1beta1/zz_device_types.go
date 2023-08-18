@@ -45,7 +45,7 @@ type DeviceDeviceParameters struct {
 
 	// The name of the device.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Amazon Web Services Internet of Things (IoT) object name.
 	// +kubebuilder:validation:Optional

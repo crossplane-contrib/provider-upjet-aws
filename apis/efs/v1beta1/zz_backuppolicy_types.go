@@ -29,7 +29,7 @@ type BackupPolicyBackupPolicyParameters struct {
 
 	// A status of the backup policy. Valid values: ENABLED, DISABLED.
 	// +kubebuilder:validation:Optional
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+	Status *string `json:"status" tf:"status,omitempty"`
 }
 
 type BackupPolicyInitParameters struct {

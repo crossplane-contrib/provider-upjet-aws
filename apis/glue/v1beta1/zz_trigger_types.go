@@ -206,7 +206,7 @@ type EventBatchingConditionParameters struct {
 
 	// Number of events that must be received from Amazon EventBridge before EventBridge  event trigger fires.
 	// +kubebuilder:validation:Optional
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize" tf:"batch_size,omitempty"`
 
 	// Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received. Default value is 900.
 	// +kubebuilder:validation:Optional
@@ -235,7 +235,7 @@ type PredicateParameters struct {
 
 	// A list of the conditions that determine when the trigger will fire. See Conditions.
 	// +kubebuilder:validation:Optional
-	Conditions []ConditionsParameters `json:"conditions,omitempty" tf:"conditions,omitempty"`
+	Conditions []ConditionsParameters `json:"conditions" tf:"conditions,omitempty"`
 
 	// How to handle multiple conditions. Defaults to AND. Valid values are AND or ANY.
 	// +kubebuilder:validation:Optional

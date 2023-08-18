@@ -28,10 +28,10 @@ type SignatureValidityPeriodObservation struct {
 type SignatureValidityPeriodParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type SigningProfileInitParameters struct {

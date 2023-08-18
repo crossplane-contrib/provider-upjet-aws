@@ -44,11 +44,11 @@ type MappingRuleParameters struct {
 
 	// The claim name that must be present in the token, for example, "isAdmin" or "paid".
 	// +kubebuilder:validation:Optional
-	Claim *string `json:"claim,omitempty" tf:"claim,omitempty"`
+	Claim *string `json:"claim" tf:"claim,omitempty"`
 
 	// The match condition that specifies how closely the claim value in the IdP token must match Value.
 	// +kubebuilder:validation:Optional
-	MatchType *string `json:"matchType,omitempty" tf:"match_type,omitempty"`
+	MatchType *string `json:"matchType" tf:"match_type,omitempty"`
 
 	// The role ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -66,7 +66,7 @@ type MappingRuleParameters struct {
 
 	// A brief string that the claim must match, for example, "paid" or "yes".
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type PoolRolesAttachmentInitParameters struct {
@@ -161,7 +161,7 @@ type RoleMappingParameters struct {
 
 	// A string identifying the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Depends on cognito_identity_providers set on aws_cognito_identity_pool resource or a aws_cognito_identity_provider resource.
 	// +kubebuilder:validation:Optional
-	IdentityProvider *string `json:"identityProvider,omitempty" tf:"identity_provider,omitempty"`
+	IdentityProvider *string `json:"identityProvider" tf:"identity_provider,omitempty"`
 
 	// The Rules Configuration to be used for mapping users to roles. You can specify up to 25 rules per identity provider. Rules are evaluated in order. The first one to match specifies the role.
 	// +kubebuilder:validation:Optional
@@ -169,7 +169,7 @@ type RoleMappingParameters struct {
 
 	// The role mapping type.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // PoolRolesAttachmentSpec defines the desired state of PoolRolesAttachment

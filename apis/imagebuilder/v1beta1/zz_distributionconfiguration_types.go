@@ -118,7 +118,7 @@ type ContainerDistributionConfigurationParameters struct {
 
 	// Configuration block with the destination repository for the container distribution configuration.
 	// +kubebuilder:validation:Optional
-	TargetRepository []ContainerDistributionConfigurationTargetRepositoryParameters `json:"targetRepository,omitempty" tf:"target_repository,omitempty"`
+	TargetRepository []ContainerDistributionConfigurationTargetRepositoryParameters `json:"targetRepository" tf:"target_repository,omitempty"`
 }
 
 type ContainerDistributionConfigurationTargetRepositoryInitParameters struct {
@@ -143,11 +143,11 @@ type ContainerDistributionConfigurationTargetRepositoryParameters struct {
 
 	// The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
 	// +kubebuilder:validation:Optional
-	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
 
 	// The service in which this image is registered. Valid values: ECR.
 	// +kubebuilder:validation:Optional
-	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+	Service *string `json:"service" tf:"service,omitempty"`
 }
 
 type DistributionConfigurationInitParameters struct {
@@ -325,11 +325,11 @@ type FastLaunchConfigurationParameters struct {
 
 	// The owner account ID for the fast-launch enabled Windows AMI.
 	// +kubebuilder:validation:Optional
-	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
 
 	// A Boolean that represents the current state of faster launching for the Windows AMI. Set to true to start using Windows faster launching, or false to stop using it.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Configuration block for the launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances to create pre-provisioned snapshots. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -429,7 +429,7 @@ type LaunchTemplateConfigurationParameters struct {
 
 	// The ID of the Amazon EC2 launch template to use.
 	// +kubebuilder:validation:Optional
-	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+	LaunchTemplateID *string `json:"launchTemplateId" tf:"launch_template_id,omitempty"`
 }
 
 type LaunchTemplateInitParameters struct {

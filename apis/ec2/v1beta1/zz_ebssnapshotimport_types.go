@@ -100,7 +100,7 @@ type DiskContainerParameters struct {
 
 	// The format of the disk image being imported. One of VHD or VMDK.
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 
 	// The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..). One of url or user_bucket must be set.
 	// +kubebuilder:validation:Optional
@@ -280,11 +280,11 @@ type UserBucketParameters struct {
 
 	// The name of the Amazon S3 bucket where the disk image is located.
 	// +kubebuilder:validation:Optional
-	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+	S3Bucket *string `json:"s3Bucket" tf:"s3_bucket,omitempty"`
 
 	// The file name of the disk image.
 	// +kubebuilder:validation:Optional
-	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
+	S3Key *string `json:"s3Key" tf:"s3_key,omitempty"`
 }
 
 // EBSSnapshotImportSpec defines the desired state of EBSSnapshotImport

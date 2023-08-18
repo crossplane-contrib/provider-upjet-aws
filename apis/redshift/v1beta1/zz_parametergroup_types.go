@@ -108,11 +108,11 @@ type ParameterParameters struct {
 
 	// The name of the Redshift parameter group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the Redshift parameter.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // ParameterGroupSpec defines the desired state of ParameterGroup

@@ -88,7 +88,7 @@ type SQLInjectionMatchTuplesFieldToMatchParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SQLInjectionMatchTuplesInitParameters struct {
@@ -121,7 +121,7 @@ type SQLInjectionMatchTuplesParameters struct {
 
 	// Specifies where in a web request to look for snippets of malicious SQL code.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []SQLInjectionMatchTuplesFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []SQLInjectionMatchTuplesFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
@@ -129,7 +129,7 @@ type SQLInjectionMatchTuplesParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
 
 // SQLInjectionMatchSetSpec defines the desired state of SQLInjectionMatchSet

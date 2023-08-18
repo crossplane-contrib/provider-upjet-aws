@@ -172,7 +172,7 @@ type ControlPlanePlacementParameters struct {
 
 	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
 	// +kubebuilder:validation:Optional
-	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
 }
 
 type EncryptionConfigInitParameters struct {
@@ -197,11 +197,11 @@ type EncryptionConfigParameters struct {
 
 	// Configuration block with provider for encryption. Detailed below.
 	// +kubebuilder:validation:Optional
-	Provider []ProviderParameters `json:"provider,omitempty" tf:"provider,omitempty"`
+	Provider []ProviderParameters `json:"provider" tf:"provider,omitempty"`
 
 	// List of strings with resources to be encrypted. Valid values: secrets.
 	// +kubebuilder:validation:Optional
-	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
+	Resources []*string `json:"resources" tf:"resources,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -290,7 +290,7 @@ type OutpostConfigParameters struct {
 
 	// The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all Kubernetes control plane instances. The instance type can't be changed after cluster creation. Choose an instance type based on the number of nodes that your cluster will have. If your cluster will have:
 	// +kubebuilder:validation:Optional
-	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
+	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
 	// The following arguments are supported in the control_plane_placement configuration block:
@@ -299,7 +299,7 @@ type OutpostConfigParameters struct {
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
 	// +kubebuilder:validation:Optional
-	OutpostArns []*string `json:"outpostArns,omitempty" tf:"outpost_arns,omitempty"`
+	OutpostArns []*string `json:"outpostArns" tf:"outpost_arns,omitempty"`
 }
 
 type ProviderInitParameters struct {
@@ -318,7 +318,7 @@ type ProviderParameters struct {
 
 	// ARN of the Key Management Service (KMS) customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
 	// +kubebuilder:validation:Optional
-	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
+	KeyArn *string `json:"keyArn" tf:"key_arn,omitempty"`
 }
 
 type VPCConfigInitParameters struct {

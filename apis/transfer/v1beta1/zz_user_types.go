@@ -35,11 +35,11 @@ type HomeDirectoryMappingsParameters struct {
 
 	// Represents an entry and a target.
 	// +kubebuilder:validation:Optional
-	Entry *string `json:"entry,omitempty" tf:"entry,omitempty"`
+	Entry *string `json:"entry" tf:"entry,omitempty"`
 
 	// Represents the map target.
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+	Target *string `json:"target" tf:"target,omitempty"`
 }
 
 type PosixProfileInitParameters struct {
@@ -70,7 +70,7 @@ type PosixProfileParameters struct {
 
 	// The POSIX group ID used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
-	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
+	GID *float64 `json:"gid" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
@@ -78,7 +78,7 @@ type PosixProfileParameters struct {
 
 	// The POSIX user ID used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
-	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
+	UID *float64 `json:"uid" tf:"uid,omitempty"`
 }
 
 type UserInitParameters struct {

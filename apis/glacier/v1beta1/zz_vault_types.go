@@ -32,7 +32,7 @@ type NotificationParameters struct {
 
 	// You can configure a vault to publish a notification for ArchiveRetrievalCompleted and InventoryRetrievalCompleted events.
 	// +kubebuilder:validation:Optional
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// The SNS Topic ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic

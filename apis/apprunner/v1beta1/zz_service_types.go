@@ -75,7 +75,7 @@ type CodeConfigurationParameters struct {
 
 	// Source of the App Runner configuration. Valid values: REPOSITORY, API. Values are interpreted as follows:
 	// +kubebuilder:validation:Optional
-	ConfigurationSource *string `json:"configurationSource,omitempty" tf:"configuration_source,omitempty"`
+	ConfigurationSource *string `json:"configurationSource" tf:"configuration_source,omitempty"`
 }
 
 type CodeConfigurationValuesInitParameters struct {
@@ -132,7 +132,7 @@ type CodeConfigurationValuesParameters struct {
 
 	// Runtime environment type for building and running an App Runner service. Represents a programming language runtime. Valid values: PYTHON_3, NODEJS_12, NODEJS_14, NODEJS_16, CORRETTO_8, CORRETTO_11, GO_1, DOTNET_6, PHP_81, RUBY_31.
 	// +kubebuilder:validation:Optional
-	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+	Runtime *string `json:"runtime" tf:"runtime,omitempty"`
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	// +kubebuilder:validation:Optional
@@ -179,11 +179,11 @@ type CodeRepositoryParameters struct {
 
 	// Location of the repository that contains the source code.
 	// +kubebuilder:validation:Optional
-	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 
 	// Version that should be used within the source code repository. See Source Code Version below for more details.
 	// +kubebuilder:validation:Optional
-	SourceCodeVersion []SourceCodeVersionParameters `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
+	SourceCodeVersion []SourceCodeVersionParameters `json:"sourceCodeVersion" tf:"source_code_version,omitempty"`
 }
 
 type EgressConfigurationInitParameters struct {
@@ -238,7 +238,7 @@ type EncryptionConfigurationParameters struct {
 
 	// ARN of the KMS key used for encryption.
 	// +kubebuilder:validation:Optional
-	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+	KMSKey *string `json:"kmsKey" tf:"kms_key,omitempty"`
 }
 
 type HealthCheckConfigurationInitParameters struct {
@@ -394,11 +394,11 @@ type ImageRepositoryParameters struct {
 	// Identifier of an image. For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the
 	// image name format, see Pulling an image in the Amazon ECR User Guide.
 	// +kubebuilder:validation:Optional
-	ImageIdentifier *string `json:"imageIdentifier,omitempty" tf:"image_identifier,omitempty"`
+	ImageIdentifier *string `json:"imageIdentifier" tf:"image_identifier,omitempty"`
 
 	// Type of the image repository. This reflects the repository provider and whether the repository is private or public. Valid values: ECR , ECR_PUBLIC.
 	// +kubebuilder:validation:Optional
-	ImageRepositoryType *string `json:"imageRepositoryType,omitempty" tf:"image_repository_type,omitempty"`
+	ImageRepositoryType *string `json:"imageRepositoryType" tf:"image_repository_type,omitempty"`
 }
 
 type IngressConfigurationInitParameters struct {
@@ -551,7 +551,7 @@ type ServiceObservabilityConfigurationParameters struct {
 
 	// When true, an observability configuration resource is associated with the service.
 	// +kubebuilder:validation:Optional
-	ObservabilityEnabled *bool `json:"observabilityEnabled,omitempty" tf:"observability_enabled,omitempty"`
+	ObservabilityEnabled *bool `json:"observabilityEnabled" tf:"observability_enabled,omitempty"`
 }
 
 type ServiceObservation struct {
@@ -667,11 +667,11 @@ type SourceCodeVersionParameters struct {
 
 	// Type of version identifier. For a git-based repository, branches represent versions. Valid values: BRANCH.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// Source code version. For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type SourceConfigurationInitParameters struct {

@@ -41,15 +41,15 @@ type AlarmsParameters struct {
 
 	// One or more CloudWatch alarm names.
 	// +kubebuilder:validation:Optional
-	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
+	AlarmNames []*string `json:"alarmNames" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
 	// Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 	// +kubebuilder:validation:Optional
-	Rollback *bool `json:"rollback,omitempty" tf:"rollback,omitempty"`
+	Rollback *bool `json:"rollback" tf:"rollback,omitempty"`
 }
 
 type CapacityProviderStrategyInitParameters struct {
@@ -84,7 +84,7 @@ type CapacityProviderStrategyParameters struct {
 
 	// Short name of the capacity provider.
 	// +kubebuilder:validation:Optional
-	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
+	CapacityProvider *string `json:"capacityProvider" tf:"capacity_provider,omitempty"`
 
 	// Relative percentage of the total number of launched tasks that should use the specified capacity provider.
 	// +kubebuilder:validation:Optional
@@ -117,7 +117,7 @@ type ClientAliasParameters struct {
 
 	// The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 }
 
 type DeploymentCircuitBreakerInitParameters struct {
@@ -142,11 +142,11 @@ type DeploymentCircuitBreakerParameters struct {
 
 	// Whether to enable the deployment circuit breaker logic for the service.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
 	// Whether to enable Amazon ECS to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 	// +kubebuilder:validation:Optional
-	Rollback *bool `json:"rollback,omitempty" tf:"rollback,omitempty"`
+	Rollback *bool `json:"rollback" tf:"rollback,omitempty"`
 }
 
 type DeploymentControllerInitParameters struct {
@@ -199,11 +199,11 @@ type LoadBalancerParameters struct {
 
 	// Name of the container to associate with the load balancer (as it appears in a container definition).
 	// +kubebuilder:validation:Optional
-	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
 	// Port on the container to associate with the load balancer.
 	// +kubebuilder:validation:Optional
-	ContainerPort *float64 `json:"containerPort,omitempty" tf:"container_port,omitempty"`
+	ContainerPort *float64 `json:"containerPort" tf:"container_port,omitempty"`
 
 	// Name of the ELB (Classic) to associate with the service.
 	// +kubebuilder:validation:Optional
@@ -313,7 +313,7 @@ type OrderedPlacementStrategyParameters struct {
 
 	// Type of placement strategy. Must be one of: binpack, random, or spread
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PlacementConstraintsInitParameters struct {
@@ -342,7 +342,7 @@ type PlacementConstraintsParameters struct {
 
 	// Type of constraint. The only valid values at this time are memberOf and distinctInstance.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SecretOptionInitParameters struct {
@@ -367,11 +367,11 @@ type SecretOptionParameters struct {
 
 	// The name of the secret.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the SSM Parameter Store.
 	// +kubebuilder:validation:Optional
-	ValueFrom *string `json:"valueFrom,omitempty" tf:"value_from,omitempty"`
+	ValueFrom *string `json:"valueFrom" tf:"value_from,omitempty"`
 }
 
 type ServiceConnectConfigurationInitParameters struct {
@@ -417,7 +417,7 @@ type ServiceConnectConfigurationLogConfigurationParameters struct {
 
 	// The log driver to use for the container.
 	// +kubebuilder:validation:Optional
-	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
+	LogDriver *string `json:"logDriver" tf:"log_driver,omitempty"`
 
 	// The configuration options to send to the log driver.
 	// +kubebuilder:validation:Optional
@@ -447,7 +447,7 @@ type ServiceConnectConfigurationParameters struct {
 
 	// Specifies whether to use Service Connect with this service.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// The log configuration for the container. See below.
 	// +kubebuilder:validation:Optional
@@ -508,7 +508,7 @@ type ServiceConnectConfigurationServiceParameters struct {
 
 	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	// +kubebuilder:validation:Optional
-	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
+	PortName *string `json:"portName" tf:"port_name,omitempty"`
 }
 
 type ServiceInitParameters struct {
@@ -866,7 +866,7 @@ type ServiceRegistriesParameters struct {
 
 	// ARN of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service(aws_service_discovery_service). For more information, see Service
 	// +kubebuilder:validation:Optional
-	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
+	RegistryArn *string `json:"registryArn" tf:"registry_arn,omitempty"`
 }
 
 // ServiceSpec defines the desired state of Service

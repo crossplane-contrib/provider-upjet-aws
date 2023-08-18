@@ -247,7 +247,7 @@ type TrackingOptionsParameters struct {
 
 	// The domain to use for tracking open and click events.
 	// +kubebuilder:validation:Optional
-	CustomRedirectDomain *string `json:"customRedirectDomain,omitempty" tf:"custom_redirect_domain,omitempty"`
+	CustomRedirectDomain *string `json:"customRedirectDomain" tf:"custom_redirect_domain,omitempty"`
 }
 
 type VdmOptionsInitParameters struct {

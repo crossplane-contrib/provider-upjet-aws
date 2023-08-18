@@ -115,7 +115,7 @@ type CookiesConfigParameters struct {
 
 	// Determines whether any cookies in viewer requests are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are none, whitelist, allExcept, all.
 	// +kubebuilder:validation:Optional
-	CookieBehavior *string `json:"cookieBehavior,omitempty" tf:"cookie_behavior,omitempty"`
+	CookieBehavior *string `json:"cookieBehavior" tf:"cookie_behavior,omitempty"`
 
 	// Object that contains a list of cookie names. See Items for more information.
 	// +kubebuilder:validation:Optional
@@ -229,7 +229,7 @@ type ParametersInCacheKeyAndForwardedToOriginParameters struct {
 
 	// Object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the cache key and automatically included in requests that CloudFront sends to the origin. See Cookies Config for more information.
 	// +kubebuilder:validation:Optional
-	CookiesConfig []CookiesConfigParameters `json:"cookiesConfig,omitempty" tf:"cookies_config,omitempty"`
+	CookiesConfig []CookiesConfigParameters `json:"cookiesConfig" tf:"cookies_config,omitempty"`
 
 	// A flag that can affect whether the Accept-Encoding HTTP header is included in the cache key and included in requests that CloudFront sends to the origin.
 	// +kubebuilder:validation:Optional
@@ -241,11 +241,11 @@ type ParametersInCacheKeyAndForwardedToOriginParameters struct {
 
 	// Object that determines whether any HTTP headers (and if so, which headers) are included in the cache key and automatically included in requests that CloudFront sends to the origin. See Headers Config for more information.
 	// +kubebuilder:validation:Optional
-	HeadersConfig []HeadersConfigParameters `json:"headersConfig,omitempty" tf:"headers_config,omitempty"`
+	HeadersConfig []HeadersConfigParameters `json:"headersConfig" tf:"headers_config,omitempty"`
 
 	// Object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the cache key and automatically included in requests that CloudFront sends to the origin. See Query String Config for more information.
 	// +kubebuilder:validation:Optional
-	QueryStringsConfig []QueryStringsConfigParameters `json:"queryStringsConfig,omitempty" tf:"query_strings_config,omitempty"`
+	QueryStringsConfig []QueryStringsConfigParameters `json:"queryStringsConfig" tf:"query_strings_config,omitempty"`
 }
 
 type QueryStringsConfigInitParameters struct {
@@ -270,7 +270,7 @@ type QueryStringsConfigParameters struct {
 
 	// Determines whether any URL query strings in viewer requests are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are none, whitelist, allExcept, all.
 	// +kubebuilder:validation:Optional
-	QueryStringBehavior *string `json:"queryStringBehavior,omitempty" tf:"query_string_behavior,omitempty"`
+	QueryStringBehavior *string `json:"queryStringBehavior" tf:"query_string_behavior,omitempty"`
 
 	// Object that contains a list of query string names. See Items for more information.
 	// +kubebuilder:validation:Optional

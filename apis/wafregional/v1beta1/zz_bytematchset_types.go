@@ -84,11 +84,11 @@ type ByteMatchTuplesParameters struct {
 
 	// Settings for the ByteMatchTuple. FieldToMatch documented below.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []FieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []FieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// Within the portion of a web request that you want to search.
 	// +kubebuilder:validation:Optional
-	PositionalConstraint *string `json:"positionalConstraint,omitempty" tf:"positional_constraint,omitempty"`
+	PositionalConstraint *string `json:"positionalConstraint" tf:"positional_constraint,omitempty"`
 
 	// The value that you want AWS WAF to search for. The maximum length of the value is 50 bytes.
 	// +kubebuilder:validation:Optional
@@ -96,7 +96,7 @@ type ByteMatchTuplesParameters struct {
 
 	// The formatting way for web request.
 	// +kubebuilder:validation:Optional
-	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
 
 type FieldToMatchInitParameters struct {
@@ -125,7 +125,7 @@ type FieldToMatchParameters struct {
 
 	// The part of the web request that you want AWS WAF to search for a specified string.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ByteMatchSetSpec defines the desired state of ByteMatchSet

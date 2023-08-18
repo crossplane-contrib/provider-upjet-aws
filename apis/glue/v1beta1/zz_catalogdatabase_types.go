@@ -174,7 +174,7 @@ type TargetDatabaseParameters struct {
 
 	// Name of the catalog database.
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 }
 
 // CatalogDatabaseSpec defines the desired state of CatalogDatabase

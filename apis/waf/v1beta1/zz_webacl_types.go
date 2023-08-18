@@ -29,7 +29,7 @@ type ActionParameters struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DefaultActionInitParameters struct {
@@ -51,7 +51,7 @@ type DefaultActionParameters struct {
 	// Specifies how you want AWS WAF to respond to requests that don't match the criteria in any of the rules.
 	// e.g., ALLOW or BLOCK
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type LoggingConfigurationInitParameters struct {
@@ -106,7 +106,7 @@ type OverrideActionParameters struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedactedFieldsFieldToMatchInitParameters struct {
@@ -135,7 +135,7 @@ type RedactedFieldsFieldToMatchParameters struct {
 
 	// valid values are: BLOCK, ALLOW, or COUNT
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedactedFieldsInitParameters struct {
@@ -154,7 +154,7 @@ type RedactedFieldsParameters struct {
 
 	// Set of configuration blocks for fields to redact. Detailed below.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []RedactedFieldsFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []RedactedFieldsFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 }
 
 type RulesInitParameters struct {
@@ -205,7 +205,7 @@ type RulesParameters struct {
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Global) rule (e.g., aws_waf_rule). WAF (Regional) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.Rule

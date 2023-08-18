@@ -85,7 +85,7 @@ type GitConfigParameters struct {
 
 	// The URL where the Git repository is located.
 	// +kubebuilder:validation:Optional
-	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
+	RepositoryURL *string `json:"repositoryUrl" tf:"repository_url,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to access the git repository. The secret must have a staging label of AWSCURRENT and must be in the following format: {"username": UserName, "password": Password}
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret

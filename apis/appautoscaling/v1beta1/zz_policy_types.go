@@ -104,11 +104,11 @@ type DimensionsParameters struct {
 
 	// Name of the dimension.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Value of the dimension.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type MetricDimensionsInitParameters struct {
@@ -133,11 +133,11 @@ type MetricDimensionsParameters struct {
 
 	// Name of the dimension.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Value of the dimension.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type MetricInitParameters struct {
@@ -172,11 +172,11 @@ type MetricParameters struct {
 
 	// Name of the metric.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 type MetricStatInitParameters struct {
@@ -207,11 +207,11 @@ type MetricStatParameters struct {
 
 	// Structure that defines the CloudWatch metric to return, including the metric name, namespace, and dimensions.
 	// +kubebuilder:validation:Optional
-	Metric []MetricParameters `json:"metric,omitempty" tf:"metric,omitempty"`
+	Metric []MetricParameters `json:"metric" tf:"metric,omitempty"`
 
 	// Statistic of the metrics to return.
 	// +kubebuilder:validation:Optional
-	Stat *string `json:"stat,omitempty" tf:"stat,omitempty"`
+	Stat *string `json:"stat" tf:"stat,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -262,7 +262,7 @@ type MetricsParameters struct {
 
 	// Short name for the metric used in target tracking scaling policy.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Human-readable label for this metric or expression.
 	// +kubebuilder:validation:Optional
@@ -403,7 +403,7 @@ type PredefinedMetricSpecificationParameters struct {
 
 	// Metric type.
 	// +kubebuilder:validation:Optional
-	PredefinedMetricType *string `json:"predefinedMetricType,omitempty" tf:"predefined_metric_type,omitempty"`
+	PredefinedMetricType *string `json:"predefinedMetricType" tf:"predefined_metric_type,omitempty"`
 
 	// Reserved for future use if the predefined_metric_type is not ALBRequestCountPerTarget. If the predefined_metric_type is ALBRequestCountPerTarget, you must specify this argument. Documentation can be found at: AWS Predefined Scaling Metric Specification. Must be less than or equal to 1023 characters in length.
 	// +kubebuilder:validation:Optional
@@ -446,7 +446,7 @@ type StepAdjustmentParameters struct {
 
 	// Number of members by which to scale, when the adjustment bounds are breached. A positive value scales up. A negative value scales down.
 	// +kubebuilder:validation:Optional
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *float64 `json:"scalingAdjustment" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepScalingPolicyConfigurationInitParameters struct {
@@ -574,7 +574,7 @@ type TargetTrackingScalingPolicyConfigurationParameters struct {
 
 	// Target value for the metric.
 	// +kubebuilder:validation:Optional
-	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
+	TargetValue *float64 `json:"targetValue" tf:"target_value,omitempty"`
 }
 
 // PolicySpec defines the desired state of Policy

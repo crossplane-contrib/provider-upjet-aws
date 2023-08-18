@@ -335,7 +335,7 @@ type EBSBlockDeviceParameters struct {
 
 	// Path at which the device is exposed to created instances.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Boolean controlling whether the created EBS volumes will be encrypted. Can't be used with snapshot_id.
 	// +kubebuilder:validation:Optional
@@ -404,12 +404,12 @@ type EphemeralBlockDeviceParameters struct {
 
 	// Path at which the device is exposed to created instances.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Name for the ephemeral device, of the form "ephemeralN" where
 	// N is a volume number starting from zero.
 	// +kubebuilder:validation:Optional
-	VirtualName *string `json:"virtualName,omitempty" tf:"virtual_name,omitempty"`
+	VirtualName *string `json:"virtualName" tf:"virtual_name,omitempty"`
 }
 
 // AMISpec defines the desired state of AMI

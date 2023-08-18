@@ -91,7 +91,7 @@ type RegexMatchTupleFieldToMatchParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RegexMatchTupleInitParameters struct {
@@ -125,7 +125,7 @@ type RegexMatchTupleParameters struct {
 
 	// The part of a web request that you want to search, such as a specified header or a query string.
 	// +kubebuilder:validation:Optional
-	FieldToMatch []RegexMatchTupleFieldToMatchParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
+	FieldToMatch []RegexMatchTupleFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
 	// The ID of a Regex Pattern Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.RegexPatternSet
@@ -146,7 +146,7 @@ type RegexMatchTupleParameters struct {
 	// See docs
 	// for all supported values.
 	// +kubebuilder:validation:Optional
-	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
+	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
 
 // RegexMatchSetSpec defines the desired state of RegexMatchSet

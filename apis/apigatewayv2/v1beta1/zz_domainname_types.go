@@ -64,7 +64,7 @@ type DomainNameConfigurationParameters struct {
 
 	// Endpoint type. Valid values: REGIONAL.
 	// +kubebuilder:validation:Optional
-	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
+	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	// +kubebuilder:validation:Optional
@@ -72,7 +72,7 @@ type DomainNameConfigurationParameters struct {
 
 	// Transport Layer Security (TLS) version of the security policy for the domain name. Valid values: TLS_1_2.
 	// +kubebuilder:validation:Optional
-	SecurityPolicy *string `json:"securityPolicy,omitempty" tf:"security_policy,omitempty"`
+	SecurityPolicy *string `json:"securityPolicy" tf:"security_policy,omitempty"`
 }
 
 type DomainNameInitParameters struct {
@@ -153,7 +153,7 @@ type MutualTLSAuthenticationParameters struct {
 
 	// Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version.
 	// +kubebuilder:validation:Optional
-	TruststoreURI *string `json:"truststoreUri,omitempty" tf:"truststore_uri,omitempty"`
+	TruststoreURI *string `json:"truststoreUri" tf:"truststore_uri,omitempty"`
 
 	// Version of the S3 object that contains the truststore. To specify a version, you must have versioning enabled for the S3 bucket.
 	// +kubebuilder:validation:Optional

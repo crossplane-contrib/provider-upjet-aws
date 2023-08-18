@@ -86,15 +86,15 @@ type CustomizedLoadMetricSpecificationParameters struct {
 
 	// Name of the metric.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
 	// Statistic of the metric. Currently, the value must always be Sum.
 	// +kubebuilder:validation:Optional
-	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
+	Statistic *string `json:"statistic" tf:"statistic,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -145,15 +145,15 @@ type CustomizedScalingMetricSpecificationParameters struct {
 
 	// Name of the metric.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// Namespace of the metric.
 	// +kubebuilder:validation:Optional
-	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 
 	// Statistic of the metric. Currently, the value must always be Sum.
 	// +kubebuilder:validation:Optional
-	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
+	Statistic *string `json:"statistic" tf:"statistic,omitempty"`
 
 	// Unit of the metric.
 	// +kubebuilder:validation:Optional
@@ -182,7 +182,7 @@ type PredefinedLoadMetricSpecificationParameters struct {
 
 	// Metric type. Valid values: ALBTargetGroupRequestCount, ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut.
 	// +kubebuilder:validation:Optional
-	PredefinedLoadMetricType *string `json:"predefinedLoadMetricType,omitempty" tf:"predefined_load_metric_type,omitempty"`
+	PredefinedLoadMetricType *string `json:"predefinedLoadMetricType" tf:"predefined_load_metric_type,omitempty"`
 
 	// Identifies the resource associated with the metric type.
 	// +kubebuilder:validation:Optional
@@ -211,7 +211,7 @@ type PredefinedScalingMetricSpecificationParameters struct {
 
 	// Metric type. Valid values: ALBRequestCountPerTarget, ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections.
 	// +kubebuilder:validation:Optional
-	PredefinedScalingMetricType *string `json:"predefinedScalingMetricType,omitempty" tf:"predefined_scaling_metric_type,omitempty"`
+	PredefinedScalingMetricType *string `json:"predefinedScalingMetricType" tf:"predefined_scaling_metric_type,omitempty"`
 
 	// Identifies the resource associated with the metric type.
 	// +kubebuilder:validation:Optional
@@ -329,11 +329,11 @@ type ScalingInstructionParameters struct {
 
 	// Maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for predictive_scaling_max_capacity_behavior.
 	// +kubebuilder:validation:Optional
-	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
 
 	// Minimum capacity of the resource.
 	// +kubebuilder:validation:Optional
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 
 	// Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -355,11 +355,11 @@ type ScalingInstructionParameters struct {
 
 	// ID of the resource. This string consists of the resource type and unique identifier.
 	// +kubebuilder:validation:Optional
-	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 
 	// Scalable dimension associated with the resource. Valid values: autoscaling:autoScalingGroup:DesiredCapacity, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount.
 	// +kubebuilder:validation:Optional
-	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
+	ScalableDimension *string `json:"scalableDimension" tf:"scalable_dimension,omitempty"`
 
 	// Controls whether a resource's externally created scaling policies are kept or replaced. Valid values: KeepExternalPolicies, ReplaceExternalPolicies. Defaults to KeepExternalPolicies.
 	// +kubebuilder:validation:Optional
@@ -371,12 +371,12 @@ type ScalingInstructionParameters struct {
 
 	// Namespace of the AWS service. Valid values: autoscaling, dynamodb, ecs, ec2, rds.
 	// +kubebuilder:validation:Optional
-	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+	ServiceNamespace *string `json:"serviceNamespace" tf:"service_namespace,omitempty"`
 
 	// Structure that defines new target tracking configurations. Each of these structures includes a specific scaling metric and a target value for the metric, along with various parameters to use with dynamic scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
 	// +kubebuilder:validation:Optional
-	TargetTrackingConfiguration []TargetTrackingConfigurationParameters `json:"targetTrackingConfiguration,omitempty" tf:"target_tracking_configuration,omitempty"`
+	TargetTrackingConfiguration []TargetTrackingConfigurationParameters `json:"targetTrackingConfiguration" tf:"target_tracking_configuration,omitempty"`
 }
 
 type ScalingPlanInitParameters struct {
@@ -451,7 +451,7 @@ type TagFilterParameters struct {
 
 	// Tag key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Tag values.
 	// +kubebuilder:validation:Optional
@@ -549,7 +549,7 @@ type TargetTrackingConfigurationParameters struct {
 
 	// Target value for the metric.
 	// +kubebuilder:validation:Optional
-	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
+	TargetValue *float64 `json:"targetValue" tf:"target_value,omitempty"`
 }
 
 // ScalingPlanSpec defines the desired state of ScalingPlan

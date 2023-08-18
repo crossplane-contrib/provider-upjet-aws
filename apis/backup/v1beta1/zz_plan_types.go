@@ -35,11 +35,11 @@ type AdvancedBackupSettingParameters struct {
 
 	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
 	// +kubebuilder:validation:Optional
-	BackupOptions map[string]*string `json:"backupOptions,omitempty" tf:"backup_options,omitempty"`
+	BackupOptions map[string]*string `json:"backupOptions" tf:"backup_options,omitempty"`
 
 	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
 	// +kubebuilder:validation:Optional
-	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 }
 
 type CopyActionInitParameters struct {
@@ -64,7 +64,7 @@ type CopyActionParameters struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.
 	// +kubebuilder:validation:Optional
-	DestinationVaultArn *string `json:"destinationVaultArn,omitempty" tf:"destination_vault_arn,omitempty"`
+	DestinationVaultArn *string `json:"destinationVaultArn" tf:"destination_vault_arn,omitempty"`
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.  Fields documented below.
 	// +kubebuilder:validation:Optional
@@ -276,7 +276,7 @@ type RuleParameters struct {
 
 	// An display name for a backup rule.
 	// +kubebuilder:validation:Optional
-	RuleName *string `json:"ruleName,omitempty" tf:"rule_name,omitempty"`
+	RuleName *string `json:"ruleName" tf:"rule_name,omitempty"`
 
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	// +kubebuilder:validation:Optional

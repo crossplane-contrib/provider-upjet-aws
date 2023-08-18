@@ -278,11 +278,11 @@ type BucketDefinitionsParameters struct {
 
 	// The unique identifier for the AWS account that owns the buckets.
 	// +kubebuilder:validation:Optional
-	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
 
 	// An array that lists the names of the buckets.
 	// +kubebuilder:validation:Optional
-	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
+	Buckets []*string `json:"buckets" tf:"buckets,omitempty"`
 }
 
 type ClassificationJobInitParameters struct {

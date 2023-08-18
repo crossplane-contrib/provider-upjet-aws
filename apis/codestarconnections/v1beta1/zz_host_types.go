@@ -110,11 +110,11 @@ type VPCConfigurationParameters struct {
 
 	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 
 	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
@@ -122,7 +122,7 @@ type VPCConfigurationParameters struct {
 
 	// The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
-	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+	VPCID *string `json:"vpcId" tf:"vpc_id,omitempty"`
 }
 
 // HostSpec defines the desired state of Host

@@ -108,18 +108,18 @@ type PortInfoParameters struct {
 
 	// First port in a range of open ports on an instance.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Last port in a range of open ports on an instance.
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 // InstancePublicPortsSpec defines the desired state of InstancePublicPorts

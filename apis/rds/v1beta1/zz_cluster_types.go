@@ -659,15 +659,15 @@ type ClusterS3ImportParameters struct {
 
 	// Role applied to load the data.
 	// +kubebuilder:validation:Optional
-	IngestionRole *string `json:"ingestionRole,omitempty" tf:"ingestion_role,omitempty"`
+	IngestionRole *string `json:"ingestionRole" tf:"ingestion_role,omitempty"`
 
 	// Source engine for the backup
 	// +kubebuilder:validation:Optional
-	SourceEngine *string `json:"sourceEngine,omitempty" tf:"source_engine,omitempty"`
+	SourceEngine *string `json:"sourceEngine" tf:"source_engine,omitempty"`
 
 	// Version of the source engine used to make the backup
 	// +kubebuilder:validation:Optional
-	SourceEngineVersion *string `json:"sourceEngineVersion,omitempty" tf:"source_engine_version,omitempty"`
+	SourceEngineVersion *string `json:"sourceEngineVersion" tf:"source_engine_version,omitempty"`
 }
 
 type ScalingConfigurationInitParameters struct {
@@ -751,11 +751,11 @@ type Serverlessv2ScalingConfigurationParameters struct {
 
 	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 16.
 	// +kubebuilder:validation:Optional
-	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
 
 	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid Aurora MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256. Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16, 32, 64, 192, and 384). Defaults to 1.
 	// +kubebuilder:validation:Optional
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

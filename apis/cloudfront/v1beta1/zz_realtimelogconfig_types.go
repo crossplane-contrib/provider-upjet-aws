@@ -35,11 +35,11 @@ type EndpointParameters struct {
 
 	// The Amazon Kinesis data stream configuration.
 	// +kubebuilder:validation:Optional
-	KinesisStreamConfig []KinesisStreamConfigParameters `json:"kinesisStreamConfig,omitempty" tf:"kinesis_stream_config,omitempty"`
+	KinesisStreamConfig []KinesisStreamConfigParameters `json:"kinesisStreamConfig" tf:"kinesis_stream_config,omitempty"`
 
 	// The type of data stream where real-time log data is sent. The only valid value is Kinesis.
 	// +kubebuilder:validation:Optional
-	StreamType *string `json:"streamType,omitempty" tf:"stream_type,omitempty"`
+	StreamType *string `json:"streamType" tf:"stream_type,omitempty"`
 }
 
 type KinesisStreamConfigInitParameters struct {

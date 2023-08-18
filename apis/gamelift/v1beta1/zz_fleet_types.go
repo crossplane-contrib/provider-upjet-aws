@@ -66,19 +66,19 @@ type EC2InboundPermissionParameters struct {
 
 	// Starting value for a range of allowed port numbers.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// Range of allowed IP addresses expressed in CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet mask].
 	// +kubebuilder:validation:Optional
-	IPRange *string `json:"ipRange,omitempty" tf:"ip_range,omitempty"`
+	IPRange *string `json:"ipRange" tf:"ip_range,omitempty"`
 
 	// Network communication protocol used by the fleetE.g., TCP or UDP
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than from_port.
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type FleetInitParameters struct {
@@ -364,11 +364,11 @@ type ServerProcessParameters struct {
 
 	// Number of server processes using this configuration to run concurrently on an instance.
 	// +kubebuilder:validation:Optional
-	ConcurrentExecutions *float64 `json:"concurrentExecutions,omitempty" tf:"concurrent_executions,omitempty"`
+	ConcurrentExecutions *float64 `json:"concurrentExecutions" tf:"concurrent_executions,omitempty"`
 
 	// Location of the server executable in a game build. All game builds are installed on instances at the root : for Windows instances C:\game, and for Linux instances /local/game.
 	// +kubebuilder:validation:Optional
-	LaunchPath *string `json:"launchPath,omitempty" tf:"launch_path,omitempty"`
+	LaunchPath *string `json:"launchPath" tf:"launch_path,omitempty"`
 
 	// Optional list of parameters to pass to the server executable on launch.
 	// +kubebuilder:validation:Optional

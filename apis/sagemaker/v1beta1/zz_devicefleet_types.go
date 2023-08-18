@@ -121,7 +121,7 @@ type OutputConfigParameters struct {
 
 	// The Amazon Simple Storage (S3) bucker URI.
 	// +kubebuilder:validation:Optional
-	S3OutputLocation *string `json:"s3OutputLocation,omitempty" tf:"s3_output_location,omitempty"`
+	S3OutputLocation *string `json:"s3OutputLocation" tf:"s3_output_location,omitempty"`
 }
 
 // DeviceFleetSpec defines the desired state of DeviceFleet

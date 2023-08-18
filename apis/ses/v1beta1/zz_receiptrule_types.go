@@ -41,15 +41,15 @@ type AddHeaderActionParameters struct {
 
 	// The name of the header to add
 	// +kubebuilder:validation:Optional
-	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
 
 	// The value of the header to add
 	// +kubebuilder:validation:Optional
-	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
+	HeaderValue *string `json:"headerValue" tf:"header_value,omitempty"`
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 }
 
 type BounceActionInitParameters struct {
@@ -98,19 +98,19 @@ type BounceActionParameters struct {
 
 	// The message to send
 	// +kubebuilder:validation:Optional
-	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+	Message *string `json:"message" tf:"message,omitempty"`
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The RFC 5321 SMTP reply code
 	// +kubebuilder:validation:Optional
-	SMTPReplyCode *string `json:"smtpReplyCode,omitempty" tf:"smtp_reply_code,omitempty"`
+	SMTPReplyCode *string `json:"smtpReplyCode" tf:"smtp_reply_code,omitempty"`
 
 	// The email address of the sender
 	// +kubebuilder:validation:Optional
-	Sender *string `json:"sender,omitempty" tf:"sender,omitempty"`
+	Sender *string `json:"sender" tf:"sender,omitempty"`
 
 	// The RFC 3463 SMTP enhanced status code
 	// +kubebuilder:validation:Optional
@@ -155,7 +155,7 @@ type LambdaActionParameters struct {
 
 	// The ARN of the Lambda function to invoke
 	// +kubebuilder:validation:Optional
-	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
 
 	// Event or RequestResponse
 	// +kubebuilder:validation:Optional
@@ -163,7 +163,7 @@ type LambdaActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -370,7 +370,7 @@ type S3ActionParameters struct {
 
 	// The name of the S3 bucket
 	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
 	// The ARN of the KMS key
 	// +kubebuilder:validation:Optional
@@ -382,7 +382,7 @@ type S3ActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -421,11 +421,11 @@ type SnsActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
-	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+	TopicArn *string `json:"topicArn" tf:"topic_arn,omitempty"`
 }
 
 type StopActionInitParameters struct {
@@ -456,11 +456,11 @@ type StopActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The scope to apply. The only acceptable value is RuleSet.
 	// +kubebuilder:validation:Optional
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+	Scope *string `json:"scope" tf:"scope,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -495,11 +495,11 @@ type WorkmailActionParameters struct {
 
 	// The ARN of the WorkMail organization
 	// +kubebuilder:validation:Optional
-	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
+	OrganizationArn *string `json:"organizationArn" tf:"organization_arn,omitempty"`
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional

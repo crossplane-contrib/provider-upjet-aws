@@ -646,7 +646,7 @@ type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +kubebuilder:validation:Optional
-	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
+	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
 }
 
 type TargetGroupInfoInitParameters struct {
@@ -705,11 +705,11 @@ type TargetGroupPairInfoParameters struct {
 
 	// Configuration block for the production traffic route (documented below).
 	// +kubebuilder:validation:Optional
-	ProdTrafficRoute []ProdTrafficRouteParameters `json:"prodTrafficRoute,omitempty" tf:"prod_traffic_route,omitempty"`
+	ProdTrafficRoute []ProdTrafficRouteParameters `json:"prodTrafficRoute" tf:"prod_traffic_route,omitempty"`
 
 	// Configuration blocks for a target group within a target group pair (documented below).
 	// +kubebuilder:validation:Optional
-	TargetGroup []TargetGroupParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
+	TargetGroup []TargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
 
 	// Configuration block for the test traffic route (documented below).
 	// +kubebuilder:validation:Optional
@@ -778,7 +778,7 @@ type TestTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +kubebuilder:validation:Optional
-	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
+	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
 }
 
 type TriggerConfigurationInitParameters struct {
@@ -806,11 +806,11 @@ type TriggerConfigurationParameters struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
 	// +kubebuilder:validation:Optional
-	TriggerEvents []*string `json:"triggerEvents,omitempty" tf:"trigger_events,omitempty"`
+	TriggerEvents []*string `json:"triggerEvents" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.
 	// +kubebuilder:validation:Optional
-	TriggerName *string `json:"triggerName,omitempty" tf:"trigger_name,omitempty"`
+	TriggerName *string `json:"triggerName" tf:"trigger_name,omitempty"`
 
 	// The ARN of the SNS topic through which notifications are sent.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic

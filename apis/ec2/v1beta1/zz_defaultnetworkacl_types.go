@@ -171,7 +171,7 @@ type EgressParameters struct {
 
 	// The action to take.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The CIDR block to match. This must be a valid network mask.
 	// +kubebuilder:validation:Optional
@@ -179,7 +179,7 @@ type EgressParameters struct {
 
 	// The from port to match.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// The IPv6 CIDR block.
 	// +kubebuilder:validation:Optional
@@ -195,15 +195,15 @@ type EgressParameters struct {
 
 	// The protocol to match. If using the -1 'all' protocol, you must specify a from and to port of 0.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The rule number. Used for ordering.
 	// +kubebuilder:validation:Optional
-	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
+	RuleNo *float64 `json:"ruleNo" tf:"rule_no,omitempty"`
 
 	// The to port to match.
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type IngressInitParameters struct {
@@ -267,7 +267,7 @@ type IngressParameters struct {
 
 	// The action to take.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The CIDR block to match. This must be a valid network mask.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.DefaultVPC
@@ -285,7 +285,7 @@ type IngressParameters struct {
 
 	// The from port to match.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// The IPv6 CIDR block.
 	// +kubebuilder:validation:Optional
@@ -301,15 +301,15 @@ type IngressParameters struct {
 
 	// The protocol to match. If using the -1 'all' protocol, you must specify a from and to port of 0.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The rule number. Used for ordering.
 	// +kubebuilder:validation:Optional
-	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
+	RuleNo *float64 `json:"ruleNo" tf:"rule_no,omitempty"`
 
 	// The to port to match.
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 // DefaultNetworkACLSpec defines the desired state of DefaultNetworkACL

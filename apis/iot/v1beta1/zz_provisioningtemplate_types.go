@@ -39,7 +39,7 @@ type PreProvisioningHookParameters struct {
 
 	// The ARN of the target function.
 	// +kubebuilder:validation:Optional
-	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+	TargetArn *string `json:"targetArn" tf:"target_arn,omitempty"`
 }
 
 type ProvisioningTemplateInitParameters struct {

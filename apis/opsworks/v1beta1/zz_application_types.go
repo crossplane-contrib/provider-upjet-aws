@@ -59,7 +59,7 @@ type AppSourceParameters struct {
 
 	// The type of source to use. For example, "archive".
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The URL where the app resource can be found.
 	// +kubebuilder:validation:Optional
@@ -287,7 +287,7 @@ type EnvironmentParameters struct {
 
 	// Variable name.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Set visibility of the variable value to true or false.
 	// +kubebuilder:validation:Optional
@@ -295,7 +295,7 @@ type EnvironmentParameters struct {
 
 	// Variable value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type SSLConfigurationInitParameters struct {
@@ -320,7 +320,7 @@ type SSLConfigurationParameters struct {
 
 	// The contents of the certificate's domain.crt file.
 	// +kubebuilder:validation:Optional
-	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate *string `json:"certificate" tf:"certificate,omitempty"`
 
 	// Can be used to specify an intermediate certificate authority key or client authentication.
 	// +kubebuilder:validation:Optional

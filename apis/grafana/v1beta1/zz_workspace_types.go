@@ -35,11 +35,11 @@ type NetworkAccessControlParameters struct {
 
 	// - An array of prefix list IDs.
 	// +kubebuilder:validation:Optional
-	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+	PrefixListIds []*string `json:"prefixListIds" tf:"prefix_list_ids,omitempty"`
 
 	// - An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored.
 	// +kubebuilder:validation:Optional
-	VpceIds []*string `json:"vpceIds,omitempty" tf:"vpce_ids,omitempty"`
+	VpceIds []*string `json:"vpceIds" tf:"vpce_ids,omitempty"`
 }
 
 type VPCConfigurationInitParameters struct {
@@ -64,11 +64,11 @@ type VPCConfigurationParameters struct {
 
 	// - The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
 	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// - The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
 	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 type WorkspaceInitParameters struct {

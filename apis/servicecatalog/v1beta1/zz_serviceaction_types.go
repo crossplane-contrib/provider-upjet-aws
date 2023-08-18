@@ -57,7 +57,7 @@ type DefinitionParameters struct {
 
 	// Name of the SSM document. For example, AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide the ARN instead of the name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// List of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].
 	// +kubebuilder:validation:Optional
@@ -69,7 +69,7 @@ type DefinitionParameters struct {
 
 	// SSM document version. For example, 1.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type ServiceActionInitParameters struct {

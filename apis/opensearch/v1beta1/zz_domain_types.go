@@ -51,7 +51,7 @@ type AdvancedSecurityOptionsParameters struct {
 
 	// Whether advanced security is enabled.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Whether the internal user database is enabled. Default is false.
 	// +kubebuilder:validation:Optional
@@ -90,7 +90,7 @@ type AutoTuneOptionsParameters struct {
 
 	// Auto-Tune desired state for the domain. Valid values: ENABLED or DISABLED.
 	// +kubebuilder:validation:Optional
-	DesiredState *string `json:"desiredState,omitempty" tf:"desired_state,omitempty"`
+	DesiredState *string `json:"desiredState" tf:"desired_state,omitempty"`
 
 	// Configuration block for Auto-Tune maintenance windows. Can be specified multiple times for each maintenance window. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -258,15 +258,15 @@ type CognitoOptionsParameters struct {
 
 	// ID of the Cognito Identity Pool to use.
 	// +kubebuilder:validation:Optional
-	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+	IdentityPoolID *string `json:"identityPoolId" tf:"identity_pool_id,omitempty"`
 
 	// ARN of the IAM role that has the AmazonOpenSearchServiceCognitoAccess policy attached.
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
 	// ID of the Cognito User Pool to use.
 	// +kubebuilder:validation:Optional
-	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+	UserPoolID *string `json:"userPoolId" tf:"user_pool_id,omitempty"`
 }
 
 type ColdStorageOptionsInitParameters struct {
@@ -556,11 +556,11 @@ type DurationParameters struct {
 
 	// Unit of time specifying the duration of an Auto-Tune maintenance window. Valid values: HOURS.
 	// +kubebuilder:validation:Optional
-	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+	Unit *string `json:"unit" tf:"unit,omitempty"`
 
 	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type EBSOptionsInitParameters struct {
@@ -603,7 +603,7 @@ type EBSOptionsParameters struct {
 
 	// Whether EBS volumes are attached to data nodes in the domain.
 	// +kubebuilder:validation:Optional
-	EBSEnabled *bool `json:"ebsEnabled,omitempty" tf:"ebs_enabled,omitempty"`
+	EBSEnabled *bool `json:"ebsEnabled" tf:"ebs_enabled,omitempty"`
 
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
 	// +kubebuilder:validation:Optional
@@ -644,7 +644,7 @@ type EncryptAtRestParameters struct {
 
 	// Whether to enable encryption at rest. If the encrypt_at_rest block is not provided then this defaults to false. Enabling encryption on new domains requires an engine_version of OpenSearch_X.Y or Elasticsearch_5.1 or greater.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// KMS key ARN to encrypt the Elasticsearch domain with. If not specified then it defaults to using the aws/es service KMS key. Note that KMS will accept a KMS key ID but will return the key ARN.
 	// +kubebuilder:validation:Optional
@@ -694,7 +694,7 @@ type LogPublishingOptionsParameters struct {
 
 	// Type of OpenSearch log. Valid values: INDEX_SLOW_LOGS, SEARCH_SLOW_LOGS, ES_APPLICATION_LOGS, AUDIT_LOGS.
 	// +kubebuilder:validation:Optional
-	LogType *string `json:"logType,omitempty" tf:"log_type,omitempty"`
+	LogType *string `json:"logType" tf:"log_type,omitempty"`
 }
 
 type MaintenanceScheduleInitParameters struct {
@@ -725,15 +725,15 @@ type MaintenanceScheduleParameters struct {
 
 	// A cron expression specifying the recurrence pattern for an Auto-Tune maintenance schedule.
 	// +kubebuilder:validation:Optional
-	CronExpressionForRecurrence *string `json:"cronExpressionForRecurrence,omitempty" tf:"cron_expression_for_recurrence,omitempty"`
+	CronExpressionForRecurrence *string `json:"cronExpressionForRecurrence" tf:"cron_expression_for_recurrence,omitempty"`
 
 	// Configuration block for the duration of the Auto-Tune maintenance window. Detailed below.
 	// +kubebuilder:validation:Optional
-	Duration []DurationParameters `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration []DurationParameters `json:"duration" tf:"duration,omitempty"`
 
 	// Date and time at which to start the Auto-Tune maintenance schedule in RFC3339 format.
 	// +kubebuilder:validation:Optional
-	StartAt *string `json:"startAt,omitempty" tf:"start_at,omitempty"`
+	StartAt *string `json:"startAt" tf:"start_at,omitempty"`
 }
 
 type MasterUserOptionsInitParameters struct {
@@ -785,7 +785,7 @@ type NodeToNodeEncryptionParameters struct {
 
 	// Whether to enable node-to-node encryption. If the node_to_node_encryption block is not provided then this defaults to false. Enabling node-to-node encryption of a new domain requires an engine_version of OpenSearch_X.Y or Elasticsearch_6.0 or greater.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type SnapshotOptionsInitParameters struct {
@@ -804,7 +804,7 @@ type SnapshotOptionsParameters struct {
 
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
 	// +kubebuilder:validation:Optional
-	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour" tf:"automated_snapshot_start_hour,omitempty"`
 }
 
 type VPCOptionsInitParameters struct {

@@ -250,7 +250,7 @@ type LoggingParameters struct {
 
 	// Configuration block with S3 logging settings. Detailed below.
 	// +kubebuilder:validation:Optional
-	S3Logs []S3LogsParameters `json:"s3Logs,omitempty" tf:"s3_logs,omitempty"`
+	S3Logs []S3LogsParameters `json:"s3Logs" tf:"s3_logs,omitempty"`
 }
 
 type S3LogsInitParameters struct {

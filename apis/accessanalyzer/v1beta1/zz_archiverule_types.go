@@ -91,7 +91,7 @@ type FilterParameters struct {
 
 	// Filter criteria.
 	// +kubebuilder:validation:Optional
-	Criteria *string `json:"criteria,omitempty" tf:"criteria,omitempty"`
+	Criteria *string `json:"criteria" tf:"criteria,omitempty"`
 
 	// Equals comparator.
 	// +kubebuilder:validation:Optional

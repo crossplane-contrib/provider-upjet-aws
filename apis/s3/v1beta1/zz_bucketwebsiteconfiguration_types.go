@@ -161,7 +161,7 @@ type ErrorDocumentParameters struct {
 
 	// Object key name to use when a 4XX class error occurs.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 }
 
 type IndexDocumentInitParameters struct {
@@ -186,7 +186,7 @@ type IndexDocumentParameters struct {
 	// For example, if the suffix is index.html and you make a request to samplebucket/images/, the data that is returned will be for the object with the key name images/index.html.
 	// The suffix must not be empty and must not include a slash character.
 	// +kubebuilder:validation:Optional
-	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
+	Suffix *string `json:"suffix" tf:"suffix,omitempty"`
 }
 
 type RedirectAllRequestsToInitParameters struct {
@@ -211,7 +211,7 @@ type RedirectAllRequestsToParameters struct {
 
 	// Name of the host where requests are redirected.
 	// +kubebuilder:validation:Optional
-	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// Protocol to use when redirecting requests. The default is the protocol that is used in the original request. Valid values: http, https.
 	// +kubebuilder:validation:Optional
@@ -303,7 +303,7 @@ type RoutingRuleParameters struct {
 
 	// Configuration block for redirect information. See below.
 	// +kubebuilder:validation:Optional
-	Redirect []RedirectParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
+	Redirect []RedirectParameters `json:"redirect" tf:"redirect,omitempty"`
 }
 
 // BucketWebsiteConfigurationSpec defines the desired state of BucketWebsiteConfiguration

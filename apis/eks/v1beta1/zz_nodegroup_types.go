@@ -61,7 +61,7 @@ type LaunchTemplateParameters struct {
 
 	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type NodeGroupInitParameters struct {
@@ -369,15 +369,15 @@ type ScalingConfigParameters struct {
 
 	// Desired number of worker nodes.
 	// +kubebuilder:validation:Optional
-	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
+	DesiredSize *float64 `json:"desiredSize" tf:"desired_size,omitempty"`
 
 	// Maximum number of worker nodes.
 	// +kubebuilder:validation:Optional
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *float64 `json:"maxSize" tf:"max_size,omitempty"`
 
 	// Minimum number of worker nodes.
 	// +kubebuilder:validation:Optional
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *float64 `json:"minSize" tf:"min_size,omitempty"`
 }
 
 type TaintInitParameters struct {
@@ -408,11 +408,11 @@ type TaintParameters struct {
 
 	// The effect of the taint. Valid values: NO_SCHEDULE, NO_EXECUTE, PREFER_NO_SCHEDULE.
 	// +kubebuilder:validation:Optional
-	Effect *string `json:"effect,omitempty" tf:"effect,omitempty"`
+	Effect *string `json:"effect" tf:"effect,omitempty"`
 
 	// The key of the taint. Maximum length of 63.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The value of the taint. Maximum length of 63.
 	// +kubebuilder:validation:Optional

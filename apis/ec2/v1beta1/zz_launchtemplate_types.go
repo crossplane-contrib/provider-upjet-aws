@@ -310,7 +310,7 @@ type ElasticGpuSpecificationsParameters struct {
 
 	// The Elastic GPU Type
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ElasticInferenceAcceleratorInitParameters struct {
@@ -329,7 +329,7 @@ type ElasticInferenceAcceleratorParameters struct {
 
 	// Accelerator type.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type HibernationOptionsInitParameters struct {
@@ -348,7 +348,7 @@ type HibernationOptionsParameters struct {
 
 	// If set to true, the launched EC2 instance will hibernation enabled.
 	// +kubebuilder:validation:Optional
-	Configured *bool `json:"configured,omitempty" tf:"configured,omitempty"`
+	Configured *bool `json:"configured" tf:"configured,omitempty"`
 }
 
 type IAMInstanceProfileInitParameters struct {
@@ -630,7 +630,7 @@ type InstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum amount of memory (MiB). Default is no maximum.
 	// +kubebuilder:validation:Optional
-	MemoryMib []MemoryMibParameters `json:"memoryMib,omitempty" tf:"memory_mib,omitempty"`
+	MemoryMib []MemoryMibParameters `json:"memoryMib" tf:"memory_mib,omitempty"`
 
 	// Block describing the minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -658,7 +658,7 @@ type InstanceRequirementsParameters struct {
 
 	// Block describing the minimum and maximum number of vCPUs. Default is no maximum.
 	// +kubebuilder:validation:Optional
-	VcpuCount []VcpuCountParameters `json:"vcpuCount,omitempty" tf:"vcpu_count,omitempty"`
+	VcpuCount []VcpuCountParameters `json:"vcpuCount" tf:"vcpu_count,omitempty"`
 }
 
 type LaunchTemplateCPUOptionsInitParameters struct {
@@ -1343,7 +1343,7 @@ type LicenseSpecificationParameters struct {
 
 	// ARN of the license configuration.
 	// +kubebuilder:validation:Optional
-	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
+	LicenseConfigurationArn *string `json:"licenseConfigurationArn" tf:"license_configuration_arn,omitempty"`
 }
 
 type MemoryGibPerVcpuInitParameters struct {
@@ -1401,7 +1401,7 @@ type MemoryMibParameters struct {
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 type MonitoringInitParameters struct {
@@ -1944,7 +1944,7 @@ type VcpuCountParameters struct {
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min" tf:"min,omitempty"`
 }
 
 // LaunchTemplateSpec defines the desired state of LaunchTemplate

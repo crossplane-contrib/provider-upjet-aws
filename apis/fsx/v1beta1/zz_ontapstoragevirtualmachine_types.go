@@ -255,11 +255,11 @@ type SelfManagedActiveDirectoryConfigurationParameters struct {
 
 	// A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
 	// +kubebuilder:validation:Optional
-	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
+	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
 	// +kubebuilder:validation:Optional
-	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
 	// The name of the domain group whose members are granted administrative privileges for the SVM. The group that you specify must already exist in your domain. Defaults to Domain Admins.
 	// +kubebuilder:validation:Optional
@@ -275,7 +275,7 @@ type SelfManagedActiveDirectoryConfigurationParameters struct {
 
 	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 // OntapStorageVirtualMachineSpec defines the desired state of OntapStorageVirtualMachine

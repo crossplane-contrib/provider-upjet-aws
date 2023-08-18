@@ -145,7 +145,7 @@ type EFSVolumeConfigurationParameters struct {
 
 	// ID of the EFS File System.
 	// +kubebuilder:validation:Optional
-	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
 	// Directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter. This argument is ignored when using authorization_config.
 	// +kubebuilder:validation:Optional
@@ -176,7 +176,7 @@ type EphemeralStorageParameters struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum supported value is 21 GiB and the maximum supported value is 200 GiB.
 	// +kubebuilder:validation:Optional
-	SizeInGib *float64 `json:"sizeInGib,omitempty" tf:"size_in_gib,omitempty"`
+	SizeInGib *float64 `json:"sizeInGib" tf:"size_in_gib,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigInitParameters struct {
@@ -201,11 +201,11 @@ type FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters struct
 
 	// The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an AWS Secrets Manager secret or AWS Systems Manager Parameter Store parameter. The ARNs refer to the stored credentials.
 	// +kubebuilder:validation:Optional
-	CredentialsParameter *string `json:"credentialsParameter,omitempty" tf:"credentials_parameter,omitempty"`
+	CredentialsParameter *string `json:"credentialsParameter" tf:"credentials_parameter,omitempty"`
 
 	// A fully qualified domain name hosted by an AWS Directory Service Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.
 	// +kubebuilder:validation:Optional
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+	Domain *string `json:"domain" tf:"domain,omitempty"`
 }
 
 type FSXWindowsFileServerVolumeConfigurationInitParameters struct {
@@ -236,15 +236,15 @@ type FSXWindowsFileServerVolumeConfigurationParameters struct {
 
 	// Configuration block for authorization for the Amazon FSx for Windows File Server file system detailed below.
 	// +kubebuilder:validation:Optional
-	AuthorizationConfig []FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
+	AuthorizationConfig []FSXWindowsFileServerVolumeConfigurationAuthorizationConfigParameters `json:"authorizationConfig" tf:"authorization_config,omitempty"`
 
 	// The Amazon FSx for Windows File Server file system ID to use.
 	// +kubebuilder:validation:Optional
-	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
 
 	// The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
 	// +kubebuilder:validation:Optional
-	RootDirectory *string `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
+	RootDirectory *string `json:"rootDirectory" tf:"root_directory,omitempty"`
 }
 
 type InferenceAcceleratorInitParameters struct {
@@ -269,11 +269,11 @@ type InferenceAcceleratorParameters struct {
 
 	// Elastic Inference accelerator device name. The deviceName must also be referenced in a container definition as a ResourceRequirement.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Elastic Inference accelerator type to use.
 	// +kubebuilder:validation:Optional
-	DeviceType *string `json:"deviceType,omitempty" tf:"device_type,omitempty"`
+	DeviceType *string `json:"deviceType" tf:"device_type,omitempty"`
 }
 
 type ProxyConfigurationInitParameters struct {
@@ -304,7 +304,7 @@ type ProxyConfigurationParameters struct {
 
 	// Name of the container that will serve as the App Mesh proxy.
 	// +kubebuilder:validation:Optional
-	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
 	// Set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified a key-value mapping.
 	// +kubebuilder:validation:Optional
@@ -585,7 +585,7 @@ type TaskDefinitionPlacementConstraintsParameters struct {
 
 	// Type of constraint. Use memberOf to restrict selection to a group of valid candidates. Note that distinctInstance is not supported in task definitions.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type VolumeInitParameters struct {
@@ -647,7 +647,7 @@ type VolumeParameters struct {
 	// Name of the volume. This name is referenced in the sourceVolume
 	// parameter of container definition in the mountPoints section.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // TaskDefinitionSpec defines the desired state of TaskDefinition

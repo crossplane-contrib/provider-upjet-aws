@@ -29,7 +29,7 @@ type DestinationParameters struct {
 
 	// A configuration block describing the S3 Source object: See S3 Source below for details.
 	// +kubebuilder:validation:Optional
-	S3 []S3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+	S3 []S3Parameters `json:"s3" tf:"s3,omitempty"`
 }
 
 type RevocationRecordInitParameters struct {
@@ -68,7 +68,7 @@ type S3Parameters struct {
 
 	// Name of the S3 bucket.
 	// +kubebuilder:validation:Optional
-	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
 	// An Amazon S3 object key prefix that you can use to limit signed objects keys to begin with the specified prefix.
 	// +kubebuilder:validation:Optional
@@ -222,7 +222,7 @@ type SourceParameters struct {
 
 	// A configuration block describing the S3 Source object: See S3 Source below for details.
 	// +kubebuilder:validation:Optional
-	S3 []SourceS3Parameters `json:"s3,omitempty" tf:"s3,omitempty"`
+	S3 []SourceS3Parameters `json:"s3" tf:"s3,omitempty"`
 }
 
 type SourceS3InitParameters struct {
@@ -253,15 +253,15 @@ type SourceS3Parameters struct {
 
 	// Name of the S3 bucket.
 	// +kubebuilder:validation:Optional
-	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
 	// Key name of the object that contains your unsigned code.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Version of your source image in your version enabled S3 bucket.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 // SigningJobSpec defines the desired state of SigningJob

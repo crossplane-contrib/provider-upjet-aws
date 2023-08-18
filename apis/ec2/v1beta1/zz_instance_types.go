@@ -222,7 +222,7 @@ type InstanceEBSBlockDeviceParameters struct {
 
 	// Name of the device to mount.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Enables EBS encryption on the volume. Defaults to false. Cannot be used with snapshot_id. Must be configured to perform drift detection.
 	// +kubebuilder:validation:Optional
@@ -294,7 +294,7 @@ type InstanceEphemeralBlockDeviceParameters struct {
 
 	// Name of the block device to mount on the instance.
 	// +kubebuilder:validation:Optional
-	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
+	DeviceName *string `json:"deviceName" tf:"device_name,omitempty"`
 
 	// Suppresses the specified device included in the AMI's block device mapping.
 	// +kubebuilder:validation:Optional
@@ -469,7 +469,7 @@ type InstanceNetworkInterfaceParameters struct {
 
 	// Integer index of the network interface attachment. Limited by instance type.
 	// +kubebuilder:validation:Optional
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
 	// Integer index of the network card. Limited by instance type. The default index is 0.
 	// +kubebuilder:validation:Optional

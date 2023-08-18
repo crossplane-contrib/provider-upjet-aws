@@ -58,11 +58,11 @@ type FilterParameters struct {
 
 	// The JSON path to filter on.
 	// +kubebuilder:validation:Optional
-	JSONPath *string `json:"jsonPath,omitempty" tf:"json_path,omitempty"`
+	JSONPath *string `json:"jsonPath" tf:"json_path,omitempty"`
 
 	// The value to match on (e.g., refs/heads/{Branch}). See AWS docs for details.
 	// +kubebuilder:validation:Optional
-	MatchEquals *string `json:"matchEquals,omitempty" tf:"match_equals,omitempty"`
+	MatchEquals *string `json:"matchEquals" tf:"match_equals,omitempty"`
 }
 
 type WebhookInitParameters struct {

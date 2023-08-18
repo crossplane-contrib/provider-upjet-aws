@@ -137,7 +137,7 @@ type TargetIPParameters struct {
 
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 	// +kubebuilder:validation:Optional
-	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
+	IP *string `json:"ip" tf:"ip,omitempty"`
 
 	// The port at ip that you want to forward DNS queries to. Default value is 53
 	// +kubebuilder:validation:Optional
