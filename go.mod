@@ -15,7 +15,7 @@ require (
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.10.0-rc.0.0.20230818115249-bd528e443b6f
+	github.com/upbound/upjet v0.10.0-rc.0.0.20230821110519-e620c6228964
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/api v0.27.3
 	k8s.io/apimachinery v0.27.3
