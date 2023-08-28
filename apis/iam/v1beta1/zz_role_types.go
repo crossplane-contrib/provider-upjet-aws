@@ -14,6 +14,12 @@ import (
 )
 
 type InlinePolicyInitParameters struct {
+
+	// Friendly name of the role. See IAM Identifiers for more information.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Policy document as a JSON formatted string.
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type InlinePolicyObservation struct {
@@ -26,6 +32,14 @@ type InlinePolicyObservation struct {
 }
 
 type InlinePolicyParameters struct {
+
+	// Friendly name of the role. See IAM Identifiers for more information.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Policy document as a JSON formatted string.
+	// +kubebuilder:validation:Optional
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type RoleInitParameters struct {
@@ -38,6 +52,9 @@ type RoleInitParameters struct {
 
 	// Whether to force detaching any policies the role has before destroying it. Defaults to false.
 	ForceDetachPolicies *bool `json:"forceDetachPolicies,omitempty" tf:"force_detach_policies,omitempty"`
+
+	// Configuration block defining an exclusive set of IAM inline policies associated with the IAM role. See below. Configuring one empty block (i.e.
+	InlinePolicy []InlinePolicyInitParameters `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
@@ -126,6 +143,10 @@ type RoleParameters struct {
 	// Whether to force detaching any policies the role has before destroying it. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ForceDetachPolicies *bool `json:"forceDetachPolicies,omitempty" tf:"force_detach_policies,omitempty"`
+
+	// Configuration block defining an exclusive set of IAM inline policies associated with the IAM role. See below. Configuring one empty block (i.e.
+	// +kubebuilder:validation:Optional
+	InlinePolicy []InlinePolicyParameters `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	// +kubebuilder:validation:Optional

@@ -35,7 +35,7 @@ func Configure(p *config.Provider) {
 		// aws_iam_policy_attachment
 		// aws_iam_role_policy_attachment
 		// aws_iam_role_policy
-		config.MoveToStatus(r.TerraformResource, "inline_policy", "managed_policy_arns")
+		config.MoveToStatus(r.TerraformResource, "managed_policy_arns")
 	})
 
 	p.AddResourceConfigurator("aws_iam_instance_profile", func(r *config.Resource) {

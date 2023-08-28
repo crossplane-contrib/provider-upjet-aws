@@ -77,6 +77,21 @@ spec:
                     description: Whether to force detaching any policies the role
                       has before destroying it. Defaults to false.
                     type: boolean
+                  inlinePolicy:
+                    description: Configuration block defining an exclusive set of
+                      IAM inline policies associated with the IAM role. See below.
+                      Configuring one empty block (i.e.
+                    items:
+                      properties:
+                        name:
+                          description: Friendly name of the role. See IAM Identifiers
+                            for more information.
+                          type: string
+                        policy:
+                          description: Policy document as a JSON formatted string.
+                          type: string
+                      type: object
+                    type: array
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
@@ -120,6 +135,21 @@ spec:
                     description: Whether to force detaching any policies the role
                       has before destroying it. Defaults to false.
                     type: boolean
+                  inlinePolicy:
+                    description: Configuration block defining an exclusive set of
+                      IAM inline policies associated with the IAM role. See below.
+                      Configuring one empty block (i.e.
+                    items:
+                      properties:
+                        name:
+                          description: Friendly name of the role. See IAM Identifiers
+                            for more information.
+                          type: string
+                        policy:
+                          description: Policy document as a JSON formatted string.
+                          type: string
+                      type: object
+                    type: array
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
