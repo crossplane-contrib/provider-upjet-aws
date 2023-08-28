@@ -47,3 +47,21 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/flowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    policy: ${data.aws_iam_policy_document.example.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

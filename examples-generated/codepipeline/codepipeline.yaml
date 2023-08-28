@@ -95,6 +95,24 @@ spec:
 
 ---
 
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codepipeline/v1beta1/codepipeline
+  labels:
+    testing.upbound.io/example-name: codepipeline_policy
+  name: codepipeline-policy
+spec:
+  forProvider:
+    name: codepipeline_policy
+    policy: ${data.aws_iam_policy_document.codepipeline_policy.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: codepipeline_role
+
+---
+
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:

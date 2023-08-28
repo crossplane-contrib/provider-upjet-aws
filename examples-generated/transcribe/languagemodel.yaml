@@ -35,6 +35,37 @@ spec:
 
 ---
 
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transcribe/v1beta1/languagemodel
+  labels:
+    testing.upbound.io/example-name: test_policy
+  name: test-policy
+spec:
+  forProvider:
+    name: example
+    policy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = [
+                "s3:GetObject",
+                "s3:ListBucket",
+              ]
+              Effect   = "Allow"
+              Resource = ["*"]
+            },
+          ]
+        })}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
