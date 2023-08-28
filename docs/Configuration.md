@@ -2,7 +2,7 @@
 title: Configuration
 weight: 2
 ---
-> :warning: **Warning:** The monolithic AWS provider (`upbound/provider-aws`) has been deprecated in favor of the [AWS provider family](https://marketplace.upbound.io/providers/upbound/provider-family-aws/). You can read more about the provider families in our [blog post](https://blog.upbound.io/new-provider-families) and the official documentation for the provider families is [here](https://docs.upbound.io/providers/provider-families/). We will continue support for the monolithic AWS provider until June 12, 2024. And you can find more information on migrating from the monolithic providers to the provider families [here](https://docs.upbound.io/providers/migration/).
+⚠️ **Warning:** The monolithic AWS provider (`upbound/provider-aws`) has been deprecated in favor of the [AWS provider family](https://marketplace.upbound.io/providers/upbound/provider-family-aws/). You can read more about the provider families in our [blog post](https://blog.upbound.io/new-provider-families) and the official documentation for the provider families is [here](https://docs.upbound.io/providers/provider-families/). We will continue support for the monolithic AWS provider until June 12, 2024. And you can find more information on migrating from the monolithic providers to the provider families [here](https://docs.upbound.io/providers/migration/).
 
 # AWS official provider documentation
 Upbound supports and maintains the Upbound AWS official provider.
