@@ -105,7 +105,6 @@ metadata:
   name: codepipeline-policy
 spec:
   forProvider:
-    name: codepipeline_policy
     policy: ${data.aws_iam_policy_document.codepipeline_policy.json}
     roleSelector:
       matchLabels:

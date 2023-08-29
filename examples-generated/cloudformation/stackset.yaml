@@ -67,7 +67,6 @@ metadata:
   name: awscloudformationstacksetadministrationrole-executionpolicy
 spec:
   forProvider:
-    name: ExecutionPolicy
     policy: ${data.aws_iam_policy_document.AWSCloudFormationStackSetAdministrationRole_ExecutionPolicy.json}
     roleSelector:
       matchLabels:

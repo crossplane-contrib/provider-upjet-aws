@@ -43,7 +43,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: tf-test-transfer-user-iam-policy
     policy: ${data.aws_iam_policy_document.example.json}
     roleSelector:
       matchLabels:

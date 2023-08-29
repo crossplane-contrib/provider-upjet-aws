@@ -50,7 +50,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: cloudfront-realtime-log-config-example
     policy: ${data.aws_iam_policy_document.example.json}
     roleSelector:
       matchLabels:

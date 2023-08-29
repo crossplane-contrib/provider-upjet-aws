@@ -58,7 +58,6 @@ metadata:
   name: dlm-lifecycle
 spec:
   forProvider:
-    name: dlm-lifecycle-policy
     policy: ${data.aws_iam_policy_document.dlm_lifecycle.json}
     roleSelector:
       matchLabels:

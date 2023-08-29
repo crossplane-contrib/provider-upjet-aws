@@ -76,7 +76,6 @@ metadata:
   name: invocation-policy
 spec:
   forProvider:
-    name: default
     policy: ${data.aws_iam_policy_document.invocation_policy.json}
     roleSelector:
       matchLabels:

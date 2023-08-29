@@ -15,9 +15,6 @@ import (
 
 type RolePolicyInitParameters struct {
 
-	// The name of the role policy.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The inline policy document. This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }
@@ -27,9 +24,6 @@ type RolePolicyObservation struct {
 	// The role policy ID, in the form of role_name:role_policy_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the role policy.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The inline policy document. This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -38,10 +32,6 @@ type RolePolicyObservation struct {
 }
 
 type RolePolicyParameters struct {
-
-	// The name of the role policy.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The inline policy document. This is a JSON formatted string
 	// +kubebuilder:validation:Optional

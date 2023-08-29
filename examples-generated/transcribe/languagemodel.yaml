@@ -45,7 +45,6 @@ metadata:
   name: test-policy
 spec:
   forProvider:
-    name: example
     policy: |-
       ${jsonencode({
           Version = "2012-10-17"

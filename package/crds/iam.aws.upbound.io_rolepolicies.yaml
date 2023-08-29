@@ -67,9 +67,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  name:
-                    description: The name of the role policy.
-                    type: string
                   policy:
                     description: The inline policy document. This is a JSON formatted
                       string
@@ -164,9 +161,6 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  name:
-                    description: The name of the role policy.
-                    type: string
                   policy:
                     description: The inline policy document. This is a JSON formatted
                       string
@@ -381,9 +375,6 @@ spec:
                 properties:
                   id:
                     description: The role policy ID, in the form of role_name:role_policy_name.
-                    type: string
-                  name:
-                    description: The name of the role policy.
                     type: string
                   policy:
                     description: The inline policy document. This is a JSON formatted

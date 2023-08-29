@@ -57,7 +57,6 @@ metadata:
   name: iam-policy-for-lambda
 spec:
   forProvider:
-    name: mypolicy
     policy: ${data.aws_iam_policy_document.iam_policy_for_lambda.json}
     roleSelector:
       matchLabels:

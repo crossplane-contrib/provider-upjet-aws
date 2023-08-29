@@ -8,7 +8,6 @@ metadata:
   name: test-policy
 spec:
   forProvider:
-    name: test_policy
     policy: |
       {
         "Version": "2012-10-17",

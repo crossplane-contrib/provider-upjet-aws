@@ -56,7 +56,6 @@ metadata:
   name: p
 spec:
   forProvider:
-    name: awsconfig-example
     policy: ${data.aws_iam_policy_document.p.json}
     roleSelector:
       matchLabels:

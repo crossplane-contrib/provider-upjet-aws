@@ -70,7 +70,6 @@ metadata:
   name: authenticated
 spec:
   forProvider:
-    name: authenticated_policy
     policy: ${data.aws_iam_policy_document.authenticated_role_policy.json}
     roleSelector:
       matchLabels:

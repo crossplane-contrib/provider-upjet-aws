@@ -83,7 +83,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example
     policy: ${data.aws_iam_policy_document.example.json}
     roleSelector:
       matchLabels:
