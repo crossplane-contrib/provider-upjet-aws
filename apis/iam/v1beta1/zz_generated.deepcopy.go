@@ -2152,6 +2152,17 @@ func (in *RoleInitParameters) DeepCopyInto(out *RoleInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ManagedPolicyArns != nil {
+		in, out := &in.ManagedPolicyArns, &out.ManagedPolicyArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.MaxSessionDuration != nil {
 		in, out := &in.MaxSessionDuration, &out.MaxSessionDuration
 		*out = new(float64)
@@ -2424,6 +2435,17 @@ func (in *RoleParameters) DeepCopyInto(out *RoleParameters) {
 		*out = make([]InlinePolicyParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ManagedPolicyArns != nil {
+		in, out := &in.ManagedPolicyArns, &out.ManagedPolicyArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.MaxSessionDuration != nil {
