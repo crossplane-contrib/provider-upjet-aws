@@ -77,6 +77,35 @@ spec:
                     description: Whether to force detaching any policies the role
                       has before destroying it. Defaults to false.
                     type: boolean
+                  inlinePolicy:
+                    description: Configuration block defining an exclusive set of
+                      IAM inline policies associated with the IAM role. See below.
+                      If no blocks are configured, Crossplane will not manage any
+                      inline policies in this resource. Configuring one empty block
+                      (i.e., inline_policy {}) will cause Crossplane to remove all
+                      inline policies added out of band on apply.
+                    items:
+                      properties:
+                        name:
+                          description: Friendly name of the role. See IAM Identifiers
+                            for more information.
+                          type: string
+                        policy:
+                          description: Policy document as a JSON formatted string.
+                          type: string
+                      type: object
+                    type: array
+                  managedPolicyArns:
+                    description: Set of exclusive IAM managed policy ARNs to attach
+                      to the IAM role. If this attribute is not configured, Crossplane
+                      will ignore policy attachments to this resource. When configured,
+                      Crossplane will align the role's managed policy attachments
+                      with this set by attaching or detaching managed policies. Configuring
+                      an empty set (i.e., managed_policy_arns = []) will cause Crossplane
+                      to remove all managed policy attachments.
+                    items:
+                      type: string
+                    type: array
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
@@ -120,6 +149,35 @@ spec:
                     description: Whether to force detaching any policies the role
                       has before destroying it. Defaults to false.
                     type: boolean
+                  inlinePolicy:
+                    description: Configuration block defining an exclusive set of
+                      IAM inline policies associated with the IAM role. See below.
+                      If no blocks are configured, Crossplane will not manage any
+                      inline policies in this resource. Configuring one empty block
+                      (i.e., inline_policy {}) will cause Crossplane to remove all
+                      inline policies added out of band on apply.
+                    items:
+                      properties:
+                        name:
+                          description: Friendly name of the role. See IAM Identifiers
+                            for more information.
+                          type: string
+                        policy:
+                          description: Policy document as a JSON formatted string.
+                          type: string
+                      type: object
+                    type: array
+                  managedPolicyArns:
+                    description: Set of exclusive IAM managed policy ARNs to attach
+                      to the IAM role. If this attribute is not configured, Crossplane
+                      will ignore policy attachments to this resource. When configured,
+                      Crossplane will align the role's managed policy attachments
+                      with this set by attaching or detaching managed policies. Configuring
+                      an empty set (i.e., managed_policy_arns = []) will cause Crossplane
+                      to remove all managed policy attachments.
+                    items:
+                      type: string
+                    type: array
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
@@ -369,7 +427,10 @@ spec:
                   inlinePolicy:
                     description: Configuration block defining an exclusive set of
                       IAM inline policies associated with the IAM role. See below.
-                      Configuring one empty block (i.e.
+                      If no blocks are configured, Crossplane will not manage any
+                      inline policies in this resource. Configuring one empty block
+                      (i.e., inline_policy {}) will cause Crossplane to remove all
+                      inline policies added out of band on apply.
                     items:
                       properties:
                         name:
@@ -383,7 +444,12 @@ spec:
                     type: array
                   managedPolicyArns:
                     description: Set of exclusive IAM managed policy ARNs to attach
-                      to the IAM role. Configuring an empty set (i.e.
+                      to the IAM role. If this attribute is not configured, Crossplane
+                      will ignore policy attachments to this resource. When configured,
+                      Crossplane will align the role's managed policy attachments
+                      with this set by attaching or detaching managed policies. Configuring
+                      an empty set (i.e., managed_policy_arns = []) will cause Crossplane
+                      to remove all managed policy attachments.
                     items:
                       type: string
                     type: array
