@@ -36,7 +36,10 @@ func Configure(p *config.Provider) {
 		}
 
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"server_side_encryption"},
+			IgnoredFields: []string{
+				"server_side_encryption",
+				"version_id",
+			},
 		}
 
 		delete(r.References, "extended_s3_configuration.data_format_conversion_configuration.schema_configuration.database_name")
