@@ -47,6 +47,23 @@ spec:
 
 ---
 
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: iam_policy_for_lambda
+  name: iam-policy-for-lambda
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.iam_policy_for_lambda.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+
+---
+
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
 metadata:

@@ -111,7 +111,6 @@ var skipList = []string{
 	"aws_alb_target_group_attachment$", // identical with aws_lb_target_group_attachment
 	"aws_iam_policy_attachment$",       // identical with aws_iam_*_policy_attachment resources.
 	"aws_iam_group_policy$",            // identical with aws_iam_*_policy_attachment resources.
-	"aws_iam_role_policy$",             // identical with aws_iam_*_policy_attachment resources.
 	"aws_iam_user_policy$",             // identical with aws_iam_*_policy_attachment resources.
 	"aws_alb$",                         // identical with aws_lb.
 	"aws_alb_listener$",                // identical with aws_lb_listener.

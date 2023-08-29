@@ -36,6 +36,23 @@ spec:
 
 ---
 
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    policy: ${data.aws_iam_role_policy.foo.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
 apiVersion: transfer.aws.upbound.io/v1beta1
 kind: Server
 metadata:

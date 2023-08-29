@@ -54,3 +54,20 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.AWSCloudFormationStackSetAdministrationRole_assume_role_policy.json}
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudformation/v1beta1/stackset
+  labels:
+    testing.upbound.io/example-name: AWSCloudFormationStackSetAdministrationRole_ExecutionPolicy
+  name: awscloudformationstacksetadministrationrole-executionpolicy
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.AWSCloudFormationStackSetAdministrationRole_ExecutionPolicy.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: AWSCloudFormationStackSetAdministrationRole

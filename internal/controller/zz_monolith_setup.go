@@ -492,6 +492,7 @@ import (
 	openidconnectprovider "github.com/upbound/provider-aws/internal/controller/iam/openidconnectprovider"
 	policyiam "github.com/upbound/provider-aws/internal/controller/iam/policy"
 	role "github.com/upbound/provider-aws/internal/controller/iam/role"
+	rolepolicy "github.com/upbound/provider-aws/internal/controller/iam/rolepolicy"
 	rolepolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/rolepolicyattachment"
 	samlprovider "github.com/upbound/provider-aws/internal/controller/iam/samlprovider"
 	servercertificate "github.com/upbound/provider-aws/internal/controller/iam/servercertificate"
@@ -1401,6 +1402,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		openidconnectprovider.Setup,
 		policyiam.Setup,
 		role.Setup,
+		rolepolicy.Setup,
 		rolepolicyattachment.Setup,
 		samlprovider.Setup,
 		servercertificate.Setup,

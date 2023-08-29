@@ -45,3 +45,20 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dlm/v1beta1/lifecyclepolicy
+  labels:
+    testing.upbound.io/example-name: dlm_lifecycle
+  name: dlm-lifecycle
+spec:
+  forProvider:
+    policy: ${data.aws_iam_policy_document.dlm_lifecycle.json}
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dlm_lifecycle_role
