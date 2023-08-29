@@ -27,12 +27,6 @@ type AutoscalingGroupsParameters struct {
 
 type LaunchTemplateInitParameters struct {
 
-	// Identifier of the EC2 Launch Template. Conflicts with name.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Name of the EC2 Launch Template. Conflicts with id.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -52,10 +46,32 @@ type LaunchTemplateObservation struct {
 type LaunchTemplateParameters struct {
 
 	// Identifier of the EC2 Launch Template. Conflicts with name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:refFieldName=LaunchTemplateIDRefs
+	// +crossplane:generate:reference:selectorFieldName=LaunchTemplateIDSelector
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Reference to a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDRefs *v1.Reference `json:"launchTemplateIdRefs,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
+
+	// Reference to a LaunchTemplate in ec2 to populate name.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateNameRefs *v1.Reference `json:"launchTemplateNameRefs,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate name.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateNameSelector *v1.Selector `json:"launchTemplateNameSelector,omitempty" tf:"-"`
+
 	// Name of the EC2 Launch Template. Conflicts with id.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:refFieldName=LaunchTemplateNameRefs
+	// +crossplane:generate:reference:selectorFieldName=LaunchTemplateNameSelector
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -257,6 +257,42 @@ func (mg *NodeGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplate); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplate[i3].ID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.LaunchTemplate[i3].LaunchTemplateIDRefs,
+			Selector:     mg.Spec.ForProvider.LaunchTemplate[i3].LaunchTemplateIDSelector,
+			To: reference.To{
+				List:    &v1beta11.LaunchTemplateList{},
+				Managed: &v1beta11.LaunchTemplate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplate[i3].ID")
+		}
+		mg.Spec.ForProvider.LaunchTemplate[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LaunchTemplate[i3].LaunchTemplateIDRefs = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplate); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplate[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.LaunchTemplate[i3].LaunchTemplateNameRefs,
+			Selector:     mg.Spec.ForProvider.LaunchTemplate[i3].LaunchTemplateNameSelector,
+			To: reference.To{
+				List:    &v1beta11.LaunchTemplateList{},
+				Managed: &v1beta11.LaunchTemplate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplate[i3].Name")
+		}
+		mg.Spec.ForProvider.LaunchTemplate[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.LaunchTemplate[i3].LaunchTemplateNameRefs = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NodeRoleArn),
 		Extract:      common.ARNExtractor(),

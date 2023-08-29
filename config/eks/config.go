@@ -52,6 +52,16 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
+		r.References["launch_template.id"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate",
+			RefFieldName:      "LaunchTemplateIDRefs",
+			SelectorFieldName: "LaunchTemplateIDSelector",
+		}
+		r.References["launch_template.name"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate",
+			RefFieldName:      "LaunchTemplateNameRefs",
+			SelectorFieldName: "LaunchTemplateNameSelector",
+		}
 		r.UseAsync = true
 		r.MetaResource.ArgumentDocs["launch_template.version"] = `- (Required) EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.`
 		r.MetaResource.ArgumentDocs["subnet_ids"] = `- Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.`
