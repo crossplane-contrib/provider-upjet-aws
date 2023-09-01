@@ -1565,6 +1565,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Batch Scheduling Policy can be imported using the arn: arn:aws:batch:us-east-1:123456789012:scheduling-policy/sample
 	"aws_batch_scheduling_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:scheduling-policy/{{ .external_name }}"),
+	// Batch Job Definition can be imported using ARN that has a random substring, revision at the end:
+	// arn:aws:batch:us-east-1:123456789012:job-definition/sample:1
+	"aws_batch_job_definition": config.IdentifierFromProvider,
 
 	// budgets
 	//
