@@ -72,6 +72,15 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  replaceExistingAssociation:
+                    description: 'Boolean whether the Gateway Attachment should remove
+                      any current Route Table association before associating with
+                      the specified Route Table. Default value: false. This argument
+                      is intended for use with EC2 Transit Gateways shared into the
+                      current account, otherwise the transit_gateway_default_route_table_association
+                      argument of the aws_ec2_transit_gateway_vpc_attachment resource
+                      should be used.'
+                    type: boolean
                   transitGatewayAttachmentId:
                     description: Identifier of EC2 Transit Gateway Attachment.
                     type: string
@@ -243,6 +252,16 @@ spec:
                   required on creation, but we do not desire to update them after
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
+                properties:
+                  replaceExistingAssociation:
+                    description: 'Boolean whether the Gateway Attachment should remove
+                      any current Route Table association before associating with
+                      the specified Route Table. Default value: false. This argument
+                      is intended for use with EC2 Transit Gateways shared into the
+                      current account, otherwise the transit_gateway_default_route_table_association
+                      argument of the aws_ec2_transit_gateway_vpc_attachment resource
+                      should be used.'
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -451,6 +470,15 @@ spec:
                     description: EC2 Transit Gateway Route Table identifier combined
                       with EC2 Transit Gateway Attachment identifier
                     type: string
+                  replaceExistingAssociation:
+                    description: 'Boolean whether the Gateway Attachment should remove
+                      any current Route Table association before associating with
+                      the specified Route Table. Default value: false. This argument
+                      is intended for use with EC2 Transit Gateways shared into the
+                      current account, otherwise the transit_gateway_default_route_table_association
+                      argument of the aws_ec2_transit_gateway_vpc_attachment resource
+                      should be used.'
+                    type: boolean
                   resourceId:
                     description: Identifier of the resource
                     type: string

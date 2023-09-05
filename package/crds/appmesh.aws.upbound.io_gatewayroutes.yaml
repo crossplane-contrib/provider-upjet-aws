@@ -166,6 +166,16 @@ spec:
                                                   type: string
                                               type: object
                                             type: array
+                                          path:
+                                            description: Exact path to rewrite.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Value used to replace
+                                                    matched path.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           prefix:
                                             description: Specified beginning characters
                                               to rewrite.
@@ -235,9 +245,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                                 prefix:
                                                   description: Specified beginning
@@ -283,9 +292,8 @@ spec:
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           suffix:
                                             description: Header value sent by the
@@ -294,13 +302,12 @@ spec:
                                         type: object
                                       type: array
                                     path:
-                                      description: Client request path to match on.
+                                      description: Exact path to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           regex:
                                             description: Header value sent by the
@@ -330,9 +337,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -367,6 +373,16 @@ spec:
                                                   description: 'Default target host
                                                     name to write to. Valid values:
                                                     ENABLED, DISABLED.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          path:
+                                            description: Exact path to rewrite.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -539,9 +555,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                                 prefix:
                                                   description: Specified beginning
@@ -587,9 +602,8 @@ spec:
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           suffix:
                                             description: Header value sent by the
@@ -598,13 +612,12 @@ spec:
                                         type: object
                                       type: array
                                     path:
-                                      description: Client request path to match on.
+                                      description: Exact path to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           regex:
                                             description: Header value sent by the
@@ -634,9 +647,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -852,6 +864,16 @@ spec:
                                                   type: string
                                               type: object
                                             type: array
+                                          path:
+                                            description: Exact path to rewrite.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Value used to replace
+                                                    matched path.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           prefix:
                                             description: Specified beginning characters
                                               to rewrite.
@@ -921,9 +943,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                                 prefix:
                                                   description: Specified beginning
@@ -969,9 +990,8 @@ spec:
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           suffix:
                                             description: Header value sent by the
@@ -980,13 +1000,12 @@ spec:
                                         type: object
                                       type: array
                                     path:
-                                      description: Client request path to match on.
+                                      description: Exact path to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           regex:
                                             description: Header value sent by the
@@ -1016,9 +1035,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -1053,6 +1071,16 @@ spec:
                                                   description: 'Default target host
                                                     name to write to. Valid values:
                                                     ENABLED, DISABLED.'
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          path:
+                                            description: Exact path to rewrite.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -1118,9 +1146,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                                 prefix:
                                                   description: Specified beginning
@@ -1166,9 +1193,8 @@ spec:
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           suffix:
                                             description: Header value sent by the
@@ -1177,13 +1203,12 @@ spec:
                                         type: object
                                       type: array
                                     path:
-                                      description: Client request path to match on.
+                                      description: Exact path to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           regex:
                                             description: Header value sent by the
@@ -1213,9 +1238,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -1567,6 +1591,16 @@ spec:
                                                   type: string
                                               type: object
                                             type: array
+                                          path:
+                                            description: Exact path to rewrite.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Value used to replace
+                                                    matched path.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           prefix:
                                             description: Specified beginning characters
                                               to rewrite.
@@ -1636,9 +1670,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                                 prefix:
                                                   description: Specified beginning
@@ -1684,9 +1717,8 @@ spec:
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           suffix:
                                             description: Header value sent by the
@@ -1695,13 +1727,12 @@ spec:
                                         type: object
                                       type: array
                                     path:
-                                      description: Client request path to match on.
+                                      description: Exact path to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           regex:
                                             description: Header value sent by the
@@ -1731,9 +1762,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array
@@ -1771,6 +1801,16 @@ spec:
                                                   type: string
                                               type: object
                                             type: array
+                                          path:
+                                            description: Exact path to rewrite.
+                                            items:
+                                              properties:
+                                                exact:
+                                                  description: Value used to replace
+                                                    matched path.
+                                                  type: string
+                                              type: object
+                                            type: array
                                           prefix:
                                             description: Specified beginning characters
                                               to rewrite.
@@ -1840,9 +1880,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                                 prefix:
                                                   description: Specified beginning
@@ -1888,9 +1927,8 @@ spec:
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           suffix:
                                             description: Header value sent by the
@@ -1899,13 +1937,12 @@ spec:
                                         type: object
                                       type: array
                                     path:
-                                      description: Client request path to match on.
+                                      description: Exact path to rewrite.
                                       items:
                                         properties:
                                           exact:
-                                            description: Header value sent by the
-                                              client must match the specified value
-                                              exactly.
+                                            description: Value used to replace matched
+                                              path.
                                             type: string
                                           regex:
                                             description: Header value sent by the
@@ -1935,9 +1972,8 @@ spec:
                                             items:
                                               properties:
                                                 exact:
-                                                  description: Header value sent by
-                                                    the client must match the specified
-                                                    value exactly.
+                                                  description: Value used to replace
+                                                    matched path.
                                                   type: string
                                               type: object
                                             type: array

@@ -15,7 +15,7 @@ import (
 
 type BucketNotificationInitParameters struct {
 
-	// Whether to enable Amazon EventBridge notifications.
+	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
 	// Used to configure notifications to a Lambda Function. See below.
@@ -33,7 +33,7 @@ type BucketNotificationObservation struct {
 	// Name of the bucket for notification configuration.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Whether to enable Amazon EventBridge notifications.
+	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
 	// Unique identifier for each of the notification configurations.
@@ -65,7 +65,7 @@ type BucketNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Whether to enable Amazon EventBridge notifications.
+	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 

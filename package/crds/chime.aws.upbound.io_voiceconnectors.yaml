@@ -80,6 +80,11 @@ spec:
                     description: When enabled, requires encryption for the Amazon
                       Chime Voice Connector.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 required:
                 - region
                 type: object
@@ -104,6 +109,11 @@ spec:
                     description: When enabled, requires encryption for the Amazon
                       Chime Voice Connector.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -312,6 +322,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: ARN (Amazon Resource Name) of the Amazon Chime Voice
+                      Connector.
+                    type: string
                   awsRegion:
                     description: 'The AWS Region in which the Amazon Chime Voice Connector
                       is created. Default value: us-east-1'
@@ -326,6 +340,17 @@ spec:
                     description: When enabled, requires encryption for the Amazon
                       Chime Voice Connector.
                     type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

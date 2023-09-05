@@ -258,6 +258,8 @@ spec:
                         type: object
                     type: object
                   deltaTarget:
+                    description: List of nested Delta Lake target arguments. See Delta
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -303,6 +305,64 @@ spec:
                             units to use by the AWS Glue crawler. The valid values
                             are null or a value between 0.1 to 1.5.
                           type: number
+                      type: object
+                    type: array
+                  hudiTarget:
+                    description: List nested Hudi target arguments. See Iceberg Target
+                      below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  icebergTarget:
+                    description: List nested Iceberg target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   jdbcTarget:
@@ -434,7 +494,7 @@ spec:
                         crawlerLineageSettings:
                           description: 'Specifies whether data lineage is enabled
                             for the crawler. Valid values are: ENABLE and DISABLE.
-                            Default value is Disable.'
+                            Default value is DISABLE.'
                           type: string
                       type: object
                     type: array
@@ -750,6 +810,8 @@ spec:
                       details see Setting Crawler Configuration Options.
                     type: string
                   deltaTarget:
+                    description: List of nested Delta Lake target arguments. See Delta
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -795,6 +857,64 @@ spec:
                             units to use by the AWS Glue crawler. The valid values
                             are null or a value between 0.1 to 1.5.
                           type: number
+                      type: object
+                    type: array
+                  hudiTarget:
+                    description: List nested Hudi target arguments. See Iceberg Target
+                      below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  icebergTarget:
+                    description: List nested Iceberg target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   jdbcTarget:
@@ -844,7 +964,7 @@ spec:
                         crawlerLineageSettings:
                           description: 'Specifies whether data lineage is enabled
                             for the crawler. Valid values are: ENABLE and DISABLE.
-                            Default value is Disable.'
+                            Default value is DISABLE.'
                           type: string
                       type: object
                     type: array
@@ -1192,6 +1312,8 @@ spec:
                     description: Glue database where results are written.
                     type: string
                   deltaTarget:
+                    description: List of nested Delta Lake target arguments. See Delta
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -1237,6 +1359,64 @@ spec:
                             units to use by the AWS Glue crawler. The valid values
                             are null or a value between 0.1 to 1.5.
                           type: number
+                      type: object
+                    type: array
+                  hudiTarget:
+                    description: List nested Hudi target arguments. See Iceberg Target
+                      below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  icebergTarget:
+                    description: List nested Iceberg target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   id:
@@ -1293,7 +1473,7 @@ spec:
                         crawlerLineageSettings:
                           description: 'Specifies whether data lineage is enabled
                             for the crawler. Valid values are: ENABLE and DISABLE.
-                            Default value is Disable.'
+                            Default value is DISABLE.'
                           type: string
                       type: object
                     type: array

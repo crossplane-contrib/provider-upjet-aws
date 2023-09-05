@@ -56,10 +56,11 @@ type ClusterInitParameters struct {
 	// –  Version number of the cache engine to be used.
 	// If not set, defaults to the latest version.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
-	// When engine is redis and the version is 6 or higher, the major and minor version can be set, e.g., 6.2,
+	// When engine is redis and the version is 7 or higher, the major and minor version should be set, e.g., 7.2.
+	// When the version is 6, the major and minor version can be set, e.g., 6.2,
 	// or the minor version can be unspecified which will use the latest version at creation time, e.g., 6.x.
 	// Otherwise, specify the full version desired, e.g., 5.0.6.
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of your final cluster snapshot. If omitted, no final snapshot will be made.
@@ -98,9 +99,6 @@ type ClusterInitParameters struct {
 
 	// The outpost ARN in which the cache cluster will be created.
 	PreferredOutpostArn *string `json:"preferredOutpostArn,omitempty" tf:"preferred_outpost_arn,omitempty"`
-
-	// create the resource.
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
@@ -152,10 +150,11 @@ type ClusterObservation struct {
 	// –  Version number of the cache engine to be used.
 	// If not set, defaults to the latest version.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
-	// When engine is redis and the version is 6 or higher, the major and minor version can be set, e.g., 6.2,
+	// When engine is redis and the version is 7 or higher, the major and minor version should be set, e.g., 7.2.
+	// When the version is 6, the major and minor version can be set, e.g., 6.2,
 	// or the minor version can be unspecified which will use the latest version at creation time, e.g., 6.x.
 	// Otherwise, specify the full version desired, e.g., 5.0.6.
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Because ElastiCache pulls the latest minor or patch for a version, this attribute returns the running version of the cache engine.
@@ -209,9 +208,6 @@ type ClusterObservation struct {
 	// –  One or more VPC security groups associated with the cache cluster
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// create the resource.
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
-
 	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
@@ -261,10 +257,11 @@ type ClusterParameters struct {
 	// –  Version number of the cache engine to be used.
 	// If not set, defaults to the latest version.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
-	// When engine is redis and the version is 6 or higher, the major and minor version can be set, e.g., 6.2,
+	// When engine is redis and the version is 7 or higher, the major and minor version should be set, e.g., 7.2.
+	// When the version is 6, the major and minor version can be set, e.g., 6.2,
 	// or the minor version can be unspecified which will use the latest version at creation time, e.g., 6.x.
 	// Otherwise, specify the full version desired, e.g., 5.0.6.
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -363,10 +360,6 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// create the resource.
-	// +kubebuilder:validation:Optional
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	// +kubebuilder:validation:Optional

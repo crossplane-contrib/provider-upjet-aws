@@ -146,6 +146,13 @@ spec:
                   input:
                     description: JSON payload to the lambda function.
                     type: string
+                  lifecycleScope:
+                    description: Lifecycle scope of the resource to manage. Valid
+                      values are CREATE_ONLY and CRUD. Defaults to CREATE_ONLY. CREATE_ONLY
+                      will invoke the function only on creation or replacement. CRUD
+                      will invoke the function on each lifecycle event, and augment
+                      the input JSON payload with additional lifecycle information.
+                    type: string
                   qualifier:
                     description: Qualifier (i.e., version) of the lambda function.
                       Defaults to $LATEST.
@@ -153,6 +160,11 @@ spec:
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
+                    type: string
+                  terraformKey:
+                    description: The JSON key used to store lifecycle information
+                      in the input JSON payload. Defaults to tf. This additional key
+                      is only included when lifecycle_scope is set to CRUD.
                     type: string
                   triggers:
                     additionalProperties:
@@ -179,9 +191,21 @@ spec:
                   input:
                     description: JSON payload to the lambda function.
                     type: string
+                  lifecycleScope:
+                    description: Lifecycle scope of the resource to manage. Valid
+                      values are CREATE_ONLY and CRUD. Defaults to CREATE_ONLY. CREATE_ONLY
+                      will invoke the function only on creation or replacement. CRUD
+                      will invoke the function on each lifecycle event, and augment
+                      the input JSON payload with additional lifecycle information.
+                    type: string
                   qualifier:
                     description: Qualifier (i.e., version) of the lambda function.
                       Defaults to $LATEST.
+                    type: string
+                  terraformKey:
+                    description: The JSON key used to store lifecycle information
+                      in the input JSON payload. Defaults to tf. This additional key
+                      is only included when lifecycle_scope is set to CRUD.
                     type: string
                   triggers:
                     additionalProperties:
@@ -405,12 +429,24 @@ spec:
                   input:
                     description: JSON payload to the lambda function.
                     type: string
+                  lifecycleScope:
+                    description: Lifecycle scope of the resource to manage. Valid
+                      values are CREATE_ONLY and CRUD. Defaults to CREATE_ONLY. CREATE_ONLY
+                      will invoke the function only on creation or replacement. CRUD
+                      will invoke the function on each lifecycle event, and augment
+                      the input JSON payload with additional lifecycle information.
+                    type: string
                   qualifier:
                     description: Qualifier (i.e., version) of the lambda function.
                       Defaults to $LATEST.
                     type: string
                   result:
                     description: String result of the lambda function invocation.
+                    type: string
+                  terraformKey:
+                    description: The JSON key used to store lifecycle information
+                      in the input JSON payload. Defaults to tf. This additional key
+                      is only included when lifecycle_scope is set to CRUD.
                     type: string
                   triggers:
                     additionalProperties:

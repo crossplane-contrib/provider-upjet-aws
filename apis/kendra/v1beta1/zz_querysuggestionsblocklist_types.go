@@ -15,16 +15,16 @@ import (
 
 type QuerySuggestionsBlockListInitParameters struct {
 
-	// The description for a block list.
+	// Description for a block list.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name for the block list.
+	// Name for the block list.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The S3 path where your block list text file sits in S3. Detailed below.
+	// S3 path where your block list text file is located. See details below.
 	SourceS3Path []SourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block, tags with matching keys will overwrite those defined at the provider-level.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -33,42 +33,42 @@ type QuerySuggestionsBlockListObservation struct {
 	// ARN of the block list.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The description for a block list.
+	// Description for a block list.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifier of the index for a block list.
+	// Identifier of the index for a block list.
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
-	// The name for the block list.
+	// Name for the block list.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The unique indentifier of the block list.
+	// Unique identifier of the block list.
 	QuerySuggestionsBlockListID *string `json:"querySuggestionsBlockListId,omitempty" tf:"query_suggestions_block_list_id,omitempty"`
 
-	// The IAM (Identity and Access Management) role used to access the block list text file in S3.
+	// IAM (Identity and Access Management) role used to access the block list text file in S3.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The S3 path where your block list text file sits in S3. Detailed below.
+	// S3 path where your block list text file is located. See details below.
 	SourceS3Path []SourceS3PathObservation `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block, tags with matching keys will overwrite those defined at the provider-level.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider's default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type QuerySuggestionsBlockListParameters struct {
 
-	// The description for a block list.
+	// Description for a block list.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier of the index for a block list.
+	// Identifier of the index for a block list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -82,7 +82,7 @@ type QuerySuggestionsBlockListParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
 
-	// The name for the block list.
+	// Name for the block list.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -91,7 +91,7 @@ type QuerySuggestionsBlockListParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The IAM (Identity and Access Management) role used to access the block list text file in S3.
+	// IAM (Identity and Access Management) role used to access the block list text file in S3.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -105,33 +105,33 @@ type QuerySuggestionsBlockListParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The S3 path where your block list text file sits in S3. Detailed below.
+	// S3 path where your block list text file is located. See details below.
 	// +kubebuilder:validation:Optional
 	SourceS3Path []SourceS3PathParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
-	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// Key-value map of resource tags. If configured with a provider default_tags configuration block, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SourceS3PathInitParameters struct {
 
-	// The name of the file.
+	// Name of the file.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type SourceS3PathObservation struct {
 
-	// The name of the S3 bucket that contains the file.
+	// Name of the S3 bucket that contains the file.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// The name of the file.
+	// Name of the file.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type SourceS3PathParameters struct {
 
-	// The name of the S3 bucket that contains the file.
+	// Name of the S3 bucket that contains the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -145,7 +145,7 @@ type SourceS3PathParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// The name of the file.
+	// Name of the file.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 }
