@@ -96,14 +96,11 @@ type RouteTableRouteObservation_2 struct {
 	// Identifier of a VPC Egress Only Internet Gateway.
 	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id,omitempty"`
 
-	// Identifier of a VPC internet gateway or a virtual private gateway.
+	// Identifier of a VPC internet gateway, virtual private gateway, or local. local routes cannot be created but can be adopted or imported. See the example above.
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// The Ipv6 CIDR block of the route.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
-
-	// Identifier of an EC2 instance.
-	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Identifier of a Outpost local gateway.
 	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`

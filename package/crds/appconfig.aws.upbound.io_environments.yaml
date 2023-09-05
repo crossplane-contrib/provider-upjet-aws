@@ -553,8 +553,8 @@ spec:
                     description: AppConfig environment ID.
                     type: string
                   id:
-                    description: AppConfig environment ID and application ID separated
-                      by a colon (:).
+                    description: (Deprecated) AppConfig environment ID and application
+                      ID separated by a colon (:).
                     type: string
                   monitor:
                     description: Set of Amazon CloudWatch alarms to monitor during

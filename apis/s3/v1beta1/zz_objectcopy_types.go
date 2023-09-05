@@ -78,7 +78,7 @@ type ObjectCopyGrantParameters struct {
 
 type ObjectCopyInitParameters struct {
 
-	// Canned ACL to apply. Defaults to private. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in.
@@ -182,7 +182,7 @@ type ObjectCopyInitParameters struct {
 
 type ObjectCopyObservation struct {
 
-	// Canned ACL to apply. Defaults to private. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in.
@@ -310,7 +310,7 @@ type ObjectCopyObservation struct {
 
 type ObjectCopyParameters struct {
 
-	// Canned ACL to apply. Defaults to private. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 

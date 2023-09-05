@@ -19,7 +19,7 @@ import (
 
 type ObjectInitParameters struct {
 
-	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
@@ -88,7 +88,7 @@ type ObjectInitParameters struct {
 
 type ObjectObservation struct {
 
-	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
@@ -172,7 +172,7 @@ type ObjectObservation struct {
 
 type ObjectParameters struct {
 
-	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 

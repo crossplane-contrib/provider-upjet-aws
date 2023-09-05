@@ -102,7 +102,7 @@ type BucketServerSideEncryptionConfigurationRuleParameters struct {
 
 type RuleApplyServerSideEncryptionByDefaultInitParameters struct {
 
-	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
+	// Server-side encryption algorithm to use. Valid values are AES256, aws:kms, and aws:kms:dsse
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
@@ -111,7 +111,7 @@ type RuleApplyServerSideEncryptionByDefaultObservation struct {
 	// AWS KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms.
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
 
-	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
+	// Server-side encryption algorithm to use. Valid values are AES256, aws:kms, and aws:kms:dsse
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
 }
 
@@ -131,7 +131,7 @@ type RuleApplyServerSideEncryptionByDefaultParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSMasterKeyIDSelector *v1.Selector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
-	// Server-side encryption algorithm to use. Valid values are AES256 and aws:kms
+	// Server-side encryption algorithm to use. Valid values are AES256, aws:kms, and aws:kms:dsse
 	// +kubebuilder:validation:Optional
 	SseAlgorithm *string `json:"sseAlgorithm" tf:"sse_algorithm,omitempty"`
 }

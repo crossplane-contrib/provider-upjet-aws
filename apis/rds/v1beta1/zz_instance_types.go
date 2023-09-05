@@ -19,21 +19,21 @@ import (
 
 type BlueGreenUpdateInitParameters struct {
 
-	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
+	// Enables low-downtime updates when true.
 	// Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlueGreenUpdateObservation struct {
 
-	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
+	// Enables low-downtime updates when true.
 	// Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlueGreenUpdateParameters struct {
 
-	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
+	// Enables low-downtime updates when true.
 	// Default is false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -70,6 +70,9 @@ type InstanceInitParameters struct {
 	// uses low-downtime updates,
 	// or will use RDS Blue/Green deployments.
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+
+	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
+	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
 
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
@@ -164,9 +167,6 @@ type InstanceInitParameters struct {
 	// Specifies if the RDS instance is multi-AZ
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
-	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
 	// Supported in Amazon RDS.
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
@@ -206,10 +206,6 @@ type InstanceInitParameters struct {
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	S3Import []S3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
-
-	// List of DB Security Groups to
-	// associate. Only used for DB Instances on the .
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// Determines whether a final DB snapshot is
 	// created before the DB instance is deleted. If true is specified, no DBSnapshot
@@ -290,6 +286,9 @@ type InstanceObservation struct {
 	// or will use RDS Blue/Green deployments.
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
+	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
+	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
+
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
@@ -368,7 +367,7 @@ type InstanceObservation struct {
 	// accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// The RDS instance ID.
+	// RDS DBI resource ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The instance type of the RDS instance.
@@ -428,9 +427,6 @@ type InstanceObservation struct {
 	// Specifies if the RDS instance is multi-AZ
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
-	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
 	// Supported in Amazon RDS.
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
@@ -486,10 +482,6 @@ type InstanceObservation struct {
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	S3Import []S3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
-
-	// List of DB Security Groups to
-	// associate. Only used for DB Instances on the .
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// Determines whether a final DB snapshot is
 	// created before the DB instance is deleted. If true is specified, no DBSnapshot
@@ -586,6 +578,10 @@ type InstanceParameters struct {
 	// or will use RDS Blue/Green deployments.
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+
+	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
+	// +kubebuilder:validation:Optional
+	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
 
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
@@ -771,10 +767,6 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
-	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
 	// Supported in Amazon RDS.
 	// +kubebuilder:validation:Optional
@@ -858,11 +850,6 @@ type InstanceParameters struct {
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	// +kubebuilder:validation:Optional
 	S3Import []S3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
-
-	// List of DB Security Groups to
-	// associate. Only used for DB Instances on the .
-	// +kubebuilder:validation:Optional
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// Determines whether a final DB snapshot is
 	// created before the DB instance is deleted. If true is specified, no DBSnapshot
