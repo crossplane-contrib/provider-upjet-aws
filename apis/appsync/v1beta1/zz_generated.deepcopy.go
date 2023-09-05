@@ -1987,6 +1987,11 @@ func (in *GraphQLAPIInitParameters) DeepCopyInto(out *GraphQLAPIInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Visibility != nil {
+		in, out := &in.Visibility, &out.Visibility
+		*out = new(string)
+		**out = **in
+	}
 	if in.XrayEnabled != nil {
 		in, out := &in.XrayEnabled, &out.XrayEnabled
 		*out = new(bool)
@@ -2237,6 +2242,11 @@ func (in *GraphQLAPIObservation) DeepCopyInto(out *GraphQLAPIObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Visibility != nil {
+		in, out := &in.Visibility, &out.Visibility
+		*out = new(string)
+		**out = **in
+	}
 	if in.XrayEnabled != nil {
 		in, out := &in.XrayEnabled, &out.XrayEnabled
 		*out = new(bool)
@@ -2432,6 +2442,11 @@ func (in *GraphQLAPIParameters) DeepCopyInto(out *GraphQLAPIParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Visibility != nil {
+		in, out := &in.Visibility, &out.Visibility
+		*out = new(string)
+		**out = **in
 	}
 	if in.XrayEnabled != nil {
 		in, out := &in.XrayEnabled, &out.XrayEnabled

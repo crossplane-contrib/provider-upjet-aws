@@ -915,6 +915,11 @@ func (in *FileSystemObservation) DeepCopyInto(out *FileSystemObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.NumberOfMountTargets != nil {
 		in, out := &in.NumberOfMountTargets, &out.NumberOfMountTargets
 		*out = new(float64)

@@ -201,25 +201,6 @@ type HeaderParameters struct {
 	SourcePort *string `json:"sourcePort" tf:"source_port,omitempty"`
 }
 
-type IPSetInitParameters struct {
-
-	// Set of port ranges.
-	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
-}
-
-type IPSetObservation struct {
-
-	// Set of port ranges.
-	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
-}
-
-type IPSetParameters struct {
-
-	// Set of port ranges.
-	// +kubebuilder:validation:Optional
-	Definition []*string `json:"definition" tf:"definition,omitempty"`
-}
-
 type IPSetReferenceInitParameters struct {
 }
 
@@ -275,10 +256,29 @@ type IPSetReferencesParameters struct {
 	Key *string `json:"key" tf:"key,omitempty"`
 }
 
+type IPSetsIPSetInitParameters struct {
+
+	// Set of port ranges.
+	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
+}
+
+type IPSetsIPSetObservation struct {
+
+	// Set of port ranges.
+	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
+}
+
+type IPSetsIPSetParameters struct {
+
+	// Set of port ranges.
+	// +kubebuilder:validation:Optional
+	Definition []*string `json:"definition" tf:"definition,omitempty"`
+}
+
 type IPSetsInitParameters struct {
 
 	// A configuration block that defines a set of IP addresses. See IP Set below for details.
-	IPSet []IPSetInitParameters `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
+	IPSet []IPSetsIPSetInitParameters `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
 
 	// An unique alphanumeric string to identify the port_set.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -287,7 +287,7 @@ type IPSetsInitParameters struct {
 type IPSetsObservation struct {
 
 	// A configuration block that defines a set of IP addresses. See IP Set below for details.
-	IPSet []IPSetObservation `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
+	IPSet []IPSetsIPSetObservation `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
 
 	// An unique alphanumeric string to identify the port_set.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -297,7 +297,7 @@ type IPSetsParameters struct {
 
 	// A configuration block that defines a set of IP addresses. See IP Set below for details.
 	// +kubebuilder:validation:Optional
-	IPSet []IPSetParameters `json:"ipSet" tf:"ip_set,omitempty"`
+	IPSet []IPSetsIPSetParameters `json:"ipSet" tf:"ip_set,omitempty"`
 
 	// An unique alphanumeric string to identify the port_set.
 	// +kubebuilder:validation:Optional
@@ -624,7 +624,7 @@ type RuleGroupRuleGroupInitParameters struct {
 	ReferenceSets []ReferenceSetsInitParameters `json:"referenceSets,omitempty" tf:"reference_sets,omitempty"`
 
 	// A configuration block that defines additional settings available to use in the rules defined in the rule group. Can only be specified for stateful rule groups. See Rule Variables below for details.
-	RuleVariables []RuleVariablesInitParameters `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
+	RuleVariables []RuleGroupRuleVariablesInitParameters `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
 
 	// A configuration block that defines the stateful or stateless rules for the rule group. See Rules Source below for details.
 	RulesSource []RulesSourceInitParameters `json:"rulesSource,omitempty" tf:"rules_source,omitempty"`
@@ -639,7 +639,7 @@ type RuleGroupRuleGroupObservation struct {
 	ReferenceSets []ReferenceSetsObservation `json:"referenceSets,omitempty" tf:"reference_sets,omitempty"`
 
 	// A configuration block that defines additional settings available to use in the rules defined in the rule group. Can only be specified for stateful rule groups. See Rule Variables below for details.
-	RuleVariables []RuleVariablesObservation `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
+	RuleVariables []RuleGroupRuleVariablesObservation `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
 
 	// A configuration block that defines the stateful or stateless rules for the rule group. See Rules Source below for details.
 	RulesSource []RulesSourceObservation `json:"rulesSource,omitempty" tf:"rules_source,omitempty"`
@@ -656,7 +656,7 @@ type RuleGroupRuleGroupParameters struct {
 
 	// A configuration block that defines additional settings available to use in the rules defined in the rule group. Can only be specified for stateful rule groups. See Rule Variables below for details.
 	// +kubebuilder:validation:Optional
-	RuleVariables []RuleVariablesParameters `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
+	RuleVariables []RuleGroupRuleVariablesParameters `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
 
 	// A configuration block that defines the stateful or stateless rules for the rule group. See Rules Source below for details.
 	// +kubebuilder:validation:Optional
@@ -665,6 +665,35 @@ type RuleGroupRuleGroupParameters struct {
 	// A configuration block that defines stateful rule options for the rule group. See Stateful Rule Options below for details.
 	// +kubebuilder:validation:Optional
 	StatefulRuleOptions []StatefulRuleOptionsParameters `json:"statefulRuleOptions,omitempty" tf:"stateful_rule_options,omitempty"`
+}
+
+type RuleGroupRuleVariablesInitParameters struct {
+
+	// Set of configuration blocks that define IP address information. See IP Sets below for details.
+	IPSets []IPSetsInitParameters `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
+
+	// Set of configuration blocks that define port range information. See Port Sets below for details.
+	PortSets []PortSetsInitParameters `json:"portSets,omitempty" tf:"port_sets,omitempty"`
+}
+
+type RuleGroupRuleVariablesObservation struct {
+
+	// Set of configuration blocks that define IP address information. See IP Sets below for details.
+	IPSets []IPSetsObservation `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
+
+	// Set of configuration blocks that define port range information. See Port Sets below for details.
+	PortSets []PortSetsObservation `json:"portSets,omitempty" tf:"port_sets,omitempty"`
+}
+
+type RuleGroupRuleVariablesParameters struct {
+
+	// Set of configuration blocks that define IP address information. See IP Sets below for details.
+	// +kubebuilder:validation:Optional
+	IPSets []IPSetsParameters `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
+
+	// Set of configuration blocks that define port range information. See Port Sets below for details.
+	// +kubebuilder:validation:Optional
+	PortSets []PortSetsParameters `json:"portSets,omitempty" tf:"port_sets,omitempty"`
 }
 
 type RuleOptionInitParameters struct {
@@ -697,35 +726,6 @@ type RuleOptionParameters struct {
 	// Set of strings for additional settings to use in stateful rule inspection.
 	// +kubebuilder:validation:Optional
 	Settings []*string `json:"settings,omitempty" tf:"settings,omitempty"`
-}
-
-type RuleVariablesInitParameters struct {
-
-	// Set of configuration blocks that define IP address information. See IP Sets below for details.
-	IPSets []IPSetsInitParameters `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
-
-	// Set of configuration blocks that define port range information. See Port Sets below for details.
-	PortSets []PortSetsInitParameters `json:"portSets,omitempty" tf:"port_sets,omitempty"`
-}
-
-type RuleVariablesObservation struct {
-
-	// Set of configuration blocks that define IP address information. See IP Sets below for details.
-	IPSets []IPSetsObservation `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
-
-	// Set of configuration blocks that define port range information. See Port Sets below for details.
-	PortSets []PortSetsObservation `json:"portSets,omitempty" tf:"port_sets,omitempty"`
-}
-
-type RuleVariablesParameters struct {
-
-	// Set of configuration blocks that define IP address information. See IP Sets below for details.
-	// +kubebuilder:validation:Optional
-	IPSets []IPSetsParameters `json:"ipSets,omitempty" tf:"ip_sets,omitempty"`
-
-	// Set of configuration blocks that define port range information. See Port Sets below for details.
-	// +kubebuilder:validation:Optional
-	PortSets []PortSetsParameters `json:"portSets,omitempty" tf:"port_sets,omitempty"`
 }
 
 type RulesSourceInitParameters struct {
@@ -866,7 +866,7 @@ type SourcePortParameters struct {
 
 type StatefulRuleInitParameters struct {
 
-	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP or PASS.
+	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP, PASS, or REJECT.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A configuration block containing the stateful 5-tuple inspection criteria for the rule, used to inspect traffic flows. See Header below for details.
@@ -878,7 +878,7 @@ type StatefulRuleInitParameters struct {
 
 type StatefulRuleObservation struct {
 
-	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP or PASS.
+	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP, PASS, or REJECT.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A configuration block containing the stateful 5-tuple inspection criteria for the rule, used to inspect traffic flows. See Header below for details.
@@ -909,7 +909,7 @@ type StatefulRuleOptionsParameters struct {
 
 type StatefulRuleParameters struct {
 
-	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP or PASS.
+	// Action to take with packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, AWS Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow. Valid values: ALERT, DROP, PASS, or REJECT.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 

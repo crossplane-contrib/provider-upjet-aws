@@ -260,7 +260,6 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("DBName"))
-	opts = append(opts, resource.WithNameFilter("Name"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
@@ -268,7 +267,7 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Instance) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DBInstanceAutomatedBackupsReplication

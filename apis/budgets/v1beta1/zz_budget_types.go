@@ -54,9 +54,6 @@ type BudgetInitParameters struct {
 	// A list of CostFilter name/values pair to apply to budget.
 	CostFilter []CostFilterInitParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
-	// Map of CostFilters key/value pairs to apply to the budget.
-	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
-
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes []CostTypesInitParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
@@ -98,9 +95,6 @@ type BudgetObservation struct {
 
 	// A list of CostFilter name/values pair to apply to budget.
 	CostFilter []CostFilterObservation `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
-
-	// Map of CostFilters key/value pairs to apply to the budget.
-	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes []CostTypesObservation `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
@@ -147,10 +141,6 @@ type BudgetParameters struct {
 	// A list of CostFilter name/values pair to apply to budget.
 	// +kubebuilder:validation:Optional
 	CostFilter []CostFilterParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
-
-	// Map of CostFilters key/value pairs to apply to the budget.
-	// +kubebuilder:validation:Optional
-	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	// +kubebuilder:validation:Optional

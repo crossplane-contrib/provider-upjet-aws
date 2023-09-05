@@ -17,6 +17,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EcrConfigurationInitParameters struct {
+
+	// Key-value map of resource tags.
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// The name of the repository to scan
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+}
+
+type EcrConfigurationObservation struct {
+
+	// Key-value map of resource tags.
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// The name of the repository to scan
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+}
+
+type EcrConfigurationParameters struct {
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// The name of the repository to scan
+	// +kubebuilder:validation:Optional
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+}
+
 type ImagePipelineImageTestsConfigurationInitParameters struct {
 
 	// Whether image tests are enabled. Defaults to true.
@@ -59,6 +88,9 @@ type ImagePipelineInitParameters struct {
 
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
+	// Configuration block with image scanning configuration. Detailed below.
+	ImageScanningConfiguration []ImageScanningConfigurationInitParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
@@ -109,6 +141,9 @@ type ImagePipelineObservation struct {
 
 	// Amazon Resource Name (ARN) of the image recipe.
 	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
+
+	// Configuration block with image scanning configuration. Detailed below.
+	ImageScanningConfiguration []ImageScanningConfigurationObservation `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationObservation `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
@@ -167,6 +202,10 @@ type ImagePipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
 
+	// Configuration block with image scanning configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	ImageScanningConfiguration []ImageScanningConfigurationParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
+
 	// Configuration block with image tests configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
@@ -205,6 +244,35 @@ type ImagePipelineParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ImageScanningConfigurationInitParameters struct {
+
+	// Configuration block with ECR configuration for image scanning. Detailed below.
+	EcrConfiguration []EcrConfigurationInitParameters `json:"ecrConfiguration,omitempty" tf:"ecr_configuration,omitempty"`
+
+	// Whether image scans are enabled. Defaults to false.
+	ImageScanningEnabled *bool `json:"imageScanningEnabled,omitempty" tf:"image_scanning_enabled,omitempty"`
+}
+
+type ImageScanningConfigurationObservation struct {
+
+	// Configuration block with ECR configuration for image scanning. Detailed below.
+	EcrConfiguration []EcrConfigurationObservation `json:"ecrConfiguration,omitempty" tf:"ecr_configuration,omitempty"`
+
+	// Whether image scans are enabled. Defaults to false.
+	ImageScanningEnabled *bool `json:"imageScanningEnabled,omitempty" tf:"image_scanning_enabled,omitempty"`
+}
+
+type ImageScanningConfigurationParameters struct {
+
+	// Configuration block with ECR configuration for image scanning. Detailed below.
+	// +kubebuilder:validation:Optional
+	EcrConfiguration []EcrConfigurationParameters `json:"ecrConfiguration,omitempty" tf:"ecr_configuration,omitempty"`
+
+	// Whether image scans are enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ImageScanningEnabled *bool `json:"imageScanningEnabled,omitempty" tf:"image_scanning_enabled,omitempty"`
 }
 
 type ScheduleInitParameters struct {

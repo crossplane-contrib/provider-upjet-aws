@@ -2362,11 +2362,6 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.LoggingRole != nil {
-		in, out := &in.LoggingRole, &out.LoggingRole
-		*out = new(string)
-		**out = **in
-	}
 	if in.ProtocolDetails != nil {
 		in, out := &in.ProtocolDetails, &out.ProtocolDetails
 		*out = make([]ProtocolDetailsInitParameters, len(*in))
@@ -2389,6 +2384,17 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		in, out := &in.SecurityPolicyName, &out.SecurityPolicyName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StructuredLogDestinations != nil {
+		in, out := &in.StructuredLogDestinations, &out.StructuredLogDestinations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -2560,6 +2566,17 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StructuredLogDestinations != nil {
+		in, out := &in.StructuredLogDestinations, &out.StructuredLogDestinations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2696,6 +2713,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoggingRoleRef != nil {
+		in, out := &in.LoggingRoleRef, &out.LoggingRoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LoggingRoleSelector != nil {
+		in, out := &in.LoggingRoleSelector, &out.LoggingRoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PostAuthenticationLoginBannerSecretRef != nil {
 		in, out := &in.PostAuthenticationLoginBannerSecretRef, &out.PostAuthenticationLoginBannerSecretRef
 		*out = new(v1.SecretKeySelector)
@@ -2733,6 +2760,17 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		in, out := &in.SecurityPolicyName, &out.SecurityPolicyName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StructuredLogDestinations != nil {
+		in, out := &in.StructuredLogDestinations, &out.StructuredLogDestinations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

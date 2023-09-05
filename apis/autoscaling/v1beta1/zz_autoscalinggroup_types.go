@@ -77,7 +77,7 @@ type AcceleratorTotalMemoryMibParameters struct {
 
 type AutoscalingGroupInitParameters struct {
 
-	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
@@ -104,8 +104,8 @@ type AutoscalingGroupInitParameters struct {
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
 	// Allows deleting the Auto Scaling Group without waiting
-	// for all instances in the pool to terminate.  You can force an Auto Scaling Group to delete
-	// even if it's in the process of scaling a resource.  This bypasses that
+	// for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+	// even if it's in the process of scaling a resource. This bypasses that
 	// behavior and potentially leaves resources dangling.
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
@@ -118,6 +118,9 @@ type AutoscalingGroupInitParameters struct {
 
 	// "EC2" or "ELB". Controls how health checking is done.
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
+
+	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
+	IgnoreFailedScalingActivities *bool `json:"ignoreFailedScalingActivities,omitempty" tf:"ignore_failed_scaling_activities,omitempty"`
 
 	// One or more
 	// Lifecycle Hooks
@@ -156,7 +159,10 @@ type AutoscalingGroupInitParameters struct {
 	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
 	MixedInstancesPolicy []MixedInstancesPolicyInitParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
-	// in protection
+	// Whether newly launched instances
+	// are automatically protected from termination by Amazon EC2 Auto Scaling when
+	// scaling in. For more information about preventing instances from terminating
+	// on scale in, see Using instance scale-in protection
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
 
@@ -164,14 +170,14 @@ type AutoscalingGroupInitParameters struct {
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. See Tag below for more details.
 	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-
-	// Key-value map of resource tags.
-	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
+
+	// Attaches one or more traffic sources to the specified Auto Scaling group.
+	TrafficSource []TrafficSourceInitParameters `json:"trafficSource,omitempty" tf:"traffic_source,omitempty"`
 
 	// (See also Waiting
 	// for Capacity below.
@@ -192,7 +198,7 @@ type AutoscalingGroupObservation struct {
 	// ARN for this Auto Scaling Group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
@@ -219,8 +225,8 @@ type AutoscalingGroupObservation struct {
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
 	// Allows deleting the Auto Scaling Group without waiting
-	// for all instances in the pool to terminate.  You can force an Auto Scaling Group to delete
-	// even if it's in the process of scaling a resource.  This bypasses that
+	// for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+	// even if it's in the process of scaling a resource. This bypasses that
 	// behavior and potentially leaves resources dangling.
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
@@ -236,6 +242,9 @@ type AutoscalingGroupObservation struct {
 
 	// Auto Scaling Group id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
+	IgnoreFailedScalingActivities *bool `json:"ignoreFailedScalingActivities,omitempty" tf:"ignore_failed_scaling_activities,omitempty"`
 
 	// One or more
 	// Lifecycle Hooks
@@ -258,7 +267,7 @@ type AutoscalingGroupObservation struct {
 	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// List of elastic load balancer names to add to the autoscaling
-	// group names. Only valid for classic load balancers. For ALBs, use target_group_arns instead.
+	// group names. Only valid for classic load balancers. For ALBs, use target_group_arns instead. To remove all load balancer attachments an empty list should be specified.
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
@@ -287,28 +296,31 @@ type AutoscalingGroupObservation struct {
 	// Predicted capacity of the group.
 	PredictedCapacity *float64 `json:"predictedCapacity,omitempty" tf:"predicted_capacity,omitempty"`
 
-	// in protection
+	// Whether newly launched instances
+	// are automatically protected from termination by Amazon EC2 Auto Scaling when
+	// scaling in. For more information about preventing instances from terminating
+	// on scale in, see Using instance scale-in protection
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
 
-	// linked role that the ASG will use to call other AWS services
+	// ARN of the service-linked role that the ASG will use to call other AWS services
 	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
 
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. See Tag below for more details.
 	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// Key-value map of resource tags.
-	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing.
+	// Set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing. To remove all target group attachments an empty list should be specified.
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
+
+	// Attaches one or more traffic sources to the specified Auto Scaling group.
+	TrafficSource []TrafficSourceObservation `json:"trafficSource,omitempty" tf:"traffic_source,omitempty"`
 
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
@@ -332,7 +344,7 @@ type AutoscalingGroupObservation struct {
 
 type AutoscalingGroupParameters struct {
 
-	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
@@ -367,8 +379,8 @@ type AutoscalingGroupParameters struct {
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
 	// Allows deleting the Auto Scaling Group without waiting
-	// for all instances in the pool to terminate.  You can force an Auto Scaling Group to delete
-	// even if it's in the process of scaling a resource.  This bypasses that
+	// for all instances in the pool to terminate. You can force an Auto Scaling Group to delete
+	// even if it's in the process of scaling a resource. This bypasses that
 	// behavior and potentially leaves resources dangling.
 	// +kubebuilder:validation:Optional
 	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
@@ -385,6 +397,10 @@ type AutoscalingGroupParameters struct {
 	// "EC2" or "ELB". Controls how health checking is done.
 	// +kubebuilder:validation:Optional
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
+
+	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
+	// +kubebuilder:validation:Optional
+	IgnoreFailedScalingActivities *bool `json:"ignoreFailedScalingActivities,omitempty" tf:"ignore_failed_scaling_activities,omitempty"`
 
 	// One or more
 	// Lifecycle Hooks
@@ -459,7 +475,10 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
 
-	// in protection
+	// Whether newly launched instances
+	// are automatically protected from termination by Amazon EC2 Auto Scaling when
+	// scaling in. For more information about preventing instances from terminating
+	// on scale in, see Using instance scale-in protection
 	// in the Amazon EC2 Auto Scaling User Guide.
 	// +kubebuilder:validation:Optional
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
@@ -469,7 +488,7 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// linked role that the ASG will use to call other AWS services
+	// ARN of the service-linked role that the ASG will use to call other AWS services
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -488,17 +507,17 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
-	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
+	// Configuration block(s) containing resource tags. See Tag below for more details.
 	// +kubebuilder:validation:Optional
 	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
-
-	// Key-value map of resource tags.
-	// +kubebuilder:validation:Optional
-	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	// +kubebuilder:validation:Optional
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
+
+	// Attaches one or more traffic sources to the specified Auto Scaling group.
+	// +kubebuilder:validation:Optional
+	TrafficSource []TrafficSourceParameters `json:"trafficSource,omitempty" tf:"traffic_source,omitempty"`
 
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
@@ -1353,7 +1372,7 @@ type OverrideParameters struct {
 
 type PreferencesInitParameters struct {
 
-	// Automatically rollback if instance refresh fails. Defaults to false.
+	// Automatically rollback if instance refresh fails. Defaults to false. This option may only be set to true when specifying a launch_template or mixed_instances_policy.
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
 	// Number of seconds to wait after a checkpoint. Defaults to 3600.
@@ -1374,7 +1393,7 @@ type PreferencesInitParameters struct {
 
 type PreferencesObservation struct {
 
-	// Automatically rollback if instance refresh fails. Defaults to false.
+	// Automatically rollback if instance refresh fails. Defaults to false. This option may only be set to true when specifying a launch_template or mixed_instances_policy.
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
 	// Number of seconds to wait after a checkpoint. Defaults to 3600.
@@ -1395,7 +1414,7 @@ type PreferencesObservation struct {
 
 type PreferencesParameters struct {
 
-	// Automatically rollback if instance refresh fails. Defaults to false.
+	// Automatically rollback if instance refresh fails. Defaults to false. This option may only be set to true when specifying a launch_template or mixed_instances_policy.
 	// +kubebuilder:validation:Optional
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
@@ -1489,6 +1508,47 @@ type TotalLocalStorageGbParameters struct {
 	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type TrafficSourceInitParameters struct {
+
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Provides additional context for the value of Identifier.
+	// The following lists the valid values:
+	// elb if identifier is the name of a Classic Load Balancer.
+	// elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+	// vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TrafficSourceObservation struct {
+
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Provides additional context for the value of Identifier.
+	// The following lists the valid values:
+	// elb if identifier is the name of a Classic Load Balancer.
+	// elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+	// vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TrafficSourceParameters struct {
+
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+
+	// Provides additional context for the value of Identifier.
+	// The following lists the valid values:
+	// elb if identifier is the name of a Classic Load Balancer.
+	// elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+	// vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type VcpuCountInitParameters struct {

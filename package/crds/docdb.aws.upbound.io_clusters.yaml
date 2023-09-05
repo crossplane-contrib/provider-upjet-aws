@@ -242,6 +242,9 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
@@ -425,6 +428,9 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
@@ -705,6 +711,9 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The

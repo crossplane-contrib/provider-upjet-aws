@@ -22,7 +22,7 @@ type ReportDefinitionInitParameters struct {
 	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
 	// Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet.
@@ -52,7 +52,7 @@ type ReportDefinitionObservation struct {
 	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
 	// The Amazon Resource Name (ARN) specifying the cur report.
@@ -91,7 +91,7 @@ type ReportDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
 	// +kubebuilder:validation:Optional
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 

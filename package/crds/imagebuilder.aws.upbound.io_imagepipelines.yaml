@@ -159,6 +159,32 @@ spec:
                             type: string
                         type: object
                     type: object
+                  imageScanningConfiguration:
+                    description: Configuration block with image scanning configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        ecrConfiguration:
+                          description: Configuration block with ECR configuration
+                            for image scanning. Detailed below.
+                          items:
+                            properties:
+                              containerTags:
+                                description: Key-value map of resource tags.
+                                items:
+                                  type: string
+                                type: array
+                              repositoryName:
+                                description: The name of the repository to scan
+                                type: string
+                            type: object
+                          type: array
+                        imageScanningEnabled:
+                          description: Whether image scans are enabled. Defaults to
+                            false.
+                          type: boolean
+                      type: object
+                    type: array
                   imageTestsConfiguration:
                     description: Configuration block with image tests configuration.
                       Detailed below.
@@ -325,6 +351,32 @@ spec:
                     description: Whether additional information about the image being
                       created is collected. Defaults to true.
                     type: boolean
+                  imageScanningConfiguration:
+                    description: Configuration block with image scanning configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        ecrConfiguration:
+                          description: Configuration block with ECR configuration
+                            for image scanning. Detailed below.
+                          items:
+                            properties:
+                              containerTags:
+                                description: Key-value map of resource tags.
+                                items:
+                                  type: string
+                                type: array
+                              repositoryName:
+                                description: The name of the repository to scan
+                                type: string
+                            type: object
+                          type: array
+                        imageScanningEnabled:
+                          description: Whether image scans are enabled. Defaults to
+                            false.
+                          type: boolean
+                      type: object
+                    type: array
                   imageTestsConfiguration:
                     description: Configuration block with image tests configuration.
                       Detailed below.
@@ -584,6 +636,32 @@ spec:
                   imageRecipeArn:
                     description: Amazon Resource Name (ARN) of the image recipe.
                     type: string
+                  imageScanningConfiguration:
+                    description: Configuration block with image scanning configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        ecrConfiguration:
+                          description: Configuration block with ECR configuration
+                            for image scanning. Detailed below.
+                          items:
+                            properties:
+                              containerTags:
+                                description: Key-value map of resource tags.
+                                items:
+                                  type: string
+                                type: array
+                              repositoryName:
+                                description: The name of the repository to scan
+                                type: string
+                            type: object
+                          type: array
+                        imageScanningEnabled:
+                          description: Whether image scans are enabled. Defaults to
+                            false.
+                          type: boolean
+                      type: object
+                    type: array
                   imageTestsConfiguration:
                     description: Configuration block with image tests configuration.
                       Detailed below.

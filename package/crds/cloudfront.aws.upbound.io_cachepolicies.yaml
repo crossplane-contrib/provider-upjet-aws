@@ -34,14 +34,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CachePolicy is the Schema for the CachePolicys API. Provides
-          a cache policy for a CloudFront ditribution. When it’s attached to a cache
-          behavior, the cache policy determines the values that CloudFront includes
-          in the cache key. These values can include HTTP headers, cookies, and URL
-          query strings. CloudFront uses the cache key to find an object in its cache
-          that it can return to the viewer. It also determines the default, minimum,
-          and maximum time to live (TTL) values that you want objects to stay in the
-          CloudFront cache.
+        description: CachePolicy is the Schema for the CachePolicys API. Use the
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -74,48 +67,47 @@ spec:
               forProvider:
                 properties:
                   comment:
-                    description: A comment to describe the cache policy.
+                    description: Description for the cache policy.
                     type: string
                   defaultTtl:
-                    description: The default amount of time, in seconds, that you
-                      want objects to stay in the CloudFront cache before CloudFront
-                      sends another request to the origin to see if the object has
+                    description: Amount of time, in seconds, that objects are allowed
+                      to remain in the CloudFront cache before CloudFront sends a
+                      new request to the origin server to check if the object has
                       been updated.
                     type: number
                   maxTtl:
-                    description: The maximum amount of time, in seconds, that objects
+                    description: Maximum amount of time, in seconds, that objects
                       stay in the CloudFront cache before CloudFront sends another
                       request to the origin to see if the object has been updated.
                     type: number
                   minTtl:
-                    description: The minimum amount of time, in seconds, that you
-                      want objects to stay in the CloudFront cache before CloudFront
-                      sends another request to the origin to see if the object has
-                      been updated.
+                    description: Minimum amount of time, in seconds, that objects
+                      should remain in the CloudFront cache before a new request is
+                      sent to the origin to check for updates.
                     type: number
                   name:
-                    description: A unique name to identify the cache policy.
+                    description: Unique name used to identify the cache policy.
                     type: string
                   parametersInCacheKeyAndForwardedToOrigin:
-                    description: The HTTP headers, cookies, and URL query strings
-                      to include in the cache key. See Parameters In Cache Key And
-                      Forwarded To Origin for more information.
+                    description: Configuration for including HTTP headers, cookies,
+                      and URL query strings in the cache key. For more information,
+                      refer to the Parameters In Cache Key And Forwarded To Origin
+                      section.
                     items:
                       properties:
                         cookiesConfig:
-                          description: Object that determines whether any cookies
-                            in viewer requests (and if so, which cookies) are included
-                            in the cache key and automatically included in requests
-                            that CloudFront sends to the origin. See Cookies Config
-                            for more information.
+                          description: Whether any cookies in viewer requests are
+                            included in the cache key and automatically included in
+                            requests that CloudFront sends to the origin. See Cookies
+                            Config for more information.
                           items:
                             properties:
                               cookieBehavior:
-                                description: Determines whether any cookies in viewer
-                                  requests are included in the cache key and automatically
+                                description: Whether any cookies in viewer requests
+                                  are included in the cache key and automatically
                                   included in requests that CloudFront sends to the
-                                  origin. Valid values are none, whitelist, allExcept,
-                                  all.
+                                  origin. Valid values for cookie_behavior are none,
+                                  whitelist, allExcept, and all.
                                 type: string
                               cookies:
                                 description: Object that contains a list of cookie
@@ -123,8 +115,8 @@ spec:
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -133,36 +125,36 @@ spec:
                             type: object
                           type: array
                         enableAcceptEncodingBrotli:
-                          description: A flag that can affect whether the Accept-Encoding
-                            HTTP header is included in the cache key and included
-                            in requests that CloudFront sends to the origin.
+                          description: Flag determines whether the Accept-Encoding
+                            HTTP header is included in the cache key and in requests
+                            that CloudFront sends to the origin.
                           type: boolean
                         enableAcceptEncodingGzip:
-                          description: A flag that can affect whether the Accept-Encoding
-                            HTTP header is included in the cache key and included
-                            in requests that CloudFront sends to the origin.
+                          description: Whether the Accept-Encoding HTTP header is
+                            included in the cache key and in requests sent to the
+                            origin by CloudFront.
                           type: boolean
                         headersConfig:
-                          description: Object that determines whether any HTTP headers
-                            (and if so, which headers) are included in the cache key
-                            and automatically included in requests that CloudFront
-                            sends to the origin. See Headers Config for more information.
+                          description: Whether any HTTP headers are included in the
+                            cache key and automatically included in requests that
+                            CloudFront sends to the origin. See Headers Config for
+                            more information.
                           items:
                             properties:
                               headerBehavior:
-                                description: Determines whether any HTTP headers are
-                                  included in the cache key and automatically included
-                                  in requests that CloudFront sends to the origin.
-                                  Valid values are none, whitelist.
+                                description: Whether any HTTP headers are included
+                                  in the cache key and automatically included in requests
+                                  that CloudFront sends to the origin. Valid values
+                                  for header_behavior are none and whitelist.
                                 type: string
                               headers:
-                                description: Object that contains a list of header
-                                  names. See Items for more information.
+                                description: Object contains a list of header names.
+                                  See Items for more information.
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -171,28 +163,29 @@ spec:
                             type: object
                           type: array
                         queryStringsConfig:
-                          description: Object that determines whether any URL query
-                            strings in viewer requests (and if so, which query strings)
-                            are included in the cache key and automatically included
-                            in requests that CloudFront sends to the origin. See Query
-                            String Config for more information.
+                          description: Whether any URL query strings in viewer requests
+                            are included in the cache key. It also automatically includes
+                            these query strings in requests that CloudFront sends
+                            to the origin. Please refer to the Query String Config
+                            for more information.
                           items:
                             properties:
                               queryStringBehavior:
-                                description: Determines whether any URL query strings
-                                  in viewer requests are included in the cache key
-                                  and automatically included in requests that CloudFront
-                                  sends to the origin. Valid values are none, whitelist,
-                                  allExcept, all.
+                                description: Whether URL query strings in viewer requests
+                                  are included in the cache key and automatically
+                                  included in requests that CloudFront sends to the
+                                  origin. Valid values for query_string_behavior are
+                                  none, whitelist, allExcept, and all.
                                 type: string
                               queryStrings:
-                                description: Object that contains a list of query
-                                  string names. See Items for more information.
+                                description: Configuration parameter that contains
+                                  a list of query string names. See Items for more
+                                  information.
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -222,48 +215,47 @@ spec:
                   like an autoscaler.
                 properties:
                   comment:
-                    description: A comment to describe the cache policy.
+                    description: Description for the cache policy.
                     type: string
                   defaultTtl:
-                    description: The default amount of time, in seconds, that you
-                      want objects to stay in the CloudFront cache before CloudFront
-                      sends another request to the origin to see if the object has
+                    description: Amount of time, in seconds, that objects are allowed
+                      to remain in the CloudFront cache before CloudFront sends a
+                      new request to the origin server to check if the object has
                       been updated.
                     type: number
                   maxTtl:
-                    description: The maximum amount of time, in seconds, that objects
+                    description: Maximum amount of time, in seconds, that objects
                       stay in the CloudFront cache before CloudFront sends another
                       request to the origin to see if the object has been updated.
                     type: number
                   minTtl:
-                    description: The minimum amount of time, in seconds, that you
-                      want objects to stay in the CloudFront cache before CloudFront
-                      sends another request to the origin to see if the object has
-                      been updated.
+                    description: Minimum amount of time, in seconds, that objects
+                      should remain in the CloudFront cache before a new request is
+                      sent to the origin to check for updates.
                     type: number
                   name:
-                    description: A unique name to identify the cache policy.
+                    description: Unique name used to identify the cache policy.
                     type: string
                   parametersInCacheKeyAndForwardedToOrigin:
-                    description: The HTTP headers, cookies, and URL query strings
-                      to include in the cache key. See Parameters In Cache Key And
-                      Forwarded To Origin for more information.
+                    description: Configuration for including HTTP headers, cookies,
+                      and URL query strings in the cache key. For more information,
+                      refer to the Parameters In Cache Key And Forwarded To Origin
+                      section.
                     items:
                       properties:
                         cookiesConfig:
-                          description: Object that determines whether any cookies
-                            in viewer requests (and if so, which cookies) are included
-                            in the cache key and automatically included in requests
-                            that CloudFront sends to the origin. See Cookies Config
-                            for more information.
+                          description: Whether any cookies in viewer requests are
+                            included in the cache key and automatically included in
+                            requests that CloudFront sends to the origin. See Cookies
+                            Config for more information.
                           items:
                             properties:
                               cookieBehavior:
-                                description: Determines whether any cookies in viewer
-                                  requests are included in the cache key and automatically
+                                description: Whether any cookies in viewer requests
+                                  are included in the cache key and automatically
                                   included in requests that CloudFront sends to the
-                                  origin. Valid values are none, whitelist, allExcept,
-                                  all.
+                                  origin. Valid values for cookie_behavior are none,
+                                  whitelist, allExcept, and all.
                                 type: string
                               cookies:
                                 description: Object that contains a list of cookie
@@ -271,8 +263,8 @@ spec:
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -281,36 +273,36 @@ spec:
                             type: object
                           type: array
                         enableAcceptEncodingBrotli:
-                          description: A flag that can affect whether the Accept-Encoding
-                            HTTP header is included in the cache key and included
-                            in requests that CloudFront sends to the origin.
+                          description: Flag determines whether the Accept-Encoding
+                            HTTP header is included in the cache key and in requests
+                            that CloudFront sends to the origin.
                           type: boolean
                         enableAcceptEncodingGzip:
-                          description: A flag that can affect whether the Accept-Encoding
-                            HTTP header is included in the cache key and included
-                            in requests that CloudFront sends to the origin.
+                          description: Whether the Accept-Encoding HTTP header is
+                            included in the cache key and in requests sent to the
+                            origin by CloudFront.
                           type: boolean
                         headersConfig:
-                          description: Object that determines whether any HTTP headers
-                            (and if so, which headers) are included in the cache key
-                            and automatically included in requests that CloudFront
-                            sends to the origin. See Headers Config for more information.
+                          description: Whether any HTTP headers are included in the
+                            cache key and automatically included in requests that
+                            CloudFront sends to the origin. See Headers Config for
+                            more information.
                           items:
                             properties:
                               headerBehavior:
-                                description: Determines whether any HTTP headers are
-                                  included in the cache key and automatically included
-                                  in requests that CloudFront sends to the origin.
-                                  Valid values are none, whitelist.
+                                description: Whether any HTTP headers are included
+                                  in the cache key and automatically included in requests
+                                  that CloudFront sends to the origin. Valid values
+                                  for header_behavior are none and whitelist.
                                 type: string
                               headers:
-                                description: Object that contains a list of header
-                                  names. See Items for more information.
+                                description: Object contains a list of header names.
+                                  See Items for more information.
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -319,28 +311,29 @@ spec:
                             type: object
                           type: array
                         queryStringsConfig:
-                          description: Object that determines whether any URL query
-                            strings in viewer requests (and if so, which query strings)
-                            are included in the cache key and automatically included
-                            in requests that CloudFront sends to the origin. See Query
-                            String Config for more information.
+                          description: Whether any URL query strings in viewer requests
+                            are included in the cache key. It also automatically includes
+                            these query strings in requests that CloudFront sends
+                            to the origin. Please refer to the Query String Config
+                            for more information.
                           items:
                             properties:
                               queryStringBehavior:
-                                description: Determines whether any URL query strings
-                                  in viewer requests are included in the cache key
-                                  and automatically included in requests that CloudFront
-                                  sends to the origin. Valid values are none, whitelist,
-                                  allExcept, all.
+                                description: Whether URL query strings in viewer requests
+                                  are included in the cache key and automatically
+                                  included in requests that CloudFront sends to the
+                                  origin. Valid values for query_string_behavior are
+                                  none, whitelist, allExcept, and all.
                                 type: string
                               queryStrings:
-                                description: Object that contains a list of query
-                                  string names. See Items for more information.
+                                description: Configuration parameter that contains
+                                  a list of query string names. See Items for more
+                                  information.
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -527,54 +520,53 @@ spec:
               atProvider:
                 properties:
                   comment:
-                    description: A comment to describe the cache policy.
+                    description: Description for the cache policy.
                     type: string
                   defaultTtl:
-                    description: The default amount of time, in seconds, that you
-                      want objects to stay in the CloudFront cache before CloudFront
-                      sends another request to the origin to see if the object has
+                    description: Amount of time, in seconds, that objects are allowed
+                      to remain in the CloudFront cache before CloudFront sends a
+                      new request to the origin server to check if the object has
                       been updated.
                     type: number
                   etag:
-                    description: The current version of the cache policy.
+                    description: Current version of the cache policy.
                     type: string
                   id:
-                    description: The identifier for the cache policy.
+                    description: Identifier for the cache policy.
                     type: string
                   maxTtl:
-                    description: The maximum amount of time, in seconds, that objects
+                    description: Maximum amount of time, in seconds, that objects
                       stay in the CloudFront cache before CloudFront sends another
                       request to the origin to see if the object has been updated.
                     type: number
                   minTtl:
-                    description: The minimum amount of time, in seconds, that you
-                      want objects to stay in the CloudFront cache before CloudFront
-                      sends another request to the origin to see if the object has
-                      been updated.
+                    description: Minimum amount of time, in seconds, that objects
+                      should remain in the CloudFront cache before a new request is
+                      sent to the origin to check for updates.
                     type: number
                   name:
-                    description: A unique name to identify the cache policy.
+                    description: Unique name used to identify the cache policy.
                     type: string
                   parametersInCacheKeyAndForwardedToOrigin:
-                    description: The HTTP headers, cookies, and URL query strings
-                      to include in the cache key. See Parameters In Cache Key And
-                      Forwarded To Origin for more information.
+                    description: Configuration for including HTTP headers, cookies,
+                      and URL query strings in the cache key. For more information,
+                      refer to the Parameters In Cache Key And Forwarded To Origin
+                      section.
                     items:
                       properties:
                         cookiesConfig:
-                          description: Object that determines whether any cookies
-                            in viewer requests (and if so, which cookies) are included
-                            in the cache key and automatically included in requests
-                            that CloudFront sends to the origin. See Cookies Config
-                            for more information.
+                          description: Whether any cookies in viewer requests are
+                            included in the cache key and automatically included in
+                            requests that CloudFront sends to the origin. See Cookies
+                            Config for more information.
                           items:
                             properties:
                               cookieBehavior:
-                                description: Determines whether any cookies in viewer
-                                  requests are included in the cache key and automatically
+                                description: Whether any cookies in viewer requests
+                                  are included in the cache key and automatically
                                   included in requests that CloudFront sends to the
-                                  origin. Valid values are none, whitelist, allExcept,
-                                  all.
+                                  origin. Valid values for cookie_behavior are none,
+                                  whitelist, allExcept, and all.
                                 type: string
                               cookies:
                                 description: Object that contains a list of cookie
@@ -582,8 +574,8 @@ spec:
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -592,36 +584,36 @@ spec:
                             type: object
                           type: array
                         enableAcceptEncodingBrotli:
-                          description: A flag that can affect whether the Accept-Encoding
-                            HTTP header is included in the cache key and included
-                            in requests that CloudFront sends to the origin.
+                          description: Flag determines whether the Accept-Encoding
+                            HTTP header is included in the cache key and in requests
+                            that CloudFront sends to the origin.
                           type: boolean
                         enableAcceptEncodingGzip:
-                          description: A flag that can affect whether the Accept-Encoding
-                            HTTP header is included in the cache key and included
-                            in requests that CloudFront sends to the origin.
+                          description: Whether the Accept-Encoding HTTP header is
+                            included in the cache key and in requests sent to the
+                            origin by CloudFront.
                           type: boolean
                         headersConfig:
-                          description: Object that determines whether any HTTP headers
-                            (and if so, which headers) are included in the cache key
-                            and automatically included in requests that CloudFront
-                            sends to the origin. See Headers Config for more information.
+                          description: Whether any HTTP headers are included in the
+                            cache key and automatically included in requests that
+                            CloudFront sends to the origin. See Headers Config for
+                            more information.
                           items:
                             properties:
                               headerBehavior:
-                                description: Determines whether any HTTP headers are
-                                  included in the cache key and automatically included
-                                  in requests that CloudFront sends to the origin.
-                                  Valid values are none, whitelist.
+                                description: Whether any HTTP headers are included
+                                  in the cache key and automatically included in requests
+                                  that CloudFront sends to the origin. Valid values
+                                  for header_behavior are none and whitelist.
                                 type: string
                               headers:
-                                description: Object that contains a list of header
-                                  names. See Items for more information.
+                                description: Object contains a list of header names.
+                                  See Items for more information.
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array
@@ -630,28 +622,29 @@ spec:
                             type: object
                           type: array
                         queryStringsConfig:
-                          description: Object that determines whether any URL query
-                            strings in viewer requests (and if so, which query strings)
-                            are included in the cache key and automatically included
-                            in requests that CloudFront sends to the origin. See Query
-                            String Config for more information.
+                          description: Whether any URL query strings in viewer requests
+                            are included in the cache key. It also automatically includes
+                            these query strings in requests that CloudFront sends
+                            to the origin. Please refer to the Query String Config
+                            for more information.
                           items:
                             properties:
                               queryStringBehavior:
-                                description: Determines whether any URL query strings
-                                  in viewer requests are included in the cache key
-                                  and automatically included in requests that CloudFront
-                                  sends to the origin. Valid values are none, whitelist,
-                                  allExcept, all.
+                                description: Whether URL query strings in viewer requests
+                                  are included in the cache key and automatically
+                                  included in requests that CloudFront sends to the
+                                  origin. Valid values for query_string_behavior are
+                                  none, whitelist, allExcept, and all.
                                 type: string
                               queryStrings:
-                                description: Object that contains a list of query
-                                  string names. See Items for more information.
+                                description: Configuration parameter that contains
+                                  a list of query string names. See Items for more
+                                  information.
                                 items:
                                   properties:
                                     items:
-                                      description: A list of item names (cookies,
-                                        headers, or query strings).
+                                      description: List of item names, such as cookies,
+                                        headers, or query strings.
                                       items:
                                         type: string
                                       type: array

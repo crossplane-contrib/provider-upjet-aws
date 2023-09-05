@@ -350,8 +350,10 @@ spec:
                       be created in.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: Whether to replace the security groups on associated
-                      lambda network interfaces upon destruction. Removing these security
+                    description: AWS no longer supports this operation. This attribute
+                      now has no effect and will be removed in a future major version.
+                      Whether to replace the security groups on associated lambda
+                      network interfaces upon destruction. Removing these security
                       groups from orphaned network interfaces can speed up security
                       group deletion times by avoiding a dependency on AWS's internal
                       cleanup operations. By default, the ENI security groups will
@@ -975,8 +977,10 @@ spec:
                       Function Version. Defaults to false.
                     type: boolean
                   replaceSecurityGroupsOnDestroy:
-                    description: Whether to replace the security groups on associated
-                      lambda network interfaces upon destruction. Removing these security
+                    description: AWS no longer supports this operation. This attribute
+                      now has no effect and will be removed in a future major version.
+                      Whether to replace the security groups on associated lambda
+                      network interfaces upon destruction. Removing these security
                       groups from orphaned network interfaces can speed up security
                       group deletion times by avoiding a dependency on AWS's internal
                       cleanup operations. By default, the ENI security groups will
@@ -1366,8 +1370,10 @@ spec:
                       used in aws_api_gateway_integration's uri.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: Whether to replace the security groups on associated
-                      lambda network interfaces upon destruction. Removing these security
+                    description: AWS no longer supports this operation. This attribute
+                      now has no effect and will be removed in a future major version.
+                      Whether to replace the security groups on associated lambda
+                      network interfaces upon destruction. Removing these security
                       groups from orphaned network interfaces can speed up security
                       group deletion times by avoiding a dependency on AWS's internal
                       cleanup operations. By default, the ENI security groups will
