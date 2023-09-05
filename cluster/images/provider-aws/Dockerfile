@@ -1,4 +1,4 @@
-FROM alpine:3.18.2 AS builder
+FROM alpine:3.18.3 AS builder
 RUN apk --no-cache add curl
 
 ARG TARGETOS
