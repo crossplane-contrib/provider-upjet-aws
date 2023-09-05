@@ -178,17 +178,46 @@ spec:
                                 items:
                                   properties:
                                     type:
-                                      description: 'Public access type. Valida values:
+                                      description: 'Public access type. Valid values:
                                         DISABLED, SERVICE_PROVIDED_EIPS.'
                                       type: string
                                   type: object
                                 type: array
+                              vpcConnectivity:
+                                description: VPC connectivity access control for brokers.
+                                  See below.
+                                items:
+                                  properties:
+                                    clientAuthentication:
+                                      description: Configuration block for specifying
+                                        a client authentication. See below.
+                                      items:
+                                        properties:
+                                          sasl:
+                                            description: SASL authentication type
+                                              details for VPC connectivity. See below.
+                                            items:
+                                              properties:
+                                                iam:
+                                                  description: Enables SASL/IAM authentication
+                                                    for VPC connectivity.
+                                                  type: boolean
+                                                scram:
+                                                  description: Enables SASL/SCRAM
+                                                    authentication for VPC connectivity.
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                          tls:
+                                            description: Enables TLS authentication
+                                              for VPC connectivity.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                             type: object
                           type: array
-                        ebsVolumeSize:
-                          description: The size in GiB of the EBS volume for the data
-                            drive on each broker node.
-                          type: number
                         instanceType:
                           description: Specify the instance type to use for the kafka
                             brokersE.g., kafka.m5.large. (Pricing info)
@@ -333,23 +362,22 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: SASL authentication type details for VPC connectivity.
+                            See below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
+                                description: Enables SASL/IAM authentication for VPC
+                                  connectivity.
                                 type: boolean
                               scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
+                                description: Enables SASL/SCRAM authentication for
+                                  VPC connectivity.
                                 type: boolean
                             type: object
                           type: array
                         tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
+                          description: Enables TLS authentication for VPC connectivity.
                           items:
                             properties:
                               certificateAuthorityArns:
@@ -973,17 +1001,46 @@ spec:
                                 items:
                                   properties:
                                     type:
-                                      description: 'Public access type. Valida values:
+                                      description: 'Public access type. Valid values:
                                         DISABLED, SERVICE_PROVIDED_EIPS.'
                                       type: string
                                   type: object
                                 type: array
+                              vpcConnectivity:
+                                description: VPC connectivity access control for brokers.
+                                  See below.
+                                items:
+                                  properties:
+                                    clientAuthentication:
+                                      description: Configuration block for specifying
+                                        a client authentication. See below.
+                                      items:
+                                        properties:
+                                          sasl:
+                                            description: SASL authentication type
+                                              details for VPC connectivity. See below.
+                                            items:
+                                              properties:
+                                                iam:
+                                                  description: Enables SASL/IAM authentication
+                                                    for VPC connectivity.
+                                                  type: boolean
+                                                scram:
+                                                  description: Enables SASL/SCRAM
+                                                    authentication for VPC connectivity.
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                          tls:
+                                            description: Enables TLS authentication
+                                              for VPC connectivity.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                             type: object
                           type: array
-                        ebsVolumeSize:
-                          description: The size in GiB of the EBS volume for the data
-                            drive on each broker node.
-                          type: number
                         instanceType:
                           description: Specify the instance type to use for the kafka
                             brokersE.g., kafka.m5.large. (Pricing info)
@@ -1039,23 +1096,22 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: SASL authentication type details for VPC connectivity.
+                            See below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
+                                description: Enables SASL/IAM authentication for VPC
+                                  connectivity.
                                 type: boolean
                               scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
+                                description: Enables SASL/SCRAM authentication for
+                                  VPC connectivity.
                                 type: boolean
                             type: object
                           type: array
                         tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
+                          description: Enables TLS authentication for VPC connectivity.
                           items:
                             properties:
                               certificateAuthorityArns:
@@ -1464,6 +1520,24 @@ spec:
                       alphabetically. AWS may not always return all endpoints so the
                       values may not be stable across applies.
                     type: string
+                  bootstrapBrokersVpcConnectivitySaslIam:
+                    description: A string containing one or more DNS names (or IP
+                      addresses) and SASL IAM port pairs for VPC connectivity. AWS
+                      may not always return all endpoints so the values may not be
+                      stable across applies.
+                    type: string
+                  bootstrapBrokersVpcConnectivitySaslScram:
+                    description: A string containing one or more DNS names (or IP
+                      addresses) and SASL SCRAM port pairs for VPC connectivity. AWS
+                      may not always return all endpoints so the values may not be
+                      stable across applies.
+                    type: string
+                  bootstrapBrokersVpcConnectivityTls:
+                    description: A string containing one or more DNS names (or IP
+                      addresses) and TLS port pairs for VPC connectivity. AWS may
+                      not always return all endpoints so the values may not be stable
+                      across applies.
+                    type: string
                   brokerNodeGroupInfo:
                     description: Configuration block for the broker nodes of the Kafka
                       cluster.
@@ -1495,17 +1569,46 @@ spec:
                                 items:
                                   properties:
                                     type:
-                                      description: 'Public access type. Valida values:
+                                      description: 'Public access type. Valid values:
                                         DISABLED, SERVICE_PROVIDED_EIPS.'
                                       type: string
                                   type: object
                                 type: array
+                              vpcConnectivity:
+                                description: VPC connectivity access control for brokers.
+                                  See below.
+                                items:
+                                  properties:
+                                    clientAuthentication:
+                                      description: Configuration block for specifying
+                                        a client authentication. See below.
+                                      items:
+                                        properties:
+                                          sasl:
+                                            description: SASL authentication type
+                                              details for VPC connectivity. See below.
+                                            items:
+                                              properties:
+                                                iam:
+                                                  description: Enables SASL/IAM authentication
+                                                    for VPC connectivity.
+                                                  type: boolean
+                                                scram:
+                                                  description: Enables SASL/SCRAM
+                                                    authentication for VPC connectivity.
+                                                  type: boolean
+                                              type: object
+                                            type: array
+                                          tls:
+                                            description: Enables TLS authentication
+                                              for VPC connectivity.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                             type: object
                           type: array
-                        ebsVolumeSize:
-                          description: The size in GiB of the EBS volume for the data
-                            drive on each broker node.
-                          type: number
                         instanceType:
                           description: Specify the instance type to use for the kafka
                             brokersE.g., kafka.m5.large. (Pricing info)
@@ -1568,23 +1671,22 @@ spec:
                     items:
                       properties:
                         sasl:
-                          description: Configuration block for specifying SASL client
-                            authentication. See below.
+                          description: SASL authentication type details for VPC connectivity.
+                            See below.
                           items:
                             properties:
                               iam:
-                                description: Enables IAM client authentication. Defaults
-                                  to false.
+                                description: Enables SASL/IAM authentication for VPC
+                                  connectivity.
                                 type: boolean
                               scram:
-                                description: Enables SCRAM client authentication via
-                                  AWS Secrets Manager. Defaults to false.
+                                description: Enables SASL/SCRAM authentication for
+                                  VPC connectivity.
                                 type: boolean
                             type: object
                           type: array
                         tls:
-                          description: Configuration block for specifying TLS client
-                            authentication. See below.
+                          description: Enables TLS authentication for VPC connectivity.
                           items:
                             properties:
                               certificateAuthorityArns:

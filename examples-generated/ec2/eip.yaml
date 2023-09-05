@@ -8,8 +8,8 @@ metadata:
   name: lb
 spec:
   forProvider:
+    domain: vpc
     instanceSelector:
       matchLabels:
         testing.upbound.io/example-name: web
     region: us-west-1
-    vpc: true

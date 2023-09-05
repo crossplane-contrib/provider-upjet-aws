@@ -179,7 +179,8 @@ spec:
                     type: number
                   fqdn:
                     description: The fully qualified domain name of the endpoint to
-                      be checked.
+                      be checked. If a value is set for ip_address, the value set
+                      for fqdn will be passed in the Host header.
                     type: string
                   insufficientDataHealthStatus:
                     description: The status of the health check when CloudWatch has
@@ -297,7 +298,8 @@ spec:
                     type: number
                   fqdn:
                     description: The fully qualified domain name of the endpoint to
-                      be checked.
+                      be checked. If a value is set for ip_address, the value set
+                      for fqdn will be passed in the Host header.
                     type: string
                   insufficientDataHealthStatus:
                     description: The status of the health check when CloudWatch has
@@ -573,7 +575,8 @@ spec:
                     type: number
                   fqdn:
                     description: The fully qualified domain name of the endpoint to
-                      be checked.
+                      be checked. If a value is set for ip_address, the value set
+                      for fqdn will be passed in the Host header.
                     type: string
                   id:
                     description: The id of the health check

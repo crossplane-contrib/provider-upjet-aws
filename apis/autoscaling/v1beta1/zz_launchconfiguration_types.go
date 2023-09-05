@@ -209,12 +209,6 @@ type LaunchConfigurationInitParameters struct {
 
 	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
-
-	// The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. vpc-2730681a)
-	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
-
-	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
-	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
 type LaunchConfigurationObservation struct {
@@ -272,12 +266,6 @@ type LaunchConfigurationObservation struct {
 
 	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
-
-	// The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. vpc-2730681a)
-	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
-
-	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
-	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
 type LaunchConfigurationParameters struct {
@@ -350,14 +338,6 @@ type LaunchConfigurationParameters struct {
 	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.
 	// +kubebuilder:validation:Optional
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
-
-	// The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. vpc-2730681a)
-	// +kubebuilder:validation:Optional
-	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
-
-	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
-	// +kubebuilder:validation:Optional
-	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
 type MetadataOptionsInitParameters struct {

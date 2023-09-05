@@ -6057,7 +6057,7 @@ func (in *RestAPIInitParameters) DeepCopyInto(out *RestAPIInitParameters) {
 	}
 	if in.MinimumCompressionSize != nil {
 		in, out := &in.MinimumCompressionSize, &out.MinimumCompressionSize
-		*out = new(float64)
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -6214,7 +6214,7 @@ func (in *RestAPIObservation) DeepCopyInto(out *RestAPIObservation) {
 	}
 	if in.MinimumCompressionSize != nil {
 		in, out := &in.MinimumCompressionSize, &out.MinimumCompressionSize
-		*out = new(float64)
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -6345,7 +6345,7 @@ func (in *RestAPIParameters) DeepCopyInto(out *RestAPIParameters) {
 	}
 	if in.MinimumCompressionSize != nil {
 		in, out := &in.MinimumCompressionSize, &out.MinimumCompressionSize
-		*out = new(float64)
+		*out = new(string)
 		**out = **in
 	}
 	if in.Name != nil {

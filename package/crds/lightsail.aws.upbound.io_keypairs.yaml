@@ -82,6 +82,11 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 required:
                 - region
                 type: object
@@ -109,6 +114,11 @@ spec:
                     description: The public key material. This public key will be
                       imported into Lightsail
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -277,23 +287,23 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Lightsail key pair
+                    description: The ARN of the Lightsail key pair.
                     type: string
                   encryptedFingerprint:
                     description: The MD5 public key fingerprint for the encrypted
-                      private key
+                      private key.
                     type: string
                   encryptedPrivateKey:
                     description: – the private key material, base 64 encoded and encrypted
                       with the given pgp_key. This is only populated when creating
-                      a new key and pgp_key is supplied
+                      a new key and pgp_key is supplied.
                     type: string
                   fingerprint:
                     description: The MD5 public key fingerprint as specified in section
                       4 of RFC 4716.
                     type: string
                   id:
-                    description: The name used for this key pair
+                    description: The name used for this key pair.
                     type: string
                   name:
                     description: The name of the Lightsail Key Pair
@@ -304,12 +314,21 @@ spec:
                     type: string
                   privateKey:
                     description: the private key, base64 encoded. This is only populated
-                      when creating a new key, and when no pgp_key is provided
+                      when creating a new key, and when no pgp_key is provided.
                     type: string
                   publicKey:
                     description: The public key material. This public key will be
                       imported into Lightsail
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

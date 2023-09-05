@@ -156,10 +156,10 @@ spec:
                     type: string
                   operatingSystem:
                     description: The operating system the patch baseline applies to.
-                      Valid values are AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
-                      CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN, REDHAT_ENTERPRISE_LINUX,
-                      ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS. The default value is
-                      WINDOWS.
+                      Valid values are ALMA_LINUX, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
+                      AMAZON_LINUX_2023, CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN,
+                      REDHAT_ENTERPRISE_LINUX, ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS.
+                      The default value is WINDOWS.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -308,10 +308,10 @@ spec:
                     type: string
                   operatingSystem:
                     description: The operating system the patch baseline applies to.
-                      Valid values are AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
-                      CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN, REDHAT_ENTERPRISE_LINUX,
-                      ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS. The default value is
-                      WINDOWS.
+                      Valid values are ALMA_LINUX, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
+                      AMAZON_LINUX_2023, CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN,
+                      REDHAT_ENTERPRISE_LINUX, ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS.
+                      The default value is WINDOWS.
                     type: string
                   rejectedPatches:
                     description: A list of rejected patches.
@@ -618,10 +618,10 @@ spec:
                     type: string
                   operatingSystem:
                     description: The operating system the patch baseline applies to.
-                      Valid values are AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
-                      CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN, REDHAT_ENTERPRISE_LINUX,
-                      ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS. The default value is
-                      WINDOWS.
+                      Valid values are ALMA_LINUX, AMAZON_LINUX, AMAZON_LINUX_2, AMAZON_LINUX_2022,
+                      AMAZON_LINUX_2023, CENTOS, DEBIAN, MACOS, ORACLE_LINUX, RASPBIAN,
+                      REDHAT_ENTERPRISE_LINUX, ROCKY_LINUX, SUSE, UBUNTU, and WINDOWS.
+                      The default value is WINDOWS.
                     type: string
                   rejectedPatches:
                     description: A list of rejected patches.

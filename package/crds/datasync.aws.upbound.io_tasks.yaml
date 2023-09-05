@@ -294,6 +294,13 @@ spec:
                             a file was modified (written to) before the sync PREPARING
                             phase. Value values: NONE, PRESERVE. Default: PRESERVE.'
                           type: string
+                        objectTags:
+                          description: 'Specifies whether object tags are maintained
+                            when transferring between object storage systems. If you
+                            want your DataSync task to ignore object tags, specify
+                            the NONE value. Valid values: PRESERVE, NONE. Default
+                            value: PRESERVE.'
+                          type: string
                         overwriteMode:
                           description: 'Determines whether files at the destination
                             should be overwritten or preserved when copying files.
@@ -326,7 +333,7 @@ spec:
                             This value is only used for transfers between SMB and
                             Amazon FSx for Windows File Server locations, or between
                             two Amazon FSx for Windows File Server locations. Valid
-                            values: NONE, OWNER_DACL, OWNER_DACL_SACL.'
+                            values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.'
                           type: string
                         taskQueueing:
                           description: 'Determines whether tasks should be queued
@@ -539,6 +546,13 @@ spec:
                             a file was modified (written to) before the sync PREPARING
                             phase. Value values: NONE, PRESERVE. Default: PRESERVE.'
                           type: string
+                        objectTags:
+                          description: 'Specifies whether object tags are maintained
+                            when transferring between object storage systems. If you
+                            want your DataSync task to ignore object tags, specify
+                            the NONE value. Valid values: PRESERVE, NONE. Default
+                            value: PRESERVE.'
+                          type: string
                         overwriteMode:
                           description: 'Determines whether files at the destination
                             should be overwritten or preserved when copying files.
@@ -571,7 +585,7 @@ spec:
                             This value is only used for transfers between SMB and
                             Amazon FSx for Windows File Server locations, or between
                             two Amazon FSx for Windows File Server locations. Valid
-                            values: NONE, OWNER_DACL, OWNER_DACL_SACL.'
+                            values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.'
                           type: string
                         taskQueueing:
                           description: 'Determines whether tasks should be queued
@@ -869,6 +883,13 @@ spec:
                             a file was modified (written to) before the sync PREPARING
                             phase. Value values: NONE, PRESERVE. Default: PRESERVE.'
                           type: string
+                        objectTags:
+                          description: 'Specifies whether object tags are maintained
+                            when transferring between object storage systems. If you
+                            want your DataSync task to ignore object tags, specify
+                            the NONE value. Valid values: PRESERVE, NONE. Default
+                            value: PRESERVE.'
+                          type: string
                         overwriteMode:
                           description: 'Determines whether files at the destination
                             should be overwritten or preserved when copying files.
@@ -901,7 +922,7 @@ spec:
                             This value is only used for transfers between SMB and
                             Amazon FSx for Windows File Server locations, or between
                             two Amazon FSx for Windows File Server locations. Valid
-                            values: NONE, OWNER_DACL, OWNER_DACL_SACL.'
+                            values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.'
                           type: string
                         taskQueueing:
                           description: 'Determines whether tasks should be queued

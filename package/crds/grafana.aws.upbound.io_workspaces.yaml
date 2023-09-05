@@ -96,9 +96,7 @@ spec:
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
                       new workspace. Supported values are 8.4 and 9.4. If not specified,
-                      defaults to 8.4. Upgrading the workspace version isn't supported,
-                      however it's possible to copy content from the old version to
-                      the new one using AWS official migration tool.
+                      defaults to 8.4.
                     type: string
                   name:
                     description: The Grafana workspace name.
@@ -303,9 +301,7 @@ spec:
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
                       new workspace. Supported values are 8.4 and 9.4. If not specified,
-                      defaults to 8.4. Upgrading the workspace version isn't supported,
-                      however it's possible to copy content from the old version to
-                      the new one using AWS official migration tool.
+                      defaults to 8.4.
                     type: string
                   name:
                     description: The Grafana workspace name.
@@ -600,9 +596,7 @@ spec:
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
                       new workspace. Supported values are 8.4 and 9.4. If not specified,
-                      defaults to 8.4. Upgrading the workspace version isn't supported,
-                      however it's possible to copy content from the old version to
-                      the new one using AWS official migration tool.
+                      defaults to 8.4.
                     type: string
                   id:
                     type: string

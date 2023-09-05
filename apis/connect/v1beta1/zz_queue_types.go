@@ -108,8 +108,6 @@ type QueueObservation struct {
 	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
-	QuickConnectIdsAssociated []*string `json:"quickConnectIdsAssociated,omitempty" tf:"quick_connect_ids_associated,omitempty"`
-
 	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 

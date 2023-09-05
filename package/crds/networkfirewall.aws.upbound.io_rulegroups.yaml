@@ -341,7 +341,8 @@ spec:
                                         rule criteria. For all actions, AWS Network
                                         Firewall performs the specified action and
                                         discontinues stateful inspection of the traffic
-                                        flow. Valid values: ALERT, DROP or PASS.'
+                                        flow. Valid values: ALERT, DROP, PASS, or
+                                        REJECT.'
                                       type: string
                                     header:
                                       description: A configuration block containing
@@ -890,7 +891,8 @@ spec:
                                         rule criteria. For all actions, AWS Network
                                         Firewall performs the specified action and
                                         discontinues stateful inspection of the traffic
-                                        flow. Valid values: ALERT, DROP or PASS.'
+                                        flow. Valid values: ALERT, DROP, PASS, or
+                                        REJECT.'
                                       type: string
                                     header:
                                       description: A configuration block containing
@@ -1616,7 +1618,8 @@ spec:
                                         rule criteria. For all actions, AWS Network
                                         Firewall performs the specified action and
                                         discontinues stateful inspection of the traffic
-                                        flow. Valid values: ALERT, DROP or PASS.'
+                                        flow. Valid values: ALERT, DROP, PASS, or
+                                        REJECT.'
                                       type: string
                                     header:
                                       description: A configuration block containing

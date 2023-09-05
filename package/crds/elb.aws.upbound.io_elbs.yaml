@@ -264,7 +264,9 @@ spec:
                       application instances. Use this for Classic or Default VPC only.
                     type: string
                   subnets:
-                    description: A list of subnet IDs to attach to the ELB.
+                    description: A list of subnet IDs to attach to the ELB. When an
+                      update to subnets will remove all current subnets, this will
+                      force a new resource.
                     items:
                       type: string
                     type: array
@@ -784,7 +786,9 @@ spec:
                       VPC.
                     type: string
                   subnets:
-                    description: A list of subnet IDs to attach to the ELB.
+                    description: A list of subnet IDs to attach to the ELB. When an
+                      update to subnets will remove all current subnets, this will
+                      force a new resource.
                     items:
                       type: string
                     type: array

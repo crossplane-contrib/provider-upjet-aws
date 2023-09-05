@@ -80,8 +80,8 @@ spec:
                   aquaConfigurationStatus:
                     description: The value represents how the cluster is configured
                       to use AQUA (Advanced Query Accelerator) after the cluster is
-                      restored. Possible values are enabled, disabled, and auto. Requires
-                      Cluster reboot.
+                      restored. No longer supported by the AWS API. Always returns
+                      auto.
                     type: string
                   automatedSnapshotRetentionPeriod:
                     description: The number of days that automated snapshots are retained.
@@ -115,12 +115,6 @@ spec:
                     description: The specific revision number of the database in the
                       cluster
                     type: string
-                  clusterSecurityGroups:
-                    description: A list of security groups to be associated with this
-                      cluster.
-                    items:
-                      type: string
-                    type: array
                   clusterSubnetGroupName:
                     description: The name of a cluster subnet group to be associated
                       with this cluster. If this parameter is not provided the resulting
@@ -652,8 +646,8 @@ spec:
                   aquaConfigurationStatus:
                     description: The value represents how the cluster is configured
                       to use AQUA (Advanced Query Accelerator) after the cluster is
-                      restored. Possible values are enabled, disabled, and auto. Requires
-                      Cluster reboot.
+                      restored. No longer supported by the AWS API. Always returns
+                      auto.
                     type: string
                   automatedSnapshotRetentionPeriod:
                     description: The number of days that automated snapshots are retained.
@@ -687,12 +681,6 @@ spec:
                     description: The specific revision number of the database in the
                       cluster
                     type: string
-                  clusterSecurityGroups:
-                    description: A list of security groups to be associated with this
-                      cluster.
-                    items:
-                      type: string
-                    type: array
                   clusterSubnetGroupName:
                     description: The name of a cluster subnet group to be associated
                       with this cluster. If this parameter is not provided the resulting
@@ -1037,8 +1025,8 @@ spec:
                   aquaConfigurationStatus:
                     description: The value represents how the cluster is configured
                       to use AQUA (Advanced Query Accelerator) after the cluster is
-                      restored. Possible values are enabled, disabled, and auto. Requires
-                      Cluster reboot.
+                      restored. No longer supported by the AWS API. Always returns
+                      auto.
                     type: string
                   arn:
                     description: Amazon Resource Name (ARN) of cluster
@@ -1064,6 +1052,9 @@ spec:
                       Default is false. Available for use on clusters from the RA3
                       instance family.
                     type: boolean
+                  clusterNamespaceArn:
+                    description: The namespace Amazon Resource Name (ARN) of the cluster
+                    type: string
                   clusterNodes:
                     description: The nodes in the cluster. Cluster node blocks are
                       documented below
@@ -1092,12 +1083,6 @@ spec:
                     description: The specific revision number of the database in the
                       cluster
                     type: string
-                  clusterSecurityGroups:
-                    description: A list of security groups to be associated with this
-                      cluster.
-                    items:
-                      type: string
-                    type: array
                   clusterSubnetGroupName:
                     description: The name of a cluster subnet group to be associated
                       with this cluster. If this parameter is not provided the resulting

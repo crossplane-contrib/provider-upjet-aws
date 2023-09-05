@@ -145,6 +145,7 @@ spec:
                     type: object
                   eventbridge:
                     description: Whether to enable Amazon EventBridge notifications.
+                      Defaults to false.
                     type: boolean
                   lambdaFunction:
                     description: Used to configure notifications to a Lambda Function.
@@ -393,6 +394,7 @@ spec:
                 properties:
                   eventbridge:
                     description: Whether to enable Amazon EventBridge notifications.
+                      Defaults to false.
                     type: boolean
                   lambdaFunction:
                     description: Used to configure notifications to a Lambda Function.
@@ -633,6 +635,7 @@ spec:
                     type: string
                   eventbridge:
                     description: Whether to enable Amazon EventBridge notifications.
+                      Defaults to false.
                     type: boolean
                   id:
                     description: Unique identifier for each of the notification configurations.

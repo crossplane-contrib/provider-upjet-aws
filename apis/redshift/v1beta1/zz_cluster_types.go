@@ -21,7 +21,9 @@ type ClusterInitParameters struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored.
+	// No longer supported by the AWS API.
+	// Always returns auto.
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
@@ -41,9 +43,6 @@ type ClusterInitParameters struct {
 
 	// The specific revision number of the database in the cluster
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
-	// A list of security groups to be associated with this cluster.
-	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
@@ -150,7 +149,9 @@ type ClusterObservation struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored.
+	// No longer supported by the AWS API.
+	// Always returns auto.
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
 	// Amazon Resource Name (ARN) of cluster
@@ -165,6 +166,9 @@ type ClusterObservation struct {
 	// If true, the cluster can be relocated to another availabity zone, either automatically by AWS or when requested. Default is false. Available for use on clusters from the RA3 instance family.
 	AvailabilityZoneRelocationEnabled *bool `json:"availabilityZoneRelocationEnabled,omitempty" tf:"availability_zone_relocation_enabled,omitempty"`
 
+	// The namespace Amazon Resource Name (ARN) of the cluster
+	ClusterNamespaceArn *string `json:"clusterNamespaceArn,omitempty" tf:"cluster_namespace_arn,omitempty"`
+
 	// The nodes in the cluster. Cluster node blocks are documented below
 	ClusterNodes []ClusterNodesObservation `json:"clusterNodes,omitempty" tf:"cluster_nodes,omitempty"`
 
@@ -176,9 +180,6 @@ type ClusterObservation struct {
 
 	// The specific revision number of the database in the cluster
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
-	// A list of security groups to be associated with this cluster.
-	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
@@ -290,7 +291,9 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored.
+	// No longer supported by the AWS API.
+	// Always returns auto.
 	// +kubebuilder:validation:Optional
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
@@ -317,10 +320,6 @@ type ClusterParameters struct {
 	// The specific revision number of the database in the cluster
 	// +kubebuilder:validation:Optional
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
-	// A list of security groups to be associated with this cluster.
-	// +kubebuilder:validation:Optional
-	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	// +kubebuilder:validation:Optional

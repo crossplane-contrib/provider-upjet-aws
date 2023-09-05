@@ -70,10 +70,10 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description for a block list.
+                    description: Description for a block list.
                     type: string
                   indexId:
-                    description: The identifier of the index for a block list.
+                    description: Identifier of the index for a block list.
                     type: string
                   indexIdRef:
                     description: Reference to a Index in kendra to populate indexId.
@@ -149,15 +149,15 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name for the block list.
+                    description: Name for the block list.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   roleArn:
-                    description: The IAM (Identity and Access Management) role used
-                      to access the block list text file in S3.
+                    description: IAM (Identity and Access Management) role used to
+                      access the block list text file in S3.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -233,13 +233,12 @@ spec:
                         type: object
                     type: object
                   sourceS3Path:
-                    description: The S3 path where your block list text file sits
-                      in S3. Detailed below.
+                    description: S3 path where your block list text file is located.
+                      See details below.
                     items:
                       properties:
                         bucket:
-                          description: The name of the S3 bucket that contains the
-                            file.
+                          description: Name of the S3 bucket that contains the file.
                           type: string
                         bucketRef:
                           description: Reference to a Bucket in s3 to populate bucket.
@@ -318,7 +317,7 @@ spec:
                               type: object
                           type: object
                         key:
-                          description: The name of the file.
+                          description: Name of the file.
                           type: string
                       type: object
                     type: array
@@ -326,8 +325,8 @@ spec:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                      a provider default_tags configuration block, tags with matching
+                      keys will overwrite those defined at the provider-level.
                     type: object
                 required:
                 - region
@@ -346,18 +345,18 @@ spec:
                   them, like an autoscaler.
                 properties:
                   description:
-                    description: The description for a block list.
+                    description: Description for a block list.
                     type: string
                   name:
-                    description: The name for the block list.
+                    description: Name for the block list.
                     type: string
                   sourceS3Path:
-                    description: The S3 path where your block list text file sits
-                      in S3. Detailed below.
+                    description: S3 path where your block list text file is located.
+                      See details below.
                     items:
                       properties:
                         key:
-                          description: The name of the file.
+                          description: Name of the file.
                           type: string
                       type: object
                     type: array
@@ -365,8 +364,8 @@ spec:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                      a provider default_tags configuration block, tags with matching
+                      keys will overwrite those defined at the provider-level.
                     type: object
                 type: object
               managementPolicies:
@@ -549,34 +548,33 @@ spec:
                     description: ARN of the block list.
                     type: string
                   description:
-                    description: The description for a block list.
+                    description: Description for a block list.
                     type: string
                   id:
                     type: string
                   indexId:
-                    description: The identifier of the index for a block list.
+                    description: Identifier of the index for a block list.
                     type: string
                   name:
-                    description: The name for the block list.
+                    description: Name for the block list.
                     type: string
                   querySuggestionsBlockListId:
-                    description: The unique indentifier of the block list.
+                    description: Unique identifier of the block list.
                     type: string
                   roleArn:
-                    description: The IAM (Identity and Access Management) role used
-                      to access the block list text file in S3.
+                    description: IAM (Identity and Access Management) role used to
+                      access the block list text file in S3.
                     type: string
                   sourceS3Path:
-                    description: The S3 path where your block list text file sits
-                      in S3. Detailed below.
+                    description: S3 path where your block list text file is located.
+                      See details below.
                     items:
                       properties:
                         bucket:
-                          description: The name of the S3 bucket that contains the
-                            file.
+                          description: Name of the S3 bucket that contains the file.
                           type: string
                         key:
-                          description: The name of the file.
+                          description: Name of the file.
                           type: string
                       type: object
                     type: array
@@ -586,15 +584,14 @@ spec:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags. If configured with
-                      a provider default_tags configuration block present, tags with
-                      matching keys will overwrite those defined at the provider-level.
+                      a provider default_tags configuration block, tags with matching
+                      keys will overwrite those defined at the provider-level.
                     type: object
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider's default_tags configuration block.
                     type: object
                 type: object
               conditions:

@@ -37,6 +37,9 @@ type ActionRewriteInitParameters struct {
 	// Host name to rewrite.
 	Hostname []RewriteHostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// Exact path to rewrite.
+	Path []RewritePathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+
 	// Specified beginning characters to rewrite.
 	Prefix []RewritePrefixInitParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -45,6 +48,9 @@ type ActionRewriteObservation struct {
 
 	// Host name to rewrite.
 	Hostname []RewriteHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Exact path to rewrite.
+	Path []RewritePathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Specified beginning characters to rewrite.
 	Prefix []RewritePrefixObservation `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -55,6 +61,10 @@ type ActionRewriteParameters struct {
 	// Host name to rewrite.
 	// +kubebuilder:validation:Optional
 	Hostname []RewriteHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Exact path to rewrite.
+	// +kubebuilder:validation:Optional
+	Path []RewritePathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Specified beginning characters to rewrite.
 	// +kubebuilder:validation:Optional
@@ -313,7 +323,7 @@ type HTTPRouteInitParameters struct {
 
 type HTTPRouteMatchHostnameInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -322,7 +332,7 @@ type HTTPRouteMatchHostnameInitParameters struct {
 
 type HTTPRouteMatchHostnameObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -331,7 +341,7 @@ type HTTPRouteMatchHostnameObservation struct {
 
 type HTTPRouteMatchHostnameParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
@@ -348,8 +358,8 @@ type HTTPRouteMatchInitParameters struct {
 	// Host name to rewrite.
 	Hostname []HTTPRouteMatchHostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Client request path to match on.
-	Path []MatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+	// Exact path to rewrite.
+	Path []HTTPRouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -369,8 +379,8 @@ type HTTPRouteMatchObservation struct {
 	// Host name to rewrite.
 	Hostname []HTTPRouteMatchHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Client request path to match on.
-	Path []MatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
+	// Exact path to rewrite.
+	Path []HTTPRouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -392,9 +402,9 @@ type HTTPRouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname []HTTPRouteMatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Client request path to match on.
+	// Exact path to rewrite.
 	// +kubebuilder:validation:Optional
-	Path []MatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
+	Path []HTTPRouteMatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
@@ -407,6 +417,35 @@ type HTTPRouteMatchParameters struct {
 	// Client request query parameters to match on.
 	// +kubebuilder:validation:Optional
 	QueryParameter []MatchQueryParameterParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
+}
+
+type HTTPRouteMatchPathInitParameters struct {
+
+	// Value used to replace matched path.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Header value sent by the client must include the specified characters.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+}
+
+type HTTPRouteMatchPathObservation struct {
+
+	// Value used to replace matched path.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Header value sent by the client must include the specified characters.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+}
+
+type HTTPRouteMatchPathParameters struct {
+
+	// Value used to replace matched path.
+	// +kubebuilder:validation:Optional
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Header value sent by the client must include the specified characters.
+	// +kubebuilder:validation:Optional
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type HTTPRouteObservation struct {
@@ -443,7 +482,7 @@ type HeaderInitParameters struct {
 
 type HeaderMatchInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Specified beginning characters to rewrite.
@@ -461,7 +500,7 @@ type HeaderMatchInitParameters struct {
 
 type HeaderMatchObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Specified beginning characters to rewrite.
@@ -479,7 +518,7 @@ type HeaderMatchObservation struct {
 
 type HeaderMatchParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
@@ -592,8 +631,8 @@ type Http2RouteMatchInitParameters struct {
 	// Host name to rewrite.
 	Hostname []MatchHostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Client request path to match on.
-	Path []PathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+	// Exact path to rewrite.
+	Path []MatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -613,8 +652,8 @@ type Http2RouteMatchObservation struct {
 	// Host name to rewrite.
 	Hostname []MatchHostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Client request path to match on.
-	Path []PathObservation `json:"path,omitempty" tf:"path,omitempty"`
+	// Exact path to rewrite.
+	Path []MatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -636,9 +675,9 @@ type Http2RouteMatchParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname []MatchHostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
-	// Client request path to match on.
+	// Exact path to rewrite.
 	// +kubebuilder:validation:Optional
-	Path []PathParameters `json:"path,omitempty" tf:"path,omitempty"`
+	Path []MatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number that corresponds to the target for Virtual Service provider port. This is required when the provider (router or node) of the Virtual Service has multiple listeners.
 	// +kubebuilder:validation:Optional
@@ -687,7 +726,7 @@ type MatchHeaderInitParameters struct {
 
 type MatchHeaderMatchInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Specified beginning characters to rewrite.
@@ -705,7 +744,7 @@ type MatchHeaderMatchInitParameters struct {
 
 type MatchHeaderMatchObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Specified beginning characters to rewrite.
@@ -723,7 +762,7 @@ type MatchHeaderMatchObservation struct {
 
 type MatchHeaderMatchParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
@@ -773,7 +812,7 @@ type MatchHeaderParameters struct {
 
 type MatchHostnameInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -782,7 +821,7 @@ type MatchHostnameInitParameters struct {
 
 type MatchHostnameObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Header value sent by the client must end with the specified characters.
@@ -791,7 +830,7 @@ type MatchHostnameObservation struct {
 
 type MatchHostnameParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
@@ -831,7 +870,7 @@ type MatchParameters struct {
 
 type MatchPathInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Header value sent by the client must include the specified characters.
@@ -840,7 +879,7 @@ type MatchPathInitParameters struct {
 
 type MatchPathObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
 	// Header value sent by the client must include the specified characters.
@@ -849,7 +888,7 @@ type MatchPathObservation struct {
 
 type MatchPathParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 
@@ -869,19 +908,19 @@ type MatchQueryParameterInitParameters struct {
 
 type MatchQueryParameterMatchInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type MatchQueryParameterMatchObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type MatchQueryParameterMatchParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
@@ -937,31 +976,21 @@ type MatchRangeParameters struct {
 
 type PathInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
-
-	// Header value sent by the client must include the specified characters.
-	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type PathObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
-
-	// Header value sent by the client must include the specified characters.
-	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type PathParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
-	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
-
-	// Header value sent by the client must include the specified characters.
-	// +kubebuilder:validation:Optional
-	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+	Exact *string `json:"exact" tf:"exact,omitempty"`
 }
 
 type PrefixInitParameters struct {
@@ -1004,19 +1033,19 @@ type QueryParameterInitParameters struct {
 
 type QueryParameterMatchInitParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type QueryParameterMatchObservation struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type QueryParameterMatchParameters struct {
 
-	// Header value sent by the client must match the specified value exactly.
+	// Value used to replace matched path.
 	// +kubebuilder:validation:Optional
 	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
@@ -1094,6 +1123,9 @@ type RewriteInitParameters struct {
 	// Host name to rewrite.
 	Hostname []HostnameInitParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// Exact path to rewrite.
+	Path []PathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+
 	// Specified beginning characters to rewrite.
 	Prefix []PrefixInitParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
@@ -1102,6 +1134,9 @@ type RewriteObservation struct {
 
 	// Host name to rewrite.
 	Hostname []HostnameObservation `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// Exact path to rewrite.
+	Path []PathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Specified beginning characters to rewrite.
 	Prefix []PrefixObservation `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -1113,9 +1148,32 @@ type RewriteParameters struct {
 	// +kubebuilder:validation:Optional
 	Hostname []HostnameParameters `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// Exact path to rewrite.
+	// +kubebuilder:validation:Optional
+	Path []PathParameters `json:"path,omitempty" tf:"path,omitempty"`
+
 	// Specified beginning characters to rewrite.
 	// +kubebuilder:validation:Optional
 	Prefix []PrefixParameters `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type RewritePathInitParameters struct {
+
+	// Value used to replace matched path.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+}
+
+type RewritePathObservation struct {
+
+	// Value used to replace matched path.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+}
+
+type RewritePathParameters struct {
+
+	// Value used to replace matched path.
+	// +kubebuilder:validation:Optional
+	Exact *string `json:"exact" tf:"exact,omitempty"`
 }
 
 type RewritePrefixInitParameters struct {

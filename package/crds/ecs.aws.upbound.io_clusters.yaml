@@ -120,27 +120,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  defaultCapacityProviderStrategy:
-                    description: Configuration block for capacity provider strategy
-                      to use by default for the cluster. Can be one or more. Detailed
-                      below.
-                    items:
-                      properties:
-                        base:
-                          description: The number of tasks, at a minimum, to run on
-                            the specified capacity provider. Only one capacity provider
-                            in a capacity provider strategy can have a base defined.
-                          type: number
-                        capacityProvider:
-                          description: The short name of the capacity provider.
-                          type: string
-                        weight:
-                          description: The relative percentage of the total number
-                            of launched tasks that should use the specified capacity
-                            provider.
-                          type: number
-                      type: object
-                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -246,27 +225,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                      type: object
-                    type: array
-                  defaultCapacityProviderStrategy:
-                    description: Configuration block for capacity provider strategy
-                      to use by default for the cluster. Can be one or more. Detailed
-                      below.
-                    items:
-                      properties:
-                        base:
-                          description: The number of tasks, at a minimum, to run on
-                            the specified capacity provider. Only one capacity provider
-                            in a capacity provider strategy can have a base defined.
-                          type: number
-                        capacityProvider:
-                          description: The short name of the capacity provider.
-                          type: string
-                        weight:
-                          description: The relative percentage of the total number
-                            of launched tasks that should use the specified capacity
-                            provider.
-                          type: number
                       type: object
                     type: array
                   serviceConnectDefaults:
@@ -472,13 +430,6 @@ spec:
                   arn:
                     description: ARN that identifies the cluster.
                     type: string
-                  capacityProviders:
-                    description: List of short names of one or more capacity providers
-                      to associate with the cluster. Valid values also include FARGATE
-                      and FARGATE_SPOT.
-                    items:
-                      type: string
-                    type: array
                   configuration:
                     description: The execute command configuration for the cluster.
                       Detailed below.
@@ -531,27 +482,6 @@ spec:
                                 type: string
                             type: object
                           type: array
-                      type: object
-                    type: array
-                  defaultCapacityProviderStrategy:
-                    description: Configuration block for capacity provider strategy
-                      to use by default for the cluster. Can be one or more. Detailed
-                      below.
-                    items:
-                      properties:
-                        base:
-                          description: The number of tasks, at a minimum, to run on
-                            the specified capacity provider. Only one capacity provider
-                            in a capacity provider strategy can have a base defined.
-                          type: number
-                        capacityProvider:
-                          description: The short name of the capacity provider.
-                          type: string
-                        weight:
-                          description: The relative percentage of the total number
-                            of launched tasks that should use the specified capacity
-                            provider.
-                          type: number
                       type: object
                     type: array
                   id:

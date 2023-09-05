@@ -153,7 +153,7 @@ type EmailConfigurationInitParameters struct {
 	// Email configuration set name from SES.
 	ConfigurationSet *string `json:"configurationSet,omitempty" tf:"configuration_set,omitempty"`
 
-	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration.
+	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration. Required to be DEVELOPER if from_email_address is set.
 	EmailSendingAccount *string `json:"emailSendingAccount,omitempty" tf:"email_sending_account,omitempty"`
 
 	// Sender’s email address or sender’s display name with their email address (e.g., john@example.com, John Smith <john@example.com> or \"John Smith Ph.D.\" <john@example.com>). Escaped double quotes are required around display names that contain certain characters as specified in RFC 5322.
@@ -171,7 +171,7 @@ type EmailConfigurationObservation struct {
 	// Email configuration set name from SES.
 	ConfigurationSet *string `json:"configurationSet,omitempty" tf:"configuration_set,omitempty"`
 
-	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration.
+	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration. Required to be DEVELOPER if from_email_address is set.
 	EmailSendingAccount *string `json:"emailSendingAccount,omitempty" tf:"email_sending_account,omitempty"`
 
 	// Sender’s email address or sender’s display name with their email address (e.g., john@example.com, John Smith <john@example.com> or \"John Smith Ph.D.\" <john@example.com>). Escaped double quotes are required around display names that contain certain characters as specified in RFC 5322.
@@ -190,7 +190,7 @@ type EmailConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationSet *string `json:"configurationSet,omitempty" tf:"configuration_set,omitempty"`
 
-	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration.
+	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration. Required to be DEVELOPER if from_email_address is set.
 	// +kubebuilder:validation:Optional
 	EmailSendingAccount *string `json:"emailSendingAccount,omitempty" tf:"email_sending_account,omitempty"`
 
@@ -761,7 +761,7 @@ type UserPoolInitParameters struct {
 	// Name of the user pool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration blocked for information about the user pool password policy. Detailed below.
+	// Configuration block for information about the user pool password policy. Detailed below.
 	PasswordPolicy []PasswordPolicyInitParameters `json:"passwordPolicy,omitempty" tf:"password_policy,omitempty"`
 
 	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
@@ -860,7 +860,7 @@ type UserPoolObservation struct {
 	// Name of the user pool.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration blocked for information about the user pool password policy. Detailed below.
+	// Configuration block for information about the user pool password policy. Detailed below.
 	PasswordPolicy []PasswordPolicyObservation `json:"passwordPolicy,omitempty" tf:"password_policy,omitempty"`
 
 	// String representing the SMS authentication message. The Message must contain the {####} placeholder, which will be replaced with the code.
@@ -950,7 +950,7 @@ type UserPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration blocked for information about the user pool password policy. Detailed below.
+	// Configuration block for information about the user pool password policy. Detailed below.
 	// +kubebuilder:validation:Optional
 	PasswordPolicy []PasswordPolicyParameters `json:"passwordPolicy,omitempty" tf:"password_policy,omitempty"`
 

@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    cidr: 172.2.0.0/24
+    cidr: 172.20.0.0/24
     ipamPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -61,7 +61,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    cidr: 172.2.0.0/16
+    cidr: 172.20.0.0/16
     ipamPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

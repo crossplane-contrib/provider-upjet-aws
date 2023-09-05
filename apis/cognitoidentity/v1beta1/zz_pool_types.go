@@ -104,7 +104,7 @@ type PoolObservation struct {
 	// backend and the Cognito service to communicate about the developer provider.
 	DeveloperProviderName *string `json:"developerProviderName,omitempty" tf:"developer_provider_name,omitempty"`
 
-	// An identity pool ID, e.g. us-west-2_abc123.
+	// An identity pool ID, e.g. us-west-2:1a234567-8901-234b-5cde-f6789g01h2i3.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Cognito Identity Pool name.

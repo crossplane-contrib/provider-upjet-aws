@@ -106,35 +106,6 @@ spec:
                       be enabled for Redis (cluster mode enabled) replication groups.
                       Defaults to false.
                     type: boolean
-                  availabilityZones:
-                    description: List of EC2 availability zones in which the replication
-                      group's cache clusters will be created. The order of the availability
-                      zones in the list is not considered.
-                    items:
-                      type: string
-                    type: array
-                  clusterMode:
-                    description: Create a native Redis cluster. automatic_failover_enabled
-                      must be set to true. Cluster Mode documented below. Only 1 cluster_mode
-                      block is allowed. Note that configuring this block does not
-                      enable cluster mode, i.e., data sharding, this requires using
-                      a parameter group that has the parameter cluster-enabled set
-                      to true.
-                    items:
-                      properties:
-                        numNodeGroups:
-                          description: Number of node groups (shards) for this Redis
-                            replication group. Changing this number will trigger a
-                            resizing operation before other settings modifications.
-                          type: number
-                        replicasPerNodeGroup:
-                          description: Number of replica nodes in each node group.
-                            Changing this number will trigger a resizing operation
-                            before other settings modifications. Valid values are
-                            0 to 5.
-                          type: number
-                      type: object
-                    type: array
                   dataTieringEnabled:
                     description: Enables data tiering. Data tiering is only supported
                       for replication groups using the r6gd node type. This parameter
@@ -151,12 +122,13 @@ spec:
                   engineVersion:
                     description: Version number of the cache engine to be used for
                       the cache clusters in this replication group. If the version
-                      is 6 or higher, the major and minor version can be set, e.g.,
-                      6.2, or the minor version can be unspecified which will use
-                      the latest version at creation time, e.g., 6.x. Otherwise, specify
-                      the full version desired, e.g., 5.0.6. The actual engine version
-                      used is returned in the attribute engine_version_actual, see
-                      Attributes Reference below.
+                      is 7 or higher, the major and minor version should be set, e.g.,
+                      7.2. If the version is 6, the major and minor version can be
+                      set, e.g., 6.2, or the minor version can be unspecified which
+                      will use the latest version at creation time, e.g., 6.x. Otherwise,
+                      specify the full version desired, e.g., 5.0.6. The actual engine
+                      version used is returned in the attribute engine_version_actual,
+                      see Attribute Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: The name of your final node group (shard) snapshot.
@@ -169,8 +141,7 @@ spec:
                       the replication group is added to the specified global replication
                       group as a secondary replication group; otherwise, the replication
                       group is not part of any global replication group. If global_replication_group_id
-                      is set, the num_node_groups parameter (or the num_node_groups
-                      parameter of the deprecated cluster_mode block) cannot be set.
+                      is set, the num_node_groups parameter cannot be set.
                     type: string
                   kmsKeyId:
                     description: The ARN of the key that you wish to use if encrypting
@@ -299,13 +270,6 @@ spec:
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
                     type: number
-                  numberCacheClusters:
-                    description: Number of cache clusters (primary and replicas) this
-                      replication group will have. If Multi-AZ is enabled, the value
-                      of this parameter must be at least 2. Updates will occur before
-                      other modifications. Conflicts with num_cache_clusters, num_node_groups,
-                      or the deprecated cluster_mode. Defaults to 1.
-                    type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -335,10 +299,6 @@ spec:
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
                     type: number
-                  replicationGroupDescription:
-                    description: created description for the replication group. Must
-                      not be empty.
-                    type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -588,35 +548,6 @@ spec:
                       be enabled for Redis (cluster mode enabled) replication groups.
                       Defaults to false.
                     type: boolean
-                  availabilityZones:
-                    description: List of EC2 availability zones in which the replication
-                      group's cache clusters will be created. The order of the availability
-                      zones in the list is not considered.
-                    items:
-                      type: string
-                    type: array
-                  clusterMode:
-                    description: Create a native Redis cluster. automatic_failover_enabled
-                      must be set to true. Cluster Mode documented below. Only 1 cluster_mode
-                      block is allowed. Note that configuring this block does not
-                      enable cluster mode, i.e., data sharding, this requires using
-                      a parameter group that has the parameter cluster-enabled set
-                      to true.
-                    items:
-                      properties:
-                        numNodeGroups:
-                          description: Number of node groups (shards) for this Redis
-                            replication group. Changing this number will trigger a
-                            resizing operation before other settings modifications.
-                          type: number
-                        replicasPerNodeGroup:
-                          description: Number of replica nodes in each node group.
-                            Changing this number will trigger a resizing operation
-                            before other settings modifications. Valid values are
-                            0 to 5.
-                          type: number
-                      type: object
-                    type: array
                   dataTieringEnabled:
                     description: Enables data tiering. Data tiering is only supported
                       for replication groups using the r6gd node type. This parameter
@@ -633,12 +564,13 @@ spec:
                   engineVersion:
                     description: Version number of the cache engine to be used for
                       the cache clusters in this replication group. If the version
-                      is 6 or higher, the major and minor version can be set, e.g.,
-                      6.2, or the minor version can be unspecified which will use
-                      the latest version at creation time, e.g., 6.x. Otherwise, specify
-                      the full version desired, e.g., 5.0.6. The actual engine version
-                      used is returned in the attribute engine_version_actual, see
-                      Attributes Reference below.
+                      is 7 or higher, the major and minor version should be set, e.g.,
+                      7.2. If the version is 6, the major and minor version can be
+                      set, e.g., 6.2, or the minor version can be unspecified which
+                      will use the latest version at creation time, e.g., 6.x. Otherwise,
+                      specify the full version desired, e.g., 5.0.6. The actual engine
+                      version used is returned in the attribute engine_version_actual,
+                      see Attribute Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: The name of your final node group (shard) snapshot.
@@ -651,8 +583,7 @@ spec:
                       the replication group is added to the specified global replication
                       group as a secondary replication group; otherwise, the replication
                       group is not part of any global replication group. If global_replication_group_id
-                      is set, the num_node_groups parameter (or the num_node_groups
-                      parameter of the deprecated cluster_mode block) cannot be set.
+                      is set, the num_node_groups parameter cannot be set.
                     type: string
                   logDeliveryConfiguration:
                     description: Specifies the destination and format of Redis SLOWLOG
@@ -703,13 +634,6 @@ spec:
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
                     type: number
-                  numberCacheClusters:
-                    description: Number of cache clusters (primary and replicas) this
-                      replication group will have. If Multi-AZ is enabled, the value
-                      of this parameter must be at least 2. Updates will occur before
-                      other modifications. Conflicts with num_cache_clusters, num_node_groups,
-                      or the deprecated cluster_mode. Defaults to 1.
-                    type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -735,10 +659,6 @@ spec:
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
                     type: number
-                  replicationGroupDescription:
-                    description: created description for the replication group. Must
-                      not be empty.
-                    type: string
                   securityGroupNames:
                     description: List of cache security group names to associate with
                       this replication group.
@@ -980,38 +900,9 @@ spec:
                       be enabled for Redis (cluster mode enabled) replication groups.
                       Defaults to false.
                     type: boolean
-                  availabilityZones:
-                    description: List of EC2 availability zones in which the replication
-                      group's cache clusters will be created. The order of the availability
-                      zones in the list is not considered.
-                    items:
-                      type: string
-                    type: array
                   clusterEnabled:
                     description: Indicates if cluster mode is enabled.
                     type: boolean
-                  clusterMode:
-                    description: Create a native Redis cluster. automatic_failover_enabled
-                      must be set to true. Cluster Mode documented below. Only 1 cluster_mode
-                      block is allowed. Note that configuring this block does not
-                      enable cluster mode, i.e., data sharding, this requires using
-                      a parameter group that has the parameter cluster-enabled set
-                      to true.
-                    items:
-                      properties:
-                        numNodeGroups:
-                          description: Number of node groups (shards) for this Redis
-                            replication group. Changing this number will trigger a
-                            resizing operation before other settings modifications.
-                          type: number
-                        replicasPerNodeGroup:
-                          description: Number of replica nodes in each node group.
-                            Changing this number will trigger a resizing operation
-                            before other settings modifications. Valid values are
-                            0 to 5.
-                          type: number
-                      type: object
-                    type: array
                   configurationEndpointAddress:
                     description: Address of the replication group configuration endpoint
                       when cluster mode is enabled.
@@ -1032,12 +923,13 @@ spec:
                   engineVersion:
                     description: Version number of the cache engine to be used for
                       the cache clusters in this replication group. If the version
-                      is 6 or higher, the major and minor version can be set, e.g.,
-                      6.2, or the minor version can be unspecified which will use
-                      the latest version at creation time, e.g., 6.x. Otherwise, specify
-                      the full version desired, e.g., 5.0.6. The actual engine version
-                      used is returned in the attribute engine_version_actual, see
-                      Attributes Reference below.
+                      is 7 or higher, the major and minor version should be set, e.g.,
+                      7.2. If the version is 6, the major and minor version can be
+                      set, e.g., 6.2, or the minor version can be unspecified which
+                      will use the latest version at creation time, e.g., 6.x. Otherwise,
+                      specify the full version desired, e.g., 5.0.6. The actual engine
+                      version used is returned in the attribute engine_version_actual,
+                      see Attribute Reference below.
                     type: string
                   engineVersionActual:
                     description: Because ElastiCache pulls the latest minor or patch
@@ -1055,8 +947,7 @@ spec:
                       the replication group is added to the specified global replication
                       group as a secondary replication group; otherwise, the replication
                       group is not part of any global replication group. If global_replication_group_id
-                      is set, the num_node_groups parameter (or the num_node_groups
-                      parameter of the deprecated cluster_mode block) cannot be set.
+                      is set, the num_node_groups parameter cannot be set.
                     type: string
                   id:
                     description: ID of the ElastiCache Replication Group.
@@ -1121,13 +1012,6 @@ spec:
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
                     type: number
-                  numberCacheClusters:
-                    description: Number of cache clusters (primary and replicas) this
-                      replication group will have. If Multi-AZ is enabled, the value
-                      of this parameter must be at least 2. Updates will occur before
-                      other modifications. Conflicts with num_cache_clusters, num_node_groups,
-                      or the deprecated cluster_mode. Defaults to 1.
-                    type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -1161,10 +1045,6 @@ spec:
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
                     type: number
-                  replicationGroupDescription:
-                    description: created description for the replication group. Must
-                      not be empty.
-                    type: string
                   securityGroupIds:
                     description: One or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you

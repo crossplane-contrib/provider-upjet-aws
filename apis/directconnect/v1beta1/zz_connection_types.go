@@ -95,7 +95,7 @@ type ConnectionObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VLAN ID.
-	VlanID *string `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
+	VlanID *float64 `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 }
 
 type ConnectionParameters struct {

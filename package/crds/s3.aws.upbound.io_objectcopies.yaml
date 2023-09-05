@@ -68,10 +68,9 @@ spec:
               forProvider:
                 properties:
                   acl:
-                    description: Canned ACL to apply. Defaults to private. Valid values
-                      are private, public-read, public-read-write, authenticated-read,
-                      aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
-                      Conflicts with grant.
+                    description: Canned ACL to apply. Valid values are private, public-read,
+                      public-read-write, authenticated-read, aws-exec-read, bucket-owner-read,
+                      and bucket-owner-full-control. Conflicts with grant.
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in.
@@ -353,10 +352,9 @@ spec:
                   them, like an autoscaler.
                 properties:
                   acl:
-                    description: Canned ACL to apply. Defaults to private. Valid values
-                      are private, public-read, public-read-write, authenticated-read,
-                      aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
-                      Conflicts with grant.
+                    description: Canned ACL to apply. Valid values are private, public-read,
+                      public-read-write, authenticated-read, aws-exec-read, bucket-owner-read,
+                      and bucket-owner-full-control. Conflicts with grant.
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in.
@@ -717,10 +715,9 @@ spec:
               atProvider:
                 properties:
                   acl:
-                    description: Canned ACL to apply. Defaults to private. Valid values
-                      are private, public-read, public-read-write, authenticated-read,
-                      aws-exec-read, bucket-owner-read, and bucket-owner-full-control.
-                      Conflicts with grant.
+                    description: Canned ACL to apply. Valid values are private, public-read,
+                      public-read-write, authenticated-read, aws-exec-read, bucket-owner-read,
+                      and bucket-owner-full-control. Conflicts with grant.
                     type: string
                   bucket:
                     description: Name of the bucket to put the file in.

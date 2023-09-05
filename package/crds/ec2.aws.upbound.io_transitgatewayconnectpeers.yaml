@@ -425,6 +425,16 @@ spec:
                       provided, it will use the same BGP ASN as is associated with
                       Transit Gateway.
                     type: string
+                  bgpPeerAddress:
+                    description: The IP address assigned to customer device, which
+                      is used as BGP IP address.
+                    type: string
+                  bgpTransitGatewayAddresses:
+                    description: The IP addresses assigned to Transit Gateway, which
+                      are used as BGP IP addresses.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: EC2 Transit Gateway Connect Peer identifier
                     type: string

@@ -705,6 +705,29 @@ spec:
                           type: array
                       type: object
                     type: array
+                  sagemakerPipelineTarget:
+                    description: Parameters used when you are using the rule to invoke
+                      an Amazon SageMaker Pipeline. Documented below. A maximum of
+                      1 are allowed.
+                    items:
+                      properties:
+                        pipelineParameterList:
+                          description: List of Parameter names and values for SageMaker
+                            Model Building Pipeline execution.
+                          items:
+                            properties:
+                              name:
+                                description: Name of parameter to start execution
+                                  of a SageMaker Model Building Pipeline.
+                                type: string
+                              value:
+                                description: Value of parameter to start execution
+                                  of a SageMaker Model Building Pipeline.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   sqsTarget:
                     description: Parameters used when you are using the rule to invoke
                       an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
@@ -1049,6 +1072,29 @@ spec:
                             Amazon EC2 instance IDs.
                           items:
                             type: string
+                          type: array
+                      type: object
+                    type: array
+                  sagemakerPipelineTarget:
+                    description: Parameters used when you are using the rule to invoke
+                      an Amazon SageMaker Pipeline. Documented below. A maximum of
+                      1 are allowed.
+                    items:
+                      properties:
+                        pipelineParameterList:
+                          description: List of Parameter names and values for SageMaker
+                            Model Building Pipeline execution.
+                          items:
+                            properties:
+                              name:
+                                description: Name of parameter to start execution
+                                  of a SageMaker Model Building Pipeline.
+                                type: string
+                              value:
+                                description: Value of parameter to start execution
+                                  of a SageMaker Model Building Pipeline.
+                                type: string
+                            type: object
                           type: array
                       type: object
                     type: array
@@ -1572,6 +1618,29 @@ spec:
                             Amazon EC2 instance IDs.
                           items:
                             type: string
+                          type: array
+                      type: object
+                    type: array
+                  sagemakerPipelineTarget:
+                    description: Parameters used when you are using the rule to invoke
+                      an Amazon SageMaker Pipeline. Documented below. A maximum of
+                      1 are allowed.
+                    items:
+                      properties:
+                        pipelineParameterList:
+                          description: List of Parameter names and values for SageMaker
+                            Model Building Pipeline execution.
+                          items:
+                            properties:
+                              name:
+                                description: Name of parameter to start execution
+                                  of a SageMaker Model Building Pipeline.
+                                type: string
+                              value:
+                                description: Value of parameter to start execution
+                                  of a SageMaker Model Building Pipeline.
+                                type: string
+                            type: object
                           type: array
                       type: object
                     type: array

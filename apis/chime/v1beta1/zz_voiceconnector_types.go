@@ -20,9 +20,15 @@ type VoiceConnectorInitParameters struct {
 
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VoiceConnectorObservation struct {
+
+	// ARN (Amazon Resource Name) of the Amazon Chime Voice Connector.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default value: us-east-1
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
@@ -34,6 +40,12 @@ type VoiceConnectorObservation struct {
 
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VoiceConnectorParameters struct {
@@ -50,6 +62,10 @@ type VoiceConnectorParameters struct {
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	// +kubebuilder:validation:Optional
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // VoiceConnectorSpec defines the desired state of VoiceConnector

@@ -82,6 +82,25 @@ type ActionParameters struct {
 	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
+type CloudwatchLogsConfigurationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+}
+
+type CloudwatchLogsConfigurationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+}
+
+type CloudwatchLogsConfigurationParameters struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+	// +kubebuilder:validation:Optional
+	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
+}
+
 type ExperimentTemplateInitParameters struct {
 
 	// Action to be performed during an experiment. See below.
@@ -89,6 +108,9 @@ type ExperimentTemplateInitParameters struct {
 
 	// Description for the experiment template.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The configuration for experiment logging. See below.
+	LogConfiguration []LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// When an ongoing experiment should be stopped. See below.
 	StopCondition []StopConditionInitParameters `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
@@ -110,6 +132,9 @@ type ExperimentTemplateObservation struct {
 
 	// Experiment Template ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The configuration for experiment logging. See below.
+	LogConfiguration []LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// ARN of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -135,6 +160,10 @@ type ExperimentTemplateParameters struct {
 	// Description for the experiment template.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The configuration for experiment logging. See below.
+	// +kubebuilder:validation:Optional
+	LogConfiguration []LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -176,6 +205,9 @@ type ExperimentTemplateTargetInitParameters struct {
 	// Friendly name given to the target.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The resource type parameters.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
 	ResourceArns []*string `json:"resourceArns,omitempty" tf:"resource_arns,omitempty"`
 
@@ -196,6 +228,9 @@ type ExperimentTemplateTargetObservation struct {
 
 	// Friendly name given to the target.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The resource type parameters.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
 	ResourceArns []*string `json:"resourceArns,omitempty" tf:"resource_arns,omitempty"`
@@ -219,6 +254,10 @@ type ExperimentTemplateTargetParameters struct {
 	// Friendly name given to the target.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The resource type parameters.
+	// +kubebuilder:validation:Optional
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
 	// +kubebuilder:validation:Optional
@@ -264,6 +303,45 @@ type FilterParameters struct {
 	// Set of attribute values for the filter.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values" tf:"values,omitempty"`
+}
+
+type LogConfigurationInitParameters struct {
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs. See below.
+	CloudwatchLogsConfiguration []CloudwatchLogsConfigurationInitParameters `json:"cloudwatchLogsConfiguration,omitempty" tf:"cloudwatch_logs_configuration,omitempty"`
+
+	// The schema version. See documentation for the list of schema versions.
+	LogSchemaVersion *float64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
+
+	// The configuration for experiment logging to Amazon S3. See below.
+	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type LogConfigurationObservation struct {
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs. See below.
+	CloudwatchLogsConfiguration []CloudwatchLogsConfigurationObservation `json:"cloudwatchLogsConfiguration,omitempty" tf:"cloudwatch_logs_configuration,omitempty"`
+
+	// The schema version. See documentation for the list of schema versions.
+	LogSchemaVersion *float64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
+
+	// The configuration for experiment logging to Amazon S3. See below.
+	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type LogConfigurationParameters struct {
+
+	// The configuration for experiment logging to Amazon CloudWatch Logs. See below.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogsConfiguration []CloudwatchLogsConfigurationParameters `json:"cloudwatchLogsConfiguration,omitempty" tf:"cloudwatch_logs_configuration,omitempty"`
+
+	// The schema version. See documentation for the list of schema versions.
+	// +kubebuilder:validation:Optional
+	LogSchemaVersion *float64 `json:"logSchemaVersion" tf:"log_schema_version,omitempty"`
+
+	// The configuration for experiment logging to Amazon S3. See below.
+	// +kubebuilder:validation:Optional
+	S3Configuration []S3ConfigurationParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type ParameterInitParameters struct {
@@ -322,6 +400,35 @@ type ResourceTagParameters struct {
 	// Tag value.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type S3ConfigurationInitParameters struct {
+
+	// The name of the destination bucket.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The bucket prefix.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type S3ConfigurationObservation struct {
+
+	// The name of the destination bucket.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The bucket prefix.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type S3ConfigurationParameters struct {
+
+	// The name of the destination bucket.
+	// +kubebuilder:validation:Optional
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+
+	// The bucket prefix.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
 type StopConditionInitParameters struct {

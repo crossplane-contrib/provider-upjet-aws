@@ -83,6 +83,11 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  skipDestroy:
+                    description: Whether to retain the provisoned concurrency configuration
+                      upon destruction. Defaults to false. If set to true, the resource
+                      in simply removed from state instead.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -110,6 +115,11 @@ spec:
                   qualifier:
                     description: Lambda Function version or Lambda Alias name.
                     type: string
+                  skipDestroy:
+                    description: Whether to retain the provisoned concurrency configuration
+                      upon destruction. Defaults to false. If set to true, the resource
+                      in simply removed from state instead.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -298,7 +308,7 @@ spec:
                     type: string
                   id:
                     description: Lambda Function name and qualifier separated by a
-                      colon (:).
+                      comma (,).
                     type: string
                   provisionedConcurrentExecutions:
                     description: Amount of capacity to allocate. Must be greater than
@@ -307,6 +317,11 @@ spec:
                   qualifier:
                     description: Lambda Function version or Lambda Alias name.
                     type: string
+                  skipDestroy:
+                    description: Whether to retain the provisoned concurrency configuration
+                      upon destruction. Defaults to false. If set to true, the resource
+                      in simply removed from state instead.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -534,6 +534,10 @@ spec:
                           - name
                           - namespace
                           type: object
+                        replicationUser:
+                          description: Whether to set set replication user. Defaults
+                            to false.
+                          type: boolean
                         username:
                           description: Username of the user.
                           type: string
@@ -737,6 +741,10 @@ spec:
                           items:
                             type: string
                           type: array
+                        replicationUser:
+                          description: Whether to set set replication user. Defaults
+                            to false.
+                          type: boolean
                         username:
                           description: Username of the user.
                           type: string
@@ -1159,6 +1167,10 @@ spec:
                           items:
                             type: string
                           type: array
+                        replicationUser:
+                          description: Whether to set set replication user. Defaults
+                            to false.
+                          type: boolean
                         username:
                           description: Username of the user.
                           type: string

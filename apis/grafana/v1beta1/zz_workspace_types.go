@@ -88,7 +88,7 @@ type WorkspaceInitParameters struct {
 	// The workspace description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	// The Grafana workspace name.
@@ -142,7 +142,7 @@ type WorkspaceObservation struct {
 	// The endpoint of the Grafana workspace.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -205,7 +205,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4.
 	// +kubebuilder:validation:Optional
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 

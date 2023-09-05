@@ -104,12 +104,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  costFilters:
-                    additionalProperties:
-                      type: string
-                    description: Map of CostFilters key/value pairs to apply to the
-                      budget.
-                    type: object
                   costTypes:
                     description: Object containing CostTypes The types of cost included
                       in a budget, such as tax and subscriptions.
@@ -297,12 +291,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  costFilters:
-                    additionalProperties:
-                      type: string
-                    description: Map of CostFilters key/value pairs to apply to the
-                      budget.
-                    type: object
                   costTypes:
                     description: Object containing CostTypes The types of cost included
                       in a budget, such as tax and subscriptions.
@@ -653,12 +641,6 @@ spec:
                           type: array
                       type: object
                     type: array
-                  costFilters:
-                    additionalProperties:
-                      type: string
-                    description: Map of CostFilters key/value pairs to apply to the
-                      budget.
-                    type: object
                   costTypes:
                     description: Object containing CostTypes The types of cost included
                       in a budget, such as tax and subscriptions.

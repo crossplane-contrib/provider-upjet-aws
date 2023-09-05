@@ -182,7 +182,7 @@ type LBObservation struct {
 	// Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
 	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
 
-	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.
+	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// A subnet mapping block as documented below.
@@ -289,7 +289,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.
+	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector

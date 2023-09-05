@@ -68,10 +68,12 @@ spec:
               forProvider:
                 properties:
                   availabilityZones:
-                    description: List of one or more availability zones for the group.
-                      Used for EC2-Classic, attaching a network interface via id from
-                      a launch template and default subnets when not specified with
-                      vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+                    description: A list of Availability Zones where instances in the
+                      Auto Scaling group can be created. Used for launching into the
+                      default VPC subnet in each Availability Zone when not using
+                      the vpc_zone_identifier attribute, or for attaching a network
+                      interface when an existing network interface ID is specified
+                      in a launch template. Conflicts with vpc_zone_identifier.
                     items:
                       type: string
                     type: array
@@ -113,9 +115,9 @@ spec:
                     type: array
                   forceDelete:
                     description: Allows deleting the Auto Scaling Group without waiting
-                      for all instances in the pool to terminate.  You can force an
+                      for all instances in the pool to terminate. You can force an
                       Auto Scaling Group to delete even if it's in the process of
-                      scaling a resource.  This bypasses that behavior and potentially
+                      scaling a resource. This bypasses that behavior and potentially
                       leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
@@ -130,6 +132,11 @@ spec:
                     description: '"EC2" or "ELB". Controls how health checking is
                       done.'
                     type: string
+                  ignoreFailedScalingActivities:
+                    description: Whether to ignore failed Auto Scaling scaling activities
+                      while waiting for capacity. The default is false -- failed scaling
+                      activities cause errors to be returned.
+                    type: boolean
                   initialLifecycleHook:
                     description: One or more Lifecycle Hooks to attach to the Auto
                       Scaling Group before instances are launched. The syntax is exactly
@@ -171,7 +178,9 @@ spec:
                             properties:
                               autoRollback:
                                 description: Automatically rollback if instance refresh
-                                  fails. Defaults to false.
+                                  fails. Defaults to false. This option may only be
+                                  set to true when specifying a launch_template or
+                                  mixed_instances_policy.
                                 type: boolean
                               checkpointDelay:
                                 description: Number of seconds to wait after a checkpoint.
@@ -1056,16 +1065,19 @@ spec:
                         type: object
                     type: object
                   protectFromScaleIn:
-                    description: in protection in the Amazon EC2 Auto Scaling User
-                      Guide.
+                    description: Whether newly launched instances are automatically
+                      protected from termination by Amazon EC2 Auto Scaling when scaling
+                      in. For more information about preventing instances from terminating
+                      on scale in, see Using instance scale-in protection in the Amazon
+                      EC2 Auto Scaling User Guide.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   serviceLinkedRoleArn:
-                    description: linked role that the ASG will use to call other AWS
-                      services
+                    description: ARN of the service-linked role that the ASG will
+                      use to call other AWS services
                     type: string
                   serviceLinkedRoleArnRef:
                     description: Reference to a Role in iam to populate serviceLinkedRoleArn.
@@ -1152,7 +1164,7 @@ spec:
                     type: array
                   tag:
                     description: Configuration block(s) containing resource tags.
-                      Conflicts with tags. See Tag below for more details.
+                      See Tag below for more details.
                     items:
                       properties:
                         key:
@@ -1167,13 +1179,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  tags:
-                    description: Key-value map of resource tags.
-                    items:
-                      additionalProperties:
-                        type: string
-                      type: object
-                    type: array
                   terminationPolicies:
                     description: List of policies to decide how the instances in the
                       Auto Scaling Group should be terminated. The allowed values
@@ -1183,6 +1188,30 @@ spec:
                       for custom termination policies.
                     items:
                       type: string
+                    type: array
+                  trafficSource:
+                    description: Attaches one or more traffic sources to the specified
+                      Auto Scaling group.
+                    items:
+                      properties:
+                        identifier:
+                          description: Identifies the traffic source. For Application
+                            Load Balancers, Gateway Load Balancers, Network Load Balancers,
+                            and VPC Lattice, this will be the Amazon Resource Name
+                            (ARN) for a target group in this account and Region. For
+                            Classic Load Balancers, this will be the name of the Classic
+                            Load Balancer in this account and Region.
+                          type: string
+                        type:
+                          description: 'Provides additional context for the value
+                            of Identifier. The following lists the valid values: elb
+                            if identifier is the name of a Classic Load Balancer.
+                            elbv2 if identifier is the ARN of an Application Load
+                            Balancer, Gateway Load Balancer, or Network Load Balancer
+                            target group. vpc-lattice if identifier is the ARN of
+                            a VPC Lattice target group.'
+                          type: string
+                      type: object
                     type: array
                   vpcZoneIdentifier:
                     description: List of subnet IDs to launch resources in. Subnets
@@ -1327,10 +1356,12 @@ spec:
                   them, like an autoscaler.
                 properties:
                   availabilityZones:
-                    description: List of one or more availability zones for the group.
-                      Used for EC2-Classic, attaching a network interface via id from
-                      a launch template and default subnets when not specified with
-                      vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+                    description: A list of Availability Zones where instances in the
+                      Auto Scaling group can be created. Used for launching into the
+                      default VPC subnet in each Availability Zone when not using
+                      the vpc_zone_identifier attribute, or for attaching a network
+                      interface when an existing network interface ID is specified
+                      in a launch template. Conflicts with vpc_zone_identifier.
                     items:
                       type: string
                     type: array
@@ -1372,9 +1403,9 @@ spec:
                     type: array
                   forceDelete:
                     description: Allows deleting the Auto Scaling Group without waiting
-                      for all instances in the pool to terminate.  You can force an
+                      for all instances in the pool to terminate. You can force an
                       Auto Scaling Group to delete even if it's in the process of
-                      scaling a resource.  This bypasses that behavior and potentially
+                      scaling a resource. This bypasses that behavior and potentially
                       leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
@@ -1389,6 +1420,11 @@ spec:
                     description: '"EC2" or "ELB". Controls how health checking is
                       done.'
                     type: string
+                  ignoreFailedScalingActivities:
+                    description: Whether to ignore failed Auto Scaling scaling activities
+                      while waiting for capacity. The default is false -- failed scaling
+                      activities cause errors to be returned.
+                    type: boolean
                   initialLifecycleHook:
                     description: One or more Lifecycle Hooks to attach to the Auto
                       Scaling Group before instances are launched. The syntax is exactly
@@ -1430,7 +1466,9 @@ spec:
                             properties:
                               autoRollback:
                                 description: Automatically rollback if instance refresh
-                                  fails. Defaults to false.
+                                  fails. Defaults to false. This option may only be
+                                  set to true when specifying a launch_template or
+                                  mixed_instances_policy.
                                 type: boolean
                               checkpointDelay:
                                 description: Number of seconds to wait after a checkpoint.
@@ -1895,8 +1933,11 @@ spec:
                       type: object
                     type: array
                   protectFromScaleIn:
-                    description: in protection in the Amazon EC2 Auto Scaling User
-                      Guide.
+                    description: Whether newly launched instances are automatically
+                      protected from termination by Amazon EC2 Auto Scaling when scaling
+                      in. For more information about preventing instances from terminating
+                      on scale in, see Using instance scale-in protection in the Amazon
+                      EC2 Auto Scaling User Guide.
                     type: boolean
                   suspendedProcesses:
                     description: List of processes to suspend for the Auto Scaling
@@ -1910,7 +1951,7 @@ spec:
                     type: array
                   tag:
                     description: Configuration block(s) containing resource tags.
-                      Conflicts with tags. See Tag below for more details.
+                      See Tag below for more details.
                     items:
                       properties:
                         key:
@@ -1925,13 +1966,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  tags:
-                    description: Key-value map of resource tags.
-                    items:
-                      additionalProperties:
-                        type: string
-                      type: object
-                    type: array
                   terminationPolicies:
                     description: List of policies to decide how the instances in the
                       Auto Scaling Group should be terminated. The allowed values
@@ -1941,6 +1975,30 @@ spec:
                       for custom termination policies.
                     items:
                       type: string
+                    type: array
+                  trafficSource:
+                    description: Attaches one or more traffic sources to the specified
+                      Auto Scaling group.
+                    items:
+                      properties:
+                        identifier:
+                          description: Identifies the traffic source. For Application
+                            Load Balancers, Gateway Load Balancers, Network Load Balancers,
+                            and VPC Lattice, this will be the Amazon Resource Name
+                            (ARN) for a target group in this account and Region. For
+                            Classic Load Balancers, this will be the name of the Classic
+                            Load Balancer in this account and Region.
+                          type: string
+                        type:
+                          description: 'Provides additional context for the value
+                            of Identifier. The following lists the valid values: elb
+                            if identifier is the name of a Classic Load Balancer.
+                            elbv2 if identifier is the ARN of an Application Load
+                            Balancer, Gateway Load Balancer, or Network Load Balancer
+                            target group. vpc-lattice if identifier is the ARN of
+                            a VPC Lattice target group.'
+                          type: string
+                      type: object
                     type: array
                   waitForCapacityTimeout:
                     description: (See also Waiting for Capacity below.
@@ -2164,10 +2222,12 @@ spec:
                     description: ARN for this Auto Scaling Group
                     type: string
                   availabilityZones:
-                    description: List of one or more availability zones for the group.
-                      Used for EC2-Classic, attaching a network interface via id from
-                      a launch template and default subnets when not specified with
-                      vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+                    description: A list of Availability Zones where instances in the
+                      Auto Scaling group can be created. Used for launching into the
+                      default VPC subnet in each Availability Zone when not using
+                      the vpc_zone_identifier attribute, or for attaching a network
+                      interface when an existing network interface ID is specified
+                      in a launch template. Conflicts with vpc_zone_identifier.
                     items:
                       type: string
                     type: array
@@ -2209,9 +2269,9 @@ spec:
                     type: array
                   forceDelete:
                     description: Allows deleting the Auto Scaling Group without waiting
-                      for all instances in the pool to terminate.  You can force an
+                      for all instances in the pool to terminate. You can force an
                       Auto Scaling Group to delete even if it's in the process of
-                      scaling a resource.  This bypasses that behavior and potentially
+                      scaling a resource. This bypasses that behavior and potentially
                       leaves resources dangling.
                     type: boolean
                   forceDeleteWarmPool:
@@ -2229,6 +2289,11 @@ spec:
                   id:
                     description: Auto Scaling Group id.
                     type: string
+                  ignoreFailedScalingActivities:
+                    description: Whether to ignore failed Auto Scaling scaling activities
+                      while waiting for capacity. The default is false -- failed scaling
+                      activities cause errors to be returned.
+                    type: boolean
                   initialLifecycleHook:
                     description: One or more Lifecycle Hooks to attach to the Auto
                       Scaling Group before instances are launched. The syntax is exactly
@@ -2270,7 +2335,9 @@ spec:
                             properties:
                               autoRollback:
                                 description: Automatically rollback if instance refresh
-                                  fails. Defaults to false.
+                                  fails. Defaults to false. This option may only be
+                                  set to true when specifying a launch_template or
+                                  mixed_instances_policy.
                                 type: boolean
                               checkpointDelay:
                                 description: Number of seconds to wait after a checkpoint.
@@ -2343,7 +2410,8 @@ spec:
                   loadBalancers:
                     description: List of elastic load balancer names to add to the
                       autoscaling group names. Only valid for classic load balancers.
-                      For ALBs, use target_group_arns instead.
+                      For ALBs, use target_group_arns instead. To remove all load
+                      balancer attachments an empty list should be specified.
                     items:
                       type: string
                     type: array
@@ -2763,12 +2831,15 @@ spec:
                     description: Predicted capacity of the group.
                     type: number
                   protectFromScaleIn:
-                    description: in protection in the Amazon EC2 Auto Scaling User
-                      Guide.
+                    description: Whether newly launched instances are automatically
+                      protected from termination by Amazon EC2 Auto Scaling when scaling
+                      in. For more information about preventing instances from terminating
+                      on scale in, see Using instance scale-in protection in the Amazon
+                      EC2 Auto Scaling User Guide.
                     type: boolean
                   serviceLinkedRoleArn:
-                    description: linked role that the ASG will use to call other AWS
-                      services
+                    description: ARN of the service-linked role that the ASG will
+                      use to call other AWS services
                     type: string
                   suspendedProcesses:
                     description: List of processes to suspend for the Auto Scaling
@@ -2782,7 +2853,7 @@ spec:
                     type: array
                   tag:
                     description: Configuration block(s) containing resource tags.
-                      Conflicts with tags. See Tag below for more details.
+                      See Tag below for more details.
                     items:
                       properties:
                         key:
@@ -2797,16 +2868,10 @@ spec:
                           type: string
                       type: object
                     type: array
-                  tags:
-                    description: Key-value map of resource tags.
-                    items:
-                      additionalProperties:
-                        type: string
-                      type: object
-                    type: array
                   targetGroupArns:
                     description: Set of aws_alb_target_group ARNs, for use with Application
-                      or Network Load Balancing.
+                      or Network Load Balancing. To remove all target group attachments
+                      an empty list should be specified.
                     items:
                       type: string
                     type: array
@@ -2819,6 +2884,30 @@ spec:
                       for custom termination policies.
                     items:
                       type: string
+                    type: array
+                  trafficSource:
+                    description: Attaches one or more traffic sources to the specified
+                      Auto Scaling group.
+                    items:
+                      properties:
+                        identifier:
+                          description: Identifies the traffic source. For Application
+                            Load Balancers, Gateway Load Balancers, Network Load Balancers,
+                            and VPC Lattice, this will be the Amazon Resource Name
+                            (ARN) for a target group in this account and Region. For
+                            Classic Load Balancers, this will be the name of the Classic
+                            Load Balancer in this account and Region.
+                          type: string
+                        type:
+                          description: 'Provides additional context for the value
+                            of Identifier. The following lists the valid values: elb
+                            if identifier is the name of a Classic Load Balancer.
+                            elbv2 if identifier is the ARN of an Application Load
+                            Balancer, Gateway Load Balancer, or Network Load Balancer
+                            target group. vpc-lattice if identifier is the ARN of
+                            a VPC Lattice target group.'
+                          type: string
+                      type: object
                     type: array
                   vpcZoneIdentifier:
                     description: List of subnet IDs to launch resources in. Subnets
