@@ -94,6 +94,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  publish:
+                    description: 'Set to true to publish a version of the state machine
+                      during creation. Default: false.'
+                    type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -240,6 +244,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  publish:
+                    description: 'Set to true to publish a version of the state machine
+                      during creation. Default: false.'
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -444,6 +452,8 @@ spec:
                     description: The Amazon States Language definition of the state
                       machine.
                     type: string
+                  description:
+                    type: string
                   id:
                     description: The ARN of the state machine.
                     type: string
@@ -470,9 +480,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  publish:
+                    description: 'Set to true to publish a version of the state machine
+                      during creation. Default: false.'
+                    type: boolean
+                  revisionId:
+                    description: The ARN of the state machine.
+                    type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of the IAM role to
                       use for this state machine.
+                    type: string
+                  stateMachineVersionArn:
+                    description: The ARN of the state machine.
                     type: string
                   status:
                     description: The current status of the state machine. Either ACTIVE
@@ -507,6 +527,8 @@ spec:
                       is created. The default is STANDARD. You cannot update the type
                       of a state machine once it has been created. Valid values: STANDARD,
                       EXPRESS.'
+                    type: string
+                  versionDescription:
                     type: string
                 type: object
               conditions:

@@ -46,33 +46,6 @@ type MediaConcurrenciesParameters struct {
 	Concurrency *float64 `json:"concurrency" tf:"concurrency,omitempty"`
 }
 
-type QueueConfigsAssociatedInitParameters struct {
-}
-
-type QueueConfigsAssociatedObservation struct {
-
-	// Specifies the channels agents can handle in the Contact Control Panel (CCP) for this routing profile. Valid values are VOICE, CHAT, TASK.
-	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
-
-	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
-	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
-
-	// Specifies the order in which contacts are to be handled for the queue.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// ARN for the queue.
-	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
-
-	// Specifies the identifier for the queue.
-	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
-
-	// Name for the queue.
-	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
-}
-
-type QueueConfigsAssociatedParameters struct {
-}
-
 type QueueConfigsInitParameters struct {
 
 	// Specifies the channels agents can handle in the Contact Control Panel (CCP) for this routing profile. Valid values are VOICE, CHAT, TASK.
@@ -171,8 +144,6 @@ type RoutingProfileObservation struct {
 
 	// One or more queue_configs blocks that specify the inbound queues associated with the routing profile. If no queue is added, the agent only can make outbound calls. The queue_configs block is documented below.
 	QueueConfigs []QueueConfigsObservation `json:"queueConfigs,omitempty" tf:"queue_configs,omitempty"`
-
-	QueueConfigsAssociated []QueueConfigsAssociatedObservation `json:"queueConfigsAssociated,omitempty" tf:"queue_configs_associated,omitempty"`
 
 	// The identifier for the Routing Profile.
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`

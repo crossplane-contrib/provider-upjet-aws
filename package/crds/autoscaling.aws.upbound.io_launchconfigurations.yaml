@@ -227,16 +227,6 @@ spec:
                       user data must be base64-encoded and passed via this argument
                       to avoid corruption.
                     type: string
-                  vpcClassicLinkId:
-                    description: The ID of a ClassicLink-enabled VPC. Only applies
-                      to EC2-Classic instances. (eg. vpc-2730681a)
-                    type: string
-                  vpcClassicLinkSecurityGroups:
-                    description: The IDs of one or more security groups for the specified
-                      ClassicLink-enabled VPC (eg. sg-46ae3d11).
-                    items:
-                      type: string
-                    type: array
                 required:
                 - region
                 type: object
@@ -407,16 +397,6 @@ spec:
                       user data must be base64-encoded and passed via this argument
                       to avoid corruption.
                     type: string
-                  vpcClassicLinkId:
-                    description: The ID of a ClassicLink-enabled VPC. Only applies
-                      to EC2-Classic instances. (eg. vpc-2730681a)
-                    type: string
-                  vpcClassicLinkSecurityGroups:
-                    description: The IDs of one or more security groups for the specified
-                      ClassicLink-enabled VPC (eg. sg-46ae3d11).
-                    items:
-                      type: string
-                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -753,16 +733,6 @@ spec:
                       user data must be base64-encoded and passed via this argument
                       to avoid corruption.
                     type: string
-                  vpcClassicLinkId:
-                    description: The ID of a ClassicLink-enabled VPC. Only applies
-                      to EC2-Classic instances. (eg. vpc-2730681a)
-                    type: string
-                  vpcClassicLinkSecurityGroups:
-                    description: The IDs of one or more security groups for the specified
-                      ClassicLink-enabled VPC (eg. sg-46ae3d11).
-                    items:
-                      type: string
-                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

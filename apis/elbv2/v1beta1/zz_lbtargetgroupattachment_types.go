@@ -19,37 +19,37 @@ import (
 
 type LBTargetGroupAttachmentInitParameters struct {
 
-	// The Availability Zone where the IP address of the target is to be registered. If the private ip address is outside of the VPC scope, this value must be set to 'all'.
+	// The Availability Zone where the IP address of the target is to be registered. If the private IP address is outside of the VPC scope, this value must be set to all.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The port on which targets receive traffic.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
+	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the Lambda function ARN. If the target type is alb, specify the ALB ARN.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 type LBTargetGroupAttachmentObservation struct {
 
-	// The Availability Zone where the IP address of the target is to be registered. If the private ip address is outside of the VPC scope, this value must be set to 'all'.
+	// The Availability Zone where the IP address of the target is to be registered. If the private IP address is outside of the VPC scope, this value must be set to all.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// A unique identifier for the attachment
+	// A unique identifier for the attachment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The port on which targets receive traffic.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The ARN of the target group with which to register targets
+	// The ARN of the target group with which to register targets.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
-	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
+	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the Lambda function ARN. If the target type is alb, specify the ALB ARN.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }
 
 type LBTargetGroupAttachmentParameters struct {
 
-	// The Availability Zone where the IP address of the target is to be registered. If the private ip address is outside of the VPC scope, this value must be set to 'all'.
+	// The Availability Zone where the IP address of the target is to be registered. If the private IP address is outside of the VPC scope, this value must be set to all.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
@@ -62,7 +62,7 @@ type LBTargetGroupAttachmentParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ARN of the target group with which to register targets
+	// The ARN of the target group with which to register targets.
 	// +crossplane:generate:reference:type=LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
@@ -75,7 +75,7 @@ type LBTargetGroupAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
-	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
+	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the Lambda function ARN. If the target type is alb, specify the ALB ARN.
 	// +kubebuilder:validation:Optional
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }

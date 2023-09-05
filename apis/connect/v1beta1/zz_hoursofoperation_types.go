@@ -114,9 +114,6 @@ type HoursOfOperationObservation struct {
 	// Specifies the description of the Hours of Operation.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (Deprecated) The Amazon Resource Name (ARN) of the Hours of Operation.
-	HoursOfOperationArn *string `json:"hoursOfOperationArn,omitempty" tf:"hours_of_operation_arn,omitempty"`
-
 	// The identifier for the hours of operation.
 	HoursOfOperationID *string `json:"hoursOfOperationId,omitempty" tf:"hours_of_operation_id,omitempty"`
 

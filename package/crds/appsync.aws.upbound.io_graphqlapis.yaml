@@ -420,6 +420,12 @@ spec:
                           type: object
                       type: object
                     type: array
+                  visibility:
+                    description: Sets the value of the GraphQL API to public (GLOBAL)
+                      or private (PRIVATE). If no value is provided, the visibility
+                      will be set to GLOBAL by default. This value cannot be changed
+                      once the API has been created.
+                    type: string
                   xrayEnabled:
                     description: Whether tracing with X-ray is enabled. Defaults to
                       false.
@@ -626,6 +632,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  visibility:
+                    description: Sets the value of the GraphQL API to public (GLOBAL)
+                      or private (PRIVATE). If no value is provided, the visibility
+                      will be set to GLOBAL by default. This value cannot be changed
+                      once the API has been created.
+                    type: string
                   xrayEnabled:
                     description: Whether tracing with X-ray is enabled. Defaults to
                       false.
@@ -1018,6 +1030,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  visibility:
+                    description: Sets the value of the GraphQL API to public (GLOBAL)
+                      or private (PRIVATE). If no value is provided, the visibility
+                      will be set to GLOBAL by default. This value cannot be changed
+                      once the API has been created.
+                    type: string
                   xrayEnabled:
                     description: Whether tracing with X-ray is enabled. Defaults to
                       false.

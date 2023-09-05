@@ -13,7 +13,7 @@ spec:
     groupName: default
     name: my-schedule
     region: us-west-1
-    scheduleExpression: rate(1 hour)
+    scheduleExpression: rate(1 hours)
     target:
     - arnSelector:
         matchLabels:

@@ -420,10 +420,6 @@ spec:
                     description: 'The IP address type of the Lightsail Instance. Valid
                       Values: dualstack | ipv4.'
                     type: string
-                  ipv6Address:
-                    description: (Deprecated) The first IPv6 address of the Lightsail
-                      instance. Use ipv6_addresses attribute instead.
-                    type: string
                   ipv6Addresses:
                     description: List of IPv6 addresses for the Lightsail instance.
                     items:

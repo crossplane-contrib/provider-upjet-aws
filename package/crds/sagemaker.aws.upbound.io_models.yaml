@@ -131,6 +131,10 @@ spec:
                           description: The URL for the S3 location where model artifacts
                             are stored.
                           type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
+                          type: string
                       type: object
                     type: array
                   enableNetworkIsolation:
@@ -290,6 +294,10 @@ spec:
                           description: The URL for the S3 location where model artifacts
                             are stored.
                           type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
+                          type: string
                       type: object
                     type: array
                   region:
@@ -395,6 +403,10 @@ spec:
                           description: The URL for the S3 location where model artifacts
                             are stored.
                           type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
+                          type: string
                       type: object
                     type: array
                   enableNetworkIsolation:
@@ -476,6 +488,10 @@ spec:
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array
@@ -733,6 +749,10 @@ spec:
                           description: The URL for the S3 location where model artifacts
                             are stored.
                           type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
+                          type: string
                       type: object
                     type: array
                   enableNetworkIsolation:
@@ -820,6 +840,10 @@ spec:
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array

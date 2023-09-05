@@ -119,6 +119,40 @@ spec:
                   description:
                     description: Description for the experiment template.
                     type: string
+                  logConfiguration:
+                    description: The configuration for experiment logging. See below.
+                    items:
+                      properties:
+                        cloudwatchLogsConfiguration:
+                          description: The configuration for experiment logging to
+                            Amazon CloudWatch Logs. See below.
+                          items:
+                            properties:
+                              logGroupArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  destination Amazon CloudWatch Logs log group.
+                                type: string
+                            type: object
+                          type: array
+                        logSchemaVersion:
+                          description: The schema version. See documentation for the
+                            list of schema versions.
+                          type: number
+                        s3Configuration:
+                          description: The configuration for experiment logging to
+                            Amazon S3. See below.
+                          items:
+                            properties:
+                              bucketName:
+                                description: The name of the destination bucket.
+                                type: string
+                              prefix:
+                                description: The bucket prefix.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -243,6 +277,11 @@ spec:
                         name:
                           description: Friendly name given to the target.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The resource type parameters.
+                          type: object
                         resourceArns:
                           description: Set of ARNs of the resources to target with
                             an action. Conflicts with resource_tag.
@@ -343,6 +382,40 @@ spec:
                   description:
                     description: Description for the experiment template.
                     type: string
+                  logConfiguration:
+                    description: The configuration for experiment logging. See below.
+                    items:
+                      properties:
+                        cloudwatchLogsConfiguration:
+                          description: The configuration for experiment logging to
+                            Amazon CloudWatch Logs. See below.
+                          items:
+                            properties:
+                              logGroupArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  destination Amazon CloudWatch Logs log group.
+                                type: string
+                            type: object
+                          type: array
+                        logSchemaVersion:
+                          description: The schema version. See documentation for the
+                            list of schema versions.
+                          type: number
+                        s3Configuration:
+                          description: The configuration for experiment logging to
+                            Amazon S3. See below.
+                          items:
+                            properties:
+                              bucketName:
+                                description: The name of the destination bucket.
+                                type: string
+                              prefix:
+                                description: The bucket prefix.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   stopCondition:
                     description: When an ongoing experiment should be stopped. See
                       below.
@@ -386,6 +459,11 @@ spec:
                         name:
                           description: Friendly name given to the target.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The resource type parameters.
+                          type: object
                         resourceArns:
                           description: Set of ARNs of the resources to target with
                             an action. Conflicts with resource_tag.
@@ -653,6 +731,40 @@ spec:
                   id:
                     description: Experiment Template ID.
                     type: string
+                  logConfiguration:
+                    description: The configuration for experiment logging. See below.
+                    items:
+                      properties:
+                        cloudwatchLogsConfiguration:
+                          description: The configuration for experiment logging to
+                            Amazon CloudWatch Logs. See below.
+                          items:
+                            properties:
+                              logGroupArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  destination Amazon CloudWatch Logs log group.
+                                type: string
+                            type: object
+                          type: array
+                        logSchemaVersion:
+                          description: The schema version. See documentation for the
+                            list of schema versions.
+                          type: number
+                        s3Configuration:
+                          description: The configuration for experiment logging to
+                            Amazon S3. See below.
+                          items:
+                            properties:
+                              bucketName:
+                                description: The name of the destination bucket.
+                                type: string
+                              prefix:
+                                description: The bucket prefix.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   roleArn:
                     description: ARN of an IAM role that grants the AWS FIS service
                       permission to perform service actions on your behalf.
@@ -704,6 +816,11 @@ spec:
                         name:
                           description: Friendly name given to the target.
                           type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The resource type parameters.
+                          type: object
                         resourceArns:
                           description: Set of ARNs of the resources to target with
                             an action. Conflicts with resource_tag.

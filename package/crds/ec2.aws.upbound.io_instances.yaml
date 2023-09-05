@@ -364,6 +364,45 @@ spec:
                       instances. Cannot be set on instance-store instances. See Shutdown
                       Behavior for more information.
                     type: string
+                  instanceMarketOptions:
+                    description: Describes the market (purchasing) option for the
+                      instances. See Market Options below for details on attributes.
+                    items:
+                      properties:
+                        marketType:
+                          description: Type of market for the instance. Valid value
+                            is spot. Defaults to spot.
+                          type: string
+                        spotOptions:
+                          description: Block to configure the options for Spot Instances.
+                            See Spot Options below for details on attributes.
+                          items:
+                            properties:
+                              instanceInterruptionBehavior:
+                                description: The behavior when a Spot Instance is
+                                  interrupted. Valid values include hibernate, stop,
+                                  terminate . The default is terminate.
+                                type: string
+                              maxPrice:
+                                description: The maximum hourly price that you're
+                                  willing to pay for a Spot Instance.
+                                type: string
+                              spotInstanceType:
+                                description: The Spot Instance request type. Valid
+                                  values include one-time, persistent. Persistent
+                                  Spot Instance requests are only supported when the
+                                  instance interruption behavior is either hibernate
+                                  or stop. The default is one-time.
+                                type: string
+                              validUntil:
+                                description: The end date of the request, in UTC format
+                                  (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent
+                                  requests.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   instanceType:
                     description: Instance type to use for the instance. Required unless
                       launch_template is specified and the Launch Template specifies
@@ -428,6 +467,10 @@ spec:
                           description: Whether the metadata service is available.
                             Valid values include enabled or disabled. Defaults to
                             enabled.
+                          type: string
+                        httpProtocolIpv6:
+                          description: Whether the IPv6 endpoint for the instance
+                            metadata service is enabled. Defaults to disabled.
                           type: string
                         httpPutResponseHopLimit:
                           description: Desired HTTP PUT response hop limit for instance
@@ -1158,6 +1201,45 @@ spec:
                       instances. Cannot be set on instance-store instances. See Shutdown
                       Behavior for more information.
                     type: string
+                  instanceMarketOptions:
+                    description: Describes the market (purchasing) option for the
+                      instances. See Market Options below for details on attributes.
+                    items:
+                      properties:
+                        marketType:
+                          description: Type of market for the instance. Valid value
+                            is spot. Defaults to spot.
+                          type: string
+                        spotOptions:
+                          description: Block to configure the options for Spot Instances.
+                            See Spot Options below for details on attributes.
+                          items:
+                            properties:
+                              instanceInterruptionBehavior:
+                                description: The behavior when a Spot Instance is
+                                  interrupted. Valid values include hibernate, stop,
+                                  terminate . The default is terminate.
+                                type: string
+                              maxPrice:
+                                description: The maximum hourly price that you're
+                                  willing to pay for a Spot Instance.
+                                type: string
+                              spotInstanceType:
+                                description: The Spot Instance request type. Valid
+                                  values include one-time, persistent. Persistent
+                                  Spot Instance requests are only supported when the
+                                  instance interruption behavior is either hibernate
+                                  or stop. The default is one-time.
+                                type: string
+                              validUntil:
+                                description: The end date of the request, in UTC format
+                                  (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent
+                                  requests.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   instanceType:
                     description: Instance type to use for the instance. Required unless
                       launch_template is specified and the Launch Template specifies
@@ -1222,6 +1304,10 @@ spec:
                           description: Whether the metadata service is available.
                             Valid values include enabled or disabled. Defaults to
                             enabled.
+                          type: string
+                        httpProtocolIpv6:
+                          description: Whether the IPv6 endpoint for the instance
+                            metadata service is enabled. Defaults to disabled.
                           type: string
                         httpPutResponseHopLimit:
                           description: Desired HTTP PUT response hop limit for instance
@@ -1794,6 +1880,49 @@ spec:
                       instances. Cannot be set on instance-store instances. See Shutdown
                       Behavior for more information.
                     type: string
+                  instanceLifecycle:
+                    description: Indicates whether this is a Spot Instance or a Scheduled
+                      Instance.
+                    type: string
+                  instanceMarketOptions:
+                    description: Describes the market (purchasing) option for the
+                      instances. See Market Options below for details on attributes.
+                    items:
+                      properties:
+                        marketType:
+                          description: Type of market for the instance. Valid value
+                            is spot. Defaults to spot.
+                          type: string
+                        spotOptions:
+                          description: Block to configure the options for Spot Instances.
+                            See Spot Options below for details on attributes.
+                          items:
+                            properties:
+                              instanceInterruptionBehavior:
+                                description: The behavior when a Spot Instance is
+                                  interrupted. Valid values include hibernate, stop,
+                                  terminate . The default is terminate.
+                                type: string
+                              maxPrice:
+                                description: The maximum hourly price that you're
+                                  willing to pay for a Spot Instance.
+                                type: string
+                              spotInstanceType:
+                                description: The Spot Instance request type. Valid
+                                  values include one-time, persistent. Persistent
+                                  Spot Instance requests are only supported when the
+                                  instance interruption behavior is either hibernate
+                                  or stop. The default is one-time.
+                                type: string
+                              validUntil:
+                                description: The end date of the request, in UTC format
+                                  (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent
+                                  requests.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   instanceState:
                     description: 'State of the instance. One of: pending, running,
                       shutting-down, terminated, stopping, stopped. See Instance Lifecycle
@@ -1863,6 +1992,10 @@ spec:
                           description: Whether the metadata service is available.
                             Valid values include enabled or disabled. Defaults to
                             enabled.
+                          type: string
+                        httpProtocolIpv6:
+                          description: Whether the IPv6 endpoint for the instance
+                            metadata service is enabled. Defaults to disabled.
                           type: string
                         httpPutResponseHopLimit:
                           description: Desired HTTP PUT response hop limit for instance
@@ -2049,6 +2182,10 @@ spec:
                       the destination address does not match the instance. Used for
                       NAT or VPNs. Defaults true.
                     type: boolean
+                  spotInstanceRequestId:
+                    description: If the request is a Spot Instance request, the ID
+                      of the request.
+                    type: string
                   subnetId:
                     description: VPC Subnet ID to launch in.
                     type: string

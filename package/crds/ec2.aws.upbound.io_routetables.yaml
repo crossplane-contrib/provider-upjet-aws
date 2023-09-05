@@ -379,11 +379,9 @@ spec:
                           description: Identifier of a VPC Egress Only Internet Gateway.
                           type: string
                         gatewayId:
-                          description: Identifier of a VPC internet gateway or a virtual
-                            private gateway.
-                          type: string
-                        instanceId:
-                          description: Identifier of an EC2 instance.
+                          description: Identifier of a VPC internet gateway, virtual
+                            private gateway, or local. local routes cannot be created
+                            but can be adopted or imported. See the example above.
                           type: string
                         ipv6CidrBlock:
                           description: The Ipv6 CIDR block of the route.

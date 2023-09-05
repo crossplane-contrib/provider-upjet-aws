@@ -105,6 +105,11 @@ spec:
                       is used as a source for a Read Replica, uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
+                  backupTarget:
+                    description: Specifies where automated backups and manual snapshots
+                      are stored. Possible values are region (default) and outposts.
+                      See Working with Amazon RDS on AWS Outposts for more information.
+                    type: string
                   backupWindow:
                     description: 'The daily time range (in UTC) during which automated
                       backups are created if they are enabled. Example: "09:46-10:16".
@@ -116,8 +121,8 @@ spec:
                     items:
                       properties:
                         enabled:
-                          description: Enables [low-downtime updates](#Low-Downtime
-                            Updates) when true. Default is false.
+                          description: Enables low-downtime updates when true. Default
+                            is false.
                           type: boolean
                       type: object
                     type: array
@@ -566,15 +571,6 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
-                  name:
-                    description: The name of the database to create when the DB instance
-                      is created. If this parameter is not specified, no database
-                      is created in the DB instance. Note that this does not apply
-                      for Oracle or SQL Server engines. See the AWS documentation
-                      for more details on what applies for those engines. If you are
-                      providing an Oracle db name, it needs to be in all upper case.
-                      Cannot be specified for a replica.
-                    type: string
                   ncharCharacterSetName:
                     description: The national character set is used in the NCHAR,
                       NVARCHAR2, and NCLOB data types for Oracle instances. This can't
@@ -789,12 +785,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  securityGroupNames:
-                    description: List of DB Security Groups to associate. Only used
-                      for DB Instances on the .
-                    items:
-                      type: string
-                    type: array
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB instance is deleted. If true is specified, no
@@ -967,6 +957,11 @@ spec:
                       is used as a source for a Read Replica, uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
+                  backupTarget:
+                    description: Specifies where automated backups and manual snapshots
+                      are stored. Possible values are region (default) and outposts.
+                      See Working with Amazon RDS on AWS Outposts for more information.
+                    type: string
                   backupWindow:
                     description: 'The daily time range (in UTC) during which automated
                       backups are created if they are enabled. Example: "09:46-10:16".
@@ -978,8 +973,8 @@ spec:
                     items:
                       properties:
                         enabled:
-                          description: Enables [low-downtime updates](#Low-Downtime
-                            Updates) when true. Default is false.
+                          description: Enables low-downtime updates when true. Default
+                            is false.
                           type: boolean
                       type: object
                     type: array
@@ -1110,15 +1105,6 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
-                  name:
-                    description: The name of the database to create when the DB instance
-                      is created. If this parameter is not specified, no database
-                      is created in the DB instance. Note that this does not apply
-                      for Oracle or SQL Server engines. See the AWS documentation
-                      for more details on what applies for those engines. If you are
-                      providing an Oracle db name, it needs to be in all upper case.
-                      Cannot be specified for a replica.
-                    type: string
                   ncharCharacterSetName:
                     description: The national character set is used in the NCHAR,
                       NVARCHAR2, and NCLOB data types for Oracle instances. This can't
@@ -1222,12 +1208,6 @@ spec:
                             backup
                           type: string
                       type: object
-                    type: array
-                  securityGroupNames:
-                    description: List of DB Security Groups to associate. Only used
-                      for DB Instances on the .
-                    items:
-                      type: string
                     type: array
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
@@ -1482,6 +1462,11 @@ spec:
                       is used as a source for a Read Replica, uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
+                  backupTarget:
+                    description: Specifies where automated backups and manual snapshots
+                      are stored. Possible values are region (default) and outposts.
+                      See Working with Amazon RDS on AWS Outposts for more information.
+                    type: string
                   backupWindow:
                     description: 'The daily time range (in UTC) during which automated
                       backups are created if they are enabled. Example: "09:46-10:16".
@@ -1493,8 +1478,8 @@ spec:
                     items:
                       properties:
                         enabled:
-                          description: Enables [low-downtime updates](#Low-Downtime
-                            Updates) when true. Default is false.
+                          description: Enables low-downtime updates when true. Default
+                            is false.
                           type: boolean
                       type: object
                     type: array
@@ -1607,7 +1592,7 @@ spec:
                       Management (IAM) accounts to database accounts is enabled.
                     type: boolean
                   id:
-                    description: The RDS instance ID.
+                    description: RDS DBI resource ID.
                     type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
@@ -1705,15 +1690,6 @@ spec:
                   multiAz:
                     description: Specifies if the RDS instance is multi-AZ
                     type: boolean
-                  name:
-                    description: The name of the database to create when the DB instance
-                      is created. If this parameter is not specified, no database
-                      is created in the DB instance. Note that this does not apply
-                      for Oracle or SQL Server engines. See the AWS documentation
-                      for more details on what applies for those engines. If you are
-                      providing an Oracle db name, it needs to be in all upper case.
-                      Cannot be specified for a replica.
-                    type: string
                   ncharCharacterSetName:
                     description: The national character set is used in the NCHAR,
                       NVARCHAR2, and NCLOB data types for Oracle instances. This can't
@@ -1835,12 +1811,6 @@ spec:
                             backup
                           type: string
                       type: object
-                    type: array
-                  securityGroupNames:
-                    description: List of DB Security Groups to associate. Only used
-                      for DB Instances on the .
-                    items:
-                      type: string
                     type: array
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
