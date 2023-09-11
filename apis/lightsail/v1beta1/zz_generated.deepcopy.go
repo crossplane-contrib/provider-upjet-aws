@@ -2632,7 +2632,8 @@ func (in *KeyPairInitParameters) DeepCopyInto(out *KeyPairInitParameters) {
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -2739,7 +2740,8 @@ func (in *KeyPairObservation) DeepCopyInto(out *KeyPairObservation) {
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -2754,7 +2756,8 @@ func (in *KeyPairObservation) DeepCopyInto(out *KeyPairObservation) {
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -2804,7 +2807,8 @@ func (in *KeyPairParameters) DeepCopyInto(out *KeyPairParameters) {
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
