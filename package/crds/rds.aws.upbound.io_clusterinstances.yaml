@@ -78,15 +78,15 @@ spec:
                       Default true.
                     type: boolean
                   availabilityZone:
-                    description: The EC2 Availability Zone that the DB instance is
-                      created in. See docs about the details.
+                    description: EC2 Availability Zone that the DB instance is created
+                      in. See docs about the details.
                     type: string
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: Identifier of the CA certificate for the DB instance.
                     type: string
                   clusterIdentifier:
-                    description: The identifier of the aws_rds_cluster in which to
-                      launch this instance.
+                    description: Identifier of the aws_rds_cluster in which to launch
+                      this instance.
                     type: string
                   clusterIdentifierRef:
                     description: Reference to a Cluster in rds to populate clusterIdentifier.
@@ -165,12 +165,16 @@ spec:
                     description: defined tags from the DB instance to snapshots of
                       the DB instance. Default false.
                     type: boolean
+                  customIamInstanceProfile:
+                    description: Instance profile associated with the underlying Amazon
+                      EC2 instance of an RDS Custom DB instance.
+                    type: string
                   dbParameterGroupName:
-                    description: The name of the DB parameter group to associate with
+                    description: Name of the DB parameter group to associate with
                       this instance.
                     type: string
                   dbSubnetGroupName:
-                    description: 'A DB subnet group to associate with this DB instance.
+                    description: 'DB subnet group to associate with this DB instance.
                       NOTE: This must match the db_subnet_group_name of the attached
                       aws_rds_cluster.'
                     type: string
@@ -248,32 +252,30 @@ spec:
                         type: object
                     type: object
                   engine:
-                    description: 'The name of the database engine to be used for the
-                      RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql,
-                      aurora-postgresql. For information on the difference between
-                      the available Aurora MySQL engines see Comparison between Aurora
-                      MySQL 1 and Aurora MySQL 2 in the Amazon RDS User Guide.'
+                    description: 'Name of the database engine to be used for the RDS
+                      instance. Valid Values: aurora-mysql, aurora-postgresql, mysql,
+                      postgres.'
                     type: string
                   engineVersion:
-                    description: The database engine version.
+                    description: Database engine version.
                     type: string
                   instanceClass:
-                    description: The instance class to use. For details on CPU and
-                      memory, see Scaling Aurora DB Instances. Aurora uses db.* instance
-                      classes/types. Please see AWS Documentation for currently available
-                      instance classes and complete details.
+                    description: Instance class to use. For details on CPU and memory,
+                      see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types.
+                      Please see AWS Documentation for currently available instance
+                      classes and complete details.
                     type: string
                   monitoringInterval:
-                    description: 'The interval, in seconds, between points when Enhanced
+                    description: 'Interval, in seconds, between points when Enhanced
                       Monitoring metrics are collected for the DB instance. To disable
                       collecting Enhanced Monitoring metrics, specify 0. The default
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
-                    description: The ARN for the IAM role that permits RDS to send
-                      enhanced monitoring metrics to CloudWatch Logs. You can find
-                      more information on the AWS Documentation what IAM permissions
-                      are needed to allow Enhanced Monitoring for RDS Instances.
+                    description: ARN for the IAM role that permits RDS to send enhanced
+                      monitoring metrics to CloudWatch Logs. You can find more information
+                      on the AWS Documentation what IAM permissions are needed to
+                      allow Enhanced Monitoring for RDS Instances.
                     type: string
                   monitoringRoleArnRef:
                     description: Reference to a Role in iam to populate monitoringRoleArn.
@@ -437,13 +439,13 @@ spec:
                       needs to be set to true. Defaults to '7'.
                     type: number
                   preferredBackupWindow:
-                    description: 'The daily time range during which automated backups
+                    description: 'Daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00".
                       NOTE: If preferred_backup_window is set at the cluster level,
                       this argument must be omitted.'
                     type: string
                   preferredMaintenanceWindow:
-                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                    description: 'Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
                       Eg: "Mon:00:00-Mon:03:00".'
                     type: string
                   promotionTier:
@@ -492,38 +494,40 @@ spec:
                       Default true.
                     type: boolean
                   availabilityZone:
-                    description: The EC2 Availability Zone that the DB instance is
-                      created in. See docs about the details.
+                    description: EC2 Availability Zone that the DB instance is created
+                      in. See docs about the details.
                     type: string
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: Identifier of the CA certificate for the DB instance.
                     type: string
                   copyTagsToSnapshot:
                     description: defined tags from the DB instance to snapshots of
                       the DB instance. Default false.
                     type: boolean
+                  customIamInstanceProfile:
+                    description: Instance profile associated with the underlying Amazon
+                      EC2 instance of an RDS Custom DB instance.
+                    type: string
                   dbParameterGroupName:
-                    description: The name of the DB parameter group to associate with
+                    description: Name of the DB parameter group to associate with
                       this instance.
                     type: string
                   engine:
-                    description: 'The name of the database engine to be used for the
-                      RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql,
-                      aurora-postgresql. For information on the difference between
-                      the available Aurora MySQL engines see Comparison between Aurora
-                      MySQL 1 and Aurora MySQL 2 in the Amazon RDS User Guide.'
+                    description: 'Name of the database engine to be used for the RDS
+                      instance. Valid Values: aurora-mysql, aurora-postgresql, mysql,
+                      postgres.'
                     type: string
                   engineVersion:
-                    description: The database engine version.
+                    description: Database engine version.
                     type: string
                   instanceClass:
-                    description: The instance class to use. For details on CPU and
-                      memory, see Scaling Aurora DB Instances. Aurora uses db.* instance
-                      classes/types. Please see AWS Documentation for currently available
-                      instance classes and complete details.
+                    description: Instance class to use. For details on CPU and memory,
+                      see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types.
+                      Please see AWS Documentation for currently available instance
+                      classes and complete details.
                     type: string
                   monitoringInterval:
-                    description: 'The interval, in seconds, between points when Enhanced
+                    description: 'Interval, in seconds, between points when Enhanced
                       Monitoring metrics are collected for the DB instance. To disable
                       collecting Enhanced Monitoring metrics, specify 0. The default
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
@@ -539,13 +543,13 @@ spec:
                       needs to be set to true. Defaults to '7'.
                     type: number
                   preferredBackupWindow:
-                    description: 'The daily time range during which automated backups
+                    description: 'Daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00".
                       NOTE: If preferred_backup_window is set at the cluster level,
                       this argument must be omitted.'
                     type: string
                   preferredMaintenanceWindow:
-                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                    description: 'Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
                       Eg: "Mon:00:00-Mon:03:00".'
                     type: string
                   promotionTier:
@@ -726,6 +730,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
+            - message: spec.forProvider.engine is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)
+                || (has(self.initProvider) && has(self.initProvider.engine))'
             - message: spec.forProvider.instanceClass is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)
@@ -749,76 +757,77 @@ spec:
                       Default true.
                     type: boolean
                   availabilityZone:
-                    description: The EC2 Availability Zone that the DB instance is
-                      created in. See docs about the details.
+                    description: EC2 Availability Zone that the DB instance is created
+                      in. See docs about the details.
                     type: string
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: Identifier of the CA certificate for the DB instance.
                     type: string
                   clusterIdentifier:
-                    description: The identifier of the aws_rds_cluster in which to
-                      launch this instance.
+                    description: Identifier of the aws_rds_cluster in which to launch
+                      this instance.
                     type: string
                   copyTagsToSnapshot:
                     description: defined tags from the DB instance to snapshots of
                       the DB instance. Default false.
                     type: boolean
+                  customIamInstanceProfile:
+                    description: Instance profile associated with the underlying Amazon
+                      EC2 instance of an RDS Custom DB instance.
+                    type: string
                   dbParameterGroupName:
-                    description: The name of the DB parameter group to associate with
+                    description: Name of the DB parameter group to associate with
                       this instance.
                     type: string
                   dbSubnetGroupName:
-                    description: 'A DB subnet group to associate with this DB instance.
+                    description: 'DB subnet group to associate with this DB instance.
                       NOTE: This must match the db_subnet_group_name of the attached
                       aws_rds_cluster.'
                     type: string
                   dbiResourceId:
-                    description: The region-unique, immutable identifier for the DB
-                      instance.
+                    description: Region-unique, immutable identifier for the DB instance.
                     type: string
                   endpoint:
-                    description: The DNS address for this instance. May not be writable
+                    description: DNS address for this instance. May not be writable
                     type: string
                   engine:
-                    description: 'The name of the database engine to be used for the
-                      RDS instance. Defaults to aurora. Valid Values: aurora, aurora-mysql,
-                      aurora-postgresql. For information on the difference between
-                      the available Aurora MySQL engines see Comparison between Aurora
-                      MySQL 1 and Aurora MySQL 2 in the Amazon RDS User Guide.'
+                    description: 'Name of the database engine to be used for the RDS
+                      instance. Valid Values: aurora-mysql, aurora-postgresql, mysql,
+                      postgres.'
                     type: string
                   engineVersion:
-                    description: The database engine version.
+                    description: Database engine version.
                     type: string
                   engineVersionActual:
-                    description: The database engine version
+                    description: Database engine version
                     type: string
                   id:
-                    description: The Instance identifier
+                    description: Instance identifier
                     type: string
                   instanceClass:
-                    description: The instance class to use. For details on CPU and
-                      memory, see Scaling Aurora DB Instances. Aurora uses db.* instance
-                      classes/types. Please see AWS Documentation for currently available
-                      instance classes and complete details.
+                    description: Instance class to use. For details on CPU and memory,
+                      see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types.
+                      Please see AWS Documentation for currently available instance
+                      classes and complete details.
                     type: string
                   kmsKeyId:
-                    description: The ARN for the KMS encryption key if one is set
-                      to the cluster.
+                    description: ARN for the KMS encryption key if one is set to the
+                      cluster.
                     type: string
                   monitoringInterval:
-                    description: 'The interval, in seconds, between points when Enhanced
+                    description: 'Interval, in seconds, between points when Enhanced
                       Monitoring metrics are collected for the DB instance. To disable
                       collecting Enhanced Monitoring metrics, specify 0. The default
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
-                    description: The ARN for the IAM role that permits RDS to send
-                      enhanced monitoring metrics to CloudWatch Logs. You can find
-                      more information on the AWS Documentation what IAM permissions
-                      are needed to allow Enhanced Monitoring for RDS Instances.
+                    description: ARN for the IAM role that permits RDS to send enhanced
+                      monitoring metrics to CloudWatch Logs. You can find more information
+                      on the AWS Documentation what IAM permissions are needed to
+                      allow Enhanced Monitoring for RDS Instances.
                     type: string
                   networkType:
-                    description: The network type of the DB instance.
+                    description: Network type of the DB instance.
                     type: string
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights is enabled
@@ -836,16 +845,16 @@ spec:
                       needs to be set to true. Defaults to '7'.
                     type: number
                   port:
-                    description: The database port
+                    description: Database port
                     type: number
                   preferredBackupWindow:
-                    description: 'The daily time range during which automated backups
+                    description: 'Daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00".
                       NOTE: If preferred_backup_window is set at the cluster level,
                       this argument must be omitted.'
                     type: string
                   preferredMaintenanceWindow:
-                    description: 'The window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
+                    description: 'Window to perform maintenance in. Syntax: "ddd:hh24:mi-ddd:hh24:mi".
                       Eg: "Mon:00:00-Mon:03:00".'
                     type: string
                   promotionTier:
@@ -869,9 +878,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                   writer:
                     description: – Boolean indicating if this instance is writable.

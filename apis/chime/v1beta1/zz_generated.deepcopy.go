@@ -567,7 +567,8 @@ func (in *VoiceConnectorInitParameters) DeepCopyInto(out *VoiceConnectorInitPara
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -853,7 +854,8 @@ func (in *VoiceConnectorObservation) DeepCopyInto(out *VoiceConnectorObservation
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -868,7 +870,8 @@ func (in *VoiceConnectorObservation) DeepCopyInto(out *VoiceConnectorObservation
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -1118,7 +1121,8 @@ func (in *VoiceConnectorParameters) DeepCopyInto(out *VoiceConnectorParameters) 
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
