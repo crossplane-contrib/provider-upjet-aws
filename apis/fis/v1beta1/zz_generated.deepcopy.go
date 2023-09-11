@@ -593,7 +593,8 @@ func (in *ExperimentTemplateTargetInitParameters) DeepCopyInto(out *ExperimentTe
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -663,7 +664,8 @@ func (in *ExperimentTemplateTargetObservation) DeepCopyInto(out *ExperimentTempl
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -733,7 +735,8 @@ func (in *ExperimentTemplateTargetParameters) DeepCopyInto(out *ExperimentTempla
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
