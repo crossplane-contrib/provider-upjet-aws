@@ -63,6 +63,42 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs = mrsp.ResolvedReferences
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConfigurationInfo); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationInfo[i3].Arn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.ConfigurationInfo[i3].ArnRef,
+			Selector:     mg.Spec.ForProvider.ConfigurationInfo[i3].ArnSelector,
+			To: reference.To{
+				List:    &ConfigurationList{},
+				Managed: &Configuration{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ConfigurationInfo[i3].Arn")
+		}
+		mg.Spec.ForProvider.ConfigurationInfo[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ConfigurationInfo[i3].ArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConfigurationInfo); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.ConfigurationInfo[i3].Revision),
+			Extract:      GetConfigurationRevision(),
+			Reference:    mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionRef,
+			Selector:     mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionSelector,
+			To: reference.To{
+				List:    &ConfigurationList{},
+				Managed: &Configuration{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.ConfigurationInfo[i3].Revision")
+		}
+		mg.Spec.ForProvider.ConfigurationInfo[i3].Revision = reference.ToFloatPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionInfo); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),
