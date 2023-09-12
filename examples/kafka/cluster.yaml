@@ -10,13 +10,20 @@ spec:
       - clientSubnetsRefs:
           - name: subnet-az1
           - name: subnet-az2
-        instanceType: kafka.m5.large
+        instanceType: kafka.t3.small
         securityGroupsRefs:
           - name: sg
         storageInfo:
           - ebsStorageInfo:
               - volumeSize: 1000
     clusterName: example
+    configurationInfo:
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      revisionSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     encryptionInfo:
       - encryptionAtRestKmsKeyArnSelector:
           matchLabels:
@@ -39,6 +46,24 @@ spec:
     region: us-west-1
     tags:
       foo: bar
+
+---
+
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    kafkaVersions:
+      - 2.6.0
+    name: example
+    region: us-west-1
+    serverProperties: |
+      auto.create.topics.enable = true
+      delete.topic.enable = true
 
 ---
 
