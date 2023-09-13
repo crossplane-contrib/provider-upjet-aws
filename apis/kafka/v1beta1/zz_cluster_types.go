@@ -408,7 +408,7 @@ type ConfigurationInfoParameters struct {
 
 	// Revision of the MSK Configuration to use in the cluster.
 	// +crossplane:generate:reference:type=Configuration
-	// +crossplane:generate:reference:extractor=GetConfigurationRevision()
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("latest_revision",true)
 	// +kubebuilder:validation:Optional
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 

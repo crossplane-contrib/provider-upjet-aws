@@ -84,7 +84,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConfigurationInfo); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.ConfigurationInfo[i3].Revision),
-			Extract:      GetConfigurationRevision(),
+			Extract:      resource.ExtractParamPath("latest_revision", true),
 			Reference:    mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionRef,
 			Selector:     mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionSelector,
 			To: reference.To{
