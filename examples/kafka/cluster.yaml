@@ -1,6 +1,8 @@
 apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,12 +20,12 @@ spec:
               - volumeSize: 1000
     clusterName: example
     configurationInfo:
-      arnSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
-      revisionSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      - arnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        revisionSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
     encryptionInfo:
       - encryptionAtRestKmsKeyArnSelector:
           matchLabels:
