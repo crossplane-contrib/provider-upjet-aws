@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for networkfirewall group.
+// Configure adds configurations for the networkfirewall group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_networkfirewall_firewall_policy", func(r *config.Resource) {
 		r.References = config.References{

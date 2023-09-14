@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for kafka group.
+// Configure adds configurations for the kafka group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_msk_cluster", func(r *config.Resource) {
 		r.References["encryption_info.encryption_at_rest_kms_key_arn"] = config.Reference{

@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for kinesis group.
+// Configure adds configurations for the kinesis group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_kinesis_stream_consumer", func(r *config.Resource) {
 		r.References["stream_arn"] = config.Reference{

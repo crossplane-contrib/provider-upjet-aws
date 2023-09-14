@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for lambda group.
+// Configure adds configurations for the lambda group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lambda_alias", func(r *config.Resource) {
 		r.References["function_name"] = config.Reference{

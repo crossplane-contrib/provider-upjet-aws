@@ -4,7 +4,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for sagemaker group.
+// Configure adds configurations for the sagemaker group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_sagemaker_workforce", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{

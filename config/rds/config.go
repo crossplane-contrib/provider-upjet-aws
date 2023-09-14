@@ -30,7 +30,7 @@ const (
 	errGetPasswordSecret = "cannot get password secret"
 )
 
-// Configure adds configurations for rds group.
+// Configure adds configurations for the rds group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_rds_cluster", func(r *config.Resource) {
 		// Mutually exclusive with aws_rds_cluster_role_association

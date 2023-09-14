@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for rolesanywhere group.
+// Configure adds configurations for the rolesanywhere group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_rolesanywhere_profile", func(r *config.Resource) {
 		r.References["role_arns"] = config.Reference{

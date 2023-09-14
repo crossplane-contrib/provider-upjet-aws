@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for efs group.
+// Configure adds configurations for the efs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_efs_mount_target", func(r *config.Resource) {
 		r.UseAsync = true

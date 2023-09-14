@@ -8,8 +8,8 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for devicefarm group.
-func Configure(p *config.Provider) { // nolint:gocyclo
+// Configure adds configurations for the devicefarm group.
+func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_devicefarm_test_grid_project", func(r *config.Resource) {
 		r.References["vpc_config.subnet_ids"] = config.Reference{
 			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",

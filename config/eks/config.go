@@ -12,8 +12,8 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for eks group.
-func Configure(p *config.Provider) { // nolint:gocyclo
+// Configure adds configurations for the eks group.
+func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_eks_cluster", func(r *config.Resource) {
 		r.References = config.References{
 			"role_arn": {

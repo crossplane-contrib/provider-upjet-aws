@@ -20,7 +20,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for cloudwatchlogs group.
+// Configure adds configurations for the cloudwatchlogs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudwatch_log_destination", func(r *config.Resource) {
 		// the target_arn field is generated together with the associated

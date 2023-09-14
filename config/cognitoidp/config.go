@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for acm group.
+// Configure adds configurations for the cognitoidp group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cognito_user_pool_client", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{

@@ -4,7 +4,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for budgets group.
+// Configure adds configurations for the budgets group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_budgets_budget_action", func(r *config.Resource) {
 		r.References["definition.iam_action_definition.aws_iam_role.example.name"] = config.Reference{

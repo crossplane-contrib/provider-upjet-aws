@@ -4,7 +4,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for ebs group.
+// Configure adds configurations for the cloudsearch group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudsearch_domain", func(r *config.Resource) {
 		r.UseAsync = true

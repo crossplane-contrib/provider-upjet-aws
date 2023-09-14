@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for cloudwatch group.
+// Configure adds configurations for the cloudwatch group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudwatch_metric_stream", func(r *config.Resource) {
 		config.MarkAsRequired(r.TerraformResource, "name")

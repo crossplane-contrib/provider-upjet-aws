@@ -9,7 +9,7 @@ import (
 	"github.com/upbound/upjet/pkg/registry"
 )
 
-// Configure adds configurations for s3 group.
+// Configure adds configurations for the s3 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_s3_bucket", func(r *config.Resource) {
 		// Mutually exclusive with:

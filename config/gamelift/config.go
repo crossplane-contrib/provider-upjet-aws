@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for gamelift group.
+// Configure adds configurations for the gamelift group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_gamelift_build", func(r *config.Resource) {
 		r.References["storage_location.role_arn"] = config.Reference{

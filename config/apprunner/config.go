@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for apprunner group.
+// Configure adds configurations for the apprunner group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_apprunner_vpc_connector", func(r *config.Resource) {
 		r.References["subnets"] = config.Reference{

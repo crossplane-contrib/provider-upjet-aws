@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for ebs group.
+// Configure adds configurations for the cloudfront group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudfront_distribution", func(r *config.Resource) {
 		r.UseAsync = true

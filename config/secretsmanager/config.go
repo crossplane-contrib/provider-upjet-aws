@@ -2,7 +2,7 @@ package secretsmanager
 
 import "github.com/upbound/upjet/pkg/config"
 
-// Configure adds configurations for lambda group.
+// Configure adds configurations for the secretsmanager group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_secretsmanager_secret", func(r *config.Resource) {
 		// Use aws_secretsmanager_secret_rotation.

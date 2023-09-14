@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for backup group.
+// Configure adds configurations for the backup group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_backup_vault", func(r *config.Resource) {
 		r.References["kms_key_arn"] = config.Reference{

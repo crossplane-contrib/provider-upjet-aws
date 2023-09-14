@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for kinesisanalytics group.
+// Configure adds configurations for the kinesisanalytics group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_kinesis_analytics_application", func(r *config.Resource) {
 		r.References["inputs.kinesis_stream.resource_arn"] = config.Reference{
