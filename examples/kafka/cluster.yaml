@@ -99,18 +99,19 @@ kind: DeliveryStream
 metadata:
   labels:
     testing.upbound.io/example-name: test_stream
-  name: test-stream
+  name: example
 spec:
   forProvider:
-    destination: s3
+    destination: extended_s3
     region: us-west-1
-    s3Configuration:
+    extendedS3Configuration:
       - bucketArnSelector:
           matchLabels:
             testing.upbound.io/example-name: bucket
         roleArnSelector:
           matchLabels:
             testing.upbound.io/example-name: firehose_role
+    name: example
     tags:
       LogDeliveryEnabled: placeholder
 
