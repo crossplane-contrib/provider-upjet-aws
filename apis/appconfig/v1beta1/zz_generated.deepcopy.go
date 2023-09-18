@@ -921,7 +921,7 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 	}
 	if in.DeploymentNumber != nil {
 		in, out := &in.DeploymentNumber, &out.DeploymentNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DeploymentStrategyID != nil {
@@ -1176,7 +1176,7 @@ func (in *DeploymentStrategyInitParameters) DeepCopyInto(out *DeploymentStrategy
 	*out = *in
 	if in.DeploymentDurationInMinutes != nil {
 		in, out := &in.DeploymentDurationInMinutes, &out.DeploymentDurationInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -1186,7 +1186,7 @@ func (in *DeploymentStrategyInitParameters) DeepCopyInto(out *DeploymentStrategy
 	}
 	if in.FinalBakeTimeInMinutes != nil {
 		in, out := &in.FinalBakeTimeInMinutes, &out.FinalBakeTimeInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.GrowthFactor != nil {
@@ -1279,7 +1279,7 @@ func (in *DeploymentStrategyObservation) DeepCopyInto(out *DeploymentStrategyObs
 	}
 	if in.DeploymentDurationInMinutes != nil {
 		in, out := &in.DeploymentDurationInMinutes, &out.DeploymentDurationInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -1289,7 +1289,7 @@ func (in *DeploymentStrategyObservation) DeepCopyInto(out *DeploymentStrategyObs
 	}
 	if in.FinalBakeTimeInMinutes != nil {
 		in, out := &in.FinalBakeTimeInMinutes, &out.FinalBakeTimeInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.GrowthFactor != nil {
@@ -1366,7 +1366,7 @@ func (in *DeploymentStrategyParameters) DeepCopyInto(out *DeploymentStrategyPara
 	*out = *in
 	if in.DeploymentDurationInMinutes != nil {
 		in, out := &in.DeploymentDurationInMinutes, &out.DeploymentDurationInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -1376,7 +1376,7 @@ func (in *DeploymentStrategyParameters) DeepCopyInto(out *DeploymentStrategyPara
 	}
 	if in.FinalBakeTimeInMinutes != nil {
 		in, out := &in.FinalBakeTimeInMinutes, &out.FinalBakeTimeInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.GrowthFactor != nil {
@@ -1896,7 +1896,7 @@ func (in *ExtensionAssociationObservation) DeepCopyInto(out *ExtensionAssociatio
 	}
 	if in.ExtensionVersion != nil {
 		in, out := &in.ExtensionVersion, &out.ExtensionVersion
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -2196,7 +2196,7 @@ func (in *ExtensionObservation) DeepCopyInto(out *ExtensionObservation) {
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2425,7 +2425,7 @@ func (in *HostedConfigurationVersionObservation) DeepCopyInto(out *HostedConfigu
 	}
 	if in.VersionNumber != nil {
 		in, out := &in.VersionNumber, &out.VersionNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

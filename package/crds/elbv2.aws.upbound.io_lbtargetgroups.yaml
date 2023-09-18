@@ -90,13 +90,15 @@ spec:
                           description: Number of consecutive health check successes
                             required before considering a target healthy. The range
                             is 2-10. Defaults to 3.
-                          type: number
+                          format: int64
+                          type: integer
                         interval:
                           description: Approximate amount of time, in seconds, between
                             health checks of an individual target. The range is 5-300.
                             For lambda target groups, it needs to be greater than
                             the timeout of the underlying lambda. Defaults to 30.
-                          type: number
+                          format: int64
+                          type: integer
                         matcher:
                           description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
                             ALB. Only applies to Application Load Balancers (i.e.,
@@ -127,12 +129,14 @@ spec:
                             For target groups with a protocol of GENEVE, the default
                             is 5 seconds. If the target type is lambda, the default
                             is 30 seconds.
-                          type: number
+                          format: int64
+                          type: integer
                         unhealthyThreshold:
                           description: Number of consecutive health check failures
                             required before considering a target unhealthy. The range
                             is 2-10. Defaults to 3.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   ipAddressType:
@@ -168,7 +172,8 @@ spec:
                       targets receive traffic, unless overridden when registering
                       a specific target. Required when target_type is instance, ip
                       or alb. Does not apply when target_type is lambda.
-                    type: number
+                    format: int64
+                    type: integer
                   preserveClientIp:
                     description: Whether client IP preservation is enabled. See doc
                       for more information.
@@ -199,7 +204,8 @@ spec:
                     description: Amount time for targets to warm up before the load
                       balancer sends them a full share of requests. The range is 30-900
                       seconds or 0 to disable. The default value is 0 seconds.
-                    type: number
+                    format: int64
+                    type: integer
                   stickiness:
                     description: Stickiness configuration block. Detailed below.
                     items:
@@ -211,7 +217,8 @@ spec:
                             expires, the load balancer-generated cookie is considered
                             stale. The range is 1 second to 1 week (604800 seconds).
                             The default value is 1 day (86400 seconds).
-                          type: number
+                          format: int64
+                          type: integer
                         cookieName:
                           description: Name of the application based cookie. AWSALB,
                             AWSALBAPP, and AWSALBTG prefixes are reserved and cannot
@@ -374,13 +381,15 @@ spec:
                           description: Number of consecutive health check successes
                             required before considering a target healthy. The range
                             is 2-10. Defaults to 3.
-                          type: number
+                          format: int64
+                          type: integer
                         interval:
                           description: Approximate amount of time, in seconds, between
                             health checks of an individual target. The range is 5-300.
                             For lambda target groups, it needs to be greater than
                             the timeout of the underlying lambda. Defaults to 30.
-                          type: number
+                          format: int64
+                          type: integer
                         matcher:
                           description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
                             ALB. Only applies to Application Load Balancers (i.e.,
@@ -411,12 +420,14 @@ spec:
                             For target groups with a protocol of GENEVE, the default
                             is 5 seconds. If the target type is lambda, the default
                             is 30 seconds.
-                          type: number
+                          format: int64
+                          type: integer
                         unhealthyThreshold:
                           description: Number of consecutive health check failures
                             required before considering a target unhealthy. The range
                             is 2-10. Defaults to 3.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   ipAddressType:
@@ -452,7 +463,8 @@ spec:
                       targets receive traffic, unless overridden when registering
                       a specific target. Required when target_type is instance, ip
                       or alb. Does not apply when target_type is lambda.
-                    type: number
+                    format: int64
+                    type: integer
                   preserveClientIp:
                     description: Whether client IP preservation is enabled. See doc
                       for more information.
@@ -479,7 +491,8 @@ spec:
                     description: Amount time for targets to warm up before the load
                       balancer sends them a full share of requests. The range is 30-900
                       seconds or 0 to disable. The default value is 0 seconds.
-                    type: number
+                    format: int64
+                    type: integer
                   stickiness:
                     description: Stickiness configuration block. Detailed below.
                     items:
@@ -491,7 +504,8 @@ spec:
                             expires, the load balancer-generated cookie is considered
                             stale. The range is 1 second to 1 week (604800 seconds).
                             The default value is 1 day (86400 seconds).
-                          type: number
+                          format: int64
+                          type: integer
                         cookieName:
                           description: Name of the application based cookie. AWSALB,
                             AWSALBAPP, and AWSALBTG prefixes are reserved and cannot
@@ -738,13 +752,15 @@ spec:
                           description: Number of consecutive health check successes
                             required before considering a target healthy. The range
                             is 2-10. Defaults to 3.
-                          type: number
+                          format: int64
+                          type: integer
                         interval:
                           description: Approximate amount of time, in seconds, between
                             health checks of an individual target. The range is 5-300.
                             For lambda target groups, it needs to be greater than
                             the timeout of the underlying lambda. Defaults to 30.
-                          type: number
+                          format: int64
+                          type: integer
                         matcher:
                           description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
                             ALB. Only applies to Application Load Balancers (i.e.,
@@ -775,12 +791,14 @@ spec:
                             For target groups with a protocol of GENEVE, the default
                             is 5 seconds. If the target type is lambda, the default
                             is 30 seconds.
-                          type: number
+                          format: int64
+                          type: integer
                         unhealthyThreshold:
                           description: Number of consecutive health check failures
                             required before considering a target unhealthy. The range
                             is 2-10. Defaults to 3.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   id:
@@ -819,7 +837,8 @@ spec:
                       targets receive traffic, unless overridden when registering
                       a specific target. Required when target_type is instance, ip
                       or alb. Does not apply when target_type is lambda.
-                    type: number
+                    format: int64
+                    type: integer
                   preserveClientIp:
                     description: Whether client IP preservation is enabled. See doc
                       for more information.
@@ -846,7 +865,8 @@ spec:
                     description: Amount time for targets to warm up before the load
                       balancer sends them a full share of requests. The range is 30-900
                       seconds or 0 to disable. The default value is 0 seconds.
-                    type: number
+                    format: int64
+                    type: integer
                   stickiness:
                     description: Stickiness configuration block. Detailed below.
                     items:
@@ -858,7 +878,8 @@ spec:
                             expires, the load balancer-generated cookie is considered
                             stale. The range is 1 second to 1 week (604800 seconds).
                             The default value is 1 day (86400 seconds).
-                          type: number
+                          format: int64
+                          type: integer
                         cookieName:
                           description: Name of the application based cookie. AWSALB,
                             AWSALBAPP, and AWSALBTG prefixes are reserved and cannot

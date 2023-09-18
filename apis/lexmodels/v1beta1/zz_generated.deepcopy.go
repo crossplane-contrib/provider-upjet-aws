@@ -399,7 +399,7 @@ func (in *BotInitParameters) DeepCopyInto(out *BotInitParameters) {
 	}
 	if in.IdleSessionTTLInSeconds != nil {
 		in, out := &in.IdleSessionTTLInSeconds, &out.IdleSessionTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Intent != nil {
@@ -542,7 +542,7 @@ func (in *BotObservation) DeepCopyInto(out *BotObservation) {
 	}
 	if in.IdleSessionTTLInSeconds != nil {
 		in, out := &in.IdleSessionTTLInSeconds, &out.IdleSessionTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Intent != nil {
@@ -643,7 +643,7 @@ func (in *BotParameters) DeepCopyInto(out *BotParameters) {
 	}
 	if in.IdleSessionTTLInSeconds != nil {
 		in, out := &in.IdleSessionTTLInSeconds, &out.IdleSessionTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Intent != nil {
@@ -730,7 +730,7 @@ func (in *ClarificationPromptInitParameters) DeepCopyInto(out *ClarificationProm
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -772,7 +772,7 @@ func (in *ClarificationPromptMessageInitParameters) DeepCopyInto(out *Clarificat
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -802,7 +802,7 @@ func (in *ClarificationPromptMessageObservation) DeepCopyInto(out *Clarification
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -832,7 +832,7 @@ func (in *ClarificationPromptMessageParameters) DeepCopyInto(out *ClarificationP
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -852,7 +852,7 @@ func (in *ClarificationPromptObservation) DeepCopyInto(out *ClarificationPromptO
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -884,7 +884,7 @@ func (in *ClarificationPromptParameters) DeepCopyInto(out *ClarificationPromptPa
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -1028,7 +1028,7 @@ func (in *ConclusionStatementMessageInitParameters) DeepCopyInto(out *Conclusion
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1058,7 +1058,7 @@ func (in *ConclusionStatementMessageObservation) DeepCopyInto(out *ConclusionSta
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1088,7 +1088,7 @@ func (in *ConclusionStatementMessageParameters) DeepCopyInto(out *ConclusionStat
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1162,7 +1162,7 @@ func (in *ConfirmationPromptInitParameters) DeepCopyInto(out *ConfirmationPrompt
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -1204,7 +1204,7 @@ func (in *ConfirmationPromptMessageInitParameters) DeepCopyInto(out *Confirmatio
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1234,7 +1234,7 @@ func (in *ConfirmationPromptMessageObservation) DeepCopyInto(out *ConfirmationPr
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1264,7 +1264,7 @@ func (in *ConfirmationPromptMessageParameters) DeepCopyInto(out *ConfirmationPro
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1284,7 +1284,7 @@ func (in *ConfirmationPromptObservation) DeepCopyInto(out *ConfirmationPromptObs
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -1316,7 +1316,7 @@ func (in *ConfirmationPromptParameters) DeepCopyInto(out *ConfirmationPromptPara
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -2241,7 +2241,7 @@ func (in *IntentRejectionStatementMessageInitParameters) DeepCopyInto(out *Inten
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2271,7 +2271,7 @@ func (in *IntentRejectionStatementMessageObservation) DeepCopyInto(out *IntentRe
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2301,7 +2301,7 @@ func (in *IntentRejectionStatementMessageParameters) DeepCopyInto(out *IntentRej
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2530,7 +2530,7 @@ func (in *MessageInitParameters) DeepCopyInto(out *MessageInitParameters) {
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2560,7 +2560,7 @@ func (in *MessageObservation) DeepCopyInto(out *MessageObservation) {
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2590,7 +2590,7 @@ func (in *MessageParameters) DeepCopyInto(out *MessageParameters) {
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2610,7 +2610,7 @@ func (in *PromptInitParameters) DeepCopyInto(out *PromptInitParameters) {
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -2652,7 +2652,7 @@ func (in *PromptMessageInitParameters) DeepCopyInto(out *PromptMessageInitParame
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2682,7 +2682,7 @@ func (in *PromptMessageObservation) DeepCopyInto(out *PromptMessageObservation) 
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2712,7 +2712,7 @@ func (in *PromptMessageParameters) DeepCopyInto(out *PromptMessageParameters) {
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2732,7 +2732,7 @@ func (in *PromptObservation) DeepCopyInto(out *PromptObservation) {
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -2764,7 +2764,7 @@ func (in *PromptParameters) DeepCopyInto(out *PromptParameters) {
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -2833,7 +2833,7 @@ func (in *RejectionStatementMessageInitParameters) DeepCopyInto(out *RejectionSt
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2863,7 +2863,7 @@ func (in *RejectionStatementMessageObservation) DeepCopyInto(out *RejectionState
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2893,7 +2893,7 @@ func (in *RejectionStatementMessageParameters) DeepCopyInto(out *RejectionStatem
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2977,7 +2977,7 @@ func (in *SlotInitParameters) DeepCopyInto(out *SlotInitParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResponseCard != nil {
@@ -3045,7 +3045,7 @@ func (in *SlotObservation) DeepCopyInto(out *SlotObservation) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResponseCard != nil {
@@ -3113,7 +3113,7 @@ func (in *SlotParameters) DeepCopyInto(out *SlotParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResponseCard != nil {
@@ -3406,7 +3406,7 @@ func (in *ValueElicitationPromptInitParameters) DeepCopyInto(out *ValueElicitati
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -3448,7 +3448,7 @@ func (in *ValueElicitationPromptMessageInitParameters) DeepCopyInto(out *ValueEl
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3478,7 +3478,7 @@ func (in *ValueElicitationPromptMessageObservation) DeepCopyInto(out *ValueElici
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3508,7 +3508,7 @@ func (in *ValueElicitationPromptMessageParameters) DeepCopyInto(out *ValueElicit
 	}
 	if in.GroupNumber != nil {
 		in, out := &in.GroupNumber, &out.GroupNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3528,7 +3528,7 @@ func (in *ValueElicitationPromptObservation) DeepCopyInto(out *ValueElicitationP
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {
@@ -3560,7 +3560,7 @@ func (in *ValueElicitationPromptParameters) DeepCopyInto(out *ValueElicitationPr
 	*out = *in
 	if in.MaxAttempts != nil {
 		in, out := &in.MaxAttempts, &out.MaxAttempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Message != nil {

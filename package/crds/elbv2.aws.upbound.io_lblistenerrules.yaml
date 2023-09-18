@@ -98,7 +98,8 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                type: number
+                                format: int64
+                                type: integer
                               userPoolArn:
                                 description: The ARN of the Cognito user pool.
                                 type: string
@@ -185,86 +186,6 @@ spec:
                               userPoolClientId:
                                 description: The ID of the Cognito user pool client.
                                 type: string
-                              userPoolClientIdRef:
-                                description: Reference to a UserPoolClient in cognitoidp
-                                  to populate userPoolClientId.
-                                properties:
-                                  name:
-                                    description: Name of the referenced object.
-                                    type: string
-                                  policy:
-                                    description: Policies for referencing.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                required:
-                                - name
-                                type: object
-                              userPoolClientIdSelector:
-                                description: Selector for a UserPoolClient in cognitoidp
-                                  to populate userPoolClientId.
-                                properties:
-                                  matchControllerRef:
-                                    description: MatchControllerRef ensures an object
-                                      with the same controller reference as the selecting
-                                      object is selected.
-                                    type: boolean
-                                  matchLabels:
-                                    additionalProperties:
-                                      type: string
-                                    description: MatchLabels ensures an object with
-                                      matching labels is selected.
-                                    type: object
-                                  policy:
-                                    description: Policies for selection.
-                                    properties:
-                                      resolution:
-                                        default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
-                                        enum:
-                                        - Required
-                                        - Optional
-                                        type: string
-                                      resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
-                                        enum:
-                                        - Always
-                                        - IfNotPresent
-                                        type: string
-                                    type: object
-                                type: object
                               userPoolDomain:
                                 description: The domain prefix or fully-qualified
                                   domain name of the Cognito user pool.
@@ -404,7 +325,8 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                type: number
+                                format: int64
+                                type: integer
                               tokenEndpoint:
                                 description: The token endpoint of the IdP.
                                 type: string
@@ -452,7 +374,8 @@ spec:
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
                                         seconds (7 days).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     enabled:
                                       description: Indicates whether target group
                                         stickiness is enabled.
@@ -553,13 +476,15 @@ spec:
                                       type: object
                                     weight:
                                       description: The weight. The range is 0 to 999.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
                           type: array
                         order:
-                          type: number
+                          format: int64
+                          type: integer
                         redirect:
                           description: Information for creating a redirect action.
                             Required if type is redirect.
@@ -923,7 +848,8 @@ spec:
                       it unset will automatically set the rule with next available
                       priority after currently existing highest rule. A listener can't
                       have multiple rules with the same priority.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -979,7 +905,11 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                type: number
+                                format: int64
+                                type: integer
+                              userPoolClientId:
+                                description: The ID of the Cognito user pool client.
+                                type: string
                             type: object
                           type: array
                         authenticateOidc:
@@ -1018,7 +948,8 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                type: number
+                                format: int64
+                                type: integer
                               tokenEndpoint:
                                 description: The token endpoint of the IdP.
                                 type: string
@@ -1064,7 +995,8 @@ spec:
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
                                         seconds (7 days).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     enabled:
                                       description: Indicates whether target group
                                         stickiness is enabled.
@@ -1077,13 +1009,15 @@ spec:
                                   properties:
                                     weight:
                                       description: The weight. The range is 0 to 999.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
                           type: array
                         order:
-                          type: number
+                          format: int64
+                          type: integer
                         redirect:
                           description: Information for creating a redirect action.
                             Required if type is redirect.
@@ -1287,7 +1221,8 @@ spec:
                       it unset will automatically set the rule with next available
                       priority after currently existing highest rule. A listener can't
                       have multiple rules with the same priority.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -1499,7 +1434,8 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                type: number
+                                format: int64
+                                type: integer
                               userPoolArn:
                                 description: The ARN of the Cognito user pool.
                                 type: string
@@ -1548,7 +1484,8 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                type: number
+                                format: int64
+                                type: integer
                               tokenEndpoint:
                                 description: The token endpoint of the IdP.
                                 type: string
@@ -1594,7 +1531,8 @@ spec:
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
                                         seconds (7 days).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     enabled:
                                       description: Indicates whether target group
                                         stickiness is enabled.
@@ -1611,13 +1549,15 @@ spec:
                                       type: string
                                     weight:
                                       description: The weight. The range is 0 to 999.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
                           type: array
                         order:
-                          type: number
+                          format: int64
+                          type: integer
                         redirect:
                           description: Information for creating a redirect action.
                             Required if type is redirect.
@@ -1836,7 +1776,8 @@ spec:
                       it unset will automatically set the rule with next available
                       priority after currently existing highest rule. A listener can't
                       have multiple rules with the same priority.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string

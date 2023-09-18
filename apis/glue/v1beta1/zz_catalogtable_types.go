@@ -38,7 +38,7 @@ type CatalogTableInitParameters struct {
 	PartitionKeys []PartitionKeysInitParameters `json:"partitionKeys,omitempty" tf:"partition_keys,omitempty"`
 
 	// Retention time for this table.
-	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// Configuration block for information about the physical storage of this table. For more information, refer to the Glue Developer Guide. See storage_descriptor below.
 	StorageDescriptor []StorageDescriptorInitParameters `json:"storageDescriptor,omitempty" tf:"storage_descriptor,omitempty"`
@@ -89,7 +89,7 @@ type CatalogTableObservation struct {
 	PartitionKeys []PartitionKeysObservation `json:"partitionKeys,omitempty" tf:"partition_keys,omitempty"`
 
 	// Retention time for this table.
-	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// Configuration block for information about the physical storage of this table. For more information, refer to the Glue Developer Guide. See storage_descriptor below.
 	StorageDescriptor []StorageDescriptorObservation `json:"storageDescriptor,omitempty" tf:"storage_descriptor,omitempty"`
@@ -157,7 +157,7 @@ type CatalogTableParameters struct {
 
 	// Retention time for this table.
 	// +kubebuilder:validation:Optional
-	Retention *float64 `json:"retention,omitempty" tf:"retention,omitempty"`
+	Retention *int64 `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// Configuration block for information about the physical storage of this table. For more information, refer to the Glue Developer Guide. See storage_descriptor below.
 	// +kubebuilder:validation:Optional
@@ -395,7 +395,7 @@ type SchemaReferenceInitParameters struct {
 	SchemaVersionID *string `json:"schemaVersionId,omitempty" tf:"schema_version_id,omitempty"`
 
 	// Version number of the schema.
-	SchemaVersionNumber *float64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
+	SchemaVersionNumber *int64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
 }
 
 type SchemaReferenceObservation struct {
@@ -407,7 +407,7 @@ type SchemaReferenceObservation struct {
 	SchemaVersionID *string `json:"schemaVersionId,omitempty" tf:"schema_version_id,omitempty"`
 
 	// Version number of the schema.
-	SchemaVersionNumber *float64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
+	SchemaVersionNumber *int64 `json:"schemaVersionNumber,omitempty" tf:"schema_version_number,omitempty"`
 }
 
 type SchemaReferenceParameters struct {
@@ -422,7 +422,7 @@ type SchemaReferenceParameters struct {
 
 	// Version number of the schema.
 	// +kubebuilder:validation:Optional
-	SchemaVersionNumber *float64 `json:"schemaVersionNumber" tf:"schema_version_number,omitempty"`
+	SchemaVersionNumber *int64 `json:"schemaVersionNumber" tf:"schema_version_number,omitempty"`
 }
 
 type SerDeInfoInitParameters struct {
@@ -509,7 +509,7 @@ type SortColumnsInitParameters struct {
 	Column *string `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Whether the column is sorted in ascending (1) or descending order (0).
-	SortOrder *float64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+	SortOrder *int64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
 }
 
 type SortColumnsObservation struct {
@@ -518,7 +518,7 @@ type SortColumnsObservation struct {
 	Column *string `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Whether the column is sorted in ascending (1) or descending order (0).
-	SortOrder *float64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
+	SortOrder *int64 `json:"sortOrder,omitempty" tf:"sort_order,omitempty"`
 }
 
 type SortColumnsParameters struct {
@@ -529,7 +529,7 @@ type SortColumnsParameters struct {
 
 	// Whether the column is sorted in ascending (1) or descending order (0).
 	// +kubebuilder:validation:Optional
-	SortOrder *float64 `json:"sortOrder" tf:"sort_order,omitempty"`
+	SortOrder *int64 `json:"sortOrder" tf:"sort_order,omitempty"`
 }
 
 type StorageDescriptorInitParameters struct {
@@ -550,7 +550,7 @@ type StorageDescriptorInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Must be specified if the table contains any dimension columns.
-	NumberOfBuckets *float64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
+	NumberOfBuckets *int64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
 
 	// Output format: SequenceFileOutputFormat (binary), or IgnoreKeyTextOutputFormat, or a custom format.
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
@@ -592,7 +592,7 @@ type StorageDescriptorObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Must be specified if the table contains any dimension columns.
-	NumberOfBuckets *float64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
+	NumberOfBuckets *int64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
 
 	// Output format: SequenceFileOutputFormat (binary), or IgnoreKeyTextOutputFormat, or a custom format.
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
@@ -640,7 +640,7 @@ type StorageDescriptorParameters struct {
 
 	// Must be specified if the table contains any dimension columns.
 	// +kubebuilder:validation:Optional
-	NumberOfBuckets *float64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
+	NumberOfBuckets *int64 `json:"numberOfBuckets,omitempty" tf:"number_of_buckets,omitempty"`
 
 	// Output format: SequenceFileOutputFormat (binary), or IgnoreKeyTextOutputFormat, or a custom format.
 	// +kubebuilder:validation:Optional

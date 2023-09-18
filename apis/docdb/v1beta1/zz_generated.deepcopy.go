@@ -61,7 +61,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.BackupRetentionPeriod != nil {
 		in, out := &in.BackupRetentionPeriod, &out.BackupRetentionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DBClusterParameterGroupName != nil {
@@ -117,7 +117,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredBackupWindow != nil {
@@ -250,7 +250,7 @@ func (in *ClusterInstanceInitParameters) DeepCopyInto(out *ClusterInstanceInitPa
 	}
 	if in.PromotionTier != nil {
 		in, out := &in.PromotionTier, &out.PromotionTier
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -398,7 +398,7 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredBackupWindow != nil {
@@ -413,7 +413,7 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 	}
 	if in.PromotionTier != nil {
 		in, out := &in.PromotionTier, &out.PromotionTier
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PubliclyAccessible != nil {
@@ -540,7 +540,7 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 	}
 	if in.PromotionTier != nil {
 		in, out := &in.PromotionTier, &out.PromotionTier
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -669,7 +669,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.BackupRetentionPeriod != nil {
 		in, out := &in.BackupRetentionPeriod, &out.BackupRetentionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ClusterMembers != nil {
@@ -761,7 +761,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredBackupWindow != nil {
@@ -1139,7 +1139,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.BackupRetentionPeriod != nil {
 		in, out := &in.BackupRetentionPeriod, &out.BackupRetentionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DBClusterParameterGroupName != nil {
@@ -1215,7 +1215,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredBackupWindow != nil {
@@ -1419,7 +1419,7 @@ func (in *ClusterSnapshotObservation) DeepCopyInto(out *ClusterSnapshotObservati
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotType != nil {

@@ -353,7 +353,8 @@ spec:
                     type: string
                   latestRevision:
                     description: Latest revision of the configuration.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Name of the configuration.
                     type: string

@@ -69,10 +69,12 @@ spec:
                 properties:
                   maxCapacity:
                     description: Max capacity of the scalable target.
-                    type: number
+                    format: int64
+                    type: integer
                   minCapacity:
                     description: Min capacity of the scalable target.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -199,10 +201,12 @@ spec:
                 properties:
                   maxCapacity:
                     description: Max capacity of the scalable target.
-                    type: number
+                    format: int64
+                    type: integer
                   minCapacity:
                     description: Min capacity of the scalable target.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -390,10 +394,12 @@ spec:
                     type: string
                   maxCapacity:
                     description: Max capacity of the scalable target.
-                    type: number
+                    format: int64
+                    type: integer
                   minCapacity:
                     description: Min capacity of the scalable target.
-                    type: number
+                    format: int64
+                    type: integer
                   resourceId:
                     description: 'Resource type and unique identifier string for the
                       resource associated with the scaling policy. Documentation can

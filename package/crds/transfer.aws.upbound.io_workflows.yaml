@@ -166,7 +166,8 @@ spec:
                                 type: string
                               timeoutSeconds:
                                 description: Timeout, in seconds, for the step.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         decryptStepDetails:
@@ -479,7 +480,8 @@ spec:
                                 type: object
                               timeoutSeconds:
                                 description: Timeout, in seconds, for the step.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         decryptStepDetails:
@@ -732,7 +734,8 @@ spec:
                                 type: string
                               timeoutSeconds:
                                 description: Timeout, in seconds, for the step.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         decryptStepDetails:
@@ -957,7 +960,8 @@ spec:
                                 type: string
                               timeoutSeconds:
                                 description: Timeout, in seconds, for the step.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         decryptStepDetails:
@@ -1372,7 +1376,8 @@ spec:
                                 type: string
                               timeoutSeconds:
                                 description: Timeout, in seconds, for the step.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         decryptStepDetails:
@@ -1601,7 +1606,8 @@ spec:
                                 type: string
                               timeoutSeconds:
                                 description: Timeout, in seconds, for the step.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         decryptStepDetails:

@@ -103,7 +103,7 @@ type RealtimeLogConfigInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. An integer between 1 and 100, inclusive.
-	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+	SamplingRate *int64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
 }
 
 type RealtimeLogConfigObservation struct {
@@ -124,7 +124,7 @@ type RealtimeLogConfigObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. An integer between 1 and 100, inclusive.
-	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+	SamplingRate *int64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
 }
 
 type RealtimeLogConfigParameters struct {
@@ -148,7 +148,7 @@ type RealtimeLogConfigParameters struct {
 
 	// The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. An integer between 1 and 100, inclusive.
 	// +kubebuilder:validation:Optional
-	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+	SamplingRate *int64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
 }
 
 // RealtimeLogConfigSpec defines the desired state of RealtimeLogConfig

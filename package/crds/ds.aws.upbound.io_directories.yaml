@@ -262,7 +262,8 @@ spec:
                     description: The number of domain controllers desired in the directory.
                       Minimum value of 2. Scaling of domain controllers is only supported
                       for MicrosoftAD directories.
-                    type: number
+                    format: int64
+                    type: integer
                   edition:
                     description: The MicrosoftAD edition (Standard or Enterprise).
                       Defaults to Enterprise.
@@ -531,7 +532,8 @@ spec:
                     description: The number of domain controllers desired in the directory.
                       Minimum value of 2. Scaling of domain controllers is only supported
                       for MicrosoftAD directories.
-                    type: number
+                    format: int64
+                    type: integer
                   edition:
                     description: The MicrosoftAD edition (Standard or Enterprise).
                       Defaults to Enterprise.
@@ -791,7 +793,8 @@ spec:
                     description: The number of domain controllers desired in the directory.
                       Minimum value of 2. Scaling of domain controllers is only supported
                       for MicrosoftAD directories.
-                    type: number
+                    format: int64
+                    type: integer
                   dnsIpAddresses:
                     description: A list of IP addresses of the DNS servers for the
                       directory or connector.

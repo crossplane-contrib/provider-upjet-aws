@@ -705,7 +705,7 @@ func (in *ContainerServiceInitParameters) DeepCopyInto(out *ContainerServiceInit
 	}
 	if in.Scale != nil {
 		in, out := &in.Scale, &out.Scale
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -837,7 +837,7 @@ func (in *ContainerServiceObservation) DeepCopyInto(out *ContainerServiceObserva
 	}
 	if in.Scale != nil {
 		in, out := &in.Scale, &out.Scale
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.State != nil {
@@ -928,7 +928,7 @@ func (in *ContainerServiceParameters) DeepCopyInto(out *ContainerServiceParamete
 	}
 	if in.Scale != nil {
 		in, out := &in.Scale, &out.Scale
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1235,7 +1235,7 @@ func (in *DiskInitParameters) DeepCopyInto(out *DiskInitParameters) {
 	}
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1323,7 +1323,7 @@ func (in *DiskObservation) DeepCopyInto(out *DiskObservation) {
 	}
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SupportCode != nil {
@@ -1390,7 +1390,7 @@ func (in *DiskParameters) DeepCopyInto(out *DiskParameters) {
 	}
 	if in.SizeInGb != nil {
 		in, out := &in.SizeInGb, &out.SizeInGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -2188,7 +2188,7 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	}
 	if in.CPUCount != nil {
 		in, out := &in.CPUCount, &out.CPUCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CreatedAt != nil {
@@ -3347,7 +3347,7 @@ func (in *LBInitParameters) DeepCopyInto(out *LBInitParameters) {
 	}
 	if in.InstancePort != nil {
 		in, out := &in.InstancePort, &out.InstancePort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -3445,7 +3445,7 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 	}
 	if in.InstancePort != nil {
 		in, out := &in.InstancePort, &out.InstancePort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -3455,11 +3455,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 	}
 	if in.PublicPorts != nil {
 		in, out := &in.PublicPorts, &out.PublicPorts
-		*out = make([]*float64, len(*in))
+		*out = make([]*int64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(float64)
+				*out = new(int64)
 				**out = **in
 			}
 		}
@@ -3528,7 +3528,7 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 	}
 	if in.InstancePort != nil {
 		in, out := &in.InstancePort, &out.InstancePort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -3631,7 +3631,7 @@ func (in *LBStickinessPolicyInitParameters) DeepCopyInto(out *LBStickinessPolicy
 	*out = *in
 	if in.CookieDuration != nil {
 		in, out := &in.CookieDuration, &out.CookieDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -3688,7 +3688,7 @@ func (in *LBStickinessPolicyObservation) DeepCopyInto(out *LBStickinessPolicyObs
 	*out = *in
 	if in.CookieDuration != nil {
 		in, out := &in.CookieDuration, &out.CookieDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -3718,7 +3718,7 @@ func (in *LBStickinessPolicyParameters) DeepCopyInto(out *LBStickinessPolicyPara
 	*out = *in
 	if in.CookieDuration != nil {
 		in, out := &in.CookieDuration, &out.CookieDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -3805,7 +3805,7 @@ func (in *PortInfoInitParameters) DeepCopyInto(out *PortInfoInitParameters) {
 	}
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IPv6Cidrs != nil {
@@ -3826,7 +3826,7 @@ func (in *PortInfoInitParameters) DeepCopyInto(out *PortInfoInitParameters) {
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3868,7 +3868,7 @@ func (in *PortInfoObservation) DeepCopyInto(out *PortInfoObservation) {
 	}
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IPv6Cidrs != nil {
@@ -3889,7 +3889,7 @@ func (in *PortInfoObservation) DeepCopyInto(out *PortInfoObservation) {
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3931,7 +3931,7 @@ func (in *PortInfoParameters) DeepCopyInto(out *PortInfoParameters) {
 	}
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IPv6Cidrs != nil {
@@ -3952,7 +3952,7 @@ func (in *PortInfoParameters) DeepCopyInto(out *PortInfoParameters) {
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

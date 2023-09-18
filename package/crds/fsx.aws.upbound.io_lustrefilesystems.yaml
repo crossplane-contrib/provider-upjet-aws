@@ -78,7 +78,8 @@ spec:
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days. only valid for PERSISTENT_1
                       and PERSISTENT_2 deployment_type.
-                    type: number
+                    format: int64
+                    type: integer
                   backupId:
                     description: The ID of the source backup to create the filesystem
                       from.
@@ -136,7 +137,8 @@ spec:
                       with import_path argument. Defaults to 1024. Minimum of 1 and
                       maximum of 512000. Only supported on PERSISTENT_1 deployment
                       types.
-                    type: number
+                    format: int64
+                    type: integer
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest, applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type.
@@ -246,7 +248,8 @@ spec:
                       100, 200. Valid values for PERSISTENT_1 deployment_type and
                       HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
                       and  SSD storage_type are 125, 250, 500, 1000.'
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -371,7 +374,8 @@ spec:
                       and PERSISTENT_2 deployment types, See more details at Fsx Storage
                       Capacity Update. Required when not creating filesystem for a
                       backup.
-                    type: number
+                    format: int64
+                    type: integer
                   storageType:
                     description: '- The filesystem storage type. Either SSD or HDD,
                       defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
@@ -497,7 +501,8 @@ spec:
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days. only valid for PERSISTENT_1
                       and PERSISTENT_2 deployment_type.
-                    type: number
+                    format: int64
+                    type: integer
                   backupId:
                     description: The ID of the source backup to create the filesystem
                       from.
@@ -555,7 +560,8 @@ spec:
                       with import_path argument. Defaults to 1024. Minimum of 1 and
                       maximum of 512000. Only supported on PERSISTENT_1 deployment
                       types.
-                    type: number
+                    format: int64
+                    type: integer
                   logConfiguration:
                     description: The Lustre logging configuration used when creating
                       an Amazon FSx for Lustre file system. When logging is enabled,
@@ -587,7 +593,8 @@ spec:
                       100, 200. Valid values for PERSISTENT_1 deployment_type and
                       HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
                       and  SSD storage_type are 125, 250, 500, 1000.'
-                    type: number
+                    format: int64
+                    type: integer
                   rootSquashConfiguration:
                     description: The Lustre root squash configuration used when creating
                       an Amazon FSx for Lustre file system. When enabled, root squash
@@ -624,7 +631,8 @@ spec:
                       and PERSISTENT_2 deployment types, See more details at Fsx Storage
                       Capacity Update. Required when not creating filesystem for a
                       backup.
-                    type: number
+                    format: int64
+                    type: integer
                   storageType:
                     description: '- The filesystem storage type. Either SSD or HDD,
                       defaults to SSD. HDD is only supported on PERSISTENT_1 deployment
@@ -819,7 +827,8 @@ spec:
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days. only valid for PERSISTENT_1
                       and PERSISTENT_2 deployment_type.
-                    type: number
+                    format: int64
+                    type: integer
                   backupId:
                     description: The ID of the source backup to create the filesystem
                       from.
@@ -883,7 +892,8 @@ spec:
                       with import_path argument. Defaults to 1024. Minimum of 1 and
                       maximum of 512000. Only supported on PERSISTENT_1 deployment
                       types.
-                    type: number
+                    format: int64
+                    type: integer
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest, applicable for PERSISTENT_1 and PERSISTENT_2 deployment_type.
@@ -934,7 +944,8 @@ spec:
                       100, 200. Valid values for PERSISTENT_1 deployment_type and
                       HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type
                       and  SSD storage_type are 125, 250, 500, 1000.'
-                    type: number
+                    format: int64
+                    type: integer
                   rootSquashConfiguration:
                     description: The Lustre root squash configuration used when creating
                       an Amazon FSx for Lustre file system. When enabled, root squash
@@ -978,7 +989,8 @@ spec:
                       and PERSISTENT_2 deployment types, See more details at Fsx Storage
                       Capacity Update. Required when not creating filesystem for a
                       backup.
-                    type: number
+                    format: int64
+                    type: integer
                   storageType:
                     description: '- The filesystem storage type. Either SSD or HDD,
                       defaults to SSD. HDD is only supported on PERSISTENT_1 deployment

@@ -31,7 +31,7 @@ type ClusterInitParameters struct {
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
-	AutomatedSnapshotRetentionPeriod *float64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
+	AutomatedSnapshotRetentionPeriod *int64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
 
 	// The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. Can only be changed if availability_zone_relocation_enabled is true.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -84,7 +84,7 @@ type ClusterInitParameters struct {
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
-	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
+	ManualSnapshotRetentionPeriod *int64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -93,7 +93,7 @@ type ClusterInitParameters struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1.
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+	NumberOfNodes *int64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 
 	// The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
@@ -102,7 +102,7 @@ type ClusterInitParameters struct {
 	// The cluster is accessible only via the JDBC and ODBC connection strings.
 	// Part of the connection string requires the port on which the cluster will listen for incoming connections.
 	// Default port is 5439.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can occur.
 	// Format: ddd:hh24:mi-ddd:hh24:mi
@@ -162,7 +162,7 @@ type ClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
-	AutomatedSnapshotRetentionPeriod *float64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
+	AutomatedSnapshotRetentionPeriod *int64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
 
 	// The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. Can only be changed if availability_zone_relocation_enabled is true.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
@@ -236,7 +236,7 @@ type ClusterObservation struct {
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
 	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
-	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
+	ManualSnapshotRetentionPeriod *int64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -245,7 +245,7 @@ type ClusterObservation struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1.
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+	NumberOfNodes *int64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 
 	// The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
@@ -254,7 +254,7 @@ type ClusterObservation struct {
 	// The cluster is accessible only via the JDBC and ODBC connection strings.
 	// Part of the connection string requires the port on which the cluster will listen for incoming connections.
 	// Default port is 5439.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can occur.
 	// Format: ddd:hh24:mi-ddd:hh24:mi
@@ -303,7 +303,7 @@ type ClusterParameters struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
 	// +kubebuilder:validation:Optional
-	AutomatedSnapshotRetentionPeriod *float64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
+	AutomatedSnapshotRetentionPeriod *int64 `json:"automatedSnapshotRetentionPeriod,omitempty" tf:"automated_snapshot_retention_period,omitempty"`
 
 	// The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. Can only be changed if availability_zone_relocation_enabled is true.
 	// +kubebuilder:validation:Optional
@@ -415,7 +415,7 @@ type ClusterParameters struct {
 
 	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
 	// +kubebuilder:validation:Optional
-	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
+	ManualSnapshotRetentionPeriod *int64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
 
 	// Password for the master DB user.
 	// Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and
@@ -433,7 +433,7 @@ type ClusterParameters struct {
 
 	// The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node. Default is 1.
 	// +kubebuilder:validation:Optional
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+	NumberOfNodes *int64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 
 	// The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
 	// +kubebuilder:validation:Optional
@@ -444,7 +444,7 @@ type ClusterParameters struct {
 	// Part of the connection string requires the port on which the cluster will listen for incoming connections.
 	// Default port is 5439.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can occur.
 	// Format: ddd:hh24:mi-ddd:hh24:mi
@@ -567,7 +567,7 @@ type SnapshotCopyInitParameters struct {
 	GrantName *string `json:"grantName,omitempty" tf:"grant_name,omitempty"`
 
 	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type SnapshotCopyObservation struct {
@@ -579,7 +579,7 @@ type SnapshotCopyObservation struct {
 	GrantName *string `json:"grantName,omitempty" tf:"grant_name,omitempty"`
 
 	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type SnapshotCopyParameters struct {
@@ -594,7 +594,7 @@ type SnapshotCopyParameters struct {
 
 	// The number of days to retain automated snapshots in the destination region after they are copied from the source region. Defaults to 7.
 	// +kubebuilder:validation:Optional
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

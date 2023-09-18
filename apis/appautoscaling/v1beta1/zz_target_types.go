@@ -20,10 +20,10 @@ import (
 type TargetInitParameters struct {
 
 	// Max capacity of the scalable target.
-	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// Min capacity of the scalable target.
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *int64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -37,10 +37,10 @@ type TargetObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Max capacity of the scalable target.
-	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// Min capacity of the scalable target.
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *int64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// Resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -65,11 +65,11 @@ type TargetParameters struct {
 
 	// Max capacity of the scalable target.
 	// +kubebuilder:validation:Optional
-	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// Min capacity of the scalable target.
 	// +kubebuilder:validation:Optional
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *int64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

@@ -95,7 +95,8 @@ spec:
                           description: The amount of idle time in minutes after which
                             your application will automatically stop. Defaults to
                             15 minutes.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   imageConfiguration:
@@ -139,7 +140,8 @@ spec:
                               workerCount:
                                 description: The number of workers in the initial
                                   capacity configuration.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         initialCapacityType:
@@ -248,7 +250,8 @@ spec:
                           description: The amount of idle time in minutes after which
                             your application will automatically stop. Defaults to
                             15 minutes.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   imageConfiguration:
@@ -292,7 +295,8 @@ spec:
                               workerCount:
                                 description: The number of workers in the initial
                                   capacity configuration.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         initialCapacityType:
@@ -564,7 +568,8 @@ spec:
                           description: The amount of idle time in minutes after which
                             your application will automatically stop. Defaults to
                             15 minutes.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   id:
@@ -611,7 +616,8 @@ spec:
                               workerCount:
                                 description: The number of workers in the initial
                                   capacity configuration.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         initialCapacityType:

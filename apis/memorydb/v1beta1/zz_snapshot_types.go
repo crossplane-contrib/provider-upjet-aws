@@ -38,16 +38,16 @@ type ClusterConfigurationObservation struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// Number of shards in the cluster.
-	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
+	NumShards *int64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// Name of the parameter group associated with the cluster.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// Port number on which the cluster accepts connections.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Number of days for which MemoryDB retains automatic snapshots before deleting them.
-	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of the shard.
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`

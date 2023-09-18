@@ -183,11 +183,13 @@ spec:
                   numReplicasPerShard:
                     description: The number of replicas to apply to each shard, up
                       to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
-                    type: number
+                    format: int64
+                    type: integer
                   numShards:
                     description: The number of shards in the cluster. Defaults to
                       1.
-                    type: number
+                    format: int64
+                    type: integer
                   parameterGroupName:
                     description: The name of the parameter group associated with the
                       cluster.
@@ -195,7 +197,8 @@ spec:
                   port:
                     description: The port number on which each of the nodes accepts
                       connections. Defaults to 6379.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -299,7 +302,8 @@ spec:
                     description: The number of days for which MemoryDB retains automatic
                       snapshots before deleting them. When set to 0, automatic backups
                       are disabled. Defaults to 0.
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotWindow:
                     description: 'The daily time range (in UTC) during which MemoryDB
                       begins taking a daily snapshot of your shard. Example: 05:00-09:00.'
@@ -451,11 +455,13 @@ spec:
                   numReplicasPerShard:
                     description: The number of replicas to apply to each shard, up
                       to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
-                    type: number
+                    format: int64
+                    type: integer
                   numShards:
                     description: The number of shards in the cluster. Defaults to
                       1.
-                    type: number
+                    format: int64
+                    type: integer
                   parameterGroupName:
                     description: The name of the parameter group associated with the
                       cluster.
@@ -463,7 +469,8 @@ spec:
                   port:
                     description: The port number on which each of the nodes accepts
                       connections. Defaults to 6379.
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotArns:
                     description: List of ARN-s that uniquely identify RDB snapshot
                       files stored in S3. The snapshot files will be used to populate
@@ -480,7 +487,8 @@ spec:
                     description: The number of days for which MemoryDB retains automatic
                       snapshots before deleting them. When set to 0, automatic backups
                       are disabled. Defaults to 0.
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotWindow:
                     description: 'The daily time range (in UTC) during which MemoryDB
                       begins taking a daily snapshot of your shard. Example: 05:00-09:00.'
@@ -695,7 +703,8 @@ spec:
                         port:
                           description: The port number on which each of the nodes
                             accepts connections. Defaults to 6379.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   dataTiering:
@@ -739,11 +748,13 @@ spec:
                   numReplicasPerShard:
                     description: The number of replicas to apply to each shard, up
                       to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
-                    type: number
+                    format: int64
+                    type: integer
                   numShards:
                     description: The number of shards in the cluster. Defaults to
                       1.
-                    type: number
+                    format: int64
+                    type: integer
                   parameterGroupName:
                     description: The name of the parameter group associated with the
                       cluster.
@@ -751,7 +762,8 @@ spec:
                   port:
                     description: The port number on which each of the nodes accepts
                       connections. Defaults to 6379.
-                    type: number
+                    format: int64
+                    type: integer
                   securityGroupIds:
                     description: Set of VPC Security Group ID-s to associate with
                       this cluster.
@@ -788,7 +800,8 @@ spec:
                                       description: The port number on which each of
                                         the nodes accepts connections. Defaults to
                                         6379.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               name:
@@ -798,7 +811,8 @@ spec:
                           type: array
                         numNodes:
                           description: Number of individual nodes in this shard.
-                          type: number
+                          format: int64
+                          type: integer
                         slots:
                           description: 'Keyspace for this shard. Example: 0-16383.'
                           type: string
@@ -820,7 +834,8 @@ spec:
                     description: The number of days for which MemoryDB retains automatic
                       snapshots before deleting them. When set to 0, automatic backups
                       are disabled. Defaults to 0.
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotWindow:
                     description: 'The daily time range (in UTC) during which MemoryDB
                       begins taking a daily snapshot of your shard. Example: 05:00-09:00.'

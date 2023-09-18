@@ -99,11 +99,13 @@ spec:
                   cdcMaxBatchInterval:
                     description: Maximum length of the interval, defined in seconds,
                       after which to output a file to Amazon S3. (AWS default is 60.)
-                    type: number
+                    format: int64
+                    type: integer
                   cdcMinFileSize:
                     description: Minimum file size condition as defined in kilobytes
                       to output a file to Amazon S3. (AWS default is 32000 KB.)
-                    type: number
+                    format: int64
+                    type: integer
                   cdcPath:
                     description: Folder path of CDC files. If cdc_path is set, AWS
                       DMS reads CDC files from this path and replicates the data changes
@@ -145,7 +147,8 @@ spec:
                   dataPageSize:
                     description: Size of one data page in bytes. (AWS default is 1
                       MiB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   datePartitionDelimiter:
                     description: Date separating delimiter to use during folder partitioning.
                       Valid values are SLASH, UNDERSCORE, DASH, and NONE. (AWS default
@@ -175,7 +178,8 @@ spec:
                   dictPageSizeLimit:
                     description: Maximum size in bytes of an encoded dictionary page
                       of a column. (AWS default is 1 MiB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   enableStatistics:
                     description: Whether to enable statistics for Parquet pages and
                       row groups. Default is true.
@@ -204,7 +208,8 @@ spec:
                   ignoreHeaderRows:
                     description: When this value is set to 1, DMS ignores the first
                       row header in a .csv file. (AWS default is 0.)
-                    type: number
+                    format: int64
+                    type: integer
                   includeOpForFullLoad:
                     description: Whether to enable a full load to write INSERT operations
                       to the .csv output files only to indicate how the rows were
@@ -295,7 +300,8 @@ spec:
                     description: Maximum size (in KB) of any .csv file to be created
                       while migrating to an S3 target during full load. Valid values
                       are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   parquetTimestampInMillisecond:
                     description: '- Specifies the precision of any TIMESTAMP column
                       values written to an S3 object file in .parquet format. Default
@@ -322,7 +328,8 @@ spec:
                     type: boolean
                   rowGroupLength:
                     description: Number of rows in a row group. (AWS default is 10000.)
-                    type: number
+                    format: int64
+                    type: integer
                   serverSideEncryptionKmsKeyId:
                     description: When encryption_mode is SSE_KMS, ARN for the AWS
                       KMS key. (Ignored for source endpoints -- only SSE_S3 encryption_mode
@@ -551,11 +558,13 @@ spec:
                   cdcMaxBatchInterval:
                     description: Maximum length of the interval, defined in seconds,
                       after which to output a file to Amazon S3. (AWS default is 60.)
-                    type: number
+                    format: int64
+                    type: integer
                   cdcMinFileSize:
                     description: Minimum file size condition as defined in kilobytes
                       to output a file to Amazon S3. (AWS default is 32000 KB.)
-                    type: number
+                    format: int64
+                    type: integer
                   cdcPath:
                     description: Folder path of CDC files. If cdc_path is set, AWS
                       DMS reads CDC files from this path and replicates the data changes
@@ -597,7 +606,8 @@ spec:
                   dataPageSize:
                     description: Size of one data page in bytes. (AWS default is 1
                       MiB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   datePartitionDelimiter:
                     description: Date separating delimiter to use during folder partitioning.
                       Valid values are SLASH, UNDERSCORE, DASH, and NONE. (AWS default
@@ -627,7 +637,8 @@ spec:
                   dictPageSizeLimit:
                     description: Maximum size in bytes of an encoded dictionary page
                       of a column. (AWS default is 1 MiB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   enableStatistics:
                     description: Whether to enable statistics for Parquet pages and
                       row groups. Default is true.
@@ -656,7 +667,8 @@ spec:
                   ignoreHeaderRows:
                     description: When this value is set to 1, DMS ignores the first
                       row header in a .csv file. (AWS default is 0.)
-                    type: number
+                    format: int64
+                    type: integer
                   includeOpForFullLoad:
                     description: Whether to enable a full load to write INSERT operations
                       to the .csv output files only to indicate how the rows were
@@ -666,7 +678,8 @@ spec:
                     description: Maximum size (in KB) of any .csv file to be created
                       while migrating to an S3 target during full load. Valid values
                       are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   parquetTimestampInMillisecond:
                     description: '- Specifies the precision of any TIMESTAMP column
                       values written to an S3 object file in .parquet format. Default
@@ -689,7 +702,8 @@ spec:
                     type: boolean
                   rowGroupLength:
                     description: Number of rows in a row group. (AWS default is 10000.)
-                    type: number
+                    format: int64
+                    type: integer
                   sslMode:
                     description: SSL mode to use for the connection. Valid values
                       are none, require, verify-ca, verify-full. (AWS default is none.)
@@ -924,11 +938,13 @@ spec:
                   cdcMaxBatchInterval:
                     description: Maximum length of the interval, defined in seconds,
                       after which to output a file to Amazon S3. (AWS default is 60.)
-                    type: number
+                    format: int64
+                    type: integer
                   cdcMinFileSize:
                     description: Minimum file size condition as defined in kilobytes
                       to output a file to Amazon S3. (AWS default is 32000 KB.)
-                    type: number
+                    format: int64
+                    type: integer
                   cdcPath:
                     description: Folder path of CDC files. If cdc_path is set, AWS
                       DMS reads CDC files from this path and replicates the data changes
@@ -970,7 +986,8 @@ spec:
                   dataPageSize:
                     description: Size of one data page in bytes. (AWS default is 1
                       MiB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   datePartitionDelimiter:
                     description: Date separating delimiter to use during folder partitioning.
                       Valid values are SLASH, UNDERSCORE, DASH, and NONE. (AWS default
@@ -1000,7 +1017,8 @@ spec:
                   dictPageSizeLimit:
                     description: Maximum size in bytes of an encoded dictionary page
                       of a column. (AWS default is 1 MiB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   enableStatistics:
                     description: Whether to enable statistics for Parquet pages and
                       row groups. Default is true.
@@ -1042,7 +1060,8 @@ spec:
                   ignoreHeaderRows:
                     description: When this value is set to 1, DMS ignores the first
                       row header in a .csv file. (AWS default is 0.)
-                    type: number
+                    format: int64
+                    type: integer
                   includeOpForFullLoad:
                     description: Whether to enable a full load to write INSERT operations
                       to the .csv output files only to indicate how the rows were
@@ -1060,7 +1079,8 @@ spec:
                     description: Maximum size (in KB) of any .csv file to be created
                       while migrating to an S3 target during full load. Valid values
                       are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
-                    type: number
+                    format: int64
+                    type: integer
                   parquetTimestampInMillisecond:
                     description: '- Specifies the precision of any TIMESTAMP column
                       values written to an S3 object file in .parquet format. Default
@@ -1083,7 +1103,8 @@ spec:
                     type: boolean
                   rowGroupLength:
                     description: Number of rows in a row group. (AWS default is 10000.)
-                    type: number
+                    format: int64
+                    type: integer
                   serverSideEncryptionKmsKeyId:
                     description: When encryption_mode is SSE_KMS, ARN for the AWS
                       KMS key. (Ignored for source endpoints -- only SSE_S3 encryption_mode

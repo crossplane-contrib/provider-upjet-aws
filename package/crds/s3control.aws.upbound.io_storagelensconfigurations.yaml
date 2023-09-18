@@ -204,7 +204,8 @@ spec:
                                                       maxDepth:
                                                         description: The max depth
                                                           of the selection criteria.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       minStorageBytesPercentage:
                                                         description: The minimum number
                                                           of storage bytes percentage
@@ -592,7 +593,8 @@ spec:
                                                       maxDepth:
                                                         description: The max depth
                                                           of the selection criteria.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       minStorageBytesPercentage:
                                                         description: The minimum number
                                                           of storage bytes percentage
@@ -1059,7 +1061,8 @@ spec:
                                                       maxDepth:
                                                         description: The max depth
                                                           of the selection criteria.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       minStorageBytesPercentage:
                                                         description: The minimum number
                                                           of storage bytes percentage

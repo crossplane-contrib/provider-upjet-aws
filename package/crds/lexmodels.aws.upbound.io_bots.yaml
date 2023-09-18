@@ -90,7 +90,8 @@ spec:
                                   message belongs to. When a group is assigned to
                                   a message, Amazon Lex returns one message from each
                                   group in the response.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -116,7 +117,8 @@ spec:
                         maxAttempts:
                           description: The number of times to prompt the user for
                             information.
-                          type: number
+                          format: int64
+                          type: integer
                         message:
                           description: A set of messages, each of which provides a
                             message string and its type. You can specify the message
@@ -135,7 +137,8 @@ spec:
                                   message belongs to. When a group is assigned to
                                   a message, Amazon Lex returns one message from each
                                   group in the response.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -173,7 +176,8 @@ spec:
                     description: The maximum time in seconds that Amazon Lex retains
                       the data gathered in a conversation. Default is 300. Must be
                       a number between 60 and 86400 (inclusive).
-                    type: number
+                    format: int64
+                    type: integer
                   intent:
                     description: A set of Intent objects. Each intent represents a
                       command that a user can express. Attributes are documented under
@@ -260,7 +264,8 @@ spec:
                                   message belongs to. When a group is assigned to
                                   a message, Amazon Lex returns one message from each
                                   group in the response.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -286,7 +291,8 @@ spec:
                         maxAttempts:
                           description: The number of times to prompt the user for
                             information.
-                          type: number
+                          format: int64
+                          type: integer
                         message:
                           description: A set of messages, each of which provides a
                             message string and its type. You can specify the message
@@ -305,7 +311,8 @@ spec:
                                   message belongs to. When a group is assigned to
                                   a message, Amazon Lex returns one message from each
                                   group in the response.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -343,7 +350,8 @@ spec:
                     description: The maximum time in seconds that Amazon Lex retains
                       the data gathered in a conversation. Default is 300. Must be
                       a number between 60 and 86400 (inclusive).
-                    type: number
+                    format: int64
+                    type: integer
                   intent:
                     description: A set of Intent objects. Each intent represents a
                       command that a user can express. Attributes are documented under
@@ -590,7 +598,8 @@ spec:
                                   message belongs to. When a group is assigned to
                                   a message, Amazon Lex returns one message from each
                                   group in the response.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -623,7 +632,8 @@ spec:
                         maxAttempts:
                           description: The number of times to prompt the user for
                             information.
-                          type: number
+                          format: int64
+                          type: integer
                         message:
                           description: A set of messages, each of which provides a
                             message string and its type. You can specify the message
@@ -642,7 +652,8 @@ spec:
                                   message belongs to. When a group is assigned to
                                   a message, Amazon Lex returns one message from each
                                   group in the response.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -689,7 +700,8 @@ spec:
                     description: The maximum time in seconds that Amazon Lex retains
                       the data gathered in a conversation. Default is 300. Must be
                       a number between 60 and 86400 (inclusive).
-                    type: number
+                    format: int64
+                    type: integer
                   intent:
                     description: A set of Intent objects. Each intent represents a
                       command that a user can express. Attributes are documented under

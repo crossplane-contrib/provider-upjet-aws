@@ -73,19 +73,23 @@ spec:
                   downlinkBandwidthBits:
                     description: The data throughput rate in bits per second, as an
                       integer from 0 to 104857600. Default value is 104857600.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkDelayMs:
                     description: Delay time for all packets to destination in milliseconds
                       as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkJitterMs:
                     description: Time variation in the delay of received packets in
                       milliseconds as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkLossPercent:
                     description: Proportion of received packets that fail to arrive
                       from 0 to 100 percent.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name for the network profile.
                     type: string
@@ -183,19 +187,23 @@ spec:
                   uplinkBandwidthBits:
                     description: The data throughput rate in bits per second, as an
                       integer from 0 to 104857600. Default value is 104857600.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkDelayMs:
                     description: Delay time for all packets to destination in milliseconds
                       as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkJitterMs:
                     description: Time variation in the delay of received packets in
                       milliseconds as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkLossPercent:
                     description: Proportion of received packets that fail to arrive
                       from 0 to 100 percent.
-                    type: number
+                    format: int64
+                    type: integer
                 required:
                 - region
                 type: object
@@ -217,19 +225,23 @@ spec:
                   downlinkBandwidthBits:
                     description: The data throughput rate in bits per second, as an
                       integer from 0 to 104857600. Default value is 104857600.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkDelayMs:
                     description: Delay time for all packets to destination in milliseconds
                       as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkJitterMs:
                     description: Time variation in the delay of received packets in
                       milliseconds as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkLossPercent:
                     description: Proportion of received packets that fail to arrive
                       from 0 to 100 percent.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name for the network profile.
                     type: string
@@ -245,19 +257,23 @@ spec:
                   uplinkBandwidthBits:
                     description: The data throughput rate in bits per second, as an
                       integer from 0 to 104857600. Default value is 104857600.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkDelayMs:
                     description: Delay time for all packets to destination in milliseconds
                       as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkJitterMs:
                     description: Time variation in the delay of received packets in
                       milliseconds as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkLossPercent:
                     description: Proportion of received packets that fail to arrive
                       from 0 to 100 percent.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -438,19 +454,23 @@ spec:
                   downlinkBandwidthBits:
                     description: The data throughput rate in bits per second, as an
                       integer from 0 to 104857600. Default value is 104857600.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkDelayMs:
                     description: Delay time for all packets to destination in milliseconds
                       as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkJitterMs:
                     description: Time variation in the delay of received packets in
                       milliseconds as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   downlinkLossPercent:
                     description: Proportion of received packets that fail to arrive
                       from 0 to 100 percent.
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     type: string
                   name:
@@ -478,19 +498,23 @@ spec:
                   uplinkBandwidthBits:
                     description: The data throughput rate in bits per second, as an
                       integer from 0 to 104857600. Default value is 104857600.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkDelayMs:
                     description: Delay time for all packets to destination in milliseconds
                       as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkJitterMs:
                     description: Time variation in the delay of received packets in
                       milliseconds as an integer from 0 to 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   uplinkLossPercent:
                     description: Proportion of received packets that fail to arrive
                       from 0 to 100 percent.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

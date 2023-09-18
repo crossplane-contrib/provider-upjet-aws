@@ -72,7 +72,8 @@ spec:
                     type: string
                   licenseCount:
                     description: Number of licenses managed by the license configuration.
-                    type: number
+                    format: int64
+                    type: integer
                   licenseCountHardLimit:
                     description: Sets the number of available licenses as a hard limit.
                     type: boolean
@@ -117,7 +118,8 @@ spec:
                     type: string
                   licenseCount:
                     description: Number of licenses managed by the license configuration.
-                    type: number
+                    format: int64
+                    type: integer
                   licenseCountHardLimit:
                     description: Sets the number of available licenses as a hard limit.
                     type: boolean
@@ -325,7 +327,8 @@ spec:
                     type: string
                   licenseCount:
                     description: Number of licenses managed by the license configuration.
-                    type: number
+                    format: int64
+                    type: integer
                   licenseCountHardLimit:
                     description: Sets the number of available licenses as a hard limit.
                     type: boolean

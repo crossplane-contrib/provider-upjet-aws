@@ -163,7 +163,8 @@ spec:
                     type: boolean
                   ttl:
                     description: TTL in seconds for cache entries.
-                    type: number
+                    format: int64
+                    type: integer
                   type:
                     description: Cache instance type. Valid values are SMALL, MEDIUM,
                       LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL,
@@ -198,7 +199,8 @@ spec:
                     type: boolean
                   ttl:
                     description: TTL in seconds for cache entries.
-                    type: number
+                    format: int64
+                    type: integer
                   type:
                     description: Cache instance type. Valid values are SMALL, MEDIUM,
                       LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL,
@@ -403,7 +405,8 @@ spec:
                     type: boolean
                   ttl:
                     description: TTL in seconds for cache entries.
-                    type: number
+                    format: int64
+                    type: integer
                   type:
                     description: Cache instance type. Valid values are SMALL, MEDIUM,
                       LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X, T2_SMALL,

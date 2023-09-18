@@ -35,7 +35,7 @@ type CapacityReservationInitParameters struct {
 	EphemeralStorage *bool `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
 	// The number of instances for which to reserve capacity.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts. Specify either open or targeted.
 	InstanceMatchCriteria *string `json:"instanceMatchCriteria,omitempty" tf:"instance_match_criteria,omitempty"`
@@ -83,7 +83,7 @@ type CapacityReservationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The number of instances for which to reserve capacity.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts. Specify either open or targeted.
 	InstanceMatchCriteria *string `json:"instanceMatchCriteria,omitempty" tf:"instance_match_criteria,omitempty"`
@@ -137,7 +137,7 @@ type CapacityReservationParameters struct {
 
 	// The number of instances for which to reserve capacity.
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts. Specify either open or targeted.
 	// +kubebuilder:validation:Optional

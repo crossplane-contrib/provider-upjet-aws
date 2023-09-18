@@ -102,7 +102,8 @@ spec:
                     type: string
                   loginValidityDuration:
                     description: The login validity duration.
-                    type: number
+                    format: int64
+                    type: integer
                   nameAssertion:
                     description: The name assertion.
                     type: string
@@ -241,7 +242,8 @@ spec:
                     type: string
                   loginValidityDuration:
                     description: The login validity duration.
-                    type: number
+                    format: int64
+                    type: integer
                   nameAssertion:
                     description: The name assertion.
                     type: string
@@ -459,7 +461,8 @@ spec:
                     type: string
                   loginValidityDuration:
                     description: The login validity duration.
-                    type: number
+                    format: int64
+                    type: integer
                   nameAssertion:
                     description: The name assertion.
                     type: string

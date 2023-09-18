@@ -71,7 +71,8 @@ spec:
                     description: The length of the generated password on resource
                       creation. Only applies on resource creation. Drift detection
                       is not possible with this argument. Default value is 20.
-                    type: number
+                    format: int64
+                    type: integer
                   passwordResetRequired:
                     description: Whether the user should be forced to reset the generated
                       password on resource creation. Only applies on resource creation.
@@ -174,7 +175,8 @@ spec:
                     description: The length of the generated password on resource
                       creation. Only applies on resource creation. Drift detection
                       is not possible with this argument. Default value is 20.
-                    type: number
+                    format: int64
+                    type: integer
                   passwordResetRequired:
                     description: Whether the user should be forced to reset the generated
                       password on resource creation. Only applies on resource creation.
@@ -367,7 +369,8 @@ spec:
                     description: The length of the generated password on resource
                       creation. Only applies on resource creation. Drift detection
                       is not possible with this argument. Default value is 20.
-                    type: number
+                    format: int64
+                    type: integer
                   passwordResetRequired:
                     description: Whether the user should be forced to reset the generated
                       password on resource creation. Only applies on resource creation.

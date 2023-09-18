@@ -29,7 +29,7 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
-	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+	NetmaskLength *int64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 }
 
 type VPCIpamPoolCidrAllocationObservation struct {
@@ -53,7 +53,7 @@ type VPCIpamPoolCidrAllocationObservation struct {
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
-	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+	NetmaskLength *int64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 
 	// The ID of the resource.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -95,7 +95,7 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	// +kubebuilder:validation:Optional
-	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+	NetmaskLength *int64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

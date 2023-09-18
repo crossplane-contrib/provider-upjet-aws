@@ -30,26 +30,26 @@ type NetworkACLEgressObservation struct {
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
 	// The from port to match.
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// The IPv6 CIDR block.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// The ICMP type code to be used. Default 0.
-	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+	IcmpCode *int64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
 	// The ICMP type to be used. Default 0.
-	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+	IcmpType *int64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// The protocol to match. If using the -1 'all'
 	// protocol, you must specify a from and to port of 0.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The rule number. Used for ordering.
-	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
+	RuleNo *int64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
 
 	// The to port to match.
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type NetworkACLEgressParameters struct {
@@ -68,26 +68,26 @@ type NetworkACLIngressObservation struct {
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
 	// The from port to match.
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// The IPv6 CIDR block.
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block,omitempty"`
 
 	// The ICMP type code to be used. Default 0.
-	IcmpCode *float64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
+	IcmpCode *int64 `json:"icmpCode,omitempty" tf:"icmp_code,omitempty"`
 
 	// The ICMP type to be used. Default 0.
-	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
+	IcmpType *int64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
 	// The protocol to match. If using the -1 'all'
 	// protocol, you must specify a from and to port of 0.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The rule number. Used for ordering.
-	RuleNo *float64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
+	RuleNo *int64 `json:"ruleNo,omitempty" tf:"rule_no,omitempty"`
 
 	// The to port to match.
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type NetworkACLIngressParameters struct {

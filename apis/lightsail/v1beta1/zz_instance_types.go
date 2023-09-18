@@ -104,7 +104,7 @@ type InstanceObservation struct {
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The number of vCPUs the instance has.
-	CPUCount *float64 `json:"cpuCount,omitempty" tf:"cpu_count,omitempty"`
+	CPUCount *int64 `json:"cpuCount,omitempty" tf:"cpu_count,omitempty"`
 
 	// The timestamp when the instance was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`

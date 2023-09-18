@@ -20,13 +20,13 @@ import (
 type SignatureValidityPeriodInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SignatureValidityPeriodObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SignatureValidityPeriodParameters struct {
@@ -35,7 +35,7 @@ type SignatureValidityPeriodParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type SigningMaterialInitParameters struct {

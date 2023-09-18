@@ -459,7 +459,8 @@ spec:
                       properties:
                         asn:
                           description: ASN of a core network edge.
-                          type: number
+                          format: int64
+                          type: integer
                         edgeLocation:
                           description: Region where a core network edge is located.
                           type: string

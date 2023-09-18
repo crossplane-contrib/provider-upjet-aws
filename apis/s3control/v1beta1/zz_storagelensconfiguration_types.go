@@ -542,7 +542,7 @@ type SelectionCriteriaInitParameters struct {
 	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
 
 	// The max depth of the selection criteria.
-	MaxDepth *float64 `json:"maxDepth,omitempty" tf:"max_depth,omitempty"`
+	MaxDepth *int64 `json:"maxDepth,omitempty" tf:"max_depth,omitempty"`
 
 	// The minimum number of storage bytes percentage whose metrics will be selected.
 	MinStorageBytesPercentage *float64 `json:"minStorageBytesPercentage,omitempty" tf:"min_storage_bytes_percentage,omitempty"`
@@ -554,7 +554,7 @@ type SelectionCriteriaObservation struct {
 	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
 
 	// The max depth of the selection criteria.
-	MaxDepth *float64 `json:"maxDepth,omitempty" tf:"max_depth,omitempty"`
+	MaxDepth *int64 `json:"maxDepth,omitempty" tf:"max_depth,omitempty"`
 
 	// The minimum number of storage bytes percentage whose metrics will be selected.
 	MinStorageBytesPercentage *float64 `json:"minStorageBytesPercentage,omitempty" tf:"min_storage_bytes_percentage,omitempty"`
@@ -568,7 +568,7 @@ type SelectionCriteriaParameters struct {
 
 	// The max depth of the selection criteria.
 	// +kubebuilder:validation:Optional
-	MaxDepth *float64 `json:"maxDepth,omitempty" tf:"max_depth,omitempty"`
+	MaxDepth *int64 `json:"maxDepth,omitempty" tf:"max_depth,omitempty"`
 
 	// The minimum number of storage bytes percentage whose metrics will be selected.
 	// +kubebuilder:validation:Optional

@@ -50,7 +50,7 @@ func (in *DevicePoolInitParameters) DeepCopyInto(out *DevicePoolInitParameters) 
 	}
 	if in.MaxDevices != nil {
 		in, out := &in.MaxDevices, &out.MaxDevices
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -145,7 +145,7 @@ func (in *DevicePoolObservation) DeepCopyInto(out *DevicePoolObservation) {
 	}
 	if in.MaxDevices != nil {
 		in, out := &in.MaxDevices, &out.MaxDevices
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -224,7 +224,7 @@ func (in *DevicePoolParameters) DeepCopyInto(out *DevicePoolParameters) {
 	}
 	if in.MaxDevices != nil {
 		in, out := &in.MaxDevices, &out.MaxDevices
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -670,22 +670,22 @@ func (in *NetworkProfileInitParameters) DeepCopyInto(out *NetworkProfileInitPara
 	}
 	if in.DownlinkBandwidthBits != nil {
 		in, out := &in.DownlinkBandwidthBits, &out.DownlinkBandwidthBits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkDelayMs != nil {
 		in, out := &in.DownlinkDelayMs, &out.DownlinkDelayMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkJitterMs != nil {
 		in, out := &in.DownlinkJitterMs, &out.DownlinkJitterMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkLossPercent != nil {
 		in, out := &in.DownlinkLossPercent, &out.DownlinkLossPercent
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -716,22 +716,22 @@ func (in *NetworkProfileInitParameters) DeepCopyInto(out *NetworkProfileInitPara
 	}
 	if in.UplinkBandwidthBits != nil {
 		in, out := &in.UplinkBandwidthBits, &out.UplinkBandwidthBits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkDelayMs != nil {
 		in, out := &in.UplinkDelayMs, &out.UplinkDelayMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkJitterMs != nil {
 		in, out := &in.UplinkJitterMs, &out.UplinkJitterMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkLossPercent != nil {
 		in, out := &in.UplinkLossPercent, &out.UplinkLossPercent
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -793,22 +793,22 @@ func (in *NetworkProfileObservation) DeepCopyInto(out *NetworkProfileObservation
 	}
 	if in.DownlinkBandwidthBits != nil {
 		in, out := &in.DownlinkBandwidthBits, &out.DownlinkBandwidthBits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkDelayMs != nil {
 		in, out := &in.DownlinkDelayMs, &out.DownlinkDelayMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkJitterMs != nil {
 		in, out := &in.DownlinkJitterMs, &out.DownlinkJitterMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkLossPercent != nil {
 		in, out := &in.DownlinkLossPercent, &out.DownlinkLossPercent
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -865,22 +865,22 @@ func (in *NetworkProfileObservation) DeepCopyInto(out *NetworkProfileObservation
 	}
 	if in.UplinkBandwidthBits != nil {
 		in, out := &in.UplinkBandwidthBits, &out.UplinkBandwidthBits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkDelayMs != nil {
 		in, out := &in.UplinkDelayMs, &out.UplinkDelayMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkJitterMs != nil {
 		in, out := &in.UplinkJitterMs, &out.UplinkJitterMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkLossPercent != nil {
 		in, out := &in.UplinkLossPercent, &out.UplinkLossPercent
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -905,22 +905,22 @@ func (in *NetworkProfileParameters) DeepCopyInto(out *NetworkProfileParameters) 
 	}
 	if in.DownlinkBandwidthBits != nil {
 		in, out := &in.DownlinkBandwidthBits, &out.DownlinkBandwidthBits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkDelayMs != nil {
 		in, out := &in.DownlinkDelayMs, &out.DownlinkDelayMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkJitterMs != nil {
 		in, out := &in.DownlinkJitterMs, &out.DownlinkJitterMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DownlinkLossPercent != nil {
 		in, out := &in.DownlinkLossPercent, &out.DownlinkLossPercent
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -971,22 +971,22 @@ func (in *NetworkProfileParameters) DeepCopyInto(out *NetworkProfileParameters) 
 	}
 	if in.UplinkBandwidthBits != nil {
 		in, out := &in.UplinkBandwidthBits, &out.UplinkBandwidthBits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkDelayMs != nil {
 		in, out := &in.UplinkDelayMs, &out.UplinkDelayMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkJitterMs != nil {
 		in, out := &in.UplinkJitterMs, &out.UplinkJitterMs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UplinkLossPercent != nil {
 		in, out := &in.UplinkLossPercent, &out.UplinkLossPercent
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1068,7 +1068,7 @@ func (in *ProjectInitParameters) DeepCopyInto(out *ProjectInitParameters) {
 	*out = *in
 	if in.DefaultJobTimeoutMinutes != nil {
 		in, out := &in.DefaultJobTimeoutMinutes, &out.DefaultJobTimeoutMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1146,7 +1146,7 @@ func (in *ProjectObservation) DeepCopyInto(out *ProjectObservation) {
 	}
 	if in.DefaultJobTimeoutMinutes != nil {
 		in, out := &in.DefaultJobTimeoutMinutes, &out.DefaultJobTimeoutMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -1208,7 +1208,7 @@ func (in *ProjectParameters) DeepCopyInto(out *ProjectParameters) {
 	*out = *in
 	if in.DefaultJobTimeoutMinutes != nil {
 		in, out := &in.DefaultJobTimeoutMinutes, &out.DefaultJobTimeoutMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {

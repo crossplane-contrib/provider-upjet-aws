@@ -99,7 +99,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -120,7 +121,8 @@ spec:
                         maxAttempts:
                           description: The number of times to prompt the user for
                             information. Must be a number between 1 and 5 (inclusive).
-                          type: number
+                          format: int64
+                          type: integer
                         message:
                           description: A set of messages, each of which provides a
                             message string and its type. You can specify the message
@@ -142,7 +144,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -198,7 +201,8 @@ spec:
                                 description: The number of times to prompt the user
                                   for information. Must be a number between 1 and
                                   5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                               message:
                                 description: A set of messages, each of which provides
                                   a message string and its type. You can specify the
@@ -221,7 +225,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -262,7 +267,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -348,7 +354,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -391,7 +398,8 @@ spec:
                             a value for the slot with priority 1. If multiple slots
                             share the same priority, the order in which Lex elicits
                             values is arbitrary. Must be between 1 and 100.
-                          type: number
+                          format: int64
+                          type: integer
                         responseCard:
                           description: 'The response card. Amazon Lex will substitute
                             session attributes and slot values into the response card.
@@ -431,7 +439,8 @@ spec:
                                 description: The number of times to prompt the user
                                   for information. Must be a number between 1 and
                                   5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                               message:
                                 description: A set of messages, each of which provides
                                   a message string and its type. You can specify the
@@ -454,7 +463,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -515,7 +525,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -536,7 +547,8 @@ spec:
                         maxAttempts:
                           description: The number of times to prompt the user for
                             information. Must be a number between 1 and 5 (inclusive).
-                          type: number
+                          format: int64
+                          type: integer
                         message:
                           description: A set of messages, each of which provides a
                             message string and its type. You can specify the message
@@ -558,7 +570,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -614,7 +627,8 @@ spec:
                                 description: The number of times to prompt the user
                                   for information. Must be a number between 1 and
                                   5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                               message:
                                 description: A set of messages, each of which provides
                                   a message string and its type. You can specify the
@@ -637,7 +651,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -678,7 +693,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -760,7 +776,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -803,7 +820,8 @@ spec:
                             a value for the slot with priority 1. If multiple slots
                             share the same priority, the order in which Lex elicits
                             values is arbitrary. Must be between 1 and 100.
-                          type: number
+                          format: int64
+                          type: integer
                         responseCard:
                           description: 'The response card. Amazon Lex will substitute
                             session attributes and slot values into the response card.
@@ -843,7 +861,8 @@ spec:
                                 description: The number of times to prompt the user
                                   for information. Must be a number between 1 and
                                   5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                               message:
                                 description: A set of messages, each of which provides
                                   a message string and its type. You can specify the
@@ -866,7 +885,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -1091,7 +1111,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -1112,7 +1133,8 @@ spec:
                         maxAttempts:
                           description: The number of times to prompt the user for
                             information. Must be a number between 1 and 5 (inclusive).
-                          type: number
+                          format: int64
+                          type: integer
                         message:
                           description: A set of messages, each of which provides a
                             message string and its type. You can specify the message
@@ -1134,7 +1156,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -1193,7 +1216,8 @@ spec:
                                 description: The number of times to prompt the user
                                   for information. Must be a number between 1 and
                                   5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                               message:
                                 description: A set of messages, each of which provides
                                   a message string and its type. You can specify the
@@ -1216,7 +1240,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -1257,7 +1282,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:
@@ -1345,7 +1371,8 @@ spec:
                                   a message, Amazon Lex returns one message from each
                                   group in the response. Must be a number between
                                   1 and 5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         responseCard:
@@ -1388,7 +1415,8 @@ spec:
                             a value for the slot with priority 1. If multiple slots
                             share the same priority, the order in which Lex elicits
                             values is arbitrary. Must be between 1 and 100.
-                          type: number
+                          format: int64
+                          type: integer
                         responseCard:
                           description: 'The response card. Amazon Lex will substitute
                             session attributes and slot values into the response card.
@@ -1428,7 +1456,8 @@ spec:
                                 description: The number of times to prompt the user
                                   for information. Must be a number between 1 and
                                   5 (inclusive).
-                                type: number
+                                format: int64
+                                type: integer
                               message:
                                 description: A set of messages, each of which provides
                                   a message string and its type. You can specify the
@@ -1451,7 +1480,8 @@ spec:
                                         to a message, Amazon Lex returns one message
                                         from each group in the response. Must be a
                                         number between 1 and 5 (inclusive).
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               responseCard:

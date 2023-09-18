@@ -412,7 +412,8 @@ spec:
                     type: string
                   version:
                     description: Version of the parameter.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

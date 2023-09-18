@@ -78,7 +78,8 @@ spec:
                   ipv4PrefixCount:
                     description: Number of IPv4 prefixes that AWS automatically assigns
                       to the network interface.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv4Prefixes:
                     description: One or more IPv4 prefixes assigned to the network
                       interface.
@@ -90,7 +91,8 @@ spec:
                       You can't use this option if specifying specific ipv6_addresses.
                       If your subnet has the AssignIpv6AddressOnCreation attribute
                       set to true, you can specify 0 to override this setting.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6AddressList:
                     description: List of private IPs to assign to the ENI in sequential
                       order.
@@ -113,7 +115,8 @@ spec:
                   ipv6PrefixCount:
                     description: Number of IPv6 prefixes that AWS automatically assigns
                       to the network interface.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Prefixes:
                     description: One or more IPv6 prefixes assigned to the network
                       interface.
@@ -143,7 +146,8 @@ spec:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
                       as a primary private IP will be assiged to an ENI by default.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -341,7 +345,8 @@ spec:
                   ipv4PrefixCount:
                     description: Number of IPv4 prefixes that AWS automatically assigns
                       to the network interface.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv4Prefixes:
                     description: One or more IPv4 prefixes assigned to the network
                       interface.
@@ -353,7 +358,8 @@ spec:
                       You can't use this option if specifying specific ipv6_addresses.
                       If your subnet has the AssignIpv6AddressOnCreation attribute
                       set to true, you can specify 0 to override this setting.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6AddressList:
                     description: List of private IPs to assign to the ENI in sequential
                       order.
@@ -376,7 +382,8 @@ spec:
                   ipv6PrefixCount:
                     description: Number of IPv6 prefixes that AWS automatically assigns
                       to the network interface.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Prefixes:
                     description: One or more IPv6 prefixes assigned to the network
                       interface.
@@ -406,7 +413,8 @@ spec:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
                       as a primary private IP will be assiged to an ENI by default.
-                    type: number
+                    format: int64
+                    type: integer
                   sourceDestCheck:
                     description: Whether to enable source destination checking for
                       the ENI. Default true.
@@ -595,7 +603,8 @@ spec:
                           type: string
                         deviceIndex:
                           description: Integer to define the devices index.
-                          type: number
+                          format: int64
+                          type: integer
                         instance:
                           description: ID of the instance to attach to.
                           type: string
@@ -615,7 +624,8 @@ spec:
                   ipv4PrefixCount:
                     description: Number of IPv4 prefixes that AWS automatically assigns
                       to the network interface.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv4Prefixes:
                     description: One or more IPv4 prefixes assigned to the network
                       interface.
@@ -627,7 +637,8 @@ spec:
                       You can't use this option if specifying specific ipv6_addresses.
                       If your subnet has the AssignIpv6AddressOnCreation attribute
                       set to true, you can specify 0 to override this setting.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6AddressList:
                     description: List of private IPs to assign to the ENI in sequential
                       order.
@@ -650,7 +661,8 @@ spec:
                   ipv6PrefixCount:
                     description: Number of IPv6 prefixes that AWS automatically assigns
                       to the network interface.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Prefixes:
                     description: One or more IPv6 prefixes assigned to the network
                       interface.
@@ -692,7 +704,8 @@ spec:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
                       as a primary private IP will be assiged to an ENI by default.
-                    type: number
+                    format: int64
+                    type: integer
                   securityGroups:
                     description: List of security group IDs to assign to the ENI.
                     items:

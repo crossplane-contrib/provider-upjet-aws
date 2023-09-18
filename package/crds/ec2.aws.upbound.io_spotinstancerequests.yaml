@@ -83,7 +83,8 @@ spec:
                       instance a two-minute warning before it terminates. Note that
                       you can't specify an Availability Zone group or a launch group
                       if you specify a duration.
-                    type: number
+                    format: int64
+                    type: integer
                   capacityReservationSpecification:
                     items:
                       properties:
@@ -102,20 +103,24 @@ spec:
                       type: object
                     type: array
                   cpuCoreCount:
-                    type: number
+                    format: int64
+                    type: integer
                   cpuOptions:
                     items:
                       properties:
                         amdSevSnp:
                           type: string
                         coreCount:
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   cpuThreadsPerCore:
-                    type: number
+                    format: int64
+                    type: integer
                   creditSpecification:
                     items:
                       properties:
@@ -137,7 +142,8 @@ spec:
                         encrypted:
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -150,9 +156,11 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object
@@ -198,7 +206,8 @@ spec:
                   instanceType:
                     type: string
                   ipv6AddressCount:
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Addresses:
                     items:
                       type: string
@@ -237,7 +246,8 @@ spec:
                         httpProtocolIpv6:
                           type: string
                         httpPutResponseHopLimit:
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           type: string
                         instanceMetadataTags:
@@ -253,9 +263,11 @@ spec:
                         deleteOnTermination:
                           type: boolean
                         deviceIndex:
-                          type: number
+                          format: int64
+                          type: integer
                         networkCardIndex:
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -264,7 +276,8 @@ spec:
                   placementGroup:
                     type: string
                   placementPartitionNumber:
-                    type: number
+                    format: int64
+                    type: integer
                   privateDnsNameOptions:
                     items:
                       properties:
@@ -291,7 +304,8 @@ spec:
                         encrypted:
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -301,9 +315,11 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object
@@ -545,7 +561,8 @@ spec:
                       instance a two-minute warning before it terminates. Note that
                       you can't specify an Availability Zone group or a launch group
                       if you specify a duration.
-                    type: number
+                    format: int64
+                    type: integer
                   capacityReservationSpecification:
                     items:
                       properties:
@@ -564,20 +581,24 @@ spec:
                       type: object
                     type: array
                   cpuCoreCount:
-                    type: number
+                    format: int64
+                    type: integer
                   cpuOptions:
                     items:
                       properties:
                         amdSevSnp:
                           type: string
                         coreCount:
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   cpuThreadsPerCore:
-                    type: number
+                    format: int64
+                    type: integer
                   creditSpecification:
                     items:
                       properties:
@@ -599,7 +620,8 @@ spec:
                         encrypted:
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -612,9 +634,11 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object
@@ -660,7 +684,8 @@ spec:
                   instanceType:
                     type: string
                   ipv6AddressCount:
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Addresses:
                     items:
                       type: string
@@ -699,7 +724,8 @@ spec:
                         httpProtocolIpv6:
                           type: string
                         httpPutResponseHopLimit:
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           type: string
                         instanceMetadataTags:
@@ -715,9 +741,11 @@ spec:
                         deleteOnTermination:
                           type: boolean
                         deviceIndex:
-                          type: number
+                          format: int64
+                          type: integer
                         networkCardIndex:
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -726,7 +754,8 @@ spec:
                   placementGroup:
                     type: string
                   placementPartitionNumber:
-                    type: number
+                    format: int64
+                    type: integer
                   privateDnsNameOptions:
                     items:
                       properties:
@@ -749,7 +778,8 @@ spec:
                         encrypted:
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -759,9 +789,11 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object
@@ -999,7 +1031,8 @@ spec:
                       instance a two-minute warning before it terminates. Note that
                       you can't specify an Availability Zone group or a launch group
                       if you specify a duration.
-                    type: number
+                    format: int64
+                    type: integer
                   capacityReservationSpecification:
                     items:
                       properties:
@@ -1018,20 +1051,24 @@ spec:
                       type: object
                     type: array
                   cpuCoreCount:
-                    type: number
+                    format: int64
+                    type: integer
                   cpuOptions:
                     items:
                       properties:
                         amdSevSnp:
                           type: string
                         coreCount:
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   cpuThreadsPerCore:
-                    type: number
+                    format: int64
+                    type: integer
                   creditSpecification:
                     items:
                       properties:
@@ -1053,7 +1090,8 @@ spec:
                         encrypted:
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -1066,12 +1104,14 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeId:
                           description: The Spot Instance Request ID.
                           type: string
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object
@@ -1122,7 +1162,8 @@ spec:
                   instanceType:
                     type: string
                   ipv6AddressCount:
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Addresses:
                     items:
                       type: string
@@ -1161,7 +1202,8 @@ spec:
                         httpProtocolIpv6:
                           type: string
                         httpPutResponseHopLimit:
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           type: string
                         instanceMetadataTags:
@@ -1177,9 +1219,11 @@ spec:
                         deleteOnTermination:
                           type: boolean
                         deviceIndex:
-                          type: number
+                          format: int64
+                          type: integer
                         networkCardIndex:
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -1192,7 +1236,8 @@ spec:
                   placementGroup:
                     type: string
                   placementPartitionNumber:
-                    type: number
+                    format: int64
+                    type: integer
                   primaryNetworkInterfaceId:
                     description: The Spot Instance Request ID.
                     type: string
@@ -1234,7 +1279,8 @@ spec:
                         encrypted:
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: The Spot Instance Request ID.
                           type: string
@@ -1244,12 +1290,14 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeId:
                           description: The Spot Instance Request ID.
                           type: string
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object

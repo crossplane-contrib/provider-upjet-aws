@@ -1416,7 +1416,7 @@ type ScheduledInitParameters struct {
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
 	// Optional offset that is added to the time interval for a schedule-triggered flow. Maximum value of 36000.
-	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+	ScheduleOffset *int64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Scheduled start time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
 	ScheduleStartTime *string `json:"scheduleStartTime,omitempty" tf:"schedule_start_time,omitempty"`
@@ -1440,7 +1440,7 @@ type ScheduledObservation struct {
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
 	// Optional offset that is added to the time interval for a schedule-triggered flow. Maximum value of 36000.
-	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+	ScheduleOffset *int64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Scheduled start time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
 	ScheduleStartTime *string `json:"scheduleStartTime,omitempty" tf:"schedule_start_time,omitempty"`
@@ -1469,7 +1469,7 @@ type ScheduledParameters struct {
 
 	// Optional offset that is added to the time interval for a schedule-triggered flow. Maximum value of 36000.
 	// +kubebuilder:validation:Optional
-	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+	ScheduleOffset *int64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Scheduled start time for a schedule-triggered flow. Must be a valid RFC3339 timestamp.
 	// +kubebuilder:validation:Optional

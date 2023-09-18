@@ -41,7 +41,7 @@ type DeploymentObservation struct {
 	ConfigurationVersion *string `json:"configurationVersion,omitempty" tf:"configuration_version,omitempty"`
 
 	// Deployment number.
-	DeploymentNumber *float64 `json:"deploymentNumber,omitempty" tf:"deployment_number,omitempty"`
+	DeploymentNumber *int64 `json:"deploymentNumber,omitempty" tf:"deployment_number,omitempty"`
 
 	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
 	DeploymentStrategyID *string `json:"deploymentStrategyId,omitempty" tf:"deployment_strategy_id,omitempty"`
