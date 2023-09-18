@@ -73,79 +73,6 @@ spec:
                       If ALL is specified, the css and/or image_file settings will
                       be used for every client that has no UI customization set previously.
                     type: string
-                  clientIdRef:
-                    description: Reference to a UserPoolClient to populate clientId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  clientIdSelector:
-                    description: Selector for a UserPoolClient to populate clientId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   css:
                     description: The CSS values in the UI customization, provided
                       as a String. At least one of css or image_file is required.
@@ -252,6 +179,11 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
+                  clientId:
+                    description: The client ID for the client app. Defaults to ALL.
+                      If ALL is specified, the css and/or image_file settings will
+                      be used for every client that has no UI customization set previously.
+                    type: string
                   css:
                     description: The CSS values in the UI customization, provided
                       as a String. At least one of css or image_file is required.

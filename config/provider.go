@@ -145,6 +145,7 @@ func GetProvider() *config.Provider {
 			ExternalNameConfigurations(),
 			NamePrefixRemoval(),
 			DocumentationForTags(),
+			iamNoForkClientConfig(),
 		),
 		config.WithMainTemplate(hack.MainTemplate),
 	)

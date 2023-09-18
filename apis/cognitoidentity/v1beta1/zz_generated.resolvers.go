@@ -62,28 +62,9 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences(ctx context
 func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
-	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.CognitoIdentityProviders); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDRef,
-			Selector:     mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDSelector,
-			To: reference.To{
-				List:    &v1beta1.UserPoolClientList{},
-				Managed: &v1beta1.UserPoolClient{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID")
-		}
-		mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDRef = rsp.ResolvedReference
-
-	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SAMLProviderArns),
 		Extract:       common.ARNExtractor(),
