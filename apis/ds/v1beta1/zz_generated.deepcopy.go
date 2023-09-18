@@ -443,7 +443,7 @@ func (in *DirectoryInitParameters) DeepCopyInto(out *DirectoryInitParameters) {
 	}
 	if in.DesiredNumberOfDomainControllers != nil {
 		in, out := &in.DesiredNumberOfDomainControllers, &out.DesiredNumberOfDomainControllers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Edition != nil {
@@ -579,7 +579,7 @@ func (in *DirectoryObservation) DeepCopyInto(out *DirectoryObservation) {
 	}
 	if in.DesiredNumberOfDomainControllers != nil {
 		in, out := &in.DesiredNumberOfDomainControllers, &out.DesiredNumberOfDomainControllers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Edition != nil {
@@ -695,7 +695,7 @@ func (in *DirectoryParameters) DeepCopyInto(out *DirectoryParameters) {
 	}
 	if in.DesiredNumberOfDomainControllers != nil {
 		in, out := &in.DesiredNumberOfDomainControllers, &out.DesiredNumberOfDomainControllers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Edition != nil {

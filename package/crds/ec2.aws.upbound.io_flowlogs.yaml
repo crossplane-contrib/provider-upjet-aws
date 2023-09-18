@@ -270,7 +270,8 @@ spec:
                       Default: 600. When transit_gateway_id or transit_gateway_attachment_id
                       is specified, max_aggregation_interval must be 60 seconds (1
                       minute).'
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -504,7 +505,8 @@ spec:
                       Default: 600. When transit_gateway_id or transit_gateway_attachment_id
                       is specified, max_aggregation_interval must be 60 seconds (1
                       minute).'
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -747,7 +749,8 @@ spec:
                       Default: 600. When transit_gateway_id or transit_gateway_attachment_id
                       is specified, max_aggregation_interval must be 60 seconds (1
                       minute).'
-                    type: number
+                    format: int64
+                    type: integer
                   subnetId:
                     description: Subnet ID to attach to
                     type: string

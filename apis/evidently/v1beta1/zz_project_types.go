@@ -83,10 +83,10 @@ type ProjectInitParameters struct {
 type ProjectObservation struct {
 
 	// The number of ongoing experiments currently in the project.
-	ActiveExperimentCount *float64 `json:"activeExperimentCount,omitempty" tf:"active_experiment_count,omitempty"`
+	ActiveExperimentCount *int64 `json:"activeExperimentCount,omitempty" tf:"active_experiment_count,omitempty"`
 
 	// The number of ongoing launches currently in the project.
-	ActiveLaunchCount *float64 `json:"activeLaunchCount,omitempty" tf:"active_launch_count,omitempty"`
+	ActiveLaunchCount *int64 `json:"activeLaunchCount,omitempty" tf:"active_launch_count,omitempty"`
 
 	// The ARN of the project.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -101,10 +101,10 @@ type ProjectObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The number of experiments currently in the project. This includes all experiments that have been created and not deleted, whether they are ongoing or not.
-	ExperimentCount *float64 `json:"experimentCount,omitempty" tf:"experiment_count,omitempty"`
+	ExperimentCount *int64 `json:"experimentCount,omitempty" tf:"experiment_count,omitempty"`
 
 	// The number of features currently in the project.
-	FeatureCount *float64 `json:"featureCount,omitempty" tf:"feature_count,omitempty"`
+	FeatureCount *int64 `json:"featureCount,omitempty" tf:"feature_count,omitempty"`
 
 	// The ID has the same value as the arn of the project.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -113,7 +113,7 @@ type ProjectObservation struct {
 	LastUpdatedTime *string `json:"lastUpdatedTime,omitempty" tf:"last_updated_time,omitempty"`
 
 	// The number of launches currently in the project. This includes all launches that have been created and not deleted, whether they are ongoing or not.
-	LaunchCount *float64 `json:"launchCount,omitempty" tf:"launch_count,omitempty"`
+	LaunchCount *int64 `json:"launchCount,omitempty" tf:"launch_count,omitempty"`
 
 	// A name for the project.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

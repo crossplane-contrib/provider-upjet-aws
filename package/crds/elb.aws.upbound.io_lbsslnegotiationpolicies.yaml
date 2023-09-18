@@ -85,7 +85,8 @@ spec:
                   lbPort:
                     description: The load balancer port to which the policy should
                       be applied. This must be an active listener on the load balancer.
-                    type: number
+                    format: int64
+                    type: integer
                   loadBalancer:
                     description: The load balancer to which the policy should be attached.
                     type: string
@@ -206,7 +207,8 @@ spec:
                   lbPort:
                     description: The load balancer port to which the policy should
                       be applied. This must be an active listener on the load balancer.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name of the SSL negotiation policy.
                     type: string
@@ -411,7 +413,8 @@ spec:
                   lbPort:
                     description: The load balancer port to which the policy should
                       be applied. This must be an active listener on the load balancer.
-                    type: number
+                    format: int64
+                    type: integer
                   loadBalancer:
                     description: The load balancer to which the policy should be attached.
                     type: string

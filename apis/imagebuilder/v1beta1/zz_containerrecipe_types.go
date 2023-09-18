@@ -291,7 +291,7 @@ type EBSInitParameters struct {
 	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -300,10 +300,10 @@ type EBSInitParameters struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume, in GiB.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of the volume. For example, gp2 or io2.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -318,7 +318,7 @@ type EBSObservation struct {
 	Encrypted *string `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -327,10 +327,10 @@ type EBSObservation struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume, in GiB.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of the volume. For example, gp2 or io2.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -348,7 +348,7 @@ type EBSParameters struct {
 
 	// Number of Input/Output (I/O) operations per second to provision for an io1 or io2 volume.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key for encryption.
 	// +kubebuilder:validation:Optional
@@ -360,11 +360,11 @@ type EBSParameters struct {
 
 	// For GP3 volumes only. The throughput in MiB/s that the volume supports.
 	// +kubebuilder:validation:Optional
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume, in GiB.
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of the volume. For example, gp2 or io2.
 	// +kubebuilder:validation:Optional

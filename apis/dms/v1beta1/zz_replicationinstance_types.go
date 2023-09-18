@@ -20,7 +20,7 @@ import (
 type ReplicationInstanceInitParameters struct {
 
 	// The amount of storage (in gigabytes) to be initially allocated for the replication instance.
-	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
+	AllocatedStorage *int64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
 	// Indicates that major version upgrades are allowed.
 	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
@@ -59,7 +59,7 @@ type ReplicationInstanceInitParameters struct {
 type ReplicationInstanceObservation struct {
 
 	// The amount of storage (in gigabytes) to be initially allocated for the replication instance.
-	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
+	AllocatedStorage *int64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
 	// Indicates that major version upgrades are allowed.
 	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
@@ -122,7 +122,7 @@ type ReplicationInstanceParameters struct {
 
 	// The amount of storage (in gigabytes) to be initially allocated for the replication instance.
 	// +kubebuilder:validation:Optional
-	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
+	AllocatedStorage *int64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
 	// Indicates that major version upgrades are allowed.
 	// +kubebuilder:validation:Optional

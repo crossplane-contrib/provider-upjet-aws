@@ -190,7 +190,8 @@ spec:
                   automaticBackupRetentionDays:
                     description: The number of days to retain automatic backups. Minimum
                       of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
-                    type: number
+                    format: int64
+                    type: integer
                   backupId:
                     description: The ID of the source backup to create the filesystem
                       from.
@@ -473,7 +474,8 @@ spec:
                       of 32 and maximum of 65536. If the storage type is set to HDD
                       the minimum value is 2000. Required when not creating filesystem
                       for a backup.
-                    type: number
+                    format: int64
+                    type: integer
                   storageType:
                     description: Specifies the storage type, Valid values are SSD
                       and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows
@@ -571,7 +573,8 @@ spec:
                   throughputCapacity:
                     description: Throughput (megabytes per second) of the file system
                       in power of 2 increments. Minimum of 8 and maximum of 2048.
-                    type: number
+                    format: int64
+                    type: integer
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -636,7 +639,8 @@ spec:
                   automaticBackupRetentionDays:
                     description: The number of days to retain automatic backups. Minimum
                       of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
-                    type: number
+                    format: int64
+                    type: integer
                   backupId:
                     description: The ID of the source backup to create the filesystem
                       from.
@@ -733,7 +737,8 @@ spec:
                       of 32 and maximum of 65536. If the storage type is set to HDD
                       the minimum value is 2000. Required when not creating filesystem
                       for a backup.
-                    type: number
+                    format: int64
+                    type: integer
                   storageType:
                     description: Specifies the storage type, Valid values are SSD
                       and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows
@@ -747,7 +752,8 @@ spec:
                   throughputCapacity:
                     description: Throughput (megabytes per second) of the file system
                       in power of 2 increments. Minimum of 8 and maximum of 2048.
-                    type: number
+                    format: int64
+                    type: integer
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -976,7 +982,8 @@ spec:
                   automaticBackupRetentionDays:
                     description: The number of days to retain automatic backups. Minimum
                       of 0 and maximum of 90. Defaults to 7. Set to 0 to disable.
-                    type: number
+                    format: int64
+                    type: integer
                   backupId:
                     description: The ID of the source backup to create the filesystem
                       from.
@@ -1110,7 +1117,8 @@ spec:
                       of 32 and maximum of 65536. If the storage type is set to HDD
                       the minimum value is 2000. Required when not creating filesystem
                       for a backup.
-                    type: number
+                    format: int64
+                    type: integer
                   storageType:
                     description: Specifies the storage type, Valid values are SSD
                       and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows
@@ -1138,7 +1146,8 @@ spec:
                   throughputCapacity:
                     description: Throughput (megabytes per second) of the file system
                       in power of 2 increments. Minimum of 8 and maximum of 2048.
-                    type: number
+                    format: int64
+                    type: integer
                   vpcId:
                     description: Identifier of the Virtual Private Cloud for the file
                       system.

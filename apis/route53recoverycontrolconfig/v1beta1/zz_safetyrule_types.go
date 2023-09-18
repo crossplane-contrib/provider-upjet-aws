@@ -23,7 +23,7 @@ type RuleConfigInitParameters struct {
 	Inverted *bool `json:"inverted,omitempty" tf:"inverted,omitempty"`
 
 	// Number of controls that must be set when you specify an ATLEAST type rule.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *int64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
 	// Rule type. Valid values are ATLEAST, AND, and OR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -35,7 +35,7 @@ type RuleConfigObservation struct {
 	Inverted *bool `json:"inverted,omitempty" tf:"inverted,omitempty"`
 
 	// Number of controls that must be set when you specify an ATLEAST type rule.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *int64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
 	// Rule type. Valid values are ATLEAST, AND, and OR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -49,7 +49,7 @@ type RuleConfigParameters struct {
 
 	// Number of controls that must be set when you specify an ATLEAST type rule.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
+	Threshold *int64 `json:"threshold" tf:"threshold,omitempty"`
 
 	// Rule type. Valid values are ATLEAST, AND, and OR.
 	// +kubebuilder:validation:Optional
@@ -71,7 +71,7 @@ type SafetyRuleInitParameters struct {
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
-	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
+	WaitPeriodMs *int64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
 }
 
 type SafetyRuleObservation struct {
@@ -103,7 +103,7 @@ type SafetyRuleObservation struct {
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
-	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
+	WaitPeriodMs *int64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
 }
 
 type SafetyRuleParameters struct {
@@ -159,7 +159,7 @@ type SafetyRuleParameters struct {
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
 	// +kubebuilder:validation:Optional
-	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
+	WaitPeriodMs *int64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
 }
 
 // SafetyRuleSpec defines the desired state of SafetyRule

@@ -55,7 +55,7 @@ type IntegrationInitParameters struct {
 	TLSConfig []TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
-	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+	TimeoutMilliseconds *int64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -114,7 +114,7 @@ type IntegrationObservation struct {
 	TLSConfig []TLSConfigObservation `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
-	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+	TimeoutMilliseconds *int64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -236,7 +236,7 @@ type IntegrationParameters struct {
 
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
 	// +kubebuilder:validation:Optional
-	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+	TimeoutMilliseconds *int64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	// +kubebuilder:validation:Optional

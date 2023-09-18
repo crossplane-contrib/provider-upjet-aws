@@ -86,7 +86,8 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     description: The days to retain backups for. Default 1
-                    type: number
+                    format: int64
+                    type: integer
                   copyTagsToSnapshot:
                     description: If set to true, tags are copied to any snapshot of
                       the DB cluster that is created.
@@ -444,7 +445,8 @@ spec:
                   port:
                     description: The port on which the Neptune accepts connections.
                       Default is 8182.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
@@ -767,7 +769,8 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     description: The days to retain backups for. Default 1
-                    type: number
+                    format: int64
+                    type: integer
                   copyTagsToSnapshot:
                     description: If set to true, tags are copied to any snapshot of
                       the DB cluster that is created.
@@ -811,7 +814,8 @@ spec:
                   port:
                     description: The port on which the Neptune accepts connections.
                       Default is 8182.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
@@ -1043,7 +1047,8 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     description: The days to retain backups for. Default 1
-                    type: number
+                    format: int64
+                    type: integer
                   clusterMembers:
                     description: – List of Neptune Instances that are a part of this
                       cluster
@@ -1122,7 +1127,8 @@ spec:
                   port:
                     description: The port on which the Neptune accepts connections.
                       Default is 8182.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod

@@ -147,7 +147,8 @@ spec:
                   authorizerResultTtlInSeconds:
                     description: TTL of cached authorizer results in seconds. Defaults
                       to 300.
-                    type: number
+                    format: int64
+                    type: integer
                   authorizerUri:
                     description: Authorizer's Uniform Resource Identifier (URI). This
                       must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},
@@ -355,7 +356,8 @@ spec:
                   authorizerResultTtlInSeconds:
                     description: TTL of cached authorizer results in seconds. Defaults
                       to 300.
-                    type: number
+                    format: int64
+                    type: integer
                   identitySource:
                     description: Source of the identity in an incoming request. Defaults
                       to method.request.header.Authorization. For REQUEST type, this
@@ -566,7 +568,8 @@ spec:
                   authorizerResultTtlInSeconds:
                     description: TTL of cached authorizer results in seconds. Defaults
                       to 300.
-                    type: number
+                    format: int64
+                    type: integer
                   authorizerUri:
                     description: Authorizer's Uniform Resource Identifier (URI). This
                       must be a well-formed Lambda function URI in the form of arn:aws:apigateway:{region}:lambda:path/{service_api},

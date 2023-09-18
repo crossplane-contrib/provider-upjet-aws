@@ -190,7 +190,8 @@ spec:
                           type: string
                         throttlingBurstLimit:
                           description: Throttling burst limit for the default route.
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: Throttling rate limit for the default route.
                           type: number
@@ -306,7 +307,8 @@ spec:
                           type: string
                         throttlingBurstLimit:
                           description: Throttling burst limit for the route.
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: Throttling rate limit for the route.
                           type: number
@@ -384,7 +386,8 @@ spec:
                           type: string
                         throttlingBurstLimit:
                           description: Throttling burst limit for the default route.
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: Throttling rate limit for the default route.
                           type: number
@@ -419,7 +422,8 @@ spec:
                           type: string
                         throttlingBurstLimit:
                           description: Throttling burst limit for the route.
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: Throttling rate limit for the route.
                           type: number
@@ -654,7 +658,8 @@ spec:
                           type: string
                         throttlingBurstLimit:
                           description: Throttling burst limit for the default route.
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: Throttling rate limit for the default route.
                           type: number
@@ -708,7 +713,8 @@ spec:
                           type: string
                         throttlingBurstLimit:
                           description: Throttling burst limit for the route.
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: Throttling rate limit for the route.
                           type: number

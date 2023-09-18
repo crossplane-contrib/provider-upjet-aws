@@ -18,11 +18,11 @@ import (
 )
 
 type CloudwatchConfigurationLogStreamsInitParameters struct {
-	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+	BatchCount *int64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+	BufferDuration *int64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
 
 	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
 
@@ -43,11 +43,11 @@ type CloudwatchConfigurationLogStreamsInitParameters struct {
 }
 
 type CloudwatchConfigurationLogStreamsObservation struct {
-	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+	BatchCount *int64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+	BufferDuration *int64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
 
 	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
 
@@ -70,13 +70,13 @@ type CloudwatchConfigurationLogStreamsObservation struct {
 type CloudwatchConfigurationLogStreamsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+	BatchCount *int64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+	BufferDuration *int64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
@@ -129,19 +129,19 @@ type EcsClusterLayerEBSVolumeInitParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// For PIOPS volumes, the IOPS per disk.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
 	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
-	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *int64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
 
 	// The size of the volume in gigabytes.
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -151,19 +151,19 @@ type EcsClusterLayerEBSVolumeObservation struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// For PIOPS volumes, the IOPS per disk.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
 	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
-	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *int64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
 
 	// The size of the volume in gigabytes.
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -176,7 +176,7 @@ type EcsClusterLayerEBSVolumeParameters struct {
 
 	// For PIOPS volumes, the IOPS per disk.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
 	// +kubebuilder:validation:Optional
@@ -184,7 +184,7 @@ type EcsClusterLayerEBSVolumeParameters struct {
 
 	// The number of disks to use for the EBS volume.
 	// +kubebuilder:validation:Optional
-	NumberOfDisks *float64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *int64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	// +kubebuilder:validation:Optional
@@ -192,7 +192,7 @@ type EcsClusterLayerEBSVolumeParameters struct {
 
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size" tf:"size,omitempty"`
+	Size *int64 `json:"size" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional
@@ -241,7 +241,7 @@ type EcsClusterLayerInitParameters struct {
 	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
 
 	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
-	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+	InstanceShutdownTimeout *int64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
 	LoadBasedAutoScaling []EcsClusterLayerLoadBasedAutoScalingInitParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
 
@@ -340,7 +340,7 @@ type EcsClusterLayerObservation struct {
 	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
 
 	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
-	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+	InstanceShutdownTimeout *int64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
 	LoadBasedAutoScaling []EcsClusterLayerLoadBasedAutoScalingObservation `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
 
@@ -449,7 +449,7 @@ type EcsClusterLayerParameters struct {
 
 	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
 	// +kubebuilder:validation:Optional
-	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+	InstanceShutdownTimeout *int64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LoadBasedAutoScaling []EcsClusterLayerLoadBasedAutoScalingParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
@@ -490,15 +490,15 @@ type LoadBasedAutoScalingDownscalingInitParameters struct {
 
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
 
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type LoadBasedAutoScalingDownscalingObservation struct {
@@ -506,15 +506,15 @@ type LoadBasedAutoScalingDownscalingObservation struct {
 
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
 
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type LoadBasedAutoScalingDownscalingParameters struct {
@@ -526,10 +526,10 @@ type LoadBasedAutoScalingDownscalingParameters struct {
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
@@ -538,7 +538,7 @@ type LoadBasedAutoScalingDownscalingParameters struct {
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type LoadBasedAutoScalingUpscalingInitParameters struct {
@@ -546,15 +546,15 @@ type LoadBasedAutoScalingUpscalingInitParameters struct {
 
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
 
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type LoadBasedAutoScalingUpscalingObservation struct {
@@ -562,15 +562,15 @@ type LoadBasedAutoScalingUpscalingObservation struct {
 
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
 
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type LoadBasedAutoScalingUpscalingParameters struct {
@@ -582,10 +582,10 @@ type LoadBasedAutoScalingUpscalingParameters struct {
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
@@ -594,7 +594,7 @@ type LoadBasedAutoScalingUpscalingParameters struct {
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 // EcsClusterLayerSpec defines the desired state of EcsClusterLayer

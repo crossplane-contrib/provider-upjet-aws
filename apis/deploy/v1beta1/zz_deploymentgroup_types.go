@@ -322,7 +322,7 @@ type DeploymentReadyOptionInitParameters struct {
 	ActionOnTimeout *string `json:"actionOnTimeout,omitempty" tf:"action_on_timeout,omitempty"`
 
 	// The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for action_on_timeout.
-	WaitTimeInMinutes *float64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
+	WaitTimeInMinutes *int64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
 }
 
 type DeploymentReadyOptionObservation struct {
@@ -331,7 +331,7 @@ type DeploymentReadyOptionObservation struct {
 	ActionOnTimeout *string `json:"actionOnTimeout,omitempty" tf:"action_on_timeout,omitempty"`
 
 	// The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for action_on_timeout.
-	WaitTimeInMinutes *float64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
+	WaitTimeInMinutes *int64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
 }
 
 type DeploymentReadyOptionParameters struct {
@@ -342,7 +342,7 @@ type DeploymentReadyOptionParameters struct {
 
 	// The number of minutes to wait before the status of a blue/green deployment changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for action_on_timeout.
 	// +kubebuilder:validation:Optional
-	WaitTimeInMinutes *float64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
+	WaitTimeInMinutes *int64 `json:"waitTimeInMinutes,omitempty" tf:"wait_time_in_minutes,omitempty"`
 }
 
 type DeploymentStyleInitParameters struct {
@@ -743,7 +743,7 @@ type TerminateBlueInstancesOnDeploymentSuccessInitParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
-	TerminationWaitTimeInMinutes *float64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
+	TerminationWaitTimeInMinutes *int64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
 }
 
 type TerminateBlueInstancesOnDeploymentSuccessObservation struct {
@@ -752,7 +752,7 @@ type TerminateBlueInstancesOnDeploymentSuccessObservation struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
-	TerminationWaitTimeInMinutes *float64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
+	TerminationWaitTimeInMinutes *int64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
 }
 
 type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
@@ -763,7 +763,7 @@ type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
 
 	// The number of minutes to wait after a successful blue/green deployment before terminating instances from the original environment.
 	// +kubebuilder:validation:Optional
-	TerminationWaitTimeInMinutes *float64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
+	TerminationWaitTimeInMinutes *int64 `json:"terminationWaitTimeInMinutes,omitempty" tf:"termination_wait_time_in_minutes,omitempty"`
 }
 
 type TestTrafficRouteInitParameters struct {

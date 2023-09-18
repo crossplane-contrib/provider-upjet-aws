@@ -40,7 +40,7 @@ type ControlPanelObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Number routing controls in a control panel.
-	RoutingControlCount *float64 `json:"routingControlCount,omitempty" tf:"routing_control_count,omitempty"`
+	RoutingControlCount *int64 `json:"routingControlCount,omitempty" tf:"routing_control_count,omitempty"`
 
 	// Status of control panel: PENDING when it is being created/updated, PENDING_DELETION when it is being deleted, and DEPLOYED otherwise.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

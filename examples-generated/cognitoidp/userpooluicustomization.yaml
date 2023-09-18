@@ -36,24 +36,6 @@ spec:
 ---
 
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserPoolClient
-metadata:
-  annotations:
-    meta.upbound.io/example-id: cognitoidp/v1beta1/userpooluicustomization
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    name: example
-    region: us-west-1
-    userPoolIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPoolDomain
 metadata:
   annotations:

@@ -238,7 +238,8 @@ spec:
                           description: Specifies the order in which the rules in a
                             WebACL are evaluated. Rules with a lower value are evaluated
                             before rules with a higher value.
-                          type: number
+                          format: int64
+                          type: integer
                         ruleId:
                           description: ID of the associated WAF (Global) rule (e.g.,
                             aws_waf_rule). WAF (Regional) rules cannot be used.
@@ -433,7 +434,8 @@ spec:
                           description: Specifies the order in which the rules in a
                             WebACL are evaluated. Rules with a lower value are evaluated
                             before rules with a higher value.
-                          type: number
+                          format: int64
+                          type: integer
                         type:
                           description: The rule type, either REGULAR, as defined by
                             Rule, RATE_BASED, as defined by RateBasedRule, or GROUP,
@@ -722,7 +724,8 @@ spec:
                           description: Specifies the order in which the rules in a
                             WebACL are evaluated. Rules with a lower value are evaluated
                             before rules with a higher value.
-                          type: number
+                          format: int64
+                          type: integer
                         ruleId:
                           description: ID of the associated WAF (Global) rule (e.g.,
                             aws_waf_rule). WAF (Regional) rules cannot be used.

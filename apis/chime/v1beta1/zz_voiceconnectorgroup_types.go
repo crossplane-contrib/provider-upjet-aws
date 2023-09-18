@@ -20,13 +20,13 @@ import (
 type ConnectorInitParameters struct {
 
 	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type ConnectorObservation struct {
 
 	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.
 	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
@@ -36,7 +36,7 @@ type ConnectorParameters struct {
 
 	// The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority" tf:"priority,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector

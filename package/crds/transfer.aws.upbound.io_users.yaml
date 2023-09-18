@@ -112,17 +112,20 @@ spec:
                         gid:
                           description: The POSIX group ID used for all EFS operations
                             by this user.
-                          type: number
+                          format: int64
+                          type: integer
                         secondaryGids:
                           description: The secondary POSIX group IDs used for all
                             EFS operations by this user.
                           items:
-                            type: number
+                            format: int64
+                            type: integer
                           type: array
                         uid:
                           description: The POSIX user ID used for all EFS operations
                             by this user.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   region:
@@ -348,17 +351,20 @@ spec:
                         gid:
                           description: The POSIX group ID used for all EFS operations
                             by this user.
-                          type: number
+                          format: int64
+                          type: integer
                         secondaryGids:
                           description: The secondary POSIX group IDs used for all
                             EFS operations by this user.
                           items:
-                            type: number
+                            format: int64
+                            type: integer
                           type: array
                         uid:
                           description: The POSIX user ID used for all EFS operations
                             by this user.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   tags:
@@ -582,17 +588,20 @@ spec:
                         gid:
                           description: The POSIX group ID used for all EFS operations
                             by this user.
-                          type: number
+                          format: int64
+                          type: integer
                         secondaryGids:
                           description: The secondary POSIX group IDs used for all
                             EFS operations by this user.
                           items:
-                            type: number
+                            format: int64
+                            type: integer
                           type: array
                         uid:
                           description: The POSIX user ID used for all EFS operations
                             by this user.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   role:

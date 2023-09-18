@@ -23,7 +23,7 @@ type CachingConfigInitParameters struct {
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
 	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type CachingConfigObservation struct {
@@ -32,7 +32,7 @@ type CachingConfigObservation struct {
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
 	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type CachingConfigParameters struct {
@@ -43,7 +43,7 @@ type CachingConfigParameters struct {
 
 	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
 	// +kubebuilder:validation:Optional
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type PipelineConfigInitParameters struct {
@@ -77,7 +77,7 @@ type ResolverInitParameters struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
-	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
+	MaxBatchSize *int64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
 	// The caching configuration for the resolver. See Pipeline Config.
 	PipelineConfig []PipelineConfigInitParameters `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
@@ -121,7 +121,7 @@ type ResolverObservation struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
-	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
+	MaxBatchSize *int64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
 	// The caching configuration for the resolver. See Pipeline Config.
 	PipelineConfig []PipelineConfigObservation `json:"pipelineConfig,omitempty" tf:"pipeline_config,omitempty"`
@@ -189,7 +189,7 @@ type ResolverParameters struct {
 
 	// Maximum batching size for a resolver. Valid values are between 0 and 2000.
 	// +kubebuilder:validation:Optional
-	MaxBatchSize *float64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
+	MaxBatchSize *int64 `json:"maxBatchSize,omitempty" tf:"max_batch_size,omitempty"`
 
 	// The caching configuration for the resolver. See Pipeline Config.
 	// +kubebuilder:validation:Optional

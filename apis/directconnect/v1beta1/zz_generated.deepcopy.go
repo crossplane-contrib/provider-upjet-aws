@@ -55,7 +55,7 @@ func (in *BGPPeerInitParameters) DeepCopyInto(out *BGPPeerInitParameters) {
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -132,7 +132,7 @@ func (in *BGPPeerObservation) DeepCopyInto(out *BGPPeerObservation) {
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -192,7 +192,7 @@ func (in *BGPPeerParameters) DeepCopyInto(out *BGPPeerParameters) {
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -1857,7 +1857,7 @@ func (in *HostedPrivateVirtualInterfaceInitParameters) DeepCopyInto(out *HostedP
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -1872,7 +1872,7 @@ func (in *HostedPrivateVirtualInterfaceInitParameters) DeepCopyInto(out *HostedP
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1887,7 +1887,7 @@ func (in *HostedPrivateVirtualInterfaceInitParameters) DeepCopyInto(out *HostedP
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1964,7 +1964,7 @@ func (in *HostedPrivateVirtualInterfaceObservation) DeepCopyInto(out *HostedPriv
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -1994,7 +1994,7 @@ func (in *HostedPrivateVirtualInterfaceObservation) DeepCopyInto(out *HostedPriv
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -2009,7 +2009,7 @@ func (in *HostedPrivateVirtualInterfaceObservation) DeepCopyInto(out *HostedPriv
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2039,7 +2039,7 @@ func (in *HostedPrivateVirtualInterfaceParameters) DeepCopyInto(out *HostedPriva
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -2069,7 +2069,7 @@ func (in *HostedPrivateVirtualInterfaceParameters) DeepCopyInto(out *HostedPriva
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -2089,7 +2089,7 @@ func (in *HostedPrivateVirtualInterfaceParameters) DeepCopyInto(out *HostedPriva
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2419,7 +2419,7 @@ func (in *HostedPublicVirtualInterfaceInitParameters) DeepCopyInto(out *HostedPu
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -2455,7 +2455,7 @@ func (in *HostedPublicVirtualInterfaceInitParameters) DeepCopyInto(out *HostedPu
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2532,7 +2532,7 @@ func (in *HostedPublicVirtualInterfaceObservation) DeepCopyInto(out *HostedPubli
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -2578,7 +2578,7 @@ func (in *HostedPublicVirtualInterfaceObservation) DeepCopyInto(out *HostedPubli
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2608,7 +2608,7 @@ func (in *HostedPublicVirtualInterfaceParameters) DeepCopyInto(out *HostedPublic
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -2664,7 +2664,7 @@ func (in *HostedPublicVirtualInterfaceParameters) DeepCopyInto(out *HostedPublic
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3014,7 +3014,7 @@ func (in *HostedTransitVirtualInterfaceInitParameters) DeepCopyInto(out *HostedT
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3029,7 +3029,7 @@ func (in *HostedTransitVirtualInterfaceInitParameters) DeepCopyInto(out *HostedT
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3044,7 +3044,7 @@ func (in *HostedTransitVirtualInterfaceInitParameters) DeepCopyInto(out *HostedT
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3121,7 +3121,7 @@ func (in *HostedTransitVirtualInterfaceObservation) DeepCopyInto(out *HostedTran
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3151,7 +3151,7 @@ func (in *HostedTransitVirtualInterfaceObservation) DeepCopyInto(out *HostedTran
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3166,7 +3166,7 @@ func (in *HostedTransitVirtualInterfaceObservation) DeepCopyInto(out *HostedTran
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3196,7 +3196,7 @@ func (in *HostedTransitVirtualInterfaceParameters) DeepCopyInto(out *HostedTrans
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3226,7 +3226,7 @@ func (in *HostedTransitVirtualInterfaceParameters) DeepCopyInto(out *HostedTrans
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3246,7 +3246,7 @@ func (in *HostedTransitVirtualInterfaceParameters) DeepCopyInto(out *HostedTrans
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3661,7 +3661,7 @@ func (in *PrivateVirtualInterfaceInitParameters) DeepCopyInto(out *PrivateVirtua
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3681,7 +3681,7 @@ func (in *PrivateVirtualInterfaceInitParameters) DeepCopyInto(out *PrivateVirtua
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3712,7 +3712,7 @@ func (in *PrivateVirtualInterfaceInitParameters) DeepCopyInto(out *PrivateVirtua
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3789,7 +3789,7 @@ func (in *PrivateVirtualInterfaceObservation) DeepCopyInto(out *PrivateVirtualIn
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3824,7 +3824,7 @@ func (in *PrivateVirtualInterfaceObservation) DeepCopyInto(out *PrivateVirtualIn
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3876,7 +3876,7 @@ func (in *PrivateVirtualInterfaceObservation) DeepCopyInto(out *PrivateVirtualIn
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3906,7 +3906,7 @@ func (in *PrivateVirtualInterfaceParameters) DeepCopyInto(out *PrivateVirtualInt
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -3941,7 +3941,7 @@ func (in *PrivateVirtualInterfaceParameters) DeepCopyInto(out *PrivateVirtualInt
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3992,7 +3992,7 @@ func (in *PrivateVirtualInterfaceParameters) DeepCopyInto(out *PrivateVirtualInt
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4084,7 +4084,7 @@ func (in *PublicVirtualInterfaceInitParameters) DeepCopyInto(out *PublicVirtualI
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4131,7 +4131,7 @@ func (in *PublicVirtualInterfaceInitParameters) DeepCopyInto(out *PublicVirtualI
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4208,7 +4208,7 @@ func (in *PublicVirtualInterfaceObservation) DeepCopyInto(out *PublicVirtualInte
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4281,7 +4281,7 @@ func (in *PublicVirtualInterfaceObservation) DeepCopyInto(out *PublicVirtualInte
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4311,7 +4311,7 @@ func (in *PublicVirtualInterfaceParameters) DeepCopyInto(out *PublicVirtualInter
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4378,7 +4378,7 @@ func (in *PublicVirtualInterfaceParameters) DeepCopyInto(out *PublicVirtualInter
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4470,7 +4470,7 @@ func (in *TransitVirtualInterfaceInitParameters) DeepCopyInto(out *TransitVirtua
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4485,7 +4485,7 @@ func (in *TransitVirtualInterfaceInitParameters) DeepCopyInto(out *TransitVirtua
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -4516,7 +4516,7 @@ func (in *TransitVirtualInterfaceInitParameters) DeepCopyInto(out *TransitVirtua
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4593,7 +4593,7 @@ func (in *TransitVirtualInterfaceObservation) DeepCopyInto(out *TransitVirtualIn
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4628,7 +4628,7 @@ func (in *TransitVirtualInterfaceObservation) DeepCopyInto(out *TransitVirtualIn
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -4675,7 +4675,7 @@ func (in *TransitVirtualInterfaceObservation) DeepCopyInto(out *TransitVirtualIn
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4705,7 +4705,7 @@ func (in *TransitVirtualInterfaceParameters) DeepCopyInto(out *TransitVirtualInt
 	}
 	if in.BGPAsn != nil {
 		in, out := &in.BGPAsn, &out.BGPAsn
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BGPAuthKey != nil {
@@ -4750,7 +4750,7 @@ func (in *TransitVirtualInterfaceParameters) DeepCopyInto(out *TransitVirtualInt
 	}
 	if in.Mtu != nil {
 		in, out := &in.Mtu, &out.Mtu
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -4786,7 +4786,7 @@ func (in *TransitVirtualInterfaceParameters) DeepCopyInto(out *TransitVirtualInt
 	}
 	if in.Vlan != nil {
 		in, out := &in.Vlan, &out.Vlan
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

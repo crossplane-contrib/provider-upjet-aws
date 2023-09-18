@@ -43,7 +43,7 @@ type ImageVersionObservation struct {
 	// The name of the image. Must be unique to your account.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ImageVersionParameters struct {

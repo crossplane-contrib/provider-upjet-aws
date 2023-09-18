@@ -83,7 +83,7 @@ type FileSystemObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The current number of mount targets that the file system has.
-	NumberOfMountTargets *float64 `json:"numberOfMountTargets,omitempty" tf:"number_of_mount_targets,omitempty"`
+	NumberOfMountTargets *int64 `json:"numberOfMountTargets,omitempty" tf:"number_of_mount_targets,omitempty"`
 
 	// The AWS account that created the file system. If the file system was createdby an IAM user, the parent account to which the user belongs is the owner.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
@@ -199,13 +199,13 @@ type SizeInBytesInitParameters struct {
 type SizeInBytesObservation struct {
 
 	// The latest known metered size (in bytes) of data stored in the file system.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 
 	// The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
-	ValueInIa *float64 `json:"valueInIa,omitempty" tf:"value_in_ia,omitempty"`
+	ValueInIa *int64 `json:"valueInIa,omitempty" tf:"value_in_ia,omitempty"`
 
 	// The latest known metered size (in bytes) of data stored in the Standard storage class.
-	ValueInStandard *float64 `json:"valueInStandard,omitempty" tf:"value_in_standard,omitempty"`
+	ValueInStandard *int64 `json:"valueInStandard,omitempty" tf:"value_in_standard,omitempty"`
 }
 
 type SizeInBytesParameters struct {

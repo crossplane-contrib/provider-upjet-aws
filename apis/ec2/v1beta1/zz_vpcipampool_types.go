@@ -23,13 +23,13 @@ type VPCIpamPoolInitParameters struct {
 	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
-	AllocationDefaultNetmaskLength *float64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
+	AllocationDefaultNetmaskLength *int64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
 
 	// The maximum netmask length that will be required for CIDR allocations in this pool.
-	AllocationMaxNetmaskLength *float64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
+	AllocationMaxNetmaskLength *int64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
 
 	// The minimum netmask length that will be required for CIDR allocations in this pool.
-	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
+	AllocationMinNetmaskLength *int64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
 
 	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
 	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
@@ -63,13 +63,13 @@ type VPCIpamPoolObservation struct {
 	AddressFamily *string `json:"addressFamily,omitempty" tf:"address_family,omitempty"`
 
 	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
-	AllocationDefaultNetmaskLength *float64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
+	AllocationDefaultNetmaskLength *int64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
 
 	// The maximum netmask length that will be required for CIDR allocations in this pool.
-	AllocationMaxNetmaskLength *float64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
+	AllocationMaxNetmaskLength *int64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
 
 	// The minimum netmask length that will be required for CIDR allocations in this pool.
-	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
+	AllocationMinNetmaskLength *int64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
 
 	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
 	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
@@ -98,7 +98,7 @@ type VPCIpamPoolObservation struct {
 	// The locale in which you would like to create the IPAM pool. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. Possible values: Any AWS region, such as us-east-1.
 	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
-	PoolDepth *float64 `json:"poolDepth,omitempty" tf:"pool_depth,omitempty"`
+	PoolDepth *int64 `json:"poolDepth,omitempty" tf:"pool_depth,omitempty"`
 
 	// The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Valid values are byoip or amazon. Default is byoip.
 	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
@@ -127,15 +127,15 @@ type VPCIpamPoolParameters struct {
 
 	// A default netmask length for allocations added to this pool. If, for example, the CIDR assigned to this pool is 10.0.0.0/8 and you enter 16 here, new allocations will default to 10.0.0.0/16 (unless you provide a different netmask value when you create the new allocation).
 	// +kubebuilder:validation:Optional
-	AllocationDefaultNetmaskLength *float64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
+	AllocationDefaultNetmaskLength *int64 `json:"allocationDefaultNetmaskLength,omitempty" tf:"allocation_default_netmask_length,omitempty"`
 
 	// The maximum netmask length that will be required for CIDR allocations in this pool.
 	// +kubebuilder:validation:Optional
-	AllocationMaxNetmaskLength *float64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
+	AllocationMaxNetmaskLength *int64 `json:"allocationMaxNetmaskLength,omitempty" tf:"allocation_max_netmask_length,omitempty"`
 
 	// The minimum netmask length that will be required for CIDR allocations in this pool.
 	// +kubebuilder:validation:Optional
-	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
+	AllocationMinNetmaskLength *int64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
 
 	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
 	// +kubebuilder:validation:Optional

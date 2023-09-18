@@ -558,12 +558,12 @@ func (in *CreationInfoInitParameters) DeepCopyInto(out *CreationInfoInitParamete
 	*out = *in
 	if in.OwnerGID != nil {
 		in, out := &in.OwnerGID, &out.OwnerGID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OwnerUID != nil {
 		in, out := &in.OwnerUID, &out.OwnerUID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Permissions != nil {
@@ -588,12 +588,12 @@ func (in *CreationInfoObservation) DeepCopyInto(out *CreationInfoObservation) {
 	*out = *in
 	if in.OwnerGID != nil {
 		in, out := &in.OwnerGID, &out.OwnerGID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OwnerUID != nil {
 		in, out := &in.OwnerUID, &out.OwnerUID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Permissions != nil {
@@ -618,12 +618,12 @@ func (in *CreationInfoParameters) DeepCopyInto(out *CreationInfoParameters) {
 	*out = *in
 	if in.OwnerGID != nil {
 		in, out := &in.OwnerGID, &out.OwnerGID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OwnerUID != nil {
 		in, out := &in.OwnerUID, &out.OwnerUID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Permissions != nil {
@@ -922,7 +922,7 @@ func (in *FileSystemObservation) DeepCopyInto(out *FileSystemObservation) {
 	}
 	if in.NumberOfMountTargets != nil {
 		in, out := &in.NumberOfMountTargets, &out.NumberOfMountTargets
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OwnerID != nil {
@@ -1671,23 +1671,23 @@ func (in *PosixUserInitParameters) DeepCopyInto(out *PosixUserInitParameters) {
 	*out = *in
 	if in.GID != nil {
 		in, out := &in.GID, &out.GID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecondaryGids != nil {
 		in, out := &in.SecondaryGids, &out.SecondaryGids
-		*out = make([]*float64, len(*in))
+		*out = make([]*int64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(float64)
+				*out = new(int64)
 				**out = **in
 			}
 		}
 	}
 	if in.UID != nil {
 		in, out := &in.UID, &out.UID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1707,23 +1707,23 @@ func (in *PosixUserObservation) DeepCopyInto(out *PosixUserObservation) {
 	*out = *in
 	if in.GID != nil {
 		in, out := &in.GID, &out.GID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecondaryGids != nil {
 		in, out := &in.SecondaryGids, &out.SecondaryGids
-		*out = make([]*float64, len(*in))
+		*out = make([]*int64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(float64)
+				*out = new(int64)
 				**out = **in
 			}
 		}
 	}
 	if in.UID != nil {
 		in, out := &in.UID, &out.UID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1743,23 +1743,23 @@ func (in *PosixUserParameters) DeepCopyInto(out *PosixUserParameters) {
 	*out = *in
 	if in.GID != nil {
 		in, out := &in.GID, &out.GID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecondaryGids != nil {
 		in, out := &in.SecondaryGids, &out.SecondaryGids
-		*out = make([]*float64, len(*in))
+		*out = make([]*int64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(float64)
+				*out = new(int64)
 				**out = **in
 			}
 		}
 	}
 	if in.UID != nil {
 		in, out := &in.UID, &out.UID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2085,17 +2085,17 @@ func (in *SizeInBytesObservation) DeepCopyInto(out *SizeInBytesObservation) {
 	*out = *in
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ValueInIa != nil {
 		in, out := &in.ValueInIa, &out.ValueInIa
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ValueInStandard != nil {
 		in, out := &in.ValueInStandard, &out.ValueInStandard
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

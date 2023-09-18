@@ -27,7 +27,7 @@ type BGPPeerInitParameters struct {
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -50,7 +50,7 @@ type BGPPeerObservation struct {
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -85,7 +85,7 @@ type BGPPeerParameters struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	// +kubebuilder:validation:Optional
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional

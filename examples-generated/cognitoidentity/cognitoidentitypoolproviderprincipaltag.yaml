@@ -57,25 +57,3 @@ spec:
     - email
     name: user pool
     region: us-west-1
-
----
-
-apiVersion: cognitoidp.aws.upbound.io/v1beta1
-kind: UserPoolClient
-metadata:
-  annotations:
-    meta.upbound.io/example-id: cognitoidentity/v1beta1/cognitoidentitypoolproviderprincipaltag
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    name: client
-    region: us-west-1
-    supportedIdentityProviders: |-
-      ${compact([
-          "COGNITO",
-        ])}
-    userPoolIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example

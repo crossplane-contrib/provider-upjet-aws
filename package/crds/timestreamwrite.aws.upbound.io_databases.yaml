@@ -358,7 +358,8 @@ spec:
                   tableCount:
                     description: The total number of tables found within the Timestream
                       database.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string

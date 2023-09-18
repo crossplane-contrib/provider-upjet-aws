@@ -110,11 +110,13 @@ spec:
                         maximumCount:
                           description: 'The maximum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                         minimumCount:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   outputArtifactDetails:
@@ -124,11 +126,13 @@ spec:
                         maximumCount:
                           description: 'The maximum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                         minimumCount:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   providerName:
@@ -230,11 +234,13 @@ spec:
                         maximumCount:
                           description: 'The maximum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                         minimumCount:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   outputArtifactDetails:
@@ -244,11 +250,13 @@ spec:
                         maximumCount:
                           description: 'The maximum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                         minimumCount:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   providerName:
@@ -524,11 +532,13 @@ spec:
                         maximumCount:
                           description: 'The maximum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                         minimumCount:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   outputArtifactDetails:
@@ -538,11 +548,13 @@ spec:
                         maximumCount:
                           description: 'The maximum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                         minimumCount:
                           description: 'The minimum number of artifacts allowed for
                             the action type. Min: 0, Max: 5'
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   owner:

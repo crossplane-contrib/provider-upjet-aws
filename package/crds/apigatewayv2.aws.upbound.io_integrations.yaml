@@ -469,7 +469,8 @@ spec:
                       for WebSocket APIs and between 50 and 30,000 milliseconds for
                       HTTP APIs. The default timeout is 29 seconds for WebSocket APIs
                       and 30 seconds for HTTP APIs.
-                    type: number
+                    format: int64
+                    type: integer
                   tlsConfig:
                     description: TLS configuration for a private integration. Supported
                       only for HTTP APIs.
@@ -584,7 +585,8 @@ spec:
                       for WebSocket APIs and between 50 and 30,000 milliseconds for
                       HTTP APIs. The default timeout is 29 seconds for WebSocket APIs
                       and 30 seconds for HTTP APIs.
-                    type: number
+                    format: int64
+                    type: integer
                   tlsConfig:
                     description: TLS configuration for a private integration. Supported
                       only for HTTP APIs.
@@ -880,7 +882,8 @@ spec:
                       for WebSocket APIs and between 50 and 30,000 milliseconds for
                       HTTP APIs. The default timeout is 29 seconds for WebSocket APIs
                       and 30 seconds for HTTP APIs.
-                    type: number
+                    format: int64
+                    type: integer
                   tlsConfig:
                     description: TLS configuration for a private integration. Supported
                       only for HTTP APIs.

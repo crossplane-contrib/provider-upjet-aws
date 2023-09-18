@@ -286,7 +286,8 @@ spec:
                     type: string
                   version:
                     description: The current version of the thing record in the registry.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

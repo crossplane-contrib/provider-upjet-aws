@@ -23,10 +23,10 @@ type HealthCheckInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Number of consecutive health check successes required before considering a target healthy. The range is 2-10. Defaults to 3.
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. For lambda target groups, it needs to be greater than the timeout of the underlying lambda. Defaults to 30.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
@@ -41,10 +41,10 @@ type HealthCheckInitParameters struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Number of consecutive health check failures required before considering a target unhealthy. The range is 2-10. Defaults to 3.
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckObservation struct {
@@ -53,10 +53,10 @@ type HealthCheckObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Number of consecutive health check successes required before considering a target healthy. The range is 2-10. Defaults to 3.
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. For lambda target groups, it needs to be greater than the timeout of the underlying lambda. Defaults to 30.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
@@ -71,10 +71,10 @@ type HealthCheckObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Number of consecutive health check failures required before considering a target unhealthy. The range is 2-10. Defaults to 3.
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckParameters struct {
@@ -85,11 +85,11 @@ type HealthCheckParameters struct {
 
 	// Number of consecutive health check successes required before considering a target healthy. The range is 2-10. Defaults to 3.
 	// +kubebuilder:validation:Optional
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. For lambda target groups, it needs to be greater than the timeout of the underlying lambda. Defaults to 30.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
 	// +kubebuilder:validation:Optional
@@ -109,11 +109,11 @@ type HealthCheckParameters struct {
 
 	// Amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
 	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Number of consecutive health check failures required before considering a target unhealthy. The range is 2-10. Defaults to 3.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type LBTargetGroupInitParameters struct {
@@ -143,7 +143,7 @@ type LBTargetGroupInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (May be required, Forces new resource) Port on which targets receive traffic, unless overridden when registering a specific target. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Whether client IP preservation is enabled. See doc for more information.
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
@@ -158,7 +158,7 @@ type LBTargetGroupInitParameters struct {
 	ProxyProtocolV2 *bool `json:"proxyProtocolV2,omitempty" tf:"proxy_protocol_v2,omitempty"`
 
 	// Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds.
-	SlowStart *float64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
+	SlowStart *int64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
 
 	// Stickiness configuration block. Detailed below.
 	Stickiness []LBTargetGroupStickinessInitParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
@@ -209,7 +209,7 @@ type LBTargetGroupObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (May be required, Forces new resource) Port on which targets receive traffic, unless overridden when registering a specific target. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Whether client IP preservation is enabled. See doc for more information.
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
@@ -224,7 +224,7 @@ type LBTargetGroupObservation struct {
 	ProxyProtocolV2 *bool `json:"proxyProtocolV2,omitempty" tf:"proxy_protocol_v2,omitempty"`
 
 	// Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds.
-	SlowStart *float64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
+	SlowStart *int64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
 
 	// Stickiness configuration block. Detailed below.
 	Stickiness []LBTargetGroupStickinessObservation `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
@@ -281,7 +281,7 @@ type LBTargetGroupParameters struct {
 
 	// (May be required, Forces new resource) Port on which targets receive traffic, unless overridden when registering a specific target. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Whether client IP preservation is enabled. See doc for more information.
 	// +kubebuilder:validation:Optional
@@ -306,7 +306,7 @@ type LBTargetGroupParameters struct {
 
 	// Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds.
 	// +kubebuilder:validation:Optional
-	SlowStart *float64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
+	SlowStart *int64 `json:"slowStart,omitempty" tf:"slow_start,omitempty"`
 
 	// Stickiness configuration block. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -341,7 +341,7 @@ type LBTargetGroupParameters struct {
 type LBTargetGroupStickinessInitParameters struct {
 
 	// Only used when the type is lb_cookie. The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).
-	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+	CookieDuration *int64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// Name of the application based cookie. AWSALB, AWSALBAPP, and AWSALBTG prefixes are reserved and cannot be used. Only needed when type is app_cookie.
 	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
@@ -356,7 +356,7 @@ type LBTargetGroupStickinessInitParameters struct {
 type LBTargetGroupStickinessObservation struct {
 
 	// Only used when the type is lb_cookie. The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).
-	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+	CookieDuration *int64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// Name of the application based cookie. AWSALB, AWSALBAPP, and AWSALBTG prefixes are reserved and cannot be used. Only needed when type is app_cookie.
 	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
@@ -372,7 +372,7 @@ type LBTargetGroupStickinessParameters struct {
 
 	// Only used when the type is lb_cookie. The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).
 	// +kubebuilder:validation:Optional
-	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+	CookieDuration *int64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// Name of the application based cookie. AWSALB, AWSALBAPP, and AWSALBTG prefixes are reserved and cannot be used. Only needed when type is app_cookie.
 	// +kubebuilder:validation:Optional

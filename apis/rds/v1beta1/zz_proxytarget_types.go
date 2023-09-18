@@ -44,7 +44,7 @@ type ProxyTargetObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Port for the target RDS DB Instance or Aurora DB Cluster.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Identifier representing the DB Instance or DB Cluster target.
 	RDSResourceID *string `json:"rdsResourceId,omitempty" tf:"rds_resource_id,omitempty"`

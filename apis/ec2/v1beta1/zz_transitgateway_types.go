@@ -20,7 +20,7 @@ import (
 type TransitGatewayInitParameters_2 struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
-	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
+	AmazonSideAsn *int64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
 	// Whether resource attachment requests are automatically accepted. Valid values: disable, enable. Default value: disable.
 	AutoAcceptSharedAttachments *string `json:"autoAcceptSharedAttachments,omitempty" tf:"auto_accept_shared_attachments,omitempty"`
@@ -53,7 +53,7 @@ type TransitGatewayInitParameters_2 struct {
 type TransitGatewayObservation_2 struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
-	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
+	AmazonSideAsn *int64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
 	// EC2 Transit Gateway Amazon Resource Name (ARN)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -105,7 +105,7 @@ type TransitGatewayParameters_2 struct {
 
 	// Private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. Default value: 64512.
 	// +kubebuilder:validation:Optional
-	AmazonSideAsn *float64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
+	AmazonSideAsn *int64 `json:"amazonSideAsn,omitempty" tf:"amazon_side_asn,omitempty"`
 
 	// Whether resource attachment requests are automatically accepted. Valid values: disable, enable. Default value: disable.
 	// +kubebuilder:validation:Optional

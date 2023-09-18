@@ -409,7 +409,8 @@ spec:
                     type: string
                   cpuCount:
                     description: The number of vCPUs the instance has.
-                    type: number
+                    format: int64
+                    type: integer
                   createdAt:
                     description: The timestamp when the instance was created.
                     type: string

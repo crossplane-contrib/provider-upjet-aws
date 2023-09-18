@@ -8,8 +8,6 @@ metadata:
   name: foo
 spec:
   forProvider:
-    accepter:
-    - allowRemoteVpcDnsResolution: true
     region: us-west-1
     vpcPeeringConnectionIdSelector:
       matchLabels:

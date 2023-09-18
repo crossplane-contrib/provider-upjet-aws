@@ -209,12 +209,14 @@ spec:
                           description: The duration for which data must be stored
                             in the magnetic store. Minimum value of 1. Maximum value
                             of 73000.
-                          type: number
+                          format: int64
+                          type: integer
                         memoryStoreRetentionPeriodInHours:
                           description: The duration for which data must be stored
                             in the memory store. Minimum value of 1. Maximum value
                             of 8766.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   schema:
@@ -334,12 +336,14 @@ spec:
                           description: The duration for which data must be stored
                             in the magnetic store. Minimum value of 1. Maximum value
                             of 73000.
-                          type: number
+                          format: int64
+                          type: integer
                         memoryStoreRetentionPeriodInHours:
                           description: The duration for which data must be stored
                             in the memory store. Minimum value of 1. Maximum value
                             of 8766.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   schema:
@@ -616,12 +620,14 @@ spec:
                           description: The duration for which data must be stored
                             in the magnetic store. Minimum value of 1. Maximum value
                             of 73000.
-                          type: number
+                          format: int64
+                          type: integer
                         memoryStoreRetentionPeriodInHours:
                           description: The duration for which data must be stored
                             in the memory store. Minimum value of 1. Maximum value
                             of 8766.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   schema:

@@ -205,7 +205,8 @@ spec:
                                 type: string
                               numberOfNodes:
                                 description: The new number of nodes for the cluster.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         resumeCluster:
@@ -293,7 +294,8 @@ spec:
                                 type: string
                               numberOfNodes:
                                 description: The new number of nodes for the cluster.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         resumeCluster:
@@ -547,7 +549,8 @@ spec:
                                 type: string
                               numberOfNodes:
                                 description: The new number of nodes for the cluster.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         resumeCluster:

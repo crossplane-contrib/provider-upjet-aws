@@ -200,7 +200,8 @@ spec:
                     description: Specifies the position of the filter in the list
                       of current filters. Also specifies the order in which this filter
                       is applied to the findings.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -280,7 +281,8 @@ spec:
                     description: Specifies the position of the filter in the list
                       of current filters. Also specifies the order in which this filter
                       is applied to the findings.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -530,7 +532,8 @@ spec:
                     description: Specifies the position of the filter in the list
                       of current filters. Also specifies the order in which this filter
                       is applied to the findings.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string

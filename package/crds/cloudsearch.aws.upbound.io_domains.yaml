@@ -150,11 +150,13 @@ spec:
                           description: The number of partitions you want to preconfigure
                             for your domain. Only valid when you select search.2xlarge
                             as the instance type.
-                          type: number
+                          format: int64
+                          type: integer
                         desiredReplicationCount:
                           description: The number of replicas you want to preconfigure
                             for each index partition.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 required:
@@ -251,11 +253,13 @@ spec:
                           description: The number of partitions you want to preconfigure
                             for your domain. Only valid when you select search.2xlarge
                             as the instance type.
-                          type: number
+                          format: int64
+                          type: integer
                         desiredReplicationCount:
                           description: The number of replicas you want to preconfigure
                             for each index partition.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object
@@ -516,11 +520,13 @@ spec:
                           description: The number of partitions you want to preconfigure
                             for your domain. Only valid when you select search.2xlarge
                             as the instance type.
-                          type: number
+                          format: int64
+                          type: integer
                         desiredReplicationCount:
                           description: The number of replicas you want to preconfigure
                             for each index partition.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   searchServiceEndpoint:

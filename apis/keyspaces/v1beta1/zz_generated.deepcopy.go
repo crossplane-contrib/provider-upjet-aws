@@ -18,7 +18,7 @@ func (in *CapacitySpecificationInitParameters) DeepCopyInto(out *CapacitySpecifi
 	*out = *in
 	if in.ReadCapacityUnits != nil {
 		in, out := &in.ReadCapacityUnits, &out.ReadCapacityUnits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThroughputMode != nil {
@@ -28,7 +28,7 @@ func (in *CapacitySpecificationInitParameters) DeepCopyInto(out *CapacitySpecifi
 	}
 	if in.WriteCapacityUnits != nil {
 		in, out := &in.WriteCapacityUnits, &out.WriteCapacityUnits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -48,7 +48,7 @@ func (in *CapacitySpecificationObservation) DeepCopyInto(out *CapacitySpecificat
 	*out = *in
 	if in.ReadCapacityUnits != nil {
 		in, out := &in.ReadCapacityUnits, &out.ReadCapacityUnits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThroughputMode != nil {
@@ -58,7 +58,7 @@ func (in *CapacitySpecificationObservation) DeepCopyInto(out *CapacitySpecificat
 	}
 	if in.WriteCapacityUnits != nil {
 		in, out := &in.WriteCapacityUnits, &out.WriteCapacityUnits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -78,7 +78,7 @@ func (in *CapacitySpecificationParameters) DeepCopyInto(out *CapacitySpecificati
 	*out = *in
 	if in.ReadCapacityUnits != nil {
 		in, out := &in.ReadCapacityUnits, &out.ReadCapacityUnits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThroughputMode != nil {
@@ -88,7 +88,7 @@ func (in *CapacitySpecificationParameters) DeepCopyInto(out *CapacitySpecificati
 	}
 	if in.WriteCapacityUnits != nil {
 		in, out := &in.WriteCapacityUnits, &out.WriteCapacityUnits
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1088,7 +1088,7 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 	}
 	if in.DefaultTimeToLive != nil {
 		in, out := &in.DefaultTimeToLive, &out.DefaultTimeToLive
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EncryptionSpecification != nil {
@@ -1215,7 +1215,7 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 	}
 	if in.DefaultTimeToLive != nil {
 		in, out := &in.DefaultTimeToLive, &out.DefaultTimeToLive
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EncryptionSpecification != nil {
@@ -1331,7 +1331,7 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	}
 	if in.DefaultTimeToLive != nil {
 		in, out := &in.DefaultTimeToLive, &out.DefaultTimeToLive
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EncryptionSpecification != nil {

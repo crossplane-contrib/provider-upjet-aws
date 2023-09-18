@@ -114,7 +114,8 @@ spec:
                       CPU Options CPU Cores and Threads Per CPU Core Per Instance
                       Type - specifying this option for unsupported instance types
                       will return an error from the EC2 API.
-                    type: number
+                    format: int64
+                    type: integer
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -133,19 +134,22 @@ spec:
                             CPU Core Per Instance Type - specifying this option for
                             unsupported instance types will return an error from the
                             EC2 API.
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
                           description: If set to 1, hyperthreading is disabled on
                             the launched instance. Defaults to 2 if not set. See Optimizing
                             CPU Options for more information.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   cpuThreadsPerCore:
                     description: If set to 1, hyperthreading is disabled on the launched
                       instance. Defaults to 2 if not set. See Optimizing CPU Options
                       for more information.
-                    type: number
+                    format: int64
+                    type: integer
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -190,7 +194,8 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. Only valid for
                             volume_type of io1, io2 or gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of the KMS Key to
                             use when encrypting the volume. Must be configured to
@@ -284,10 +289,12 @@ spec:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
                             of gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gibibytes (GiB).
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values include standard,
                             gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
@@ -415,7 +422,8 @@ spec:
                     description: Number of IPv6 addresses to associate with the primary
                       network interface. Amazon EC2 chooses the IPv6 addresses from
                       the range of your subnet.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Addresses:
                     description: Specify one or more IPv6 addresses from the range
                       of the subnet to associate with the primary network interface
@@ -477,7 +485,8 @@ spec:
                             metadata requests. The larger the number, the further
                             instance metadata requests can travel. Valid values are
                             integer from 1 to 64. Defaults to 1.
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
@@ -510,11 +519,13 @@ spec:
                         deviceIndex:
                           description: Integer index of the network interface attachment.
                             Limited by instance type.
-                          type: number
+                          format: int64
+                          type: integer
                         networkCardIndex:
                           description: Integer index of the network card. Limited
                             by instance type. The default index is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: ID of the network interface to attach.
                           type: string
@@ -604,7 +615,8 @@ spec:
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
-                    type: number
+                    format: int64
+                    type: integer
                   privateDnsNameOptions:
                     description: Options for the instance hostname. The default values
                       are inherited from the subnet. See Private DNS Name Options
@@ -656,7 +668,8 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. Only valid for
                             volume_type of io1, io2 or gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of the KMS Key to
                             use when encrypting the volume. Must be configured to
@@ -747,10 +760,12 @@ spec:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
                             of gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gibibytes (GiB).
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values include standard,
                             gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
@@ -1032,7 +1047,8 @@ spec:
                       CPU Options CPU Cores and Threads Per CPU Core Per Instance
                       Type - specifying this option for unsupported instance types
                       will return an error from the EC2 API.
-                    type: number
+                    format: int64
+                    type: integer
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -1051,19 +1067,22 @@ spec:
                             CPU Core Per Instance Type - specifying this option for
                             unsupported instance types will return an error from the
                             EC2 API.
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
                           description: If set to 1, hyperthreading is disabled on
                             the launched instance. Defaults to 2 if not set. See Optimizing
                             CPU Options for more information.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   cpuThreadsPerCore:
                     description: If set to 1, hyperthreading is disabled on the launched
                       instance. Defaults to 2 if not set. See Optimizing CPU Options
                       for more information.
-                    type: number
+                    format: int64
+                    type: integer
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -1108,7 +1127,8 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. Only valid for
                             volume_type of io1, io2 or gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         snapshotId:
                           description: Snapshot ID to mount.
                           type: string
@@ -1121,10 +1141,12 @@ spec:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
                             of gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gibibytes (GiB).
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values include standard,
                             gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
@@ -1252,7 +1274,8 @@ spec:
                     description: Number of IPv6 addresses to associate with the primary
                       network interface. Amazon EC2 chooses the IPv6 addresses from
                       the range of your subnet.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Addresses:
                     description: Specify one or more IPv6 addresses from the range
                       of the subnet to associate with the primary network interface
@@ -1314,7 +1337,8 @@ spec:
                             metadata requests. The larger the number, the further
                             instance metadata requests can travel. Valid values are
                             integer from 1 to 64. Defaults to 1.
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
@@ -1347,11 +1371,13 @@ spec:
                         deviceIndex:
                           description: Integer index of the network interface attachment.
                             Limited by instance type.
-                          type: number
+                          format: int64
+                          type: integer
                         networkCardIndex:
                           description: Integer index of the network card. Limited
                             by instance type. The default index is 0.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   placementGroup:
@@ -1360,7 +1386,8 @@ spec:
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
-                    type: number
+                    format: int64
+                    type: integer
                   privateDnsNameOptions:
                     description: Options for the instance hostname. The default values
                       are inherited from the subnet. See Private DNS Name Options
@@ -1408,7 +1435,8 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. Only valid for
                             volume_type of io1, io2 or gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         tags:
                           additionalProperties:
                             type: string
@@ -1418,10 +1446,12 @@ spec:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
                             of gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gibibytes (GiB).
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values include standard,
                             gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
@@ -1699,7 +1729,8 @@ spec:
                       CPU Options CPU Cores and Threads Per CPU Core Per Instance
                       Type - specifying this option for unsupported instance types
                       will return an error from the EC2 API.
-                    type: number
+                    format: int64
+                    type: integer
                   cpuOptions:
                     description: The CPU options for the instance. See CPU Options
                       below for more details.
@@ -1718,19 +1749,22 @@ spec:
                             CPU Core Per Instance Type - specifying this option for
                             unsupported instance types will return an error from the
                             EC2 API.
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
                           description: If set to 1, hyperthreading is disabled on
                             the launched instance. Defaults to 2 if not set. See Optimizing
                             CPU Options for more information.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   cpuThreadsPerCore:
                     description: If set to 1, hyperthreading is disabled on the launched
                       instance. Defaults to 2 if not set. See Optimizing CPU Options
                       for more information.
-                    type: number
+                    format: int64
+                    type: integer
                   creditSpecification:
                     description: Configuration block for customizing the credit specification
                       of the instance. See Credit Specification below for more details.
@@ -1775,7 +1809,8 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. Only valid for
                             volume_type of io1, io2 or gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of the KMS Key to
                             use when encrypting the volume. Must be configured to
@@ -1793,14 +1828,16 @@ spec:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
                             of gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeId:
                           description: ID of the volume. For example, the ID can be
                             accessed like this, aws_instance.web.ebs_block_device.2.volume_id.
                           type: string
                         volumeSize:
                           description: Size of the volume in gibibytes (GiB).
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values include standard,
                             gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
@@ -1940,7 +1977,8 @@ spec:
                     description: Number of IPv6 addresses to associate with the primary
                       network interface. Amazon EC2 chooses the IPv6 addresses from
                       the range of your subnet.
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6Addresses:
                     description: Specify one or more IPv6 addresses from the range
                       of the subnet to associate with the primary network interface
@@ -2002,7 +2040,8 @@ spec:
                             metadata requests. The larger the number, the further
                             instance metadata requests can travel. Valid values are
                             integer from 1 to 64. Defaults to 1.
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           description: Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
@@ -2035,11 +2074,13 @@ spec:
                         deviceIndex:
                           description: Integer index of the network interface attachment.
                             Limited by instance type.
-                          type: number
+                          format: int64
+                          type: integer
                         networkCardIndex:
                           description: Integer index of the network card. Limited
                             by instance type. The default index is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: ID of the network interface to attach.
                           type: string
@@ -2062,7 +2103,8 @@ spec:
                   placementPartitionNumber:
                     description: Number of the partition the instance is in. Valid
                       only if the  strategy argument is set to "partition".
-                    type: number
+                    format: int64
+                    type: integer
                   primaryNetworkInterfaceId:
                     description: ID of the instance's primary network interface.
                     type: string
@@ -2132,7 +2174,8 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. Only valid for
                             volume_type of io1, io2 or gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         kmsKeyId:
                           description: Amazon Resource Name (ARN) of the KMS Key to
                             use when encrypting the volume. Must be configured to
@@ -2147,14 +2190,16 @@ spec:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
                             of gp3.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeId:
                           description: ID of the volume. For example, the ID can be
                             accessed like this, aws_instance.web.root_block_device.0.volume_id.
                           type: string
                         volumeSize:
                           description: Size of the volume in gibibytes (GiB).
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values include standard,
                             gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.

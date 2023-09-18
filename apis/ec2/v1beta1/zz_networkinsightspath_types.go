@@ -23,7 +23,7 @@ type NetworkInsightsPathInitParameters struct {
 	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
 
 	// Destination port to analyze access to.
-	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+	DestinationPort *int64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -50,7 +50,7 @@ type NetworkInsightsPathObservation struct {
 	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
 
 	// Destination port to analyze access to.
-	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+	DestinationPort *int64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
 	// ID of the Network Insights Path.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -88,7 +88,7 @@ type NetworkInsightsPathParameters struct {
 
 	// Destination port to analyze access to.
 	// +kubebuilder:validation:Optional
-	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+	DestinationPort *int64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
 	// Reference to a NetworkInterface in ec2 to populate destination.
 	// +kubebuilder:validation:Optional

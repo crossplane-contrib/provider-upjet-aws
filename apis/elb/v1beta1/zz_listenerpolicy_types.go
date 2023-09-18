@@ -20,7 +20,7 @@ import (
 type ListenerPolicyInitParameters struct {
 
 	// The load balancer listener port to apply the policy to.
-	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
+	LoadBalancerPort *int64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
@@ -38,7 +38,7 @@ type ListenerPolicyObservation struct {
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
 	// The load balancer listener port to apply the policy to.
-	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
+	LoadBalancerPort *int64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
@@ -64,7 +64,7 @@ type ListenerPolicyParameters struct {
 
 	// The load balancer listener port to apply the policy to.
 	// +kubebuilder:validation:Optional
-	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
+	LoadBalancerPort *int64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
 	// +kubebuilder:validation:Optional

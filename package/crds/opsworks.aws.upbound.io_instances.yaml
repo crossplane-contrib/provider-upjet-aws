@@ -111,13 +111,15 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. This must be set
                             with a volume_type of io1.
-                          type: number
+                          format: int64
+                          type: integer
                         snapshotId:
                           description: Snapshot ID to mount.
                           type: string
                         volumeSize:
                           description: Size of the volume in gigabytes.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values are standard,
                             gp2, or io1. Default is standard.
@@ -260,10 +262,12 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. This must be set
                             with a volume_type of io1.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gigabytes.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values are standard,
                             gp2, or io1. Default is standard.
@@ -588,13 +592,15 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. This must be set
                             with a volume_type of io1.
-                          type: number
+                          format: int64
+                          type: integer
                         snapshotId:
                           description: Snapshot ID to mount.
                           type: string
                         volumeSize:
                           description: Size of the volume in gigabytes.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values are standard,
                             gp2, or io1. Default is standard.
@@ -656,10 +662,12 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. This must be set
                             with a volume_type of io1.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gigabytes.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values are standard,
                             gp2, or io1. Default is standard.
@@ -902,13 +910,15 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. This must be set
                             with a volume_type of io1.
-                          type: number
+                          format: int64
+                          type: integer
                         snapshotId:
                           description: Snapshot ID to mount.
                           type: string
                         volumeSize:
                           description: Size of the volume in gigabytes.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values are standard,
                             gp2, or io1. Default is standard.
@@ -1021,10 +1031,12 @@ spec:
                         iops:
                           description: Amount of provisioned IOPS. This must be set
                             with a volume_type of io1.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
                           description: Size of the volume in gigabytes.
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           description: Type of volume. Valid values are standard,
                             gp2, or io1. Default is standard.

@@ -35,7 +35,7 @@ type BucketCorsConfigurationCorsRuleInitParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Time in seconds that your browser is to cache the preflight response for the specified resource.
-	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
+	MaxAgeSeconds *int64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type BucketCorsConfigurationCorsRuleObservation struct {
@@ -56,7 +56,7 @@ type BucketCorsConfigurationCorsRuleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Time in seconds that your browser is to cache the preflight response for the specified resource.
-	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
+	MaxAgeSeconds *int64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type BucketCorsConfigurationCorsRuleParameters struct {
@@ -83,7 +83,7 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 
 	// Time in seconds that your browser is to cache the preflight response for the specified resource.
 	// +kubebuilder:validation:Optional
-	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
+	MaxAgeSeconds *int64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
 type BucketCorsConfigurationInitParameters struct {

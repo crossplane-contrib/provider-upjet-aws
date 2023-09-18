@@ -32,10 +32,10 @@ type SamplingRuleInitParameters struct {
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// The priority of the sampling rule.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
-	ReservoirSize *float64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
+	ReservoirSize *int64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
 
 	// Matches the ARN of the AWS resource on which the service runs.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -53,7 +53,7 @@ type SamplingRuleInitParameters struct {
 	URLPath *string `json:"urlPath,omitempty" tf:"url_path,omitempty"`
 
 	// The version of the sampling rule format (1 )
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SamplingRuleObservation struct {
@@ -77,10 +77,10 @@ type SamplingRuleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The priority of the sampling rule.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
-	ReservoirSize *float64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
+	ReservoirSize *int64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
 
 	// Matches the ARN of the AWS resource on which the service runs.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -101,7 +101,7 @@ type SamplingRuleObservation struct {
 	URLPath *string `json:"urlPath,omitempty" tf:"url_path,omitempty"`
 
 	// The version of the sampling rule format (1 )
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SamplingRuleParameters struct {
@@ -124,7 +124,7 @@ type SamplingRuleParameters struct {
 
 	// The priority of the sampling rule.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -133,7 +133,7 @@ type SamplingRuleParameters struct {
 
 	// A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.
 	// +kubebuilder:validation:Optional
-	ReservoirSize *float64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
+	ReservoirSize *int64 `json:"reservoirSize,omitempty" tf:"reservoir_size,omitempty"`
 
 	// Matches the ARN of the AWS resource on which the service runs.
 	// +kubebuilder:validation:Optional
@@ -157,7 +157,7 @@ type SamplingRuleParameters struct {
 
 	// The version of the sampling rule format (1 )
 	// +kubebuilder:validation:Optional
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 // SamplingRuleSpec defines the desired state of SamplingRule

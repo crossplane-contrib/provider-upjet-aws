@@ -22,7 +22,7 @@ type PlacementGroupInitParameters struct {
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
 	// partition.  Valid values are 1 - 7 (default is 2).
-	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+	PartitionCount *int64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Determines how placement groups spread instances. Can only be used
 	// when the strategy is set to spread. Can be host or rack. host can only be used for Outpost placement groups. Defaults to rack.
@@ -46,7 +46,7 @@ type PlacementGroupObservation struct {
 	// The number of partitions to create in the
 	// placement group.  Can only be specified when the strategy is set to
 	// partition.  Valid values are 1 - 7 (default is 2).
-	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+	PartitionCount *int64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The ID of the placement group.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
@@ -71,7 +71,7 @@ type PlacementGroupParameters struct {
 	// placement group.  Can only be specified when the strategy is set to
 	// partition.  Valid values are 1 - 7 (default is 2).
 	// +kubebuilder:validation:Optional
-	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+	PartitionCount *int64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

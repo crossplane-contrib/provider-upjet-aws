@@ -143,7 +143,8 @@ spec:
                       on the Amazon Macie console. This value also determines the
                       order in which the filter is applied to findings, relative to
                       other filters that are also applied to the findings.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -244,7 +245,8 @@ spec:
                       on the Amazon Macie console. This value also determines the
                       order in which the filter is applied to findings, relative to
                       other filters that are also applied to the findings.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -508,7 +510,8 @@ spec:
                       on the Amazon Macie console. This value also determines the
                       order in which the filter is applied to findings, relative to
                       other filters that are also applied to the findings.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string

@@ -79,7 +79,8 @@ spec:
                             Only applies when the proxy has opened its maximum number
                             of connections and all connections are busy with client
                             sessions.
-                          type: number
+                          format: int64
+                          type: integer
                         initQuery:
                           description: One or more SQL statements for the proxy to
                             run when opening each new database connection. Typically
@@ -96,7 +97,8 @@ spec:
                             expressed as a percentage of the max_connections setting
                             for the RDS DB instance or Aurora DB cluster used by the
                             target group.
-                          type: number
+                          format: int64
+                          type: integer
                         maxIdleConnectionsPercent:
                           description: Controls how actively the proxy closes idle
                             database connections in the connection pool. A high value
@@ -107,7 +109,8 @@ spec:
                             as a percentage of the max_connections setting for the
                             RDS DB instance or Aurora DB cluster used by the target
                             group.
-                          type: number
+                          format: int64
+                          type: integer
                         sessionPinningFilters:
                           description: Each item in the list represents a class of
                             SQL operations that normally cause all later statements
@@ -226,7 +229,8 @@ spec:
                             Only applies when the proxy has opened its maximum number
                             of connections and all connections are busy with client
                             sessions.
-                          type: number
+                          format: int64
+                          type: integer
                         initQuery:
                           description: One or more SQL statements for the proxy to
                             run when opening each new database connection. Typically
@@ -243,7 +247,8 @@ spec:
                             expressed as a percentage of the max_connections setting
                             for the RDS DB instance or Aurora DB cluster used by the
                             target group.
-                          type: number
+                          format: int64
+                          type: integer
                         maxIdleConnectionsPercent:
                           description: Controls how actively the proxy closes idle
                             database connections in the connection pool. A high value
@@ -254,7 +259,8 @@ spec:
                             as a percentage of the max_connections setting for the
                             RDS DB instance or Aurora DB cluster used by the target
                             group.
-                          type: number
+                          format: int64
+                          type: integer
                         sessionPinningFilters:
                           description: Each item in the list represents a class of
                             SQL operations that normally cause all later statements
@@ -449,7 +455,8 @@ spec:
                             Only applies when the proxy has opened its maximum number
                             of connections and all connections are busy with client
                             sessions.
-                          type: number
+                          format: int64
+                          type: integer
                         initQuery:
                           description: One or more SQL statements for the proxy to
                             run when opening each new database connection. Typically
@@ -466,7 +473,8 @@ spec:
                             expressed as a percentage of the max_connections setting
                             for the RDS DB instance or Aurora DB cluster used by the
                             target group.
-                          type: number
+                          format: int64
+                          type: integer
                         maxIdleConnectionsPercent:
                           description: Controls how actively the proxy closes idle
                             database connections in the connection pool. A high value
@@ -477,7 +485,8 @@ spec:
                             as a percentage of the max_connections setting for the
                             RDS DB instance or Aurora DB cluster used by the target
                             group.
-                          type: number
+                          format: int64
+                          type: integer
                         sessionPinningFilters:
                           description: Each item in the list represents a class of
                             SQL operations that normally cause all later statements

@@ -76,7 +76,8 @@ spec:
                   lbPort:
                     description: Load balancer port to which the policy should be
                       applied. This must be an active listener on the load balancer.
-                    type: number
+                    format: int64
+                    type: integer
                   loadBalancer:
                     description: Name of load balancer to which the policy should
                       be attached.
@@ -360,7 +361,8 @@ spec:
                   lbPort:
                     description: Load balancer port to which the policy should be
                       applied. This must be an active listener on the load balancer.
-                    type: number
+                    format: int64
+                    type: integer
                   loadBalancer:
                     description: Name of load balancer to which the policy should
                       be attached.

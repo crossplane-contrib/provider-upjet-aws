@@ -11,9 +11,7 @@ spec:
     description: example
     memberDefinition:
     - cognitoMemberDefinition:
-      - clientIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+      - clientId: ${aws_cognito_user_pool_client.example.id}
         userGroupSelector:
           matchLabels:
             testing.upbound.io/example-name: example

@@ -26,7 +26,7 @@ type PublicVirtualInterfaceInitParameters struct {
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -44,7 +44,7 @@ type PublicVirtualInterfaceInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VLAN ID.
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type PublicVirtualInterfaceObservation struct {
@@ -64,7 +64,7 @@ type PublicVirtualInterfaceObservation struct {
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -91,7 +91,7 @@ type PublicVirtualInterfaceObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VLAN ID.
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type PublicVirtualInterfaceParameters struct {
@@ -106,7 +106,7 @@ type PublicVirtualInterfaceParameters struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	// +kubebuilder:validation:Optional
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -148,7 +148,7 @@ type PublicVirtualInterfaceParameters struct {
 
 	// The VLAN ID.
 	// +kubebuilder:validation:Optional
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 // PublicVirtualInterfaceSpec defines the desired state of PublicVirtualInterface

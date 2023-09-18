@@ -70,7 +70,8 @@ spec:
                   allocatedStorage:
                     description: The amount of storage (in gigabytes) to be initially
                       allocated for the replication instance.
-                    type: number
+                    format: int64
+                    type: integer
                   allowMajorVersionUpgrade:
                     description: Indicates that major version upgrades are allowed.
                     type: boolean
@@ -387,7 +388,8 @@ spec:
                   allocatedStorage:
                     description: The amount of storage (in gigabytes) to be initially
                       allocated for the replication instance.
-                    type: number
+                    format: int64
+                    type: integer
                   allowMajorVersionUpgrade:
                     description: Indicates that major version upgrades are allowed.
                     type: boolean
@@ -612,7 +614,8 @@ spec:
                   allocatedStorage:
                     description: The amount of storage (in gigabytes) to be initially
                       allocated for the replication instance.
-                    type: number
+                    format: int64
+                    type: integer
                   allowMajorVersionUpgrade:
                     description: Indicates that major version upgrades are allowed.
                     type: boolean

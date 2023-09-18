@@ -353,7 +353,8 @@ spec:
                 properties:
                   allocatedStorage:
                     description: Allocated storage size in gigabytes (GB).
-                    type: number
+                    format: int64
+                    type: integer
                   availabilityZones:
                     description: List of EC2 Availability Zones that instances in
                       the DB cluster snapshot can be restored in.
@@ -390,7 +391,8 @@ spec:
                   port:
                     description: Port that the DB cluster was listening on at the
                       time of the snapshot.
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:

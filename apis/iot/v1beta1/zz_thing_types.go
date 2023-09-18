@@ -43,7 +43,7 @@ type ThingObservation struct {
 	ThingTypeName *string `json:"thingTypeName,omitempty" tf:"thing_type_name,omitempty"`
 
 	// The current version of the thing record in the registry.
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ThingParameters struct {

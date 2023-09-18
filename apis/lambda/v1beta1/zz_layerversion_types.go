@@ -106,7 +106,7 @@ type LayerVersionObservation struct {
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
 	// Size in bytes of the function .zip file.
-	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
+	SourceCodeSize *int64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
 
 	// Lambda Layer version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`

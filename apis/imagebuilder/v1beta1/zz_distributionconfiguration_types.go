@@ -301,7 +301,7 @@ type FastLaunchConfigurationInitParameters struct {
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// The maximum number of parallel instances that are launched for creating resources.
-	MaxParallelLaunches *float64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
+	MaxParallelLaunches *int64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
 
 	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
 	SnapshotConfiguration []SnapshotConfigurationInitParameters `json:"snapshotConfiguration,omitempty" tf:"snapshot_configuration,omitempty"`
@@ -319,7 +319,7 @@ type FastLaunchConfigurationObservation struct {
 	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// The maximum number of parallel instances that are launched for creating resources.
-	MaxParallelLaunches *float64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
+	MaxParallelLaunches *int64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
 
 	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
 	SnapshotConfiguration []SnapshotConfigurationObservation `json:"snapshotConfiguration,omitempty" tf:"snapshot_configuration,omitempty"`
@@ -341,7 +341,7 @@ type FastLaunchConfigurationParameters struct {
 
 	// The maximum number of parallel instances that are launched for creating resources.
 	// +kubebuilder:validation:Optional
-	MaxParallelLaunches *float64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
+	MaxParallelLaunches *int64 `json:"maxParallelLaunches,omitempty" tf:"max_parallel_launches,omitempty"`
 
 	// Configuration block for managing the number of snapshots that are created from pre-provisioned instances for the Windows AMI when faster launching is enabled. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -478,20 +478,20 @@ type LaunchTemplateParameters struct {
 type SnapshotConfigurationInitParameters struct {
 
 	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
-	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
+	TargetResourceCount *int64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
 }
 
 type SnapshotConfigurationObservation struct {
 
 	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
-	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
+	TargetResourceCount *int64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
 }
 
 type SnapshotConfigurationParameters struct {
 
 	// The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
 	// +kubebuilder:validation:Optional
-	TargetResourceCount *float64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
+	TargetResourceCount *int64 `json:"targetResourceCount,omitempty" tf:"target_resource_count,omitempty"`
 }
 
 // DistributionConfigurationSpec defines the desired state of DistributionConfiguration
