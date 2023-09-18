@@ -33,9 +33,7 @@ spec:
   forProvider:
     allowUnauthenticatedIdentities: false
     cognitoIdentityProviders:
-    - clientIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+    - clientId: ${aws_cognito_user_pool_client.example.id}
       providerName: ${aws_cognito_user_pool.example.endpoint}
       serverSideTokenCheck: false
     identityPoolName: identity pool
