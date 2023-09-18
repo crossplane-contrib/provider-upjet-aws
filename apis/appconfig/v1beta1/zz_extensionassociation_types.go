@@ -32,7 +32,7 @@ type ExtensionAssociationObservation struct {
 	ExtensionArn *string `json:"extensionArn,omitempty" tf:"extension_arn,omitempty"`
 
 	// The version number for the extension defined in the association.
-	ExtensionVersion *float64 `json:"extensionVersion,omitempty" tf:"extension_version,omitempty"`
+	ExtensionVersion *int64 `json:"extensionVersion,omitempty" tf:"extension_version,omitempty"`
 
 	// AppConfig Extension Association ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

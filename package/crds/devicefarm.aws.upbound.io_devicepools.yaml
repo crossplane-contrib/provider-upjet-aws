@@ -73,7 +73,8 @@ spec:
                   maxDevices:
                     description: The number of devices that Device Farm can add to
                       your device pool.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name of the Device Pool
                     type: string
@@ -207,7 +208,8 @@ spec:
                   maxDevices:
                     description: The number of devices that Device Farm can add to
                       your device pool.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name of the Device Pool
                     type: string
@@ -424,7 +426,8 @@ spec:
                   maxDevices:
                     description: The number of devices that Device Farm can add to
                       your device pool.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name of the Device Pool
                     type: string

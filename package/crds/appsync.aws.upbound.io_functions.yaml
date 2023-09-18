@@ -239,7 +239,8 @@ spec:
                   maxBatchSize:
                     description: Maximum batching size for a resolver. Valid values
                       are between 0 and 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Function name. The function name does not have to
                       be unique.
@@ -331,7 +332,8 @@ spec:
                   maxBatchSize:
                     description: Maximum batching size for a resolver. Valid values
                       are between 0 and 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Function name. The function name does not have to
                       be unique.
@@ -590,7 +592,8 @@ spec:
                   maxBatchSize:
                     description: Maximum batching size for a resolver. Valid values
                       are between 0 and 2000.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Function name. The function name does not have to
                       be unique.

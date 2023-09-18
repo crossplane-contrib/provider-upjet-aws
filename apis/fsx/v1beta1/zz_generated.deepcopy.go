@@ -660,7 +660,7 @@ func (in *DataRepositoryAssociationInitParameters) DeepCopyInto(out *DataReposit
 	}
 	if in.ImportedFileChunkSize != nil {
 		in, out := &in.ImportedFileChunkSize, &out.ImportedFileChunkSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3 != nil {
@@ -775,7 +775,7 @@ func (in *DataRepositoryAssociationObservation) DeepCopyInto(out *DataRepository
 	}
 	if in.ImportedFileChunkSize != nil {
 		in, out := &in.ImportedFileChunkSize, &out.ImportedFileChunkSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3 != nil {
@@ -869,7 +869,7 @@ func (in *DataRepositoryAssociationParameters) DeepCopyInto(out *DataRepositoryA
 	}
 	if in.ImportedFileChunkSize != nil {
 		in, out := &in.ImportedFileChunkSize, &out.ImportedFileChunkSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -952,7 +952,7 @@ func (in *DiskIopsConfigurationInitParameters) DeepCopyInto(out *DiskIopsConfigu
 	*out = *in
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -977,7 +977,7 @@ func (in *DiskIopsConfigurationObservation) DeepCopyInto(out *DiskIopsConfigurat
 	*out = *in
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -1002,7 +1002,7 @@ func (in *DiskIopsConfigurationParameters) DeepCopyInto(out *DiskIopsConfigurati
 	*out = *in
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -1376,7 +1376,7 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BackupID != nil {
@@ -1426,7 +1426,7 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 	}
 	if in.ImportedFileChunkSize != nil {
 		in, out := &in.ImportedFileChunkSize, &out.ImportedFileChunkSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LogConfiguration != nil {
@@ -1438,7 +1438,7 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 	}
 	if in.PerUnitStorageThroughput != nil {
 		in, out := &in.PerUnitStorageThroughput, &out.PerUnitStorageThroughput
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RootSquashConfiguration != nil {
@@ -1450,7 +1450,7 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -1538,7 +1538,7 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BackupID != nil {
@@ -1598,7 +1598,7 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 	}
 	if in.ImportedFileChunkSize != nil {
 		in, out := &in.ImportedFileChunkSize, &out.ImportedFileChunkSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.KMSKeyID != nil {
@@ -1636,7 +1636,7 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 	}
 	if in.PerUnitStorageThroughput != nil {
 		in, out := &in.PerUnitStorageThroughput, &out.PerUnitStorageThroughput
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RootSquashConfiguration != nil {
@@ -1659,7 +1659,7 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -1742,7 +1742,7 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BackupID != nil {
@@ -1792,7 +1792,7 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 	}
 	if in.ImportedFileChunkSize != nil {
 		in, out := &in.ImportedFileChunkSize, &out.ImportedFileChunkSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.KMSKeyID != nil {
@@ -1819,7 +1819,7 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 	}
 	if in.PerUnitStorageThroughput != nil {
 		in, out := &in.PerUnitStorageThroughput, &out.PerUnitStorageThroughput
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -1859,7 +1859,7 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -2112,7 +2112,7 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 	*out = *in
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DailyAutomaticBackupStartTime != nil {
@@ -2150,7 +2150,7 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -2176,7 +2176,7 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WeeklyMaintenanceStartTime != nil {
@@ -2238,7 +2238,7 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DNSName != nil {
@@ -2330,7 +2330,7 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -2383,7 +2383,7 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VPCID != nil {
@@ -2413,7 +2413,7 @@ func (in *OntapFileSystemParameters) DeepCopyInto(out *OntapFileSystemParameters
 	*out = *in
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DailyAutomaticBackupStartTime != nil {
@@ -2514,7 +2514,7 @@ func (in *OntapFileSystemParameters) DeepCopyInto(out *OntapFileSystemParameters
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -2563,7 +2563,7 @@ func (in *OntapFileSystemParameters) DeepCopyInto(out *OntapFileSystemParameters
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WeeklyMaintenanceStartTime != nil {
@@ -3646,7 +3646,7 @@ func (in *WindowsFileSystemInitParameters) DeepCopyInto(out *WindowsFileSystemIn
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BackupID != nil {
@@ -3695,7 +3695,7 @@ func (in *WindowsFileSystemInitParameters) DeepCopyInto(out *WindowsFileSystemIn
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -3721,7 +3721,7 @@ func (in *WindowsFileSystemInitParameters) DeepCopyInto(out *WindowsFileSystemIn
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WeeklyMaintenanceStartTime != nil {
@@ -3806,7 +3806,7 @@ func (in *WindowsFileSystemObservation) DeepCopyInto(out *WindowsFileSystemObser
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BackupID != nil {
@@ -3907,7 +3907,7 @@ func (in *WindowsFileSystemObservation) DeepCopyInto(out *WindowsFileSystemObser
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -3960,7 +3960,7 @@ func (in *WindowsFileSystemObservation) DeepCopyInto(out *WindowsFileSystemObser
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VPCID != nil {
@@ -4023,7 +4023,7 @@ func (in *WindowsFileSystemParameters) DeepCopyInto(out *WindowsFileSystemParame
 	}
 	if in.AutomaticBackupRetentionDays != nil {
 		in, out := &in.AutomaticBackupRetentionDays, &out.AutomaticBackupRetentionDays
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BackupID != nil {
@@ -4115,7 +4115,7 @@ func (in *WindowsFileSystemParameters) DeepCopyInto(out *WindowsFileSystemParame
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageType != nil {
@@ -4164,7 +4164,7 @@ func (in *WindowsFileSystemParameters) DeepCopyInto(out *WindowsFileSystemParame
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WeeklyMaintenanceStartTime != nil {

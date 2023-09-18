@@ -277,18 +277,18 @@ type EBSBlockDeviceInitParameters struct {
 
 	// Number of I/O operations per second the
 	// created volumes will support.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN of the Outpost on which the snapshot is stored.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of created volumes in GiB.
 	// If snapshot_id is set and volume_size is omitted then the volume will have the same size
 	// as the selected snapshot.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of EBS volume to create. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: standard).
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -308,7 +308,7 @@ type EBSBlockDeviceObservation struct {
 
 	// Number of I/O operations per second the
 	// created volumes will support.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN of the Outpost on which the snapshot is stored.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
@@ -319,12 +319,12 @@ type EBSBlockDeviceObservation struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of created volumes in GiB.
 	// If snapshot_id is set and volume_size is omitted then the volume will have the same size
 	// as the selected snapshot.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of EBS volume to create. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: standard).
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -348,7 +348,7 @@ type EBSBlockDeviceParameters struct {
 	// Number of I/O operations per second the
 	// created volumes will support.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN of the Outpost on which the snapshot is stored.
 	// +kubebuilder:validation:Optional
@@ -371,13 +371,13 @@ type EBSBlockDeviceParameters struct {
 
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of created volumes in GiB.
 	// If snapshot_id is set and volume_size is omitted then the volume will have the same size
 	// as the selected snapshot.
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of EBS volume to create. Can be standard, gp2, gp3, io1, io2, sc1 or st1 (Default: standard).
 	// +kubebuilder:validation:Optional

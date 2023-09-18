@@ -138,7 +138,8 @@ spec:
                         accessControlMaxAgeSec:
                           description: A number that CloudFront uses as the value
                             for the Access-Control-Max-Age HTTP response header.
-                          type: number
+                          format: int64
+                          type: integer
                         originOverride:
                           description: A Boolean value that determines how CloudFront
                             behaves for the HTTP response header.
@@ -279,7 +280,8 @@ spec:
                                 description: A number that CloudFront uses as the
                                   value for the Access-Control-Max-Age HTTP response
                                   header.
-                                type: number
+                                format: int64
+                                type: integer
                               includeSubdomains:
                                 description: Whether CloudFront includes the includeSubDomains
                                   directive in the Strict-Transport-Security HTTP
@@ -435,7 +437,8 @@ spec:
                         accessControlMaxAgeSec:
                           description: A number that CloudFront uses as the value
                             for the Access-Control-Max-Age HTTP response header.
-                          type: number
+                          format: int64
+                          type: integer
                         originOverride:
                           description: A Boolean value that determines how CloudFront
                             behaves for the HTTP response header.
@@ -572,7 +575,8 @@ spec:
                                 description: A number that CloudFront uses as the
                                   value for the Access-Control-Max-Age HTTP response
                                   header.
-                                type: number
+                                format: int64
+                                type: integer
                               includeSubdomains:
                                 description: Whether CloudFront includes the includeSubDomains
                                   directive in the Strict-Transport-Security HTTP
@@ -885,7 +889,8 @@ spec:
                         accessControlMaxAgeSec:
                           description: A number that CloudFront uses as the value
                             for the Access-Control-Max-Age HTTP response header.
-                          type: number
+                          format: int64
+                          type: integer
                         originOverride:
                           description: A Boolean value that determines how CloudFront
                             behaves for the HTTP response header.
@@ -1025,7 +1030,8 @@ spec:
                                 description: A number that CloudFront uses as the
                                   value for the Access-Control-Max-Age HTTP response
                                   header.
-                                type: number
+                                format: int64
+                                type: integer
                               includeSubdomains:
                                 description: Whether CloudFront includes the includeSubDomains
                                   directive in the Strict-Transport-Security HTTP

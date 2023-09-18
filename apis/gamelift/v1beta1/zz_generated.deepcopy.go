@@ -631,7 +631,7 @@ func (in *EC2InboundPermissionInitParameters) DeepCopyInto(out *EC2InboundPermis
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IPRange != nil {
@@ -646,7 +646,7 @@ func (in *EC2InboundPermissionInitParameters) DeepCopyInto(out *EC2InboundPermis
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -666,7 +666,7 @@ func (in *EC2InboundPermissionObservation) DeepCopyInto(out *EC2InboundPermissio
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IPRange != nil {
@@ -681,7 +681,7 @@ func (in *EC2InboundPermissionObservation) DeepCopyInto(out *EC2InboundPermissio
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -701,7 +701,7 @@ func (in *EC2InboundPermissionParameters) DeepCopyInto(out *EC2InboundPermission
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IPRange != nil {
@@ -716,7 +716,7 @@ func (in *EC2InboundPermissionParameters) DeepCopyInto(out *EC2InboundPermission
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1293,7 +1293,7 @@ func (in *GameSessionQueueInitParameters) DeepCopyInto(out *GameSessionQueueInit
 	}
 	if in.TimeoutInSeconds != nil {
 		in, out := &in.TimeoutInSeconds, &out.TimeoutInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1415,7 +1415,7 @@ func (in *GameSessionQueueObservation) DeepCopyInto(out *GameSessionQueueObserva
 	}
 	if in.TimeoutInSeconds != nil {
 		in, out := &in.TimeoutInSeconds, &out.TimeoutInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1494,7 +1494,7 @@ func (in *GameSessionQueueParameters) DeepCopyInto(out *GameSessionQueueParamete
 	}
 	if in.TimeoutInSeconds != nil {
 		in, out := &in.TimeoutInSeconds, &out.TimeoutInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1549,12 +1549,12 @@ func (in *PlayerLatencyPolicyInitParameters) DeepCopyInto(out *PlayerLatencyPoli
 	*out = *in
 	if in.MaximumIndividualPlayerLatencyMilliseconds != nil {
 		in, out := &in.MaximumIndividualPlayerLatencyMilliseconds, &out.MaximumIndividualPlayerLatencyMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PolicyDurationSeconds != nil {
 		in, out := &in.PolicyDurationSeconds, &out.PolicyDurationSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1574,12 +1574,12 @@ func (in *PlayerLatencyPolicyObservation) DeepCopyInto(out *PlayerLatencyPolicyO
 	*out = *in
 	if in.MaximumIndividualPlayerLatencyMilliseconds != nil {
 		in, out := &in.MaximumIndividualPlayerLatencyMilliseconds, &out.MaximumIndividualPlayerLatencyMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PolicyDurationSeconds != nil {
 		in, out := &in.PolicyDurationSeconds, &out.PolicyDurationSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1599,12 +1599,12 @@ func (in *PlayerLatencyPolicyParameters) DeepCopyInto(out *PlayerLatencyPolicyPa
 	*out = *in
 	if in.MaximumIndividualPlayerLatencyMilliseconds != nil {
 		in, out := &in.MaximumIndividualPlayerLatencyMilliseconds, &out.MaximumIndividualPlayerLatencyMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PolicyDurationSeconds != nil {
 		in, out := &in.PolicyDurationSeconds, &out.PolicyDurationSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1624,12 +1624,12 @@ func (in *ResourceCreationLimitPolicyInitParameters) DeepCopyInto(out *ResourceC
 	*out = *in
 	if in.NewGameSessionsPerCreator != nil {
 		in, out := &in.NewGameSessionsPerCreator, &out.NewGameSessionsPerCreator
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PolicyPeriodInMinutes != nil {
 		in, out := &in.PolicyPeriodInMinutes, &out.PolicyPeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1649,12 +1649,12 @@ func (in *ResourceCreationLimitPolicyObservation) DeepCopyInto(out *ResourceCrea
 	*out = *in
 	if in.NewGameSessionsPerCreator != nil {
 		in, out := &in.NewGameSessionsPerCreator, &out.NewGameSessionsPerCreator
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PolicyPeriodInMinutes != nil {
 		in, out := &in.PolicyPeriodInMinutes, &out.PolicyPeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1674,12 +1674,12 @@ func (in *ResourceCreationLimitPolicyParameters) DeepCopyInto(out *ResourceCreat
 	*out = *in
 	if in.NewGameSessionsPerCreator != nil {
 		in, out := &in.NewGameSessionsPerCreator, &out.NewGameSessionsPerCreator
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PolicyPeriodInMinutes != nil {
 		in, out := &in.PolicyPeriodInMinutes, &out.PolicyPeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1789,12 +1789,12 @@ func (in *RuntimeConfigurationInitParameters) DeepCopyInto(out *RuntimeConfigura
 	*out = *in
 	if in.GameSessionActivationTimeoutSeconds != nil {
 		in, out := &in.GameSessionActivationTimeoutSeconds, &out.GameSessionActivationTimeoutSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentGameSessionActivations != nil {
 		in, out := &in.MaxConcurrentGameSessionActivations, &out.MaxConcurrentGameSessionActivations
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerProcess != nil {
@@ -1821,12 +1821,12 @@ func (in *RuntimeConfigurationObservation) DeepCopyInto(out *RuntimeConfiguratio
 	*out = *in
 	if in.GameSessionActivationTimeoutSeconds != nil {
 		in, out := &in.GameSessionActivationTimeoutSeconds, &out.GameSessionActivationTimeoutSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentGameSessionActivations != nil {
 		in, out := &in.MaxConcurrentGameSessionActivations, &out.MaxConcurrentGameSessionActivations
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerProcess != nil {
@@ -1853,12 +1853,12 @@ func (in *RuntimeConfigurationParameters) DeepCopyInto(out *RuntimeConfiguration
 	*out = *in
 	if in.GameSessionActivationTimeoutSeconds != nil {
 		in, out := &in.GameSessionActivationTimeoutSeconds, &out.GameSessionActivationTimeoutSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentGameSessionActivations != nil {
 		in, out := &in.MaxConcurrentGameSessionActivations, &out.MaxConcurrentGameSessionActivations
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerProcess != nil {
@@ -2289,7 +2289,7 @@ func (in *ServerProcessInitParameters) DeepCopyInto(out *ServerProcessInitParame
 	*out = *in
 	if in.ConcurrentExecutions != nil {
 		in, out := &in.ConcurrentExecutions, &out.ConcurrentExecutions
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LaunchPath != nil {
@@ -2319,7 +2319,7 @@ func (in *ServerProcessObservation) DeepCopyInto(out *ServerProcessObservation) 
 	*out = *in
 	if in.ConcurrentExecutions != nil {
 		in, out := &in.ConcurrentExecutions, &out.ConcurrentExecutions
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LaunchPath != nil {
@@ -2349,7 +2349,7 @@ func (in *ServerProcessParameters) DeepCopyInto(out *ServerProcessParameters) {
 	*out = *in
 	if in.ConcurrentExecutions != nil {
 		in, out := &in.ConcurrentExecutions, &out.ConcurrentExecutions
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LaunchPath != nil {

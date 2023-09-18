@@ -213,7 +213,8 @@ spec:
                               maxParallelLaunches:
                                 description: The maximum number of parallel instances
                                   that are launched for creating resources.
-                                type: number
+                                format: int64
+                                type: integer
                               snapshotConfiguration:
                                 description: Configuration block for managing the
                                   number of snapshots that are created from pre-provisioned
@@ -225,7 +226,8 @@ spec:
                                       description: The number of pre-provisioned snapshots
                                         to keep on hand for a fast-launch enabled
                                         Windows AMI.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -435,7 +437,8 @@ spec:
                               maxParallelLaunches:
                                 description: The maximum number of parallel instances
                                   that are launched for creating resources.
-                                type: number
+                                format: int64
+                                type: integer
                               snapshotConfiguration:
                                 description: Configuration block for managing the
                                   number of snapshots that are created from pre-provisioned
@@ -447,7 +450,8 @@ spec:
                                       description: The number of pre-provisioned snapshots
                                         to keep on hand for a fast-launch enabled
                                         Windows AMI.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -818,7 +822,8 @@ spec:
                               maxParallelLaunches:
                                 description: The maximum number of parallel instances
                                   that are launched for creating resources.
-                                type: number
+                                format: int64
+                                type: integer
                               snapshotConfiguration:
                                 description: Configuration block for managing the
                                   number of snapshots that are created from pre-provisioned
@@ -830,7 +835,8 @@ spec:
                                       description: The number of pre-provisioned snapshots
                                         to keep on hand for a fast-launch enabled
                                         Windows AMI.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object

@@ -158,7 +158,8 @@ spec:
                       If it is greater than 0, API Gateway caches authorizer responses.
                       The maximum value is 3600, or 1 hour. Defaults to 300. Supported
                       only for HTTP API Lambda authorizers.
-                    type: number
+                    format: int64
+                    type: integer
                   authorizerType:
                     description: 'Authorizer type. Valid values: JWT, REQUEST. Specify
                       REQUEST for a Lambda function using incoming request parameters.
@@ -316,7 +317,8 @@ spec:
                       If it is greater than 0, API Gateway caches authorizer responses.
                       The maximum value is 3600, or 1 hour. Defaults to 300. Supported
                       only for HTTP API Lambda authorizers.
-                    type: number
+                    format: int64
+                    type: integer
                   authorizerType:
                     description: 'Authorizer type. Valid values: JWT, REQUEST. Specify
                       REQUEST for a Lambda function using incoming request parameters.
@@ -553,7 +555,8 @@ spec:
                       If it is greater than 0, API Gateway caches authorizer responses.
                       The maximum value is 3600, or 1 hour. Defaults to 300. Supported
                       only for HTTP API Lambda authorizers.
-                    type: number
+                    format: int64
+                    type: integer
                   authorizerType:
                     description: 'Authorizer type. Valid values: JWT, REQUEST. Specify
                       REQUEST for a Lambda function using incoming request parameters.

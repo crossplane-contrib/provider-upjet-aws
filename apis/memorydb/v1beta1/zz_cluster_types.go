@@ -26,7 +26,7 @@ type ClusterEndpointObservation struct {
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type ClusterEndpointParameters struct {
@@ -59,16 +59,16 @@ type ClusterInitParameters struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
-	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
+	NumReplicasPerShard *int64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
 
 	// The number of shards in the cluster. Defaults to 1.
-	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
+	NumShards *int64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// The name of the parameter group associated with the cluster.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of ARN-s that uniquely identify RDB snapshot files stored in S3. The snapshot files will be used to populate the new cluster. Object names in the ARN-s cannot contain any commas.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
@@ -77,7 +77,7 @@ type ClusterInitParameters struct {
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
 	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
-	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
@@ -133,16 +133,16 @@ type ClusterObservation struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
-	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
+	NumReplicasPerShard *int64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
 
 	// The number of shards in the cluster. Defaults to 1.
-	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
+	NumShards *int64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// The name of the parameter group associated with the cluster.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Set of VPC Security Group ID-s to associate with this cluster.
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -157,7 +157,7 @@ type ClusterObservation struct {
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
 	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
-	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
@@ -227,11 +227,11 @@ type ClusterParameters struct {
 
 	// The number of replicas to apply to each shard, up to a maximum of 5. Defaults to 1 (i.e. 2 nodes per shard).
 	// +kubebuilder:validation:Optional
-	NumReplicasPerShard *float64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
+	NumReplicasPerShard *int64 `json:"numReplicasPerShard,omitempty" tf:"num_replicas_per_shard,omitempty"`
 
 	// The number of shards in the cluster. Defaults to 1.
 	// +kubebuilder:validation:Optional
-	NumShards *float64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
+	NumShards *int64 `json:"numShards,omitempty" tf:"num_shards,omitempty"`
 
 	// The name of the parameter group associated with the cluster.
 	// +kubebuilder:validation:Optional
@@ -239,7 +239,7 @@ type ClusterParameters struct {
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -271,7 +271,7 @@ type ClusterParameters struct {
 
 	// The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to 0, automatic backups are disabled. Defaults to 0.
 	// +kubebuilder:validation:Optional
-	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: 05:00-09:00.
 	// +kubebuilder:validation:Optional
@@ -313,7 +313,7 @@ type EndpointObservation struct {
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The port number on which each of the nodes accepts connections. Defaults to 6379.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type EndpointParameters struct {
@@ -351,7 +351,7 @@ type ShardsObservation struct {
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
 
 	// Number of individual nodes in this shard.
-	NumNodes *float64 `json:"numNodes,omitempty" tf:"num_nodes,omitempty"`
+	NumNodes *int64 `json:"numNodes,omitempty" tf:"num_nodes,omitempty"`
 
 	// Keyspace for this shard. Example: 0-16383.
 	Slots *string `json:"slots,omitempty" tf:"slots,omitempty"`

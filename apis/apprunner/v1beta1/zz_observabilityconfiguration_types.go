@@ -43,7 +43,7 @@ type ObservabilityConfigurationObservation struct {
 	ObservabilityConfigurationName *string `json:"observabilityConfigurationName,omitempty" tf:"observability_configuration_name,omitempty"`
 
 	// The revision of this observability configuration.
-	ObservabilityConfigurationRevision *float64 `json:"observabilityConfigurationRevision,omitempty" tf:"observability_configuration_revision,omitempty"`
+	ObservabilityConfigurationRevision *int64 `json:"observabilityConfigurationRevision,omitempty" tf:"observability_configuration_revision,omitempty"`
 
 	// Current state of the observability configuration. An INACTIVE configuration revision has been deleted and can't be used. It is permanently removed some time after deletion.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`

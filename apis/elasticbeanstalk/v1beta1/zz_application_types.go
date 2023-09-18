@@ -70,10 +70,10 @@ type AppversionLifecycleInitParameters struct {
 	DeleteSourceFromS3 *bool `json:"deleteSourceFromS3,omitempty" tf:"delete_source_from_s3,omitempty"`
 
 	// The number of days to retain an application version ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
-	MaxAgeInDays *float64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
+	MaxAgeInDays *int64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
 
 	// The maximum number of application versions to retain ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
-	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+	MaxCount *int64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 }
 
 type AppversionLifecycleObservation struct {
@@ -82,10 +82,10 @@ type AppversionLifecycleObservation struct {
 	DeleteSourceFromS3 *bool `json:"deleteSourceFromS3,omitempty" tf:"delete_source_from_s3,omitempty"`
 
 	// The number of days to retain an application version ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
-	MaxAgeInDays *float64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
+	MaxAgeInDays *int64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
 
 	// The maximum number of application versions to retain ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
-	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+	MaxCount *int64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
 	// The ARN of an IAM service role under which the application version is deleted.  Elastic Beanstalk must have permission to assume this role.
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
@@ -99,11 +99,11 @@ type AppversionLifecycleParameters struct {
 
 	// The number of days to retain an application version ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
 	// +kubebuilder:validation:Optional
-	MaxAgeInDays *float64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
+	MaxAgeInDays *int64 `json:"maxAgeInDays,omitempty" tf:"max_age_in_days,omitempty"`
 
 	// The maximum number of application versions to retain ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
 	// +kubebuilder:validation:Optional
-	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+	MaxCount *int64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
 	// The ARN of an IAM service role under which the application version is deleted.  Elastic Beanstalk must have permission to assume this role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

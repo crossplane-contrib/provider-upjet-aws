@@ -364,7 +364,8 @@ spec:
                     description: The name of the image. Must be unique to your account.
                     type: string
                   version:
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

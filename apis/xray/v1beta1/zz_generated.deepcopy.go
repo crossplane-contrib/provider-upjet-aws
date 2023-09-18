@@ -604,12 +604,12 @@ func (in *SamplingRuleInitParameters) DeepCopyInto(out *SamplingRuleInitParamete
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ReservoirSize != nil {
 		in, out := &in.ReservoirSize, &out.ReservoirSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -650,7 +650,7 @@ func (in *SamplingRuleInitParameters) DeepCopyInto(out *SamplingRuleInitParamete
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -743,12 +743,12 @@ func (in *SamplingRuleObservation) DeepCopyInto(out *SamplingRuleObservation) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ReservoirSize != nil {
 		in, out := &in.ReservoirSize, &out.ReservoirSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -805,7 +805,7 @@ func (in *SamplingRuleObservation) DeepCopyInto(out *SamplingRuleObservation) {
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -856,7 +856,7 @@ func (in *SamplingRuleParameters) DeepCopyInto(out *SamplingRuleParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -866,7 +866,7 @@ func (in *SamplingRuleParameters) DeepCopyInto(out *SamplingRuleParameters) {
 	}
 	if in.ReservoirSize != nil {
 		in, out := &in.ReservoirSize, &out.ReservoirSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -907,7 +907,7 @@ func (in *SamplingRuleParameters) DeepCopyInto(out *SamplingRuleParameters) {
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

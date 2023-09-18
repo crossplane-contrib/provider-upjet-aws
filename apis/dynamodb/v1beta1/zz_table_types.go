@@ -64,10 +64,10 @@ type GlobalSecondaryIndexInitParameters struct {
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
-	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+	ReadCapacity *int64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
-	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+	WriteCapacity *int64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type GlobalSecondaryIndexObservation struct {
@@ -88,10 +88,10 @@ type GlobalSecondaryIndexObservation struct {
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
-	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+	ReadCapacity *int64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
-	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+	WriteCapacity *int64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type GlobalSecondaryIndexParameters struct {
@@ -118,11 +118,11 @@ type GlobalSecondaryIndexParameters struct {
 
 	// Number of read units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
-	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+	ReadCapacity *int64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Number of write units for this index. Must be set if billing_mode is set to PROVISIONED.
 	// +kubebuilder:validation:Optional
-	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+	WriteCapacity *int64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type LocalSecondaryIndexInitParameters struct {
@@ -278,7 +278,7 @@ type TableInitParameters struct {
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
-	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+	ReadCapacity *int64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	Replica []TableReplicaInitParameters `json:"replica,omitempty" tf:"replica,omitempty"`
@@ -313,7 +313,7 @@ type TableInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
-	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+	WriteCapacity *int64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type TableObservation struct {
@@ -349,7 +349,7 @@ type TableObservation struct {
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
-	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+	ReadCapacity *int64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Configuration block(s) with DynamoDB Global Tables V2 (version 2019.11.21) replication configurations. See below.
 	Replica []TableReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
@@ -393,7 +393,7 @@ type TableObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
-	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+	WriteCapacity *int64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type TableParameters struct {
@@ -432,7 +432,7 @@ type TableParameters struct {
 
 	// Number of read units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
-	ReadCapacity *float64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
+	ReadCapacity *int64 `json:"readCapacity,omitempty" tf:"read_capacity,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -483,7 +483,7 @@ type TableParameters struct {
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
 	// +kubebuilder:validation:Optional
-	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
+	WriteCapacity *int64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
 type TableReplicaInitParameters struct {

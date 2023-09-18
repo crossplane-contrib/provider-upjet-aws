@@ -71,7 +71,8 @@ spec:
                     description: Sets the execution timeout value (in minutes) for
                       a project. All test runs in this project use the specified execution
                       timeout value unless overridden when scheduling a run.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name of the project
                     type: string
@@ -103,7 +104,8 @@ spec:
                     description: Sets the execution timeout value (in minutes) for
                       a project. All test runs in this project use the specified execution
                       timeout value unless overridden when scheduling a run.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: The name of the project
                     type: string
@@ -290,7 +292,8 @@ spec:
                     description: Sets the execution timeout value (in minutes) for
                       a project. All test runs in this project use the specified execution
                       timeout value unless overridden when scheduling a run.
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     type: string
                   name:

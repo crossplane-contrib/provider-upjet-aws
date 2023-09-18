@@ -47,7 +47,7 @@ type TrafficPolicyObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Version number of the traffic policy. This value is automatically incremented by AWS after each update of this resource.
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type TrafficPolicyParameters struct {

@@ -423,7 +423,7 @@ type StepAdjustmentInitParameters struct {
 	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
 
 	// Number of members by which to scale, when the adjustment bounds are breached. A positive value scales up. A negative value scales down.
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepAdjustmentObservation struct {
@@ -435,7 +435,7 @@ type StepAdjustmentObservation struct {
 	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
 
 	// Number of members by which to scale, when the adjustment bounds are breached. A positive value scales up. A negative value scales down.
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepAdjustmentParameters struct {
@@ -450,7 +450,7 @@ type StepAdjustmentParameters struct {
 
 	// Number of members by which to scale, when the adjustment bounds are breached. A positive value scales up. A negative value scales down.
 	// +kubebuilder:validation:Optional
-	ScalingAdjustment *float64 `json:"scalingAdjustment" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepScalingPolicyConfigurationInitParameters struct {
@@ -459,13 +459,13 @@ type StepScalingPolicyConfigurationInitParameters struct {
 	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
-	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+	Cooldown *int64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
 	MetricAggregationType *string `json:"metricAggregationType,omitempty" tf:"metric_aggregation_type,omitempty"`
 
 	// Minimum number to adjust your scalable dimension as a result of a scaling activity. If the adjustment type is PercentChangeInCapacity, the scaling policy changes the scalable dimension of the scalable target by this amount.
-	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+	MinAdjustmentMagnitude *int64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
 
 	// Set of adjustments that manage scaling. These have the following structure:
 	StepAdjustment []StepAdjustmentInitParameters `json:"stepAdjustment,omitempty" tf:"step_adjustment,omitempty"`
@@ -477,13 +477,13 @@ type StepScalingPolicyConfigurationObservation struct {
 	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
-	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+	Cooldown *int64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
 	MetricAggregationType *string `json:"metricAggregationType,omitempty" tf:"metric_aggregation_type,omitempty"`
 
 	// Minimum number to adjust your scalable dimension as a result of a scaling activity. If the adjustment type is PercentChangeInCapacity, the scaling policy changes the scalable dimension of the scalable target by this amount.
-	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+	MinAdjustmentMagnitude *int64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
 
 	// Set of adjustments that manage scaling. These have the following structure:
 	StepAdjustment []StepAdjustmentObservation `json:"stepAdjustment,omitempty" tf:"step_adjustment,omitempty"`
@@ -497,7 +497,7 @@ type StepScalingPolicyConfigurationParameters struct {
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
 	// +kubebuilder:validation:Optional
-	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+	Cooldown *int64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
 	// +kubebuilder:validation:Optional
@@ -505,7 +505,7 @@ type StepScalingPolicyConfigurationParameters struct {
 
 	// Minimum number to adjust your scalable dimension as a result of a scaling activity. If the adjustment type is PercentChangeInCapacity, the scaling policy changes the scalable dimension of the scalable target by this amount.
 	// +kubebuilder:validation:Optional
-	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+	MinAdjustmentMagnitude *int64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
 
 	// Set of adjustments that manage scaling. These have the following structure:
 	// +kubebuilder:validation:Optional
@@ -524,10 +524,10 @@ type TargetTrackingScalingPolicyConfigurationInitParameters struct {
 	PredefinedMetricSpecification []PredefinedMetricSpecificationInitParameters `json:"predefinedMetricSpecification,omitempty" tf:"predefined_metric_specification,omitempty"`
 
 	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
-	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
+	ScaleInCooldown *int64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
 	// Amount of time, in seconds, after a scale out activity completes before another scale out activity can start.
-	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
+	ScaleOutCooldown *int64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
 	// Target value for the metric.
 	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
@@ -545,10 +545,10 @@ type TargetTrackingScalingPolicyConfigurationObservation struct {
 	PredefinedMetricSpecification []PredefinedMetricSpecificationObservation `json:"predefinedMetricSpecification,omitempty" tf:"predefined_metric_specification,omitempty"`
 
 	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
-	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
+	ScaleInCooldown *int64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
 	// Amount of time, in seconds, after a scale out activity completes before another scale out activity can start.
-	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
+	ScaleOutCooldown *int64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
 	// Target value for the metric.
 	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
@@ -570,11 +570,11 @@ type TargetTrackingScalingPolicyConfigurationParameters struct {
 
 	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
 	// +kubebuilder:validation:Optional
-	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
+	ScaleInCooldown *int64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
 	// Amount of time, in seconds, after a scale out activity completes before another scale out activity can start.
 	// +kubebuilder:validation:Optional
-	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
+	ScaleOutCooldown *int64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
 	// Target value for the metric.
 	// +kubebuilder:validation:Optional

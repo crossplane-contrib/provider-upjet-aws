@@ -20,10 +20,10 @@ import (
 type BatchTargetInitParameters struct {
 
 	// The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.
-	ArraySize *float64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
+	ArraySize *int64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
 
 	// The number of times to attempt to retry, if the job fails. Valid values are 1 to 10.
-	JobAttempts *float64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
+	JobAttempts *int64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
 
 	// The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
 	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
@@ -35,10 +35,10 @@ type BatchTargetInitParameters struct {
 type BatchTargetObservation struct {
 
 	// The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.
-	ArraySize *float64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
+	ArraySize *int64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
 
 	// The number of times to attempt to retry, if the job fails. Valid values are 1 to 10.
-	JobAttempts *float64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
+	JobAttempts *int64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
 
 	// The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
 	JobDefinition *string `json:"jobDefinition,omitempty" tf:"job_definition,omitempty"`
@@ -51,11 +51,11 @@ type BatchTargetParameters struct {
 
 	// The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.
 	// +kubebuilder:validation:Optional
-	ArraySize *float64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
+	ArraySize *int64 `json:"arraySize,omitempty" tf:"array_size,omitempty"`
 
 	// The number of times to attempt to retry, if the job fails. Valid values are 1 to 10.
 	// +kubebuilder:validation:Optional
-	JobAttempts *float64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
+	JobAttempts *int64 `json:"jobAttempts,omitempty" tf:"job_attempts,omitempty"`
 
 	// The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
 	// +kubebuilder:validation:Optional
@@ -69,32 +69,32 @@ type BatchTargetParameters struct {
 type CapacityProviderStrategyInitParameters struct {
 
 	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyObservation struct {
 
 	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyParameters struct {
 
 	// The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Defaults to 0.
 	// +kubebuilder:validation:Optional
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
 	// +kubebuilder:validation:Optional
@@ -102,7 +102,7 @@ type CapacityProviderStrategyParameters struct {
 
 	// The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type DeadLetterConfigInitParameters struct {
@@ -160,7 +160,7 @@ type EcsTargetInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
-	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+	TaskCount *int64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 }
 
 type EcsTargetObservation struct {
@@ -199,7 +199,7 @@ type EcsTargetObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
-	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+	TaskCount *int64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
@@ -253,7 +253,7 @@ type EcsTargetParameters struct {
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
 	// +kubebuilder:validation:Optional
-	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+	TaskCount *int64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.TaskDefinition
@@ -555,30 +555,30 @@ type RedshiftTargetParameters struct {
 type RetryPolicyInitParameters struct {
 
 	// The age in seconds to continue to make retry attempts.
-	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// maximum number of retry attempts to make before the request fails
-	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RetryPolicyObservation struct {
 
 	// The age in seconds to continue to make retry attempts.
-	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// maximum number of retry attempts to make before the request fails
-	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RetryPolicyParameters struct {
 
 	// The age in seconds to continue to make retry attempts.
 	// +kubebuilder:validation:Optional
-	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// maximum number of retry attempts to make before the request fails
 	// +kubebuilder:validation:Optional
-	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RunCommandTargetsInitParameters struct {

@@ -682,7 +682,8 @@ spec:
                     type: string
                   deploymentNumber:
                     description: Deployment number.
-                    type: number
+                    format: int64
+                    type: integer
                   deploymentStrategyId:
                     description: Deployment strategy ID or name of a predefined deployment
                       strategy. See Predefined Deployment Strategies for more details.

@@ -387,7 +387,8 @@ spec:
                                           minutes:
                                             description: 'Time in minutes. Valid values:
                                               15.'
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     status:
@@ -419,7 +420,8 @@ spec:
                                           minutes:
                                             description: 'Time in minutes. Valid values:
                                               15.'
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -508,7 +510,8 @@ spec:
                             should only be set if filter is configured. If not provided,
                             defaults to 0. Priority must be unique between multiple
                             rules.
-                          type: number
+                          format: int64
+                          type: integer
                         sourceSelectionCriteria:
                           description: Specifies special object selection criteria.
                             See below.
@@ -664,7 +667,8 @@ spec:
                                           minutes:
                                             description: 'Time in minutes. Valid values:
                                               15.'
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     status:
@@ -696,7 +700,8 @@ spec:
                                           minutes:
                                             description: 'Time in minutes. Valid values:
                                               15.'
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -785,7 +790,8 @@ spec:
                             should only be set if filter is configured. If not provided,
                             defaults to 0. Priority must be unique between multiple
                             rules.
-                          type: number
+                          format: int64
+                          type: integer
                         sourceSelectionCriteria:
                           description: Specifies special object selection criteria.
                             See below.
@@ -1093,7 +1099,8 @@ spec:
                                           minutes:
                                             description: 'Time in minutes. Valid values:
                                               15.'
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     status:
@@ -1125,7 +1132,8 @@ spec:
                                           minutes:
                                             description: 'Time in minutes. Valid values:
                                               15.'
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1214,7 +1222,8 @@ spec:
                             should only be set if filter is configured. If not provided,
                             defaults to 0. Priority must be unique between multiple
                             rules.
-                          type: number
+                          format: int64
+                          type: integer
                         sourceSelectionCriteria:
                           description: Specifies special object selection criteria.
                             See below.

@@ -86,7 +86,7 @@ func (in *ActionInitParameters) DeepCopyInto(out *ActionInitParameters) {
 	}
 	if in.RunOrder != nil {
 		in, out := &in.RunOrder, &out.RunOrder
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Version != nil {
@@ -184,7 +184,7 @@ func (in *ActionObservation) DeepCopyInto(out *ActionObservation) {
 	}
 	if in.RunOrder != nil {
 		in, out := &in.RunOrder, &out.RunOrder
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Version != nil {
@@ -282,7 +282,7 @@ func (in *ActionParameters) DeepCopyInto(out *ActionParameters) {
 	}
 	if in.RunOrder != nil {
 		in, out := &in.RunOrder, &out.RunOrder
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Version != nil {
@@ -1415,12 +1415,12 @@ func (in *InputArtifactDetailsInitParameters) DeepCopyInto(out *InputArtifactDet
 	*out = *in
 	if in.MaximumCount != nil {
 		in, out := &in.MaximumCount, &out.MaximumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MinimumCount != nil {
 		in, out := &in.MinimumCount, &out.MinimumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1440,12 +1440,12 @@ func (in *InputArtifactDetailsObservation) DeepCopyInto(out *InputArtifactDetail
 	*out = *in
 	if in.MaximumCount != nil {
 		in, out := &in.MaximumCount, &out.MaximumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MinimumCount != nil {
 		in, out := &in.MinimumCount, &out.MinimumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1465,12 +1465,12 @@ func (in *InputArtifactDetailsParameters) DeepCopyInto(out *InputArtifactDetails
 	*out = *in
 	if in.MaximumCount != nil {
 		in, out := &in.MaximumCount, &out.MaximumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MinimumCount != nil {
 		in, out := &in.MinimumCount, &out.MinimumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1490,12 +1490,12 @@ func (in *OutputArtifactDetailsInitParameters) DeepCopyInto(out *OutputArtifactD
 	*out = *in
 	if in.MaximumCount != nil {
 		in, out := &in.MaximumCount, &out.MaximumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MinimumCount != nil {
 		in, out := &in.MinimumCount, &out.MinimumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1515,12 +1515,12 @@ func (in *OutputArtifactDetailsObservation) DeepCopyInto(out *OutputArtifactDeta
 	*out = *in
 	if in.MaximumCount != nil {
 		in, out := &in.MaximumCount, &out.MaximumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MinimumCount != nil {
 		in, out := &in.MinimumCount, &out.MinimumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1540,12 +1540,12 @@ func (in *OutputArtifactDetailsParameters) DeepCopyInto(out *OutputArtifactDetai
 	*out = *in
 	if in.MaximumCount != nil {
 		in, out := &in.MaximumCount, &out.MaximumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MinimumCount != nil {
 		in, out := &in.MinimumCount, &out.MinimumCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

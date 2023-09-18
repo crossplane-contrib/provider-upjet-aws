@@ -122,12 +122,12 @@ func (in *FairSharePolicyInitParameters) DeepCopyInto(out *FairSharePolicyInitPa
 	*out = *in
 	if in.ComputeReservation != nil {
 		in, out := &in.ComputeReservation, &out.ComputeReservation
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ShareDecaySeconds != nil {
 		in, out := &in.ShareDecaySeconds, &out.ShareDecaySeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ShareDistribution != nil {
@@ -154,12 +154,12 @@ func (in *FairSharePolicyObservation) DeepCopyInto(out *FairSharePolicyObservati
 	*out = *in
 	if in.ComputeReservation != nil {
 		in, out := &in.ComputeReservation, &out.ComputeReservation
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ShareDecaySeconds != nil {
 		in, out := &in.ShareDecaySeconds, &out.ShareDecaySeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ShareDistribution != nil {
@@ -186,12 +186,12 @@ func (in *FairSharePolicyParameters) DeepCopyInto(out *FairSharePolicyParameters
 	*out = *in
 	if in.ComputeReservation != nil {
 		in, out := &in.ComputeReservation, &out.ComputeReservation
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ShareDecaySeconds != nil {
 		in, out := &in.ShareDecaySeconds, &out.ShareDecaySeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ShareDistribution != nil {

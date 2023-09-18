@@ -125,7 +125,7 @@ type TieringInitParameters struct {
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
 	// Number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *int64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type TieringObservation struct {
@@ -134,7 +134,7 @@ type TieringObservation struct {
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
 	// Number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *int64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type TieringParameters struct {
@@ -145,7 +145,7 @@ type TieringParameters struct {
 
 	// Number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier.
 	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days" tf:"days,omitempty"`
+	Days *int64 `json:"days" tf:"days,omitempty"`
 }
 
 // BucketIntelligentTieringConfigurationSpec defines the desired state of BucketIntelligentTieringConfiguration

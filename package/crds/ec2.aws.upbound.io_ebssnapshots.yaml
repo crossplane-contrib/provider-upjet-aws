@@ -96,7 +96,8 @@ spec:
                       restore an archived snapshot. Required for temporary restores
                       only. The snapshot will be automatically re-archived after this
                       period.
-                    type: number
+                    format: int64
+                    type: integer
                   volumeId:
                     description: The Volume ID of which to make a snapshot.
                     type: string
@@ -213,7 +214,8 @@ spec:
                       restore an archived snapshot. Required for temporary restores
                       only. The snapshot will be automatically re-archived after this
                       period.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -434,13 +436,15 @@ spec:
                       restore an archived snapshot. Required for temporary restores
                       only. The snapshot will be automatically re-archived after this
                       period.
-                    type: number
+                    format: int64
+                    type: integer
                   volumeId:
                     description: The Volume ID of which to make a snapshot.
                     type: string
                   volumeSize:
                     description: The size of the drive in GiBs.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

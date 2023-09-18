@@ -486,7 +486,8 @@ spec:
                   numberOfMountTargets:
                     description: The current number of mount targets that the file
                       system has.
-                    type: number
+                    format: int64
+                    type: integer
                   ownerId:
                     description: The AWS account that created the file system. If
                       the file system was createdby an IAM user, the parent account
@@ -510,15 +511,18 @@ spec:
                         value:
                           description: The latest known metered size (in bytes) of
                             data stored in the file system.
-                          type: number
+                          format: int64
+                          type: integer
                         valueInIa:
                           description: The latest known metered size (in bytes) of
                             data stored in the Infrequent Access storage class.
-                          type: number
+                          format: int64
+                          type: integer
                         valueInStandard:
                           description: The latest known metered size (in bytes) of
                             data stored in the Standard storage class.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   tags:

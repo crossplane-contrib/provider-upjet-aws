@@ -20,59 +20,59 @@ import (
 type AcceleratorCountInitParameters struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorCountObservation struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorCountParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorTotalMemoryMibInitParameters struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorTotalMemoryMibObservation struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AcceleratorTotalMemoryMibParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type AutoscalingGroupInitParameters struct {
@@ -87,15 +87,15 @@ type AutoscalingGroupInitParameters struct {
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
-	DefaultCooldown *float64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
+	DefaultCooldown *int64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
 
 	// Amount of time, in seconds, until a newly launched instance can contribute to the Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling aggregates instance metrics, resulting in more reliable usage data. Set this value equal to the amount of time that it takes for resource consumption to become stable after an instance reaches the InService state. (See Set the default instance warmup for an Auto Scaling group)
-	DefaultInstanceWarmup *float64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
+	DefaultInstanceWarmup *int64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
 
 	// Number of Amazon EC2 instances that
 	// should be running in the group. (See also Waiting for
 	// Capacity below.)
-	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
+	DesiredCapacity *int64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
 	// The unit of measurement for the value specified for desired_capacity. Supported for attribute-based instance type selection only. Valid values: "units", "vcpu", "memory-mib".
 	DesiredCapacityType *string `json:"desiredCapacityType,omitempty" tf:"desired_capacity_type,omitempty"`
@@ -114,7 +114,7 @@ type AutoscalingGroupInitParameters struct {
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
 	// Time (in seconds) after instance comes into service before checking health.
-	HealthCheckGracePeriod *float64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
+	HealthCheckGracePeriod *int64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
 
 	// "EC2" or "ELB". Controls how health checking is done.
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
@@ -140,21 +140,21 @@ type AutoscalingGroupInitParameters struct {
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
-	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
+	MaxInstanceLifetime *int64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
 	// Maximum size of the Auto Scaling Group.
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
 	MetricsGranularity *string `json:"metricsGranularity,omitempty" tf:"metrics_granularity,omitempty"`
 
 	// Updates will not wait on ELB instance number changes.
 	// (See also Waiting for Capacity below.)
-	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
+	MinELBCapacity *int64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
 	MixedInstancesPolicy []MixedInstancesPolicyInitParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
@@ -186,7 +186,7 @@ type AutoscalingGroupInitParameters struct {
 	// (Takes
 	// precedence over min_elb_capacity behavior.)
 	// (See also Waiting for Capacity below.)
-	WaitForELBCapacity *float64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
+	WaitForELBCapacity *int64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
 
 	// If this block is configured, add a Warm Pool
 	// to the specified Auto Scaling group. Defined below
@@ -208,15 +208,15 @@ type AutoscalingGroupObservation struct {
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
-	DefaultCooldown *float64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
+	DefaultCooldown *int64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
 
 	// Amount of time, in seconds, until a newly launched instance can contribute to the Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling aggregates instance metrics, resulting in more reliable usage data. Set this value equal to the amount of time that it takes for resource consumption to become stable after an instance reaches the InService state. (See Set the default instance warmup for an Auto Scaling group)
-	DefaultInstanceWarmup *float64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
+	DefaultInstanceWarmup *int64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
 
 	// Number of Amazon EC2 instances that
 	// should be running in the group. (See also Waiting for
 	// Capacity below.)
-	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
+	DesiredCapacity *int64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
 	// The unit of measurement for the value specified for desired_capacity. Supported for attribute-based instance type selection only. Valid values: "units", "vcpu", "memory-mib".
 	DesiredCapacityType *string `json:"desiredCapacityType,omitempty" tf:"desired_capacity_type,omitempty"`
@@ -235,7 +235,7 @@ type AutoscalingGroupObservation struct {
 	ForceDeleteWarmPool *bool `json:"forceDeleteWarmPool,omitempty" tf:"force_delete_warm_pool,omitempty"`
 
 	// Time (in seconds) after instance comes into service before checking health.
-	HealthCheckGracePeriod *float64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
+	HealthCheckGracePeriod *int64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
 
 	// "EC2" or "ELB". Controls how health checking is done.
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
@@ -271,21 +271,21 @@ type AutoscalingGroupObservation struct {
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
-	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
+	MaxInstanceLifetime *int64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
 	// Maximum size of the Auto Scaling Group.
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
 	MetricsGranularity *string `json:"metricsGranularity,omitempty" tf:"metrics_granularity,omitempty"`
 
 	// Updates will not wait on ELB instance number changes.
 	// (See also Waiting for Capacity below.)
-	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
+	MinELBCapacity *int64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
 	MixedInstancesPolicy []MixedInstancesPolicyObservation `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
@@ -294,7 +294,7 @@ type AutoscalingGroupObservation struct {
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// Predicted capacity of the group.
-	PredictedCapacity *float64 `json:"predictedCapacity,omitempty" tf:"predicted_capacity,omitempty"`
+	PredictedCapacity *int64 `json:"predictedCapacity,omitempty" tf:"predicted_capacity,omitempty"`
 
 	// Whether newly launched instances
 	// are automatically protected from termination by Amazon EC2 Auto Scaling when
@@ -332,14 +332,14 @@ type AutoscalingGroupObservation struct {
 	// (Takes
 	// precedence over min_elb_capacity behavior.)
 	// (See also Waiting for Capacity below.)
-	WaitForELBCapacity *float64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
+	WaitForELBCapacity *int64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
 
 	// If this block is configured, add a Warm Pool
 	// to the specified Auto Scaling group. Defined below
 	WarmPool []WarmPoolObservation `json:"warmPool,omitempty" tf:"warm_pool,omitempty"`
 
 	// Current size of the warm pool.
-	WarmPoolSize *float64 `json:"warmPoolSize,omitempty" tf:"warm_pool_size,omitempty"`
+	WarmPoolSize *int64 `json:"warmPoolSize,omitempty" tf:"warm_pool_size,omitempty"`
 }
 
 type AutoscalingGroupParameters struct {
@@ -358,17 +358,17 @@ type AutoscalingGroupParameters struct {
 
 	// Amount of time, in seconds, after a scaling activity completes before another scaling activity can start.
 	// +kubebuilder:validation:Optional
-	DefaultCooldown *float64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
+	DefaultCooldown *int64 `json:"defaultCooldown,omitempty" tf:"default_cooldown,omitempty"`
 
 	// Amount of time, in seconds, until a newly launched instance can contribute to the Amazon CloudWatch metrics. This delay lets an instance finish initializing before Amazon EC2 Auto Scaling aggregates instance metrics, resulting in more reliable usage data. Set this value equal to the amount of time that it takes for resource consumption to become stable after an instance reaches the InService state. (See Set the default instance warmup for an Auto Scaling group)
 	// +kubebuilder:validation:Optional
-	DefaultInstanceWarmup *float64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
+	DefaultInstanceWarmup *int64 `json:"defaultInstanceWarmup,omitempty" tf:"default_instance_warmup,omitempty"`
 
 	// Number of Amazon EC2 instances that
 	// should be running in the group. (See also Waiting for
 	// Capacity below.)
 	// +kubebuilder:validation:Optional
-	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
+	DesiredCapacity *int64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
 	// The unit of measurement for the value specified for desired_capacity. Supported for attribute-based instance type selection only. Valid values: "units", "vcpu", "memory-mib".
 	// +kubebuilder:validation:Optional
@@ -392,7 +392,7 @@ type AutoscalingGroupParameters struct {
 
 	// Time (in seconds) after instance comes into service before checking health.
 	// +kubebuilder:validation:Optional
-	HealthCheckGracePeriod *float64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
+	HealthCheckGracePeriod *int64 `json:"healthCheckGracePeriod,omitempty" tf:"health_check_grace_period,omitempty"`
 
 	// "EC2" or "ELB". Controls how health checking is done.
 	// +kubebuilder:validation:Optional
@@ -437,11 +437,11 @@ type AutoscalingGroupParameters struct {
 
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
 	// +kubebuilder:validation:Optional
-	MaxInstanceLifetime *float64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
+	MaxInstanceLifetime *int64 `json:"maxInstanceLifetime,omitempty" tf:"max_instance_lifetime,omitempty"`
 
 	// Maximum size of the Auto Scaling Group.
 	// +kubebuilder:validation:Optional
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Granularity to associate with the metrics to collect. The only valid value is 1Minute. Default is 1Minute.
 	// +kubebuilder:validation:Optional
@@ -450,12 +450,12 @@ type AutoscalingGroupParameters struct {
 	// Updates will not wait on ELB instance number changes.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
-	MinELBCapacity *float64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
+	MinELBCapacity *int64 `json:"minElbCapacity,omitempty" tf:"min_elb_capacity,omitempty"`
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
 	// +kubebuilder:validation:Optional
@@ -541,7 +541,7 @@ type AutoscalingGroupParameters struct {
 	// precedence over min_elb_capacity behavior.)
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
-	WaitForELBCapacity *float64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
+	WaitForELBCapacity *int64 `json:"waitForElbCapacity,omitempty" tf:"wait_for_elb_capacity,omitempty"`
 
 	// If this block is configured, add a Warm Pool
 	// to the specified Auto Scaling group. Defined below
@@ -552,36 +552,36 @@ type AutoscalingGroupParameters struct {
 type BaselineEBSBandwidthMbpsInitParameters struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type BaselineEBSBandwidthMbpsObservation struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type BaselineEBSBandwidthMbpsParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InitialLifecycleHookInitParameters struct {
 	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
 
-	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+	HeartbeatTimeout *int64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
 
@@ -600,7 +600,7 @@ type InitialLifecycleHookInitParameters struct {
 type InitialLifecycleHookObservation struct {
 	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
 
-	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+	HeartbeatTimeout *int64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
 
@@ -622,7 +622,7 @@ type InitialLifecycleHookParameters struct {
 	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+	HeartbeatTimeout *int64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	LifecycleTransition *string `json:"lifecycleTransition" tf:"lifecycle_transition,omitempty"`
@@ -739,13 +739,13 @@ type InstanceRequirementsInitParameters struct {
 	NetworkInterfaceCount []NetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// Price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
-	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	OnDemandMaxPricePercentageOverLowestPrice *int64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
 	// Price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	SpotMaxPricePercentageOverLowestPrice *int64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	TotalLocalStorageGb []TotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
@@ -811,13 +811,13 @@ type InstanceRequirementsObservation struct {
 	NetworkInterfaceCount []NetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// Price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
-	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	OnDemandMaxPricePercentageOverLowestPrice *int64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
 	// Price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	SpotMaxPricePercentageOverLowestPrice *int64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	TotalLocalStorageGb []TotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
@@ -902,7 +902,7 @@ type InstanceRequirementsParameters struct {
 
 	// Price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
 	// +kubebuilder:validation:Optional
-	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	OnDemandMaxPricePercentageOverLowestPrice *int64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	// +kubebuilder:validation:Optional
@@ -910,7 +910,7 @@ type InstanceRequirementsParameters struct {
 
 	// Price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
 	// +kubebuilder:validation:Optional
-	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	SpotMaxPricePercentageOverLowestPrice *int64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -946,16 +946,16 @@ type InstancesDistributionInitParameters struct {
 	OnDemandAllocationStrategy *string `json:"onDemandAllocationStrategy,omitempty" tf:"on_demand_allocation_strategy,omitempty"`
 
 	// Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances. Default: 0.
-	OnDemandBaseCapacity *float64 `json:"onDemandBaseCapacity,omitempty" tf:"on_demand_base_capacity,omitempty"`
+	OnDemandBaseCapacity *int64 `json:"onDemandBaseCapacity,omitempty" tf:"on_demand_base_capacity,omitempty"`
 
 	// Percentage split between on-demand and Spot instances above the base on-demand capacity. Default: 100.
-	OnDemandPercentageAboveBaseCapacity *float64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
+	OnDemandPercentageAboveBaseCapacity *int64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
 
 	// How to allocate capacity across the Spot pools. Valid values: lowest-price, capacity-optimized, capacity-optimized-prioritized, and price-capacity-optimized. Default: lowest-price.
 	SpotAllocationStrategy *string `json:"spotAllocationStrategy,omitempty" tf:"spot_allocation_strategy,omitempty"`
 
 	// Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify. Only available with spot_allocation_strategy set to lowest-price. Otherwise it must be set to 0, if it has been defined before. Default: 2.
-	SpotInstancePools *float64 `json:"spotInstancePools,omitempty" tf:"spot_instance_pools,omitempty"`
+	SpotInstancePools *int64 `json:"spotInstancePools,omitempty" tf:"spot_instance_pools,omitempty"`
 
 	// Maximum price per unit hour that the user is willing to pay for the Spot instances. Default: an empty string which means the on-demand price.
 	SpotMaxPrice *string `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
@@ -967,16 +967,16 @@ type InstancesDistributionObservation struct {
 	OnDemandAllocationStrategy *string `json:"onDemandAllocationStrategy,omitempty" tf:"on_demand_allocation_strategy,omitempty"`
 
 	// Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances. Default: 0.
-	OnDemandBaseCapacity *float64 `json:"onDemandBaseCapacity,omitempty" tf:"on_demand_base_capacity,omitempty"`
+	OnDemandBaseCapacity *int64 `json:"onDemandBaseCapacity,omitempty" tf:"on_demand_base_capacity,omitempty"`
 
 	// Percentage split between on-demand and Spot instances above the base on-demand capacity. Default: 100.
-	OnDemandPercentageAboveBaseCapacity *float64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
+	OnDemandPercentageAboveBaseCapacity *int64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
 
 	// How to allocate capacity across the Spot pools. Valid values: lowest-price, capacity-optimized, capacity-optimized-prioritized, and price-capacity-optimized. Default: lowest-price.
 	SpotAllocationStrategy *string `json:"spotAllocationStrategy,omitempty" tf:"spot_allocation_strategy,omitempty"`
 
 	// Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify. Only available with spot_allocation_strategy set to lowest-price. Otherwise it must be set to 0, if it has been defined before. Default: 2.
-	SpotInstancePools *float64 `json:"spotInstancePools,omitempty" tf:"spot_instance_pools,omitempty"`
+	SpotInstancePools *int64 `json:"spotInstancePools,omitempty" tf:"spot_instance_pools,omitempty"`
 
 	// Maximum price per unit hour that the user is willing to pay for the Spot instances. Default: an empty string which means the on-demand price.
 	SpotMaxPrice *string `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
@@ -990,11 +990,11 @@ type InstancesDistributionParameters struct {
 
 	// Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances. Default: 0.
 	// +kubebuilder:validation:Optional
-	OnDemandBaseCapacity *float64 `json:"onDemandBaseCapacity,omitempty" tf:"on_demand_base_capacity,omitempty"`
+	OnDemandBaseCapacity *int64 `json:"onDemandBaseCapacity,omitempty" tf:"on_demand_base_capacity,omitempty"`
 
 	// Percentage split between on-demand and Spot instances above the base on-demand capacity. Default: 100.
 	// +kubebuilder:validation:Optional
-	OnDemandPercentageAboveBaseCapacity *float64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
+	OnDemandPercentageAboveBaseCapacity *int64 `json:"onDemandPercentageAboveBaseCapacity,omitempty" tf:"on_demand_percentage_above_base_capacity,omitempty"`
 
 	// How to allocate capacity across the Spot pools. Valid values: lowest-price, capacity-optimized, capacity-optimized-prioritized, and price-capacity-optimized. Default: lowest-price.
 	// +kubebuilder:validation:Optional
@@ -1002,7 +1002,7 @@ type InstancesDistributionParameters struct {
 
 	// Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify. Only available with spot_allocation_strategy set to lowest-price. Otherwise it must be set to 0, if it has been defined before. Default: 2.
 	// +kubebuilder:validation:Optional
-	SpotInstancePools *float64 `json:"spotInstancePools,omitempty" tf:"spot_instance_pools,omitempty"`
+	SpotInstancePools *int64 `json:"spotInstancePools,omitempty" tf:"spot_instance_pools,omitempty"`
 
 	// Maximum price per unit hour that the user is willing to pay for the Spot instances. Default: an empty string which means the on-demand price.
 	// +kubebuilder:validation:Optional
@@ -1133,30 +1133,30 @@ type MemoryGibPerVcpuParameters struct {
 type MemoryMibInitParameters struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryMibObservation struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MemoryMibParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type MixedInstancesPolicyInitParameters struct {
@@ -1249,30 +1249,30 @@ type NetworkBandwidthGbpsParameters struct {
 type NetworkInterfaceCountInitParameters struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkInterfaceCountObservation struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type NetworkInterfaceCountParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type OverrideInitParameters struct {
@@ -1379,13 +1379,13 @@ type PreferencesInitParameters struct {
 	CheckpointDelay *string `json:"checkpointDelay,omitempty" tf:"checkpoint_delay,omitempty"`
 
 	// List of percentages for each checkpoint. Values must be unique and in ascending order. To replace all instances, the final number must be 100.
-	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
+	CheckpointPercentages []*int64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
-	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
+	MinHealthyPercentage *int64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
 	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
 	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
@@ -1406,13 +1406,13 @@ type PreferencesObservation struct {
 	CheckpointDelay *string `json:"checkpointDelay,omitempty" tf:"checkpoint_delay,omitempty"`
 
 	// List of percentages for each checkpoint. Values must be unique and in ascending order. To replace all instances, the final number must be 100.
-	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
+	CheckpointPercentages []*int64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
-	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
+	MinHealthyPercentage *int64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
 	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
 	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
@@ -1436,7 +1436,7 @@ type PreferencesParameters struct {
 
 	// List of percentages for each checkpoint. Values must be unique and in ascending order. To replace all instances, the final number must be 100.
 	// +kubebuilder:validation:Optional
-	CheckpointPercentages []*float64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
+	CheckpointPercentages []*int64 `json:"checkpointPercentages,omitempty" tf:"checkpoint_percentages,omitempty"`
 
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	// +kubebuilder:validation:Optional
@@ -1444,7 +1444,7 @@ type PreferencesParameters struct {
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	// +kubebuilder:validation:Optional
-	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
+	MinHealthyPercentage *int64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
 	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
 	// +kubebuilder:validation:Optional
@@ -1574,30 +1574,30 @@ type TrafficSourceParameters struct {
 type VcpuCountInitParameters struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type VcpuCountObservation struct {
 
 	// Maximum.
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type VcpuCountParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type WarmPoolInitParameters struct {
@@ -1606,11 +1606,11 @@ type WarmPoolInitParameters struct {
 	InstanceReusePolicy []InstanceReusePolicyInitParameters `json:"instanceReusePolicy,omitempty" tf:"instance_reuse_policy,omitempty"`
 
 	// Total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
-	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
+	MaxGroupPreparedCapacity *int64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: Stopped (default), Running or Hibernated.
 	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
@@ -1622,11 +1622,11 @@ type WarmPoolObservation struct {
 	InstanceReusePolicy []InstanceReusePolicyObservation `json:"instanceReusePolicy,omitempty" tf:"instance_reuse_policy,omitempty"`
 
 	// Total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
-	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
+	MaxGroupPreparedCapacity *int64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: Stopped (default), Running or Hibernated.
 	PoolState *string `json:"poolState,omitempty" tf:"pool_state,omitempty"`
@@ -1640,12 +1640,12 @@ type WarmPoolParameters struct {
 
 	// Total maximum number of instances that are allowed to be in the warm pool or in any state except Terminated for the Auto Scaling group.
 	// +kubebuilder:validation:Optional
-	MaxGroupPreparedCapacity *float64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
+	MaxGroupPreparedCapacity *int64 `json:"maxGroupPreparedCapacity,omitempty" tf:"max_group_prepared_capacity,omitempty"`
 
 	// Minimum size of the Auto Scaling Group.
 	// (See also Waiting for Capacity below.)
 	// +kubebuilder:validation:Optional
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// Sets the instance state to transition to after the lifecycle hooks finish. Valid values are: Stopped (default), Running or Hibernated.
 	// +kubebuilder:validation:Optional

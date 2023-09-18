@@ -215,7 +215,7 @@ type SpaceSettingsKernelGatewayAppSettingsCustomImageInitParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type SpaceSettingsKernelGatewayAppSettingsCustomImageObservation struct {
@@ -227,7 +227,7 @@ type SpaceSettingsKernelGatewayAppSettingsCustomImageObservation struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type SpaceSettingsKernelGatewayAppSettingsCustomImageParameters struct {
@@ -242,7 +242,7 @@ type SpaceSettingsKernelGatewayAppSettingsCustomImageParameters struct {
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters struct {

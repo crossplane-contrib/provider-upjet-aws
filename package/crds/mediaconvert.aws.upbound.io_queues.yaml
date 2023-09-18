@@ -95,7 +95,8 @@ spec:
                         reservedSlots:
                           description: Specifies the number of reserved transcode
                             slots (RTS) for queue.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   status:
@@ -146,7 +147,8 @@ spec:
                         reservedSlots:
                           description: Specifies the number of reserved transcode
                             slots (RTS) for queue.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   status:
@@ -354,7 +356,8 @@ spec:
                         reservedSlots:
                           description: Specifies the number of reserved transcode
                             slots (RTS) for queue.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   status:

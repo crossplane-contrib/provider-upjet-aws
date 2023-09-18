@@ -84,10 +84,12 @@ spec:
                             properties:
                               hours:
                                 description: Specifies the hour of closing.
-                                type: number
+                                format: int64
+                                type: integer
                               minutes:
                                 description: Specifies the minute of closing.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         startTime:
@@ -98,10 +100,12 @@ spec:
                             properties:
                               hours:
                                 description: Specifies the hour of opening.
-                                type: number
+                                format: int64
+                                type: integer
                               minutes:
                                 description: Specifies the minute of opening.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -233,10 +237,12 @@ spec:
                             properties:
                               hours:
                                 description: Specifies the hour of closing.
-                                type: number
+                                format: int64
+                                type: integer
                               minutes:
                                 description: Specifies the minute of closing.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         startTime:
@@ -247,10 +253,12 @@ spec:
                             properties:
                               hours:
                                 description: Specifies the hour of opening.
-                                type: number
+                                format: int64
+                                type: integer
                               minutes:
                                 description: Specifies the minute of opening.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -468,10 +476,12 @@ spec:
                             properties:
                               hours:
                                 description: Specifies the hour of closing.
-                                type: number
+                                format: int64
+                                type: integer
                               minutes:
                                 description: Specifies the minute of closing.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         startTime:
@@ -482,10 +492,12 @@ spec:
                             properties:
                               hours:
                                 description: Specifies the hour of opening.
-                                type: number
+                                format: int64
+                                type: integer
                               minutes:
                                 description: Specifies the minute of opening.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object

@@ -750,7 +750,7 @@ func (in *FilterInitParameters) DeepCopyInto(out *FilterInitParameters) {
 	}
 	if in.Rank != nil {
 		in, out := &in.Rank, &out.Rank
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -850,7 +850,7 @@ func (in *FilterObservation) DeepCopyInto(out *FilterObservation) {
 	}
 	if in.Rank != nil {
 		in, out := &in.Rank, &out.Rank
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -934,7 +934,7 @@ func (in *FilterParameters) DeepCopyInto(out *FilterParameters) {
 	}
 	if in.Rank != nil {
 		in, out := &in.Rank, &out.Rank
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {

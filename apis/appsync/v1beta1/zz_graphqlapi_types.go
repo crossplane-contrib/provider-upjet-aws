@@ -105,7 +105,7 @@ type GraphQLAPIInitParameters struct {
 type GraphQLAPILambdaAuthorizerConfigInitParameters struct {
 
 	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
-	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
@@ -117,7 +117,7 @@ type GraphQLAPILambdaAuthorizerConfigInitParameters struct {
 type GraphQLAPILambdaAuthorizerConfigObservation struct {
 
 	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
-	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
@@ -130,7 +130,7 @@ type GraphQLAPILambdaAuthorizerConfigParameters struct {
 
 	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
 	// +kubebuilder:validation:Optional
-	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	// +kubebuilder:validation:Optional
@@ -192,13 +192,13 @@ type GraphQLAPIObservation struct {
 type GraphQLAPIOpenIDConnectConfigInitParameters struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
-	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+	AuthTTL *int64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
 
 	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Number of milliseconds a token is valid after being issued to a user.
-	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+	IatTTL *int64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -207,13 +207,13 @@ type GraphQLAPIOpenIDConnectConfigInitParameters struct {
 type GraphQLAPIOpenIDConnectConfigObservation struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
-	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+	AuthTTL *int64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
 
 	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Number of milliseconds a token is valid after being issued to a user.
-	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+	IatTTL *int64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -223,7 +223,7 @@ type GraphQLAPIOpenIDConnectConfigParameters struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
 	// +kubebuilder:validation:Optional
-	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+	AuthTTL *int64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
 
 	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
 	// +kubebuilder:validation:Optional
@@ -231,7 +231,7 @@ type GraphQLAPIOpenIDConnectConfigParameters struct {
 
 	// Number of milliseconds a token is valid after being issued to a user.
 	// +kubebuilder:validation:Optional
-	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+	IatTTL *int64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	// +kubebuilder:validation:Optional
@@ -349,7 +349,7 @@ type GraphQLAPIUserPoolConfigParameters struct {
 type LambdaAuthorizerConfigInitParameters struct {
 
 	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
-	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
@@ -361,7 +361,7 @@ type LambdaAuthorizerConfigInitParameters struct {
 type LambdaAuthorizerConfigObservation struct {
 
 	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
-	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
@@ -374,7 +374,7 @@ type LambdaAuthorizerConfigParameters struct {
 
 	// Number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses. Minimum value of 0. Maximum value of 3600.
 	// +kubebuilder:validation:Optional
-	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// ARN of the Lambda function to be called for authorization. Note: This Lambda function must have a resource-based policy assigned to it, to allow lambda:InvokeFunction from service principal appsync.amazonaws.com.
 	// +kubebuilder:validation:Optional
@@ -434,13 +434,13 @@ type LogConfigParameters struct {
 type OpenIDConnectConfigInitParameters struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
-	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+	AuthTTL *int64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
 
 	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Number of milliseconds a token is valid after being issued to a user.
-	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+	IatTTL *int64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -449,13 +449,13 @@ type OpenIDConnectConfigInitParameters struct {
 type OpenIDConnectConfigObservation struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
-	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+	AuthTTL *int64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
 
 	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Number of milliseconds a token is valid after being issued to a user.
-	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+	IatTTL *int64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -465,7 +465,7 @@ type OpenIDConnectConfigParameters struct {
 
 	// Number of milliseconds a token is valid after being authenticated.
 	// +kubebuilder:validation:Optional
-	AuthTTL *float64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
+	AuthTTL *int64 `json:"authTtl,omitempty" tf:"auth_ttl,omitempty"`
 
 	// Client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
 	// +kubebuilder:validation:Optional
@@ -473,7 +473,7 @@ type OpenIDConnectConfigParameters struct {
 
 	// Number of milliseconds a token is valid after being issued to a user.
 	// +kubebuilder:validation:Optional
-	IatTTL *float64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
+	IatTTL *int64 `json:"iatTtl,omitempty" tf:"iat_ttl,omitempty"`
 
 	// Issuer for the OpenID Connect configuration. The issuer returned by discovery MUST exactly match the value of iss in the ID Token.
 	// +kubebuilder:validation:Optional

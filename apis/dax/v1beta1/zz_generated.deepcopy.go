@@ -86,7 +86,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.ReplicationFactor != nil {
 		in, out := &in.ReplicationFactor, &out.ReplicationFactor
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerSideEncryption != nil {
@@ -239,12 +239,12 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ReplicationFactor != nil {
 		in, out := &in.ReplicationFactor, &out.ReplicationFactor
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityGroupIds != nil {
@@ -380,7 +380,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.ReplicationFactor != nil {
 		in, out := &in.ReplicationFactor, &out.ReplicationFactor
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityGroupIDRefs != nil {
@@ -516,7 +516,7 @@ func (in *NodesObservation) DeepCopyInto(out *NodesObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

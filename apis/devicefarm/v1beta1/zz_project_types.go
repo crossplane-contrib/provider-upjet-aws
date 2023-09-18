@@ -20,7 +20,7 @@ import (
 type ProjectInitParameters struct {
 
 	// Sets the execution timeout value (in minutes) for a project. All test runs in this project use the specified execution timeout value unless overridden when scheduling a run.
-	DefaultJobTimeoutMinutes *float64 `json:"defaultJobTimeoutMinutes,omitempty" tf:"default_job_timeout_minutes,omitempty"`
+	DefaultJobTimeoutMinutes *int64 `json:"defaultJobTimeoutMinutes,omitempty" tf:"default_job_timeout_minutes,omitempty"`
 
 	// The name of the project
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -35,7 +35,7 @@ type ProjectObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Sets the execution timeout value (in minutes) for a project. All test runs in this project use the specified execution timeout value unless overridden when scheduling a run.
-	DefaultJobTimeoutMinutes *float64 `json:"defaultJobTimeoutMinutes,omitempty" tf:"default_job_timeout_minutes,omitempty"`
+	DefaultJobTimeoutMinutes *int64 `json:"defaultJobTimeoutMinutes,omitempty" tf:"default_job_timeout_minutes,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -53,7 +53,7 @@ type ProjectParameters struct {
 
 	// Sets the execution timeout value (in minutes) for a project. All test runs in this project use the specified execution timeout value unless overridden when scheduling a run.
 	// +kubebuilder:validation:Optional
-	DefaultJobTimeoutMinutes *float64 `json:"defaultJobTimeoutMinutes,omitempty" tf:"default_job_timeout_minutes,omitempty"`
+	DefaultJobTimeoutMinutes *int64 `json:"defaultJobTimeoutMinutes,omitempty" tf:"default_job_timeout_minutes,omitempty"`
 
 	// The name of the project
 	// +kubebuilder:validation:Optional

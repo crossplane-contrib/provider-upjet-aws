@@ -92,7 +92,8 @@ spec:
                     description: If a broadcast disconnects and then reconnects within
                       the specified interval, the multiple streams will be considered
                       a single broadcast and merged together.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -115,7 +116,8 @@ spec:
                         targetIntervalSeconds:
                           description: The targeted thumbnail-generation interval
                             in seconds.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 required:
@@ -158,7 +160,8 @@ spec:
                     description: If a broadcast disconnects and then reconnects within
                       the specified interval, the multiple streams will be considered
                       a single broadcast and merged together.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -177,7 +180,8 @@ spec:
                         targetIntervalSeconds:
                           description: The targeted thumbnail-generation interval
                             in seconds.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object
@@ -382,7 +386,8 @@ spec:
                     description: If a broadcast disconnects and then reconnects within
                       the specified interval, the multiple streams will be considered
                       a single broadcast and merged together.
-                    type: number
+                    format: int64
+                    type: integer
                   state:
                     description: The current state of the Recording Configuration.
                     type: string
@@ -410,7 +415,8 @@ spec:
                         targetIntervalSeconds:
                           description: The targeted thumbnail-generation interval
                             in seconds.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object

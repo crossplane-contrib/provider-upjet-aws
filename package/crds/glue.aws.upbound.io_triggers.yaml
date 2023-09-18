@@ -249,7 +249,8 @@ spec:
                               notifyDelayAfter:
                                 description: After a job run starts, the number of
                                   minutes to wait before sending a job run delay notification.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         securityConfiguration:
@@ -259,7 +260,8 @@ spec:
                         timeout:
                           description: The job run timeout in minutes. It overrides
                             the timeout value of the job.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   description:
@@ -277,12 +279,14 @@ spec:
                         batchSize:
                           description: Number of events that must be received from
                             Amazon EventBridge before EventBridge  event trigger fires.
-                          type: number
+                          format: int64
+                          type: integer
                         batchWindow:
                           description: Window of time in seconds after which EventBridge
                             event trigger fires. Window starts when first event is
                             received. Default value is 900.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   predicate:
@@ -548,7 +552,8 @@ spec:
                               notifyDelayAfter:
                                 description: After a job run starts, the number of
                                   minutes to wait before sending a job run delay notification.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         securityConfiguration:
@@ -558,7 +563,8 @@ spec:
                         timeout:
                           description: The job run timeout in minutes. It overrides
                             the timeout value of the job.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   description:
@@ -576,12 +582,14 @@ spec:
                         batchSize:
                           description: Number of events that must be received from
                             Amazon EventBridge before EventBridge  event trigger fires.
-                          type: number
+                          format: int64
+                          type: integer
                         batchWindow:
                           description: Window of time in seconds after which EventBridge
                             event trigger fires. Window starts when first event is
                             received. Default value is 900.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   predicate:
@@ -843,7 +851,8 @@ spec:
                               notifyDelayAfter:
                                 description: After a job run starts, the number of
                                   minutes to wait before sending a job run delay notification.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         securityConfiguration:
@@ -853,7 +862,8 @@ spec:
                         timeout:
                           description: The job run timeout in minutes. It overrides
                             the timeout value of the job.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   arn:
@@ -874,12 +884,14 @@ spec:
                         batchSize:
                           description: Number of events that must be received from
                             Amazon EventBridge before EventBridge  event trigger fires.
-                          type: number
+                          format: int64
+                          type: integer
                         batchWindow:
                           description: Window of time in seconds after which EventBridge
                             event trigger fires. Window starts when first event is
                             received. Default value is 900.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   id:

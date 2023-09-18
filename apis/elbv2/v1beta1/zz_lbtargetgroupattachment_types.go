@@ -23,7 +23,7 @@ type LBTargetGroupAttachmentInitParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The port on which targets receive traffic.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the Lambda function ARN. If the target type is alb, specify the ALB ARN.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
@@ -38,7 +38,7 @@ type LBTargetGroupAttachmentObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The port on which targets receive traffic.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ARN of the target group with which to register targets.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
@@ -55,7 +55,7 @@ type LBTargetGroupAttachmentParameters struct {
 
 	// The port on which targets receive traffic.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

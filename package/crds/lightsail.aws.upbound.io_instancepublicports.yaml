@@ -164,7 +164,8 @@ spec:
                           type: array
                         fromPort:
                           description: First port in a range of open ports on an instance.
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Cidrs:
                           items:
                             type: string
@@ -175,7 +176,8 @@ spec:
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   region:
@@ -216,7 +218,8 @@ spec:
                           type: array
                         fromPort:
                           description: First port in a range of open ports on an instance.
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Cidrs:
                           items:
                             type: string
@@ -227,7 +230,8 @@ spec:
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object
@@ -426,7 +430,8 @@ spec:
                           type: array
                         fromPort:
                           description: First port in a range of open ports on an instance.
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Cidrs:
                           items:
                             type: string
@@ -437,7 +442,8 @@ spec:
                           type: string
                         toPort:
                           description: Last port in a range of open ports on an instance.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object

@@ -76,7 +76,8 @@ spec:
                     type: string
                   sizeInGb:
                     description: The instance port the load balancer will connect.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -102,7 +103,8 @@ spec:
                     type: string
                   sizeInGb:
                     description: The instance port the load balancer will connect.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -297,7 +299,8 @@ spec:
                     type: string
                   sizeInGb:
                     description: The instance port the load balancer will connect.
-                    type: number
+                    format: int64
+                    type: integer
                   supportCode:
                     description: The support code for the disk. Include this code
                       in your email to support when you have questions about a disk

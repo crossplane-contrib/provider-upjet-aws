@@ -80,7 +80,7 @@ type FlowLogInitParameters struct {
 	// during which a flow of packets is captured and aggregated into a flow
 	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
 	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
-	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
+	MaxAggregationInterval *int64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -131,7 +131,7 @@ type FlowLogObservation struct {
 	// during which a flow of packets is captured and aggregated into a flow
 	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
 	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
-	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
+	MaxAggregationInterval *int64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Subnet ID to attach to
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -214,7 +214,7 @@ type FlowLogParameters struct {
 	// log record. Valid Values: 60 seconds (1 minute) or 600 seconds (10
 	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	// +kubebuilder:validation:Optional
-	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
+	MaxAggregationInterval *int64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

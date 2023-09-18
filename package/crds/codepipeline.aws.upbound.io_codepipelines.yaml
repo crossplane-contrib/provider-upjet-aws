@@ -326,7 +326,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
-                                type: number
+                                format: int64
+                                type: integer
                               version:
                                 description: A string that identifies the action type.
                                 type: string
@@ -446,7 +447,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
-                                type: number
+                                format: int64
+                                type: integer
                               version:
                                 description: A string that identifies the action type.
                                 type: string
@@ -749,7 +751,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
-                                type: number
+                                format: int64
+                                type: integer
                               version:
                                 description: A string that identifies the action type.
                                 type: string

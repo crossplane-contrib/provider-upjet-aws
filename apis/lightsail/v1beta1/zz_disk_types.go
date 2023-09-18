@@ -23,7 +23,7 @@ type DiskInitParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The instance port the load balancer will connect.
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+	SizeInGb *int64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -44,7 +44,7 @@ type DiskObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The instance port the load balancer will connect.
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+	SizeInGb *int64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// The support code for the disk. Include this code in your email to support when you have questions about a disk in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
@@ -69,7 +69,7 @@ type DiskParameters struct {
 
 	// The instance port the load balancer will connect.
 	// +kubebuilder:validation:Optional
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+	SizeInGb *int64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

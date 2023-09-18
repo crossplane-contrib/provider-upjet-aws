@@ -163,7 +163,8 @@ spec:
                   registrationLimit:
                     description: The maximum number of managed instances you want
                       to register. The default value is 1 instance.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -199,7 +200,8 @@ spec:
                   registrationLimit:
                     description: The maximum number of managed instances you want
                       to register. The default value is 1 instance.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -399,11 +401,13 @@ spec:
                   registrationCount:
                     description: The number of managed instances that are currently
                       registered using this activation.
-                    type: number
+                    format: int64
+                    type: integer
                   registrationLimit:
                     description: The maximum number of managed instances you want
                       to register. The default value is 1 instance.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string

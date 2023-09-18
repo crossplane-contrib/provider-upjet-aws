@@ -153,22 +153,22 @@ func (in *OperationPreferencesInitParameters) DeepCopyInto(out *OperationPrefere
 	*out = *in
 	if in.FailureToleranceCount != nil {
 		in, out := &in.FailureToleranceCount, &out.FailureToleranceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.FailureTolerancePercentage != nil {
 		in, out := &in.FailureTolerancePercentage, &out.FailureTolerancePercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentCount != nil {
 		in, out := &in.MaxConcurrentCount, &out.MaxConcurrentCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentPercentage != nil {
 		in, out := &in.MaxConcurrentPercentage, &out.MaxConcurrentPercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RegionConcurrencyType != nil {
@@ -204,22 +204,22 @@ func (in *OperationPreferencesObservation) DeepCopyInto(out *OperationPreference
 	*out = *in
 	if in.FailureToleranceCount != nil {
 		in, out := &in.FailureToleranceCount, &out.FailureToleranceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.FailureTolerancePercentage != nil {
 		in, out := &in.FailureTolerancePercentage, &out.FailureTolerancePercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentCount != nil {
 		in, out := &in.MaxConcurrentCount, &out.MaxConcurrentCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentPercentage != nil {
 		in, out := &in.MaxConcurrentPercentage, &out.MaxConcurrentPercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RegionConcurrencyType != nil {
@@ -255,22 +255,22 @@ func (in *OperationPreferencesParameters) DeepCopyInto(out *OperationPreferences
 	*out = *in
 	if in.FailureToleranceCount != nil {
 		in, out := &in.FailureToleranceCount, &out.FailureToleranceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.FailureTolerancePercentage != nil {
 		in, out := &in.FailureTolerancePercentage, &out.FailureTolerancePercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentCount != nil {
 		in, out := &in.MaxConcurrentCount, &out.MaxConcurrentCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaxConcurrentPercentage != nil {
 		in, out := &in.MaxConcurrentPercentage, &out.MaxConcurrentPercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RegionConcurrencyType != nil {
@@ -417,7 +417,7 @@ func (in *StackInitParameters) DeepCopyInto(out *StackInitParameters) {
 	}
 	if in.TimeoutInMinutes != nil {
 		in, out := &in.TimeoutInMinutes, &out.TimeoutInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -600,7 +600,7 @@ func (in *StackObservation) DeepCopyInto(out *StackObservation) {
 	}
 	if in.TimeoutInMinutes != nil {
 		in, out := &in.TimeoutInMinutes, &out.TimeoutInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -729,7 +729,7 @@ func (in *StackParameters) DeepCopyInto(out *StackParameters) {
 	}
 	if in.TimeoutInMinutes != nil {
 		in, out := &in.TimeoutInMinutes, &out.TimeoutInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

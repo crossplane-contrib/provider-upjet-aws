@@ -20,7 +20,7 @@ import (
 type SpecListenerPortMappingInitParameters struct {
 
 	// Port used for the port mapping.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -29,7 +29,7 @@ type SpecListenerPortMappingInitParameters struct {
 type SpecListenerPortMappingObservation struct {
 
 	// Port used for the port mapping.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -39,7 +39,7 @@ type SpecListenerPortMappingParameters struct {
 
 	// Port used for the port mapping.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	Port *int64 `json:"port" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http,http2, tcp and grpc.
 	// +kubebuilder:validation:Optional

@@ -20,7 +20,7 @@ import (
 type LBStickinessPolicyInitParameters struct {
 
 	// The cookie duration in seconds. This determines the length of the session stickiness.
-	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+	CookieDuration *int64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -29,7 +29,7 @@ type LBStickinessPolicyInitParameters struct {
 type LBStickinessPolicyObservation struct {
 
 	// The cookie duration in seconds. This determines the length of the session stickiness.
-	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+	CookieDuration *int64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -42,7 +42,7 @@ type LBStickinessPolicyParameters struct {
 
 	// The cookie duration in seconds. This determines the length of the session stickiness.
 	// +kubebuilder:validation:Optional
-	CookieDuration *float64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
+	CookieDuration *int64 `json:"cookieDuration,omitempty" tf:"cookie_duration,omitempty"`
 
 	// - The Session Stickiness state of the load balancer. true to activate session stickiness or false to deactivate session stickiness.
 	// +kubebuilder:validation:Optional

@@ -306,7 +306,8 @@ spec:
                     description: Version number of the traffic policy. This value
                       is automatically incremented by AWS after each update of this
                       resource.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

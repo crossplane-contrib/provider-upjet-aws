@@ -39,7 +39,7 @@ type CertificateConfigurationParameters struct {
 type EC2InboundPermissionInitParameters struct {
 
 	// Starting value for a range of allowed port numbers.
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Range of allowed IP addresses expressed in CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet mask].
 	IPRange *string `json:"ipRange,omitempty" tf:"ip_range,omitempty"`
@@ -48,13 +48,13 @@ type EC2InboundPermissionInitParameters struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than from_port.
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type EC2InboundPermissionObservation struct {
 
 	// Starting value for a range of allowed port numbers.
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Range of allowed IP addresses expressed in CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet mask].
 	IPRange *string `json:"ipRange,omitempty" tf:"ip_range,omitempty"`
@@ -63,14 +63,14 @@ type EC2InboundPermissionObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than from_port.
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type EC2InboundPermissionParameters struct {
 
 	// Starting value for a range of allowed port numbers.
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// Range of allowed IP addresses expressed in CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet mask].
 	// +kubebuilder:validation:Optional
@@ -82,7 +82,7 @@ type EC2InboundPermissionParameters struct {
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than from_port.
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort" tf:"to_port,omitempty"`
 }
 
 type FleetInitParameters struct {
@@ -275,39 +275,39 @@ type FleetParameters struct {
 type ResourceCreationLimitPolicyInitParameters struct {
 
 	// Maximum number of game sessions that an individual can create during the policy period.
-	NewGameSessionsPerCreator *float64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
+	NewGameSessionsPerCreator *int64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
 
 	// Time span used in evaluating the resource creation limit policy.
-	PolicyPeriodInMinutes *float64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
+	PolicyPeriodInMinutes *int64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
 }
 
 type ResourceCreationLimitPolicyObservation struct {
 
 	// Maximum number of game sessions that an individual can create during the policy period.
-	NewGameSessionsPerCreator *float64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
+	NewGameSessionsPerCreator *int64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
 
 	// Time span used in evaluating the resource creation limit policy.
-	PolicyPeriodInMinutes *float64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
+	PolicyPeriodInMinutes *int64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
 }
 
 type ResourceCreationLimitPolicyParameters struct {
 
 	// Maximum number of game sessions that an individual can create during the policy period.
 	// +kubebuilder:validation:Optional
-	NewGameSessionsPerCreator *float64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
+	NewGameSessionsPerCreator *int64 `json:"newGameSessionsPerCreator,omitempty" tf:"new_game_sessions_per_creator,omitempty"`
 
 	// Time span used in evaluating the resource creation limit policy.
 	// +kubebuilder:validation:Optional
-	PolicyPeriodInMinutes *float64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
+	PolicyPeriodInMinutes *int64 `json:"policyPeriodInMinutes,omitempty" tf:"policy_period_in_minutes,omitempty"`
 }
 
 type RuntimeConfigurationInitParameters struct {
 
 	// Maximum amount of time (in seconds) that a game session can remain in status ACTIVATING.
-	GameSessionActivationTimeoutSeconds *float64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
+	GameSessionActivationTimeoutSeconds *int64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
 
 	// Maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously.
-	MaxConcurrentGameSessionActivations *float64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
+	MaxConcurrentGameSessionActivations *int64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
 
 	// Collection of server process configurations that describe which server processes to run on each instance in a fleet. See below.
 	ServerProcess []ServerProcessInitParameters `json:"serverProcess,omitempty" tf:"server_process,omitempty"`
@@ -316,10 +316,10 @@ type RuntimeConfigurationInitParameters struct {
 type RuntimeConfigurationObservation struct {
 
 	// Maximum amount of time (in seconds) that a game session can remain in status ACTIVATING.
-	GameSessionActivationTimeoutSeconds *float64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
+	GameSessionActivationTimeoutSeconds *int64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
 
 	// Maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously.
-	MaxConcurrentGameSessionActivations *float64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
+	MaxConcurrentGameSessionActivations *int64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
 
 	// Collection of server process configurations that describe which server processes to run on each instance in a fleet. See below.
 	ServerProcess []ServerProcessObservation `json:"serverProcess,omitempty" tf:"server_process,omitempty"`
@@ -329,11 +329,11 @@ type RuntimeConfigurationParameters struct {
 
 	// Maximum amount of time (in seconds) that a game session can remain in status ACTIVATING.
 	// +kubebuilder:validation:Optional
-	GameSessionActivationTimeoutSeconds *float64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
+	GameSessionActivationTimeoutSeconds *int64 `json:"gameSessionActivationTimeoutSeconds,omitempty" tf:"game_session_activation_timeout_seconds,omitempty"`
 
 	// Maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously.
 	// +kubebuilder:validation:Optional
-	MaxConcurrentGameSessionActivations *float64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
+	MaxConcurrentGameSessionActivations *int64 `json:"maxConcurrentGameSessionActivations,omitempty" tf:"max_concurrent_game_session_activations,omitempty"`
 
 	// Collection of server process configurations that describe which server processes to run on each instance in a fleet. See below.
 	// +kubebuilder:validation:Optional
@@ -343,7 +343,7 @@ type RuntimeConfigurationParameters struct {
 type ServerProcessInitParameters struct {
 
 	// Number of server processes using this configuration to run concurrently on an instance.
-	ConcurrentExecutions *float64 `json:"concurrentExecutions,omitempty" tf:"concurrent_executions,omitempty"`
+	ConcurrentExecutions *int64 `json:"concurrentExecutions,omitempty" tf:"concurrent_executions,omitempty"`
 
 	// Location of the server executable in a game build. All game builds are installed on instances at the root : for Windows instances C:\game, and for Linux instances /local/game.
 	LaunchPath *string `json:"launchPath,omitempty" tf:"launch_path,omitempty"`
@@ -355,7 +355,7 @@ type ServerProcessInitParameters struct {
 type ServerProcessObservation struct {
 
 	// Number of server processes using this configuration to run concurrently on an instance.
-	ConcurrentExecutions *float64 `json:"concurrentExecutions,omitempty" tf:"concurrent_executions,omitempty"`
+	ConcurrentExecutions *int64 `json:"concurrentExecutions,omitempty" tf:"concurrent_executions,omitempty"`
 
 	// Location of the server executable in a game build. All game builds are installed on instances at the root : for Windows instances C:\game, and for Linux instances /local/game.
 	LaunchPath *string `json:"launchPath,omitempty" tf:"launch_path,omitempty"`
@@ -368,7 +368,7 @@ type ServerProcessParameters struct {
 
 	// Number of server processes using this configuration to run concurrently on an instance.
 	// +kubebuilder:validation:Optional
-	ConcurrentExecutions *float64 `json:"concurrentExecutions" tf:"concurrent_executions,omitempty"`
+	ConcurrentExecutions *int64 `json:"concurrentExecutions" tf:"concurrent_executions,omitempty"`
 
 	// Location of the server executable in a game build. All game builds are installed on instances at the root : for Windows instances C:\game, and for Linux instances /local/game.
 	// +kubebuilder:validation:Optional

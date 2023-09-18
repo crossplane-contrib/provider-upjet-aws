@@ -26,13 +26,13 @@ type AccountPasswordPolicyInitParameters struct {
 	HardExpiry *bool `json:"hardExpiry,omitempty" tf:"hard_expiry,omitempty"`
 
 	// The number of days that an user password is valid.
-	MaxPasswordAge *float64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
+	MaxPasswordAge *int64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
 
 	// Minimum length to require for user passwords.
-	MinimumPasswordLength *float64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
+	MinimumPasswordLength *int64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
 
 	// The number of previous passwords that users are prevented from reusing.
-	PasswordReusePrevention *float64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
+	PasswordReusePrevention *int64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
 
 	// Whether to require lowercase characters for user passwords.
 	RequireLowercaseCharacters *bool `json:"requireLowercaseCharacters,omitempty" tf:"require_lowercase_characters,omitempty"`
@@ -61,13 +61,13 @@ type AccountPasswordPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The number of days that an user password is valid.
-	MaxPasswordAge *float64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
+	MaxPasswordAge *int64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
 
 	// Minimum length to require for user passwords.
-	MinimumPasswordLength *float64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
+	MinimumPasswordLength *int64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
 
 	// The number of previous passwords that users are prevented from reusing.
-	PasswordReusePrevention *float64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
+	PasswordReusePrevention *int64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
 
 	// Whether to require lowercase characters for user passwords.
 	RequireLowercaseCharacters *bool `json:"requireLowercaseCharacters,omitempty" tf:"require_lowercase_characters,omitempty"`
@@ -94,15 +94,15 @@ type AccountPasswordPolicyParameters struct {
 
 	// The number of days that an user password is valid.
 	// +kubebuilder:validation:Optional
-	MaxPasswordAge *float64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
+	MaxPasswordAge *int64 `json:"maxPasswordAge,omitempty" tf:"max_password_age,omitempty"`
 
 	// Minimum length to require for user passwords.
 	// +kubebuilder:validation:Optional
-	MinimumPasswordLength *float64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
+	MinimumPasswordLength *int64 `json:"minimumPasswordLength,omitempty" tf:"minimum_password_length,omitempty"`
 
 	// The number of previous passwords that users are prevented from reusing.
 	// +kubebuilder:validation:Optional
-	PasswordReusePrevention *float64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
+	PasswordReusePrevention *int64 `json:"passwordReusePrevention,omitempty" tf:"password_reuse_prevention,omitempty"`
 
 	// Whether to require lowercase characters for user passwords.
 	// +kubebuilder:validation:Optional
