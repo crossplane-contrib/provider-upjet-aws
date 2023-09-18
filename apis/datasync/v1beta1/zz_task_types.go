@@ -77,7 +77,7 @@ type OptionsInitParameters struct {
 	Atime *string `json:"atime,omitempty" tf:"atime,omitempty"`
 
 	// Limits the bandwidth utilized. For example, to set a maximum of 1 MB, set this value to 1048576. Value values: -1 or greater. Default: -1 (unlimited).
-	BytesPerSecond *float64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
+	BytesPerSecond *int64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
 
 	// Group identifier of the file's owners. Valid values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE (preserve integer value of the ID).
 	GID *string `json:"gid,omitempty" tf:"gid,omitempty"`
@@ -125,7 +125,7 @@ type OptionsObservation struct {
 	Atime *string `json:"atime,omitempty" tf:"atime,omitempty"`
 
 	// Limits the bandwidth utilized. For example, to set a maximum of 1 MB, set this value to 1048576. Value values: -1 or greater. Default: -1 (unlimited).
-	BytesPerSecond *float64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
+	BytesPerSecond *int64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
 
 	// Group identifier of the file's owners. Valid values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE (preserve integer value of the ID).
 	GID *string `json:"gid,omitempty" tf:"gid,omitempty"`
@@ -175,7 +175,7 @@ type OptionsParameters struct {
 
 	// Limits the bandwidth utilized. For example, to set a maximum of 1 MB, set this value to 1048576. Value values: -1 or greater. Default: -1 (unlimited).
 	// +kubebuilder:validation:Optional
-	BytesPerSecond *float64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
+	BytesPerSecond *int64 `json:"bytesPerSecond,omitempty" tf:"bytes_per_second,omitempty"`
 
 	// Group identifier of the file's owners. Valid values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE (preserve integer value of the ID).
 	// +kubebuilder:validation:Optional

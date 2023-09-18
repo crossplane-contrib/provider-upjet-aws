@@ -84,7 +84,7 @@ type SAMLOptionsInitParameters struct {
 	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
 
 	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
-	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+	SessionTimeoutMinutes *int64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
 
 	// Custom SAML attribute to use for user names. Default is an empty string - "". This will cause Elasticsearch to use the NameID element of the Subject, which is the default location for name identifiers in the SAML specification.
 	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
@@ -105,7 +105,7 @@ type SAMLOptionsObservation struct {
 	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
 
 	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
-	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+	SessionTimeoutMinutes *int64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
 
 	// Custom SAML attribute to use for user names. Default is an empty string - "". This will cause Elasticsearch to use the NameID element of the Subject, which is the default location for name identifiers in the SAML specification.
 	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
@@ -135,7 +135,7 @@ type SAMLOptionsParameters struct {
 
 	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
 	// +kubebuilder:validation:Optional
-	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+	SessionTimeoutMinutes *int64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
 
 	// Custom SAML attribute to use for user names. Default is an empty string - "". This will cause Elasticsearch to use the NameID element of the Subject, which is the default location for name identifiers in the SAML specification.
 	// +kubebuilder:validation:Optional

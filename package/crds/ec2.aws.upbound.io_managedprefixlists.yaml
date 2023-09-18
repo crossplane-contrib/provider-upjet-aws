@@ -167,7 +167,8 @@ spec:
                   maxEntries:
                     description: Maximum number of entries that this prefix list can
                       contain.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Name of this resource. The name must not start with
                       com.amazonaws.
@@ -216,7 +217,8 @@ spec:
                   maxEntries:
                     description: Maximum number of entries that this prefix list can
                       contain.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Name of this resource. The name must not start with
                       com.amazonaws.
@@ -434,7 +436,8 @@ spec:
                   maxEntries:
                     description: Maximum number of entries that this prefix list can
                       contain.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Name of this resource. The name must not start with
                       com.amazonaws.
@@ -455,7 +458,8 @@ spec:
                     type: object
                   version:
                     description: Latest version of this prefix list.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

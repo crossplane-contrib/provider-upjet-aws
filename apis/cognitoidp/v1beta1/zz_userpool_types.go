@@ -417,7 +417,7 @@ type NumberAttributeConstraintsParameters struct {
 type PasswordPolicyInitParameters struct {
 
 	// Minimum length of the password policy that you have set.
-	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
+	MinimumLength *int64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
 
 	// Whether you have required users to use at least one lowercase letter in their password.
 	RequireLowercase *bool `json:"requireLowercase,omitempty" tf:"require_lowercase,omitempty"`
@@ -432,13 +432,13 @@ type PasswordPolicyInitParameters struct {
 	RequireUppercase *bool `json:"requireUppercase,omitempty" tf:"require_uppercase,omitempty"`
 
 	// In the password policy you have set, refers to the number of days a temporary password is valid. If the user does not sign-in during this time, their password will need to be reset by an administrator.
-	TemporaryPasswordValidityDays *float64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
+	TemporaryPasswordValidityDays *int64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
 }
 
 type PasswordPolicyObservation struct {
 
 	// Minimum length of the password policy that you have set.
-	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
+	MinimumLength *int64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
 
 	// Whether you have required users to use at least one lowercase letter in their password.
 	RequireLowercase *bool `json:"requireLowercase,omitempty" tf:"require_lowercase,omitempty"`
@@ -453,14 +453,14 @@ type PasswordPolicyObservation struct {
 	RequireUppercase *bool `json:"requireUppercase,omitempty" tf:"require_uppercase,omitempty"`
 
 	// In the password policy you have set, refers to the number of days a temporary password is valid. If the user does not sign-in during this time, their password will need to be reset by an administrator.
-	TemporaryPasswordValidityDays *float64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
+	TemporaryPasswordValidityDays *int64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
 }
 
 type PasswordPolicyParameters struct {
 
 	// Minimum length of the password policy that you have set.
 	// +kubebuilder:validation:Optional
-	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
+	MinimumLength *int64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
 
 	// Whether you have required users to use at least one lowercase letter in their password.
 	// +kubebuilder:validation:Optional
@@ -480,7 +480,7 @@ type PasswordPolicyParameters struct {
 
 	// In the password policy you have set, refers to the number of days a temporary password is valid. If the user does not sign-in during this time, their password will need to be reset by an administrator.
 	// +kubebuilder:validation:Optional
-	TemporaryPasswordValidityDays *float64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
+	TemporaryPasswordValidityDays *int64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
 }
 
 type RecoveryMechanismInitParameters struct {
@@ -489,7 +489,7 @@ type RecoveryMechanismInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Positive integer specifying priority of a method with 1 being the highest priority.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type RecoveryMechanismObservation struct {
@@ -498,7 +498,7 @@ type RecoveryMechanismObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Positive integer specifying priority of a method with 1 being the highest priority.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type RecoveryMechanismParameters struct {
@@ -509,7 +509,7 @@ type RecoveryMechanismParameters struct {
 
 	// Positive integer specifying priority of a method with 1 being the highest priority.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority" tf:"priority,omitempty"`
 }
 
 type SMSConfigurationInitParameters struct {
@@ -843,7 +843,7 @@ type UserPoolObservation struct {
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// A number estimating the size of the user pool.
-	EstimatedNumberOfUsers *float64 `json:"estimatedNumberOfUsers,omitempty" tf:"estimated_number_of_users,omitempty"`
+	EstimatedNumberOfUsers *int64 `json:"estimatedNumberOfUsers,omitempty" tf:"estimated_number_of_users,omitempty"`
 
 	// ID of the user pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

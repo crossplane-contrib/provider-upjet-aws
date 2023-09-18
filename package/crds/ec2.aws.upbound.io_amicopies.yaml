@@ -518,7 +518,8 @@ spec:
                             image should be encrypted. Defaults to false
                           type: boolean
                         iops:
-                          type: number
+                          format: int64
+                          type: integer
                         outpostArn:
                           description: ARN of the AMI.
                           type: string
@@ -526,9 +527,11 @@ spec:
                           description: ID of the created AMI.
                           type: string
                         throughput:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeSize:
-                          type: number
+                          format: int64
+                          type: integer
                         volumeType:
                           type: string
                       type: object

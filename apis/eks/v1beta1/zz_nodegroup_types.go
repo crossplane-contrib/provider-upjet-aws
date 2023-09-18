@@ -73,7 +73,7 @@ type NodeGroupInitParameters struct {
 	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
 
 	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
-	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+	DiskSize *int64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Force version update if existing pods are unable to be drained due to a pod disruption budget issue.
 	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
@@ -121,7 +121,7 @@ type NodeGroupObservation struct {
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
-	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+	DiskSize *int64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Force version update if existing pods are unable to be drained due to a pod disruption budget issue.
 	ForceUpdateVersion *bool `json:"forceUpdateVersion,omitempty" tf:"force_update_version,omitempty"`
@@ -201,7 +201,7 @@ type NodeGroupParameters struct {
 
 	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
 	// +kubebuilder:validation:Optional
-	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
+	DiskSize *int64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Force version update if existing pods are unable to be drained due to a pod disruption budget issue.
 	// +kubebuilder:validation:Optional
@@ -347,40 +347,40 @@ type ResourcesParameters struct {
 type ScalingConfigInitParameters struct {
 
 	// Desired number of worker nodes.
-	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
+	DesiredSize *int64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
 
 	// Maximum number of worker nodes.
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Minimum number of worker nodes.
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 }
 
 type ScalingConfigObservation struct {
 
 	// Desired number of worker nodes.
-	DesiredSize *float64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
+	DesiredSize *int64 `json:"desiredSize,omitempty" tf:"desired_size,omitempty"`
 
 	// Maximum number of worker nodes.
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// Minimum number of worker nodes.
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 }
 
 type ScalingConfigParameters struct {
 
 	// Desired number of worker nodes.
 	// +kubebuilder:validation:Optional
-	DesiredSize *float64 `json:"desiredSize" tf:"desired_size,omitempty"`
+	DesiredSize *int64 `json:"desiredSize" tf:"desired_size,omitempty"`
 
 	// Maximum number of worker nodes.
 	// +kubebuilder:validation:Optional
-	MaxSize *float64 `json:"maxSize" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize" tf:"max_size,omitempty"`
 
 	// Minimum number of worker nodes.
 	// +kubebuilder:validation:Optional
-	MinSize *float64 `json:"minSize" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize" tf:"min_size,omitempty"`
 }
 
 type TaintInitParameters struct {
@@ -425,30 +425,30 @@ type TaintParameters struct {
 type UpdateConfigInitParameters struct {
 
 	// Desired max number of unavailable worker nodes during node group update.
-	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 
 	// Desired max percentage of unavailable worker nodes during node group update.
-	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
+	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
 }
 
 type UpdateConfigObservation struct {
 
 	// Desired max number of unavailable worker nodes during node group update.
-	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 
 	// Desired max percentage of unavailable worker nodes during node group update.
-	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
+	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
 }
 
 type UpdateConfigParameters struct {
 
 	// Desired max number of unavailable worker nodes during node group update.
 	// +kubebuilder:validation:Optional
-	MaxUnavailable *float64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
+	MaxUnavailable *int64 `json:"maxUnavailable,omitempty" tf:"max_unavailable,omitempty"`
 
 	// Desired max percentage of unavailable worker nodes during node group update.
 	// +kubebuilder:validation:Optional
-	MaxUnavailablePercentage *float64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
+	MaxUnavailablePercentage *int64 `json:"maxUnavailablePercentage,omitempty" tf:"max_unavailable_percentage,omitempty"`
 }
 
 // NodeGroupSpec defines the desired state of NodeGroup

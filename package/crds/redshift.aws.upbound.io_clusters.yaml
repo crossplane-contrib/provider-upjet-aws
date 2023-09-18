@@ -89,7 +89,8 @@ spec:
                       automated snapshots are disabled, you can still create manual
                       snapshots when you want with create-cluster-snapshot. Default
                       is 1.
-                    type: number
+                    format: int64
+                    type: integer
                   availabilityZone:
                     description: The EC2 Availability Zone (AZ) in which you want
                       Amazon Redshift to provision the cluster. For example, if you
@@ -436,7 +437,8 @@ spec:
                       If the value is -1, the snapshot is retained indefinitely. This
                       setting doesn't change the retention period of existing snapshots.
                       Valid values are between -1 and 3653. Default value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                   masterPasswordSecretRef:
                     description: Password for the master DB user. Note that this may
                       show up in logs, and it will be stored in the state file. Password
@@ -467,7 +469,8 @@ spec:
                     description: The number of compute nodes in the cluster. This
                       parameter is required when the ClusterType parameter is specified
                       as multi-node. Default is 1.
-                    type: number
+                    format: int64
+                    type: integer
                   ownerAccount:
                     description: The AWS customer account used to create or copy the
                       snapshot. Required if you are restoring a snapshot you do not
@@ -480,7 +483,8 @@ spec:
                       Part of the connection string requires the port on which the
                       cluster will listen for incoming connections. Default port is
                       5439.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredMaintenanceWindow:
                     description: 'The weekly time range (in UTC) during which automated
                       cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi'
@@ -522,7 +526,8 @@ spec:
                           description: The number of days to retain automated snapshots
                             in the destination region after they are copied from the
                             source region. Defaults to 7.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   snapshotIdentifier:
@@ -655,7 +660,8 @@ spec:
                       automated snapshots are disabled, you can still create manual
                       snapshots when you want with create-cluster-snapshot. Default
                       is 1.
-                    type: number
+                    format: int64
+                    type: integer
                   availabilityZone:
                     description: The EC2 Availability Zone (AZ) in which you want
                       Amazon Redshift to provision the cluster. For example, if you
@@ -766,7 +772,8 @@ spec:
                       If the value is -1, the snapshot is retained indefinitely. This
                       setting doesn't change the retention period of existing snapshots.
                       Valid values are between -1 and 3653. Default value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
@@ -777,7 +784,8 @@ spec:
                     description: The number of compute nodes in the cluster. This
                       parameter is required when the ClusterType parameter is specified
                       as multi-node. Default is 1.
-                    type: number
+                    format: int64
+                    type: integer
                   ownerAccount:
                     description: The AWS customer account used to create or copy the
                       snapshot. Required if you are restoring a snapshot you do not
@@ -790,7 +798,8 @@ spec:
                       Part of the connection string requires the port on which the
                       cluster will listen for incoming connections. Default port is
                       5439.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredMaintenanceWindow:
                     description: 'The weekly time range (in UTC) during which automated
                       cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi'
@@ -828,7 +837,8 @@ spec:
                           description: The number of days to retain automated snapshots
                             in the destination region after they are copied from the
                             source region. Defaults to 7.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   snapshotIdentifier:
@@ -1037,7 +1047,8 @@ spec:
                       automated snapshots are disabled, you can still create manual
                       snapshots when you want with create-cluster-snapshot. Default
                       is 1.
-                    type: number
+                    format: int64
+                    type: integer
                   availabilityZone:
                     description: The EC2 Availability Zone (AZ) in which you want
                       Amazon Redshift to provision the cluster. For example, if you
@@ -1188,7 +1199,8 @@ spec:
                       If the value is -1, the snapshot is retained indefinitely. This
                       setting doesn't change the retention period of existing snapshots.
                       Valid values are between -1 and 3653. Default value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
@@ -1199,7 +1211,8 @@ spec:
                     description: The number of compute nodes in the cluster. This
                       parameter is required when the ClusterType parameter is specified
                       as multi-node. Default is 1.
-                    type: number
+                    format: int64
+                    type: integer
                   ownerAccount:
                     description: The AWS customer account used to create or copy the
                       snapshot. Required if you are restoring a snapshot you do not
@@ -1212,7 +1225,8 @@ spec:
                       Part of the connection string requires the port on which the
                       cluster will listen for incoming connections. Default port is
                       5439.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredMaintenanceWindow:
                     description: 'The weekly time range (in UTC) during which automated
                       cluster maintenance can occur. Format: ddd:hh24:mi-ddd:hh24:mi'
@@ -1250,7 +1264,8 @@ spec:
                           description: The number of days to retain automated snapshots
                             in the destination region after they are copied from the
                             source region. Defaults to 7.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   snapshotIdentifier:

@@ -84,7 +84,8 @@ spec:
                     type: string
                   priority:
                     description: The priority of the sampling rule.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -94,7 +95,8 @@ spec:
                       per second, prior to applying the fixed rate. The reservoir
                       is not used directly by services, but applies to all services
                       using the rule collectively.
-                    type: number
+                    format: int64
+                    type: integer
                   resourceArn:
                     description: Matches the ARN of the AWS resource on which the
                       service runs.
@@ -117,7 +119,8 @@ spec:
                     type: string
                   version:
                     description: The version of the sampling rule format (1 )
-                    type: number
+                    format: int64
+                    type: integer
                 required:
                 - region
                 type: object
@@ -151,13 +154,15 @@ spec:
                     type: string
                   priority:
                     description: The priority of the sampling rule.
-                    type: number
+                    format: int64
+                    type: integer
                   reservoirSize:
                     description: A fixed number of matching requests to instrument
                       per second, prior to applying the fixed rate. The reservoir
                       is not used directly by services, but applies to all services
                       using the rule collectively.
-                    type: number
+                    format: int64
+                    type: integer
                   resourceArn:
                     description: Matches the ARN of the AWS resource on which the
                       service runs.
@@ -180,7 +185,8 @@ spec:
                     type: string
                   version:
                     description: The version of the sampling rule format (1 )
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -412,13 +418,15 @@ spec:
                     type: string
                   priority:
                     description: The priority of the sampling rule.
-                    type: number
+                    format: int64
+                    type: integer
                   reservoirSize:
                     description: A fixed number of matching requests to instrument
                       per second, prior to applying the fixed rate. The reservoir
                       is not used directly by services, but applies to all services
                       using the rule collectively.
-                    type: number
+                    format: int64
+                    type: integer
                   resourceArn:
                     description: Matches the ARN of the AWS resource on which the
                       service runs.
@@ -448,7 +456,8 @@ spec:
                     type: string
                   version:
                     description: The version of the sampling rule format (1 )
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

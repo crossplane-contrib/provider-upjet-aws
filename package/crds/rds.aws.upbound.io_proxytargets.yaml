@@ -444,7 +444,8 @@ spec:
                   port:
                     description: Port for the target RDS DB Instance or Aurora DB
                       Cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   rdsResourceId:
                     description: Identifier representing the DB Instance or DB Cluster
                       target.

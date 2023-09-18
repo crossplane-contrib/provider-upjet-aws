@@ -234,7 +234,7 @@ func (in *AssessmentTemplateInitParameters) DeepCopyInto(out *AssessmentTemplate
 	*out = *in
 	if in.Duration != nil {
 		in, out := &in.Duration, &out.Duration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EventSubscription != nil {
@@ -330,7 +330,7 @@ func (in *AssessmentTemplateObservation) DeepCopyInto(out *AssessmentTemplateObs
 	}
 	if in.Duration != nil {
 		in, out := &in.Duration, &out.Duration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EventSubscription != nil {
@@ -415,7 +415,7 @@ func (in *AssessmentTemplateParameters) DeepCopyInto(out *AssessmentTemplatePara
 	*out = *in
 	if in.Duration != nil {
 		in, out := &in.Duration, &out.Duration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EventSubscription != nil {

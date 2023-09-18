@@ -16,7 +16,7 @@ import (
 type ProfileInitParameters struct {
 
 	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
-	DurationSeconds *float64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
+	DurationSeconds *int64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
 
 	// Whether or not the Profile is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -43,7 +43,7 @@ type ProfileObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
-	DurationSeconds *float64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
+	DurationSeconds *int64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
 
 	// Whether or not the Profile is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -77,7 +77,7 @@ type ProfileParameters struct {
 
 	// The number of seconds the vended session credentials are valid for. Defaults to 3600.
 	// +kubebuilder:validation:Optional
-	DurationSeconds *float64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
+	DurationSeconds *int64 `json:"durationSeconds,omitempty" tf:"duration_seconds,omitempty"`
 
 	// Whether or not the Profile is enabled.
 	// +kubebuilder:validation:Optional

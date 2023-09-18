@@ -46,7 +46,7 @@ type VPCIpamScopeObservation struct {
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// The number of pools in the scope.
-	PoolCount *float64 `json:"poolCount,omitempty" tf:"pool_count,omitempty"`
+	PoolCount *int64 `json:"poolCount,omitempty" tf:"pool_count,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

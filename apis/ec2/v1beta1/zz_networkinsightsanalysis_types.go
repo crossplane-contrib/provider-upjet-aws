@@ -44,7 +44,7 @@ type ACLRuleObservation struct {
 
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
-	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+	RuleNumber *int64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 }
 
 type ACLRuleParameters struct {
@@ -54,9 +54,9 @@ type ACLRulePortRangeInitParameters struct {
 }
 
 type ACLRulePortRangeObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type ACLRulePortRangeParameters struct {
@@ -127,9 +127,9 @@ type ClassicLoadBalancerListenerInitParameters struct {
 }
 
 type ClassicLoadBalancerListenerObservation struct {
-	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+	InstancePort *int64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
-	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
+	LoadBalancerPort *int64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 }
 
 type ClassicLoadBalancerListenerParameters struct {
@@ -173,9 +173,9 @@ type DestinationPortRangesInitParameters struct {
 }
 
 type DestinationPortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type DestinationPortRangesParameters struct {
@@ -273,13 +273,13 @@ type ExplanationsObservation struct {
 	// ARN of the Network Insights Analysis.
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
-	LoadBalancerListenerPort *float64 `json:"loadBalancerListenerPort,omitempty" tf:"load_balancer_listener_port,omitempty"`
+	LoadBalancerListenerPort *int64 `json:"loadBalancerListenerPort,omitempty" tf:"load_balancer_listener_port,omitempty"`
 
 	LoadBalancerTargetGroup []LoadBalancerTargetGroupObservation `json:"loadBalancerTargetGroup,omitempty" tf:"load_balancer_target_group,omitempty"`
 
 	LoadBalancerTargetGroups []LoadBalancerTargetGroupsObservation `json:"loadBalancerTargetGroups,omitempty" tf:"load_balancer_target_groups,omitempty"`
 
-	LoadBalancerTargetPort *float64 `json:"loadBalancerTargetPort,omitempty" tf:"load_balancer_target_port,omitempty"`
+	LoadBalancerTargetPort *int64 `json:"loadBalancerTargetPort,omitempty" tf:"load_balancer_target_port,omitempty"`
 
 	MissingComponent *string `json:"missingComponent,omitempty" tf:"missing_component,omitempty"`
 
@@ -289,7 +289,7 @@ type ExplanationsObservation struct {
 
 	PacketField *string `json:"packetField,omitempty" tf:"packet_field,omitempty"`
 
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	PortRanges []PortRangesObservation `json:"portRanges,omitempty" tf:"port_ranges,omitempty"`
 
@@ -351,7 +351,7 @@ type ForwardPathComponentsACLRuleObservation struct {
 
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
-	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+	RuleNumber *int64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 }
 
 type ForwardPathComponentsACLRuleParameters struct {
@@ -430,7 +430,7 @@ type ForwardPathComponentsObservation struct {
 
 	SecurityGroupRule []ForwardPathComponentsSecurityGroupRuleObservation `json:"securityGroupRule,omitempty" tf:"security_group_rule,omitempty"`
 
-	SequenceNumber *float64 `json:"sequenceNumber,omitempty" tf:"sequence_number,omitempty"`
+	SequenceNumber *int64 `json:"sequenceNumber,omitempty" tf:"sequence_number,omitempty"`
 
 	SourceVPC []ForwardPathComponentsSourceVPCObservation `json:"sourceVpc,omitempty" tf:"source_vpc,omitempty"`
 
@@ -508,9 +508,9 @@ type ForwardPathComponentsSecurityGroupRulePortRangeInitParameters struct {
 }
 
 type ForwardPathComponentsSecurityGroupRulePortRangeObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type ForwardPathComponentsSecurityGroupRulePortRangeParameters struct {
@@ -614,9 +614,9 @@ type InboundHeaderDestinationPortRangesInitParameters struct {
 }
 
 type InboundHeaderDestinationPortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type InboundHeaderDestinationPortRangesParameters struct {
@@ -644,9 +644,9 @@ type InboundHeaderSourcePortRangesInitParameters struct {
 }
 
 type InboundHeaderSourcePortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type InboundHeaderSourcePortRangesParameters struct {
@@ -855,9 +855,9 @@ type OutboundHeaderDestinationPortRangesInitParameters struct {
 }
 
 type OutboundHeaderDestinationPortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type OutboundHeaderDestinationPortRangesParameters struct {
@@ -885,9 +885,9 @@ type OutboundHeaderSourcePortRangesInitParameters struct {
 }
 
 type OutboundHeaderSourcePortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type OutboundHeaderSourcePortRangesParameters struct {
@@ -897,9 +897,9 @@ type PortRangeInitParameters struct {
 }
 
 type PortRangeObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type PortRangeParameters struct {
@@ -909,9 +909,9 @@ type PortRangesInitParameters struct {
 }
 
 type PortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type PortRangesParameters struct {
@@ -948,7 +948,7 @@ type ReturnPathComponentsACLRuleObservation struct {
 
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
-	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+	RuleNumber *int64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 }
 
 type ReturnPathComponentsACLRuleParameters struct {
@@ -958,9 +958,9 @@ type ReturnPathComponentsACLRulePortRangeInitParameters struct {
 }
 
 type ReturnPathComponentsACLRulePortRangeObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type ReturnPathComponentsACLRulePortRangeParameters struct {
@@ -1086,7 +1086,7 @@ type ReturnPathComponentsObservation struct {
 
 	SecurityGroupRule []ReturnPathComponentsSecurityGroupRuleObservation `json:"securityGroupRule,omitempty" tf:"security_group_rule,omitempty"`
 
-	SequenceNumber *float64 `json:"sequenceNumber,omitempty" tf:"sequence_number,omitempty"`
+	SequenceNumber *int64 `json:"sequenceNumber,omitempty" tf:"sequence_number,omitempty"`
 
 	SourceVPC []ReturnPathComponentsSourceVPCObservation `json:"sourceVpc,omitempty" tf:"source_vpc,omitempty"`
 
@@ -1103,9 +1103,9 @@ type ReturnPathComponentsOutboundHeaderDestinationPortRangesInitParameters struc
 }
 
 type ReturnPathComponentsOutboundHeaderDestinationPortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type ReturnPathComponentsOutboundHeaderDestinationPortRangesParameters struct {
@@ -1133,9 +1133,9 @@ type ReturnPathComponentsOutboundHeaderSourcePortRangesInitParameters struct {
 }
 
 type ReturnPathComponentsOutboundHeaderSourcePortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type ReturnPathComponentsOutboundHeaderSourcePortRangesParameters struct {
@@ -1206,9 +1206,9 @@ type ReturnPathComponentsSecurityGroupRulePortRangeInitParameters struct {
 }
 
 type ReturnPathComponentsSecurityGroupRulePortRangeObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type ReturnPathComponentsSecurityGroupRulePortRangeParameters struct {
@@ -1404,9 +1404,9 @@ type SecurityGroupRulePortRangeInitParameters struct {
 }
 
 type SecurityGroupRulePortRangeObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type SecurityGroupRulePortRangeParameters struct {
@@ -1433,9 +1433,9 @@ type SourcePortRangesInitParameters struct {
 }
 
 type SourcePortRangesObservation struct {
-	From *float64 `json:"from,omitempty" tf:"from,omitempty"`
+	From *int64 `json:"from,omitempty" tf:"from,omitempty"`
 
-	To *float64 `json:"to,omitempty" tf:"to,omitempty"`
+	To *int64 `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type SourcePortRangesParameters struct {

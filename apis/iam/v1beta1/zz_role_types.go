@@ -60,7 +60,7 @@ type RoleInitParameters struct {
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
-	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
+	MaxSessionDuration *int64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
 
 	// Path to the role. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -99,7 +99,7 @@ type RoleObservation struct {
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
-	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
+	MaxSessionDuration *int64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
 
 	// Path to the role. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -141,7 +141,7 @@ type RoleParameters struct {
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	// +kubebuilder:validation:Optional
-	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
+	MaxSessionDuration *int64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
 
 	// Path to the role. See IAM Identifiers for more information.
 	// +kubebuilder:validation:Optional

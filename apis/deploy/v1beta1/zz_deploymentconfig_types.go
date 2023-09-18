@@ -72,7 +72,7 @@ type MinimumHealthyHostsInitParameters struct {
 	// a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the
 	// deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.
 	// When the type is HOST_COUNT, the value represents the minimum number of healthy instances as an absolute value.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MinimumHealthyHostsObservation struct {
@@ -84,7 +84,7 @@ type MinimumHealthyHostsObservation struct {
 	// a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the
 	// deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.
 	// When the type is HOST_COUNT, the value represents the minimum number of healthy instances as an absolute value.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MinimumHealthyHostsParameters struct {
@@ -98,65 +98,65 @@ type MinimumHealthyHostsParameters struct {
 	// deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.
 	// When the type is HOST_COUNT, the value represents the minimum number of healthy instances as an absolute value.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeBasedCanaryInitParameters struct {
 
 	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
-	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+	Percentage *int64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedCanaryObservation struct {
 
 	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
-	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+	Percentage *int64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedCanaryParameters struct {
 
 	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
 	// +kubebuilder:validation:Optional
-	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+	Percentage *int64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedLinearInitParameters struct {
 
 	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
-	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+	Percentage *int64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedLinearObservation struct {
 
 	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
-	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+	Percentage *int64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TimeBasedLinearParameters struct {
 
 	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary deployment.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary deployment.
 	// +kubebuilder:validation:Optional
-	Percentage *float64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
+	Percentage *int64 `json:"percentage,omitempty" tf:"percentage,omitempty"`
 }
 
 type TrafficRoutingConfigInitParameters struct {

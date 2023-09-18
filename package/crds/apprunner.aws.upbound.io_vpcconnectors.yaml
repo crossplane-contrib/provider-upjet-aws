@@ -492,7 +492,8 @@ spec:
                     description: 'The revision of VPC connector. It''s unique among
                       all the active connectors ("Status": "ACTIVE") that share the
                       same Name.'
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

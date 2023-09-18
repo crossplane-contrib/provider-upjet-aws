@@ -22,7 +22,7 @@ type VoiceConnectorTerminationInitParameters struct {
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
-	CpsLimit *float64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
+	CpsLimit *int64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
 
 	// The default caller ID phone number.
 	DefaultPhoneNumber *string `json:"defaultPhoneNumber,omitempty" tf:"default_phone_number,omitempty"`
@@ -40,7 +40,7 @@ type VoiceConnectorTerminationObservation struct {
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
-	CpsLimit *float64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
+	CpsLimit *int64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
 
 	// The default caller ID phone number.
 	DefaultPhoneNumber *string `json:"defaultPhoneNumber,omitempty" tf:"default_phone_number,omitempty"`
@@ -67,7 +67,7 @@ type VoiceConnectorTerminationParameters struct {
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
 	// +kubebuilder:validation:Optional
-	CpsLimit *float64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
+	CpsLimit *int64 `json:"cpsLimit,omitempty" tf:"cps_limit,omitempty"`
 
 	// The default caller ID phone number.
 	// +kubebuilder:validation:Optional

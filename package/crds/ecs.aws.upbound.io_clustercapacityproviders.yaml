@@ -162,7 +162,8 @@ spec:
                             the specified capacity provider. Only one capacity provider
                             in a capacity provider strategy can have a base defined.
                             Defaults to 0.
-                          type: number
+                          format: int64
+                          type: integer
                         capacityProvider:
                           description: Name of the capacity provider.
                           type: string
@@ -172,7 +173,8 @@ spec:
                             provider. The weight value is taken into consideration
                             after the base count of tasks has been satisfied. Defaults
                             to 0.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   region:
@@ -212,7 +214,8 @@ spec:
                             the specified capacity provider. Only one capacity provider
                             in a capacity provider strategy can have a base defined.
                             Defaults to 0.
-                          type: number
+                          format: int64
+                          type: integer
                         capacityProvider:
                           description: Name of the capacity provider.
                           type: string
@@ -222,7 +225,8 @@ spec:
                             provider. The weight value is taken into consideration
                             after the base count of tasks has been satisfied. Defaults
                             to 0.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object
@@ -414,7 +418,8 @@ spec:
                             the specified capacity provider. Only one capacity provider
                             in a capacity provider strategy can have a base defined.
                             Defaults to 0.
-                          type: number
+                          format: int64
+                          type: integer
                         capacityProvider:
                           description: Name of the capacity provider.
                           type: string
@@ -424,7 +429,8 @@ spec:
                             provider. The weight value is taken into consideration
                             after the base count of tasks has been satisfied. Defaults
                             to 0.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   id:

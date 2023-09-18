@@ -600,17 +600,17 @@ func (in *CloudwatchConfigurationLogStreamsInitParameters) DeepCopyInto(out *Clo
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -670,17 +670,17 @@ func (in *CloudwatchConfigurationLogStreamsObservation) DeepCopyInto(out *Cloudw
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -740,17 +740,17 @@ func (in *CloudwatchConfigurationLogStreamsParameters) DeepCopyInto(out *Cloudwa
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -1115,7 +1115,7 @@ func (in *CustomLayerInitParameters) DeepCopyInto(out *CustomLayerInitParameters
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -1346,7 +1346,7 @@ func (in *CustomLayerObservation) DeepCopyInto(out *CustomLayerObservation) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -1568,7 +1568,7 @@ func (in *CustomLayerParameters) DeepCopyInto(out *CustomLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -1703,12 +1703,12 @@ func (in *DownscalingInitParameters) DeepCopyInto(out *DownscalingInitParameters
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -1723,7 +1723,7 @@ func (in *DownscalingInitParameters) DeepCopyInto(out *DownscalingInitParameters
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1759,12 +1759,12 @@ func (in *DownscalingObservation) DeepCopyInto(out *DownscalingObservation) {
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -1779,7 +1779,7 @@ func (in *DownscalingObservation) DeepCopyInto(out *DownscalingObservation) {
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1815,12 +1815,12 @@ func (in *DownscalingParameters) DeepCopyInto(out *DownscalingParameters) {
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -1835,7 +1835,7 @@ func (in *DownscalingParameters) DeepCopyInto(out *DownscalingParameters) {
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1865,7 +1865,7 @@ func (in *EBSBlockDeviceInitParameters) DeepCopyInto(out *EBSBlockDeviceInitPara
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotID != nil {
@@ -1875,7 +1875,7 @@ func (in *EBSBlockDeviceInitParameters) DeepCopyInto(out *EBSBlockDeviceInitPara
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeType != nil {
@@ -1910,7 +1910,7 @@ func (in *EBSBlockDeviceObservation) DeepCopyInto(out *EBSBlockDeviceObservation
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotID != nil {
@@ -1920,7 +1920,7 @@ func (in *EBSBlockDeviceObservation) DeepCopyInto(out *EBSBlockDeviceObservation
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeType != nil {
@@ -1955,7 +1955,7 @@ func (in *EBSBlockDeviceParameters) DeepCopyInto(out *EBSBlockDeviceParameters) 
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotID != nil {
@@ -1965,7 +1965,7 @@ func (in *EBSBlockDeviceParameters) DeepCopyInto(out *EBSBlockDeviceParameters) 
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeType != nil {
@@ -1995,7 +1995,7 @@ func (in *EBSVolumeInitParameters) DeepCopyInto(out *EBSVolumeInitParameters) {
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -2005,7 +2005,7 @@ func (in *EBSVolumeInitParameters) DeepCopyInto(out *EBSVolumeInitParameters) {
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -2015,7 +2015,7 @@ func (in *EBSVolumeInitParameters) DeepCopyInto(out *EBSVolumeInitParameters) {
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2045,7 +2045,7 @@ func (in *EBSVolumeObservation) DeepCopyInto(out *EBSVolumeObservation) {
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -2055,7 +2055,7 @@ func (in *EBSVolumeObservation) DeepCopyInto(out *EBSVolumeObservation) {
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -2065,7 +2065,7 @@ func (in *EBSVolumeObservation) DeepCopyInto(out *EBSVolumeObservation) {
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2095,7 +2095,7 @@ func (in *EBSVolumeParameters) DeepCopyInto(out *EBSVolumeParameters) {
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -2105,7 +2105,7 @@ func (in *EBSVolumeParameters) DeepCopyInto(out *EBSVolumeParameters) {
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -2115,7 +2115,7 @@ func (in *EBSVolumeParameters) DeepCopyInto(out *EBSVolumeParameters) {
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2253,7 +2253,7 @@ func (in *EcsClusterLayerEBSVolumeInitParameters) DeepCopyInto(out *EcsClusterLa
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -2263,7 +2263,7 @@ func (in *EcsClusterLayerEBSVolumeInitParameters) DeepCopyInto(out *EcsClusterLa
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -2273,7 +2273,7 @@ func (in *EcsClusterLayerEBSVolumeInitParameters) DeepCopyInto(out *EcsClusterLa
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2303,7 +2303,7 @@ func (in *EcsClusterLayerEBSVolumeObservation) DeepCopyInto(out *EcsClusterLayer
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -2313,7 +2313,7 @@ func (in *EcsClusterLayerEBSVolumeObservation) DeepCopyInto(out *EcsClusterLayer
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -2323,7 +2323,7 @@ func (in *EcsClusterLayerEBSVolumeObservation) DeepCopyInto(out *EcsClusterLayer
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2353,7 +2353,7 @@ func (in *EcsClusterLayerEBSVolumeParameters) DeepCopyInto(out *EcsClusterLayerE
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -2363,7 +2363,7 @@ func (in *EcsClusterLayerEBSVolumeParameters) DeepCopyInto(out *EcsClusterLayerE
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -2373,7 +2373,7 @@ func (in *EcsClusterLayerEBSVolumeParameters) DeepCopyInto(out *EcsClusterLayerE
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2507,7 +2507,7 @@ func (in *EcsClusterLayerInitParameters) DeepCopyInto(out *EcsClusterLayerInitPa
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -2840,7 +2840,7 @@ func (in *EcsClusterLayerObservation) DeepCopyInto(out *EcsClusterLayerObservati
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -3072,7 +3072,7 @@ func (in *EcsClusterLayerParameters) DeepCopyInto(out *EcsClusterLayerParameters
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -3405,17 +3405,17 @@ func (in *GangliaLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyI
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -3475,17 +3475,17 @@ func (in *GangliaLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyInto
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -3545,17 +3545,17 @@ func (in *GangliaLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -3674,7 +3674,7 @@ func (in *GangliaLayerEBSVolumeInitParameters) DeepCopyInto(out *GangliaLayerEBS
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -3684,7 +3684,7 @@ func (in *GangliaLayerEBSVolumeInitParameters) DeepCopyInto(out *GangliaLayerEBS
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -3694,7 +3694,7 @@ func (in *GangliaLayerEBSVolumeInitParameters) DeepCopyInto(out *GangliaLayerEBS
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -3724,7 +3724,7 @@ func (in *GangliaLayerEBSVolumeObservation) DeepCopyInto(out *GangliaLayerEBSVol
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -3734,7 +3734,7 @@ func (in *GangliaLayerEBSVolumeObservation) DeepCopyInto(out *GangliaLayerEBSVol
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -3744,7 +3744,7 @@ func (in *GangliaLayerEBSVolumeObservation) DeepCopyInto(out *GangliaLayerEBSVol
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -3774,7 +3774,7 @@ func (in *GangliaLayerEBSVolumeParameters) DeepCopyInto(out *GangliaLayerEBSVolu
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -3784,7 +3784,7 @@ func (in *GangliaLayerEBSVolumeParameters) DeepCopyInto(out *GangliaLayerEBSVolu
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -3794,7 +3794,7 @@ func (in *GangliaLayerEBSVolumeParameters) DeepCopyInto(out *GangliaLayerEBSVolu
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -3928,7 +3928,7 @@ func (in *GangliaLayerInitParameters) DeepCopyInto(out *GangliaLayerInitParamete
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -4055,12 +4055,12 @@ func (in *GangliaLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInt
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -4075,7 +4075,7 @@ func (in *GangliaLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInt
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4111,12 +4111,12 @@ func (in *GangliaLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -4131,7 +4131,7 @@ func (in *GangliaLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4167,12 +4167,12 @@ func (in *GangliaLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -4187,7 +4187,7 @@ func (in *GangliaLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4325,12 +4325,12 @@ func (in *GangliaLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -4345,7 +4345,7 @@ func (in *GangliaLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4381,12 +4381,12 @@ func (in *GangliaLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -4401,7 +4401,7 @@ func (in *GangliaLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4437,12 +4437,12 @@ func (in *GangliaLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out 
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -4457,7 +4457,7 @@ func (in *GangliaLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out 
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4607,7 +4607,7 @@ func (in *GangliaLayerObservation) DeepCopyInto(out *GangliaLayerObservation) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -4839,7 +4839,7 @@ func (in *GangliaLayerParameters) DeepCopyInto(out *GangliaLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -5022,17 +5022,17 @@ func (in *HAProxyLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyI
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -5092,17 +5092,17 @@ func (in *HAProxyLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyInto
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -5162,17 +5162,17 @@ func (in *HAProxyLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -5291,7 +5291,7 @@ func (in *HAProxyLayerEBSVolumeInitParameters) DeepCopyInto(out *HAProxyLayerEBS
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -5301,7 +5301,7 @@ func (in *HAProxyLayerEBSVolumeInitParameters) DeepCopyInto(out *HAProxyLayerEBS
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -5311,7 +5311,7 @@ func (in *HAProxyLayerEBSVolumeInitParameters) DeepCopyInto(out *HAProxyLayerEBS
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -5341,7 +5341,7 @@ func (in *HAProxyLayerEBSVolumeObservation) DeepCopyInto(out *HAProxyLayerEBSVol
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -5351,7 +5351,7 @@ func (in *HAProxyLayerEBSVolumeObservation) DeepCopyInto(out *HAProxyLayerEBSVol
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -5361,7 +5361,7 @@ func (in *HAProxyLayerEBSVolumeObservation) DeepCopyInto(out *HAProxyLayerEBSVol
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -5391,7 +5391,7 @@ func (in *HAProxyLayerEBSVolumeParameters) DeepCopyInto(out *HAProxyLayerEBSVolu
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -5401,7 +5401,7 @@ func (in *HAProxyLayerEBSVolumeParameters) DeepCopyInto(out *HAProxyLayerEBSVolu
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -5411,7 +5411,7 @@ func (in *HAProxyLayerEBSVolumeParameters) DeepCopyInto(out *HAProxyLayerEBSVolu
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -5555,7 +5555,7 @@ func (in *HAProxyLayerInitParameters) DeepCopyInto(out *HAProxyLayerInitParamete
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -5687,12 +5687,12 @@ func (in *HAProxyLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInt
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -5707,7 +5707,7 @@ func (in *HAProxyLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInt
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5743,12 +5743,12 @@ func (in *HAProxyLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -5763,7 +5763,7 @@ func (in *HAProxyLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5799,12 +5799,12 @@ func (in *HAProxyLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -5819,7 +5819,7 @@ func (in *HAProxyLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5957,12 +5957,12 @@ func (in *HAProxyLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -5977,7 +5977,7 @@ func (in *HAProxyLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6013,12 +6013,12 @@ func (in *HAProxyLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -6033,7 +6033,7 @@ func (in *HAProxyLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6069,12 +6069,12 @@ func (in *HAProxyLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out 
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -6089,7 +6089,7 @@ func (in *HAProxyLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out 
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6249,7 +6249,7 @@ func (in *HAProxyLayerObservation) DeepCopyInto(out *HAProxyLayerObservation) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -6496,7 +6496,7 @@ func (in *HAProxyLayerParameters) DeepCopyInto(out *HAProxyLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -7419,17 +7419,17 @@ func (in *JavaAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyI
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -7489,17 +7489,17 @@ func (in *JavaAppLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyInto
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -7559,17 +7559,17 @@ func (in *JavaAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -7688,7 +7688,7 @@ func (in *JavaAppLayerEBSVolumeInitParameters) DeepCopyInto(out *JavaAppLayerEBS
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -7698,7 +7698,7 @@ func (in *JavaAppLayerEBSVolumeInitParameters) DeepCopyInto(out *JavaAppLayerEBS
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -7708,7 +7708,7 @@ func (in *JavaAppLayerEBSVolumeInitParameters) DeepCopyInto(out *JavaAppLayerEBS
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -7738,7 +7738,7 @@ func (in *JavaAppLayerEBSVolumeObservation) DeepCopyInto(out *JavaAppLayerEBSVol
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -7748,7 +7748,7 @@ func (in *JavaAppLayerEBSVolumeObservation) DeepCopyInto(out *JavaAppLayerEBSVol
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -7758,7 +7758,7 @@ func (in *JavaAppLayerEBSVolumeObservation) DeepCopyInto(out *JavaAppLayerEBSVol
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -7788,7 +7788,7 @@ func (in *JavaAppLayerEBSVolumeParameters) DeepCopyInto(out *JavaAppLayerEBSVolu
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -7798,7 +7798,7 @@ func (in *JavaAppLayerEBSVolumeParameters) DeepCopyInto(out *JavaAppLayerEBSVolu
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -7808,7 +7808,7 @@ func (in *JavaAppLayerEBSVolumeParameters) DeepCopyInto(out *JavaAppLayerEBSVolu
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -7952,7 +7952,7 @@ func (in *JavaAppLayerInitParameters) DeepCopyInto(out *JavaAppLayerInitParamete
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.JvmOptions != nil {
@@ -8079,12 +8079,12 @@ func (in *JavaAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInt
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -8099,7 +8099,7 @@ func (in *JavaAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInt
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8135,12 +8135,12 @@ func (in *JavaAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -8155,7 +8155,7 @@ func (in *JavaAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8191,12 +8191,12 @@ func (in *JavaAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -8211,7 +8211,7 @@ func (in *JavaAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8349,12 +8349,12 @@ func (in *JavaAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -8369,7 +8369,7 @@ func (in *JavaAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8405,12 +8405,12 @@ func (in *JavaAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -8425,7 +8425,7 @@ func (in *JavaAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8461,12 +8461,12 @@ func (in *JavaAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out 
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -8481,7 +8481,7 @@ func (in *JavaAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out 
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8641,7 +8641,7 @@ func (in *JavaAppLayerObservation) DeepCopyInto(out *JavaAppLayerObservation) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.JvmOptions != nil {
@@ -8883,7 +8883,7 @@ func (in *JavaAppLayerParameters) DeepCopyInto(out *JavaAppLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.JvmOptions != nil {
@@ -9028,12 +9028,12 @@ func (in *LoadBasedAutoScalingDownscalingInitParameters) DeepCopyInto(out *LoadB
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -9048,7 +9048,7 @@ func (in *LoadBasedAutoScalingDownscalingInitParameters) DeepCopyInto(out *LoadB
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -9084,12 +9084,12 @@ func (in *LoadBasedAutoScalingDownscalingObservation) DeepCopyInto(out *LoadBase
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -9104,7 +9104,7 @@ func (in *LoadBasedAutoScalingDownscalingObservation) DeepCopyInto(out *LoadBase
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -9140,12 +9140,12 @@ func (in *LoadBasedAutoScalingDownscalingParameters) DeepCopyInto(out *LoadBased
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -9160,7 +9160,7 @@ func (in *LoadBasedAutoScalingDownscalingParameters) DeepCopyInto(out *LoadBased
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -9298,12 +9298,12 @@ func (in *LoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(out *LoadBas
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -9318,7 +9318,7 @@ func (in *LoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(out *LoadBas
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -9354,12 +9354,12 @@ func (in *LoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out *LoadBasedA
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -9374,7 +9374,7 @@ func (in *LoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out *LoadBasedA
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -9410,12 +9410,12 @@ func (in *LoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out *LoadBasedAu
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -9430,7 +9430,7 @@ func (in *LoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out *LoadBasedAu
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -9450,17 +9450,17 @@ func (in *LogStreamsInitParameters) DeepCopyInto(out *LogStreamsInitParameters) 
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -9520,17 +9520,17 @@ func (in *LogStreamsObservation) DeepCopyInto(out *LogStreamsObservation) {
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -9590,17 +9590,17 @@ func (in *LogStreamsParameters) DeepCopyInto(out *LogStreamsParameters) {
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -9714,17 +9714,17 @@ func (in *MemcachedLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCop
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -9784,17 +9784,17 @@ func (in *MemcachedLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyIn
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -9854,17 +9854,17 @@ func (in *MemcachedLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInt
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -9983,7 +9983,7 @@ func (in *MemcachedLayerEBSVolumeInitParameters) DeepCopyInto(out *MemcachedLaye
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -9993,7 +9993,7 @@ func (in *MemcachedLayerEBSVolumeInitParameters) DeepCopyInto(out *MemcachedLaye
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -10003,7 +10003,7 @@ func (in *MemcachedLayerEBSVolumeInitParameters) DeepCopyInto(out *MemcachedLaye
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -10033,7 +10033,7 @@ func (in *MemcachedLayerEBSVolumeObservation) DeepCopyInto(out *MemcachedLayerEB
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -10043,7 +10043,7 @@ func (in *MemcachedLayerEBSVolumeObservation) DeepCopyInto(out *MemcachedLayerEB
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -10053,7 +10053,7 @@ func (in *MemcachedLayerEBSVolumeObservation) DeepCopyInto(out *MemcachedLayerEB
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -10083,7 +10083,7 @@ func (in *MemcachedLayerEBSVolumeParameters) DeepCopyInto(out *MemcachedLayerEBS
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -10093,7 +10093,7 @@ func (in *MemcachedLayerEBSVolumeParameters) DeepCopyInto(out *MemcachedLayerEBS
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -10103,7 +10103,7 @@ func (in *MemcachedLayerEBSVolumeParameters) DeepCopyInto(out *MemcachedLayerEBS
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -10128,7 +10128,7 @@ func (in *MemcachedLayerInitParameters) DeepCopyInto(out *MemcachedLayerInitPara
 	*out = *in
 	if in.AllocatedMemory != nil {
 		in, out := &in.AllocatedMemory, &out.AllocatedMemory
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AutoAssignElasticIps != nil {
@@ -10242,7 +10242,7 @@ func (in *MemcachedLayerInitParameters) DeepCopyInto(out *MemcachedLayerInitPara
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -10354,12 +10354,12 @@ func (in *MemcachedLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyI
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -10374,7 +10374,7 @@ func (in *MemcachedLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyI
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10410,12 +10410,12 @@ func (in *MemcachedLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -10430,7 +10430,7 @@ func (in *MemcachedLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10466,12 +10466,12 @@ func (in *MemcachedLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -10486,7 +10486,7 @@ func (in *MemcachedLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10624,12 +10624,12 @@ func (in *MemcachedLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInt
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -10644,7 +10644,7 @@ func (in *MemcachedLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInt
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10680,12 +10680,12 @@ func (in *MemcachedLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -10700,7 +10700,7 @@ func (in *MemcachedLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10736,12 +10736,12 @@ func (in *MemcachedLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -10756,7 +10756,7 @@ func (in *MemcachedLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10776,7 +10776,7 @@ func (in *MemcachedLayerObservation) DeepCopyInto(out *MemcachedLayerObservation
 	*out = *in
 	if in.AllocatedMemory != nil {
 		in, out := &in.AllocatedMemory, &out.AllocatedMemory
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Arn != nil {
@@ -10911,7 +10911,7 @@ func (in *MemcachedLayerObservation) DeepCopyInto(out *MemcachedLayerObservation
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -10996,7 +10996,7 @@ func (in *MemcachedLayerParameters) DeepCopyInto(out *MemcachedLayerParameters) 
 	*out = *in
 	if in.AllocatedMemory != nil {
 		in, out := &in.AllocatedMemory, &out.AllocatedMemory
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AutoAssignElasticIps != nil {
@@ -11133,7 +11133,7 @@ func (in *MemcachedLayerParameters) DeepCopyInto(out *MemcachedLayerParameters) 
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -11301,17 +11301,17 @@ func (in *MySQLLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyInt
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -11371,17 +11371,17 @@ func (in *MySQLLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyInto(o
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -11441,17 +11441,17 @@ func (in *MySQLLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(ou
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -11570,7 +11570,7 @@ func (in *MySQLLayerEBSVolumeInitParameters) DeepCopyInto(out *MySQLLayerEBSVolu
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -11580,7 +11580,7 @@ func (in *MySQLLayerEBSVolumeInitParameters) DeepCopyInto(out *MySQLLayerEBSVolu
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -11590,7 +11590,7 @@ func (in *MySQLLayerEBSVolumeInitParameters) DeepCopyInto(out *MySQLLayerEBSVolu
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -11620,7 +11620,7 @@ func (in *MySQLLayerEBSVolumeObservation) DeepCopyInto(out *MySQLLayerEBSVolumeO
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -11630,7 +11630,7 @@ func (in *MySQLLayerEBSVolumeObservation) DeepCopyInto(out *MySQLLayerEBSVolumeO
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -11640,7 +11640,7 @@ func (in *MySQLLayerEBSVolumeObservation) DeepCopyInto(out *MySQLLayerEBSVolumeO
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -11670,7 +11670,7 @@ func (in *MySQLLayerEBSVolumeParameters) DeepCopyInto(out *MySQLLayerEBSVolumePa
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -11680,7 +11680,7 @@ func (in *MySQLLayerEBSVolumeParameters) DeepCopyInto(out *MySQLLayerEBSVolumePa
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -11690,7 +11690,7 @@ func (in *MySQLLayerEBSVolumeParameters) DeepCopyInto(out *MySQLLayerEBSVolumePa
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -11824,7 +11824,7 @@ func (in *MySQLLayerInitParameters) DeepCopyInto(out *MySQLLayerInitParameters) 
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -11946,12 +11946,12 @@ func (in *MySQLLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -11966,7 +11966,7 @@ func (in *MySQLLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -12002,12 +12002,12 @@ func (in *MySQLLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(out
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -12022,7 +12022,7 @@ func (in *MySQLLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(out
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -12058,12 +12058,12 @@ func (in *MySQLLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(out 
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -12078,7 +12078,7 @@ func (in *MySQLLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(out 
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -12216,12 +12216,12 @@ func (in *MySQLLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -12236,7 +12236,7 @@ func (in *MySQLLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -12272,12 +12272,12 @@ func (in *MySQLLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out *
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -12292,7 +12292,7 @@ func (in *MySQLLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out *
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -12328,12 +12328,12 @@ func (in *MySQLLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out *M
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -12348,7 +12348,7 @@ func (in *MySQLLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out *M
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -12498,7 +12498,7 @@ func (in *MySQLLayerObservation) DeepCopyInto(out *MySQLLayerObservation) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -12725,7 +12725,7 @@ func (in *MySQLLayerParameters) DeepCopyInto(out *MySQLLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -12903,17 +12903,17 @@ func (in *NodeJSAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCop
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -12973,17 +12973,17 @@ func (in *NodeJSAppLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyIn
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -13043,17 +13043,17 @@ func (in *NodeJSAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInt
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -13172,7 +13172,7 @@ func (in *NodeJSAppLayerEBSVolumeInitParameters) DeepCopyInto(out *NodeJSAppLaye
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -13182,7 +13182,7 @@ func (in *NodeJSAppLayerEBSVolumeInitParameters) DeepCopyInto(out *NodeJSAppLaye
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -13192,7 +13192,7 @@ func (in *NodeJSAppLayerEBSVolumeInitParameters) DeepCopyInto(out *NodeJSAppLaye
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -13222,7 +13222,7 @@ func (in *NodeJSAppLayerEBSVolumeObservation) DeepCopyInto(out *NodeJSAppLayerEB
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -13232,7 +13232,7 @@ func (in *NodeJSAppLayerEBSVolumeObservation) DeepCopyInto(out *NodeJSAppLayerEB
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -13242,7 +13242,7 @@ func (in *NodeJSAppLayerEBSVolumeObservation) DeepCopyInto(out *NodeJSAppLayerEB
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -13272,7 +13272,7 @@ func (in *NodeJSAppLayerEBSVolumeParameters) DeepCopyInto(out *NodeJSAppLayerEBS
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -13282,7 +13282,7 @@ func (in *NodeJSAppLayerEBSVolumeParameters) DeepCopyInto(out *NodeJSAppLayerEBS
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -13292,7 +13292,7 @@ func (in *NodeJSAppLayerEBSVolumeParameters) DeepCopyInto(out *NodeJSAppLayerEBS
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -13426,7 +13426,7 @@ func (in *NodeJSAppLayerInitParameters) DeepCopyInto(out *NodeJSAppLayerInitPara
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -13543,12 +13543,12 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyI
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -13563,7 +13563,7 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyI
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -13599,12 +13599,12 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -13619,7 +13619,7 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -13655,12 +13655,12 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -13675,7 +13675,7 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -13813,12 +13813,12 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInt
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -13833,7 +13833,7 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInt
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -13869,12 +13869,12 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -13889,7 +13889,7 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -13925,12 +13925,12 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -13945,7 +13945,7 @@ func (in *NodeJSAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -14095,7 +14095,7 @@ func (in *NodeJSAppLayerObservation) DeepCopyInto(out *NodeJSAppLayerObservation
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -14317,7 +14317,7 @@ func (in *NodeJSAppLayerParameters) DeepCopyInto(out *NodeJSAppLayerParameters) 
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -14490,17 +14490,17 @@ func (in *PHPAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopyIn
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -14560,17 +14560,17 @@ func (in *PHPAppLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyInto(
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -14630,17 +14630,17 @@ func (in *PHPAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto(o
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -14759,7 +14759,7 @@ func (in *PHPAppLayerEBSVolumeInitParameters) DeepCopyInto(out *PHPAppLayerEBSVo
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -14769,7 +14769,7 @@ func (in *PHPAppLayerEBSVolumeInitParameters) DeepCopyInto(out *PHPAppLayerEBSVo
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -14779,7 +14779,7 @@ func (in *PHPAppLayerEBSVolumeInitParameters) DeepCopyInto(out *PHPAppLayerEBSVo
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -14809,7 +14809,7 @@ func (in *PHPAppLayerEBSVolumeObservation) DeepCopyInto(out *PHPAppLayerEBSVolum
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -14819,7 +14819,7 @@ func (in *PHPAppLayerEBSVolumeObservation) DeepCopyInto(out *PHPAppLayerEBSVolum
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -14829,7 +14829,7 @@ func (in *PHPAppLayerEBSVolumeObservation) DeepCopyInto(out *PHPAppLayerEBSVolum
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -14859,7 +14859,7 @@ func (in *PHPAppLayerEBSVolumeParameters) DeepCopyInto(out *PHPAppLayerEBSVolume
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -14869,7 +14869,7 @@ func (in *PHPAppLayerEBSVolumeParameters) DeepCopyInto(out *PHPAppLayerEBSVolume
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -14879,7 +14879,7 @@ func (in *PHPAppLayerEBSVolumeParameters) DeepCopyInto(out *PHPAppLayerEBSVolume
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -15013,7 +15013,7 @@ func (in *PHPAppLayerInitParameters) DeepCopyInto(out *PHPAppLayerInitParameters
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -15125,12 +15125,12 @@ func (in *PHPAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInto
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -15145,7 +15145,7 @@ func (in *PHPAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyInto
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -15181,12 +15181,12 @@ func (in *PHPAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -15201,7 +15201,7 @@ func (in *PHPAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -15237,12 +15237,12 @@ func (in *PHPAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(out
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -15257,7 +15257,7 @@ func (in *PHPAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(out
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -15395,12 +15395,12 @@ func (in *PHPAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -15415,7 +15415,7 @@ func (in *PHPAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -15451,12 +15451,12 @@ func (in *PHPAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out 
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -15471,7 +15471,7 @@ func (in *PHPAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(out 
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -15507,12 +15507,12 @@ func (in *PHPAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out *
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -15527,7 +15527,7 @@ func (in *PHPAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out *
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -15677,7 +15677,7 @@ func (in *PHPAppLayerObservation) DeepCopyInto(out *PHPAppLayerObservation) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -15894,7 +15894,7 @@ func (in *PHPAppLayerParameters) DeepCopyInto(out *PHPAppLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -16491,17 +16491,17 @@ func (in *RailsAppLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCopy
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -16561,17 +16561,17 @@ func (in *RailsAppLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyInt
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -16631,17 +16631,17 @@ func (in *RailsAppLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInto
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -16760,7 +16760,7 @@ func (in *RailsAppLayerEBSVolumeInitParameters) DeepCopyInto(out *RailsAppLayerE
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -16770,7 +16770,7 @@ func (in *RailsAppLayerEBSVolumeInitParameters) DeepCopyInto(out *RailsAppLayerE
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -16780,7 +16780,7 @@ func (in *RailsAppLayerEBSVolumeInitParameters) DeepCopyInto(out *RailsAppLayerE
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -16810,7 +16810,7 @@ func (in *RailsAppLayerEBSVolumeObservation) DeepCopyInto(out *RailsAppLayerEBSV
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -16820,7 +16820,7 @@ func (in *RailsAppLayerEBSVolumeObservation) DeepCopyInto(out *RailsAppLayerEBSV
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -16830,7 +16830,7 @@ func (in *RailsAppLayerEBSVolumeObservation) DeepCopyInto(out *RailsAppLayerEBSV
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -16860,7 +16860,7 @@ func (in *RailsAppLayerEBSVolumeParameters) DeepCopyInto(out *RailsAppLayerEBSVo
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -16870,7 +16870,7 @@ func (in *RailsAppLayerEBSVolumeParameters) DeepCopyInto(out *RailsAppLayerEBSVo
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -16880,7 +16880,7 @@ func (in *RailsAppLayerEBSVolumeParameters) DeepCopyInto(out *RailsAppLayerEBSVo
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -17024,7 +17024,7 @@ func (in *RailsAppLayerInitParameters) DeepCopyInto(out *RailsAppLayerInitParame
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -17156,12 +17156,12 @@ func (in *RailsAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyIn
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -17176,7 +17176,7 @@ func (in *RailsAppLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyIn
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -17212,12 +17212,12 @@ func (in *RailsAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -17232,7 +17232,7 @@ func (in *RailsAppLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -17268,12 +17268,12 @@ func (in *RailsAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -17288,7 +17288,7 @@ func (in *RailsAppLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -17426,12 +17426,12 @@ func (in *RailsAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -17446,7 +17446,7 @@ func (in *RailsAppLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInto
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -17482,12 +17482,12 @@ func (in *RailsAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -17502,7 +17502,7 @@ func (in *RailsAppLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -17538,12 +17538,12 @@ func (in *RailsAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -17558,7 +17558,7 @@ func (in *RailsAppLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(out
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -17718,7 +17718,7 @@ func (in *RailsAppLayerObservation) DeepCopyInto(out *RailsAppLayerObservation) 
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -17965,7 +17965,7 @@ func (in *RailsAppLayerParameters) DeepCopyInto(out *RailsAppLayerParameters) {
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -18104,12 +18104,12 @@ func (in *RootBlockDeviceInitParameters) DeepCopyInto(out *RootBlockDeviceInitPa
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeType != nil {
@@ -18139,12 +18139,12 @@ func (in *RootBlockDeviceObservation) DeepCopyInto(out *RootBlockDeviceObservati
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeType != nil {
@@ -18174,12 +18174,12 @@ func (in *RootBlockDeviceParameters) DeepCopyInto(out *RootBlockDeviceParameters
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VolumeType != nil {
@@ -18888,17 +18888,17 @@ func (in *StaticWebLayerCloudwatchConfigurationLogStreamsInitParameters) DeepCop
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -18958,17 +18958,17 @@ func (in *StaticWebLayerCloudwatchConfigurationLogStreamsObservation) DeepCopyIn
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -19028,17 +19028,17 @@ func (in *StaticWebLayerCloudwatchConfigurationLogStreamsParameters) DeepCopyInt
 	*out = *in
 	if in.BatchCount != nil {
 		in, out := &in.BatchCount, &out.BatchCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferDuration != nil {
 		in, out := &in.BufferDuration, &out.BufferDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatetimeFormat != nil {
@@ -19157,7 +19157,7 @@ func (in *StaticWebLayerEBSVolumeInitParameters) DeepCopyInto(out *StaticWebLaye
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -19167,7 +19167,7 @@ func (in *StaticWebLayerEBSVolumeInitParameters) DeepCopyInto(out *StaticWebLaye
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -19177,7 +19177,7 @@ func (in *StaticWebLayerEBSVolumeInitParameters) DeepCopyInto(out *StaticWebLaye
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -19207,7 +19207,7 @@ func (in *StaticWebLayerEBSVolumeObservation) DeepCopyInto(out *StaticWebLayerEB
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -19217,7 +19217,7 @@ func (in *StaticWebLayerEBSVolumeObservation) DeepCopyInto(out *StaticWebLayerEB
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -19227,7 +19227,7 @@ func (in *StaticWebLayerEBSVolumeObservation) DeepCopyInto(out *StaticWebLayerEB
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -19257,7 +19257,7 @@ func (in *StaticWebLayerEBSVolumeParameters) DeepCopyInto(out *StaticWebLayerEBS
 	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MountPoint != nil {
@@ -19267,7 +19267,7 @@ func (in *StaticWebLayerEBSVolumeParameters) DeepCopyInto(out *StaticWebLayerEBS
 	}
 	if in.NumberOfDisks != nil {
 		in, out := &in.NumberOfDisks, &out.NumberOfDisks
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RaidLevel != nil {
@@ -19277,7 +19277,7 @@ func (in *StaticWebLayerEBSVolumeParameters) DeepCopyInto(out *StaticWebLayerEBS
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -19411,7 +19411,7 @@ func (in *StaticWebLayerInitParameters) DeepCopyInto(out *StaticWebLayerInitPara
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -19523,12 +19523,12 @@ func (in *StaticWebLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyI
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -19543,7 +19543,7 @@ func (in *StaticWebLayerLoadBasedAutoScalingDownscalingInitParameters) DeepCopyI
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -19579,12 +19579,12 @@ func (in *StaticWebLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -19599,7 +19599,7 @@ func (in *StaticWebLayerLoadBasedAutoScalingDownscalingObservation) DeepCopyInto
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -19635,12 +19635,12 @@ func (in *StaticWebLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -19655,7 +19655,7 @@ func (in *StaticWebLayerLoadBasedAutoScalingDownscalingParameters) DeepCopyInto(
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -19793,12 +19793,12 @@ func (in *StaticWebLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInt
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -19813,7 +19813,7 @@ func (in *StaticWebLayerLoadBasedAutoScalingUpscalingInitParameters) DeepCopyInt
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -19849,12 +19849,12 @@ func (in *StaticWebLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(o
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -19869,7 +19869,7 @@ func (in *StaticWebLayerLoadBasedAutoScalingUpscalingObservation) DeepCopyInto(o
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -19905,12 +19905,12 @@ func (in *StaticWebLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(ou
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -19925,7 +19925,7 @@ func (in *StaticWebLayerLoadBasedAutoScalingUpscalingParameters) DeepCopyInto(ou
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -20075,7 +20075,7 @@ func (in *StaticWebLayerObservation) DeepCopyInto(out *StaticWebLayerObservation
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -20292,7 +20292,7 @@ func (in *StaticWebLayerParameters) DeepCopyInto(out *StaticWebLayerParameters) 
 	}
 	if in.InstanceShutdownTimeout != nil {
 		in, out := &in.InstanceShutdownTimeout, &out.InstanceShutdownTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBasedAutoScaling != nil {
@@ -20422,12 +20422,12 @@ func (in *UpscalingInitParameters) DeepCopyInto(out *UpscalingInitParameters) {
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -20442,7 +20442,7 @@ func (in *UpscalingInitParameters) DeepCopyInto(out *UpscalingInitParameters) {
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -20478,12 +20478,12 @@ func (in *UpscalingObservation) DeepCopyInto(out *UpscalingObservation) {
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -20498,7 +20498,7 @@ func (in *UpscalingObservation) DeepCopyInto(out *UpscalingObservation) {
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -20534,12 +20534,12 @@ func (in *UpscalingParameters) DeepCopyInto(out *UpscalingParameters) {
 	}
 	if in.IgnoreMetricsTime != nil {
 		in, out := &in.IgnoreMetricsTime, &out.IgnoreMetricsTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadThreshold != nil {
@@ -20554,7 +20554,7 @@ func (in *UpscalingParameters) DeepCopyInto(out *UpscalingParameters) {
 	}
 	if in.ThresholdsWaitTime != nil {
 		in, out := &in.ThresholdsWaitTime, &out.ThresholdsWaitTime
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

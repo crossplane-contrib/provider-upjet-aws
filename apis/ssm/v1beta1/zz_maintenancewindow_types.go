@@ -19,13 +19,13 @@ type MaintenanceWindowInitParameters struct {
 	AllowUnassociatedTargets *bool `json:"allowUnassociatedTargets,omitempty" tf:"allow_unassociated_targets,omitempty"`
 
 	// The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
-	Cutoff *float64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
+	Cutoff *int64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
 
 	// A description for the maintenance window.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The duration of the Maintenance Window in hours.
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Whether the maintenance window is enabled. Default: true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -40,7 +40,7 @@ type MaintenanceWindowInitParameters struct {
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
-	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+	ScheduleOffset *int64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Timezone for schedule in Internet Assigned Numbers Authority (IANA) Time Zone Database format. For example: America/Los_Angeles, etc/UTC, or Asia/Seoul.
 	ScheduleTimezone *string `json:"scheduleTimezone,omitempty" tf:"schedule_timezone,omitempty"`
@@ -58,13 +58,13 @@ type MaintenanceWindowObservation struct {
 	AllowUnassociatedTargets *bool `json:"allowUnassociatedTargets,omitempty" tf:"allow_unassociated_targets,omitempty"`
 
 	// The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
-	Cutoff *float64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
+	Cutoff *int64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
 
 	// A description for the maintenance window.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The duration of the Maintenance Window in hours.
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Whether the maintenance window is enabled. Default: true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -82,7 +82,7 @@ type MaintenanceWindowObservation struct {
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
-	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+	ScheduleOffset *int64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Timezone for schedule in Internet Assigned Numbers Authority (IANA) Time Zone Database format. For example: America/Los_Angeles, etc/UTC, or Asia/Seoul.
 	ScheduleTimezone *string `json:"scheduleTimezone,omitempty" tf:"schedule_timezone,omitempty"`
@@ -105,7 +105,7 @@ type MaintenanceWindowParameters struct {
 
 	// The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
 	// +kubebuilder:validation:Optional
-	Cutoff *float64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
+	Cutoff *int64 `json:"cutoff,omitempty" tf:"cutoff,omitempty"`
 
 	// A description for the maintenance window.
 	// +kubebuilder:validation:Optional
@@ -113,7 +113,7 @@ type MaintenanceWindowParameters struct {
 
 	// The duration of the Maintenance Window in hours.
 	// +kubebuilder:validation:Optional
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Whether the maintenance window is enabled. Default: true.
 	// +kubebuilder:validation:Optional
@@ -138,7 +138,7 @@ type MaintenanceWindowParameters struct {
 
 	// The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
 	// +kubebuilder:validation:Optional
-	ScheduleOffset *float64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
+	ScheduleOffset *int64 `json:"scheduleOffset,omitempty" tf:"schedule_offset,omitempty"`
 
 	// Timezone for schedule in Internet Assigned Numbers Authority (IANA) Time Zone Database format. For example: America/Los_Angeles, etc/UTC, or Asia/Seoul.
 	// +kubebuilder:validation:Optional

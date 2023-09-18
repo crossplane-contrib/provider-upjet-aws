@@ -43,7 +43,7 @@ type ActionInitParameters struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The order in which actions are run.
-	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
+	RunOrder *int64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
 	// A string that identifies the action type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -82,7 +82,7 @@ type ActionObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The order in which actions are run.
-	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
+	RunOrder *int64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
 	// A string that identifies the action type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -132,7 +132,7 @@ type ActionParameters struct {
 
 	// The order in which actions are run.
 	// +kubebuilder:validation:Optional
-	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
+	RunOrder *int64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
 	// A string that identifies the action type.
 	// +kubebuilder:validation:Optional

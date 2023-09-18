@@ -88,7 +88,8 @@ spec:
                             number of instance and rounds up fractional instances.
                             When the type is HOST_COUNT, the value represents the
                             minimum number of healthy instances as an absolute value.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   region:
@@ -108,11 +109,13 @@ spec:
                               interval:
                                 description: The number of minutes between the first
                                   and second traffic shifts of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                               percentage:
                                 description: The percentage of traffic to shift in
                                   the first increment of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         timeBasedLinear:
@@ -123,11 +126,13 @@ spec:
                               interval:
                                 description: The number of minutes between the first
                                   and second traffic shifts of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                               percentage:
                                 description: The percentage of traffic to shift in
                                   the first increment of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         type:
@@ -173,7 +178,8 @@ spec:
                             number of instance and rounds up fractional instances.
                             When the type is HOST_COUNT, the value represents the
                             minimum number of healthy instances as an absolute value.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   trafficRoutingConfig:
@@ -189,11 +195,13 @@ spec:
                               interval:
                                 description: The number of minutes between the first
                                   and second traffic shifts of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                               percentage:
                                 description: The percentage of traffic to shift in
                                   the first increment of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         timeBasedLinear:
@@ -204,11 +212,13 @@ spec:
                               interval:
                                 description: The number of minutes between the first
                                   and second traffic shifts of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                               percentage:
                                 description: The percentage of traffic to shift in
                                   the first increment of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         type:
@@ -411,7 +421,8 @@ spec:
                             number of instance and rounds up fractional instances.
                             When the type is HOST_COUNT, the value represents the
                             minimum number of healthy instances as an absolute value.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   trafficRoutingConfig:
@@ -427,11 +438,13 @@ spec:
                               interval:
                                 description: The number of minutes between the first
                                   and second traffic shifts of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                               percentage:
                                 description: The percentage of traffic to shift in
                                   the first increment of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         timeBasedLinear:
@@ -442,11 +455,13 @@ spec:
                               interval:
                                 description: The number of minutes between the first
                                   and second traffic shifts of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                               percentage:
                                 description: The percentage of traffic to shift in
                                   the first increment of a TimeBasedCanary deployment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         type:

@@ -86,9 +86,6 @@ type IngestEndpointsInitParameters struct {
 
 type IngestEndpointsObservation struct {
 
-	// The password
-	Password *string `json:"password,omitempty" tf:"password,omitempty"`
-
 	// The URL
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 

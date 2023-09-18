@@ -35,7 +35,7 @@ type ClusterInstanceInitParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The port on which the DB accepts connections. Defaults to 8182.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00"
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
@@ -45,7 +45,7 @@ type ClusterInstanceInitParameters struct {
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
-	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+	PromotionTier *int64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
 	// Bool to control if instance is publicly accessible. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -103,7 +103,7 @@ type ClusterInstanceObservation struct {
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
 	// The port on which the DB accepts connections. Defaults to 8182.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00"
 	PreferredBackupWindow *string `json:"preferredBackupWindow,omitempty" tf:"preferred_backup_window,omitempty"`
@@ -113,7 +113,7 @@ type ClusterInstanceObservation struct {
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
-	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+	PromotionTier *int64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
 	// Bool to control if instance is publicly accessible. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -199,7 +199,7 @@ type ClusterInstanceParameters struct {
 
 	// The port on which the DB accepts connections. Defaults to 8182.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The daily time range during which automated backups are created if automated backups are enabled. Eg: "04:00-09:00"
 	// +kubebuilder:validation:Optional
@@ -212,7 +212,7 @@ type ClusterInstanceParameters struct {
 
 	// Default 0. Failover Priority setting on instance level. The reader who has lower tier has higher priority to get promoter to writer.
 	// +kubebuilder:validation:Optional
-	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
+	PromotionTier *int64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
 	// Bool to control if instance is publicly accessible. Default is false.
 	// +kubebuilder:validation:Optional

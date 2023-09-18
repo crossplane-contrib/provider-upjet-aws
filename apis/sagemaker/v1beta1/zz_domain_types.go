@@ -61,7 +61,7 @@ type CustomImageInitParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type CustomImageObservation struct {
@@ -73,7 +73,7 @@ type CustomImageObservation struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type CustomImageParameters struct {
@@ -88,7 +88,7 @@ type CustomImageParameters struct {
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type DefaultResourceSpecInitParameters struct {
@@ -762,7 +762,7 @@ type JupyterServerAppSettingsParameters struct {
 type KernelGatewayAppSettingsCustomImageInitParameters struct {
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type KernelGatewayAppSettingsCustomImageObservation struct {
@@ -774,7 +774,7 @@ type KernelGatewayAppSettingsCustomImageObservation struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type KernelGatewayAppSettingsCustomImageParameters struct {
@@ -808,7 +808,7 @@ type KernelGatewayAppSettingsCustomImageParameters struct {
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type KernelGatewayAppSettingsDefaultResourceSpecInitParameters struct {
@@ -937,7 +937,7 @@ type RSessionAppSettingsCustomImageInitParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type RSessionAppSettingsCustomImageObservation struct {
@@ -949,7 +949,7 @@ type RSessionAppSettingsCustomImageObservation struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// The version number of the Custom Image.
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type RSessionAppSettingsCustomImageParameters struct {
@@ -964,7 +964,7 @@ type RSessionAppSettingsCustomImageParameters struct {
 
 	// The version number of the Custom Image.
 	// +kubebuilder:validation:Optional
-	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+	ImageVersionNumber *int64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type RSessionAppSettingsDefaultResourceSpecInitParameters struct {

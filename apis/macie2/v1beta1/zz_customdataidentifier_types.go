@@ -25,7 +25,7 @@ type CustomDataIdentifierInitParameters struct {
 	Keywords []*string `json:"keywords,omitempty" tf:"keywords,omitempty"`
 
 	// The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
-	MaximumMatchDistance *float64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
+	MaximumMatchDistance *int64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
 
 	// A custom name for the custom data identifier. The name can contain as many as 128 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -58,7 +58,7 @@ type CustomDataIdentifierObservation struct {
 	Keywords []*string `json:"keywords,omitempty" tf:"keywords,omitempty"`
 
 	// The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
-	MaximumMatchDistance *float64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
+	MaximumMatchDistance *int64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
 
 	// A custom name for the custom data identifier. The name can contain as many as 128 characters. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -88,7 +88,7 @@ type CustomDataIdentifierParameters struct {
 
 	// The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
 	// +kubebuilder:validation:Optional
-	MaximumMatchDistance *float64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
+	MaximumMatchDistance *int64 `json:"maximumMatchDistance,omitempty" tf:"maximum_match_distance,omitempty"`
 
 	// A custom name for the custom data identifier. The name can contain as many as 128 characters. Conflicts with name_prefix.
 	// +kubebuilder:validation:Optional

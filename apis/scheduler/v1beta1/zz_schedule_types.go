@@ -16,32 +16,32 @@ import (
 type CapacityProviderStrategyInitParameters struct {
 
 	// How many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Ranges from 0 (default) to 100000.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// Designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Ranges from from 0 to 1000.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyObservation struct {
 
 	// How many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Ranges from 0 (default) to 100000.
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// Designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Ranges from from 0 to 1000.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CapacityProviderStrategyParameters struct {
 
 	// How many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. Ranges from 0 (default) to 100000.
 	// +kubebuilder:validation:Optional
-	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// Short name of the capacity provider.
 	// +kubebuilder:validation:Optional
@@ -49,7 +49,7 @@ type CapacityProviderStrategyParameters struct {
 
 	// Designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied. Ranges from from 0 to 1000.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type DeadLetterConfigInitParameters struct {
@@ -110,7 +110,7 @@ type EcsParametersInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
-	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+	TaskCount *int64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// ARN of the task definition to use.
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
@@ -155,7 +155,7 @@ type EcsParametersObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
-	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+	TaskCount *int64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// ARN of the task definition to use.
 	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
@@ -213,7 +213,7 @@ type EcsParametersParameters struct {
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
 	// +kubebuilder:validation:Optional
-	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+	TaskCount *int64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
 
 	// ARN of the task definition to use.
 	// +kubebuilder:validation:Optional
@@ -252,7 +252,7 @@ type EventbridgeParametersParameters struct {
 type FlexibleTimeWindowInitParameters struct {
 
 	// Maximum time window during which a schedule can be invoked. Ranges from 1 to 1440 minutes.
-	MaximumWindowInMinutes *float64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
+	MaximumWindowInMinutes *int64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
 
 	// Determines whether the schedule is invoked within a flexible time window. One of: OFF, FLEXIBLE.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -261,7 +261,7 @@ type FlexibleTimeWindowInitParameters struct {
 type FlexibleTimeWindowObservation struct {
 
 	// Maximum time window during which a schedule can be invoked. Ranges from 1 to 1440 minutes.
-	MaximumWindowInMinutes *float64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
+	MaximumWindowInMinutes *int64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
 
 	// Determines whether the schedule is invoked within a flexible time window. One of: OFF, FLEXIBLE.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -271,7 +271,7 @@ type FlexibleTimeWindowParameters struct {
 
 	// Maximum time window during which a schedule can be invoked. Ranges from 1 to 1440 minutes.
 	// +kubebuilder:validation:Optional
-	MaximumWindowInMinutes *float64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
+	MaximumWindowInMinutes *int64 `json:"maximumWindowInMinutes,omitempty" tf:"maximum_window_in_minutes,omitempty"`
 
 	// Determines whether the schedule is invoked within a flexible time window. One of: OFF, FLEXIBLE.
 	// +kubebuilder:validation:Optional
@@ -426,30 +426,30 @@ type PlacementStrategyParameters struct {
 type RetryPolicyInitParameters struct {
 
 	// Maximum amount of time, in seconds, to continue to make retry attempts. Ranges from 60 to 86400 (default).
-	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// Maximum number of retry attempts to make before the request fails. Ranges from 0 to 185 (default).
-	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RetryPolicyObservation struct {
 
 	// Maximum amount of time, in seconds, to continue to make retry attempts. Ranges from 60 to 86400 (default).
-	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// Maximum number of retry attempts to make before the request fails. Ranges from 0 to 185 (default).
-	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type RetryPolicyParameters struct {
 
 	// Maximum amount of time, in seconds, to continue to make retry attempts. Ranges from 60 to 86400 (default).
 	// +kubebuilder:validation:Optional
-	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// Maximum number of retry attempts to make before the request fails. Ranges from 0 to 185 (default).
 	// +kubebuilder:validation:Optional
-	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 }
 
 type SagemakerPipelineParametersInitParameters struct {

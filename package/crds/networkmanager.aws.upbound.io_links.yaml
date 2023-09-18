@@ -73,10 +73,12 @@ spec:
                       properties:
                         downloadSpeed:
                           description: Download speed in Mbps.
-                          type: number
+                          format: int64
+                          type: integer
                         uploadSpeed:
                           description: Upload speed in Mbps.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   description:
@@ -274,10 +276,12 @@ spec:
                       properties:
                         downloadSpeed:
                           description: Download speed in Mbps.
-                          type: number
+                          format: int64
+                          type: integer
                         uploadSpeed:
                           description: Upload speed in Mbps.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   description:
@@ -476,10 +480,12 @@ spec:
                       properties:
                         downloadSpeed:
                           description: Download speed in Mbps.
-                          type: number
+                          format: int64
+                          type: integer
                         uploadSpeed:
                           description: Upload speed in Mbps.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   description:

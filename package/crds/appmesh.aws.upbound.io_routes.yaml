@@ -178,7 +178,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -187,7 +188,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -232,11 +234,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -268,7 +272,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -304,7 +309,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -316,7 +322,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -344,7 +351,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -358,7 +366,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -383,7 +392,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -392,7 +402,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -438,11 +449,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -492,7 +505,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -546,7 +560,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -558,7 +573,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -586,7 +602,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -600,7 +617,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -625,7 +643,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -724,7 +743,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -770,11 +790,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -824,7 +846,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -878,7 +901,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -890,7 +914,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -918,7 +943,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -932,7 +958,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -943,7 +970,8 @@ spec:
                           description: Priority for the route, between 0 and 1000.
                             Routes are matched based on the specified value, where
                             0 is the highest priority.
-                          type: number
+                          format: int64
+                          type: integer
                         tcpRoute:
                           description: TCP routing information for the route.
                           items:
@@ -962,7 +990,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -1061,7 +1090,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1074,7 +1104,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               timeout:
@@ -1094,7 +1125,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1233,7 +1265,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -1242,7 +1275,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1287,11 +1321,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1323,7 +1359,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -1359,7 +1396,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -1371,7 +1409,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -1399,7 +1438,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -1413,7 +1453,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1438,7 +1479,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -1447,7 +1489,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1493,11 +1536,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1547,7 +1592,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -1601,7 +1647,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -1613,7 +1660,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -1641,7 +1689,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -1655,7 +1704,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1680,11 +1730,13 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1730,11 +1782,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1784,7 +1838,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -1838,7 +1893,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -1850,7 +1906,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -1878,7 +1935,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -1892,7 +1950,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1903,7 +1962,8 @@ spec:
                           description: Priority for the route, between 0 and 1000.
                             Routes are matched based on the specified value, where
                             0 is the highest priority.
-                          type: number
+                          format: int64
+                          type: integer
                         tcpRoute:
                           description: TCP routing information for the route.
                           items:
@@ -1922,11 +1982,13 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -1939,7 +2001,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               timeout:
@@ -1959,7 +2022,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2198,7 +2262,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -2207,7 +2272,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2252,11 +2318,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -2288,7 +2356,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -2324,7 +2393,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -2336,7 +2406,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -2364,7 +2435,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -2378,7 +2450,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2403,7 +2476,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -2412,7 +2486,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2458,11 +2533,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -2512,7 +2589,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -2566,7 +2644,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -2578,7 +2657,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -2606,7 +2686,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -2620,7 +2701,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2645,7 +2727,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -2654,7 +2737,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2700,11 +2784,13 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                     type: object
                                                   type: array
                                                 regex:
@@ -2754,7 +2840,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     prefix:
                                       description: Value sent by the client must begin
                                         with the specified characters. Must be between
@@ -2808,7 +2895,8 @@ spec:
                                       type: array
                                     maxRetries:
                                       description: Maximum number of retries.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     perRetryTimeout:
                                       description: Per-retry timeout.
                                       items:
@@ -2820,7 +2908,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     tcpRetryEvents:
@@ -2848,7 +2937,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     perRequest:
@@ -2862,7 +2952,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2873,7 +2964,8 @@ spec:
                           description: Priority for the route, between 0 and 1000.
                             Routes are matched based on the specified value, where
                             0 is the highest priority.
-                          type: number
+                          format: int64
+                          type: integer
                         tcpRoute:
                           description: TCP routing information for the route.
                           items:
@@ -2892,7 +2984,8 @@ spec:
                                           port:
                                             description: The port number to match
                                               from the request.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           virtualNode:
                                             description: Virtual node to associate
                                               with the weighted target. Must be between
@@ -2901,7 +2994,8 @@ spec:
                                           weight:
                                             description: Relative weight of the weighted
                                               target. An integer between 0 and 100.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object
@@ -2914,7 +3008,8 @@ spec:
                                     port:
                                       description: The port number to match from the
                                         request.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               timeout:
@@ -2934,7 +3029,8 @@ spec:
                                           value:
                                             description: Number of time units. Minimum
                                               value of 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                   type: object

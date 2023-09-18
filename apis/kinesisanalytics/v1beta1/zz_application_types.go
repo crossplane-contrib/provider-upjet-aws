@@ -91,7 +91,7 @@ type ApplicationObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Version of the application.
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ApplicationParameters struct {
@@ -705,20 +705,20 @@ type OutputsSchemaParameters struct {
 type ParallelismInitParameters struct {
 
 	// The Count of streams.
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ParallelismObservation struct {
 
 	// The Count of streams.
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ParallelismParameters struct {
 
 	// The Count of streams.
 	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type ProcessingConfigurationInitParameters struct {

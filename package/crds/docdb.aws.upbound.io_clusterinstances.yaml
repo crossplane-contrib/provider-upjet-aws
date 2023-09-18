@@ -190,7 +190,8 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoter to writer.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -262,7 +263,8 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoter to writer.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -506,7 +508,8 @@ spec:
                     type: string
                   port:
                     description: The database port
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: The daily time range during which automated backups
                       are created if automated backups are enabled.
@@ -519,7 +522,8 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoter to writer.
-                    type: number
+                    format: int64
+                    type: integer
                   publiclyAccessible:
                     type: boolean
                   storageEncrypted:

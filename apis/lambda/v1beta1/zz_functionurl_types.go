@@ -31,7 +31,7 @@ type CorsInitParameters struct {
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
-	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type CorsObservation struct {
@@ -52,7 +52,7 @@ type CorsObservation struct {
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
-	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type CorsParameters struct {
@@ -79,7 +79,7 @@ type CorsParameters struct {
 
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
 	// +kubebuilder:validation:Optional
-	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type FunctionURLInitParameters struct {

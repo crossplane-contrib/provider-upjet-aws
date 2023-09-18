@@ -30,7 +30,7 @@ type AppCookieStickinessPolicyObservation struct {
 	// Load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// Name of load balancer to which the policy
 	// should be attached.
@@ -47,7 +47,7 @@ type AppCookieStickinessPolicyParameters struct {
 	// should be applied. This must be an active listener on the load
 	// balancer.
 	// +kubebuilder:validation:Required
-	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort" tf:"lb_port,omitempty"`
 
 	// Name of load balancer to which the policy
 	// should be attached.

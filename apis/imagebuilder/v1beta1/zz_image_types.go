@@ -190,7 +190,7 @@ type ImageTestsConfigurationInitParameters struct {
 	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
 
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
-	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+	TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImageTestsConfigurationObservation struct {
@@ -199,7 +199,7 @@ type ImageTestsConfigurationObservation struct {
 	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
 
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
-	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+	TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImageTestsConfigurationParameters struct {
@@ -210,7 +210,7 @@ type ImageTestsConfigurationParameters struct {
 
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
 	// +kubebuilder:validation:Optional
-	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+	TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type OutputResourcesInitParameters struct {

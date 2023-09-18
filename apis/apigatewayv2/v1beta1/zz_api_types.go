@@ -223,7 +223,7 @@ type CorsConfigurationInitParameters struct {
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Number of seconds that the browser should cache preflight request results.
-	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type CorsConfigurationObservation struct {
@@ -244,7 +244,7 @@ type CorsConfigurationObservation struct {
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Number of seconds that the browser should cache preflight request results.
-	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type CorsConfigurationParameters struct {
@@ -271,7 +271,7 @@ type CorsConfigurationParameters struct {
 
 	// Number of seconds that the browser should cache preflight request results.
 	// +kubebuilder:validation:Optional
-	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+	MaxAge *int64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 // APISpec defines the desired state of API

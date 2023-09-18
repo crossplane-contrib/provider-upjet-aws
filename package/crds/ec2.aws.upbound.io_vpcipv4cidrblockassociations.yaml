@@ -83,7 +83,8 @@ spec:
                   ipv4NetmaskLength:
                     description: The netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -195,7 +196,8 @@ spec:
                   ipv4NetmaskLength:
                     description: The netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -382,7 +384,8 @@ spec:
                   ipv4NetmaskLength:
                     description: The netmask length of the IPv4 CIDR you want to allocate
                       to this VPC. Requires specifying a ipv4_ipam_pool_id.
-                    type: number
+                    format: int64
+                    type: integer
                   vpcId:
                     description: The ID of the VPC to make the association with.
                     type: string

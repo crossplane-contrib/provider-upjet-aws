@@ -934,7 +934,7 @@ func (in *TargetIPInitParameters) DeepCopyInto(out *TargetIPInitParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -959,7 +959,7 @@ func (in *TargetIPObservation) DeepCopyInto(out *TargetIPObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -984,7 +984,7 @@ func (in *TargetIPParameters) DeepCopyInto(out *TargetIPParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

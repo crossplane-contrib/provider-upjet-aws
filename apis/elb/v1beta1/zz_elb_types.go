@@ -25,7 +25,7 @@ type AccessLogsInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
 
 type AccessLogsObservation struct {
@@ -40,7 +40,7 @@ type AccessLogsObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
 
 type AccessLogsParameters struct {
@@ -59,7 +59,7 @@ type AccessLogsParameters struct {
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 }
 
 type ELBInitParameters struct {
@@ -74,7 +74,7 @@ type ELBInitParameters struct {
 	ConnectionDraining *bool `json:"connectionDraining,omitempty" tf:"connection_draining,omitempty"`
 
 	// The time in seconds to allow for connections to drain. Default: 300
-	ConnectionDrainingTimeout *float64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
+	ConnectionDrainingTimeout *int64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
 
 	// Enable cross-zone load balancing. Default: true
 	CrossZoneLoadBalancing *bool `json:"crossZoneLoadBalancing,omitempty" tf:"cross_zone_load_balancing,omitempty"`
@@ -86,7 +86,7 @@ type ELBInitParameters struct {
 	HealthCheck []HealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
 	// The time in seconds that the connection is allowed to be idle. Default: 60
-	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+	IdleTimeout *int64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// If true, ELB will be an internal ELB.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
@@ -122,7 +122,7 @@ type ELBObservation struct {
 	ConnectionDraining *bool `json:"connectionDraining,omitempty" tf:"connection_draining,omitempty"`
 
 	// The time in seconds to allow for connections to drain. Default: 300
-	ConnectionDrainingTimeout *float64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
+	ConnectionDrainingTimeout *int64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
 
 	// Enable cross-zone load balancing. Default: true
 	CrossZoneLoadBalancing *bool `json:"crossZoneLoadBalancing,omitempty" tf:"cross_zone_load_balancing,omitempty"`
@@ -140,7 +140,7 @@ type ELBObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The time in seconds that the connection is allowed to be idle. Default: 60
-	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+	IdleTimeout *int64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// A list of instance ids to place in the ELB pool.
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
@@ -194,7 +194,7 @@ type ELBParameters struct {
 
 	// The time in seconds to allow for connections to drain. Default: 300
 	// +kubebuilder:validation:Optional
-	ConnectionDrainingTimeout *float64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
+	ConnectionDrainingTimeout *int64 `json:"connectionDrainingTimeout,omitempty" tf:"connection_draining_timeout,omitempty"`
 
 	// Enable cross-zone load balancing. Default: true
 	// +kubebuilder:validation:Optional
@@ -210,7 +210,7 @@ type ELBParameters struct {
 
 	// The time in seconds that the connection is allowed to be idle. Default: 60
 	// +kubebuilder:validation:Optional
-	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+	IdleTimeout *int64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// A list of instance ids to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
@@ -270,50 +270,50 @@ type ELBParameters struct {
 type HealthCheckInitParameters struct {
 
 	// The number of checks before the instance is declared healthy.
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The target of the check. Valid pattern is "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL
 	// values are:
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The length of time before the check times out.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The number of checks before the instance is declared unhealthy.
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckObservation struct {
 
 	// The number of checks before the instance is declared healthy.
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The target of the check. Valid pattern is "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL
 	// values are:
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The length of time before the check times out.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The number of checks before the instance is declared unhealthy.
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckParameters struct {
 
 	// The number of checks before the instance is declared healthy.
 	// +kubebuilder:validation:Optional
-	HealthyThreshold *float64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
 
 	// The publishing interval in minutes. Valid values: 5 and 60. Default: 60
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval" tf:"interval,omitempty"`
+	Interval *int64 `json:"interval" tf:"interval,omitempty"`
 
 	// The target of the check. Valid pattern is "${PROTOCOL}:${PORT}${PATH}", where PROTOCOL
 	// values are:
@@ -322,24 +322,24 @@ type HealthCheckParameters struct {
 
 	// The length of time before the check times out.
 	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout" tf:"timeout,omitempty"`
 
 	// The number of checks before the instance is declared unhealthy.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ListenerInitParameters struct {
 
 	// The port on the instance to route to
-	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+	InstancePort *int64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
 	// The protocol to use to the instance. Valid
 	// values are HTTP, HTTPS, TCP, or SSL
 	InstanceProtocol *string `json:"instanceProtocol,omitempty" tf:"instance_protocol,omitempty"`
 
 	// The port to listen on for the load balancer
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The protocol to listen on. Valid values are HTTP,
 	// HTTPS, TCP, or SSL
@@ -353,14 +353,14 @@ type ListenerInitParameters struct {
 type ListenerObservation struct {
 
 	// The port on the instance to route to
-	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
+	InstancePort *int64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
 	// The protocol to use to the instance. Valid
 	// values are HTTP, HTTPS, TCP, or SSL
 	InstanceProtocol *string `json:"instanceProtocol,omitempty" tf:"instance_protocol,omitempty"`
 
 	// The port to listen on for the load balancer
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The protocol to listen on. Valid values are HTTP,
 	// HTTPS, TCP, or SSL
@@ -375,7 +375,7 @@ type ListenerParameters struct {
 
 	// The port on the instance to route to
 	// +kubebuilder:validation:Optional
-	InstancePort *float64 `json:"instancePort" tf:"instance_port,omitempty"`
+	InstancePort *int64 `json:"instancePort" tf:"instance_port,omitempty"`
 
 	// The protocol to use to the instance. Valid
 	// values are HTTP, HTTPS, TCP, or SSL
@@ -384,7 +384,7 @@ type ListenerParameters struct {
 
 	// The port to listen on for the load balancer
 	// +kubebuilder:validation:Optional
-	LBPort *float64 `json:"lbPort" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort" tf:"lb_port,omitempty"`
 
 	// The protocol to listen on. Valid values are HTTP,
 	// HTTPS, TCP, or SSL

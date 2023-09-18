@@ -47,7 +47,7 @@ type ResizeClusterInitParameters struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The new number of nodes for the cluster.
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+	NumberOfNodes *int64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 }
 
 type ResizeClusterObservation struct {
@@ -65,7 +65,7 @@ type ResizeClusterObservation struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// The new number of nodes for the cluster.
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+	NumberOfNodes *int64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 }
 
 type ResizeClusterParameters struct {
@@ -88,7 +88,7 @@ type ResizeClusterParameters struct {
 
 	// The new number of nodes for the cluster.
 	// +kubebuilder:validation:Optional
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+	NumberOfNodes *int64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
 }
 
 type ResumeClusterInitParameters struct {

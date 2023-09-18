@@ -97,7 +97,8 @@ spec:
                       a result based on the proximity of a keyword to text that matches
                       the regex pattern. The distance can be 1 - 300 characters. The
                       default value is 50.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: A custom name for the custom data identifier. The
                       name can contain as many as 128 characters. Conflicts with name_prefix.
@@ -161,7 +162,8 @@ spec:
                       a result based on the proximity of a keyword to text that matches
                       the regex pattern. The distance can be 1 - 300 characters. The
                       default value is 50.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: A custom name for the custom data identifier. The
                       name can contain as many as 128 characters. Conflicts with name_prefix.
@@ -385,7 +387,8 @@ spec:
                       a result based on the proximity of a keyword to text that matches
                       the regex pattern. The distance can be 1 - 300 characters. The
                       default value is 50.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: A custom name for the custom data identifier. The
                       name can contain as many as 128 characters. Conflicts with name_prefix.

@@ -23,7 +23,7 @@ type ReplicaKeyInitParameters struct {
 
 	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
 	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
-	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+	DeletionWindowInDays *int64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
 	// A description of the KMS key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -51,7 +51,7 @@ type ReplicaKeyObservation struct {
 
 	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
 	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
-	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+	DeletionWindowInDays *int64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
 	// A description of the KMS key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -98,7 +98,7 @@ type ReplicaKeyParameters struct {
 	// The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key.
 	// If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30.
 	// +kubebuilder:validation:Optional
-	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+	DeletionWindowInDays *int64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
 	// A description of the KMS key.
 	// +kubebuilder:validation:Optional

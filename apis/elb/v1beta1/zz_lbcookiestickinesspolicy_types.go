@@ -17,12 +17,12 @@ type LBCookieStickinessPolicyInitParameters struct {
 
 	// The time period after which
 	// the session cookie should be considered stale, expressed in seconds.
-	CookieExpirationPeriod *float64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
+	CookieExpirationPeriod *int64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
 
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The name of the stickiness policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -32,7 +32,7 @@ type LBCookieStickinessPolicyObservation struct {
 
 	// The time period after which
 	// the session cookie should be considered stale, expressed in seconds.
-	CookieExpirationPeriod *float64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
+	CookieExpirationPeriod *int64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
 
 	// The ID of the policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -40,7 +40,7 @@ type LBCookieStickinessPolicyObservation struct {
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.
@@ -55,13 +55,13 @@ type LBCookieStickinessPolicyParameters struct {
 	// The time period after which
 	// the session cookie should be considered stale, expressed in seconds.
 	// +kubebuilder:validation:Optional
-	CookieExpirationPeriod *float64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
+	CookieExpirationPeriod *int64 `json:"cookieExpirationPeriod,omitempty" tf:"cookie_expiration_period,omitempty"`
 
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
 	// +kubebuilder:validation:Optional
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.

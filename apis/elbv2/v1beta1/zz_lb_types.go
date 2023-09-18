@@ -94,7 +94,7 @@ type LBInitParameters struct {
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
-	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+	IdleTimeout *int64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// If true, the LB will be internal. Defaults to false.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
@@ -167,7 +167,7 @@ type LBObservation struct {
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// The time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
-	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+	IdleTimeout *int64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// If true, the LB will be internal. Defaults to false.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
@@ -257,7 +257,7 @@ type LBParameters struct {
 
 	// The time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
 	// +kubebuilder:validation:Optional
-	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
+	IdleTimeout *int64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// If true, the LB will be internal. Defaults to false.
 	// +kubebuilder:validation:Optional

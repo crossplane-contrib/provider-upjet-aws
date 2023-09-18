@@ -69,10 +69,10 @@ type APIStagesParameters struct {
 type QuotaSettingsInitParameters struct {
 
 	// Maximum number of requests that can be made in a given time period.
-	Limit *float64 `json:"limit,omitempty" tf:"limit,omitempty"`
+	Limit *int64 `json:"limit,omitempty" tf:"limit,omitempty"`
 
 	// Number of requests subtracted from the given limit in the initial time period.
-	Offset *float64 `json:"offset,omitempty" tf:"offset,omitempty"`
+	Offset *int64 `json:"offset,omitempty" tf:"offset,omitempty"`
 
 	// Time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
@@ -81,10 +81,10 @@ type QuotaSettingsInitParameters struct {
 type QuotaSettingsObservation struct {
 
 	// Maximum number of requests that can be made in a given time period.
-	Limit *float64 `json:"limit,omitempty" tf:"limit,omitempty"`
+	Limit *int64 `json:"limit,omitempty" tf:"limit,omitempty"`
 
 	// Number of requests subtracted from the given limit in the initial time period.
-	Offset *float64 `json:"offset,omitempty" tf:"offset,omitempty"`
+	Offset *int64 `json:"offset,omitempty" tf:"offset,omitempty"`
 
 	// Time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
@@ -94,11 +94,11 @@ type QuotaSettingsParameters struct {
 
 	// Maximum number of requests that can be made in a given time period.
 	// +kubebuilder:validation:Optional
-	Limit *float64 `json:"limit" tf:"limit,omitempty"`
+	Limit *int64 `json:"limit" tf:"limit,omitempty"`
 
 	// Number of requests subtracted from the given limit in the initial time period.
 	// +kubebuilder:validation:Optional
-	Offset *float64 `json:"offset,omitempty" tf:"offset,omitempty"`
+	Offset *int64 `json:"offset,omitempty" tf:"offset,omitempty"`
 
 	// Time period in which the limit applies. Valid values are "DAY", "WEEK" or "MONTH".
 	// +kubebuilder:validation:Optional
@@ -108,7 +108,7 @@ type QuotaSettingsParameters struct {
 type ThrottleInitParameters struct {
 
 	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
-	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// Method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -120,7 +120,7 @@ type ThrottleInitParameters struct {
 type ThrottleObservation struct {
 
 	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
-	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// Method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -133,7 +133,7 @@ type ThrottleParameters struct {
 
 	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
 	// +kubebuilder:validation:Optional
-	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// Method to apply the throttle settings for. Specfiy the path and method, for example /test/GET.
 	// +kubebuilder:validation:Optional
@@ -240,7 +240,7 @@ type UsagePlanParameters struct {
 type UsagePlanThrottleSettingsInitParameters struct {
 
 	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
-	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// The API request steady-state rate limit.
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
@@ -249,7 +249,7 @@ type UsagePlanThrottleSettingsInitParameters struct {
 type UsagePlanThrottleSettingsObservation struct {
 
 	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
-	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// The API request steady-state rate limit.
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`
@@ -259,7 +259,7 @@ type UsagePlanThrottleSettingsParameters struct {
 
 	// The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.
 	// +kubebuilder:validation:Optional
-	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// The API request steady-state rate limit.
 	// +kubebuilder:validation:Optional

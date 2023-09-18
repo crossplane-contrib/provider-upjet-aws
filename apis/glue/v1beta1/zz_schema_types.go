@@ -52,10 +52,10 @@ type SchemaObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The latest version of the schema associated with the returned schema definition.
-	LatestSchemaVersion *float64 `json:"latestSchemaVersion,omitempty" tf:"latest_schema_version,omitempty"`
+	LatestSchemaVersion *int64 `json:"latestSchemaVersion,omitempty" tf:"latest_schema_version,omitempty"`
 
 	// The next version of the schema associated with the returned schema definition.
-	NextSchemaVersion *float64 `json:"nextSchemaVersion,omitempty" tf:"next_schema_version,omitempty"`
+	NextSchemaVersion *int64 `json:"nextSchemaVersion,omitempty" tf:"next_schema_version,omitempty"`
 
 	// The ARN of the Glue Registry to create the schema in.
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
@@ -64,7 +64,7 @@ type SchemaObservation struct {
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
 	// The version number of the checkpoint (the last time the compatibility mode was changed).
-	SchemaCheckpoint *float64 `json:"schemaCheckpoint,omitempty" tf:"schema_checkpoint,omitempty"`
+	SchemaCheckpoint *int64 `json:"schemaCheckpoint,omitempty" tf:"schema_checkpoint,omitempty"`
 
 	// The schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`

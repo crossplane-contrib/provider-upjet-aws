@@ -214,7 +214,8 @@ spec:
                                   the status of a blue/green deployment changed to
                                   Stopped if rerouting is not started manually. Applies
                                   only to the STOP_DEPLOYMENT option for action_on_timeout.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         greenFleetProvisioningOption:
@@ -243,7 +244,8 @@ spec:
                                 description: The number of minutes to wait after a
                                   successful blue/green deployment before terminating
                                   instances from the original environment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -1023,7 +1025,8 @@ spec:
                                   the status of a blue/green deployment changed to
                                   Stopped if rerouting is not started manually. Applies
                                   only to the STOP_DEPLOYMENT option for action_on_timeout.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         greenFleetProvisioningOption:
@@ -1052,7 +1055,8 @@ spec:
                                 description: The number of minutes to wait after a
                                   successful blue/green deployment before terminating
                                   instances from the original environment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -1483,7 +1487,8 @@ spec:
                                   the status of a blue/green deployment changed to
                                   Stopped if rerouting is not started manually. Applies
                                   only to the STOP_DEPLOYMENT option for action_on_timeout.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         greenFleetProvisioningOption:
@@ -1512,7 +1517,8 @@ spec:
                                 description: The number of minutes to wait after a
                                   successful blue/green deployment before terminating
                                   instances from the original environment.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object

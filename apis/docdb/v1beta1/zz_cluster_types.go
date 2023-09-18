@@ -25,7 +25,7 @@ type ClusterInitParameters struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
-	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+	BackupRetentionPeriod *int64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
@@ -58,7 +58,7 @@ type ClusterInitParameters struct {
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
 	// The port on which the DB accepts connections
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC
 	// Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
@@ -95,7 +95,7 @@ type ClusterObservation struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
-	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+	BackupRetentionPeriod *int64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// – List of DocumentDB Instances that are a part of this cluster
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
@@ -146,7 +146,7 @@ type ClusterObservation struct {
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
 	// The port on which the DB accepts connections
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC
 	// Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00
@@ -193,7 +193,7 @@ type ClusterParameters struct {
 
 	// The days to retain backups for. Default 1
 	// +kubebuilder:validation:Optional
-	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+	BackupRetentionPeriod *int64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
 	// +kubebuilder:validation:Optional
@@ -254,7 +254,7 @@ type ClusterParameters struct {
 
 	// The port on which the DB accepts connections
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.Time in UTC
 	// Default: A 30-minute window selected at random from an 8-hour block of time per regionE.g., 04:00-09:00

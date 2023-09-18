@@ -356,10 +356,12 @@ spec:
                   activeExperimentCount:
                     description: The number of ongoing experiments currently in the
                       project.
-                    type: number
+                    format: int64
+                    type: integer
                   activeLaunchCount:
                     description: The number of ongoing launches currently in the project.
-                    type: number
+                    format: int64
+                    type: integer
                   arn:
                     description: The ARN of the project.
                     type: string
@@ -409,10 +411,12 @@ spec:
                     description: The number of experiments currently in the project.
                       This includes all experiments that have been created and not
                       deleted, whether they are ongoing or not.
-                    type: number
+                    format: int64
+                    type: integer
                   featureCount:
                     description: The number of features currently in the project.
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     description: The ID has the same value as the arn of the project.
                     type: string
@@ -424,7 +428,8 @@ spec:
                     description: The number of launches currently in the project.
                       This includes all launches that have been created and not deleted,
                       whether they are ongoing or not.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: A name for the project.
                     type: string

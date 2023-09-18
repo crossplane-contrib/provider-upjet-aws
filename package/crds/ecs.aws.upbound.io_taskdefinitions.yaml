@@ -90,7 +90,8 @@ spec:
                           description: The total amount, in GiB, of ephemeral storage
                             to set for the task. The minimum supported value is 21
                             GiB and the maximum supported value is 200 GiB.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   executionRoleArn:
@@ -379,7 +380,8 @@ spec:
                                   you do not specify a transit encryption port, it
                                   will use the port selection strategy that the Amazon
                                   EFS mount helper uses.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         fsxWindowsFileServerVolumeConfiguration:
@@ -472,7 +474,8 @@ spec:
                           description: The total amount, in GiB, of ephemeral storage
                             to set for the task. The minimum supported value is 21
                             GiB and the maximum supported value is 200 GiB.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   family:
@@ -680,7 +683,8 @@ spec:
                                   you do not specify a transit encryption port, it
                                   will use the port selection strategy that the Amazon
                                   EFS mount helper uses.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         fsxWindowsFileServerVolumeConfiguration:
@@ -944,7 +948,8 @@ spec:
                           description: The total amount, in GiB, of ephemeral storage
                             to set for the task. The minimum supported value is 21
                             GiB and the maximum supported value is 200 GiB.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   executionRoleArn:
@@ -1036,7 +1041,8 @@ spec:
                     type: array
                   revision:
                     description: Revision of the task in a particular family.
-                    type: number
+                    format: int64
+                    type: integer
                   runtimePlatform:
                     description: Configuration block for runtime_platform that containers
                       in your task may use.
@@ -1167,7 +1173,8 @@ spec:
                                   you do not specify a transit encryption port, it
                                   will use the port selection strategy that the Amazon
                                   EFS mount helper uses.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         fsxWindowsFileServerVolumeConfiguration:

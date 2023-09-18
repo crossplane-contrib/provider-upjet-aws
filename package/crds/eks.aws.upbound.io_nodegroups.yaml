@@ -156,7 +156,8 @@ spec:
                   diskSize:
                     description: Disk size in GiB for worker nodes. Defaults to 50
                       for Windows, 20 all other node groups.
-                    type: number
+                    format: int64
+                    type: integer
                   forceUpdateVersion:
                     description: Force version update if existing pods are unable
                       to be drained due to a pod disruption budget issue.
@@ -399,13 +400,16 @@ spec:
                       properties:
                         desiredSize:
                           description: Desired number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                         maxSize:
                           description: Maximum number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                         minSize:
                           description: Minimum number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   subnetIdRefs:
@@ -525,11 +529,13 @@ spec:
                         maxUnavailable:
                           description: Desired max number of unavailable worker nodes
                             during node group update.
-                          type: number
+                          format: int64
+                          type: integer
                         maxUnavailablePercentage:
                           description: Desired max percentage of unavailable worker
                             nodes during node group update.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   version:
@@ -636,7 +642,8 @@ spec:
                   diskSize:
                     description: Disk size in GiB for worker nodes. Defaults to 50
                       for Windows, 20 all other node groups.
-                    type: number
+                    format: int64
+                    type: integer
                   forceUpdateVersion:
                     description: Force version update if existing pods are unable
                       to be drained due to a pod disruption budget issue.
@@ -707,13 +714,16 @@ spec:
                       properties:
                         desiredSize:
                           description: Desired number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                         maxSize:
                           description: Maximum number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                         minSize:
                           description: Minimum number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   tags:
@@ -747,11 +757,13 @@ spec:
                         maxUnavailable:
                           description: Desired max number of unavailable worker nodes
                             during node group update.
-                          type: number
+                          format: int64
+                          type: integer
                         maxUnavailablePercentage:
                           description: Desired max percentage of unavailable worker
                             nodes during node group update.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                 type: object
@@ -945,7 +957,8 @@ spec:
                   diskSize:
                     description: Disk size in GiB for worker nodes. Defaults to 50
                       for Windows, 20 all other node groups.
-                    type: number
+                    format: int64
+                    type: integer
                   forceUpdateVersion:
                     description: Force version update if existing pods are unable
                       to be drained due to a pod disruption budget issue.
@@ -1054,13 +1067,16 @@ spec:
                       properties:
                         desiredSize:
                           description: Desired number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                         maxSize:
                           description: Maximum number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                         minSize:
                           description: Minimum number of worker nodes.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   status:
@@ -1113,11 +1129,13 @@ spec:
                         maxUnavailable:
                           description: Desired max number of unavailable worker nodes
                             during node group update.
-                          type: number
+                          format: int64
+                          type: integer
                         maxUnavailablePercentage:
                           description: Desired max percentage of unavailable worker
                             nodes during node group update.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   version:

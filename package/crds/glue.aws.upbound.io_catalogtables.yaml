@@ -223,7 +223,8 @@ spec:
                     type: string
                   retention:
                     description: Retention time for this table.
-                    type: number
+                    format: int64
+                    type: integer
                   storageDescriptor:
                     description: Configuration block for information about the physical
                       storage of this table. For more information, refer to the Glue
@@ -274,7 +275,8 @@ spec:
                         numberOfBuckets:
                           description: Must be specified if the table contains any
                             dimension columns.
-                          type: number
+                          format: int64
+                          type: integer
                         outputFormat:
                           description: 'Output format: SequenceFileOutputFormat (binary),
                             or IgnoreKeyTextOutputFormat, or a custom format.'
@@ -319,7 +321,8 @@ spec:
                                 type: string
                               schemaVersionNumber:
                                 description: Version number of the schema.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         serDeInfo:
@@ -379,7 +382,8 @@ spec:
                               sortOrder:
                                 description: Whether the column is sorted in ascending
                                   (1) or descending order (0).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         storedAsSubDirectories:
@@ -505,7 +509,8 @@ spec:
                     type: array
                   retention:
                     description: Retention time for this table.
-                    type: number
+                    format: int64
+                    type: integer
                   storageDescriptor:
                     description: Configuration block for information about the physical
                       storage of this table. For more information, refer to the Glue
@@ -556,7 +561,8 @@ spec:
                         numberOfBuckets:
                           description: Must be specified if the table contains any
                             dimension columns.
-                          type: number
+                          format: int64
+                          type: integer
                         outputFormat:
                           description: 'Output format: SequenceFileOutputFormat (binary),
                             or IgnoreKeyTextOutputFormat, or a custom format.'
@@ -601,7 +607,8 @@ spec:
                                 type: string
                               schemaVersionNumber:
                                 description: Version number of the schema.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         serDeInfo:
@@ -661,7 +668,8 @@ spec:
                               sortOrder:
                                 description: Whether the column is sorted in ascending
                                   (1) or descending order (0).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         storedAsSubDirectories:
@@ -944,7 +952,8 @@ spec:
                     type: array
                   retention:
                     description: Retention time for this table.
-                    type: number
+                    format: int64
+                    type: integer
                   storageDescriptor:
                     description: Configuration block for information about the physical
                       storage of this table. For more information, refer to the Glue
@@ -995,7 +1004,8 @@ spec:
                         numberOfBuckets:
                           description: Must be specified if the table contains any
                             dimension columns.
-                          type: number
+                          format: int64
+                          type: integer
                         outputFormat:
                           description: 'Output format: SequenceFileOutputFormat (binary),
                             or IgnoreKeyTextOutputFormat, or a custom format.'
@@ -1040,7 +1050,8 @@ spec:
                                 type: string
                               schemaVersionNumber:
                                 description: Version number of the schema.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         serDeInfo:
@@ -1100,7 +1111,8 @@ spec:
                               sortOrder:
                                 description: Whether the column is sorted in ascending
                                   (1) or descending order (0).
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         storedAsSubDirectories:

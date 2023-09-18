@@ -88,7 +88,7 @@ type SettingsInitParameters struct {
 	CacheDataEncrypted *bool `json:"cacheDataEncrypted,omitempty" tf:"cache_data_encrypted,omitempty"`
 
 	// Time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
-	CacheTTLInSeconds *float64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
+	CacheTTLInSeconds *int64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
 
 	// Whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
 	CachingEnabled *bool `json:"cachingEnabled,omitempty" tf:"caching_enabled,omitempty"`
@@ -106,7 +106,7 @@ type SettingsInitParameters struct {
 	RequireAuthorizationForCacheControl *bool `json:"requireAuthorizationForCacheControl,omitempty" tf:"require_authorization_for_cache_control,omitempty"`
 
 	// Throttling burst limit. Default: -1 (throttling disabled).
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit. Default: -1 (throttling disabled).
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
@@ -121,7 +121,7 @@ type SettingsObservation struct {
 	CacheDataEncrypted *bool `json:"cacheDataEncrypted,omitempty" tf:"cache_data_encrypted,omitempty"`
 
 	// Time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
-	CacheTTLInSeconds *float64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
+	CacheTTLInSeconds *int64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
 
 	// Whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
 	CachingEnabled *bool `json:"cachingEnabled,omitempty" tf:"caching_enabled,omitempty"`
@@ -139,7 +139,7 @@ type SettingsObservation struct {
 	RequireAuthorizationForCacheControl *bool `json:"requireAuthorizationForCacheControl,omitempty" tf:"require_authorization_for_cache_control,omitempty"`
 
 	// Throttling burst limit. Default: -1 (throttling disabled).
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit. Default: -1 (throttling disabled).
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
@@ -156,7 +156,7 @@ type SettingsParameters struct {
 
 	// Time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
 	// +kubebuilder:validation:Optional
-	CacheTTLInSeconds *float64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
+	CacheTTLInSeconds *int64 `json:"cacheTtlInSeconds,omitempty" tf:"cache_ttl_in_seconds,omitempty"`
 
 	// Whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
 	// +kubebuilder:validation:Optional
@@ -180,7 +180,7 @@ type SettingsParameters struct {
 
 	// Throttling burst limit. Default: -1 (throttling disabled).
 	// +kubebuilder:validation:Optional
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit. Default: -1 (throttling disabled).
 	// +kubebuilder:validation:Optional

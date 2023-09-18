@@ -235,7 +235,8 @@ spec:
                     description: 'The retention period of the event data store, in
                       days. You can set a retention period of up to 2555 days, the
                       equivalent of seven years. Default: 2555.'
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -348,7 +349,8 @@ spec:
                     description: 'The retention period of the event data store, in
                       days. You can set a retention period of up to 2555 days, the
                       equivalent of seven years. Default: 2555.'
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -629,7 +631,8 @@ spec:
                     description: 'The retention period of the event data store, in
                       days. You can set a retention period of up to 2555 days, the
                       equivalent of seven years. Default: 2555.'
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string

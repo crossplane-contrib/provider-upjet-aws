@@ -45,7 +45,7 @@ type ClusterInitParameters struct {
 
 	// node cluster, without any read
 	// replicas
-	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
+	ReplicationFactor *int64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
 	// Encrypt at rest options
 	ServerSideEncryption []ServerSideEncryptionInitParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
@@ -111,11 +111,11 @@ type ClusterObservation struct {
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// The port used by the configuration endpoint
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// node cluster, without any read
 	// replicas
-	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
+	ReplicationFactor *int64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
 	// –  One or more VPC security groups associated
 	// with the cluster
@@ -196,7 +196,7 @@ type ClusterParameters struct {
 	// node cluster, without any read
 	// replicas
 	// +kubebuilder:validation:Optional
-	ReplicationFactor *float64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
+	ReplicationFactor *int64 `json:"replicationFactor,omitempty" tf:"replication_factor,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
@@ -239,7 +239,7 @@ type NodesObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The port used by the configuration endpoint
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type NodesParameters struct {

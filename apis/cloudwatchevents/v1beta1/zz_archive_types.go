@@ -22,7 +22,7 @@ type ArchiveInitParameters struct {
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
 	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 type ArchiveObservation struct {
@@ -42,7 +42,7 @@ type ArchiveObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 type ArchiveParameters struct {
@@ -76,7 +76,7 @@ type ArchiveParameters struct {
 
 	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
 	// +kubebuilder:validation:Optional
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 // ArchiveSpec defines the desired state of Archive

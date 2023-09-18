@@ -460,7 +460,8 @@ spec:
                                   stream. Minimum value of 0. Maximum value of 87600.
                                   A value of 0, indicates that the stream does not
                                   persist data.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         s3Config:
@@ -731,7 +732,8 @@ spec:
                                   stream. Minimum value of 0. Maximum value of 87600.
                                   A value of 0, indicates that the stream does not
                                   persist data.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         s3Config:
@@ -1019,7 +1021,8 @@ spec:
                                   stream. Minimum value of 0. Maximum value of 87600.
                                   A value of 0, indicates that the stream does not
                                   persist data.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         s3Config:

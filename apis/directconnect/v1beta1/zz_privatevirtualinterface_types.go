@@ -22,7 +22,7 @@ type PrivateVirtualInterfaceInitParameters struct {
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -35,7 +35,7 @@ type PrivateVirtualInterfaceInitParameters struct {
 
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual private interface can be either 1500 or 9001 (jumbo frames). Default is 1500.
-	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+	Mtu *int64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// The name for the virtual interface.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -47,7 +47,7 @@ type PrivateVirtualInterfaceInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VLAN ID.
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type PrivateVirtualInterfaceObservation struct {
@@ -67,7 +67,7 @@ type PrivateVirtualInterfaceObservation struct {
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -89,7 +89,7 @@ type PrivateVirtualInterfaceObservation struct {
 
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual private interface can be either 1500 or 9001 (jumbo frames). Default is 1500.
-	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+	Mtu *int64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// The name for the virtual interface.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -107,7 +107,7 @@ type PrivateVirtualInterfaceObservation struct {
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
 	// The VLAN ID.
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type PrivateVirtualInterfaceParameters struct {
@@ -122,7 +122,7 @@ type PrivateVirtualInterfaceParameters struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	// +kubebuilder:validation:Optional
-	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -152,7 +152,7 @@ type PrivateVirtualInterfaceParameters struct {
 	// The maximum transmission unit (MTU) is the size, in bytes, of the largest permissible packet that can be passed over the connection.
 	// The MTU of a virtual private interface can be either 1500 or 9001 (jumbo frames). Default is 1500.
 	// +kubebuilder:validation:Optional
-	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+	Mtu *int64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
 
 	// The name for the virtual interface.
 	// +kubebuilder:validation:Optional
@@ -186,7 +186,7 @@ type PrivateVirtualInterfaceParameters struct {
 
 	// The VLAN ID.
 	// +kubebuilder:validation:Optional
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 // PrivateVirtualInterfaceSpec defines the desired state of PrivateVirtualInterface

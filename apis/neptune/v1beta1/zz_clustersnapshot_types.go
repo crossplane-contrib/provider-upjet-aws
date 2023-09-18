@@ -19,7 +19,7 @@ type ClusterSnapshotInitParameters struct {
 type ClusterSnapshotObservation struct {
 
 	// Specifies the allocated storage size in gigabytes (GB).
-	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
+	AllocatedStorage *int64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
 	// List of EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
@@ -45,7 +45,7 @@ type ClusterSnapshotObservation struct {
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
 	// Port that the DB cluster was listening on at the time of the snapshot.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 

@@ -19,7 +19,7 @@ type LifecycleHookInitParameters struct {
 	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
 
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the DefaultResult parameter
-	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+	HeartbeatTimeout *int64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
 	LifecycleTransition *string `json:"lifecycleTransition,omitempty" tf:"lifecycle_transition,omitempty"`
@@ -40,7 +40,7 @@ type LifecycleHookObservation struct {
 	DefaultResult *string `json:"defaultResult,omitempty" tf:"default_result,omitempty"`
 
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the DefaultResult parameter
-	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+	HeartbeatTimeout *int64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -78,7 +78,7 @@ type LifecycleHookParameters struct {
 
 	// Defines the amount of time, in seconds, that can elapse before the lifecycle hook times out. When the lifecycle hook times out, Auto Scaling performs the action defined in the DefaultResult parameter
 	// +kubebuilder:validation:Optional
-	HeartbeatTimeout *float64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
+	HeartbeatTimeout *int64 `json:"heartbeatTimeout,omitempty" tf:"heartbeat_timeout,omitempty"`
 
 	// Instance state to which you want to attach the lifecycle hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
 	// +kubebuilder:validation:Optional

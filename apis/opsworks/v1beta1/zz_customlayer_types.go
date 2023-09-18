@@ -80,7 +80,7 @@ type CustomLayerInitParameters struct {
 	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
 
 	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
-	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+	InstanceShutdownTimeout *int64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
 	// Load-based auto scaling configuration. See Load Based AutoScaling
 	LoadBasedAutoScaling []LoadBasedAutoScalingInitParameters `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
@@ -153,7 +153,7 @@ type CustomLayerObservation struct {
 	InstallUpdatesOnBoot *bool `json:"installUpdatesOnBoot,omitempty" tf:"install_updates_on_boot,omitempty"`
 
 	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
-	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+	InstanceShutdownTimeout *int64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
 	// Load-based auto scaling configuration. See Load Based AutoScaling
 	LoadBasedAutoScaling []LoadBasedAutoScalingObservation `json:"loadBasedAutoScaling,omitempty" tf:"load_based_auto_scaling,omitempty"`
@@ -254,7 +254,7 @@ type CustomLayerParameters struct {
 
 	// The time, in seconds, that OpsWorks will wait for Chef to complete after triggering the Shutdown event.
 	// +kubebuilder:validation:Optional
-	InstanceShutdownTimeout *float64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
+	InstanceShutdownTimeout *int64 `json:"instanceShutdownTimeout,omitempty" tf:"instance_shutdown_timeout,omitempty"`
 
 	// Load-based auto scaling configuration. See Load Based AutoScaling
 	// +kubebuilder:validation:Optional
@@ -304,10 +304,10 @@ type DownscalingInitParameters struct {
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// The number of instances to add or remove when the load exceeds a threshold.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The load threshold. A value of -1 disables the threshold.
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
@@ -316,7 +316,7 @@ type DownscalingInitParameters struct {
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
 	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type DownscalingObservation struct {
@@ -328,10 +328,10 @@ type DownscalingObservation struct {
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// The number of instances to add or remove when the load exceeds a threshold.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The load threshold. A value of -1 disables the threshold.
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
@@ -340,7 +340,7 @@ type DownscalingObservation struct {
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
 	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type DownscalingParameters struct {
@@ -355,11 +355,11 @@ type DownscalingParameters struct {
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
 	// +kubebuilder:validation:Optional
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// The number of instances to add or remove when the load exceeds a threshold.
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The load threshold. A value of -1 disables the threshold.
 	// +kubebuilder:validation:Optional
@@ -371,7 +371,7 @@ type DownscalingParameters struct {
 
 	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
 	// +kubebuilder:validation:Optional
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type EBSVolumeInitParameters struct {
@@ -380,19 +380,19 @@ type EBSVolumeInitParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// For PIOPS volumes, the IOPS per disk.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
 	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
-	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *int64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
 
 	// The size of the volume in gigabytes.
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -404,19 +404,19 @@ type EBSVolumeObservation struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// For PIOPS volumes, the IOPS per disk.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
 	MountPoint *string `json:"mountPoint,omitempty" tf:"mount_point,omitempty"`
 
 	// The number of disks to use for the EBS volume.
-	NumberOfDisks *float64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *int64 `json:"numberOfDisks,omitempty" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	RaidLevel *string `json:"raidLevel,omitempty" tf:"raid_level,omitempty"`
 
 	// The size of the volume in gigabytes.
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -430,7 +430,7 @@ type EBSVolumeParameters struct {
 
 	// For PIOPS volumes, the IOPS per disk.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The path to mount the EBS volume on the layer's instances.
 	// +kubebuilder:validation:Optional
@@ -438,7 +438,7 @@ type EBSVolumeParameters struct {
 
 	// The number of disks to use for the EBS volume.
 	// +kubebuilder:validation:Optional
-	NumberOfDisks *float64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
+	NumberOfDisks *int64 `json:"numberOfDisks" tf:"number_of_disks,omitempty"`
 
 	// The RAID level to use for the volume.
 	// +kubebuilder:validation:Optional
@@ -446,7 +446,7 @@ type EBSVolumeParameters struct {
 
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size" tf:"size,omitempty"`
+	Size *int64 `json:"size" tf:"size,omitempty"`
 
 	// The type of volume to create. This may be standard (the default), io1 or gp2.
 	// +kubebuilder:validation:Optional
@@ -495,13 +495,13 @@ type LoadBasedAutoScalingParameters struct {
 type LogStreamsInitParameters struct {
 
 	// Specifies the max number of log events in a batch, up to 10000. The default value is 1000.
-	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+	BatchCount *int64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
 	// Specifies the maximum size of log events in a batch, in bytes, up to 1048576 bytes. The default value is 32768 bytes.
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// Specifies the time duration for the batching of log events. The minimum value is 5000 and default value is 5000.
-	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+	BufferDuration *int64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
 
 	// Specifies how the timestamp is extracted from logs. For more information, see the CloudWatch Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
 	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
@@ -531,13 +531,13 @@ type LogStreamsInitParameters struct {
 type LogStreamsObservation struct {
 
 	// Specifies the max number of log events in a batch, up to 10000. The default value is 1000.
-	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+	BatchCount *int64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
 	// Specifies the maximum size of log events in a batch, in bytes, up to 1048576 bytes. The default value is 32768 bytes.
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// Specifies the time duration for the batching of log events. The minimum value is 5000 and default value is 5000.
-	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+	BufferDuration *int64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
 
 	// Specifies how the timestamp is extracted from logs. For more information, see the CloudWatch Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
 	DatetimeFormat *string `json:"datetimeFormat,omitempty" tf:"datetime_format,omitempty"`
@@ -568,15 +568,15 @@ type LogStreamsParameters struct {
 
 	// Specifies the max number of log events in a batch, up to 10000. The default value is 1000.
 	// +kubebuilder:validation:Optional
-	BatchCount *float64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
+	BatchCount *int64 `json:"batchCount,omitempty" tf:"batch_count,omitempty"`
 
 	// Specifies the maximum size of log events in a batch, in bytes, up to 1048576 bytes. The default value is 32768 bytes.
 	// +kubebuilder:validation:Optional
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// Specifies the time duration for the batching of log events. The minimum value is 5000 and default value is 5000.
 	// +kubebuilder:validation:Optional
-	BufferDuration *float64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
+	BufferDuration *int64 `json:"bufferDuration,omitempty" tf:"buffer_duration,omitempty"`
 
 	// Specifies how the timestamp is extracted from logs. For more information, see the CloudWatch Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
 	// +kubebuilder:validation:Optional
@@ -620,10 +620,10 @@ type UpscalingInitParameters struct {
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// The number of instances to add or remove when the load exceeds a threshold.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The load threshold. A value of -1 disables the threshold.
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
@@ -632,7 +632,7 @@ type UpscalingInitParameters struct {
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
 	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type UpscalingObservation struct {
@@ -644,10 +644,10 @@ type UpscalingObservation struct {
 	CPUThreshold *float64 `json:"cpuThreshold,omitempty" tf:"cpu_threshold,omitempty"`
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// The number of instances to add or remove when the load exceeds a threshold.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The load threshold. A value of -1 disables the threshold.
 	LoadThreshold *float64 `json:"loadThreshold,omitempty" tf:"load_threshold,omitempty"`
@@ -656,7 +656,7 @@ type UpscalingObservation struct {
 	MemoryThreshold *float64 `json:"memoryThreshold,omitempty" tf:"memory_threshold,omitempty"`
 
 	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 type UpscalingParameters struct {
@@ -671,11 +671,11 @@ type UpscalingParameters struct {
 
 	// The amount of time (in minutes) after a scaling event occurs that AWS OpsWorks Stacks should ignore metrics and suppress additional scaling events.
 	// +kubebuilder:validation:Optional
-	IgnoreMetricsTime *float64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
+	IgnoreMetricsTime *int64 `json:"ignoreMetricsTime,omitempty" tf:"ignore_metrics_time,omitempty"`
 
 	// The number of instances to add or remove when the load exceeds a threshold.
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The load threshold. A value of -1 disables the threshold.
 	// +kubebuilder:validation:Optional
@@ -687,7 +687,7 @@ type UpscalingParameters struct {
 
 	// The amount of time, in minutes, that the load must exceed a threshold before more instances are added or removed.
 	// +kubebuilder:validation:Optional
-	ThresholdsWaitTime *float64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
+	ThresholdsWaitTime *int64 `json:"thresholdsWaitTime,omitempty" tf:"thresholds_wait_time,omitempty"`
 }
 
 // CustomLayerSpec defines the desired state of CustomLayer

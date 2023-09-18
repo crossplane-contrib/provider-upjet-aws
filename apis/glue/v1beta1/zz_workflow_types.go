@@ -16,13 +16,13 @@ import (
 type WorkflowInitParameters struct {
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
-	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+	DefaultRunProperties map[string]string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Prevents exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
-	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+	MaxConcurrentRuns *int64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -34,7 +34,7 @@ type WorkflowObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
-	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+	DefaultRunProperties map[string]string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -43,7 +43,7 @@ type WorkflowObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Prevents exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
-	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+	MaxConcurrentRuns *int64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -56,7 +56,7 @@ type WorkflowParameters struct {
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +kubebuilder:validation:Optional
-	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+	DefaultRunProperties map[string]string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
 	// +kubebuilder:validation:Optional
@@ -64,7 +64,7 @@ type WorkflowParameters struct {
 
 	// Prevents exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
 	// +kubebuilder:validation:Optional
-	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+	MaxConcurrentRuns *int64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

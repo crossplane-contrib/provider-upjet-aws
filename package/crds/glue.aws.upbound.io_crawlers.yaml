@@ -723,7 +723,8 @@ spec:
                             to be crawled when crawling sample files in a dataset.
                             If not set, all the files are crawled. A valid value is
                             an integer between 1 and 249.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   schedule:
@@ -1029,7 +1030,8 @@ spec:
                             to be crawled when crawling sample files in a dataset.
                             If not set, all the files are crawled. A valid value is
                             an integer between 1 and 249.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   schedule:
@@ -1511,7 +1513,8 @@ spec:
                             to be crawled when crawling sample files in a dataset.
                             If not set, all the files are crawled. A valid value is
                             an integer between 1 and 249.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   schedule:

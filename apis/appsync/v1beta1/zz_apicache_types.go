@@ -22,7 +22,7 @@ type APICacheInitParameters struct {
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// TTL in seconds for cache entries.
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// Transit encryption flag when connecting to cache. You cannot update this setting after creation.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
@@ -46,7 +46,7 @@ type APICacheObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// TTL in seconds for cache entries.
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// Transit encryption flag when connecting to cache. You cannot update this setting after creation.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
@@ -86,7 +86,7 @@ type APICacheParameters struct {
 
 	// TTL in seconds for cache entries.
 	// +kubebuilder:validation:Optional
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *int64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// Transit encryption flag when connecting to cache. You cannot update this setting after creation.
 	// +kubebuilder:validation:Optional

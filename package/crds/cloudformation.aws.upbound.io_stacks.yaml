@@ -205,7 +205,8 @@ spec:
                   timeoutInMinutes:
                     description: The amount of time that can pass before the stack
                       status becomes CREATE_FAILED.
-                    type: number
+                    format: int64
+                    type: integer
                 required:
                 - name
                 - region
@@ -274,7 +275,8 @@ spec:
                   timeoutInMinutes:
                     description: The amount of time that can pass before the stack
                       status becomes CREATE_FAILED.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -518,7 +520,8 @@ spec:
                   timeoutInMinutes:
                     description: The amount of time that can pass before the stack
                       status becomes CREATE_FAILED.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

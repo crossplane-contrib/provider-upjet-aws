@@ -54,20 +54,20 @@ type EnvironmentParameters struct {
 type EphemeralStorageInitParameters struct {
 
 	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type EphemeralStorageObservation struct {
 
 	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type EphemeralStorageParameters struct {
 
 	// The size of the Lambda function Ephemeral storage(/tmp) represented in MB. The minimum supported ephemeral_storage value defaults to 512MB and the maximum supported value is 10240MB.
 	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type FileSystemConfigInitParameters struct {
@@ -142,7 +142,7 @@ type FunctionInitParameters struct {
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
 	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
-	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
+	MemorySize *int64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
 	PackageType *string `json:"packageType,omitempty" tf:"package_type,omitempty"`
@@ -154,7 +154,7 @@ type FunctionInitParameters struct {
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
-	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
+	ReservedConcurrentExecutions *int64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
 	// Identifier of the function's runtime. See Runtimes for valid values.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
@@ -177,7 +177,7 @@ type FunctionInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Configuration block. Detailed below.
 	TracingConfig []TracingConfigInitParameters `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
@@ -236,7 +236,7 @@ type FunctionObservation struct {
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
 	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
-	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
+	MemorySize *int64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
 	PackageType *string `json:"packageType,omitempty" tf:"package_type,omitempty"`
@@ -257,7 +257,7 @@ type FunctionObservation struct {
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
-	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
+	ReservedConcurrentExecutions *int64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
 	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -289,7 +289,7 @@ type FunctionObservation struct {
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
 	// Size in bytes of the function .zip file.
-	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
+	SourceCodeSize *int64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -298,7 +298,7 @@ type FunctionObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Configuration block. Detailed below.
 	TracingConfig []TracingConfigObservation `json:"tracingConfig,omitempty" tf:"tracing_config,omitempty"`
@@ -371,7 +371,7 @@ type FunctionParameters struct {
 
 	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
 	// +kubebuilder:validation:Optional
-	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
+	MemorySize *int64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
 	// Lambda deployment package type. Valid values are Zip and Image. Defaults to Zip.
 	// +kubebuilder:validation:Optional
@@ -407,7 +407,7 @@ type FunctionParameters struct {
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
 	// +kubebuilder:validation:Optional
-	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
+	ReservedConcurrentExecutions *int64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
 	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -465,7 +465,7 @@ type FunctionParameters struct {
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
 	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Configuration block. Detailed below.
 	// +kubebuilder:validation:Optional

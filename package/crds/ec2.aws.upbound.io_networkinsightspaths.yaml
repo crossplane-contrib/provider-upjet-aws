@@ -79,7 +79,8 @@ spec:
                     type: string
                   destinationPort:
                     description: Destination port to analyze access to.
-                    type: number
+                    format: int64
+                    type: integer
                   destinationRef:
                     description: Reference to a NetworkInterface in ec2 to populate
                       destination.
@@ -274,7 +275,8 @@ spec:
                     type: string
                   destinationPort:
                     description: Destination port to analyze access to.
-                    type: number
+                    format: int64
+                    type: integer
                   protocol:
                     description: Protocol to use for analysis. Valid options are tcp
                       or udp.
@@ -477,7 +479,8 @@ spec:
                     type: string
                   destinationPort:
                     description: Destination port to analyze access to.
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     description: ID of the Network Insights Path.
                     type: string

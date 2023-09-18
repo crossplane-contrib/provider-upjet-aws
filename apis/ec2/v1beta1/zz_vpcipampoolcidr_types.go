@@ -51,7 +51,7 @@ type VPCIpamPoolCidrInitParameters struct {
 	CidrAuthorizationContext []CidrAuthorizationContextInitParameters `json:"cidrAuthorizationContext,omitempty" tf:"cidr_authorization_context,omitempty"`
 
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
-	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+	NetmaskLength *int64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 }
 
 type VPCIpamPoolCidrObservation struct {
@@ -72,7 +72,7 @@ type VPCIpamPoolCidrObservation struct {
 	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
-	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+	NetmaskLength *int64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 }
 
 type VPCIpamPoolCidrParameters struct {
@@ -101,7 +101,7 @@ type VPCIpamPoolCidrParameters struct {
 
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
 	// +kubebuilder:validation:Optional
-	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
+	NetmaskLength *int64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

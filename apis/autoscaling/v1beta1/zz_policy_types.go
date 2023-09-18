@@ -917,19 +917,19 @@ type PolicyInitParameters struct {
 	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
-	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+	Cooldown *int64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// Whether the scaling policy is enabled or disabled. Default: true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period.
-	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+	EstimatedInstanceWarmup *int64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
 	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
 	MetricAggregationType *string `json:"metricAggregationType,omitempty" tf:"metric_aggregation_type,omitempty"`
 
 	// Minimum value to scale by when adjustment_type is set to PercentChangeInCapacity.
-	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+	MinAdjustmentMagnitude *int64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
 
 	// Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
@@ -938,7 +938,7 @@ type PolicyInitParameters struct {
 	PredictiveScalingConfiguration []PredictiveScalingConfigurationInitParameters `json:"predictiveScalingConfiguration,omitempty" tf:"predictive_scaling_configuration,omitempty"`
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 
 	// Set of adjustments that manage
 	// group scaling. These have the following structure:
@@ -960,13 +960,13 @@ type PolicyObservation struct {
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
-	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+	Cooldown *int64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// Whether the scaling policy is enabled or disabled. Default: true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period.
-	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+	EstimatedInstanceWarmup *int64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
 	// Short name for the metric used in predictive scaling policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -975,7 +975,7 @@ type PolicyObservation struct {
 	MetricAggregationType *string `json:"metricAggregationType,omitempty" tf:"metric_aggregation_type,omitempty"`
 
 	// Minimum value to scale by when adjustment_type is set to PercentChangeInCapacity.
-	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+	MinAdjustmentMagnitude *int64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
 
 	// Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
@@ -984,7 +984,7 @@ type PolicyObservation struct {
 	PredictiveScalingConfiguration []PredictiveScalingConfigurationObservation `json:"predictiveScalingConfiguration,omitempty" tf:"predictive_scaling_configuration,omitempty"`
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 
 	// Set of adjustments that manage
 	// group scaling. These have the following structure:
@@ -1015,7 +1015,7 @@ type PolicyParameters struct {
 
 	// Amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start.
 	// +kubebuilder:validation:Optional
-	Cooldown *float64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
+	Cooldown *int64 `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// Whether the scaling policy is enabled or disabled. Default: true.
 	// +kubebuilder:validation:Optional
@@ -1023,7 +1023,7 @@ type PolicyParameters struct {
 
 	// Estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period.
 	// +kubebuilder:validation:Optional
-	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+	EstimatedInstanceWarmup *int64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
 	// Aggregation type for the policy's metrics. Valid values are "Minimum", "Maximum", and "Average". Without a value, AWS will treat the aggregation type as "Average".
 	// +kubebuilder:validation:Optional
@@ -1031,7 +1031,7 @@ type PolicyParameters struct {
 
 	// Minimum value to scale by when adjustment_type is set to PercentChangeInCapacity.
 	// +kubebuilder:validation:Optional
-	MinAdjustmentMagnitude *float64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
+	MinAdjustmentMagnitude *int64 `json:"minAdjustmentMagnitude,omitempty" tf:"min_adjustment_magnitude,omitempty"`
 
 	// Policy type, either "SimpleScaling", "StepScaling", "TargetTrackingScaling", or "PredictiveScaling". If this value isn't provided, AWS will default to "SimpleScaling."
 	// +kubebuilder:validation:Optional
@@ -1048,7 +1048,7 @@ type PolicyParameters struct {
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
 	// +kubebuilder:validation:Optional
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 
 	// Set of adjustments that manage
 	// group scaling. These have the following structure:
@@ -1249,7 +1249,7 @@ type StepAdjustmentInitParameters struct {
 	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepAdjustmentObservation struct {
@@ -1266,7 +1266,7 @@ type StepAdjustmentObservation struct {
 	MetricIntervalUpperBound *string `json:"metricIntervalUpperBound,omitempty" tf:"metric_interval_upper_bound,omitempty"`
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
-	ScalingAdjustment *float64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment,omitempty" tf:"scaling_adjustment,omitempty"`
 }
 
 type StepAdjustmentParameters struct {
@@ -1286,7 +1286,7 @@ type StepAdjustmentParameters struct {
 
 	// Number of instances by which to scale. adjustment_type determines the interpretation of this number (e.g., as an absolute number or as a percentage of the existing Auto Scaling group size). A positive increment adds to the current capacity and a negative value removes from the current capacity.
 	// +kubebuilder:validation:Optional
-	ScalingAdjustment *float64 `json:"scalingAdjustment" tf:"scaling_adjustment,omitempty"`
+	ScalingAdjustment *int64 `json:"scalingAdjustment" tf:"scaling_adjustment,omitempty"`
 }
 
 type TargetTrackingConfigurationInitParameters struct {

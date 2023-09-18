@@ -198,7 +198,6 @@ import (
 	usergroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/usergroup"
 	useringroup "github.com/upbound/provider-aws/internal/controller/cognitoidp/useringroup"
 	userpool "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpool"
-	userpoolclient "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpoolclient"
 	userpooldomain "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooldomain"
 	userpooluicustomization "github.com/upbound/provider-aws/internal/controller/cognitoidp/userpooluicustomization"
 	awsconfigurationrecorderstatus "github.com/upbound/provider-aws/internal/controller/configservice/awsconfigurationrecorderstatus"
@@ -854,7 +853,6 @@ import (
 	signingjob "github.com/upbound/provider-aws/internal/controller/signer/signingjob"
 	signingprofile "github.com/upbound/provider-aws/internal/controller/signer/signingprofile"
 	signingprofilepermission "github.com/upbound/provider-aws/internal/controller/signer/signingprofilepermission"
-	domainsimpledb "github.com/upbound/provider-aws/internal/controller/simpledb/domain"
 	platformapplication "github.com/upbound/provider-aws/internal/controller/sns/platformapplication"
 	smspreferences "github.com/upbound/provider-aws/internal/controller/sns/smspreferences"
 	topic "github.com/upbound/provider-aws/internal/controller/sns/topic"
@@ -1116,7 +1114,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		usergroup.Setup,
 		useringroup.Setup,
 		userpool.Setup,
-		userpoolclient.Setup,
 		userpooldomain.Setup,
 		userpooluicustomization.Setup,
 		awsconfigurationrecorderstatus.Setup,
@@ -1772,7 +1769,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		signingjob.Setup,
 		signingprofile.Setup,
 		signingprofilepermission.Setup,
-		domainsimpledb.Setup,
 		platformapplication.Setup,
 		smspreferences.Setup,
 		topic.Setup,

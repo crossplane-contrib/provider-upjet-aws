@@ -73,7 +73,8 @@ spec:
                   dataRetention:
                     description: The retention period, in hours, for the Amazon Kinesis
                       data.
-                    type: number
+                    format: int64
+                    type: integer
                   disabled:
                     description: 'When true, media streaming to Amazon Kinesis is
                       turned off. Default: false'
@@ -199,7 +200,8 @@ spec:
                   dataRetention:
                     description: The retention period, in hours, for the Amazon Kinesis
                       data.
-                    type: number
+                    format: int64
+                    type: integer
                   disabled:
                     description: 'When true, media streaming to Amazon Kinesis is
                       turned off. Default: false'
@@ -400,7 +402,8 @@ spec:
                   dataRetention:
                     description: The retention period, in hours, for the Amazon Kinesis
                       data.
-                    type: number
+                    format: int64
+                    type: integer
                   disabled:
                     description: 'When true, media streaming to Amazon Kinesis is
                       turned off. Default: false'

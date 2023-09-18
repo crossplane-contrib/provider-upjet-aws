@@ -442,7 +442,8 @@ spec:
                   version:
                     description: The current version of the Thing Group record in
                       the registry.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

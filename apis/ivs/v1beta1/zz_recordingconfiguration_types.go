@@ -41,7 +41,7 @@ type RecordingConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
-	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
+	RecordingReconnectWindowSeconds *int64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -64,7 +64,7 @@ type RecordingConfigurationObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
-	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
+	RecordingReconnectWindowSeconds *int64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
 
 	// The current state of the Recording Configuration.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -91,7 +91,7 @@ type RecordingConfigurationParameters struct {
 
 	// If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
 	// +kubebuilder:validation:Optional
-	RecordingReconnectWindowSeconds *float64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
+	RecordingReconnectWindowSeconds *int64 `json:"recordingReconnectWindowSeconds,omitempty" tf:"recording_reconnect_window_seconds,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -132,7 +132,7 @@ type ThumbnailConfigurationInitParameters struct {
 	RecordingMode *string `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
 
 	// The targeted thumbnail-generation interval in seconds.
-	TargetIntervalSeconds *float64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
+	TargetIntervalSeconds *int64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
 }
 
 type ThumbnailConfigurationObservation struct {
@@ -141,7 +141,7 @@ type ThumbnailConfigurationObservation struct {
 	RecordingMode *string `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
 
 	// The targeted thumbnail-generation interval in seconds.
-	TargetIntervalSeconds *float64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
+	TargetIntervalSeconds *int64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
 }
 
 type ThumbnailConfigurationParameters struct {
@@ -152,7 +152,7 @@ type ThumbnailConfigurationParameters struct {
 
 	// The targeted thumbnail-generation interval in seconds.
 	// +kubebuilder:validation:Optional
-	TargetIntervalSeconds *float64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
+	TargetIntervalSeconds *int64 `json:"targetIntervalSeconds,omitempty" tf:"target_interval_seconds,omitempty"`
 }
 
 // RecordingConfigurationSpec defines the desired state of RecordingConfiguration

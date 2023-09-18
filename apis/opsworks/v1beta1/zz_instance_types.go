@@ -22,13 +22,13 @@ type EBSBlockDeviceInitParameters struct {
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Size of the volume in gigabytes.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -43,13 +43,13 @@ type EBSBlockDeviceObservation struct {
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Size of the volume in gigabytes.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -67,7 +67,7 @@ type EBSBlockDeviceParameters struct {
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Snapshot ID to mount.
 	// +kubebuilder:validation:Optional
@@ -75,7 +75,7 @@ type EBSBlockDeviceParameters struct {
 
 	// Size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
 	// +kubebuilder:validation:Optional
@@ -501,10 +501,10 @@ type RootBlockDeviceInitParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Size of the volume in gigabytes.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -516,10 +516,10 @@ type RootBlockDeviceObservation struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Size of the volume in gigabytes.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -533,11 +533,11 @@ type RootBlockDeviceParameters struct {
 
 	// Amount of provisioned IOPS. This must be set with a volume_type of io1.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values are standard, gp2, or io1. Default is standard.
 	// +kubebuilder:validation:Optional

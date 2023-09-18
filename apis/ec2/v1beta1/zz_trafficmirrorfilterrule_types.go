@@ -16,59 +16,59 @@ import (
 type DestinationPortRangeInitParameters struct {
 
 	// Starting port of the range
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Ending port of the range
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type DestinationPortRangeObservation struct {
 
 	// Starting port of the range
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Ending port of the range
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type DestinationPortRangeParameters struct {
 
 	// Starting port of the range
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Ending port of the range
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SourcePortRangeInitParameters struct {
 
 	// Starting port of the range
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Ending port of the range
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SourcePortRangeObservation struct {
 
 	// Starting port of the range
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Ending port of the range
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SourcePortRangeParameters struct {
 
 	// Starting port of the range
 	// +kubebuilder:validation:Optional
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Ending port of the range
 	// +kubebuilder:validation:Optional
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type TrafficMirrorFilterRuleInitParameters struct {
@@ -83,13 +83,13 @@ type TrafficMirrorFilterRuleInitParameters struct {
 	DestinationPortRange []DestinationPortRangeInitParameters `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
-	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *int64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
 	// Number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
-	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+	RuleNumber *int64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 
 	// Source CIDR block to assign to the Traffic Mirror rule.
 	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
@@ -119,13 +119,13 @@ type TrafficMirrorFilterRuleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
-	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *int64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Action to take (accept | reject) on the filtered traffic. Valid values are accept and reject
 	RuleAction *string `json:"ruleAction,omitempty" tf:"rule_action,omitempty"`
 
 	// Number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
-	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+	RuleNumber *int64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 
 	// Source CIDR block to assign to the Traffic Mirror rule.
 	SourceCidrBlock *string `json:"sourceCidrBlock,omitempty" tf:"source_cidr_block,omitempty"`
@@ -156,7 +156,7 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// Protocol number, for example 17 (UDP), to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
 	// +kubebuilder:validation:Optional
-	Protocol *float64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *int64 `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -169,7 +169,7 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// Number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
 	// +kubebuilder:validation:Optional
-	RuleNumber *float64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
+	RuleNumber *int64 `json:"ruleNumber,omitempty" tf:"rule_number,omitempty"`
 
 	// Source CIDR block to assign to the Traffic Mirror rule.
 	// +kubebuilder:validation:Optional

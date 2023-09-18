@@ -405,7 +405,8 @@ spec:
                         fromPort:
                           description: Start port (or ICMP type number if protocol
                             is icmp or icmpv6).
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6CidrBlocks:
                           description: List of IPv6 CIDR blocks.
                           items:
@@ -436,7 +437,8 @@ spec:
                         toPort:
                           description: End range port (or ICMP code if protocol is
                             icmp).
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   id:
@@ -464,7 +466,8 @@ spec:
                         fromPort:
                           description: Start port (or ICMP type number if protocol
                             is icmp or icmpv6).
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6CidrBlocks:
                           description: List of IPv6 CIDR blocks.
                           items:
@@ -495,7 +498,8 @@ spec:
                         toPort:
                           description: End range port (or ICMP code if protocol is
                             icmp).
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   name:

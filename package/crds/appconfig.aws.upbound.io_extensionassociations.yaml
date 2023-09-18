@@ -431,7 +431,8 @@ spec:
                   extensionVersion:
                     description: The version number for the extension defined in the
                       association.
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     description: AppConfig Extension Association ID.
                     type: string

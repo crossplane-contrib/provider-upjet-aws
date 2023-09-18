@@ -361,7 +361,8 @@ spec:
                     type: string
                   routingControlCount:
                     description: Number routing controls in a control panel.
-                    type: number
+                    format: int64
+                    type: integer
                   status:
                     description: 'Status of control panel: PENDING when it is being
                       created/updated, PENDING_DELETION when it is being deleted,

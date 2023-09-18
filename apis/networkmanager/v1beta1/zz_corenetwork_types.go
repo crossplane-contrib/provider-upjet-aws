@@ -121,7 +121,7 @@ type EdgesInitParameters struct {
 type EdgesObservation struct {
 
 	// ASN of a core network edge.
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	Asn *int64 `json:"asn,omitempty" tf:"asn,omitempty"`
 
 	// Region where a core network edge is located.
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`

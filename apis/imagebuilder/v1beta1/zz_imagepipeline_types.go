@@ -48,7 +48,7 @@ type ImagePipelineImageTestsConfigurationInitParameters struct {
 	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
 
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
-	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+	TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImagePipelineImageTestsConfigurationObservation struct {
@@ -57,7 +57,7 @@ type ImagePipelineImageTestsConfigurationObservation struct {
 	ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty" tf:"image_tests_enabled,omitempty"`
 
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
-	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+	TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImagePipelineImageTestsConfigurationParameters struct {
@@ -68,7 +68,7 @@ type ImagePipelineImageTestsConfigurationParameters struct {
 
 	// Number of minutes before image tests time out. Valid values are between 60 and 1440. Defaults to 720.
 	// +kubebuilder:validation:Optional
-	TimeoutMinutes *float64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
+	TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty" tf:"timeout_minutes,omitempty"`
 }
 
 type ImagePipelineInitParameters struct {

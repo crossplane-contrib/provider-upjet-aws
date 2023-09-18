@@ -140,7 +140,7 @@ type ReportSettingInitParameters struct {
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 
 	// Specifies the number of frameworks a report covers.
-	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+	NumberOfFrameworks *int64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
 
 	// Specifies the list of Organizational Units a report covers.
 	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
@@ -161,7 +161,7 @@ type ReportSettingObservation struct {
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 
 	// Specifies the number of frameworks a report covers.
-	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+	NumberOfFrameworks *int64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
 
 	// Specifies the list of Organizational Units a report covers.
 	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
@@ -185,7 +185,7 @@ type ReportSettingParameters struct {
 
 	// Specifies the number of frameworks a report covers.
 	// +kubebuilder:validation:Optional
-	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
+	NumberOfFrameworks *int64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
 
 	// Specifies the list of Organizational Units a report covers.
 	// +kubebuilder:validation:Optional

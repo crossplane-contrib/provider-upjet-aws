@@ -341,7 +341,7 @@ func (in *ClusterConfigurationObservation) DeepCopyInto(out *ClusterConfiguratio
 	}
 	if in.NumShards != nil {
 		in, out := &in.NumShards, &out.NumShards
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -351,12 +351,12 @@ func (in *ClusterConfigurationObservation) DeepCopyInto(out *ClusterConfiguratio
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -431,7 +431,7 @@ func (in *ClusterEndpointObservation) DeepCopyInto(out *ClusterEndpointObservati
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -506,12 +506,12 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.NumReplicasPerShard != nil {
 		in, out := &in.NumReplicasPerShard, &out.NumReplicasPerShard
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NumShards != nil {
 		in, out := &in.NumShards, &out.NumShards
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -521,7 +521,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotArns != nil {
@@ -542,7 +542,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -692,12 +692,12 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.NumReplicasPerShard != nil {
 		in, out := &in.NumReplicasPerShard, &out.NumReplicasPerShard
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NumShards != nil {
 		in, out := &in.NumShards, &out.NumShards
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -707,7 +707,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityGroupIds != nil {
@@ -746,7 +746,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -873,12 +873,12 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.NumReplicasPerShard != nil {
 		in, out := &in.NumReplicasPerShard, &out.NumReplicasPerShard
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NumShards != nil {
 		in, out := &in.NumShards, &out.NumShards
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -888,7 +888,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -937,7 +937,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -1058,7 +1058,7 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1531,7 +1531,7 @@ func (in *ShardsObservation) DeepCopyInto(out *ShardsObservation) {
 	}
 	if in.NumNodes != nil {
 		in, out := &in.NumNodes, &out.NumNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Slots != nil {

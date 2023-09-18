@@ -1262,7 +1262,7 @@ type PutItemParameters struct {
 type RepublishInitParameters struct {
 
 	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
-	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+	Qos *int64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1274,7 +1274,7 @@ type RepublishInitParameters struct {
 type RepublishObservation struct {
 
 	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
-	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+	Qos *int64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1287,7 +1287,7 @@ type RepublishParameters struct {
 
 	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
 	// +kubebuilder:validation:Optional
-	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+	Qos *int64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +kubebuilder:validation:Optional
@@ -2135,7 +2135,7 @@ type TopicRuleParameters struct {
 type TopicRuleRepublishInitParameters struct {
 
 	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
-	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+	Qos *int64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2147,7 +2147,7 @@ type TopicRuleRepublishInitParameters struct {
 type TopicRuleRepublishObservation struct {
 
 	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
-	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+	Qos *int64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2160,7 +2160,7 @@ type TopicRuleRepublishParameters struct {
 
 	// The Quality of Service (QoS) level to use when republishing messages. Valid values are 0 or 1. The default value is 0.
 	// +kubebuilder:validation:Optional
-	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
+	Qos *int64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +kubebuilder:validation:Optional

@@ -82,7 +82,8 @@ spec:
                         type:
                           type: string
                         value:
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   signingMaterial:
@@ -126,7 +127,8 @@ spec:
                         type:
                           type: string
                         value:
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   signingMaterial:
@@ -347,7 +349,8 @@ spec:
                         type:
                           type: string
                         value:
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   signingMaterial:

@@ -16,30 +16,30 @@ import (
 type CapacityUnitsInitParameters struct {
 
 	// The amount of extra query capacity for an index and GetQuerySuggestions capacity. For more information, refer to QueryCapacityUnits.
-	QueryCapacityUnits *float64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
+	QueryCapacityUnits *int64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
 
 	// The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first. Minimum value of 0.
-	StorageCapacityUnits *float64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
+	StorageCapacityUnits *int64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
 }
 
 type CapacityUnitsObservation struct {
 
 	// The amount of extra query capacity for an index and GetQuerySuggestions capacity. For more information, refer to QueryCapacityUnits.
-	QueryCapacityUnits *float64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
+	QueryCapacityUnits *int64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
 
 	// The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first. Minimum value of 0.
-	StorageCapacityUnits *float64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
+	StorageCapacityUnits *int64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
 }
 
 type CapacityUnitsParameters struct {
 
 	// The amount of extra query capacity for an index and GetQuerySuggestions capacity. For more information, refer to QueryCapacityUnits.
 	// +kubebuilder:validation:Optional
-	QueryCapacityUnits *float64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
+	QueryCapacityUnits *int64 `json:"queryCapacityUnits,omitempty" tf:"query_capacity_units,omitempty"`
 
 	// The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	StorageCapacityUnits *float64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
+	StorageCapacityUnits *int64 `json:"storageCapacityUnits,omitempty" tf:"storage_capacity_units,omitempty"`
 }
 
 type DocumentMetadataConfigurationUpdatesInitParameters struct {
@@ -97,7 +97,7 @@ type FaqStatisticsInitParameters struct {
 type FaqStatisticsObservation struct {
 
 	// The total number of FAQ questions and answers contained in the index.
-	IndexedQuestionAnswersCount *float64 `json:"indexedQuestionAnswersCount,omitempty" tf:"indexed_question_answers_count,omitempty"`
+	IndexedQuestionAnswersCount *int64 `json:"indexedQuestionAnswersCount,omitempty" tf:"indexed_question_answers_count,omitempty"`
 }
 
 type FaqStatisticsParameters struct {
@@ -390,13 +390,13 @@ type RelevanceInitParameters struct {
 	Freshness *bool `json:"freshness,omitempty" tf:"freshness,omitempty"`
 
 	// The relative importance of the field in the search. Larger numbers provide more of a boost than smaller numbers. Minimum value of 1. Maximum value of 10.
-	Importance *float64 `json:"importance,omitempty" tf:"importance,omitempty"`
+	Importance *int64 `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// Determines how values should be interpreted. For more information, refer to RankOrder.
 	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
-	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
+	ValuesImportanceMap map[string]*int64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
 type RelevanceObservation struct {
@@ -408,13 +408,13 @@ type RelevanceObservation struct {
 	Freshness *bool `json:"freshness,omitempty" tf:"freshness,omitempty"`
 
 	// The relative importance of the field in the search. Larger numbers provide more of a boost than smaller numbers. Minimum value of 1. Maximum value of 10.
-	Importance *float64 `json:"importance,omitempty" tf:"importance,omitempty"`
+	Importance *int64 `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// Determines how values should be interpreted. For more information, refer to RankOrder.
 	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
-	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
+	ValuesImportanceMap map[string]*int64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
 type RelevanceParameters struct {
@@ -429,7 +429,7 @@ type RelevanceParameters struct {
 
 	// The relative importance of the field in the search. Larger numbers provide more of a boost than smaller numbers. Minimum value of 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
-	Importance *float64 `json:"importance,omitempty" tf:"importance,omitempty"`
+	Importance *int64 `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// Determines how values should be interpreted. For more information, refer to RankOrder.
 	// +kubebuilder:validation:Optional
@@ -437,7 +437,7 @@ type RelevanceParameters struct {
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
 	// +kubebuilder:validation:Optional
-	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
+	ValuesImportanceMap map[string]*int64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
 type SearchInitParameters struct {
@@ -514,10 +514,10 @@ type TextDocumentStatisticsInitParameters struct {
 type TextDocumentStatisticsObservation struct {
 
 	// The total size, in bytes, of the indexed documents.
-	IndexedTextBytes *float64 `json:"indexedTextBytes,omitempty" tf:"indexed_text_bytes,omitempty"`
+	IndexedTextBytes *int64 `json:"indexedTextBytes,omitempty" tf:"indexed_text_bytes,omitempty"`
 
 	// The number of text documents indexed.
-	IndexedTextDocumentsCount *float64 `json:"indexedTextDocumentsCount,omitempty" tf:"indexed_text_documents_count,omitempty"`
+	IndexedTextDocumentsCount *int64 `json:"indexedTextDocumentsCount,omitempty" tf:"indexed_text_documents_count,omitempty"`
 }
 
 type TextDocumentStatisticsParameters struct {

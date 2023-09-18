@@ -78,7 +78,7 @@ type BotInitParameters struct {
 	EnableModelImprovements *bool `json:"enableModelImprovements,omitempty" tf:"enable_model_improvements,omitempty"`
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 (inclusive).
-	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
+	IdleSessionTTLInSeconds *int64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
 	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
 	Intent []IntentInitParameters `json:"intent,omitempty" tf:"intent,omitempty"`
@@ -134,7 +134,7 @@ type BotObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 (inclusive).
-	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
+	IdleSessionTTLInSeconds *int64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
 	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
 	Intent []IntentObservation `json:"intent,omitempty" tf:"intent,omitempty"`
@@ -196,7 +196,7 @@ type BotParameters struct {
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. Default is 300. Must be a number between 60 and 86400 (inclusive).
 	// +kubebuilder:validation:Optional
-	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
+	IdleSessionTTLInSeconds *int64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
 	// A set of Intent objects. Each intent represents a command that a user can express. Attributes are documented under intent. Can have up to 250 Intent objects.
 	// +kubebuilder:validation:Optional
@@ -227,7 +227,7 @@ type BotParameters struct {
 type ClarificationPromptInitParameters struct {
 
 	// The number of times to prompt the user for information.
-	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -250,7 +250,7 @@ type ClarificationPromptMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
-	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ClarificationPromptMessageObservation struct {
@@ -263,7 +263,7 @@ type ClarificationPromptMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
-	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ClarificationPromptMessageParameters struct {
@@ -279,13 +279,13 @@ type ClarificationPromptMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
 	// +kubebuilder:validation:Optional
-	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ClarificationPromptObservation struct {
 
 	// The number of times to prompt the user for information.
-	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -302,7 +302,7 @@ type ClarificationPromptParameters struct {
 
 	// The number of times to prompt the user for information.
 	// +kubebuilder:validation:Optional
-	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
+	MaxAttempts *int64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -356,7 +356,7 @@ type MessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
-	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type MessageObservation struct {
@@ -369,7 +369,7 @@ type MessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
-	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type MessageParameters struct {
@@ -385,7 +385,7 @@ type MessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response.
 	// +kubebuilder:validation:Optional
-	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 // BotSpec defines the desired state of Bot

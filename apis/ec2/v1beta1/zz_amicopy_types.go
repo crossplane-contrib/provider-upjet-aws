@@ -25,7 +25,7 @@ type AMICopyEBSBlockDeviceObservation struct {
 	// Whether the destination snapshots of the copied image should be encrypted. Defaults to false
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// ARN of the AMI.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
@@ -33,9 +33,9 @@ type AMICopyEBSBlockDeviceObservation struct {
 	// ID of the created AMI.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }

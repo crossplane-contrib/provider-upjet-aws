@@ -16,13 +16,13 @@ import (
 type DeploymentStrategyInitParameters struct {
 
 	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
-	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
+	DeploymentDurationInMinutes *int64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
 
 	// Description of the deployment strategy. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
-	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
+	FinalBakeTimeInMinutes *int64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
 
 	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
 	GrowthFactor *float64 `json:"growthFactor,omitempty" tf:"growth_factor,omitempty"`
@@ -46,13 +46,13 @@ type DeploymentStrategyObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
-	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
+	DeploymentDurationInMinutes *int64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
 
 	// Description of the deployment strategy. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
-	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
+	FinalBakeTimeInMinutes *int64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
 
 	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
 	GrowthFactor *float64 `json:"growthFactor,omitempty" tf:"growth_factor,omitempty"`
@@ -80,7 +80,7 @@ type DeploymentStrategyParameters struct {
 
 	// Total amount of time for a deployment to last. Minimum value of 0, maximum value of 1440.
 	// +kubebuilder:validation:Optional
-	DeploymentDurationInMinutes *float64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
+	DeploymentDurationInMinutes *int64 `json:"deploymentDurationInMinutes,omitempty" tf:"deployment_duration_in_minutes,omitempty"`
 
 	// Description of the deployment strategy. Can be at most 1024 characters.
 	// +kubebuilder:validation:Optional
@@ -88,7 +88,7 @@ type DeploymentStrategyParameters struct {
 
 	// Amount of time AWS AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back. Minimum value of 0, maximum value of 1440.
 	// +kubebuilder:validation:Optional
-	FinalBakeTimeInMinutes *float64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
+	FinalBakeTimeInMinutes *int64 `json:"finalBakeTimeInMinutes,omitempty" tf:"final_bake_time_in_minutes,omitempty"`
 
 	// Percentage of targets to receive a deployed configuration during each interval. Minimum value of 1.0, maximum value of 100.0.
 	// +kubebuilder:validation:Optional

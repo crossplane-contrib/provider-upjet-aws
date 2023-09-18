@@ -75,7 +75,8 @@ spec:
                   provisionedConcurrentExecutions:
                     description: Amount of capacity to allocate. Must be greater than
                       or equal to 1.
-                    type: number
+                    format: int64
+                    type: integer
                   qualifier:
                     description: Lambda Function version or Lambda Alias name.
                     type: string
@@ -111,7 +112,8 @@ spec:
                   provisionedConcurrentExecutions:
                     description: Amount of capacity to allocate. Must be greater than
                       or equal to 1.
-                    type: number
+                    format: int64
+                    type: integer
                   qualifier:
                     description: Lambda Function version or Lambda Alias name.
                     type: string
@@ -313,7 +315,8 @@ spec:
                   provisionedConcurrentExecutions:
                     description: Amount of capacity to allocate. Must be greater than
                       or equal to 1.
-                    type: number
+                    format: int64
+                    type: integer
                   qualifier:
                     description: Lambda Function version or Lambda Alias name.
                     type: string

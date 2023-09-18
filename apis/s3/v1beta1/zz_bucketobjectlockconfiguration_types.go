@@ -104,32 +104,32 @@ type BucketObjectLockConfigurationRuleParameters struct {
 type RuleDefaultRetentionInitParameters struct {
 
 	// Number of days that you want to specify for the default retention period.
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *int64 `json:"days,omitempty" tf:"days,omitempty"`
 
 	// Default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Number of years that you want to specify for the default retention period.
-	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
+	Years *int64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type RuleDefaultRetentionObservation struct {
 
 	// Number of days that you want to specify for the default retention period.
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *int64 `json:"days,omitempty" tf:"days,omitempty"`
 
 	// Default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Number of years that you want to specify for the default retention period.
-	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
+	Years *int64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 type RuleDefaultRetentionParameters struct {
 
 	// Number of days that you want to specify for the default retention period.
 	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *int64 `json:"days,omitempty" tf:"days,omitempty"`
 
 	// Default Object Lock retention mode you want to apply to new objects placed in the specified bucket. Valid values: COMPLIANCE, GOVERNANCE.
 	// +kubebuilder:validation:Optional
@@ -137,7 +137,7 @@ type RuleDefaultRetentionParameters struct {
 
 	// Number of years that you want to specify for the default retention period.
 	// +kubebuilder:validation:Optional
-	Years *float64 `json:"years,omitempty" tf:"years,omitempty"`
+	Years *int64 `json:"years,omitempty" tf:"years,omitempty"`
 }
 
 // BucketObjectLockConfigurationSpec defines the desired state of BucketObjectLockConfiguration

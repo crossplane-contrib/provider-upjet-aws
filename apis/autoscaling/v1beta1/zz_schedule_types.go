@@ -16,16 +16,16 @@ import (
 type ScheduleInitParameters struct {
 
 	// The initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. Set to -1 if you don't want to change the desired capacity at the scheduled time. Defaults to 0.
-	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
+	DesiredCapacity *int64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
 	// The date and time for the recurring schedule to end, in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// The maximum size of the Auto Scaling group. Set to -1 if you don't want to change the maximum size at the scheduled time. Defaults to 0.
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// The minimum size of the Auto Scaling group. Set to -1 if you don't want to change the minimum size at the scheduled time. Defaults to 0.
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The recurring schedule for this action specified using the Unix cron syntax format.
 	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
@@ -46,7 +46,7 @@ type ScheduleObservation struct {
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
 	// The initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. Set to -1 if you don't want to change the desired capacity at the scheduled time. Defaults to 0.
-	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
+	DesiredCapacity *int64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
 	// The date and time for the recurring schedule to end, in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
@@ -54,10 +54,10 @@ type ScheduleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum size of the Auto Scaling group. Set to -1 if you don't want to change the maximum size at the scheduled time. Defaults to 0.
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// The minimum size of the Auto Scaling group. Set to -1 if you don't want to change the minimum size at the scheduled time. Defaults to 0.
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The recurring schedule for this action specified using the Unix cron syntax format.
 	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
@@ -86,7 +86,7 @@ type ScheduleParameters struct {
 
 	// The initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. Set to -1 if you don't want to change the desired capacity at the scheduled time. Defaults to 0.
 	// +kubebuilder:validation:Optional
-	DesiredCapacity *float64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
+	DesiredCapacity *int64 `json:"desiredCapacity,omitempty" tf:"desired_capacity,omitempty"`
 
 	// The date and time for the recurring schedule to end, in UTC with the format "YYYY-MM-DDThh:mm:ssZ" (e.g. "2021-06-01T00:00:00Z").
 	// +kubebuilder:validation:Optional
@@ -94,11 +94,11 @@ type ScheduleParameters struct {
 
 	// The maximum size of the Auto Scaling group. Set to -1 if you don't want to change the maximum size at the scheduled time. Defaults to 0.
 	// +kubebuilder:validation:Optional
-	MaxSize *float64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
+	MaxSize *int64 `json:"maxSize,omitempty" tf:"max_size,omitempty"`
 
 	// The minimum size of the Auto Scaling group. Set to -1 if you don't want to change the minimum size at the scheduled time. Defaults to 0.
 	// +kubebuilder:validation:Optional
-	MinSize *float64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
+	MinSize *int64 `json:"minSize,omitempty" tf:"min_size,omitempty"`
 
 	// The recurring schedule for this action specified using the Unix cron syntax format.
 	// +kubebuilder:validation:Optional

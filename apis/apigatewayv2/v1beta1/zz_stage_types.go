@@ -56,7 +56,7 @@ type DefaultRouteSettingsInitParameters struct {
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Throttling burst limit for the default route.
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit for the default route.
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
@@ -76,7 +76,7 @@ type DefaultRouteSettingsObservation struct {
 	LoggingLevel *string `json:"loggingLevel,omitempty" tf:"logging_level,omitempty"`
 
 	// Throttling burst limit for the default route.
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit for the default route.
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
@@ -100,7 +100,7 @@ type DefaultRouteSettingsParameters struct {
 
 	// Throttling burst limit for the default route.
 	// +kubebuilder:validation:Optional
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit for the default route.
 	// +kubebuilder:validation:Optional
@@ -124,7 +124,7 @@ type RouteSettingsInitParameters struct {
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
 	// Throttling burst limit for the route.
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit for the route.
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
@@ -147,7 +147,7 @@ type RouteSettingsObservation struct {
 	RouteKey *string `json:"routeKey,omitempty" tf:"route_key,omitempty"`
 
 	// Throttling burst limit for the route.
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit for the route.
 	ThrottlingRateLimit *float64 `json:"throttlingRateLimit,omitempty" tf:"throttling_rate_limit,omitempty"`
@@ -175,7 +175,7 @@ type RouteSettingsParameters struct {
 
 	// Throttling burst limit for the route.
 	// +kubebuilder:validation:Optional
-	ThrottlingBurstLimit *float64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
+	ThrottlingBurstLimit *int64 `json:"throttlingBurstLimit,omitempty" tf:"throttling_burst_limit,omitempty"`
 
 	// Throttling rate limit for the route.
 	// +kubebuilder:validation:Optional

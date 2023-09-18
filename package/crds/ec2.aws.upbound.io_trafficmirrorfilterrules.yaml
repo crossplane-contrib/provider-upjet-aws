@@ -83,10 +83,12 @@ spec:
                       properties:
                         fromPort:
                           description: Starting port of the range
-                          type: number
+                          format: int64
+                          type: integer
                         toPort:
                           description: Ending port of the range
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   protocol:
@@ -94,7 +96,8 @@ spec:
                       to the Traffic Mirror rule. For information about the protocol
                       value, see Protocol Numbers on the Internet Assigned Numbers
                       Authority (IANA) website.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -107,7 +110,8 @@ spec:
                     description: Number of the Traffic Mirror rule. This number must
                       be unique for each Traffic Mirror rule in a given direction.
                       The rules are processed in ascending order by rule number.
-                    type: number
+                    format: int64
+                    type: integer
                   sourceCidrBlock:
                     description: Source CIDR block to assign to the Traffic Mirror
                       rule.
@@ -120,10 +124,12 @@ spec:
                       properties:
                         fromPort:
                           description: Starting port of the range
-                          type: number
+                          format: int64
+                          type: integer
                         toPort:
                           description: Ending port of the range
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   trafficDirection:
@@ -240,10 +246,12 @@ spec:
                       properties:
                         fromPort:
                           description: Starting port of the range
-                          type: number
+                          format: int64
+                          type: integer
                         toPort:
                           description: Ending port of the range
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   protocol:
@@ -251,7 +259,8 @@ spec:
                       to the Traffic Mirror rule. For information about the protocol
                       value, see Protocol Numbers on the Internet Assigned Numbers
                       Authority (IANA) website.
-                    type: number
+                    format: int64
+                    type: integer
                   ruleAction:
                     description: Action to take (accept | reject) on the filtered
                       traffic. Valid values are accept and reject
@@ -260,7 +269,8 @@ spec:
                     description: Number of the Traffic Mirror rule. This number must
                       be unique for each Traffic Mirror rule in a given direction.
                       The rules are processed in ascending order by rule number.
-                    type: number
+                    format: int64
+                    type: integer
                   sourceCidrBlock:
                     description: Source CIDR block to assign to the Traffic Mirror
                       rule.
@@ -273,10 +283,12 @@ spec:
                       properties:
                         fromPort:
                           description: Starting port of the range
-                          type: number
+                          format: int64
+                          type: integer
                         toPort:
                           description: Ending port of the range
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   trafficDirection:
@@ -490,10 +502,12 @@ spec:
                       properties:
                         fromPort:
                           description: Starting port of the range
-                          type: number
+                          format: int64
+                          type: integer
                         toPort:
                           description: Ending port of the range
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   id:
@@ -504,7 +518,8 @@ spec:
                       to the Traffic Mirror rule. For information about the protocol
                       value, see Protocol Numbers on the Internet Assigned Numbers
                       Authority (IANA) website.
-                    type: number
+                    format: int64
+                    type: integer
                   ruleAction:
                     description: Action to take (accept | reject) on the filtered
                       traffic. Valid values are accept and reject
@@ -513,7 +528,8 @@ spec:
                     description: Number of the Traffic Mirror rule. This number must
                       be unique for each Traffic Mirror rule in a given direction.
                       The rules are processed in ascending order by rule number.
-                    type: number
+                    format: int64
+                    type: integer
                   sourceCidrBlock:
                     description: Source CIDR block to assign to the Traffic Mirror
                       rule.
@@ -526,10 +542,12 @@ spec:
                       properties:
                         fromPort:
                           description: Starting port of the range
-                          type: number
+                          format: int64
+                          type: integer
                         toPort:
                           description: Ending port of the range
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   trafficDirection:

@@ -16,32 +16,32 @@ import (
 type ActionWeightedTargetInitParameters struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ActionWeightedTargetObservation struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ActionWeightedTargetParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -49,7 +49,7 @@ type ActionWeightedTargetParameters struct {
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight" tf:"weight,omitempty"`
 }
 
 type GRPCRouteActionInitParameters struct {
@@ -83,7 +83,7 @@ type GRPCRouteMatchInitParameters struct {
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -101,7 +101,7 @@ type GRPCRouteMatchObservation struct {
 	MethodName *string `json:"methodName,omitempty" tf:"method_name,omitempty"`
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -122,7 +122,7 @@ type GRPCRouteMatchParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -136,29 +136,29 @@ type GRPCRouteMatchParameters struct {
 type HTTPRouteActionWeightedTargetInitParameters struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type HTTPRouteActionWeightedTargetObservation struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type HTTPRouteActionWeightedTargetParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
@@ -176,7 +176,7 @@ type HTTPRouteActionWeightedTargetParameters struct {
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight" tf:"weight,omitempty"`
 }
 
 type HTTPRouteMatchHeaderInitParameters struct {
@@ -332,7 +332,7 @@ type HTTPRouteRetryPolicyInitParameters struct {
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
-	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	PerRetryTimeout []HTTPRouteRetryPolicyPerRetryTimeoutInitParameters `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
@@ -348,7 +348,7 @@ type HTTPRouteRetryPolicyObservation struct {
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
-	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	PerRetryTimeout []HTTPRouteRetryPolicyPerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
@@ -366,7 +366,7 @@ type HTTPRouteRetryPolicyParameters struct {
 
 	// Maximum number of retries.
 	// +kubebuilder:validation:Optional
-	MaxRetries *float64 `json:"maxRetries" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	// +kubebuilder:validation:Optional
@@ -383,7 +383,7 @@ type HTTPRouteRetryPolicyPerRetryTimeoutInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteRetryPolicyPerRetryTimeoutObservation struct {
@@ -392,7 +392,7 @@ type HTTPRouteRetryPolicyPerRetryTimeoutObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteRetryPolicyPerRetryTimeoutParameters struct {
@@ -403,7 +403,7 @@ type HTTPRouteRetryPolicyPerRetryTimeoutParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutIdleInitParameters struct {
@@ -412,7 +412,7 @@ type HTTPRouteTimeoutIdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutIdleObservation struct {
@@ -421,7 +421,7 @@ type HTTPRouteTimeoutIdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutIdleParameters struct {
@@ -432,7 +432,7 @@ type HTTPRouteTimeoutIdleParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutInitParameters struct {
@@ -470,7 +470,7 @@ type HTTPRouteTimeoutPerRequestInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutPerRequestObservation struct {
@@ -479,7 +479,7 @@ type HTTPRouteTimeoutPerRequestObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPRouteTimeoutPerRequestParameters struct {
@@ -490,36 +490,36 @@ type HTTPRouteTimeoutPerRequestParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type HeaderMatchRangeInitParameters struct {
 
 	// End of the range.
-	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+	End *int64 `json:"end,omitempty" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
-	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
+	Start *int64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type HeaderMatchRangeObservation struct {
 
 	// End of the range.
-	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+	End *int64 `json:"end,omitempty" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
-	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
+	Start *int64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type HeaderMatchRangeParameters struct {
 
 	// End of the range.
 	// +kubebuilder:validation:Optional
-	End *float64 `json:"end" tf:"end,omitempty"`
+	End *int64 `json:"end" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
 	// +kubebuilder:validation:Optional
-	Start *float64 `json:"start" tf:"start,omitempty"`
+	Start *int64 `json:"start" tf:"start,omitempty"`
 }
 
 type Http2RouteMatchHeaderInitParameters struct {
@@ -704,7 +704,7 @@ type Http2RouteRetryPolicyInitParameters struct {
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
-	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	PerRetryTimeout []RetryPolicyPerRetryTimeoutInitParameters `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
@@ -720,7 +720,7 @@ type Http2RouteRetryPolicyObservation struct {
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
-	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	PerRetryTimeout []RetryPolicyPerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
@@ -738,7 +738,7 @@ type Http2RouteRetryPolicyParameters struct {
 
 	// Maximum number of retries.
 	// +kubebuilder:validation:Optional
-	MaxRetries *float64 `json:"maxRetries" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	// +kubebuilder:validation:Optional
@@ -784,7 +784,7 @@ type IdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IdleObservation struct {
@@ -793,7 +793,7 @@ type IdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IdleParameters struct {
@@ -804,36 +804,36 @@ type IdleParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type MatchHeaderMatchRangeInitParameters struct {
 
 	// End of the range.
-	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+	End *int64 `json:"end,omitempty" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
-	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
+	Start *int64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type MatchHeaderMatchRangeObservation struct {
 
 	// End of the range.
-	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+	End *int64 `json:"end,omitempty" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
-	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
+	Start *int64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type MatchHeaderMatchRangeParameters struct {
 
 	// End of the range.
 	// +kubebuilder:validation:Optional
-	End *float64 `json:"end" tf:"end,omitempty"`
+	End *int64 `json:"end" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
 	// +kubebuilder:validation:Optional
-	Start *float64 `json:"start" tf:"start,omitempty"`
+	Start *int64 `json:"start" tf:"start,omitempty"`
 }
 
 type MetadataInitParameters struct {
@@ -910,30 +910,30 @@ type MetadataMatchParameters struct {
 type MetadataMatchRangeInitParameters struct {
 
 	// End of the range.
-	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+	End *int64 `json:"end,omitempty" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
-	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
+	Start *int64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type MetadataMatchRangeObservation struct {
 
 	// End of the range.
-	End *float64 `json:"end,omitempty" tf:"end,omitempty"`
+	End *int64 `json:"end,omitempty" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
-	Start *float64 `json:"start,omitempty" tf:"start,omitempty"`
+	Start *int64 `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type MetadataMatchRangeParameters struct {
 
 	// End of the range.
 	// +kubebuilder:validation:Optional
-	End *float64 `json:"end" tf:"end,omitempty"`
+	End *int64 `json:"end" tf:"end,omitempty"`
 
 	// (Requited) Start of the range.
 	// +kubebuilder:validation:Optional
-	Start *float64 `json:"start" tf:"start,omitempty"`
+	Start *int64 `json:"start" tf:"start,omitempty"`
 }
 
 type MetadataObservation struct {
@@ -969,7 +969,7 @@ type PerRequestInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PerRequestObservation struct {
@@ -978,7 +978,7 @@ type PerRequestObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PerRequestParameters struct {
@@ -989,7 +989,7 @@ type PerRequestParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type PerRetryTimeoutInitParameters struct {
@@ -998,7 +998,7 @@ type PerRetryTimeoutInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PerRetryTimeoutObservation struct {
@@ -1007,7 +1007,7 @@ type PerRetryTimeoutObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PerRetryTimeoutParameters struct {
@@ -1018,7 +1018,7 @@ type PerRetryTimeoutParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type RetryPolicyInitParameters struct {
@@ -1032,7 +1032,7 @@ type RetryPolicyInitParameters struct {
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
-	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	PerRetryTimeout []PerRetryTimeoutInitParameters `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
@@ -1052,7 +1052,7 @@ type RetryPolicyObservation struct {
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
-	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	PerRetryTimeout []PerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
@@ -1075,7 +1075,7 @@ type RetryPolicyParameters struct {
 
 	// Maximum number of retries.
 	// +kubebuilder:validation:Optional
-	MaxRetries *float64 `json:"maxRetries" tf:"max_retries,omitempty"`
+	MaxRetries *int64 `json:"maxRetries" tf:"max_retries,omitempty"`
 
 	// Per-retry timeout.
 	// +kubebuilder:validation:Optional
@@ -1092,7 +1092,7 @@ type RetryPolicyPerRetryTimeoutInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RetryPolicyPerRetryTimeoutObservation struct {
@@ -1101,7 +1101,7 @@ type RetryPolicyPerRetryTimeoutObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RetryPolicyPerRetryTimeoutParameters struct {
@@ -1112,7 +1112,7 @@ type RetryPolicyPerRetryTimeoutParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type RouteInitParameters struct {
@@ -1234,7 +1234,7 @@ type RouteSpecInitParameters struct {
 
 	// Priority for the route, between 0 and 1000.
 	// Routes are matched based on the specified value, where 0 is the highest priority.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// TCP routing information for the route.
 	TCPRoute []TCPRouteInitParameters `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
@@ -1253,7 +1253,7 @@ type RouteSpecObservation struct {
 
 	// Priority for the route, between 0 and 1000.
 	// Routes are matched based on the specified value, where 0 is the highest priority.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// TCP routing information for the route.
 	TCPRoute []TCPRouteObservation `json:"tcpRoute,omitempty" tf:"tcp_route,omitempty"`
@@ -1276,7 +1276,7 @@ type RouteSpecParameters struct {
 	// Priority for the route, between 0 and 1000.
 	// Routes are matched based on the specified value, where 0 is the highest priority.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// TCP routing information for the route.
 	// +kubebuilder:validation:Optional
@@ -1381,7 +1381,7 @@ type SpecHTTPRouteMatchInitParameters struct {
 	Path []SpecHTTPRouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -1405,7 +1405,7 @@ type SpecHTTPRouteMatchObservation struct {
 	Path []SpecHTTPRouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -1433,7 +1433,7 @@ type SpecHTTPRouteMatchParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -1560,7 +1560,7 @@ type SpecHttp2RouteMatchInitParameters struct {
 	Path []Http2RouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -1584,7 +1584,7 @@ type SpecHttp2RouteMatchObservation struct {
 	Path []Http2RouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
@@ -1612,7 +1612,7 @@ type SpecHttp2RouteMatchParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Value sent by the client must begin with the specified characters. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -1686,29 +1686,29 @@ type TCPRouteActionParameters struct {
 type TCPRouteActionWeightedTargetInitParameters struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TCPRouteActionWeightedTargetObservation struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TCPRouteActionWeightedTargetParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
@@ -1726,7 +1726,7 @@ type TCPRouteActionWeightedTargetParameters struct {
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight" tf:"weight,omitempty"`
 }
 
 type TCPRouteInitParameters struct {
@@ -1744,20 +1744,20 @@ type TCPRouteInitParameters struct {
 type TCPRouteMatchInitParameters struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteMatchObservation struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteMatchParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TCPRouteObservation struct {
@@ -1793,7 +1793,7 @@ type TCPRouteTimeoutIdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TCPRouteTimeoutIdleObservation struct {
@@ -1802,7 +1802,7 @@ type TCPRouteTimeoutIdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TCPRouteTimeoutIdleParameters struct {
@@ -1813,7 +1813,7 @@ type TCPRouteTimeoutIdleParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type TCPRouteTimeoutInitParameters struct {
@@ -1841,7 +1841,7 @@ type TimeoutIdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeoutIdleObservation struct {
@@ -1850,7 +1850,7 @@ type TimeoutIdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeoutIdleParameters struct {
@@ -1861,7 +1861,7 @@ type TimeoutIdleParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type TimeoutInitParameters struct {
@@ -1899,7 +1899,7 @@ type TimeoutPerRequestInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeoutPerRequestObservation struct {
@@ -1908,7 +1908,7 @@ type TimeoutPerRequestObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// Number of time units. Minimum value of 0.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TimeoutPerRequestParameters struct {
@@ -1919,38 +1919,38 @@ type TimeoutPerRequestParameters struct {
 
 	// Number of time units. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type WeightedTargetInitParameters struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type WeightedTargetObservation struct {
 
 	// The port number to match from the request.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type WeightedTargetParameters struct {
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -1958,7 +1958,7 @@ type WeightedTargetParameters struct {
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	Weight *int64 `json:"weight" tf:"weight,omitempty"`
 }
 
 // RouteSpec defines the desired state of Route

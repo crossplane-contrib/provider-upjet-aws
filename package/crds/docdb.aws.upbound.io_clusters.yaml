@@ -80,7 +80,8 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     description: The days to retain backups for. Default 1
-                    type: number
+                    format: int64
+                    type: integer
                   dbClusterParameterGroupName:
                     description: A cluster parameter group to associate with the cluster.
                     type: string
@@ -216,7 +217,8 @@ spec:
                     type: string
                   port:
                     description: The port on which the DB accepts connections
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
@@ -367,7 +369,8 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     description: The days to retain backups for. Default 1
-                    type: number
+                    format: int64
+                    type: integer
                   dbClusterParameterGroupName:
                     description: A cluster parameter group to associate with the cluster.
                     type: string
@@ -407,7 +410,8 @@ spec:
                     type: string
                   port:
                     description: The port on which the DB accepts connections
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
@@ -625,7 +629,8 @@ spec:
                     type: array
                   backupRetentionPeriod:
                     description: The days to retain backups for. Default 1
-                    type: number
+                    format: int64
+                    type: integer
                   clusterMembers:
                     description: – List of DocumentDB Instances that are a part of
                       this cluster
@@ -687,7 +692,8 @@ spec:
                     type: string
                   port:
                     description: The port on which the DB accepts connections
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod

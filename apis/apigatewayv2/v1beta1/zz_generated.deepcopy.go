@@ -783,7 +783,7 @@ func (in *AuthorizerInitParameters) DeepCopyInto(out *AuthorizerInitParameters) 
 	}
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AuthorizerType != nil {
@@ -883,7 +883,7 @@ func (in *AuthorizerObservation) DeepCopyInto(out *AuthorizerObservation) {
 	}
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AuthorizerType != nil {
@@ -971,7 +971,7 @@ func (in *AuthorizerParameters) DeepCopyInto(out *AuthorizerParameters) {
 	}
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AuthorizerType != nil {
@@ -1128,7 +1128,7 @@ func (in *CorsConfigurationInitParameters) DeepCopyInto(out *CorsConfigurationIn
 	}
 	if in.MaxAge != nil {
 		in, out := &in.MaxAge, &out.MaxAge
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1197,7 +1197,7 @@ func (in *CorsConfigurationObservation) DeepCopyInto(out *CorsConfigurationObser
 	}
 	if in.MaxAge != nil {
 		in, out := &in.MaxAge, &out.MaxAge
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1266,7 +1266,7 @@ func (in *CorsConfigurationParameters) DeepCopyInto(out *CorsConfigurationParame
 	}
 	if in.MaxAge != nil {
 		in, out := &in.MaxAge, &out.MaxAge
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1301,7 +1301,7 @@ func (in *DefaultRouteSettingsInitParameters) DeepCopyInto(out *DefaultRouteSett
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -1341,7 +1341,7 @@ func (in *DefaultRouteSettingsObservation) DeepCopyInto(out *DefaultRouteSetting
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -1381,7 +1381,7 @@ func (in *DefaultRouteSettingsParameters) DeepCopyInto(out *DefaultRouteSettings
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -2098,7 +2098,7 @@ func (in *IntegrationInitParameters) DeepCopyInto(out *IntegrationInitParameters
 	}
 	if in.TimeoutMilliseconds != nil {
 		in, out := &in.TimeoutMilliseconds, &out.TimeoutMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2271,7 +2271,7 @@ func (in *IntegrationObservation) DeepCopyInto(out *IntegrationObservation) {
 	}
 	if in.TimeoutMilliseconds != nil {
 		in, out := &in.TimeoutMilliseconds, &out.TimeoutMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2447,7 +2447,7 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 	}
 	if in.TimeoutMilliseconds != nil {
 		in, out := &in.TimeoutMilliseconds, &out.TimeoutMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4017,7 +4017,7 @@ func (in *RouteSettingsInitParameters) DeepCopyInto(out *RouteSettingsInitParame
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -4062,7 +4062,7 @@ func (in *RouteSettingsObservation) DeepCopyInto(out *RouteSettingsObservation) 
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -4107,7 +4107,7 @@ func (in *RouteSettingsParameters) DeepCopyInto(out *RouteSettingsParameters) {
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {

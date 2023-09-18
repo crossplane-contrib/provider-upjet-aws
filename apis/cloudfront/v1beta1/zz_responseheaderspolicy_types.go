@@ -135,7 +135,7 @@ type CorsConfigInitParameters struct {
 	AccessControlExposeHeaders []AccessControlExposeHeadersInitParameters `json:"accessControlExposeHeaders,omitempty" tf:"access_control_expose_headers,omitempty"`
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *int64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
 
 	// A Boolean value that determines how CloudFront behaves for the HTTP response header.
 	OriginOverride *bool `json:"originOverride,omitempty" tf:"origin_override,omitempty"`
@@ -159,7 +159,7 @@ type CorsConfigObservation struct {
 	AccessControlExposeHeaders []AccessControlExposeHeadersObservation `json:"accessControlExposeHeaders,omitempty" tf:"access_control_expose_headers,omitempty"`
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *int64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
 
 	// A Boolean value that determines how CloudFront behaves for the HTTP response header.
 	OriginOverride *bool `json:"originOverride,omitempty" tf:"origin_override,omitempty"`
@@ -189,7 +189,7 @@ type CorsConfigParameters struct {
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
 	// +kubebuilder:validation:Optional
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *int64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
 
 	// A Boolean value that determines how CloudFront behaves for the HTTP response header.
 	// +kubebuilder:validation:Optional
@@ -538,7 +538,7 @@ type ServerTimingHeadersConfigParameters struct {
 type StrictTransportSecurityInitParameters struct {
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *int64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
 
 	// Whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
 	IncludeSubdomains *bool `json:"includeSubdomains,omitempty" tf:"include_subdomains,omitempty"`
@@ -553,7 +553,7 @@ type StrictTransportSecurityInitParameters struct {
 type StrictTransportSecurityObservation struct {
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *int64 `json:"accessControlMaxAgeSec,omitempty" tf:"access_control_max_age_sec,omitempty"`
 
 	// Whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
 	IncludeSubdomains *bool `json:"includeSubdomains,omitempty" tf:"include_subdomains,omitempty"`
@@ -569,7 +569,7 @@ type StrictTransportSecurityParameters struct {
 
 	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP response header.
 	// +kubebuilder:validation:Optional
-	AccessControlMaxAgeSec *float64 `json:"accessControlMaxAgeSec" tf:"access_control_max_age_sec,omitempty"`
+	AccessControlMaxAgeSec *int64 `json:"accessControlMaxAgeSec" tf:"access_control_max_age_sec,omitempty"`
 
 	// Whether CloudFront includes the includeSubDomains directive in the Strict-Transport-Security HTTP response header.
 	// +kubebuilder:validation:Optional

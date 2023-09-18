@@ -229,7 +229,8 @@ spec:
                     description: Specifies the maximum number of contacts that can
                       be in the queue before it is considered full. Minimum value
                       of 0.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Specifies the name of the Queue.
                     type: string
@@ -293,7 +294,8 @@ spec:
                     description: Specifies the maximum number of contacts that can
                       be in the queue before it is considered full. Minimum value
                       of 0.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Specifies the name of the Queue.
                     type: string
@@ -523,7 +525,8 @@ spec:
                     description: Specifies the maximum number of contacts that can
                       be in the queue before it is considered full. Minimum value
                       of 0.
-                    type: number
+                    format: int64
+                    type: integer
                   name:
                     description: Specifies the name of the Queue.
                     type: string

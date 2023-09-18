@@ -58,7 +58,7 @@ type ManagedPrefixListInitParameters struct {
 	Entry []EntryInitParameters `json:"entry,omitempty" tf:"entry,omitempty"`
 
 	// Maximum number of entries that this prefix list can contain.
-	MaxEntries *float64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
+	MaxEntries *int64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
 
 	// Name of this resource. The name must not start with com.amazonaws.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -82,7 +82,7 @@ type ManagedPrefixListObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum number of entries that this prefix list can contain.
-	MaxEntries *float64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
+	MaxEntries *int64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
 
 	// Name of this resource. The name must not start with com.amazonaws.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -97,7 +97,7 @@ type ManagedPrefixListObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Latest version of this prefix list.
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ManagedPrefixListParameters struct {
@@ -112,7 +112,7 @@ type ManagedPrefixListParameters struct {
 
 	// Maximum number of entries that this prefix list can contain.
 	// +kubebuilder:validation:Optional
-	MaxEntries *float64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
+	MaxEntries *int64 `json:"maxEntries,omitempty" tf:"max_entries,omitempty"`
 
 	// Name of this resource. The name must not start with com.amazonaws.
 	// +kubebuilder:validation:Optional

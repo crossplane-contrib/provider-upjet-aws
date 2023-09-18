@@ -298,9 +298,6 @@ spec:
                           description: A list of the ingest endpoints
                           items:
                             properties:
-                              password:
-                                description: The password
-                                type: string
                               url:
                                 description: The URL
                                 type: string

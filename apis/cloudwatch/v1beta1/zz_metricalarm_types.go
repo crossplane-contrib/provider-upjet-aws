@@ -28,7 +28,7 @@ type MetricAlarmInitParameters struct {
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
 	// The number of datapoints that must be breaching to trigger the alarm.
-	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
+	DatapointsToAlarm *int64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
@@ -40,7 +40,7 @@ type MetricAlarmInitParameters struct {
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
 	// The number of periods over which data is compared to the specified threshold.
-	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
+	EvaluationPeriods *int64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
@@ -64,7 +64,7 @@ type MetricAlarmInitParameters struct {
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to the alarm's associated metric.
 	// Either of the following is supported: SampleCount, Average, Sum, Minimum, Maximum
@@ -104,7 +104,7 @@ type MetricAlarmObservation struct {
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
 	// The number of datapoints that must be breaching to trigger the alarm.
-	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
+	DatapointsToAlarm *int64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
@@ -116,7 +116,7 @@ type MetricAlarmObservation struct {
 	EvaluateLowSampleCountPercentiles *string `json:"evaluateLowSampleCountPercentiles,omitempty" tf:"evaluate_low_sample_count_percentiles,omitempty"`
 
 	// The number of periods over which data is compared to the specified threshold.
-	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
+	EvaluationPeriods *int64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
@@ -143,7 +143,7 @@ type MetricAlarmObservation struct {
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to the alarm's associated metric.
 	// Either of the following is supported: SampleCount, Average, Sum, Minimum, Maximum
@@ -188,7 +188,7 @@ type MetricAlarmParameters struct {
 
 	// The number of datapoints that must be breaching to trigger the alarm.
 	// +kubebuilder:validation:Optional
-	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
+	DatapointsToAlarm *int64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
 	// +kubebuilder:validation:Optional
@@ -203,7 +203,7 @@ type MetricAlarmParameters struct {
 
 	// The number of periods over which data is compared to the specified threshold.
 	// +kubebuilder:validation:Optional
-	EvaluationPeriods *float64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
+	EvaluationPeriods *int64 `json:"evaluationPeriods,omitempty" tf:"evaluation_periods,omitempty"`
 
 	// The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
 	// +kubebuilder:validation:Optional
@@ -234,7 +234,7 @@ type MetricAlarmParameters struct {
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -283,7 +283,7 @@ type MetricInitParameters struct {
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
 	// See docs for supported statistics.
@@ -309,7 +309,7 @@ type MetricObservation struct {
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
 	// See docs for supported statistics.
@@ -339,7 +339,7 @@ type MetricParameters struct {
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
-	Period *float64 `json:"period" tf:"period,omitempty"`
+	Period *int64 `json:"period" tf:"period,omitempty"`
 
 	// The statistic to apply to this metric.
 	// See docs for supported statistics.
@@ -371,7 +371,7 @@ type MetricQueryInitParameters struct {
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
 	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
@@ -397,7 +397,7 @@ type MetricQueryObservation struct {
 	// Granularity in seconds of returned data points.
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
 	ReturnData *bool `json:"returnData,omitempty" tf:"return_data,omitempty"`
@@ -429,7 +429,7 @@ type MetricQueryParameters struct {
 	// For metrics with regular resolution, valid values are any multiple of 60.
 	// For high-resolution metrics, valid values are 1, 5, 10, 30, or any multiple of 60.
 	// +kubebuilder:validation:Optional
-	Period *float64 `json:"period,omitempty" tf:"period,omitempty"`
+	Period *int64 `json:"period,omitempty" tf:"period,omitempty"`
 
 	// Specify exactly one metric_query to be true to use that metric_query result as the alarm.
 	// +kubebuilder:validation:Optional

@@ -74,30 +74,30 @@ type CopyActionParameters struct {
 type LifecycleInitParameters struct {
 
 	// Specifies the number of days after creation that a recovery point is moved to cold storage.
-	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+	ColdStorageAfter *int64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
-	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+	DeleteAfter *int64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type LifecycleObservation struct {
 
 	// Specifies the number of days after creation that a recovery point is moved to cold storage.
-	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+	ColdStorageAfter *int64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
-	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+	DeleteAfter *int64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type LifecycleParameters struct {
 
 	// Specifies the number of days after creation that a recovery point is moved to cold storage.
 	// +kubebuilder:validation:Optional
-	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+	ColdStorageAfter *int64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	// +kubebuilder:validation:Optional
-	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+	DeleteAfter *int64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type PlanInitParameters struct {
@@ -169,7 +169,7 @@ type PlanParameters struct {
 type RuleInitParameters struct {
 
 	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
-	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
+	CompletionWindow *int64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
 	// Configuration block(s) with copy operation settings. Detailed below.
 	CopyAction []CopyActionInitParameters `json:"copyAction,omitempty" tf:"copy_action,omitempty"`
@@ -190,42 +190,42 @@ type RuleInitParameters struct {
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The amount of time in minutes before beginning a backup.
-	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+	StartWindow *int64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 }
 
 type RuleLifecycleInitParameters struct {
 
 	// Specifies the number of days after creation that a recovery point is moved to cold storage.
-	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+	ColdStorageAfter *int64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
-	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+	DeleteAfter *int64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type RuleLifecycleObservation struct {
 
 	// Specifies the number of days after creation that a recovery point is moved to cold storage.
-	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+	ColdStorageAfter *int64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
-	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+	DeleteAfter *int64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type RuleLifecycleParameters struct {
 
 	// Specifies the number of days after creation that a recovery point is moved to cold storage.
 	// +kubebuilder:validation:Optional
-	ColdStorageAfter *float64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
+	ColdStorageAfter *int64 `json:"coldStorageAfter,omitempty" tf:"cold_storage_after,omitempty"`
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	// +kubebuilder:validation:Optional
-	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+	DeleteAfter *int64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
 }
 
 type RuleObservation struct {
 
 	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
-	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
+	CompletionWindow *int64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
 	// Configuration block(s) with copy operation settings. Detailed below.
 	CopyAction []CopyActionObservation `json:"copyAction,omitempty" tf:"copy_action,omitempty"`
@@ -246,7 +246,7 @@ type RuleObservation struct {
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The amount of time in minutes before beginning a backup.
-	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+	StartWindow *int64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
 	// The name of a logical container where backups are stored.
 	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
@@ -256,7 +256,7 @@ type RuleParameters struct {
 
 	// The amount of time in minutes AWS Backup attempts a backup before canceling the job and returning an error.
 	// +kubebuilder:validation:Optional
-	CompletionWindow *float64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
+	CompletionWindow *int64 `json:"completionWindow,omitempty" tf:"completion_window,omitempty"`
 
 	// Configuration block(s) with copy operation settings. Detailed below.
 	// +kubebuilder:validation:Optional
@@ -284,7 +284,7 @@ type RuleParameters struct {
 
 	// The amount of time in minutes before beginning a backup.
 	// +kubebuilder:validation:Optional
-	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+	StartWindow *int64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
 	// The name of a logical container where backups are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault

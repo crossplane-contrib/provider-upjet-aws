@@ -84,7 +84,7 @@ type ParameterObservation_2 struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Version of the parameter.
-	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
+	Version *int64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ParameterParameters_2 struct {

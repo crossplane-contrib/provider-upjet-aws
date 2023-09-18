@@ -376,7 +376,7 @@ type StatefulRuleGroupReferenceInitParameters struct {
 	Override []OverrideInitParameters `json:"override,omitempty" tf:"override,omitempty"`
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type StatefulRuleGroupReferenceObservation struct {
@@ -385,7 +385,7 @@ type StatefulRuleGroupReferenceObservation struct {
 	Override []OverrideObservation `json:"override,omitempty" tf:"override,omitempty"`
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -399,7 +399,7 @@ type StatefulRuleGroupReferenceParameters struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.RuleGroup
@@ -448,13 +448,13 @@ type StatelessCustomActionParameters struct {
 type StatelessRuleGroupReferenceInitParameters struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type StatelessRuleGroupReferenceObservation struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
@@ -464,7 +464,7 @@ type StatelessRuleGroupReferenceParameters struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority" tf:"priority,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the stateless rule group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.RuleGroup

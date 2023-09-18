@@ -170,7 +170,8 @@ spec:
                                   properties:
                                     port:
                                       description: Port used for the port mapping.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http,http2, tcp and grpc.
@@ -224,7 +225,8 @@ spec:
                                   properties:
                                     port:
                                       description: Port used for the port mapping.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http,http2, tcp and grpc.
@@ -457,7 +459,8 @@ spec:
                                   properties:
                                     port:
                                       description: Port used for the port mapping.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http,http2, tcp and grpc.

@@ -84,13 +84,15 @@ spec:
                                   allowed to run in parallel on the non-compliant
                                   resources for that specific rule. The default value
                                   is 10%.
-                                type: number
+                                format: int64
+                                type: integer
                               errorPercentage:
                                 description: Percentage of errors that are allowed
                                   before SSM stops running automations on non-compliant
                                   resources for that specific rule. The default is
                                   50%.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -98,7 +100,8 @@ spec:
                   maximumAutomaticAttempts:
                     description: Maximum number of failed attempts for auto-remediation.
                       If you do not select a number, the default is 5.
-                    type: number
+                    format: int64
+                    type: integer
                   parameter:
                     description: Can be specified multiple times for each parameter.
                       Each parameter block supports arguments below.
@@ -130,7 +133,8 @@ spec:
                   retryAttemptSeconds:
                     description: Maximum time in seconds that AWS Config runs auto-remediation.
                       If you do not select a number, the default is 60 seconds.
-                    type: number
+                    format: int64
+                    type: integer
                   targetId:
                     description: Target ID is the name of the public document.
                     type: string
@@ -174,13 +178,15 @@ spec:
                                   allowed to run in parallel on the non-compliant
                                   resources for that specific rule. The default value
                                   is 10%.
-                                type: number
+                                format: int64
+                                type: integer
                               errorPercentage:
                                 description: Percentage of errors that are allowed
                                   before SSM stops running automations on non-compliant
                                   resources for that specific rule. The default is
                                   50%.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -188,7 +194,8 @@ spec:
                   maximumAutomaticAttempts:
                     description: Maximum number of failed attempts for auto-remediation.
                       If you do not select a number, the default is 5.
-                    type: number
+                    format: int64
+                    type: integer
                   parameter:
                     description: Can be specified multiple times for each parameter.
                       Each parameter block supports arguments below.
@@ -216,7 +223,8 @@ spec:
                   retryAttemptSeconds:
                     description: Maximum time in seconds that AWS Config runs auto-remediation.
                       If you do not select a number, the default is 60 seconds.
-                    type: number
+                    format: int64
+                    type: integer
                   targetId:
                     description: Target ID is the name of the public document.
                     type: string
@@ -424,13 +432,15 @@ spec:
                                   allowed to run in parallel on the non-compliant
                                   resources for that specific rule. The default value
                                   is 10%.
-                                type: number
+                                format: int64
+                                type: integer
                               errorPercentage:
                                 description: Percentage of errors that are allowed
                                   before SSM stops running automations on non-compliant
                                   resources for that specific rule. The default is
                                   50%.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -440,7 +450,8 @@ spec:
                   maximumAutomaticAttempts:
                     description: Maximum number of failed attempts for auto-remediation.
                       If you do not select a number, the default is 5.
-                    type: number
+                    format: int64
+                    type: integer
                   parameter:
                     description: Can be specified multiple times for each parameter.
                       Each parameter block supports arguments below.
@@ -468,7 +479,8 @@ spec:
                   retryAttemptSeconds:
                     description: Maximum time in seconds that AWS Config runs auto-remediation.
                       If you do not select a number, the default is 60 seconds.
-                    type: number
+                    format: int64
+                    type: integer
                   targetId:
                     description: Target ID is the name of the public document.
                     type: string

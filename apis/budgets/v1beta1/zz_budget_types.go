@@ -322,19 +322,19 @@ type CostTypesParameters struct {
 }
 
 type HistoricalOptionsInitParameters struct {
-	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
+	BudgetAdjustmentPeriod *int64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
 }
 
 type HistoricalOptionsObservation struct {
-	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
+	BudgetAdjustmentPeriod *int64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
 
-	LookbackAvailablePeriods *float64 `json:"lookbackAvailablePeriods,omitempty" tf:"lookback_available_periods,omitempty"`
+	LookbackAvailablePeriods *int64 `json:"lookbackAvailablePeriods,omitempty" tf:"lookback_available_periods,omitempty"`
 }
 
 type HistoricalOptionsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod" tf:"budget_adjustment_period,omitempty"`
+	BudgetAdjustmentPeriod *int64 `json:"budgetAdjustmentPeriod" tf:"budget_adjustment_period,omitempty"`
 }
 
 type NotificationInitParameters struct {

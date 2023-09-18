@@ -171,7 +171,7 @@ type AutoStopConfigurationInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
-	IdleTimeoutMinutes *float64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
+	IdleTimeoutMinutes *int64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
 }
 
 type AutoStopConfigurationObservation struct {
@@ -180,7 +180,7 @@ type AutoStopConfigurationObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
-	IdleTimeoutMinutes *float64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
+	IdleTimeoutMinutes *int64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
 }
 
 type AutoStopConfigurationParameters struct {
@@ -191,7 +191,7 @@ type AutoStopConfigurationParameters struct {
 
 	// The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
 	// +kubebuilder:validation:Optional
-	IdleTimeoutMinutes *float64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
+	IdleTimeoutMinutes *int64 `json:"idleTimeoutMinutes,omitempty" tf:"idle_timeout_minutes,omitempty"`
 }
 
 type ImageConfigurationInitParameters struct {
@@ -219,7 +219,7 @@ type InitialCapacityConfigInitParameters struct {
 	WorkerConfiguration []WorkerConfigurationInitParameters `json:"workerConfiguration,omitempty" tf:"worker_configuration,omitempty"`
 
 	// The number of workers in the initial capacity configuration.
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+	WorkerCount *int64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
 type InitialCapacityConfigObservation struct {
@@ -228,7 +228,7 @@ type InitialCapacityConfigObservation struct {
 	WorkerConfiguration []WorkerConfigurationObservation `json:"workerConfiguration,omitempty" tf:"worker_configuration,omitempty"`
 
 	// The number of workers in the initial capacity configuration.
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+	WorkerCount *int64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
 type InitialCapacityConfigParameters struct {
@@ -239,7 +239,7 @@ type InitialCapacityConfigParameters struct {
 
 	// The number of workers in the initial capacity configuration.
 	// +kubebuilder:validation:Optional
-	WorkerCount *float64 `json:"workerCount" tf:"worker_count,omitempty"`
+	WorkerCount *int64 `json:"workerCount" tf:"worker_count,omitempty"`
 }
 
 type InitialCapacityInitParameters struct {

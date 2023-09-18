@@ -136,7 +136,7 @@ type EventDataStoreInitParameters struct {
 	OrganizationEnabled *bool `json:"organizationEnabled,omitempty" tf:"organization_enabled,omitempty"`
 
 	// The retention period of the event data store, in days. You can set a retention period of up to 2555 days, the equivalent of seven years. Default: 2555.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -169,7 +169,7 @@ type EventDataStoreObservation struct {
 	OrganizationEnabled *bool `json:"organizationEnabled,omitempty" tf:"organization_enabled,omitempty"`
 
 	// The retention period of the event data store, in days. You can set a retention period of up to 2555 days, the equivalent of seven years. Default: 2555.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -219,7 +219,7 @@ type EventDataStoreParameters struct {
 
 	// The retention period of the event data store, in days. You can set a retention period of up to 2555 days, the equivalent of seven years. Default: 2555.
 	// +kubebuilder:validation:Optional
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

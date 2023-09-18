@@ -16,7 +16,7 @@ import (
 type StreamInitParameters struct {
 
 	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
-	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
+	DataRetentionInHours *int64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
 	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
@@ -41,7 +41,7 @@ type StreamObservation struct {
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
 	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
-	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
+	DataRetentionInHours *int64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
 	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
@@ -73,7 +73,7 @@ type StreamParameters struct {
 
 	// –  The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
 	// +kubebuilder:validation:Optional
-	DataRetentionInHours *float64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
+	DataRetentionInHours *int64 `json:"dataRetentionInHours,omitempty" tf:"data_retention_in_hours,omitempty"`
 
 	// The name of the device that is writing to the stream. In the current implementation, Kinesis Video Streams does not use this name.
 	// +kubebuilder:validation:Optional

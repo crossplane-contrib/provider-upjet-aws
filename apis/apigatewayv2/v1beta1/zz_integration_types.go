@@ -61,7 +61,7 @@ type IntegrationInitParameters struct {
 
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
 	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+	TimeoutMilliseconds *int64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
 type IntegrationObservation struct {
@@ -131,7 +131,7 @@ type IntegrationObservation struct {
 
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
 	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+	TimeoutMilliseconds *int64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
 type IntegrationParameters struct {
@@ -257,7 +257,7 @@ type IntegrationParameters struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs.
 	// The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
 	// +kubebuilder:validation:Optional
-	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
+	TimeoutMilliseconds *int64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 }
 
 type ResponseParametersInitParameters struct {

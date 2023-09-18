@@ -19,16 +19,16 @@ type NetworkProfileInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
-	DownlinkBandwidthBits *float64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
+	DownlinkBandwidthBits *int64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
 
 	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
-	DownlinkDelayMs *float64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
+	DownlinkDelayMs *int64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
 
 	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
-	DownlinkJitterMs *float64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
+	DownlinkJitterMs *int64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
-	DownlinkLossPercent *float64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
+	DownlinkLossPercent *int64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
 
 	// The name for the network profile.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -40,16 +40,16 @@ type NetworkProfileInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
-	UplinkBandwidthBits *float64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
+	UplinkBandwidthBits *int64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
 
 	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
-	UplinkDelayMs *float64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
+	UplinkDelayMs *int64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
 
 	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
-	UplinkJitterMs *float64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
+	UplinkJitterMs *int64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
-	UplinkLossPercent *float64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
+	UplinkLossPercent *int64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
 }
 
 type NetworkProfileObservation struct {
@@ -61,16 +61,16 @@ type NetworkProfileObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
-	DownlinkBandwidthBits *float64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
+	DownlinkBandwidthBits *int64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
 
 	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
-	DownlinkDelayMs *float64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
+	DownlinkDelayMs *int64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
 
 	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
-	DownlinkJitterMs *float64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
+	DownlinkJitterMs *int64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
-	DownlinkLossPercent *float64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
+	DownlinkLossPercent *int64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -90,16 +90,16 @@ type NetworkProfileObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
-	UplinkBandwidthBits *float64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
+	UplinkBandwidthBits *int64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
 
 	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
-	UplinkDelayMs *float64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
+	UplinkDelayMs *int64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
 
 	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
-	UplinkJitterMs *float64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
+	UplinkJitterMs *int64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
-	UplinkLossPercent *float64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
+	UplinkLossPercent *int64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
 }
 
 type NetworkProfileParameters struct {
@@ -110,19 +110,19 @@ type NetworkProfileParameters struct {
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
 	// +kubebuilder:validation:Optional
-	DownlinkBandwidthBits *float64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
+	DownlinkBandwidthBits *int64 `json:"downlinkBandwidthBits,omitempty" tf:"downlink_bandwidth_bits,omitempty"`
 
 	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
 	// +kubebuilder:validation:Optional
-	DownlinkDelayMs *float64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
+	DownlinkDelayMs *int64 `json:"downlinkDelayMs,omitempty" tf:"downlink_delay_ms,omitempty"`
 
 	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
 	// +kubebuilder:validation:Optional
-	DownlinkJitterMs *float64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
+	DownlinkJitterMs *int64 `json:"downlinkJitterMs,omitempty" tf:"downlink_jitter_ms,omitempty"`
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
 	// +kubebuilder:validation:Optional
-	DownlinkLossPercent *float64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
+	DownlinkLossPercent *int64 `json:"downlinkLossPercent,omitempty" tf:"downlink_loss_percent,omitempty"`
 
 	// The name for the network profile.
 	// +kubebuilder:validation:Optional
@@ -157,19 +157,19 @@ type NetworkProfileParameters struct {
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600. Default value is 104857600.
 	// +kubebuilder:validation:Optional
-	UplinkBandwidthBits *float64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
+	UplinkBandwidthBits *int64 `json:"uplinkBandwidthBits,omitempty" tf:"uplink_bandwidth_bits,omitempty"`
 
 	// Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
 	// +kubebuilder:validation:Optional
-	UplinkDelayMs *float64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
+	UplinkDelayMs *int64 `json:"uplinkDelayMs,omitempty" tf:"uplink_delay_ms,omitempty"`
 
 	// Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
 	// +kubebuilder:validation:Optional
-	UplinkJitterMs *float64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
+	UplinkJitterMs *int64 `json:"uplinkJitterMs,omitempty" tf:"uplink_jitter_ms,omitempty"`
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
 	// +kubebuilder:validation:Optional
-	UplinkLossPercent *float64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
+	UplinkLossPercent *int64 `json:"uplinkLossPercent,omitempty" tf:"uplink_loss_percent,omitempty"`
 }
 
 // NetworkProfileSpec defines the desired state of NetworkProfile

@@ -157,7 +157,8 @@ spec:
                       elapse before the lifecycle hook times out. When the lifecycle
                       hook times out, Auto Scaling performs the action defined in
                       the DefaultResult parameter
-                    type: number
+                    format: int64
+                    type: integer
                   lifecycleTransition:
                     description: Instance state to which you want to attach the lifecycle
                       hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
@@ -281,7 +282,8 @@ spec:
                       elapse before the lifecycle hook times out. When the lifecycle
                       hook times out, Auto Scaling performs the action defined in
                       the DefaultResult parameter
-                    type: number
+                    format: int64
+                    type: integer
                   lifecycleTransition:
                     description: Instance state to which you want to attach the lifecycle
                       hook. For a list of lifecycle hook types, see describe-lifecycle-hook-types
@@ -484,7 +486,8 @@ spec:
                       elapse before the lifecycle hook times out. When the lifecycle
                       hook times out, Auto Scaling performs the action defined in
                       the DefaultResult parameter
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     type: string
                   lifecycleTransition:

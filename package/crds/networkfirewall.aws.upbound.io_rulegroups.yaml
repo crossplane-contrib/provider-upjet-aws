@@ -73,7 +73,8 @@ spec:
                       required is the sum of the capacity requirements of the individual
                       rules. For a stateful rule group, the minimum capacity required
                       is the number of individual rules.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: A friendly description of the rule group.
                     type: string
@@ -490,7 +491,8 @@ spec:
                                               AWS Network Firewall evaluates the rules
                                               in a rule group starting with the lowest
                                               priority setting.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           ruleDefinition:
                                             description: A configuration block defining
                                               the stateless 5-tuple packet inspection
@@ -557,14 +559,16 @@ spec:
                                                                 range. This must be
                                                                 less than or equal
                                                                 to the to_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                             toPort:
                                                               description: The upper
                                                                 limit of the port
                                                                 range. This must be
                                                                 greater than or equal
                                                                 to the from_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                           type: object
                                                         type: array
                                                       protocols:
@@ -575,7 +579,8 @@ spec:
                                                           (IANA). If not specified,
                                                           this matches with any protocol.
                                                         items:
-                                                          type: number
+                                                          format: int64
+                                                          type: integer
                                                         type: array
                                                       source:
                                                         description: Set of configuration
@@ -613,14 +618,16 @@ spec:
                                                                 range. This must be
                                                                 less than or equal
                                                                 to the to_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                             toPort:
                                                               description: The upper
                                                                 limit of the port
                                                                 range. This must be
                                                                 greater than or equal
                                                                 to the from_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                           type: object
                                                         type: array
                                                       tcpFlag:
@@ -722,7 +729,8 @@ spec:
                       required is the sum of the capacity requirements of the individual
                       rules. For a stateful rule group, the minimum capacity required
                       is the number of individual rules.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: A friendly description of the rule group.
                     type: string
@@ -1040,7 +1048,8 @@ spec:
                                               AWS Network Firewall evaluates the rules
                                               in a rule group starting with the lowest
                                               priority setting.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           ruleDefinition:
                                             description: A configuration block defining
                                               the stateless 5-tuple packet inspection
@@ -1107,14 +1116,16 @@ spec:
                                                                 range. This must be
                                                                 less than or equal
                                                                 to the to_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                             toPort:
                                                               description: The upper
                                                                 limit of the port
                                                                 range. This must be
                                                                 greater than or equal
                                                                 to the from_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                           type: object
                                                         type: array
                                                       protocols:
@@ -1125,7 +1136,8 @@ spec:
                                                           (IANA). If not specified,
                                                           this matches with any protocol.
                                                         items:
-                                                          type: number
+                                                          format: int64
+                                                          type: integer
                                                         type: array
                                                       source:
                                                         description: Set of configuration
@@ -1163,14 +1175,16 @@ spec:
                                                                 range. This must be
                                                                 less than or equal
                                                                 to the to_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                             toPort:
                                                               description: The upper
                                                                 limit of the port
                                                                 range. This must be
                                                                 greater than or equal
                                                                 to the from_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                           type: object
                                                         type: array
                                                       tcpFlag:
@@ -1440,7 +1454,8 @@ spec:
                       required is the sum of the capacity requirements of the individual
                       rules. For a stateful rule group, the minimum capacity required
                       is the number of individual rules.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: A friendly description of the rule group.
                     type: string
@@ -1767,7 +1782,8 @@ spec:
                                               AWS Network Firewall evaluates the rules
                                               in a rule group starting with the lowest
                                               priority setting.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           ruleDefinition:
                                             description: A configuration block defining
                                               the stateless 5-tuple packet inspection
@@ -1834,14 +1850,16 @@ spec:
                                                                 range. This must be
                                                                 less than or equal
                                                                 to the to_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                             toPort:
                                                               description: The upper
                                                                 limit of the port
                                                                 range. This must be
                                                                 greater than or equal
                                                                 to the from_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                           type: object
                                                         type: array
                                                       protocols:
@@ -1852,7 +1870,8 @@ spec:
                                                           (IANA). If not specified,
                                                           this matches with any protocol.
                                                         items:
-                                                          type: number
+                                                          format: int64
+                                                          type: integer
                                                         type: array
                                                       source:
                                                         description: Set of configuration
@@ -1890,14 +1909,16 @@ spec:
                                                                 range. This must be
                                                                 less than or equal
                                                                 to the to_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                             toPort:
                                                               description: The upper
                                                                 limit of the port
                                                                 range. This must be
                                                                 greater than or equal
                                                                 to the from_port.
-                                                              type: number
+                                                              format: int64
+                                                              type: integer
                                                           type: object
                                                         type: array
                                                       tcpFlag:

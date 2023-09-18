@@ -66,7 +66,7 @@ type ProvisioningTemplateObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The default version of the fleet provisioning template.
-	DefaultVersionID *float64 `json:"defaultVersionId,omitempty" tf:"default_version_id,omitempty"`
+	DefaultVersionID *int64 `json:"defaultVersionId,omitempty" tf:"default_version_id,omitempty"`
 
 	// The description of the fleet provisioning template.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

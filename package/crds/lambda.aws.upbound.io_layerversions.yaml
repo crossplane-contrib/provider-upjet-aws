@@ -438,7 +438,8 @@ spec:
                     type: string
                   sourceCodeSize:
                     description: Size in bytes of the function .zip file.
-                    type: number
+                    format: int64
+                    type: integer
                   version:
                     description: Lambda Layer version.
                     type: string

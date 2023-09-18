@@ -95,7 +95,7 @@ type ReservationPlanSettingsInitParameters struct {
 	RenewalType *string `json:"renewalType,omitempty" tf:"renewal_type,omitempty"`
 
 	// Specifies the number of reserved transcode slots (RTS) for queue.
-	ReservedSlots *float64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
+	ReservedSlots *int64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
 }
 
 type ReservationPlanSettingsObservation struct {
@@ -107,7 +107,7 @@ type ReservationPlanSettingsObservation struct {
 	RenewalType *string `json:"renewalType,omitempty" tf:"renewal_type,omitempty"`
 
 	// Specifies the number of reserved transcode slots (RTS) for queue.
-	ReservedSlots *float64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
+	ReservedSlots *int64 `json:"reservedSlots,omitempty" tf:"reserved_slots,omitempty"`
 }
 
 type ReservationPlanSettingsParameters struct {
@@ -122,7 +122,7 @@ type ReservationPlanSettingsParameters struct {
 
 	// Specifies the number of reserved transcode slots (RTS) for queue.
 	// +kubebuilder:validation:Optional
-	ReservedSlots *float64 `json:"reservedSlots" tf:"reserved_slots,omitempty"`
+	ReservedSlots *int64 `json:"reservedSlots" tf:"reserved_slots,omitempty"`
 }
 
 // QueueSpec defines the desired state of Queue

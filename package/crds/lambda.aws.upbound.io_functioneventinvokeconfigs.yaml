@@ -268,12 +268,14 @@ spec:
                   maximumEventAgeInSeconds:
                     description: Maximum age of a request that Lambda sends to a function
                       for processing in seconds. Valid values between 60 and 21600.
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRetryAttempts:
                     description: Maximum number of times to retry when the function
                       returns an error. Valid values between 0 and 2. Defaults to
                       2.
-                    type: number
+                    format: int64
+                    type: integer
                   qualifier:
                     description: Lambda Function published version, $LATEST, or Lambda
                       Alias name.
@@ -325,12 +327,14 @@ spec:
                   maximumEventAgeInSeconds:
                     description: Maximum age of a request that Lambda sends to a function
                       for processing in seconds. Valid values between 60 and 21600.
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRetryAttempts:
                     description: Maximum number of times to retry when the function
                       returns an error. Valid values between 0 and 2. Defaults to
                       2.
-                    type: number
+                    format: int64
+                    type: integer
                   qualifier:
                     description: Lambda Function published version, $LATEST, or Lambda
                       Alias name.
@@ -551,12 +555,14 @@ spec:
                   maximumEventAgeInSeconds:
                     description: Maximum age of a request that Lambda sends to a function
                       for processing in seconds. Valid values between 60 and 21600.
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRetryAttempts:
                     description: Maximum number of times to retry when the function
                       returns an error. Valid values between 0 and 2. Defaults to
                       2.
-                    type: number
+                    format: int64
+                    type: integer
                   qualifier:
                     description: Lambda Function published version, $LATEST, or Lambda
                       Alias name.

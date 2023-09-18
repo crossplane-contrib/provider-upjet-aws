@@ -50,7 +50,7 @@ type LBSSLNegotiationPolicyInitParameters struct {
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The name of the SSL negotiation policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -70,7 +70,7 @@ type LBSSLNegotiationPolicyObservation struct {
 	// The load balancer port to which the policy
 	// should be applied. This must be an active listener on the load
 	// balancer.
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.
@@ -93,7 +93,7 @@ type LBSSLNegotiationPolicyParameters struct {
 	// should be applied. This must be an active listener on the load
 	// balancer.
 	// +kubebuilder:validation:Optional
-	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
+	LBPort *int64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
 	// The load balancer to which the policy
 	// should be attached.

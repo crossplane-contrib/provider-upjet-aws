@@ -409,22 +409,22 @@ func (in *LimitsInitParameters) DeepCopyInto(out *LimitsInitParameters) {
 	*out = *in
 	if in.Daily != nil {
 		in, out := &in.Daily, &out.Daily
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaximumDuration != nil {
 		in, out := &in.MaximumDuration, &out.MaximumDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MessagesPerSecond != nil {
 		in, out := &in.MessagesPerSecond, &out.MessagesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Total != nil {
 		in, out := &in.Total, &out.Total
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -444,22 +444,22 @@ func (in *LimitsObservation) DeepCopyInto(out *LimitsObservation) {
 	*out = *in
 	if in.Daily != nil {
 		in, out := &in.Daily, &out.Daily
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaximumDuration != nil {
 		in, out := &in.MaximumDuration, &out.MaximumDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MessagesPerSecond != nil {
 		in, out := &in.MessagesPerSecond, &out.MessagesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Total != nil {
 		in, out := &in.Total, &out.Total
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -479,22 +479,22 @@ func (in *LimitsParameters) DeepCopyInto(out *LimitsParameters) {
 	*out = *in
 	if in.Daily != nil {
 		in, out := &in.Daily, &out.Daily
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaximumDuration != nil {
 		in, out := &in.MaximumDuration, &out.MaximumDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MessagesPerSecond != nil {
 		in, out := &in.MessagesPerSecond, &out.MessagesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Total != nil {
 		in, out := &in.Total, &out.Total
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -693,7 +693,7 @@ func (in *SMSChannelObservation) DeepCopyInto(out *SMSChannelObservation) {
 	}
 	if in.PromotionalMessagesPerSecond != nil {
 		in, out := &in.PromotionalMessagesPerSecond, &out.PromotionalMessagesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SenderID != nil {
@@ -708,7 +708,7 @@ func (in *SMSChannelObservation) DeepCopyInto(out *SMSChannelObservation) {
 	}
 	if in.TransactionalMessagesPerSecond != nil {
 		in, out := &in.TransactionalMessagesPerSecond, &out.TransactionalMessagesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

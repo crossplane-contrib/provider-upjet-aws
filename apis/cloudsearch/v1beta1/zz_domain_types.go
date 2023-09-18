@@ -225,10 +225,10 @@ type ScalingParametersInitParameters struct {
 	DesiredInstanceType *string `json:"desiredInstanceType,omitempty" tf:"desired_instance_type,omitempty"`
 
 	// The number of partitions you want to preconfigure for your domain. Only valid when you select search.2xlarge as the instance type.
-	DesiredPartitionCount *float64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
+	DesiredPartitionCount *int64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
 
 	// The number of replicas you want to preconfigure for each index partition.
-	DesiredReplicationCount *float64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
+	DesiredReplicationCount *int64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
 }
 
 type ScalingParametersObservation struct {
@@ -237,10 +237,10 @@ type ScalingParametersObservation struct {
 	DesiredInstanceType *string `json:"desiredInstanceType,omitempty" tf:"desired_instance_type,omitempty"`
 
 	// The number of partitions you want to preconfigure for your domain. Only valid when you select search.2xlarge as the instance type.
-	DesiredPartitionCount *float64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
+	DesiredPartitionCount *int64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
 
 	// The number of replicas you want to preconfigure for each index partition.
-	DesiredReplicationCount *float64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
+	DesiredReplicationCount *int64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
 }
 
 type ScalingParametersParameters struct {
@@ -251,11 +251,11 @@ type ScalingParametersParameters struct {
 
 	// The number of partitions you want to preconfigure for your domain. Only valid when you select search.2xlarge as the instance type.
 	// +kubebuilder:validation:Optional
-	DesiredPartitionCount *float64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
+	DesiredPartitionCount *int64 `json:"desiredPartitionCount,omitempty" tf:"desired_partition_count,omitempty"`
 
 	// The number of replicas you want to preconfigure for each index partition.
 	// +kubebuilder:validation:Optional
-	DesiredReplicationCount *float64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
+	DesiredReplicationCount *int64 `json:"desiredReplicationCount,omitempty" tf:"desired_replication_count,omitempty"`
 }
 
 // DomainSpec defines the desired state of Domain

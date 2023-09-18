@@ -66,7 +66,7 @@ type NotebookInstanceInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type NotebookInstanceObservation struct {
@@ -130,7 +130,7 @@ type NotebookInstanceObservation struct {
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type NotebookInstanceParameters struct {
@@ -236,7 +236,7 @@ type NotebookInstanceParameters struct {
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 // NotebookInstanceSpec defines the desired state of NotebookInstance

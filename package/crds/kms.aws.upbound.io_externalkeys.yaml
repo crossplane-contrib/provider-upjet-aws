@@ -79,7 +79,8 @@ spec:
                     description: Duration in days after which the key is deleted after
                       destruction of the resource. Must be between 7 and 30 days.
                       Defaults to 30.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: Description of the key.
                     type: string
@@ -159,7 +160,8 @@ spec:
                     description: Duration in days after which the key is deleted after
                       destruction of the resource. Must be between 7 and 30 days.
                       Defaults to 30.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: Description of the key.
                     type: string
@@ -369,7 +371,8 @@ spec:
                     description: Duration in days after which the key is deleted after
                       destruction of the resource. Must be between 7 and 30 days.
                       Defaults to 30.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: Description of the key.
                     type: string

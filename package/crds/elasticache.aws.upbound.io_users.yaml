@@ -382,7 +382,8 @@ spec:
                     items:
                       properties:
                         passwordCount:
-                          type: number
+                          format: int64
+                          type: integer
                         type:
                           description: 'Specifies the authentication type. Possible
                             options are: password, no-password-required or iam.'

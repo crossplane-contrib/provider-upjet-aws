@@ -69,7 +69,8 @@ spec:
                 properties:
                   instancePort:
                     description: The instance port to apply the policy to.
-                    type: number
+                    format: int64
+                    type: integer
                   loadBalancerName:
                     description: The load balancer to attach the policy to.
                     type: string
@@ -173,7 +174,8 @@ spec:
                 properties:
                   instancePort:
                     description: The instance port to apply the policy to.
-                    type: number
+                    format: int64
+                    type: integer
                   policyNames:
                     description: List of Policy Names to apply to the backend server.
                     items:
@@ -356,7 +358,8 @@ spec:
                     type: string
                   instancePort:
                     description: The instance port to apply the policy to.
-                    type: number
+                    format: int64
+                    type: integer
                   loadBalancerName:
                     description: The load balancer to attach the policy to.
                     type: string

@@ -499,7 +499,8 @@ spec:
                                 description: The Quality of Service (QoS) level to
                                   use when republishing messages. Valid values are
                                   0 or 1. The default value is 0.
-                                type: number
+                                format: int64
+                                type: integer
                               roleArn:
                                 description: The IAM role ARN that allows access to
                                   the CloudWatch alarm.
@@ -929,7 +930,8 @@ spec:
                           description: The Quality of Service (QoS) level to use when
                             republishing messages. Valid values are 0 or 1. The default
                             value is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The IAM role ARN that allows access to the
                             CloudWatch alarm.
@@ -1668,7 +1670,8 @@ spec:
                                 description: The Quality of Service (QoS) level to
                                   use when republishing messages. Valid values are
                                   0 or 1. The default value is 0.
-                                type: number
+                                format: int64
+                                type: integer
                               roleArn:
                                 description: The IAM role ARN that allows access to
                                   the CloudWatch alarm.
@@ -1927,7 +1930,8 @@ spec:
                           description: The Quality of Service (QoS) level to use when
                             republishing messages. Valid values are 0 or 1. The default
                             value is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The IAM role ARN that allows access to the
                             CloudWatch alarm.
@@ -2674,7 +2678,8 @@ spec:
                                 description: The Quality of Service (QoS) level to
                                   use when republishing messages. Valid values are
                                   0 or 1. The default value is 0.
-                                type: number
+                                format: int64
+                                type: integer
                               roleArn:
                                 description: The IAM role ARN that allows access to
                                   the CloudWatch alarm.
@@ -2943,7 +2948,8 @@ spec:
                           description: The Quality of Service (QoS) level to use when
                             republishing messages. Valid values are 0 or 1. The default
                             value is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The IAM role ARN that allows access to the
                             CloudWatch alarm.

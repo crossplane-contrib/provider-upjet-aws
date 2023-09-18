@@ -79,7 +79,8 @@ spec:
                   fromPort:
                     description: Start port (or ICMP type number if protocol is "icmp"
                       or "icmpv6").
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6CidrBlocks:
                     description: List of IPv6 CIDR blocks. Cannot be specified with
                       source_security_group_id or self.
@@ -338,7 +339,8 @@ spec:
                     type: object
                   toPort:
                     description: End port (or ICMP code if protocol is "icmp").
-                    type: number
+                    format: int64
+                    type: integer
                   type:
                     description: Type of rule being created. Valid options are ingress
                       (inbound) or egress (outbound).
@@ -371,7 +373,8 @@ spec:
                   fromPort:
                     description: Start port (or ICMP type number if protocol is "icmp"
                       or "icmpv6").
-                    type: number
+                    format: int64
+                    type: integer
                   ipv6CidrBlocks:
                     description: List of IPv6 CIDR blocks. Cannot be specified with
                       source_security_group_id or self.
@@ -389,7 +392,8 @@ spec:
                     type: boolean
                   toPort:
                     description: End port (or ICMP code if protocol is "icmp").
-                    type: number
+                    format: int64
+                    type: integer
                   type:
                     description: Type of rule being created. Valid options are ingress
                       (inbound) or egress (outbound).
@@ -590,7 +594,8 @@ spec:
                   fromPort:
                     description: Start port (or ICMP type number if protocol is "icmp"
                       or "icmpv6").
-                    type: number
+                    format: int64
+                    type: integer
                   id:
                     description: ID of the security group rule.
                     type: string
@@ -629,7 +634,8 @@ spec:
                     type: string
                   toPort:
                     description: End port (or ICMP code if protocol is "icmp").
-                    type: number
+                    format: int64
+                    type: integer
                   type:
                     description: Type of rule being created. Valid options are ingress
                       (inbound) or egress (outbound).

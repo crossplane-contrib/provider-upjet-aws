@@ -19,7 +19,7 @@ type RoleAliasInitParameters struct {
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// The duration of the credential, in seconds. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 900 seconds (15 minutes) to 43200 seconds (12 hours).
-	CredentialDuration *float64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
+	CredentialDuration *int64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
 }
 
 type RoleAliasObservation struct {
@@ -31,7 +31,7 @@ type RoleAliasObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The duration of the credential, in seconds. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 900 seconds (15 minutes) to 43200 seconds (12 hours).
-	CredentialDuration *float64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
+	CredentialDuration *int64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -47,7 +47,7 @@ type RoleAliasParameters struct {
 
 	// The duration of the credential, in seconds. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 900 seconds (15 minutes) to 43200 seconds (12 hours).
 	// +kubebuilder:validation:Optional
-	CredentialDuration *float64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
+	CredentialDuration *int64 `json:"credentialDuration,omitempty" tf:"credential_duration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

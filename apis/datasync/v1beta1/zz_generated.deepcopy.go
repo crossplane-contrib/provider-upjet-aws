@@ -498,7 +498,7 @@ func (in *OptionsInitParameters) DeepCopyInto(out *OptionsInitParameters) {
 	}
 	if in.BytesPerSecond != nil {
 		in, out := &in.BytesPerSecond, &out.BytesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.GID != nil {
@@ -588,7 +588,7 @@ func (in *OptionsObservation) DeepCopyInto(out *OptionsObservation) {
 	}
 	if in.BytesPerSecond != nil {
 		in, out := &in.BytesPerSecond, &out.BytesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.GID != nil {
@@ -678,7 +678,7 @@ func (in *OptionsParameters) DeepCopyInto(out *OptionsParameters) {
 	}
 	if in.BytesPerSecond != nil {
 		in, out := &in.BytesPerSecond, &out.BytesPerSecond
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.GID != nil {

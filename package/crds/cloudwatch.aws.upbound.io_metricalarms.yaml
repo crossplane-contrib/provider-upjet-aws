@@ -93,7 +93,8 @@ spec:
                   datapointsToAlarm:
                     description: The number of datapoints that must be breaching to
                       trigger the alarm.
-                    type: number
+                    format: int64
+                    type: integer
                   dimensions:
                     additionalProperties:
                       type: string
@@ -112,7 +113,8 @@ spec:
                   evaluationPeriods:
                     description: The number of periods over which data is compared
                       to the specified threshold.
-                    type: number
+                    format: int64
+                    type: integer
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
                       with the alarm. Specify a value between p0.0 and p100.
@@ -189,7 +191,8 @@ spec:
                                   values are any multiple of 60. For high-resolution
                                   metrics, valid values are 1, 5, 10, 30, or any multiple
                                   of 60.
-                                type: number
+                                format: int64
+                                type: integer
                               stat:
                                 description: The statistic to apply to this metric.
                                   See docs for supported statistics.
@@ -204,7 +207,8 @@ spec:
                             For metrics with regular resolution, valid values are
                             any multiple of 60. For high-resolution metrics, valid
                             values are 1, 5, 10, 30, or any multiple of 60.
-                          type: number
+                          format: int64
+                          type: integer
                         returnData:
                           description: Specify exactly one metric_query to be true
                             to use that metric_query result as the alarm.
@@ -226,7 +230,8 @@ spec:
                   period:
                     description: The period in seconds over which the specified statistic
                       is applied. Valid values are 10, 30, or any multiple of 60.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -302,7 +307,8 @@ spec:
                   datapointsToAlarm:
                     description: The number of datapoints that must be breaching to
                       trigger the alarm.
-                    type: number
+                    format: int64
+                    type: integer
                   dimensions:
                     additionalProperties:
                       type: string
@@ -321,7 +327,8 @@ spec:
                   evaluationPeriods:
                     description: The number of periods over which data is compared
                       to the specified threshold.
-                    type: number
+                    format: int64
+                    type: integer
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
                       with the alarm. Specify a value between p0.0 and p100.
@@ -398,7 +405,8 @@ spec:
                                   values are any multiple of 60. For high-resolution
                                   metrics, valid values are 1, 5, 10, 30, or any multiple
                                   of 60.
-                                type: number
+                                format: int64
+                                type: integer
                               stat:
                                 description: The statistic to apply to this metric.
                                   See docs for supported statistics.
@@ -413,7 +421,8 @@ spec:
                             For metrics with regular resolution, valid values are
                             any multiple of 60. For high-resolution metrics, valid
                             values are 1, 5, 10, 30, or any multiple of 60.
-                          type: number
+                          format: int64
+                          type: integer
                         returnData:
                           description: Specify exactly one metric_query to be true
                             to use that metric_query result as the alarm.
@@ -435,7 +444,8 @@ spec:
                   period:
                     description: The period in seconds over which the specified statistic
                       is applied. Valid values are 10, 30, or any multiple of 60.
-                    type: number
+                    format: int64
+                    type: integer
                   statistic:
                     description: 'The statistic to apply to the alarm''s associated
                       metric. Either of the following is supported: SampleCount, Average,
@@ -670,7 +680,8 @@ spec:
                   datapointsToAlarm:
                     description: The number of datapoints that must be breaching to
                       trigger the alarm.
-                    type: number
+                    format: int64
+                    type: integer
                   dimensions:
                     additionalProperties:
                       type: string
@@ -689,7 +700,8 @@ spec:
                   evaluationPeriods:
                     description: The number of periods over which data is compared
                       to the specified threshold.
-                    type: number
+                    format: int64
+                    type: integer
                   extendedStatistic:
                     description: The percentile statistic for the metric associated
                       with the alarm. Specify a value between p0.0 and p100.
@@ -769,7 +781,8 @@ spec:
                                   values are any multiple of 60. For high-resolution
                                   metrics, valid values are 1, 5, 10, 30, or any multiple
                                   of 60.
-                                type: number
+                                format: int64
+                                type: integer
                               stat:
                                 description: The statistic to apply to this metric.
                                   See docs for supported statistics.
@@ -784,7 +797,8 @@ spec:
                             For metrics with regular resolution, valid values are
                             any multiple of 60. For high-resolution metrics, valid
                             values are 1, 5, 10, 30, or any multiple of 60.
-                          type: number
+                          format: int64
+                          type: integer
                         returnData:
                           description: Specify exactly one metric_query to be true
                             to use that metric_query result as the alarm.
@@ -806,7 +820,8 @@ spec:
                   period:
                     description: The period in seconds over which the specified statistic
                       is applied. Valid values are 10, 30, or any multiple of 60.
-                    type: number
+                    format: int64
+                    type: integer
                   statistic:
                     description: 'The statistic to apply to the alarm''s associated
                       metric. Either of the following is supported: SampleCount, Average,

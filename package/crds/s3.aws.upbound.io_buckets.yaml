@@ -354,7 +354,8 @@ spec:
                         maxAgeSeconds:
                           description: Specifies time in seconds that browser can
                             cache the response for a preflight request.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   forceDestroy:
@@ -408,7 +409,8 @@ spec:
                         abortIncompleteMultipartUploadDays:
                           description: Specifies the number of days after initiating
                             a multipart upload when the multipart upload must be completed.
-                          type: number
+                          format: int64
+                          type: integer
                         enabled:
                           description: Specifies lifecycle rule status.
                           type: boolean
@@ -424,7 +426,8 @@ spec:
                               days:
                                 description: Specifies the number of days after object
                                   creation when the specific rule action takes effect.
-                                type: number
+                                format: int64
+                                type: integer
                               expiredObjectDeleteMarker:
                                 description: On a versioned bucket (versioning-enabled
                                   or versioning-suspended bucket), you can add this
@@ -447,7 +450,8 @@ spec:
                               days:
                                 description: Specifies the number of days after object
                                   creation when the specific rule action takes effect.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         noncurrentVersionTransition:
@@ -458,7 +462,8 @@ spec:
                               days:
                                 description: Specifies the number of days after object
                                   creation when the specific rule action takes effect.
-                                type: number
+                                format: int64
+                                type: integer
                               storageClass:
                                 description: Specifies the Amazon S3 storage class
                                   to which you want the object to transition.
@@ -486,7 +491,8 @@ spec:
                               days:
                                 description: Specifies the number of days after object
                                   creation when the specific rule action takes effect.
-                                type: number
+                                format: int64
+                                type: integer
                               storageClass:
                                 description: Specifies the Amazon S3 storage class
                                   to which you want the object to transition.
@@ -536,7 +542,8 @@ spec:
                                     days:
                                       description: Number of days that you want to
                                         specify for the default retention period.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     mode:
                                       description: Default Object Lock retention mode
                                         you want to apply to new objects placed in
@@ -546,7 +553,8 @@ spec:
                                     years:
                                       description: Number of years that you want to
                                         specify for the default retention period.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -621,7 +629,8 @@ spec:
                                             description: Threshold within which objects
                                               are to be replicated. The only valid
                                               value is 15.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           status:
                                             description: Status of the rule. Either
                                               Enabled or Disabled. The rule is ignored
@@ -644,7 +653,8 @@ spec:
                                             description: Threshold within which objects
                                               are to be replicated. The only valid
                                               value is 15.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           status:
                                             description: Status of the rule. Either
                                               Enabled or Disabled. The rule is ignored
@@ -694,7 +704,8 @@ spec:
                                   should only be set if filter is configured. If not
                                   provided, defaults to 0. Priority must be unique
                                   between multiple rules.
-                                type: number
+                                format: int64
+                                type: integer
                               sourceSelectionCriteria:
                                 description: Specifies special object selection criteria
                                   (documented below).

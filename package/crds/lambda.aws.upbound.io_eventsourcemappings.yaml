@@ -87,7 +87,8 @@ spec:
                     description: The largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
                       100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
-                    type: number
+                    format: int64
+                    type: integer
                   bisectBatchOnFunctionError:
                     description: If the function returns an error, split the batch
                       in two and retry. Only available for stream sources (DynamoDB
@@ -260,24 +261,28 @@ spec:
                       If the batch it reads from the stream/queue only has one record
                       in it, Lambda only sends one record to the function. Only available
                       for stream sources (DynamoDB and Kinesis) and SQS standard queues.
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRecordAgeInSeconds:
                     description: The maximum age of a record that Lambda sends to
                       a function for processing. Only available for stream sources
                       (DynamoDB and Kinesis). Must be either -1 (forever, and the
                       default value) or between 60 and 604800 (inclusive).
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRetryAttempts:
                     description: The maximum number of times to retry when the function
                       returns an error. Only available for stream sources (DynamoDB
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
-                    type: number
+                    format: int64
+                    type: integer
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
-                    type: number
+                    format: int64
+                    type: integer
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -299,7 +304,8 @@ spec:
                             the Amazon SQS event source can invoke. Must be between
                             2 and 1000. See Configuring maximum concurrency for Amazon
                             SQS event sources.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   selfManagedEventSource:
@@ -381,7 +387,8 @@ spec:
                       AWS Lambda streaming analytics. The range is between 1 second
                       up to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
-                    type: number
+                    format: int64
+                    type: integer
                 required:
                 - region
                 type: object
@@ -416,7 +423,8 @@ spec:
                     description: The largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
                       100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
-                    type: number
+                    format: int64
+                    type: integer
                   bisectBatchOnFunctionError:
                     description: If the function returns an error, split the batch
                       in two and retry. Only available for stream sources (DynamoDB
@@ -512,24 +520,28 @@ spec:
                       If the batch it reads from the stream/queue only has one record
                       in it, Lambda only sends one record to the function. Only available
                       for stream sources (DynamoDB and Kinesis) and SQS standard queues.
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRecordAgeInSeconds:
                     description: The maximum age of a record that Lambda sends to
                       a function for processing. Only available for stream sources
                       (DynamoDB and Kinesis). Must be either -1 (forever, and the
                       default value) or between 60 and 604800 (inclusive).
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRetryAttempts:
                     description: The maximum number of times to retry when the function
                       returns an error. Only available for stream sources (DynamoDB
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
-                    type: number
+                    format: int64
+                    type: integer
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
-                    type: number
+                    format: int64
+                    type: integer
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -547,7 +559,8 @@ spec:
                             the Amazon SQS event source can invoke. Must be between
                             2 and 1000. See Configuring maximum concurrency for Amazon
                             SQS event sources.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   selfManagedEventSource:
@@ -629,7 +642,8 @@ spec:
                       AWS Lambda streaming analytics. The range is between 1 second
                       up to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -815,7 +829,8 @@ spec:
                     description: The largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
                       100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
-                    type: number
+                    format: int64
+                    type: integer
                   bisectBatchOnFunctionError:
                     description: If the function returns an error, split the batch
                       in two and retry. Only available for stream sources (DynamoDB
@@ -929,24 +944,28 @@ spec:
                       If the batch it reads from the stream/queue only has one record
                       in it, Lambda only sends one record to the function. Only available
                       for stream sources (DynamoDB and Kinesis) and SQS standard queues.
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRecordAgeInSeconds:
                     description: The maximum age of a record that Lambda sends to
                       a function for processing. Only available for stream sources
                       (DynamoDB and Kinesis). Must be either -1 (forever, and the
                       default value) or between 60 and 604800 (inclusive).
-                    type: number
+                    format: int64
+                    type: integer
                   maximumRetryAttempts:
                     description: The maximum number of times to retry when the function
                       returns an error. Only available for stream sources (DynamoDB
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
-                    type: number
+                    format: int64
+                    type: integer
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
-                    type: number
+                    format: int64
+                    type: integer
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -964,7 +983,8 @@ spec:
                             the Amazon SQS event source can invoke. Must be between
                             2 and 1000. See Configuring maximum concurrency for Amazon
                             SQS event sources.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   selfManagedEventSource:
@@ -1053,7 +1073,8 @@ spec:
                       AWS Lambda streaming analytics. The range is between 1 second
                       up to 900 seconds. Only available for stream sources (DynamoDB
                       and Kinesis).
-                    type: number
+                    format: int64
+                    type: integer
                   uuid:
                     description: The UUID of the created event source mapping.
                     type: string

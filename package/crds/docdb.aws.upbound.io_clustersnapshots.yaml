@@ -360,7 +360,8 @@ spec:
                   port:
                     description: Port that the DocumentDB cluster was listening on
                       at the time of the snapshot.
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:

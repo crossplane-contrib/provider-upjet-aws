@@ -525,7 +525,8 @@ spec:
                     type: string
                   attachmentPolicyRuleNumber:
                     description: The policy rule number associated with the attachment.
-                    type: number
+                    format: int64
+                    type: integer
                   attachmentType:
                     description: The type of attachment.
                     type: string

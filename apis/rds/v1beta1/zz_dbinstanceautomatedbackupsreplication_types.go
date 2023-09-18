@@ -19,7 +19,7 @@ type DBInstanceAutomatedBackupsReplicationInitParameters struct {
 	PreSignedURL *string `json:"preSignedUrl,omitempty" tf:"pre_signed_url,omitempty"`
 
 	// The retention period for the replicated automated backups, defaults to 7.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type DBInstanceAutomatedBackupsReplicationObservation struct {
@@ -34,7 +34,7 @@ type DBInstanceAutomatedBackupsReplicationObservation struct {
 	PreSignedURL *string `json:"preSignedUrl,omitempty" tf:"pre_signed_url,omitempty"`
 
 	// The retention period for the replicated automated backups, defaults to 7.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
 	SourceDBInstanceArn *string `json:"sourceDbInstanceArn,omitempty" tf:"source_db_instance_arn,omitempty"`
@@ -66,7 +66,7 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 
 	// The retention period for the replicated automated backups, defaults to 7.
 	// +kubebuilder:validation:Optional
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance

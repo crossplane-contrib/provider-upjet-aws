@@ -58,7 +58,7 @@ type QueueInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
-	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
+	MaxContacts *int64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 
 	// Specifies the name of the Queue.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -94,7 +94,7 @@ type QueueObservation struct {
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
-	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
+	MaxContacts *int64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 
 	// Specifies the name of the Queue.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -154,7 +154,7 @@ type QueueParameters struct {
 
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
+	MaxContacts *int64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 
 	// Specifies the name of the Queue.
 	// +kubebuilder:validation:Optional

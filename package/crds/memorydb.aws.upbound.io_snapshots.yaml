@@ -445,18 +445,21 @@ spec:
                           type: string
                         numShards:
                           description: Number of shards in the cluster.
-                          type: number
+                          format: int64
+                          type: integer
                         parameterGroupName:
                           description: Name of the parameter group associated with
                             the cluster.
                           type: string
                         port:
                           description: Port number on which the cluster accepts connections.
-                          type: number
+                          format: int64
+                          type: integer
                         snapshotRetentionLimit:
                           description: Number of days for which MemoryDB retains automatic
                             snapshots before deleting them.
-                          type: number
+                          format: int64
+                          type: integer
                         snapshotWindow:
                           description: The daily time range (in UTC) during which
                             MemoryDB begins taking a daily snapshot of the shard.

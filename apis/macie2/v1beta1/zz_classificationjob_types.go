@@ -309,7 +309,7 @@ type ClassificationJobInitParameters struct {
 	S3JobDefinition []S3JobDefinitionInitParameters `json:"s3JobDefinition,omitempty" tf:"s3_job_definition,omitempty"`
 
 	// The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
-	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
+	SamplingPercentage *int64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
 
 	// The recurrence pattern for running the job. To run the job only once, don't specify a value for this property and set the value for the job_type property to ONE_TIME. (documented below)
 	ScheduleFrequency []ScheduleFrequencyInitParameters `json:"scheduleFrequency,omitempty" tf:"schedule_frequency,omitempty"`
@@ -353,7 +353,7 @@ type ClassificationJobObservation struct {
 	S3JobDefinition []S3JobDefinitionObservation `json:"s3JobDefinition,omitempty" tf:"s3_job_definition,omitempty"`
 
 	// The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
-	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
+	SamplingPercentage *int64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
 
 	// The recurrence pattern for running the job. To run the job only once, don't specify a value for this property and set the value for the job_type property to ONE_TIME. (documented below)
 	ScheduleFrequency []ScheduleFrequencyObservation `json:"scheduleFrequency,omitempty" tf:"schedule_frequency,omitempty"`
@@ -404,7 +404,7 @@ type ClassificationJobParameters struct {
 
 	// The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
 	// +kubebuilder:validation:Optional
-	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
+	SamplingPercentage *int64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
 
 	// The recurrence pattern for running the job. To run the job only once, don't specify a value for this property and set the value for the job_type property to ONE_TIME. (documented below)
 	// +kubebuilder:validation:Optional
@@ -556,7 +556,7 @@ type ScheduleFrequencyInitParameters struct {
 	DailySchedule *bool `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
 	// Specifies a monthly recurrence pattern for running the job.
-	MonthlySchedule *float64 `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
+	MonthlySchedule *int64 `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// Specifies a weekly recurrence pattern for running the job.
 	WeeklySchedule *string `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
@@ -568,7 +568,7 @@ type ScheduleFrequencyObservation struct {
 	DailySchedule *bool `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
 	// Specifies a monthly recurrence pattern for running the job.
-	MonthlySchedule *float64 `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
+	MonthlySchedule *int64 `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// Specifies a weekly recurrence pattern for running the job.
 	WeeklySchedule *string `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
@@ -582,7 +582,7 @@ type ScheduleFrequencyParameters struct {
 
 	// Specifies a monthly recurrence pattern for running the job.
 	// +kubebuilder:validation:Optional
-	MonthlySchedule *float64 `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
+	MonthlySchedule *int64 `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// Specifies a weekly recurrence pattern for running the job.
 	// +kubebuilder:validation:Optional

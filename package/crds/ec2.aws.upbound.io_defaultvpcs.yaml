@@ -89,7 +89,8 @@ spec:
                   ipv6IpamPoolId:
                     type: string
                   ipv6NetmaskLength:
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -136,7 +137,8 @@ spec:
                   ipv6IpamPoolId:
                     type: string
                   ipv6NetmaskLength:
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -353,7 +355,8 @@ spec:
                   ipv6IpamPoolId:
                     type: string
                   ipv6NetmaskLength:
-                    type: number
+                    format: int64
+                    type: integer
                   mainRouteTableId:
                     type: string
                   ownerId:

@@ -16,7 +16,7 @@ import (
 type TopicInitParameters struct {
 
 	// Percentage of success to sample
-	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
+	ApplicationSuccessFeedbackSampleRate *int64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
 	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
@@ -31,25 +31,25 @@ type TopicInitParameters struct {
 	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
 
 	// Percentage of success to sample
-	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
+	FirehoseSuccessFeedbackSampleRate *int64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
 
 	// Percentage of success to sample
-	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
+	HTTPSuccessFeedbackSampleRate *int64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
 
 	// The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
 
 	// Percentage of success to sample
-	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+	LambdaSuccessFeedbackSampleRate *int64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
 
 	// The fully-formed AWS policy as JSON.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// If SignatureVersion should be 1 (SHA1) or 2 (SHA256). The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.
-	SignatureVersion *float64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
+	SignatureVersion *int64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
 
 	// Percentage of success to sample
-	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
+	SqsSuccessFeedbackSampleRate *int64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -67,7 +67,7 @@ type TopicObservation struct {
 	ApplicationSuccessFeedbackRoleArn *string `json:"applicationSuccessFeedbackRoleArn,omitempty" tf:"application_success_feedback_role_arn,omitempty"`
 
 	// Percentage of success to sample
-	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
+	ApplicationSuccessFeedbackSampleRate *int64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
 	// The ARN of the SNS topic, as a more obvious property (clone of id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -91,7 +91,7 @@ type TopicObservation struct {
 	FirehoseSuccessFeedbackRoleArn *string `json:"firehoseSuccessFeedbackRoleArn,omitempty" tf:"firehose_success_feedback_role_arn,omitempty"`
 
 	// Percentage of success to sample
-	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
+	FirehoseSuccessFeedbackSampleRate *int64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
 
 	// IAM role for failure feedback
 	HTTPFailureFeedbackRoleArn *string `json:"httpFailureFeedbackRoleArn,omitempty" tf:"http_failure_feedback_role_arn,omitempty"`
@@ -100,7 +100,7 @@ type TopicObservation struct {
 	HTTPSuccessFeedbackRoleArn *string `json:"httpSuccessFeedbackRoleArn,omitempty" tf:"http_success_feedback_role_arn,omitempty"`
 
 	// Percentage of success to sample
-	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
+	HTTPSuccessFeedbackSampleRate *int64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
 
 	// The ARN of the SNS topic
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -115,7 +115,7 @@ type TopicObservation struct {
 	LambdaSuccessFeedbackRoleArn *string `json:"lambdaSuccessFeedbackRoleArn,omitempty" tf:"lambda_success_feedback_role_arn,omitempty"`
 
 	// Percentage of success to sample
-	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+	LambdaSuccessFeedbackSampleRate *int64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
 
 	// The AWS Account ID of the SNS topic owner
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -124,7 +124,7 @@ type TopicObservation struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// If SignatureVersion should be 1 (SHA1) or 2 (SHA256). The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.
-	SignatureVersion *float64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
+	SignatureVersion *int64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
 
 	// IAM role for failure feedback
 	SqsFailureFeedbackRoleArn *string `json:"sqsFailureFeedbackRoleArn,omitempty" tf:"sqs_failure_feedback_role_arn,omitempty"`
@@ -133,7 +133,7 @@ type TopicObservation struct {
 	SqsSuccessFeedbackRoleArn *string `json:"sqsSuccessFeedbackRoleArn,omitempty" tf:"sqs_success_feedback_role_arn,omitempty"`
 
 	// Percentage of success to sample
-	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
+	SqsSuccessFeedbackSampleRate *int64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -177,7 +177,7 @@ type TopicParameters struct {
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
-	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
+	ApplicationSuccessFeedbackSampleRate *int64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
 	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
 	// +kubebuilder:validation:Optional
@@ -225,7 +225,7 @@ type TopicParameters struct {
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
-	FirehoseSuccessFeedbackSampleRate *float64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
+	FirehoseSuccessFeedbackSampleRate *int64 `json:"firehoseSuccessFeedbackSampleRate,omitempty" tf:"firehose_success_feedback_sample_rate,omitempty"`
 
 	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -257,7 +257,7 @@ type TopicParameters struct {
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
-	HTTPSuccessFeedbackSampleRate *float64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
+	HTTPSuccessFeedbackSampleRate *int64 `json:"httpSuccessFeedbackSampleRate,omitempty" tf:"http_success_feedback_sample_rate,omitempty"`
 
 	// The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
 	// +kubebuilder:validation:Optional
@@ -293,7 +293,7 @@ type TopicParameters struct {
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
-	LambdaSuccessFeedbackSampleRate *float64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
+	LambdaSuccessFeedbackSampleRate *int64 `json:"lambdaSuccessFeedbackSampleRate,omitempty" tf:"lambda_success_feedback_sample_rate,omitempty"`
 
 	// The fully-formed AWS policy as JSON.
 	// +kubebuilder:validation:Optional
@@ -306,7 +306,7 @@ type TopicParameters struct {
 
 	// If SignatureVersion should be 1 (SHA1) or 2 (SHA256). The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS.
 	// +kubebuilder:validation:Optional
-	SignatureVersion *float64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
+	SignatureVersion *int64 `json:"signatureVersion,omitempty" tf:"signature_version,omitempty"`
 
 	// IAM role for failure feedback
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -338,7 +338,7 @@ type TopicParameters struct {
 
 	// Percentage of success to sample
 	// +kubebuilder:validation:Optional
-	SqsSuccessFeedbackSampleRate *float64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
+	SqsSuccessFeedbackSampleRate *int64 `json:"sqsSuccessFeedbackSampleRate,omitempty" tf:"sqs_success_feedback_sample_rate,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

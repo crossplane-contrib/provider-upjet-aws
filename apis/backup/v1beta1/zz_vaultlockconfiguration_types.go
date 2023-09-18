@@ -16,13 +16,13 @@ import (
 type VaultLockConfigurationInitParameters struct {
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
-	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
+	ChangeableForDays *int64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
 
 	// The maximum retention period that the vault retains its recovery points.
-	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
+	MaxRetentionDays *int64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
 
 	// The minimum retention period that the vault retains its recovery points.
-	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
+	MinRetentionDays *int64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
 }
 
 type VaultLockConfigurationObservation struct {
@@ -34,15 +34,15 @@ type VaultLockConfigurationObservation struct {
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
-	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
+	ChangeableForDays *int64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum retention period that the vault retains its recovery points.
-	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
+	MaxRetentionDays *int64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
 
 	// The minimum retention period that the vault retains its recovery points.
-	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
+	MinRetentionDays *int64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
 }
 
 type VaultLockConfigurationParameters struct {
@@ -62,15 +62,15 @@ type VaultLockConfigurationParameters struct {
 
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	// +kubebuilder:validation:Optional
-	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
+	ChangeableForDays *int64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
 
 	// The maximum retention period that the vault retains its recovery points.
 	// +kubebuilder:validation:Optional
-	MaxRetentionDays *float64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
+	MaxRetentionDays *int64 `json:"maxRetentionDays,omitempty" tf:"max_retention_days,omitempty"`
 
 	// The minimum retention period that the vault retains its recovery points.
 	// +kubebuilder:validation:Optional
-	MinRetentionDays *float64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
+	MinRetentionDays *int64 `json:"minRetentionDays,omitempty" tf:"min_retention_days,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

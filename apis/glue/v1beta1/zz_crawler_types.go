@@ -691,7 +691,7 @@ type S3TargetInitParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
-	SampleSize *float64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
+	SampleSize *int64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
 }
 
 type S3TargetObservation struct {
@@ -712,7 +712,7 @@ type S3TargetObservation struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
-	SampleSize *float64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
+	SampleSize *int64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
 }
 
 type S3TargetParameters struct {
@@ -739,7 +739,7 @@ type S3TargetParameters struct {
 
 	// Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.
 	// +kubebuilder:validation:Optional
-	SampleSize *float64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
+	SampleSize *int64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
 }
 
 type SchemaChangePolicyInitParameters struct {

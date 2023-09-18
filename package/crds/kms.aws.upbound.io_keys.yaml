@@ -97,7 +97,8 @@ spec:
                       key is a multi-Region primary key with replicas, the waiting
                       period begins when the last of its replica keys is deleted.
                       Otherwise, the waiting period begins immediately.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: The description of the key as viewed in AWS console.
                     type: string
@@ -178,7 +179,8 @@ spec:
                       key is a multi-Region primary key with replicas, the waiting
                       period begins when the last of its replica keys is deleted.
                       Otherwise, the waiting period begins immediately.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: The description of the key as viewed in AWS console.
                     type: string
@@ -409,7 +411,8 @@ spec:
                       key is a multi-Region primary key with replicas, the waiting
                       period begins when the last of its replica keys is deleted.
                       Otherwise, the waiting period begins immediately.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: The description of the key as viewed in AWS console.
                     type: string

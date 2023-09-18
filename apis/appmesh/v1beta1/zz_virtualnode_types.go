@@ -118,7 +118,7 @@ type BackendDefaultsClientPolicyTLSInitParameters struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
-	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	Validation []BackendDefaultsClientPolicyTLSValidationInitParameters `json:"validation,omitempty" tf:"validation,omitempty"`
@@ -133,7 +133,7 @@ type BackendDefaultsClientPolicyTLSObservation struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
-	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	Validation []BackendDefaultsClientPolicyTLSValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
@@ -151,7 +151,7 @@ type BackendDefaultsClientPolicyTLSParameters struct {
 
 	// One or more ports that the policy is enforced for.
 	// +kubebuilder:validation:Optional
-	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	// +kubebuilder:validation:Optional
@@ -241,7 +241,7 @@ type BaseEjectionDurationInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BaseEjectionDurationObservation struct {
@@ -250,7 +250,7 @@ type BaseEjectionDurationObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BaseEjectionDurationParameters struct {
@@ -261,7 +261,7 @@ type BaseEjectionDurationParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type ClientPolicyTLSCertificateFileInitParameters struct {
@@ -350,7 +350,7 @@ type ClientPolicyTLSInitParameters struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
-	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	Validation []ClientPolicyTLSValidationInitParameters `json:"validation,omitempty" tf:"validation,omitempty"`
@@ -365,7 +365,7 @@ type ClientPolicyTLSObservation struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
-	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	Validation []ClientPolicyTLSValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
@@ -383,7 +383,7 @@ type ClientPolicyTLSParameters struct {
 
 	// One or more ports that the policy is enforced for.
 	// +kubebuilder:validation:Optional
-	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	// +kubebuilder:validation:Optional
@@ -537,68 +537,68 @@ type ClientPolicyTLSValidationTrustSdsParameters struct {
 type ConnectionPoolGRPCInitParameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolGRPCObservation struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolGRPCParameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxRequests *float64 `json:"maxRequests" tf:"max_requests,omitempty"`
+	MaxRequests *int64 `json:"maxRequests" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolHTTPInitParameters struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
-	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections *int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 
 	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
-	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
+	MaxPendingRequests *int64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type ConnectionPoolHTTPObservation struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
-	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections *int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 
 	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
-	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
+	MaxPendingRequests *int64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type ConnectionPoolHTTPParameters struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxConnections *float64 `json:"maxConnections" tf:"max_connections,omitempty"`
+	MaxConnections *int64 `json:"maxConnections" tf:"max_connections,omitempty"`
 
 	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
+	MaxPendingRequests *int64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type ConnectionPoolHttp2InitParameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolHttp2Observation struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type ConnectionPoolHttp2Parameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxRequests *float64 `json:"maxRequests" tf:"max_requests,omitempty"`
+	MaxRequests *int64 `json:"maxRequests" tf:"max_requests,omitempty"`
 }
 
 type DNSInitParameters struct {
@@ -704,7 +704,7 @@ type GRPCIdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GRPCIdleObservation struct {
@@ -713,7 +713,7 @@ type GRPCIdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GRPCIdleParameters struct {
@@ -724,7 +724,7 @@ type GRPCIdleParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type GRPCPerRequestInitParameters struct {
@@ -733,7 +733,7 @@ type GRPCPerRequestInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GRPCPerRequestObservation struct {
@@ -742,7 +742,7 @@ type GRPCPerRequestObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GRPCPerRequestParameters struct {
@@ -753,7 +753,7 @@ type GRPCPerRequestParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type HTTPIdleInitParameters struct {
@@ -762,7 +762,7 @@ type HTTPIdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPIdleObservation struct {
@@ -771,7 +771,7 @@ type HTTPIdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPIdleParameters struct {
@@ -782,7 +782,7 @@ type HTTPIdleParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type HTTPPerRequestInitParameters struct {
@@ -791,7 +791,7 @@ type HTTPPerRequestInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPPerRequestObservation struct {
@@ -800,7 +800,7 @@ type HTTPPerRequestObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPPerRequestParameters struct {
@@ -811,7 +811,7 @@ type HTTPPerRequestParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type Http2IdleInitParameters struct {
@@ -820,7 +820,7 @@ type Http2IdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type Http2IdleObservation struct {
@@ -829,7 +829,7 @@ type Http2IdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type Http2IdleParameters struct {
@@ -840,7 +840,7 @@ type Http2IdleParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type Http2PerRequestInitParameters struct {
@@ -849,7 +849,7 @@ type Http2PerRequestInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type Http2PerRequestObservation struct {
@@ -858,7 +858,7 @@ type Http2PerRequestObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type Http2PerRequestParameters struct {
@@ -869,7 +869,7 @@ type Http2PerRequestParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type IntervalInitParameters struct {
@@ -878,7 +878,7 @@ type IntervalInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IntervalObservation struct {
@@ -887,7 +887,7 @@ type IntervalObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IntervalParameters struct {
@@ -898,7 +898,7 @@ type IntervalParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type ListenerConnectionPoolInitParameters struct {
@@ -953,60 +953,60 @@ type ListenerConnectionPoolParameters struct {
 type ListenerHealthCheckInitParameters struct {
 
 	// Number of consecutive successful health checks that must occur before declaring listener healthy.
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time period in milliseconds between each health check execution.
-	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
+	IntervalMillis *int64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time to wait when receiving a response from the health check, in milliseconds.
-	TimeoutMillis *float64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
+	TimeoutMillis *int64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
 
 	// Number of consecutive failed health checks that must occur before declaring a virtual node unhealthy.
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ListenerHealthCheckObservation struct {
 
 	// Number of consecutive successful health checks that must occur before declaring listener healthy.
-	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time period in milliseconds between each health check execution.
-	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
+	IntervalMillis *int64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time to wait when receiving a response from the health check, in milliseconds.
-	TimeoutMillis *float64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
+	TimeoutMillis *int64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
 
 	// Number of consecutive failed health checks that must occur before declaring a virtual node unhealthy.
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ListenerHealthCheckParameters struct {
 
 	// Number of consecutive successful health checks that must occur before declaring listener healthy.
 	// +kubebuilder:validation:Optional
-	HealthyThreshold *float64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *int64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
 
 	// Time period in milliseconds between each health check execution.
 	// +kubebuilder:validation:Optional
-	IntervalMillis *float64 `json:"intervalMillis" tf:"interval_millis,omitempty"`
+	IntervalMillis *int64 `json:"intervalMillis" tf:"interval_millis,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -1014,7 +1014,7 @@ type ListenerHealthCheckParameters struct {
 
 	// Port used for the port mapping.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	// +kubebuilder:validation:Optional
@@ -1022,17 +1022,17 @@ type ListenerHealthCheckParameters struct {
 
 	// Amount of time to wait when receiving a response from the health check, in milliseconds.
 	// +kubebuilder:validation:Optional
-	TimeoutMillis *float64 `json:"timeoutMillis" tf:"timeout_millis,omitempty"`
+	TimeoutMillis *int64 `json:"timeoutMillis" tf:"timeout_millis,omitempty"`
 
 	// Number of consecutive failed health checks that must occur before declaring a virtual node unhealthy.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *int64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ListenerPortMappingInitParameters struct {
 
 	// Port used for the port mapping.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -1041,7 +1041,7 @@ type ListenerPortMappingInitParameters struct {
 type ListenerPortMappingObservation struct {
 
 	// Port used for the port mapping.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -1051,7 +1051,7 @@ type ListenerPortMappingParameters struct {
 
 	// Port used for the port mapping.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	Port *int64 `json:"port" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	// +kubebuilder:validation:Optional
@@ -1386,10 +1386,10 @@ type OutlierDetectionInitParameters struct {
 
 	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
 	// Minimum value of 0. Maximum value of 100.
-	MaxEjectionPercent *float64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
+	MaxEjectionPercent *int64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
 
 	// Number of consecutive 5xx errors required for ejection. Minimum value of 1.
-	MaxServerErrors *float64 `json:"maxServerErrors,omitempty" tf:"max_server_errors,omitempty"`
+	MaxServerErrors *int64 `json:"maxServerErrors,omitempty" tf:"max_server_errors,omitempty"`
 }
 
 type OutlierDetectionObservation struct {
@@ -1402,10 +1402,10 @@ type OutlierDetectionObservation struct {
 
 	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
 	// Minimum value of 0. Maximum value of 100.
-	MaxEjectionPercent *float64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
+	MaxEjectionPercent *int64 `json:"maxEjectionPercent,omitempty" tf:"max_ejection_percent,omitempty"`
 
 	// Number of consecutive 5xx errors required for ejection. Minimum value of 1.
-	MaxServerErrors *float64 `json:"maxServerErrors,omitempty" tf:"max_server_errors,omitempty"`
+	MaxServerErrors *int64 `json:"maxServerErrors,omitempty" tf:"max_server_errors,omitempty"`
 }
 
 type OutlierDetectionParameters struct {
@@ -1421,11 +1421,11 @@ type OutlierDetectionParameters struct {
 	// Maximum percentage of hosts in load balancing pool for upstream service that can be ejected. Will eject at least one host regardless of the value.
 	// Minimum value of 0. Maximum value of 100.
 	// +kubebuilder:validation:Optional
-	MaxEjectionPercent *float64 `json:"maxEjectionPercent" tf:"max_ejection_percent,omitempty"`
+	MaxEjectionPercent *int64 `json:"maxEjectionPercent" tf:"max_ejection_percent,omitempty"`
 
 	// Number of consecutive 5xx errors required for ejection. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxServerErrors *float64 `json:"maxServerErrors" tf:"max_server_errors,omitempty"`
+	MaxServerErrors *int64 `json:"maxServerErrors" tf:"max_server_errors,omitempty"`
 }
 
 type ServiceDiscoveryInitParameters struct {
@@ -1609,7 +1609,7 @@ type TCPIdleInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TCPIdleObservation struct {
@@ -1618,7 +1618,7 @@ type TCPIdleObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
-	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TCPIdleParameters struct {
@@ -1629,26 +1629,26 @@ type TCPIdleParameters struct {
 
 	// The specified value for the JSON. Must be between 1 and 100 characters in length.
 	// +kubebuilder:validation:Optional
-	Value *float64 `json:"value" tf:"value,omitempty"`
+	Value *int64 `json:"value" tf:"value,omitempty"`
 }
 
 type TCPInitParameters struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
-	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections *int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 }
 
 type TCPObservation struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
-	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections *int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 }
 
 type TCPParameters struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxConnections *float64 `json:"maxConnections" tf:"max_connections,omitempty"`
+	MaxConnections *int64 `json:"maxConnections" tf:"max_connections,omitempty"`
 }
 
 type TLSCertificateAcmInitParameters struct {

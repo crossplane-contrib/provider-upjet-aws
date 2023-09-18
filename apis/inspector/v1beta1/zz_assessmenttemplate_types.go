@@ -16,7 +16,7 @@ import (
 type AssessmentTemplateInitParameters struct {
 
 	// The duration of the inspector run.
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// A block that enables sending notifications about a specified assessment template event to a designated SNS topic. See Event Subscriptions for details.
 	EventSubscription []EventSubscriptionInitParameters `json:"eventSubscription,omitempty" tf:"event_subscription,omitempty"`
@@ -37,7 +37,7 @@ type AssessmentTemplateObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The duration of the inspector run.
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// A block that enables sending notifications about a specified assessment template event to a designated SNS topic. See Event Subscriptions for details.
 	EventSubscription []EventSubscriptionObservation `json:"eventSubscription,omitempty" tf:"event_subscription,omitempty"`
@@ -64,7 +64,7 @@ type AssessmentTemplateParameters struct {
 
 	// The duration of the inspector run.
 	// +kubebuilder:validation:Optional
-	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *int64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// A block that enables sending notifications about a specified assessment template event to a designated SNS topic. See Event Subscriptions for details.
 	// +kubebuilder:validation:Optional

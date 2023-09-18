@@ -167,7 +167,8 @@ spec:
                           description: Time to live (TTL), in seconds, for cached
                             responses. The higher the TTL, the longer the response
                             will be cached.
-                          type: number
+                          format: int64
+                          type: integer
                         cachingEnabled:
                           description: Whether responses should be cached and returned
                             for requests. A cache cluster must be enabled on the stage
@@ -194,7 +195,8 @@ spec:
                         throttlingBurstLimit:
                           description: 'Throttling burst limit. Default: -1 (throttling
                             disabled).'
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: 'Throttling rate limit. Default: -1 (throttling
                             disabled).'
@@ -316,7 +318,8 @@ spec:
                           description: Time to live (TTL), in seconds, for cached
                             responses. The higher the TTL, the longer the response
                             will be cached.
-                          type: number
+                          format: int64
+                          type: integer
                         cachingEnabled:
                           description: Whether responses should be cached and returned
                             for requests. A cache cluster must be enabled on the stage
@@ -343,7 +346,8 @@ spec:
                         throttlingBurstLimit:
                           description: 'Throttling burst limit. Default: -1 (throttling
                             disabled).'
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: 'Throttling rate limit. Default: -1 (throttling
                             disabled).'
@@ -554,7 +558,8 @@ spec:
                           description: Time to live (TTL), in seconds, for cached
                             responses. The higher the TTL, the longer the response
                             will be cached.
-                          type: number
+                          format: int64
+                          type: integer
                         cachingEnabled:
                           description: Whether responses should be cached and returned
                             for requests. A cache cluster must be enabled on the stage
@@ -581,7 +586,8 @@ spec:
                         throttlingBurstLimit:
                           description: 'Throttling burst limit. Default: -1 (throttling
                             disabled).'
-                          type: number
+                          format: int64
+                          type: integer
                         throttlingRateLimit:
                           description: 'Throttling rate limit. Default: -1 (throttling
                             disabled).'

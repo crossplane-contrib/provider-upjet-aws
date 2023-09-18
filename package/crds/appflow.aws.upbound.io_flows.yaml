@@ -1304,7 +1304,8 @@ spec:
                                       description: Optional offset that is added to
                                         the time interval for a schedule-triggered
                                         flow. Maximum value of 36000.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     scheduleStartTime:
                                       description: Scheduled start time for a schedule-triggered
                                         flow. Must be a valid RFC3339 timestamp.
@@ -2397,7 +2398,8 @@ spec:
                                       description: Optional offset that is added to
                                         the time interval for a schedule-triggered
                                         flow. Maximum value of 36000.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     scheduleStartTime:
                                       description: Scheduled start time for a schedule-triggered
                                         flow. Must be a valid RFC3339 timestamp.
@@ -3677,7 +3679,8 @@ spec:
                                       description: Optional offset that is added to
                                         the time interval for a schedule-triggered
                                         flow. Maximum value of 36000.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     scheduleStartTime:
                                       description: Scheduled start time for a schedule-triggered
                                         flow. Must be a valid RFC3339 timestamp.

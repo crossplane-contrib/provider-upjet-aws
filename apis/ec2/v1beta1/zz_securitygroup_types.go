@@ -25,7 +25,7 @@ type SecurityGroupEgressObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Start port (or ICMP type number if protocol is icmp or icmpv6).
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// List of IPv6 CIDR blocks.
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
@@ -43,7 +43,7 @@ type SecurityGroupEgressObservation struct {
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// End range port (or ICMP code if protocol is icmp).
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SecurityGroupEgressParameters struct {
@@ -61,7 +61,7 @@ type SecurityGroupIngressObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Start port (or ICMP type number if protocol is icmp or icmpv6).
-	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// List of IPv6 CIDR blocks.
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
@@ -79,7 +79,7 @@ type SecurityGroupIngressObservation struct {
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// End range port (or ICMP code if protocol is icmp).
-	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type SecurityGroupIngressParameters struct {

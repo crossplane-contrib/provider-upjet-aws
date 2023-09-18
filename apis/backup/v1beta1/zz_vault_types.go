@@ -37,7 +37,7 @@ type VaultObservation struct {
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// The number of recovery points that are stored in a backup vault.
-	RecoveryPoints *float64 `json:"recoveryPoints,omitempty" tf:"recovery_points,omitempty"`
+	RecoveryPoints *int64 `json:"recoveryPoints,omitempty" tf:"recovery_points,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

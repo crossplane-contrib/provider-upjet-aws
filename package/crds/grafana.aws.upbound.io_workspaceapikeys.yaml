@@ -83,7 +83,8 @@ spec:
                   secondsToLive:
                     description: Specifies the time in seconds until the API key expires.
                       Keys can be valid for up to 30 days.
-                    type: number
+                    format: int64
+                    type: integer
                   workspaceId:
                     description: The ID of the workspace that the API key is valid
                       for.
@@ -188,7 +189,8 @@ spec:
                   secondsToLive:
                     description: Specifies the time in seconds until the API key expires.
                       Keys can be valid for up to 30 days.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -386,7 +388,8 @@ spec:
                   secondsToLive:
                     description: Specifies the time in seconds until the API key expires.
                       Keys can be valid for up to 30 days.
-                    type: number
+                    format: int64
+                    type: integer
                   workspaceId:
                     description: The ID of the workspace that the API key is valid
                       for.

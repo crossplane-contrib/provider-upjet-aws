@@ -76,7 +76,8 @@ spec:
                     type: string
                   port:
                     description: The port on which targets receive traffic.
-                    type: number
+                    format: int64
+                    type: integer
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -188,7 +189,8 @@ spec:
                     type: string
                   port:
                     description: The port on which targets receive traffic.
-                    type: number
+                    format: int64
+                    type: integer
                   targetId:
                     description: The ID of the target. This is the Instance ID for
                       an instance, or the container ID for an ECS container. If the
@@ -379,7 +381,8 @@ spec:
                     type: string
                   port:
                     description: The port on which targets receive traffic.
-                    type: number
+                    format: int64
+                    type: integer
                   targetGroupArn:
                     description: The ARN of the target group with which to register
                       targets.
