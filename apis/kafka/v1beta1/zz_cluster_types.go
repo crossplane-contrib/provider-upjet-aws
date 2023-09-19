@@ -379,6 +379,9 @@ type ClusterParameters struct {
 }
 
 type ConfigurationInfoInitParameters struct {
+
+	// Revision of the MSK Configuration to use in the cluster.
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type ConfigurationInfoObservation struct {
@@ -407,18 +410,8 @@ type ConfigurationInfoParameters struct {
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Revision of the MSK Configuration to use in the cluster.
-	// +crossplane:generate:reference:type=Configuration
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("latest_revision",true)
 	// +kubebuilder:validation:Optional
-	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
-
-	// Reference to a Configuration to populate revision.
-	// +kubebuilder:validation:Optional
-	RevisionRef *v1.Reference `json:"revisionRef,omitempty" tf:"-"`
-
-	// Selector for a Configuration to populate revision.
-	// +kubebuilder:validation:Optional
-	RevisionSelector *v1.Selector `json:"revisionSelector,omitempty" tf:"-"`
+	Revision *float64 `json:"revision" tf:"revision,omitempty"`
 }
 
 type ConnectivityInfoInitParameters struct {

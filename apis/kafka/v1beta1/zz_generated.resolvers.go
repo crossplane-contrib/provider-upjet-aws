@@ -81,24 +81,6 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.ForProvider.ConfigurationInfo[i3].ArnRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConfigurationInfo); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.ConfigurationInfo[i3].Revision),
-			Extract:      resource.ExtractParamPath("latest_revision", true),
-			Reference:    mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionRef,
-			Selector:     mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionSelector,
-			To: reference.To{
-				List:    &ConfigurationList{},
-				Managed: &Configuration{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.ConfigurationInfo[i3].Revision")
-		}
-		mg.Spec.ForProvider.ConfigurationInfo[i3].Revision = reference.ToFloatPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.ConfigurationInfo[i3].RevisionRef = rsp.ResolvedReference
-
-	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionInfo); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),

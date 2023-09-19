@@ -23,9 +23,7 @@ spec:
       - arnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-        revisionSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+        revision: 1
     encryptionInfo:
       - encryptionAtRestKmsKeyArnSelector:
           matchLabels:

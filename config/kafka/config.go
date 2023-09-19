@@ -29,10 +29,6 @@ func Configure(p *config.Provider) {
 			Type:      "Configuration",
 			Extractor: common.PathARNExtractor,
 		}
-		r.References["configuration_info.revision"] = config.Reference{
-			Type:      "Configuration",
-			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("latest_revision",true)`,
-		}
 		r.UseAsync = true
 	})
 }
