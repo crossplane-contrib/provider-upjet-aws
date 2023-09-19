@@ -6,7 +6,6 @@ package clients
 
 import (
 	"context"
-	"fmt"
 	"os"
 
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
@@ -105,7 +104,9 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			TerraformVersion: ps.Version,
 		}
 		tfClient, diag := config.GetClient(context.TODO(), &xpprovider.AWSClient{})
-		fmt.Println(diag)
+		if diag != nil && diag.HasError() {
+			return terraform.Setup{}, errors.Errorf("failed to configure the AWS client: %v", diag)
+		}
 		ps.Meta = tfClient
 
 		return ps, nil
