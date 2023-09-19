@@ -222,3 +222,5 @@ require (
 replace github.com/upbound/upjet => ../upjet
 
 replace github.com/hashicorp/terraform-provider-aws => /Users/alper/data/workspaces/github.com/hashicorp/terraform-provider-aws
+
+replace github.com/crossplane/crossplane-runtime => ../../crossplane/crossplane-runtime
