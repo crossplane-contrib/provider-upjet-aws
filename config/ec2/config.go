@@ -325,6 +325,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"ipv6_cidr_block",
+				"cidr_block",
 			},
 		}
 		r.UseAsync = true
