@@ -16,6 +16,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	tjcontroller "github.com/upbound/upjet/pkg/controller"
 	"github.com/upbound/upjet/pkg/controller/handler"
+	"github.com/upbound/upjet/pkg/metrics"
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
@@ -33,7 +34,8 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.UserPolicyAttachment_GroupVersionKind)))
 	opts := []managed.ReconcilerOption{
-		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_iam_user_policy_attachment"], tjcontroller.WithNoForkLogger(o.Logger))),
+		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_iam_user_policy_attachment"], tjcontroller.WithNoForkLogger(o.Logger),
+			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.UserPolicyAttachment_GroupVersionKind, mgr, o.PollInterval)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
 		managed.WithFinalizer(terraform.NewWorkspaceFinalizer(o.WorkspaceStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
