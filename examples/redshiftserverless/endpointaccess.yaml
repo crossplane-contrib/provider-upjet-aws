@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    endpointName: example
     region: us-west-1
     workgroupName: example
     subnetIdRefs:

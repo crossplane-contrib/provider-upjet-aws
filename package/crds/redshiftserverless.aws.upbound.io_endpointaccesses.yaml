@@ -67,9 +67,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  endpointName:
-                    description: The name of the endpoint.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -259,9 +256,6 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  endpointName:
-                    description: The name of the endpoint.
-                    type: string
                   workgroupName:
                     description: The name of the workgroup.
                     type: string
@@ -464,10 +458,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: endpointName is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointName)
-                || has(self.initProvider.endpointName)'
             - message: workgroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.workgroupName)
@@ -483,9 +473,6 @@ spec:
                   arn:
                     description: Amazon Resource Name (ARN) of the Redshift Serverless
                       Endpoint Access.
-                    type: string
-                  endpointName:
-                    description: The name of the endpoint.
                     type: string
                   id:
                     description: The Redshift Endpoint Access Name.

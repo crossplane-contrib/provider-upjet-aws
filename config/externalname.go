@@ -1162,10 +1162,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_redshift_hsm_configuration": config.ParameterAsIdentifier("hsm_configuration_identifier"),
 	// Redshift usage limits can be imported using the id
 	"aws_redshift_usage_limit": config.IdentifierFromProvider,
+
+	// redshiftserverless
+	//
 	// Redshift Serverless Namespaces can be imported using the namespace_name
 	"aws_redshiftserverless_namespace": config.ParameterAsIdentifier("namespace_name"),
 	// Redshift Serverless Endpoint Access can be imported using the endpoint_name
-	"aws_redshiftserverless_endpoint_access": config.IdentifierFromProvider,
+	"aws_redshiftserverless_endpoint_access": config.ParameterAsIdentifier("endpoint_name"),
 	// Redshift Serverless Resource Policies can be imported using the resource_arn
 	"aws_redshiftserverless_resource_policy": config.IdentifierFromProvider,
 	// Redshift Serverless Snapshots can be imported using the snapshot_name

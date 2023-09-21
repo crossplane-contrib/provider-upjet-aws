@@ -34,7 +34,7 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example-resourcepolicy
+  name: example
 spec:
   forProvider:
     namespaceName: example
@@ -47,7 +47,7 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example-resourcepolicy
+  name: example
 spec:
   forProvider:
     region: us-west-1
@@ -59,7 +59,7 @@ metadata:
     meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example-resourcepolicy
+  name: example
 spec:
   forProvider:
     namespaceName: example

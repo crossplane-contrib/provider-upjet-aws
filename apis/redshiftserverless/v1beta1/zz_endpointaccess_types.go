@@ -15,9 +15,6 @@ import (
 
 type EndpointAccessInitParameters struct {
 
-	// The name of the endpoint.
-	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
-
 	// The name of the workgroup.
 	WorkgroupName *string `json:"workgroupName,omitempty" tf:"workgroup_name,omitempty"`
 }
@@ -29,9 +26,6 @@ type EndpointAccessObservation struct {
 
 	// Amazon Resource Name (ARN) of the Redshift Serverless Endpoint Access.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-
-	// The name of the endpoint.
-	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
 
 	// The Redshift Endpoint Access Name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -53,10 +47,6 @@ type EndpointAccessObservation struct {
 }
 
 type EndpointAccessParameters struct {
-
-	// The name of the endpoint.
-	// +kubebuilder:validation:Optional
-	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -173,7 +163,6 @@ type EndpointAccessStatus struct {
 type EndpointAccess struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointName) || has(self.initProvider.endpointName)",message="endpointName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.workgroupName) || has(self.initProvider.workgroupName)",message="workgroupName is a required parameter"
 	Spec   EndpointAccessSpec   `json:"spec"`
 	Status EndpointAccessStatus `json:"status,omitempty"`
