@@ -43,7 +43,7 @@ spec:
               - enabledInBroker: true
             nodeExporter:
               - enabledInBroker: true
-    region: us-west-1
+    region: us-east-2
     tags:
       foo: bar
 
@@ -60,7 +60,7 @@ spec:
     kafkaVersions:
       - 2.6.0
     name: example
-    region: us-west-1
+    region: us-east-2
     serverProperties: |
       auto.create.topics.enable = true
       delete.topic.enable = true
@@ -101,7 +101,7 @@ metadata:
 spec:
   forProvider:
     destination: extended_s3
-    region: us-west-1
+    region: us-east-2
     extendedS3Configuration:
       - bucketArnSelector:
           matchLabels:
@@ -124,7 +124,7 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -136,7 +136,7 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -148,7 +148,7 @@ metadata:
   name: sg
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -161,9 +161,9 @@ metadata:
   name: subnet-az1
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2a
     cidrBlock: 192.168.0.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -176,9 +176,9 @@ metadata:
   name: subnet-az2
 spec:
   forProvider:
-    availabilityZone: us-west-1c
+    availabilityZone: us-east-2b
     cidrBlock: 192.168.1.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -194,7 +194,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -204,7 +204,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Application: serviceA
       Environment: production
