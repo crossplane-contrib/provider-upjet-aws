@@ -1,0 +1,66 @@
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: ResourcePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-resourcepolicy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "redshift-serverless:RestoreFromSnapshot",
+            "Principal": {
+              "AWS": "${data.aws_peer_account_id}"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }
+    region: us-west-1
+    resourceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespaceName: example
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/resourcepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespaceName: example
+    region: us-west-1

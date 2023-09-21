@@ -1,0 +1,24 @@
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/workgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespaceName: concurrency-scaling
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/workgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: concurrency-scaling
+spec:
+  forProvider:
+    region: us-west-1

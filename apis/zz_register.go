@@ -129,6 +129,7 @@ import (
 	v1beta1ram "github.com/upbound/provider-aws/apis/ram/v1beta1"
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
+	v1beta1redshiftserverless "github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1"
 	v1beta1resourcegroups "github.com/upbound/provider-aws/apis/resourcegroups/v1beta1"
 	v1beta1rolesanywhere "github.com/upbound/provider-aws/apis/rolesanywhere/v1beta1"
 	v1beta1route53 "github.com/upbound/provider-aws/apis/route53/v1beta1"
@@ -292,6 +293,7 @@ func init() {
 		v1beta1ram.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1beta1redshift.SchemeBuilder.AddToScheme,
+		v1beta1redshiftserverless.SchemeBuilder.AddToScheme,
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
 		v1beta1rolesanywhere.SchemeBuilder.AddToScheme,
 		v1beta1route53.SchemeBuilder.AddToScheme,

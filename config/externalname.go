@@ -1163,6 +1163,21 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Redshift usage limits can be imported using the id
 	"aws_redshift_usage_limit": config.IdentifierFromProvider,
 
+	// redshiftserverless
+	//
+	// Redshift Serverless Namespaces can be imported using the namespace_name
+	"aws_redshiftserverless_namespace": config.ParameterAsIdentifier("namespace_name"),
+	// Redshift Serverless Endpoint Access can be imported using the endpoint_name
+	"aws_redshiftserverless_endpoint_access": config.ParameterAsIdentifier("endpoint_name"),
+	// Redshift Serverless Resource Policies can be imported using the resource_arn
+	"aws_redshiftserverless_resource_policy": config.IdentifierFromProvider,
+	// Redshift Serverless Snapshots can be imported using the snapshot_name
+	"aws_redshiftserverless_snapshot": config.ParameterAsIdentifier("snapshot_name"),
+	// Redshift Serverless Usage Limits can be imported using the id
+	"aws_redshiftserverless_usage_limit": config.IdentifierFromProvider,
+	// Redshift Serverless Workgroups can be imported using the workgroup_name
+	"aws_redshiftserverless_workgroup": config.ParameterAsIdentifier("workgroup_name"),
+
 	// sfn
 	//
 	"aws_sfn_activity":      config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),

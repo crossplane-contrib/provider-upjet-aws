@@ -1,0 +1,37 @@
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespaceName: example
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: RedshiftServerlessNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: redshiftserverless.aws.upbound.io/v1beta1
+kind: Workgroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: redshiftserverless/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    namespaceName: example
+    region: us-west-1
