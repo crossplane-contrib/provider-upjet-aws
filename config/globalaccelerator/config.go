@@ -20,7 +20,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for ebs group.
+// Configure adds configurations for the globalaccelerator group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_globalaccelerator_endpoint_group", func(r *config.Resource) {
 		r.References = config.References{

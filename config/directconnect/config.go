@@ -20,8 +20,8 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for directconnect group.
-func Configure(p *config.Provider) { // nolint:gocyclo
+// Configure adds configurations for the directconnect group.
+func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dx_public_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
 			Type: "Connection",

@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for ecrpublic group.
+// Configure adds configurations for the ecrpublic group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecrpublic_repository", func(r *config.Resource) {
 		// Deletion takes a while.

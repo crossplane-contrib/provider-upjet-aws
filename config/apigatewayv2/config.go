@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for autoscaling group.
+// Configure adds configurations for the apigatewayv2 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_apigatewayv2_api_mapping", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{

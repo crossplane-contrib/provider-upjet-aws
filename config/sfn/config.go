@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for sfn group.
+// Configure adds configurations for the sfn group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_sfn_state_machine", func(r *config.Resource) {
 		r.References["role_arn"] = config.Reference{

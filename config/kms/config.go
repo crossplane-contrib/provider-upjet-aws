@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for kms group.
+// Configure adds configurations for the kms group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_kms_alias", func(r *config.Resource) {
 		r.References["target_key_id"] = config.Reference{

@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for networkmanager group
+// Configure adds configurations for the networkmanager group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_networkmanager_link", func(r *config.Resource) {
 		r.References["site_id"] = config.Reference{

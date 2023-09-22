@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for athena group.
+// Configure adds configurations for the athena group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_athena_workgroup", func(r *config.Resource) {
 		r.References["configuration.result_configuration.encryption_configuration.kms_key_arn"] = config.Reference{

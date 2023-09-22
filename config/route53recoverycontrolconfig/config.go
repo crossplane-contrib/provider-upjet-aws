@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for route53recoverycontrolconfig group.
+// Configure adds configurations for the route53recoverycontrolconfig group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_route53recoverycontrolconfig_control_panel", func(r *config.Resource) {
 		r.References["cluster_arn"] = config.Reference{

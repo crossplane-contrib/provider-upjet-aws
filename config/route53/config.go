@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure route53 resources.
+// Configure adds configurations for the route53 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_route53_traffic_policy_instance", func(r *config.Resource) {
 		r.References["hosted_zone_id"] = config.Reference{

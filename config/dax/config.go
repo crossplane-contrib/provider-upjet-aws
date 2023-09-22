@@ -2,7 +2,7 @@ package dax
 
 import "github.com/upbound/upjet/pkg/config"
 
-// Configure adds configurations for dax group.
+// Configure adds configurations for the dax group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dax_cluster", func(r *config.Resource) {
 		r.UseAsync = true

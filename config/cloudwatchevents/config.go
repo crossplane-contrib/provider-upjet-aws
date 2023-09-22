@@ -18,7 +18,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for cloudwatchevents group.
+// Configure adds configurations for the cloudwatchevents group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudwatch_event_permission", func(r *config.Resource) {
 		r.References["event_bus_name"] = config.Reference{

@@ -2,7 +2,7 @@ package ds
 
 import "github.com/upbound/upjet/pkg/config"
 
-// Configure adds configurations for ds group.
+// Configure adds configurations for the ds group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_directory_service_directory", func(r *config.Resource) {
 		r.References["vpc_settings.subnet_ids"] = config.Reference{

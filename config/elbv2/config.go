@@ -2,7 +2,7 @@ package elbv2
 
 import "github.com/upbound/upjet/pkg/config"
 
-// Configure adds configurations for acm group.
+// Configure adds configurations for the elbv2 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lb", func(r *config.Resource) {
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")

@@ -2,7 +2,7 @@ package docdb
 
 import "github.com/upbound/upjet/pkg/config"
 
-// Configure adds configurations for docdb group.
+// Configure adds configurations for the docdb group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_docdb_cluster", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "cluster_members")

@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for autoscaling group.
+// Configure adds configurations for the autoscaling group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_autoscaling_group", func(r *config.Resource) {
 		// These are mutually exclusive with aws_autoscaling_attachment.

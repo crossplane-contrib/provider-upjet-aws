@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for ebs group.
+// Configure adds configurations for the ebs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ebs_volume", func(r *config.Resource) {
 		r.References = map[string]config.Reference{

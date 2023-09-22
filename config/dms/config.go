@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for dms group.
+// Configure adds configurations for the dms group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dms_endpoint", func(r *config.Resource) {
 		r.References = config.References{

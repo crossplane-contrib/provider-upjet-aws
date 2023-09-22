@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for connect group.
+// Configure adds configurations for the connect group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_connect_contact_flow", func(r *config.Resource) {
 		r.References["instance_id"] = config.Reference{

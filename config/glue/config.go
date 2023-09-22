@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure glue resources.
+// Configure adds configurations for the glue group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_glue_catalog_database", func(r *config.Resource) {
 		// Required in ID but optional in schema since TF defaults to Account ID.

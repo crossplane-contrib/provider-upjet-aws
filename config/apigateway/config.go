@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for acm group.
+// Configure adds configurations for the apigateway group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_api_gateway_rest_api", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "policy")

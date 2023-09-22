@@ -20,7 +20,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for servicecatalog group.
+// Configure adds configurations for the servicecatalog group.
 func Configure(p *config.Provider) {
 	// done for proper normalization as the defaulting is done by Terraform
 	// please refer to this resource's external-name configuration for details.

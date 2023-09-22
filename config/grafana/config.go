@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for grafana group.
+// Configure adds configurations for the grafana group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_grafana_workspace", func(r *config.Resource) {
 		r.References["role_arn"] = config.Reference{

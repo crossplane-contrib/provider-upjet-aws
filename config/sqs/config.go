@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for sns group.
+// Configure adds configurations for the sqs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_sqs_queue_policy", func(r *config.Resource) {
 		r.References["queue_url"] = config.Reference{

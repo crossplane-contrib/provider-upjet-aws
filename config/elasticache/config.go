@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for elasticache group.
+// Configure adds configurations for the elasticache group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_elasticache_cluster", func(r *config.Resource) {
 		r.References["parameter_group_name"] = config.Reference{

@@ -8,7 +8,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for acm group.
+// Configure adds configurations for the acmpca group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_acmpca_certificate_authority", func(r *config.Resource) {
 		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313

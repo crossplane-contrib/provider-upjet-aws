@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for ec2 group.
+// Configure adds configurations for the ec2 group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_instance", func(r *config.Resource) {
 		r.UseAsync = true

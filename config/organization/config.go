@@ -16,7 +16,7 @@ package organization
 
 import "github.com/upbound/upjet/pkg/config"
 
-// Configure adds configurations for organization group.
+// Configure adds configurations for the organization group.
 func Configure(p *config.Provider) {
 	// please see: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account
 	// If `role_name` is used, it's stated that Terraform will always

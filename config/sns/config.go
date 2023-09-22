@@ -6,7 +6,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for sns group.
+// Configure adds configurations for the sns group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_sns_topic_subscription", func(r *config.Resource) {
 		r.References["endpoint"] = config.Reference{

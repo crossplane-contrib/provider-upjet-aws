@@ -16,7 +16,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for ecs group.
+// Configure adds configurations for the ecs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecs_cluster", func(r *config.Resource) {
 		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {

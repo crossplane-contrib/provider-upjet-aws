@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for ecrs group.
+// Configure adds configurations for the ecr group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecr_repository", func(r *config.Resource) {
 		r.References = map[string]config.Reference{

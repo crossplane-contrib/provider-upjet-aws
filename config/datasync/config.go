@@ -20,7 +20,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// Configure adds configurations for datasync group.
+// Configure adds configurations for the datasync group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_datasync_task", func(r *config.Resource) {
 		r.References["destination_location_arn"] = config.Reference{

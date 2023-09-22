@@ -18,7 +18,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure adds configurations for kendra group.
+// Configure adds configurations for the kendra group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_kendra_thesaurus", func(r *config.Resource) {
 		r.Path = "thesaurus"
