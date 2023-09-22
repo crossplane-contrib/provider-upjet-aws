@@ -25,6 +25,10 @@ func Configure(p *config.Provider) {
 		r.References["broker_node_group_info.security_groups"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
 		}
+		r.References["configuration_info.arn"] = config.Reference{
+			Type:      "Configuration",
+			Extractor: common.PathARNExtractor,
+		}
 		r.UseAsync = true
 	})
 }

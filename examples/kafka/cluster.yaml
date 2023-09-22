@@ -1,6 +1,8 @@
 apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -10,13 +12,18 @@ spec:
       - clientSubnetsRefs:
           - name: subnet-az1
           - name: subnet-az2
-        instanceType: kafka.m5.large
+        instanceType: kafka.t3.small
         securityGroupsRefs:
           - name: sg
         storageInfo:
           - ebsStorageInfo:
               - volumeSize: 1000
     clusterName: example
+    configurationInfo:
+      - arnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        revision: 1
     encryptionInfo:
       - encryptionAtRestKmsKeyArnSelector:
           matchLabels:
@@ -36,9 +43,27 @@ spec:
               - enabledInBroker: true
             nodeExporter:
               - enabledInBroker: true
-    region: us-west-1
+    region: us-east-2
     tags:
       foo: bar
+
+---
+
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    kafkaVersions:
+      - 2.6.0
+    name: example
+    region: us-east-2
+    serverProperties: |
+      auto.create.topics.enable = true
+      delete.topic.enable = true
 
 ---
 
@@ -72,18 +97,19 @@ kind: DeliveryStream
 metadata:
   labels:
     testing.upbound.io/example-name: test_stream
-  name: test-stream
+  name: example
 spec:
   forProvider:
-    destination: s3
-    region: us-west-1
-    s3Configuration:
+    destination: extended_s3
+    region: us-east-2
+    extendedS3Configuration:
       - bucketArnSelector:
           matchLabels:
             testing.upbound.io/example-name: bucket
         roleArnSelector:
           matchLabels:
             testing.upbound.io/example-name: firehose_role
+    name: example
     tags:
       LogDeliveryEnabled: placeholder
 
@@ -98,7 +124,7 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -110,7 +136,7 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -122,7 +148,7 @@ metadata:
   name: sg
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -135,9 +161,9 @@ metadata:
   name: subnet-az1
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2a
     cidrBlock: 192.168.0.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -150,9 +176,9 @@ metadata:
   name: subnet-az2
 spec:
   forProvider:
-    availabilityZone: us-west-1c
+    availabilityZone: us-east-2b
     cidrBlock: 192.168.1.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc
@@ -168,7 +194,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -178,7 +204,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Application: serviceA
       Environment: production

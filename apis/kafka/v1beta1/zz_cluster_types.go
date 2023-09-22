@@ -380,9 +380,6 @@ type ClusterParameters struct {
 
 type ConfigurationInfoInitParameters struct {
 
-	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-
 	// Revision of the MSK Configuration to use in the cluster.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
@@ -399,8 +396,18 @@ type ConfigurationInfoObservation struct {
 type ConfigurationInfoParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
+	// +crossplane:generate:reference:type=Configuration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn" tf:"arn,omitempty"`
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Configuration to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Configuration to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Revision of the MSK Configuration to use in the cluster.
 	// +kubebuilder:validation:Optional
