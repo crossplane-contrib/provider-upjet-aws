@@ -11,6 +11,7 @@ import (
 
 	cluster "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 )
 
 // Setup_kafka creates all controllers with the supplied logger and adds them to
@@ -19,6 +20,7 @@ func Setup_kafka(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.Setup,
 		configuration.Setup,
+		scramsecretassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
