@@ -33,7 +33,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_msk_scram_secret_association", func(r *config.Resource) {
 		r.References["secret_arn_list"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret",
+			Type:              "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret",
 			RefFieldName:      "SecretArnRefs",
 			SelectorFieldName: "SecretArnSelector",
 		}
