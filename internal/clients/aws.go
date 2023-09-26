@@ -38,6 +38,7 @@ const (
 	keySkipCredsValidation       = "skip_credentials_validation"
 	keyS3UsePathStyle            = "s3_use_path_style"
 	keySkipMetadataApiCheck      = "skip_metadata_api_check"
+	keySkipRegionValidation      = "skip_region_validation"
 	keySkipReqAccountId          = "skip_requesting_account_id"
 	keyEndpoints                 = "endpoints"
 )
@@ -182,6 +183,7 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 		keySessionToken:         creds.SessionToken,
 		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
 		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
+		keySkipRegionValidation: pc.Spec.SkipRegionValidation,
 		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
 		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
 	}

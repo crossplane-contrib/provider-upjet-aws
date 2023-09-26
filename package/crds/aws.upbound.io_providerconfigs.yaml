@@ -297,6 +297,12 @@ spec:
                 description: Whether to skip the AWS Metadata API check Useful for
                   AWS API implementations that do not have a metadata API endpoint.
                 type: boolean
+              skip_region_validation:
+                description: Whether to skip validation of provided region name. Useful
+                  for AWS-like implementations that use their own region names or
+                  to bypass the validation for regions that aren't publicly available
+                  yet.
+                type: boolean
               skip_requesting_account_id:
                 description: Whether to skip requesting the account ID. Useful for
                   AWS API implementations that do not have the IAM, STS API, or metadata
