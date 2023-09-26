@@ -51,7 +51,7 @@ type CanarySettingsInitParameters struct {
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
-	StageVariableOverrides map[string]string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
+	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
 	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
@@ -63,7 +63,7 @@ type CanarySettingsObservation struct {
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
-	StageVariableOverrides map[string]string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
+	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
 	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
@@ -77,7 +77,7 @@ type CanarySettingsParameters struct {
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
 	// +kubebuilder:validation:Optional
-	StageVariableOverrides map[string]string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
+	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
 	// +kubebuilder:validation:Optional

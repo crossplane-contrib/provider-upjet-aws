@@ -13,7 +13,6 @@ import (
 	configurationprofile "github.com/upbound/provider-aws/internal/controller/appconfig/configurationprofile"
 	deployment "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
 	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
-	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
 	extension "github.com/upbound/provider-aws/internal/controller/appconfig/extension"
 	extensionassociation "github.com/upbound/provider-aws/internal/controller/appconfig/extensionassociation"
 	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
@@ -27,7 +26,6 @@ func Setup_appconfig(mgr ctrl.Manager, o controller.Options) error {
 		configurationprofile.Setup,
 		deployment.Setup,
 		deploymentstrategy.Setup,
-		environment.Setup,
 		extension.Setup,
 		extensionassociation.Setup,
 		hostedconfigurationversion.Setup,

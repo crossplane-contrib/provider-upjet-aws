@@ -69,7 +69,6 @@ import (
 	configurationprofile "github.com/upbound/provider-aws/internal/controller/appconfig/configurationprofile"
 	deploymentappconfig "github.com/upbound/provider-aws/internal/controller/appconfig/deployment"
 	deploymentstrategy "github.com/upbound/provider-aws/internal/controller/appconfig/deploymentstrategy"
-	environment "github.com/upbound/provider-aws/internal/controller/appconfig/environment"
 	extension "github.com/upbound/provider-aws/internal/controller/appconfig/extension"
 	extensionassociation "github.com/upbound/provider-aws/internal/controller/appconfig/extensionassociation"
 	hostedconfigurationversion "github.com/upbound/provider-aws/internal/controller/appconfig/hostedconfigurationversion"
@@ -602,7 +601,6 @@ import (
 	invitationacceptermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
 	membermacie2 "github.com/upbound/provider-aws/internal/controller/macie2/member"
 	queuemediaconvert "github.com/upbound/provider-aws/internal/controller/mediaconvert/queue"
-	channelmedialive "github.com/upbound/provider-aws/internal/controller/medialive/channel"
 	input "github.com/upbound/provider-aws/internal/controller/medialive/input"
 	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/medialive/inputsecuritygroup"
 	multiplex "github.com/upbound/provider-aws/internal/controller/medialive/multiplex"
@@ -646,21 +644,10 @@ import (
 	domainpolicyopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptionsopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
 	applicationopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/application"
-	customlayer "github.com/upbound/provider-aws/internal/controller/opsworks/customlayer"
-	ecsclusterlayer "github.com/upbound/provider-aws/internal/controller/opsworks/ecsclusterlayer"
-	ganglialayer "github.com/upbound/provider-aws/internal/controller/opsworks/ganglialayer"
-	haproxylayer "github.com/upbound/provider-aws/internal/controller/opsworks/haproxylayer"
 	instanceopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/instance"
-	javaapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/javaapplayer"
-	memcachedlayer "github.com/upbound/provider-aws/internal/controller/opsworks/memcachedlayer"
-	mysqllayer "github.com/upbound/provider-aws/internal/controller/opsworks/mysqllayer"
-	nodejsapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/nodejsapplayer"
 	permissionopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/permission"
-	phpapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/phpapplayer"
-	railsapplayer "github.com/upbound/provider-aws/internal/controller/opsworks/railsapplayer"
 	rdsdbinstance "github.com/upbound/provider-aws/internal/controller/opsworks/rdsdbinstance"
 	stackopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/stack"
-	staticweblayer "github.com/upbound/provider-aws/internal/controller/opsworks/staticweblayer"
 	userprofile "github.com/upbound/provider-aws/internal/controller/opsworks/userprofile"
 	accountorganizations "github.com/upbound/provider-aws/internal/controller/organizations/account"
 	delegatedadministrator "github.com/upbound/provider-aws/internal/controller/organizations/delegatedadministrator"
@@ -673,8 +660,6 @@ import (
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 	ledger "github.com/upbound/provider-aws/internal/controller/qldb/ledger"
 	streamqldb "github.com/upbound/provider-aws/internal/controller/qldb/stream"
-	groupquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/group"
-	userquicksight "github.com/upbound/provider-aws/internal/controller/quicksight/user"
 	principalassociation "github.com/upbound/provider-aws/internal/controller/ram/principalassociation"
 	resourceassociation "github.com/upbound/provider-aws/internal/controller/ram/resourceassociation"
 	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
@@ -912,8 +897,6 @@ import (
 	sqlinjectionmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/sqlinjectionmatchset"
 	webaclwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/webacl"
 	xssmatchsetwafregional "github.com/upbound/provider-aws/internal/controller/wafregional/xssmatchset"
-	ipsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/ipset"
-	regexpatternsetwafv2 "github.com/upbound/provider-aws/internal/controller/wafv2/regexpatternset"
 	directoryworkspaces "github.com/upbound/provider-aws/internal/controller/workspaces/directory"
 	ipgroup "github.com/upbound/provider-aws/internal/controller/workspaces/ipgroup"
 	encryptionconfig "github.com/upbound/provider-aws/internal/controller/xray/encryptionconfig"
@@ -985,7 +968,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		configurationprofile.Setup,
 		deploymentappconfig.Setup,
 		deploymentstrategy.Setup,
-		environment.Setup,
 		extension.Setup,
 		extensionassociation.Setup,
 		hostedconfigurationversion.Setup,
@@ -1518,7 +1500,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		invitationacceptermacie2.Setup,
 		membermacie2.Setup,
 		queuemediaconvert.Setup,
-		channelmedialive.Setup,
 		input.Setup,
 		inputsecuritygroup.Setup,
 		multiplex.Setup,
@@ -1562,21 +1543,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		domainpolicyopensearch.Setup,
 		domainsamloptionsopensearch.Setup,
 		applicationopsworks.Setup,
-		customlayer.Setup,
-		ecsclusterlayer.Setup,
-		ganglialayer.Setup,
-		haproxylayer.Setup,
 		instanceopsworks.Setup,
-		javaapplayer.Setup,
-		memcachedlayer.Setup,
-		mysqllayer.Setup,
-		nodejsapplayer.Setup,
 		permissionopsworks.Setup,
-		phpapplayer.Setup,
-		railsapplayer.Setup,
 		rdsdbinstance.Setup,
 		stackopsworks.Setup,
-		staticweblayer.Setup,
 		userprofile.Setup,
 		accountorganizations.Setup,
 		delegatedadministrator.Setup,
@@ -1589,8 +1559,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		providerconfig.Setup,
 		ledger.Setup,
 		streamqldb.Setup,
-		groupquicksight.Setup,
-		userquicksight.Setup,
 		principalassociation.Setup,
 		resourceassociation.Setup,
 		resourceshare.Setup,
@@ -1828,8 +1796,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		sqlinjectionmatchsetwafregional.Setup,
 		webaclwafregional.Setup,
 		xssmatchsetwafregional.Setup,
-		ipsetwafv2.Setup,
-		regexpatternsetwafv2.Setup,
 		directoryworkspaces.Setup,
 		ipgroup.Setup,
 		encryptionconfig.Setup,
