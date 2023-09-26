@@ -20,7 +20,7 @@ import (
 type UsageLimitInitParameters struct {
 
 	// The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
-	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
+	Amount *int64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
 	// The action that Amazon Redshift Serverless takes when the limit is reached. Valid values are log, emit-metric, and deactivate. The default is log.
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
@@ -35,7 +35,7 @@ type UsageLimitInitParameters struct {
 type UsageLimitObservation struct {
 
 	// The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
-	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
+	Amount *int64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Redshift Serverless Usage Limit.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -60,7 +60,7 @@ type UsageLimitParameters struct {
 
 	// The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data transferred between Regions in cross-account sharing. The value must be a positive number.
 	// +kubebuilder:validation:Optional
-	Amount *float64 `json:"amount,omitempty" tf:"amount,omitempty"`
+	Amount *int64 `json:"amount,omitempty" tf:"amount,omitempty"`
 
 	// The action that Amazon Redshift Serverless takes when the limit is reached. Valid values are log, emit-metric, and deactivate. The default is log.
 	// +kubebuilder:validation:Optional

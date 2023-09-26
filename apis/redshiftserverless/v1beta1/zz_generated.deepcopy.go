@@ -187,7 +187,7 @@ func (in *EndpointAccessObservation) DeepCopyInto(out *EndpointAccessObservation
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SubnetIds != nil {
@@ -367,7 +367,7 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VPCEndpoint != nil {
@@ -1102,7 +1102,7 @@ func (in *SnapshotInitParameters) DeepCopyInto(out *SnapshotInitParameters) {
 	*out = *in
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1211,7 +1211,7 @@ func (in *SnapshotObservation) DeepCopyInto(out *SnapshotObservation) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1251,7 +1251,7 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1333,7 +1333,7 @@ func (in *UsageLimitInitParameters) DeepCopyInto(out *UsageLimitInitParameters) 
 	*out = *in
 	if in.Amount != nil {
 		in, out := &in.Amount, &out.Amount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BreachAction != nil {
@@ -1400,7 +1400,7 @@ func (in *UsageLimitObservation) DeepCopyInto(out *UsageLimitObservation) {
 	*out = *in
 	if in.Amount != nil {
 		in, out := &in.Amount, &out.Amount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Arn != nil {
@@ -1450,7 +1450,7 @@ func (in *UsageLimitParameters) DeepCopyInto(out *UsageLimitParameters) {
 	*out = *in
 	if in.Amount != nil {
 		in, out := &in.Amount, &out.Amount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BreachAction != nil {
@@ -1694,7 +1694,7 @@ func (in *WorkgroupInitParameters) DeepCopyInto(out *WorkgroupInitParameters) {
 	*out = *in
 	if in.BaseCapacity != nil {
 		in, out := &in.BaseCapacity, &out.BaseCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ConfigParameter != nil {
@@ -1789,7 +1789,7 @@ func (in *WorkgroupObservation) DeepCopyInto(out *WorkgroupObservation) {
 	}
 	if in.BaseCapacity != nil {
 		in, out := &in.BaseCapacity, &out.BaseCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ConfigParameter != nil {
@@ -1902,7 +1902,7 @@ func (in *WorkgroupParameters) DeepCopyInto(out *WorkgroupParameters) {
 	*out = *in
 	if in.BaseCapacity != nil {
 		in, out := &in.BaseCapacity, &out.BaseCapacity
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ConfigParameter != nil {
