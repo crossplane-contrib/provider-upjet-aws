@@ -325,11 +325,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
 	"aws_iot_topic_rule_destination": config.IdentifierFromProvider,
 
-	// kafka
-	//
-	// MSK SCRAM Secret Associations can be imported using the id
-	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
-
 	// macie
 	//
 	// No import
