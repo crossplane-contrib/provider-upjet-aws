@@ -20,7 +20,7 @@ import (
 type WorkflowInitParameters struct {
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
-	DefaultRunProperties map[string]string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -38,7 +38,7 @@ type WorkflowObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
-	DefaultRunProperties map[string]string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -60,7 +60,7 @@ type WorkflowParameters struct {
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +kubebuilder:validation:Optional
-	DefaultRunProperties map[string]string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
+	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
 	// +kubebuilder:validation:Optional

@@ -1770,7 +1770,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// AppConfig Deployment Strategies can be imported by using their deployment strategy ID
 	"aws_appconfig_deployment_strategy": config.IdentifierFromProvider,
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	"aws_appconfig_environment": config.IdentifierFromProvider,
+	// terraform-plugin-framework
+	// "aws_appconfig_environment": config.IdentifierFromProvider,
 	// AppConfig Configuration Profiles can be imported by using the configuration profile ID and application ID separated by a colon (:)
 	"aws_appconfig_configuration_profile": config.IdentifierFromProvider,
 	// AppConfig Hosted Configuration Versions can be imported by using the application ID, configuration profile ID, and version number separated by a slash (/)
