@@ -21,9 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     description: My example deployment
-    environmentIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    environmentId: ${aws_appconfig_environment.example.environment_id}
     region: us-west-1
     tags:
       Type: AppConfig Deployment

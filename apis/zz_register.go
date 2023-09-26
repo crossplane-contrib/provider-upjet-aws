@@ -129,7 +129,6 @@ import (
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	v1beta1qldb "github.com/upbound/provider-aws/apis/qldb/v1beta1"
-	v1beta1quicksight "github.com/upbound/provider-aws/apis/quicksight/v1beta1"
 	v1beta1ram "github.com/upbound/provider-aws/apis/ram/v1beta1"
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
@@ -169,7 +168,6 @@ import (
 	v1beta1vpc "github.com/upbound/provider-aws/apis/vpc/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
 	v1beta1wafregional "github.com/upbound/provider-aws/apis/wafregional/v1beta1"
-	v1beta1wafv2 "github.com/upbound/provider-aws/apis/wafv2/v1beta1"
 	v1beta1workspaces "github.com/upbound/provider-aws/apis/workspaces/v1beta1"
 	v1beta1xray "github.com/upbound/provider-aws/apis/xray/v1beta1"
 )
@@ -292,7 +290,6 @@ func init() {
 		v1beta1organizations.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
 		v1beta1qldb.SchemeBuilder.AddToScheme,
-		v1beta1quicksight.SchemeBuilder.AddToScheme,
 		v1beta1ram.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,
 		v1beta1redshift.SchemeBuilder.AddToScheme,
@@ -332,7 +329,6 @@ func init() {
 		v1beta1vpc.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,
 		v1beta1wafregional.SchemeBuilder.AddToScheme,
-		v1beta1wafv2.SchemeBuilder.AddToScheme,
 		v1beta1workspaces.SchemeBuilder.AddToScheme,
 		v1beta1xray.SchemeBuilder.AddToScheme,
 	)

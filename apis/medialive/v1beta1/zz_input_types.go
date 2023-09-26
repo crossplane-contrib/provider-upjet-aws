@@ -17,19 +17,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type InputDestinationsInitParameters struct {
+type DestinationsInitParameters struct {
 
 	// A unique name for the location the RTMP stream is being pushed to.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
-type InputDestinationsObservation struct {
+type DestinationsObservation struct {
 
 	// A unique name for the location the RTMP stream is being pushed to.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
-type InputDestinationsParameters struct {
+type DestinationsParameters struct {
 
 	// A unique name for the location the RTMP stream is being pushed to.
 	// +kubebuilder:validation:Optional
@@ -58,7 +58,7 @@ type InputDevicesParameters struct {
 type InputInitParameters struct {
 
 	// Destination settings for PUSH type inputs. See Destinations for more details.
-	Destinations []InputDestinationsInitParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
+	Destinations []DestinationsInitParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// Settings for the devices. See Input Devices for more details.
 	InputDevices []InputDevicesInitParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
@@ -82,7 +82,7 @@ type InputInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Settings for a private VPC Input. See VPC for more details.
-	VPC []InputVPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
+	VPC []VPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type InputObservation struct {
@@ -94,7 +94,7 @@ type InputObservation struct {
 	AttachedChannels []*string `json:"attachedChannels,omitempty" tf:"attached_channels,omitempty"`
 
 	// Destination settings for PUSH type inputs. See Destinations for more details.
-	Destinations []InputDestinationsObservation `json:"destinations,omitempty" tf:"destinations,omitempty"`
+	Destinations []DestinationsObservation `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The unique ID for the device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -135,14 +135,14 @@ type InputObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Settings for a private VPC Input. See VPC for more details.
-	VPC []InputVPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
+	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type InputParameters struct {
 
 	// Destination settings for PUSH type inputs. See Destinations for more details.
 	// +kubebuilder:validation:Optional
-	Destinations []InputDestinationsParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
+	Destinations []DestinationsParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// Settings for the devices. See Input Devices for more details.
 	// +kubebuilder:validation:Optional
@@ -193,36 +193,7 @@ type InputParameters struct {
 
 	// Settings for a private VPC Input. See VPC for more details.
 	// +kubebuilder:validation:Optional
-	VPC []InputVPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
-}
-
-type InputVPCInitParameters struct {
-
-	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// A list of 2 VPC subnet IDs from the same VPC.
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-}
-
-type InputVPCObservation struct {
-
-	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// A list of 2 VPC subnet IDs from the same VPC.
-	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
-}
-
-type InputVPCParameters struct {
-
-	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
-	// +kubebuilder:validation:Optional
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// A list of 2 VPC subnet IDs from the same VPC.
-	// +kubebuilder:validation:Optional
-	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
+	VPC []VPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
 type MediaConnectFlowsInitParameters struct {
@@ -281,6 +252,35 @@ type SourcesParameters struct {
 	// The username for the input source.
 	// +kubebuilder:validation:Optional
 	Username *string `json:"username" tf:"username,omitempty"`
+}
+
+type VPCInitParameters struct {
+
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// A list of 2 VPC subnet IDs from the same VPC.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type VPCObservation struct {
+
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// A list of 2 VPC subnet IDs from the same VPC.
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type VPCParameters struct {
+
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Input.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// A list of 2 VPC subnet IDs from the same VPC.
+	// +kubebuilder:validation:Optional
+	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 // InputSpec defines the desired state of Input
