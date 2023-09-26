@@ -7,6 +7,8 @@ package clients
 import (
 	"context"
 	"os"
+	"reflect"
+	"unsafe"
 
 	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -56,7 +58,7 @@ type SetupConfig struct {
 	TerraformProvider     *schema.Provider
 }
 
-func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn {
+func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		var err error
@@ -104,8 +106,9 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "could not configure no-fork AWS client")
 		}
-		tfClient, diag := awsConfig.GetClient(context.TODO(), &xpprovider.AWSClient{
-			// ServicePackages: config.TerraformProvider.Meta().(*xpprovider.AWSClient).ServicePackages,
+		p := config.TerraformProvider.Meta()
+		tfClient, diag := awsConfig.GetClient(ctx, &xpprovider.AWSClient{
+			ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
 		})
 		if diag != nil && diag.HasError() {
 			return terraform.Setup{}, errors.Errorf("failed to configure the AWS client: %v", diag)

@@ -5,16 +5,14 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"context"
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/upbound/provider-aws/config/kendra"
-	"github.com/upbound/provider-aws/config/medialive"
-
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
+	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry/reference"
-
-	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/upbound/provider-aws/config/acm"
 	"github.com/upbound/provider-aws/config/acmpca"
@@ -61,6 +59,7 @@ import (
 	"github.com/upbound/provider-aws/config/grafana"
 	"github.com/upbound/provider-aws/config/iam"
 	"github.com/upbound/provider-aws/config/kafka"
+	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
 	"github.com/upbound/provider-aws/config/kinesisanalytics"
 	kinesisanalytics2 "github.com/upbound/provider-aws/config/kinesisanalyticsv2"
@@ -68,6 +67,7 @@ import (
 	"github.com/upbound/provider-aws/config/lakeformation"
 	"github.com/upbound/provider-aws/config/lambda"
 	"github.com/upbound/provider-aws/config/licensemanager"
+	"github.com/upbound/provider-aws/config/medialive"
 	"github.com/upbound/provider-aws/config/memorydb"
 	"github.com/upbound/provider-aws/config/mq"
 	"github.com/upbound/provider-aws/config/neptune"
@@ -123,8 +123,11 @@ var skipList = []string{
 }
 
 // GetProvider returns provider configuration
-func GetProvider() *config.Provider {
-	p := xpprovider.Provider()
+func GetProvider(ctx context.Context) (*config.Provider, error) {
+	p, err := xpprovider.GetProviderSchema(ctx)
+	if err != nil {
+		return nil, errors.Wrap(err, "cannot get the Terraform provider schema")
+	}
 	modulePath := "github.com/upbound/provider-aws"
 	pc := config.NewProvider(p.ResourcesMap, "aws",
 		modulePath, providerMetadata,
@@ -238,7 +241,7 @@ func GetProvider() *config.Provider {
 	}
 
 	pc.ConfigureResources()
-	return pc
+	return pc, nil
 }
 
 // ResourcesWithExternalNameConfig returns the list of resources that have external
