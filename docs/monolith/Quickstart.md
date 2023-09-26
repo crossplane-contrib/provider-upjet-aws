@@ -12,7 +12,7 @@ provider read the
 [Configuration](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/docs/configuration)
 .
 
-To install and use this official provider:
+To install and use AWS official provider:
 * Install Upbound Universal Crossplane (UXP) into your Kubernetes cluster. 
 * Install the `Provider` and apply a `ProviderConfig`.
 * Create a *managed resource* in AWS with Kubernetes.
@@ -147,7 +147,7 @@ Verify the version of `up` with `up --version`
 
 ```shell
 $ up --version
-v0.13.0
+v0.19.1
 ```
 
 _Note_: official providers only support `up` command-line versions v0.13.0 or
@@ -162,28 +162,24 @@ install` command.
 
 ```shell
 $ up uxp install
-UXP 1.9.0-up.3 installed
+UXP 1.13.2-up.2 installed
 ```
 
 Verify all UXP pods are `Running` with `kubectl get pods -n upbound-system`
 
 ```shell
 $ kubectl get pods -n upbound-system
-NAME                                        READY   STATUS    RESTARTS      AGE
-crossplane-7fdfbd897c-pmrml                 1/1     Running   0             68m
-crossplane-rbac-manager-7d6867bc4d-v7wpb    1/1     Running   0             68m
-upbound-bootstrapper-5f47977d54-t8kvk       1/1     Running   0             68m
-xgql-7c4b74c458-5bf2q                       1/1     Running   3 (67m ago)   68m
+NAME                                       READY   STATUS    RESTARTS   AGE
+crossplane-77ff754998-4l8xb                1/1     Running   0          21s
+crossplane-rbac-manager-79b8bdd6d8-ml6ft   1/1     Running   0          21s
 ```
-
-_Note:_ `RESTARTS` for the `xgql` pod are normal during initial installation. 
 
 Find more information in the [Upbound UXP
 documentation](https://docs.upbound.io/uxp/).
 
 ### Install the official AWS provider
 
-Install the official provider into the Kubernetes cluster with a Kubernetes
+Install the official provider-aws into the Kubernetes cluster with a Kubernetes
 configuration file. 
 
 ```yaml
@@ -193,7 +189,7 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.18.0
+  package: xpkg.upbound.io/upbound/provider-aws:<version>
 EOF
 ```
 
@@ -249,7 +245,7 @@ provider-aws                         xpkg.upbound.io/upbound/provider-aws:latest
 Use `kubectl describe providers` for more information.
 
 ### Create a Kubernetes secret for AWS
-The provider requires credentials to create and manage AWS resources.
+The provider-aws requires credentials to create and manage AWS resources.
 
 #### Generate an AWS key-pair file
 Create a text file containing the AWS account `aws_access_key_id` and
@@ -294,7 +290,7 @@ _Note:_ the size may be larger if there are extra blank space in your text file.
 
 ### Create a ProviderConfig
 Create a `ProviderConfig` Kubernetes configuration file to attach the AWS
-credentials to the installed official provider.
+credentials to the installed official provider-aws.
 
 ```yaml
 cat <<EOF | kubectl apply -f -
@@ -347,7 +343,7 @@ ensure CRDs are installed first
 ```
 
 ### Create a managed resource
-Create a managed resource to verify the provider is functioning. 
+Create a managed resource to verify the provider-aws is functioning. 
 
 This example creates an AWS S3 storage bucket, which requires a globally unique
 name. 
