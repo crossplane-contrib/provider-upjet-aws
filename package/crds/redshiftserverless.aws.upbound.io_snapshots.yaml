@@ -152,7 +152,8 @@ spec:
                   retentionPeriod:
                     description: How long to retain the created snapshot. Default
                       value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                 required:
                 - region
                 type: object
@@ -171,7 +172,8 @@ spec:
                   retentionPeriod:
                     description: How long to retain the created snapshot. Default
                       value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
@@ -376,7 +378,8 @@ spec:
                   retentionPeriod:
                     description: How long to retain the created snapshot. Default
                       value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

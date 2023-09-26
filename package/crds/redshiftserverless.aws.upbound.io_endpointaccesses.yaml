@@ -442,7 +442,8 @@ spec:
                   port:
                     description: The port that Amazon Redshift Serverless listens
                       on.
-                    type: number
+                    format: int64
+                    type: integer
                   subnetIds:
                     description: An array of VPC subnet IDs to associate with the
                       endpoint.
