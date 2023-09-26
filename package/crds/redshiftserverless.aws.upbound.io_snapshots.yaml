@@ -152,7 +152,8 @@ spec:
                   retentionPeriod:
                     description: How long to retain the created snapshot. Default
                       value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                 required:
                 - region
                 type: object
@@ -172,14 +173,14 @@ spec:
                   retentionPeriod:
                     description: How long to retain the created snapshot. Default
                       value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicies
+                description: 'THIS IS A BETA FIELD. It is on by default but can be
+                  opted out through a Crossplane feature flag. ManagementPolicies
                   specify the array of actions Crossplane is allowed to take on the
                   managed and external resources. This field is planned to replace
                   the DeletionPolicy field in a future release. Currently, both could
@@ -378,7 +379,8 @@ spec:
                   retentionPeriod:
                     description: How long to retain the created snapshot. Default
                       value is -1.
-                    type: number
+                    format: int64
+                    type: integer
                 type: object
               conditions:
                 description: Conditions of the resource.

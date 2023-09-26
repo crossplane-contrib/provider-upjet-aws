@@ -51,7 +51,7 @@ type EndpointObservation struct {
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
 	// The port that Amazon Redshift Serverless listens on.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The VPC endpoint or the Redshift Serverless workgroup. See VPC Endpoint below.
 	VPCEndpoint []EndpointVPCEndpointObservation `json:"vpcEndpoint,omitempty" tf:"vpc_endpoint,omitempty"`
@@ -102,7 +102,7 @@ type VPCEndpointNetworkInterfaceParameters struct {
 type WorkgroupInitParameters struct {
 
 	// The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
-	BaseCapacity *float64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
+	BaseCapacity *int64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
 
 	// An array of parameters to set for more control over a serverless database. See Config Parameter below.
 	ConfigParameter []ConfigParameterInitParameters `json:"configParameter,omitempty" tf:"config_parameter,omitempty"`
@@ -126,7 +126,7 @@ type WorkgroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
-	BaseCapacity *float64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
+	BaseCapacity *int64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
 
 	// An array of parameters to set for more control over a serverless database. See Config Parameter below.
 	ConfigParameter []ConfigParameterObservation `json:"configParameter,omitempty" tf:"config_parameter,omitempty"`
@@ -166,7 +166,7 @@ type WorkgroupParameters struct {
 
 	// The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
 	// +kubebuilder:validation:Optional
-	BaseCapacity *float64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
+	BaseCapacity *int64 `json:"baseCapacity,omitempty" tf:"base_capacity,omitempty"`
 
 	// An array of parameters to set for more control over a serverless database. See Config Parameter below.
 	// +kubebuilder:validation:Optional
