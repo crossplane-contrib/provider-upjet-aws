@@ -171,6 +171,9 @@ type InstanceInitParameters struct {
 	// Type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// List of the layers the instance will belong to.
+	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
+
 	// Name of operating system that will be installed.
 	Os *string `json:"os,omitempty" tf:"os,omitempty"`
 
@@ -412,17 +415,8 @@ type InstanceParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=CustomLayer
 	// +kubebuilder:validation:Optional
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
-
-	// References to CustomLayer to populate layerIds.
-	// +kubebuilder:validation:Optional
-	LayerIdsRefs []v1.Reference `json:"layerIdsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of CustomLayer to populate layerIds.
-	// +kubebuilder:validation:Optional
-	LayerIdsSelector *v1.Selector `json:"layerIdsSelector,omitempty" tf:"-"`
 
 	// Name of operating system that will be installed.
 	// +kubebuilder:validation:Optional
@@ -583,8 +577,9 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              InstanceSpec   `json:"spec"`
-	Status            InstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerIds) || has(self.initProvider.layerIds)",message="layerIds is a required parameter"
+	Spec   InstanceSpec   `json:"spec"`
+	Status InstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
