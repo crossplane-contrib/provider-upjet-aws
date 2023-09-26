@@ -8,6 +8,7 @@ import (
 	"context"
 	"os"
 
+	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -97,11 +98,9 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			}
 		}
 
-		config := xpprovider.AWSConfig{
-			AccessKey:        ps.Configuration[keyAccessKeyID].(string),
-			SecretKey:        ps.Configuration[keySecretAccessKey].(string),
-			Region:           ps.Configuration[keyRegion].(string),
-			TerraformVersion: ps.Version,
+		config, err := configureNoForkAWSClient(ctx, c, mg, pc, &ps)
+		if err != nil {
+			return terraform.Setup{}, errors.Wrap(err, "could not configure no-fork AWS client")
 		}
 		tfClient, diag := config.GetClient(context.TODO(), &xpprovider.AWSClient{})
 		if diag != nil && diag.HasError() {
@@ -244,4 +243,81 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 		cfg.Region = "us-east-1"
 	}
 	return cfg, nil
+}
+
+func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) (xpprovider.AWSConfig, error) { //nolint:gocyclo
+	if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+		return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client because the length of assume role chain array " +
+			"is more than 1 or endpoint configuration is not nil")
+	}
+
+	cfg, err := getAWSConfig(ctx, c, mg)
+	if err != nil {
+		return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get AWS config")
+	}
+
+	awsConfig := xpprovider.AWSConfig{
+		Region:           cfg.Region,
+		TerraformVersion: ps.Version,
+	}
+
+	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
+	case authKeyWebIdentity:
+		if pc.Spec.Credentials.WebIdentity == nil {
+			return xpprovider.AWSConfig{}, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+		}
+		awsConfig.AssumeRoleWithWebIdentity = &tfawsbase.AssumeRoleWithWebIdentity{
+			RoleARN:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
+			WebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
+		}
+		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
+			awsConfig.AssumeRoleWithWebIdentity.SessionName = pc.Spec.Credentials.WebIdentity.RoleSessionName
+		}
+	case authKeyUpbound:
+		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
+			return xpprovider.AWSConfig{}, errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
+		}
+		awsConfig.AssumeRoleWithWebIdentity = &tfawsbase.AssumeRoleWithWebIdentity{
+			RoleARN:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
+			WebIdentityTokenFile: upboundProviderIdentityTokenFile,
+		}
+
+		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
+			awsConfig.AssumeRoleWithWebIdentity.SessionName = pc.Spec.Credentials.WebIdentity.RoleSessionName
+		}
+	case authKeySecret:
+		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
+		if err != nil {
+			return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get credentials")
+		}
+		cfg, err = UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
+		if err != nil {
+			return xpprovider.AWSConfig{}, errors.Wrap(err, errAWSConfig)
+		}
+		creds, err := cfg.Credentials.Retrieve(ctx)
+		if err != nil {
+			return xpprovider.AWSConfig{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
+		}
+
+		awsConfig.Region = cfg.Region
+		awsConfig.AccessKey = creds.AccessKeyID
+		awsConfig.SecretKey = creds.SecretAccessKey
+		awsConfig.Token = creds.SessionToken
+
+	}
+	if len(pc.Spec.AssumeRoleChain) != 0 {
+		awsConfig.AssumeRole = &tfawsbase.AssumeRole{
+			RoleARN:           *pc.Spec.AssumeRoleChain[0].RoleARN,
+			TransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
+			ExternalID:        *pc.Spec.AssumeRoleChain[0].ExternalID,
+		}
+
+		tags := make(map[string]string)
+		for _, tag := range pc.Spec.AssumeRoleChain[0].Tags {
+			tags[*tag.Key] = *tag.Value
+		}
+
+		awsConfig.AssumeRole.Tags = tags
+	}
+	return awsConfig, nil
 }
