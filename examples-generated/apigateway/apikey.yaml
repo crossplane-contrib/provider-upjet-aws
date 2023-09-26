@@ -4,9 +4,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: apigateway/v1beta1/apikey
   labels:
-    testing.upbound.io/example-name: MyDemoApiKey
-  name: mydemoapikey
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    name: demo
+    name: example
     region: us-west-1

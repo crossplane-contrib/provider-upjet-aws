@@ -89,6 +89,7 @@ type CatalogDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Region of the target database.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -164,6 +165,9 @@ type TargetDatabaseObservation struct {
 
 	// Name of the catalog database.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Region of the target database.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type TargetDatabaseParameters struct {
@@ -175,6 +179,10 @@ type TargetDatabaseParameters struct {
 	// Name of the catalog database.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+
+	// Region of the target database.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 // CatalogDatabaseSpec defines the desired state of CatalogDatabase

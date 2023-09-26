@@ -513,6 +513,11 @@ func (in *OptionsInitParameters) DeepCopyInto(out *OptionsInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ObjectTags != nil {
+		in, out := &in.ObjectTags, &out.ObjectTags
+		*out = new(string)
+		**out = **in
+	}
 	if in.OverwriteMode != nil {
 		in, out := &in.OverwriteMode, &out.OverwriteMode
 		*out = new(string)
@@ -598,6 +603,11 @@ func (in *OptionsObservation) DeepCopyInto(out *OptionsObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ObjectTags != nil {
+		in, out := &in.ObjectTags, &out.ObjectTags
+		*out = new(string)
+		**out = **in
+	}
 	if in.OverwriteMode != nil {
 		in, out := &in.OverwriteMode, &out.OverwriteMode
 		*out = new(string)
@@ -680,6 +690,11 @@ func (in *OptionsParameters) DeepCopyInto(out *OptionsParameters) {
 	}
 	if in.Mtime != nil {
 		in, out := &in.Mtime, &out.Mtime
+		*out = new(string)
+		**out = **in
+	}
+	if in.ObjectTags != nil {
+		in, out := &in.ObjectTags, &out.ObjectTags
 		*out = new(string)
 		**out = **in
 	}

@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     description: My provisioning template
+    enabled: true
     provisioningRoleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: iot_fleet_provisioning

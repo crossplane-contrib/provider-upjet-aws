@@ -368,12 +368,20 @@ spec:
             properties:
               atProvider:
                 properties:
+                  apiKeyVersion:
+                    description: The version of the API keys used for the account.
+                    type: string
                   cloudwatchRoleArn:
                     description: ARN of an IAM role for CloudWatch (to allow logging
                       & monitoring). See more in AWS Docs. Logging & monitoring can
                       be enabled/disabled and otherwise tuned on the API Gateway Stage
                       level.
                     type: string
+                  features:
+                    description: A list of features supported for the account.
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
                   throttleSettings:

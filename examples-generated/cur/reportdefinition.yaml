@@ -13,6 +13,7 @@ spec:
     - QUICKSIGHT
     additionalSchemaElements:
     - RESOURCES
+    - SPLIT_COST_ALLOCATION_DATA
     compression: GZIP
     format: textORcsv
     region: us-west-1

@@ -255,12 +255,9 @@ func (tr *ReplicationGroup) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
-	opts = append(opts, resource.WithNameFilter("ClusterMode"))
 	opts = append(opts, resource.WithNameFilter("Description"))
 	opts = append(opts, resource.WithNameFilter("NumCacheClusters"))
 	opts = append(opts, resource.WithNameFilter("NumNodeGroups"))
-	opts = append(opts, resource.WithNameFilter("NumberCacheClusters"))
-	opts = append(opts, resource.WithNameFilter("ReplicationGroupDescription"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

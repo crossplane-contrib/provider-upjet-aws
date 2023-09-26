@@ -70,6 +70,16 @@ func (in *AddonInitParameters) DeepCopyInto(out *AddonInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResolveConflictsOnCreate != nil {
+		in, out := &in.ResolveConflictsOnCreate, &out.ResolveConflictsOnCreate
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResolveConflictsOnUpdate != nil {
+		in, out := &in.ResolveConflictsOnUpdate, &out.ResolveConflictsOnUpdate
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -182,6 +192,16 @@ func (in *AddonObservation) DeepCopyInto(out *AddonObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResolveConflictsOnCreate != nil {
+		in, out := &in.ResolveConflictsOnCreate, &out.ResolveConflictsOnCreate
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResolveConflictsOnUpdate != nil {
+		in, out := &in.ResolveConflictsOnUpdate, &out.ResolveConflictsOnUpdate
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceAccountRoleArn != nil {
 		in, out := &in.ServiceAccountRoleArn, &out.ServiceAccountRoleArn
 		*out = new(string)
@@ -274,6 +294,16 @@ func (in *AddonParameters) DeepCopyInto(out *AddonParameters) {
 	}
 	if in.ResolveConflicts != nil {
 		in, out := &in.ResolveConflicts, &out.ResolveConflicts
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResolveConflictsOnCreate != nil {
+		in, out := &in.ResolveConflictsOnCreate, &out.ResolveConflictsOnCreate
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResolveConflictsOnUpdate != nil {
+		in, out := &in.ResolveConflictsOnUpdate, &out.ResolveConflictsOnUpdate
 		*out = new(string)
 		**out = **in
 	}

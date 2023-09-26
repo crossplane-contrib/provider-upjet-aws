@@ -152,14 +152,16 @@ spec:
                     type: boolean
                   minimumCompressionSize:
                     description: Minimum response size to compress for the REST API.
-                      Integer between -1 and 10485760 (10MB). Setting a value greater
-                      than -1 will enable compression, -1 disables compression (default).
-                      If importing an OpenAPI specification via the body argument,
-                      this corresponds to the x-amazon-apigateway-minimum-compression-size
-                      extension. If the argument value (except -1) is provided and
-                      is different than the OpenAPI value, the argument value will
-                      override the OpenAPI value.
-                    type: number
+                      String containing an integer value between -1 and 10485760 (10MB).
+                      -1 will disable an existing compression configuration, and all
+                      other values will enable compression with the configured size.
+                      New resources can simply omit this argument to disable compression,
+                      rather than setting the value to -1. If importing an OpenAPI
+                      specification via the body argument, this corresponds to the
+                      x-amazon-apigateway-minimum-compression-size extension. If the
+                      argument value is provided and is different than the OpenAPI
+                      value, the argument value will override the OpenAPI value.
+                    type: string
                   name:
                     description: Name of the REST API. If importing an OpenAPI specification
                       via the body argument, this corresponds to the info.title field.
@@ -295,14 +297,16 @@ spec:
                     type: boolean
                   minimumCompressionSize:
                     description: Minimum response size to compress for the REST API.
-                      Integer between -1 and 10485760 (10MB). Setting a value greater
-                      than -1 will enable compression, -1 disables compression (default).
-                      If importing an OpenAPI specification via the body argument,
-                      this corresponds to the x-amazon-apigateway-minimum-compression-size
-                      extension. If the argument value (except -1) is provided and
-                      is different than the OpenAPI value, the argument value will
-                      override the OpenAPI value.
-                    type: number
+                      String containing an integer value between -1 and 10485760 (10MB).
+                      -1 will disable an existing compression configuration, and all
+                      other values will enable compression with the configured size.
+                      New resources can simply omit this argument to disable compression,
+                      rather than setting the value to -1. If importing an OpenAPI
+                      specification via the body argument, this corresponds to the
+                      x-amazon-apigateway-minimum-compression-size extension. If the
+                      argument value is provided and is different than the OpenAPI
+                      value, the argument value will override the OpenAPI value.
+                    type: string
                   name:
                     description: Name of the REST API. If importing an OpenAPI specification
                       via the body argument, this corresponds to the info.title field.
@@ -642,14 +646,16 @@ spec:
                     type: string
                   minimumCompressionSize:
                     description: Minimum response size to compress for the REST API.
-                      Integer between -1 and 10485760 (10MB). Setting a value greater
-                      than -1 will enable compression, -1 disables compression (default).
-                      If importing an OpenAPI specification via the body argument,
-                      this corresponds to the x-amazon-apigateway-minimum-compression-size
-                      extension. If the argument value (except -1) is provided and
-                      is different than the OpenAPI value, the argument value will
-                      override the OpenAPI value.
-                    type: number
+                      String containing an integer value between -1 and 10485760 (10MB).
+                      -1 will disable an existing compression configuration, and all
+                      other values will enable compression with the configured size.
+                      New resources can simply omit this argument to disable compression,
+                      rather than setting the value to -1. If importing an OpenAPI
+                      specification via the body argument, this corresponds to the
+                      x-amazon-apigateway-minimum-compression-size extension. If the
+                      argument value is provided and is different than the OpenAPI
+                      value, the argument value will override the OpenAPI value.
+                    type: string
                   name:
                     description: Name of the REST API. If importing an OpenAPI specification
                       via the body argument, this corresponds to the info.title field.

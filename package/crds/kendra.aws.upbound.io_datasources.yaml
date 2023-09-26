@@ -69,8 +69,7 @@ spec:
                   configuration:
                     description: A block with the configuration information to connect
                       to your Data Source repository. You can't specify the configuration
-                      argument when the type parameter is set to CUSTOM. Detailed
-                      below.
+                      block when the type parameter is set to CUSTOM. Detailed below.
                     items:
                       properties:
                         s3Configuration:
@@ -632,7 +631,7 @@ spec:
                                 description: Configuration of the condition used for
                                   the target document attribute or metadata field
                                   when ingesting documents into Amazon Kendra. See
-                                  Document Attribute Condition.
+                                  condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -649,7 +648,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -704,7 +703,7 @@ spec:
                                       description: The target value you want to create
                                         for the target attribute. For example, 'Finance'
                                         could be the target value for the target attribute
-                                        key 'Department'. See Document Attribute Value.
+                                        key 'Department'. See target_document_attribute_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -755,7 +754,7 @@ spec:
                                   For example, you can specify a condition that if
                                   there are empty date-time values, then Amazon Kendra
                                   should invoke a function that inserts the current
-                                  date-time. See Document Attribute Condition.
+                                  date-time. See invocation_condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -772,7 +771,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -834,7 +833,7 @@ spec:
                                   For example, you can specify a condition that if
                                   there are empty date-time values, then Amazon Kendra
                                   should invoke a function that inserts the current
-                                  date-time. See Document Attribute Condition.
+                                  date-time. See invocation_condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -851,7 +850,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -911,7 +910,7 @@ spec:
                     type: string
                   indexId:
                     description: The identifier of the index for your Amazon Kendra
-                      data_source.
+                      data source.
                     type: string
                   indexIdRef:
                     description: Reference to a Index in kendra to populate indexId.
@@ -994,7 +993,7 @@ spec:
                       other than English.
                     type: string
                   name:
-                    description: A name for your Data Source connector.
+                    description: A name for your data source connector.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -1115,8 +1114,7 @@ spec:
                   configuration:
                     description: A block with the configuration information to connect
                       to your Data Source repository. You can't specify the configuration
-                      argument when the type parameter is set to CUSTOM. Detailed
-                      below.
+                      block when the type parameter is set to CUSTOM. Detailed below.
                     items:
                       properties:
                         s3Configuration:
@@ -1405,7 +1403,7 @@ spec:
                                 description: Configuration of the condition used for
                                   the target document attribute or metadata field
                                   when ingesting documents into Amazon Kendra. See
-                                  Document Attribute Condition.
+                                  condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -1422,7 +1420,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -1477,7 +1475,7 @@ spec:
                                       description: The target value you want to create
                                         for the target attribute. For example, 'Finance'
                                         could be the target value for the target attribute
-                                        key 'Department'. See Document Attribute Value.
+                                        key 'Department'. See target_document_attribute_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -1528,7 +1526,7 @@ spec:
                                   For example, you can specify a condition that if
                                   there are empty date-time values, then Amazon Kendra
                                   should invoke a function that inserts the current
-                                  date-time. See Document Attribute Condition.
+                                  date-time. See invocation_condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -1545,7 +1543,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -1607,7 +1605,7 @@ spec:
                                   For example, you can specify a condition that if
                                   there are empty date-time values, then Amazon Kendra
                                   should invoke a function that inserts the current
-                                  date-time. See Document Attribute Condition.
+                                  date-time. See invocation_condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -1624,7 +1622,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -1690,7 +1688,7 @@ spec:
                       other than English.
                     type: string
                   name:
-                    description: A name for your Data Source connector.
+                    description: A name for your data source connector.
                     type: string
                   schedule:
                     description: Sets the frequency for Amazon Kendra to check the
@@ -1926,8 +1924,7 @@ spec:
                   configuration:
                     description: A block with the configuration information to connect
                       to your Data Source repository. You can't specify the configuration
-                      argument when the type parameter is set to CUSTOM. Detailed
-                      below.
+                      block when the type parameter is set to CUSTOM. Detailed below.
                     items:
                       properties:
                         s3Configuration:
@@ -2238,7 +2235,7 @@ spec:
                                 description: Configuration of the condition used for
                                   the target document attribute or metadata field
                                   when ingesting documents into Amazon Kendra. See
-                                  Document Attribute Condition.
+                                  condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -2255,7 +2252,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -2310,7 +2307,7 @@ spec:
                                       description: The target value you want to create
                                         for the target attribute. For example, 'Finance'
                                         could be the target value for the target attribute
-                                        key 'Department'. See Document Attribute Value.
+                                        key 'Department'. See target_document_attribute_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -2361,7 +2358,7 @@ spec:
                                   For example, you can specify a condition that if
                                   there are empty date-time values, then Amazon Kendra
                                   should invoke a function that inserts the current
-                                  date-time. See Document Attribute Condition.
+                                  date-time. See invocation_condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -2378,7 +2375,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -2440,7 +2437,7 @@ spec:
                                   For example, you can specify a condition that if
                                   there are empty date-time values, then Amazon Kendra
                                   should invoke a function that inserts the current
-                                  date-time. See Document Attribute Condition.
+                                  date-time. See invocation_condition.
                                 items:
                                   properties:
                                     conditionDocumentAttributeKey:
@@ -2457,7 +2454,7 @@ spec:
                                         For example, you can specify the value 'financial'
                                         for strings in the _source_uri field that
                                         partially match or contain this value. See
-                                        Document Attribute Value.
+                                        condition_on_value.
                                       items:
                                         properties:
                                           dateValue:
@@ -2529,7 +2526,7 @@ spec:
                     type: string
                   indexId:
                     description: The identifier of the index for your Amazon Kendra
-                      data_source.
+                      data source.
                     type: string
                   languageCode:
                     description: The code for a language. This allows you to support
@@ -2539,7 +2536,7 @@ spec:
                       other than English.
                     type: string
                   name:
-                    description: A name for your Data Source connector.
+                    description: A name for your data source connector.
                     type: string
                   roleArn:
                     description: The Amazon Resource Name (ARN) of a role with permission

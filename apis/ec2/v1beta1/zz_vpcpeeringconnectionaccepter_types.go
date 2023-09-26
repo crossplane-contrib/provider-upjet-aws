@@ -15,50 +15,24 @@ import (
 
 type VPCPeeringConnectionAccepterAccepterInitParameters struct {
 
-	// Indicates whether a local ClassicLink connection can communicate
-	// with the peer VPC over the VPC Peering Connection.
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Indicates whether a local VPC can resolve public DNS hostnames to
 	// private IP addresses when queried from instances in a peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Indicates whether a local VPC can communicate with a ClassicLink
-	// connection in the peer VPC over the VPC Peering Connection.
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterAccepterObservation struct {
 
-	// Indicates whether a local ClassicLink connection can communicate
-	// with the peer VPC over the VPC Peering Connection.
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Indicates whether a local VPC can resolve public DNS hostnames to
 	// private IP addresses when queried from instances in a peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Indicates whether a local VPC can communicate with a ClassicLink
-	// connection in the peer VPC over the VPC Peering Connection.
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterAccepterParameters struct {
 
-	// Indicates whether a local ClassicLink connection can communicate
-	// with the peer VPC over the VPC Peering Connection.
-	// +kubebuilder:validation:Optional
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Indicates whether a local VPC can resolve public DNS hostnames to
 	// private IP addresses when queried from instances in a peer VPC.
 	// +kubebuilder:validation:Optional
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Indicates whether a local VPC can communicate with a ClassicLink
-	// connection in the peer VPC over the VPC Peering Connection.
-	// +kubebuilder:validation:Optional
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterInitParameters struct {
@@ -161,50 +135,24 @@ type VPCPeeringConnectionAccepterParameters struct {
 
 type VPCPeeringConnectionAccepterRequesterInitParameters struct {
 
-	// Indicates whether a local ClassicLink connection can communicate
-	// with the peer VPC over the VPC Peering Connection.
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Indicates whether a local VPC can resolve public DNS hostnames to
 	// private IP addresses when queried from instances in a peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Indicates whether a local VPC can communicate with a ClassicLink
-	// connection in the peer VPC over the VPC Peering Connection.
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterRequesterObservation struct {
 
-	// Indicates whether a local ClassicLink connection can communicate
-	// with the peer VPC over the VPC Peering Connection.
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Indicates whether a local VPC can resolve public DNS hostnames to
 	// private IP addresses when queried from instances in a peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Indicates whether a local VPC can communicate with a ClassicLink
-	// connection in the peer VPC over the VPC Peering Connection.
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterRequesterParameters struct {
 
-	// Indicates whether a local ClassicLink connection can communicate
-	// with the peer VPC over the VPC Peering Connection.
-	// +kubebuilder:validation:Optional
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Indicates whether a local VPC can resolve public DNS hostnames to
 	// private IP addresses when queried from instances in a peer VPC.
 	// +kubebuilder:validation:Optional
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Indicates whether a local VPC can communicate with a ClassicLink
-	// connection in the peer VPC over the VPC Peering Connection.
-	// +kubebuilder:validation:Optional
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 // VPCPeeringConnectionAccepterSpec defines the desired state of VPCPeeringConnectionAccepter

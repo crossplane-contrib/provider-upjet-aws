@@ -2975,6 +2975,11 @@ func (in *ObjectLambdaAccessPointObservation) DeepCopyInto(out *ObjectLambdaAcce
 		*out = new(string)
 		**out = **in
 	}
+	if in.Alias != nil {
+		in, out := &in.Alias, &out.Alias
+		*out = new(string)
+		**out = **in
+	}
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
 		*out = new(string)
