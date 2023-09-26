@@ -150,6 +150,7 @@ func GetProvider() *config.Provider {
 		config.WithMainTemplate(hack.MainTemplate),
 	)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
+	pc.TerraformProvider = p
 
 	for _, configure := range []func(provider *config.Provider){
 		acm.Configure,
