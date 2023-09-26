@@ -9,6 +9,7 @@ import (
 	"os"
 
 	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -52,6 +53,7 @@ type SetupConfig struct {
 	NativeProviderVersion *string
 	TerraformVersion      *string
 	DefaultScheduler      terraform.ProviderScheduler
+	TerraformProvider     *schema.Provider
 }
 
 func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn {
@@ -98,11 +100,13 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			}
 		}
 
-		config, err := configureNoForkAWSClient(ctx, c, mg, pc, &ps)
+		awsConfig, err := configureNoForkAWSClient(ctx, c, mg, pc, &ps)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "could not configure no-fork AWS client")
 		}
-		tfClient, diag := config.GetClient(context.TODO(), &xpprovider.AWSClient{})
+		tfClient, diag := awsConfig.GetClient(context.TODO(), &xpprovider.AWSClient{
+			// ServicePackages: config.TerraformProvider.Meta().(*xpprovider.AWSClient).ServicePackages,
+		})
 		if diag != nil && diag.HasError() {
 			return terraform.Setup{}, errors.Errorf("failed to configure the AWS client: %v", diag)
 		}

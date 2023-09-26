@@ -101,6 +101,8 @@ func main() {
 			terraform.WithSharedProviderOptions(terraform.WithNativeProviderPath(*setupConfig.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*setupConfig.NativeProviderSource)))
 	}
 
+	provider := config.GetProvider()
+	setupConfig.TerraformProvider = provider.TerraformProvider
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
@@ -109,7 +111,7 @@ func main() {
 			MaxConcurrentReconciles: *maxReconcileRate,
 			Features:                &feature.Flags{},
 		},
-		Provider:   config.GetProvider(),
+		Provider:   provider,
 		SetupFn:    clients.SelectTerraformSetup(log, setupConfig),
 		PollJitter: pollJitter,
 	}
