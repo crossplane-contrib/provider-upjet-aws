@@ -2,12 +2,11 @@
 title: Configuration
 weight: 2
 ---
-⚠️ **Warning:** The monolithic AWS provider (`upbound/provider-aws`) has been deprecated in favor of the [AWS provider family](https://marketplace.upbound.io/providers/upbound/provider-family-aws/). You can read more about the provider families in our [blog post](https://blog.upbound.io/new-provider-families) and the official documentation for the provider families is [here](https://docs.upbound.io/providers/provider-families/). We will continue support for the monolithic AWS provider until June 12, 2024. And you can find more information on migrating from the monolithic providers to the provider families [here](https://docs.upbound.io/providers/migration/).
 
-# AWS official provider documentation
-Upbound supports and maintains the Upbound AWS official provider.
+# AWS official provider-family documentation
+Upbound supports and maintains the Upbound AWS official provider-family.
 
-## Install the provider
+## Install the provider-family-aws
 ### Prerequisites
 #### Upbound Up command-line
 The Upbound Up command-line simplifies configuration and management of Upbound
@@ -34,40 +33,43 @@ up uxp install
 Find more information in the [Upbound UXP
 documentation](https://docs.upbound.io/uxp/).
 
-_The Upbound AWS official provider may also be used with upstream [Crossplane](https://crossplane.io/docs/master/getting-started/install-configure.html)._
+### Install the provider-family-aws
 
-### Install the provider
+Install the Upbound official AWS provider-famil with the following configuration file.
+For instance, let's install the `provider-aws-s3`
 
-Install the Upbound official AWS provider with the following configuration file
+_Note_: The first provider installed of a family also installs an extra provider-family Provider.
+The provider-family provider manages the ProviderConfig for all other providers in the same family.
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-aws
+  name: provider-aws-s3
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:<version>
+  package: xpkg.upbound.io/upbound/provider-aws-s3:<version>
+EOF
 ```
 
-Define the provider version with `spec.package`.
+Define the `provider-aws-s3` version with `spec.package`.
 
-Install the provider with `kubectl apply -f`.
+Install the `provider-aws-s3` with `kubectl apply -f`.
 
 Verify the configuration with `kubectl get providers`.
 
 ```shell
-$ kubectl get providers
-NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:v0.17.0  62s
+NAME                          INSTALLED   HEALTHY   PACKAGE                                               AGE
+provider-aws-s3               True        True      xpkg.upbound.io/upbound/provider-aws-s3:v0.40.0       6m39s
+upbound-provider-family-aws   True        True      xpkg.upbound.io/upbound/provider-family-aws:v0.40.0   6m30s
 ```
 
 View the Crossplane [Provider CRD
 definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1)
 to view all available `Provider` options.
 
-## Configure the provider
-The AWS provider requires credentials for authentication to AWS. The AWS
-provider consumes the credentials from a Kubernetes secret object.
+## Configure the provider-family-aws
+The AWS provider-family requires credentials for authentication to AWS. The AWS
+provider-family consumes the credentials from a Kubernetes secret object.
 
 ### Configure authentication
 Upbound supports authentication to AWS via access keys, service accounts or with
@@ -500,9 +502,9 @@ The `Provider.spec.controllerConfigRef.name` must match the
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-aws
+  name: provider-aws-s3
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:latest
+  package: xpkg.upbound.io/upbound/provider-aws-s3:latest
   controllerConfigRef:
     name: irsa-controllerconfig
 ```
@@ -513,15 +515,15 @@ providers`.
 ```shell
 $ kubectl apply -f provider.yaml
 $ kubectl get providers
-NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-aws   True        True      xpkg.upbound.io/upbound/provider-aws:latest   83s
+NAME              INSTALLED   HEALTHY   PACKAGE                                          AGE
+provider-aws-s3   True        True      xpkg.upbound.io/upbound/provider-aws-s3:latest   83s
 ```
 
 _Note_: it may take up to five minutes for the provider `HEALTHY` value to be
 `True`.
 
 ##### Create a ProviderConfig
-The `ProviderConfig` explicitly configures the official AWS provider to use
+The `ProviderConfig` explicitly configures the official AWS provider-family to use
 `IRSA` authentication. 
 
 Define the `ProviderConfig.spec.credentials.source` as `IRSA`. 
@@ -548,4 +550,4 @@ NAME                                    AGE
 providerconfig.aws.upbound.io/default   46s
 ```
 
-The official AWS provider now uses the `IRSA` role for authentication to AWS.
+The official AWS provider-family now uses the `IRSA` role for authentication to AWS.
