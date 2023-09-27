@@ -24,7 +24,7 @@ type ScramSecretAssociationObservation struct {
 	// Amazon Resource Name (ARN) of the MSK cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of AWS Secrets Manager secret ARNs.
+	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
 	SecretArnList []*string `json:"secretArnList,omitempty" tf:"secret_arn_list,omitempty"`
 }
 
@@ -49,7 +49,7 @@ type ScramSecretAssociationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// List of AWS Secrets Manager secret ARNs.
+	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:refFieldName=SecretArnRefs
 	// +crossplane:generate:reference:selectorFieldName=SecretArnSelector
