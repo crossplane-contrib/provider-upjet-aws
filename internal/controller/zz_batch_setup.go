@@ -9,6 +9,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
 )
 
@@ -16,6 +17,7 @@ import (
 // the supplied manager.
 func Setup_batch(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		jobdefinition.Setup,
 		schedulingpolicy.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
