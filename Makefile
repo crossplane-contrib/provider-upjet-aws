@@ -193,12 +193,14 @@ uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
-build-monolith:
-	@$(MAKE) build SUBPACKAGES=monolith LOAD_MONOLITH=true
+build.%:
+	@$(MAKE) build SUBPACKAGES=$* LOAD_PACKAGES=true
 
-local-deploy: build-monolith controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-monolith
+XPKG_SKIP_DEP_RESOLUTION := true
+
+local-deploy.%: controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-%
 	@$(INFO) running locally built provider
-	@$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-monolith --for condition=Healthy --timeout 5m
+	$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$* --for condition=Healthy --timeout 5m
 	@$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
 	@$(OK) running locally built provider
 

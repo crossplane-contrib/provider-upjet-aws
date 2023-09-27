@@ -25,10 +25,10 @@ img.build:
 	@$(INFO) Family base image to build: $(IMAGE)
 	@$(INFO) Building image $${IMAGE}; \
 	$(MAKE) BUILD_ARGS="--load ${BUILD_ARGS}" IMAGE=$${IMAGE} XPKG_REG_ORGS=$(XPKG_REG_ORGS) img.build.shared; \
-	if [[ "$${LOAD_MONOLITH}" == "true" ]]; then \
-	  $(MAKE) batch-process SUBPACKAGES=monolith BATCH_PLATFORMS=$(PLATFORM) BUILD_ONLY=true STORE_PACKAGE=monolith && \
-	  export t=$$(docker load -qi "$(XPKG_OUTPUT_DIR)/$(PLATFORM)/$(PROJECT_NAME)-monolith-$(VERSION).xpkg") && \
-	  docker tag $${t##*:} $(BUILD_REGISTRY)/$(PROJECT_NAME)-monolith-$(ARCH); \
+	if [[ "$${LOAD_PACKAGES}" == "true" ]]; then \
+	  $(MAKE) batch-process SUBPACKAGES=$(SUBPACKAGES) BATCH_PLATFORMS=$(PLATFORM) BUILD_ONLY=true STORE_PACKAGE=$(SUBPACKAGES) && \
+	  export t=$$(docker load -qi "$(XPKG_OUTPUT_DIR)/$(PLATFORM)/$(PROJECT_NAME)-$(SUBPACKAGES)-$(VERSION).xpkg") && \
+	  docker tag $${t##*:} $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(SUBPACKAGES)-$(ARCH); \
 	fi || $(FAIL)
 	@$(OK) docker build $${IMAGE};
 
