@@ -291,6 +291,8 @@ var GroupMap = map[string]GroupKindCalculator{
 	"aws_vpc_ipam_preview_next_cidr":                           ReplaceGroupWords("ec2", 0),
 	"aws_vpc_ipam_scope":                                       ReplaceGroupWords("ec2", 0),
 	"aws_vpc_ipam":                                             ReplaceGroupWords("ec2", 0),
+	"aws_vpc_security_group_egress_rule":                       ReplaceGroupWords("ec2", 0),
+	"aws_vpc_security_group_ingress_rule":                      ReplaceGroupWords("ec2", 0),
 	"aws_vpc_ipv4_cidr_block_association":                      ReplaceGroupWords("ec2", 0),
 	"aws_vpc_ipv6_cidr_block_association":                      ReplaceGroupWords("ec2", 0),
 	"aws_vpc_peering_connection_accepter":                      ReplaceGroupWords("ec2", 0),

@@ -378,6 +378,8 @@ import (
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
 	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionaccepter"
 	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionoptions"
+	vpcsecuritygroupegressrule "github.com/upbound/provider-aws/internal/controller/ec2/vpcsecuritygroupegressrule"
+	vpcsecuritygroupingressrule "github.com/upbound/provider-aws/internal/controller/ec2/vpcsecuritygroupingressrule"
 	vpnconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnection"
 	vpnconnectionroute "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnectionroute"
 	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
@@ -1296,6 +1298,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcpeeringconnection.Setup,
 		vpcpeeringconnectionaccepter.Setup,
 		vpcpeeringconnectionoptions.Setup,
+		vpcsecuritygroupegressrule.Setup,
+		vpcsecuritygroupingressrule.Setup,
 		vpnconnection.Setup,
 		vpnconnectionroute.Setup,
 		vpngateway.Setup,

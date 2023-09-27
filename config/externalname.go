@@ -187,6 +187,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using a very complex format:
 	// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 	"aws_security_group_rule": config.IdentifierFromProvider,
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_egress_rule": config.IdentifierFromProvider,
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_ingress_rule": config.IdentifierFromProvider,
 	// Imported by using the VPC CIDR Association ID: vpc-cidr-assoc-xxxxxxxx
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111

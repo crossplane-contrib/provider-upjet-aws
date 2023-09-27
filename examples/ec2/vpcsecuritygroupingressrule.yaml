@@ -1,0 +1,48 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1beta1/securitygroupingressrule
+  name: sample-vpc
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1beta1/securitygroupingressrule
+  name: example
+  labels:
+    testing.upbound.io/example-name: example
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCSecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpcsecuritygroupingressrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cidrIpv4: 10.0.0.0/8
+    fromPort: 80
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    toPort: 8080
