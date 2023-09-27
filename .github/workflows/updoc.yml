@@ -6,5 +6,7 @@ on:
 jobs:
   publish-docs:
     uses: upbound/uptest/.github/workflows/provider-updoc.yml@main
+    with:
+      providers: "monolith config"
     secrets:
       UPBOUND_CI_PROD_BUCKET_SA: ${{ secrets.UPBOUND_CI_PROD_BUCKET_SA }}
