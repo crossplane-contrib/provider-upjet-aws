@@ -1121,6 +1121,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// MSK clusters can be imported using the cluster arn that has a random substring
 	// in the end.
 	"aws_msk_cluster": config.IdentifierFromProvider,
+	// The terraform implementation of MSK SCRAM secret associations assume
+	// that there is a single aws_msk_scram_secret_association per msk
+	// cluster, so the best identifier is the cluster ARN.
+	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
 
 	// ram
 	//

@@ -14,6 +14,7 @@ import (
 	v1beta13 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
 	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
+	v1beta15 "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -165,6 +166,49 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 		}
 	}
+
+	return nil
+}
+
+// ResolveReferences of this ScramSecretAssociation.
+func (mg *ScramSecretAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ClusterArnRef,
+		Selector:     mg.Spec.ForProvider.ClusterArnSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterArn")
+	}
+	mg.Spec.ForProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterArnRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecretArnList),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.SecretArnRefs,
+		Selector:      mg.Spec.ForProvider.SecretArnSelector,
+		To: reference.To{
+			List:    &v1beta15.SecretList{},
+			Managed: &v1beta15.Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretArnList")
+	}
+	mg.Spec.ForProvider.SecretArnList = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecretArnRefs = mrsp.ResolvedReferences
 
 	return nil
 }

@@ -31,4 +31,12 @@ func Configure(p *config.Provider) {
 		}
 		r.UseAsync = true
 	})
+	p.AddResourceConfigurator("aws_msk_scram_secret_association", func(r *config.Resource) {
+		r.References["secret_arn_list"] = config.Reference{
+			Type:              "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret",
+			RefFieldName:      "SecretArnRefs",
+			SelectorFieldName: "SecretArnSelector",
+		}
+		r.MetaResource.ArgumentDocs["secret_arn_list"] = "- (Required) List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster."
+	})
 }

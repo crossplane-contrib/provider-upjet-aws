@@ -533,6 +533,7 @@ import (
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	datasourcekendra "github.com/upbound/provider-aws/internal/controller/kendra/datasource"
 	experience "github.com/upbound/provider-aws/internal/controller/kendra/experience"
 	index "github.com/upbound/provider-aws/internal/controller/kendra/index"
@@ -1449,6 +1450,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		scramsecretassociation.Setup,
 		datasourcekendra.Setup,
 		experience.Setup,
 		index.Setup,
