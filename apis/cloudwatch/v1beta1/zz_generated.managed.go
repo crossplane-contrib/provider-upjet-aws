@@ -27,14 +27,6 @@ func (mg *CompositeAlarm) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this CompositeAlarm.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *CompositeAlarm) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this CompositeAlarm.
 func (mg *CompositeAlarm) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *CompositeAlarm) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this CompositeAlarm.
 func (mg *CompositeAlarm) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this CompositeAlarm.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *CompositeAlarm) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this CompositeAlarm.
@@ -103,14 +87,6 @@ func (mg *Dashboard) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Dashboard.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Dashboard) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Dashboard.
 func (mg *Dashboard) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Dashboard) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Dashboard.
 func (mg *Dashboard) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Dashboard.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Dashboard) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Dashboard.
@@ -179,14 +147,6 @@ func (mg *MetricAlarm) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MetricAlarm.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MetricAlarm) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MetricAlarm.
 func (mg *MetricAlarm) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *MetricAlarm) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MetricAlarm.
 func (mg *MetricAlarm) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MetricAlarm.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MetricAlarm) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MetricAlarm.
@@ -255,14 +207,6 @@ func (mg *MetricStream) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MetricStream.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MetricStream) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MetricStream.
 func (mg *MetricStream) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *MetricStream) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MetricStream.
 func (mg *MetricStream) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MetricStream.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MetricStream) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MetricStream.

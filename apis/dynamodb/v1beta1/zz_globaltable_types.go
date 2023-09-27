@@ -98,7 +98,7 @@ type GlobalTableStatus struct {
 type GlobalTable struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replica) || has(self.initProvider.replica)",message="replica is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replica) || (has(self.initProvider) && has(self.initProvider.replica))",message="spec.forProvider.replica is a required parameter"
 	Spec   GlobalTableSpec   `json:"spec"`
 	Status GlobalTableStatus `json:"status,omitempty"`
 }

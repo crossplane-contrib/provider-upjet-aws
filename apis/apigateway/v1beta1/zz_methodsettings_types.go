@@ -227,8 +227,8 @@ type MethodSettingsStatus struct {
 type MethodSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.methodPath) || has(self.initProvider.methodPath)",message="methodPath is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settings) || has(self.initProvider.settings)",message="settings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.methodPath) || (has(self.initProvider) && has(self.initProvider.methodPath))",message="spec.forProvider.methodPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settings) || (has(self.initProvider) && has(self.initProvider.settings))",message="spec.forProvider.settings is a required parameter"
 	Spec   MethodSettingsSpec   `json:"spec"`
 	Status MethodSettingsStatus `json:"status,omitempty"`
 }

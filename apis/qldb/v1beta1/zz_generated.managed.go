@@ -27,14 +27,6 @@ func (mg *Ledger) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Ledger.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Ledger) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Ledger.
 func (mg *Ledger) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Ledger) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Ledger.
 func (mg *Ledger) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Ledger.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Ledger) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Ledger.
@@ -103,14 +87,6 @@ func (mg *Stream) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Stream.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Stream) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Stream.
 func (mg *Stream) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Stream) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Stream.
 func (mg *Stream) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Stream.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Stream) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Stream.

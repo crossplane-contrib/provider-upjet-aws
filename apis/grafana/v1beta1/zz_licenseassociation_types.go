@@ -98,7 +98,7 @@ type LicenseAssociationStatus struct {
 type LicenseAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseType) || has(self.initProvider.licenseType)",message="licenseType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.licenseType) || (has(self.initProvider) && has(self.initProvider.licenseType))",message="spec.forProvider.licenseType is a required parameter"
 	Spec   LicenseAssociationSpec   `json:"spec"`
 	Status LicenseAssociationStatus `json:"status,omitempty"`
 }

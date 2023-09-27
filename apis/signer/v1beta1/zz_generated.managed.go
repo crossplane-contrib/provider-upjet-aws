@@ -27,14 +27,6 @@ func (mg *SigningJob) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SigningJob.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SigningJob) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SigningJob.
 func (mg *SigningJob) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *SigningJob) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SigningJob.
 func (mg *SigningJob) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SigningJob.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SigningJob) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SigningJob.
@@ -103,14 +87,6 @@ func (mg *SigningProfile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SigningProfile.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SigningProfile) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SigningProfile.
 func (mg *SigningProfile) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *SigningProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SigningProfile.
 func (mg *SigningProfile) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SigningProfile.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SigningProfile) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SigningProfile.
@@ -179,14 +147,6 @@ func (mg *SigningProfilePermission) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SigningProfilePermission.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SigningProfilePermission) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SigningProfilePermission.
 func (mg *SigningProfilePermission) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SigningProfilePermission) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this SigningProfilePermission.
 func (mg *SigningProfilePermission) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SigningProfilePermission.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SigningProfilePermission) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SigningProfilePermission.

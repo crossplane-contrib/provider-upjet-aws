@@ -27,14 +27,6 @@ func (mg *Channel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Channel.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Channel) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Channel.
 func (mg *Channel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Channel) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Channel.
 func (mg *Channel) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Channel.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Channel) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Channel.
@@ -103,14 +87,6 @@ func (mg *Input) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Input.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Input) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Input.
 func (mg *Input) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Input) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Input.
 func (mg *Input) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Input.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Input) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Input.
@@ -179,14 +147,6 @@ func (mg *InputSecurityGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this InputSecurityGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *InputSecurityGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this InputSecurityGroup.
 func (mg *InputSecurityGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *InputSecurityGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this InputSecurityGroup.
 func (mg *InputSecurityGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this InputSecurityGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *InputSecurityGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this InputSecurityGroup.
@@ -255,14 +207,6 @@ func (mg *Multiplex) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Multiplex.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Multiplex) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Multiplex.
 func (mg *Multiplex) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *Multiplex) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Multiplex.
 func (mg *Multiplex) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Multiplex.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Multiplex) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Multiplex.

@@ -27,14 +27,6 @@ func (mg *Graph) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Graph.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Graph) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Graph.
 func (mg *Graph) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Graph) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Graph.
 func (mg *Graph) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Graph.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Graph) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Graph.
@@ -103,14 +87,6 @@ func (mg *InvitationAccepter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this InvitationAccepter.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *InvitationAccepter) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this InvitationAccepter.
 func (mg *InvitationAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *InvitationAccepter) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this InvitationAccepter.
 func (mg *InvitationAccepter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this InvitationAccepter.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *InvitationAccepter) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this InvitationAccepter.
@@ -179,14 +147,6 @@ func (mg *Member) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Member.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Member) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Member.
 func (mg *Member) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *Member) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Member.
 func (mg *Member) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Member.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Member) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Member.

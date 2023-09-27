@@ -27,14 +27,6 @@ func (mg *LicenseAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LicenseAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LicenseAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LicenseAssociation.
 func (mg *LicenseAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *LicenseAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LicenseAssociation.
 func (mg *LicenseAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LicenseAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LicenseAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LicenseAssociation.
@@ -103,14 +87,6 @@ func (mg *RoleAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RoleAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RoleAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RoleAssociation.
 func (mg *RoleAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *RoleAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RoleAssociation.
 func (mg *RoleAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RoleAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RoleAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RoleAssociation.
@@ -179,14 +147,6 @@ func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Workspace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Workspace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Workspace.
 func (mg *Workspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *Workspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Workspace.
 func (mg *Workspace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Workspace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Workspace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Workspace.
@@ -255,14 +207,6 @@ func (mg *WorkspaceAPIKey) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WorkspaceAPIKey.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WorkspaceAPIKey) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WorkspaceAPIKey.
 func (mg *WorkspaceAPIKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *WorkspaceAPIKey) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WorkspaceAPIKey.
 func (mg *WorkspaceAPIKey) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WorkspaceAPIKey.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WorkspaceAPIKey) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WorkspaceAPIKey.
@@ -331,14 +267,6 @@ func (mg *WorkspaceSAMLConfiguration) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WorkspaceSAMLConfiguration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WorkspaceSAMLConfiguration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WorkspaceSAMLConfiguration.
 func (mg *WorkspaceSAMLConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *WorkspaceSAMLConfiguration) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this WorkspaceSAMLConfiguration.
 func (mg *WorkspaceSAMLConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WorkspaceSAMLConfiguration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WorkspaceSAMLConfiguration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WorkspaceSAMLConfiguration.

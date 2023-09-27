@@ -27,14 +27,6 @@ func (mg *Application) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Application.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Application) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Application.
 func (mg *Application) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Application) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Application.
 func (mg *Application) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Application.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Application) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Application.
@@ -103,14 +87,6 @@ func (mg *ApplicationSnapshot) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ApplicationSnapshot.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ApplicationSnapshot) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ApplicationSnapshot.
 func (mg *ApplicationSnapshot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ApplicationSnapshot) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this ApplicationSnapshot.
 func (mg *ApplicationSnapshot) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ApplicationSnapshot.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ApplicationSnapshot) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ApplicationSnapshot.

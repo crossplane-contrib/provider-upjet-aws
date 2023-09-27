@@ -1591,11 +1591,11 @@ type DistributionStatus struct {
 type Distribution struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultCacheBehavior) || has(self.initProvider.defaultCacheBehavior)",message="defaultCacheBehavior is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.origin) || has(self.initProvider.origin)",message="origin is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.restrictions) || has(self.initProvider.restrictions)",message="restrictions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.viewerCertificate) || has(self.initProvider.viewerCertificate)",message="viewerCertificate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultCacheBehavior) || (has(self.initProvider) && has(self.initProvider.defaultCacheBehavior))",message="spec.forProvider.defaultCacheBehavior is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || (has(self.initProvider) && has(self.initProvider.enabled))",message="spec.forProvider.enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.origin) || (has(self.initProvider) && has(self.initProvider.origin))",message="spec.forProvider.origin is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.restrictions) || (has(self.initProvider) && has(self.initProvider.restrictions))",message="spec.forProvider.restrictions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.viewerCertificate) || (has(self.initProvider) && has(self.initProvider.viewerCertificate))",message="spec.forProvider.viewerCertificate is a required parameter"
 	Spec   DistributionSpec   `json:"spec"`
 	Status DistributionStatus `json:"status,omitempty"`
 }

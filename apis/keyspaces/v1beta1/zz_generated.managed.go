@@ -27,14 +27,6 @@ func (mg *Keyspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Keyspace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Keyspace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Keyspace.
 func (mg *Keyspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Keyspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Keyspace.
 func (mg *Keyspace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Keyspace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Keyspace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Keyspace.
@@ -103,14 +87,6 @@ func (mg *Table) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Table.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Table) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Table.
 func (mg *Table) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Table) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Table.
 func (mg *Table) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Table.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Table) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Table.

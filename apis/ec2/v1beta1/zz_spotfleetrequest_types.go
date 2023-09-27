@@ -1425,8 +1425,8 @@ type SpotFleetRequestStatus struct {
 type SpotFleetRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.iamFleetRole) || has(self.initProvider.iamFleetRole)",message="iamFleetRole is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetCapacity) || has(self.initProvider.targetCapacity)",message="targetCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.iamFleetRole) || (has(self.initProvider) && has(self.initProvider.iamFleetRole))",message="spec.forProvider.iamFleetRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetCapacity) || (has(self.initProvider) && has(self.initProvider.targetCapacity))",message="spec.forProvider.targetCapacity is a required parameter"
 	Spec   SpotFleetRequestSpec   `json:"spec"`
 	Status SpotFleetRequestStatus `json:"status,omitempty"`
 }

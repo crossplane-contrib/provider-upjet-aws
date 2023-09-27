@@ -104,7 +104,7 @@ type BucketStatus struct {
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bundleId) || has(self.initProvider.bundleId)",message="bundleId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bundleId) || (has(self.initProvider) && has(self.initProvider.bundleId))",message="spec.forProvider.bundleId is a required parameter"
 	Spec   BucketSpec   `json:"spec"`
 	Status BucketStatus `json:"status,omitempty"`
 }

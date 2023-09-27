@@ -130,8 +130,8 @@ type HostedConfigurationVersionStatus struct {
 type HostedConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentSecretRef)",message="contentSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType) || has(self.initProvider.contentType)",message="contentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentSecretRef)",message="spec.forProvider.contentSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType) || (has(self.initProvider) && has(self.initProvider.contentType))",message="spec.forProvider.contentType is a required parameter"
 	Spec   HostedConfigurationVersionSpec   `json:"spec"`
 	Status HostedConfigurationVersionStatus `json:"status,omitempty"`
 }

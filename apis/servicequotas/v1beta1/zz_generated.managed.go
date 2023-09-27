@@ -27,14 +27,6 @@ func (mg *ServiceQuota) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ServiceQuota.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ServiceQuota) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ServiceQuota.
 func (mg *ServiceQuota) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ServiceQuota) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ServiceQuota.
 func (mg *ServiceQuota) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ServiceQuota.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ServiceQuota) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ServiceQuota.

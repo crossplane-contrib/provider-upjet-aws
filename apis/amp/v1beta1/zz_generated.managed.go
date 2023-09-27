@@ -27,14 +27,6 @@ func (mg *AlertManagerDefinition) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AlertManagerDefinition.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AlertManagerDefinition) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AlertManagerDefinition.
 func (mg *AlertManagerDefinition) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AlertManagerDefinition) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this AlertManagerDefinition.
 func (mg *AlertManagerDefinition) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AlertManagerDefinition.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AlertManagerDefinition) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AlertManagerDefinition.
@@ -103,14 +87,6 @@ func (mg *RuleGroupNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RuleGroupNamespace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RuleGroupNamespace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RuleGroupNamespace.
 func (mg *RuleGroupNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *RuleGroupNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RuleGroupNamespace.
 func (mg *RuleGroupNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RuleGroupNamespace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RuleGroupNamespace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RuleGroupNamespace.
@@ -179,14 +147,6 @@ func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Workspace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Workspace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Workspace.
 func (mg *Workspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *Workspace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Workspace.
 func (mg *Workspace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Workspace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Workspace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Workspace.

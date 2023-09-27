@@ -27,14 +27,6 @@ func (mg *CloudFormationStack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this CloudFormationStack.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *CloudFormationStack) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this CloudFormationStack.
 func (mg *CloudFormationStack) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *CloudFormationStack) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this CloudFormationStack.
 func (mg *CloudFormationStack) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this CloudFormationStack.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *CloudFormationStack) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this CloudFormationStack.

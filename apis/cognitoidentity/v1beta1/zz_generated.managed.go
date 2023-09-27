@@ -27,14 +27,6 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this CognitoIdentityPoolProviderPrincipalTag.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *CognitoIdentityPoolProviderPrincipalTag) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this CognitoIdentityPoolProviderPrincipalTag.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *CognitoIdentityPoolProviderPrincipalTag) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this CognitoIdentityPoolProviderPrincipalTag.
@@ -103,14 +87,6 @@ func (mg *Pool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Pool.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Pool) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Pool.
 func (mg *Pool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Pool) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Pool.
 func (mg *Pool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Pool.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Pool) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Pool.
@@ -179,14 +147,6 @@ func (mg *PoolRolesAttachment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PoolRolesAttachment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PoolRolesAttachment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *PoolRolesAttachment) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PoolRolesAttachment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PoolRolesAttachment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PoolRolesAttachment.

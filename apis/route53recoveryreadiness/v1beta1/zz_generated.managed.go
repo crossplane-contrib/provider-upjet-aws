@@ -27,14 +27,6 @@ func (mg *Cell) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Cell.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Cell) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Cell.
 func (mg *Cell) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Cell) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Cell.
 func (mg *Cell) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Cell.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Cell) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Cell.
@@ -103,14 +87,6 @@ func (mg *ReadinessCheck) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ReadinessCheck.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ReadinessCheck) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ReadinessCheck.
 func (mg *ReadinessCheck) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ReadinessCheck) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ReadinessCheck.
 func (mg *ReadinessCheck) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ReadinessCheck.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ReadinessCheck) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ReadinessCheck.
@@ -179,14 +147,6 @@ func (mg *RecoveryGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RecoveryGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RecoveryGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RecoveryGroup.
 func (mg *RecoveryGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *RecoveryGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RecoveryGroup.
 func (mg *RecoveryGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RecoveryGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RecoveryGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RecoveryGroup.
@@ -255,14 +207,6 @@ func (mg *ResourceSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceSet.
 func (mg *ResourceSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *ResourceSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ResourceSet.
 func (mg *ResourceSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceSet.

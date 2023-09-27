@@ -192,9 +192,9 @@ type StreamStatus struct {
 type Stream struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inclusiveStartTime) || has(self.initProvider.inclusiveStartTime)",message="inclusiveStartTime is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.kinesisConfiguration) || has(self.initProvider.kinesisConfiguration)",message="kinesisConfiguration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.streamName) || has(self.initProvider.streamName)",message="streamName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inclusiveStartTime) || (has(self.initProvider) && has(self.initProvider.inclusiveStartTime))",message="spec.forProvider.inclusiveStartTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.kinesisConfiguration) || (has(self.initProvider) && has(self.initProvider.kinesisConfiguration))",message="spec.forProvider.kinesisConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.streamName) || (has(self.initProvider) && has(self.initProvider.streamName))",message="spec.forProvider.streamName is a required parameter"
 	Spec   StreamSpec   `json:"spec"`
 	Status StreamStatus `json:"status,omitempty"`
 }

@@ -214,9 +214,9 @@ type OriginRequestPolicyStatus struct {
 type OriginRequestPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookiesConfig) || has(self.initProvider.cookiesConfig)",message="cookiesConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.headersConfig) || has(self.initProvider.headersConfig)",message="headersConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.queryStringsConfig) || has(self.initProvider.queryStringsConfig)",message="queryStringsConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookiesConfig) || (has(self.initProvider) && has(self.initProvider.cookiesConfig))",message="spec.forProvider.cookiesConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.headersConfig) || (has(self.initProvider) && has(self.initProvider.headersConfig))",message="spec.forProvider.headersConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.queryStringsConfig) || (has(self.initProvider) && has(self.initProvider.queryStringsConfig))",message="spec.forProvider.queryStringsConfig is a required parameter"
 	Spec   OriginRequestPolicySpec   `json:"spec"`
 	Status OriginRequestPolicyStatus `json:"status,omitempty"`
 }

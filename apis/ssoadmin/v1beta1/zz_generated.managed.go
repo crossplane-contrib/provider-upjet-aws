@@ -27,14 +27,6 @@ func (mg *AccountAssignment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AccountAssignment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AccountAssignment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AccountAssignment.
 func (mg *AccountAssignment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AccountAssignment) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AccountAssignment.
 func (mg *AccountAssignment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AccountAssignment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AccountAssignment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AccountAssignment.
@@ -103,14 +87,6 @@ func (mg *ManagedPolicyAttachment) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ManagedPolicyAttachment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ManagedPolicyAttachment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ManagedPolicyAttachment.
 func (mg *ManagedPolicyAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ManagedPolicyAttachment) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this ManagedPolicyAttachment.
 func (mg *ManagedPolicyAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ManagedPolicyAttachment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ManagedPolicyAttachment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ManagedPolicyAttachment.
@@ -179,14 +147,6 @@ func (mg *PermissionSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PermissionSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PermissionSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PermissionSet.
 func (mg *PermissionSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *PermissionSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PermissionSet.
 func (mg *PermissionSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PermissionSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PermissionSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PermissionSet.
@@ -255,14 +207,6 @@ func (mg *PermissionSetInlinePolicy) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PermissionSetInlinePolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PermissionSetInlinePolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PermissionSetInlinePolicy.
 func (mg *PermissionSetInlinePolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *PermissionSetInlinePolicy) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this PermissionSetInlinePolicy.
 func (mg *PermissionSetInlinePolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PermissionSetInlinePolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PermissionSetInlinePolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PermissionSetInlinePolicy.

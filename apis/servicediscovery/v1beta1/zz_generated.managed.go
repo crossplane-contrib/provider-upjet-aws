@@ -27,14 +27,6 @@ func (mg *HTTPNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HTTPNamespace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HTTPNamespace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HTTPNamespace.
 func (mg *HTTPNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *HTTPNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HTTPNamespace.
 func (mg *HTTPNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HTTPNamespace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HTTPNamespace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HTTPNamespace.
@@ -103,14 +87,6 @@ func (mg *PrivateDNSNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PrivateDNSNamespace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PrivateDNSNamespace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PrivateDNSNamespace.
 func (mg *PrivateDNSNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *PrivateDNSNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this PrivateDNSNamespace.
 func (mg *PrivateDNSNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PrivateDNSNamespace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PrivateDNSNamespace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PrivateDNSNamespace.
@@ -179,14 +147,6 @@ func (mg *PublicDNSNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PublicDNSNamespace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PublicDNSNamespace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PublicDNSNamespace.
 func (mg *PublicDNSNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *PublicDNSNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PublicDNSNamespace.
 func (mg *PublicDNSNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PublicDNSNamespace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PublicDNSNamespace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PublicDNSNamespace.
@@ -255,14 +207,6 @@ func (mg *Service) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Service.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Service) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Service.
 func (mg *Service) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *Service) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Service.
 func (mg *Service) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Service.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Service) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Service.

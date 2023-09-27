@@ -2431,10 +2431,10 @@ type FlowStatus struct {
 type Flow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationFlowConfig) || has(self.initProvider.destinationFlowConfig)",message="destinationFlowConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceFlowConfig) || has(self.initProvider.sourceFlowConfig)",message="sourceFlowConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.task) || has(self.initProvider.task)",message="task is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.triggerConfig) || has(self.initProvider.triggerConfig)",message="triggerConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationFlowConfig) || (has(self.initProvider) && has(self.initProvider.destinationFlowConfig))",message="spec.forProvider.destinationFlowConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceFlowConfig) || (has(self.initProvider) && has(self.initProvider.sourceFlowConfig))",message="spec.forProvider.sourceFlowConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.task) || (has(self.initProvider) && has(self.initProvider.task))",message="spec.forProvider.task is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.triggerConfig) || (has(self.initProvider) && has(self.initProvider.triggerConfig))",message="spec.forProvider.triggerConfig is a required parameter"
 	Spec   FlowSpec   `json:"spec"`
 	Status FlowStatus `json:"status,omitempty"`
 }

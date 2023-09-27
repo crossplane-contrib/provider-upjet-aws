@@ -643,7 +643,7 @@ type GangliaLayerStatus struct {
 type GangliaLayer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.password) || has(self.initProvider.password)",message="password is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.password) || (has(self.initProvider) && has(self.initProvider.password))",message="spec.forProvider.password is a required parameter"
 	Spec   GangliaLayerSpec   `json:"spec"`
 	Status GangliaLayerStatus `json:"status,omitempty"`
 }

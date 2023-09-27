@@ -138,7 +138,7 @@ type IntegrationResponseStatus struct {
 type IntegrationResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.integrationResponseKey) || has(self.initProvider.integrationResponseKey)",message="integrationResponseKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.integrationResponseKey) || (has(self.initProvider) && has(self.initProvider.integrationResponseKey))",message="spec.forProvider.integrationResponseKey is a required parameter"
 	Spec   IntegrationResponseSpec   `json:"spec"`
 	Status IntegrationResponseStatus `json:"status,omitempty"`
 }

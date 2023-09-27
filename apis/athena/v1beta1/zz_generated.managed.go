@@ -27,14 +27,6 @@ func (mg *DataCatalog) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this DataCatalog.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *DataCatalog) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this DataCatalog.
 func (mg *DataCatalog) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *DataCatalog) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DataCatalog.
 func (mg *DataCatalog) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this DataCatalog.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *DataCatalog) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this DataCatalog.
@@ -103,14 +87,6 @@ func (mg *Database) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Database.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Database) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Database.
 func (mg *Database) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Database) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Database.
 func (mg *Database) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Database.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Database) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Database.
@@ -179,14 +147,6 @@ func (mg *NamedQuery) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NamedQuery.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NamedQuery) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NamedQuery.
 func (mg *NamedQuery) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *NamedQuery) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this NamedQuery.
 func (mg *NamedQuery) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NamedQuery.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NamedQuery) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NamedQuery.
@@ -255,14 +207,6 @@ func (mg *Workgroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Workgroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Workgroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Workgroup.
 func (mg *Workgroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *Workgroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Workgroup.
 func (mg *Workgroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Workgroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Workgroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Workgroup.

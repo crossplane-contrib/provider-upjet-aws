@@ -27,14 +27,6 @@ func (mg *Analyzer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Analyzer.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Analyzer) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Analyzer.
 func (mg *Analyzer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Analyzer) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Analyzer.
 func (mg *Analyzer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Analyzer.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Analyzer) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Analyzer.
@@ -103,14 +87,6 @@ func (mg *ArchiveRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ArchiveRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ArchiveRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ArchiveRule.
 func (mg *ArchiveRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ArchiveRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ArchiveRule.
 func (mg *ArchiveRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ArchiveRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ArchiveRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ArchiveRule.

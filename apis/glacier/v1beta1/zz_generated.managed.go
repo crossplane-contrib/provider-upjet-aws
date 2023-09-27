@@ -27,14 +27,6 @@ func (mg *Vault) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Vault.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Vault) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Vault.
 func (mg *Vault) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Vault) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Vault.
 func (mg *Vault) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Vault.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Vault) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Vault.
@@ -103,14 +87,6 @@ func (mg *VaultLock) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VaultLock.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VaultLock) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VaultLock.
 func (mg *VaultLock) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *VaultLock) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this VaultLock.
 func (mg *VaultLock) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VaultLock.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VaultLock) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VaultLock.

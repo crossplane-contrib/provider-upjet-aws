@@ -27,14 +27,6 @@ func (mg *Channel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Channel.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Channel) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Channel.
 func (mg *Channel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Channel) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Channel.
 func (mg *Channel) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Channel.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Channel) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Channel.
@@ -103,14 +87,6 @@ func (mg *RecordingConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RecordingConfiguration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RecordingConfiguration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RecordingConfiguration.
 func (mg *RecordingConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *RecordingConfiguration) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this RecordingConfiguration.
 func (mg *RecordingConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RecordingConfiguration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RecordingConfiguration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RecordingConfiguration.

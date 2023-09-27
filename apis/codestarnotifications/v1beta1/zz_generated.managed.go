@@ -27,14 +27,6 @@ func (mg *NotificationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NotificationRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NotificationRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NotificationRule.
 func (mg *NotificationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *NotificationRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this NotificationRule.
 func (mg *NotificationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NotificationRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NotificationRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NotificationRule.

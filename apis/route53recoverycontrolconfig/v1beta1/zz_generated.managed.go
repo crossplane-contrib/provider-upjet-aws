@@ -27,14 +27,6 @@ func (mg *Cluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Cluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Cluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Cluster.
 func (mg *Cluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Cluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Cluster.
 func (mg *Cluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Cluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Cluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Cluster.
@@ -103,14 +87,6 @@ func (mg *ControlPanel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ControlPanel.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ControlPanel) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ControlPanel.
 func (mg *ControlPanel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ControlPanel) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ControlPanel.
 func (mg *ControlPanel) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ControlPanel.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ControlPanel) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ControlPanel.
@@ -179,14 +147,6 @@ func (mg *RoutingControl) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RoutingControl.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RoutingControl) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RoutingControl.
 func (mg *RoutingControl) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *RoutingControl) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RoutingControl.
 func (mg *RoutingControl) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RoutingControl.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RoutingControl) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RoutingControl.
@@ -255,14 +207,6 @@ func (mg *SafetyRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SafetyRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SafetyRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SafetyRule.
 func (mg *SafetyRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *SafetyRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SafetyRule.
 func (mg *SafetyRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SafetyRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SafetyRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SafetyRule.

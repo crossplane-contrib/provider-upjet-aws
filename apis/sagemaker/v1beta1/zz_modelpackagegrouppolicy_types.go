@@ -88,7 +88,7 @@ type ModelPackageGroupPolicyStatus struct {
 type ModelPackageGroupPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourcePolicy) || has(self.initProvider.resourcePolicy)",message="resourcePolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourcePolicy) || (has(self.initProvider) && has(self.initProvider.resourcePolicy))",message="spec.forProvider.resourcePolicy is a required parameter"
 	Spec   ModelPackageGroupPolicySpec   `json:"spec"`
 	Status ModelPackageGroupPolicyStatus `json:"status,omitempty"`
 }

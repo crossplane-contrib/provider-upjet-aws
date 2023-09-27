@@ -27,14 +27,6 @@ func (mg *Association) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Association.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Association) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Association.
 func (mg *Association) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Association) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Association.
 func (mg *Association) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Association.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Association) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Association.
@@ -103,14 +87,6 @@ func (mg *LicenseConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LicenseConfiguration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LicenseConfiguration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LicenseConfiguration.
 func (mg *LicenseConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *LicenseConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this LicenseConfiguration.
 func (mg *LicenseConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LicenseConfiguration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LicenseConfiguration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LicenseConfiguration.

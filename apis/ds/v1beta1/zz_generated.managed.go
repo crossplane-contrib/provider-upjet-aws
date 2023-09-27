@@ -27,14 +27,6 @@ func (mg *ConditionalForwarder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ConditionalForwarder.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ConditionalForwarder) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ConditionalForwarder.
 func (mg *ConditionalForwarder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ConditionalForwarder) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this ConditionalForwarder.
 func (mg *ConditionalForwarder) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ConditionalForwarder.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ConditionalForwarder) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ConditionalForwarder.
@@ -103,14 +87,6 @@ func (mg *Directory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Directory.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Directory) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Directory.
 func (mg *Directory) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Directory) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Directory.
 func (mg *Directory) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Directory.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Directory) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Directory.
@@ -179,14 +147,6 @@ func (mg *SharedDirectory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SharedDirectory.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SharedDirectory) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SharedDirectory.
 func (mg *SharedDirectory) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SharedDirectory) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SharedDirectory.
 func (mg *SharedDirectory) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SharedDirectory.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SharedDirectory) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SharedDirectory.

@@ -27,14 +27,6 @@ func (mg *Enabler) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Enabler.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Enabler) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Enabler.
 func (mg *Enabler) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Enabler) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Enabler.
 func (mg *Enabler) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Enabler.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Enabler) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Enabler.

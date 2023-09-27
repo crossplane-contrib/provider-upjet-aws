@@ -412,7 +412,7 @@ type WindowsFileSystemStatus struct {
 type WindowsFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity) || has(self.initProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity) || (has(self.initProvider) && has(self.initProvider.throughputCapacity))",message="spec.forProvider.throughputCapacity is a required parameter"
 	Spec   WindowsFileSystemSpec   `json:"spec"`
 	Status WindowsFileSystemStatus `json:"status,omitempty"`
 }

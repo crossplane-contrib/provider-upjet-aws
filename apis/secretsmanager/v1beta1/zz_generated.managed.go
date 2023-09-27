@@ -27,14 +27,6 @@ func (mg *Secret) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Secret.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Secret) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Secret.
 func (mg *Secret) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Secret) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Secret.
 func (mg *Secret) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Secret.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Secret) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Secret.
@@ -103,14 +87,6 @@ func (mg *SecretPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SecretPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SecretPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SecretPolicy.
 func (mg *SecretPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *SecretPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SecretPolicy.
 func (mg *SecretPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SecretPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SecretPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SecretPolicy.
@@ -179,14 +147,6 @@ func (mg *SecretRotation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SecretRotation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SecretRotation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SecretRotation.
 func (mg *SecretRotation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SecretRotation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SecretRotation.
 func (mg *SecretRotation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SecretRotation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SecretRotation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SecretRotation.
@@ -255,14 +207,6 @@ func (mg *SecretVersion) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SecretVersion.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SecretVersion) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SecretVersion.
 func (mg *SecretVersion) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *SecretVersion) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SecretVersion.
 func (mg *SecretVersion) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SecretVersion.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SecretVersion) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SecretVersion.

@@ -27,14 +27,6 @@ func (mg *AnomalyMonitor) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AnomalyMonitor.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AnomalyMonitor) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AnomalyMonitor.
 func (mg *AnomalyMonitor) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AnomalyMonitor) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AnomalyMonitor.
 func (mg *AnomalyMonitor) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AnomalyMonitor.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AnomalyMonitor) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AnomalyMonitor.

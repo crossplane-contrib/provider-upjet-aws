@@ -27,14 +27,6 @@ func (mg *AppMonitor) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppMonitor.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppMonitor) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppMonitor.
 func (mg *AppMonitor) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AppMonitor) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AppMonitor.
 func (mg *AppMonitor) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppMonitor.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppMonitor) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppMonitor.
@@ -103,14 +87,6 @@ func (mg *MetricsDestination) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MetricsDestination.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MetricsDestination) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MetricsDestination.
 func (mg *MetricsDestination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *MetricsDestination) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MetricsDestination.
 func (mg *MetricsDestination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MetricsDestination.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MetricsDestination) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MetricsDestination.

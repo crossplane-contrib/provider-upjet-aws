@@ -27,14 +27,6 @@ func (mg *ByteMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ByteMatchSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ByteMatchSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ByteMatchSet.
 func (mg *ByteMatchSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ByteMatchSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ByteMatchSet.
 func (mg *ByteMatchSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ByteMatchSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ByteMatchSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ByteMatchSet.
@@ -103,14 +87,6 @@ func (mg *GeoMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this GeoMatchSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *GeoMatchSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this GeoMatchSet.
 func (mg *GeoMatchSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *GeoMatchSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this GeoMatchSet.
 func (mg *GeoMatchSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this GeoMatchSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *GeoMatchSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this GeoMatchSet.
@@ -179,14 +147,6 @@ func (mg *IPSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IPSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IPSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IPSet.
 func (mg *IPSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *IPSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IPSet.
 func (mg *IPSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IPSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IPSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IPSet.
@@ -255,14 +207,6 @@ func (mg *RateBasedRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RateBasedRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RateBasedRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RateBasedRule.
 func (mg *RateBasedRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *RateBasedRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RateBasedRule.
 func (mg *RateBasedRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RateBasedRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RateBasedRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RateBasedRule.
@@ -331,14 +267,6 @@ func (mg *RegexMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RegexMatchSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RegexMatchSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RegexMatchSet.
 func (mg *RegexMatchSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *RegexMatchSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RegexMatchSet.
 func (mg *RegexMatchSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RegexMatchSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RegexMatchSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RegexMatchSet.
@@ -407,14 +327,6 @@ func (mg *RegexPatternSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RegexPatternSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RegexPatternSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RegexPatternSet.
 func (mg *RegexPatternSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *RegexPatternSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RegexPatternSet.
 func (mg *RegexPatternSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RegexPatternSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RegexPatternSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RegexPatternSet.
@@ -483,14 +387,6 @@ func (mg *Rule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Rule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Rule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Rule.
 func (mg *Rule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *Rule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Rule.
 func (mg *Rule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Rule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Rule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Rule.
@@ -559,14 +447,6 @@ func (mg *SQLInjectionMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SQLInjectionMatchSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SQLInjectionMatchSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SQLInjectionMatchSet.
 func (mg *SQLInjectionMatchSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *SQLInjectionMatchSet) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this SQLInjectionMatchSet.
 func (mg *SQLInjectionMatchSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SQLInjectionMatchSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SQLInjectionMatchSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SQLInjectionMatchSet.
@@ -635,14 +507,6 @@ func (mg *SizeConstraintSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SizeConstraintSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SizeConstraintSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SizeConstraintSet.
 func (mg *SizeConstraintSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *SizeConstraintSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SizeConstraintSet.
 func (mg *SizeConstraintSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SizeConstraintSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SizeConstraintSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SizeConstraintSet.
@@ -711,14 +567,6 @@ func (mg *WebACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WebACL.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WebACL) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WebACL.
 func (mg *WebACL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *WebACL) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WebACL.
 func (mg *WebACL) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WebACL.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WebACL) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WebACL.
@@ -787,14 +627,6 @@ func (mg *XSSMatchSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this XSSMatchSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *XSSMatchSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this XSSMatchSet.
 func (mg *XSSMatchSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -823,14 +655,6 @@ func (mg *XSSMatchSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this XSSMatchSet.
 func (mg *XSSMatchSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this XSSMatchSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *XSSMatchSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this XSSMatchSet.

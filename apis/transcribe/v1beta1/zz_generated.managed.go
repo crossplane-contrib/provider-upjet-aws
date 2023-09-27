@@ -27,14 +27,6 @@ func (mg *LanguageModel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LanguageModel.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LanguageModel) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LanguageModel.
 func (mg *LanguageModel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *LanguageModel) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LanguageModel.
 func (mg *LanguageModel) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LanguageModel.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LanguageModel) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LanguageModel.
@@ -103,14 +87,6 @@ func (mg *Vocabulary) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Vocabulary.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Vocabulary) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Vocabulary.
 func (mg *Vocabulary) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Vocabulary) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Vocabulary.
 func (mg *Vocabulary) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Vocabulary.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Vocabulary) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Vocabulary.
@@ -179,14 +147,6 @@ func (mg *VocabularyFilter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VocabularyFilter.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VocabularyFilter) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VocabularyFilter.
 func (mg *VocabularyFilter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *VocabularyFilter) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this VocabularyFilter.
 func (mg *VocabularyFilter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VocabularyFilter.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VocabularyFilter) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VocabularyFilter.

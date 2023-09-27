@@ -27,14 +27,6 @@ func (mg *LocationS3) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LocationS3.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LocationS3) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LocationS3.
 func (mg *LocationS3) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *LocationS3) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LocationS3.
 func (mg *LocationS3) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LocationS3.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LocationS3) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LocationS3.
@@ -103,14 +87,6 @@ func (mg *Task) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Task.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Task) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Task.
 func (mg *Task) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Task) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Task.
 func (mg *Task) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Task.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Task) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Task.
