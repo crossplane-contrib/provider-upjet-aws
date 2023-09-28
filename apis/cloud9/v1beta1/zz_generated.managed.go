@@ -27,14 +27,6 @@ func (mg *EnvironmentEC2) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EnvironmentEC2.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EnvironmentEC2) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EnvironmentEC2.
 func (mg *EnvironmentEC2) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *EnvironmentEC2) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EnvironmentEC2.
 func (mg *EnvironmentEC2) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EnvironmentEC2.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EnvironmentEC2) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EnvironmentEC2.
@@ -103,14 +87,6 @@ func (mg *EnvironmentMembership) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EnvironmentMembership.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EnvironmentMembership) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EnvironmentMembership.
 func (mg *EnvironmentMembership) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *EnvironmentMembership) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this EnvironmentMembership.
 func (mg *EnvironmentMembership) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EnvironmentMembership.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EnvironmentMembership) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EnvironmentMembership.

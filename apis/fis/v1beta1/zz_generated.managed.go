@@ -27,14 +27,6 @@ func (mg *ExperimentTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ExperimentTemplate.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ExperimentTemplate) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ExperimentTemplate.
 func (mg *ExperimentTemplate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ExperimentTemplate) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ExperimentTemplate.
 func (mg *ExperimentTemplate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ExperimentTemplate.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ExperimentTemplate) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ExperimentTemplate.

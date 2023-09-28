@@ -27,14 +27,6 @@ func (mg *Firewall) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Firewall.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Firewall) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Firewall.
 func (mg *Firewall) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Firewall) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Firewall.
 func (mg *Firewall) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Firewall.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Firewall) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Firewall.
@@ -103,14 +87,6 @@ func (mg *FirewallPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FirewallPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FirewallPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FirewallPolicy.
 func (mg *FirewallPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *FirewallPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FirewallPolicy.
 func (mg *FirewallPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FirewallPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FirewallPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FirewallPolicy.
@@ -179,14 +147,6 @@ func (mg *LoggingConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LoggingConfiguration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LoggingConfiguration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LoggingConfiguration.
 func (mg *LoggingConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *LoggingConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this LoggingConfiguration.
 func (mg *LoggingConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LoggingConfiguration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LoggingConfiguration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LoggingConfiguration.
@@ -255,14 +207,6 @@ func (mg *RuleGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RuleGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RuleGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RuleGroup.
 func (mg *RuleGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *RuleGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RuleGroup.
 func (mg *RuleGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RuleGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RuleGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RuleGroup.

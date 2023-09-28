@@ -114,7 +114,7 @@ type VocabularyStatus struct {
 type Vocabulary struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.languageCode) || has(self.initProvider.languageCode)",message="languageCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.languageCode) || (has(self.initProvider) && has(self.initProvider.languageCode))",message="spec.forProvider.languageCode is a required parameter"
 	Spec   VocabularySpec   `json:"spec"`
 	Status VocabularyStatus `json:"status,omitempty"`
 }

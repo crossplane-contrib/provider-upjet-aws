@@ -267,8 +267,8 @@ type ContainerServiceStatus struct {
 type ContainerService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.power) || has(self.initProvider.power)",message="power is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scale) || has(self.initProvider.scale)",message="scale is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.power) || (has(self.initProvider) && has(self.initProvider.power))",message="spec.forProvider.power is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scale) || (has(self.initProvider) && has(self.initProvider.scale))",message="spec.forProvider.scale is a required parameter"
 	Spec   ContainerServiceSpec   `json:"spec"`
 	Status ContainerServiceStatus `json:"status,omitempty"`
 }

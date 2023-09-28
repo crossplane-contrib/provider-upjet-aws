@@ -119,7 +119,7 @@ type ServiceLinkedRoleStatus struct {
 type ServiceLinkedRole struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.awsServiceName) || has(self.initProvider.awsServiceName)",message="awsServiceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.awsServiceName) || (has(self.initProvider) && has(self.initProvider.awsServiceName))",message="spec.forProvider.awsServiceName is a required parameter"
 	Spec   ServiceLinkedRoleSpec   `json:"spec"`
 	Status ServiceLinkedRoleStatus `json:"status,omitempty"`
 }

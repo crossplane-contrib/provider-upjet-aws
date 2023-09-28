@@ -27,14 +27,6 @@ func (mg *Cluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Cluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Cluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Cluster.
 func (mg *Cluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Cluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Cluster.
 func (mg *Cluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Cluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Cluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Cluster.
@@ -103,14 +87,6 @@ func (mg *ClusterEndpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ClusterEndpoint.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ClusterEndpoint) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ClusterEndpoint.
 func (mg *ClusterEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ClusterEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ClusterEndpoint.
 func (mg *ClusterEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ClusterEndpoint.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ClusterEndpoint) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ClusterEndpoint.
@@ -179,14 +147,6 @@ func (mg *ClusterInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ClusterInstance.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ClusterInstance) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ClusterInstance.
 func (mg *ClusterInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *ClusterInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ClusterInstance.
 func (mg *ClusterInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ClusterInstance.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ClusterInstance) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ClusterInstance.
@@ -255,14 +207,6 @@ func (mg *ClusterParameterGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ClusterParameterGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ClusterParameterGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ClusterParameterGroup.
 func (mg *ClusterParameterGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *ClusterParameterGroup) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this ClusterParameterGroup.
 func (mg *ClusterParameterGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ClusterParameterGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ClusterParameterGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ClusterParameterGroup.
@@ -331,14 +267,6 @@ func (mg *ClusterSnapshot) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ClusterSnapshot.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ClusterSnapshot) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ClusterSnapshot.
 func (mg *ClusterSnapshot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *ClusterSnapshot) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ClusterSnapshot.
 func (mg *ClusterSnapshot) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ClusterSnapshot.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ClusterSnapshot) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ClusterSnapshot.
@@ -407,14 +327,6 @@ func (mg *EventSubscription) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EventSubscription.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EventSubscription) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EventSubscription.
 func (mg *EventSubscription) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *EventSubscription) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EventSubscription.
 func (mg *EventSubscription) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EventSubscription.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EventSubscription) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EventSubscription.
@@ -483,14 +387,6 @@ func (mg *GlobalCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this GlobalCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *GlobalCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this GlobalCluster.
 func (mg *GlobalCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *GlobalCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this GlobalCluster.
 func (mg *GlobalCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this GlobalCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *GlobalCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this GlobalCluster.
@@ -559,14 +447,6 @@ func (mg *ParameterGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ParameterGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ParameterGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ParameterGroup.
 func (mg *ParameterGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *ParameterGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ParameterGroup.
 func (mg *ParameterGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ParameterGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ParameterGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ParameterGroup.
@@ -635,14 +507,6 @@ func (mg *SubnetGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SubnetGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SubnetGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SubnetGroup.
 func (mg *SubnetGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *SubnetGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SubnetGroup.
 func (mg *SubnetGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SubnetGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SubnetGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SubnetGroup.

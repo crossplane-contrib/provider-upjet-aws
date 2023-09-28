@@ -157,8 +157,8 @@ type MaintenanceWindowTargetStatus struct {
 type MaintenanceWindowTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceType) || has(self.initProvider.resourceType)",message="resourceType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targets) || has(self.initProvider.targets)",message="targets is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceType) || (has(self.initProvider) && has(self.initProvider.resourceType))",message="spec.forProvider.resourceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targets) || (has(self.initProvider) && has(self.initProvider.targets))",message="spec.forProvider.targets is a required parameter"
 	Spec   MaintenanceWindowTargetSpec   `json:"spec"`
 	Status MaintenanceWindowTargetStatus `json:"status,omitempty"`
 }

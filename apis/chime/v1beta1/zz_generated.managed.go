@@ -27,14 +27,6 @@ func (mg *VoiceConnector) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnector.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnector) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnector.
 func (mg *VoiceConnector) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *VoiceConnector) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this VoiceConnector.
 func (mg *VoiceConnector) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnector.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnector) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnector.
@@ -103,14 +87,6 @@ func (mg *VoiceConnectorGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnectorGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnectorGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnectorGroup.
 func (mg *VoiceConnectorGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *VoiceConnectorGroup) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this VoiceConnectorGroup.
 func (mg *VoiceConnectorGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnectorGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnectorGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnectorGroup.
@@ -179,14 +147,6 @@ func (mg *VoiceConnectorLogging) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnectorLogging.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnectorLogging) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnectorLogging.
 func (mg *VoiceConnectorLogging) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *VoiceConnectorLogging) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this VoiceConnectorLogging.
 func (mg *VoiceConnectorLogging) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnectorLogging.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnectorLogging) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnectorLogging.
@@ -255,14 +207,6 @@ func (mg *VoiceConnectorOrigination) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnectorOrigination.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnectorOrigination) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *VoiceConnectorOrigination) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this VoiceConnectorOrigination.
 func (mg *VoiceConnectorOrigination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnectorOrigination.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnectorOrigination) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnectorOrigination.
@@ -331,14 +267,6 @@ func (mg *VoiceConnectorStreaming) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnectorStreaming.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnectorStreaming) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *VoiceConnectorStreaming) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this VoiceConnectorStreaming.
 func (mg *VoiceConnectorStreaming) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnectorStreaming.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnectorStreaming) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnectorStreaming.
@@ -407,14 +327,6 @@ func (mg *VoiceConnectorTermination) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnectorTermination.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnectorTermination) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnectorTermination.
 func (mg *VoiceConnectorTermination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *VoiceConnectorTermination) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this VoiceConnectorTermination.
 func (mg *VoiceConnectorTermination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnectorTermination.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnectorTermination) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnectorTermination.
@@ -483,14 +387,6 @@ func (mg *VoiceConnectorTerminationCredentials) GetProviderConfigReference() *xp
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VoiceConnectorTerminationCredentials.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VoiceConnectorTerminationCredentials) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VoiceConnectorTerminationCredentials.
 func (mg *VoiceConnectorTerminationCredentials) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *VoiceConnectorTerminationCredentials) SetManagementPolicies(r xpv1.Man
 // SetProviderConfigReference of this VoiceConnectorTerminationCredentials.
 func (mg *VoiceConnectorTerminationCredentials) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VoiceConnectorTerminationCredentials.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VoiceConnectorTerminationCredentials) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VoiceConnectorTerminationCredentials.

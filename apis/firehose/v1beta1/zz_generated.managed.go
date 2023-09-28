@@ -27,14 +27,6 @@ func (mg *DeliveryStream) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this DeliveryStream.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *DeliveryStream) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this DeliveryStream.
 func (mg *DeliveryStream) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *DeliveryStream) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DeliveryStream.
 func (mg *DeliveryStream) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this DeliveryStream.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *DeliveryStream) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this DeliveryStream.

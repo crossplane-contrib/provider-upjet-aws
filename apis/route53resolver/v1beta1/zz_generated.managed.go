@@ -27,14 +27,6 @@ func (mg *Endpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Endpoint.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Endpoint) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Endpoint.
 func (mg *Endpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Endpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Endpoint.
 func (mg *Endpoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Endpoint.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Endpoint) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Endpoint.
@@ -103,14 +87,6 @@ func (mg *Rule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Rule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Rule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Rule.
 func (mg *Rule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Rule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Rule.
 func (mg *Rule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Rule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Rule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Rule.
@@ -179,14 +147,6 @@ func (mg *RuleAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RuleAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RuleAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RuleAssociation.
 func (mg *RuleAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *RuleAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RuleAssociation.
 func (mg *RuleAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RuleAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RuleAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RuleAssociation.

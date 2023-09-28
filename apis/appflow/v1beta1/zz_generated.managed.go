@@ -27,14 +27,6 @@ func (mg *Flow) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Flow.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Flow) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Flow.
 func (mg *Flow) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Flow) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Flow.
 func (mg *Flow) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Flow.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Flow) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Flow.

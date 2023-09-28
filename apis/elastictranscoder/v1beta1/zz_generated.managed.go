@@ -27,14 +27,6 @@ func (mg *Pipeline) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Pipeline.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Pipeline) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Pipeline.
 func (mg *Pipeline) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Pipeline) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Pipeline.
 func (mg *Pipeline) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Pipeline.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Pipeline) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Pipeline.
@@ -103,14 +87,6 @@ func (mg *Preset) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Preset.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Preset) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Preset.
 func (mg *Preset) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Preset) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Preset.
 func (mg *Preset) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Preset.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Preset) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Preset.

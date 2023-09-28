@@ -142,7 +142,7 @@ type ArchiveRuleStatus struct {
 type ArchiveRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filter) || has(self.initProvider.filter)",message="filter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filter) || (has(self.initProvider) && has(self.initProvider.filter))",message="spec.forProvider.filter is a required parameter"
 	Spec   ArchiveRuleSpec   `json:"spec"`
 	Status ArchiveRuleStatus `json:"status,omitempty"`
 }

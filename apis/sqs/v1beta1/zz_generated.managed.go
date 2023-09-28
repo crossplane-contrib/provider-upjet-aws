@@ -27,14 +27,6 @@ func (mg *Queue) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Queue.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Queue) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Queue.
 func (mg *Queue) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Queue) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Queue.
 func (mg *Queue) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Queue.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Queue) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Queue.
@@ -103,14 +87,6 @@ func (mg *QueuePolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this QueuePolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *QueuePolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this QueuePolicy.
 func (mg *QueuePolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *QueuePolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this QueuePolicy.
 func (mg *QueuePolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this QueuePolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *QueuePolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this QueuePolicy.
@@ -179,14 +147,6 @@ func (mg *QueueRedriveAllowPolicy) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this QueueRedriveAllowPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *QueueRedriveAllowPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this QueueRedriveAllowPolicy.
 func (mg *QueueRedriveAllowPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *QueueRedriveAllowPolicy) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this QueueRedriveAllowPolicy.
 func (mg *QueueRedriveAllowPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this QueueRedriveAllowPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *QueueRedriveAllowPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this QueueRedriveAllowPolicy.
@@ -255,14 +207,6 @@ func (mg *QueueRedrivePolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this QueueRedrivePolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *QueueRedrivePolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this QueueRedrivePolicy.
 func (mg *QueueRedrivePolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *QueueRedrivePolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this QueueRedrivePolicy.
 func (mg *QueueRedrivePolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this QueueRedrivePolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *QueueRedrivePolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this QueueRedrivePolicy.

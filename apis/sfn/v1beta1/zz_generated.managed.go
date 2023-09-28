@@ -27,14 +27,6 @@ func (mg *Activity) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Activity.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Activity) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Activity.
 func (mg *Activity) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Activity) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Activity.
 func (mg *Activity) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Activity.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Activity) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Activity.
@@ -103,14 +87,6 @@ func (mg *StateMachine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this StateMachine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *StateMachine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this StateMachine.
 func (mg *StateMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *StateMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this StateMachine.
 func (mg *StateMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this StateMachine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *StateMachine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this StateMachine.

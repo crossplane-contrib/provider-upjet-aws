@@ -27,14 +27,6 @@ func (mg *GeofenceCollection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this GeofenceCollection.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *GeofenceCollection) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this GeofenceCollection.
 func (mg *GeofenceCollection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *GeofenceCollection) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this GeofenceCollection.
 func (mg *GeofenceCollection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this GeofenceCollection.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *GeofenceCollection) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this GeofenceCollection.
@@ -103,14 +87,6 @@ func (mg *PlaceIndex) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PlaceIndex.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PlaceIndex) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PlaceIndex.
 func (mg *PlaceIndex) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *PlaceIndex) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PlaceIndex.
 func (mg *PlaceIndex) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PlaceIndex.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PlaceIndex) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PlaceIndex.
@@ -179,14 +147,6 @@ func (mg *RouteCalculator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RouteCalculator.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RouteCalculator) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RouteCalculator.
 func (mg *RouteCalculator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *RouteCalculator) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RouteCalculator.
 func (mg *RouteCalculator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RouteCalculator.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RouteCalculator) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RouteCalculator.
@@ -255,14 +207,6 @@ func (mg *Tracker) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Tracker.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Tracker) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Tracker.
 func (mg *Tracker) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *Tracker) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Tracker.
 func (mg *Tracker) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Tracker.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Tracker) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Tracker.
@@ -331,14 +267,6 @@ func (mg *TrackerAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this TrackerAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *TrackerAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this TrackerAssociation.
 func (mg *TrackerAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *TrackerAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this TrackerAssociation.
 func (mg *TrackerAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this TrackerAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *TrackerAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this TrackerAssociation.

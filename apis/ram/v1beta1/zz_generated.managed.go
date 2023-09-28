@@ -27,14 +27,6 @@ func (mg *PrincipalAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PrincipalAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PrincipalAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PrincipalAssociation.
 func (mg *PrincipalAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *PrincipalAssociation) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this PrincipalAssociation.
 func (mg *PrincipalAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PrincipalAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PrincipalAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PrincipalAssociation.
@@ -103,14 +87,6 @@ func (mg *ResourceAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceAssociation.
 func (mg *ResourceAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ResourceAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this ResourceAssociation.
 func (mg *ResourceAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceAssociation.
@@ -179,14 +147,6 @@ func (mg *ResourceShare) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceShare.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceShare) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceShare.
 func (mg *ResourceShare) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *ResourceShare) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ResourceShare.
 func (mg *ResourceShare) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceShare.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceShare) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceShare.
@@ -255,14 +207,6 @@ func (mg *ResourceShareAccepter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceShareAccepter.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceShareAccepter) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceShareAccepter.
 func (mg *ResourceShareAccepter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *ResourceShareAccepter) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this ResourceShareAccepter.
 func (mg *ResourceShareAccepter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceShareAccepter.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceShareAccepter) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceShareAccepter.

@@ -27,14 +27,6 @@ func (mg *Container) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Container.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Container) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Container.
 func (mg *Container) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Container) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Container.
 func (mg *Container) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Container.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Container) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Container.
@@ -103,14 +87,6 @@ func (mg *ContainerPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ContainerPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ContainerPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ContainerPolicy.
 func (mg *ContainerPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ContainerPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ContainerPolicy.
 func (mg *ContainerPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ContainerPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ContainerPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ContainerPolicy.

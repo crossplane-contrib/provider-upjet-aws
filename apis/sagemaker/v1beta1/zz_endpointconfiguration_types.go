@@ -770,7 +770,7 @@ type EndpointConfigurationStatus struct {
 type EndpointConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productionVariants) || has(self.initProvider.productionVariants)",message="productionVariants is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productionVariants) || (has(self.initProvider) && has(self.initProvider.productionVariants))",message="spec.forProvider.productionVariants is a required parameter"
 	Spec   EndpointConfigurationSpec   `json:"spec"`
 	Status EndpointConfigurationStatus `json:"status,omitempty"`
 }

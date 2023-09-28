@@ -92,7 +92,7 @@ type VPNConnectionRouteStatus struct {
 type VPNConnectionRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock) || has(self.initProvider.destinationCidrBlock)",message="destinationCidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock) || (has(self.initProvider) && has(self.initProvider.destinationCidrBlock))",message="spec.forProvider.destinationCidrBlock is a required parameter"
 	Spec   VPNConnectionRouteSpec   `json:"spec"`
 	Status VPNConnectionRouteStatus `json:"status,omitempty"`
 }

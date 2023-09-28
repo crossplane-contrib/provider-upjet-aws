@@ -27,14 +27,6 @@ func (mg *Directory) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Directory.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Directory) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Directory.
 func (mg *Directory) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Directory) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Directory.
 func (mg *Directory) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Directory.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Directory) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Directory.
@@ -103,14 +87,6 @@ func (mg *IPGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IPGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IPGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IPGroup.
 func (mg *IPGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *IPGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IPGroup.
 func (mg *IPGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IPGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IPGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IPGroup.

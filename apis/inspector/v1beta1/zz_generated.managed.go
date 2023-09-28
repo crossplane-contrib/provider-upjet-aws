@@ -27,14 +27,6 @@ func (mg *AssessmentTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AssessmentTarget.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AssessmentTarget) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AssessmentTarget.
 func (mg *AssessmentTarget) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AssessmentTarget) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AssessmentTarget.
 func (mg *AssessmentTarget) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AssessmentTarget.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AssessmentTarget) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AssessmentTarget.
@@ -103,14 +87,6 @@ func (mg *AssessmentTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AssessmentTemplate.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AssessmentTemplate) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AssessmentTemplate.
 func (mg *AssessmentTemplate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *AssessmentTemplate) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AssessmentTemplate.
 func (mg *AssessmentTemplate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AssessmentTemplate.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AssessmentTemplate) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AssessmentTemplate.
@@ -179,14 +147,6 @@ func (mg *ResourceGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceGroup.
 func (mg *ResourceGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *ResourceGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ResourceGroup.
 func (mg *ResourceGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceGroup.

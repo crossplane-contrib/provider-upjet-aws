@@ -76,7 +76,7 @@ type StandardsSubscriptionStatus struct {
 type StandardsSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.standardsArn) || has(self.initProvider.standardsArn)",message="standardsArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.standardsArn) || (has(self.initProvider) && has(self.initProvider.standardsArn))",message="spec.forProvider.standardsArn is a required parameter"
 	Spec   StandardsSubscriptionSpec   `json:"spec"`
 	Status StandardsSubscriptionStatus `json:"status,omitempty"`
 }

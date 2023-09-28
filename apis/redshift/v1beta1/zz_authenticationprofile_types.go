@@ -76,7 +76,7 @@ type AuthenticationProfileStatus struct {
 type AuthenticationProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent) || has(self.initProvider.authenticationProfileContent)",message="authenticationProfileContent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent) || (has(self.initProvider) && has(self.initProvider.authenticationProfileContent))",message="spec.forProvider.authenticationProfileContent is a required parameter"
 	Spec   AuthenticationProfileSpec   `json:"spec"`
 	Status AuthenticationProfileStatus `json:"status,omitempty"`
 }

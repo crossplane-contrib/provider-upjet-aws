@@ -27,14 +27,6 @@ func (mg *Codepipeline) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Codepipeline.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Codepipeline) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Codepipeline.
 func (mg *Codepipeline) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Codepipeline) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Codepipeline.
 func (mg *Codepipeline) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Codepipeline.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Codepipeline) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Codepipeline.
@@ -103,14 +87,6 @@ func (mg *CustomActionType) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this CustomActionType.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *CustomActionType) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this CustomActionType.
 func (mg *CustomActionType) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *CustomActionType) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this CustomActionType.
 func (mg *CustomActionType) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this CustomActionType.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *CustomActionType) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this CustomActionType.
@@ -179,14 +147,6 @@ func (mg *Webhook) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Webhook.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Webhook) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Webhook.
 func (mg *Webhook) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *Webhook) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Webhook.
 func (mg *Webhook) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Webhook.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Webhook) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Webhook.

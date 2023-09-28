@@ -103,14 +103,6 @@ func (mg *SchedulingPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SchedulingPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SchedulingPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SchedulingPolicy.
 func (mg *SchedulingPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +131,6 @@ func (mg *SchedulingPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SchedulingPolicy.
 func (mg *SchedulingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SchedulingPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SchedulingPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SchedulingPolicy.

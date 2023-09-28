@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: schedules.scheduler.aws.upbound.io
 spec:
   group: scheduler.aws.upbound.io
@@ -971,42 +971,6 @@ spec:
                 required:
                 - name
                 type: object
-              providerRef:
-                description: 'ProviderReference specifies the provider that will be
-                  used to create, observe, update, and delete this managed resource.
-                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
-                properties:
-                  name:
-                    description: Name of the referenced object.
-                    type: string
-                  policy:
-                    description: Policies for referencing.
-                    properties:
-                      resolution:
-                        default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
-                        enum:
-                        - Required
-                        - Optional
-                        type: string
-                      resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
-                        enum:
-                        - Always
-                        - IfNotPresent
-                        type: string
-                    type: object
-                required:
-                - name
-                type: object
               publishConnectionDetailsTo:
                 description: PublishConnectionDetailsTo specifies the connection secret
                   config which contains a name, metadata and a reference to secret
@@ -1105,18 +1069,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: flexibleTimeWindow is a required parameter
+            - message: spec.forProvider.flexibleTimeWindow is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.flexibleTimeWindow)
-                || has(self.initProvider.flexibleTimeWindow)'
-            - message: scheduleExpression is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.flexibleTimeWindow))'
+            - message: spec.forProvider.scheduleExpression is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scheduleExpression)
-                || has(self.initProvider.scheduleExpression)'
-            - message: target is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.scheduleExpression))'
+            - message: spec.forProvider.target is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.target)
-                || has(self.initProvider.target)'
+                || (has(self.initProvider) && has(self.initProvider.target))'
           status:
             description: ScheduleStatus defines the observed state of Schedule.
             properties:

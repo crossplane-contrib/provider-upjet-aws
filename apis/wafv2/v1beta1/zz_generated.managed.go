@@ -27,14 +27,6 @@ func (mg *IPSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IPSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IPSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IPSet.
 func (mg *IPSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *IPSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IPSet.
 func (mg *IPSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IPSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IPSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IPSet.
@@ -103,14 +87,6 @@ func (mg *RegexPatternSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this RegexPatternSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *RegexPatternSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this RegexPatternSet.
 func (mg *RegexPatternSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *RegexPatternSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this RegexPatternSet.
 func (mg *RegexPatternSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this RegexPatternSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *RegexPatternSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this RegexPatternSet.

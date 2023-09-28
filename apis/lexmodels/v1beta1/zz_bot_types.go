@@ -424,9 +424,9 @@ type BotStatus struct {
 type Bot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.abortStatement) || has(self.initProvider.abortStatement)",message="abortStatement is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.childDirected) || has(self.initProvider.childDirected)",message="childDirected is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intent) || has(self.initProvider.intent)",message="intent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.abortStatement) || (has(self.initProvider) && has(self.initProvider.abortStatement))",message="spec.forProvider.abortStatement is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.childDirected) || (has(self.initProvider) && has(self.initProvider.childDirected))",message="spec.forProvider.childDirected is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intent) || (has(self.initProvider) && has(self.initProvider.intent))",message="spec.forProvider.intent is a required parameter"
 	Spec   BotSpec   `json:"spec"`
 	Status BotStatus `json:"status,omitempty"`
 }

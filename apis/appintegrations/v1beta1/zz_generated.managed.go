@@ -27,14 +27,6 @@ func (mg *EventIntegration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EventIntegration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EventIntegration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EventIntegration.
 func (mg *EventIntegration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *EventIntegration) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EventIntegration.
 func (mg *EventIntegration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EventIntegration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EventIntegration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EventIntegration.

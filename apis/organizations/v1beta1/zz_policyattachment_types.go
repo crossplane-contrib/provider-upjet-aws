@@ -101,7 +101,7 @@ type PolicyAttachmentStatus struct {
 type PolicyAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetId) || has(self.initProvider.targetId)",message="targetId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetId) || (has(self.initProvider) && has(self.initProvider.targetId))",message="spec.forProvider.targetId is a required parameter"
 	Spec   PolicyAttachmentSpec   `json:"spec"`
 	Status PolicyAttachmentStatus `json:"status,omitempty"`
 }

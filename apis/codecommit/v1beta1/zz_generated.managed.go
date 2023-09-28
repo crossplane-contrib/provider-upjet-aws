@@ -27,14 +27,6 @@ func (mg *ApprovalRuleTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ApprovalRuleTemplate.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ApprovalRuleTemplate) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ApprovalRuleTemplate.
 func (mg *ApprovalRuleTemplate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ApprovalRuleTemplate) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this ApprovalRuleTemplate.
 func (mg *ApprovalRuleTemplate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ApprovalRuleTemplate.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ApprovalRuleTemplate) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ApprovalRuleTemplate.
@@ -103,14 +87,6 @@ func (mg *ApprovalRuleTemplateAssociation) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ApprovalRuleTemplateAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ApprovalRuleTemplateAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ApprovalRuleTemplateAssociation.
 func (mg *ApprovalRuleTemplateAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ApprovalRuleTemplateAssociation) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this ApprovalRuleTemplateAssociation.
 func (mg *ApprovalRuleTemplateAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ApprovalRuleTemplateAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ApprovalRuleTemplateAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ApprovalRuleTemplateAssociation.
@@ -179,14 +147,6 @@ func (mg *Repository) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Repository.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Repository) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Repository.
 func (mg *Repository) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *Repository) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Repository.
 func (mg *Repository) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Repository.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Repository) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Repository.
@@ -255,14 +207,6 @@ func (mg *Trigger) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Trigger.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Trigger) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Trigger.
 func (mg *Trigger) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *Trigger) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Trigger.
 func (mg *Trigger) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Trigger.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Trigger) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Trigger.

@@ -157,9 +157,9 @@ type LanguageModelStatus struct {
 type LanguageModel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.baseModelName) || has(self.initProvider.baseModelName)",message="baseModelName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputDataConfig) || has(self.initProvider.inputDataConfig)",message="inputDataConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.languageCode) || has(self.initProvider.languageCode)",message="languageCode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.baseModelName) || (has(self.initProvider) && has(self.initProvider.baseModelName))",message="spec.forProvider.baseModelName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputDataConfig) || (has(self.initProvider) && has(self.initProvider.inputDataConfig))",message="spec.forProvider.inputDataConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.languageCode) || (has(self.initProvider) && has(self.initProvider.languageCode))",message="spec.forProvider.languageCode is a required parameter"
 	Spec   LanguageModelSpec   `json:"spec"`
 	Status LanguageModelStatus `json:"status,omitempty"`
 }

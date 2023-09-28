@@ -27,14 +27,6 @@ func (mg *Backup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Backup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Backup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Backup.
 func (mg *Backup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Backup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Backup.
 func (mg *Backup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Backup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Backup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Backup.
@@ -103,14 +87,6 @@ func (mg *DataRepositoryAssociation) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this DataRepositoryAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *DataRepositoryAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this DataRepositoryAssociation.
 func (mg *DataRepositoryAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *DataRepositoryAssociation) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this DataRepositoryAssociation.
 func (mg *DataRepositoryAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this DataRepositoryAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *DataRepositoryAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this DataRepositoryAssociation.
@@ -179,14 +147,6 @@ func (mg *LustreFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LustreFileSystem.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LustreFileSystem) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LustreFileSystem.
 func (mg *LustreFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *LustreFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LustreFileSystem.
 func (mg *LustreFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LustreFileSystem.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LustreFileSystem) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LustreFileSystem.
@@ -255,14 +207,6 @@ func (mg *OntapFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this OntapFileSystem.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *OntapFileSystem) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this OntapFileSystem.
 func (mg *OntapFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *OntapFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this OntapFileSystem.
 func (mg *OntapFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this OntapFileSystem.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *OntapFileSystem) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this OntapFileSystem.
@@ -331,14 +267,6 @@ func (mg *OntapStorageVirtualMachine) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this OntapStorageVirtualMachine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *OntapStorageVirtualMachine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this OntapStorageVirtualMachine.
 func (mg *OntapStorageVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *OntapStorageVirtualMachine) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this OntapStorageVirtualMachine.
 func (mg *OntapStorageVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this OntapStorageVirtualMachine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *OntapStorageVirtualMachine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this OntapStorageVirtualMachine.
@@ -407,14 +327,6 @@ func (mg *WindowsFileSystem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WindowsFileSystem.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WindowsFileSystem) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WindowsFileSystem.
 func (mg *WindowsFileSystem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *WindowsFileSystem) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WindowsFileSystem.
 func (mg *WindowsFileSystem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WindowsFileSystem.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WindowsFileSystem) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WindowsFileSystem.

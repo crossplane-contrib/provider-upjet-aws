@@ -180,7 +180,7 @@ type ConnectAttachmentStatus struct {
 type ConnectAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.options) || has(self.initProvider.options)",message="options is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.options) || (has(self.initProvider) && has(self.initProvider.options))",message="spec.forProvider.options is a required parameter"
 	Spec   ConnectAttachmentSpec   `json:"spec"`
 	Status ConnectAttachmentStatus `json:"status,omitempty"`
 }
