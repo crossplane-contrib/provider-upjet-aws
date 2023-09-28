@@ -30,6 +30,13 @@ img.build:
 	  export t=$$(docker load -qi "$(XPKG_OUTPUT_DIR)/$(PLATFORM)/$(PROJECT_NAME)-monolith-$(VERSION).xpkg") && \
 	  docker tag $${t##*:} $(BUILD_REGISTRY)/$(PROJECT_NAME)-monolith-$(ARCH); \
 	fi || $(FAIL)
+
+	if [[ "$${LOAD_SUBPACKAGE}" == "true" ]]; then \
+		$(MAKE) batch-process SUBPACKAGES=$(SUBPACKAGES) BATCH_PLATFORMS=$(PLATFORM) BUILD_ONLY=true STORE_PACKAGE=$(SUBPACKAGES) && \
+		export t=$$(docker load -qi "$(XPKG_OUTPUT_DIR)/$(PLATFORM)/$(PROJECT_NAME)-$(SUBPACKAGES)-$(VERSION).xpkg") && \
+		docker tag $${t##*:} $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(SUBPACKAGES)-$(ARCH); \
+	fi
+
 	@$(OK) docker build $${IMAGE};
 
 img.build.shared:

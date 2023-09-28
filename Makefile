@@ -196,9 +196,13 @@ uptest-local:
 build-monolith:
 	@$(MAKE) build SUBPACKAGES=monolith LOAD_MONOLITH=true
 
-local-deploy: build-monolith controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-monolith
+local-deploy: controlplane.up
 	@$(INFO) running locally built provider
-	@$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-monolith --for condition=Healthy --timeout 5m
+	for subpackage in $(UPTEST_SUBPACKAGES); do \
+		$(MAKE) build SUBPACKAGES=$$subpackage LOAD_SUBPACKAGE=true; \
+		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$$subpackage; \
+		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$$subpackage --for condition=Healthy --timeout 5m; \
+	done
 	@$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
 	@$(OK) running locally built provider
 
