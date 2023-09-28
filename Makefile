@@ -193,16 +193,21 @@ uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
-build.%:
-	@$(MAKE) build SUBPACKAGES=$* LOAD_PACKAGES=true
+build-provider.%:
+	@$(MAKE) build SUBPACKAGES="$$(tr ',' ' ' <<< $*)" LOAD_PACKAGES=true
 
 XPKG_SKIP_DEP_RESOLUTION := true
 
-local-deploy.%: controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-%
-	@$(INFO) running locally built provider
-	$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$* --for condition=Healthy --timeout 5m
-	@$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m
-	@$(OK) running locally built provider
+local-deploy.%: controlplane.up
+	@for api in $$(tr ',' ' ' <<< $*); do \
+		$(MAKE) local.xpkg.deploy.provider.$(PROJECT_NAME)-$${api}; \
+		$(INFO) running locally built $(PROJECT_NAME)-$${api}; \
+		$(KUBECTL) wait provider.pkg $(PROJECT_NAME)-$${api} --for condition=Healthy --timeout 5m; \
+		$(KUBECTL) -n upbound-system wait --for=condition=Available deployment --all --timeout=5m; \
+		$(OK) running locally built $(PROJECT_NAME)-$${api}; \
+	done || $(FAIL)
+
+local-deploy: build-provider.monolith local-deploy.monolith
 
 # This target requires the following environment variables to be set:
 # - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g.
@@ -211,7 +216,26 @@ local-deploy.%: controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME)-%
 #   $ export UPTEST_CLOUD_CREDENTIALS=$(echo "DEFAULT='$(cat ~/.aws/credentials)'\nPEER='$(cat ~/.aws/credentials-uptest)'")
 # - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
 # - UPTEST_DATASOURCE_PATH, see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
-e2e: local-deploy uptest
+family-e2e:
+	@(INSTALL_APIS=""; \
+	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
+	  	$(INFO) Processing the example manifest "$${m}"; \
+		for api in $$(sed -nE 's/^apiVersion: *(.+)/\1/p' "$${m}" | cut -d. -f1); do \
+			if [[ $${INSTALL_APIS} =~ " $${api} " ]]; then \
+				$(INFO) Resource provider $(PROJECT_NAME)-$${api} is already installed. Skipping...; \
+				continue; \
+			fi; \
+			$(INFO) Installing the family resource $(PROJECT_NAME)-$${api} for the test file: $${m}; \
+			INSTALL_APIS="$${INSTALL_APIS} $${api} "; \
+		done; \
+	done; \
+	INSTALL_APIS="config,$$(tr ' ' ',' <<< $${INSTALL_APIS})"; \
+	INSTALL_APIS="$$(tr -s ',' <<< "$${INSTALL_APIS}")"; \
+	$(INFO) Building and deploying resource providers for the short API groups: $${INSTALL_APIS}; \
+	$(MAKE) build-provider.$${INSTALL_APIS} local-deploy.$${INSTALL_APIS}) || $(FAIL)
+	$(MAKE) uptest
+
+e2e: family-e2e
 
 # TODO: please move this to the common build submodule
 # once the use cases mature
