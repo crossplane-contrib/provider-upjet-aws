@@ -10,7 +10,7 @@ sources:
     provider in your AWS account, then create an IAM role that the AWS provider
     in your control plane can assume. Go through the following steps to add the
     identity provider.
-    1. Open the IAM console at [https://console.aws.amazon.com/iam](https://console.aws.amazon.com/iam').
+    1. Open the IAM console at [https://console.aws.amazon.com/iam](https://console.aws.amazon.com/iam).
     2. Navigate to **Identity Providers** > **Add Provider** and select **OpenID Connect**.
     3. Use `https://proidc.upbound.io` as the **Provider URL** and `sts.amazonaws.com` as the **Audience**.
     4. Select **Add Provider**.
