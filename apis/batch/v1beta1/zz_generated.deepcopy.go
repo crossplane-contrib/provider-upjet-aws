@@ -261,7 +261,8 @@ func (in *JobDefinitionInitParameters) DeepCopyInto(out *JobDefinitionInitParame
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -299,7 +300,8 @@ func (in *JobDefinitionInitParameters) DeepCopyInto(out *JobDefinitionInitParame
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -393,7 +395,8 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -436,7 +439,8 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -451,7 +455,8 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -503,7 +508,8 @@ func (in *JobDefinitionParameters) DeepCopyInto(out *JobDefinitionParameters) {
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
@@ -546,7 +552,8 @@ func (in *JobDefinitionParameters) DeepCopyInto(out *JobDefinitionParameters) {
 			if val == nil {
 				(*out)[key] = nil
 			} else {
-				in, out := &val, &outVal
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
 				*out = new(string)
 				**out = **in
 			}
