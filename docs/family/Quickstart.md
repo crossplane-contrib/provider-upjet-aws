@@ -79,8 +79,8 @@ After installing the provider, verify the install with `kubectl get providers`.
 
 ```shell
 NAME                          INSTALLED   HEALTHY   PACKAGE                                               AGE
-provider-aws-s3               True        True      xpkg.upbound.io/upbound/provider-aws-s3:v0.40.0       6m39s
-upbound-provider-family-aws   True        True      xpkg.upbound.io/upbound/provider-family-aws:v0.40.0   6m30s
+provider-aws-s3               True        True      xpkg.upbound.io/upbound/provider-aws-s3:v0.41.0       6m39s
+upbound-provider-family-aws   True        True      xpkg.upbound.io/upbound/provider-family-aws:v0.41.0   6m30s
 ```
 
 It may take up to 5 minutes to report `HEALTHY`.
