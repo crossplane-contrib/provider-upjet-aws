@@ -73,7 +73,7 @@ kind: Provider
 metadata:
   name: provider-aws
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.21.0
+  package: xpkg.upbound.io/upbound/provider-aws:v0.41.0
 EOF
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Installed --timeout=180s
 kubectl wait "providers.pkg.crossplane.io/provider-aws" --for=condition=Healthy --timeout=180s
@@ -116,9 +116,9 @@ spec:
 EOF
 
 printf "Checking AWS bucket creation (this only takes a minute)...\n"
-kubectl wait "$(kubectl get buckets -o name)" --for=condition=Ready --timeout=180s
+kubectl wait "$(kubectl get buckets.s3 -o name)" --for=condition=Ready --timeout=180s
 
-kubectl get buckets
+kubectl get buckets.s3
 ```
 
 Your Kubernetes cluster created this AWS S3 bucket.
@@ -363,10 +363,10 @@ spec:
 EOF
 ```
 
-Use `kubectl get buckets` to verify bucket creation.
+Use `kubectl get buckets.s3` to verify bucket creation.
 
 ```shell
-$ kubectl get buckets
+$ kubectl get buckets.s3
 NAME                           READY   SYNCED   EXTERNAL-NAME                  AGE
 upbound-bucket-fb8360b455dd9   True    True     upbound-bucket-fb8360b455dd9   8s
 ```
@@ -423,12 +423,12 @@ providerconfig.aws.upbound.io/my-config   114s
 
 ### Delete the managed resource
 Remove the managed resource by using `kubectl delete -f` with the same `Bucket`
-object file. Verify removal of the bucket with `kubectl get buckets`
+object file. Verify removal of the bucket with `kubectl get buckets.s3`
 
 ```shell
 $ kubectl delete -f bucket.yml
 bucket.s3.aws.upbound.io "upbound-bucket-fb8360b455dd9" deleted
 
-$ kubectl get buckets
+$ kubectl get buckets.s3
 No resources found
 ```
