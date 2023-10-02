@@ -696,12 +696,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// MediaLive MultiplexProgram can be imported using the id, or a combination of "program_name/multiplex_id"
 	"aws_medialive_multiplex_program": config.IdentifierFromProvider,
 
-	// msk
-	//
-	// MSK serverless clusters can be imported using the cluster arn
-	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
-	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
-
 	// networkmanager
 	//
 	// aws_networkmanager_site_to_site_vpn_attachment can be imported using the attachment ID
