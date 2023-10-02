@@ -537,6 +537,7 @@ import (
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
+	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
 	datasourcekendra "github.com/upbound/provider-aws/internal/controller/kendra/datasource"
 	experience "github.com/upbound/provider-aws/internal/controller/kendra/experience"
 	index "github.com/upbound/provider-aws/internal/controller/kendra/index"
@@ -1457,6 +1458,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterkafka.Setup,
 		configuration.Setup,
 		scramsecretassociation.Setup,
+		serverlesscluster.Setup,
 		datasourcekendra.Setup,
 		experience.Setup,
 		index.Setup,
