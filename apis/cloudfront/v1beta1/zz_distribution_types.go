@@ -1309,10 +1309,10 @@ type OriginInitParameters struct {
 	// Optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
-	// The CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
+	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	OriginShield []OriginShieldInitParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
-	// The CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
+	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig []S3OriginConfigInitParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
 
@@ -1342,10 +1342,10 @@ type OriginObservation struct {
 	// Optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
-	// The CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
+	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	OriginShield []OriginShieldObservation `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
-	// The CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
+	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig []S3OriginConfigObservation `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
 
@@ -1393,11 +1393,11 @@ type OriginParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
-	// The CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
+	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	// +kubebuilder:validation:Optional
 	OriginShield []OriginShieldParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
-	// The CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
+	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	// +kubebuilder:validation:Optional
 	S3OriginConfig []S3OriginConfigParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
@@ -1428,7 +1428,7 @@ type OriginShieldParameters struct {
 
 	// AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2.
 	// +kubebuilder:validation:Optional
-	OriginShieldRegion *string `json:"originShieldRegion" tf:"origin_shield_region,omitempty"`
+	OriginShieldRegion *string `json:"originShieldRegion,omitempty" tf:"origin_shield_region,omitempty"`
 }
 
 type RestrictionsInitParameters struct {

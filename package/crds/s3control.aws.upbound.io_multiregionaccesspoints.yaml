@@ -131,6 +131,11 @@ spec:
                                 description: The name of the associated bucket for
                                   the Region.
                                 type: string
+                              bucketAccountId:
+                                description: The AWS account ID that owns the Amazon
+                                  S3 bucket that's associated with this Multi-Region
+                                  Access Point.
+                                type: string
                               bucketRef:
                                 description: Reference to a Bucket in s3 to populate
                                   bucket.
@@ -536,6 +541,16 @@ spec:
                               bucket:
                                 description: The name of the associated bucket for
                                   the Region.
+                                type: string
+                              bucketAccountId:
+                                description: The AWS account ID that owns the Amazon
+                                  S3 bucket that's associated with this Multi-Region
+                                  Access Point.
+                                type: string
+                              region:
+                                description: The Region configuration block to specify
+                                  the bucket associated with the Multi-Region Access
+                                  Point. See Region Configuration below for more details.
                                 type: string
                             type: object
                           type: array

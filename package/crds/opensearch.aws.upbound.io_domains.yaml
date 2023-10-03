@@ -512,6 +512,17 @@ spec:
                           type: number
                       type: object
                     type: array
+                  softwareUpdateOptions:
+                    description: Software update options for the domain. Detailed
+                      below.
+                    items:
+                      properties:
+                        autoSoftwareUpdateEnabled:
+                          description: Whether automatic service software updates
+                            are enabled for the domain. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -892,6 +903,17 @@ spec:
                           description: Hour during which the service takes an automated
                             daily snapshot of the indices in the domain.
                           type: number
+                      type: object
+                    type: array
+                  softwareUpdateOptions:
+                    description: Software update options for the domain. Detailed
+                      below.
+                    items:
+                      properties:
+                        autoSoftwareUpdateEnabled:
+                          description: Whether automatic service software updates
+                            are enabled for the domain. Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   tags:
@@ -1457,6 +1479,17 @@ spec:
                           description: Hour during which the service takes an automated
                             daily snapshot of the indices in the domain.
                           type: number
+                      type: object
+                    type: array
+                  softwareUpdateOptions:
+                    description: Software update options for the domain. Detailed
+                      below.
+                    items:
+                      properties:
+                        autoSoftwareUpdateEnabled:
+                          description: Whether automatic service software updates
+                            are enabled for the domain. Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   tags:

@@ -27,7 +27,7 @@ type BrokerInitParameters struct {
 	// Name of the broker.
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
@@ -84,7 +84,7 @@ type BrokerObservation struct {
 	// Name of the broker.
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
@@ -157,7 +157,7 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 

@@ -398,6 +398,9 @@ type DomainInitParameters struct {
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	SnapshotOptions []SnapshotOptionsInitParameters `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
 
+	// Software update options for the domain. Detailed below.
+	SoftwareUpdateOptions []SoftwareUpdateOptionsInitParameters `json:"softwareUpdateOptions,omitempty" tf:"software_update_options,omitempty"`
+
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -468,6 +471,9 @@ type DomainObservation struct {
 
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	SnapshotOptions []SnapshotOptionsObservation `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Software update options for the domain. Detailed below.
+	SoftwareUpdateOptions []SoftwareUpdateOptionsObservation `json:"softwareUpdateOptions,omitempty" tf:"software_update_options,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -541,6 +547,10 @@ type DomainParameters struct {
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	// +kubebuilder:validation:Optional
 	SnapshotOptions []SnapshotOptionsParameters `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Software update options for the domain. Detailed below.
+	// +kubebuilder:validation:Optional
+	SoftwareUpdateOptions []SoftwareUpdateOptionsParameters `json:"softwareUpdateOptions,omitempty" tf:"software_update_options,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -867,6 +877,25 @@ type SnapshotOptionsParameters struct {
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
 	// +kubebuilder:validation:Optional
 	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour" tf:"automated_snapshot_start_hour,omitempty"`
+}
+
+type SoftwareUpdateOptionsInitParameters struct {
+
+	// Whether automatic service software updates are enabled for the domain. Defaults to false.
+	AutoSoftwareUpdateEnabled *bool `json:"autoSoftwareUpdateEnabled,omitempty" tf:"auto_software_update_enabled,omitempty"`
+}
+
+type SoftwareUpdateOptionsObservation struct {
+
+	// Whether automatic service software updates are enabled for the domain. Defaults to false.
+	AutoSoftwareUpdateEnabled *bool `json:"autoSoftwareUpdateEnabled,omitempty" tf:"auto_software_update_enabled,omitempty"`
+}
+
+type SoftwareUpdateOptionsParameters struct {
+
+	// Whether automatic service software updates are enabled for the domain. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutoSoftwareUpdateEnabled *bool `json:"autoSoftwareUpdateEnabled,omitempty" tf:"auto_software_update_enabled,omitempty"`
 }
 
 type VPCOptionsInitParameters struct {

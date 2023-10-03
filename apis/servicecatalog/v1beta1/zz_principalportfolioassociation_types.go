@@ -18,7 +18,7 @@ type PrincipalPortfolioAssociationInitParameters struct {
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
-	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 }
 
@@ -36,7 +36,7 @@ type PrincipalPortfolioAssociationObservation struct {
 	// Principal ARN.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
-	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 }
 
@@ -73,7 +73,7 @@ type PrincipalPortfolioAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalArnSelector *v1.Selector `json:"principalArnSelector,omitempty" tf:"-"`
 
-	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	// +kubebuilder:validation:Optional
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 

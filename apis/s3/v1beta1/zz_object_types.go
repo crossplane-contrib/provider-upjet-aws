@@ -24,6 +24,9 @@ type ObjectInitParameters struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
 
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
+
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
@@ -95,6 +98,21 @@ type ObjectObservation struct {
 
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
+
+	// The base64-encoded, 32-bit CRC32 checksum of the object.
+	ChecksumCrc32 *string `json:"checksumCrc32,omitempty" tf:"checksum_crc32,omitempty"`
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object.
+	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object.
+	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object.
+	ChecksumSha256 *string `json:"checksumSha256,omitempty" tf:"checksum_sha256,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
@@ -193,6 +211,10 @@ type ObjectParameters struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// +kubebuilder:validation:Optional
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	// +kubebuilder:validation:Optional

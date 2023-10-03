@@ -218,6 +218,10 @@ spec:
                     description: A cron or rate expression that specifies when the
                       association runs.
                     type: string
+                  syncCompliance:
+                    description: The mode for generating association compliance. You
+                      can specify AUTO or MANUAL.
+                    type: string
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum
@@ -327,6 +331,10 @@ spec:
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
                       association runs.
+                    type: string
+                  syncCompliance:
+                    description: The mode for generating association compliance. You
+                      can specify AUTO or MANUAL.
                     type: string
                   targets:
                     description: A block containing the targets of the SSM association.
@@ -599,6 +607,10 @@ spec:
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
                       association runs.
+                    type: string
+                  syncCompliance:
+                    description: The mode for generating association compliance. You
+                      can specify AUTO or MANUAL.
                     type: string
                   targets:
                     description: A block containing the targets of the SSM association.

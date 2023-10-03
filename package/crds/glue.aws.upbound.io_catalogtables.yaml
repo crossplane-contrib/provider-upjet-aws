@@ -154,6 +154,28 @@ spec:
                   description:
                     description: Description of the table.
                     type: string
+                  openTableFormatInput:
+                    description: Configuration block for open table formats. See open_table_format_input
+                      below.
+                    items:
+                      properties:
+                        icebergInput:
+                          description: Configuration block for iceberg table config.
+                            See iceberg_input below.
+                          items:
+                            properties:
+                              metadataOperation:
+                                description: A required metadata operation. Can only
+                                  be set to CREATE.
+                                type: string
+                              version:
+                                description: The table version for the Iceberg table.
+                                  Defaults to 2.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   owner:
                     description: Owner of the table.
                     type: string
@@ -418,6 +440,28 @@ spec:
                   description:
                     description: Description of the table.
                     type: string
+                  openTableFormatInput:
+                    description: Configuration block for open table formats. See open_table_format_input
+                      below.
+                    items:
+                      properties:
+                        icebergInput:
+                          description: Configuration block for iceberg table config.
+                            See iceberg_input below.
+                          items:
+                            properties:
+                              metadataOperation:
+                                description: A required metadata operation. Can only
+                                  be set to CREATE.
+                                type: string
+                              version:
+                                description: The table version for the Iceberg table.
+                                  Defaults to 2.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   owner:
                     description: Owner of the table.
                     type: string
@@ -833,6 +877,28 @@ spec:
                   id:
                     description: Catalog ID, Database name and of the name table.
                     type: string
+                  openTableFormatInput:
+                    description: Configuration block for open table formats. See open_table_format_input
+                      below.
+                    items:
+                      properties:
+                        icebergInput:
+                          description: Configuration block for iceberg table config.
+                            See iceberg_input below.
+                          items:
+                            properties:
+                              metadataOperation:
+                                description: A required metadata operation. Can only
+                                  be set to CREATE.
+                                type: string
+                              version:
+                                description: The table version for the Iceberg table.
+                                  Defaults to 2.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   owner:
                     description: Owner of the table.
                     type: string

@@ -349,7 +349,7 @@ type AudioDescriptionsInitParameters struct {
 	// Advanced audio normalization settings. See Audio Normalization Settings for more details.
 	AudioNormalizationSettings []AudioNormalizationSettingsInitParameters `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
 	// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
@@ -384,7 +384,7 @@ type AudioDescriptionsObservation struct {
 	// Advanced audio normalization settings. See Audio Normalization Settings for more details.
 	AudioNormalizationSettings []AudioNormalizationSettingsObservation `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
 	// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
@@ -420,7 +420,7 @@ type AudioDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioNormalizationSettings []AudioNormalizationSettingsParameters `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	// +kubebuilder:validation:Optional
 	AudioSelectorName *string `json:"audioSelectorName" tf:"audio_selector_name,omitempty"`
 
@@ -686,26 +686,29 @@ type AudioSelectorParameters struct {
 
 type AudioSilenceSettingsInitParameters struct {
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioSilenceSettingsObservation struct {
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioSilenceSettingsParameters struct {
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	// +kubebuilder:validation:Optional
 	AudioSelectorName *string `json:"audioSelectorName" tf:"audio_selector_name,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	// +kubebuilder:validation:Optional
 	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
@@ -759,39 +762,47 @@ type AudioWatermarkSettingsParameters struct {
 }
 
 type AutomaticInputFailoverSettingsInitParameters struct {
+
+	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
 	FailoverCondition []FailoverConditionInitParameters `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
+	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The ID of the input.
+	// The input ID of the secondary input in the automatic input failover pair.
 	SecondaryInputID *string `json:"secondaryInputId,omitempty" tf:"secondary_input_id,omitempty"`
 }
 
 type AutomaticInputFailoverSettingsObservation struct {
+
+	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
 	FailoverCondition []FailoverConditionObservation `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
+	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The ID of the input.
+	// The input ID of the secondary input in the automatic input failover pair.
 	SecondaryInputID *string `json:"secondaryInputId,omitempty" tf:"secondary_input_id,omitempty"`
 }
 
 type AutomaticInputFailoverSettingsParameters struct {
 
+	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	// +kubebuilder:validation:Optional
 	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FailoverCondition []FailoverConditionParameters `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
+	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	// +kubebuilder:validation:Optional
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The ID of the input.
+	// The input ID of the secondary input in the automatic input failover pair.
 	// +kubebuilder:validation:Optional
 	SecondaryInputID *string `json:"secondaryInputId" tf:"secondary_input_id,omitempty"`
 }
@@ -3073,58 +3084,58 @@ type EncoderSettingsParameters struct {
 
 type FailoverConditionInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Failover condition type-specific settings. See Failover Condition Settings for more details.
 	FailoverConditionSettings []FailoverConditionSettingsInitParameters `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Failover condition type-specific settings. See Failover Condition Settings for more details.
 	FailoverConditionSettings []FailoverConditionSettingsObservation `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Failover condition type-specific settings. See Failover Condition Settings for more details.
 	// +kubebuilder:validation:Optional
 	FailoverConditionSettings []FailoverConditionSettingsParameters `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionSettingsInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
 	AudioSilenceSettings []AudioSilenceSettingsInitParameters `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
 	InputLossSettings []InputLossSettingsInitParameters `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
 	VideoBlackSettings []VideoBlackSettingsInitParameters `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
 
 type FailoverConditionSettingsObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
 	AudioSilenceSettings []AudioSilenceSettingsObservation `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
 	InputLossSettings []InputLossSettingsObservation `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
 	VideoBlackSettings []VideoBlackSettingsObservation `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
 
 type FailoverConditionSettingsParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	AudioSilenceSettings []AudioSilenceSettingsParameters `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	InputLossSettings []InputLossSettingsParameters `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	VideoBlackSettings []VideoBlackSettingsParameters `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
@@ -5052,19 +5063,19 @@ type HlsWebdavSettingsParameters struct {
 
 type InputAttachmentsInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsInitParameters `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
 	// User-specified name for the attachment.
 	InputAttachmentName *string `json:"inputAttachmentName,omitempty" tf:"input_attachment_name,omitempty"`
 
-	// Settings of an input. See Input Settings for more details
+	// Settings of an input. See Input Settings for more details.
 	InputSettings []InputSettingsInitParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputAttachmentsObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsObservation `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
 	// User-specified name for the attachment.
@@ -5073,13 +5084,13 @@ type InputAttachmentsObservation struct {
 	// The ID of the input.
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 
-	// Settings of an input. See Input Settings for more details
+	// Settings of an input. See Input Settings for more details.
 	InputSettings []InputSettingsObservation `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputAttachmentsParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsParameters `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
@@ -5101,7 +5112,7 @@ type InputAttachmentsParameters struct {
 	// +kubebuilder:validation:Optional
 	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
 
-	// Settings of an input. See Input Settings for more details
+	// Settings of an input. See Input Settings for more details.
 	// +kubebuilder:validation:Optional
 	InputSettings []InputSettingsParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
@@ -5209,15 +5220,20 @@ type InputLossImageSlateParameters struct {
 }
 
 type InputLossSettingsInitParameters struct {
+
+	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputLossSettingsObservation struct {
+
+	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputLossSettingsParameters struct {
 
+	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	// +kubebuilder:validation:Optional
 	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
@@ -6866,7 +6882,7 @@ type OutputSettingsInitParameters struct {
 	// RTMP output settings. See RTMP Output Settings for more details.
 	RtmpOutputSettings []RtmpOutputSettingsInitParameters `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details
+	// UDP output settings. See UDP Output Settings for more details.
 	UDPOutputSettings []UDPOutputSettingsInitParameters `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
 
@@ -6893,7 +6909,7 @@ type OutputSettingsObservation struct {
 	// RTMP output settings. See RTMP Output Settings for more details.
 	RtmpOutputSettings []RtmpOutputSettingsObservation `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details
+	// UDP output settings. See UDP Output Settings for more details.
 	UDPOutputSettings []UDPOutputSettingsObservation `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
 
@@ -6927,7 +6943,7 @@ type OutputSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RtmpOutputSettings []RtmpOutputSettingsParameters `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details
+	// UDP output settings. See UDP Output Settings for more details.
 	// +kubebuilder:validation:Optional
 	UDPOutputSettings []UDPOutputSettingsParameters `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
@@ -7766,22 +7782,30 @@ type VPCParameters struct {
 }
 
 type VideoBlackSettingsInitParameters struct {
+
+	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoBlackSettingsObservation struct {
+
+	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoBlackSettingsParameters struct {
 
+	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	// +kubebuilder:validation:Optional
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	// +kubebuilder:validation:Optional
 	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }

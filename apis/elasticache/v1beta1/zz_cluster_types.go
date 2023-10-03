@@ -114,6 +114,9 @@ type ClusterInitParameters struct {
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -228,6 +231,9 @@ type ClusterObservation struct {
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -393,6 +399,10 @@ type ClusterParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// +kubebuilder:validation:Optional
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
 type LogDeliveryConfigurationInitParameters struct {

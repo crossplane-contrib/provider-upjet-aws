@@ -138,6 +138,11 @@ func (in *BucketInitParameters) DeepCopyInto(out *BucketInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDelete != nil {
+		in, out := &in.ForceDelete, &out.ForceDelete
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -221,6 +226,11 @@ func (in *BucketObservation) DeepCopyInto(out *BucketObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDelete != nil {
+		in, out := &in.ForceDelete, &out.ForceDelete
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -286,6 +296,11 @@ func (in *BucketParameters) DeepCopyInto(out *BucketParameters) {
 	if in.BundleID != nil {
 		in, out := &in.BundleID, &out.BundleID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ForceDelete != nil {
+		in, out := &in.ForceDelete, &out.ForceDelete
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Region != nil {

@@ -86,7 +86,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ only. Detailed below.
+                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
                     items:
                       properties:
                         id:
@@ -580,7 +580,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ only. Detailed below.
+                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
                     items:
                       properties:
                         revision:
@@ -960,7 +960,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ only. Detailed below.
+                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
                     items:
                       properties:
                         id:
