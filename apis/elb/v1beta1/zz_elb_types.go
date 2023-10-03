@@ -401,8 +401,8 @@ type ListenerParameters struct {
 type ELBSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ELBParameters `json:"forProvider"`
-	// THIS IS A BETA FIELD. It is not honored
-	// unless the relevant Crossplane feature flag is enabled.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.

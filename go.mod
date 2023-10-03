@@ -136,4 +136,4 @@ require (
 )
 
 // TODO remove this once upjet with gmp beta bump is merged https://github.com/upbound/upjet/pull/284
-replace github.com/upbound/upjet => github.com/lsviben/upjet v0.0.0-20231003121019-1ebac127ebba
+replace github.com/upbound/upjet => github.com/lsviben/upjet v0.0.0-20231003131531-8b62dc435316
