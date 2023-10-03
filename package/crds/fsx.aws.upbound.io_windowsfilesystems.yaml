@@ -156,7 +156,7 @@ spec:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
                       and file shares on the Amazon FSx for Windows File Server file
-                      system. See below.
+                      system. See Audit Log Configuration below.
                     items:
                       properties:
                         auditLogDestination:
@@ -208,6 +208,23 @@ spec:
                       values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default
                       value is SINGLE_AZ_1.
                     type: string
+                  diskIopsConfiguration:
+                    description: The SSD IOPS configuration for the Amazon FSx for
+                      Windows File Server file system. See Disk Iops Configuration
+                      below.
+                    items:
+                      properties:
+                        iops:
+                          description: '- The total number of SSD IOPS provisioned
+                            for the file system.'
+                          type: number
+                        mode:
+                          description: '- Specifies whether the number of IOPS for
+                            the file system is using the system. Valid values are
+                            AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.'
+                          type: string
+                      type: object
+                    type: array
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -382,7 +399,8 @@ spec:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
                       on-premises) Microsoft Active Directory (AD) directory. Cannot
-                      be specified with active_directory_id. Detailed below.
+                      be specified with active_directory_id. See Self-Managed Active
+                      Directory below.
                     items:
                       properties:
                         dnsIps:
@@ -584,7 +602,7 @@ spec:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
                       and file shares on the Amazon FSx for Windows File Server file
-                      system. See below.
+                      system. See Audit Log Configuration below.
                     items:
                       properties:
                         auditLogDestination:
@@ -636,6 +654,23 @@ spec:
                       values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default
                       value is SINGLE_AZ_1.
                     type: string
+                  diskIopsConfiguration:
+                    description: The SSD IOPS configuration for the Amazon FSx for
+                      Windows File Server file system. See Disk Iops Configuration
+                      below.
+                    items:
+                      properties:
+                        iops:
+                          description: '- The total number of SSD IOPS provisioned
+                            for the file system.'
+                          type: number
+                        mode:
+                          description: '- Specifies whether the number of IOPS for
+                            the file system is using the system. Valid values are
+                            AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.'
+                          type: string
+                      type: object
+                    type: array
                   preferredSubnetId:
                     description: Specifies the subnet in which you want the preferred
                       file server to be located. Required for when deployment type
@@ -645,7 +680,8 @@ spec:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
                       on-premises) Microsoft Active Directory (AD) directory. Cannot
-                      be specified with active_directory_id. Detailed below.
+                      be specified with active_directory_id. See Self-Managed Active
+                      Directory below.
                     items:
                       properties:
                         dnsIps:
@@ -906,7 +942,7 @@ spec:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
                       and file shares on the Amazon FSx for Windows File Server file
-                      system. See below.
+                      system. See Audit Log Configuration below.
                     items:
                       properties:
                         auditLogDestination:
@@ -958,6 +994,23 @@ spec:
                       values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default
                       value is SINGLE_AZ_1.
                     type: string
+                  diskIopsConfiguration:
+                    description: The SSD IOPS configuration for the Amazon FSx for
+                      Windows File Server file system. See Disk Iops Configuration
+                      below.
+                    items:
+                      properties:
+                        iops:
+                          description: '- The total number of SSD IOPS provisioned
+                            for the file system.'
+                          type: number
+                        mode:
+                          description: '- Specifies whether the number of IOPS for
+                            the file system is using the system. Valid values are
+                            AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.'
+                          type: string
+                      type: object
+                    type: array
                   dnsName:
                     description: DNS name for the file system, e.g., fs-12345678.corp.example.com
                       (domain name matching the Active Directory domain name)
@@ -1004,7 +1057,8 @@ spec:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
                       on-premises) Microsoft Active Directory (AD) directory. Cannot
-                      be specified with active_directory_id. Detailed below.
+                      be specified with active_directory_id. See Self-Managed Active
+                      Directory below.
                     items:
                       properties:
                         dnsIps:

@@ -561,6 +561,9 @@ spec:
                     description: The AWS account ID for the owner of the bucket for
                       which you want to create an Object Lambda Access Point.
                     type: string
+                  alias:
+                    description: Alias for the S3 Object Lambda Access Point.
+                    type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the Object Lambda Access
                       Point.

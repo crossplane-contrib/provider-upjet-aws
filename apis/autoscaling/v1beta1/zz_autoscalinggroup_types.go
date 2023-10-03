@@ -1387,8 +1387,14 @@ type PreferencesInitParameters struct {
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
+	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
+
 	// Replace instances that already have your desired configuration. Defaults to false.
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
+
+	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
+	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
 type PreferencesObservation struct {
@@ -1408,8 +1414,14 @@ type PreferencesObservation struct {
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
+	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
+
 	// Replace instances that already have your desired configuration. Defaults to false.
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
+
+	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
+	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
 type PreferencesParameters struct {
@@ -1434,9 +1446,17 @@ type PreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
+	// +kubebuilder:validation:Optional
+	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
+
 	// Replace instances that already have your desired configuration. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
+
+	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
+	// +kubebuilder:validation:Optional
+	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
 type TagInitParameters struct {

@@ -828,10 +828,10 @@ spec:
                             bucket or your custom origin.
                           type: string
                         originShield:
-                          description: The CloudFront Origin Shield configuration
-                            information. Using Origin Shield can help reduce the load
-                            on your origin. For more information, see Using Origin
-                            Shield in the Amazon CloudFront Developer Guide.
+                          description: CloudFront Origin Shield configuration information.
+                            Using Origin Shield can help reduce the load on your origin.
+                            For more information, see Using Origin Shield in the Amazon
+                            CloudFront Developer Guide.
                           items:
                             properties:
                               enabled:
@@ -847,7 +847,7 @@ spec:
                             type: object
                           type: array
                         s3OriginConfig:
-                          description: The CloudFront S3 origin configuration information.
+                          description: CloudFront S3 origin configuration information.
                             If a custom origin is required, use custom_origin_config
                             instead.
                           items:
@@ -1609,10 +1609,10 @@ spec:
                             bucket or your custom origin.
                           type: string
                         originShield:
-                          description: The CloudFront Origin Shield configuration
-                            information. Using Origin Shield can help reduce the load
-                            on your origin. For more information, see Using Origin
-                            Shield in the Amazon CloudFront Developer Guide.
+                          description: CloudFront Origin Shield configuration information.
+                            Using Origin Shield can help reduce the load on your origin.
+                            For more information, see Using Origin Shield in the Amazon
+                            CloudFront Developer Guide.
                           items:
                             properties:
                               enabled:
@@ -1628,7 +1628,7 @@ spec:
                             type: object
                           type: array
                         s3OriginConfig:
-                          description: The CloudFront S3 origin configuration information.
+                          description: CloudFront S3 origin configuration information.
                             If a custom origin is required, use custom_origin_config
                             instead.
                           items:
@@ -2513,10 +2513,10 @@ spec:
                             bucket or your custom origin.
                           type: string
                         originShield:
-                          description: The CloudFront Origin Shield configuration
-                            information. Using Origin Shield can help reduce the load
-                            on your origin. For more information, see Using Origin
-                            Shield in the Amazon CloudFront Developer Guide.
+                          description: CloudFront Origin Shield configuration information.
+                            Using Origin Shield can help reduce the load on your origin.
+                            For more information, see Using Origin Shield in the Amazon
+                            CloudFront Developer Guide.
                           items:
                             properties:
                               enabled:
@@ -2532,7 +2532,7 @@ spec:
                             type: object
                           type: array
                         s3OriginConfig:
-                          description: The CloudFront S3 origin configuration information.
+                          description: CloudFront S3 origin configuration information.
                             If a custom origin is required, use custom_origin_config
                             instead.
                           items:

@@ -170,8 +170,10 @@ spec:
                                   type: object
                                 type: array
                               audioSelectorName:
-                                description: The name of the audio selector used as
-                                  the source for this AudioDescription.
+                                description: The name of the audio selector in the
+                                  input that MediaLive should monitor to detect silence.
+                                  Select your most important rendition. If you didn't
+                                  create an audio selector in this input, leave blank.
                                 type: string
                               audioType:
                                 description: Applies only if audioTypeControl is useConfigured.
@@ -2118,7 +2120,7 @@ spec:
                                             type: array
                                           udpOutputSettings:
                                             description: UDP output settings. See
-                                              UDP Output Settings for more details
+                                              UDP Output Settings for more details.
                                             items:
                                               properties:
                                                 bufferMsec:
@@ -2817,59 +2819,110 @@ spec:
                     items:
                       properties:
                         automaticInputFailoverSettings:
-                          description: Destination settings for a standard output;
-                            one destination for each redundant encoder. See Settings
-                            for more details.
+                          description: User-specified settings for defining what the
+                            conditions are for declaring the input unhealthy and failing
+                            over to a different input. See Automatic Input Failover
+                            Settings for more details.
                           items:
                             properties:
                               errorClearTimeMsec:
+                                description: This clear time defines the requirement
+                                  a recovered input must meet to be considered healthy.
+                                  The input must have no failover conditions for this
+                                  length of time. Enter a time in milliseconds. This
+                                  value is particularly important if the input_preference
+                                  for the failover pair is set to PRIMARY_INPUT_PREFERRED,
+                                  because after this time, MediaLive will switch back
+                                  to the primary input.
                                 type: number
                               failoverCondition:
                                 items:
                                   properties:
                                     failoverConditionSettings:
-                                      description: Destination settings for a standard
-                                        output; one destination for each redundant
-                                        encoder. See Settings for more details.
+                                      description: Failover condition type-specific
+                                        settings. See Failover Condition Settings
+                                        for more details.
                                       items:
                                         properties:
                                           audioSilenceSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
+                                            description: MediaLive will perform a
+                                              failover if the specified audio selector
+                                              is silent for the specified period.
+                                              See Audio Silence Failover Settings
                                               for more details.
                                             items:
                                               properties:
                                                 audioSelectorName:
                                                   description: The name of the audio
-                                                    selector used as the source for
-                                                    this AudioDescription.
+                                                    selector in the input that MediaLive
+                                                    should monitor to detect silence.
+                                                    Select your most important rendition.
+                                                    If you didn't create an audio
+                                                    selector in this input, leave
+                                                    blank.
                                                   type: string
                                                 audioSilenceThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that the active
+                                                    input must be silent before automatic
+                                                    input failover occurs. Silence
+                                                    is defined as audio loss or audio
+                                                    quieter than -50 dBFS.
                                                   type: number
                                               type: object
                                             type: array
                                           inputLossSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
-                                              for more details.
+                                            description: MediaLive will perform a
+                                              failover if content is not detected
+                                              in this input for the specified period.
+                                              See Input Loss Failover Settings for
+                                              more details.
                                             items:
                                               properties:
                                                 inputLossThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that no input
+                                                    is detected. After that time,
+                                                    an input failover will occur.
                                                   type: number
                                               type: object
                                             type: array
                                           videoBlackSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
-                                              for more details.
+                                            description: MediaLive will perform a
+                                              failover if content is considered black
+                                              for the specified period. See Video
+                                              Black Failover Settings for more details.
                                             items:
                                               properties:
                                                 blackDetectThreshold:
+                                                  description: 'A value used in calculating
+                                                    the threshold below which MediaLive
+                                                    considers a pixel to be ''black''.
+                                                    For the input to be considered
+                                                    black, every pixel in a frame
+                                                    must be below this threshold.
+                                                    The threshold is calculated as
+                                                    a percentage (expressed as a decimal)
+                                                    of white. Therefore .1 means 10%
+                                                    white (or 90% black). Note how
+                                                    the formula works for any color
+                                                    depth. For example, if you set
+                                                    this field to 0.1 in 10-bit color
+                                                    depth: (10230.1=102.3), which
+                                                    means a pixel value of 102 or
+                                                    less is ''black''. If you set
+                                                    this field to .1 in an 8-bit color
+                                                    depth: (2550.1=25.5), which means
+                                                    a pixel value of 25 or less is
+                                                    ''black''. The range is 0.0 to
+                                                    1.0, with any number of decimal
+                                                    places.'
                                                   type: number
                                                 videoBlackThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that the active
+                                                    input must be black before automatic
+                                                    input failover occurs.
                                                   type: number
                                               type: object
                                             type: array
@@ -2878,9 +2931,13 @@ spec:
                                   type: object
                                 type: array
                               inputPreference:
+                                description: Input preference when deciding which
+                                  input to make active when a previously failed input
+                                  has recovered.
                                 type: string
                               secondaryInputId:
-                                description: The ID of the input.
+                                description: The input ID of the secondary input in
+                                  the automatic input failover pair.
                                 type: string
                             type: object
                           type: array
@@ -2970,7 +3027,7 @@ spec:
                           type: object
                         inputSettings:
                           description: Settings of an input. See Input Settings for
-                            more details
+                            more details.
                           items:
                             properties:
                               audioSelector:
@@ -3683,8 +3740,10 @@ spec:
                                   type: object
                                 type: array
                               audioSelectorName:
-                                description: The name of the audio selector used as
-                                  the source for this AudioDescription.
+                                description: The name of the audio selector in the
+                                  input that MediaLive should monitor to detect silence.
+                                  Select your most important rendition. If you didn't
+                                  create an audio selector in this input, leave blank.
                                 type: string
                               audioType:
                                 description: Applies only if audioTypeControl is useConfigured.
@@ -5631,7 +5690,7 @@ spec:
                                             type: array
                                           udpOutputSettings:
                                             description: UDP output settings. See
-                                              UDP Output Settings for more details
+                                              UDP Output Settings for more details.
                                             items:
                                               properties:
                                                 bufferMsec:
@@ -6330,59 +6389,110 @@ spec:
                     items:
                       properties:
                         automaticInputFailoverSettings:
-                          description: Destination settings for a standard output;
-                            one destination for each redundant encoder. See Settings
-                            for more details.
+                          description: User-specified settings for defining what the
+                            conditions are for declaring the input unhealthy and failing
+                            over to a different input. See Automatic Input Failover
+                            Settings for more details.
                           items:
                             properties:
                               errorClearTimeMsec:
+                                description: This clear time defines the requirement
+                                  a recovered input must meet to be considered healthy.
+                                  The input must have no failover conditions for this
+                                  length of time. Enter a time in milliseconds. This
+                                  value is particularly important if the input_preference
+                                  for the failover pair is set to PRIMARY_INPUT_PREFERRED,
+                                  because after this time, MediaLive will switch back
+                                  to the primary input.
                                 type: number
                               failoverCondition:
                                 items:
                                   properties:
                                     failoverConditionSettings:
-                                      description: Destination settings for a standard
-                                        output; one destination for each redundant
-                                        encoder. See Settings for more details.
+                                      description: Failover condition type-specific
+                                        settings. See Failover Condition Settings
+                                        for more details.
                                       items:
                                         properties:
                                           audioSilenceSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
+                                            description: MediaLive will perform a
+                                              failover if the specified audio selector
+                                              is silent for the specified period.
+                                              See Audio Silence Failover Settings
                                               for more details.
                                             items:
                                               properties:
                                                 audioSelectorName:
                                                   description: The name of the audio
-                                                    selector used as the source for
-                                                    this AudioDescription.
+                                                    selector in the input that MediaLive
+                                                    should monitor to detect silence.
+                                                    Select your most important rendition.
+                                                    If you didn't create an audio
+                                                    selector in this input, leave
+                                                    blank.
                                                   type: string
                                                 audioSilenceThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that the active
+                                                    input must be silent before automatic
+                                                    input failover occurs. Silence
+                                                    is defined as audio loss or audio
+                                                    quieter than -50 dBFS.
                                                   type: number
                                               type: object
                                             type: array
                                           inputLossSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
-                                              for more details.
+                                            description: MediaLive will perform a
+                                              failover if content is not detected
+                                              in this input for the specified period.
+                                              See Input Loss Failover Settings for
+                                              more details.
                                             items:
                                               properties:
                                                 inputLossThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that no input
+                                                    is detected. After that time,
+                                                    an input failover will occur.
                                                   type: number
                                               type: object
                                             type: array
                                           videoBlackSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
-                                              for more details.
+                                            description: MediaLive will perform a
+                                              failover if content is considered black
+                                              for the specified period. See Video
+                                              Black Failover Settings for more details.
                                             items:
                                               properties:
                                                 blackDetectThreshold:
+                                                  description: 'A value used in calculating
+                                                    the threshold below which MediaLive
+                                                    considers a pixel to be ''black''.
+                                                    For the input to be considered
+                                                    black, every pixel in a frame
+                                                    must be below this threshold.
+                                                    The threshold is calculated as
+                                                    a percentage (expressed as a decimal)
+                                                    of white. Therefore .1 means 10%
+                                                    white (or 90% black). Note how
+                                                    the formula works for any color
+                                                    depth. For example, if you set
+                                                    this field to 0.1 in 10-bit color
+                                                    depth: (10230.1=102.3), which
+                                                    means a pixel value of 102 or
+                                                    less is ''black''. If you set
+                                                    this field to .1 in an 8-bit color
+                                                    depth: (2550.1=25.5), which means
+                                                    a pixel value of 25 or less is
+                                                    ''black''. The range is 0.0 to
+                                                    1.0, with any number of decimal
+                                                    places.'
                                                   type: number
                                                 videoBlackThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that the active
+                                                    input must be black before automatic
+                                                    input failover occurs.
                                                   type: number
                                               type: object
                                             type: array
@@ -6391,9 +6501,13 @@ spec:
                                   type: object
                                 type: array
                               inputPreference:
+                                description: Input preference when deciding which
+                                  input to make active when a previously failed input
+                                  has recovered.
                                 type: string
                               secondaryInputId:
-                                description: The ID of the input.
+                                description: The input ID of the secondary input in
+                                  the automatic input failover pair.
                                 type: string
                             type: object
                           type: array
@@ -6402,7 +6516,7 @@ spec:
                           type: string
                         inputSettings:
                           description: Settings of an input. See Input Settings for
-                            more details
+                            more details.
                           items:
                             properties:
                               audioSelector:
@@ -7218,8 +7332,10 @@ spec:
                                   type: object
                                 type: array
                               audioSelectorName:
-                                description: The name of the audio selector used as
-                                  the source for this AudioDescription.
+                                description: The name of the audio selector in the
+                                  input that MediaLive should monitor to detect silence.
+                                  Select your most important rendition. If you didn't
+                                  create an audio selector in this input, leave blank.
                                 type: string
                               audioType:
                                 description: Applies only if audioTypeControl is useConfigured.
@@ -9166,7 +9282,7 @@ spec:
                                             type: array
                                           udpOutputSettings:
                                             description: UDP output settings. See
-                                              UDP Output Settings for more details
+                                              UDP Output Settings for more details.
                                             items:
                                               properties:
                                                 bufferMsec:
@@ -9869,59 +9985,110 @@ spec:
                     items:
                       properties:
                         automaticInputFailoverSettings:
-                          description: Destination settings for a standard output;
-                            one destination for each redundant encoder. See Settings
-                            for more details.
+                          description: User-specified settings for defining what the
+                            conditions are for declaring the input unhealthy and failing
+                            over to a different input. See Automatic Input Failover
+                            Settings for more details.
                           items:
                             properties:
                               errorClearTimeMsec:
+                                description: This clear time defines the requirement
+                                  a recovered input must meet to be considered healthy.
+                                  The input must have no failover conditions for this
+                                  length of time. Enter a time in milliseconds. This
+                                  value is particularly important if the input_preference
+                                  for the failover pair is set to PRIMARY_INPUT_PREFERRED,
+                                  because after this time, MediaLive will switch back
+                                  to the primary input.
                                 type: number
                               failoverCondition:
                                 items:
                                   properties:
                                     failoverConditionSettings:
-                                      description: Destination settings for a standard
-                                        output; one destination for each redundant
-                                        encoder. See Settings for more details.
+                                      description: Failover condition type-specific
+                                        settings. See Failover Condition Settings
+                                        for more details.
                                       items:
                                         properties:
                                           audioSilenceSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
+                                            description: MediaLive will perform a
+                                              failover if the specified audio selector
+                                              is silent for the specified period.
+                                              See Audio Silence Failover Settings
                                               for more details.
                                             items:
                                               properties:
                                                 audioSelectorName:
                                                   description: The name of the audio
-                                                    selector used as the source for
-                                                    this AudioDescription.
+                                                    selector in the input that MediaLive
+                                                    should monitor to detect silence.
+                                                    Select your most important rendition.
+                                                    If you didn't create an audio
+                                                    selector in this input, leave
+                                                    blank.
                                                   type: string
                                                 audioSilenceThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that the active
+                                                    input must be silent before automatic
+                                                    input failover occurs. Silence
+                                                    is defined as audio loss or audio
+                                                    quieter than -50 dBFS.
                                                   type: number
                                               type: object
                                             type: array
                                           inputLossSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
-                                              for more details.
+                                            description: MediaLive will perform a
+                                              failover if content is not detected
+                                              in this input for the specified period.
+                                              See Input Loss Failover Settings for
+                                              more details.
                                             items:
                                               properties:
                                                 inputLossThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that no input
+                                                    is detected. After that time,
+                                                    an input failover will occur.
                                                   type: number
                                               type: object
                                             type: array
                                           videoBlackSettings:
-                                            description: Destination settings for
-                                              a standard output; one destination for
-                                              each redundant encoder. See Settings
-                                              for more details.
+                                            description: MediaLive will perform a
+                                              failover if content is considered black
+                                              for the specified period. See Video
+                                              Black Failover Settings for more details.
                                             items:
                                               properties:
                                                 blackDetectThreshold:
+                                                  description: 'A value used in calculating
+                                                    the threshold below which MediaLive
+                                                    considers a pixel to be ''black''.
+                                                    For the input to be considered
+                                                    black, every pixel in a frame
+                                                    must be below this threshold.
+                                                    The threshold is calculated as
+                                                    a percentage (expressed as a decimal)
+                                                    of white. Therefore .1 means 10%
+                                                    white (or 90% black). Note how
+                                                    the formula works for any color
+                                                    depth. For example, if you set
+                                                    this field to 0.1 in 10-bit color
+                                                    depth: (10230.1=102.3), which
+                                                    means a pixel value of 102 or
+                                                    less is ''black''. If you set
+                                                    this field to .1 in an 8-bit color
+                                                    depth: (2550.1=25.5), which means
+                                                    a pixel value of 25 or less is
+                                                    ''black''. The range is 0.0 to
+                                                    1.0, with any number of decimal
+                                                    places.'
                                                   type: number
                                                 videoBlackThresholdMsec:
+                                                  description: The amount of time
+                                                    (in milliseconds) that the active
+                                                    input must be black before automatic
+                                                    input failover occurs.
                                                   type: number
                                               type: object
                                             type: array
@@ -9930,9 +10097,13 @@ spec:
                                   type: object
                                 type: array
                               inputPreference:
+                                description: Input preference when deciding which
+                                  input to make active when a previously failed input
+                                  has recovered.
                                 type: string
                               secondaryInputId:
-                                description: The ID of the input.
+                                description: The input ID of the secondary input in
+                                  the automatic input failover pair.
                                 type: string
                             type: object
                           type: array
@@ -9944,7 +10115,7 @@ spec:
                           type: string
                         inputSettings:
                           description: Settings of an input. See Input Settings for
-                            more details
+                            more details.
                           items:
                             properties:
                               audioSelector:

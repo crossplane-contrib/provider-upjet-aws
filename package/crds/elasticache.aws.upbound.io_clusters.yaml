@@ -548,6 +548,11 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  transitEncryptionEnabled:
+                    description: Enable encryption in-transit. Supported only with
+                      Memcached versions 1.6.12 and later, running in a VPC. See the
+                      ElastiCache in-transit encryption documentation for more details.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -718,6 +723,11 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                  transitEncryptionEnabled:
+                    description: Enable encryption in-transit. Supported only with
+                      Memcached versions 1.6.12 and later, running in a VPC. See the
+                      ElastiCache in-transit encryption documentation for more details.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -1106,6 +1116,11 @@ spec:
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                  transitEncryptionEnabled:
+                    description: Enable encryption in-transit. Supported only with
+                      Memcached versions 1.6.12 and later, running in a VPC. See the
+                      ElastiCache in-transit encryption documentation for more details.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.
