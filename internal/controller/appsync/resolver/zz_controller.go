@@ -49,7 +49,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.PollJitter != 0 {
 		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
 	}
-	if o.Features.Enabled(features.EnableAlphaManagementPolicies) {
+	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
 	}
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.Resolver_GroupVersionKind), opts...)

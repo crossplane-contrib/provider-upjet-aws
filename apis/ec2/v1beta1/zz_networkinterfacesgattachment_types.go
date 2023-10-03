@@ -65,9 +65,8 @@ type NetworkInterfaceSgAttachmentParameters struct {
 type NetworkInterfaceSgAttachmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkInterfaceSgAttachmentParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It is not honored
+	// unless the relevant Crossplane feature flag is enabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
