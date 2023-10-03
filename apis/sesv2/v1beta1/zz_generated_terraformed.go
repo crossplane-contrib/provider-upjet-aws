@@ -276,7 +276,7 @@ func (mg *EmailIdentity) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this EmailIdentity
 func (tr *EmailIdentity) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"dkim_signing_attributes[*].domain_signing_private_key": "spec.forProvider.dkimSigningAttributes[*].domainSigningPrivateKeySecretRef"}
 }
 
 // GetObservation of this EmailIdentity

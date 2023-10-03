@@ -25,10 +25,10 @@ type OptionGroupInitParameters struct {
 	// Specifies the major version of the engine that this option group should be associated with.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// A list of Options to apply.
+	// List of options to apply.
 	Option []OptionInitParameters `json:"option,omitempty" tf:"option,omitempty"`
 
-	// The description of the option group.
+	// Description of the option group.
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
 	// Key-value map of resource tags.
@@ -37,28 +37,28 @@ type OptionGroupInitParameters struct {
 
 type OptionGroupObservation struct {
 
-	// The ARN of the db option group.
+	// ARN of the DB option group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies the name of the engine that this option group should be associated with.
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
-	// The db option group name.
+	// DB option group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the major version of the engine that this option group should be associated with.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// A list of Options to apply.
+	// List of options to apply.
 	Option []OptionObservation `json:"option,omitempty" tf:"option,omitempty"`
 
-	// The description of the option group.
+	// Description of the option group.
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -72,11 +72,11 @@ type OptionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// A list of Options to apply.
+	// List of options to apply.
 	// +kubebuilder:validation:Optional
 	Option []OptionParameters `json:"option,omitempty" tf:"option,omitempty"`
 
-	// The description of the option group.
+	// Description of the option group.
 	// +kubebuilder:validation:Optional
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
@@ -92,98 +92,98 @@ type OptionGroupParameters struct {
 
 type OptionInitParameters struct {
 
-	// A list of DB Security Groups for which the option is enabled.
+	// List of DB Security Groups for which the option is enabled.
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
-	// The Name of the Option (e.g., MEMCACHED).
+	// Name of the option (e.g., MEMCACHED).
 	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
 
-	// A list of option settings to apply.
+	// List of option settings to apply.
 	OptionSettings []OptionSettingsInitParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
-	// The Port number when connecting to the Option (e.g., 11211).
+	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// A list of VPC Security Groups for which the option is enabled.
+	// List of VPC Security Groups for which the option is enabled.
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
-	// The version of the option (e.g., 13.1.0.0).
+	// Version of the option (e.g., 13.1.0.0). Leaving out or removing version from your configuration does not remove or clear a version from the option in AWS. AWS may assign a default version. Not including version in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any version changes.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type OptionObservation struct {
 
-	// A list of DB Security Groups for which the option is enabled.
+	// List of DB Security Groups for which the option is enabled.
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
-	// The Name of the Option (e.g., MEMCACHED).
+	// Name of the option (e.g., MEMCACHED).
 	OptionName *string `json:"optionName,omitempty" tf:"option_name,omitempty"`
 
-	// A list of option settings to apply.
+	// List of option settings to apply.
 	OptionSettings []OptionSettingsObservation `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
-	// The Port number when connecting to the Option (e.g., 11211).
+	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// A list of VPC Security Groups for which the option is enabled.
+	// List of VPC Security Groups for which the option is enabled.
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
-	// The version of the option (e.g., 13.1.0.0).
+	// Version of the option (e.g., 13.1.0.0). Leaving out or removing version from your configuration does not remove or clear a version from the option in AWS. AWS may assign a default version. Not including version in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any version changes.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type OptionParameters struct {
 
-	// A list of DB Security Groups for which the option is enabled.
+	// List of DB Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
-	// The Name of the Option (e.g., MEMCACHED).
+	// Name of the option (e.g., MEMCACHED).
 	// +kubebuilder:validation:Optional
 	OptionName *string `json:"optionName" tf:"option_name,omitempty"`
 
-	// A list of option settings to apply.
+	// List of option settings to apply.
 	// +kubebuilder:validation:Optional
 	OptionSettings []OptionSettingsParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
-	// The Port number when connecting to the Option (e.g., 11211).
+	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// A list of VPC Security Groups for which the option is enabled.
+	// List of VPC Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
-	// The version of the option (e.g., 13.1.0.0).
+	// Version of the option (e.g., 13.1.0.0). Leaving out or removing version from your configuration does not remove or clear a version from the option in AWS. AWS may assign a default version. Not including version in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any version changes.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type OptionSettingsInitParameters struct {
 
-	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
+	// Name of the setting.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Value of the setting.
+	// Value of the setting.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type OptionSettingsObservation struct {
 
-	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
+	// Name of the setting.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Value of the setting.
+	// Value of the setting.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type OptionSettingsParameters struct {
 
-	// The name of the option group. Must be lowercase, to match as it is stored in AWS.
+	// Name of the setting.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The Value of the setting.
+	// Value of the setting.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

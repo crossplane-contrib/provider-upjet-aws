@@ -68,8 +68,8 @@ spec:
               forProvider:
                 properties:
                   destination:
-                    description: ID or ARN of the resource which is the source of
-                      the path. Can be an Instance, Internet Gateway, Network Interface,
+                    description: ID or ARN of the resource which is the destination
+                      of the path. Can be an Instance, Internet Gateway, Network Interface,
                       Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN
                       Gateway. If the resource is in another account, you must specify
                       an ARN.
@@ -461,8 +461,8 @@ spec:
                     description: ARN of the Network Insights Path.
                     type: string
                   destination:
-                    description: ID or ARN of the resource which is the source of
-                      the path. Can be an Instance, Internet Gateway, Network Interface,
+                    description: ID or ARN of the resource which is the destination
+                      of the path. Can be an Instance, Internet Gateway, Network Interface,
                       Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN
                       Gateway. If the resource is in another account, you must specify
                       an ARN.

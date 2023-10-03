@@ -7784,9 +7784,19 @@ func (in *PreferencesInitParameters) DeepCopyInto(out *PreferencesInitParameters
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ScaleInProtectedInstances != nil {
+		in, out := &in.ScaleInProtectedInstances, &out.ScaleInProtectedInstances
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkipMatching != nil {
 		in, out := &in.SkipMatching, &out.SkipMatching
 		*out = new(bool)
+		**out = **in
+	}
+	if in.StandbyInstances != nil {
+		in, out := &in.StandbyInstances, &out.StandbyInstances
+		*out = new(string)
 		**out = **in
 	}
 }
@@ -7835,9 +7845,19 @@ func (in *PreferencesObservation) DeepCopyInto(out *PreferencesObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ScaleInProtectedInstances != nil {
+		in, out := &in.ScaleInProtectedInstances, &out.ScaleInProtectedInstances
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkipMatching != nil {
 		in, out := &in.SkipMatching, &out.SkipMatching
 		*out = new(bool)
+		**out = **in
+	}
+	if in.StandbyInstances != nil {
+		in, out := &in.StandbyInstances, &out.StandbyInstances
+		*out = new(string)
 		**out = **in
 	}
 }
@@ -7886,9 +7906,19 @@ func (in *PreferencesParameters) DeepCopyInto(out *PreferencesParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ScaleInProtectedInstances != nil {
+		in, out := &in.ScaleInProtectedInstances, &out.ScaleInProtectedInstances
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkipMatching != nil {
 		in, out := &in.SkipMatching, &out.SkipMatching
 		*out = new(bool)
+		**out = **in
+	}
+	if in.StandbyInstances != nil {
+		in, out := &in.StandbyInstances, &out.StandbyInstances
+		*out = new(string)
 		**out = **in
 	}
 }

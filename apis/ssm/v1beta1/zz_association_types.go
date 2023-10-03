@@ -52,6 +52,9 @@ type AssociationInitParameters struct {
 	// A cron or rate expression that specifies when the association runs.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 
+	// The mode for generating association compliance. You can specify AUTO or MANUAL.
+	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
+
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
@@ -104,6 +107,9 @@ type AssociationObservation struct {
 
 	// A cron or rate expression that specifies when the association runs.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// The mode for generating association compliance. You can specify AUTO or MANUAL.
+	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
@@ -175,6 +181,10 @@ type AssociationParameters struct {
 	// A cron or rate expression that specifies when the association runs.
 	// +kubebuilder:validation:Optional
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+
+	// The mode for generating association compliance. You can specify AUTO or MANUAL.
+	// +kubebuilder:validation:Optional
+	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	// +kubebuilder:validation:Optional
