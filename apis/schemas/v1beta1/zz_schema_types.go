@@ -31,7 +31,7 @@ type SchemaInitParameters struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the schema. Valid values: OpenApi3.
+	// The type of the schema. Valid values: OpenApi3 or JSONSchemaDraft4.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -63,7 +63,7 @@ type SchemaObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of the schema. Valid values: OpenApi3.
+	// The type of the schema. Valid values: OpenApi3 or JSONSchemaDraft4.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The version of the schema.
@@ -109,7 +109,7 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the schema. Valid values: OpenApi3.
+	// The type of the schema. Valid values: OpenApi3 or JSONSchemaDraft4.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

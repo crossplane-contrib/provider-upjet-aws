@@ -9519,6 +9519,11 @@ func (in *ObjectCopyInitParameters) DeepCopyInto(out *ObjectCopyInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.ChecksumAlgorithm != nil {
+		in, out := &in.ChecksumAlgorithm, &out.ChecksumAlgorithm
+		*out = new(string)
+		**out = **in
+	}
 	if in.ContentDisposition != nil {
 		in, out := &in.ContentDisposition, &out.ContentDisposition
 		*out = new(string)
@@ -9757,6 +9762,31 @@ func (in *ObjectCopyObservation) DeepCopyInto(out *ObjectCopyObservation) {
 	}
 	if in.CacheControl != nil {
 		in, out := &in.CacheControl, &out.CacheControl
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumAlgorithm != nil {
+		in, out := &in.ChecksumAlgorithm, &out.ChecksumAlgorithm
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumCrc32 != nil {
+		in, out := &in.ChecksumCrc32, &out.ChecksumCrc32
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumCrc32C != nil {
+		in, out := &in.ChecksumCrc32C, &out.ChecksumCrc32C
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumSha1 != nil {
+		in, out := &in.ChecksumSha1, &out.ChecksumSha1
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumSha256 != nil {
+		in, out := &in.ChecksumSha256, &out.ChecksumSha256
 		*out = new(string)
 		**out = **in
 	}
@@ -10017,6 +10047,11 @@ func (in *ObjectCopyParameters) DeepCopyInto(out *ObjectCopyParameters) {
 	}
 	if in.CacheControl != nil {
 		in, out := &in.CacheControl, &out.CacheControl
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumAlgorithm != nil {
+		in, out := &in.ChecksumAlgorithm, &out.ChecksumAlgorithm
 		*out = new(string)
 		**out = **in
 	}
@@ -10284,6 +10319,11 @@ func (in *ObjectInitParameters) DeepCopyInto(out *ObjectInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ChecksumAlgorithm != nil {
+		in, out := &in.ChecksumAlgorithm, &out.ChecksumAlgorithm
+		*out = new(string)
+		**out = **in
+	}
 	if in.Content != nil {
 		in, out := &in.Content, &out.Content
 		*out = new(string)
@@ -10525,6 +10565,31 @@ func (in *ObjectObservation) DeepCopyInto(out *ObjectObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ChecksumAlgorithm != nil {
+		in, out := &in.ChecksumAlgorithm, &out.ChecksumAlgorithm
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumCrc32 != nil {
+		in, out := &in.ChecksumCrc32, &out.ChecksumCrc32
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumCrc32C != nil {
+		in, out := &in.ChecksumCrc32C, &out.ChecksumCrc32C
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumSha1 != nil {
+		in, out := &in.ChecksumSha1, &out.ChecksumSha1
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumSha256 != nil {
+		in, out := &in.ChecksumSha256, &out.ChecksumSha256
+		*out = new(string)
+		**out = **in
+	}
 	if in.Content != nil {
 		in, out := &in.Content, &out.Content
 		*out = new(string)
@@ -10715,6 +10780,11 @@ func (in *ObjectParameters) DeepCopyInto(out *ObjectParameters) {
 	}
 	if in.CacheControl != nil {
 		in, out := &in.CacheControl, &out.CacheControl
+		*out = new(string)
+		**out = **in
+	}
+	if in.ChecksumAlgorithm != nil {
+		in, out := &in.ChecksumAlgorithm, &out.ChecksumAlgorithm
 		*out = new(string)
 		**out = **in
 	}

@@ -207,10 +207,20 @@ spec:
                                   percentage of the desired capacity of the Auto Scaling
                                   group. Defaults to 90.
                                 type: number
+                              scaleInProtectedInstances:
+                                description: Behavior when encountering instances
+                                  protected from scale in are found. Available behaviors
+                                  are Refresh, Ignore, and Wait. Default is Ignore.
+                                type: string
                               skipMatching:
                                 description: Replace instances that already have your
                                   desired configuration. Defaults to false.
                                 type: boolean
+                              standbyInstances:
+                                description: Behavior when encountering instances
+                                  in the Standby state in are found. Available behaviors
+                                  are Terminate, Ignore, and Wait. Default is Ignore.
+                                type: string
                             type: object
                           type: array
                         strategy:
@@ -1494,10 +1504,20 @@ spec:
                                   percentage of the desired capacity of the Auto Scaling
                                   group. Defaults to 90.
                                 type: number
+                              scaleInProtectedInstances:
+                                description: Behavior when encountering instances
+                                  protected from scale in are found. Available behaviors
+                                  are Refresh, Ignore, and Wait. Default is Ignore.
+                                type: string
                               skipMatching:
                                 description: Replace instances that already have your
                                   desired configuration. Defaults to false.
                                 type: boolean
+                              standbyInstances:
+                                description: Behavior when encountering instances
+                                  in the Standby state in are found. Available behaviors
+                                  are Terminate, Ignore, and Wait. Default is Ignore.
+                                type: string
                             type: object
                           type: array
                         strategy:
@@ -2362,10 +2382,20 @@ spec:
                                   percentage of the desired capacity of the Auto Scaling
                                   group. Defaults to 90.
                                 type: number
+                              scaleInProtectedInstances:
+                                description: Behavior when encountering instances
+                                  protected from scale in are found. Available behaviors
+                                  are Refresh, Ignore, and Wait. Default is Ignore.
+                                type: string
                               skipMatching:
                                 description: Replace instances that already have your
                                   desired configuration. Defaults to false.
                                 type: boolean
+                              standbyInstances:
+                                description: Behavior when encountering instances
+                                  in the Standby state in are found. Available behaviors
+                                  are Terminate, Ignore, and Wait. Default is Ignore.
+                                type: string
                             type: object
                           type: array
                         strategy:
