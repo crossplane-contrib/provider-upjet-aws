@@ -262,10 +262,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.value is a required parameter
+            - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
-                || (has(self.initProvider) && has(self.initProvider.value))'
+                || has(self.initProvider.value)'
           status:
             description: TagStatus defines the observed state of Tag.
             properties:

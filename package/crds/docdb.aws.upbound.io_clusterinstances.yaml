@@ -431,10 +431,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.instanceClass is a required parameter
+            - message: instanceClass is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)
-                || (has(self.initProvider) && has(self.initProvider.instanceClass))'
+                || has(self.initProvider.instanceClass)'
           status:
             description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:

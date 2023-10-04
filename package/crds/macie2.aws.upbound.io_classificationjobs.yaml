@@ -1096,14 +1096,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.jobType is a required parameter
+            - message: jobType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.jobType)
-                || (has(self.initProvider) && has(self.initProvider.jobType))'
-            - message: spec.forProvider.s3JobDefinition is a required parameter
+                || has(self.initProvider.jobType)'
+            - message: s3JobDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.s3JobDefinition)
-                || (has(self.initProvider) && has(self.initProvider.s3JobDefinition))'
+                || has(self.initProvider.s3JobDefinition)'
           status:
             description: ClassificationJobStatus defines the observed state of ClassificationJob.
             properties:

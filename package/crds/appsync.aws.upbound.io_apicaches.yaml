@@ -368,18 +368,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.apiCachingBehavior is a required parameter
+            - message: apiCachingBehavior is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.apiCachingBehavior)
-                || (has(self.initProvider) && has(self.initProvider.apiCachingBehavior))'
-            - message: spec.forProvider.ttl is a required parameter
+                || has(self.initProvider.apiCachingBehavior)'
+            - message: ttl is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ttl)
-                || (has(self.initProvider) && has(self.initProvider.ttl))'
-            - message: spec.forProvider.type is a required parameter
+                || has(self.initProvider.ttl)'
+            - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || (has(self.initProvider) && has(self.initProvider.type))'
+                || has(self.initProvider.type)'
           status:
             description: APICacheStatus defines the observed state of APICache.
             properties:

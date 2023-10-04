@@ -491,11 +491,13 @@ spec:
                                     hours:
                                       description: Starting hour of the 10-hour window
                                         for updates
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     minutes:
                                       description: Starting minute of the 10-hour
                                         window for updates
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -896,11 +898,13 @@ spec:
                                     hours:
                                       description: Starting hour of the 10-hour window
                                         for updates
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     minutes:
                                       description: Starting minute of the 10-hour
                                         window for updates
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -1121,10 +1125,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.domainName is a required parameter
+            - message: domainName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.domainName)
-                || (has(self.initProvider) && has(self.initProvider.domainName))'
+                || has(self.initProvider.domainName)'
           status:
             description: DomainStatus defines the observed state of Domain.
             properties:
@@ -1480,11 +1484,13 @@ spec:
                                     hours:
                                       description: Starting hour of the 10-hour window
                                         for updates
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     minutes:
                                       description: Starting minute of the 10-hour
                                         window for updates
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object

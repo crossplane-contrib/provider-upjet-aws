@@ -124,7 +124,7 @@ type GatewayResponseStatus struct {
 type GatewayResponse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.responseType) || (has(self.initProvider) && has(self.initProvider.responseType))",message="spec.forProvider.responseType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.responseType) || has(self.initProvider.responseType)",message="responseType is a required parameter"
 	Spec   GatewayResponseSpec   `json:"spec"`
 	Status GatewayResponseStatus `json:"status,omitempty"`
 }

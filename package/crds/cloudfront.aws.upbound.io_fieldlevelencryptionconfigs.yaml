@@ -491,14 +491,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.contentTypeProfileConfig is a required parameter
+            - message: contentTypeProfileConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.contentTypeProfileConfig)
-                || (has(self.initProvider) && has(self.initProvider.contentTypeProfileConfig))'
-            - message: spec.forProvider.queryArgProfileConfig is a required parameter
+                || has(self.initProvider.contentTypeProfileConfig)'
+            - message: queryArgProfileConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.queryArgProfileConfig)
-                || (has(self.initProvider) && has(self.initProvider.queryArgProfileConfig))'
+                || has(self.initProvider.queryArgProfileConfig)'
           status:
             description: FieldLevelEncryptionConfigStatus defines the observed state
               of FieldLevelEncryptionConfig.

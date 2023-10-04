@@ -1041,12 +1041,12 @@ func (in *EndTimeInitParameters) DeepCopyInto(out *EndTimeInitParameters) {
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1066,12 +1066,12 @@ func (in *EndTimeObservation) DeepCopyInto(out *EndTimeObservation) {
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1091,12 +1091,12 @@ func (in *EndTimeParameters) DeepCopyInto(out *EndTimeParameters) {
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2341,7 +2341,7 @@ func (in *KinesisVideoStreamConfigInitParameters) DeepCopyInto(out *KinesisVideo
 	}
 	if in.RetentionPeriodHours != nil {
 		in, out := &in.RetentionPeriodHours, &out.RetentionPeriodHours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2373,7 +2373,7 @@ func (in *KinesisVideoStreamConfigObservation) DeepCopyInto(out *KinesisVideoStr
 	}
 	if in.RetentionPeriodHours != nil {
 		in, out := &in.RetentionPeriodHours, &out.RetentionPeriodHours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2405,7 +2405,7 @@ func (in *KinesisVideoStreamConfigParameters) DeepCopyInto(out *KinesisVideoStre
 	}
 	if in.RetentionPeriodHours != nil {
 		in, out := &in.RetentionPeriodHours, &out.RetentionPeriodHours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3049,7 +3049,7 @@ func (in *MediaConcurrenciesInitParameters) DeepCopyInto(out *MediaConcurrencies
 	}
 	if in.Concurrency != nil {
 		in, out := &in.Concurrency, &out.Concurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3074,7 +3074,7 @@ func (in *MediaConcurrenciesObservation) DeepCopyInto(out *MediaConcurrenciesObs
 	}
 	if in.Concurrency != nil {
 		in, out := &in.Concurrency, &out.Concurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3099,7 +3099,7 @@ func (in *MediaConcurrenciesParameters) DeepCopyInto(out *MediaConcurrenciesPara
 	}
 	if in.Concurrency != nil {
 		in, out := &in.Concurrency, &out.Concurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3686,12 +3686,12 @@ func (in *QueueConfigsInitParameters) DeepCopyInto(out *QueueConfigsInitParamete
 	}
 	if in.Delay != nil {
 		in, out := &in.Delay, &out.Delay
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.QueueID != nil {
@@ -3721,12 +3721,12 @@ func (in *QueueConfigsObservation) DeepCopyInto(out *QueueConfigsObservation) {
 	}
 	if in.Delay != nil {
 		in, out := &in.Delay, &out.Delay
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.QueueArn != nil {
@@ -3766,12 +3766,12 @@ func (in *QueueConfigsParameters) DeepCopyInto(out *QueueConfigsParameters) {
 	}
 	if in.Delay != nil {
 		in, out := &in.Delay, &out.Delay
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.QueueID != nil {
@@ -3801,7 +3801,7 @@ func (in *QueueInitParameters) DeepCopyInto(out *QueueInitParameters) {
 	}
 	if in.MaxContacts != nil {
 		in, out := &in.MaxContacts, &out.MaxContacts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -3922,7 +3922,7 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 	}
 	if in.MaxContacts != nil {
 		in, out := &in.MaxContacts, &out.MaxContacts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -4042,7 +4042,7 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 	}
 	if in.MaxContacts != nil {
 		in, out := &in.MaxContacts, &out.MaxContacts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -5390,12 +5390,12 @@ func (in *StartTimeInitParameters) DeepCopyInto(out *StartTimeInitParameters) {
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5415,12 +5415,12 @@ func (in *StartTimeObservation) DeepCopyInto(out *StartTimeObservation) {
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5440,12 +5440,12 @@ func (in *StartTimeParameters) DeepCopyInto(out *StartTimeParameters) {
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6278,7 +6278,7 @@ func (in *UserPhoneConfigInitParameters) DeepCopyInto(out *UserPhoneConfigInitPa
 	*out = *in
 	if in.AfterContactWorkTimeLimit != nil {
 		in, out := &in.AfterContactWorkTimeLimit, &out.AfterContactWorkTimeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AutoAccept != nil {
@@ -6313,7 +6313,7 @@ func (in *UserPhoneConfigObservation) DeepCopyInto(out *UserPhoneConfigObservati
 	*out = *in
 	if in.AfterContactWorkTimeLimit != nil {
 		in, out := &in.AfterContactWorkTimeLimit, &out.AfterContactWorkTimeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AutoAccept != nil {
@@ -6348,7 +6348,7 @@ func (in *UserPhoneConfigParameters) DeepCopyInto(out *UserPhoneConfigParameters
 	*out = *in
 	if in.AfterContactWorkTimeLimit != nil {
 		in, out := &in.AfterContactWorkTimeLimit, &out.AfterContactWorkTimeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AutoAccept != nil {

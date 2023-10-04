@@ -126,7 +126,7 @@ type JobDefinitionObservation struct {
 	RetryStrategy []RetryStrategyObservation `json:"retryStrategy,omitempty" tf:"retry_strategy,omitempty"`
 
 	// The revision of the job definition.
-	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *int64 `json:"revision,omitempty" tf:"revision,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -190,7 +190,7 @@ type JobDefinitionParameters struct {
 type RetryStrategyInitParameters struct {
 
 	// The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts.
-	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
+	Attempts *int64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 
 	// The evaluate on exit conditions under which the job should be retried or failed. If this parameter is specified, then the attempts parameter must also be specified. You may specify up to 5 configuration blocks.
 	EvaluateOnExit []EvaluateOnExitInitParameters `json:"evaluateOnExit,omitempty" tf:"evaluate_on_exit,omitempty"`
@@ -199,7 +199,7 @@ type RetryStrategyInitParameters struct {
 type RetryStrategyObservation struct {
 
 	// The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts.
-	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
+	Attempts *int64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 
 	// The evaluate on exit conditions under which the job should be retried or failed. If this parameter is specified, then the attempts parameter must also be specified. You may specify up to 5 configuration blocks.
 	EvaluateOnExit []EvaluateOnExitObservation `json:"evaluateOnExit,omitempty" tf:"evaluate_on_exit,omitempty"`
@@ -209,7 +209,7 @@ type RetryStrategyParameters struct {
 
 	// The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts.
 	// +kubebuilder:validation:Optional
-	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
+	Attempts *int64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 
 	// The evaluate on exit conditions under which the job should be retried or failed. If this parameter is specified, then the attempts parameter must also be specified. You may specify up to 5 configuration blocks.
 	// +kubebuilder:validation:Optional
@@ -219,20 +219,20 @@ type RetryStrategyParameters struct {
 type TimeoutInitParameters struct {
 
 	// The time duration in seconds after which AWS Batch terminates your jobs if they have not finished. The minimum value for the timeout is 60 seconds.
-	AttemptDurationSeconds *float64 `json:"attemptDurationSeconds,omitempty" tf:"attempt_duration_seconds,omitempty"`
+	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds,omitempty" tf:"attempt_duration_seconds,omitempty"`
 }
 
 type TimeoutObservation struct {
 
 	// The time duration in seconds after which AWS Batch terminates your jobs if they have not finished. The minimum value for the timeout is 60 seconds.
-	AttemptDurationSeconds *float64 `json:"attemptDurationSeconds,omitempty" tf:"attempt_duration_seconds,omitempty"`
+	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds,omitempty" tf:"attempt_duration_seconds,omitempty"`
 }
 
 type TimeoutParameters struct {
 
 	// The time duration in seconds after which AWS Batch terminates your jobs if they have not finished. The minimum value for the timeout is 60 seconds.
 	// +kubebuilder:validation:Optional
-	AttemptDurationSeconds *float64 `json:"attemptDurationSeconds,omitempty" tf:"attempt_duration_seconds,omitempty"`
+	AttemptDurationSeconds *int64 `json:"attemptDurationSeconds,omitempty" tf:"attempt_duration_seconds,omitempty"`
 }
 
 // JobDefinitionSpec defines the desired state of JobDefinition
@@ -270,8 +270,8 @@ type JobDefinitionStatus struct {
 type JobDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   JobDefinitionSpec   `json:"spec"`
 	Status JobDefinitionStatus `json:"status,omitempty"`
 }

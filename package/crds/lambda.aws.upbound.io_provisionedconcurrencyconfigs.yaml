@@ -283,19 +283,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.functionName is a required parameter
+            - message: functionName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.functionName)
-                || (has(self.initProvider) && has(self.initProvider.functionName))'
-            - message: spec.forProvider.provisionedConcurrentExecutions is a required
-                parameter
+                || has(self.initProvider.functionName)'
+            - message: provisionedConcurrentExecutions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.provisionedConcurrentExecutions)
-                || (has(self.initProvider) && has(self.initProvider.provisionedConcurrentExecutions))'
-            - message: spec.forProvider.qualifier is a required parameter
+                || has(self.initProvider.provisionedConcurrentExecutions)'
+            - message: qualifier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.qualifier)
-                || (has(self.initProvider) && has(self.initProvider.qualifier))'
+                || has(self.initProvider.qualifier)'
           status:
             description: ProvisionedConcurrencyConfigStatus defines the observed state
               of ProvisionedConcurrencyConfig.

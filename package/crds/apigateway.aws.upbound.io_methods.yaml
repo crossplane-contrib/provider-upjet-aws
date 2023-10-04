@@ -573,14 +573,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.authorization is a required parameter
+            - message: authorization is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.authorization)
-                || (has(self.initProvider) && has(self.initProvider.authorization))'
-            - message: spec.forProvider.httpMethod is a required parameter
+                || has(self.initProvider.authorization)'
+            - message: httpMethod is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.httpMethod)
-                || (has(self.initProvider) && has(self.initProvider.httpMethod))'
+                || has(self.initProvider.httpMethod)'
           status:
             description: MethodStatus defines the observed state of Method.
             properties:

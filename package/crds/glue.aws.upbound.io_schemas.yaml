@@ -373,22 +373,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.compatibility is a required parameter
+            - message: compatibility is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.compatibility)
-                || (has(self.initProvider) && has(self.initProvider.compatibility))'
-            - message: spec.forProvider.dataFormat is a required parameter
+                || has(self.initProvider.compatibility)'
+            - message: dataFormat is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.dataFormat)
-                || (has(self.initProvider) && has(self.initProvider.dataFormat))'
-            - message: spec.forProvider.schemaDefinition is a required parameter
+                || has(self.initProvider.dataFormat)'
+            - message: schemaDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaDefinition)
-                || (has(self.initProvider) && has(self.initProvider.schemaDefinition))'
-            - message: spec.forProvider.schemaName is a required parameter
+                || has(self.initProvider.schemaDefinition)'
+            - message: schemaName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaName)
-                || (has(self.initProvider) && has(self.initProvider.schemaName))'
+                || has(self.initProvider.schemaName)'
           status:
             description: SchemaStatus defines the observed state of Schema.
             properties:

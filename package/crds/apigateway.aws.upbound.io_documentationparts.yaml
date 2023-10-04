@@ -390,14 +390,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.location is a required parameter
+            - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || (has(self.initProvider) && has(self.initProvider.location))'
-            - message: spec.forProvider.properties is a required parameter
+                || has(self.initProvider.location)'
+            - message: properties is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.properties)
-                || (has(self.initProvider) && has(self.initProvider.properties))'
+                || has(self.initProvider.properties)'
           status:
             description: DocumentationPartStatus defines the observed state of DocumentationPart.
             properties:

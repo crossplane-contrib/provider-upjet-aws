@@ -552,10 +552,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.stageName is a required parameter
+            - message: stageName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.stageName)
-                || (has(self.initProvider) && has(self.initProvider.stageName))'
+                || has(self.initProvider.stageName)'
           status:
             description: StageStatus defines the observed state of Stage.
             properties:

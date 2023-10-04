@@ -106,7 +106,7 @@ type ServiceSpecificCredentialStatus struct {
 type ServiceSpecificCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName) || (has(self.initProvider) && has(self.initProvider.serviceName))",message="spec.forProvider.serviceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceName) || has(self.initProvider.serviceName)",message="serviceName is a required parameter"
 	Spec   ServiceSpecificCredentialSpec   `json:"spec"`
 	Status ServiceSpecificCredentialStatus `json:"status,omitempty"`
 }

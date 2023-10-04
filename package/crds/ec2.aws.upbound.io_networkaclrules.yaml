@@ -406,18 +406,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.protocol is a required parameter
+            - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
-                || (has(self.initProvider) && has(self.initProvider.protocol))'
-            - message: spec.forProvider.ruleAction is a required parameter
+                || has(self.initProvider.protocol)'
+            - message: ruleAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleAction)
-                || (has(self.initProvider) && has(self.initProvider.ruleAction))'
-            - message: spec.forProvider.ruleNumber is a required parameter
+                || has(self.initProvider.ruleAction)'
+            - message: ruleNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleNumber)
-                || (has(self.initProvider) && has(self.initProvider.ruleNumber))'
+                || has(self.initProvider.ruleNumber)'
           status:
             description: NetworkACLRuleStatus defines the observed state of NetworkACLRule.
             properties:

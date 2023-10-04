@@ -308,10 +308,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.active is a required parameter
+            - message: active is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.active)
-                || (has(self.initProvider) && has(self.initProvider.active))'
+                || has(self.initProvider.active)'
           status:
             description: CertificateStatus defines the observed state of Certificate.
             properties:

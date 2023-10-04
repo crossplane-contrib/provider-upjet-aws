@@ -260,10 +260,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.globalSettings is a required parameter
+            - message: globalSettings is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.globalSettings)
-                || (has(self.initProvider) && has(self.initProvider.globalSettings))'
+                || has(self.initProvider.globalSettings)'
           status:
             description: GlobalSettingsStatus defines the observed state of GlobalSettings.
             properties:

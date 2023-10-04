@@ -111,7 +111,7 @@ type DiskAttachmentStatus struct {
 type DiskAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.diskPath) || (has(self.initProvider) && has(self.initProvider.diskPath))",message="spec.forProvider.diskPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.diskPath) || has(self.initProvider.diskPath)",message="diskPath is a required parameter"
 	Spec   DiskAttachmentSpec   `json:"spec"`
 	Status DiskAttachmentStatus `json:"status,omitempty"`
 }

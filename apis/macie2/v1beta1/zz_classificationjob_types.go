@@ -981,8 +981,8 @@ type ClassificationJobStatus struct {
 type ClassificationJob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.jobType) || (has(self.initProvider) && has(self.initProvider.jobType))",message="spec.forProvider.jobType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3JobDefinition) || (has(self.initProvider) && has(self.initProvider.s3JobDefinition))",message="spec.forProvider.s3JobDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.jobType) || has(self.initProvider.jobType)",message="jobType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3JobDefinition) || has(self.initProvider.s3JobDefinition)",message="s3JobDefinition is a required parameter"
 	Spec   ClassificationJobSpec   `json:"spec"`
 	Status ClassificationJobStatus `json:"status,omitempty"`
 }

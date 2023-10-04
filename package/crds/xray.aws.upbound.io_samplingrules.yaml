@@ -348,46 +348,46 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.fixedRate is a required parameter
+            - message: fixedRate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.fixedRate)
-                || (has(self.initProvider) && has(self.initProvider.fixedRate))'
-            - message: spec.forProvider.host is a required parameter
+                || has(self.initProvider.fixedRate)'
+            - message: host is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.host)
-                || (has(self.initProvider) && has(self.initProvider.host))'
-            - message: spec.forProvider.httpMethod is a required parameter
+                || has(self.initProvider.host)'
+            - message: httpMethod is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.httpMethod)
-                || (has(self.initProvider) && has(self.initProvider.httpMethod))'
-            - message: spec.forProvider.priority is a required parameter
+                || has(self.initProvider.httpMethod)'
+            - message: priority is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)
-                || (has(self.initProvider) && has(self.initProvider.priority))'
-            - message: spec.forProvider.reservoirSize is a required parameter
+                || has(self.initProvider.priority)'
+            - message: reservoirSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.reservoirSize)
-                || (has(self.initProvider) && has(self.initProvider.reservoirSize))'
-            - message: spec.forProvider.resourceArn is a required parameter
+                || has(self.initProvider.reservoirSize)'
+            - message: resourceArn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceArn)
-                || (has(self.initProvider) && has(self.initProvider.resourceArn))'
-            - message: spec.forProvider.serviceName is a required parameter
+                || has(self.initProvider.resourceArn)'
+            - message: serviceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceName)
-                || (has(self.initProvider) && has(self.initProvider.serviceName))'
-            - message: spec.forProvider.serviceType is a required parameter
+                || has(self.initProvider.serviceName)'
+            - message: serviceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceType)
-                || (has(self.initProvider) && has(self.initProvider.serviceType))'
-            - message: spec.forProvider.urlPath is a required parameter
+                || has(self.initProvider.serviceType)'
+            - message: urlPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.urlPath)
-                || (has(self.initProvider) && has(self.initProvider.urlPath))'
-            - message: spec.forProvider.version is a required parameter
+                || has(self.initProvider.urlPath)'
+            - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
-                || (has(self.initProvider) && has(self.initProvider.version))'
+                || has(self.initProvider.version)'
           status:
             description: SamplingRuleStatus defines the observed state of SamplingRule.
             properties:

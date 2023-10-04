@@ -315,7 +315,7 @@ type LogConfigurationInitParameters struct {
 	CloudwatchLogsConfiguration []CloudwatchLogsConfigurationInitParameters `json:"cloudwatchLogsConfiguration,omitempty" tf:"cloudwatch_logs_configuration,omitempty"`
 
 	// The schema version. See documentation for the list of schema versions.
-	LogSchemaVersion *float64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
+	LogSchemaVersion *int64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
 
 	// The configuration for experiment logging to Amazon S3. See below.
 	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
@@ -327,7 +327,7 @@ type LogConfigurationObservation struct {
 	CloudwatchLogsConfiguration []CloudwatchLogsConfigurationObservation `json:"cloudwatchLogsConfiguration,omitempty" tf:"cloudwatch_logs_configuration,omitempty"`
 
 	// The schema version. See documentation for the list of schema versions.
-	LogSchemaVersion *float64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
+	LogSchemaVersion *int64 `json:"logSchemaVersion,omitempty" tf:"log_schema_version,omitempty"`
 
 	// The configuration for experiment logging to Amazon S3. See below.
 	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
@@ -341,7 +341,7 @@ type LogConfigurationParameters struct {
 
 	// The schema version. See documentation for the list of schema versions.
 	// +kubebuilder:validation:Optional
-	LogSchemaVersion *float64 `json:"logSchemaVersion" tf:"log_schema_version,omitempty"`
+	LogSchemaVersion *int64 `json:"logSchemaVersion" tf:"log_schema_version,omitempty"`
 
 	// The configuration for experiment logging to Amazon S3. See below.
 	// +kubebuilder:validation:Optional
@@ -528,9 +528,9 @@ type ExperimentTemplateStatus struct {
 type ExperimentTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || (has(self.initProvider) && has(self.initProvider.action))",message="spec.forProvider.action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || (has(self.initProvider) && has(self.initProvider.description))",message="spec.forProvider.description is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stopCondition) || (has(self.initProvider) && has(self.initProvider.stopCondition))",message="spec.forProvider.stopCondition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || has(self.initProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stopCondition) || has(self.initProvider.stopCondition)",message="stopCondition is a required parameter"
 	Spec   ExperimentTemplateSpec   `json:"spec"`
 	Status ExperimentTemplateStatus `json:"status,omitempty"`
 }

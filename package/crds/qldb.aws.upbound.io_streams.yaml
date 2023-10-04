@@ -566,18 +566,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.inclusiveStartTime is a required parameter
+            - message: inclusiveStartTime is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.inclusiveStartTime)
-                || (has(self.initProvider) && has(self.initProvider.inclusiveStartTime))'
-            - message: spec.forProvider.kinesisConfiguration is a required parameter
+                || has(self.initProvider.inclusiveStartTime)'
+            - message: kinesisConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.kinesisConfiguration)
-                || (has(self.initProvider) && has(self.initProvider.kinesisConfiguration))'
-            - message: spec.forProvider.streamName is a required parameter
+                || has(self.initProvider.kinesisConfiguration)'
+            - message: streamName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.streamName)
-                || (has(self.initProvider) && has(self.initProvider.streamName))'
+                || has(self.initProvider.streamName)'
           status:
             description: StreamStatus defines the observed state of Stream.
             properties:

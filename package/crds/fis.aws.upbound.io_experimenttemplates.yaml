@@ -137,7 +137,8 @@ spec:
                         logSchemaVersion:
                           description: The schema version. See documentation for the
                             list of schema versions.
-                          type: number
+                          format: int64
+                          type: integer
                         s3Configuration:
                           description: The configuration for experiment logging to
                             Amazon S3. See below.
@@ -400,7 +401,8 @@ spec:
                         logSchemaVersion:
                           description: The schema version. See documentation for the
                             list of schema versions.
-                          type: number
+                          format: int64
+                          type: integer
                         s3Configuration:
                           description: The configuration for experiment logging to
                             Amazon S3. See below.
@@ -659,18 +661,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.action is a required parameter
+            - message: action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
-                || (has(self.initProvider) && has(self.initProvider.action))'
-            - message: spec.forProvider.description is a required parameter
+                || has(self.initProvider.action)'
+            - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
-                || (has(self.initProvider) && has(self.initProvider.description))'
-            - message: spec.forProvider.stopCondition is a required parameter
+                || has(self.initProvider.description)'
+            - message: stopCondition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.stopCondition)
-                || (has(self.initProvider) && has(self.initProvider.stopCondition))'
+                || has(self.initProvider.stopCondition)'
           status:
             description: ExperimentTemplateStatus defines the observed state of ExperimentTemplate.
             properties:
@@ -749,7 +751,8 @@ spec:
                         logSchemaVersion:
                           description: The schema version. See documentation for the
                             list of schema versions.
-                          type: number
+                          format: int64
+                          type: integer
                         s3Configuration:
                           description: The configuration for experiment logging to
                             Amazon S3. See below.

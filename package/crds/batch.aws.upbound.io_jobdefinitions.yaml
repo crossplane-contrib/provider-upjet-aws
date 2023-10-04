@@ -106,7 +106,8 @@ spec:
                         attempts:
                           description: The number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
-                          type: number
+                          format: int64
+                          type: integer
                         evaluateOnExit:
                           description: The evaluate on exit conditions under which
                             the job should be retried or failed. If this parameter
@@ -150,7 +151,8 @@ spec:
                           description: The time duration in seconds after which AWS
                             Batch terminates your jobs if they have not finished.
                             The minimum value for the timeout is 60 seconds.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   type:
@@ -206,7 +208,8 @@ spec:
                         attempts:
                           description: The number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
-                          type: number
+                          format: int64
+                          type: integer
                         evaluateOnExit:
                           description: The evaluate on exit conditions under which
                             the job should be retried or failed. If this parameter
@@ -250,7 +253,8 @@ spec:
                           description: The time duration in seconds after which AWS
                             Batch terminates your jobs if they have not finished.
                             The minimum value for the timeout is 60 seconds.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   type:
@@ -418,14 +422,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.type is a required parameter
+                || has(self.initProvider.name)'
+            - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || (has(self.initProvider) && has(self.initProvider.type))'
+                || has(self.initProvider.type)'
           status:
             description: JobDefinitionStatus defines the observed state of JobDefinition.
             properties:
@@ -471,7 +475,8 @@ spec:
                         attempts:
                           description: The number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
-                          type: number
+                          format: int64
+                          type: integer
                         evaluateOnExit:
                           description: The evaluate on exit conditions under which
                             the job should be retried or failed. If this parameter
@@ -502,7 +507,8 @@ spec:
                     type: array
                   revision:
                     description: The revision of the job definition.
-                    type: number
+                    format: int64
+                    type: integer
                   tags:
                     additionalProperties:
                       type: string
@@ -525,7 +531,8 @@ spec:
                           description: The time duration in seconds after which AWS
                             Batch terminates your jobs if they have not finished.
                             The minimum value for the timeout is 60 seconds.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   type:

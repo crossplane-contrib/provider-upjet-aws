@@ -254,10 +254,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.ruleSetName is a required parameter
+            - message: ruleSetName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleSetName)
-                || (has(self.initProvider) && has(self.initProvider.ruleSetName))'
+                || has(self.initProvider.ruleSetName)'
           status:
             description: ReceiptRuleSetStatus defines the observed state of ReceiptRuleSet.
             properties:

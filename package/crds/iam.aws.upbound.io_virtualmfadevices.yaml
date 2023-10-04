@@ -266,10 +266,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.virtualMfaDeviceName is a required parameter
+            - message: virtualMfaDeviceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.virtualMfaDeviceName)
-                || (has(self.initProvider) && has(self.initProvider.virtualMfaDeviceName))'
+                || has(self.initProvider.virtualMfaDeviceName)'
           status:
             description: VirtualMfaDeviceStatus defines the observed state of VirtualMfaDevice.
             properties:

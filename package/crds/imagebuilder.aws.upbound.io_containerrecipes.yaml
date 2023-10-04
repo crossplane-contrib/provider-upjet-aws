@@ -777,30 +777,30 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.component is a required parameter
+            - message: component is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.component)
-                || (has(self.initProvider) && has(self.initProvider.component))'
-            - message: spec.forProvider.containerType is a required parameter
+                || has(self.initProvider.component)'
+            - message: containerType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.containerType)
-                || (has(self.initProvider) && has(self.initProvider.containerType))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.containerType)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.parentImage is a required parameter
+                || has(self.initProvider.name)'
+            - message: parentImage is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.parentImage)
-                || (has(self.initProvider) && has(self.initProvider.parentImage))'
-            - message: spec.forProvider.targetRepository is a required parameter
+                || has(self.initProvider.parentImage)'
+            - message: targetRepository is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetRepository)
-                || (has(self.initProvider) && has(self.initProvider.targetRepository))'
-            - message: spec.forProvider.version is a required parameter
+                || has(self.initProvider.targetRepository)'
+            - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
-                || (has(self.initProvider) && has(self.initProvider.version))'
+                || has(self.initProvider.version)'
           status:
             description: ContainerRecipeStatus defines the observed state of ContainerRecipe.
             properties:

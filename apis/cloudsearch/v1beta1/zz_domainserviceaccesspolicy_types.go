@@ -95,7 +95,7 @@ type DomainServiceAccessPolicyStatus struct {
 type DomainServiceAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessPolicy) || (has(self.initProvider) && has(self.initProvider.accessPolicy))",message="spec.forProvider.accessPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessPolicy) || has(self.initProvider.accessPolicy)",message="accessPolicy is a required parameter"
 	Spec   DomainServiceAccessPolicySpec   `json:"spec"`
 	Status DomainServiceAccessPolicyStatus `json:"status,omitempty"`
 }

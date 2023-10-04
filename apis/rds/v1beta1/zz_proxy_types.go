@@ -259,9 +259,9 @@ type ProxyStatus struct {
 type Proxy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.auth) || (has(self.initProvider) && has(self.initProvider.auth))",message="spec.forProvider.auth is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineFamily) || (has(self.initProvider) && has(self.initProvider.engineFamily))",message="spec.forProvider.engineFamily is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds) || (has(self.initProvider) && has(self.initProvider.vpcSubnetIds))",message="spec.forProvider.vpcSubnetIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.auth) || has(self.initProvider.auth)",message="auth is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineFamily) || has(self.initProvider.engineFamily)",message="engineFamily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds) || has(self.initProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
 	Spec   ProxySpec   `json:"spec"`
 	Status ProxyStatus `json:"status,omitempty"`
 }

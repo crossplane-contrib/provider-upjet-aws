@@ -108,7 +108,8 @@ spec:
                             configuration means that the AWS provider will ignore
                             a previously set value, a value set by AWS, and any port
                             changes.
-                          type: number
+                          format: int64
+                          type: integer
                         version:
                           description: Version of the option (e.g., 13.1.0.0). Leaving
                             out or removing version from your configuration does not
@@ -194,7 +195,8 @@ spec:
                             configuration means that the AWS provider will ignore
                             a previously set value, a value set by AWS, and any port
                             changes.
-                          type: number
+                          format: int64
+                          type: integer
                         version:
                           description: Version of the option (e.g., 13.1.0.0). Leaving
                             out or removing version from your configuration does not
@@ -382,14 +384,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.engineName is a required parameter
+            - message: engineName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineName)
-                || (has(self.initProvider) && has(self.initProvider.engineName))'
-            - message: spec.forProvider.majorEngineVersion is a required parameter
+                || has(self.initProvider.engineName)'
+            - message: majorEngineVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.majorEngineVersion)
-                || (has(self.initProvider) && has(self.initProvider.majorEngineVersion))'
+                || has(self.initProvider.majorEngineVersion)'
           status:
             description: OptionGroupStatus defines the observed state of OptionGroup.
             properties:
@@ -442,7 +444,8 @@ spec:
                             configuration means that the AWS provider will ignore
                             a previously set value, a value set by AWS, and any port
                             changes.
-                          type: number
+                          format: int64
+                          type: integer
                         version:
                           description: Version of the option (e.g., 13.1.0.0). Leaving
                             out or removing version from your configuration does not

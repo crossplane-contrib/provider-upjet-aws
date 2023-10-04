@@ -507,7 +507,7 @@ type BucketLifecycleConfigurationStatus struct {
 type BucketLifecycleConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || (has(self.initProvider) && has(self.initProvider.rule))",message="spec.forProvider.rule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || has(self.initProvider.rule)",message="rule is a required parameter"
 	Spec   BucketLifecycleConfigurationSpec   `json:"spec"`
 	Status BucketLifecycleConfigurationStatus `json:"status,omitempty"`
 }

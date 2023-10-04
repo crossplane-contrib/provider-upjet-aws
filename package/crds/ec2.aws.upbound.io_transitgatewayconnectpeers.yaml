@@ -401,14 +401,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.insideCidrBlocks is a required parameter
+            - message: insideCidrBlocks is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.insideCidrBlocks)
-                || (has(self.initProvider) && has(self.initProvider.insideCidrBlocks))'
-            - message: spec.forProvider.peerAddress is a required parameter
+                || has(self.initProvider.insideCidrBlocks)'
+            - message: peerAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.peerAddress)
-                || (has(self.initProvider) && has(self.initProvider.peerAddress))'
+                || has(self.initProvider.peerAddress)'
           status:
             description: TransitGatewayConnectPeerStatus defines the observed state
               of TransitGatewayConnectPeer.

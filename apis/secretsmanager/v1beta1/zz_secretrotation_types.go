@@ -20,7 +20,7 @@ import (
 type RotationRulesInitParameters struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
@@ -32,7 +32,7 @@ type RotationRulesInitParameters struct {
 type RotationRulesObservation struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
@@ -45,7 +45,7 @@ type RotationRulesParameters struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
 	// +kubebuilder:validation:Optional
-	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	// +kubebuilder:validation:Optional
@@ -155,7 +155,7 @@ type SecretRotationStatus struct {
 type SecretRotation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rotationRules) || (has(self.initProvider) && has(self.initProvider.rotationRules))",message="spec.forProvider.rotationRules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rotationRules) || has(self.initProvider.rotationRules)",message="rotationRules is a required parameter"
 	Spec   SecretRotationSpec   `json:"spec"`
 	Status SecretRotationStatus `json:"status,omitempty"`
 }

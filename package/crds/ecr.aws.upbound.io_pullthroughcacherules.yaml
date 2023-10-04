@@ -264,14 +264,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.ecrRepositoryPrefix is a required parameter
+            - message: ecrRepositoryPrefix is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ecrRepositoryPrefix)
-                || (has(self.initProvider) && has(self.initProvider.ecrRepositoryPrefix))'
-            - message: spec.forProvider.upstreamRegistryUrl is a required parameter
+                || has(self.initProvider.ecrRepositoryPrefix)'
+            - message: upstreamRegistryUrl is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.upstreamRegistryUrl)
-                || (has(self.initProvider) && has(self.initProvider.upstreamRegistryUrl))'
+                || has(self.initProvider.upstreamRegistryUrl)'
           status:
             description: PullThroughCacheRuleStatus defines the observed state of
               PullThroughCacheRule.

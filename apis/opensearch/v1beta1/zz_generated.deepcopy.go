@@ -2931,12 +2931,12 @@ func (in *WindowStartTimeInitParameters) DeepCopyInto(out *WindowStartTimeInitPa
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2956,12 +2956,12 @@ func (in *WindowStartTimeObservation) DeepCopyInto(out *WindowStartTimeObservati
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2981,12 +2981,12 @@ func (in *WindowStartTimeParameters) DeepCopyInto(out *WindowStartTimeParameters
 	*out = *in
 	if in.Hours != nil {
 		in, out := &in.Hours, &out.Hours
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Minutes != nil {
 		in, out := &in.Minutes, &out.Minutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
