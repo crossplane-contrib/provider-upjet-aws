@@ -46,7 +46,7 @@ func (in *ActionsInitParameters) DeepCopyInto(out *ActionsInitParameters) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -66,7 +66,7 @@ func (in *ActionsNotificationPropertyInitParameters) DeepCopyInto(out *ActionsNo
 	*out = *in
 	if in.NotifyDelayAfter != nil {
 		in, out := &in.NotifyDelayAfter, &out.NotifyDelayAfter
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -86,7 +86,7 @@ func (in *ActionsNotificationPropertyObservation) DeepCopyInto(out *ActionsNotif
 	*out = *in
 	if in.NotifyDelayAfter != nil {
 		in, out := &in.NotifyDelayAfter, &out.NotifyDelayAfter
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -106,7 +106,7 @@ func (in *ActionsNotificationPropertyParameters) DeepCopyInto(out *ActionsNotifi
 	*out = *in
 	if in.NotifyDelayAfter != nil {
 		in, out := &in.NotifyDelayAfter, &out.NotifyDelayAfter
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -164,7 +164,7 @@ func (in *ActionsObservation) DeepCopyInto(out *ActionsObservation) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -242,7 +242,7 @@ func (in *ActionsParameters) DeepCopyInto(out *ActionsParameters) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -684,7 +684,7 @@ func (in *CatalogTableInitParameters) DeepCopyInto(out *CatalogTableInitParamete
 	}
 	if in.Retention != nil {
 		in, out := &in.Retention, &out.Retention
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageDescriptor != nil {
@@ -832,7 +832,7 @@ func (in *CatalogTableObservation) DeepCopyInto(out *CatalogTableObservation) {
 	}
 	if in.Retention != nil {
 		in, out := &in.Retention, &out.Retention
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageDescriptor != nil {
@@ -953,7 +953,7 @@ func (in *CatalogTableParameters) DeepCopyInto(out *CatalogTableParameters) {
 	}
 	if in.Retention != nil {
 		in, out := &in.Retention, &out.Retention
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageDescriptor != nil {
@@ -3854,12 +3854,12 @@ func (in *EventBatchingConditionInitParameters) DeepCopyInto(out *EventBatchingC
 	*out = *in
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchWindow != nil {
 		in, out := &in.BatchWindow, &out.BatchWindow
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3879,12 +3879,12 @@ func (in *EventBatchingConditionObservation) DeepCopyInto(out *EventBatchingCond
 	*out = *in
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchWindow != nil {
 		in, out := &in.BatchWindow, &out.BatchWindow
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3904,12 +3904,12 @@ func (in *EventBatchingConditionParameters) DeepCopyInto(out *EventBatchingCondi
 	*out = *in
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BatchWindow != nil {
 		in, out := &in.BatchWindow, &out.BatchWindow
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3929,7 +3929,7 @@ func (in *ExecutionPropertyInitParameters) DeepCopyInto(out *ExecutionPropertyIn
 	*out = *in
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3949,7 +3949,7 @@ func (in *ExecutionPropertyObservation) DeepCopyInto(out *ExecutionPropertyObser
 	*out = *in
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3969,7 +3969,7 @@ func (in *ExecutionPropertyParameters) DeepCopyInto(out *ExecutionPropertyParame
 	*out = *in
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4095,7 +4095,7 @@ func (in *HudiTargetInitParameters) DeepCopyInto(out *HudiTargetInitParameters) 
 	}
 	if in.MaximumTraversalDepth != nil {
 		in, out := &in.MaximumTraversalDepth, &out.MaximumTraversalDepth
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Paths != nil {
@@ -4142,7 +4142,7 @@ func (in *HudiTargetObservation) DeepCopyInto(out *HudiTargetObservation) {
 	}
 	if in.MaximumTraversalDepth != nil {
 		in, out := &in.MaximumTraversalDepth, &out.MaximumTraversalDepth
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Paths != nil {
@@ -4189,7 +4189,7 @@ func (in *HudiTargetParameters) DeepCopyInto(out *HudiTargetParameters) {
 	}
 	if in.MaximumTraversalDepth != nil {
 		in, out := &in.MaximumTraversalDepth, &out.MaximumTraversalDepth
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Paths != nil {
@@ -4311,7 +4311,7 @@ func (in *IcebergTargetInitParameters) DeepCopyInto(out *IcebergTargetInitParame
 	}
 	if in.MaximumTraversalDepth != nil {
 		in, out := &in.MaximumTraversalDepth, &out.MaximumTraversalDepth
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Paths != nil {
@@ -4358,7 +4358,7 @@ func (in *IcebergTargetObservation) DeepCopyInto(out *IcebergTargetObservation) 
 	}
 	if in.MaximumTraversalDepth != nil {
 		in, out := &in.MaximumTraversalDepth, &out.MaximumTraversalDepth
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Paths != nil {
@@ -4405,7 +4405,7 @@ func (in *IcebergTargetParameters) DeepCopyInto(out *IcebergTargetParameters) {
 	}
 	if in.MaximumTraversalDepth != nil {
 		in, out := &in.MaximumTraversalDepth, &out.MaximumTraversalDepth
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Paths != nil {
@@ -4810,7 +4810,7 @@ func (in *JobInitParameters) DeepCopyInto(out *JobInitParameters) {
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NonOverridableArguments != nil {
@@ -4838,7 +4838,7 @@ func (in *JobInitParameters) DeepCopyInto(out *JobInitParameters) {
 	}
 	if in.NumberOfWorkers != nil {
 		in, out := &in.NumberOfWorkers, &out.NumberOfWorkers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityConfiguration != nil {
@@ -4864,7 +4864,7 @@ func (in *JobInitParameters) DeepCopyInto(out *JobInitParameters) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WorkerType != nil {
@@ -4992,7 +4992,7 @@ func (in *JobObservation) DeepCopyInto(out *JobObservation) {
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NonOverridableArguments != nil {
@@ -5020,7 +5020,7 @@ func (in *JobObservation) DeepCopyInto(out *JobObservation) {
 	}
 	if in.NumberOfWorkers != nil {
 		in, out := &in.NumberOfWorkers, &out.NumberOfWorkers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -5067,7 +5067,7 @@ func (in *JobObservation) DeepCopyInto(out *JobObservation) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WorkerType != nil {
@@ -5153,7 +5153,7 @@ func (in *JobParameters) DeepCopyInto(out *JobParameters) {
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NonOverridableArguments != nil {
@@ -5181,7 +5181,7 @@ func (in *JobParameters) DeepCopyInto(out *JobParameters) {
 	}
 	if in.NumberOfWorkers != nil {
 		in, out := &in.NumberOfWorkers, &out.NumberOfWorkers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -5227,7 +5227,7 @@ func (in *JobParameters) DeepCopyInto(out *JobParameters) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WorkerType != nil {
@@ -5517,7 +5517,7 @@ func (in *NotificationPropertyInitParameters) DeepCopyInto(out *NotificationProp
 	*out = *in
 	if in.NotifyDelayAfter != nil {
 		in, out := &in.NotifyDelayAfter, &out.NotifyDelayAfter
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5537,7 +5537,7 @@ func (in *NotificationPropertyObservation) DeepCopyInto(out *NotificationPropert
 	*out = *in
 	if in.NotifyDelayAfter != nil {
 		in, out := &in.NotifyDelayAfter, &out.NotifyDelayAfter
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -5557,7 +5557,7 @@ func (in *NotificationPropertyParameters) DeepCopyInto(out *NotificationProperty
 	*out = *in
 	if in.NotifyDelayAfter != nil {
 		in, out := &in.NotifyDelayAfter, &out.NotifyDelayAfter
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6748,7 +6748,7 @@ func (in *S3TargetInitParameters) DeepCopyInto(out *S3TargetInitParameters) {
 	}
 	if in.SampleSize != nil {
 		in, out := &in.SampleSize, &out.SampleSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6799,7 +6799,7 @@ func (in *S3TargetObservation) DeepCopyInto(out *S3TargetObservation) {
 	}
 	if in.SampleSize != nil {
 		in, out := &in.SampleSize, &out.SampleSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -6850,7 +6850,7 @@ func (in *S3TargetParameters) DeepCopyInto(out *S3TargetParameters) {
 	}
 	if in.SampleSize != nil {
 		in, out := &in.SampleSize, &out.SampleSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -7175,12 +7175,12 @@ func (in *SchemaObservation) DeepCopyInto(out *SchemaObservation) {
 	}
 	if in.LatestSchemaVersion != nil {
 		in, out := &in.LatestSchemaVersion, &out.LatestSchemaVersion
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NextSchemaVersion != nil {
 		in, out := &in.NextSchemaVersion, &out.NextSchemaVersion
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RegistryArn != nil {
@@ -7195,7 +7195,7 @@ func (in *SchemaObservation) DeepCopyInto(out *SchemaObservation) {
 	}
 	if in.SchemaCheckpoint != nil {
 		in, out := &in.SchemaCheckpoint, &out.SchemaCheckpoint
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SchemaDefinition != nil {
@@ -7345,7 +7345,7 @@ func (in *SchemaReferenceInitParameters) DeepCopyInto(out *SchemaReferenceInitPa
 	}
 	if in.SchemaVersionNumber != nil {
 		in, out := &in.SchemaVersionNumber, &out.SchemaVersionNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -7377,7 +7377,7 @@ func (in *SchemaReferenceObservation) DeepCopyInto(out *SchemaReferenceObservati
 	}
 	if in.SchemaVersionNumber != nil {
 		in, out := &in.SchemaVersionNumber, &out.SchemaVersionNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -7409,7 +7409,7 @@ func (in *SchemaReferenceParameters) DeepCopyInto(out *SchemaReferenceParameters
 	}
 	if in.SchemaVersionNumber != nil {
 		in, out := &in.SchemaVersionNumber, &out.SchemaVersionNumber
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -7921,7 +7921,7 @@ func (in *SortColumnsInitParameters) DeepCopyInto(out *SortColumnsInitParameters
 	}
 	if in.SortOrder != nil {
 		in, out := &in.SortOrder, &out.SortOrder
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -7946,7 +7946,7 @@ func (in *SortColumnsObservation) DeepCopyInto(out *SortColumnsObservation) {
 	}
 	if in.SortOrder != nil {
 		in, out := &in.SortOrder, &out.SortOrder
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -7971,7 +7971,7 @@ func (in *SortColumnsParameters) DeepCopyInto(out *SortColumnsParameters) {
 	}
 	if in.SortOrder != nil {
 		in, out := &in.SortOrder, &out.SortOrder
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -8024,7 +8024,7 @@ func (in *StorageDescriptorInitParameters) DeepCopyInto(out *StorageDescriptorIn
 	}
 	if in.NumberOfBuckets != nil {
 		in, out := &in.NumberOfBuckets, &out.NumberOfBuckets
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OutputFormat != nil {
@@ -8131,7 +8131,7 @@ func (in *StorageDescriptorObservation) DeepCopyInto(out *StorageDescriptorObser
 	}
 	if in.NumberOfBuckets != nil {
 		in, out := &in.NumberOfBuckets, &out.NumberOfBuckets
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OutputFormat != nil {
@@ -8238,7 +8238,7 @@ func (in *StorageDescriptorParameters) DeepCopyInto(out *StorageDescriptorParame
 	}
 	if in.NumberOfBuckets != nil {
 		in, out := &in.NumberOfBuckets, &out.NumberOfBuckets
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OutputFormat != nil {
@@ -9151,7 +9151,7 @@ func (in *WorkflowInitParameters) DeepCopyInto(out *WorkflowInitParameters) {
 	}
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -9250,7 +9250,7 @@ func (in *WorkflowObservation) DeepCopyInto(out *WorkflowObservation) {
 	}
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -9323,7 +9323,7 @@ func (in *WorkflowParameters) DeepCopyInto(out *WorkflowParameters) {
 	}
 	if in.MaxConcurrentRuns != nil {
 		in, out := &in.MaxConcurrentRuns, &out.MaxConcurrentRuns
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Region != nil {

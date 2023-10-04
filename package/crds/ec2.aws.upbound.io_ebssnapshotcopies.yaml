@@ -458,10 +458,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.sourceRegion is a required parameter
+            - message: sourceRegion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceRegion)
-                || (has(self.initProvider) && has(self.initProvider.sourceRegion))'
+                || has(self.initProvider.sourceRegion)'
           status:
             description: EBSSnapshotCopyStatus defines the observed state of EBSSnapshotCopy.
             properties:

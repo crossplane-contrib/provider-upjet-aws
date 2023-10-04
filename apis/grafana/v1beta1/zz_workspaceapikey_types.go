@@ -117,9 +117,9 @@ type WorkspaceAPIKeyStatus struct {
 type WorkspaceAPIKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyName) || (has(self.initProvider) && has(self.initProvider.keyName))",message="spec.forProvider.keyName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyRole) || (has(self.initProvider) && has(self.initProvider.keyRole))",message="spec.forProvider.keyRole is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.secondsToLive) || (has(self.initProvider) && has(self.initProvider.secondsToLive))",message="spec.forProvider.secondsToLive is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyName) || has(self.initProvider.keyName)",message="keyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyRole) || has(self.initProvider.keyRole)",message="keyRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.secondsToLive) || has(self.initProvider.secondsToLive)",message="secondsToLive is a required parameter"
 	Spec   WorkspaceAPIKeySpec   `json:"spec"`
 	Status WorkspaceAPIKeyStatus `json:"status,omitempty"`
 }

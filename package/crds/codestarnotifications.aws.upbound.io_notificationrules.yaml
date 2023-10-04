@@ -475,18 +475,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.detailType is a required parameter
+            - message: detailType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.detailType)
-                || (has(self.initProvider) && has(self.initProvider.detailType))'
-            - message: spec.forProvider.eventTypeIds is a required parameter
+                || has(self.initProvider.detailType)'
+            - message: eventTypeIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventTypeIds)
-                || (has(self.initProvider) && has(self.initProvider.eventTypeIds))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.eventTypeIds)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: NotificationRuleStatus defines the observed state of NotificationRule.
             properties:

@@ -421,7 +421,7 @@ type HudiTargetInitParameters struct {
 	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
 
 	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
-	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+	MaximumTraversalDepth *int64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
 
 	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
@@ -436,7 +436,7 @@ type HudiTargetObservation struct {
 	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
 
 	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
-	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+	MaximumTraversalDepth *int64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
 
 	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
@@ -454,7 +454,7 @@ type HudiTargetParameters struct {
 
 	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
 	// +kubebuilder:validation:Optional
-	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth" tf:"maximum_traversal_depth,omitempty"`
+	MaximumTraversalDepth *int64 `json:"maximumTraversalDepth" tf:"maximum_traversal_depth,omitempty"`
 
 	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
 	// +kubebuilder:validation:Optional
@@ -470,7 +470,7 @@ type IcebergTargetInitParameters struct {
 	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
 
 	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
-	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+	MaximumTraversalDepth *int64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
 
 	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
@@ -485,7 +485,7 @@ type IcebergTargetObservation struct {
 	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
 
 	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
-	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+	MaximumTraversalDepth *int64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
 
 	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
@@ -503,7 +503,7 @@ type IcebergTargetParameters struct {
 
 	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
 	// +kubebuilder:validation:Optional
-	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth" tf:"maximum_traversal_depth,omitempty"`
+	MaximumTraversalDepth *int64 `json:"maximumTraversalDepth" tf:"maximum_traversal_depth,omitempty"`
 
 	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
 	// +kubebuilder:validation:Optional

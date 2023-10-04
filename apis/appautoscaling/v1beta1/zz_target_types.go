@@ -142,8 +142,8 @@ type TargetStatus struct {
 type Target struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxCapacity) || (has(self.initProvider) && has(self.initProvider.maxCapacity))",message="spec.forProvider.maxCapacity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minCapacity) || (has(self.initProvider) && has(self.initProvider.minCapacity))",message="spec.forProvider.minCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxCapacity) || has(self.initProvider.maxCapacity)",message="maxCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minCapacity) || has(self.initProvider.minCapacity)",message="minCapacity is a required parameter"
 	Spec   TargetSpec   `json:"spec"`
 	Status TargetStatus `json:"status,omitempty"`
 }

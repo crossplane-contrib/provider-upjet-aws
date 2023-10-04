@@ -616,14 +616,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.description is a required parameter
+            - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
-                || (has(self.initProvider) && has(self.initProvider.description))'
-            - message: spec.forProvider.memberDefinition is a required parameter
+                || has(self.initProvider.description)'
+            - message: memberDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.memberDefinition)
-                || (has(self.initProvider) && has(self.initProvider.memberDefinition))'
+                || has(self.initProvider.memberDefinition)'
           status:
             description: WorkteamStatus defines the observed state of Workteam.
             properties:

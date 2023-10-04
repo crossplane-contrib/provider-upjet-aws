@@ -390,14 +390,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.power is a required parameter
+            - message: power is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.power)
-                || (has(self.initProvider) && has(self.initProvider.power))'
-            - message: spec.forProvider.scale is a required parameter
+                || has(self.initProvider.power)'
+            - message: scale is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scale)
-                || (has(self.initProvider) && has(self.initProvider.scale))'
+                || has(self.initProvider.scale)'
           status:
             description: ContainerServiceStatus defines the observed state of ContainerService.
             properties:

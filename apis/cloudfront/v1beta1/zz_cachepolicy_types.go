@@ -23,13 +23,13 @@ type CachePolicyInitParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Amount of time, in seconds, that objects are allowed to remain in the CloudFront cache before CloudFront sends a new request to the origin server to check if the object has been updated.
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Maximum amount of time, in seconds, that objects stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time, in seconds, that objects should remain in the CloudFront cache before a new request is sent to the origin to check for updates.
-	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique name used to identify the cache policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -44,7 +44,7 @@ type CachePolicyObservation struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// Amount of time, in seconds, that objects are allowed to remain in the CloudFront cache before CloudFront sends a new request to the origin server to check if the object has been updated.
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Current version of the cache policy.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
@@ -53,10 +53,10 @@ type CachePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum amount of time, in seconds, that objects stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time, in seconds, that objects should remain in the CloudFront cache before a new request is sent to the origin to check for updates.
-	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique name used to identify the cache policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -73,15 +73,15 @@ type CachePolicyParameters struct {
 
 	// Amount of time, in seconds, that objects are allowed to remain in the CloudFront cache before CloudFront sends a new request to the origin server to check if the object has been updated.
 	// +kubebuilder:validation:Optional
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Maximum amount of time, in seconds, that objects stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
 	// +kubebuilder:validation:Optional
-	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time, in seconds, that objects should remain in the CloudFront cache before a new request is sent to the origin to check for updates.
 	// +kubebuilder:validation:Optional
-	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique name used to identify the cache policy.
 	// +kubebuilder:validation:Optional
@@ -335,8 +335,8 @@ type CachePolicyStatus struct {
 type CachePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parametersInCacheKeyAndForwardedToOrigin) || (has(self.initProvider) && has(self.initProvider.parametersInCacheKeyAndForwardedToOrigin))",message="spec.forProvider.parametersInCacheKeyAndForwardedToOrigin is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.parametersInCacheKeyAndForwardedToOrigin) || has(self.initProvider.parametersInCacheKeyAndForwardedToOrigin)",message="parametersInCacheKeyAndForwardedToOrigin is a required parameter"
 	Spec   CachePolicySpec   `json:"spec"`
 	Status CachePolicyStatus `json:"status,omitempty"`
 }

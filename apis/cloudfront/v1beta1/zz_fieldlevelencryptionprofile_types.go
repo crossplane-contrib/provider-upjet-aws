@@ -179,8 +179,8 @@ type FieldLevelEncryptionProfileStatus struct {
 type FieldLevelEncryptionProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encryptionEntities) || (has(self.initProvider) && has(self.initProvider.encryptionEntities))",message="spec.forProvider.encryptionEntities is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encryptionEntities) || has(self.initProvider.encryptionEntities)",message="encryptionEntities is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   FieldLevelEncryptionProfileSpec   `json:"spec"`
 	Status FieldLevelEncryptionProfileStatus `json:"status,omitempty"`
 }

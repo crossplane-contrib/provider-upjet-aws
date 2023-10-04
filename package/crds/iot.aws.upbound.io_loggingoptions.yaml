@@ -339,10 +339,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.defaultLogLevel is a required parameter
+            - message: defaultLogLevel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultLogLevel)
-                || (has(self.initProvider) && has(self.initProvider.defaultLogLevel))'
+                || has(self.initProvider.defaultLogLevel)'
           status:
             description: LoggingOptionsStatus defines the observed state of LoggingOptions.
             properties:

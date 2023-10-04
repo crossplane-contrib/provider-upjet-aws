@@ -556,10 +556,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.protocol is a required parameter
+            - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
-                || (has(self.initProvider) && has(self.initProvider.protocol))'
+                || has(self.initProvider.protocol)'
           status:
             description: TopicSubscriptionStatus defines the observed state of TopicSubscription.
             properties:

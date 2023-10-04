@@ -270,7 +270,8 @@ spec:
                       Monitoring metrics are collected for the DB instance. To disable
                       collecting Enhanced Monitoring metrics, specify 0. The default
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
-                    type: number
+                    format: int64
+                    type: integer
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
                       monitoring metrics to CloudWatch Logs. You can find more information
@@ -437,7 +438,8 @@ spec:
                       data. Valid values are 7, 731 (2 years) or a multiple of 31.
                       When specifying performance_insights_retention_period, performance_insights_enabled
                       needs to be set to true. Defaults to '7'.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'Daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00".
@@ -452,7 +454,8 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoted to writer.
-                    type: number
+                    format: int64
+                    type: integer
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
                       Default false. See the documentation on Creating DB Instances
@@ -530,7 +533,8 @@ spec:
                       Monitoring metrics are collected for the DB instance. To disable
                       collecting Enhanced Monitoring metrics, specify 0. The default
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
-                    type: number
+                    format: int64
+                    type: integer
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights is enabled
                       or not.
@@ -540,7 +544,8 @@ spec:
                       data. Valid values are 7, 731 (2 years) or a multiple of 31.
                       When specifying performance_insights_retention_period, performance_insights_enabled
                       needs to be set to true. Defaults to '7'.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'Daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00".
@@ -555,7 +560,8 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoted to writer.
-                    type: number
+                    format: int64
+                    type: integer
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
                       Default false. See the documentation on Creating DB Instances
@@ -728,14 +734,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.engine is a required parameter
+            - message: engine is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)
-                || (has(self.initProvider) && has(self.initProvider.engine))'
-            - message: spec.forProvider.instanceClass is a required parameter
+                || has(self.initProvider.engine)'
+            - message: instanceClass is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceClass)
-                || (has(self.initProvider) && has(self.initProvider.instanceClass))'
+                || has(self.initProvider.instanceClass)'
           status:
             description: ClusterInstanceStatus defines the observed state of ClusterInstance.
             properties:
@@ -817,7 +823,8 @@ spec:
                       Monitoring metrics are collected for the DB instance. To disable
                       collecting Enhanced Monitoring metrics, specify 0. The default
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
-                    type: number
+                    format: int64
+                    type: integer
                   monitoringRoleArn:
                     description: ARN for the IAM role that permits RDS to send enhanced
                       monitoring metrics to CloudWatch Logs. You can find more information
@@ -841,10 +848,12 @@ spec:
                       data. Valid values are 7, 731 (2 years) or a multiple of 31.
                       When specifying performance_insights_retention_period, performance_insights_enabled
                       needs to be set to true. Defaults to '7'.
-                    type: number
+                    format: int64
+                    type: integer
                   port:
                     description: Database port
-                    type: number
+                    format: int64
+                    type: integer
                   preferredBackupWindow:
                     description: 'Daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00".
@@ -859,7 +868,8 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoted to writer.
-                    type: number
+                    format: int64
+                    type: integer
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
                       Default false. See the documentation on Creating DB Instances

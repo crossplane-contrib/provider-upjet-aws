@@ -304,9 +304,9 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountAccessType) || (has(self.initProvider) && has(self.initProvider.accountAccessType))",message="spec.forProvider.accountAccessType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationProviders) || (has(self.initProvider) && has(self.initProvider.authenticationProviders))",message="spec.forProvider.authenticationProviders is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissionType) || (has(self.initProvider) && has(self.initProvider.permissionType))",message="spec.forProvider.permissionType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountAccessType) || has(self.initProvider.accountAccessType)",message="accountAccessType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationProviders) || has(self.initProvider.authenticationProviders)",message="authenticationProviders is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.permissionType) || has(self.initProvider.permissionType)",message="permissionType is a required parameter"
 	Spec   WorkspaceSpec   `json:"spec"`
 	Status WorkspaceStatus `json:"status,omitempty"`
 }

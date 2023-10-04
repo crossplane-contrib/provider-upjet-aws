@@ -119,7 +119,7 @@ type UsagePlanKeyStatus struct {
 type UsagePlanKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyType) || (has(self.initProvider) && has(self.initProvider.keyType))",message="spec.forProvider.keyType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyType) || has(self.initProvider.keyType)",message="keyType is a required parameter"
 	Spec   UsagePlanKeySpec   `json:"spec"`
 	Status UsagePlanKeyStatus `json:"status,omitempty"`
 }

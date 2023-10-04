@@ -375,18 +375,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.content is a required parameter
+            - message: content is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.content)
-                || (has(self.initProvider) && has(self.initProvider.content))'
-            - message: spec.forProvider.languageCode is a required parameter
+                || has(self.initProvider.content)'
+            - message: languageCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)
-                || (has(self.initProvider) && has(self.initProvider.languageCode))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.languageCode)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: VocabularyStatus defines the observed state of Vocabulary.
             properties:

@@ -282,18 +282,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.quotaCode is a required parameter
+            - message: quotaCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.quotaCode)
-                || (has(self.initProvider) && has(self.initProvider.quotaCode))'
-            - message: spec.forProvider.serviceCode is a required parameter
+                || has(self.initProvider.quotaCode)'
+            - message: serviceCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceCode)
-                || (has(self.initProvider) && has(self.initProvider.serviceCode))'
-            - message: spec.forProvider.value is a required parameter
+                || has(self.initProvider.serviceCode)'
+            - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
-                || (has(self.initProvider) && has(self.initProvider.value))'
+                || has(self.initProvider.value)'
           status:
             description: ServiceQuotaStatus defines the observed state of ServiceQuota.
             properties:

@@ -471,7 +471,7 @@ type CertificateAuthorityStatus struct {
 type CertificateAuthority struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateAuthorityConfiguration) || (has(self.initProvider) && has(self.initProvider.certificateAuthorityConfiguration))",message="spec.forProvider.certificateAuthorityConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateAuthorityConfiguration) || has(self.initProvider.certificateAuthorityConfiguration)",message="certificateAuthorityConfiguration is a required parameter"
 	Spec   CertificateAuthoritySpec   `json:"spec"`
 	Status CertificateAuthorityStatus `json:"status,omitempty"`
 }

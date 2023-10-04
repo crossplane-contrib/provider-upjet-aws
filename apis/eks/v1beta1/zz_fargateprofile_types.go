@@ -178,7 +178,7 @@ type FargateProfileStatus struct {
 type FargateProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.selector) || (has(self.initProvider) && has(self.initProvider.selector))",message="spec.forProvider.selector is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.selector) || has(self.initProvider.selector)",message="selector is a required parameter"
 	Spec   FargateProfileSpec   `json:"spec"`
 	Status FargateProfileStatus `json:"status,omitempty"`
 }

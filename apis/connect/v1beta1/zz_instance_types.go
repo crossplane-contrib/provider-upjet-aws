@@ -188,9 +188,9 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityManagementType) || (has(self.initProvider) && has(self.initProvider.identityManagementType))",message="spec.forProvider.identityManagementType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inboundCallsEnabled) || (has(self.initProvider) && has(self.initProvider.inboundCallsEnabled))",message="spec.forProvider.inboundCallsEnabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outboundCallsEnabled) || (has(self.initProvider) && has(self.initProvider.outboundCallsEnabled))",message="spec.forProvider.outboundCallsEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityManagementType) || has(self.initProvider.identityManagementType)",message="identityManagementType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inboundCallsEnabled) || has(self.initProvider.inboundCallsEnabled)",message="inboundCallsEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outboundCallsEnabled) || has(self.initProvider.outboundCallsEnabled)",message="outboundCallsEnabled is a required parameter"
 	Spec   InstanceSpec   `json:"spec"`
 	Status InstanceStatus `json:"status,omitempty"`
 }

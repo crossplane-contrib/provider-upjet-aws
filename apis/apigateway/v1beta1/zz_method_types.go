@@ -208,8 +208,8 @@ type MethodStatus struct {
 type Method struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorization) || (has(self.initProvider) && has(self.initProvider.authorization))",message="spec.forProvider.authorization is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod) || (has(self.initProvider) && has(self.initProvider.httpMethod))",message="spec.forProvider.httpMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorization) || has(self.initProvider.authorization)",message="authorization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod) || has(self.initProvider.httpMethod)",message="httpMethod is a required parameter"
 	Spec   MethodSpec   `json:"spec"`
 	Status MethodStatus `json:"status,omitempty"`
 }

@@ -412,10 +412,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.targetGroupName is a required parameter
+            - message: targetGroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetGroupName)
-                || (has(self.initProvider) && has(self.initProvider.targetGroupName))'
+                || has(self.initProvider.targetGroupName)'
           status:
             description: ProxyTargetStatus defines the observed state of ProxyTarget.
             properties:

@@ -483,14 +483,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.appName is a required parameter
+            - message: appName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.appName)
-                || (has(self.initProvider) && has(self.initProvider.appName))'
-            - message: spec.forProvider.appType is a required parameter
+                || has(self.initProvider.appName)'
+            - message: appType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.appType)
-                || (has(self.initProvider) && has(self.initProvider.appType))'
+                || has(self.initProvider.appType)'
           status:
             description: AppStatus defines the observed state of App.
             properties:

@@ -218,7 +218,7 @@ type SecurityConfigurationStatus struct {
 type SecurityConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encryptionConfiguration) || (has(self.initProvider) && has(self.initProvider.encryptionConfiguration))",message="spec.forProvider.encryptionConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encryptionConfiguration) || has(self.initProvider.encryptionConfiguration)",message="encryptionConfiguration is a required parameter"
 	Spec   SecurityConfigurationSpec   `json:"spec"`
 	Status SecurityConfigurationStatus `json:"status,omitempty"`
 }

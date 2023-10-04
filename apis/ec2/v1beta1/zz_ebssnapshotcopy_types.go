@@ -196,7 +196,7 @@ type EBSSnapshotCopyStatus struct {
 type EBSSnapshotCopy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRegion) || (has(self.initProvider) && has(self.initProvider.sourceRegion))",message="spec.forProvider.sourceRegion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRegion) || has(self.initProvider.sourceRegion)",message="sourceRegion is a required parameter"
 	Spec   EBSSnapshotCopySpec   `json:"spec"`
 	Status EBSSnapshotCopyStatus `json:"status,omitempty"`
 }

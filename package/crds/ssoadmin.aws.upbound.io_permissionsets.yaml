@@ -294,14 +294,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.instanceArn is a required parameter
+            - message: instanceArn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceArn)
-                || (has(self.initProvider) && has(self.initProvider.instanceArn))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.instanceArn)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: PermissionSetStatus defines the observed state of PermissionSet.
             properties:

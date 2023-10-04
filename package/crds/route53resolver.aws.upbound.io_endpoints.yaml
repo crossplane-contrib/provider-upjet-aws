@@ -466,14 +466,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.direction is a required parameter
+            - message: direction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.direction)
-                || (has(self.initProvider) && has(self.initProvider.direction))'
-            - message: spec.forProvider.ipAddress is a required parameter
+                || has(self.initProvider.direction)'
+            - message: ipAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ipAddress)
-                || (has(self.initProvider) && has(self.initProvider.ipAddress))'
+                || has(self.initProvider.ipAddress)'
           status:
             description: EndpointStatus defines the observed state of Endpoint.
             properties:

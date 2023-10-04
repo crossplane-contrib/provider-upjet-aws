@@ -604,18 +604,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.phoneConfig is a required parameter
+                || has(self.initProvider.name)'
+            - message: phoneConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.phoneConfig)
-                || (has(self.initProvider) && has(self.initProvider.phoneConfig))'
-            - message: spec.forProvider.securityProfileIds is a required parameter
+                || has(self.initProvider.phoneConfig)'
+            - message: securityProfileIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.securityProfileIds)
-                || (has(self.initProvider) && has(self.initProvider.securityProfileIds))'
+                || has(self.initProvider.securityProfileIds)'
           status:
             description: UserStatus defines the observed state of User.
             properties:

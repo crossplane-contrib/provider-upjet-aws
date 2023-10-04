@@ -798,8 +798,8 @@ type StorageLensConfigurationStatus struct {
 type StorageLensConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configId) || (has(self.initProvider) && has(self.initProvider.configId))",message="spec.forProvider.configId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageLensConfiguration) || (has(self.initProvider) && has(self.initProvider.storageLensConfiguration))",message="spec.forProvider.storageLensConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configId) || has(self.initProvider.configId)",message="configId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageLensConfiguration) || has(self.initProvider.storageLensConfiguration)",message="storageLensConfiguration is a required parameter"
 	Spec   StorageLensConfigurationSpec   `json:"spec"`
 	Status StorageLensConfigurationStatus `json:"status,omitempty"`
 }

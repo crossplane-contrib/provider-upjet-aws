@@ -350,18 +350,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.accessString is a required parameter
+            - message: accessString is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.accessString)
-                || (has(self.initProvider) && has(self.initProvider.accessString))'
-            - message: spec.forProvider.engine is a required parameter
+                || has(self.initProvider.accessString)'
+            - message: engine is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engine)
-                || (has(self.initProvider) && has(self.initProvider.engine))'
-            - message: spec.forProvider.userName is a required parameter
+                || has(self.initProvider.engine)'
+            - message: userName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)
-                || (has(self.initProvider) && has(self.initProvider.userName))'
+                || has(self.initProvider.userName)'
           status:
             description: UserStatus defines the observed state of User.
             properties:

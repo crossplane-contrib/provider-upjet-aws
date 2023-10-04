@@ -428,7 +428,7 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 	}
 	if in.Revision != nil {
 		in, out := &in.Revision, &out.Revision
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -624,7 +624,7 @@ func (in *RetryStrategyInitParameters) DeepCopyInto(out *RetryStrategyInitParame
 	*out = *in
 	if in.Attempts != nil {
 		in, out := &in.Attempts, &out.Attempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EvaluateOnExit != nil {
@@ -651,7 +651,7 @@ func (in *RetryStrategyObservation) DeepCopyInto(out *RetryStrategyObservation) 
 	*out = *in
 	if in.Attempts != nil {
 		in, out := &in.Attempts, &out.Attempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EvaluateOnExit != nil {
@@ -678,7 +678,7 @@ func (in *RetryStrategyParameters) DeepCopyInto(out *RetryStrategyParameters) {
 	*out = *in
 	if in.Attempts != nil {
 		in, out := &in.Attempts, &out.Attempts
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EvaluateOnExit != nil {
@@ -1019,7 +1019,7 @@ func (in *TimeoutInitParameters) DeepCopyInto(out *TimeoutInitParameters) {
 	*out = *in
 	if in.AttemptDurationSeconds != nil {
 		in, out := &in.AttemptDurationSeconds, &out.AttemptDurationSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1039,7 +1039,7 @@ func (in *TimeoutObservation) DeepCopyInto(out *TimeoutObservation) {
 	*out = *in
 	if in.AttemptDurationSeconds != nil {
 		in, out := &in.AttemptDurationSeconds, &out.AttemptDurationSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1059,7 +1059,7 @@ func (in *TimeoutParameters) DeepCopyInto(out *TimeoutParameters) {
 	*out = *in
 	if in.AttemptDurationSeconds != nil {
 		in, out := &in.AttemptDurationSeconds, &out.AttemptDurationSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

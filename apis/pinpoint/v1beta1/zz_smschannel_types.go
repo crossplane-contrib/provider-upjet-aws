@@ -40,7 +40,7 @@ type SMSChannelObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum number of promotional messages that can be sent per second.
-	PromotionalMessagesPerSecond *float64 `json:"promotionalMessagesPerSecond,omitempty" tf:"promotional_messages_per_second,omitempty"`
+	PromotionalMessagesPerSecond *int64 `json:"promotionalMessagesPerSecond,omitempty" tf:"promotional_messages_per_second,omitempty"`
 
 	// Identifier of the sender for your messages.
 	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
@@ -49,7 +49,7 @@ type SMSChannelObservation struct {
 	ShortCode *string `json:"shortCode,omitempty" tf:"short_code,omitempty"`
 
 	// Maximum number of transactional messages per second that can be sent.
-	TransactionalMessagesPerSecond *float64 `json:"transactionalMessagesPerSecond,omitempty" tf:"transactional_messages_per_second,omitempty"`
+	TransactionalMessagesPerSecond *int64 `json:"transactionalMessagesPerSecond,omitempty" tf:"transactional_messages_per_second,omitempty"`
 }
 
 type SMSChannelParameters struct {

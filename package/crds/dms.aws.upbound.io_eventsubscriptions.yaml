@@ -370,10 +370,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.eventCategories is a required parameter
+            - message: eventCategories is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventCategories)
-                || (has(self.initProvider) && has(self.initProvider.eventCategories))'
+                || has(self.initProvider.eventCategories)'
           status:
             description: EventSubscriptionStatus defines the observed state of EventSubscription.
             properties:

@@ -436,10 +436,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.integrationResponseKey is a required parameter
+            - message: integrationResponseKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.integrationResponseKey)
-                || (has(self.initProvider) && has(self.initProvider.integrationResponseKey))'
+                || has(self.initProvider.integrationResponseKey)'
           status:
             description: IntegrationResponseStatus defines the observed state of IntegrationResponse.
             properties:

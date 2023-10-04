@@ -363,22 +363,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.availabilityZone is a required parameter
+            - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
-                || (has(self.initProvider) && has(self.initProvider.availabilityZone))'
-            - message: spec.forProvider.instanceCount is a required parameter
+                || has(self.initProvider.availabilityZone)'
+            - message: instanceCount is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceCount)
-                || (has(self.initProvider) && has(self.initProvider.instanceCount))'
-            - message: spec.forProvider.instancePlatform is a required parameter
+                || has(self.initProvider.instanceCount)'
+            - message: instancePlatform is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePlatform)
-                || (has(self.initProvider) && has(self.initProvider.instancePlatform))'
-            - message: spec.forProvider.instanceType is a required parameter
+                || has(self.initProvider.instancePlatform)'
+            - message: instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
-                || (has(self.initProvider) && has(self.initProvider.instanceType))'
+                || has(self.initProvider.instanceType)'
           status:
             description: CapacityReservationStatus defines the observed state of CapacityReservation.
             properties:

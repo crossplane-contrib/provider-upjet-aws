@@ -160,14 +160,16 @@ spec:
                               baseTableTtl:
                                 description: The number of minutes that an Item is
                                   stored in the data source.
-                                type: number
+                                format: int64
+                                type: integer
                               deltaSyncTableName:
                                 description: The table name.
                                 type: string
                               deltaSyncTableTtl:
                                 description: The number of minutes that a Delta Sync
                                   log entry is stored in the Delta Sync table.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         region:
@@ -494,14 +496,16 @@ spec:
                               baseTableTtl:
                                 description: The number of minutes that an Item is
                                   stored in the data source.
-                                type: number
+                                format: int64
+                                type: integer
                               deltaSyncTableName:
                                 description: The table name.
                                 type: string
                               deltaSyncTableTtl:
                                 description: The number of minutes that a Delta Sync
                                   log entry is stored in the Delta Sync table.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         useCallerCredentials:
@@ -782,10 +786,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.type is a required parameter
+            - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || (has(self.initProvider) && has(self.initProvider.type))'
+                || has(self.initProvider.type)'
           status:
             description: DatasourceStatus defines the observed state of Datasource.
             properties:
@@ -812,14 +816,16 @@ spec:
                               baseTableTtl:
                                 description: The number of minutes that an Item is
                                   stored in the data source.
-                                type: number
+                                format: int64
+                                type: integer
                               deltaSyncTableName:
                                 description: The table name.
                                 type: string
                               deltaSyncTableTtl:
                                 description: The number of minutes that a Delta Sync
                                   log entry is stored in the Delta Sync table.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         region:

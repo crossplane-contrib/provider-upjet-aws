@@ -260,7 +260,7 @@ type FeatureStatus struct {
 type Feature struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.variations) || (has(self.initProvider) && has(self.initProvider.variations))",message="spec.forProvider.variations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.variations) || has(self.initProvider.variations)",message="variations is a required parameter"
 	Spec   FeatureSpec   `json:"spec"`
 	Status FeatureStatus `json:"status,omitempty"`
 }

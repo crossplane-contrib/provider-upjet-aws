@@ -1592,7 +1592,7 @@ type ApplicationStatus struct {
 type Application struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.runtimeEnvironment) || (has(self.initProvider) && has(self.initProvider.runtimeEnvironment))",message="spec.forProvider.runtimeEnvironment is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.runtimeEnvironment) || has(self.initProvider.runtimeEnvironment)",message="runtimeEnvironment is a required parameter"
 	Spec   ApplicationSpec   `json:"spec"`
 	Status ApplicationStatus `json:"status,omitempty"`
 }

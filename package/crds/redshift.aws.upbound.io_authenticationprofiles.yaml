@@ -258,11 +258,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.authenticationProfileContent is a required
-                parameter
+            - message: authenticationProfileContent is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationProfileContent)
-                || (has(self.initProvider) && has(self.initProvider.authenticationProfileContent))'
+                || has(self.initProvider.authenticationProfileContent)'
           status:
             description: AuthenticationProfileStatus defines the observed state of
               AuthenticationProfile.
