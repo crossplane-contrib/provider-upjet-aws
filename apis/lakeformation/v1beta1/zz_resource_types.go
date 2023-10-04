@@ -98,7 +98,7 @@ type ResourceStatus struct {
 type Resource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.arn) || (has(self.initProvider) && has(self.initProvider.arn))",message="spec.forProvider.arn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.arn) || has(self.initProvider.arn)",message="arn is a required parameter"
 	Spec   ResourceSpec   `json:"spec"`
 	Status ResourceStatus `json:"status,omitempty"`
 }

@@ -271,14 +271,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.accountIds is a required parameter
+            - message: accountIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.accountIds)
-                || (has(self.initProvider) && has(self.initProvider.accountIds))'
-            - message: spec.forProvider.resourceTypes is a required parameter
+                || has(self.initProvider.accountIds)'
+            - message: resourceTypes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceTypes)
-                || (has(self.initProvider) && has(self.initProvider.resourceTypes))'
+                || has(self.initProvider.resourceTypes)'
           status:
             description: EnablerStatus defines the observed state of Enabler.
             properties:

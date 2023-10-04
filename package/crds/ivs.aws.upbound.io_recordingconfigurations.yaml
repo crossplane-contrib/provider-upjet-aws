@@ -346,10 +346,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.destinationConfiguration is a required parameter
+            - message: destinationConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationConfiguration)
-                || (has(self.initProvider) && has(self.initProvider.destinationConfiguration))'
+                || has(self.initProvider.destinationConfiguration)'
           status:
             description: RecordingConfigurationStatus defines the observed state of
               RecordingConfiguration.

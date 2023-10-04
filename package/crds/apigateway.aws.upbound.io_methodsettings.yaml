@@ -520,14 +520,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.methodPath is a required parameter
+            - message: methodPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.methodPath)
-                || (has(self.initProvider) && has(self.initProvider.methodPath))'
-            - message: spec.forProvider.settings is a required parameter
+                || has(self.initProvider.methodPath)'
+            - message: settings is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.settings)
-                || (has(self.initProvider) && has(self.initProvider.settings))'
+                || has(self.initProvider.settings)'
           status:
             description: MethodSettingsStatus defines the observed state of MethodSettings.
             properties:

@@ -1159,14 +1159,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.serviceName is a required parameter
+            - message: serviceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceName)
-                || (has(self.initProvider) && has(self.initProvider.serviceName))'
-            - message: spec.forProvider.sourceConfiguration is a required parameter
+                || has(self.initProvider.serviceName)'
+            - message: sourceConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceConfiguration)
-                || (has(self.initProvider) && has(self.initProvider.sourceConfiguration))'
+                || has(self.initProvider.sourceConfiguration)'
           status:
             description: ServiceStatus defines the observed state of Service.
             properties:

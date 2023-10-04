@@ -335,10 +335,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.servicePrincipal is a required parameter
+            - message: servicePrincipal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.servicePrincipal)
-                || (has(self.initProvider) && has(self.initProvider.servicePrincipal))'
+                || has(self.initProvider.servicePrincipal)'
           status:
             description: DelegatedAdministratorStatus defines the observed state of
               DelegatedAdministrator.

@@ -333,10 +333,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.redriveAllowPolicy is a required parameter
+            - message: redriveAllowPolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.redriveAllowPolicy)
-                || (has(self.initProvider) && has(self.initProvider.redriveAllowPolicy))'
+                || has(self.initProvider.redriveAllowPolicy)'
           status:
             description: QueueRedriveAllowPolicyStatus defines the observed state
               of QueueRedriveAllowPolicy.

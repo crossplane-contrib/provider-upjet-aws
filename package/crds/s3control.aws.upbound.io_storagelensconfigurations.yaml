@@ -909,14 +909,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.configId is a required parameter
+            - message: configId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.configId)
-                || (has(self.initProvider) && has(self.initProvider.configId))'
-            - message: spec.forProvider.storageLensConfiguration is a required parameter
+                || has(self.initProvider.configId)'
+            - message: storageLensConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.storageLensConfiguration)
-                || (has(self.initProvider) && has(self.initProvider.storageLensConfiguration))'
+                || has(self.initProvider.storageLensConfiguration)'
           status:
             description: StorageLensConfigurationStatus defines the observed state
               of StorageLensConfiguration.

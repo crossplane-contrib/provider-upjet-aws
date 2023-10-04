@@ -87,12 +87,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -262,7 +264,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -440,12 +443,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -776,12 +781,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -933,7 +940,8 @@ spec:
                                                     is 256 MiB and the minimum is
                                                     64 MiB. Kinesis Data Firehose
                                                     uses this value for padding calculations.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 bloomFilterColumns:
                                                   description: A list of column names
                                                     for which you want Kinesis Data
@@ -1012,12 +1020,14 @@ spec:
                                                   description: The number of rows
                                                     between index entries. The default
                                                     is 10000 and the minimum is 1000.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 stripeSizeBytes:
                                                   description: The number of bytes
                                                     in each stripe. The default is
                                                     64 MiB and the minimum is 8 MiB.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                               type: object
                                             type: array
                                           parquetSerDe:
@@ -1037,7 +1047,8 @@ spec:
                                                     is 256 MiB and the minimum is
                                                     64 MiB. Kinesis Data Firehose
                                                     uses this value for padding calculations.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 compression:
                                                   description: The compression code
                                                     to use over data blocks. The possible
@@ -1058,7 +1069,8 @@ spec:
                                                     if you intend to copy the data
                                                     from Amazon S3 to HDFS before
                                                     querying. The default is 0.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 pageSizeBytes:
                                                   description: The Parquet page size.
                                                     Column chunks are divided into
@@ -1067,7 +1079,8 @@ spec:
                                                     of compression and encoding).
                                                     The minimum value is 64 KiB and
                                                     the default is 1 MiB.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 writerVersion:
                                                   description: Indicates the version
                                                     of row format to output. The possible
@@ -1303,7 +1316,8 @@ spec:
                                   Firehose does not retry if the value of DurationInSeconds
                                   is 0 (zero) or if the first delivery attempt takes
                                   longer than the current value.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         errorOutputPrefix:
@@ -1465,12 +1479,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -1558,12 +1574,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -1674,7 +1692,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -1852,12 +1871,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -2026,12 +2047,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -2201,7 +2224,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -2379,12 +2403,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -2739,7 +2765,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -2914,12 +2941,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -3149,12 +3178,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -3351,7 +3382,8 @@ spec:
                           description: The amount of time, in seconds between 180
                             and 600, that Kinesis Firehose waits to receive an acknowledgment
                             from Splunk after it sends it data.
-                          type: number
+                          format: int64
+                          type: integer
                         hecEndpoint:
                           description: The HTTP Event Collector (HEC) endpoint to
                             which Kinesis Firehose sends your data.
@@ -3432,7 +3464,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupMode:
                           description: The Amazon S3 backup mode.  Valid values are
                             Disabled and Enabled.  Default value is Disabled.
@@ -3530,12 +3563,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -3716,12 +3751,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -3809,7 +3846,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupMode:
                           description: The Amazon S3 backup mode.  Valid values are
                             Disabled and Enabled.  Default value is Disabled.
@@ -3824,12 +3862,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -3913,12 +3953,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -4070,7 +4112,8 @@ spec:
                                                     is 256 MiB and the minimum is
                                                     64 MiB. Kinesis Data Firehose
                                                     uses this value for padding calculations.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 bloomFilterColumns:
                                                   description: A list of column names
                                                     for which you want Kinesis Data
@@ -4149,12 +4192,14 @@ spec:
                                                   description: The number of rows
                                                     between index entries. The default
                                                     is 10000 and the minimum is 1000.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 stripeSizeBytes:
                                                   description: The number of bytes
                                                     in each stripe. The default is
                                                     64 MiB and the minimum is 8 MiB.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                               type: object
                                             type: array
                                           parquetSerDe:
@@ -4174,7 +4219,8 @@ spec:
                                                     is 256 MiB and the minimum is
                                                     64 MiB. Kinesis Data Firehose
                                                     uses this value for padding calculations.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 compression:
                                                   description: The compression code
                                                     to use over data blocks. The possible
@@ -4195,7 +4241,8 @@ spec:
                                                     if you intend to copy the data
                                                     from Amazon S3 to HDFS before
                                                     querying. The default is 0.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 pageSizeBytes:
                                                   description: The Parquet page size.
                                                     Column chunks are divided into
@@ -4204,7 +4251,8 @@ spec:
                                                     of compression and encoding).
                                                     The minimum value is 64 KiB and
                                                     the default is 1 MiB.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 writerVersion:
                                                   description: Indicates the version
                                                     of row format to output. The possible
@@ -4259,7 +4307,8 @@ spec:
                                   Firehose does not retry if the value of DurationInSeconds
                                   is 0 (zero) or if the first delivery attempt takes
                                   longer than the current value.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         errorOutputPrefix:
@@ -4341,12 +4390,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -4415,12 +4466,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -4531,7 +4584,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupMode:
                           description: The Amazon S3 backup mode.  Valid values are
                             Disabled and Enabled.  Default value is Disabled.
@@ -4546,12 +4600,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -4636,12 +4692,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -4729,7 +4787,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupMode:
                           description: The Amazon S3 backup mode.  Valid values are
                             Disabled and Enabled.  Default value is Disabled.
@@ -4744,12 +4803,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -4919,7 +4980,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupConfiguration:
                           description: The configuration for backup in Amazon S3.
                             Required if s3_backup_mode is Enabled. Supports the same
@@ -4931,12 +4993,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -4999,12 +5063,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -5110,7 +5176,8 @@ spec:
                           description: The amount of time, in seconds between 180
                             and 600, that Kinesis Firehose waits to receive an acknowledgment
                             from Splunk after it sends it data.
-                          type: number
+                          format: int64
+                          type: integer
                         hecEndpoint:
                           description: The HTTP Event Collector (HEC) endpoint to
                             which Kinesis Firehose sends your data.
@@ -5173,7 +5240,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupMode:
                           description: The Amazon S3 backup mode.  Valid values are
                             Disabled and Enabled.  Default value is Disabled.
@@ -5188,12 +5256,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -5415,14 +5485,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.destination is a required parameter
+            - message: destination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)
-                || (has(self.initProvider) && has(self.initProvider.destination))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.destination)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: DeliveryStreamStatus defines the observed state of DeliveryStream.
             properties:
@@ -5448,12 +5518,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -5545,7 +5617,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -5567,12 +5640,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -5669,12 +5744,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -5826,7 +5903,8 @@ spec:
                                                     is 256 MiB and the minimum is
                                                     64 MiB. Kinesis Data Firehose
                                                     uses this value for padding calculations.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 bloomFilterColumns:
                                                   description: A list of column names
                                                     for which you want Kinesis Data
@@ -5905,12 +5983,14 @@ spec:
                                                   description: The number of rows
                                                     between index entries. The default
                                                     is 10000 and the minimum is 1000.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 stripeSizeBytes:
                                                   description: The number of bytes
                                                     in each stripe. The default is
                                                     64 MiB and the minimum is 8 MiB.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                               type: object
                                             type: array
                                           parquetSerDe:
@@ -5930,7 +6010,8 @@ spec:
                                                     is 256 MiB and the minimum is
                                                     64 MiB. Kinesis Data Firehose
                                                     uses this value for padding calculations.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 compression:
                                                   description: The compression code
                                                     to use over data blocks. The possible
@@ -5951,7 +6032,8 @@ spec:
                                                     if you intend to copy the data
                                                     from Amazon S3 to HDFS before
                                                     querying. The default is 0.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 pageSizeBytes:
                                                   description: The Parquet page size.
                                                     Column chunks are divided into
@@ -5960,7 +6042,8 @@ spec:
                                                     of compression and encoding).
                                                     The minimum value is 64 KiB and
                                                     the default is 1 MiB.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 writerVersion:
                                                   description: Indicates the version
                                                     of row format to output. The possible
@@ -6028,7 +6111,8 @@ spec:
                                   Firehose does not retry if the value of DurationInSeconds
                                   is 0 (zero) or if the first delivery attempt takes
                                   longer than the current value.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         errorOutputPrefix:
@@ -6114,12 +6198,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -6188,12 +6274,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -6304,7 +6392,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -6326,12 +6415,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -6422,12 +6513,14 @@ spec:
                           description: Buffer incoming data for the specified period
                             of time, in seconds between 60 to 900, before delivering
                             it to the destination.  The default value is 300s.
-                          type: number
+                          format: int64
+                          type: integer
                         bufferingSize:
                           description: Buffer incoming data to the specified size,
                             in MBs between 1 to 100, before delivering it to the destination.  The
                             default value is 5MB.
-                          type: number
+                          format: int64
+                          type: integer
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. More details are given below
@@ -6519,7 +6612,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -6541,12 +6635,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -6726,7 +6822,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         roleArn:
                           description: The ARN of the role that provides access to
                             the source Kinesis stream.
@@ -6745,12 +6842,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -6820,12 +6919,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below
@@ -6935,7 +7036,8 @@ spec:
                           description: The amount of time, in seconds between 180
                             and 600, that Kinesis Firehose waits to receive an acknowledgment
                             from Splunk after it sends it data.
-                          type: number
+                          format: int64
+                          type: integer
                         hecEndpoint:
                           description: The HTTP Event Collector (HEC) endpoint to
                             which Kinesis Firehose sends your data.
@@ -6998,7 +7100,8 @@ spec:
                             3600 seconds (60 minutes). Firehose does not retry if
                             the value of DurationInSeconds is 0 (zero) or if the first
                             delivery attempt takes longer than the current value.
-                          type: number
+                          format: int64
+                          type: integer
                         s3BackupMode:
                           description: The Amazon S3 backup mode.  Valid values are
                             Disabled and Enabled.  Default value is Disabled.
@@ -7016,12 +7119,14 @@ spec:
                                   period of time, in seconds between 60 to 900, before
                                   delivering it to the destination.  The default value
                                   is 300s.
-                                type: number
+                                format: int64
+                                type: integer
                               bufferingSize:
                                 description: Buffer incoming data to the specified
                                   size, in MBs between 1 to 100, before delivering
                                   it to the destination.  The default value is 5MB.
-                                type: number
+                                format: int64
+                                type: integer
                               cloudwatchLoggingOptions:
                                 description: The CloudWatch Logging Options for the
                                   delivery stream. More details are given below

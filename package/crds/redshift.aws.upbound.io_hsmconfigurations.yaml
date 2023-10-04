@@ -309,26 +309,25 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.description is a required parameter
+            - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
-                || (has(self.initProvider) && has(self.initProvider.description))'
-            - message: spec.forProvider.hsmIpAddress is a required parameter
+                || has(self.initProvider.description)'
+            - message: hsmIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmIpAddress)
-                || (has(self.initProvider) && has(self.initProvider.hsmIpAddress))'
-            - message: spec.forProvider.hsmPartitionName is a required parameter
+                || has(self.initProvider.hsmIpAddress)'
+            - message: hsmPartitionName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmPartitionName)
-                || (has(self.initProvider) && has(self.initProvider.hsmPartitionName))'
-            - message: spec.forProvider.hsmPartitionPasswordSecretRef is a required
-                parameter
+                || has(self.initProvider.hsmPartitionName)'
+            - message: hsmPartitionPasswordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmPartitionPasswordSecretRef)'
-            - message: spec.forProvider.hsmServerPublicCertificate is a required parameter
+            - message: hsmServerPublicCertificate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hsmServerPublicCertificate)
-                || (has(self.initProvider) && has(self.initProvider.hsmServerPublicCertificate))'
+                || has(self.initProvider.hsmServerPublicCertificate)'
           status:
             description: HSMConfigurationStatus defines the observed state of HSMConfiguration.
             properties:

@@ -10573,7 +10573,7 @@ func (in *ServerlessConfigInitParameters) DeepCopyInto(out *ServerlessConfigInit
 	}
 	if in.ProvisionedConcurrency != nil {
 		in, out := &in.ProvisionedConcurrency, &out.ProvisionedConcurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10603,7 +10603,7 @@ func (in *ServerlessConfigObservation) DeepCopyInto(out *ServerlessConfigObserva
 	}
 	if in.ProvisionedConcurrency != nil {
 		in, out := &in.ProvisionedConcurrency, &out.ProvisionedConcurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -10633,7 +10633,7 @@ func (in *ServerlessConfigParameters) DeepCopyInto(out *ServerlessConfigParamete
 	}
 	if in.ProvisionedConcurrency != nil {
 		in, out := &in.ProvisionedConcurrency, &out.ProvisionedConcurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -11139,7 +11139,7 @@ func (in *ShadowProductionVariantsServerlessConfigInitParameters) DeepCopyInto(o
 	}
 	if in.ProvisionedConcurrency != nil {
 		in, out := &in.ProvisionedConcurrency, &out.ProvisionedConcurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -11169,7 +11169,7 @@ func (in *ShadowProductionVariantsServerlessConfigObservation) DeepCopyInto(out 
 	}
 	if in.ProvisionedConcurrency != nil {
 		in, out := &in.ProvisionedConcurrency, &out.ProvisionedConcurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -11199,7 +11199,7 @@ func (in *ShadowProductionVariantsServerlessConfigParameters) DeepCopyInto(out *
 	}
 	if in.ProvisionedConcurrency != nil {
 		in, out := &in.ProvisionedConcurrency, &out.ProvisionedConcurrency
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

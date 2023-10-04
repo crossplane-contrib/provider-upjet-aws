@@ -120,7 +120,7 @@ type IdentityNotificationTopicStatus struct {
 type IdentityNotificationTopic struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationType) || (has(self.initProvider) && has(self.initProvider.notificationType))",message="spec.forProvider.notificationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationType) || has(self.initProvider.notificationType)",message="notificationType is a required parameter"
 	Spec   IdentityNotificationTopicSpec   `json:"spec"`
 	Status IdentityNotificationTopicStatus `json:"status,omitempty"`
 }

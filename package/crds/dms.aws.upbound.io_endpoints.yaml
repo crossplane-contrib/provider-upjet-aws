@@ -85,12 +85,14 @@ spec:
                           description: Maximum number of seconds for which DMS retries
                             failed API requests to the OpenSearch cluster. Default
                             is 300.
-                          type: number
+                          format: int64
+                          type: integer
                         fullLoadErrorPercentage:
                           description: Maximum percentage of records that can fail
                             to be written before a full load operation stops. Default
                             is 10.
-                          type: number
+                          format: int64
+                          type: integer
                         serviceAccessRoleArn:
                           description: ARN of the IAM Role with permissions to write
                             to the OpenSearch cluster.
@@ -157,7 +159,8 @@ spec:
                         messageMaxBytes:
                           description: Maximum size in bytes for records created on
                             the endpoint Default is 1,000,000.
-                          type: number
+                          format: int64
+                          type: integer
                         noHexPrefix:
                           description: Set this optional parameter to true to avoid
                             adding a '0x' prefix to raw data in hexadecimal format.
@@ -427,7 +430,8 @@ spec:
                     type: object
                   port:
                     description: Port used by the endpoint database.
-                    type: number
+                    format: int64
+                    type: integer
                   redisSettings:
                     items:
                       properties:
@@ -460,7 +464,8 @@ spec:
                           type: string
                         port:
                           description: Port used by the endpoint database.
-                          type: number
+                          format: int64
+                          type: integer
                         serverName:
                           description: Host name of the server.
                           type: string
@@ -545,13 +550,15 @@ spec:
                           description: Maximum length of the interval, defined in
                             seconds, after which to output a file to Amazon S3. Default
                             is 60.
-                          type: number
+                          format: int64
+                          type: integer
                         cdcMinFileSize:
                           description: 'Minimum file size condition as defined in
                             kilobytes to output a file to Amazon S3. Default is 32000.
                             NOTE: Previously, this setting was measured in megabytes
                             but now represents kilobytes. Update configurations accordingly.'
-                          type: number
+                          format: int64
+                          type: integer
                         cdcPath:
                           description: Folder path of CDC files. For an S3 source,
                             this setting is required if a task captures change data;
@@ -587,7 +594,8 @@ spec:
                         dataPageSize:
                           description: Size of one data page in bytes. Default is
                             1048576 (1 MiB).
-                          type: number
+                          format: int64
+                          type: integer
                         datePartitionDelimiter:
                           description: Date separating delimiter to use during folder
                             partitioning. Valid values are SLASH, UNDERSCORE, DASH,
@@ -606,7 +614,8 @@ spec:
                         dictPageSizeLimit:
                           description: Maximum size in bytes of an encoded dictionary
                             page of a column. Default is 1048576 (1 MiB).
-                          type: number
+                          format: int64
+                          type: integer
                         enableStatistics:
                           description: Whether to enable statistics for Parquet pages
                             and row groups. Default is true.
@@ -627,7 +636,8 @@ spec:
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
                             operations to the .csv output files only to indicate how
@@ -639,7 +649,8 @@ spec:
                             created while migrating to an S3 target during full load.
                             Valid values are from 1 to 1048576. Default is 1048576
                             (1 GB).
-                          type: number
+                          format: int64
+                          type: integer
                         parquetTimestampInMillisecond:
                           description: '- Specifies the precision of any TIMESTAMP
                             column values written to an S3 object file in .parquet
@@ -661,7 +672,8 @@ spec:
                           type: boolean
                         rowGroupLength:
                           description: Number of rows in a row group. Default is 10000.
-                          type: number
+                          format: int64
+                          type: integer
                         serverSideEncryptionKmsKeyId:
                           description: ARN or Id of KMS Key to use when encryption_mode
                             is SSE_KMS.
@@ -899,12 +911,14 @@ spec:
                           description: Maximum number of seconds for which DMS retries
                             failed API requests to the OpenSearch cluster. Default
                             is 300.
-                          type: number
+                          format: int64
+                          type: integer
                         fullLoadErrorPercentage:
                           description: Maximum percentage of records that can fail
                             to be written before a full load operation stops. Default
                             is 10.
-                          type: number
+                          format: int64
+                          type: integer
                         serviceAccessRoleArn:
                           description: ARN of the IAM Role with permissions to write
                             to the OpenSearch cluster.
@@ -971,7 +985,8 @@ spec:
                         messageMaxBytes:
                           description: Maximum size in bytes for records created on
                             the endpoint Default is 1,000,000.
-                          type: number
+                          format: int64
+                          type: integer
                         noHexPrefix:
                           description: Set this optional parameter to true to avoid
                             adding a '0x' prefix to raw data in hexadecimal format.
@@ -1101,7 +1116,8 @@ spec:
                     type: array
                   port:
                     description: Port used by the endpoint database.
-                    type: number
+                    format: int64
+                    type: integer
                   redisSettings:
                     items:
                       properties:
@@ -1115,7 +1131,8 @@ spec:
                           type: string
                         port:
                           description: Port used by the endpoint database.
-                          type: number
+                          format: int64
+                          type: integer
                         serverName:
                           description: Host name of the server.
                           type: string
@@ -1196,13 +1213,15 @@ spec:
                           description: Maximum length of the interval, defined in
                             seconds, after which to output a file to Amazon S3. Default
                             is 60.
-                          type: number
+                          format: int64
+                          type: integer
                         cdcMinFileSize:
                           description: 'Minimum file size condition as defined in
                             kilobytes to output a file to Amazon S3. Default is 32000.
                             NOTE: Previously, this setting was measured in megabytes
                             but now represents kilobytes. Update configurations accordingly.'
-                          type: number
+                          format: int64
+                          type: integer
                         cdcPath:
                           description: Folder path of CDC files. For an S3 source,
                             this setting is required if a task captures change data;
@@ -1238,7 +1257,8 @@ spec:
                         dataPageSize:
                           description: Size of one data page in bytes. Default is
                             1048576 (1 MiB).
-                          type: number
+                          format: int64
+                          type: integer
                         datePartitionDelimiter:
                           description: Date separating delimiter to use during folder
                             partitioning. Valid values are SLASH, UNDERSCORE, DASH,
@@ -1257,7 +1277,8 @@ spec:
                         dictPageSizeLimit:
                           description: Maximum size in bytes of an encoded dictionary
                             page of a column. Default is 1048576 (1 MiB).
-                          type: number
+                          format: int64
+                          type: integer
                         enableStatistics:
                           description: Whether to enable statistics for Parquet pages
                             and row groups. Default is true.
@@ -1278,7 +1299,8 @@ spec:
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
                             operations to the .csv output files only to indicate how
@@ -1290,7 +1312,8 @@ spec:
                             created while migrating to an S3 target during full load.
                             Valid values are from 1 to 1048576. Default is 1048576
                             (1 GB).
-                          type: number
+                          format: int64
+                          type: integer
                         parquetTimestampInMillisecond:
                           description: '- Specifies the precision of any TIMESTAMP
                             column values written to an S3 object file in .parquet
@@ -1312,7 +1335,8 @@ spec:
                           type: boolean
                         rowGroupLength:
                           description: Number of rows in a row group. Default is 10000.
-                          type: number
+                          format: int64
+                          type: integer
                         serverSideEncryptionKmsKeyId:
                           description: ARN or Id of KMS Key to use when encryption_mode
                             is SSE_KMS.
@@ -1524,14 +1548,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.endpointType is a required parameter
+            - message: endpointType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointType)
-                || (has(self.initProvider) && has(self.initProvider.endpointType))'
-            - message: spec.forProvider.engineName is a required parameter
+                || has(self.initProvider.endpointType)'
+            - message: engineName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineName)
-                || (has(self.initProvider) && has(self.initProvider.engineName))'
+                || has(self.initProvider.engineName)'
           status:
             description: EndpointStatus defines the observed state of Endpoint.
             properties:
@@ -1555,12 +1579,14 @@ spec:
                           description: Maximum number of seconds for which DMS retries
                             failed API requests to the OpenSearch cluster. Default
                             is 300.
-                          type: number
+                          format: int64
+                          type: integer
                         fullLoadErrorPercentage:
                           description: Maximum percentage of records that can fail
                             to be written before a full load operation stops. Default
                             is 10.
-                          type: number
+                          format: int64
+                          type: integer
                         serviceAccessRoleArn:
                           description: ARN of the IAM Role with permissions to write
                             to the OpenSearch cluster.
@@ -1632,7 +1658,8 @@ spec:
                         messageMaxBytes:
                           description: Maximum size in bytes for records created on
                             the endpoint Default is 1,000,000.
-                          type: number
+                          format: int64
+                          type: integer
                         noHexPrefix:
                           description: Set this optional parameter to true to avoid
                             adding a '0x' prefix to raw data in hexadecimal format.
@@ -1774,7 +1801,8 @@ spec:
                     type: array
                   port:
                     description: Port used by the endpoint database.
-                    type: number
+                    format: int64
+                    type: integer
                   redisSettings:
                     items:
                       properties:
@@ -1788,7 +1816,8 @@ spec:
                           type: string
                         port:
                           description: Port used by the endpoint database.
-                          type: number
+                          format: int64
+                          type: integer
                         serverName:
                           description: Host name of the server.
                           type: string
@@ -1869,13 +1898,15 @@ spec:
                           description: Maximum length of the interval, defined in
                             seconds, after which to output a file to Amazon S3. Default
                             is 60.
-                          type: number
+                          format: int64
+                          type: integer
                         cdcMinFileSize:
                           description: 'Minimum file size condition as defined in
                             kilobytes to output a file to Amazon S3. Default is 32000.
                             NOTE: Previously, this setting was measured in megabytes
                             but now represents kilobytes. Update configurations accordingly.'
-                          type: number
+                          format: int64
+                          type: integer
                         cdcPath:
                           description: Folder path of CDC files. For an S3 source,
                             this setting is required if a task captures change data;
@@ -1911,7 +1942,8 @@ spec:
                         dataPageSize:
                           description: Size of one data page in bytes. Default is
                             1048576 (1 MiB).
-                          type: number
+                          format: int64
+                          type: integer
                         datePartitionDelimiter:
                           description: Date separating delimiter to use during folder
                             partitioning. Valid values are SLASH, UNDERSCORE, DASH,
@@ -1930,7 +1962,8 @@ spec:
                         dictPageSizeLimit:
                           description: Maximum size in bytes of an encoded dictionary
                             page of a column. Default is 1048576 (1 MiB).
-                          type: number
+                          format: int64
+                          type: integer
                         enableStatistics:
                           description: Whether to enable statistics for Parquet pages
                             and row groups. Default is true.
@@ -1951,7 +1984,8 @@ spec:
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
+                          format: int64
+                          type: integer
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
                             operations to the .csv output files only to indicate how
@@ -1963,7 +1997,8 @@ spec:
                             created while migrating to an S3 target during full load.
                             Valid values are from 1 to 1048576. Default is 1048576
                             (1 GB).
-                          type: number
+                          format: int64
+                          type: integer
                         parquetTimestampInMillisecond:
                           description: '- Specifies the precision of any TIMESTAMP
                             column values written to an S3 object file in .parquet
@@ -1985,7 +2020,8 @@ spec:
                           type: boolean
                         rowGroupLength:
                           description: Number of rows in a row group. Default is 10000.
-                          type: number
+                          format: int64
+                          type: integer
                         serverSideEncryptionKmsKeyId:
                           description: ARN or Id of KMS Key to use when encryption_mode
                             is SSE_KMS.

@@ -786,10 +786,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.vpcConfig is a required parameter
+            - message: vpcConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcConfig)
-                || (has(self.initProvider) && has(self.initProvider.vpcConfig))'
+                || has(self.initProvider.vpcConfig)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

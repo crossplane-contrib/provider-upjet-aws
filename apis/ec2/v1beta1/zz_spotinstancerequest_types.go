@@ -20,17 +20,17 @@ import (
 type SpotInstanceRequestCPUOptionsInitParameters struct {
 	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
 
-	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+	CoreCount *int64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
-	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+	ThreadsPerCore *int64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type SpotInstanceRequestCPUOptionsObservation struct {
 	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
 
-	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+	CoreCount *int64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
-	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+	ThreadsPerCore *int64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type SpotInstanceRequestCPUOptionsParameters struct {
@@ -39,10 +39,10 @@ type SpotInstanceRequestCPUOptionsParameters struct {
 	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+	CoreCount *int64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+	ThreadsPerCore *int64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type SpotInstanceRequestCapacityReservationSpecificationCapacityReservationTargetInitParameters struct {
@@ -113,7 +113,7 @@ type SpotInstanceRequestEBSBlockDeviceInitParameters struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The Spot Instance Request ID.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -124,9 +124,9 @@ type SpotInstanceRequestEBSBlockDeviceInitParameters struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -138,7 +138,7 @@ type SpotInstanceRequestEBSBlockDeviceObservation struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The Spot Instance Request ID.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -149,12 +149,12 @@ type SpotInstanceRequestEBSBlockDeviceObservation struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The Spot Instance Request ID.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -171,7 +171,7 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
@@ -186,10 +186,10 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -247,13 +247,13 @@ type SpotInstanceRequestInitParameters struct {
 	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
 	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
 	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+	BlockDurationMinutes *int64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+	CPUCoreCount *int64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	CPUOptions []SpotInstanceRequestCPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
 
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+	CPUThreadsPerCore *int64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	CapacityReservationSpecification []SpotInstanceRequestCapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
@@ -282,7 +282,7 @@ type SpotInstanceRequestInitParameters struct {
 
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
-	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
@@ -311,7 +311,7 @@ type SpotInstanceRequestInitParameters struct {
 
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+	PlacementPartitionNumber *int64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	PrivateDNSNameOptions []SpotInstanceRequestPrivateDNSNameOptionsInitParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
 
@@ -408,7 +408,7 @@ type SpotInstanceRequestMetadataOptionsInitParameters struct {
 
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
@@ -421,7 +421,7 @@ type SpotInstanceRequestMetadataOptionsObservation struct {
 
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
-	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
@@ -438,7 +438,7 @@ type SpotInstanceRequestMetadataOptionsParameters struct {
 	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -451,9 +451,9 @@ type SpotInstanceRequestMetadataOptionsParameters struct {
 type SpotInstanceRequestNetworkInterfaceInitParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+	NetworkCardIndex *int64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The Spot Instance Request ID.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -462,9 +462,9 @@ type SpotInstanceRequestNetworkInterfaceInitParameters struct {
 type SpotInstanceRequestNetworkInterfaceObservation struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
-	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+	NetworkCardIndex *int64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The Spot Instance Request ID.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -476,10 +476,10 @@ type SpotInstanceRequestNetworkInterfaceParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
+	DeviceIndex *int64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+	NetworkCardIndex *int64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
@@ -498,13 +498,13 @@ type SpotInstanceRequestObservation struct {
 	// The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
 	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
 	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+	BlockDurationMinutes *int64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+	CPUCoreCount *int64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	CPUOptions []SpotInstanceRequestCPUOptionsObservation `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
 
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+	CPUThreadsPerCore *int64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	CapacityReservationSpecification []SpotInstanceRequestCapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
 
@@ -536,7 +536,7 @@ type SpotInstanceRequestObservation struct {
 	// The Spot Instance Request ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
@@ -571,7 +571,7 @@ type SpotInstanceRequestObservation struct {
 
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
-	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+	PlacementPartitionNumber *int64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// The Spot Instance Request ID.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
@@ -668,16 +668,16 @@ type SpotInstanceRequestParameters struct {
 	// The duration period starts as soon as your Spot instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
 	// Note that you can't specify an Availability Zone group or a launch group if you specify a duration.
 	// +kubebuilder:validation:Optional
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
+	BlockDurationMinutes *int64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+	CPUCoreCount *int64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CPUOptions []SpotInstanceRequestCPUOptionsParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+	CPUThreadsPerCore *int64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CapacityReservationSpecification []SpotInstanceRequestCapacityReservationSpecificationParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -720,7 +720,7 @@ type SpotInstanceRequestParameters struct {
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
@@ -762,7 +762,7 @@ type SpotInstanceRequestParameters struct {
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+	PlacementPartitionNumber *int64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PrivateDNSNameOptions []SpotInstanceRequestPrivateDNSNameOptionsParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
@@ -889,7 +889,7 @@ type SpotInstanceRequestRootBlockDeviceInitParameters struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The Spot Instance Request ID.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -897,9 +897,9 @@ type SpotInstanceRequestRootBlockDeviceInitParameters struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -911,7 +911,7 @@ type SpotInstanceRequestRootBlockDeviceObservation struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The Spot Instance Request ID.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -919,12 +919,12 @@ type SpotInstanceRequestRootBlockDeviceObservation struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The Spot Instance Request ID.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -938,7 +938,7 @@ type SpotInstanceRequestRootBlockDeviceParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The Spot Instance Request ID.
 	// +kubebuilder:validation:Optional
@@ -949,10 +949,10 @@ type SpotInstanceRequestRootBlockDeviceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`

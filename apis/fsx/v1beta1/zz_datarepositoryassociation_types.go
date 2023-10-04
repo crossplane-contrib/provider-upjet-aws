@@ -235,8 +235,8 @@ type DataRepositoryAssociationStatus struct {
 type DataRepositoryAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataRepositoryPath) || (has(self.initProvider) && has(self.initProvider.dataRepositoryPath))",message="spec.forProvider.dataRepositoryPath is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fileSystemPath) || (has(self.initProvider) && has(self.initProvider.fileSystemPath))",message="spec.forProvider.fileSystemPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataRepositoryPath) || has(self.initProvider.dataRepositoryPath)",message="dataRepositoryPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fileSystemPath) || has(self.initProvider.fileSystemPath)",message="fileSystemPath is a required parameter"
 	Spec   DataRepositoryAssociationSpec   `json:"spec"`
 	Status DataRepositoryAssociationStatus `json:"status,omitempty"`
 }

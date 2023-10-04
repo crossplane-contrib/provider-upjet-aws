@@ -333,10 +333,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.patchGroup is a required parameter
+            - message: patchGroup is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.patchGroup)
-                || (has(self.initProvider) && has(self.initProvider.patchGroup))'
+                || has(self.initProvider.patchGroup)'
           status:
             description: PatchGroupStatus defines the observed state of PatchGroup.
             properties:

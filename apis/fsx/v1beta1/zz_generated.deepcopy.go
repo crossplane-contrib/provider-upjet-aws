@@ -3553,7 +3553,7 @@ func (in *WindowsFileSystemDiskIopsConfigurationInitParameters) DeepCopyInto(out
 	*out = *in
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -3578,7 +3578,7 @@ func (in *WindowsFileSystemDiskIopsConfigurationObservation) DeepCopyInto(out *W
 	*out = *in
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -3603,7 +3603,7 @@ func (in *WindowsFileSystemDiskIopsConfigurationParameters) DeepCopyInto(out *Wi
 	*out = *in
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Mode != nil {

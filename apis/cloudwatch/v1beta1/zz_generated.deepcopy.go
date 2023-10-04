@@ -23,12 +23,12 @@ func (in *ActionsSuppressorInitParameters) DeepCopyInto(out *ActionsSuppressorIn
 	}
 	if in.ExtensionPeriod != nil {
 		in, out := &in.ExtensionPeriod, &out.ExtensionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WaitPeriod != nil {
 		in, out := &in.WaitPeriod, &out.WaitPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -53,12 +53,12 @@ func (in *ActionsSuppressorObservation) DeepCopyInto(out *ActionsSuppressorObser
 	}
 	if in.ExtensionPeriod != nil {
 		in, out := &in.ExtensionPeriod, &out.ExtensionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WaitPeriod != nil {
 		in, out := &in.WaitPeriod, &out.WaitPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -83,12 +83,12 @@ func (in *ActionsSuppressorParameters) DeepCopyInto(out *ActionsSuppressorParame
 	}
 	if in.ExtensionPeriod != nil {
 		in, out := &in.ExtensionPeriod, &out.ExtensionPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WaitPeriod != nil {
 		in, out := &in.WaitPeriod, &out.WaitPeriod
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

@@ -251,12 +251,12 @@ func (in *ElasticsearchSettingsInitParameters) DeepCopyInto(out *ElasticsearchSe
 	}
 	if in.ErrorRetryDuration != nil {
 		in, out := &in.ErrorRetryDuration, &out.ErrorRetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.FullLoadErrorPercentage != nil {
 		in, out := &in.FullLoadErrorPercentage, &out.FullLoadErrorPercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServiceAccessRoleArn != nil {
@@ -286,12 +286,12 @@ func (in *ElasticsearchSettingsObservation) DeepCopyInto(out *ElasticsearchSetti
 	}
 	if in.ErrorRetryDuration != nil {
 		in, out := &in.ErrorRetryDuration, &out.ErrorRetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.FullLoadErrorPercentage != nil {
 		in, out := &in.FullLoadErrorPercentage, &out.FullLoadErrorPercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServiceAccessRoleArn != nil {
@@ -321,12 +321,12 @@ func (in *ElasticsearchSettingsParameters) DeepCopyInto(out *ElasticsearchSettin
 	}
 	if in.ErrorRetryDuration != nil {
 		in, out := &in.ErrorRetryDuration, &out.ErrorRetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.FullLoadErrorPercentage != nil {
 		in, out := &in.FullLoadErrorPercentage, &out.FullLoadErrorPercentage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServiceAccessRoleArn != nil {
@@ -431,7 +431,7 @@ func (in *EndpointInitParameters) DeepCopyInto(out *EndpointInitParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RedisSettings != nil {
@@ -608,7 +608,7 @@ func (in *EndpointObservation) DeepCopyInto(out *EndpointObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RedisSettings != nil {
@@ -784,7 +784,7 @@ func (in *EndpointParameters) DeepCopyInto(out *EndpointParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RedisSettings != nil {
@@ -1300,7 +1300,7 @@ func (in *KafkaSettingsInitParameters) DeepCopyInto(out *KafkaSettingsInitParame
 	}
 	if in.MessageMaxBytes != nil {
 		in, out := &in.MessageMaxBytes, &out.MessageMaxBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NoHexPrefix != nil {
@@ -1395,7 +1395,7 @@ func (in *KafkaSettingsObservation) DeepCopyInto(out *KafkaSettingsObservation) 
 	}
 	if in.MessageMaxBytes != nil {
 		in, out := &in.MessageMaxBytes, &out.MessageMaxBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NoHexPrefix != nil {
@@ -1490,7 +1490,7 @@ func (in *KafkaSettingsParameters) DeepCopyInto(out *KafkaSettingsParameters) {
 	}
 	if in.MessageMaxBytes != nil {
 		in, out := &in.MessageMaxBytes, &out.MessageMaxBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NoHexPrefix != nil {
@@ -1885,7 +1885,7 @@ func (in *RedisSettingsInitParameters) DeepCopyInto(out *RedisSettingsInitParame
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SSLCACertificateArn != nil {
@@ -1930,7 +1930,7 @@ func (in *RedisSettingsObservation) DeepCopyInto(out *RedisSettingsObservation) 
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SSLCACertificateArn != nil {
@@ -1980,7 +1980,7 @@ func (in *RedisSettingsParameters) DeepCopyInto(out *RedisSettingsParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SSLCACertificateArn != nil {
@@ -2162,7 +2162,7 @@ func (in *ReplicationInstanceInitParameters) DeepCopyInto(out *ReplicationInstan
 	*out = *in
 	if in.AllocatedStorage != nil {
 		in, out := &in.AllocatedStorage, &out.AllocatedStorage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AllowMajorVersionUpgrade != nil {
@@ -2280,7 +2280,7 @@ func (in *ReplicationInstanceObservation) DeepCopyInto(out *ReplicationInstanceO
 	*out = *in
 	if in.AllocatedStorage != nil {
 		in, out := &in.AllocatedStorage, &out.AllocatedStorage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AllowMajorVersionUpgrade != nil {
@@ -2435,7 +2435,7 @@ func (in *ReplicationInstanceParameters) DeepCopyInto(out *ReplicationInstancePa
 	*out = *in
 	if in.AllocatedStorage != nil {
 		in, out := &in.AllocatedStorage, &out.AllocatedStorage
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AllowMajorVersionUpgrade != nil {
@@ -3321,12 +3321,12 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 	}
 	if in.CdcMaxBatchInterval != nil {
 		in, out := &in.CdcMaxBatchInterval, &out.CdcMaxBatchInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcMinFileSize != nil {
 		in, out := &in.CdcMinFileSize, &out.CdcMinFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcPath != nil {
@@ -3371,7 +3371,7 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 	}
 	if in.DataPageSize != nil {
 		in, out := &in.DataPageSize, &out.DataPageSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatePartitionDelimiter != nil {
@@ -3401,7 +3401,7 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EnableStatistics != nil {
@@ -3436,7 +3436,7 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IncludeOpForFullLoad != nil {
@@ -3446,7 +3446,7 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParquetTimestampInMillisecond != nil {
@@ -3471,7 +3471,7 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 	}
 	if in.RowGroupLength != nil {
 		in, out := &in.RowGroupLength, &out.RowGroupLength
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SSLMode != nil {
@@ -3594,12 +3594,12 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	}
 	if in.CdcMaxBatchInterval != nil {
 		in, out := &in.CdcMaxBatchInterval, &out.CdcMaxBatchInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcMinFileSize != nil {
 		in, out := &in.CdcMinFileSize, &out.CdcMinFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcPath != nil {
@@ -3644,7 +3644,7 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	}
 	if in.DataPageSize != nil {
 		in, out := &in.DataPageSize, &out.DataPageSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatePartitionDelimiter != nil {
@@ -3674,7 +3674,7 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EnableStatistics != nil {
@@ -3729,7 +3729,7 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IncludeOpForFullLoad != nil {
@@ -3744,7 +3744,7 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParquetTimestampInMillisecond != nil {
@@ -3769,7 +3769,7 @@ func (in *S3EndpointObservation) DeepCopyInto(out *S3EndpointObservation) {
 	}
 	if in.RowGroupLength != nil {
 		in, out := &in.RowGroupLength, &out.RowGroupLength
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SSLMode != nil {
@@ -3891,12 +3891,12 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	}
 	if in.CdcMaxBatchInterval != nil {
 		in, out := &in.CdcMaxBatchInterval, &out.CdcMaxBatchInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcMinFileSize != nil {
 		in, out := &in.CdcMinFileSize, &out.CdcMinFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcPath != nil {
@@ -3941,7 +3941,7 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	}
 	if in.DataPageSize != nil {
 		in, out := &in.DataPageSize, &out.DataPageSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatePartitionDelimiter != nil {
@@ -3971,7 +3971,7 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EnableStatistics != nil {
@@ -4006,7 +4006,7 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IncludeOpForFullLoad != nil {
@@ -4031,7 +4031,7 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParquetTimestampInMillisecond != nil {
@@ -4061,7 +4061,7 @@ func (in *S3EndpointParameters) DeepCopyInto(out *S3EndpointParameters) {
 	}
 	if in.RowGroupLength != nil {
 		in, out := &in.RowGroupLength, &out.RowGroupLength
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SSLMode != nil {
@@ -4212,12 +4212,12 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 	}
 	if in.CdcMaxBatchInterval != nil {
 		in, out := &in.CdcMaxBatchInterval, &out.CdcMaxBatchInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcMinFileSize != nil {
 		in, out := &in.CdcMinFileSize, &out.CdcMinFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcPath != nil {
@@ -4257,7 +4257,7 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 	}
 	if in.DataPageSize != nil {
 		in, out := &in.DataPageSize, &out.DataPageSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatePartitionDelimiter != nil {
@@ -4277,7 +4277,7 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EnableStatistics != nil {
@@ -4302,7 +4302,7 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IncludeOpForFullLoad != nil {
@@ -4312,7 +4312,7 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParquetTimestampInMillisecond != nil {
@@ -4337,7 +4337,7 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 	}
 	if in.RowGroupLength != nil {
 		in, out := &in.RowGroupLength, &out.RowGroupLength
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerSideEncryptionKMSKeyID != nil {
@@ -4412,12 +4412,12 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 	}
 	if in.CdcMaxBatchInterval != nil {
 		in, out := &in.CdcMaxBatchInterval, &out.CdcMaxBatchInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcMinFileSize != nil {
 		in, out := &in.CdcMinFileSize, &out.CdcMinFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcPath != nil {
@@ -4457,7 +4457,7 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 	}
 	if in.DataPageSize != nil {
 		in, out := &in.DataPageSize, &out.DataPageSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatePartitionDelimiter != nil {
@@ -4477,7 +4477,7 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EnableStatistics != nil {
@@ -4502,7 +4502,7 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IncludeOpForFullLoad != nil {
@@ -4512,7 +4512,7 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParquetTimestampInMillisecond != nil {
@@ -4537,7 +4537,7 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 	}
 	if in.RowGroupLength != nil {
 		in, out := &in.RowGroupLength, &out.RowGroupLength
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerSideEncryptionKMSKeyID != nil {
@@ -4612,12 +4612,12 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.CdcMaxBatchInterval != nil {
 		in, out := &in.CdcMaxBatchInterval, &out.CdcMaxBatchInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcMinFileSize != nil {
 		in, out := &in.CdcMinFileSize, &out.CdcMinFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CdcPath != nil {
@@ -4657,7 +4657,7 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.DataPageSize != nil {
 		in, out := &in.DataPageSize, &out.DataPageSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DatePartitionDelimiter != nil {
@@ -4677,7 +4677,7 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.DictPageSizeLimit != nil {
 		in, out := &in.DictPageSizeLimit, &out.DictPageSizeLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.EnableStatistics != nil {
@@ -4702,7 +4702,7 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IncludeOpForFullLoad != nil {
@@ -4712,7 +4712,7 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParquetTimestampInMillisecond != nil {
@@ -4737,7 +4737,7 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.RowGroupLength != nil {
 		in, out := &in.RowGroupLength, &out.RowGroupLength
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ServerSideEncryptionKMSKeyID != nil {

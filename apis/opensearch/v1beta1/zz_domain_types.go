@@ -940,30 +940,30 @@ type VPCOptionsParameters struct {
 type WindowStartTimeInitParameters struct {
 
 	// Starting hour of the 10-hour window for updates
-	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours *int64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// Starting minute of the 10-hour window for updates
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *int64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type WindowStartTimeObservation struct {
 
 	// Starting hour of the 10-hour window for updates
-	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours *int64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// Starting minute of the 10-hour window for updates
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *int64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type WindowStartTimeParameters struct {
 
 	// Starting hour of the 10-hour window for updates
 	// +kubebuilder:validation:Optional
-	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours *int64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// Starting minute of the 10-hour window for updates
 	// +kubebuilder:validation:Optional
-	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+	Minutes *int64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type ZoneAwarenessConfigInitParameters struct {
@@ -1020,7 +1020,7 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domainName) || (has(self.initProvider) && has(self.initProvider.domainName))",message="spec.forProvider.domainName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domainName) || has(self.initProvider.domainName)",message="domainName is a required parameter"
 	Spec   DomainSpec   `json:"spec"`
 	Status DomainStatus `json:"status,omitempty"`
 }

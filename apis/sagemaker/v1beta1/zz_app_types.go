@@ -208,8 +208,8 @@ type AppStatus struct {
 type App struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appName) || (has(self.initProvider) && has(self.initProvider.appName))",message="spec.forProvider.appName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appType) || (has(self.initProvider) && has(self.initProvider.appType))",message="spec.forProvider.appType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appName) || has(self.initProvider.appName)",message="appName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appType) || has(self.initProvider.appType)",message="appType is a required parameter"
 	Spec   AppSpec   `json:"spec"`
 	Status AppStatus `json:"status,omitempty"`
 }

@@ -170,8 +170,8 @@ type LocationS3Status struct {
 type LocationS3 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Config) || (has(self.initProvider) && has(self.initProvider.s3Config))",message="spec.forProvider.s3Config is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subdirectory) || (has(self.initProvider) && has(self.initProvider.subdirectory))",message="spec.forProvider.subdirectory is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Config) || has(self.initProvider.s3Config)",message="s3Config is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subdirectory) || has(self.initProvider.subdirectory)",message="subdirectory is a required parameter"
 	Spec   LocationS3Spec   `json:"spec"`
 	Status LocationS3Status `json:"status,omitempty"`
 }

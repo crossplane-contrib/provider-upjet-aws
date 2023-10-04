@@ -270,10 +270,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.replica is a required parameter
+            - message: replica is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.replica)
-                || (has(self.initProvider) && has(self.initProvider.replica))'
+                || has(self.initProvider.replica)'
           status:
             description: GlobalTableStatus defines the observed state of GlobalTable.
             properties:

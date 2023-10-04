@@ -711,7 +711,7 @@ func (in *AuthorizerInitParameters) DeepCopyInto(out *AuthorizerInitParameters) 
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.IdentitySource != nil {
@@ -804,7 +804,7 @@ func (in *AuthorizerObservation) DeepCopyInto(out *AuthorizerObservation) {
 	}
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -885,7 +885,7 @@ func (in *AuthorizerParameters) DeepCopyInto(out *AuthorizerParameters) {
 	}
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -3245,7 +3245,7 @@ func (in *IntegrationInitParameters) DeepCopyInto(out *IntegrationInitParameters
 	}
 	if in.TimeoutMilliseconds != nil {
 		in, out := &in.TimeoutMilliseconds, &out.TimeoutMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -3407,7 +3407,7 @@ func (in *IntegrationObservation) DeepCopyInto(out *IntegrationObservation) {
 	}
 	if in.TimeoutMilliseconds != nil {
 		in, out := &in.TimeoutMilliseconds, &out.TimeoutMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -3582,7 +3582,7 @@ func (in *IntegrationParameters) DeepCopyInto(out *IntegrationParameters) {
 	}
 	if in.TimeoutMilliseconds != nil {
 		in, out := &in.TimeoutMilliseconds, &out.TimeoutMilliseconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -5394,12 +5394,12 @@ func (in *QuotaSettingsInitParameters) DeepCopyInto(out *QuotaSettingsInitParame
 	*out = *in
 	if in.Limit != nil {
 		in, out := &in.Limit, &out.Limit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Offset != nil {
 		in, out := &in.Offset, &out.Offset
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Period != nil {
@@ -5424,12 +5424,12 @@ func (in *QuotaSettingsObservation) DeepCopyInto(out *QuotaSettingsObservation) 
 	*out = *in
 	if in.Limit != nil {
 		in, out := &in.Limit, &out.Limit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Offset != nil {
 		in, out := &in.Offset, &out.Offset
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Period != nil {
@@ -5454,12 +5454,12 @@ func (in *QuotaSettingsParameters) DeepCopyInto(out *QuotaSettingsParameters) {
 	*out = *in
 	if in.Limit != nil {
 		in, out := &in.Limit, &out.Limit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Offset != nil {
 		in, out := &in.Offset, &out.Offset
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Period != nil {
@@ -6667,7 +6667,7 @@ func (in *SettingsInitParameters) DeepCopyInto(out *SettingsInitParameters) {
 	}
 	if in.CacheTTLInSeconds != nil {
 		in, out := &in.CacheTTLInSeconds, &out.CacheTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CachingEnabled != nil {
@@ -6697,7 +6697,7 @@ func (in *SettingsInitParameters) DeepCopyInto(out *SettingsInitParameters) {
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -6732,7 +6732,7 @@ func (in *SettingsObservation) DeepCopyInto(out *SettingsObservation) {
 	}
 	if in.CacheTTLInSeconds != nil {
 		in, out := &in.CacheTTLInSeconds, &out.CacheTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CachingEnabled != nil {
@@ -6762,7 +6762,7 @@ func (in *SettingsObservation) DeepCopyInto(out *SettingsObservation) {
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -6797,7 +6797,7 @@ func (in *SettingsParameters) DeepCopyInto(out *SettingsParameters) {
 	}
 	if in.CacheTTLInSeconds != nil {
 		in, out := &in.CacheTTLInSeconds, &out.CacheTTLInSeconds
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CachingEnabled != nil {
@@ -6827,7 +6827,7 @@ func (in *SettingsParameters) DeepCopyInto(out *SettingsParameters) {
 	}
 	if in.ThrottlingBurstLimit != nil {
 		in, out := &in.ThrottlingBurstLimit, &out.ThrottlingBurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ThrottlingRateLimit != nil {
@@ -7385,7 +7385,7 @@ func (in *ThrottleInitParameters) DeepCopyInto(out *ThrottleInitParameters) {
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -7415,7 +7415,7 @@ func (in *ThrottleObservation) DeepCopyInto(out *ThrottleObservation) {
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -7445,7 +7445,7 @@ func (in *ThrottleParameters) DeepCopyInto(out *ThrottleParameters) {
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -7490,7 +7490,7 @@ func (in *ThrottleSettingsObservation) DeepCopyInto(out *ThrottleSettingsObserva
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RateLimit != nil {
@@ -8070,7 +8070,7 @@ func (in *UsagePlanThrottleSettingsInitParameters) DeepCopyInto(out *UsagePlanTh
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RateLimit != nil {
@@ -8095,7 +8095,7 @@ func (in *UsagePlanThrottleSettingsObservation) DeepCopyInto(out *UsagePlanThrot
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RateLimit != nil {
@@ -8120,7 +8120,7 @@ func (in *UsagePlanThrottleSettingsParameters) DeepCopyInto(out *UsagePlanThrott
 	*out = *in
 	if in.BurstLimit != nil {
 		in, out := &in.BurstLimit, &out.BurstLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RateLimit != nil {

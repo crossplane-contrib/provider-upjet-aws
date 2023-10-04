@@ -365,10 +365,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.destination is a required parameter
+            - message: destination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)
-                || (has(self.initProvider) && has(self.initProvider.destination))'
+                || has(self.initProvider.destination)'
           status:
             description: ReplicationConfigurationStatus defines the observed state
               of ReplicationConfiguration.

@@ -129,7 +129,7 @@ type VPCEndpointConnectionNotificationStatus struct {
 type VPCEndpointConnectionNotification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionEvents) || (has(self.initProvider) && has(self.initProvider.connectionEvents))",message="spec.forProvider.connectionEvents is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionEvents) || has(self.initProvider.connectionEvents)",message="connectionEvents is a required parameter"
 	Spec   VPCEndpointConnectionNotificationSpec   `json:"spec"`
 	Status VPCEndpointConnectionNotificationStatus `json:"status,omitempty"`
 }

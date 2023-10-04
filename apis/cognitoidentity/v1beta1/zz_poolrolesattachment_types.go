@@ -211,7 +211,7 @@ type PoolRolesAttachmentStatus struct {
 type PoolRolesAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles) || (has(self.initProvider) && has(self.initProvider.roles))",message="spec.forProvider.roles is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles) || has(self.initProvider.roles)",message="roles is a required parameter"
 	Spec   PoolRolesAttachmentSpec   `json:"spec"`
 	Status PoolRolesAttachmentStatus `json:"status,omitempty"`
 }

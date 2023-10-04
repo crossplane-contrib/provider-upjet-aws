@@ -385,10 +385,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.outputConfig is a required parameter
+            - message: outputConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.outputConfig)
-                || (has(self.initProvider) && has(self.initProvider.outputConfig))'
+                || has(self.initProvider.outputConfig)'
           status:
             description: DeviceFleetStatus defines the observed state of DeviceFleet.
             properties:

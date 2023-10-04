@@ -302,7 +302,7 @@ type StageStatus struct {
 type Stage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stageName) || (has(self.initProvider) && has(self.initProvider.stageName))",message="spec.forProvider.stageName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stageName) || has(self.initProvider.stageName)",message="stageName is a required parameter"
 	Spec   StageSpec   `json:"spec"`
 	Status StageStatus `json:"status,omitempty"`
 }

@@ -427,10 +427,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.mode is a required parameter
+            - message: mode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.mode)
-                || (has(self.initProvider) && has(self.initProvider.mode))'
+                || has(self.initProvider.mode)'
           status:
             description: ClusterActivityStreamStatus defines the observed state of
               ClusterActivityStream.
