@@ -348,10 +348,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.mailFromDomain is a required parameter
+            - message: mailFromDomain is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.mailFromDomain)
-                || (has(self.initProvider) && has(self.initProvider.mailFromDomain))'
+                || has(self.initProvider.mailFromDomain)'
           status:
             description: DomainMailFromStatus defines the observed state of DomainMailFrom.
             properties:

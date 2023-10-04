@@ -699,18 +699,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.applicationSource is a required parameter
+            - message: applicationSource is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.applicationSource)
-                || (has(self.initProvider) && has(self.initProvider.applicationSource))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.applicationSource)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.scalingInstruction is a required parameter
+                || has(self.initProvider.name)'
+            - message: scalingInstruction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scalingInstruction)
-                || (has(self.initProvider) && has(self.initProvider.scalingInstruction))'
+                || has(self.initProvider.scalingInstruction)'
           status:
             description: ScalingPlanStatus defines the observed state of ScalingPlan.
             properties:

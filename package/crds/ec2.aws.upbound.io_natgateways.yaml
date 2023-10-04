@@ -166,7 +166,8 @@ spec:
                   secondaryPrivateIpAddressCount:
                     description: '[Private NAT Gateway only] The number of secondary
                       private IPv4 addresses you want to assign to the NAT Gateway.'
-                    type: number
+                    format: int64
+                    type: integer
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
                       to the NAT Gateway.
@@ -289,7 +290,8 @@ spec:
                   secondaryPrivateIpAddressCount:
                     description: '[Private NAT Gateway only] The number of secondary
                       private IPv4 addresses you want to assign to the NAT Gateway.'
-                    type: number
+                    format: int64
+                    type: integer
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
                       to the NAT Gateway.
@@ -504,7 +506,8 @@ spec:
                   secondaryPrivateIpAddressCount:
                     description: '[Private NAT Gateway only] The number of secondary
                       private IPv4 addresses you want to assign to the NAT Gateway.'
-                    type: number
+                    format: int64
+                    type: integer
                   secondaryPrivateIpAddresses:
                     description: A list of secondary private IPv4 addresses to assign
                       to the NAT Gateway.

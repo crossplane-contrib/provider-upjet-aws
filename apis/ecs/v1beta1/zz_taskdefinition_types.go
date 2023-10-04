@@ -686,8 +686,8 @@ type TaskDefinitionStatus struct {
 type TaskDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.containerDefinitions) || (has(self.initProvider) && has(self.initProvider.containerDefinitions))",message="spec.forProvider.containerDefinitions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || (has(self.initProvider) && has(self.initProvider.family))",message="spec.forProvider.family is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.containerDefinitions) || has(self.initProvider.containerDefinitions)",message="containerDefinitions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || has(self.initProvider.family)",message="family is a required parameter"
 	Spec   TaskDefinitionSpec   `json:"spec"`
 	Status TaskDefinitionStatus `json:"status,omitempty"`
 }

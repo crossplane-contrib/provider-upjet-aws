@@ -98,7 +98,7 @@ type OptionInitParameters struct {
 	OptionSettings []OptionSettingsInitParameters `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
 	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of VPC Security Groups for which the option is enabled.
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
@@ -119,7 +119,7 @@ type OptionObservation struct {
 	OptionSettings []OptionSettingsObservation `json:"optionSettings,omitempty" tf:"option_settings,omitempty"`
 
 	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of VPC Security Groups for which the option is enabled.
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
@@ -144,7 +144,7 @@ type OptionParameters struct {
 
 	// Port number when connecting to the option (e.g., 11211). Leaving out or removing port from your configuration does not remove or clear a port from the option in AWS. AWS may assign a default port. Not including port in your configuration means that the AWS provider will ignore a previously set value, a value set by AWS, and any port changes.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of VPC Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
@@ -220,8 +220,8 @@ type OptionGroupStatus struct {
 type OptionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || (has(self.initProvider) && has(self.initProvider.engineName))",message="spec.forProvider.engineName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion) || (has(self.initProvider) && has(self.initProvider.majorEngineVersion))",message="spec.forProvider.majorEngineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || has(self.initProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion) || has(self.initProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
 	Spec   OptionGroupSpec   `json:"spec"`
 	Status OptionGroupStatus `json:"status,omitempty"`
 }

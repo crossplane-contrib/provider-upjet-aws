@@ -405,10 +405,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.route is a required parameter
+            - message: route is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.route)
-                || (has(self.initProvider) && has(self.initProvider.route))'
+                || has(self.initProvider.route)'
           status:
             description: VoiceConnectorOriginationStatus defines the observed state
               of VoiceConnectorOrigination.

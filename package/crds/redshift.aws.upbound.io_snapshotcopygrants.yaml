@@ -346,10 +346,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.snapshotCopyGrantName is a required parameter
+            - message: snapshotCopyGrantName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.snapshotCopyGrantName)
-                || (has(self.initProvider) && has(self.initProvider.snapshotCopyGrantName))'
+                || has(self.initProvider.snapshotCopyGrantName)'
           status:
             description: SnapshotCopyGrantStatus defines the observed state of SnapshotCopyGrant.
             properties:

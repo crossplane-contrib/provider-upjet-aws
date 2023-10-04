@@ -456,14 +456,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.s3Config is a required parameter
+            - message: s3Config is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.s3Config)
-                || (has(self.initProvider) && has(self.initProvider.s3Config))'
-            - message: spec.forProvider.subdirectory is a required parameter
+                || has(self.initProvider.s3Config)'
+            - message: subdirectory is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.subdirectory)
-                || (has(self.initProvider) && has(self.initProvider.subdirectory))'
+                || has(self.initProvider.subdirectory)'
           status:
             description: LocationS3Status defines the observed state of LocationS3.
             properties:

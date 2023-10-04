@@ -327,7 +327,8 @@ spec:
                             crawler can traverse to discover the Hudi metadata folder
                             in your Amazon S3 path. Used to limit the crawler run
                             time. Valid values are between 1 and 20.
-                          type: number
+                          format: int64
+                          type: integer
                         paths:
                           description: One or more Amazon S3 paths that contains Hudi
                             metadata folders as s3://bucket/prefix.
@@ -356,7 +357,8 @@ spec:
                             crawler can traverse to discover the Hudi metadata folder
                             in your Amazon S3 path. Used to limit the crawler run
                             time. Valid values are between 1 and 20.
-                          type: number
+                          format: int64
+                          type: integer
                         paths:
                           description: One or more Amazon S3 paths that contains Hudi
                             metadata folders as s3://bucket/prefix.
@@ -880,7 +882,8 @@ spec:
                             crawler can traverse to discover the Hudi metadata folder
                             in your Amazon S3 path. Used to limit the crawler run
                             time. Valid values are between 1 and 20.
-                          type: number
+                          format: int64
+                          type: integer
                         paths:
                           description: One or more Amazon S3 paths that contains Hudi
                             metadata folders as s3://bucket/prefix.
@@ -909,7 +912,8 @@ spec:
                             crawler can traverse to discover the Hudi metadata folder
                             in your Amazon S3 path. Used to limit the crawler run
                             time. Valid values are between 1 and 20.
-                          type: number
+                          format: int64
+                          type: integer
                         paths:
                           description: One or more Amazon S3 paths that contains Hudi
                             metadata folders as s3://bucket/prefix.
@@ -1346,7 +1350,8 @@ spec:
                             crawler can traverse to discover the Hudi metadata folder
                             in your Amazon S3 path. Used to limit the crawler run
                             time. Valid values are between 1 and 20.
-                          type: number
+                          format: int64
+                          type: integer
                         paths:
                           description: One or more Amazon S3 paths that contains Hudi
                             metadata folders as s3://bucket/prefix.
@@ -1375,7 +1380,8 @@ spec:
                             crawler can traverse to discover the Hudi metadata folder
                             in your Amazon S3 path. Used to limit the crawler run
                             time. Valid values are between 1 and 20.
-                          type: number
+                          format: int64
+                          type: integer
                         paths:
                           description: One or more Amazon S3 paths that contains Hudi
                             metadata folders as s3://bucket/prefix.

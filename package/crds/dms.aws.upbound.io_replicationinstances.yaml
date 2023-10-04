@@ -603,10 +603,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.replicationInstanceClass is a required parameter
+            - message: replicationInstanceClass is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.replicationInstanceClass)
-                || (has(self.initProvider) && has(self.initProvider.replicationInstanceClass))'
+                || has(self.initProvider.replicationInstanceClass)'
           status:
             description: ReplicationInstanceStatus defines the observed state of ReplicationInstance.
             properties:

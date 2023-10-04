@@ -555,14 +555,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.rule is a required parameter
+                || has(self.initProvider.name)'
+            - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
-                || (has(self.initProvider) && has(self.initProvider.rule))'
+                || has(self.initProvider.rule)'
           status:
             description: PlanStatus defines the observed state of Plan.
             properties:

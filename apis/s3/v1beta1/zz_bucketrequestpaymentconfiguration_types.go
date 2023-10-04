@@ -103,7 +103,7 @@ type BucketRequestPaymentConfigurationStatus struct {
 type BucketRequestPaymentConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.payer) || (has(self.initProvider) && has(self.initProvider.payer))",message="spec.forProvider.payer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.payer) || has(self.initProvider.payer)",message="payer is a required parameter"
 	Spec   BucketRequestPaymentConfigurationSpec   `json:"spec"`
 	Status BucketRequestPaymentConfigurationStatus `json:"status,omitempty"`
 }

@@ -110,7 +110,7 @@ type InstanceRoleAssociationStatus struct {
 type InstanceRoleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureName) || (has(self.initProvider) && has(self.initProvider.featureName))",message="spec.forProvider.featureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureName) || has(self.initProvider.featureName)",message="featureName is a required parameter"
 	Spec   InstanceRoleAssociationSpec   `json:"spec"`
 	Status InstanceRoleAssociationStatus `json:"status,omitempty"`
 }

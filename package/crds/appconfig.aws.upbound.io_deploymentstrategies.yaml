@@ -325,23 +325,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.deploymentDurationInMinutes is a required
-                parameter
+            - message: deploymentDurationInMinutes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.deploymentDurationInMinutes)
-                || (has(self.initProvider) && has(self.initProvider.deploymentDurationInMinutes))'
-            - message: spec.forProvider.growthFactor is a required parameter
+                || has(self.initProvider.deploymentDurationInMinutes)'
+            - message: growthFactor is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.growthFactor)
-                || (has(self.initProvider) && has(self.initProvider.growthFactor))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.growthFactor)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.replicateTo is a required parameter
+                || has(self.initProvider.name)'
+            - message: replicateTo is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.replicateTo)
-                || (has(self.initProvider) && has(self.initProvider.replicateTo))'
+                || has(self.initProvider.replicateTo)'
           status:
             description: DeploymentStrategyStatus defines the observed state of DeploymentStrategy.
             properties:

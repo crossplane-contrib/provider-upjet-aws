@@ -361,10 +361,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.responseType is a required parameter
+            - message: responseType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.responseType)
-                || (has(self.initProvider) && has(self.initProvider.responseType))'
+                || has(self.initProvider.responseType)'
           status:
             description: GatewayResponseStatus defines the observed state of GatewayResponse.
             properties:

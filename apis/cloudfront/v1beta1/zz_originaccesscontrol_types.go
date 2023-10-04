@@ -119,10 +119,10 @@ type OriginAccessControlStatus struct {
 type OriginAccessControl struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType) || (has(self.initProvider) && has(self.initProvider.originAccessControlOriginType))",message="spec.forProvider.originAccessControlOriginType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingBehavior) || (has(self.initProvider) && has(self.initProvider.signingBehavior))",message="spec.forProvider.signingBehavior is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingProtocol) || (has(self.initProvider) && has(self.initProvider.signingProtocol))",message="spec.forProvider.signingProtocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType) || has(self.initProvider.originAccessControlOriginType)",message="originAccessControlOriginType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingBehavior) || has(self.initProvider.signingBehavior)",message="signingBehavior is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingProtocol) || has(self.initProvider.signingProtocol)",message="signingProtocol is a required parameter"
 	Spec   OriginAccessControlSpec   `json:"spec"`
 	Status OriginAccessControlStatus `json:"status,omitempty"`
 }

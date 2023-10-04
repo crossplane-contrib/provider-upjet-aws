@@ -409,10 +409,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.diskPath is a required parameter
+            - message: diskPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.diskPath)
-                || (has(self.initProvider) && has(self.initProvider.diskPath))'
+                || has(self.initProvider.diskPath)'
           status:
             description: DiskAttachmentStatus defines the observed state of DiskAttachment.
             properties:

@@ -291,18 +291,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.clientIdList is a required parameter
+            - message: clientIdList is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.clientIdList)
-                || (has(self.initProvider) && has(self.initProvider.clientIdList))'
-            - message: spec.forProvider.thumbprintList is a required parameter
+                || has(self.initProvider.clientIdList)'
+            - message: thumbprintList is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.thumbprintList)
-                || (has(self.initProvider) && has(self.initProvider.thumbprintList))'
-            - message: spec.forProvider.url is a required parameter
+                || has(self.initProvider.thumbprintList)'
+            - message: url is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.url)
-                || (has(self.initProvider) && has(self.initProvider.url))'
+                || has(self.initProvider.url)'
           status:
             description: OpenIDConnectProviderStatus defines the observed state of
               OpenIDConnectProvider.

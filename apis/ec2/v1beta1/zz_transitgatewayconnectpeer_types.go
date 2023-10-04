@@ -145,8 +145,8 @@ type TransitGatewayConnectPeerStatus struct {
 type TransitGatewayConnectPeer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.insideCidrBlocks) || (has(self.initProvider) && has(self.initProvider.insideCidrBlocks))",message="spec.forProvider.insideCidrBlocks is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAddress) || (has(self.initProvider) && has(self.initProvider.peerAddress))",message="spec.forProvider.peerAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.insideCidrBlocks) || has(self.initProvider.insideCidrBlocks)",message="insideCidrBlocks is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAddress) || has(self.initProvider.peerAddress)",message="peerAddress is a required parameter"
 	Spec   TransitGatewayConnectPeerSpec   `json:"spec"`
 	Status TransitGatewayConnectPeerStatus `json:"status,omitempty"`
 }

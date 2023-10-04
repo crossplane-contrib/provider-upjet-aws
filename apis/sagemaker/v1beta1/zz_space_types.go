@@ -385,7 +385,7 @@ type SpaceStatus struct {
 type Space struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.spaceName) || (has(self.initProvider) && has(self.initProvider.spaceName))",message="spec.forProvider.spaceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.spaceName) || has(self.initProvider.spaceName)",message="spaceName is a required parameter"
 	Spec   SpaceSpec   `json:"spec"`
 	Status SpaceStatus `json:"status,omitempty"`
 }

@@ -481,8 +481,8 @@ type BudgetStatus struct {
 type Budget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.budgetType) || (has(self.initProvider) && has(self.initProvider.budgetType))",message="spec.forProvider.budgetType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit) || (has(self.initProvider) && has(self.initProvider.timeUnit))",message="spec.forProvider.timeUnit is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.budgetType) || has(self.initProvider.budgetType)",message="budgetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit) || has(self.initProvider.timeUnit)",message="timeUnit is a required parameter"
 	Spec   BudgetSpec   `json:"spec"`
 	Status BudgetStatus `json:"status,omitempty"`
 }

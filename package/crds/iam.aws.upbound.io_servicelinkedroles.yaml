@@ -281,10 +281,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.awsServiceName is a required parameter
+            - message: awsServiceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.awsServiceName)
-                || (has(self.initProvider) && has(self.initProvider.awsServiceName))'
+                || has(self.initProvider.awsServiceName)'
           status:
             description: ServiceLinkedRoleStatus defines the observed state of ServiceLinkedRole.
             properties:

@@ -1080,18 +1080,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.flexibleTimeWindow is a required parameter
+            - message: flexibleTimeWindow is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.flexibleTimeWindow)
-                || (has(self.initProvider) && has(self.initProvider.flexibleTimeWindow))'
-            - message: spec.forProvider.scheduleExpression is a required parameter
+                || has(self.initProvider.flexibleTimeWindow)'
+            - message: scheduleExpression is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scheduleExpression)
-                || (has(self.initProvider) && has(self.initProvider.scheduleExpression))'
-            - message: spec.forProvider.target is a required parameter
+                || has(self.initProvider.scheduleExpression)'
+            - message: target is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.target)
-                || (has(self.initProvider) && has(self.initProvider.target))'
+                || has(self.initProvider.target)'
           status:
             description: ScheduleStatus defines the observed state of Schedule.
             properties:

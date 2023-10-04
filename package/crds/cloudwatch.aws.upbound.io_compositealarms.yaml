@@ -86,13 +86,15 @@ spec:
                             alarm waits after suppressor alarm goes out of the ALARM
                             state. After this time, the composite alarm performs its
                             actions.
-                          type: number
+                          format: int64
+                          type: integer
                         waitPeriod:
                           description: The maximum time in seconds that the composite
                             alarm waits for the suppressor alarm to go into the ALARM
                             state. After this time, the composite alarm performs its
                             actions.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   alarmActions:
@@ -321,13 +323,15 @@ spec:
                             alarm waits after suppressor alarm goes out of the ALARM
                             state. After this time, the composite alarm performs its
                             actions.
-                          type: number
+                          format: int64
+                          type: integer
                         waitPeriod:
                           description: The maximum time in seconds that the composite
                             alarm waits for the suppressor alarm to go into the ALARM
                             state. After this time, the composite alarm performs its
                             actions.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   alarmDescription:
@@ -513,10 +517,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.alarmRule is a required parameter
+            - message: alarmRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.alarmRule)
-                || (has(self.initProvider) && has(self.initProvider.alarmRule))'
+                || has(self.initProvider.alarmRule)'
           status:
             description: CompositeAlarmStatus defines the observed state of CompositeAlarm.
             properties:
@@ -541,13 +545,15 @@ spec:
                             alarm waits after suppressor alarm goes out of the ALARM
                             state. After this time, the composite alarm performs its
                             actions.
-                          type: number
+                          format: int64
+                          type: integer
                         waitPeriod:
                           description: The maximum time in seconds that the composite
                             alarm waits for the suppressor alarm to go into the ALARM
                             state. After this time, the composite alarm performs its
                             actions.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   alarmActions:

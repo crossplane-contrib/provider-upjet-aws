@@ -400,18 +400,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.platform is a required parameter
+                || has(self.initProvider.name)'
+            - message: platform is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.platform)
-                || (has(self.initProvider) && has(self.initProvider.platform))'
-            - message: spec.forProvider.version is a required parameter
+                || has(self.initProvider.platform)'
+            - message: version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
-                || (has(self.initProvider) && has(self.initProvider.version))'
+                || has(self.initProvider.version)'
           status:
             description: ComponentStatus defines the observed state of Component.
             properties:

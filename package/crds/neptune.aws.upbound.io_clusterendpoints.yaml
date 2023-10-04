@@ -372,10 +372,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.endpointType is a required parameter
+            - message: endpointType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointType)
-                || (has(self.initProvider) && has(self.initProvider.endpointType))'
+                || has(self.initProvider.endpointType)'
           status:
             description: ClusterEndpointStatus defines the observed state of ClusterEndpoint.
             properties:

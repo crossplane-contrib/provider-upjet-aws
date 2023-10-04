@@ -142,20 +142,20 @@ type CaptureOptionsParameters struct {
 type ClientConfigInitParameters struct {
 
 	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
-	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
+	MaxConcurrentInvocationsPerInstance *int64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
 type ClientConfigObservation struct {
 
 	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
-	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
+	MaxConcurrentInvocationsPerInstance *int64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
 type ClientConfigParameters struct {
 
 	// The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
 	// +kubebuilder:validation:Optional
-	MaxConcurrentInvocationsPerInstance *float64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
+	MaxConcurrentInvocationsPerInstance *int64 `json:"maxConcurrentInvocationsPerInstance,omitempty" tf:"max_concurrent_invocations_per_instance,omitempty"`
 }
 
 type CoreDumpConfigInitParameters struct {
@@ -202,7 +202,7 @@ type DataCaptureConfigInitParameters struct {
 	EnableCapture *bool `json:"enableCapture,omitempty" tf:"enable_capture,omitempty"`
 
 	// Portion of data to capture. Should be between 0 and 100.
-	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
+	InitialSamplingPercentage *int64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
 
 	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -223,7 +223,7 @@ type DataCaptureConfigObservation struct {
 	EnableCapture *bool `json:"enableCapture,omitempty" tf:"enable_capture,omitempty"`
 
 	// Portion of data to capture. Should be between 0 and 100.
-	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
+	InitialSamplingPercentage *int64 `json:"initialSamplingPercentage,omitempty" tf:"initial_sampling_percentage,omitempty"`
 
 	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -249,7 +249,7 @@ type DataCaptureConfigParameters struct {
 
 	// Portion of data to capture. Should be between 0 and 100.
 	// +kubebuilder:validation:Optional
-	InitialSamplingPercentage *float64 `json:"initialSamplingPercentage" tf:"initial_sampling_percentage,omitempty"`
+	InitialSamplingPercentage *int64 `json:"initialSamplingPercentage" tf:"initial_sampling_percentage,omitempty"`
 
 	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt the captured data on Amazon S3.
 	// +kubebuilder:validation:Optional
@@ -389,7 +389,7 @@ type ProductionVariantsInitParameters struct {
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
 	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
-	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+	ContainerStartupHealthCheckTimeoutInSeconds *int64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []CoreDumpConfigInitParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
@@ -398,7 +398,7 @@ type ProductionVariantsInitParameters struct {
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+	InitialInstanceCount *int64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
 	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float64 `json:"initialVariantWeight,omitempty" tf:"initial_variant_weight,omitempty"`
@@ -407,7 +407,7 @@ type ProductionVariantsInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
-	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+	ModelDataDownloadTimeoutInSeconds *int64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
@@ -416,7 +416,7 @@ type ProductionVariantsInitParameters struct {
 	VariantName *string `json:"variantName,omitempty" tf:"variant_name,omitempty"`
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
-	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+	VolumeSizeInGb *int64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ProductionVariantsObservation struct {
@@ -425,7 +425,7 @@ type ProductionVariantsObservation struct {
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
 	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
-	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+	ContainerStartupHealthCheckTimeoutInSeconds *int64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []CoreDumpConfigObservation `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
@@ -434,7 +434,7 @@ type ProductionVariantsObservation struct {
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+	InitialInstanceCount *int64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
 	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float64 `json:"initialVariantWeight,omitempty" tf:"initial_variant_weight,omitempty"`
@@ -443,7 +443,7 @@ type ProductionVariantsObservation struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
-	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+	ModelDataDownloadTimeoutInSeconds *int64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// The name of the model to use.
 	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
@@ -455,7 +455,7 @@ type ProductionVariantsObservation struct {
 	VariantName *string `json:"variantName,omitempty" tf:"variant_name,omitempty"`
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
-	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+	VolumeSizeInGb *int64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ProductionVariantsParameters struct {
@@ -466,7 +466,7 @@ type ProductionVariantsParameters struct {
 
 	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
-	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+	ContainerStartupHealthCheckTimeoutInSeconds *int64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	// +kubebuilder:validation:Optional
@@ -478,7 +478,7 @@ type ProductionVariantsParameters struct {
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+	InitialInstanceCount *int64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
 	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
 	// +kubebuilder:validation:Optional
@@ -490,7 +490,7 @@ type ProductionVariantsParameters struct {
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
-	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+	ModelDataDownloadTimeoutInSeconds *int64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// The name of the model to use.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Model
@@ -515,46 +515,46 @@ type ProductionVariantsParameters struct {
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
 	// +kubebuilder:validation:Optional
-	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+	VolumeSizeInGb *int64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ServerlessConfigInitParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *int64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
-	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *int64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
-	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
+	ProvisionedConcurrency *int64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ServerlessConfigObservation struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *int64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
-	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *int64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
-	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
+	ProvisionedConcurrency *int64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ServerlessConfigParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
 	// +kubebuilder:validation:Optional
-	MaxConcurrency *float64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *int64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	// +kubebuilder:validation:Optional
-	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *int64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
 	// +kubebuilder:validation:Optional
-	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
+	ProvisionedConcurrency *int64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
@@ -592,7 +592,7 @@ type ShadowProductionVariantsInitParameters struct {
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
 	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
-	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+	ContainerStartupHealthCheckTimeoutInSeconds *int64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigInitParameters `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
@@ -601,7 +601,7 @@ type ShadowProductionVariantsInitParameters struct {
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+	InitialInstanceCount *int64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
 	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float64 `json:"initialVariantWeight,omitempty" tf:"initial_variant_weight,omitempty"`
@@ -610,7 +610,7 @@ type ShadowProductionVariantsInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
-	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+	ModelDataDownloadTimeoutInSeconds *int64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// The name of the model to use.
 	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
@@ -622,7 +622,7 @@ type ShadowProductionVariantsInitParameters struct {
 	VariantName *string `json:"variantName,omitempty" tf:"variant_name,omitempty"`
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
-	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+	VolumeSizeInGb *int64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ShadowProductionVariantsObservation struct {
@@ -631,7 +631,7 @@ type ShadowProductionVariantsObservation struct {
 	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
 	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
-	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+	ContainerStartupHealthCheckTimeoutInSeconds *int64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	CoreDumpConfig []ShadowProductionVariantsCoreDumpConfigObservation `json:"coreDumpConfig,omitempty" tf:"core_dump_config,omitempty"`
@@ -640,7 +640,7 @@ type ShadowProductionVariantsObservation struct {
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+	InitialInstanceCount *int64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
 	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float64 `json:"initialVariantWeight,omitempty" tf:"initial_variant_weight,omitempty"`
@@ -649,7 +649,7 @@ type ShadowProductionVariantsObservation struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
-	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+	ModelDataDownloadTimeoutInSeconds *int64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// The name of the model to use.
 	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
@@ -661,7 +661,7 @@ type ShadowProductionVariantsObservation struct {
 	VariantName *string `json:"variantName,omitempty" tf:"variant_name,omitempty"`
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
-	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+	VolumeSizeInGb *int64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ShadowProductionVariantsParameters struct {
@@ -672,7 +672,7 @@ type ShadowProductionVariantsParameters struct {
 
 	// The timeout value, in seconds, for your inference container to pass health check by SageMaker Hosting. For more information about health check, see How Your Container Should Respond to Health Check (Ping) Requests. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
-	ContainerStartupHealthCheckTimeoutInSeconds *float64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
+	ContainerStartupHealthCheckTimeoutInSeconds *int64 `json:"containerStartupHealthCheckTimeoutInSeconds,omitempty" tf:"container_startup_health_check_timeout_in_seconds,omitempty"`
 
 	// Specifies configuration for a core dump from the model container when the process crashes. Fields are documented below.
 	// +kubebuilder:validation:Optional
@@ -684,7 +684,7 @@ type ShadowProductionVariantsParameters struct {
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+	InitialInstanceCount *int64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
 	// Determines initial traffic distribution among all of the models that you specify in the endpoint configuration. If unspecified, it defaults to 1.0.
 	// +kubebuilder:validation:Optional
@@ -696,7 +696,7 @@ type ShadowProductionVariantsParameters struct {
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
-	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+	ModelDataDownloadTimeoutInSeconds *int64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
 	// The name of the model to use.
 	// +kubebuilder:validation:Optional
@@ -712,46 +712,46 @@ type ShadowProductionVariantsParameters struct {
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
 	// +kubebuilder:validation:Optional
-	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+	VolumeSizeInGb *int64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
 type ShadowProductionVariantsServerlessConfigInitParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *int64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
-	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *int64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
-	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
+	ProvisionedConcurrency *int64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ShadowProductionVariantsServerlessConfigObservation struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
-	MaxConcurrency *float64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *int64 `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
-	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *int64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
-	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
+	ProvisionedConcurrency *int64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ShadowProductionVariantsServerlessConfigParameters struct {
 
 	// The maximum number of concurrent invocations your serverless endpoint can process. Valid values are between 1 and 200.
 	// +kubebuilder:validation:Optional
-	MaxConcurrency *float64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
+	MaxConcurrency *int64 `json:"maxConcurrency" tf:"max_concurrency,omitempty"`
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	// +kubebuilder:validation:Optional
-	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
+	MemorySizeInMb *int64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
 	// +kubebuilder:validation:Optional
-	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
+	ProvisionedConcurrency *int64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 // EndpointConfigurationSpec defines the desired state of EndpointConfiguration
@@ -790,7 +790,7 @@ type EndpointConfigurationStatus struct {
 type EndpointConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productionVariants) || (has(self.initProvider) && has(self.initProvider.productionVariants))",message="spec.forProvider.productionVariants is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productionVariants) || has(self.initProvider.productionVariants)",message="productionVariants is a required parameter"
 	Spec   EndpointConfigurationSpec   `json:"spec"`
 	Status EndpointConfigurationStatus `json:"status,omitempty"`
 }

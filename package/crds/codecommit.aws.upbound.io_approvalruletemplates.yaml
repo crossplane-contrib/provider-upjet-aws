@@ -265,10 +265,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.content is a required parameter
+            - message: content is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.content)
-                || (has(self.initProvider) && has(self.initProvider.content))'
+                || has(self.initProvider.content)'
           status:
             description: ApprovalRuleTemplateStatus defines the observed state of
               ApprovalRuleTemplate.

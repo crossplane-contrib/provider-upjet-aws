@@ -156,7 +156,7 @@ type TriggerStatus struct {
 type Trigger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trigger) || (has(self.initProvider) && has(self.initProvider.trigger))",message="spec.forProvider.trigger is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trigger) || has(self.initProvider.trigger)",message="trigger is a required parameter"
 	Spec   TriggerSpec   `json:"spec"`
 	Status TriggerStatus `json:"status,omitempty"`
 }

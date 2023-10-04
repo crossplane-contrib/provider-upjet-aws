@@ -93,7 +93,8 @@ spec:
                               iops:
                                 description: The amount of provisioned IOPS. This
                                   must be set with a volume_type of "io1/io2/gp3".
-                                type: number
+                                format: int64
+                                type: integer
                               kmsKeyId:
                                 description: The ARN of the AWS Key Management Service
                                   (AWS KMS) customer master key (CMK) to use when
@@ -187,10 +188,12 @@ spec:
                                 description: The throughput to provision for a gp3
                                   volume in MiB/s (specified as an integer, e.g.,
                                   500), with a maximum of 1,000 MiB/s.
-                                type: number
+                                format: int64
+                                type: integer
                               volumeSize:
                                 description: The size of the volume in gigabytes.
-                                type: number
+                                format: int64
+                                type: integer
                               volumeType:
                                 description: The volume type. Can be one of standard,
                                   gp2, gp3, io1, io2, sc1 or st1.
@@ -244,13 +247,15 @@ spec:
                           type: string
                         coreCount:
                           description: The number of CPU cores for the instance.
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
                           description: The number of threads per CPU core. To disable
                             Intel Hyper-Threading Technology for the instance, specify
                             a value of 1. Otherwise, specify the default value of
                             2.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   creditSpecification:
@@ -267,7 +272,8 @@ spec:
                     type: array
                   defaultVersion:
                     description: Default Version of the launch template.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: Description of the launch template.
                     type: string
@@ -515,7 +521,8 @@ spec:
                               blockDurationMinutes:
                                 description: The required duration in minutes. This
                                   value must be a multiple of 60.
-                                type: number
+                                format: int64
+                                type: integer
                               instanceInterruptionBehavior:
                                 description: 'The behavior when a Spot Instance is
                                   interrupted. Can be hibernate, stop, or terminate.
@@ -549,10 +556,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         acceleratorManufacturers:
@@ -573,10 +582,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         acceleratorTypes:
@@ -612,10 +623,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         burstablePerformance:
@@ -681,10 +694,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         networkBandwidthGbps:
@@ -708,10 +723,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         onDemandMaxPricePercentageOverLowestPrice:
@@ -725,7 +742,8 @@ spec:
                             an integer, which Amazon EC2 Auto Scaling interprets as
                             a percentage. To turn off price protection, specify a
                             high value, such as 999999. Default is 20.
-                          type: number
+                          format: int64
+                          type: integer
                         requireHibernateSupport:
                           description: Indicate whether instance types must support
                             On-Demand Instance Hibernation, either true or false.
@@ -742,7 +760,8 @@ spec:
                             Amazon EC2 Auto Scaling interprets as a percentage. To
                             turn off price protection, specify a high value, such
                             as 999999. Default is 100.
-                          type: number
+                          format: int64
+                          type: integer
                         totalLocalStorageGb:
                           description: Block describing the minimum and maximum total
                             local storage (GB). Default is no minimum or maximum.
@@ -763,10 +782,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -821,7 +842,8 @@ spec:
                             instance metadata requests. The larger the number, the
                             further instance metadata requests can travel. Can be
                             an integer from 1 to 64. (Default: 1).'
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           description: 'Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
@@ -875,7 +897,8 @@ spec:
                         deviceIndex:
                           description: The integer index of the network interface
                             attachment.
-                          type: number
+                          format: int64
+                          type: integer
                         interfaceType:
                           description: The type of network interface. To create an
                             Elastic Fabric Adapter (EFA), specify efa.
@@ -883,7 +906,8 @@ spec:
                         ipv4AddressCount:
                           description: The number of secondary private IPv4 addresses
                             to assign to a network interface. Conflicts with ipv4_addresses
-                          type: number
+                          format: int64
+                          type: integer
                         ipv4Addresses:
                           description: One or more private IPv4 addresses to associate.
                             Conflicts with ipv4_address_count
@@ -893,7 +917,8 @@ spec:
                         ipv4PrefixCount:
                           description: The number of IPv4 prefixes to be automatically
                             assigned to the network interface. Conflicts with ipv4_prefixes
-                          type: number
+                          format: int64
+                          type: integer
                         ipv4Prefixes:
                           description: One or more IPv4 prefixes to be assigned to
                             the network interface. Conflicts with ipv4_prefix_count
@@ -903,7 +928,8 @@ spec:
                         ipv6AddressCount:
                           description: The number of IPv6 addresses to assign to a
                             network interface. Conflicts with ipv6_addresses
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Addresses:
                           description: One or more specific IPv6 addresses from the
                             IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
@@ -913,7 +939,8 @@ spec:
                         ipv6PrefixCount:
                           description: The number of IPv6 prefixes to be automatically
                             assigned to the network interface. Conflicts with ipv6_prefixes
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Prefixes:
                           description: One or more IPv6 prefixes to be assigned to
                             the network interface. Conflicts with ipv6_prefix_count
@@ -925,7 +952,8 @@ spec:
                             types support multiple network cards. The primary network
                             interface must be assigned to network card index 0. The
                             default is network card index 0.
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: The ID of the network interface to attach.
                           type: string
@@ -1203,7 +1231,8 @@ spec:
                           description: The number of the partition the instance should
                             launch in. Valid only if the placement group strategy
                             is set to partition.
-                          type: number
+                          format: int64
+                          type: integer
                         spreadDomain:
                           description: Reserved for future use.
                           type: string
@@ -1481,7 +1510,8 @@ spec:
                               iops:
                                 description: The amount of provisioned IOPS. This
                                   must be set with a volume_type of "io1/io2/gp3".
-                                type: number
+                                format: int64
+                                type: integer
                               snapshotId:
                                 description: The Snapshot ID to mount.
                                 type: string
@@ -1489,10 +1519,12 @@ spec:
                                 description: The throughput to provision for a gp3
                                   volume in MiB/s (specified as an integer, e.g.,
                                   500), with a maximum of 1,000 MiB/s.
-                                type: number
+                                format: int64
+                                type: integer
                               volumeSize:
                                 description: The size of the volume in gigabytes.
-                                type: number
+                                format: int64
+                                type: integer
                               volumeType:
                                 description: The volume type. Can be one of standard,
                                   gp2, gp3, io1, io2, sc1 or st1.
@@ -1546,13 +1578,15 @@ spec:
                           type: string
                         coreCount:
                           description: The number of CPU cores for the instance.
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
                           description: The number of threads per CPU core. To disable
                             Intel Hyper-Threading Technology for the instance, specify
                             a value of 1. Otherwise, specify the default value of
                             2.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   creditSpecification:
@@ -1569,7 +1603,8 @@ spec:
                     type: array
                   defaultVersion:
                     description: Default Version of the launch template.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: Description of the launch template.
                     type: string
@@ -1653,7 +1688,8 @@ spec:
                               blockDurationMinutes:
                                 description: The required duration in minutes. This
                                   value must be a multiple of 60.
-                                type: number
+                                format: int64
+                                type: integer
                               instanceInterruptionBehavior:
                                 description: 'The behavior when a Spot Instance is
                                   interrupted. Can be hibernate, stop, or terminate.
@@ -1687,10 +1723,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         acceleratorManufacturers:
@@ -1711,10 +1749,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         acceleratorTypes:
@@ -1750,10 +1790,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         burstablePerformance:
@@ -1819,10 +1861,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         networkBandwidthGbps:
@@ -1846,10 +1890,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         onDemandMaxPricePercentageOverLowestPrice:
@@ -1863,7 +1909,8 @@ spec:
                             an integer, which Amazon EC2 Auto Scaling interprets as
                             a percentage. To turn off price protection, specify a
                             high value, such as 999999. Default is 20.
-                          type: number
+                          format: int64
+                          type: integer
                         requireHibernateSupport:
                           description: Indicate whether instance types must support
                             On-Demand Instance Hibernation, either true or false.
@@ -1880,7 +1927,8 @@ spec:
                             Amazon EC2 Auto Scaling interprets as a percentage. To
                             turn off price protection, specify a high value, such
                             as 999999. Default is 100.
-                          type: number
+                          format: int64
+                          type: integer
                         totalLocalStorageGb:
                           description: Block describing the minimum and maximum total
                             local storage (GB). Default is no minimum or maximum.
@@ -1901,10 +1949,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -1959,7 +2009,8 @@ spec:
                             instance metadata requests. The larger the number, the
                             further instance metadata requests can travel. Can be
                             an integer from 1 to 64. (Default: 1).'
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           description: 'Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
@@ -2013,7 +2064,8 @@ spec:
                         deviceIndex:
                           description: The integer index of the network interface
                             attachment.
-                          type: number
+                          format: int64
+                          type: integer
                         interfaceType:
                           description: The type of network interface. To create an
                             Elastic Fabric Adapter (EFA), specify efa.
@@ -2021,7 +2073,8 @@ spec:
                         ipv4AddressCount:
                           description: The number of secondary private IPv4 addresses
                             to assign to a network interface. Conflicts with ipv4_addresses
-                          type: number
+                          format: int64
+                          type: integer
                         ipv4Addresses:
                           description: One or more private IPv4 addresses to associate.
                             Conflicts with ipv4_address_count
@@ -2031,7 +2084,8 @@ spec:
                         ipv4PrefixCount:
                           description: The number of IPv4 prefixes to be automatically
                             assigned to the network interface. Conflicts with ipv4_prefixes
-                          type: number
+                          format: int64
+                          type: integer
                         ipv4Prefixes:
                           description: One or more IPv4 prefixes to be assigned to
                             the network interface. Conflicts with ipv4_prefix_count
@@ -2041,7 +2095,8 @@ spec:
                         ipv6AddressCount:
                           description: The number of IPv6 addresses to assign to a
                             network interface. Conflicts with ipv6_addresses
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Addresses:
                           description: One or more specific IPv6 addresses from the
                             IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
@@ -2051,7 +2106,8 @@ spec:
                         ipv6PrefixCount:
                           description: The number of IPv6 prefixes to be automatically
                             assigned to the network interface. Conflicts with ipv6_prefixes
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Prefixes:
                           description: One or more IPv6 prefixes to be assigned to
                             the network interface. Conflicts with ipv6_prefix_count
@@ -2063,7 +2119,8 @@ spec:
                             types support multiple network cards. The primary network
                             interface must be assigned to network card index 0. The
                             default is network card index 0.
-                          type: number
+                          format: int64
+                          type: integer
                         privateIpAddress:
                           description: The primary private IPv4 address.
                           type: string
@@ -2095,7 +2152,8 @@ spec:
                           description: The number of the partition the instance should
                             launch in. Valid only if the placement group strategy
                             is set to partition.
-                          type: number
+                          format: int64
+                          type: integer
                         spreadDomain:
                           description: Reserved for future use.
                           type: string
@@ -2355,7 +2413,8 @@ spec:
                               iops:
                                 description: The amount of provisioned IOPS. This
                                   must be set with a volume_type of "io1/io2/gp3".
-                                type: number
+                                format: int64
+                                type: integer
                               kmsKeyId:
                                 description: The ARN of the AWS Key Management Service
                                   (AWS KMS) customer master key (CMK) to use when
@@ -2369,10 +2428,12 @@ spec:
                                 description: The throughput to provision for a gp3
                                   volume in MiB/s (specified as an integer, e.g.,
                                   500), with a maximum of 1,000 MiB/s.
-                                type: number
+                                format: int64
+                                type: integer
                               volumeSize:
                                 description: The size of the volume in gigabytes.
-                                type: number
+                                format: int64
+                                type: integer
                               volumeType:
                                 description: The volume type. Can be one of standard,
                                   gp2, gp3, io1, io2, sc1 or st1.
@@ -2426,13 +2487,15 @@ spec:
                           type: string
                         coreCount:
                           description: The number of CPU cores for the instance.
-                          type: number
+                          format: int64
+                          type: integer
                         threadsPerCore:
                           description: The number of threads per CPU core. To disable
                             Intel Hyper-Threading Technology for the instance, specify
                             a value of 1. Otherwise, specify the default value of
                             2.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   creditSpecification:
@@ -2449,7 +2512,8 @@ spec:
                     type: array
                   defaultVersion:
                     description: Default Version of the launch template.
-                    type: number
+                    format: int64
+                    type: integer
                   description:
                     description: Description of the launch template.
                     type: string
@@ -2544,7 +2608,8 @@ spec:
                               blockDurationMinutes:
                                 description: The required duration in minutes. This
                                   value must be a multiple of 60.
-                                type: number
+                                format: int64
+                                type: integer
                               instanceInterruptionBehavior:
                                 description: 'The behavior when a Spot Instance is
                                   interrupted. Can be hibernate, stop, or terminate.
@@ -2578,10 +2643,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         acceleratorManufacturers:
@@ -2602,10 +2669,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         acceleratorTypes:
@@ -2641,10 +2710,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         burstablePerformance:
@@ -2710,10 +2781,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         networkBandwidthGbps:
@@ -2737,10 +2810,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                         onDemandMaxPricePercentageOverLowestPrice:
@@ -2754,7 +2829,8 @@ spec:
                             an integer, which Amazon EC2 Auto Scaling interprets as
                             a percentage. To turn off price protection, specify a
                             high value, such as 999999. Default is 20.
-                          type: number
+                          format: int64
+                          type: integer
                         requireHibernateSupport:
                           description: Indicate whether instance types must support
                             On-Demand Instance Hibernation, either true or false.
@@ -2771,7 +2847,8 @@ spec:
                             Amazon EC2 Auto Scaling interprets as a percentage. To
                             turn off price protection, specify a high value, such
                             as 999999. Default is 100.
-                          type: number
+                          format: int64
+                          type: integer
                         totalLocalStorageGb:
                           description: Block describing the minimum and maximum total
                             local storage (GB). Default is no minimum or maximum.
@@ -2792,10 +2869,12 @@ spec:
                             properties:
                               max:
                                 description: Maximum.
-                                type: number
+                                format: int64
+                                type: integer
                               min:
                                 description: Minimum.
-                                type: number
+                                format: int64
+                                type: integer
                             type: object
                           type: array
                       type: object
@@ -2812,7 +2891,8 @@ spec:
                     type: string
                   latestVersion:
                     description: The latest version of the launch template.
-                    type: number
+                    format: int64
+                    type: integer
                   licenseSpecification:
                     description: A list of license specifications to associate with.
                       See License Specification below for more details.
@@ -2853,7 +2933,8 @@ spec:
                             instance metadata requests. The larger the number, the
                             further instance metadata requests can travel. Can be
                             an integer from 1 to 64. (Default: 1).'
-                          type: number
+                          format: int64
+                          type: integer
                         httpTokens:
                           description: 'Whether or not the metadata service requires
                             session tokens, also referred to as Instance Metadata
@@ -2907,7 +2988,8 @@ spec:
                         deviceIndex:
                           description: The integer index of the network interface
                             attachment.
-                          type: number
+                          format: int64
+                          type: integer
                         interfaceType:
                           description: The type of network interface. To create an
                             Elastic Fabric Adapter (EFA), specify efa.
@@ -2915,7 +2997,8 @@ spec:
                         ipv4AddressCount:
                           description: The number of secondary private IPv4 addresses
                             to assign to a network interface. Conflicts with ipv4_addresses
-                          type: number
+                          format: int64
+                          type: integer
                         ipv4Addresses:
                           description: One or more private IPv4 addresses to associate.
                             Conflicts with ipv4_address_count
@@ -2925,7 +3008,8 @@ spec:
                         ipv4PrefixCount:
                           description: The number of IPv4 prefixes to be automatically
                             assigned to the network interface. Conflicts with ipv4_prefixes
-                          type: number
+                          format: int64
+                          type: integer
                         ipv4Prefixes:
                           description: One or more IPv4 prefixes to be assigned to
                             the network interface. Conflicts with ipv4_prefix_count
@@ -2935,7 +3019,8 @@ spec:
                         ipv6AddressCount:
                           description: The number of IPv6 addresses to assign to a
                             network interface. Conflicts with ipv6_addresses
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Addresses:
                           description: One or more specific IPv6 addresses from the
                             IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
@@ -2945,7 +3030,8 @@ spec:
                         ipv6PrefixCount:
                           description: The number of IPv6 prefixes to be automatically
                             assigned to the network interface. Conflicts with ipv6_prefixes
-                          type: number
+                          format: int64
+                          type: integer
                         ipv6Prefixes:
                           description: One or more IPv6 prefixes to be assigned to
                             the network interface. Conflicts with ipv6_prefix_count
@@ -2957,7 +3043,8 @@ spec:
                             types support multiple network cards. The primary network
                             interface must be assigned to network card index 0. The
                             default is network card index 0.
-                          type: number
+                          format: int64
+                          type: integer
                         networkInterfaceId:
                           description: The ID of the network interface to attach.
                           type: string
@@ -3000,7 +3087,8 @@ spec:
                           description: The number of the partition the instance should
                             launch in. Valid only if the placement group strategy
                             is set to partition.
-                          type: number
+                          format: int64
+                          type: integer
                         spreadDomain:
                           description: Reserved for future use.
                           type: string

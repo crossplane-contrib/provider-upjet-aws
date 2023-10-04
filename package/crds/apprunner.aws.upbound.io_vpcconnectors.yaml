@@ -436,10 +436,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.vpcConnectorName is a required parameter
+            - message: vpcConnectorName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcConnectorName)
-                || (has(self.initProvider) && has(self.initProvider.vpcConnectorName))'
+                || has(self.initProvider.vpcConnectorName)'
           status:
             description: VPCConnectorStatus defines the observed state of VPCConnector.
             properties:

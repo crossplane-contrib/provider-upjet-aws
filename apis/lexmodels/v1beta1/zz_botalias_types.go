@@ -198,8 +198,8 @@ type BotAliasStatus struct {
 type BotAlias struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botName) || (has(self.initProvider) && has(self.initProvider.botName))",message="spec.forProvider.botName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botVersion) || (has(self.initProvider) && has(self.initProvider.botVersion))",message="spec.forProvider.botVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botName) || has(self.initProvider.botName)",message="botName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.botVersion) || has(self.initProvider.botVersion)",message="botVersion is a required parameter"
 	Spec   BotAliasSpec   `json:"spec"`
 	Status BotAliasStatus `json:"status,omitempty"`
 }

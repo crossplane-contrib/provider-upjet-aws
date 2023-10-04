@@ -282,14 +282,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.destination is a required parameter
+            - message: destination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)
-                || (has(self.initProvider) && has(self.initProvider.destination))'
-            - message: spec.forProvider.source is a required parameter
+                || has(self.initProvider.destination)'
+            - message: source is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.source)
-                || (has(self.initProvider) && has(self.initProvider.source))'
+                || has(self.initProvider.source)'
           status:
             description: NetworkPerformanceMetricSubscriptionStatus defines the observed
               state of NetworkPerformanceMetricSubscription.

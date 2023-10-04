@@ -637,18 +637,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.defaultAction is a required parameter
+            - message: defaultAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultAction)
-                || (has(self.initProvider) && has(self.initProvider.defaultAction))'
-            - message: spec.forProvider.metricName is a required parameter
+                || has(self.initProvider.defaultAction)'
+            - message: metricName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.metricName)
-                || (has(self.initProvider) && has(self.initProvider.metricName))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.metricName)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: WebACLStatus defines the observed state of WebACL.
             properties:

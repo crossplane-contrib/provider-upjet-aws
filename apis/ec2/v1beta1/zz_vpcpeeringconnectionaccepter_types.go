@@ -14,10 +14,6 @@ import (
 )
 
 type VPCPeeringConnectionAccepterAccepterInitParameters struct {
-
-	// Indicates whether a local VPC can resolve public DNS hostnames to
-	// private IP addresses when queried from instances in a peer VPC.
-	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterAccepterObservation struct {
@@ -28,25 +24,12 @@ type VPCPeeringConnectionAccepterAccepterObservation struct {
 }
 
 type VPCPeeringConnectionAccepterAccepterParameters struct {
-
-	// Indicates whether a local VPC can resolve public DNS hostnames to
-	// private IP addresses when queried from instances in a peer VPC.
-	// +kubebuilder:validation:Optional
-	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterInitParameters struct {
 
-	// A configuration block that describes [VPC Peering Connection]
-	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the accepter VPC.
-	Accepter []VPCPeeringConnectionAccepterAccepterInitParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
-
 	// Whether or not to accept the peering request. Defaults to false.
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
-
-	// A configuration block that describes [VPC Peering Connection]
-	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the requester VPC.
-	Requester []VPCPeeringConnectionAccepterRequesterInitParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -95,11 +78,6 @@ type VPCPeeringConnectionAccepterObservation struct {
 
 type VPCPeeringConnectionAccepterParameters struct {
 
-	// A configuration block that describes [VPC Peering Connection]
-	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the accepter VPC.
-	// +kubebuilder:validation:Optional
-	Accepter []VPCPeeringConnectionAccepterAccepterParameters `json:"accepter,omitempty" tf:"accepter,omitempty"`
-
 	// Whether or not to accept the peering request. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
@@ -108,11 +86,6 @@ type VPCPeeringConnectionAccepterParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
-
-	// A configuration block that describes [VPC Peering Connection]
-	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options set for the requester VPC.
-	// +kubebuilder:validation:Optional
-	Requester []VPCPeeringConnectionAccepterRequesterParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -134,10 +107,6 @@ type VPCPeeringConnectionAccepterParameters struct {
 }
 
 type VPCPeeringConnectionAccepterRequesterInitParameters struct {
-
-	// Indicates whether a local VPC can resolve public DNS hostnames to
-	// private IP addresses when queried from instances in a peer VPC.
-	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 type VPCPeeringConnectionAccepterRequesterObservation struct {
@@ -148,11 +117,6 @@ type VPCPeeringConnectionAccepterRequesterObservation struct {
 }
 
 type VPCPeeringConnectionAccepterRequesterParameters struct {
-
-	// Indicates whether a local VPC can resolve public DNS hostnames to
-	// private IP addresses when queried from instances in a peer VPC.
-	// +kubebuilder:validation:Optional
-	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
 }
 
 // VPCPeeringConnectionAccepterSpec defines the desired state of VPCPeeringConnectionAccepter

@@ -644,11 +644,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.certificateAuthorityConfiguration is a required
-                parameter
+            - message: certificateAuthorityConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.certificateAuthorityConfiguration)
-                || (has(self.initProvider) && has(self.initProvider.certificateAuthorityConfiguration))'
+                || has(self.initProvider.certificateAuthorityConfiguration)'
           status:
             description: CertificateAuthorityStatus defines the observed state of
               CertificateAuthority.

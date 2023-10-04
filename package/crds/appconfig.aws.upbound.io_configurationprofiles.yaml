@@ -506,14 +506,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.locationUri is a required parameter
+            - message: locationUri is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.locationUri)
-                || (has(self.initProvider) && has(self.initProvider.locationUri))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.locationUri)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: ConfigurationProfileStatus defines the observed state of
               ConfigurationProfile.

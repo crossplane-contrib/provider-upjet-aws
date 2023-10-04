@@ -1426,18 +1426,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.capacity is a required parameter
+            - message: capacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.capacity)
-                || (has(self.initProvider) && has(self.initProvider.capacity))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.capacity)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.type is a required parameter
+                || has(self.initProvider.name)'
+            - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || (has(self.initProvider) && has(self.initProvider.type))'
+                || has(self.initProvider.type)'
           status:
             description: RuleGroupStatus defines the observed state of RuleGroup.
             properties:

@@ -375,14 +375,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.callingRegions is a required parameter
+            - message: callingRegions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.callingRegions)
-                || (has(self.initProvider) && has(self.initProvider.callingRegions))'
-            - message: spec.forProvider.cidrAllowList is a required parameter
+                || has(self.initProvider.callingRegions)'
+            - message: cidrAllowList is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.cidrAllowList)
-                || (has(self.initProvider) && has(self.initProvider.cidrAllowList))'
+                || has(self.initProvider.cidrAllowList)'
           status:
             description: VoiceConnectorTerminationStatus defines the observed state
               of VoiceConnectorTermination.

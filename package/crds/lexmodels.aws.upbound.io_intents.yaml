@@ -1063,10 +1063,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.fulfillmentActivity is a required parameter
+            - message: fulfillmentActivity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.fulfillmentActivity)
-                || (has(self.initProvider) && has(self.initProvider.fulfillmentActivity))'
+                || has(self.initProvider.fulfillmentActivity)'
           status:
             description: IntentStatus defines the observed state of Intent.
             properties:

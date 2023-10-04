@@ -367,10 +367,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.functionVersion is a required parameter
+            - message: functionVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.functionVersion)
-                || (has(self.initProvider) && has(self.initProvider.functionVersion))'
+                || has(self.initProvider.functionVersion)'
           status:
             description: AliasStatus defines the observed state of Alias.
             properties:

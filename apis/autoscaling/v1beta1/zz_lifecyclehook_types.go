@@ -148,7 +148,7 @@ type LifecycleHookStatus struct {
 type LifecycleHook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lifecycleTransition) || (has(self.initProvider) && has(self.initProvider.lifecycleTransition))",message="spec.forProvider.lifecycleTransition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lifecycleTransition) || has(self.initProvider.lifecycleTransition)",message="lifecycleTransition is a required parameter"
 	Spec   LifecycleHookSpec   `json:"spec"`
 	Status LifecycleHookStatus `json:"status,omitempty"`
 }

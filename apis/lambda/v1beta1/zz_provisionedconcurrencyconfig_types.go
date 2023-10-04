@@ -106,9 +106,9 @@ type ProvisionedConcurrencyConfigStatus struct {
 type ProvisionedConcurrencyConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName) || (has(self.initProvider) && has(self.initProvider.functionName))",message="spec.forProvider.functionName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.provisionedConcurrentExecutions) || (has(self.initProvider) && has(self.initProvider.provisionedConcurrentExecutions))",message="spec.forProvider.provisionedConcurrentExecutions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.qualifier) || (has(self.initProvider) && has(self.initProvider.qualifier))",message="spec.forProvider.qualifier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName) || has(self.initProvider.functionName)",message="functionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.provisionedConcurrentExecutions) || has(self.initProvider.provisionedConcurrentExecutions)",message="provisionedConcurrentExecutions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.qualifier) || has(self.initProvider.qualifier)",message="qualifier is a required parameter"
 	Spec   ProvisionedConcurrencyConfigSpec   `json:"spec"`
 	Status ProvisionedConcurrencyConfigStatus `json:"status,omitempty"`
 }

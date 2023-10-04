@@ -277,7 +277,7 @@ type UserHierarchyStructureStatus struct {
 type UserHierarchyStructure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hierarchyStructure) || (has(self.initProvider) && has(self.initProvider.hierarchyStructure))",message="spec.forProvider.hierarchyStructure is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hierarchyStructure) || has(self.initProvider.hierarchyStructure)",message="hierarchyStructure is a required parameter"
 	Spec   UserHierarchyStructureSpec   `json:"spec"`
 	Status UserHierarchyStructureStatus `json:"status,omitempty"`
 }

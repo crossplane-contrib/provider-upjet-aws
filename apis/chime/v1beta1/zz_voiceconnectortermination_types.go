@@ -133,8 +133,8 @@ type VoiceConnectorTerminationStatus struct {
 type VoiceConnectorTermination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.callingRegions) || (has(self.initProvider) && has(self.initProvider.callingRegions))",message="spec.forProvider.callingRegions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrAllowList) || (has(self.initProvider) && has(self.initProvider.cidrAllowList))",message="spec.forProvider.cidrAllowList is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.callingRegions) || has(self.initProvider.callingRegions)",message="callingRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrAllowList) || has(self.initProvider.cidrAllowList)",message="cidrAllowList is a required parameter"
 	Spec   VoiceConnectorTerminationSpec   `json:"spec"`
 	Status VoiceConnectorTerminationStatus `json:"status,omitempty"`
 }

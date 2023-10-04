@@ -425,10 +425,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.notificationType is a required parameter
+            - message: notificationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.notificationType)
-                || (has(self.initProvider) && has(self.initProvider.notificationType))'
+                || has(self.initProvider.notificationType)'
           status:
             description: IdentityNotificationTopicStatus defines the observed state
               of IdentityNotificationTopic.

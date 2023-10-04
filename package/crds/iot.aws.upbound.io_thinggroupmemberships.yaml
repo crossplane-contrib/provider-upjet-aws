@@ -275,14 +275,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.thingGroupName is a required parameter
+            - message: thingGroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.thingGroupName)
-                || (has(self.initProvider) && has(self.initProvider.thingGroupName))'
-            - message: spec.forProvider.thingName is a required parameter
+                || has(self.initProvider.thingGroupName)'
+            - message: thingName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.thingName)
-                || (has(self.initProvider) && has(self.initProvider.thingName))'
+                || has(self.initProvider.thingName)'
           status:
             description: ThingGroupMembershipStatus defines the observed state of
               ThingGroupMembership.

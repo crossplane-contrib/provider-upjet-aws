@@ -726,7 +726,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.NumberOfBrokerNodes != nil {
 		in, out := &in.NumberOfBrokerNodes, &out.NumberOfBrokerNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpenMonitoring != nil {
@@ -921,7 +921,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.NumberOfBrokerNodes != nil {
 		in, out := &in.NumberOfBrokerNodes, &out.NumberOfBrokerNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpenMonitoring != nil {
@@ -1045,7 +1045,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.NumberOfBrokerNodes != nil {
 		in, out := &in.NumberOfBrokerNodes, &out.NumberOfBrokerNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpenMonitoring != nil {
@@ -1160,7 +1160,7 @@ func (in *ConfigurationInfoInitParameters) DeepCopyInto(out *ConfigurationInfoIn
 	*out = *in
 	if in.Revision != nil {
 		in, out := &in.Revision, &out.Revision
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1185,7 +1185,7 @@ func (in *ConfigurationInfoObservation) DeepCopyInto(out *ConfigurationInfoObser
 	}
 	if in.Revision != nil {
 		in, out := &in.Revision, &out.Revision
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1220,7 +1220,7 @@ func (in *ConfigurationInfoParameters) DeepCopyInto(out *ConfigurationInfoParame
 	}
 	if in.Revision != nil {
 		in, out := &in.Revision, &out.Revision
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1339,7 +1339,7 @@ func (in *ConfigurationObservation) DeepCopyInto(out *ConfigurationObservation) 
 	}
 	if in.LatestRevision != nil {
 		in, out := &in.LatestRevision, &out.LatestRevision
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1544,7 +1544,7 @@ func (in *EBSStorageInfoInitParameters) DeepCopyInto(out *EBSStorageInfoInitPara
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1571,7 +1571,7 @@ func (in *EBSStorageInfoObservation) DeepCopyInto(out *EBSStorageInfoObservation
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1598,7 +1598,7 @@ func (in *EBSStorageInfoParameters) DeepCopyInto(out *EBSStorageInfoParameters) 
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2203,7 +2203,7 @@ func (in *ProvisionedThroughputInitParameters) DeepCopyInto(out *ProvisionedThro
 	}
 	if in.VolumeThroughput != nil {
 		in, out := &in.VolumeThroughput, &out.VolumeThroughput
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2228,7 +2228,7 @@ func (in *ProvisionedThroughputObservation) DeepCopyInto(out *ProvisionedThrough
 	}
 	if in.VolumeThroughput != nil {
 		in, out := &in.VolumeThroughput, &out.VolumeThroughput
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -2253,7 +2253,7 @@ func (in *ProvisionedThroughputParameters) DeepCopyInto(out *ProvisionedThroughp
 	}
 	if in.VolumeThroughput != nil {
 		in, out := &in.VolumeThroughput, &out.VolumeThroughput
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

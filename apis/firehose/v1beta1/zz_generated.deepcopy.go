@@ -854,7 +854,7 @@ func (in *DynamicPartitioningConfigurationInitParameters) DeepCopyInto(out *Dyna
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -879,7 +879,7 @@ func (in *DynamicPartitioningConfigurationObservation) DeepCopyInto(out *Dynamic
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -904,7 +904,7 @@ func (in *DynamicPartitioningConfigurationParameters) DeepCopyInto(out *DynamicP
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -924,12 +924,12 @@ func (in *ElasticsearchConfigurationInitParameters) DeepCopyInto(out *Elasticsea
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -963,7 +963,7 @@ func (in *ElasticsearchConfigurationInitParameters) DeepCopyInto(out *Elasticsea
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupMode != nil {
@@ -1007,12 +1007,12 @@ func (in *ElasticsearchConfigurationObservation) DeepCopyInto(out *Elasticsearch
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1051,7 +1051,7 @@ func (in *ElasticsearchConfigurationObservation) DeepCopyInto(out *Elasticsearch
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -1100,12 +1100,12 @@ func (in *ElasticsearchConfigurationParameters) DeepCopyInto(out *ElasticsearchC
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1154,7 +1154,7 @@ func (in *ElasticsearchConfigurationParameters) DeepCopyInto(out *ElasticsearchC
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -1303,12 +1303,12 @@ func (in *ExtendedS3ConfigurationInitParameters) DeepCopyInto(out *ExtendedS3Con
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1393,12 +1393,12 @@ func (in *ExtendedS3ConfigurationObservation) DeepCopyInto(out *ExtendedS3Config
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1498,12 +1498,12 @@ func (in *ExtendedS3ConfigurationParameters) DeepCopyInto(out *ExtendedS3Configu
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1769,12 +1769,12 @@ func (in *HTTPEndpointConfigurationInitParameters) DeepCopyInto(out *HTTPEndpoin
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1805,7 +1805,7 @@ func (in *HTTPEndpointConfigurationInitParameters) DeepCopyInto(out *HTTPEndpoin
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupMode != nil {
@@ -1842,12 +1842,12 @@ func (in *HTTPEndpointConfigurationObservation) DeepCopyInto(out *HTTPEndpointCo
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1878,7 +1878,7 @@ func (in *HTTPEndpointConfigurationObservation) DeepCopyInto(out *HTTPEndpointCo
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -1925,12 +1925,12 @@ func (in *HTTPEndpointConfigurationParameters) DeepCopyInto(out *HTTPEndpointCon
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -1961,7 +1961,7 @@ func (in *HTTPEndpointConfigurationParameters) DeepCopyInto(out *HTTPEndpointCon
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -2265,12 +2265,12 @@ func (in *HTTPEndpointConfigurationS3ConfigurationInitParameters) DeepCopyInto(o
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -2322,12 +2322,12 @@ func (in *HTTPEndpointConfigurationS3ConfigurationObservation) DeepCopyInto(out 
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -2394,12 +2394,12 @@ func (in *HTTPEndpointConfigurationS3ConfigurationParameters) DeepCopyInto(out *
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -2893,12 +2893,12 @@ func (in *OpensearchConfigurationInitParameters) DeepCopyInto(out *OpensearchCon
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -2932,7 +2932,7 @@ func (in *OpensearchConfigurationInitParameters) DeepCopyInto(out *OpensearchCon
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupMode != nil {
@@ -2976,12 +2976,12 @@ func (in *OpensearchConfigurationObservation) DeepCopyInto(out *OpensearchConfig
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -3020,7 +3020,7 @@ func (in *OpensearchConfigurationObservation) DeepCopyInto(out *OpensearchConfig
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -3069,12 +3069,12 @@ func (in *OpensearchConfigurationParameters) DeepCopyInto(out *OpensearchConfigu
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -3123,7 +3123,7 @@ func (in *OpensearchConfigurationParameters) DeepCopyInto(out *OpensearchConfigu
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -3509,12 +3509,12 @@ func (in *OpensearchConfigurationS3ConfigurationInitParameters) DeepCopyInto(out
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -3566,12 +3566,12 @@ func (in *OpensearchConfigurationS3ConfigurationObservation) DeepCopyInto(out *O
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -3638,12 +3638,12 @@ func (in *OpensearchConfigurationS3ConfigurationParameters) DeepCopyInto(out *Op
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -3841,7 +3841,7 @@ func (in *OrcSerDeInitParameters) DeepCopyInto(out *OrcSerDeInitParameters) {
 	*out = *in
 	if in.BlockSizeBytes != nil {
 		in, out := &in.BlockSizeBytes, &out.BlockSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BloomFilterColumns != nil {
@@ -3887,12 +3887,12 @@ func (in *OrcSerDeInitParameters) DeepCopyInto(out *OrcSerDeInitParameters) {
 	}
 	if in.RowIndexStride != nil {
 		in, out := &in.RowIndexStride, &out.RowIndexStride
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StripeSizeBytes != nil {
 		in, out := &in.StripeSizeBytes, &out.StripeSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3912,7 +3912,7 @@ func (in *OrcSerDeObservation) DeepCopyInto(out *OrcSerDeObservation) {
 	*out = *in
 	if in.BlockSizeBytes != nil {
 		in, out := &in.BlockSizeBytes, &out.BlockSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BloomFilterColumns != nil {
@@ -3958,12 +3958,12 @@ func (in *OrcSerDeObservation) DeepCopyInto(out *OrcSerDeObservation) {
 	}
 	if in.RowIndexStride != nil {
 		in, out := &in.RowIndexStride, &out.RowIndexStride
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StripeSizeBytes != nil {
 		in, out := &in.StripeSizeBytes, &out.StripeSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -3983,7 +3983,7 @@ func (in *OrcSerDeParameters) DeepCopyInto(out *OrcSerDeParameters) {
 	*out = *in
 	if in.BlockSizeBytes != nil {
 		in, out := &in.BlockSizeBytes, &out.BlockSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BloomFilterColumns != nil {
@@ -4029,12 +4029,12 @@ func (in *OrcSerDeParameters) DeepCopyInto(out *OrcSerDeParameters) {
 	}
 	if in.RowIndexStride != nil {
 		in, out := &in.RowIndexStride, &out.RowIndexStride
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StripeSizeBytes != nil {
 		in, out := &in.StripeSizeBytes, &out.StripeSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -4195,7 +4195,7 @@ func (in *ParquetSerDeInitParameters) DeepCopyInto(out *ParquetSerDeInitParamete
 	*out = *in
 	if in.BlockSizeBytes != nil {
 		in, out := &in.BlockSizeBytes, &out.BlockSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Compression != nil {
@@ -4210,12 +4210,12 @@ func (in *ParquetSerDeInitParameters) DeepCopyInto(out *ParquetSerDeInitParamete
 	}
 	if in.MaxPaddingBytes != nil {
 		in, out := &in.MaxPaddingBytes, &out.MaxPaddingBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PageSizeBytes != nil {
 		in, out := &in.PageSizeBytes, &out.PageSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WriterVersion != nil {
@@ -4240,7 +4240,7 @@ func (in *ParquetSerDeObservation) DeepCopyInto(out *ParquetSerDeObservation) {
 	*out = *in
 	if in.BlockSizeBytes != nil {
 		in, out := &in.BlockSizeBytes, &out.BlockSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Compression != nil {
@@ -4255,12 +4255,12 @@ func (in *ParquetSerDeObservation) DeepCopyInto(out *ParquetSerDeObservation) {
 	}
 	if in.MaxPaddingBytes != nil {
 		in, out := &in.MaxPaddingBytes, &out.MaxPaddingBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PageSizeBytes != nil {
 		in, out := &in.PageSizeBytes, &out.PageSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WriterVersion != nil {
@@ -4285,7 +4285,7 @@ func (in *ParquetSerDeParameters) DeepCopyInto(out *ParquetSerDeParameters) {
 	*out = *in
 	if in.BlockSizeBytes != nil {
 		in, out := &in.BlockSizeBytes, &out.BlockSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Compression != nil {
@@ -4300,12 +4300,12 @@ func (in *ParquetSerDeParameters) DeepCopyInto(out *ParquetSerDeParameters) {
 	}
 	if in.MaxPaddingBytes != nil {
 		in, out := &in.MaxPaddingBytes, &out.MaxPaddingBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PageSizeBytes != nil {
 		in, out := &in.PageSizeBytes, &out.PageSizeBytes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.WriterVersion != nil {
@@ -4847,7 +4847,7 @@ func (in *RedshiftConfigurationInitParameters) DeepCopyInto(out *RedshiftConfigu
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupConfiguration != nil {
@@ -4925,7 +4925,7 @@ func (in *RedshiftConfigurationObservation) DeepCopyInto(out *RedshiftConfigurat
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -5009,7 +5009,7 @@ func (in *RedshiftConfigurationParameters) DeepCopyInto(out *RedshiftConfigurati
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -5395,12 +5395,12 @@ func (in *RedshiftConfigurationS3BackupConfigurationInitParameters) DeepCopyInto
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -5452,12 +5452,12 @@ func (in *RedshiftConfigurationS3BackupConfigurationObservation) DeepCopyInto(ou
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -5524,12 +5524,12 @@ func (in *RedshiftConfigurationS3BackupConfigurationParameters) DeepCopyInto(out
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -5681,12 +5681,12 @@ func (in *RedshiftConfigurationS3ConfigurationInitParameters) DeepCopyInto(out *
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -5738,12 +5738,12 @@ func (in *RedshiftConfigurationS3ConfigurationObservation) DeepCopyInto(out *Red
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -5810,12 +5810,12 @@ func (in *RedshiftConfigurationS3ConfigurationParameters) DeepCopyInto(out *Reds
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6053,12 +6053,12 @@ func (in *S3BackupConfigurationInitParameters) DeepCopyInto(out *S3BackupConfigu
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6115,12 +6115,12 @@ func (in *S3BackupConfigurationObservation) DeepCopyInto(out *S3BackupConfigurat
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6177,12 +6177,12 @@ func (in *S3BackupConfigurationParameters) DeepCopyInto(out *S3BackupConfigurati
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6324,12 +6324,12 @@ func (in *S3ConfigurationInitParameters) DeepCopyInto(out *S3ConfigurationInitPa
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6381,12 +6381,12 @@ func (in *S3ConfigurationObservation) DeepCopyInto(out *S3ConfigurationObservati
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6453,12 +6453,12 @@ func (in *S3ConfigurationParameters) DeepCopyInto(out *S3ConfigurationParameters
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -6934,7 +6934,7 @@ func (in *SplunkConfigurationInitParameters) DeepCopyInto(out *SplunkConfigurati
 	}
 	if in.HecAcknowledgmentTimeout != nil {
 		in, out := &in.HecAcknowledgmentTimeout, &out.HecAcknowledgmentTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.HecEndpoint != nil {
@@ -6956,7 +6956,7 @@ func (in *SplunkConfigurationInitParameters) DeepCopyInto(out *SplunkConfigurati
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupMode != nil {
@@ -6995,7 +6995,7 @@ func (in *SplunkConfigurationObservation) DeepCopyInto(out *SplunkConfigurationO
 	}
 	if in.HecAcknowledgmentTimeout != nil {
 		in, out := &in.HecAcknowledgmentTimeout, &out.HecAcknowledgmentTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.HecEndpoint != nil {
@@ -7017,7 +7017,7 @@ func (in *SplunkConfigurationObservation) DeepCopyInto(out *SplunkConfigurationO
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupMode != nil {
@@ -7056,7 +7056,7 @@ func (in *SplunkConfigurationParameters) DeepCopyInto(out *SplunkConfigurationPa
 	}
 	if in.HecAcknowledgmentTimeout != nil {
 		in, out := &in.HecAcknowledgmentTimeout, &out.HecAcknowledgmentTimeout
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.HecEndpoint != nil {
@@ -7079,7 +7079,7 @@ func (in *SplunkConfigurationParameters) DeepCopyInto(out *SplunkConfigurationPa
 	}
 	if in.RetryDuration != nil {
 		in, out := &in.RetryDuration, &out.RetryDuration
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.S3BackupMode != nil {
@@ -7438,12 +7438,12 @@ func (in *SplunkConfigurationS3ConfigurationInitParameters) DeepCopyInto(out *Sp
 	*out = *in
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -7495,12 +7495,12 @@ func (in *SplunkConfigurationS3ConfigurationObservation) DeepCopyInto(out *Splun
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
@@ -7567,12 +7567,12 @@ func (in *SplunkConfigurationS3ConfigurationParameters) DeepCopyInto(out *Splunk
 	}
 	if in.BufferingInterval != nil {
 		in, out := &in.BufferingInterval, &out.BufferingInterval
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.BufferingSize != nil {
 		in, out := &in.BufferingSize, &out.BufferingSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {

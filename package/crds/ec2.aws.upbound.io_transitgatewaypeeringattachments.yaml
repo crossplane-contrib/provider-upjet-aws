@@ -430,10 +430,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.peerRegion is a required parameter
+            - message: peerRegion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.peerRegion)
-                || (has(self.initProvider) && has(self.initProvider.peerRegion))'
+                || has(self.initProvider.peerRegion)'
           status:
             description: TransitGatewayPeeringAttachmentStatus defines the observed
               state of TransitGatewayPeeringAttachment.

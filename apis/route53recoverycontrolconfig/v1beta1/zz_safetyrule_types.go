@@ -194,9 +194,9 @@ type SafetyRuleStatus struct {
 type SafetyRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleConfig) || (has(self.initProvider) && has(self.initProvider.ruleConfig))",message="spec.forProvider.ruleConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.waitPeriodMs) || (has(self.initProvider) && has(self.initProvider.waitPeriodMs))",message="spec.forProvider.waitPeriodMs is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ruleConfig) || has(self.initProvider.ruleConfig)",message="ruleConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.waitPeriodMs) || has(self.initProvider.waitPeriodMs)",message="waitPeriodMs is a required parameter"
 	Spec   SafetyRuleSpec   `json:"spec"`
 	Status SafetyRuleStatus `json:"status,omitempty"`
 }

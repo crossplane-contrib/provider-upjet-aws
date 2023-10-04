@@ -49,9 +49,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithConnectionPublishers(cps...),
 		managed.WithPollInterval(o.PollInterval),
 	}
-	if o.PollJitter != 0 {
-		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
-	}
 	if o.Features.Enabled(features.EnableAlphaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
 	}

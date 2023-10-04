@@ -3477,18 +3477,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.filters is a required parameter
+            - message: filters is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.filters)
-                || (has(self.initProvider) && has(self.initProvider.filters))'
-            - message: spec.forProvider.groupByAttribute is a required parameter
+                || has(self.initProvider.filters)'
+            - message: groupByAttribute is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.groupByAttribute)
-                || (has(self.initProvider) && has(self.initProvider.groupByAttribute))'
-            - message: spec.forProvider.name is a required parameter
+                || has(self.initProvider.groupByAttribute)'
+            - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
+                || has(self.initProvider.name)'
           status:
             description: InsightStatus defines the observed state of Insight.
             properties:

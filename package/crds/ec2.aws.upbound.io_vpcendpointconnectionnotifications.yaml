@@ -425,10 +425,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.connectionEvents is a required parameter
+            - message: connectionEvents is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionEvents)
-                || (has(self.initProvider) && has(self.initProvider.connectionEvents))'
+                || has(self.initProvider.connectionEvents)'
           status:
             description: VPCEndpointConnectionNotificationStatus defines the observed
               state of VPCEndpointConnectionNotification.

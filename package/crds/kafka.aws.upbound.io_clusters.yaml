@@ -342,14 +342,16 @@ spec:
                                               the valid values for the maximum volume
                                               throughput at the following documentation
                                               on throughput bottlenecks
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     volumeSize:
                                       description: The size in GiB of the EBS volume
                                         for the data drive on each broker node. Minimum
                                         value of 1 and maximum value of 16384.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -484,7 +486,8 @@ spec:
                         revision:
                           description: Revision of the MSK Configuration to use in
                             the cluster.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   encryptionInfo:
@@ -910,7 +913,8 @@ spec:
                     description: The desired total number of broker nodes in the kafka
                       cluster.  It must be a multiple of the number of specified client
                       subnets.
-                    type: number
+                    format: int64
+                    type: integer
                   openMonitoring:
                     description: Configuration block for JMX and Node monitoring for
                       the MSK cluster. See below.
@@ -1076,14 +1080,16 @@ spec:
                                               the valid values for the maximum volume
                                               throughput at the following documentation
                                               on throughput bottlenecks
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     volumeSize:
                                       description: The size in GiB of the EBS volume
                                         for the data drive on each broker node. Minimum
                                         value of 1 and maximum value of 16384.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -1138,7 +1144,8 @@ spec:
                         revision:
                           description: Revision of the MSK Configuration to use in
                             the cluster.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   encryptionInfo:
@@ -1220,7 +1227,8 @@ spec:
                     description: The desired total number of broker nodes in the kafka
                       cluster.  It must be a multiple of the number of specified client
                       subnets.
-                    type: number
+                    format: int64
+                    type: integer
                   openMonitoring:
                     description: Configuration block for JMX and Node monitoring for
                       the MSK cluster. See below.
@@ -1428,22 +1436,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.brokerNodeGroupInfo is a required parameter
+            - message: brokerNodeGroupInfo is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.brokerNodeGroupInfo)
-                || (has(self.initProvider) && has(self.initProvider.brokerNodeGroupInfo))'
-            - message: spec.forProvider.clusterName is a required parameter
+                || has(self.initProvider.brokerNodeGroupInfo)'
+            - message: clusterName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.clusterName)
-                || (has(self.initProvider) && has(self.initProvider.clusterName))'
-            - message: spec.forProvider.kafkaVersion is a required parameter
+                || has(self.initProvider.clusterName)'
+            - message: kafkaVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.kafkaVersion)
-                || (has(self.initProvider) && has(self.initProvider.kafkaVersion))'
-            - message: spec.forProvider.numberOfBrokerNodes is a required parameter
+                || has(self.initProvider.kafkaVersion)'
+            - message: numberOfBrokerNodes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.numberOfBrokerNodes)
-                || (has(self.initProvider) && has(self.initProvider.numberOfBrokerNodes))'
+                || has(self.initProvider.numberOfBrokerNodes)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:
@@ -1650,14 +1658,16 @@ spec:
                                               the valid values for the maximum volume
                                               throughput at the following documentation
                                               on throughput bottlenecks
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     volumeSize:
                                       description: The size in GiB of the EBS volume
                                         for the data drive on each broker node. Minimum
                                         value of 1 and maximum value of 16384.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                             type: object
@@ -1716,7 +1726,8 @@ spec:
                         revision:
                           description: Revision of the MSK Configuration to use in
                             the cluster.
-                          type: number
+                          format: int64
+                          type: integer
                       type: object
                     type: array
                   currentVersion:
@@ -1820,7 +1831,8 @@ spec:
                     description: The desired total number of broker nodes in the kafka
                       cluster.  It must be a multiple of the number of specified client
                       subnets.
-                    type: number
+                    format: int64
+                    type: integer
                   openMonitoring:
                     description: Configuration block for JMX and Node monitoring for
                       the MSK cluster. See below.

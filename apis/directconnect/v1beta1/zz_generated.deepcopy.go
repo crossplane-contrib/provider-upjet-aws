@@ -703,7 +703,7 @@ func (in *ConnectionObservation) DeepCopyInto(out *ConnectionObservation) {
 	}
 	if in.VlanID != nil {
 		in, out := &in.VlanID, &out.VlanID
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

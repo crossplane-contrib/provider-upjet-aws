@@ -19,7 +19,7 @@ type MediaConcurrenciesInitParameters struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
-	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+	Concurrency *int64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 }
 
 type MediaConcurrenciesObservation struct {
@@ -28,7 +28,7 @@ type MediaConcurrenciesObservation struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
-	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+	Concurrency *int64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 }
 
 type MediaConcurrenciesParameters struct {
@@ -39,7 +39,7 @@ type MediaConcurrenciesParameters struct {
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
-	Concurrency *float64 `json:"concurrency" tf:"concurrency,omitempty"`
+	Concurrency *int64 `json:"concurrency" tf:"concurrency,omitempty"`
 }
 
 type QueueConfigsInitParameters struct {
@@ -48,10 +48,10 @@ type QueueConfigsInitParameters struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
-	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
+	Delay *int64 `json:"delay,omitempty" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the identifier for the queue.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
@@ -63,10 +63,10 @@ type QueueConfigsObservation struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
-	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
+	Delay *int64 `json:"delay,omitempty" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// ARN for the queue.
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
@@ -86,11 +86,11 @@ type QueueConfigsParameters struct {
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
 	// +kubebuilder:validation:Optional
-	Delay *float64 `json:"delay" tf:"delay,omitempty"`
+	Delay *int64 `json:"delay" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	Priority *int64 `json:"priority" tf:"priority,omitempty"`
 
 	// Specifies the identifier for the queue.
 	// +kubebuilder:validation:Optional
@@ -243,9 +243,9 @@ type RoutingProfileStatus struct {
 type RoutingProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || (has(self.initProvider) && has(self.initProvider.description))",message="spec.forProvider.description is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.mediaConcurrencies) || (has(self.initProvider) && has(self.initProvider.mediaConcurrencies))",message="spec.forProvider.mediaConcurrencies is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || has(self.initProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.mediaConcurrencies) || has(self.initProvider.mediaConcurrencies)",message="mediaConcurrencies is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   RoutingProfileSpec   `json:"spec"`
 	Status RoutingProfileStatus `json:"status,omitempty"`
 }

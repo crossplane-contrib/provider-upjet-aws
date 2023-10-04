@@ -389,10 +389,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.templateBody is a required parameter
+            - message: templateBody is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.templateBody)
-                || (has(self.initProvider) && has(self.initProvider.templateBody))'
+                || has(self.initProvider.templateBody)'
           status:
             description: ProvisioningTemplateStatus defines the observed state of
               ProvisioningTemplate.

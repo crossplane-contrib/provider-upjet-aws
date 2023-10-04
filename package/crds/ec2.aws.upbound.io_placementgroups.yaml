@@ -291,10 +291,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.strategy is a required parameter
+            - message: strategy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.strategy)
-                || (has(self.initProvider) && has(self.initProvider.strategy))'
+                || has(self.initProvider.strategy)'
           status:
             description: PlacementGroupStatus defines the observed state of PlacementGroup.
             properties:

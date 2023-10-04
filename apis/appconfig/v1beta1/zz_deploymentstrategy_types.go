@@ -152,10 +152,10 @@ type DeploymentStrategyStatus struct {
 type DeploymentStrategy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentDurationInMinutes) || (has(self.initProvider) && has(self.initProvider.deploymentDurationInMinutes))",message="spec.forProvider.deploymentDurationInMinutes is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.growthFactor) || (has(self.initProvider) && has(self.initProvider.growthFactor))",message="spec.forProvider.growthFactor is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicateTo) || (has(self.initProvider) && has(self.initProvider.replicateTo))",message="spec.forProvider.replicateTo is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentDurationInMinutes) || has(self.initProvider.deploymentDurationInMinutes)",message="deploymentDurationInMinutes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.growthFactor) || has(self.initProvider.growthFactor)",message="growthFactor is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicateTo) || has(self.initProvider.replicateTo)",message="replicateTo is a required parameter"
 	Spec   DeploymentStrategySpec   `json:"spec"`
 	Status DeploymentStrategyStatus `json:"status,omitempty"`
 }

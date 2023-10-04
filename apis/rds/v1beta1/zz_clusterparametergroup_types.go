@@ -157,7 +157,7 @@ type ClusterParameterGroupStatus struct {
 type ClusterParameterGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || (has(self.initProvider) && has(self.initProvider.family))",message="spec.forProvider.family is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || has(self.initProvider.family)",message="family is a required parameter"
 	Spec   ClusterParameterGroupSpec   `json:"spec"`
 	Status ClusterParameterGroupStatus `json:"status,omitempty"`
 }

@@ -94,8 +94,8 @@ type SigningCertificateStatus struct {
 type SigningCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateBody) || (has(self.initProvider) && has(self.initProvider.certificateBody))",message="spec.forProvider.certificateBody is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.userName) || (has(self.initProvider) && has(self.initProvider.userName))",message="spec.forProvider.userName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateBody) || has(self.initProvider.certificateBody)",message="certificateBody is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.userName) || has(self.initProvider.userName)",message="userName is a required parameter"
 	Spec   SigningCertificateSpec   `json:"spec"`
 	Status SigningCertificateStatus `json:"status,omitempty"`
 }

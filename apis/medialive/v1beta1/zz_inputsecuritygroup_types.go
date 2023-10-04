@@ -113,7 +113,7 @@ type InputSecurityGroupStatus struct {
 type InputSecurityGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.whitelistRules) || (has(self.initProvider) && has(self.initProvider.whitelistRules))",message="spec.forProvider.whitelistRules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.whitelistRules) || has(self.initProvider.whitelistRules)",message="whitelistRules is a required parameter"
 	Spec   InputSecurityGroupSpec   `json:"spec"`
 	Status InputSecurityGroupStatus `json:"status,omitempty"`
 }

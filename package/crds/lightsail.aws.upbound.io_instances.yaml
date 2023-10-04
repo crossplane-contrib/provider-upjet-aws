@@ -353,18 +353,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.availabilityZone is a required parameter
+            - message: availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
-                || (has(self.initProvider) && has(self.initProvider.availabilityZone))'
-            - message: spec.forProvider.blueprintId is a required parameter
+                || has(self.initProvider.availabilityZone)'
+            - message: blueprintId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.blueprintId)
-                || (has(self.initProvider) && has(self.initProvider.blueprintId))'
-            - message: spec.forProvider.bundleId is a required parameter
+                || has(self.initProvider.blueprintId)'
+            - message: bundleId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.bundleId)
-                || (has(self.initProvider) && has(self.initProvider.bundleId))'
+                || has(self.initProvider.bundleId)'
           status:
             description: InstanceStatus defines the observed state of Instance.
             properties:

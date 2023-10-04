@@ -1113,7 +1113,7 @@ type WorkflowStatus struct {
 type Workflow struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.steps) || (has(self.initProvider) && has(self.initProvider.steps))",message="spec.forProvider.steps is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.steps) || has(self.initProvider.steps)",message="steps is a required parameter"
 	Spec   WorkflowSpec   `json:"spec"`
 	Status WorkflowStatus `json:"status,omitempty"`
 }

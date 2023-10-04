@@ -318,19 +318,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.directoryName is a required parameter
+            - message: directoryName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.directoryName)
-                || (has(self.initProvider) && has(self.initProvider.directoryName))'
-            - message: spec.forProvider.organizationalUnitDistinguishedNames is a
-                required parameter
+                || has(self.initProvider.directoryName)'
+            - message: organizationalUnitDistinguishedNames is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.organizationalUnitDistinguishedNames)
-                || (has(self.initProvider) && has(self.initProvider.organizationalUnitDistinguishedNames))'
-            - message: spec.forProvider.serviceAccountCredentials is a required parameter
+                || has(self.initProvider.organizationalUnitDistinguishedNames)'
+            - message: serviceAccountCredentials is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceAccountCredentials)
-                || (has(self.initProvider) && has(self.initProvider.serviceAccountCredentials))'
+                || has(self.initProvider.serviceAccountCredentials)'
           status:
             description: DirectoryConfigStatus defines the observed state of DirectoryConfig.
             properties:

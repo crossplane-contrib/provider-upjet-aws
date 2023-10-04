@@ -107,7 +107,7 @@ type RouteCalculatorStatus struct {
 type RouteCalculator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSource) || (has(self.initProvider) && has(self.initProvider.dataSource))",message="spec.forProvider.dataSource is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSource) || has(self.initProvider.dataSource)",message="dataSource is a required parameter"
 	Spec   RouteCalculatorSpec   `json:"spec"`
 	Status RouteCalculatorStatus `json:"status,omitempty"`
 }

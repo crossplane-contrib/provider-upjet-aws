@@ -259,10 +259,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.tags is a required parameter
+            - message: tags is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.tags)
-                || (has(self.initProvider) && has(self.initProvider.tags))'
+                || has(self.initProvider.tags)'
           status:
             description: ResourceGroupStatus defines the observed state of ResourceGroup.
             properties:

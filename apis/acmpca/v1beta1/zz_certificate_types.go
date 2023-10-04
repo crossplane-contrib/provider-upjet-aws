@@ -166,9 +166,9 @@ type CertificateStatus struct {
 type Certificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateSigningRequestSecretRef)",message="spec.forProvider.certificateSigningRequestSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingAlgorithm) || (has(self.initProvider) && has(self.initProvider.signingAlgorithm))",message="spec.forProvider.signingAlgorithm is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validity) || (has(self.initProvider) && has(self.initProvider.validity))",message="spec.forProvider.validity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateSigningRequestSecretRef)",message="certificateSigningRequestSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.signingAlgorithm) || has(self.initProvider.signingAlgorithm)",message="signingAlgorithm is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validity) || has(self.initProvider.validity)",message="validity is a required parameter"
 	Spec   CertificateSpec   `json:"spec"`
 	Status CertificateStatus `json:"status,omitempty"`
 }

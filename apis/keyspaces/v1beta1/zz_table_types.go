@@ -476,8 +476,8 @@ type TableStatus struct {
 type Table struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schemaDefinition) || (has(self.initProvider) && has(self.initProvider.schemaDefinition))",message="spec.forProvider.schemaDefinition is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tableName) || (has(self.initProvider) && has(self.initProvider.tableName))",message="spec.forProvider.tableName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schemaDefinition) || has(self.initProvider.schemaDefinition)",message="schemaDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tableName) || has(self.initProvider.tableName)",message="tableName is a required parameter"
 	Spec   TableSpec   `json:"spec"`
 	Status TableStatus `json:"status,omitempty"`
 }

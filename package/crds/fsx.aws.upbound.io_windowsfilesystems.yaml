@@ -218,7 +218,8 @@ spec:
                         iops:
                           description: '- The total number of SSD IOPS provisioned
                             for the file system.'
-                          type: number
+                          format: int64
+                          type: integer
                         mode:
                           description: '- Specifies whether the number of IOPS for
                             the file system is using the system. Valid values are
@@ -668,7 +669,8 @@ spec:
                         iops:
                           description: '- The total number of SSD IOPS provisioned
                             for the file system.'
-                          type: number
+                          format: int64
+                          type: integer
                         mode:
                           description: '- Specifies whether the number of IOPS for
                             the file system is using the system. Valid values are
@@ -921,10 +923,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.throughputCapacity is a required parameter
+            - message: throughputCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.throughputCapacity)
-                || (has(self.initProvider) && has(self.initProvider.throughputCapacity))'
+                || has(self.initProvider.throughputCapacity)'
           status:
             description: WindowsFileSystemStatus defines the observed state of WindowsFileSystem.
             properties:
@@ -1011,7 +1013,8 @@ spec:
                         iops:
                           description: '- The total number of SSD IOPS provisioned
                             for the file system.'
-                          type: number
+                          format: int64
+                          type: integer
                         mode:
                           description: '- Specifies whether the number of IOPS for
                             the file system is using the system. Valid values are

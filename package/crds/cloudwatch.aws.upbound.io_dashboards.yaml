@@ -259,10 +259,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.dashboardBody is a required parameter
+            - message: dashboardBody is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.dashboardBody)
-                || (has(self.initProvider) && has(self.initProvider.dashboardBody))'
+                || has(self.initProvider.dashboardBody)'
           status:
             description: DashboardStatus defines the observed state of Dashboard.
             properties:

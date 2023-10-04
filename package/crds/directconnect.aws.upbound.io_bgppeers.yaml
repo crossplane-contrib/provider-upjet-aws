@@ -368,14 +368,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.addressFamily is a required parameter
+            - message: addressFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)
-                || (has(self.initProvider) && has(self.initProvider.addressFamily))'
-            - message: spec.forProvider.bgpAsn is a required parameter
+                || has(self.initProvider.addressFamily)'
+            - message: bgpAsn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)
-                || (has(self.initProvider) && has(self.initProvider.bgpAsn))'
+                || has(self.initProvider.bgpAsn)'
           status:
             description: BGPPeerStatus defines the observed state of BGPPeer.
             properties:

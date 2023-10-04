@@ -125,8 +125,8 @@ type APIDestinationStatus struct {
 type APIDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod) || (has(self.initProvider) && has(self.initProvider.httpMethod))",message="spec.forProvider.httpMethod is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.invocationEndpoint) || (has(self.initProvider) && has(self.initProvider.invocationEndpoint))",message="spec.forProvider.invocationEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpMethod) || has(self.initProvider.httpMethod)",message="httpMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.invocationEndpoint) || has(self.initProvider.invocationEndpoint)",message="invocationEndpoint is a required parameter"
 	Spec   APIDestinationSpec   `json:"spec"`
 	Status APIDestinationStatus `json:"status,omitempty"`
 }

@@ -76,7 +76,7 @@ type GlobalSettingsStatus struct {
 type GlobalSettings struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.globalSettings) || (has(self.initProvider) && has(self.initProvider.globalSettings))",message="spec.forProvider.globalSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.globalSettings) || has(self.initProvider.globalSettings)",message="globalSettings is a required parameter"
 	Spec   GlobalSettingsSpec   `json:"spec"`
 	Status GlobalSettingsStatus `json:"status,omitempty"`
 }

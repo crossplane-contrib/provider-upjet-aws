@@ -423,10 +423,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.domainNameConfiguration is a required parameter
+            - message: domainNameConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.domainNameConfiguration)
-                || (has(self.initProvider) && has(self.initProvider.domainNameConfiguration))'
+                || has(self.initProvider.domainNameConfiguration)'
           status:
             description: DomainNameStatus defines the observed state of DomainName.
             properties:

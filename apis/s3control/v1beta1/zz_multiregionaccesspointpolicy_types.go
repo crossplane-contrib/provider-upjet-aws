@@ -121,7 +121,7 @@ type MultiRegionAccessPointPolicyStatus struct {
 type MultiRegionAccessPointPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.details) || (has(self.initProvider) && has(self.initProvider.details))",message="spec.forProvider.details is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.details) || has(self.initProvider.details)",message="details is a required parameter"
 	Spec   MultiRegionAccessPointPolicySpec   `json:"spec"`
 	Status MultiRegionAccessPointPolicyStatus `json:"status,omitempty"`
 }

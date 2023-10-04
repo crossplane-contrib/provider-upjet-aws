@@ -19,10 +19,10 @@ type ElasticsearchSettingsInitParameters struct {
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
 	// Maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster. Default is 300.
-	ErrorRetryDuration *float64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
+	ErrorRetryDuration *int64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
 
 	// Maximum percentage of records that can fail to be written before a full load operation stops. Default is 10.
-	FullLoadErrorPercentage *float64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
+	FullLoadErrorPercentage *int64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
@@ -34,10 +34,10 @@ type ElasticsearchSettingsObservation struct {
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
 	// Maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster. Default is 300.
-	ErrorRetryDuration *float64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
+	ErrorRetryDuration *int64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
 
 	// Maximum percentage of records that can fail to be written before a full load operation stops. Default is 10.
-	FullLoadErrorPercentage *float64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
+	FullLoadErrorPercentage *int64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
@@ -51,11 +51,11 @@ type ElasticsearchSettingsParameters struct {
 
 	// Maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster. Default is 300.
 	// +kubebuilder:validation:Optional
-	ErrorRetryDuration *float64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
+	ErrorRetryDuration *int64 `json:"errorRetryDuration,omitempty" tf:"error_retry_duration,omitempty"`
 
 	// Maximum percentage of records that can fail to be written before a full load operation stops. Default is 10.
 	// +kubebuilder:validation:Optional
-	FullLoadErrorPercentage *float64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
+	FullLoadErrorPercentage *int64 `json:"fullLoadErrorPercentage,omitempty" tf:"full_load_error_percentage,omitempty"`
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	// +kubebuilder:validation:Optional
@@ -92,7 +92,7 @@ type EndpointInitParameters struct {
 	MongodbSettings []MongodbSettingsInitParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
 	// Port used by the endpoint database.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	RedisSettings []RedisSettingsInitParameters `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
 
@@ -157,7 +157,7 @@ type EndpointObservation struct {
 	MongodbSettings []MongodbSettingsObservation `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
 	// Port used by the endpoint database.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	RedisSettings []RedisSettingsObservation `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
 
@@ -251,7 +251,7 @@ type EndpointParameters struct {
 
 	// Port used by the endpoint database.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RedisSettings []RedisSettingsParameters `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
@@ -343,7 +343,7 @@ type KafkaSettingsInitParameters struct {
 	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
 
 	// Maximum size in bytes for records created on the endpoint Default is 1,000,000.
-	MessageMaxBytes *float64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
+	MessageMaxBytes *int64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
 
 	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the no_hex_prefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
 	NoHexPrefix *bool `json:"noHexPrefix,omitempty" tf:"no_hex_prefix,omitempty"`
@@ -394,7 +394,7 @@ type KafkaSettingsObservation struct {
 	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
 
 	// Maximum size in bytes for records created on the endpoint Default is 1,000,000.
-	MessageMaxBytes *float64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
+	MessageMaxBytes *int64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
 
 	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the no_hex_prefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
 	NoHexPrefix *bool `json:"noHexPrefix,omitempty" tf:"no_hex_prefix,omitempty"`
@@ -453,7 +453,7 @@ type KafkaSettingsParameters struct {
 
 	// Maximum size in bytes for records created on the endpoint Default is 1,000,000.
 	// +kubebuilder:validation:Optional
-	MessageMaxBytes *float64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
+	MessageMaxBytes *int64 `json:"messageMaxBytes,omitempty" tf:"message_max_bytes,omitempty"`
 
 	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the no_hex_prefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
 	// +kubebuilder:validation:Optional
@@ -673,7 +673,7 @@ type RedisSettingsInitParameters struct {
 	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
 
 	// Port used by the endpoint database.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
@@ -694,7 +694,7 @@ type RedisSettingsObservation struct {
 	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
 
 	// Port used by the endpoint database.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	SSLCACertificateArn *string `json:"sslCaCertificateArn,omitempty" tf:"ssl_ca_certificate_arn,omitempty"`
@@ -722,7 +722,7 @@ type RedisSettingsParameters struct {
 
 	// Port used by the endpoint database.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	Port *int64 `json:"port" tf:"port,omitempty"`
 
 	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
 	// +kubebuilder:validation:Optional
@@ -817,10 +817,10 @@ type S3SettingsInitParameters struct {
 	CdcInsertsOnly *bool `json:"cdcInsertsOnly,omitempty" tf:"cdc_inserts_only,omitempty"`
 
 	// Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3. Default is 60.
-	CdcMaxBatchInterval *float64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
+	CdcMaxBatchInterval *int64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
 
 	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. Default is 32000. NOTE: Previously, this setting was measured in megabytes but now represents kilobytes. Update configurations accordingly.
-	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
+	CdcMinFileSize *int64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
 	// Folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
 	CdcPath *string `json:"cdcPath,omitempty" tf:"cdc_path,omitempty"`
@@ -844,7 +844,7 @@ type S3SettingsInitParameters struct {
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Size of one data page in bytes. Default is 1048576 (1 MiB).
-	DataPageSize *float64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
+	DataPageSize *int64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
 
 	// Date separating delimiter to use during folder partitioning. Valid values are SLASH, UNDERSCORE, DASH, and NONE. Default is SLASH.
 	DatePartitionDelimiter *string `json:"datePartitionDelimiter,omitempty" tf:"date_partition_delimiter,omitempty"`
@@ -856,7 +856,7 @@ type S3SettingsInitParameters struct {
 	DatePartitionSequence *string `json:"datePartitionSequence,omitempty" tf:"date_partition_sequence,omitempty"`
 
 	// Maximum size in bytes of an encoded dictionary page of a column. Default is 1048576 (1 MiB).
-	DictPageSizeLimit *float64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
+	DictPageSizeLimit *int64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
 
 	// Whether to enable statistics for Parquet pages and row groups. Default is true.
 	EnableStatistics *bool `json:"enableStatistics,omitempty" tf:"enable_statistics,omitempty"`
@@ -871,13 +871,13 @@ type S3SettingsInitParameters struct {
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
-	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
+	IgnoreHeaderRows *int64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
 
 	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. Default is 1048576 (1 GB).
-	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+	MaxFileSize *int64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
 	// - Specifies the precision of any TIMESTAMP column values written to an S3 object file in .parquet format. Default is false.
 	ParquetTimestampInMillisecond *bool `json:"parquetTimestampInMillisecond,omitempty" tf:"parquet_timestamp_in_millisecond,omitempty"`
@@ -892,7 +892,7 @@ type S3SettingsInitParameters struct {
 	Rfc4180 *bool `json:"rfc4180,omitempty" tf:"rfc_4180,omitempty"`
 
 	// Number of rows in a row group. Default is 10000.
-	RowGroupLength *float64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
+	RowGroupLength *int64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
 
 	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
@@ -931,10 +931,10 @@ type S3SettingsObservation struct {
 	CdcInsertsOnly *bool `json:"cdcInsertsOnly,omitempty" tf:"cdc_inserts_only,omitempty"`
 
 	// Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3. Default is 60.
-	CdcMaxBatchInterval *float64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
+	CdcMaxBatchInterval *int64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
 
 	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. Default is 32000. NOTE: Previously, this setting was measured in megabytes but now represents kilobytes. Update configurations accordingly.
-	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
+	CdcMinFileSize *int64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
 	// Folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
 	CdcPath *string `json:"cdcPath,omitempty" tf:"cdc_path,omitempty"`
@@ -958,7 +958,7 @@ type S3SettingsObservation struct {
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Size of one data page in bytes. Default is 1048576 (1 MiB).
-	DataPageSize *float64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
+	DataPageSize *int64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
 
 	// Date separating delimiter to use during folder partitioning. Valid values are SLASH, UNDERSCORE, DASH, and NONE. Default is SLASH.
 	DatePartitionDelimiter *string `json:"datePartitionDelimiter,omitempty" tf:"date_partition_delimiter,omitempty"`
@@ -970,7 +970,7 @@ type S3SettingsObservation struct {
 	DatePartitionSequence *string `json:"datePartitionSequence,omitempty" tf:"date_partition_sequence,omitempty"`
 
 	// Maximum size in bytes of an encoded dictionary page of a column. Default is 1048576 (1 MiB).
-	DictPageSizeLimit *float64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
+	DictPageSizeLimit *int64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
 
 	// Whether to enable statistics for Parquet pages and row groups. Default is true.
 	EnableStatistics *bool `json:"enableStatistics,omitempty" tf:"enable_statistics,omitempty"`
@@ -985,13 +985,13 @@ type S3SettingsObservation struct {
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
-	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
+	IgnoreHeaderRows *int64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
 
 	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. Default is 1048576 (1 GB).
-	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+	MaxFileSize *int64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
 	// - Specifies the precision of any TIMESTAMP column values written to an S3 object file in .parquet format. Default is false.
 	ParquetTimestampInMillisecond *bool `json:"parquetTimestampInMillisecond,omitempty" tf:"parquet_timestamp_in_millisecond,omitempty"`
@@ -1006,7 +1006,7 @@ type S3SettingsObservation struct {
 	Rfc4180 *bool `json:"rfc4180,omitempty" tf:"rfc_4180,omitempty"`
 
 	// Number of rows in a row group. Default is 10000.
-	RowGroupLength *float64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
+	RowGroupLength *int64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
 
 	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
@@ -1052,11 +1052,11 @@ type S3SettingsParameters struct {
 
 	// Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3. Default is 60.
 	// +kubebuilder:validation:Optional
-	CdcMaxBatchInterval *float64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
+	CdcMaxBatchInterval *int64 `json:"cdcMaxBatchInterval,omitempty" tf:"cdc_max_batch_interval,omitempty"`
 
 	// Minimum file size condition as defined in kilobytes to output a file to Amazon S3. Default is 32000. NOTE: Previously, this setting was measured in megabytes but now represents kilobytes. Update configurations accordingly.
 	// +kubebuilder:validation:Optional
-	CdcMinFileSize *float64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
+	CdcMinFileSize *int64 `json:"cdcMinFileSize,omitempty" tf:"cdc_min_file_size,omitempty"`
 
 	// Folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If cdc_path is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. Supported in AWS DMS versions 3.4.2 and later.
 	// +kubebuilder:validation:Optional
@@ -1088,7 +1088,7 @@ type S3SettingsParameters struct {
 
 	// Size of one data page in bytes. Default is 1048576 (1 MiB).
 	// +kubebuilder:validation:Optional
-	DataPageSize *float64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
+	DataPageSize *int64 `json:"dataPageSize,omitempty" tf:"data_page_size,omitempty"`
 
 	// Date separating delimiter to use during folder partitioning. Valid values are SLASH, UNDERSCORE, DASH, and NONE. Default is SLASH.
 	// +kubebuilder:validation:Optional
@@ -1104,7 +1104,7 @@ type S3SettingsParameters struct {
 
 	// Maximum size in bytes of an encoded dictionary page of a column. Default is 1048576 (1 MiB).
 	// +kubebuilder:validation:Optional
-	DictPageSizeLimit *float64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
+	DictPageSizeLimit *int64 `json:"dictPageSizeLimit,omitempty" tf:"dict_page_size_limit,omitempty"`
 
 	// Whether to enable statistics for Parquet pages and row groups. Default is true.
 	// +kubebuilder:validation:Optional
@@ -1124,7 +1124,7 @@ type S3SettingsParameters struct {
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	// +kubebuilder:validation:Optional
-	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
+	IgnoreHeaderRows *int64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	// +kubebuilder:validation:Optional
@@ -1132,7 +1132,7 @@ type S3SettingsParameters struct {
 
 	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. Default is 1048576 (1 GB).
 	// +kubebuilder:validation:Optional
-	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+	MaxFileSize *int64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
 	// - Specifies the precision of any TIMESTAMP column values written to an S3 object file in .parquet format. Default is false.
 	// +kubebuilder:validation:Optional
@@ -1152,7 +1152,7 @@ type S3SettingsParameters struct {
 
 	// Number of rows in a row group. Default is 10000.
 	// +kubebuilder:validation:Optional
-	RowGroupLength *float64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
+	RowGroupLength *int64 `json:"rowGroupLength,omitempty" tf:"row_group_length,omitempty"`
 
 	// ARN or Id of KMS Key to use when encryption_mode is SSE_KMS.
 	// +kubebuilder:validation:Optional
@@ -1211,8 +1211,8 @@ type EndpointStatus struct {
 type Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType) || (has(self.initProvider) && has(self.initProvider.endpointType))",message="spec.forProvider.endpointType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || (has(self.initProvider) && has(self.initProvider.engineName))",message="spec.forProvider.engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType) || has(self.initProvider.endpointType)",message="endpointType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || has(self.initProvider.engineName)",message="engineName is a required parameter"
 	Spec   EndpointSpec   `json:"spec"`
 	Status EndpointStatus `json:"status,omitempty"`
 }

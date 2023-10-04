@@ -275,7 +275,7 @@ type NotebookInstanceStatus struct {
 type NotebookInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || (has(self.initProvider) && has(self.initProvider.instanceType))",message="spec.forProvider.instanceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceType) || has(self.initProvider.instanceType)",message="instanceType is a required parameter"
 	Spec   NotebookInstanceSpec   `json:"spec"`
 	Status NotebookInstanceStatus `json:"status,omitempty"`
 }

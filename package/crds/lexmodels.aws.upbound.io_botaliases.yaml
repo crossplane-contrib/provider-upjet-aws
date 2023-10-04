@@ -351,14 +351,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.botName is a required parameter
+            - message: botName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.botName)
-                || (has(self.initProvider) && has(self.initProvider.botName))'
-            - message: spec.forProvider.botVersion is a required parameter
+                || has(self.initProvider.botName)'
+            - message: botVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.botVersion)
-                || (has(self.initProvider) && has(self.initProvider.botVersion))'
+                || has(self.initProvider.botVersion)'
           status:
             description: BotAliasStatus defines the observed state of BotAlias.
             properties:

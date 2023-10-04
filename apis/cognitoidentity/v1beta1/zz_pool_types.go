@@ -211,7 +211,7 @@ type PoolStatus struct {
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityPoolName) || (has(self.initProvider) && has(self.initProvider.identityPoolName))",message="spec.forProvider.identityPoolName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identityPoolName) || has(self.initProvider.identityPoolName)",message="identityPoolName is a required parameter"
 	Spec   PoolSpec   `json:"spec"`
 	Status PoolStatus `json:"status,omitempty"`
 }

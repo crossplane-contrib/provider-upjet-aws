@@ -118,7 +118,7 @@ type SelfManagedActiveDirectoryParameters struct {
 type WindowsFileSystemDiskIopsConfigurationInitParameters struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -127,7 +127,7 @@ type WindowsFileSystemDiskIopsConfigurationInitParameters struct {
 type WindowsFileSystemDiskIopsConfigurationObservation struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -137,7 +137,7 @@ type WindowsFileSystemDiskIopsConfigurationParameters struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	// +kubebuilder:validation:Optional
@@ -451,7 +451,7 @@ type WindowsFileSystemStatus struct {
 type WindowsFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity) || (has(self.initProvider) && has(self.initProvider.throughputCapacity))",message="spec.forProvider.throughputCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity) || has(self.initProvider.throughputCapacity)",message="throughputCapacity is a required parameter"
 	Spec   WindowsFileSystemSpec   `json:"spec"`
 	Status WindowsFileSystemStatus `json:"status,omitempty"`
 }

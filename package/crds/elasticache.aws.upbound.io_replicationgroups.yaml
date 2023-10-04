@@ -264,12 +264,14 @@ spec:
                     type: string
                   numCacheClusters:
                     description: 00#.
-                    type: number
+                    format: int64
+                    type: integer
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
-                    type: number
+                    format: int64
+                    type: integer
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -281,7 +283,8 @@ spec:
                     description: –  Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredCacheClusterAzs:
                     description: List of EC2 availability zones in which the replication
                       group's cache clusters will be created. The order of the availability
@@ -298,7 +301,8 @@ spec:
                     description: Number of replica nodes in each node group. Changing
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
-                    type: number
+                    format: int64
+                    type: integer
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -411,7 +415,8 @@ spec:
                       zero (0), backups are turned off. Please note that setting a
                       snapshot_retention_limit is not supported on cache.t1.micro
                       cache nodes
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotWindow:
                     description: 'Daily time range (in UTC) during which ElastiCache
                       will begin taking a daily snapshot of your cache cluster. The
@@ -628,12 +633,14 @@ spec:
                     type: string
                   numCacheClusters:
                     description: 00#.
-                    type: number
+                    format: int64
+                    type: integer
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
-                    type: number
+                    format: int64
+                    type: integer
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -645,7 +652,8 @@ spec:
                     description: –  Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredCacheClusterAzs:
                     description: List of EC2 availability zones in which the replication
                       group's cache clusters will be created. The order of the availability
@@ -658,7 +666,8 @@ spec:
                     description: Number of replica nodes in each node group. Changing
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
-                    type: number
+                    format: int64
+                    type: integer
                   securityGroupNames:
                     description: List of cache security group names to associate with
                       this replication group.
@@ -686,7 +695,8 @@ spec:
                       zero (0), backups are turned off. Please note that setting a
                       snapshot_retention_limit is not supported on cache.t1.micro
                       cache nodes
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotWindow:
                     description: 'Daily time range (in UTC) during which ElastiCache
                       will begin taking a daily snapshot of your cache cluster. The
@@ -1005,12 +1015,14 @@ spec:
                     type: string
                   numCacheClusters:
                     description: 00#.
-                    type: number
+                    format: int64
+                    type: integer
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
-                    type: number
+                    format: int64
+                    type: integer
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -1022,7 +1034,8 @@ spec:
                     description: –  Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
-                    type: number
+                    format: int64
+                    type: integer
                   preferredCacheClusterAzs:
                     description: List of EC2 availability zones in which the replication
                       group's cache clusters will be created. The order of the availability
@@ -1043,7 +1056,8 @@ spec:
                     description: Number of replica nodes in each node group. Changing
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
-                    type: number
+                    format: int64
+                    type: integer
                   securityGroupIds:
                     description: One or more Amazon VPC security groups associated
                       with this replication group. Use this parameter only when you
@@ -1079,7 +1093,8 @@ spec:
                       zero (0), backups are turned off. Please note that setting a
                       snapshot_retention_limit is not supported on cache.t1.micro
                       cache nodes
-                    type: number
+                    format: int64
+                    type: integer
                   snapshotWindow:
                     description: 'Daily time range (in UTC) during which ElastiCache
                       will begin taking a daily snapshot of your cache cluster. The

@@ -1168,10 +1168,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.taskType is a required parameter
+            - message: taskType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.taskType)
-                || (has(self.initProvider) && has(self.initProvider.taskType))'
+                || has(self.initProvider.taskType)'
           status:
             description: MaintenanceWindowTaskStatus defines the observed state of
               MaintenanceWindowTask.

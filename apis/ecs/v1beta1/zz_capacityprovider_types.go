@@ -197,7 +197,7 @@ type CapacityProviderStatus struct {
 type CapacityProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoScalingGroupProvider) || (has(self.initProvider) && has(self.initProvider.autoScalingGroupProvider))",message="spec.forProvider.autoScalingGroupProvider is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoScalingGroupProvider) || has(self.initProvider.autoScalingGroupProvider)",message="autoScalingGroupProvider is a required parameter"
 	Spec   CapacityProviderSpec   `json:"spec"`
 	Status CapacityProviderStatus `json:"status,omitempty"`
 }

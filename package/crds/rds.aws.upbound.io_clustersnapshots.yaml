@@ -342,11 +342,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.dbClusterSnapshotIdentifier is a required
-                parameter
+            - message: dbClusterSnapshotIdentifier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.dbClusterSnapshotIdentifier)
-                || (has(self.initProvider) && has(self.initProvider.dbClusterSnapshotIdentifier))'
+                || has(self.initProvider.dbClusterSnapshotIdentifier)'
           status:
             description: ClusterSnapshotStatus defines the observed state of ClusterSnapshot.
             properties:

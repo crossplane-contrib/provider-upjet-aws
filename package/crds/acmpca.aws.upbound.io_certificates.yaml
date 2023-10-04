@@ -403,18 +403,17 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.certificateSigningRequestSecretRef is a required
-                parameter
+            - message: certificateSigningRequestSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.certificateSigningRequestSecretRef)'
-            - message: spec.forProvider.signingAlgorithm is a required parameter
+            - message: signingAlgorithm is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.signingAlgorithm)
-                || (has(self.initProvider) && has(self.initProvider.signingAlgorithm))'
-            - message: spec.forProvider.validity is a required parameter
+                || has(self.initProvider.signingAlgorithm)'
+            - message: validity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.validity)
-                || (has(self.initProvider) && has(self.initProvider.validity))'
+                || has(self.initProvider.validity)'
           status:
             description: CertificateStatus defines the observed state of Certificate.
             properties:

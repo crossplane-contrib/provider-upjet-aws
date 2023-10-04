@@ -353,14 +353,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.hashKey is a required parameter
+            - message: hashKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hashKey)
-                || (has(self.initProvider) && has(self.initProvider.hashKey))'
-            - message: spec.forProvider.item is a required parameter
+                || has(self.initProvider.hashKey)'
+            - message: item is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.item)
-                || (has(self.initProvider) && has(self.initProvider.item))'
+                || has(self.initProvider.item)'
           status:
             description: TableItemStatus defines the observed state of TableItem.
             properties:

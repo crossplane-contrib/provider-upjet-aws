@@ -84,7 +84,7 @@ type FindingAggregatorStatus struct {
 type FindingAggregator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkingMode) || (has(self.initProvider) && has(self.initProvider.linkingMode))",message="spec.forProvider.linkingMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkingMode) || has(self.initProvider.linkingMode)",message="linkingMode is a required parameter"
 	Spec   FindingAggregatorSpec   `json:"spec"`
 	Status FindingAggregatorStatus `json:"status,omitempty"`
 }

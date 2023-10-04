@@ -628,14 +628,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.schemaDefinition is a required parameter
+            - message: schemaDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaDefinition)
-                || (has(self.initProvider) && has(self.initProvider.schemaDefinition))'
-            - message: spec.forProvider.tableName is a required parameter
+                || has(self.initProvider.schemaDefinition)'
+            - message: tableName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.tableName)
-                || (has(self.initProvider) && has(self.initProvider.tableName))'
+                || has(self.initProvider.tableName)'
           status:
             description: TableStatus defines the observed state of Table.
             properties:

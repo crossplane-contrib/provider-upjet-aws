@@ -335,10 +335,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.definition is a required parameter
+            - message: definition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.definition)
-                || (has(self.initProvider) && has(self.initProvider.definition))'
+                || has(self.initProvider.definition)'
           status:
             description: AlertManagerDefinitionStatus defines the observed state of
               AlertManagerDefinition.

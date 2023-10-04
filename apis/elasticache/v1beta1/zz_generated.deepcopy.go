@@ -38,7 +38,7 @@ func (in *AuthenticationModeObservation) DeepCopyInto(out *AuthenticationModeObs
 	*out = *in
 	if in.PasswordCount != nil {
 		in, out := &in.PasswordCount, &out.PasswordCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -127,7 +127,7 @@ func (in *CacheNodesObservation) DeepCopyInto(out *CacheNodesObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -256,7 +256,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.NumCacheNodes != nil {
 		in, out := &in.NumCacheNodes, &out.NumCacheNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OutpostMode != nil {
@@ -266,7 +266,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredAvailabilityZones != nil {
@@ -303,7 +303,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -480,7 +480,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.NumCacheNodes != nil {
 		in, out := &in.NumCacheNodes, &out.NumCacheNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OutpostMode != nil {
@@ -495,7 +495,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredAvailabilityZones != nil {
@@ -548,7 +548,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -682,7 +682,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.NumCacheNodes != nil {
 		in, out := &in.NumCacheNodes, &out.NumCacheNodes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OutpostMode != nil {
@@ -707,7 +707,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredAvailabilityZones != nil {
@@ -787,7 +787,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -1451,12 +1451,12 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.NumCacheClusters != nil {
 		in, out := &in.NumCacheClusters, &out.NumCacheClusters
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NumNodeGroups != nil {
 		in, out := &in.NumNodeGroups, &out.NumNodeGroups
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -1466,7 +1466,7 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredCacheClusterAzs != nil {
@@ -1482,7 +1482,7 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.ReplicasPerNodeGroup != nil {
 		in, out := &in.ReplicasPerNodeGroup, &out.ReplicasPerNodeGroup
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityGroupNames != nil {
@@ -1514,7 +1514,7 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -1826,12 +1826,12 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	}
 	if in.NumCacheClusters != nil {
 		in, out := &in.NumCacheClusters, &out.NumCacheClusters
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NumNodeGroups != nil {
 		in, out := &in.NumNodeGroups, &out.NumNodeGroups
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -1841,7 +1841,7 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredCacheClusterAzs != nil {
@@ -1867,7 +1867,7 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	}
 	if in.ReplicasPerNodeGroup != nil {
 		in, out := &in.ReplicasPerNodeGroup, &out.ReplicasPerNodeGroup
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityGroupIds != nil {
@@ -1910,7 +1910,7 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {
@@ -2085,12 +2085,12 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.NumCacheClusters != nil {
 		in, out := &in.NumCacheClusters, &out.NumCacheClusters
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NumNodeGroups != nil {
 		in, out := &in.NumNodeGroups, &out.NumNodeGroups
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ParameterGroupName != nil {
@@ -2100,7 +2100,7 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.PreferredCacheClusterAzs != nil {
@@ -2121,7 +2121,7 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.ReplicasPerNodeGroup != nil {
 		in, out := &in.ReplicasPerNodeGroup, &out.ReplicasPerNodeGroup
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityGroupIDRefs != nil {
@@ -2176,7 +2176,7 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.SnapshotRetentionLimit != nil {
 		in, out := &in.SnapshotRetentionLimit, &out.SnapshotRetentionLimit
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SnapshotWindow != nil {

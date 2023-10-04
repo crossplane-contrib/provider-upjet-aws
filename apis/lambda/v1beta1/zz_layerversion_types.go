@@ -196,7 +196,7 @@ type LayerVersionStatus struct {
 type LayerVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName) || (has(self.initProvider) && has(self.initProvider.layerName))",message="spec.forProvider.layerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.layerName) || has(self.initProvider.layerName)",message="layerName is a required parameter"
 	Spec   LayerVersionSpec   `json:"spec"`
 	Status LayerVersionStatus `json:"status,omitempty"`
 }

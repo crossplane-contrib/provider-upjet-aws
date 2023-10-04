@@ -637,14 +637,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.comparisonOperator is a required parameter
+            - message: comparisonOperator is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.comparisonOperator)
-                || (has(self.initProvider) && has(self.initProvider.comparisonOperator))'
-            - message: spec.forProvider.evaluationPeriods is a required parameter
+                || has(self.initProvider.comparisonOperator)'
+            - message: evaluationPeriods is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluationPeriods)
-                || (has(self.initProvider) && has(self.initProvider.evaluationPeriods))'
+                || has(self.initProvider.evaluationPeriods)'
           status:
             description: MetricAlarmStatus defines the observed state of MetricAlarm.
             properties:

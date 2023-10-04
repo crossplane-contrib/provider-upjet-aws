@@ -257,10 +257,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.administratorAccountId is a required parameter
+            - message: administratorAccountId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.administratorAccountId)
-                || (has(self.initProvider) && has(self.initProvider.administratorAccountId))'
+                || has(self.initProvider.administratorAccountId)'
           status:
             description: InvitationAccepterStatus defines the observed state of InvitationAccepter.
             properties:

@@ -89,7 +89,7 @@ type SAMLProviderStatus struct {
 type SAMLProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.samlMetadataDocument) || (has(self.initProvider) && has(self.initProvider.samlMetadataDocument))",message="spec.forProvider.samlMetadataDocument is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.samlMetadataDocument) || has(self.initProvider.samlMetadataDocument)",message="samlMetadataDocument is a required parameter"
 	Spec   SAMLProviderSpec   `json:"spec"`
 	Status SAMLProviderStatus `json:"status,omitempty"`
 }

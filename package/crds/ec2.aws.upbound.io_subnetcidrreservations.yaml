@@ -345,14 +345,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.cidrBlock is a required parameter
+            - message: cidrBlock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.cidrBlock)
-                || (has(self.initProvider) && has(self.initProvider.cidrBlock))'
-            - message: spec.forProvider.reservationType is a required parameter
+                || has(self.initProvider.cidrBlock)'
+            - message: reservationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.reservationType)
-                || (has(self.initProvider) && has(self.initProvider.reservationType))'
+                || has(self.initProvider.reservationType)'
           status:
             description: SubnetCidrReservationStatus defines the observed state of
               SubnetCidrReservation.

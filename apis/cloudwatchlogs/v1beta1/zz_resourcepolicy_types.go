@@ -76,7 +76,7 @@ type ResourcePolicyStatus struct {
 type ResourcePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDocument) || (has(self.initProvider) && has(self.initProvider.policyDocument))",message="spec.forProvider.policyDocument is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyDocument) || has(self.initProvider.policyDocument)",message="policyDocument is a required parameter"
 	Spec   ResourcePolicySpec   `json:"spec"`
 	Status ResourcePolicyStatus `json:"status,omitempty"`
 }

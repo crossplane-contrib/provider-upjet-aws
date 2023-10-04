@@ -68,36 +68,10 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  accepter:
-                    description: An optional configuration block that allows for VPC
-                      Peering Connection options to be set for the VPC that acceptsthe
-                      peering connection (a maximum of one).
-                    items:
-                      properties:
-                        allowRemoteVpcDnsResolution:
-                          description: Allow a local VPC to resolve public DNS hostnames
-                            to private IP addresses when queried from instances in
-                            the peer VPC.
-                          type: boolean
-                      type: object
-                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  requester:
-                    description: A optional configuration block that allows for VPC
-                      Peering Connection options to be set for the VPC that requeststhe
-                      peering connection (a maximum of one).
-                    items:
-                      properties:
-                        allowRemoteVpcDnsResolution:
-                          description: Allow a local VPC to resolve public DNS hostnames
-                            to private IP addresses when queried from instances in
-                            the peer VPC.
-                          type: boolean
-                      type: object
-                    type: array
                   vpcPeeringConnectionId:
                     description: The ID of the requester VPC peering connection.
                     type: string
@@ -191,33 +165,6 @@ spec:
                   required on creation, but we do not desire to update them after
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
-                properties:
-                  accepter:
-                    description: An optional configuration block that allows for VPC
-                      Peering Connection options to be set for the VPC that acceptsthe
-                      peering connection (a maximum of one).
-                    items:
-                      properties:
-                        allowRemoteVpcDnsResolution:
-                          description: Allow a local VPC to resolve public DNS hostnames
-                            to private IP addresses when queried from instances in
-                            the peer VPC.
-                          type: boolean
-                      type: object
-                    type: array
-                  requester:
-                    description: A optional configuration block that allows for VPC
-                      Peering Connection options to be set for the VPC that requeststhe
-                      peering connection (a maximum of one).
-                    items:
-                      properties:
-                        allowRemoteVpcDnsResolution:
-                          description: Allow a local VPC to resolve public DNS hostnames
-                            to private IP addresses when queried from instances in
-                            the peer VPC.
-                          type: boolean
-                      type: object
-                    type: array
                 type: object
               managementPolicies:
                 default:

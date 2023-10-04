@@ -138,7 +138,7 @@ type CodeRepositoryStatus struct {
 type CodeRepository struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.gitConfig) || (has(self.initProvider) && has(self.initProvider.gitConfig))",message="spec.forProvider.gitConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.gitConfig) || has(self.initProvider.gitConfig)",message="gitConfig is a required parameter"
 	Spec   CodeRepositorySpec   `json:"spec"`
 	Status CodeRepositoryStatus `json:"status,omitempty"`
 }

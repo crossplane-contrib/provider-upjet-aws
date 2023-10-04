@@ -174,11 +174,11 @@ type ReportDefinitionStatus struct {
 type ReportDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.additionalSchemaElements) || (has(self.initProvider) && has(self.initProvider.additionalSchemaElements))",message="spec.forProvider.additionalSchemaElements is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.compression) || (has(self.initProvider) && has(self.initProvider.compression))",message="spec.forProvider.compression is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.format) || (has(self.initProvider) && has(self.initProvider.format))",message="spec.forProvider.format is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Region) || (has(self.initProvider) && has(self.initProvider.s3Region))",message="spec.forProvider.s3Region is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit) || (has(self.initProvider) && has(self.initProvider.timeUnit))",message="spec.forProvider.timeUnit is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.additionalSchemaElements) || has(self.initProvider.additionalSchemaElements)",message="additionalSchemaElements is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.compression) || has(self.initProvider.compression)",message="compression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.format) || has(self.initProvider.format)",message="format is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.s3Region) || has(self.initProvider.s3Region)",message="s3Region is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeUnit) || has(self.initProvider.timeUnit)",message="timeUnit is a required parameter"
 	Spec   ReportDefinitionSpec   `json:"spec"`
 	Status ReportDefinitionStatus `json:"status,omitempty"`
 }

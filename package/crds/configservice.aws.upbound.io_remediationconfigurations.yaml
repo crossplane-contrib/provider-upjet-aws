@@ -398,14 +398,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.targetId is a required parameter
+            - message: targetId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)
-                || (has(self.initProvider) && has(self.initProvider.targetId))'
-            - message: spec.forProvider.targetType is a required parameter
+                || has(self.initProvider.targetId)'
+            - message: targetType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetType)
-                || (has(self.initProvider) && has(self.initProvider.targetType))'
+                || has(self.initProvider.targetType)'
           status:
             description: RemediationConfigurationStatus defines the observed state
               of RemediationConfiguration.

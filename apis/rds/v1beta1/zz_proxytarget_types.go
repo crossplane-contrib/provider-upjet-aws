@@ -137,7 +137,7 @@ type ProxyTargetStatus struct {
 type ProxyTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetGroupName) || (has(self.initProvider) && has(self.initProvider.targetGroupName))",message="spec.forProvider.targetGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetGroupName) || has(self.initProvider.targetGroupName)",message="targetGroupName is a required parameter"
 	Spec   ProxyTargetSpec   `json:"spec"`
 	Status ProxyTargetStatus `json:"status,omitempty"`
 }
