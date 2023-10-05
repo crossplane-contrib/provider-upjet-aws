@@ -922,10 +922,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: throughputCapacity is a required parameter
+            - message: spec.forProvider.throughputCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.throughputCapacity)
-                || has(self.initProvider.throughputCapacity)'
+                || (has(self.initProvider) && has(self.initProvider.throughputCapacity))'
           status:
             description: WindowsFileSystemStatus defines the observed state of WindowsFileSystem.
             properties:

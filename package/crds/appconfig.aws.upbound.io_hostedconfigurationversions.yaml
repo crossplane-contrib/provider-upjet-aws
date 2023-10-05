@@ -437,13 +437,13 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: contentSecretRef is a required parameter
+            - message: spec.forProvider.contentSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.contentSecretRef)'
-            - message: contentType is a required parameter
+            - message: spec.forProvider.contentType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.contentType)
-                || has(self.initProvider.contentType)'
+                || (has(self.initProvider) && has(self.initProvider.contentType))'
           status:
             description: HostedConfigurationVersionStatus defines the observed state
               of HostedConfigurationVersion.

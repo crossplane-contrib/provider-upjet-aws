@@ -89,8 +89,8 @@ type LBStickinessPolicyStatus struct {
 type LBStickinessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookieDuration) || has(self.initProvider.cookieDuration)",message="cookieDuration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cookieDuration) || (has(self.initProvider) && has(self.initProvider.cookieDuration))",message="spec.forProvider.cookieDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || (has(self.initProvider) && has(self.initProvider.enabled))",message="spec.forProvider.enabled is a required parameter"
 	Spec   LBStickinessPolicySpec   `json:"spec"`
 	Status LBStickinessPolicyStatus `json:"status,omitempty"`
 }

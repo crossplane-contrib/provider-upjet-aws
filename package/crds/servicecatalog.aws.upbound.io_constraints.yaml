@@ -434,14 +434,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: parameters is a required parameter
+            - message: spec.forProvider.parameters is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.parameters)
-                || has(self.initProvider.parameters)'
-            - message: type is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.parameters))'
+            - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: ConstraintStatus defines the observed state of Constraint.
             properties:

@@ -290,14 +290,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: eventFilter is a required parameter
+            - message: spec.forProvider.eventFilter is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventFilter)
-                || has(self.initProvider.eventFilter)'
-            - message: eventbridgeBus is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.eventFilter))'
+            - message: spec.forProvider.eventbridgeBus is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventbridgeBus)
-                || has(self.initProvider.eventbridgeBus)'
+                || (has(self.initProvider) && has(self.initProvider.eventbridgeBus))'
           status:
             description: EventIntegrationStatus defines the observed state of EventIntegration.
             properties:

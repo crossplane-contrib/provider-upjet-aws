@@ -506,14 +506,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: dataRepositoryPath is a required parameter
+            - message: spec.forProvider.dataRepositoryPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.dataRepositoryPath)
-                || has(self.initProvider.dataRepositoryPath)'
-            - message: fileSystemPath is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.dataRepositoryPath))'
+            - message: spec.forProvider.fileSystemPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.fileSystemPath)
-                || has(self.initProvider.fileSystemPath)'
+                || (has(self.initProvider) && has(self.initProvider.fileSystemPath))'
           status:
             description: DataRepositoryAssociationStatus defines the observed state
               of DataRepositoryAssociation.

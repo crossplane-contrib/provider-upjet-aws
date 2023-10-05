@@ -113,7 +113,7 @@ type ReplicationSubnetGroupStatus struct {
 type ReplicationSubnetGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicationSubnetGroupDescription) || has(self.initProvider.replicationSubnetGroupDescription)",message="replicationSubnetGroupDescription is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.replicationSubnetGroupDescription) || (has(self.initProvider) && has(self.initProvider.replicationSubnetGroupDescription))",message="spec.forProvider.replicationSubnetGroupDescription is a required parameter"
 	Spec   ReplicationSubnetGroupSpec   `json:"spec"`
 	Status ReplicationSubnetGroupStatus `json:"status,omitempty"`
 }

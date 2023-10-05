@@ -179,8 +179,8 @@ func DocumentationForTags() config.ResourceOption {
 	}
 }
 
-func iamNoForkClientConfig() config.ResourceOption {
+func noForkClientConfig() config.ResourceOption {
 	return func(r *config.Resource) {
-		r.UseNoForkClient = r.ShortGroup == "iam"
+		r.UseNoForkClient = true
 	}
 }

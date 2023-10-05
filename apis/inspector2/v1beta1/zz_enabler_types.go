@@ -97,8 +97,8 @@ type EnablerStatus struct {
 type Enabler struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountIds) || has(self.initProvider.accountIds)",message="accountIds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceTypes) || has(self.initProvider.resourceTypes)",message="resourceTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accountIds) || (has(self.initProvider) && has(self.initProvider.accountIds))",message="spec.forProvider.accountIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceTypes) || (has(self.initProvider) && has(self.initProvider.resourceTypes))",message="spec.forProvider.resourceTypes is a required parameter"
 	Spec   EnablerSpec   `json:"spec"`
 	Status EnablerStatus `json:"status,omitempty"`
 }

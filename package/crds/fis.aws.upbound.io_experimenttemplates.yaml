@@ -661,18 +661,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: action is a required parameter
+            - message: spec.forProvider.action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
-                || has(self.initProvider.action)'
-            - message: description is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.action))'
+            - message: spec.forProvider.description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
-                || has(self.initProvider.description)'
-            - message: stopCondition is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.description))'
+            - message: spec.forProvider.stopCondition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.stopCondition)
-                || has(self.initProvider.stopCondition)'
+                || (has(self.initProvider) && has(self.initProvider.stopCondition))'
           status:
             description: ExperimentTemplateStatus defines the observed state of ExperimentTemplate.
             properties:

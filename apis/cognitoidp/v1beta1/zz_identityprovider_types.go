@@ -134,9 +134,9 @@ type IdentityProviderStatus struct {
 type IdentityProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerDetails) || has(self.initProvider.providerDetails)",message="providerDetails is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName) || has(self.initProvider.providerName)",message="providerName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerType) || has(self.initProvider.providerType)",message="providerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerDetails) || (has(self.initProvider) && has(self.initProvider.providerDetails))",message="spec.forProvider.providerDetails is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName) || (has(self.initProvider) && has(self.initProvider.providerName))",message="spec.forProvider.providerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerType) || (has(self.initProvider) && has(self.initProvider.providerType))",message="spec.forProvider.providerType is a required parameter"
 	Spec   IdentityProviderSpec   `json:"spec"`
 	Status IdentityProviderStatus `json:"status,omitempty"`
 }

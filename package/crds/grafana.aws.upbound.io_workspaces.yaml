@@ -542,18 +542,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: accountAccessType is a required parameter
+            - message: spec.forProvider.accountAccessType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.accountAccessType)
-                || has(self.initProvider.accountAccessType)'
-            - message: authenticationProviders is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.accountAccessType))'
+            - message: spec.forProvider.authenticationProviders is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationProviders)
-                || has(self.initProvider.authenticationProviders)'
-            - message: permissionType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.authenticationProviders))'
+            - message: spec.forProvider.permissionType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.permissionType)
-                || has(self.initProvider.permissionType)'
+                || (has(self.initProvider) && has(self.initProvider.permissionType))'
           status:
             description: WorkspaceStatus defines the observed state of Workspace.
             properties:

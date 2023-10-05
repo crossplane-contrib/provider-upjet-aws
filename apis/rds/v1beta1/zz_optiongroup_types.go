@@ -223,8 +223,8 @@ type OptionGroupStatus struct {
 type OptionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || has(self.initProvider.engineName)",message="engineName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion) || has(self.initProvider.majorEngineVersion)",message="majorEngineVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || (has(self.initProvider) && has(self.initProvider.engineName))",message="spec.forProvider.engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.majorEngineVersion) || (has(self.initProvider) && has(self.initProvider.majorEngineVersion))",message="spec.forProvider.majorEngineVersion is a required parameter"
 	Spec   OptionGroupSpec   `json:"spec"`
 	Status OptionGroupStatus `json:"status,omitempty"`
 }

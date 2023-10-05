@@ -374,14 +374,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: maxCapacity is a required parameter
+            - message: spec.forProvider.maxCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.maxCapacity)
-                || has(self.initProvider.maxCapacity)'
-            - message: minCapacity is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.maxCapacity))'
+            - message: spec.forProvider.minCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.minCapacity)
-                || has(self.initProvider.minCapacity)'
+                || (has(self.initProvider) && has(self.initProvider.minCapacity))'
           status:
             description: TargetStatus defines the observed state of Target.
             properties:

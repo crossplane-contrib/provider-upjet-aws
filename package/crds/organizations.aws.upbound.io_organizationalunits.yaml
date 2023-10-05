@@ -272,14 +272,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: name is a required parameter
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: parentId is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.parentId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.parentId)
-                || has(self.initProvider.parentId)'
+                || (has(self.initProvider) && has(self.initProvider.parentId))'
           status:
             description: OrganizationalUnitStatus defines the observed state of OrganizationalUnit.
             properties:

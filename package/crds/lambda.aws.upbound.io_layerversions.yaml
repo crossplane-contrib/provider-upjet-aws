@@ -355,10 +355,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: layerName is a required parameter
+            - message: spec.forProvider.layerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.layerName)
-                || has(self.initProvider.layerName)'
+                || (has(self.initProvider) && has(self.initProvider.layerName))'
           status:
             description: LayerVersionStatus defines the observed state of LayerVersion.
             properties:

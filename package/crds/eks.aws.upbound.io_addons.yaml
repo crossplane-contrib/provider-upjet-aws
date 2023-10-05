@@ -496,10 +496,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: addonName is a required parameter
+            - message: spec.forProvider.addonName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.addonName)
-                || has(self.initProvider.addonName)'
+                || (has(self.initProvider) && has(self.initProvider.addonName))'
           status:
             description: AddonStatus defines the observed state of Addon.
             properties:

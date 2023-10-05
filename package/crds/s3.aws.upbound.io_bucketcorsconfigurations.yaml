@@ -415,10 +415,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: corsRule is a required parameter
+            - message: spec.forProvider.corsRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.corsRule)
-                || has(self.initProvider.corsRule)'
+                || (has(self.initProvider) && has(self.initProvider.corsRule))'
           status:
             description: BucketCorsConfigurationStatus defines the observed state
               of BucketCorsConfiguration.

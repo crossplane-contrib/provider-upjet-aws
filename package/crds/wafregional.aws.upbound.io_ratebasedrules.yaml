@@ -414,22 +414,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: metricName is a required parameter
+            - message: spec.forProvider.metricName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.metricName)
-                || has(self.initProvider.metricName)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.metricName))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: rateKey is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.rateKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.rateKey)
-                || has(self.initProvider.rateKey)'
-            - message: rateLimit is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.rateKey))'
+            - message: spec.forProvider.rateLimit is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.rateLimit)
-                || has(self.initProvider.rateLimit)'
+                || (has(self.initProvider) && has(self.initProvider.rateLimit))'
           status:
             description: RateBasedRuleStatus defines the observed state of RateBasedRule.
             properties:

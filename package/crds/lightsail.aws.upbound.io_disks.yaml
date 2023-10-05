@@ -272,14 +272,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: availabilityZone is a required parameter
+            - message: spec.forProvider.availabilityZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.availabilityZone)
-                || has(self.initProvider.availabilityZone)'
-            - message: sizeInGb is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.availabilityZone))'
+            - message: spec.forProvider.sizeInGb is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sizeInGb)
-                || has(self.initProvider.sizeInGb)'
+                || (has(self.initProvider) && has(self.initProvider.sizeInGb))'
           status:
             description: DiskStatus defines the observed state of Disk.
             properties:

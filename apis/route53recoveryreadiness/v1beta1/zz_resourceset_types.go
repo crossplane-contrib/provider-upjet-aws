@@ -289,8 +289,8 @@ type ResourceSetStatus struct {
 type ResourceSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceSetType) || has(self.initProvider.resourceSetType)",message="resourceSetType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resources) || has(self.initProvider.resources)",message="resources is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceSetType) || (has(self.initProvider) && has(self.initProvider.resourceSetType))",message="spec.forProvider.resourceSetType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resources) || (has(self.initProvider) && has(self.initProvider.resources))",message="spec.forProvider.resources is a required parameter"
 	Spec   ResourceSetSpec   `json:"spec"`
 	Status ResourceSetStatus `json:"status,omitempty"`
 }

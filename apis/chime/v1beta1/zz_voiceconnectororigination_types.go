@@ -165,7 +165,7 @@ type VoiceConnectorOriginationStatus struct {
 type VoiceConnectorOrigination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.route) || has(self.initProvider.route)",message="route is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.route) || (has(self.initProvider) && has(self.initProvider.route))",message="spec.forProvider.route is a required parameter"
 	Spec   VoiceConnectorOriginationSpec   `json:"spec"`
 	Status VoiceConnectorOriginationStatus `json:"status,omitempty"`
 }

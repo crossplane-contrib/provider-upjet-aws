@@ -439,18 +439,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: config is a required parameter
+            - message: spec.forProvider.config is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.config)
-                || has(self.initProvider.config)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.config))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: timeZone is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.timeZone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.timeZone)
-                || has(self.initProvider.timeZone)'
+                || (has(self.initProvider) && has(self.initProvider.timeZone))'
           status:
             description: HoursOfOperationStatus defines the observed state of HoursOfOperation.
             properties:

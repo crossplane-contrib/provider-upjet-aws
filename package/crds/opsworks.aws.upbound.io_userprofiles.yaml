@@ -340,10 +340,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: sshUsername is a required parameter
+            - message: spec.forProvider.sshUsername is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sshUsername)
-                || has(self.initProvider.sshUsername)'
+                || (has(self.initProvider) && has(self.initProvider.sshUsername))'
           status:
             description: UserProfileStatus defines the observed state of UserProfile.
             properties:

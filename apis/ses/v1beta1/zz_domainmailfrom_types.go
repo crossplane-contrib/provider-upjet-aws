@@ -105,7 +105,7 @@ type DomainMailFromStatus struct {
 type DomainMailFrom struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.mailFromDomain) || has(self.initProvider.mailFromDomain)",message="mailFromDomain is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.mailFromDomain) || (has(self.initProvider) && has(self.initProvider.mailFromDomain))",message="spec.forProvider.mailFromDomain is a required parameter"
 	Spec   DomainMailFromSpec   `json:"spec"`
 	Status DomainMailFromStatus `json:"status,omitempty"`
 }

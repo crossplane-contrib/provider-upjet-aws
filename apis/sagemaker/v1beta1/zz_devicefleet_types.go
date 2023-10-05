@@ -163,7 +163,7 @@ type DeviceFleetStatus struct {
 type DeviceFleet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputConfig) || has(self.initProvider.outputConfig)",message="outputConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputConfig) || (has(self.initProvider) && has(self.initProvider.outputConfig))",message="spec.forProvider.outputConfig is a required parameter"
 	Spec   DeviceFleetSpec   `json:"spec"`
 	Status DeviceFleetStatus `json:"status,omitempty"`
 }

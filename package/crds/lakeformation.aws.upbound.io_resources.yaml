@@ -332,10 +332,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: arn is a required parameter
+            - message: spec.forProvider.arn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.arn)
-                || has(self.initProvider.arn)'
+                || (has(self.initProvider) && has(self.initProvider.arn))'
           status:
             description: ResourceStatus defines the observed state of Resource.
             properties:
