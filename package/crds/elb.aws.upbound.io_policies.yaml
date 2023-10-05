@@ -430,14 +430,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: policyName is a required parameter
+            - message: spec.forProvider.policyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policyName)
-                || has(self.initProvider.policyName)'
-            - message: policyTypeName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.policyName))'
+            - message: spec.forProvider.policyTypeName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policyTypeName)
-                || has(self.initProvider.policyTypeName)'
+                || (has(self.initProvider) && has(self.initProvider.policyTypeName))'
           status:
             description: PolicyStatus defines the observed state of Policy.
             properties:

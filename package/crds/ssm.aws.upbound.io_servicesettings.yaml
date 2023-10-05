@@ -260,14 +260,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: settingId is a required parameter
+            - message: spec.forProvider.settingId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.settingId)
-                || has(self.initProvider.settingId)'
-            - message: settingValue is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.settingId))'
+            - message: spec.forProvider.settingValue is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.settingValue)
-                || has(self.initProvider.settingValue)'
+                || (has(self.initProvider) && has(self.initProvider.settingValue))'
           status:
             description: ServiceSettingStatus defines the observed state of ServiceSetting.
             properties:

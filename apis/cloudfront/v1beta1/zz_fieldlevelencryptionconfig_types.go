@@ -266,8 +266,8 @@ type FieldLevelEncryptionConfigStatus struct {
 type FieldLevelEncryptionConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentTypeProfileConfig) || has(self.initProvider.contentTypeProfileConfig)",message="contentTypeProfileConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.queryArgProfileConfig) || has(self.initProvider.queryArgProfileConfig)",message="queryArgProfileConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentTypeProfileConfig) || (has(self.initProvider) && has(self.initProvider.contentTypeProfileConfig))",message="spec.forProvider.contentTypeProfileConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.queryArgProfileConfig) || (has(self.initProvider) && has(self.initProvider.queryArgProfileConfig))",message="spec.forProvider.queryArgProfileConfig is a required parameter"
 	Spec   FieldLevelEncryptionConfigSpec   `json:"spec"`
 	Status FieldLevelEncryptionConfigStatus `json:"status,omitempty"`
 }

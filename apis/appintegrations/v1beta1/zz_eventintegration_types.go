@@ -134,8 +134,8 @@ type EventIntegrationStatus struct {
 type EventIntegration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventFilter) || has(self.initProvider.eventFilter)",message="eventFilter is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventbridgeBus) || has(self.initProvider.eventbridgeBus)",message="eventbridgeBus is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventFilter) || (has(self.initProvider) && has(self.initProvider.eventFilter))",message="spec.forProvider.eventFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventbridgeBus) || (has(self.initProvider) && has(self.initProvider.eventbridgeBus))",message="spec.forProvider.eventbridgeBus is a required parameter"
 	Spec   EventIntegrationSpec   `json:"spec"`
 	Status EventIntegrationStatus `json:"status,omitempty"`
 }

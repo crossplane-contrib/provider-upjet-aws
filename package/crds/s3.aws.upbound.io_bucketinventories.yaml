@@ -598,22 +598,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: destination is a required parameter
+            - message: spec.forProvider.destination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.destination)
-                || has(self.initProvider.destination)'
-            - message: includedObjectVersions is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.destination))'
+            - message: spec.forProvider.includedObjectVersions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.includedObjectVersions)
-                || has(self.initProvider.includedObjectVersions)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.includedObjectVersions))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: schedule is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.schedule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)
-                || has(self.initProvider.schedule)'
+                || (has(self.initProvider) && has(self.initProvider.schedule))'
           status:
             description: BucketInventoryStatus defines the observed state of BucketInventory.
             properties:

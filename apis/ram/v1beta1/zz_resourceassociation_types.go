@@ -96,7 +96,7 @@ type ResourceAssociationStatus struct {
 type ResourceAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceArn) || has(self.initProvider.resourceArn)",message="resourceArn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceArn) || (has(self.initProvider) && has(self.initProvider.resourceArn))",message="spec.forProvider.resourceArn is a required parameter"
 	Spec   ResourceAssociationSpec   `json:"spec"`
 	Status ResourceAssociationStatus `json:"status,omitempty"`
 }

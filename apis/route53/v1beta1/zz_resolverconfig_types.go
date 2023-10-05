@@ -99,7 +99,7 @@ type ResolverConfigStatus struct {
 type ResolverConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autodefinedReverseFlag) || has(self.initProvider.autodefinedReverseFlag)",message="autodefinedReverseFlag is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autodefinedReverseFlag) || (has(self.initProvider) && has(self.initProvider.autodefinedReverseFlag))",message="spec.forProvider.autodefinedReverseFlag is a required parameter"
 	Spec   ResolverConfigSpec   `json:"spec"`
 	Status ResolverConfigStatus `json:"status,omitempty"`
 }

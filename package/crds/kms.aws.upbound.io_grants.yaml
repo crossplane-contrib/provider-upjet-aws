@@ -520,10 +520,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: operations is a required parameter
+            - message: spec.forProvider.operations is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.operations)
-                || has(self.initProvider.operations)'
+                || (has(self.initProvider) && has(self.initProvider.operations))'
           status:
             description: GrantStatus defines the observed state of Grant.
             properties:

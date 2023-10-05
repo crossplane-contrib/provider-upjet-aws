@@ -118,7 +118,7 @@ type NetworkInterfaceAttachmentStatus struct {
 type NetworkInterfaceAttachment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deviceIndex) || has(self.initProvider.deviceIndex)",message="deviceIndex is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deviceIndex) || (has(self.initProvider) && has(self.initProvider.deviceIndex))",message="spec.forProvider.deviceIndex is a required parameter"
 	Spec   NetworkInterfaceAttachmentSpec   `json:"spec"`
 	Status NetworkInterfaceAttachmentStatus `json:"status,omitempty"`
 }

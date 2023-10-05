@@ -503,10 +503,11 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: dataCatalogEncryptionSettings is a required parameter
+            - message: spec.forProvider.dataCatalogEncryptionSettings is a required
+                parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.dataCatalogEncryptionSettings)
-                || has(self.initProvider.dataCatalogEncryptionSettings)'
+                || (has(self.initProvider) && has(self.initProvider.dataCatalogEncryptionSettings))'
           status:
             description: DataCatalogEncryptionSettingsStatus defines the observed
               state of DataCatalogEncryptionSettings.

@@ -107,7 +107,7 @@ type VoiceConnectorStatus struct {
 type VoiceConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.requireEncryption) || has(self.initProvider.requireEncryption)",message="requireEncryption is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.requireEncryption) || (has(self.initProvider) && has(self.initProvider.requireEncryption))",message="spec.forProvider.requireEncryption is a required parameter"
 	Spec   VoiceConnectorSpec   `json:"spec"`
 	Status VoiceConnectorStatus `json:"status,omitempty"`
 }

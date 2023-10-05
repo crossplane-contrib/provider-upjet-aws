@@ -312,18 +312,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: connectionsBandwidth is a required parameter
+            - message: spec.forProvider.connectionsBandwidth is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionsBandwidth)
-                || has(self.initProvider.connectionsBandwidth)'
-            - message: location is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.connectionsBandwidth))'
+            - message: spec.forProvider.location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: LagStatus defines the observed state of Lag.
             properties:

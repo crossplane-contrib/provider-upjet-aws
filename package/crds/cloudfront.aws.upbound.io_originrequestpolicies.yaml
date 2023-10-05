@@ -377,18 +377,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: cookiesConfig is a required parameter
+            - message: spec.forProvider.cookiesConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.cookiesConfig)
-                || has(self.initProvider.cookiesConfig)'
-            - message: headersConfig is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.cookiesConfig))'
+            - message: spec.forProvider.headersConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.headersConfig)
-                || has(self.initProvider.headersConfig)'
-            - message: queryStringsConfig is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.headersConfig))'
+            - message: spec.forProvider.queryStringsConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.queryStringsConfig)
-                || has(self.initProvider.queryStringsConfig)'
+                || (has(self.initProvider) && has(self.initProvider.queryStringsConfig))'
           status:
             description: OriginRequestPolicyStatus defines the observed state of OriginRequestPolicy.
             properties:

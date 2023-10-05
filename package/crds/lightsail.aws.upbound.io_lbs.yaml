@@ -277,10 +277,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: instancePort is a required parameter
+            - message: spec.forProvider.instancePort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instancePort)
-                || has(self.initProvider.instancePort)'
+                || (has(self.initProvider) && has(self.initProvider.instancePort))'
           status:
             description: LBStatus defines the observed state of LB.
             properties:

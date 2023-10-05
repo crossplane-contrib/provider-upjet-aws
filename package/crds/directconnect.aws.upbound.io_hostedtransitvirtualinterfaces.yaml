@@ -398,26 +398,26 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: addressFamily is a required parameter
+            - message: spec.forProvider.addressFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.addressFamily)
-                || has(self.initProvider.addressFamily)'
-            - message: bgpAsn is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.addressFamily))'
+            - message: spec.forProvider.bgpAsn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)
-                || has(self.initProvider.bgpAsn)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.bgpAsn))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: ownerAccountId is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.ownerAccountId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ownerAccountId)
-                || has(self.initProvider.ownerAccountId)'
-            - message: vlan is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.ownerAccountId))'
+            - message: spec.forProvider.vlan is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.vlan)
-                || has(self.initProvider.vlan)'
+                || (has(self.initProvider) && has(self.initProvider.vlan))'
           status:
             description: HostedTransitVirtualInterfaceStatus defines the observed
               state of HostedTransitVirtualInterface.

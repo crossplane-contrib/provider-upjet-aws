@@ -94,7 +94,7 @@ type QueueRedrivePolicyStatus struct {
 type QueueRedrivePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.redrivePolicy) || has(self.initProvider.redrivePolicy)",message="redrivePolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.redrivePolicy) || (has(self.initProvider) && has(self.initProvider.redrivePolicy))",message="spec.forProvider.redrivePolicy is a required parameter"
 	Spec   QueueRedrivePolicySpec   `json:"spec"`
 	Status QueueRedrivePolicyStatus `json:"status,omitempty"`
 }

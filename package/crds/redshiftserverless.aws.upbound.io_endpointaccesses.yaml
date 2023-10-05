@@ -420,10 +420,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: workgroupName is a required parameter
+            - message: spec.forProvider.workgroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.workgroupName)
-                || has(self.initProvider.workgroupName)'
+                || (has(self.initProvider) && has(self.initProvider.workgroupName))'
           status:
             description: EndpointAccessStatus defines the observed state of EndpointAccess.
             properties:

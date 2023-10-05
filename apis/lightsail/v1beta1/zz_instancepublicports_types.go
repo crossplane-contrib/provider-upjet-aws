@@ -161,7 +161,7 @@ type InstancePublicPortsStatus struct {
 type InstancePublicPorts struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.portInfo) || has(self.initProvider.portInfo)",message="portInfo is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.portInfo) || (has(self.initProvider) && has(self.initProvider.portInfo))",message="spec.forProvider.portInfo is a required parameter"
 	Spec   InstancePublicPortsSpec   `json:"spec"`
 	Status InstancePublicPortsStatus `json:"status,omitempty"`
 }

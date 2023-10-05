@@ -1548,14 +1548,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: endpointType is a required parameter
+            - message: spec.forProvider.endpointType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointType)
-                || has(self.initProvider.endpointType)'
-            - message: engineName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.endpointType))'
+            - message: spec.forProvider.engineName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineName)
-                || has(self.initProvider.engineName)'
+                || (has(self.initProvider) && has(self.initProvider.engineName))'
           status:
             description: EndpointStatus defines the observed state of Endpoint.
             properties:

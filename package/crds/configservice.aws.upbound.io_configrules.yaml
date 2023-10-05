@@ -559,10 +559,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: source is a required parameter
+            - message: spec.forProvider.source is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.source)
-                || has(self.initProvider.source)'
+                || (has(self.initProvider) && has(self.initProvider.source))'
           status:
             description: ConfigRuleStatus defines the observed state of ConfigRule.
             properties:

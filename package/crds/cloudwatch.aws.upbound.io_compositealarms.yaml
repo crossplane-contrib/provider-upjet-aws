@@ -516,10 +516,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: alarmRule is a required parameter
+            - message: spec.forProvider.alarmRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.alarmRule)
-                || has(self.initProvider.alarmRule)'
+                || (has(self.initProvider) && has(self.initProvider.alarmRule))'
           status:
             description: CompositeAlarmStatus defines the observed state of CompositeAlarm.
             properties:

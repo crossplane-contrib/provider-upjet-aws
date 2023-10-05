@@ -79,7 +79,7 @@ type AvailabilityZoneGroupStatus struct {
 type AvailabilityZoneGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.optInStatus) || has(self.initProvider.optInStatus)",message="optInStatus is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.optInStatus) || (has(self.initProvider) && has(self.initProvider.optInStatus))",message="spec.forProvider.optInStatus is a required parameter"
 	Spec   AvailabilityZoneGroupSpec   `json:"spec"`
 	Status AvailabilityZoneGroupStatus `json:"status,omitempty"`
 }

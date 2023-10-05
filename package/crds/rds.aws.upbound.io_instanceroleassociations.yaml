@@ -415,10 +415,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: featureName is a required parameter
+            - message: spec.forProvider.featureName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.featureName)
-                || has(self.initProvider.featureName)'
+                || (has(self.initProvider) && has(self.initProvider.featureName))'
           status:
             description: InstanceRoleAssociationStatus defines the observed state
               of InstanceRoleAssociation.

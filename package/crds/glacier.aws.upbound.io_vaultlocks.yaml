@@ -358,14 +358,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: completeLock is a required parameter
+            - message: spec.forProvider.completeLock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.completeLock)
-                || has(self.initProvider.completeLock)'
-            - message: policy is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.completeLock))'
+            - message: spec.forProvider.policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
-                || has(self.initProvider.policy)'
+                || (has(self.initProvider) && has(self.initProvider.policy))'
           status:
             description: VaultLockStatus defines the observed state of VaultLock.
             properties:

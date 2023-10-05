@@ -285,22 +285,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: emailAddress is a required parameter
+            - message: spec.forProvider.emailAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddress)
-                || has(self.initProvider.emailAddress)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.emailAddress))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: phoneNumber is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.phoneNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.phoneNumber)
-                || has(self.initProvider.phoneNumber)'
-            - message: title is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.phoneNumber))'
+            - message: spec.forProvider.title is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.title)
-                || has(self.initProvider.title)'
+                || (has(self.initProvider) && has(self.initProvider.title))'
           status:
             description: AlternateContactStatus defines the observed state of AlternateContact.
             properties:

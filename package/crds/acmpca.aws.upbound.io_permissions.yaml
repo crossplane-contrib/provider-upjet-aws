@@ -359,14 +359,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: actions is a required parameter
+            - message: spec.forProvider.actions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.actions)
-                || has(self.initProvider.actions)'
-            - message: principal is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.actions))'
+            - message: spec.forProvider.principal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.principal)
-                || has(self.initProvider.principal)'
+                || (has(self.initProvider) && has(self.initProvider.principal))'
           status:
             description: PermissionStatus defines the observed state of Permission.
             properties:

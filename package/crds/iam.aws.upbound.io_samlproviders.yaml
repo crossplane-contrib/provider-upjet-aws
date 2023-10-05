@@ -260,10 +260,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: samlMetadataDocument is a required parameter
+            - message: spec.forProvider.samlMetadataDocument is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.samlMetadataDocument)
-                || has(self.initProvider.samlMetadataDocument)'
+                || (has(self.initProvider) && has(self.initProvider.samlMetadataDocument))'
           status:
             description: SAMLProviderStatus defines the observed state of SAMLProvider.
             properties:

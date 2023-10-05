@@ -200,7 +200,7 @@ type GrantStatus struct {
 type Grant struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operations) || has(self.initProvider.operations)",message="operations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operations) || (has(self.initProvider) && has(self.initProvider.operations))",message="spec.forProvider.operations is a required parameter"
 	Spec   GrantSpec   `json:"spec"`
 	Status GrantStatus `json:"status,omitempty"`
 }

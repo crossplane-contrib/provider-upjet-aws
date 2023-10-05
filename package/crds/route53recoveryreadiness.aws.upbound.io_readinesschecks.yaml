@@ -266,10 +266,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: resourceSetName is a required parameter
+            - message: spec.forProvider.resourceSetName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceSetName)
-                || has(self.initProvider.resourceSetName)'
+                || (has(self.initProvider) && has(self.initProvider.resourceSetName))'
           status:
             description: ReadinessCheckStatus defines the observed state of ReadinessCheck.
             properties:

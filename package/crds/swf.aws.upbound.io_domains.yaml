@@ -274,10 +274,11 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: workflowExecutionRetentionPeriodInDays is a required parameter
+            - message: spec.forProvider.workflowExecutionRetentionPeriodInDays is
+                a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.workflowExecutionRetentionPeriodInDays)
-                || has(self.initProvider.workflowExecutionRetentionPeriodInDays)'
+                || (has(self.initProvider) && has(self.initProvider.workflowExecutionRetentionPeriodInDays))'
           status:
             description: DomainStatus defines the observed state of Domain.
             properties:

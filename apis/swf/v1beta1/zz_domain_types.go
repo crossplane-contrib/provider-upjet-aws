@@ -105,7 +105,7 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.workflowExecutionRetentionPeriodInDays) || has(self.initProvider.workflowExecutionRetentionPeriodInDays)",message="workflowExecutionRetentionPeriodInDays is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.workflowExecutionRetentionPeriodInDays) || (has(self.initProvider) && has(self.initProvider.workflowExecutionRetentionPeriodInDays))",message="spec.forProvider.workflowExecutionRetentionPeriodInDays is a required parameter"
 	Spec   DomainSpec   `json:"spec"`
 	Status DomainStatus `json:"status,omitempty"`
 }
