@@ -335,10 +335,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: accessPolicy is a required parameter
+            - message: spec.forProvider.accessPolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.accessPolicy)
-                || has(self.initProvider.accessPolicy)'
+                || (has(self.initProvider) && has(self.initProvider.accessPolicy))'
           status:
             description: DomainServiceAccessPolicyStatus defines the observed state
               of DomainServiceAccessPolicy.

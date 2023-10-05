@@ -105,8 +105,8 @@ type StudioLifecycleConfigStatus struct {
 type StudioLifecycleConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigAppType) || has(self.initProvider.studioLifecycleConfigAppType)",message="studioLifecycleConfigAppType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigContent) || has(self.initProvider.studioLifecycleConfigContent)",message="studioLifecycleConfigContent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigAppType) || (has(self.initProvider) && has(self.initProvider.studioLifecycleConfigAppType))",message="spec.forProvider.studioLifecycleConfigAppType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.studioLifecycleConfigContent) || (has(self.initProvider) && has(self.initProvider.studioLifecycleConfigContent))",message="spec.forProvider.studioLifecycleConfigContent is a required parameter"
 	Spec   StudioLifecycleConfigSpec   `json:"spec"`
 	Status StudioLifecycleConfigStatus `json:"status,omitempty"`
 }

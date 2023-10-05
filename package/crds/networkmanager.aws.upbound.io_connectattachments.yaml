@@ -506,10 +506,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: options is a required parameter
+            - message: spec.forProvider.options is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.options)
-                || has(self.initProvider.options)'
+                || (has(self.initProvider) && has(self.initProvider.options))'
           status:
             description: ConnectAttachmentStatus defines the observed state of ConnectAttachment.
             properties:

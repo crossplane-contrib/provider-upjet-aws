@@ -794,10 +794,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: container is a required parameter
+            - message: spec.forProvider.container is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.container)
-                || has(self.initProvider.container)'
+                || (has(self.initProvider) && has(self.initProvider.container))'
           status:
             description: PresetStatus defines the observed state of Preset.
             properties:

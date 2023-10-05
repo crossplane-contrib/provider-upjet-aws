@@ -115,7 +115,7 @@ type ListenerPolicyStatus struct {
 type ListenerPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerPort) || has(self.initProvider.loadBalancerPort)",message="loadBalancerPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerPort) || (has(self.initProvider) && has(self.initProvider.loadBalancerPort))",message="spec.forProvider.loadBalancerPort is a required parameter"
 	Spec   ListenerPolicySpec   `json:"spec"`
 	Status ListenerPolicyStatus `json:"status,omitempty"`
 }

@@ -530,18 +530,19 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: eventTimeFeatureName is a required parameter
+            - message: spec.forProvider.eventTimeFeatureName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventTimeFeatureName)
-                || has(self.initProvider.eventTimeFeatureName)'
-            - message: featureDefinition is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.eventTimeFeatureName))'
+            - message: spec.forProvider.featureDefinition is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.featureDefinition)
-                || has(self.initProvider.featureDefinition)'
-            - message: recordIdentifierFeatureName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.featureDefinition))'
+            - message: spec.forProvider.recordIdentifierFeatureName is a required
+                parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.recordIdentifierFeatureName)
-                || has(self.initProvider.recordIdentifierFeatureName)'
+                || (has(self.initProvider) && has(self.initProvider.recordIdentifierFeatureName))'
           status:
             description: FeatureGroupStatus defines the observed state of FeatureGroup.
             properties:

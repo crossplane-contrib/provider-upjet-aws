@@ -2285,14 +2285,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: maxSize is a required parameter
+            - message: spec.forProvider.maxSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.maxSize)
-                || has(self.initProvider.maxSize)'
-            - message: minSize is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.maxSize))'
+            - message: spec.forProvider.minSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.minSize)
-                || has(self.initProvider.minSize)'
+                || (has(self.initProvider) && has(self.initProvider.minSize))'
           status:
             description: AutoscalingGroupStatus defines the observed state of AutoscalingGroup.
             properties:

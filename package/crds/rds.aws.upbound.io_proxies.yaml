@@ -642,18 +642,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: auth is a required parameter
+            - message: spec.forProvider.auth is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.auth)
-                || has(self.initProvider.auth)'
-            - message: engineFamily is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.auth))'
+            - message: spec.forProvider.engineFamily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineFamily)
-                || has(self.initProvider.engineFamily)'
-            - message: vpcSubnetIds is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.engineFamily))'
+            - message: spec.forProvider.vpcSubnetIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds)
-                || has(self.initProvider.vpcSubnetIds)'
+                || (has(self.initProvider) && has(self.initProvider.vpcSubnetIds))'
           status:
             description: ProxyStatus defines the observed state of Proxy.
             properties:

@@ -131,7 +131,7 @@ type BotAssociationStatus struct {
 type BotAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lexBot) || has(self.initProvider.lexBot)",message="lexBot is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lexBot) || (has(self.initProvider) && has(self.initProvider.lexBot))",message="spec.forProvider.lexBot is a required parameter"
 	Spec   BotAssociationSpec   `json:"spec"`
 	Status BotAssociationStatus `json:"status,omitempty"`
 }

@@ -349,14 +349,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: encoding is a required parameter
+            - message: spec.forProvider.encoding is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.encoding)
-                || has(self.initProvider.encoding)'
-            - message: publicKey is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.encoding))'
+            - message: spec.forProvider.publicKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.publicKey)
-                || has(self.initProvider.publicKey)'
+                || (has(self.initProvider) && has(self.initProvider.publicKey))'
           status:
             description: UserSSHKeyStatus defines the observed state of UserSSHKey.
             properties:

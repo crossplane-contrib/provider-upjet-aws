@@ -469,18 +469,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: duration is a required parameter
+            - message: spec.forProvider.duration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.duration)
-                || has(self.initProvider.duration)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.duration))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: rulesPackageArns is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.rulesPackageArns is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.rulesPackageArns)
-                || has(self.initProvider.rulesPackageArns)'
+                || (has(self.initProvider) && has(self.initProvider.rulesPackageArns))'
           status:
             description: AssessmentTemplateStatus defines the observed state of AssessmentTemplate.
             properties:

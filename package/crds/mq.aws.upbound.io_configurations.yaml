@@ -304,22 +304,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: data is a required parameter
+            - message: spec.forProvider.data is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.data)
-                || has(self.initProvider.data)'
-            - message: engineType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.data))'
+            - message: spec.forProvider.engineType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineType)
-                || has(self.initProvider.engineType)'
-            - message: engineVersion is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.engineType))'
+            - message: spec.forProvider.engineVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineVersion)
-                || has(self.initProvider.engineVersion)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.engineVersion))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: ConfigurationStatus defines the observed state of Configuration.
             properties:

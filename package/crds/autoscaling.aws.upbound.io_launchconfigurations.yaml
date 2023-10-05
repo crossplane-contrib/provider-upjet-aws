@@ -573,14 +573,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: imageId is a required parameter
+            - message: spec.forProvider.imageId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.imageId)
-                || has(self.initProvider.imageId)'
-            - message: instanceType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.imageId))'
+            - message: spec.forProvider.instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
-                || has(self.initProvider.instanceType)'
+                || (has(self.initProvider) && has(self.initProvider.instanceType))'
           status:
             description: LaunchConfigurationStatus defines the observed state of LaunchConfiguration.
             properties:

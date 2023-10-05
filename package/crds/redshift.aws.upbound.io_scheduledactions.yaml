@@ -472,14 +472,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: schedule is a required parameter
+            - message: spec.forProvider.schedule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.schedule)
-                || has(self.initProvider.schedule)'
-            - message: targetAction is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.schedule))'
+            - message: spec.forProvider.targetAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetAction)
-                || has(self.initProvider.targetAction)'
+                || (has(self.initProvider) && has(self.initProvider.targetAction))'
           status:
             description: ScheduledActionStatus defines the observed state of ScheduledAction.
             properties:

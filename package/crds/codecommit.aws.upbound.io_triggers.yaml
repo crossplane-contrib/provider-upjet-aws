@@ -468,10 +468,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: trigger is a required parameter
+            - message: spec.forProvider.trigger is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.trigger)
-                || has(self.initProvider.trigger)'
+                || (has(self.initProvider) && has(self.initProvider.trigger))'
           status:
             description: TriggerStatus defines the observed state of Trigger.
             properties:

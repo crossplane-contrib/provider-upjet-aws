@@ -275,10 +275,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: requireEncryption is a required parameter
+            - message: spec.forProvider.requireEncryption is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.requireEncryption)
-                || has(self.initProvider.requireEncryption)'
+                || (has(self.initProvider) && has(self.initProvider.requireEncryption))'
           status:
             description: VoiceConnectorStatus defines the observed state of VoiceConnector.
             properties:
