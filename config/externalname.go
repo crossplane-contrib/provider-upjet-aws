@@ -574,7 +574,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// rds
 	//
 	"aws_rds_cluster":        config.ParameterAsIdentifier("cluster_identifier"),
-	"aws_db_instance":        config.ParameterAsIdentifier("identifier"),
+	"aws_db_instance":        config.IdentifierFromProvider,
 	"aws_db_parameter_group": config.NameAsIdentifier,
 	"aws_db_subnet_group":    config.NameAsIdentifier,
 	// aws_db_instance_role_association can be imported using the DB Instance Identifier and IAM Role ARN separated by a comma
