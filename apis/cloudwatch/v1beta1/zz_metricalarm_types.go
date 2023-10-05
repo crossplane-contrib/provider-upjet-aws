@@ -472,8 +472,8 @@ type MetricAlarmStatus struct {
 type MetricAlarm struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.comparisonOperator) || has(self.initProvider.comparisonOperator)",message="comparisonOperator is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.evaluationPeriods) || has(self.initProvider.evaluationPeriods)",message="evaluationPeriods is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.comparisonOperator) || (has(self.initProvider) && has(self.initProvider.comparisonOperator))",message="spec.forProvider.comparisonOperator is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.evaluationPeriods) || (has(self.initProvider) && has(self.initProvider.evaluationPeriods))",message="spec.forProvider.evaluationPeriods is a required parameter"
 	Spec   MetricAlarmSpec   `json:"spec"`
 	Status MetricAlarmStatus `json:"status,omitempty"`
 }

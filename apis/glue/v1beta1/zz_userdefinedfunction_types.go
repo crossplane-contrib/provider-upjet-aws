@@ -164,9 +164,9 @@ type UserDefinedFunctionStatus struct {
 type UserDefinedFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.className) || has(self.initProvider.className)",message="className is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerName) || has(self.initProvider.ownerName)",message="ownerName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerType) || has(self.initProvider.ownerType)",message="ownerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.className) || (has(self.initProvider) && has(self.initProvider.className))",message="spec.forProvider.className is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerName) || (has(self.initProvider) && has(self.initProvider.ownerName))",message="spec.forProvider.ownerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ownerType) || (has(self.initProvider) && has(self.initProvider.ownerType))",message="spec.forProvider.ownerType is a required parameter"
 	Spec   UserDefinedFunctionSpec   `json:"spec"`
 	Status UserDefinedFunctionStatus `json:"status,omitempty"`
 }

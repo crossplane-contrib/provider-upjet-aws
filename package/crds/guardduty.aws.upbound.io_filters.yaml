@@ -451,18 +451,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: action is a required parameter
+            - message: spec.forProvider.action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
-                || has(self.initProvider.action)'
-            - message: findingCriteria is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.action))'
+            - message: spec.forProvider.findingCriteria is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.findingCriteria)
-                || has(self.initProvider.findingCriteria)'
-            - message: rank is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.findingCriteria))'
+            - message: spec.forProvider.rank is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.rank)
-                || has(self.initProvider.rank)'
+                || (has(self.initProvider) && has(self.initProvider.rank))'
           status:
             description: FilterStatus defines the observed state of Filter.
             properties:

@@ -540,18 +540,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: name is a required parameter
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: operatingSystem is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.operatingSystem is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.operatingSystem)
-                || has(self.initProvider.operatingSystem)'
-            - message: storageLocation is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.operatingSystem))'
+            - message: spec.forProvider.storageLocation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.storageLocation)
-                || has(self.initProvider.storageLocation)'
+                || (has(self.initProvider) && has(self.initProvider.storageLocation))'
           status:
             description: BuildStatus defines the observed state of Build.
             properties:

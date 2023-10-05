@@ -480,14 +480,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: resourceSetType is a required parameter
+            - message: spec.forProvider.resourceSetType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceSetType)
-                || has(self.initProvider.resourceSetType)'
-            - message: resources is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.resourceSetType))'
+            - message: spec.forProvider.resources is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.resources)
-                || has(self.initProvider.resources)'
+                || (has(self.initProvider) && has(self.initProvider.resources))'
           status:
             description: ResourceSetStatus defines the observed state of ResourceSet.
             properties:

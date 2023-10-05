@@ -2225,18 +2225,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: enabled is a required parameter
+            - message: spec.forProvider.enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
-                || has(self.initProvider.enabled)'
-            - message: sql is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.enabled))'
+            - message: spec.forProvider.sql is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sql)
-                || has(self.initProvider.sql)'
-            - message: sqlVersion is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.sql))'
+            - message: spec.forProvider.sqlVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sqlVersion)
-                || has(self.initProvider.sqlVersion)'
+                || (has(self.initProvider) && has(self.initProvider.sqlVersion))'
           status:
             description: TopicRuleStatus defines the observed state of TopicRule.
             properties:

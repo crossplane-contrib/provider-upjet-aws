@@ -731,14 +731,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: deploymentType is a required parameter
+            - message: spec.forProvider.deploymentType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.deploymentType)
-                || has(self.initProvider.deploymentType)'
-            - message: throughputCapacity is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.deploymentType))'
+            - message: spec.forProvider.throughputCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.throughputCapacity)
-                || has(self.initProvider.throughputCapacity)'
+                || (has(self.initProvider) && has(self.initProvider.throughputCapacity))'
           status:
             description: OntapFileSystemStatus defines the observed state of OntapFileSystem.
             properties:

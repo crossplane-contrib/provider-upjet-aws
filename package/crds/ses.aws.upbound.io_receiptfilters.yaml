@@ -263,14 +263,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: cidr is a required parameter
+            - message: spec.forProvider.cidr is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.cidr)
-                || has(self.initProvider.cidr)'
-            - message: policy is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.cidr))'
+            - message: spec.forProvider.policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
-                || has(self.initProvider.policy)'
+                || (has(self.initProvider) && has(self.initProvider.policy))'
           status:
             description: ReceiptFilterStatus defines the observed state of ReceiptFilter.
             properties:

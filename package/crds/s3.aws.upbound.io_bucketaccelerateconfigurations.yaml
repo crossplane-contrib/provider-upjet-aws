@@ -340,10 +340,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: status is a required parameter
+            - message: spec.forProvider.status is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.status)
-                || has(self.initProvider.status)'
+                || (has(self.initProvider) && has(self.initProvider.status))'
           status:
             description: BucketAccelerateConfigurationStatus defines the observed
               state of BucketAccelerateConfiguration.

@@ -96,8 +96,8 @@ type ThingGroupMembershipStatus struct {
 type ThingGroupMembership struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingGroupName) || has(self.initProvider.thingGroupName)",message="thingGroupName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingName) || has(self.initProvider.thingName)",message="thingName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingGroupName) || (has(self.initProvider) && has(self.initProvider.thingGroupName))",message="spec.forProvider.thingGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.thingName) || (has(self.initProvider) && has(self.initProvider.thingName))",message="spec.forProvider.thingName is a required parameter"
 	Spec   ThingGroupMembershipSpec   `json:"spec"`
 	Status ThingGroupMembershipStatus `json:"status,omitempty"`
 }

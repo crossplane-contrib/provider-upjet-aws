@@ -894,14 +894,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: bucketName is a required parameter
+            - message: spec.forProvider.bucketName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.bucketName)
-                || has(self.initProvider.bucketName)'
-            - message: endpointType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.bucketName))'
+            - message: spec.forProvider.endpointType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointType)
-                || has(self.initProvider.endpointType)'
+                || (has(self.initProvider) && has(self.initProvider.endpointType))'
           status:
             description: S3EndpointStatus defines the observed state of S3Endpoint.
             properties:

@@ -465,14 +465,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: principal is a required parameter
+            - message: spec.forProvider.principal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.principal)
-                || has(self.initProvider.principal)'
-            - message: statementId is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.principal))'
+            - message: spec.forProvider.statementId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.statementId)
-                || has(self.initProvider.statementId)'
+                || (has(self.initProvider) && has(self.initProvider.statementId))'
           status:
             description: PermissionStatus defines the observed state of Permission.
             properties:

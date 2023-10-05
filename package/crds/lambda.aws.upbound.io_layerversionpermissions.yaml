@@ -323,26 +323,26 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: action is a required parameter
+            - message: spec.forProvider.action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
-                || has(self.initProvider.action)'
-            - message: layerName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.action))'
+            - message: spec.forProvider.layerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.layerName)
-                || has(self.initProvider.layerName)'
-            - message: principal is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.layerName))'
+            - message: spec.forProvider.principal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.principal)
-                || has(self.initProvider.principal)'
-            - message: statementId is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.principal))'
+            - message: spec.forProvider.statementId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.statementId)
-                || has(self.initProvider.statementId)'
-            - message: versionNumber is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.statementId))'
+            - message: spec.forProvider.versionNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.versionNumber)
-                || has(self.initProvider.versionNumber)'
+                || (has(self.initProvider) && has(self.initProvider.versionNumber))'
           status:
             description: LayerVersionPermissionStatus defines the observed state of
               LayerVersionPermission.

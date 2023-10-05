@@ -412,14 +412,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: metricTransformation is a required parameter
+            - message: spec.forProvider.metricTransformation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.metricTransformation)
-                || has(self.initProvider.metricTransformation)'
-            - message: pattern is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.metricTransformation))'
+            - message: spec.forProvider.pattern is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.pattern)
-                || has(self.initProvider.pattern)'
+                || (has(self.initProvider) && has(self.initProvider.pattern))'
           status:
             description: MetricFilterStatus defines the observed state of MetricFilter.
             properties:

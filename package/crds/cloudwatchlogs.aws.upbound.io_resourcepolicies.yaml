@@ -259,10 +259,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: policyDocument is a required parameter
+            - message: spec.forProvider.policyDocument is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policyDocument)
-                || has(self.initProvider.policyDocument)'
+                || (has(self.initProvider) && has(self.initProvider.policyDocument))'
           status:
             description: ResourcePolicyStatus defines the observed state of ResourcePolicy.
             properties:

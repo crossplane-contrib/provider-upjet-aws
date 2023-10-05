@@ -397,10 +397,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: portInfo is a required parameter
+            - message: spec.forProvider.portInfo is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.portInfo)
-                || has(self.initProvider.portInfo)'
+                || (has(self.initProvider) && has(self.initProvider.portInfo))'
           status:
             description: InstancePublicPortsStatus defines the observed state of InstancePublicPorts.
             properties:

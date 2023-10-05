@@ -575,22 +575,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: component is a required parameter
+            - message: spec.forProvider.component is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.component)
-                || has(self.initProvider.component)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.component))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: parentImage is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.parentImage is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.parentImage)
-                || has(self.initProvider.parentImage)'
-            - message: version is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.parentImage))'
+            - message: spec.forProvider.version is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.version)
-                || has(self.initProvider.version)'
+                || (has(self.initProvider) && has(self.initProvider.version))'
           status:
             description: ImageRecipeStatus defines the observed state of ImageRecipe.
             properties:

@@ -360,10 +360,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: targetId is a required parameter
+            - message: spec.forProvider.targetId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetId)
-                || has(self.initProvider.targetId)'
+                || (has(self.initProvider) && has(self.initProvider.targetId))'
           status:
             description: LBTargetGroupAttachmentStatus defines the observed state
               of LBTargetGroupAttachment.

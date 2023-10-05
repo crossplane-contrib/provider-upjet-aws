@@ -1968,26 +1968,26 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: defaultCacheBehavior is a required parameter
+            - message: spec.forProvider.defaultCacheBehavior is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultCacheBehavior)
-                || has(self.initProvider.defaultCacheBehavior)'
-            - message: enabled is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.defaultCacheBehavior))'
+            - message: spec.forProvider.enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
-                || has(self.initProvider.enabled)'
-            - message: origin is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.enabled))'
+            - message: spec.forProvider.origin is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.origin)
-                || has(self.initProvider.origin)'
-            - message: restrictions is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.origin))'
+            - message: spec.forProvider.restrictions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.restrictions)
-                || has(self.initProvider.restrictions)'
-            - message: viewerCertificate is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.restrictions))'
+            - message: spec.forProvider.viewerCertificate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.viewerCertificate)
-                || has(self.initProvider.viewerCertificate)'
+                || (has(self.initProvider) && has(self.initProvider.viewerCertificate))'
           status:
             description: DistributionStatus defines the observed state of Distribution.
             properties:

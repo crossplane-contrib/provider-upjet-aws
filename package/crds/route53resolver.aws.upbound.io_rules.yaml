@@ -398,14 +398,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: domainName is a required parameter
+            - message: spec.forProvider.domainName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.domainName)
-                || has(self.initProvider.domainName)'
-            - message: ruleType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.domainName))'
+            - message: spec.forProvider.ruleType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleType)
-                || has(self.initProvider.ruleType)'
+                || (has(self.initProvider) && has(self.initProvider.ruleType))'
           status:
             description: RuleStatus defines the observed state of Rule.
             properties:

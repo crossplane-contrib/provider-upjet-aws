@@ -1069,10 +1069,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: productionVariants is a required parameter
+            - message: spec.forProvider.productionVariants is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.productionVariants)
-                || has(self.initProvider.productionVariants)'
+                || (has(self.initProvider) && has(self.initProvider.productionVariants))'
           status:
             description: EndpointConfigurationStatus defines the observed state of
               EndpointConfiguration.

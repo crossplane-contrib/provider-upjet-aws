@@ -480,10 +480,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: targetPrefix is a required parameter
+            - message: spec.forProvider.targetPrefix is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetPrefix)
-                || has(self.initProvider.targetPrefix)'
+                || (has(self.initProvider) && has(self.initProvider.targetPrefix))'
           status:
             description: BucketLoggingStatus defines the observed state of BucketLogging.
             properties:

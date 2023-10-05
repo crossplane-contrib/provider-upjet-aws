@@ -377,18 +377,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: baseModelName is a required parameter
+            - message: spec.forProvider.baseModelName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.baseModelName)
-                || has(self.initProvider.baseModelName)'
-            - message: inputDataConfig is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.baseModelName))'
+            - message: spec.forProvider.inputDataConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.inputDataConfig)
-                || has(self.initProvider.inputDataConfig)'
-            - message: languageCode is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.inputDataConfig))'
+            - message: spec.forProvider.languageCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.languageCode)
-                || has(self.initProvider.languageCode)'
+                || (has(self.initProvider) && has(self.initProvider.languageCode))'
           status:
             description: LanguageModelStatus defines the observed state of LanguageModel.
             properties:

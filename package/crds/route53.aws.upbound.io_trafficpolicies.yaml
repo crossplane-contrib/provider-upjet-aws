@@ -271,14 +271,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: document is a required parameter
+            - message: spec.forProvider.document is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.document)
-                || has(self.initProvider.document)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.document))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: TrafficPolicyStatus defines the observed state of TrafficPolicy.
             properties:

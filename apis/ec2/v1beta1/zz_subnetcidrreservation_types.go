@@ -115,8 +115,8 @@ type SubnetCidrReservationStatus struct {
 type SubnetCidrReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrBlock) || has(self.initProvider.cidrBlock)",message="cidrBlock is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reservationType) || has(self.initProvider.reservationType)",message="reservationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cidrBlock) || (has(self.initProvider) && has(self.initProvider.cidrBlock))",message="spec.forProvider.cidrBlock is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.reservationType) || (has(self.initProvider) && has(self.initProvider.reservationType))",message="spec.forProvider.reservationType is a required parameter"
 	Spec   SubnetCidrReservationSpec   `json:"spec"`
 	Status SubnetCidrReservationStatus `json:"status,omitempty"`
 }

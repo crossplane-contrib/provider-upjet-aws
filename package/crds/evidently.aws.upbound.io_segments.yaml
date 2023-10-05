@@ -273,10 +273,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: pattern is a required parameter
+            - message: spec.forProvider.pattern is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.pattern)
-                || has(self.initProvider.pattern)'
+                || (has(self.initProvider) && has(self.initProvider.pattern))'
           status:
             description: SegmentStatus defines the observed state of Segment.
             properties:

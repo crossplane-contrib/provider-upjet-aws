@@ -148,7 +148,7 @@ func GetProvider(ctx context.Context) (*config.Provider, error) {
 			ExternalNameConfigurations(),
 			NamePrefixRemoval(),
 			DocumentationForTags(),
-			iamNoForkClientConfig(),
+			noForkClientConfig(),
 		),
 		config.WithMainTemplate(hack.MainTemplate),
 	)

@@ -323,18 +323,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: bandwidth is a required parameter
+            - message: spec.forProvider.bandwidth is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.bandwidth)
-                || has(self.initProvider.bandwidth)'
-            - message: location is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.bandwidth))'
+            - message: spec.forProvider.location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: ConnectionStatus defines the observed state of Connection.
             properties:

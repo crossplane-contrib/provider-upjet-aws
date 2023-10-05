@@ -204,7 +204,7 @@ type WorkspaceSAMLConfigurationStatus struct {
 type WorkspaceSAMLConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.editorRoleValues) || has(self.initProvider.editorRoleValues)",message="editorRoleValues is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.editorRoleValues) || (has(self.initProvider) && has(self.initProvider.editorRoleValues))",message="spec.forProvider.editorRoleValues is a required parameter"
 	Spec   WorkspaceSAMLConfigurationSpec   `json:"spec"`
 	Status WorkspaceSAMLConfigurationStatus `json:"status,omitempty"`
 }

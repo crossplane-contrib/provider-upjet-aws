@@ -287,22 +287,23 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: name is a required parameter
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: originAccessControlOriginType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.originAccessControlOriginType is a required
+                parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.originAccessControlOriginType)
-                || has(self.initProvider.originAccessControlOriginType)'
-            - message: signingBehavior is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.originAccessControlOriginType))'
+            - message: spec.forProvider.signingBehavior is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.signingBehavior)
-                || has(self.initProvider.signingBehavior)'
-            - message: signingProtocol is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.signingBehavior))'
+            - message: spec.forProvider.signingProtocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.signingProtocol)
-                || has(self.initProvider.signingProtocol)'
+                || (has(self.initProvider) && has(self.initProvider.signingProtocol))'
           status:
             description: OriginAccessControlStatus defines the observed state of OriginAccessControl.
             properties:

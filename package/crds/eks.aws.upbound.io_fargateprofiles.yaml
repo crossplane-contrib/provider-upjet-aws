@@ -529,10 +529,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: selector is a required parameter
+            - message: spec.forProvider.selector is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.selector)
-                || has(self.initProvider.selector)'
+                || (has(self.initProvider) && has(self.initProvider.selector))'
           status:
             description: FargateProfileStatus defines the observed state of FargateProfile.
             properties:

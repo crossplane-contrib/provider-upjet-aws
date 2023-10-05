@@ -134,7 +134,7 @@ type InvocationStatus struct {
 type Invocation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.input) || has(self.initProvider.input)",message="input is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.input) || (has(self.initProvider) && has(self.initProvider.input))",message="spec.forProvider.input is a required parameter"
 	Spec   InvocationSpec   `json:"spec"`
 	Status InvocationStatus `json:"status,omitempty"`
 }

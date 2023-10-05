@@ -265,14 +265,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: amazonSideAsn is a required parameter
+            - message: spec.forProvider.amazonSideAsn is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.amazonSideAsn)
-                || has(self.initProvider.amazonSideAsn)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.amazonSideAsn))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: GatewayStatus defines the observed state of Gateway.
             properties:

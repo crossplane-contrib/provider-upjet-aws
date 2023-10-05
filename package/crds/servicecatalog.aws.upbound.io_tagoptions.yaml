@@ -267,14 +267,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: key is a required parameter
+            - message: spec.forProvider.key is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.key)
-                || has(self.initProvider.key)'
-            - message: value is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.key))'
+            - message: spec.forProvider.value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
-                || has(self.initProvider.value)'
+                || (has(self.initProvider) && has(self.initProvider.value))'
           status:
             description: TagOptionStatus defines the observed state of TagOption.
             properties:

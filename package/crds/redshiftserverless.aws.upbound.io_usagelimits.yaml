@@ -372,14 +372,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: amount is a required parameter
+            - message: spec.forProvider.amount is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.amount)
-                || has(self.initProvider.amount)'
-            - message: usageType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.amount))'
+            - message: spec.forProvider.usageType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.usageType)
-                || has(self.initProvider.usageType)'
+                || (has(self.initProvider) && has(self.initProvider.usageType))'
           status:
             description: UsageLimitStatus defines the observed state of UsageLimit.
             properties:

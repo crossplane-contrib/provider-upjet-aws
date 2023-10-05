@@ -144,7 +144,7 @@ type ProxyEndpointStatus struct {
 type ProxyEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds) || has(self.initProvider.vpcSubnetIds)",message="vpcSubnetIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds) || (has(self.initProvider) && has(self.initProvider.vpcSubnetIds))",message="spec.forProvider.vpcSubnetIds is a required parameter"
 	Spec   ProxyEndpointSpec   `json:"spec"`
 	Status ProxyEndpointStatus `json:"status,omitempty"`
 }

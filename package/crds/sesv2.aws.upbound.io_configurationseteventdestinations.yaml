@@ -822,14 +822,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: eventDestination is a required parameter
+            - message: spec.forProvider.eventDestination is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventDestination)
-                || has(self.initProvider.eventDestination)'
-            - message: eventDestinationName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.eventDestination))'
+            - message: spec.forProvider.eventDestinationName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventDestinationName)
-                || has(self.initProvider.eventDestinationName)'
+                || (has(self.initProvider) && has(self.initProvider.eventDestinationName))'
           status:
             description: ConfigurationSetEventDestinationStatus defines the observed
               state of ConfigurationSetEventDestination.

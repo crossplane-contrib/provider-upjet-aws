@@ -392,14 +392,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: instanceType is a required parameter
+            - message: spec.forProvider.instanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceType)
-                || has(self.initProvider.instanceType)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.instanceType))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: EnvironmentEC2Status defines the observed state of EnvironmentEC2.
             properties:

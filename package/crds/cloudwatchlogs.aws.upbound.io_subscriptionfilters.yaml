@@ -446,18 +446,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: filterPattern is a required parameter
+            - message: spec.forProvider.filterPattern is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.filterPattern)
-                || has(self.initProvider.filterPattern)'
-            - message: logGroupName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.filterPattern))'
+            - message: spec.forProvider.logGroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.logGroupName)
-                || has(self.initProvider.logGroupName)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.logGroupName))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: SubscriptionFilterStatus defines the observed state of SubscriptionFilter.
             properties:

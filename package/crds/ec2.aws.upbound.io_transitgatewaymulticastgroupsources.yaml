@@ -415,10 +415,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: groupIpAddress is a required parameter
+            - message: spec.forProvider.groupIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.groupIpAddress)
-                || has(self.initProvider.groupIpAddress)'
+                || (has(self.initProvider) && has(self.initProvider.groupIpAddress))'
           status:
             description: TransitGatewayMulticastGroupSourceStatus defines the observed
               state of TransitGatewayMulticastGroupSource.

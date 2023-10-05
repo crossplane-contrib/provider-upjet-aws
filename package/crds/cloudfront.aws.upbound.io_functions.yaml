@@ -290,13 +290,13 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: codeSecretRef is a required parameter
+            - message: spec.forProvider.codeSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.codeSecretRef)'
-            - message: runtime is a required parameter
+            - message: spec.forProvider.runtime is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.runtime)
-                || has(self.initProvider.runtime)'
+                || (has(self.initProvider) && has(self.initProvider.runtime))'
           status:
             description: FunctionStatus defines the observed state of Function.
             properties:

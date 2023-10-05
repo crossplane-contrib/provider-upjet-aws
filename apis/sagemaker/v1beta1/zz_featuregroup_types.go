@@ -352,9 +352,9 @@ type FeatureGroupStatus struct {
 type FeatureGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTimeFeatureName) || has(self.initProvider.eventTimeFeatureName)",message="eventTimeFeatureName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureDefinition) || has(self.initProvider.featureDefinition)",message="featureDefinition is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recordIdentifierFeatureName) || has(self.initProvider.recordIdentifierFeatureName)",message="recordIdentifierFeatureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTimeFeatureName) || (has(self.initProvider) && has(self.initProvider.eventTimeFeatureName))",message="spec.forProvider.eventTimeFeatureName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.featureDefinition) || (has(self.initProvider) && has(self.initProvider.featureDefinition))",message="spec.forProvider.featureDefinition is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recordIdentifierFeatureName) || (has(self.initProvider) && has(self.initProvider.recordIdentifierFeatureName))",message="spec.forProvider.recordIdentifierFeatureName is a required parameter"
 	Spec   FeatureGroupSpec   `json:"spec"`
 	Status FeatureGroupStatus `json:"status,omitempty"`
 }

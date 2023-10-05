@@ -457,26 +457,26 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: destinationCidrBlock is a required parameter
+            - message: spec.forProvider.destinationCidrBlock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationCidrBlock)
-                || has(self.initProvider.destinationCidrBlock)'
-            - message: ruleAction is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.destinationCidrBlock))'
+            - message: spec.forProvider.ruleAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleAction)
-                || has(self.initProvider.ruleAction)'
-            - message: ruleNumber is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.ruleAction))'
+            - message: spec.forProvider.ruleNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.ruleNumber)
-                || has(self.initProvider.ruleNumber)'
-            - message: sourceCidrBlock is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.ruleNumber))'
+            - message: spec.forProvider.sourceCidrBlock is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceCidrBlock)
-                || has(self.initProvider.sourceCidrBlock)'
-            - message: trafficDirection is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.sourceCidrBlock))'
+            - message: spec.forProvider.trafficDirection is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.trafficDirection)
-                || has(self.initProvider.trafficDirection)'
+                || (has(self.initProvider) && has(self.initProvider.trafficDirection))'
           status:
             description: TrafficMirrorFilterRuleStatus defines the observed state
               of TrafficMirrorFilterRule.

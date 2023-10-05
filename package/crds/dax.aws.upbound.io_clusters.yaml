@@ -512,14 +512,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: nodeType is a required parameter
+            - message: spec.forProvider.nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
-                || has(self.initProvider.nodeType)'
-            - message: replicationFactor is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.nodeType))'
+            - message: spec.forProvider.replicationFactor is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.replicationFactor)
-                || has(self.initProvider.replicationFactor)'
+                || (has(self.initProvider) && has(self.initProvider.replicationFactor))'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

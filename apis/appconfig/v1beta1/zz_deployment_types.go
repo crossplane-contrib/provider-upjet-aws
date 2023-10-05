@@ -176,7 +176,7 @@ type DeploymentStatus struct {
 type Deployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.environmentId) || has(self.initProvider.environmentId)",message="environmentId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.environmentId) || (has(self.initProvider) && has(self.initProvider.environmentId))",message="spec.forProvider.environmentId is a required parameter"
 	Spec   DeploymentSpec   `json:"spec"`
 	Status DeploymentStatus `json:"status,omitempty"`
 }

@@ -1211,8 +1211,8 @@ type EndpointStatus struct {
 type Endpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType) || has(self.initProvider.endpointType)",message="endpointType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || has(self.initProvider.engineName)",message="engineName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointType) || (has(self.initProvider) && has(self.initProvider.endpointType))",message="spec.forProvider.endpointType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineName) || (has(self.initProvider) && has(self.initProvider.engineName))",message="spec.forProvider.engineName is a required parameter"
 	Spec   EndpointSpec   `json:"spec"`
 	Status EndpointStatus `json:"status,omitempty"`
 }

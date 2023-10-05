@@ -367,18 +367,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: content is a required parameter
+            - message: spec.forProvider.content is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.content)
-                || has(self.initProvider.content)'
-            - message: name is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.content))'
+            - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
-            - message: type is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: SchemaStatus defines the observed state of Schema.
             properties:

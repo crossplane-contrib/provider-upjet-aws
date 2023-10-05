@@ -424,18 +424,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: authentication is a required parameter
+            - message: spec.forProvider.authentication is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.authentication)
-                || has(self.initProvider.authentication)'
-            - message: filter is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.authentication))'
+            - message: spec.forProvider.filter is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.filter)
-                || has(self.initProvider.filter)'
-            - message: targetAction is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.filter))'
+            - message: spec.forProvider.targetAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.targetAction)
-                || has(self.initProvider.targetAction)'
+                || (has(self.initProvider) && has(self.initProvider.targetAction))'
           status:
             description: WebhookStatus defines the observed state of Webhook.
             properties:

@@ -708,18 +708,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: bucket is a required parameter
+            - message: spec.forProvider.bucket is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.bucket)
-                || has(self.initProvider.bucket)'
-            - message: key is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.bucket))'
+            - message: spec.forProvider.key is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.key)
-                || has(self.initProvider.key)'
-            - message: source is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.key))'
+            - message: spec.forProvider.source is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.source)
-                || has(self.initProvider.source)'
+                || (has(self.initProvider) && has(self.initProvider.source))'
           status:
             description: ObjectCopyStatus defines the observed state of ObjectCopy.
             properties:

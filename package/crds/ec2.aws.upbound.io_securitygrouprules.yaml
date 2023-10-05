@@ -560,22 +560,22 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: fromPort is a required parameter
+            - message: spec.forProvider.fromPort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.fromPort)
-                || has(self.initProvider.fromPort)'
-            - message: protocol is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.fromPort))'
+            - message: spec.forProvider.protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
-                || has(self.initProvider.protocol)'
-            - message: toPort is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.protocol))'
+            - message: spec.forProvider.toPort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.toPort)
-                || has(self.initProvider.toPort)'
-            - message: type is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.toPort))'
+            - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: SecurityGroupRuleStatus defines the observed state of SecurityGroupRule.
             properties:

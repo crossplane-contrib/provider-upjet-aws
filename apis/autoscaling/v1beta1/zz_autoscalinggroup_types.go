@@ -1684,8 +1684,8 @@ type AutoscalingGroupStatus struct {
 type AutoscalingGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxSize) || has(self.initProvider.maxSize)",message="maxSize is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minSize) || has(self.initProvider.minSize)",message="minSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxSize) || (has(self.initProvider) && has(self.initProvider.maxSize))",message="spec.forProvider.maxSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minSize) || (has(self.initProvider) && has(self.initProvider.minSize))",message="spec.forProvider.minSize is a required parameter"
 	Spec   AutoscalingGroupSpec   `json:"spec"`
 	Status AutoscalingGroupStatus `json:"status,omitempty"`
 }

@@ -370,14 +370,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: countryCode is a required parameter
+            - message: spec.forProvider.countryCode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.countryCode)
-                || has(self.initProvider.countryCode)'
-            - message: type is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.countryCode))'
+            - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: PhoneNumberStatus defines the observed state of PhoneNumber.
             properties:

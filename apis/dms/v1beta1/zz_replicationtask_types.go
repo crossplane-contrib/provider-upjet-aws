@@ -195,8 +195,8 @@ type ReplicationTaskStatus struct {
 type ReplicationTask struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.migrationType) || has(self.initProvider.migrationType)",message="migrationType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tableMappings) || has(self.initProvider.tableMappings)",message="tableMappings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.migrationType) || (has(self.initProvider) && has(self.initProvider.migrationType))",message="spec.forProvider.migrationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tableMappings) || (has(self.initProvider) && has(self.initProvider.tableMappings))",message="spec.forProvider.tableMappings is a required parameter"
 	Spec   ReplicationTaskSpec   `json:"spec"`
 	Status ReplicationTaskStatus `json:"status,omitempty"`
 }

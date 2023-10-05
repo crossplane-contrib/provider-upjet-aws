@@ -177,7 +177,7 @@ type SigningProfileStatus struct {
 type SigningProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformId) || has(self.initProvider.platformId)",message="platformId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformId) || (has(self.initProvider) && has(self.initProvider.platformId))",message="spec.forProvider.platformId is a required parameter"
 	Spec   SigningProfileSpec   `json:"spec"`
 	Status SigningProfileStatus `json:"status,omitempty"`
 }

@@ -353,18 +353,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: keyName is a required parameter
+            - message: spec.forProvider.keyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.keyName)
-                || has(self.initProvider.keyName)'
-            - message: keyRole is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.keyName))'
+            - message: spec.forProvider.keyRole is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.keyRole)
-                || has(self.initProvider.keyRole)'
-            - message: secondsToLive is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.keyRole))'
+            - message: spec.forProvider.secondsToLive is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.secondsToLive)
-                || has(self.initProvider.secondsToLive)'
+                || (has(self.initProvider) && has(self.initProvider.secondsToLive))'
           status:
             description: WorkspaceAPIKeyStatus defines the observed state of WorkspaceAPIKey.
             properties:

@@ -928,10 +928,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: scalingConfig is a required parameter
+            - message: spec.forProvider.scalingConfig is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scalingConfig)
-                || has(self.initProvider.scalingConfig)'
+                || (has(self.initProvider) && has(self.initProvider.scalingConfig))'
           status:
             description: NodeGroupStatus defines the observed state of NodeGroup.
             properties:

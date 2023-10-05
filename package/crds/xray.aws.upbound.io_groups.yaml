@@ -299,14 +299,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: filterExpression is a required parameter
+            - message: spec.forProvider.filterExpression is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.filterExpression)
-                || has(self.initProvider.filterExpression)'
-            - message: groupName is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.filterExpression))'
+            - message: spec.forProvider.groupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.groupName)
-                || has(self.initProvider.groupName)'
+                || (has(self.initProvider) && has(self.initProvider.groupName))'
           status:
             description: GroupStatus defines the observed state of Group.
             properties:

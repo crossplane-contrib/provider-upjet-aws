@@ -321,8 +321,8 @@ type ConfigurationSetEventDestinationStatus struct {
 type ConfigurationSetEventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestination) || has(self.initProvider.eventDestination)",message="eventDestination is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestinationName) || has(self.initProvider.eventDestinationName)",message="eventDestinationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestination) || (has(self.initProvider) && has(self.initProvider.eventDestination))",message="spec.forProvider.eventDestination is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventDestinationName) || (has(self.initProvider) && has(self.initProvider.eventDestinationName))",message="spec.forProvider.eventDestinationName is a required parameter"
 	Spec   ConfigurationSetEventDestinationSpec   `json:"spec"`
 	Status ConfigurationSetEventDestinationStatus `json:"status,omitempty"`
 }

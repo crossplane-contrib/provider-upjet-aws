@@ -914,26 +914,26 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: brokerName is a required parameter
+            - message: spec.forProvider.brokerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.brokerName)
-                || has(self.initProvider.brokerName)'
-            - message: engineType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.brokerName))'
+            - message: spec.forProvider.engineType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineType)
-                || has(self.initProvider.engineType)'
-            - message: engineVersion is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.engineType))'
+            - message: spec.forProvider.engineVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.engineVersion)
-                || has(self.initProvider.engineVersion)'
-            - message: hostInstanceType is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.engineVersion))'
+            - message: spec.forProvider.hostInstanceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.hostInstanceType)
-                || has(self.initProvider.hostInstanceType)'
-            - message: user is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.hostInstanceType))'
+            - message: spec.forProvider.user is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.user)
-                || has(self.initProvider.user)'
+                || (has(self.initProvider) && has(self.initProvider.user))'
           status:
             description: BrokerStatus defines the observed state of Broker.
             properties:

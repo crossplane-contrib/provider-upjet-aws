@@ -1354,14 +1354,14 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: description is a required parameter
+            - message: spec.forProvider.description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
-                || has(self.initProvider.description)'
-            - message: policyDetails is a required parameter
+                || (has(self.initProvider) && has(self.initProvider.description))'
+            - message: spec.forProvider.policyDetails is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policyDetails)
-                || has(self.initProvider.policyDetails)'
+                || (has(self.initProvider) && has(self.initProvider.policyDetails))'
           status:
             description: LifecyclePolicyStatus defines the observed state of LifecyclePolicy.
             properties:

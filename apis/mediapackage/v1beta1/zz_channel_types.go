@@ -132,7 +132,7 @@ type ChannelStatus struct {
 type Channel struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.channelId) || has(self.initProvider.channelId)",message="channelId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.channelId) || (has(self.initProvider) && has(self.initProvider.channelId))",message="spec.forProvider.channelId is a required parameter"
 	Spec   ChannelSpec   `json:"spec"`
 	Status ChannelStatus `json:"status,omitempty"`
 }
