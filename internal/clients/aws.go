@@ -108,6 +108,7 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 		}
 		p := config.TerraformProvider.Meta()
 		tfClient, diag := awsConfig.GetClient(ctx, &xpprovider.AWSClient{
+			// #nosec G103
 			ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
 		})
 		if diag != nil && diag.HasError() {
