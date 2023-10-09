@@ -2,9 +2,32 @@ apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: StreamConsumer
 metadata:
   name: example
+  annotations:
+    meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
 spec:
   forProvider:
     region: us-west-1
     name: example-consumer
     streamArnRef:
       name: example
+
+---
+
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
+spec:
+  forProvider:
+    region: us-west-1
+    retentionPeriod: 48
+    shardCount: 1
+    shardLevelMetrics:
+      - IncomingBytes
+      - OutgoingBytes
+    streamModeDetails:
+      - streamMode: PROVISIONED
+    tags:
+      Environment: test

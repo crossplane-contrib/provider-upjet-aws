@@ -2,6 +2,8 @@ apiVersion: kinesis.aws.upbound.io/v1beta1
 kind: Stream
 metadata:
   name: example
+  annotations:
+    meta.upbound.io/example-id: kinesis/v1beta1/stream
 spec:
   forProvider:
     region: us-west-1
