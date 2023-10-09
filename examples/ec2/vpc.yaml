@@ -2,6 +2,8 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   name: sample-vpc
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpc
 spec:
   forProvider:
     region: us-west-1
