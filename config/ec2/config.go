@@ -220,26 +220,26 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_vpc_security_group_ingress_rule", func(r *config.Resource) {
 		r.Kind = "SecurityGroupIngressRule"
 		r.References["security_group_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			Type: "SecurityGroup",
 		}
 		r.References["referenced_security_group_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			Type: "SecurityGroup",
 		}
 		r.References["prefix_list_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList",
+			Type: "ManagedPrefixList",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_vpc_security_group_egress_rule", func(r *config.Resource) {
 		r.Kind = "SecurityGroupEgressRule"
 		r.References["security_group_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			Type: "SecurityGroup",
 		}
 		r.References["referenced_security_group_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			Type: "SecurityGroup",
 		}
 		r.References["prefix_list_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList",
+			Type: "ManagedPrefixList",
 		}
 	})
 
