@@ -1682,7 +1682,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// config.NameAsIdentifier did not work, the identifier for the resource turned out to be an ARN
 	// arn:aws:cloudformation:us-west-1:123456789123:stack/networking-stack/1e691240-6f2c-11ed-8f91-06094dc221f3
-	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 

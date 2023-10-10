@@ -2,6 +2,7 @@ apiVersion: cloudformation.aws.upbound.io/v1beta1
 kind: Stack
 metadata:
   annotations:
+    uptest.upbound.io/update-parameter: '{"tags":{"update-test-tag":"val"}}'
     meta.upbound.io/example-id: cloudformation/v1beta1/stack
   labels:
     testing.upbound.io/example-name: network
