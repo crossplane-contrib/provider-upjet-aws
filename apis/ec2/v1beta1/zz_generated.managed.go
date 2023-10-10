@@ -2707,6 +2707,126 @@ func (mg *SecurityGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretRefer
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityGroupEgressRule.
+func (mg *SecurityGroupEgressRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityGroupIngressRule.
+func (mg *SecurityGroupIngressRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SecurityGroupRule.
 func (mg *SecurityGroupRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -5524,158 +5644,6 @@ func (mg *VPCPeeringConnectionOptions) SetPublishConnectionDetailsTo(r *xpv1.Pub
 
 // SetWriteConnectionSecretToReference of this VPCPeeringConnectionOptions.
 func (mg *VPCPeeringConnectionOptions) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) GetManagementPolicies() xpv1.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this VPCSecurityGroupEgressRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VPCSecurityGroupEgressRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
-// GetPublishConnectionDetailsTo of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VPCSecurityGroupEgressRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VPCSecurityGroupEgressRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this VPCSecurityGroupEgressRule.
-func (mg *VPCSecurityGroupEgressRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetManagementPolicies of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) GetManagementPolicies() xpv1.ManagementPolicies {
-	return mg.Spec.ManagementPolicies
-}
-
-// GetProviderConfigReference of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this VPCSecurityGroupIngressRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VPCSecurityGroupIngressRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
-// GetPublishConnectionDetailsTo of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetManagementPolicies of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
-	mg.Spec.ManagementPolicies = r
-}
-
-// SetProviderConfigReference of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VPCSecurityGroupIngressRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VPCSecurityGroupIngressRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this VPCSecurityGroupIngressRule.
-func (mg *VPCSecurityGroupIngressRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

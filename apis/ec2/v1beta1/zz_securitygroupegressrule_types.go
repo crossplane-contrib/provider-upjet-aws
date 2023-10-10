@@ -13,12 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type VPCSecurityGroupIngressRuleInitParameters struct {
+type SecurityGroupEgressRuleInitParameters struct {
 
-	// The source IPv4 CIDR range.
+	// The destination IPv4 CIDR range.
 	CidrIPv4 *string `json:"cidrIpv4,omitempty" tf:"cidr_ipv4,omitempty"`
 
-	// The source IPv6 CIDR range.
+	// The destination IPv6 CIDR range.
 	CidrIPv6 *string `json:"cidrIpv6,omitempty" tf:"cidr_ipv6,omitempty"`
 
 	// The security group rule description.
@@ -37,15 +37,15 @@ type VPCSecurityGroupIngressRuleInitParameters struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type VPCSecurityGroupIngressRuleObservation struct {
+type SecurityGroupEgressRuleObservation struct {
 
 	// The Amazon Resource Name (ARN) of the security group rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The source IPv4 CIDR range.
+	// The destination IPv4 CIDR range.
 	CidrIPv4 *string `json:"cidrIpv4,omitempty" tf:"cidr_ipv4,omitempty"`
 
-	// The source IPv6 CIDR range.
+	// The destination IPv6 CIDR range.
 	CidrIPv6 *string `json:"cidrIpv6,omitempty" tf:"cidr_ipv6,omitempty"`
 
 	// The security group rule description.
@@ -59,10 +59,10 @@ type VPCSecurityGroupIngressRuleObservation struct {
 	// The IP protocol name or number. Use -1 to specify all protocols.
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
-	// The ID of the source prefix list.
+	// The ID of the destination prefix list.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
-	// The source security group that is referenced in the rule.
+	// The destination security group that is referenced in the rule.
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
 
 	// The ID of the security group.
@@ -81,13 +81,13 @@ type VPCSecurityGroupIngressRuleObservation struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-type VPCSecurityGroupIngressRuleParameters struct {
+type SecurityGroupEgressRuleParameters struct {
 
-	// The source IPv4 CIDR range.
+	// The destination IPv4 CIDR range.
 	// +kubebuilder:validation:Optional
 	CidrIPv4 *string `json:"cidrIpv4,omitempty" tf:"cidr_ipv4,omitempty"`
 
-	// The source IPv6 CIDR range.
+	// The destination IPv6 CIDR range.
 	// +kubebuilder:validation:Optional
 	CidrIPv6 *string `json:"cidrIpv6,omitempty" tf:"cidr_ipv6,omitempty"`
 
@@ -103,29 +103,29 @@ type VPCSecurityGroupIngressRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
-	// The ID of the source prefix list.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// The ID of the destination prefix list.
+	// +crossplane:generate:reference:type=ManagedPrefixList
 	// +kubebuilder:validation:Optional
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
-	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
+	// Reference to a ManagedPrefixList to populate prefixListId.
 	// +kubebuilder:validation:Optional
 	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
 
-	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
+	// Selector for a ManagedPrefixList to populate prefixListId.
 	// +kubebuilder:validation:Optional
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
-	// The source security group that is referenced in the rule.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// The destination security group that is referenced in the rule.
+	// +crossplane:generate:reference:type=SecurityGroup
 	// +kubebuilder:validation:Optional
 	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup in ec2 to populate referencedSecurityGroupId.
+	// Reference to a SecurityGroup to populate referencedSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	ReferencedSecurityGroupIDRef *v1.Reference `json:"referencedSecurityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup in ec2 to populate referencedSecurityGroupId.
+	// Selector for a SecurityGroup to populate referencedSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	ReferencedSecurityGroupIDSelector *v1.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
 
@@ -135,15 +135,15 @@ type VPCSecurityGroupIngressRuleParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the security group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
+	// Reference to a SecurityGroup to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
+	// Selector for a SecurityGroup to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
@@ -156,10 +156,10 @@ type VPCSecurityGroupIngressRuleParameters struct {
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
-// VPCSecurityGroupIngressRuleSpec defines the desired state of VPCSecurityGroupIngressRule
-type VPCSecurityGroupIngressRuleSpec struct {
+// SecurityGroupEgressRuleSpec defines the desired state of SecurityGroupEgressRule
+type SecurityGroupEgressRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VPCSecurityGroupIngressRuleParameters `json:"forProvider"`
+	ForProvider     SecurityGroupEgressRuleParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -171,49 +171,49 @@ type VPCSecurityGroupIngressRuleSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider VPCSecurityGroupIngressRuleInitParameters `json:"initProvider,omitempty"`
+	InitProvider SecurityGroupEgressRuleInitParameters `json:"initProvider,omitempty"`
 }
 
-// VPCSecurityGroupIngressRuleStatus defines the observed state of VPCSecurityGroupIngressRule.
-type VPCSecurityGroupIngressRuleStatus struct {
+// SecurityGroupEgressRuleStatus defines the observed state of SecurityGroupEgressRule.
+type SecurityGroupEgressRuleStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VPCSecurityGroupIngressRuleObservation `json:"atProvider,omitempty"`
+	AtProvider        SecurityGroupEgressRuleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// VPCSecurityGroupIngressRule is the Schema for the VPCSecurityGroupIngressRules API. Provides a VPC security group ingress rule resource.
+// SecurityGroupEgressRule is the Schema for the SecurityGroupEgressRules API. Provides a VPC security group egress rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
-type VPCSecurityGroupIngressRule struct {
+type SecurityGroupEgressRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipProtocol) || has(self.initProvider.ipProtocol)",message="ipProtocol is a required parameter"
-	Spec   VPCSecurityGroupIngressRuleSpec   `json:"spec"`
-	Status VPCSecurityGroupIngressRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipProtocol) || (has(self.initProvider) && has(self.initProvider.ipProtocol))",message="spec.forProvider.ipProtocol is a required parameter"
+	Spec   SecurityGroupEgressRuleSpec   `json:"spec"`
+	Status SecurityGroupEgressRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// VPCSecurityGroupIngressRuleList contains a list of VPCSecurityGroupIngressRules
-type VPCSecurityGroupIngressRuleList struct {
+// SecurityGroupEgressRuleList contains a list of SecurityGroupEgressRules
+type SecurityGroupEgressRuleList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []VPCSecurityGroupIngressRule `json:"items"`
+	Items           []SecurityGroupEgressRule `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	VPCSecurityGroupIngressRule_Kind             = "VPCSecurityGroupIngressRule"
-	VPCSecurityGroupIngressRule_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: VPCSecurityGroupIngressRule_Kind}.String()
-	VPCSecurityGroupIngressRule_KindAPIVersion   = VPCSecurityGroupIngressRule_Kind + "." + CRDGroupVersion.String()
-	VPCSecurityGroupIngressRule_GroupVersionKind = CRDGroupVersion.WithKind(VPCSecurityGroupIngressRule_Kind)
+	SecurityGroupEgressRule_Kind             = "SecurityGroupEgressRule"
+	SecurityGroupEgressRule_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: SecurityGroupEgressRule_Kind}.String()
+	SecurityGroupEgressRule_KindAPIVersion   = SecurityGroupEgressRule_Kind + "." + CRDGroupVersion.String()
+	SecurityGroupEgressRule_GroupVersionKind = CRDGroupVersion.WithKind(SecurityGroupEgressRule_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&VPCSecurityGroupIngressRule{}, &VPCSecurityGroupIngressRuleList{})
+	SchemeBuilder.Register(&SecurityGroupEgressRule{}, &SecurityGroupEgressRuleList{})
 }

@@ -330,6 +330,8 @@ import (
 	routetable "github.com/upbound/provider-aws/internal/controller/ec2/routetable"
 	routetableassociation "github.com/upbound/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/provider-aws/internal/controller/ec2/securitygroup"
+	securitygroupegressrule "github.com/upbound/provider-aws/internal/controller/ec2/securitygroupegressrule"
+	securitygroupingressrule "github.com/upbound/provider-aws/internal/controller/ec2/securitygroupingressrule"
 	securitygrouprule "github.com/upbound/provider-aws/internal/controller/ec2/securitygrouprule"
 	serialconsoleaccess "github.com/upbound/provider-aws/internal/controller/ec2/serialconsoleaccess"
 	snapshotcreatevolumepermission "github.com/upbound/provider-aws/internal/controller/ec2/snapshotcreatevolumepermission"
@@ -378,8 +380,6 @@ import (
 	vpcpeeringconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnection"
 	vpcpeeringconnectionaccepter "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionaccepter"
 	vpcpeeringconnectionoptions "github.com/upbound/provider-aws/internal/controller/ec2/vpcpeeringconnectionoptions"
-	vpcsecuritygroupegressrule "github.com/upbound/provider-aws/internal/controller/ec2/vpcsecuritygroupegressrule"
-	vpcsecuritygroupingressrule "github.com/upbound/provider-aws/internal/controller/ec2/vpcsecuritygroupingressrule"
 	vpnconnection "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnection"
 	vpnconnectionroute "github.com/upbound/provider-aws/internal/controller/ec2/vpnconnectionroute"
 	vpngateway "github.com/upbound/provider-aws/internal/controller/ec2/vpngateway"
@@ -1250,6 +1250,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		routetable.Setup,
 		routetableassociation.Setup,
 		securitygroup.Setup,
+		securitygroupegressrule.Setup,
+		securitygroupingressrule.Setup,
 		securitygrouprule.Setup,
 		serialconsoleaccess.Setup,
 		snapshotcreatevolumepermission.Setup,
@@ -1298,8 +1300,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vpcpeeringconnection.Setup,
 		vpcpeeringconnectionaccepter.Setup,
 		vpcpeeringconnectionoptions.Setup,
-		vpcsecuritygroupegressrule.Setup,
-		vpcsecuritygroupingressrule.Setup,
 		vpnconnection.Setup,
 		vpnconnectionroute.Setup,
 		vpngateway.Setup,

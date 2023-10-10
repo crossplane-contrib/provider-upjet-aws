@@ -2,7 +2,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpc/v1beta1/securitygroupegressrule
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
   name: sample-vpc
   labels:
     testing.upbound.io/example-name: example
@@ -17,7 +17,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: vpc/v1beta1/securitygroupegressrule
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
   name: example
   labels:
     testing.upbound.io/example-name: example
@@ -29,10 +29,10 @@ spec:
         testing.upbound.io/example-name: example
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCSecurityGroupEgressRule
+kind: SecurityGroupEgressRule
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcsecuritygroupegressrule
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
   labels:
     testing.upbound.io/example-name: example
   name: example

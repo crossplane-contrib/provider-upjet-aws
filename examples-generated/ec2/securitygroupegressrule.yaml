@@ -1,8 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPCSecurityGroupEgressRule
+kind: SecurityGroupEgressRule
 metadata:
   annotations:
-    meta.upbound.io/example-id: ec2/v1beta1/vpcsecuritygroupegressrule
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroupegressrule
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -403,6 +403,24 @@ func (l *RouteTableList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SecurityGroupEgressRuleList.
+func (l *SecurityGroupEgressRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SecurityGroupIngressRuleList.
+func (l *SecurityGroupIngressRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SecurityGroupList.
 func (l *SecurityGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -828,24 +846,6 @@ func (l *VPCPeeringConnectionList) GetItems() []resource.Managed {
 
 // GetItems of this VPCPeeringConnectionOptionsList.
 func (l *VPCPeeringConnectionOptionsList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VPCSecurityGroupEgressRuleList.
-func (l *VPCSecurityGroupEgressRuleList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VPCSecurityGroupIngressRuleList.
-func (l *VPCSecurityGroupIngressRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
