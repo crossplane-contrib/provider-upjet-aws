@@ -188,9 +188,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 	"aws_security_group_rule": config.IdentifierFromProvider,
 	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	"aws_vpc_security_group_egress_rule": config.IdentifierFromProvider,
 	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+	"aws_vpc_security_group_ingress_rule": config.IdentifierFromProvider,
 	// Imported by using the VPC CIDR Association ID: vpc-cidr-assoc-xxxxxxxx
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
@@ -2729,19 +2729,6 @@ func kmsAlias() config.ExternalName {
 	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]interface{}, _ map[string]interface{}) (string, error) {
 		if !strings.HasPrefix(externalName, "alias/") {
 			return fmt.Sprintf("alias/%s", externalName), nil
-		}
-		return externalName, nil
-	}
-	return e
-}
-
-func vpcSecurityGroupRule() config.ExternalName {
-	// Terraform does not allow security group rule id to be empty.
-	// Using a stub value to pass validation.
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			return "sgr-stub", nil
 		}
 		return externalName, nil
 	}
