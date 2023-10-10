@@ -217,6 +217,32 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("aws_vpc_security_group_ingress_rule", func(r *config.Resource) {
+		r.Kind = "SecurityGroupIngressRule"
+		r.References["security_group_id"] = config.Reference{
+			TerraformName: "aws_security_group",
+		}
+		r.References["referenced_security_group_id"] = config.Reference{
+			TerraformName: "aws_security_group",
+		}
+		r.References["prefix_list_id"] = config.Reference{
+			TerraformName: "aws_ec2_managed_prefix_list",
+		}
+	})
+
+	p.AddResourceConfigurator("aws_vpc_security_group_egress_rule", func(r *config.Resource) {
+		r.Kind = "SecurityGroupEgressRule"
+		r.References["security_group_id"] = config.Reference{
+			TerraformName: "aws_security_group",
+		}
+		r.References["referenced_security_group_id"] = config.Reference{
+			TerraformName: "aws_security_group",
+		}
+		r.References["prefix_list_id"] = config.Reference{
+			TerraformName: "aws_ec2_managed_prefix_list",
+		}
+	})
+
 	p.AddResourceConfigurator("aws_vpc_peering_connection", func(r *config.Resource) {
 		// Mutually exclusive with aws_vpc_peering_connection_options
 		config.MoveToStatus(r.TerraformResource, "accepter", "requester")
