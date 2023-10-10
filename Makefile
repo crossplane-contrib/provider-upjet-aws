@@ -217,6 +217,9 @@ local-deploy: build-provider.monolith local-deploy.monolith
 # - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
 # - UPTEST_DATASOURCE_PATH, see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
 family-e2e:
+	@$(INFO) Removing everything under $(XPKG_OUTPUT_DIR) and $(OUTPUT_DIR)/cache...
+	@rm -fR $(XPKG_OUTPUT_DIR)
+	@rm -fR $(OUTPUT_DIR)/cache
 	@(INSTALL_APIS=""; \
 	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
 	  	$(INFO) Processing the example manifest "$${m}"; \
