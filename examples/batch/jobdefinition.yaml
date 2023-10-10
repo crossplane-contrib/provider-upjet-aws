@@ -9,53 +9,51 @@ metadata:
 spec:
   forProvider:
     containerProperties: |-
-      ${jsonencode({
-          command = ["ls", "-la"],
-          image   = "busybox"
-
-          resourceRequirements = [
+      {
+        "command": [
+            "ls",
+            "-la"
+        ],
+        "environment": [
             {
-              type  = "VCPU"
-              value = "1"
+                "name": "VARNAME",
+                "value": "VARVAL"
+            }
+        ],
+        "image": "busybox",
+        "mountPoints": [
+            {
+                "containerPath": "/tmp",
+                "readOnly": false,
+                "sourceVolume": "tmp"
+            }
+        ],
+        "resourceRequirements": [
+            {
+                "type": "VCPU",
+                "value": "1"
             },
             {
-              type  = "MEMORY"
-              value = "512"
+                "type": "MEMORY",
+                "value": "512"
             }
-          ]
-
-          volumes = [
+        ],
+        "ulimits": [
             {
-              host = {
-                sourcePath = "/tmp"
-              }
-              name = "tmp"
+                "hardLimit": 1024,
+                "name": "nofile",
+                "softLimit": 1024
             }
-          ]
-
-          environment = [
+        ],
+        "volumes": [
             {
-              name  = "VARNAME"
-              value = "VARVAL"
+                "host": {
+                    "sourcePath": "/tmp"
+                },
+                "name": "tmp"
             }
-          ]
-
-          mountPoints = [
-            {
-              sourceVolume  = "tmp"
-              containerPath = "/tmp"
-              readOnly      = false
-            }
-          ]
-
-          ulimits = [
-            {
-              hardLimit = 1024
-              name      = "nofile"
-              softLimit = 1024
-            }
-          ]
-        })}
+        ]
+      }
     name: tf_test_batch_job_definition
     region: us-west-1
     type: container
