@@ -26,6 +26,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
   labels:
     testing.upbound.io/example-name: sg
   name: sg
@@ -42,6 +44,8 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: subnet-az1
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
   labels:
     testing.upbound.io/example-name: subnets
 spec:
@@ -59,6 +63,8 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   name: subnet-az2
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
   labels:
     testing.upbound.io/example-name: subnets
 spec:
@@ -75,6 +81,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
   labels:
     testing.upbound.io/example-name: vpc
   name: vpc
