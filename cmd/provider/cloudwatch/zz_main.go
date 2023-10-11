@@ -49,7 +49,7 @@ func main() {
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
 		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
-		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("false").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 	)
 	setupConfig := &clients.SetupConfig{}
 	setupConfig.TerraformVersion = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
@@ -115,8 +115,8 @@ func main() {
 	}
 
 	if *enableManagementPolicies {
-		o.Features.Enable(features.EnableAlphaManagementPolicies)
-		log.Info("Alpha feature enabled", "flag", features.EnableAlphaManagementPolicies)
+		o.Features.Enable(features.EnableBetaManagementPolicies)
+		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
 
 	o.WorkspaceStore = terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*setupConfig.NativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval), terraform.WithFeatures(o.Features))
