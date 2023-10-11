@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -44,7 +48,7 @@ type UsagePlanKeyParameters struct {
 
 	// Identifier of the API key resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.APIKey
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -67,7 +71,7 @@ type UsagePlanKeyParameters struct {
 
 	// Id of the usage plan resource representing to associate the key to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.UsagePlan
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 

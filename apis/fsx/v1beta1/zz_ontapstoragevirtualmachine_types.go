@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -167,7 +171,7 @@ type OntapStorageVirtualMachineParameters struct {
 
 	// The ID of the Amazon FSx ONTAP File System that this SVM will be created on.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.OntapFileSystem
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -959,7 +963,7 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 
 	// ARN of the CloudFront function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
 
@@ -1068,7 +1072,7 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 
 	// ARN of the Lambda function.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
 	// +kubebuilder:validation:Optional
 	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
 
@@ -1353,7 +1357,7 @@ type OriginParameters struct {
 
 	// Unique identifier of a CloudFront origin access control for this origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessControl
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OriginAccessControlID *string `json:"originAccessControlId,omitempty" tf:"origin_access_control_id,omitempty"`
 
@@ -1438,7 +1442,7 @@ type S3OriginConfigParameters struct {
 
 	// The CloudFront origin access identity to associate with the origin.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
 	// +kubebuilder:validation:Optional
 	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`
 

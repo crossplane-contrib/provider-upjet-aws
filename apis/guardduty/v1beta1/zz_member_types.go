@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -59,7 +63,7 @@ type MemberParameters struct {
 
 	// AWS account ID for member account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/guardduty/v1beta1.Detector
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("account_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("account_id",true)
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
@@ -73,7 +77,7 @@ type MemberParameters struct {
 
 	// The detector ID of the GuardDuty account where you want to create member accounts.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/guardduty/v1beta1.Detector
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
 

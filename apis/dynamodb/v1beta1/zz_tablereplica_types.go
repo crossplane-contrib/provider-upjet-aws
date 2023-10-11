@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -56,7 +60,7 @@ type TableReplicaParameters_2 struct {
 
 	// ARN of the main or global table which this resource will replicate.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
 

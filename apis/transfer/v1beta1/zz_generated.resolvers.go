@@ -8,6 +8,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/acm/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/ds/v1beta1"
@@ -15,7 +16,6 @@ import (
 	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta14 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

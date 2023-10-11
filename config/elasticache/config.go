@@ -5,7 +5,7 @@ Copyright 2021 Upbound Inc.
 package elasticache
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure adds configurations for the elasticache group.

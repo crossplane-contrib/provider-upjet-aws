@@ -8,11 +8,11 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

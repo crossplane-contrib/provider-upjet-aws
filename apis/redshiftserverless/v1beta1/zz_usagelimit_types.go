@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -73,7 +77,7 @@ type UsageLimitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1.Workgroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 

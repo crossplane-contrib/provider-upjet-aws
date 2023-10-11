@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -65,7 +69,7 @@ type IntegrationResponseParameters struct {
 
 	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Method
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("http_method",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("http_method",false)
 	// +kubebuilder:validation:Optional
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
@@ -84,7 +88,7 @@ type IntegrationResponseParameters struct {
 
 	// API resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -106,7 +110,7 @@ type IntegrationResponseParameters struct {
 
 	// ID of the associated REST API.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -124,7 +128,7 @@ type IntegrationResponseParameters struct {
 
 	// HTTP status code.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.MethodResponse
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("status_code",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("status_code",false)
 	// +kubebuilder:validation:Optional
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 

@@ -11,11 +11,11 @@ require (
 	github.com/aws/smithy-go v1.13.3
 	github.com/crossplane/crossplane-runtime v1.14.0-rc.0.0.20230912122805-43c9ceeb2071
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
+	github.com/crossplane/upjet v0.11.0-rc.0.0.20231011093342-b54f63590aa6
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.11.0-rc.0.0.20230927185952-cc55f3952474
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/api v0.28.1
 	k8s.io/apimachinery v0.28.1

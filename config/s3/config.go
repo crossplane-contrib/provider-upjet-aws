@@ -5,8 +5,8 @@ Copyright 2021 Upbound Inc.
 package s3
 
 import (
-	"github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/registry"
+	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/registry"
 )
 
 // Configure adds configurations for the s3 group.
@@ -67,21 +67,21 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_s3_bucket_analytics_configuration", func(r *config.Resource) {
 		r.References["storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_replication_configuration", func(r *config.Resource) {
 		r.References["rule.destination.bucket"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_inventory", func(r *config.Resource) {
 		r.References["destination.bucket.bucket_arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 }

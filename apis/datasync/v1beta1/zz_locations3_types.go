@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -76,7 +80,7 @@ type LocationS3Parameters struct {
 
 	// Amazon Resource Name (ARN) of the S3 Bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
 
@@ -118,7 +122,7 @@ type S3ConfigParameters struct {
 
 	// ARN of the IAM Role used to connect to the S3 Bucket.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
 

@@ -1,6 +1,6 @@
 package servicediscovery
 
-import "github.com/upbound/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for the servicediscovery group.
 func Configure(p *config.Provider) {

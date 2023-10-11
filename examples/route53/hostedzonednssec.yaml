@@ -4,7 +4,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is not stable due to https://github.com/upbound/upjet/issues/80."
+    upjet.upbound.io/manual-intervention: "This resource is not stable due to https://github.com/crossplane/upjet/issues/80."
   name: example
 spec:
   forProvider:

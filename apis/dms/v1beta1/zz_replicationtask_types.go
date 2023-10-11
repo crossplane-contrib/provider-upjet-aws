@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -102,7 +106,7 @@ type ReplicationTaskParameters struct {
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("replication_instance_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("replication_instance_arn",true)
 	// +kubebuilder:validation:Optional
 	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
 
@@ -120,7 +124,7 @@ type ReplicationTaskParameters struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
 
@@ -146,7 +150,7 @@ type ReplicationTaskParameters struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
 

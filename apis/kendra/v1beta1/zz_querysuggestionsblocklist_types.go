@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -70,7 +74,7 @@ type QuerySuggestionsBlockListParameters struct {
 
 	// The identifier of the index for a block list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
 
@@ -133,7 +137,7 @@ type SourceS3PathParameters struct {
 
 	// The name of the S3 bucket that contains the file.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -176,7 +180,7 @@ type QuerySuggestionsBlockListStatus struct {
 
 // +kubebuilder:object:root=true
 
-// QuerySuggestionsBlockList is the Schema for the QuerySuggestionsBlockLists API. Upbound official provider resource for managing an aws kendra block list used for query suggestions for an index
+// QuerySuggestionsBlockList is the Schema for the QuerySuggestionsBlockLists API. provider resource for managing an aws kendra block list used for query suggestions for an index
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -128,7 +132,7 @@ type QueueParameters struct {
 
 	// Specifies the identifier of the Hours of Operation.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.HoursOfOperation
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("hours_of_operation_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("hours_of_operation_id",true)
 	// +kubebuilder:validation:Optional
 	HoursOfOperationID *string `json:"hoursOfOperationId,omitempty" tf:"hours_of_operation_id,omitempty"`
 
@@ -142,7 +146,7 @@ type QueueParameters struct {
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 

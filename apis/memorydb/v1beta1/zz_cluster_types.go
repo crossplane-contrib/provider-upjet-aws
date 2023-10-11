@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -279,7 +283,7 @@ type ClusterParameters struct {
 
 	// The name of the subnet group to be used for the cluster. Defaults to a subnet group consisting of default VPC subnets.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/memorydb/v1beta1.SubnetGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 

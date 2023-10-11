@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -76,7 +80,7 @@ type AppParameters struct {
 
 	// The domain ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -107,7 +111,7 @@ type AppParameters struct {
 
 	// The user profile name. At least one of user_profile_name or space_name required.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.UserProfile
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
 	// +kubebuilder:validation:Optional
 	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
 

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -73,7 +77,7 @@ type LoggingConfigurationParameters struct {
 
 	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
@@ -209,7 +213,7 @@ type RulesParameters struct {
 
 	// ID of the associated WAF (Global) rule (e.g., aws_waf_rule). WAF (Regional) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.Rule
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 

@@ -215,7 +215,7 @@ match the chain of the trust policies defined among the roles.
     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
 
 [2]:
-    https://github.com/upbound/upjet/blob/main/docs/design-doc-provider-identity-based-auth.md
+    https://github.com/crossplane/upjet/blob/main/docs/design-doc-provider-identity-based-auth.md
 
 [3]:
     https://marketplace.upbound.io/providers/upbound/provider-aws/v0.37.0/docs/configuration

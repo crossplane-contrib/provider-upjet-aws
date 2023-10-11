@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -41,7 +45,7 @@ type EnvironmentMembershipParameters struct {
 
 	// The ID of the environment that contains the environment member you want to add.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloud9/v1beta1.EnvironmentEC2
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
@@ -64,7 +68,7 @@ type EnvironmentMembershipParameters struct {
 
 	// The Amazon Resource Name (ARN) of the environment member you want to add.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 

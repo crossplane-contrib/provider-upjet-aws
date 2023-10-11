@@ -1,6 +1,6 @@
 package opsworks
 
-import "github.com/upbound/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for the opsworks group.
 func Configure(p *config.Provider) {

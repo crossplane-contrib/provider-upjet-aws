@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -62,7 +66,7 @@ type PermissionParameters struct {
 
 	// The stack to set the permissions for
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -76,7 +80,7 @@ type PermissionParameters struct {
 
 	// The user's IAM ARN to set permissions for
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 

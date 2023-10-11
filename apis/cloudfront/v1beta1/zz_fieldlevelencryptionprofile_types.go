@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -50,7 +54,7 @@ type EncryptionEntitiesItemsParameters struct {
 
 	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.PublicKey
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
 

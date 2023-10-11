@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -101,7 +105,7 @@ type RulePredicateParameters struct {
 
 	// The unique identifier of a predicate, such as the ID of a ByteMatchSet or IPSet.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.IPSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
 

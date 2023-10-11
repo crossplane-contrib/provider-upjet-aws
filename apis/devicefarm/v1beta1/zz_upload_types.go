@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -66,7 +70,7 @@ type UploadParameters struct {
 
 	// The ARN of the project for the upload.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
 

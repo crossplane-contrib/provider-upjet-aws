@@ -22,8 +22,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	tjcontroller "github.com/upbound/upjet/pkg/controller"
-	ujresource "github.com/upbound/upjet/pkg/resource"
+	tjcontroller "github.com/crossplane/upjet/pkg/controller"
+	ujresource "github.com/crossplane/upjet/pkg/resource"
 
 	"github.com/upbound/provider-aws/apis/eks/v1beta1"
 	"github.com/upbound/provider-aws/apis/v1alpha1"

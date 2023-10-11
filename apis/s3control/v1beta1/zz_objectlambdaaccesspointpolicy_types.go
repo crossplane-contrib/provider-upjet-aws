@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -48,7 +52,7 @@ type ObjectLambdaAccessPointPolicyParameters struct {
 
 	// The name of the Object Lambda Access Point.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta1.ObjectLambdaAccessPoint
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -11,7 +11,7 @@ import (
 
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
 
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
 )
@@ -1264,14 +1264,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// NOTE(sergen): Parameter as identifier cannot be used, because terraform
 	// overrides the id after terraform calls.
-	// Please see the following issue in upjet: https://github.com/upbound/upjet/issues/32
+	// Please see the following issue in upjet: https://github.com/crossplane/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain": config.IdentifierFromProvider,
 	// No imports
 	"aws_opensearch_domain_policy": config.IdentifierFromProvider,
 	// NOTE(sergen): Parameter as identifier cannot be used, because terraform
 	// overrides the id after terraform calls.
-	// Please see the following issue in upjet: https://github.com/upbound/upjet/issues/32
+	// Please see the following issue in upjet: https://github.com/crossplane/upjet/issues/32
 	// OpenSearch domains can be imported using the domain_name
 	"aws_opensearch_domain_saml_options": config.IdentifierFromProvider,
 

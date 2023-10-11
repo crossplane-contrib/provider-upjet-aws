@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 package devicefarm
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure adds configurations for the devicefarm group.
