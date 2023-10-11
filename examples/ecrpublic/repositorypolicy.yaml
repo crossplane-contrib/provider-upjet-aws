@@ -32,6 +32,17 @@ spec:
               }
           ]
       }
-    repositoryName: example
+    repositoryName: uptest-test-repo
   providerConfigRef:
     name: default
+
+---
+
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: uptest-test-repo
+spec:
+  forProvider:
+    region: us-east-1
+    imageTagMutability: "IMMUTABLE"
