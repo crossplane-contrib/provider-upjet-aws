@@ -1,6 +1,9 @@
 apiVersion: efs.aws.upbound.io/v1beta1
 kind: BackupPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta1/backuppolicy
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-filesystem.sh
   name: example
 spec:
   forProvider:
@@ -9,3 +12,18 @@ spec:
     fileSystemIdRef:
       name: example
     region: us-west-1
+
+---
+
+apiVersion: efs.aws.upbound.io/v1beta1
+kind: FileSystem
+metadata:
+  name: example
+  labels:
+    testing.upbound.io/example-name: efs
+spec:
+  forProvider:
+    region: us-west-1
+    creationToken: my-product
+    tags:
+      Name: MyProduct
