@@ -10,8 +10,35 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this AccountAssignment.
+func (mg *AccountAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
+		Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
+		To: reference.To{
+			List:    &PermissionSetList{},
+			Managed: &PermissionSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PermissionSetArn")
+	}
+	mg.Spec.ForProvider.PermissionSetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PermissionSetArnRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this ManagedPolicyAttachment.
 func (mg *ManagedPolicyAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {

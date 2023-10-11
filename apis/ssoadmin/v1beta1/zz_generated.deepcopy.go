@@ -150,6 +150,16 @@ func (in *AccountAssignmentParameters) DeepCopyInto(out *AccountAssignmentParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.PermissionSetArnRef != nil {
+		in, out := &in.PermissionSetArnRef, &out.PermissionSetArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PermissionSetArnSelector != nil {
+		in, out := &in.PermissionSetArnSelector, &out.PermissionSetArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PrincipalID != nil {
 		in, out := &in.PrincipalID, &out.PrincipalID
 		*out = new(string)
