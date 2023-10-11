@@ -181,7 +181,7 @@ spec:
   forProvider:
     region: us-west-1
     mapPublicIpOnLaunch: true
-    availabilityZone: us-west-1c
+    availabilityZone: us-west-1a
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
