@@ -97,7 +97,7 @@ spec:
 ---
 
 apiVersion: s3.aws.upbound.io/v1beta1
-kind: BucketObject
+kind: Object
 metadata:
   annotations:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/applicationsnapshot
@@ -106,6 +106,7 @@ metadata:
   name: object
 spec:
   forProvider:
+    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: s3
