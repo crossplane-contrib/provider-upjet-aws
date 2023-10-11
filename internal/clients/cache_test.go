@@ -16,7 +16,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/pkg/errors"
-	"k8s.io/utils/pointer"
+	"k8s.io/utils/ptr"
 )
 
 var errBoom = errors.New("a")
@@ -35,8 +35,8 @@ func TestGetCallerIdentity(t *testing.T) {
 	}
 
 	sample := &sts.GetCallerIdentityOutput{
-		Account: pointer.String("123456789"),
-		Arn:     pointer.String("arn:aws:iam::123456789:role/S3Access"),
+		Account: ptr.To("123456789"),
+		Arn:     ptr.To("arn:aws:iam::123456789:role/S3Access"),
 	}
 	ti := time.Now()
 	cases := map[string]struct {
