@@ -1,7 +1,10 @@
 apiVersion: ecrpublic.aws.upbound.io/v1beta1
 kind: Repository
 metadata:
-  name: example
+  annotations:
+    uptest.upbound.io/update-parameter: '{"tags":{"update-test-tag":"val"}}'
+    meta.upbound.io/example-id: ecrpublic/v1beta1/repository
+  name: uptest-test-repo
 spec:
   forProvider:
     region: us-east-1
@@ -15,3 +18,15 @@ spec:
       usageText: Usage Text
   providerConfigRef:
     name: default
+
+---
+
+apiVersion: ecr.aws.upbound.io/v1beta1
+kind: Repository
+metadata:
+  name: uptest-test-repo
+spec:
+  forProvider:
+    region: us-east-1
+    imageTagMutability: "IMMUTABLE"
+
