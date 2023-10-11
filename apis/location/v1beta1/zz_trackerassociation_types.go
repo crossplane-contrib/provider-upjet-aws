@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -31,7 +35,7 @@ type TrackerAssociationParameters struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.GeofenceCollection
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
 	// +kubebuilder:validation:Optional
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
 

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -185,7 +189,7 @@ type TrafficMirrorFilterRuleParameters struct {
 
 	// ID of the traffic mirror filter to which this rule should be added
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TrafficMirrorFilter
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`
 

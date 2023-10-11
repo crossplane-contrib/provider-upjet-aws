@@ -11,8 +11,8 @@ import (
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/medialive"
 
-	"github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/registry/reference"
+	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/registry/reference"
 
 	"github.com/upbound/provider-aws/config/acm"
 	"github.com/upbound/provider-aws/config/acmpca"

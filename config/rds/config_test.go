@@ -20,7 +20,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	ujfake "github.com/upbound/upjet/pkg/resource/fake"
+	ujfake "github.com/crossplane/upjet/pkg/resource/fake"
 )
 
 var (

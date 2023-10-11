@@ -22,8 +22,8 @@ import (
 	"sort"
 	"strings"
 
-	ujconfig "github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/pipeline"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/pipeline"
 	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/upbound/provider-aws/config"

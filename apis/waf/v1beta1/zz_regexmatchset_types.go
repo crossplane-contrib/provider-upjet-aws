@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -129,7 +133,7 @@ type RegexMatchTupleParameters struct {
 
 	// The ID of a Regex Pattern Set.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.RegexPatternSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RegexPatternSetID *string `json:"regexPatternSetId,omitempty" tf:"regex_pattern_set_id,omitempty"`
 

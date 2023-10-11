@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -47,7 +51,7 @@ type RuleAssociationParameters struct {
 
 	// The ID of the resolver rule that you want to associate with the VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53resolver/v1beta1.Rule
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverRuleID *string `json:"resolverRuleId,omitempty" tf:"resolver_rule_id,omitempty"`
 

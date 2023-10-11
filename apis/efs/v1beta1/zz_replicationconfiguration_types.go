@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -98,7 +102,7 @@ type ReplicationConfigurationParameters struct {
 
 	// The ID of the file system that is to be replicated.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.FileSystem
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`
 

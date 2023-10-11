@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -89,7 +93,7 @@ type RuleParameters struct {
 	// The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53resolver/v1beta1.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
 

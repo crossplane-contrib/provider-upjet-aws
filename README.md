@@ -7,7 +7,7 @@
 </div>
 
 Provider AWS is a [Crossplane](https://crossplane.io/) provider that is
-built using [Upjet](https://github.com/upbound/upjet) code
+built using [Upjet](https://github.com/crossplane/upjet) code
 generation tools and exposes XRM-conformant managed resources for
 [Amazon AWS](https://aws.amazon.com/).
 
@@ -18,18 +18,18 @@ Follow the quick start guide [here](https://marketplace.upbound.io/providers/upb
 You can find a detailed API reference for all the managed resources with examples in the [Upbound Marketplace](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/managed-resources).
 
 For getting more information about resource consumption and monitoring
-the upjet runtime, please see [Sizing Guide](https://github.com/upbound/upjet/blob/main/docs/sizing-guide.md) 
-and [Monitoring Guide](https://github.com/upbound/upjet/blob/main/docs/monitoring.md)
+the upjet runtime, please see [Sizing Guide](https://github.com/crossplane/upjet/blob/v0.10.0/docs/sizing-guide.md)
+and [Monitoring Guide](https://github.com/crossplane/upjet/blob/main/docs/monitoring.md)
 
 ## Contributing
 
-For the general contribution guide, see [Upjet Contribution Guide](https://github.com/upbound/upjet/blob/main/CONTRIBUTING.md)
+For the general contribution guide, see [Upjet Contribution Guide](https://github.com/crossplane/upjet/blob/main/CONTRIBUTING.md)
 
-If you'd like to learn how to use Upjet, see [Usage Guide](https://github.com/upbound/upjet/tree/main/docs).
+If you'd like to learn how to use Upjet, see [Usage Guide](https://github.com/crossplane/upjet/tree/main/docs).
 
 ### Add a New Resource
 
-Follow the guide [here](https://github.com/upbound/upjet/blob/main/docs/add-new-resource-short.md).
+Follow the guide [here](https://github.com/crossplane/upjet/blob/main/docs/add-new-resource-short.md).
 
 ## Report a Bug
 

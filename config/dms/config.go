@@ -5,7 +5,7 @@ Copyright 2021 Upbound Inc.
 package dms
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
 )

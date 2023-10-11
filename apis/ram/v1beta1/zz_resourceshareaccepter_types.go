@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -53,7 +57,7 @@ type ResourceShareAccepterParameters struct {
 
 	// The ARN of the resource share.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.PrincipalAssociation
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	// +kubebuilder:validation:Optional
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
 

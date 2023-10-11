@@ -34,9 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Configuration is the Schema for the Configurations API. Upbound
-          official provider resource for managing an amazon managed streaming for
-          kafka configuration
+        description: Configuration is the Schema for the Configurations API. provider
+          resource for managing an amazon managed streaming for kafka configuration
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation

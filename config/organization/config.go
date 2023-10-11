@@ -14,7 +14,7 @@
 
 package organization
 
-import "github.com/upbound/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for the organization group.
 func Configure(p *config.Provider) {
