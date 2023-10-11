@@ -42,7 +42,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_msk_serverless_cluster", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["vpc_config.security_group_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupIDRefs",
 			SelectorFieldName: "SecurityGroupIDSelector",
 		}
