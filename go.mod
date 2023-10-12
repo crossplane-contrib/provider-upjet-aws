@@ -11,7 +11,7 @@ require (
 	github.com/aws/smithy-go v1.13.3
 	github.com/crossplane/crossplane-runtime v1.14.0-rc.0.0.20231011070344-cc691421c2e5
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v0.11.0-rc.0.0.20231011093342-b54f63590aa6
+	github.com/crossplane/upjet v0.11.0-rc.0.0.20231012093706-c4a76d2a7505
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
@@ -134,5 +134,3 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
-
-replace github.com/crossplane/upjet => github.com/turkenh/upjet v0.0.0-20231011102415-cd1230a80e29

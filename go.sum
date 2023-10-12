@@ -105,6 +105,8 @@ github.com/crossplane/crossplane-runtime v1.14.0-rc.0.0.20231011070344-cc691421c
 github.com/crossplane/crossplane-runtime v1.14.0-rc.0.0.20231011070344-cc691421c2e5/go.mod h1:kCS5576be8g++HhiDGEBUw+8nkW8p4jhURYeC0zx8jM=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79 h1:HigXs5tEQxWz0fcj8hzbU2UAZgEM7wPe0XRFOsrtF8Y=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79/go.mod h1:+e4OaFlOcmr0JvINHl/yvEYBrZawzTgj6pQumOH1SS0=
+github.com/crossplane/upjet v0.11.0-rc.0.0.20231012093706-c4a76d2a7505 h1:eCmYgfRopVn6r8RM1Ra4XQAPwVsjTGfktBj2Dk7yy+Y=
+github.com/crossplane/upjet v0.11.0-rc.0.0.20231012093706-c4a76d2a7505/go.mod h1:Ov+eoYS2n0Zge/E50zm65meOTYbAHnU6jPt27fQrpbc=
 github.com/dave/jennifer v1.4.1 h1:XyqG6cn5RQsTj3qlWQTKlRGAyrTcsk1kUmWdZBzRjDw=
 github.com/dave/jennifer v1.4.1/go.mod h1:7jEdnm+qBcxl8PC0zyp7vxcpSRnzXSt9r39tpTVGlwA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -379,8 +381,6 @@ github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o
 github.com/stretchr/testify v1.8.2 h1:+h33VjcLVPDHtOdpUCuF+7gSuG3yGIftsP1YvFihtJ8=
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
-github.com/turkenh/upjet v0.0.0-20231011102415-cd1230a80e29 h1:xcGiZNeJaL6sliDCHCsd+MqH+lgwn0rpryGC1jBZKXI=
-github.com/turkenh/upjet v0.0.0-20231011102415-cd1230a80e29/go.mod h1:Ov+eoYS2n0Zge/E50zm65meOTYbAHnU6jPt27fQrpbc=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
