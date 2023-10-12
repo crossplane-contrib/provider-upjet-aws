@@ -569,6 +569,10 @@ spec:
                       please make sure you use the verbose/specific version of the
                       policy. Use the resource aws_s3_bucket_policy instead.
                     type: string
+                  region:
+                    description: AWS region this bucket resides in. Region is the
+                      region you'd like your resource to be created in.
+                    type: string
                   replicationConfiguration:
                     description: Configuration of replication configuration. See Replication
                       Configuration below for details. Use the resource aws_s3_bucket_replication_configuration

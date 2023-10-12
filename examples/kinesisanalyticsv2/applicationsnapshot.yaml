@@ -106,7 +106,6 @@ metadata:
   name: object
 spec:
   forProvider:
-    acl: private
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: s3
