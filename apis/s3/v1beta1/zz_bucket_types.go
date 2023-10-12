@@ -106,6 +106,10 @@ type BucketObservation struct {
 	// Use the resource aws_s3_bucket_policy instead.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// AWS region this bucket resides in.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// Configuration of replication configuration. See Replication Configuration below for details.
 	// Use the resource aws_s3_bucket_replication_configuration instead.
 	ReplicationConfiguration []ReplicationConfigurationObservation `json:"replicationConfiguration,omitempty" tf:"replication_configuration,omitempty"`

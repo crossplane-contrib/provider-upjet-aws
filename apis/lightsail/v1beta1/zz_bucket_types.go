@@ -49,6 +49,10 @@ type BucketObservation struct {
 	// The name used for this bucket (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Amazon Web Services Region name.
+	// Region is the region you'd like your resource to be created in.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
 	// The support code for the resource. Include this code in your email to support when you have questions about a resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
 

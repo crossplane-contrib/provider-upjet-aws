@@ -431,8 +431,8 @@ github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
 github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7 h1:TgGCZbZgUwM2KokCe7KQ/NNsoYJ/5PKTIU73eXwvHno=
 github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7/go.mod h1:xDNhnOW+Xlvth7PX/N4XGZb4dQIIaMM6j0FiGsbc7Hw=
-github.com/ulucinar/upbound-upjet v0.0.0-20231006112348-add61c76f94a h1:uz/P3EkXgvKgLiA9kCz93TST+nCZNwex7Q/K/AtZBk0=
-github.com/ulucinar/upbound-upjet v0.0.0-20231006112348-add61c76f94a/go.mod h1:udMoR502Tv/QXYfBAwiq3sl8YMJ5vSYbKsBsoo7wJu8=
+github.com/ulucinar/upbound-upjet v0.0.0-20231012020400-3cdafb3566dd h1:iAY51sJGuSxXDWqRgzhXr6rZuoETh7/Vm630wxWh+KE=
+github.com/ulucinar/upbound-upjet v0.0.0-20231012020400-3cdafb3566dd/go.mod h1:udMoR502Tv/QXYfBAwiq3sl8YMJ5vSYbKsBsoo7wJu8=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack/v4 v4.3.12/go.mod h1:gborTTJjAo/GWTqqRjrLCn9pgNN+NXzzngzBKDPIqw4=

@@ -11,6 +11,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/types"
 	"github.com/crossplane/upjet/pkg/types/comments"
 	"github.com/crossplane/upjet/pkg/types/name"
 
@@ -29,6 +30,13 @@ func RegionAddition() config.ResourceOption {
 		if err != nil {
 			panic(errors.Wrap(err, "cannot build comment for region"))
 		}
+
+		// check if the underlying Terraform resource already has "region"
+		// as a (state) attribute
+		if s, ok := r.TerraformResource.Schema["region"]; ok && types.IsObservation(s) {
+			r.SchemaElementOptions.SetAddToObservation("region")
+		}
+
 		r.TerraformResource.Schema["region"] = &schema.Schema{
 			Type:        schema.TypeString,
 			Required:    true,
