@@ -15,6 +15,18 @@ on:
         description: "Number of parallel package builds within each build job"
         default: '1'
         required: false
+      regorg:
+        description: 'Package registry and organization where the packages will be pushed or (e.g. xpkg.upbound.io/upbound)'
+        default: 'xpkg.upbound.io/upbound'
+        required: false
+      branch_name:
+        description: "Branch name to use while publishing the packages (e.g. main)"
+        default: ''
+        required: false
+      version:
+        description: "Version string to use while publishing the packages (e.g. v1.0.0-alpha.1)"
+        default: ''
+        required: false
 
 jobs:
   publish-service-artifacts:
@@ -23,6 +35,9 @@ jobs:
       subpackages: ${{ github.event.inputs.subpackages }}
       size: ${{ github.event.inputs.size }}
       concurrency: ${{ github.event.inputs.concurrency }}
+      regorg: ${{ github.event.inputs.regorg }}
+      branch_name: ${{ github.event.inputs.branch_name }}
+      version: ${{ github.event.inputs.version }}
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR_RC }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW_RC }}
