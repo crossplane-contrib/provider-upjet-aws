@@ -1129,6 +1129,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// that there is a single aws_msk_scram_secret_association per msk
 	// cluster, so the best identifier is the cluster ARN.
 	"aws_msk_scram_secret_association": config.IdentifierFromProvider,
+	// MSK serverless clusters can be imported using the cluster arn
+	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
+	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
 
 	// ram
 	//

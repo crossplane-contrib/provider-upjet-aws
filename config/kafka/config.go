@@ -39,4 +39,17 @@ func Configure(p *config.Provider) {
 		}
 		r.MetaResource.ArgumentDocs["secret_arn_list"] = "- (Required) List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster."
 	})
+	p.AddResourceConfigurator("aws_msk_serverless_cluster", func(r *config.Resource) {
+		r.UseAsync = true
+		r.References["vpc_config.security_group_ids"] = config.Reference{
+			TerraformName:     "aws_security_group",
+			RefFieldName:      "SecurityGroupIDRefs",
+			SelectorFieldName: "SecurityGroupIDSelector",
+		}
+		r.References["vpc_config.subnet_ids"] = config.Reference{
+			TerraformName:     "aws_subnet",
+			RefFieldName:      "SubnetIDRefs",
+			SelectorFieldName: "SubnetIDSelector",
+		}
+	})
 }

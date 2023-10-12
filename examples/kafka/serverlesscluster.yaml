@@ -1,0 +1,93 @@
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: ServerlessCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clientAuthentication:
+    - sasl:
+      - iam:
+        - enabled: true
+    clusterName: Example
+    region: us-east-2
+    vpcConfig:
+      - securityGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: sg
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: subnets
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: sg
+  name: sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: subnet-az1
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: subnets
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: subnet-az2
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: subnets
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafka/v1beta1/serverlesscluster
+  labels:
+    testing.upbound.io/example-name: vpc
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2
+    enableDnsHostnames: true
