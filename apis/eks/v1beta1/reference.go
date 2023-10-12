@@ -3,7 +3,7 @@ package v1beta1
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	"k8s.io/utils/pointer"
+	"k8s.io/utils/ptr"
 )
 
 // ExternalNameIfClusterActive returns the external name only if the EKS cluster
@@ -14,7 +14,7 @@ func ExternalNameIfClusterActive() reference.ExtractValueFn {
 		if !ok {
 			return ""
 		}
-		if pointer.StringDeref(cl.Status.AtProvider.Status, "") != "ACTIVE" {
+		if ptr.Deref(cl.Status.AtProvider.Status, "") != "ACTIVE" {
 			return ""
 		}
 		return reference.ExternalName()(mr)
