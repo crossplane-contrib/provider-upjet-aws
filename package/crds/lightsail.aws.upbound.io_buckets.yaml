@@ -317,6 +317,10 @@ spec:
                   id:
                     description: The name used for this bucket (matches name).
                     type: string
+                  region:
+                    description: The Amazon Web Services Region name. Region is the
+                      region you'd like your resource to be created in.
+                    type: string
                   supportCode:
                     description: The support code for the resource. Include this code
                       in your email to support when you have questions about a resource
