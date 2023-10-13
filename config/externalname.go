@@ -201,7 +201,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route_table": config.IdentifierFromProvider,
 	// Imported using the associated resource ID and Route Table ID separated
 	// by a forward slash (/)
-	"aws_route_table_association": routeTableAssociation(),
+	"aws_route_table_association": config.IdentifierFromProvider,
 	// No import.
 	"aws_main_route_table_association": config.IdentifierFromProvider,
 	// No import
@@ -2748,24 +2748,6 @@ func route() config.ExternalName {
 			return fmt.Sprintf("%s_%s", rtb.(string), parameters["destination_prefix_list_id"].(string)), nil
 		}
 		return "", errors.New("destination_cidr_block or destination_ipv6_cidr_block or destination_prefix_list_id has to be given")
-	}
-	return e
-}
-
-func routeTableAssociation() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		rtb, ok := parameters["route_table_id"]
-		if !ok {
-			return "", errors.New("route_table_id cannot be empty")
-		}
-		switch {
-		case parameters["subnet_id"] != nil:
-			return fmt.Sprintf("%s/%s", parameters["subnet_id"].(string), rtb.(string)), nil
-		case parameters["gateway_id"] != nil:
-			return fmt.Sprintf("%s/%s", parameters["gateway_id"].(string), rtb.(string)), nil
-		}
-		return "", errors.New("gateway_id or subnet_id has to be given")
 	}
 	return e
 }
