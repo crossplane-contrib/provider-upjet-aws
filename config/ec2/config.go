@@ -215,6 +215,12 @@ func Configure(p *config.Provider) {
 				"source_security_group_id",
 			},
 		}
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+			// TODO: Has better be implemented via defaulting.
+			if _, ok := jsonMap["self"]; !ok {
+				params["self"] = false
+			}
+		}
 	})
 
 	p.AddResourceConfigurator("aws_vpc_security_group_ingress_rule", func(r *config.Resource) {
