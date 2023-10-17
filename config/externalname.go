@@ -2235,7 +2235,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ses_email_identity": config.IdentifierFromProvider,
 	// SES event destinations can be imported using configuration_set_name together with the event destination's name
 	// Example: some-configuration-set-test/event-destination-sns
-	"aws_ses_event_destination": config.TemplatedStringAsIdentifier("name", "{{ .parameters.configuration_set_name }}/{{ .external_name }}"),
+	"aws_ses_event_destination": config.IdentifierFromProvider,
 	// Identity Notification Topics can be imported using the ID of the record. The ID is made up as IDENTITY|TYPE where IDENTITY is the SES Identity and TYPE is the Notification Type.
 	// Example: 'example.com|Bounce'
 	"aws_ses_identity_notification_topic": config.IdentifierFromProvider,

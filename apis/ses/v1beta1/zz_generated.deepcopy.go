@@ -1533,6 +1533,11 @@ func (in *EventDestinationInitParameters) DeepCopyInto(out *EventDestinationInit
 			}
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.SnsDestination != nil {
 		in, out := &in.SnsDestination, &out.SnsDestination
 		*out = make([]SnsDestinationInitParameters, len(*in))
@@ -1630,6 +1635,11 @@ func (in *EventDestinationObservation) DeepCopyInto(out *EventDestinationObserva
 			}
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.SnsDestination != nil {
 		in, out := &in.SnsDestination, &out.SnsDestination
 		*out = make([]SnsDestinationObservation, len(*in))
@@ -1696,6 +1706,11 @@ func (in *EventDestinationParameters) DeepCopyInto(out *EventDestinationParamete
 				**out = **in
 			}
 		}
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
