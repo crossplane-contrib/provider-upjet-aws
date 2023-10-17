@@ -6,6 +6,7 @@ package ec2
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/common"
 )
@@ -406,6 +407,19 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ami_copy", func(r *config.Resource) {
 		r.References["source_ami_id"] = config.Reference{
 			Type: "AMI",
+		}
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+			params["ebs_block_device"] = []any{}
+			// TODO: Has better be implemented via defaulting.
+			if _, ok := jsonMap["encrypted"]; !ok {
+				params["encrypted"] = false
+			}
+		}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "ebs_block_device.#")
+			}
+			return diff, nil
 		}
 	})
 
