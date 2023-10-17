@@ -9,6 +9,9 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "rotation_rules", "rotation_lambda_arn")
 		// aws_secretsmanager_secret_policy.
 		config.MoveToStatus(r.TerraformResource, "policy")
-		delete(r.TerraformResource.Schema, "name_prefix")
+		// TODO: we had better do this for all resources...
+		r.TerraformConfigurationInjector = func(_ map[string]any, params map[string]any) {
+			params["name_prefix"] = ""
+		}
 	})
 }
