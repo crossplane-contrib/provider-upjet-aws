@@ -31,7 +31,6 @@ import (
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.EventDestination_GroupVersionKind.String())
 	var initializers managed.InitializerChain
-	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
 	if o.SecretStoreConfigGVK != nil {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK, connection.WithTLSConfig(o.ESSOptions.TLSConfig)))
