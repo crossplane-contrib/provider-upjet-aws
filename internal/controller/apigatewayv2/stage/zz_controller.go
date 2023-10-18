@@ -34,7 +34,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	for _, i := range o.Provider.Resources["aws_apigatewayv2_stage"].InitializerFns {
 		initializers = append(initializers, i(mgr.GetClient()))
 	}
-	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
 	if o.SecretStoreConfigGVK != nil {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK, connection.WithTLSConfig(o.ESSOptions.TLSConfig)))

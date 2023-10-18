@@ -86,6 +86,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
+    name: example-stage
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
