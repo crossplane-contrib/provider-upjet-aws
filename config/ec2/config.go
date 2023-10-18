@@ -335,7 +335,7 @@ func Configure(p *config.Provider) {
 				"cidr_block",
 			},
 		}
-		r.UseAsync = true
+		// r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_multicast_domain", func(r *config.Resource) {

@@ -243,6 +243,6 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231017182756-11d0e7700aef
+replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231018220658-ce988aa9f800
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7

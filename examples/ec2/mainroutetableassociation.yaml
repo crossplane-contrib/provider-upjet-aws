@@ -15,3 +15,39 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: route-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: table
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/mainroutetableassociation
+  labels:
+    testing.upbound.io/example-name: table
+spec:
+  forProvider:
+    region: us-west-1
+    tags:
+      Name: example
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: route-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: route-vpc
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/mainroutetableassociation
+  labels:
+    testing.upbound.io/example-name: route-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

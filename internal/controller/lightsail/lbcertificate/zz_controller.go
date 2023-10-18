@@ -17,7 +17,6 @@ import (
 	tjcontroller "github.com/upbound/upjet/pkg/controller"
 	"github.com/upbound/upjet/pkg/controller/handler"
 	"github.com/upbound/upjet/pkg/metrics"
-	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-aws/apis/lightsail/v1beta1"
@@ -35,12 +34,11 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.LBCertificate_GroupVersionKind)))
 	opts := []managed.ReconcilerOption{
-		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_lightsail_lb_certificate"], tjcontroller.WithNoForkLogger(o.Logger),
-			tjcontroller.WithNoForkConnectorEventHandler(eventHandler),
+		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_lightsail_lb_certificate"], o.OperationTrackerStore, tjcontroller.WithNoForkLogger(o.Logger),
 			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.LBCertificate_GroupVersionKind, mgr, o.PollInterval)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(terraform.NewWorkspaceFinalizer(o.WorkspaceStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
+
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithConnectionPublishers(cps...),
