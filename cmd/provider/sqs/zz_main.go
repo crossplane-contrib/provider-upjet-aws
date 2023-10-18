@@ -113,9 +113,10 @@ func main() {
 			MaxConcurrentReconciles: *maxReconcileRate,
 			Features:                &feature.Flags{},
 		},
-		Provider:   provider,
-		SetupFn:    clients.SelectTerraformSetup(log, setupConfig),
-		PollJitter: pollJitter,
+		Provider:              provider,
+		SetupFn:               clients.SelectTerraformSetup(log, setupConfig),
+		PollJitter:            pollJitter,
+		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 	}
 
 	if *enableManagementPolicies {
