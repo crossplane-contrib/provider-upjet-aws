@@ -11,4 +11,5 @@ spec:
     apiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: example-stage
     region: us-west-1
