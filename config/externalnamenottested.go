@@ -747,13 +747,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ssoadmin
 	//
-	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
-	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	"aws_ssoadmin_customer_managed_policy_attachment": config.IdentifierFromProvider,
-	// SSO Account Assignments can be imported using the instance_arn
-	"aws_ssoadmin_instance_access_control_attributes": config.ParameterAsIdentifier("instance_arn"),
-	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
-	"aws_ssoadmin_permissions_boundary_attachment": config.IdentifierFromProvider,
 
 	// transcribe
 	//

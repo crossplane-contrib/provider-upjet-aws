@@ -2449,17 +2449,31 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)
 	// Example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6,GROUP,1234567890,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-0123456789abcdef/ps-0123456789abcdef,arn:aws:sso:::instance/ssoins-0123456789abcdef
+	// This can't really be normalized.
 	"aws_ssoadmin_account_assignment": config.TemplatedStringAsIdentifier("", "{{ .parameters.principal_id }},{{ .parameters.principal_type }},{{ .parameters.target_id }},{{ .parameters.target_type }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
 	// SSO Managed Policy Attachments can be imported using the managed_policy_arn, permission_set_arn, and instance_arn separated by a comma (,)
 	// Example: arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// This can't really be normalized.
 	"aws_ssoadmin_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_policy_arn }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn}}"),
 	// SSO Permission Sets can be imported using the arn and instance_arn separated by a comma (,)
 	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	// TODO: Normalize external_name while testing
+	// TODO: Normalize to the permission set id once breaking changes are acceptable or multiple versions are supported
 	"aws_ssoadmin_permission_set": config.IdentifierFromProvider,
+	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
+	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// This can't really be normalized.
+	"aws_ssoadmin_customer_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{  (index .parameters.customer_managed_policy_reference 0).name }},{{ (index .parameters.customer_managed_policy_reference 0).path }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+	// SSO Instance Access Control Attributes can be imported using the instance_arn
+	"aws_ssoadmin_instance_access_control_attributes": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_arn }}"),
+	// The best name is the permission set id
 	// SSO Permission Set Inline Policies can be imported using the permission_set_arn and instance_arn separated by a comma (,)
 	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// TODO: Normalize to the permission set id once breaking changes are acceptable or multiple versions are supported
 	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+	// The best name is the permission set id
+	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
+	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_permissions_boundary_attachment": PermissionSetIdAsExternalName(),
 
 	// identitystore
 	//
@@ -2783,6 +2797,56 @@ func route() config.ExternalName {
 		return "", errors.New("destination_cidr_block or destination_ipv6_cidr_block or destination_prefix_list_id has to be given")
 	}
 	return e
+}
+
+// PermissionSetIdAsExternalName uses the id of the permission set (ps-80383020jr9302rk) as the external name, with
+// the comma-separated pair permission_set_arn,instance_arn as the terraform id, when both arns are parameters and known
+// ahead of time.
+// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+func PermissionSetIdAsExternalName() config.ExternalName {
+	return config.ExternalName{
+		SetIdentifierArgumentFn: config.NopSetIdentifierArgument,
+		IdentifierFields:        []string{"instance_arn", "permission_set_arn"},
+		GetExternalNameFn:       getPermissionSetId,
+		GetIDFn: func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
+			if externalName == "" {
+				psa, ok := parameters["permission_set_arn"]
+				if !ok {
+					return "", errors.New("permission_set_arn cannot be empty")
+				}
+				psaStr, ok := psa.(string)
+				if !ok {
+					return "", errors.New("value of permission_set_arn needs to be a string")
+				}
+				externalName = strings.Split(psaStr, "/")[2]
+			}
+			ia, ok := parameters["instance_arn"]
+			if !ok {
+				return "", errors.New("instance_arn cannot be empty")
+			}
+
+			iaStr, ok := ia.(string)
+			if !ok {
+				return "", errors.New("value of instance_arn needs to be a string")
+			}
+			instanceId := strings.Split(iaStr, "/")[1]
+
+			return fmt.Sprintf("arn:aws:sso:::permissionSet/%s/%s,%s", instanceId, externalName, iaStr), nil
+		},
+		DisableNameInitializer: true,
+	}
+}
+
+// getPermissionSetId extracts the id of the permission set to use as an external name, from a terraform id formed by
+// a comma-separated pair of ARNs, permission_set_arn,instance_arn.
+// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+func getPermissionSetId(tfstate map[string]any) (string, error) {
+	id, ok := tfstate["id"]
+	if !ok {
+		return "", errors.New("id does not exist in tfstate")
+	}
+	arn := strings.Split(id.(string), ",")[0]
+	return strings.Split(arn, "/")[2], nil
 }
 
 // FormattedIdentifierFromProvider is a helper function to construct Terraform
