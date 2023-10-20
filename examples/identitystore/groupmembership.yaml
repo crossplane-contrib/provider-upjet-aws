@@ -5,17 +5,17 @@ metadata:
     meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
     upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-membership
+  name: example-membership
 spec:
   forProvider:
     groupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-membership
     identityStoreId: FILL IN MANUALLY
     memberIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-membership
     region: us-east-1
 
 ---
@@ -27,8 +27,8 @@ metadata:
     meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
     upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-membership
+  name: example-membership
 spec:
   forProvider:
     description: Some group name
@@ -45,8 +45,8 @@ metadata:
     meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
     upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-membership
+  name: example-membership
 spec:
   forProvider:
     displayName: John Doe

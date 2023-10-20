@@ -5,8 +5,8 @@ metadata:
     meta.upbound.io/example-id: identitystore/v1beta1/group
     upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
   labels:
-    testing.upbound.io/example-name: this
-  name: this
+    testing.upbound.io/example-name: example-group
+  name: example-group
 spec:
   forProvider:
     description: Example description
