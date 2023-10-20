@@ -2461,6 +2461,15 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
 	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
 
+	// identitystore
+	//
+	// An Identity Store Group can be imported using the combination identity_store_id/group_id
+	"aws_identitystore_group": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+	// aws_identitystore_group_membership can be imported using the identity_store_id/membership_id
+	"aws_identitystore_group_membership": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+	// An Identity Store User can be imported using the combination identity_store_id/user_id
+	"aws_identitystore_user": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+
 	// applicationinsights
 	//
 	// ApplicationInsights Applications can be imported using the resource_group_name
@@ -2880,11 +2889,32 @@ func FormattedIdentifierUserDefinedNameFirst(param, separator string, keys ...st
 	return e
 }
 
+// TemplatedStringAsProviderDefinedIdentifier uses TemplatedStringAsIdentifier but
+// without the name initializer, and with a GetIdFn that exits early if the external name is empty.
+// This allows it to be used in cases where the ID is constructed with parameters and a provider-defined value, meaning
+// no user-defined input. Since the external name is not user-defined, the name
+// initializer has to be disabled.
+func TemplatedStringAsProviderDefinedIdentifier(tmpl string) config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("", tmpl)
+	e.DisableNameInitializer = true
+	getId := e.GetIDFn
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
+		if externalName == "" {
+			return "", nil
+		}
+		return getId(ctx, externalName, parameters, cfg)
+	}
+	return e
+}
+
 // TemplatedStringAsIdentifierWithNoName uses TemplatedStringAsIdentifier but
 // without the name initializer. This allows it to be used in cases where the ID
 // is constructed with parameters and a provider-defined value, meaning no
 // user-defined input. Since the external name is not user-defined, the name
 // initializer has to be disabled.
+// TODO: This seems to have some problems with handling the initial creation, when
+// the parameters in the template are defined but the external name is empty, because
+// the provider hasn't assigned its provider-defined identifier yet.
 func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	e := config.TemplatedStringAsIdentifier("", tmpl)
 	e.DisableNameInitializer = true

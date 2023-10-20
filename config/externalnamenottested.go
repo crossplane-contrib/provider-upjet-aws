@@ -616,15 +616,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amazon File Cache cache can be imported using the resource id
 	"aws_fsx_file_cache": config.IdentifierFromProvider,
 
-	// identitystore
-	//
-	// An Identity Store Group can be imported using the combination identity_store_id/group_id
-	"aws_identitystore_group": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-	// aws_identitystore_group_membership can be imported using the identity_store_id/membership_id
-	"aws_identitystore_group_membership": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-	// An Identity Store User can be imported using the combination identity_store_id/user_id
-	"aws_identitystore_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-
 	// inspector2
 	//
 	// Inspector V2 Delegated Admin Account can be imported using the account_id

@@ -1,0 +1,58 @@
+apiVersion: identitystore.aws.upbound.io/v1beta1
+kind: GroupMembership
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identityStoreId: FILL IN MANUALLY
+    memberIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-east-1
+
+---
+
+apiVersion: identitystore.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Some group name
+    displayName: MyGroup
+    identityStoreId: FILL IN MANUALLY
+    region: us-east-1
+
+---
+
+apiVersion: identitystore.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/groupmembership
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: John Doe
+    identityStoreId: FILL IN MANUALLY
+    name:
+    - familyName: Doe
+      givenName: John
+    region: us-east-1
+    userName: john.doe@example.com

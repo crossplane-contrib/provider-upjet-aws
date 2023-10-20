@@ -61,6 +61,7 @@ import (
 	"github.com/upbound/provider-aws/config/glue"
 	"github.com/upbound/provider-aws/config/grafana"
 	"github.com/upbound/provider-aws/config/iam"
+	"github.com/upbound/provider-aws/config/identitystore"
 	"github.com/upbound/provider-aws/config/kafka"
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
@@ -275,6 +276,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		kendra.Configure,
 		medialive.Configure,
 		ssoadmin.Configure,
+		identitystore.Configure,
 	} {
 		configure(pc)
 	}

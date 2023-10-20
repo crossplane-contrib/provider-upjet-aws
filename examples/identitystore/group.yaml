@@ -1,0 +1,15 @@
+apiVersion: identitystore.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identitystore/v1beta1/group
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: this
+  name: this
+spec:
+  forProvider:
+    description: Example description
+    displayName: Example group
+    identityStoreId: FILL IN MANUALLY
+    region: us-east-1
