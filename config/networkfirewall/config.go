@@ -24,4 +24,8 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
+
+	p.AddResourceConfigurator("aws_networkfirewall_firewall", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }

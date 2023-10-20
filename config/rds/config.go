@@ -178,6 +178,18 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_rds_cluster_role_association", func(r *config.Resource) {
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("aws_db_snapshot_copy", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_db_instance_automated_backups_replication", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_db_cluster_snapshot", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }
 
 // PasswordGenerator returns an InitializerFn that will generate a password
