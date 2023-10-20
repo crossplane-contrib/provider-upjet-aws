@@ -40,6 +40,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"associated_gateway_owner_account_id"},
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_dx_hosted_transit_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
