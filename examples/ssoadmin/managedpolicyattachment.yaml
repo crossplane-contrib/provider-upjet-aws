@@ -3,18 +3,18 @@ kind: ManagedPolicyAttachment
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/managedpolicyattachment
-    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which
     the operation will be executed)."
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: ssoadmin-managed-policy-attachment
+  name: ssoadmin-managed-policy-attachment
 spec:
   forProvider:
     instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
     managedPolicyArn: arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup
     permissionSetArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: ssoadmin-managed-policy-attachment
     region: us-east-1
 
 ---
@@ -27,10 +27,10 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
     the operation will be executed)."
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: ssoadmin-managed-policy-attachment
+  name: ssoadmin-managed-policy-attachment
 spec:
   forProvider:
     instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
-    name: Example
+    name: example-mpa
     region: us-east-1

@@ -1,0 +1,66 @@
+apiVersion: ssoadmin.aws.upbound.io/v1beta1
+kind: PermissionsBoundaryAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsboundaryattachment
+  labels:
+    testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+  name: ssoadmin-permissions-boundary-attachment
+spec:
+  forProvider:
+    instanceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+    permissionSetArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+    permissionsBoundary:
+    - customerManagedPolicyReference:
+      - nameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+        path: /
+    region: us-east-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsboundaryattachment
+  labels:
+    testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+  name: ssoadmin-permissions-boundary-attachment
+spec:
+  forProvider:
+    description: My test policy
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "ec2:Describe*",
+            "Resource": "*"
+          }
+        ]
+      }
+
+---
+
+apiVersion: ssoadmin.aws.upbound.io/v1beta1
+kind: PermissionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/permissionsboundaryattachment
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
+    the operation will be executed)."
+  labels:
+    testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
+  name: ssoadmin-permissions-boundary-attachment
+spec:
+  forProvider:
+    instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
+    name: example-pba
+    region: us-east-1

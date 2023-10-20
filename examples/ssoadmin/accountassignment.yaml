@@ -4,17 +4,19 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
     upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
-    the operation will be executed), principalId(An identifier for an object in SSO, such as a user or group) and targetId(An AWS account identifier)"
+    the operation will be executed) and targetId(An AWS account identifier)"
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: ssoadmin-accountassignment
+  name: ssoadmin-accountassignment
 spec:
   forProvider:
     instanceArn: ARN_OF_MANUALLY_CREATED_SSO_INSTANCE
     permissionSetArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: ssoadmin/v1beta1/accountassignment
-    principalId: ${data.aws_identitystore_group.example.group_id}
+        testing.upbound.io/example-name: ssoadmin-accountassignment
+    principalGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-accountassignment
     principalType: GROUP
     region: us-east-1
     targetId: "012347678910"
@@ -29,13 +31,28 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
     the operation will be executed)."
   labels:
-    testing.upbound.io/example-name: ssoadmin/v1beta1/accountassignment
-  name: example
+    testing.upbound.io/example-name: ssoadmin-accountassignment
+  name: ssoadmin-accountassignment
 spec:
   forProvider:
     description: An example
     instanceArn: ARN_OF_MANUALLY_CREATED_SSO_INSTANCE
-    name: Example
+    name: example-acct-assignment
     region: us-east-1
-    relayState: https://s3.console.aws.amazon.com/s3/home?region=us-east-1#
     sessionDuration: PT2H
+
+---
+apiVersion: identitystore.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
+    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
+  labels:
+    testing.upbound.io/example-name: ssoadmin-accountassignment
+  name: ssoadmin-accountassignment
+spec:
+  forProvider:
+    identityStoreId: FILL IN MANUALLY
+    region: us-east-1
+    displayName: example-acct-assignment

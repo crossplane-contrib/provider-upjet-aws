@@ -6,21 +6,22 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which
     the operation will be executed)."
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: ssoadmin-permission-set-inline-policy
+  name: ssoadmin-permission-set-inline-policy
 spec:
   forProvider:
-    instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
+    instanceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssoadmin-permission-set-inline-policy
     permissionSetArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: ssoadmin-permission-set-inline-policy
     region: us-east-1
     inlinePolicy: |
       {
         "Version": "2012-10-17",
         "Statement": [
           {
-            "Sid": "1",
             "Effect": "Allow",
             "Action": [
               "s3:ListAllMyBuckets",
@@ -41,10 +42,10 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
     the operation will be executed)."
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: ssoadmin-permission-set-inline-policy
+  name: ssoadmin-permission-set-inline-policy
 spec:
   forProvider:
     instanceArn: ${tolist(data.aws_ssoadmin_instances.example.arns)[0]}
-    name: Example
+    name: example-inline
     region: us-east-1
