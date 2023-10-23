@@ -83,6 +83,5 @@ batch-process: $(UP)
 		--package-metadata-template $(ROOT_DIR)/package/crossplane.yaml.tmpl \
 		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) \
 		--concurrency $(CONCURRENCY) \
-		--create \
 		--push-retry 10 || $(FAIL)
 	@$(OK) Done processing smaller provider packages for: "$(SUBPACKAGES)"
