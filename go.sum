@@ -596,8 +596,8 @@ github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uL
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
 github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7 h1:TgGCZbZgUwM2KokCe7KQ/NNsoYJ/5PKTIU73eXwvHno=
 github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7/go.mod h1:xDNhnOW+Xlvth7PX/N4XGZb4dQIIaMM6j0FiGsbc7Hw=
-github.com/ulucinar/upbound-upjet v0.0.0-20231020144117-f138dbdc905a h1:BCm9CElbWr2cnGVKNFQ81dRa+TdtZ6Un4kcFPYPMul4=
-github.com/ulucinar/upbound-upjet v0.0.0-20231020144117-f138dbdc905a/go.mod h1:udMoR502Tv/QXYfBAwiq3sl8YMJ5vSYbKsBsoo7wJu8=
+github.com/ulucinar/upbound-upjet v0.0.0-20231023143857-51d503694a28 h1:lkGvx6BUnk+Q3eO6Mgw+s8ZxKL6kN6qb2S30VuLndJo=
+github.com/ulucinar/upbound-upjet v0.0.0-20231023143857-51d503694a28/go.mod h1:udMoR502Tv/QXYfBAwiq3sl8YMJ5vSYbKsBsoo7wJu8=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
