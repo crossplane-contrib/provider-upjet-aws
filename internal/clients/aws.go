@@ -314,14 +314,23 @@ func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.
 
 	}
 	if len(pc.Spec.AssumeRoleChain) != 0 {
+		if pc.Spec.AssumeRoleChain[0].RoleARN == nil {
+			return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client: RoleARN cannot be nil in spec.AssumeRoleChain[0]")
+		}
 		awsConfig.AssumeRole = &tfawsbase.AssumeRole{
 			RoleARN:           *pc.Spec.AssumeRoleChain[0].RoleARN,
 			TransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
-			ExternalID:        *pc.Spec.AssumeRoleChain[0].ExternalID,
+		}
+
+		if pc.Spec.AssumeRoleChain[0].ExternalID != nil {
+			awsConfig.AssumeRole.ExternalID = *pc.Spec.AssumeRoleChain[0].ExternalID
 		}
 
 		tags := make(map[string]string)
-		for _, tag := range pc.Spec.AssumeRoleChain[0].Tags {
+		for i, tag := range pc.Spec.AssumeRoleChain[0].Tags {
+			if tag.Key == nil || tag.Value == nil {
+				return xpprovider.AWSConfig{}, errors.Errorf("cannot configure no-fork client: tag key or value cannot be nil in spec.AssumeRoleChain[0].Tags[%d]", i)
+			}
 			tags[*tag.Key] = *tag.Value
 		}
 
