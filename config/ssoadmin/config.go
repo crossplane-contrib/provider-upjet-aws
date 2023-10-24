@@ -26,11 +26,14 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "PolicyNameRef",
 			SelectorFieldName: "PolicyNameSelector",
 		}
+		//
+		delete(r.References, "instance_arn")
 	})
 	p.AddResourceConfigurator("aws_ssoadmin_permission_set_inline_policy", func(r *config.Resource) {
-		r.References["instance_arn"] = config.Reference{
-			TerraformName: "aws_ssoadmin_permission_set",
-			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("instance_arn",false)`,
-		}
+		delete(r.References, "instance_arn")
 	})
+	p.AddResourceConfigurator("aws_ssoadmin_permissions_boundary_attachment", func(r *config.Resource) {
+		delete(r.References, "instance_arn")
+	})
+
 }
