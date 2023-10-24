@@ -5,9 +5,10 @@ metadata:
     meta.upbound.io/example-id: cloudwatchlogs/v1beta1/metricfilter
   labels:
     testing.upbound.io/example-name: yada
-  name: yada
+  name: test
 spec:
   forProvider:
+    name: test
     logGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: dada
@@ -27,7 +28,7 @@ metadata:
     meta.upbound.io/example-id: cloudwatchlogs/v1beta1/metricfilter
   labels:
     testing.upbound.io/example-name: dada
-  name: dada
+  name: test
 spec:
   forProvider:
     region: us-west-1
