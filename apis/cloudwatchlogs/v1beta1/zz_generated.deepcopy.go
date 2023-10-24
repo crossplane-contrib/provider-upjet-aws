@@ -972,6 +972,11 @@ func (in *MetricFilterInitParameters) DeepCopyInto(out *MetricFilterInitParamete
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Pattern != nil {
 		in, out := &in.Pattern, &out.Pattern
 		*out = new(string)
@@ -1041,6 +1046,11 @@ func (in *MetricFilterObservation) DeepCopyInto(out *MetricFilterObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Pattern != nil {
 		in, out := &in.Pattern, &out.Pattern
 		*out = new(string)
@@ -1082,6 +1092,11 @@ func (in *MetricFilterParameters) DeepCopyInto(out *MetricFilterParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
 	}
 	if in.Pattern != nil {
 		in, out := &in.Pattern, &out.Pattern
