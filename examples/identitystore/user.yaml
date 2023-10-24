@@ -12,7 +12,7 @@ spec:
     displayName: John Doe
     emails:
     - value: john@example.com
-    identityStoreId: FILL IN MANUALLY
+    identityStoreId: Identity store id from a manually created SSO instance in the same region specified below
     name:
     - familyName: Doe
       givenName: John

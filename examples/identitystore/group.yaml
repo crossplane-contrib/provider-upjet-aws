@@ -11,5 +11,5 @@ spec:
   forProvider:
     description: Example description
     displayName: Example group
-    identityStoreId: FILL IN MANUALLY
+    identityStoreId: Identity store id from a manually created SSO instance in the same region specified below
     region: us-east-1

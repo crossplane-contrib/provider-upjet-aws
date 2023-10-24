@@ -3,14 +3,13 @@ kind: AccountAssignment
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
-    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
-    the operation will be executed) and targetId(An AWS account identifier)"
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
 spec:
   forProvider:
-    instanceArn: ARN_OF_MANUALLY_CREATED_SSO_INSTANCE
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: ssoadmin-accountassignment
@@ -28,15 +27,14 @@ kind: PermissionSet
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
-    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which 
-    the operation will be executed)."
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
 spec:
   forProvider:
     description: An example
-    instanceArn: ARN_OF_MANUALLY_CREATED_SSO_INSTANCE
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
     name: example-acct-assignment
     region: us-east-1
     sessionDuration: PT2H
@@ -53,6 +51,6 @@ metadata:
   name: ssoadmin-accountassignment
 spec:
   forProvider:
-    identityStoreId: FILL IN MANUALLY
+    identityStoreId: identity store id from a manually created SSO instance in the same region specified below
     region: us-east-1
     displayName: example-acct-assignment
