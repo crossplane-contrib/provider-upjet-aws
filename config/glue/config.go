@@ -2,6 +2,7 @@ package glue
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/common"
 )
@@ -20,6 +21,13 @@ func Configure(p *config.Provider) {
 		// This causes refresh to fail in the first reconcile.
 		r.TerraformResource.Schema["catalog_id"].Computed = false
 		r.TerraformResource.Schema["catalog_id"].Optional = false
+
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "partition_index.#")
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_glue_connection", func(r *config.Resource) {
