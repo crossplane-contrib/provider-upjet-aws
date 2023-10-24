@@ -184,6 +184,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  name:
+                    description: A name for the metric filter.
+                    type: string
                   pattern:
                     description: A valid CloudWatch Logs filter pattern for extracting
                       metric data out of ingested log events.
@@ -246,6 +249,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  name:
+                    description: A name for the metric filter.
+                    type: string
                   pattern:
                     description: A valid CloudWatch Logs filter pattern for extracting
                       metric data out of ingested log events.
@@ -416,6 +422,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.metricTransformation)
                 || (has(self.initProvider) && has(self.initProvider.metricTransformation))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.pattern is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.pattern)
@@ -470,6 +480,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  name:
+                    description: A name for the metric filter.
+                    type: string
                   pattern:
                     description: A valid CloudWatch Logs filter pattern for extracting
                       metric data out of ingested log events.
