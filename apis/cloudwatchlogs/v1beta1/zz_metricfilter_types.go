@@ -22,6 +22,9 @@ type MetricFilterInitParameters struct {
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	MetricTransformation []MetricTransformationInitParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
 
+	// A name for the metric filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// A valid CloudWatch Logs filter pattern
 	// for extracting metric data out of ingested log events.
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
@@ -37,6 +40,9 @@ type MetricFilterObservation struct {
 
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	MetricTransformation []MetricTransformationObservation `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
+
+	// A name for the metric filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A valid CloudWatch Logs filter pattern
 	// for extracting metric data out of ingested log events.
@@ -61,6 +67,10 @@ type MetricFilterParameters struct {
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	// +kubebuilder:validation:Optional
 	MetricTransformation []MetricTransformationParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
+
+	// A name for the metric filter.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A valid CloudWatch Logs filter pattern
 	// for extracting metric data out of ingested log events.
@@ -178,6 +188,7 @@ type MetricFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricTransformation) || (has(self.initProvider) && has(self.initProvider.metricTransformation))",message="spec.forProvider.metricTransformation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pattern) || (has(self.initProvider) && has(self.initProvider.pattern))",message="spec.forProvider.pattern is a required parameter"
 	Spec   MetricFilterSpec   `json:"spec"`
 	Status MetricFilterStatus `json:"status,omitempty"`
