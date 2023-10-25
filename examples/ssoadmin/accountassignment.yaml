@@ -13,7 +13,7 @@ spec:
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: ssoadmin-accountassignment
-    principalGroupSelector:
+    principalIdFromGroupSelector:
       matchLabels:
         testing.upbound.io/example-name: ssoadmin-accountassignment
     principalType: GROUP

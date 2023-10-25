@@ -11,10 +11,13 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ssoadmin_account_assignment", func(r *config.Resource) {
 		r.References["principal_id"] = config.Reference{
 			TerraformName:     "aws_identitystore_group",
-			Extractor:         `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("group_id",true)`,
-			RefFieldName:      "PrincipalGroupRef",
-			SelectorFieldName: "PrincipalGroupSelector",
+			RefFieldName:      "PrincipalIDFromGroupRef",
+			SelectorFieldName: "PrincipalIDFromGroupSelector",
 		}
+		r.MetaResource.ArgumentDocs["principal_id"] = "- (Required) An identifier for an object in SSO, such as a " +
+			"user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). This can be " +
+			"set to the crossplane external-name of either a Group or User in the identitystore api group, but the " +
+			"Ref and Selector fields will only work with a Group."
 		r.References["permission_set_arn"] = config.Reference{
 			TerraformName: "aws_ssoadmin_permission_set",
 			Extractor:     common.PathARNExtractor,
