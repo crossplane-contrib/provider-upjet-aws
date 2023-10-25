@@ -3,6 +3,7 @@ module github.com/upbound/provider-aws
 go 1.19
 
 require (
+	dario.cat/mergo v1.0.0
 	github.com/aws/aws-sdk-go-v2 v1.21.0
 	github.com/aws/aws-sdk-go-v2/config v1.18.42
 	github.com/aws/aws-sdk-go-v2/credentials v1.13.40
@@ -28,7 +29,6 @@ require (
 )
 
 require (
-	dario.cat/mergo v1.0.0 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230717121422-5aa5874ade95 // indirect
 	github.com/YakDriver/regexache v0.23.0 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
@@ -243,6 +243,6 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231024172353-a386b3e24d0c
+replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231025120025-189db1dc1a37
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7

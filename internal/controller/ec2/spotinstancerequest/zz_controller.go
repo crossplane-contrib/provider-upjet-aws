@@ -36,8 +36,10 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.SpotInstanceRequest_GroupVersionKind)))
 	opts := []managed.ReconcilerOption{
-		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_spot_instance_request"], o.OperationTrackerStore, tjcontroller.WithNoForkLogger(o.Logger),
-			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.SpotInstanceRequest_GroupVersionKind, mgr, o.PollInterval)))),
+		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_spot_instance_request"], o.OperationTrackerStore,
+			tjcontroller.WithNoForkLogger(o.Logger),
+			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.SpotInstanceRequest_GroupVersionKind, mgr, o.PollInterval)),
+			tjcontroller.WithNoForkManagementPolicies(o.Features.Enabled(features.EnableAlphaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
 

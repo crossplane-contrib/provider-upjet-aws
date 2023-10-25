@@ -33,8 +33,10 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1beta1.VPCPeeringConnectionOptions_GroupVersionKind)))
 	opts := []managed.ReconcilerOption{
-		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_vpc_peering_connection_options"], o.OperationTrackerStore, tjcontroller.WithNoForkLogger(o.Logger),
-			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.VPCPeeringConnectionOptions_GroupVersionKind, mgr, o.PollInterval)))),
+		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_vpc_peering_connection_options"], o.OperationTrackerStore,
+			tjcontroller.WithNoForkLogger(o.Logger),
+			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.VPCPeeringConnectionOptions_GroupVersionKind, mgr, o.PollInterval)),
+			tjcontroller.WithNoForkManagementPolicies(o.Features.Enabled(features.EnableAlphaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
 
