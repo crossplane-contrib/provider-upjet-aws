@@ -11,6 +11,7 @@ Copyright 2022 Upbound Inc.
 package v1beta1
 
 import (
+	"dario.cat/mergo"
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/resource"
@@ -81,6 +82,36 @@ func (tr *BotAssociation) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this BotAssociation
+func (tr *BotAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this BotAssociation using its observed tfState.
@@ -167,6 +198,36 @@ func (tr *ContactFlow) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this ContactFlow
+func (tr *ContactFlow) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this ContactFlow using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ContactFlow) LateInitialize(attrs []byte) (bool, error) {
@@ -249,6 +310,36 @@ func (tr *ContactFlowModule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this ContactFlowModule
+func (tr *ContactFlowModule) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this ContactFlowModule using its observed tfState.
@@ -335,6 +426,36 @@ func (tr *HoursOfOperation) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this HoursOfOperation
+func (tr *HoursOfOperation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this HoursOfOperation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HoursOfOperation) LateInitialize(attrs []byte) (bool, error) {
@@ -417,6 +538,36 @@ func (tr *Instance) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this Instance
+func (tr *Instance) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this Instance using its observed tfState.
@@ -503,6 +654,36 @@ func (tr *InstanceStorageConfig) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this InstanceStorageConfig
+func (tr *InstanceStorageConfig) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this InstanceStorageConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *InstanceStorageConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +766,36 @@ func (tr *LambdaFunctionAssociation) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this LambdaFunctionAssociation
+func (tr *LambdaFunctionAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this LambdaFunctionAssociation using its observed tfState.
@@ -671,6 +882,36 @@ func (tr *PhoneNumber) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this PhoneNumber
+func (tr *PhoneNumber) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this PhoneNumber using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *PhoneNumber) LateInitialize(attrs []byte) (bool, error) {
@@ -753,6 +994,36 @@ func (tr *Queue) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this Queue
+func (tr *Queue) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this Queue using its observed tfState.
@@ -839,6 +1110,36 @@ func (tr *QuickConnect) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this QuickConnect
+func (tr *QuickConnect) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this QuickConnect using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *QuickConnect) LateInitialize(attrs []byte) (bool, error) {
@@ -921,6 +1222,36 @@ func (tr *RoutingProfile) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this RoutingProfile
+func (tr *RoutingProfile) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this RoutingProfile using its observed tfState.
@@ -1007,6 +1338,36 @@ func (tr *SecurityProfile) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this SecurityProfile
+func (tr *SecurityProfile) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this SecurityProfile using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SecurityProfile) LateInitialize(attrs []byte) (bool, error) {
@@ -1089,6 +1450,36 @@ func (tr *User) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this User
+func (tr *User) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this User using its observed tfState.
@@ -1175,6 +1566,36 @@ func (tr *UserHierarchyStructure) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// GetInitParameters of this UserHierarchyStructure
+func (tr *UserHierarchyStructure) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
 // LateInitialize this UserHierarchyStructure using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *UserHierarchyStructure) LateInitialize(attrs []byte) (bool, error) {
@@ -1257,6 +1678,36 @@ func (tr *Vocabulary) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this Vocabulary
+func (tr *Vocabulary) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !isManagementPoliciesEnabled {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
 }
 
 // LateInitialize this Vocabulary using its observed tfState.
