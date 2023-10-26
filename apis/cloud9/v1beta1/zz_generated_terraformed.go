@@ -85,12 +85,12 @@ func (tr *EnvironmentEC2) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this EnvironmentEC2
-func (tr *EnvironmentEC2) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *EnvironmentEC2) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *EnvironmentMembership) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this EnvironmentMembership
-func (tr *EnvironmentMembership) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *EnvironmentMembership) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

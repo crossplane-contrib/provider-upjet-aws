@@ -85,12 +85,12 @@ func (tr *Channel) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Channel
-func (tr *Channel) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Channel) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *RecordingConfiguration) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this RecordingConfiguration
-func (tr *RecordingConfiguration) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RecordingConfiguration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

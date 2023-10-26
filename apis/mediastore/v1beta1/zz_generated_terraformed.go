@@ -85,12 +85,12 @@ func (tr *Container) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Container
-func (tr *Container) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Container) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *ContainerPolicy) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ContainerPolicy
-func (tr *ContainerPolicy) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ContainerPolicy) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

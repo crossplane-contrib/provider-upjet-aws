@@ -85,12 +85,12 @@ func (tr *Input) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Input
-func (tr *Input) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Input) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *InputSecurityGroup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this InputSecurityGroup
-func (tr *InputSecurityGroup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *InputSecurityGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *Multiplex) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Multiplex
-func (tr *Multiplex) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Multiplex) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

@@ -328,8 +328,6 @@ import (
 	routetable "github.com/upbound/provider-aws/internal/controller/ec2/routetable"
 	routetableassociation "github.com/upbound/provider-aws/internal/controller/ec2/routetableassociation"
 	securitygroup "github.com/upbound/provider-aws/internal/controller/ec2/securitygroup"
-	securitygroupegressrule "github.com/upbound/provider-aws/internal/controller/ec2/securitygroupegressrule"
-	securitygroupingressrule "github.com/upbound/provider-aws/internal/controller/ec2/securitygroupingressrule"
 	securitygrouprule "github.com/upbound/provider-aws/internal/controller/ec2/securitygrouprule"
 	serialconsoleaccess "github.com/upbound/provider-aws/internal/controller/ec2/serialconsoleaccess"
 	snapshotcreatevolumepermission "github.com/upbound/provider-aws/internal/controller/ec2/snapshotcreatevolumepermission"
@@ -1230,8 +1228,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		routetable.Setup,
 		routetableassociation.Setup,
 		securitygroup.Setup,
-		securitygroupegressrule.Setup,
-		securitygroupingressrule.Setup,
 		securitygrouprule.Setup,
 		serialconsoleaccess.Setup,
 		snapshotcreatevolumepermission.Setup,
