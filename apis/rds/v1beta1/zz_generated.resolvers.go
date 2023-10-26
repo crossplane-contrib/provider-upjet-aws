@@ -551,7 +551,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicateSourceDB),
-		Extract:      resource.ExtractParamPath("identifier", false),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ReplicateSourceDBRef,
 		Selector:     mg.Spec.ForProvider.ReplicateSourceDBSelector,
 		To: reference.To{
