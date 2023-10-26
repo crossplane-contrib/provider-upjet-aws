@@ -12,7 +12,7 @@ spec:
     automaticFailoverEnabled: true
     description: example description
     nodeType: cache.m4.large
-    numCacheClusters: 2
+    numberCacheClusters: 2
     parameterGroupName: default.redis7
     port: 6379
     preferredCacheClusterAzs:

@@ -9,12 +9,12 @@ metadata:
   name: example-dbinstance-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    name: example
     region: us-west-1
     allocatedStorage: 20
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
     instanceClass: db.t3.micro
-    dbName: example
     engine: postgres
     engineVersion: "13.7"
     username: adminuser
