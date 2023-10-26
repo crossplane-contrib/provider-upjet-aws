@@ -81,12 +81,12 @@ func (tr *ConditionalForwarder) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConditionalForwarder
-func (tr *ConditionalForwarder) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConditionalForwarder) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Directory) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Directory
-func (tr *Directory) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Directory) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *SharedDirectory) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SharedDirectory
-func (tr *SharedDirectory) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SharedDirectory) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

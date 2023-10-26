@@ -81,12 +81,12 @@ func (tr *Alias) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Alias
-func (tr *Alias) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Alias) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *CodeSigningConfig) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this CodeSigningConfig
-func (tr *CodeSigningConfig) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *CodeSigningConfig) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *EventSourceMapping) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this EventSourceMapping
-func (tr *EventSourceMapping) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *EventSourceMapping) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *Function) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Function
-func (tr *Function) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Function) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *FunctionEventInvokeConfig) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this FunctionEventInvokeConfig
-func (tr *FunctionEventInvokeConfig) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *FunctionEventInvokeConfig) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -651,12 +651,12 @@ func (tr *FunctionURL) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this FunctionURL
-func (tr *FunctionURL) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *FunctionURL) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -765,12 +765,12 @@ func (tr *Invocation) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Invocation
-func (tr *Invocation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Invocation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -879,12 +879,12 @@ func (tr *LayerVersion) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this LayerVersion
-func (tr *LayerVersion) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *LayerVersion) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -993,12 +993,12 @@ func (tr *LayerVersionPermission) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this LayerVersionPermission
-func (tr *LayerVersionPermission) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *LayerVersionPermission) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1107,12 +1107,12 @@ func (tr *Permission) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Permission
-func (tr *Permission) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Permission) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1221,12 +1221,12 @@ func (tr *ProvisionedConcurrencyConfig) GetInitParameters() (map[string]any, err
 }
 
 // GetInitParameters of this ProvisionedConcurrencyConfig
-func (tr *ProvisionedConcurrencyConfig) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ProvisionedConcurrencyConfig) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1266,5 +1266,5 @@ func (tr *ProvisionedConcurrencyConfig) LateInitialize(attrs []byte) (bool, erro
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ProvisionedConcurrencyConfig) GetTerraformSchemaVersion() int {
-	return 1
+	return 0
 }

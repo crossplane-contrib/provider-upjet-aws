@@ -8,7 +8,7 @@ metadata:
   name: secondary-cidr
 spec:
   forProvider:
-    cidrBlock: 172.20.0.0/16
+    cidrBlock: 172.2.0.0/16
     region: us-west-1
     vpcIdSelector:
       matchLabels:

@@ -178,7 +178,7 @@ spec:
                     type: object
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
-                      See launch_template below for details.
+                      Detailed below.
                     items:
                       properties:
                         id:
@@ -286,7 +286,7 @@ spec:
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
-                      See remote_access below for details.
+                      Detailed below.
                     items:
                       properties:
                         ec2SshKey:
@@ -394,8 +394,8 @@ spec:
                       type: object
                     type: array
                   scalingConfig:
-                    description: Configuration block with scaling settings. See scaling_config
-                      below for details.
+                    description: Configuration block with scaling settings. Detailed
+                      below.
                     items:
                       properties:
                         desiredSize:
@@ -505,8 +505,8 @@ spec:
                     type: object
                   taint:
                     description: The Kubernetes taints to be applied to the nodes
-                      in the node group. Maximum of 50 taints per node group. See
-                      taint below for details.
+                      in the node group. Maximum of 50 taints per node group. Detailed
+                      below.
                     items:
                       properties:
                         effect:
@@ -522,8 +522,6 @@ spec:
                       type: object
                     type: array
                   updateConfig:
-                    description: Configuration block with update settings. See update_config
-                      below for details.
                     items:
                       properties:
                         maxUnavailable:
@@ -664,7 +662,7 @@ spec:
                     type: object
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
-                      See launch_template below for details.
+                      Detailed below.
                     items:
                       properties:
                         id:
@@ -691,7 +689,7 @@ spec:
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
-                      See remote_access below for details.
+                      Detailed below.
                     items:
                       properties:
                         ec2SshKey:
@@ -708,8 +706,8 @@ spec:
                       type: object
                     type: array
                   scalingConfig:
-                    description: Configuration block with scaling settings. See scaling_config
-                      below for details.
+                    description: Configuration block with scaling settings. Detailed
+                      below.
                     items:
                       properties:
                         desiredSize:
@@ -733,8 +731,8 @@ spec:
                     type: object
                   taint:
                     description: The Kubernetes taints to be applied to the nodes
-                      in the node group. Maximum of 50 taints per node group. See
-                      taint below for details.
+                      in the node group. Maximum of 50 taints per node group. Detailed
+                      below.
                     items:
                       properties:
                         effect:
@@ -750,8 +748,6 @@ spec:
                       type: object
                     type: array
                   updateConfig:
-                    description: Configuration block with update settings. See update_config
-                      below for details.
                     items:
                       properties:
                         maxUnavailable:
@@ -982,7 +978,7 @@ spec:
                     type: object
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
-                      See launch_template below for details.
+                      Detailed below.
                     items:
                       properties:
                         id:
@@ -1013,7 +1009,7 @@ spec:
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
-                      See remote_access below for details.
+                      Detailed below.
                     items:
                       properties:
                         ec2SshKey:
@@ -1060,8 +1056,8 @@ spec:
                       type: object
                     type: array
                   scalingConfig:
-                    description: Configuration block with scaling settings. See scaling_config
-                      below for details.
+                    description: Configuration block with scaling settings. Detailed
+                      below.
                     items:
                       properties:
                         desiredSize:
@@ -1104,8 +1100,8 @@ spec:
                     type: object
                   taint:
                     description: The Kubernetes taints to be applied to the nodes
-                      in the node group. Maximum of 50 taints per node group. See
-                      taint below for details.
+                      in the node group. Maximum of 50 taints per node group. Detailed
+                      below.
                     items:
                       properties:
                         effect:
@@ -1121,8 +1117,6 @@ spec:
                       type: object
                     type: array
                   updateConfig:
-                    description: Configuration block with update settings. See update_config
-                      below for details.
                     items:
                       properties:
                         maxUnavailable:

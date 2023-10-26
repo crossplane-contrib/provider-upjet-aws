@@ -131,7 +131,7 @@ type EventSourceMappingInitParameters struct {
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *int64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
@@ -214,7 +214,7 @@ type EventSourceMappingObservation struct {
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *int64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
@@ -319,7 +319,7 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	ParallelizationFactor *int64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	// +kubebuilder:validation:Optional
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 

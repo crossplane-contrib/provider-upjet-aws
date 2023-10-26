@@ -226,8 +226,8 @@ spec:
                     type: object
                   principalType:
                     description: Principal type. Setting this argument empty (e.g.,
-                      principal_type = "") will result in an error. Valid values are
-                      IAM and IAM_PATTERN. Default is IAM.
+                      principal_type = "") will result in an error. Valid value is
+                      IAM. Default is IAM.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -255,8 +255,8 @@ spec:
                     type: string
                   principalType:
                     description: Principal type. Setting this argument empty (e.g.,
-                      principal_type = "") will result in an error. Valid values are
-                      IAM and IAM_PATTERN. Default is IAM.
+                      principal_type = "") will result in an error. Valid value is
+                      IAM. Default is IAM.
                     type: string
                 type: object
               managementPolicies:
@@ -445,8 +445,8 @@ spec:
                     type: string
                   principalType:
                     description: Principal type. Setting this argument empty (e.g.,
-                      principal_type = "") will result in an error. Valid values are
-                      IAM and IAM_PATTERN. Default is IAM.
+                      principal_type = "") will result in an error. Valid value is
+                      IAM. Default is IAM.
                     type: string
                 type: object
               conditions:

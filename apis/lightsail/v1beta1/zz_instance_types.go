@@ -111,6 +111,9 @@ type InstanceObservation struct {
 	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
+	// (Deprecated) The first IPv6 address of the Lightsail instance. Use ipv6_addresses attribute instead.
+	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
+
 	// List of IPv6 addresses for the Lightsail instance.
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 

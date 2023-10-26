@@ -36,9 +36,6 @@ type ReplicationInstanceInitParameters struct {
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
-	// The type of IP address protocol used by a replication instance. Valid values: IPV4, DUAL.
-	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
-
 	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
@@ -79,9 +76,6 @@ type ReplicationInstanceObservation struct {
 
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
-
-	// The type of IP address protocol used by a replication instance. Valid values: IPV4, DUAL.
-	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
@@ -156,10 +150,6 @@ type ReplicationInstanceParameters struct {
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
-
-	// The type of IP address protocol used by a replication instance. Valid values: IPV4, DUAL.
-	// +kubebuilder:validation:Optional
-	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 	// +kubebuilder:validation:Optional

@@ -81,12 +81,12 @@ func (tr *AssessmentTarget) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this AssessmentTarget
-func (tr *AssessmentTarget) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *AssessmentTarget) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *AssessmentTemplate) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this AssessmentTemplate
-func (tr *AssessmentTemplate) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *AssessmentTemplate) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *ResourceGroup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ResourceGroup
-func (tr *ResourceGroup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ResourceGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

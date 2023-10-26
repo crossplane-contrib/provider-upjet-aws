@@ -89,14 +89,6 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
-                  skipDestroy:
-                    description: Whether to retain the old version of a previously
-                      deployed Lambda Layer. Default is false. When this is not set
-                      to true, changing any of compatible_architectures, compatible_runtimes,
-                      description, filename, layer_name, license_info, s3_bucket,
-                      s3_key, s3_object_version, or source_code_hash forces deletion
-                      of the existing layer version and creation of a new layer version.
-                    type: boolean
                   statementId:
                     description: The name of Lambda Layer Permission, for example
                       dev-account - human readable note about what is this permission
@@ -142,14 +134,6 @@ spec:
                       Layer. * can be used here, if you want to share your Lambda
                       Layer widely.
                     type: string
-                  skipDestroy:
-                    description: Whether to retain the old version of a previously
-                      deployed Lambda Layer. Default is false. When this is not set
-                      to true, changing any of compatible_architectures, compatible_runtimes,
-                      description, filename, layer_name, license_info, s3_bucket,
-                      s3_key, s3_object_version, or source_code_hash forces deletion
-                      of the existing layer version and creation of a new layer version.
-                    type: boolean
                   statementId:
                     description: The name of Lambda Layer Permission, for example
                       dev-account - human readable note about what is this permission
@@ -378,14 +362,6 @@ spec:
                     description: A unique identifier for the current revision of the
                       policy.
                     type: string
-                  skipDestroy:
-                    description: Whether to retain the old version of a previously
-                      deployed Lambda Layer. Default is false. When this is not set
-                      to true, changing any of compatible_architectures, compatible_runtimes,
-                      description, filename, layer_name, license_info, s3_bucket,
-                      s3_key, s3_object_version, or source_code_hash forces deletion
-                      of the existing layer version and creation of a new layer version.
-                    type: boolean
                   statementId:
                     description: The name of Lambda Layer Permission, for example
                       dev-account - human readable note about what is this permission

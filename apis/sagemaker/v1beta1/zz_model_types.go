@@ -33,9 +33,6 @@ type ContainerInitParameters struct {
 
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the model package to use to create the model.
-	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type ContainerObservation struct {
@@ -58,9 +55,6 @@ type ContainerObservation struct {
 
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the model package to use to create the model.
-	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type ContainerParameters struct {
@@ -76,7 +70,7 @@ type ContainerParameters struct {
 
 	// The registry path where the inference code image is stored in Amazon ECR.
 	// +kubebuilder:validation:Optional
-	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+	Image *string `json:"image" tf:"image,omitempty"`
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	// +kubebuilder:validation:Optional
@@ -89,10 +83,6 @@ type ContainerParameters struct {
 	// The URL for the S3 location where model artifacts are stored.
 	// +kubebuilder:validation:Optional
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the model package to use to create the model.
-	// +kubebuilder:validation:Optional
-	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type ImageConfigInitParameters struct {
@@ -310,9 +300,6 @@ type PrimaryContainerInitParameters struct {
 
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the model package to use to create the model.
-	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type PrimaryContainerObservation struct {
@@ -335,9 +322,6 @@ type PrimaryContainerObservation struct {
 
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the model package to use to create the model.
-	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type PrimaryContainerParameters struct {
@@ -353,7 +337,7 @@ type PrimaryContainerParameters struct {
 
 	// The registry path where the inference code image is stored in Amazon ECR.
 	// +kubebuilder:validation:Optional
-	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+	Image *string `json:"image" tf:"image,omitempty"`
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	// +kubebuilder:validation:Optional
@@ -366,10 +350,6 @@ type PrimaryContainerParameters struct {
 	// The URL for the S3 location where model artifacts are stored.
 	// +kubebuilder:validation:Optional
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
-
-	// The Amazon Resource Name (ARN) of the model package to use to create the model.
-	// +kubebuilder:validation:Optional
-	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type RepositoryAuthConfigInitParameters struct {

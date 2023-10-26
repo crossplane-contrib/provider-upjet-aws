@@ -75,9 +75,6 @@ type FileSystemObservation struct {
 	// A file system lifecycle policy object (documented below).
 	LifecyclePolicy []LifecyclePolicyObservation `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
-	// The value of the file system's Name tag.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The current number of mount targets that the file system has.
 	NumberOfMountTargets *int64 `json:"numberOfMountTargets,omitempty" tf:"number_of_mount_targets,omitempty"`
 

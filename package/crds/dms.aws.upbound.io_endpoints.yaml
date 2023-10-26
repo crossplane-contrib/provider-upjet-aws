@@ -105,10 +105,10 @@ spec:
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
-                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
-                      names are available only for target endpoint type (e.g. redshift).
+                      db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis,
+                      mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,
+                      s3, sqlserver, sybase. Please note that some of engine names
+                      are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -638,6 +638,12 @@ spec:
                             first row header in a .csv file. Default is 0.
                           format: int64
                           type: integer
+                        ignoreHeadersRow:
+                          description: Deprecated. This setting has no effect. Will
+                            be removed in a future version. This setting has no effect,
+                            is deprecated, and will be removed in a future version
+                          format: int64
+                          type: integer
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
                             operations to the .csv output files only to indicate how
@@ -932,10 +938,10 @@ spec:
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
-                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
-                      names are available only for target endpoint type (e.g. redshift).
+                      db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis,
+                      mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,
+                      s3, sqlserver, sybase. Please note that some of engine names
+                      are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -1302,6 +1308,12 @@ spec:
                             first row header in a .csv file. Default is 0.
                           format: int64
                           type: integer
+                        ignoreHeadersRow:
+                          description: Deprecated. This setting has no effect. Will
+                            be removed in a future version. This setting has no effect,
+                            is deprecated, and will be removed in a future version
+                          format: int64
+                          type: integer
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
                             operations to the .csv output files only to indicate how
@@ -1603,10 +1615,10 @@ spec:
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
-                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
-                      names are available only for target endpoint type (e.g. redshift).
+                      db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis,
+                      mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,
+                      s3, sqlserver, sybase. Please note that some of engine names
+                      are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -1985,6 +1997,12 @@ spec:
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
+                          format: int64
+                          type: integer
+                        ignoreHeadersRow:
+                          description: Deprecated. This setting has no effect. Will
+                            be removed in a future version. This setting has no effect,
+                            is deprecated, and will be removed in a future version
                           format: int64
                           type: integer
                         includeOpForFullLoad:

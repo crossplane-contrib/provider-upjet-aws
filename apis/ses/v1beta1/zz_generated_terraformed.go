@@ -81,12 +81,12 @@ func (tr *ActiveReceiptRuleSet) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ActiveReceiptRuleSet
-func (tr *ActiveReceiptRuleSet) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ActiveReceiptRuleSet) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *ConfigurationSet) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConfigurationSet
-func (tr *ConfigurationSet) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConfigurationSet) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *DomainDKIM) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DomainDKIM
-func (tr *DomainDKIM) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DomainDKIM) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *DomainIdentity) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DomainIdentity
-func (tr *DomainIdentity) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DomainIdentity) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *DomainMailFrom) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DomainMailFrom
-func (tr *DomainMailFrom) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DomainMailFrom) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -651,12 +651,12 @@ func (tr *EmailIdentity) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this EmailIdentity
-func (tr *EmailIdentity) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *EmailIdentity) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -765,12 +765,12 @@ func (tr *EventDestination) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this EventDestination
-func (tr *EventDestination) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *EventDestination) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -879,12 +879,12 @@ func (tr *IdentityNotificationTopic) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this IdentityNotificationTopic
-func (tr *IdentityNotificationTopic) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *IdentityNotificationTopic) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -993,12 +993,12 @@ func (tr *IdentityPolicy) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this IdentityPolicy
-func (tr *IdentityPolicy) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *IdentityPolicy) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1107,12 +1107,12 @@ func (tr *ReceiptFilter) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ReceiptFilter
-func (tr *ReceiptFilter) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ReceiptFilter) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1221,12 +1221,12 @@ func (tr *ReceiptRule) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ReceiptRule
-func (tr *ReceiptRule) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ReceiptRule) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1335,12 +1335,12 @@ func (tr *ReceiptRuleSet) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ReceiptRuleSet
-func (tr *ReceiptRuleSet) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ReceiptRuleSet) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -1449,12 +1449,12 @@ func (tr *Template) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Template
-func (tr *Template) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Template) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

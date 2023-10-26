@@ -81,12 +81,12 @@ func (tr *ServiceQuota) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ServiceQuota
-func (tr *ServiceQuota) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ServiceQuota) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

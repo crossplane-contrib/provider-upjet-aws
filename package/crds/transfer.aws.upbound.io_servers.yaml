@@ -406,79 +406,6 @@ spec:
                       the service to write your SFTP users’ activity to your Amazon
                       CloudWatch logs for monitoring and auditing purposes.
                     type: string
-                  loggingRoleRef:
-                    description: Reference to a Role in iam to populate loggingRole.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  loggingRoleSelector:
-                    description: Selector for a Role in iam to populate loggingRole.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   postAuthenticationLoginBannerSecretRef:
                     description: Specify a string to display when users connect to
                       a server. This string is displayed after the user authenticates.
@@ -563,19 +490,9 @@ spec:
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Possible values are TransferSecurityPolicy-2018-11,
-                      TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06,
-                      TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05.
-                      Default value is: TransferSecurityPolicy-2018-11.'
+                      TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06
+                      and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.'
                     type: string
-                  structuredLogDestinations:
-                    description: A set of ARNs of destinations that will receive structured
-                      logs from the transfer server such as CloudWatch Log Group ARNs.
-                      If provided this enables the transfer server to emit structured
-                      logs to the specified locations. This is a set of arns of destinations
-                      that will receive structured logs from the transfer server
-                    items:
-                      type: string
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -718,6 +635,11 @@ spec:
                       authenticate the user account with an identity_provider_type
                       of API_GATEWAY.
                     type: string
+                  loggingRole:
+                    description: Amazon Resource Name (ARN) of an IAM role that allows
+                      the service to write your SFTP users’ activity to your Amazon
+                      CloudWatch logs for monitoring and auditing purposes.
+                    type: string
                   protocolDetails:
                     description: The protocol settings that are configured for your
                       server.
@@ -760,19 +682,9 @@ spec:
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Possible values are TransferSecurityPolicy-2018-11,
-                      TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06,
-                      TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05.
-                      Default value is: TransferSecurityPolicy-2018-11.'
+                      TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06
+                      and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.'
                     type: string
-                  structuredLogDestinations:
-                    description: A set of ARNs of destinations that will receive structured
-                      logs from the transfer server such as CloudWatch Log Group ARNs.
-                      If provided this enables the transfer server to emit structured
-                      logs to the specified locations. This is a set of arns of destinations
-                      that will receive structured logs from the transfer server
-                    items:
-                      type: string
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -1142,19 +1054,9 @@ spec:
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Possible values are TransferSecurityPolicy-2018-11,
-                      TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06,
-                      TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05.
-                      Default value is: TransferSecurityPolicy-2018-11.'
+                      TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06
+                      and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.'
                     type: string
-                  structuredLogDestinations:
-                    description: A set of ARNs of destinations that will receive structured
-                      logs from the transfer server such as CloudWatch Log Group ARNs.
-                      If provided this enables the transfer server to emit structured
-                      logs to the specified locations. This is a set of arns of destinations
-                      that will receive structured logs from the transfer server
-                    items:
-                      type: string
-                    type: array
                   tags:
                     additionalProperties:
                       type: string

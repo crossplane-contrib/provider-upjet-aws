@@ -8,10 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    actionsSuppressor:
-    - alarm: suppressor-alarm
-      extensionPeriod: 10
-      waitPeriod: 20
     alarmActionsSelector:
       matchLabels:
         testing.upbound.io/example-name: example

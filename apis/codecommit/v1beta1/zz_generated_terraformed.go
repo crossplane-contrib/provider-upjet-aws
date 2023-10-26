@@ -81,12 +81,12 @@ func (tr *ApprovalRuleTemplate) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ApprovalRuleTemplate
-func (tr *ApprovalRuleTemplate) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ApprovalRuleTemplate) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *ApprovalRuleTemplateAssociation) GetInitParameters() (map[string]any, 
 }
 
 // GetInitParameters of this ApprovalRuleTemplateAssociation
-func (tr *ApprovalRuleTemplateAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ApprovalRuleTemplateAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Repository) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Repository
-func (tr *Repository) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Repository) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *Trigger) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Trigger
-func (tr *Trigger) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Trigger) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

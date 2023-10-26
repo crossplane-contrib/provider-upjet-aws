@@ -81,12 +81,12 @@ func (tr *Codepipeline) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Codepipeline
-func (tr *Codepipeline) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Codepipeline) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *CustomActionType) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this CustomActionType
-func (tr *CustomActionType) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *CustomActionType) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Webhook) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Webhook
-func (tr *Webhook) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Webhook) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

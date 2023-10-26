@@ -18,8 +18,19 @@ type VPCPeeringConnectionOptionsAccepterInitParameters struct {
 
 type VPCPeeringConnectionOptionsAccepterObservation struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Allow a local linked EC2-Classic instance to communicate
+	// with instances in a peer VPC. This enables an outbound communication from the local ClassicLink connection
+	// to the remote VPC. This option is not supported for inter-region VPC peering.
+	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
+
+	// Allow a local VPC to resolve public DNS hostnames to
+	// private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
+
+	// Allow a local VPC to communicate with a linked EC2-Classic
+	// instance in a peer VPC. This enables an outbound communication from the local VPC to the remote ClassicLink
+	// connection. This option is not supported for inter-region VPC peering.
+	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsAccepterParameters struct {
@@ -30,13 +41,17 @@ type VPCPeeringConnectionOptionsInitParameters struct {
 
 type VPCPeeringConnectionOptionsObservation struct {
 
-	// An optional configuration block that allows for VPC Peering Connection options to be set for the VPC that acceptsthe peering connection (a maximum of one).
+	// An optional configuration block that allows for [VPC Peering Connection]
+	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options to be set for the VPC that accepts
+	// the peering connection (a maximum of one).
 	Accepter []VPCPeeringConnectionOptionsAccepterObservation `json:"accepter,omitempty" tf:"accepter,omitempty"`
 
 	// The ID of the VPC Peering Connection Options.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requeststhe peering connection (a maximum of one).
+	// A optional configuration block that allows for [VPC Peering Connection]
+	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options to be set for the VPC that requests
+	// the peering connection (a maximum of one).
 	Requester []VPCPeeringConnectionOptionsRequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// The ID of the requester VPC peering connection.
@@ -70,8 +85,19 @@ type VPCPeeringConnectionOptionsRequesterInitParameters struct {
 
 type VPCPeeringConnectionOptionsRequesterObservation struct {
 
-	// Allow a local VPC to resolve public DNS hostnames to private IP addresses when queried from instances in the peer VPC.
+	// Allow a local linked EC2-Classic instance to communicate
+	// with instances in a peer VPC. This enables an outbound communication from the local ClassicLink connection
+	// to the remote VPC. This option is not supported for inter-region VPC peering.
+	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
+
+	// Allow a local VPC to resolve public DNS hostnames to
+	// private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
+
+	// Allow a local VPC to communicate with a linked EC2-Classic
+	// instance in a peer VPC. This enables an outbound communication from the local VPC to the remote ClassicLink
+	// connection. This option is not supported for inter-region VPC peering.
+	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type VPCPeeringConnectionOptionsRequesterParameters struct {

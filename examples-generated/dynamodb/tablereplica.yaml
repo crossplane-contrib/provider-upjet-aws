@@ -11,7 +11,7 @@ spec:
     globalTableArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    provider: ${aws.alt}
+    provider: aws.alt
     region: us-west-1
     tags:
       Name: IZPAWS
@@ -34,7 +34,7 @@ spec:
       type: S
     billingMode: PAY_PER_REQUEST
     hashKey: BrodoBaggins
-    provider: ${aws.main}
+    provider: aws.main
     region: us-west-1
     streamEnabled: true
     streamViewType: NEW_AND_OLD_IMAGES

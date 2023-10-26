@@ -165,8 +165,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   type:
-                    description: 'The type of the schema. Valid values: OpenApi3 or
-                      JSONSchemaDraft4.'
+                    description: 'The type of the schema. Valid values: OpenApi3.'
                     type: string
                 required:
                 - region
@@ -202,8 +201,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   type:
-                    description: 'The type of the schema. Valid values: OpenApi3 or
-                      JSONSchemaDraft4.'
+                    description: 'The type of the schema. Valid values: OpenApi3.'
                     type: string
                 type: object
               managementPolicies:
@@ -420,8 +418,7 @@ spec:
                       block.
                     type: object
                   type:
-                    description: 'The type of the schema. Valid values: OpenApi3 or
-                      JSONSchemaDraft4.'
+                    description: 'The type of the schema. Valid values: OpenApi3.'
                     type: string
                   version:
                     description: The version of the schema.

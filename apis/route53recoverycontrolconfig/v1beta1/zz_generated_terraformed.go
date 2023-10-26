@@ -81,12 +81,12 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Cluster
-func (tr *Cluster) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Cluster) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *ControlPanel) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ControlPanel
-func (tr *ControlPanel) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ControlPanel) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *RoutingControl) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this RoutingControl
-func (tr *RoutingControl) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RoutingControl) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *SafetyRule) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SafetyRule
-func (tr *SafetyRule) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SafetyRule) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

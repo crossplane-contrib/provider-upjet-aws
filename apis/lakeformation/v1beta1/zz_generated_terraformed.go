@@ -81,12 +81,12 @@ func (tr *DataLakeSettings) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DataLakeSettings
-func (tr *DataLakeSettings) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DataLakeSettings) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Permissions) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Permissions
-func (tr *Permissions) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Permissions) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Resource) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Resource
-func (tr *Resource) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Resource) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

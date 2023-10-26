@@ -30,7 +30,7 @@ spec:
   forProvider:
     computeCapacity:
     - desiredInstances: 1
-    imageName: Amazon-AppStream2-Sample-Image-03-11-2023
+    imageName: Amazon-AppStream2-Sample-Image-02-04-2019
     instanceType: stream.standard.small
     name: NAME
     region: us-west-1

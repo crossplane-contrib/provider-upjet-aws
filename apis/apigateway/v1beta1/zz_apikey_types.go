@@ -15,9 +15,6 @@ import (
 
 type APIKeyInitParameters struct {
 
-	// An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
-	CustomerID *string `json:"customerId,omitempty" tf:"customer_id,omitempty"`
-
 	// API key description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -38,9 +35,6 @@ type APIKeyObservation struct {
 
 	// Creation date of the API key
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
-
-	// An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
-	CustomerID *string `json:"customerId,omitempty" tf:"customer_id,omitempty"`
 
 	// API key description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -65,10 +59,6 @@ type APIKeyObservation struct {
 }
 
 type APIKeyParameters struct {
-
-	// An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
-	// +kubebuilder:validation:Optional
-	CustomerID *string `json:"customerId,omitempty" tf:"customer_id,omitempty"`
 
 	// API key description.
 	// +kubebuilder:validation:Optional

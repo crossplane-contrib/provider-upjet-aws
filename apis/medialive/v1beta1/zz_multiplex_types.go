@@ -19,7 +19,7 @@ type MultiplexInitParameters struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Multiplex settings. See Multiplex Settings for more details.
-	MultiplexSettings []MultiplexSettingsInitParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
+	MultiplexSettings []MultiplexMultiplexSettingsInitParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -29,6 +29,55 @@ type MultiplexInitParameters struct {
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type MultiplexMultiplexSettingsInitParameters struct {
+
+	// Maximum video buffer delay.
+	MaximumVideoBufferDelayMilliseconds *int64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
+
+	// Transport stream bit rate.
+	TransportStreamBitrate *int64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
+
+	// Unique ID for each multiplex.
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+
+	// Transport stream reserved bit rate.
+	TransportStreamReservedBitrate *int64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
+}
+
+type MultiplexMultiplexSettingsObservation struct {
+
+	// Maximum video buffer delay.
+	MaximumVideoBufferDelayMilliseconds *int64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
+
+	// Transport stream bit rate.
+	TransportStreamBitrate *int64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
+
+	// Unique ID for each multiplex.
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+
+	// Transport stream reserved bit rate.
+	TransportStreamReservedBitrate *int64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
+}
+
+type MultiplexMultiplexSettingsParameters struct {
+
+	// Maximum video buffer delay.
+	// +kubebuilder:validation:Optional
+	MaximumVideoBufferDelayMilliseconds *int64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
+
+	// Transport stream bit rate.
+	// +kubebuilder:validation:Optional
+	TransportStreamBitrate *int64 `json:"transportStreamBitrate" tf:"transport_stream_bitrate,omitempty"`
+
+	// Unique ID for each multiplex.
+	// +kubebuilder:validation:Optional
+	TransportStreamID *int64 `json:"transportStreamId" tf:"transport_stream_id,omitempty"`
+
+	// Transport stream reserved bit rate.
+	// +kubebuilder:validation:Optional
+	TransportStreamReservedBitrate *int64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
 }
 
 type MultiplexObservation struct {
@@ -42,7 +91,7 @@ type MultiplexObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Multiplex settings. See Multiplex Settings for more details.
-	MultiplexSettings []MultiplexSettingsObservation `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
+	MultiplexSettings []MultiplexMultiplexSettingsObservation `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -64,7 +113,7 @@ type MultiplexParameters struct {
 
 	// Multiplex settings. See Multiplex Settings for more details.
 	// +kubebuilder:validation:Optional
-	MultiplexSettings []MultiplexSettingsParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
+	MultiplexSettings []MultiplexMultiplexSettingsParameters `json:"multiplexSettings,omitempty" tf:"multiplex_settings,omitempty"`
 
 	// name of Multiplex.
 	// +kubebuilder:validation:Optional
@@ -82,55 +131,6 @@ type MultiplexParameters struct {
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type MultiplexSettingsInitParameters struct {
-
-	// Maximum video buffer delay.
-	MaximumVideoBufferDelayMilliseconds *int64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
-
-	// Transport stream bit rate.
-	TransportStreamBitrate *int64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
-
-	// Unique ID for each multiplex.
-	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
-
-	// Transport stream reserved bit rate.
-	TransportStreamReservedBitrate *int64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
-}
-
-type MultiplexSettingsObservation struct {
-
-	// Maximum video buffer delay.
-	MaximumVideoBufferDelayMilliseconds *int64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
-
-	// Transport stream bit rate.
-	TransportStreamBitrate *int64 `json:"transportStreamBitrate,omitempty" tf:"transport_stream_bitrate,omitempty"`
-
-	// Unique ID for each multiplex.
-	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
-
-	// Transport stream reserved bit rate.
-	TransportStreamReservedBitrate *int64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
-}
-
-type MultiplexSettingsParameters struct {
-
-	// Maximum video buffer delay.
-	// +kubebuilder:validation:Optional
-	MaximumVideoBufferDelayMilliseconds *int64 `json:"maximumVideoBufferDelayMilliseconds,omitempty" tf:"maximum_video_buffer_delay_milliseconds,omitempty"`
-
-	// Transport stream bit rate.
-	// +kubebuilder:validation:Optional
-	TransportStreamBitrate *int64 `json:"transportStreamBitrate" tf:"transport_stream_bitrate,omitempty"`
-
-	// Unique ID for each multiplex.
-	// +kubebuilder:validation:Optional
-	TransportStreamID *int64 `json:"transportStreamId" tf:"transport_stream_id,omitempty"`
-
-	// Transport stream reserved bit rate.
-	// +kubebuilder:validation:Optional
-	TransportStreamReservedBitrate *int64 `json:"transportStreamReservedBitrate,omitempty" tf:"transport_stream_reserved_bitrate,omitempty"`
 }
 
 // MultiplexSpec defines the desired state of Multiplex

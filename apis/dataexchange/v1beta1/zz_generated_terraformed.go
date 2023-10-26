@@ -81,12 +81,12 @@ func (tr *DataSet) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DataSet
-func (tr *DataSet) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DataSet) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Revision) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Revision
-func (tr *Revision) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Revision) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

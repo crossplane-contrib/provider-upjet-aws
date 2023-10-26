@@ -555,6 +555,22 @@ func (in *BudgetInitParameters) DeepCopyInto(out *BudgetInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CostFilters != nil {
+		in, out := &in.CostFilters, &out.CostFilters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.CostTypes != nil {
 		in, out := &in.CostTypes, &out.CostTypes
 		*out = make([]CostTypesInitParameters, len(*in))
@@ -677,6 +693,22 @@ func (in *BudgetObservation) DeepCopyInto(out *BudgetObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CostFilters != nil {
+		in, out := &in.CostFilters, &out.CostFilters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.CostTypes != nil {
 		in, out := &in.CostTypes, &out.CostTypes
 		*out = make([]CostTypesObservation, len(*in))
@@ -765,6 +797,22 @@ func (in *BudgetParameters) DeepCopyInto(out *BudgetParameters) {
 		*out = make([]CostFilterParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CostFilters != nil {
+		in, out := &in.CostFilters, &out.CostFilters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.CostTypes != nil {

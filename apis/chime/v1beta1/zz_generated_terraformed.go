@@ -81,12 +81,12 @@ func (tr *VoiceConnector) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VoiceConnector
-func (tr *VoiceConnector) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnector) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *VoiceConnectorGroup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VoiceConnectorGroup
-func (tr *VoiceConnectorGroup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnectorGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *VoiceConnectorLogging) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VoiceConnectorLogging
-func (tr *VoiceConnectorLogging) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnectorLogging) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *VoiceConnectorOrigination) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this VoiceConnectorOrigination
-func (tr *VoiceConnectorOrigination) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnectorOrigination) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *VoiceConnectorStreaming) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VoiceConnectorStreaming
-func (tr *VoiceConnectorStreaming) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnectorStreaming) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -651,12 +651,12 @@ func (tr *VoiceConnectorTermination) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this VoiceConnectorTermination
-func (tr *VoiceConnectorTermination) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnectorTermination) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -765,12 +765,12 @@ func (tr *VoiceConnectorTerminationCredentials) GetInitParameters() (map[string]
 }
 
 // GetInitParameters of this VoiceConnectorTerminationCredentials
-func (tr *VoiceConnectorTerminationCredentials) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VoiceConnectorTerminationCredentials) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

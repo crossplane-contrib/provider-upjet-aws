@@ -81,12 +81,12 @@ func (tr *Endpoint) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Endpoint
-func (tr *Endpoint) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Endpoint) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Rule) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Rule
-func (tr *Rule) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Rule) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *RuleAssociation) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this RuleAssociation
-func (tr *RuleAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RuleAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

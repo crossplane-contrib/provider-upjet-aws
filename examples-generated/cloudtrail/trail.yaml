@@ -4,15 +4,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudtrail/v1beta1/trail
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: foobar
+  name: foobar
 spec:
   forProvider:
     includeGlobalServiceEvents: false
     region: us-west-1
     s3BucketNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: foo
     s3KeyPrefix: prefix
 
 ---
@@ -24,8 +24,8 @@ metadata:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
     meta.upbound.io/example-id: cloudtrail/v1beta1/trail
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     forceDestroy: true
@@ -39,12 +39,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: cloudtrail/v1beta1/trail
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: foo
+  name: foo
 spec:
   forProvider:
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    policy: ${data.aws_iam_policy_document.example.json}
+        testing.upbound.io/example-name: foo
+    policy: ${data.aws_iam_policy_document.foo.json}
     region: us-west-1

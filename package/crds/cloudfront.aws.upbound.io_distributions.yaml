@@ -76,12 +76,6 @@ spec:
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
-                  continuousDeploymentPolicyId:
-                    description: Identifier of a continuous deployment policy. This
-                      argument should only be set on a production distribution. See
-                      the aws_cloudfront_continuous_deployment_policy resource for
-                      additional details.
-                    type: string
                   customErrorResponse:
                     description: One or more custom error response elements (multiples
                       allowed).
@@ -724,8 +718,8 @@ spec:
                                 type: integer
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
-                                  By default, AWS enforces an upper limit of 60. But
-                                  you can request an increase. Defaults to 5.
+                                  By default, AWS enforces a limit of 60. But you
+                                  can request an increase.
                                 format: int64
                                 type: integer
                               originProtocolPolicy:
@@ -734,8 +728,8 @@ spec:
                                 type: string
                               originReadTimeout:
                                 description: The Custom Read timeout, in seconds.
-                                  By default, AWS enforces an upper limit of 60. But
-                                  you can request an increase. Defaults to 30.
+                                  By default, AWS enforces a limit of 60. But you
+                                  can request an increase.
                                 format: int64
                                 type: integer
                               originSslProtocols:
@@ -843,10 +837,10 @@ spec:
                             bucket or your custom origin.
                           type: string
                         originShield:
-                          description: CloudFront Origin Shield configuration information.
-                            Using Origin Shield can help reduce the load on your origin.
-                            For more information, see Using Origin Shield in the Amazon
-                            CloudFront Developer Guide.
+                          description: The CloudFront Origin Shield configuration
+                            information. Using Origin Shield can help reduce the load
+                            on your origin. For more information, see Using Origin
+                            Shield in the Amazon CloudFront Developer Guide.
                           items:
                             properties:
                               enabled:
@@ -862,7 +856,7 @@ spec:
                             type: object
                           type: array
                         s3OriginConfig:
-                          description: CloudFront S3 origin configuration information.
+                          description: The CloudFront S3 origin configuration information.
                             If a custom origin is required, use custom_origin_config
                             instead.
                           items:
@@ -1028,10 +1022,6 @@ spec:
                     description: 'If this is set, the distribution needs to be deleted
                       manually afterwards. Default: false.'
                     type: boolean
-                  staging:
-                    description: A Boolean that indicates whether this is a staging
-                      distribution. Defaults to false.
-                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -1121,12 +1111,6 @@ spec:
                     type: array
                   comment:
                     description: Any comments you want to include about the distribution.
-                    type: string
-                  continuousDeploymentPolicyId:
-                    description: Identifier of a continuous deployment policy. This
-                      argument should only be set on a production distribution. See
-                      the aws_cloudfront_continuous_deployment_policy resource for
-                      additional details.
                     type: string
                   customErrorResponse:
                     description: One or more custom error response elements (multiples
@@ -1604,8 +1588,8 @@ spec:
                                 type: integer
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
-                                  By default, AWS enforces an upper limit of 60. But
-                                  you can request an increase. Defaults to 5.
+                                  By default, AWS enforces a limit of 60. But you
+                                  can request an increase.
                                 format: int64
                                 type: integer
                               originProtocolPolicy:
@@ -1614,8 +1598,8 @@ spec:
                                 type: string
                               originReadTimeout:
                                 description: The Custom Read timeout, in seconds.
-                                  By default, AWS enforces an upper limit of 60. But
-                                  you can request an increase. Defaults to 30.
+                                  By default, AWS enforces a limit of 60. But you
+                                  can request an increase.
                                 format: int64
                                 type: integer
                               originSslProtocols:
@@ -1641,10 +1625,10 @@ spec:
                             bucket or your custom origin.
                           type: string
                         originShield:
-                          description: CloudFront Origin Shield configuration information.
-                            Using Origin Shield can help reduce the load on your origin.
-                            For more information, see Using Origin Shield in the Amazon
-                            CloudFront Developer Guide.
+                          description: The CloudFront Origin Shield configuration
+                            information. Using Origin Shield can help reduce the load
+                            on your origin. For more information, see Using Origin
+                            Shield in the Amazon CloudFront Developer Guide.
                           items:
                             properties:
                               enabled:
@@ -1660,7 +1644,7 @@ spec:
                             type: object
                           type: array
                         s3OriginConfig:
-                          description: CloudFront S3 origin configuration information.
+                          description: The CloudFront S3 origin configuration information.
                             If a custom origin is required, use custom_origin_config
                             instead.
                           items:
@@ -1736,10 +1720,6 @@ spec:
                   retainOnDelete:
                     description: 'If this is set, the distribution needs to be deleted
                       manually afterwards. Default: false.'
-                    type: boolean
-                  staging:
-                    description: A Boolean that indicates whether this is a staging
-                      distribution. Defaults to false.
                     type: boolean
                   tags:
                     additionalProperties:
@@ -2009,12 +1989,6 @@ spec:
                     type: string
                   comment:
                     description: Any comments you want to include about the distribution.
-                    type: string
-                  continuousDeploymentPolicyId:
-                    description: Identifier of a continuous deployment policy. This
-                      argument should only be set on a production distribution. See
-                      the aws_cloudfront_continuous_deployment_policy resource for
-                      additional details.
                     type: string
                   customErrorResponse:
                     description: One or more custom error response elements (multiples
@@ -2521,8 +2495,8 @@ spec:
                                 type: integer
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
-                                  By default, AWS enforces an upper limit of 60. But
-                                  you can request an increase. Defaults to 5.
+                                  By default, AWS enforces a limit of 60. But you
+                                  can request an increase.
                                 format: int64
                                 type: integer
                               originProtocolPolicy:
@@ -2531,8 +2505,8 @@ spec:
                                 type: string
                               originReadTimeout:
                                 description: The Custom Read timeout, in seconds.
-                                  By default, AWS enforces an upper limit of 60. But
-                                  you can request an increase. Defaults to 30.
+                                  By default, AWS enforces a limit of 60. But you
+                                  can request an increase.
                                 format: int64
                                 type: integer
                               originSslProtocols:
@@ -2562,10 +2536,10 @@ spec:
                             bucket or your custom origin.
                           type: string
                         originShield:
-                          description: CloudFront Origin Shield configuration information.
-                            Using Origin Shield can help reduce the load on your origin.
-                            For more information, see Using Origin Shield in the Amazon
-                            CloudFront Developer Guide.
+                          description: The CloudFront Origin Shield configuration
+                            information. Using Origin Shield can help reduce the load
+                            on your origin. For more information, see Using Origin
+                            Shield in the Amazon CloudFront Developer Guide.
                           items:
                             properties:
                               enabled:
@@ -2581,7 +2555,7 @@ spec:
                             type: object
                           type: array
                         s3OriginConfig:
-                          description: CloudFront S3 origin configuration information.
+                          description: The CloudFront S3 origin configuration information.
                             If a custom origin is required, use custom_origin_config
                             instead.
                           items:
@@ -2662,10 +2636,6 @@ spec:
                   retainOnDelete:
                     description: 'If this is set, the distribution needs to be deleted
                       manually afterwards. Default: false.'
-                    type: boolean
-                  staging:
-                    description: A Boolean that indicates whether this is a staging
-                      distribution. Defaults to false.
                     type: boolean
                   status:
                     description: Current status of the distribution. Deployed if the

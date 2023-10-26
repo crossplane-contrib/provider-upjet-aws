@@ -21,9 +21,6 @@ type CommandInitParameters struct {
 	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
-	// In Ray jobs, runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Working with Ray jobs in the Glue Developer Guide.
-	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
-
 	// Specifies the S3 path to a script that executes a job.
 	ScriptLocation *string `json:"scriptLocation,omitempty" tf:"script_location,omitempty"`
 }
@@ -35,9 +32,6 @@ type CommandObservation struct {
 
 	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
-
-	// In Ray jobs, runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Working with Ray jobs in the Glue Developer Guide.
-	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Specifies the S3 path to a script that executes a job.
 	ScriptLocation *string `json:"scriptLocation,omitempty" tf:"script_location,omitempty"`
@@ -52,10 +46,6 @@ type CommandParameters struct {
 	// The Python version being used to execute a Python shell job. Allowed values are 2, 3 or 3.9. Version 3 refers to Python 3.6.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
-
-	// In Ray jobs, runtime is used to specify the versions of Ray, Python and additional libraries available in your environment. This field is not used in other job types. For supported runtime environment values, see Working with Ray jobs in the Glue Developer Guide.
-	// +kubebuilder:validation:Optional
-	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Specifies the S3 path to a script that executes a job.
 	// +kubebuilder:validation:Optional
@@ -101,7 +91,7 @@ type JobInitParameters struct {
 	// –  Execution property of the job. Defined below.
 	ExecutionProperty []ExecutionPropertyInitParameters `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
 
-	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
+	// The version of glue to use, for example "1.0". For information about available versions, see the AWS Glue Release Notes.
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
 
 	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
@@ -128,7 +118,7 @@ type JobInitParameters struct {
 	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
@@ -155,7 +145,7 @@ type JobObservation struct {
 	// –  Execution property of the job. Defined below.
 	ExecutionProperty []ExecutionPropertyObservation `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
 
-	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
+	// The version of glue to use, for example "1.0". For information about available versions, see the AWS Glue Release Notes.
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
 
 	// Job name
@@ -191,7 +181,7 @@ type JobObservation struct {
 	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }
 
@@ -221,7 +211,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionProperty []ExecutionPropertyParameters `json:"executionProperty,omitempty" tf:"execution_property,omitempty"`
 
-	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
+	// The version of glue to use, for example "1.0". For information about available versions, see the AWS Glue Release Notes.
 	// +kubebuilder:validation:Optional
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
 
@@ -276,7 +266,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs.
+	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
 	// +kubebuilder:validation:Optional
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
 }

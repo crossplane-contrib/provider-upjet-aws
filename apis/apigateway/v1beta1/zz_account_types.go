@@ -18,14 +18,8 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
-	// The version of the API keys used for the account.
-	APIKeyVersion *string `json:"apiKeyVersion,omitempty" tf:"api_key_version,omitempty"`
-
 	// ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
 	CloudwatchRoleArn *string `json:"cloudwatchRoleArn,omitempty" tf:"cloudwatch_role_arn,omitempty"`
-
-	// A list of features supported for the account.
-	Features []*string `json:"features,omitempty" tf:"features,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

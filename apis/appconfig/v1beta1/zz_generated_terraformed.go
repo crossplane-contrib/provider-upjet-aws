@@ -81,12 +81,12 @@ func (tr *Application) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Application
-func (tr *Application) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Application) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *ConfigurationProfile) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConfigurationProfile
-func (tr *ConfigurationProfile) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConfigurationProfile) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Deployment) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Deployment
-func (tr *Deployment) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Deployment) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *DeploymentStrategy) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DeploymentStrategy
-func (tr *DeploymentStrategy) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DeploymentStrategy) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *Extension) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Extension
-func (tr *Extension) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Extension) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -651,12 +651,12 @@ func (tr *ExtensionAssociation) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ExtensionAssociation
-func (tr *ExtensionAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ExtensionAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -765,12 +765,12 @@ func (tr *HostedConfigurationVersion) GetInitParameters() (map[string]any, error
 }
 
 // GetInitParameters of this HostedConfigurationVersion
-func (tr *HostedConfigurationVersion) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *HostedConfigurationVersion) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

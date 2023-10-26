@@ -15,20 +15,11 @@ import (
 
 type NATGatewayInitParameters_2 struct {
 
-	// Connectivity type for the NAT Gateway. Valid values are private and public. Defaults to public.
+	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
-	// The private IPv4 address to assign to the NAT Gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
+	// The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
-
-	// A list of secondary allocation EIP IDs for this NAT Gateway.
-	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
-
-	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
-	SecondaryPrivateIPAddressCount *int64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
-
-	// A list of secondary private IPv4 addresses to assign to the NAT Gateway.
-	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -36,37 +27,28 @@ type NATGatewayInitParameters_2 struct {
 
 type NATGatewayObservation_2 struct {
 
-	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
+	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
-	// The association ID of the Elastic IP address that's associated with the NAT Gateway. Only available when connectivity_type is public.
+	// The association ID of the Elastic IP address that's associated with the NAT gateway. Only available when connectivity_type is public.
 	AssociationID *string `json:"associationId,omitempty" tf:"association_id,omitempty"`
 
-	// Connectivity type for the NAT Gateway. Valid values are private and public. Defaults to public.
+	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
 	// The ID of the NAT Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the network interface associated with the NAT Gateway.
+	// The ID of the network interface associated with the NAT gateway.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// The private IPv4 address to assign to the NAT Gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
+	// The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
-	// The Elastic IP address associated with the NAT Gateway.
+	// The Elastic IP address associated with the NAT gateway.
 	PublicIP *string `json:"publicIp,omitempty" tf:"public_ip,omitempty"`
 
-	// A list of secondary allocation EIP IDs for this NAT Gateway.
-	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
-
-	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
-	SecondaryPrivateIPAddressCount *int64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
-
-	// A list of secondary private IPv4 addresses to assign to the NAT Gateway.
-	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
-
-	// The Subnet ID of the subnet in which to place the NAT Gateway.
+	// The Subnet ID of the subnet in which to place the gateway.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -78,7 +60,7 @@ type NATGatewayObservation_2 struct {
 
 type NATGatewayParameters_2 struct {
 
-	// The Allocation ID of the Elastic IP address for the NAT Gateway. Required for connectivity_type of public.
+	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -92,11 +74,11 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
 
-	// Connectivity type for the NAT Gateway. Valid values are private and public. Defaults to public.
+	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	// +kubebuilder:validation:Optional
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
-	// The private IPv4 address to assign to the NAT Gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
+	// The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
@@ -105,19 +87,7 @@ type NATGatewayParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A list of secondary allocation EIP IDs for this NAT Gateway.
-	// +kubebuilder:validation:Optional
-	SecondaryAllocationIds []*string `json:"secondaryAllocationIds,omitempty" tf:"secondary_allocation_ids,omitempty"`
-
-	// [Private NAT Gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT Gateway.
-	// +kubebuilder:validation:Optional
-	SecondaryPrivateIPAddressCount *int64 `json:"secondaryPrivateIpAddressCount,omitempty" tf:"secondary_private_ip_address_count,omitempty"`
-
-	// A list of secondary private IPv4 addresses to assign to the NAT Gateway.
-	// +kubebuilder:validation:Optional
-	SecondaryPrivateIPAddresses []*string `json:"secondaryPrivateIpAddresses,omitempty" tf:"secondary_private_ip_addresses,omitempty"`
-
-	// The Subnet ID of the subnet in which to place the NAT Gateway.
+	// The Subnet ID of the subnet in which to place the gateway.
 	// +crossplane:generate:reference:type=Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

@@ -10,8 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta12 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/elb/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/elb/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/elbv2/v1beta1"
 	v1beta13 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta14 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
@@ -25,6 +25,22 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ALBTargetGroupArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.ALBTargetGroupArnRef,
+		Selector:     mg.Spec.ForProvider.ALBTargetGroupArnSelector,
+		To: reference.To{
+			List:    &v1beta1.LBTargetGroupList{},
+			Managed: &v1beta1.LBTargetGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ALBTargetGroupArn")
+	}
+	mg.Spec.ForProvider.ALBTargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ALBTargetGroupArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutoscalingGroupName),
@@ -48,8 +64,8 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.ELBRef,
 		Selector:     mg.Spec.ForProvider.ELBSelector,
 		To: reference.To{
-			List:    &v1beta1.ELBList{},
-			Managed: &v1beta1.ELB{},
+			List:    &v1beta11.ELBList{},
+			Managed: &v1beta11.ELB{},
 		},
 	})
 	if err != nil {
@@ -64,8 +80,8 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.LBTargetGroupArnRef,
 		Selector:     mg.Spec.ForProvider.LBTargetGroupArnSelector,
 		To: reference.To{
-			List:    &v1beta11.LBTargetGroupList{},
-			Managed: &v1beta11.LBTargetGroup{},
+			List:    &v1beta1.LBTargetGroupList{},
+			Managed: &v1beta1.LBTargetGroup{},
 		},
 	})
 	if err != nil {

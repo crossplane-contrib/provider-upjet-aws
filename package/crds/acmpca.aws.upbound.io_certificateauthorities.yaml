@@ -873,6 +873,10 @@ spec:
                       available after the certificate authority certificate has been
                       imported.
                     type: string
+                  status:
+                    description: (Deprecated use the enabled attribute instead) Status
+                      of the certificate authority.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

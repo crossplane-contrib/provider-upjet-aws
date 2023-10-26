@@ -149,21 +149,12 @@ type PublicAccessBlockParameters struct {
 }
 
 type RegionInitParameters struct {
-
-	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
-	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 }
 
 type RegionObservation struct {
 
 	// The name of the associated bucket for the Region.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
-
-	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
-	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
-
-	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
-	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RegionParameters struct {
@@ -173,10 +164,6 @@ type RegionParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
-
-	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
-	// +kubebuilder:validation:Optional
-	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional

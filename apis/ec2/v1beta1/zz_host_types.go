@@ -15,9 +15,6 @@ import (
 
 type HostInitParameters struct {
 
-	// The ID of the Outpost hardware asset on which to allocate the Dedicated Hosts. This parameter is supported only if you specify OutpostArn. If you are allocating the Dedicated Hosts in a Region, omit this parameter.
-	AssetID *string `json:"assetId,omitempty" tf:"asset_id,omitempty"`
-
 	// Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID. Valid values: on, off. Default: on.
 	AutoPlacement *string `json:"autoPlacement,omitempty" tf:"auto_placement,omitempty"`
 
@@ -44,9 +41,6 @@ type HostObservation struct {
 
 	// The ARN of the Dedicated Host.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-
-	// The ID of the Outpost hardware asset on which to allocate the Dedicated Hosts. This parameter is supported only if you specify OutpostArn. If you are allocating the Dedicated Hosts in a Region, omit this parameter.
-	AssetID *string `json:"assetId,omitempty" tf:"asset_id,omitempty"`
 
 	// Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID. Valid values: on, off. Default: on.
 	AutoPlacement *string `json:"autoPlacement,omitempty" tf:"auto_placement,omitempty"`
@@ -80,10 +74,6 @@ type HostObservation struct {
 }
 
 type HostParameters struct {
-
-	// The ID of the Outpost hardware asset on which to allocate the Dedicated Hosts. This parameter is supported only if you specify OutpostArn. If you are allocating the Dedicated Hosts in a Region, omit this parameter.
-	// +kubebuilder:validation:Optional
-	AssetID *string `json:"assetId,omitempty" tf:"asset_id,omitempty"`
 
 	// Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID. Valid values: on, off. Default: on.
 	// +kubebuilder:validation:Optional

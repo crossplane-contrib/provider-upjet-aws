@@ -81,12 +81,12 @@ func (tr *SigningJob) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SigningJob
-func (tr *SigningJob) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SigningJob) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *SigningProfile) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SigningProfile
-func (tr *SigningProfile) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SigningProfile) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *SigningProfilePermission) GetInitParameters() (map[string]any, error) 
 }
 
 // GetInitParameters of this SigningProfilePermission
-func (tr *SigningProfilePermission) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SigningProfilePermission) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

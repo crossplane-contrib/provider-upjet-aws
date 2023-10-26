@@ -479,7 +479,7 @@ spec:
                       and the Cognito service to communicate about the developer provider.
                     type: string
                   id:
-                    description: An identity pool ID, e.g. us-west-2:1a234567-8901-234b-5cde-f6789g01h2i3.
+                    description: An identity pool ID, e.g. us-west-2_abc123.
                     type: string
                   identityPoolName:
                     description: The Cognito Identity Pool name.

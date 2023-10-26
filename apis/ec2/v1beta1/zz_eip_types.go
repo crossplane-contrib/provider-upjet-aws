@@ -24,9 +24,6 @@ type EIPInitParameters struct {
 	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
 
-	// Indicates if this EIP is for use in VPC (vpc).
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
-
 	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
 
@@ -37,7 +34,7 @@ type EIPInitParameters struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Boolean if the EIP is in a VPC or not. Use domain instead.
+	// Boolean if the EIP is in a VPC or not.
 	// Defaults to true unless the region supports EC2-Classic.
 	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
@@ -65,7 +62,7 @@ type EIPObservation struct {
 	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
 
-	// Indicates if this EIP is for use in VPC (vpc).
+	// Indicates if this EIP is for use in VPC (vpc) or EC2-Classic (standard).
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Contains the EIP allocation ID.
@@ -102,7 +99,7 @@ type EIPObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Boolean if the EIP is in a VPC or not. Use domain instead.
+	// Boolean if the EIP is in a VPC or not.
 	// Defaults to true unless the region supports EC2-Classic.
 	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
@@ -120,10 +117,6 @@ type EIPParameters struct {
 	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
 	// +kubebuilder:validation:Optional
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
-
-	// Indicates if this EIP is for use in VPC (vpc).
-	// +kubebuilder:validation:Optional
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// EC2 instance ID.
 	// +crossplane:generate:reference:type=Instance
@@ -169,7 +162,7 @@ type EIPParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Boolean if the EIP is in a VPC or not. Use domain instead.
+	// Boolean if the EIP is in a VPC or not.
 	// Defaults to true unless the region supports EC2-Classic.
 	// +kubebuilder:validation:Optional
 	VPC *bool `json:"vpc,omitempty" tf:"vpc,omitempty"`

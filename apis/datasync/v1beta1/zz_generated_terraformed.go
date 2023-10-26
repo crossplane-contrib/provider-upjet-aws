@@ -81,12 +81,12 @@ func (tr *LocationS3) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this LocationS3
-func (tr *LocationS3) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *LocationS3) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Task) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Task
-func (tr *Task) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Task) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

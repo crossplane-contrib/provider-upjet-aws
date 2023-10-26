@@ -91,9 +91,6 @@ type GraphQLAPIInitParameters struct {
 	// Amazon Cognito User Pool configuration. Defined below.
 	UserPoolConfig []GraphQLAPIUserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 
-	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
-	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
-
 	// Whether tracing with X-ray is enabled. Defaults to false.
 	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
 }
@@ -177,9 +174,6 @@ type GraphQLAPIObservation struct {
 
 	// Amazon Cognito User Pool configuration. Defined below.
 	UserPoolConfig []GraphQLAPIUserPoolConfigObservation `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
-
-	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
-	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// Whether tracing with X-ray is enabled. Defaults to false.
 	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
@@ -276,10 +270,6 @@ type GraphQLAPIParameters struct {
 	// Amazon Cognito User Pool configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig []GraphQLAPIUserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
-
-	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
-	// +kubebuilder:validation:Optional
-	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// Whether tracing with X-ray is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional

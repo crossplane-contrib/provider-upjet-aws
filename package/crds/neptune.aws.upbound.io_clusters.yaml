@@ -566,9 +566,7 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a Neptune cluster snapshot, or the ARN when specifying a Neptune
-                      snapshot. Automated snapshots should not be used for this attribute,
-                      unless from a different cluster. Automated snapshots are deleted
-                      as part of cluster destruction when the resource is replaced.
+                      snapshot.
                     type: string
                   snapshotIdentifierRef:
                     description: Reference to a ClusterSnapshot to populate snapshotIdentifier.
@@ -1176,9 +1174,7 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a Neptune cluster snapshot, or the ARN when specifying a Neptune
-                      snapshot. Automated snapshots should not be used for this attribute,
-                      unless from a different cluster. Automated snapshots are deleted
-                      as part of cluster destruction when the resource is replaced.
+                      snapshot.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the Neptune cluster is encrypted.

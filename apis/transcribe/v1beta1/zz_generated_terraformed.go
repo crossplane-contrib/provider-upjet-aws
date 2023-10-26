@@ -81,12 +81,12 @@ func (tr *LanguageModel) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this LanguageModel
-func (tr *LanguageModel) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *LanguageModel) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Vocabulary) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Vocabulary
-func (tr *Vocabulary) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Vocabulary) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *VocabularyFilter) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VocabularyFilter
-func (tr *VocabularyFilter) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VocabularyFilter) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

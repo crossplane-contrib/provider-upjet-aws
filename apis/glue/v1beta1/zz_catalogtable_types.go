@@ -18,9 +18,6 @@ type CatalogTableInitParameters struct {
 	// Description of the table.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Configuration block for open table formats. See open_table_format_input below.
-	OpenTableFormatInput []OpenTableFormatInputInitParameters `json:"openTableFormatInput,omitempty" tf:"open_table_format_input,omitempty"`
-
 	// Owner of the table.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
@@ -68,9 +65,6 @@ type CatalogTableObservation struct {
 
 	// Catalog ID, Database name and of the name table.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Configuration block for open table formats. See open_table_format_input below.
-	OpenTableFormatInput []OpenTableFormatInputObservation `json:"openTableFormatInput,omitempty" tf:"open_table_format_input,omitempty"`
 
 	// Owner of the table.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
@@ -125,10 +119,6 @@ type CatalogTableParameters struct {
 	// Description of the table.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Configuration block for open table formats. See open_table_format_input below.
-	// +kubebuilder:validation:Optional
-	OpenTableFormatInput []OpenTableFormatInputParameters `json:"openTableFormatInput,omitempty" tf:"open_table_format_input,omitempty"`
 
 	// Owner of the table.
 	// +kubebuilder:validation:Optional
@@ -223,54 +213,6 @@ type ColumnsParameters struct {
 	// Datatype of data in the Column.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type IcebergInputInitParameters struct {
-
-	// A required metadata operation. Can only be set to CREATE.
-	MetadataOperation *string `json:"metadataOperation,omitempty" tf:"metadata_operation,omitempty"`
-
-	// The table version for the Iceberg table. Defaults to 2.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type IcebergInputObservation struct {
-
-	// A required metadata operation. Can only be set to CREATE.
-	MetadataOperation *string `json:"metadataOperation,omitempty" tf:"metadata_operation,omitempty"`
-
-	// The table version for the Iceberg table. Defaults to 2.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type IcebergInputParameters struct {
-
-	// A required metadata operation. Can only be set to CREATE.
-	// +kubebuilder:validation:Optional
-	MetadataOperation *string `json:"metadataOperation" tf:"metadata_operation,omitempty"`
-
-	// The table version for the Iceberg table. Defaults to 2.
-	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type OpenTableFormatInputInitParameters struct {
-
-	// Configuration block for iceberg table config. See iceberg_input below.
-	IcebergInput []IcebergInputInitParameters `json:"icebergInput,omitempty" tf:"iceberg_input,omitempty"`
-}
-
-type OpenTableFormatInputObservation struct {
-
-	// Configuration block for iceberg table config. See iceberg_input below.
-	IcebergInput []IcebergInputObservation `json:"icebergInput,omitempty" tf:"iceberg_input,omitempty"`
-}
-
-type OpenTableFormatInputParameters struct {
-
-	// Configuration block for iceberg table config. See iceberg_input below.
-	// +kubebuilder:validation:Optional
-	IcebergInput []IcebergInputParameters `json:"icebergInput" tf:"iceberg_input,omitempty"`
 }
 
 type PartitionIndexInitParameters struct {

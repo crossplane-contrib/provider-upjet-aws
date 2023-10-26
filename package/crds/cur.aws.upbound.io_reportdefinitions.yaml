@@ -76,8 +76,7 @@ spec:
                       type: string
                     type: array
                   additionalSchemaElements:
-                    description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                    description: 'A list of schema elements. Valid values are: RESOURCES.'
                     items:
                       type: string
                     type: array
@@ -216,8 +215,7 @@ spec:
                       type: string
                     type: array
                   additionalSchemaElements:
-                    description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                    description: 'A list of schema elements. Valid values are: RESOURCES.'
                     items:
                       type: string
                     type: array
@@ -446,8 +444,7 @@ spec:
                       type: string
                     type: array
                   additionalSchemaElements:
-                    description: 'A list of schema elements. Valid values are: RESOURCES,
-                      SPLIT_COST_ALLOCATION_DATA.'
+                    description: 'A list of schema elements. Valid values are: RESOURCES.'
                     items:
                       type: string
                     type: array

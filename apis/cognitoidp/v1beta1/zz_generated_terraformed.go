@@ -81,12 +81,12 @@ func (tr *IdentityProvider) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this IdentityProvider
-func (tr *IdentityProvider) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *IdentityProvider) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *ResourceServer) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ResourceServer
-func (tr *ResourceServer) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ResourceServer) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *RiskConfiguration) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this RiskConfiguration
-func (tr *RiskConfiguration) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RiskConfiguration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *User) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this User
-func (tr *User) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *User) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *UserGroup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this UserGroup
-func (tr *UserGroup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *UserGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -651,12 +651,12 @@ func (tr *UserInGroup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this UserInGroup
-func (tr *UserInGroup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *UserInGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -765,12 +765,12 @@ func (tr *UserPool) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this UserPool
-func (tr *UserPool) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *UserPool) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -883,12 +883,12 @@ func (tr *UserPoolDomain) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this UserPoolDomain
-func (tr *UserPoolDomain) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *UserPoolDomain) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -997,12 +997,12 @@ func (tr *UserPoolUICustomization) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this UserPoolUICustomization
-func (tr *UserPoolUICustomization) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *UserPoolUICustomization) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

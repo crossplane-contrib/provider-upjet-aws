@@ -86,7 +86,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
+                      to engine_type of ActiveMQ only. Detailed below.
                     items:
                       properties:
                         id:
@@ -535,10 +535,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                        replicationUser:
-                          description: Whether to set set replication user. Defaults
-                            to false.
-                          type: boolean
                         username:
                           description: Username of the user.
                           type: string
@@ -581,7 +577,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
+                      to engine_type of ActiveMQ only. Detailed below.
                     items:
                       properties:
                         revision:
@@ -743,10 +739,6 @@ spec:
                           items:
                             type: string
                           type: array
-                        replicationUser:
-                          description: Whether to set set replication user. Defaults
-                            to false.
-                          type: boolean
                         username:
                           description: Username of the user.
                           type: string
@@ -961,7 +953,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
+                      to engine_type of ActiveMQ only. Detailed below.
                     items:
                       properties:
                         id:
@@ -1169,10 +1161,6 @@ spec:
                           items:
                             type: string
                           type: array
-                        replicationUser:
-                          description: Whether to set set replication user. Defaults
-                            to false.
-                          type: boolean
                         username:
                           description: Username of the user.
                           type: string

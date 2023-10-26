@@ -277,6 +277,35 @@ type HTTPRouteMatchHeaderParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
+type HTTPRouteMatchPathInitParameters struct {
+
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+}
+
+type HTTPRouteMatchPathObservation struct {
+
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+}
+
+type HTTPRouteMatchPathParameters struct {
+
+	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
+	// +kubebuilder:validation:Optional
+	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
+
+	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
+	// +kubebuilder:validation:Optional
+	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
+}
+
 type HTTPRouteMatchQueryParameterInitParameters struct {
 
 	// Criteria for determining an gRPC request match.
@@ -1378,7 +1407,7 @@ type SpecHTTPRouteMatchInitParameters struct {
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Client request path to match on.
-	Path []SpecHTTPRouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+	Path []HTTPRouteMatchPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
 	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -1402,7 +1431,7 @@ type SpecHTTPRouteMatchObservation struct {
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Client request path to match on.
-	Path []SpecHTTPRouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
+	Path []HTTPRouteMatchPathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
 	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -1429,7 +1458,7 @@ type SpecHTTPRouteMatchParameters struct {
 
 	// Client request path to match on.
 	// +kubebuilder:validation:Optional
-	Path []SpecHTTPRouteMatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
+	Path []HTTPRouteMatchPathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number to match from the request.
 	// +kubebuilder:validation:Optional
@@ -1446,35 +1475,6 @@ type SpecHTTPRouteMatchParameters struct {
 	// Client request header scheme to match on. Valid values: http, https.
 	// +kubebuilder:validation:Optional
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
-}
-
-type SpecHTTPRouteMatchPathInitParameters struct {
-
-	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
-	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
-
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
-	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
-}
-
-type SpecHTTPRouteMatchPathObservation struct {
-
-	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
-	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
-
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
-	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
-}
-
-type SpecHTTPRouteMatchPathParameters struct {
-
-	// Value sent by the client must match the specified value exactly. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Optional
-	Exact *string `json:"exact,omitempty" tf:"exact,omitempty"`
-
-	// Value sent by the client must include the specified characters. Must be between 1 and 255 characters in length.
-	// +kubebuilder:validation:Optional
-	Regex *string `json:"regex,omitempty" tf:"regex,omitempty"`
 }
 
 type SpecHTTPRouteObservation struct {

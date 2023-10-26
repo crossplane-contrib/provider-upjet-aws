@@ -81,12 +81,12 @@ func (tr *Association) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Association
-func (tr *Association) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Association) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *LicenseConfiguration) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this LicenseConfiguration
-func (tr *LicenseConfiguration) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *LicenseConfiguration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

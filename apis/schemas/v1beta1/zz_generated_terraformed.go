@@ -81,12 +81,12 @@ func (tr *Discoverer) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Discoverer
-func (tr *Discoverer) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Discoverer) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Registry) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Registry
-func (tr *Registry) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Registry) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Schema) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Schema
-func (tr *Schema) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Schema) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

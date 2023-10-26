@@ -23,9 +23,6 @@ type ProvisionedConcurrencyConfigInitParameters struct {
 
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
-
-	// Whether to retain the provisoned concurrency configuration upon destruction. Defaults to false. If set to true, the resource in simply removed from state instead.
-	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
 type ProvisionedConcurrencyConfigObservation struct {
@@ -33,7 +30,7 @@ type ProvisionedConcurrencyConfigObservation struct {
 	// Name or Amazon Resource Name (ARN) of the Lambda Function.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Lambda Function name and qualifier separated by a comma (,).
+	// Lambda Function name and qualifier separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amount of capacity to allocate. Must be greater than or equal to 1.
@@ -41,9 +38,6 @@ type ProvisionedConcurrencyConfigObservation struct {
 
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
-
-	// Whether to retain the provisoned concurrency configuration upon destruction. Defaults to false. If set to true, the resource in simply removed from state instead.
-	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
 type ProvisionedConcurrencyConfigParameters struct {
@@ -64,10 +58,6 @@ type ProvisionedConcurrencyConfigParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
-
-	// Whether to retain the provisoned concurrency configuration upon destruction. Defaults to false. If set to true, the resource in simply removed from state instead.
-	// +kubebuilder:validation:Optional
-	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 }
 
 // ProvisionedConcurrencyConfigSpec defines the desired state of ProvisionedConcurrencyConfig

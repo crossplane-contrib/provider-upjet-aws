@@ -141,9 +141,6 @@ type ObjectLambdaAccessPointObservation struct {
 	// The AWS account ID for the owner of the bucket for which you want to create an Object Lambda Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Alias for the S3 Object Lambda Access Point.
-	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
-
 	// Amazon Resource Name (ARN) of the Object Lambda Access Point.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 

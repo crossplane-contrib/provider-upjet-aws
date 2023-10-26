@@ -81,12 +81,12 @@ func (tr *Broker) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Broker
-func (tr *Broker) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Broker) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Configuration) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Configuration
-func (tr *Configuration) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Configuration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

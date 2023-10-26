@@ -15,7 +15,7 @@ import (
 
 type TransitGatewayConnectInitParameters struct {
 
-	// The tunnel protocol. Valid values: gre. Default is gre.
+	// The tunnel protocol. Valida values: gre. Default is gre.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Key-value map of resource tags.
@@ -33,7 +33,7 @@ type TransitGatewayConnectObservation struct {
 	// EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The tunnel protocol. Valid values: gre. Default is gre.
+	// The tunnel protocol. Valida values: gre. Default is gre.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Key-value map of resource tags.
@@ -57,7 +57,7 @@ type TransitGatewayConnectObservation struct {
 
 type TransitGatewayConnectParameters struct {
 
-	// The tunnel protocol. Valid values: gre. Default is gre.
+	// The tunnel protocol. Valida values: gre. Default is gre.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 

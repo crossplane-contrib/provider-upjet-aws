@@ -81,12 +81,12 @@ func (tr *CloudFormationStack) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this CloudFormationStack
-func (tr *CloudFormationStack) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *CloudFormationStack) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

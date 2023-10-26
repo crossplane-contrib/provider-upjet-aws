@@ -9,9 +9,9 @@ metadata:
 spec:
   forProvider:
     key: testkey
-    provider: ${aws.replica}
+    provider: aws.replica
     region: us-west-1
-    resourceArn: ${replace(aws_dynamodb_table.example.arn, data.aws_region.current.name,
+    resourceArn: ${replace(aws_dynamodb_table.test.arn, data.aws_region.current.name,
       data.aws_region.replica.name)}
     value: testvalue
 

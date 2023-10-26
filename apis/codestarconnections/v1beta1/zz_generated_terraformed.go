@@ -81,12 +81,12 @@ func (tr *Connection) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Connection
-func (tr *Connection) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Connection) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Host) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Host
-func (tr *Host) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Host) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

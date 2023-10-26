@@ -9,6 +9,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	channel "github.com/upbound/provider-aws/internal/controller/medialive/channel"
 	input "github.com/upbound/provider-aws/internal/controller/medialive/input"
 	inputsecuritygroup "github.com/upbound/provider-aws/internal/controller/medialive/inputsecuritygroup"
 	multiplex "github.com/upbound/provider-aws/internal/controller/medialive/multiplex"
@@ -18,6 +19,7 @@ import (
 // the supplied manager.
 func Setup_medialive(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		channel.Setup,
 		input.Setup,
 		inputsecuritygroup.Setup,
 		multiplex.Setup,

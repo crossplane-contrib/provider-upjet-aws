@@ -18,9 +18,6 @@ type BucketInitParameters struct {
 	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
-	// AWS by default will not delete an s3 bucket which is not empty, to prevent losing bucket data and affecting other resources in lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
-	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
-
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -38,9 +35,6 @@ type BucketObservation struct {
 
 	// The timestamp when the bucket was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
-
-	// AWS by default will not delete an s3 bucket which is not empty, to prevent losing bucket data and affecting other resources in lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
-	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// The name used for this bucket (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -66,10 +60,6 @@ type BucketParameters struct {
 	// - The ID of the bundle to use for the bucket. A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. Use the get-bucket-bundles cli command to get a list of bundle IDs that you can specify.
 	// +kubebuilder:validation:Optional
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
-
-	// AWS by default will not delete an s3 bucket which is not empty, to prevent losing bucket data and affecting other resources in lightsail. If force_delete is set to true the bucket will be deleted even when not empty.
-	// +kubebuilder:validation:Optional
-	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// The Amazon Web Services Region name.
 	// Region is the region you'd like your resource to be created in.

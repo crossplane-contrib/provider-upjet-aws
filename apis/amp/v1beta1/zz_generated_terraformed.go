@@ -81,12 +81,12 @@ func (tr *AlertManagerDefinition) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this AlertManagerDefinition
-func (tr *AlertManagerDefinition) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *AlertManagerDefinition) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *RuleGroupNamespace) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this RuleGroupNamespace
-func (tr *RuleGroupNamespace) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RuleGroupNamespace) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Workspace) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Workspace
-func (tr *Workspace) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Workspace) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

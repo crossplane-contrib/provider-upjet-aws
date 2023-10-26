@@ -71,8 +71,8 @@ spec:
                 properties:
                   availabilityZone:
                     description: The Availability Zone where the IP address of the
-                      target is to be registered. If the private IP address is outside
-                      of the VPC scope, this value must be set to all.
+                      target is to be registered. If the private ip address is outside
+                      of the VPC scope, this value must be set to 'all'.
                     type: string
                   port:
                     description: The port on which targets receive traffic.
@@ -84,7 +84,7 @@ spec:
                     type: string
                   targetGroupArn:
                     description: The ARN of the target group with which to register
-                      targets.
+                      targets
                     type: string
                   targetGroupArnRef:
                     description: Reference to a LBTargetGroup to populate targetGroupArn.
@@ -163,8 +163,8 @@ spec:
                     description: The ID of the target. This is the Instance ID for
                       an instance, or the container ID for an ECS container. If the
                       target type is ip, specify an IP address. If the target type
-                      is lambda, specify the Lambda function ARN. If the target type
-                      is alb, specify the ALB ARN.
+                      is lambda, specify the arn of lambda. If the target type is
+                      alb, specify the arn of alb.
                     type: string
                 required:
                 - region
@@ -184,8 +184,8 @@ spec:
                 properties:
                   availabilityZone:
                     description: The Availability Zone where the IP address of the
-                      target is to be registered. If the private IP address is outside
-                      of the VPC scope, this value must be set to all.
+                      target is to be registered. If the private ip address is outside
+                      of the VPC scope, this value must be set to 'all'.
                     type: string
                   port:
                     description: The port on which targets receive traffic.
@@ -195,8 +195,8 @@ spec:
                     description: The ID of the target. This is the Instance ID for
                       an instance, or the container ID for an ECS container. If the
                       target type is ip, specify an IP address. If the target type
-                      is lambda, specify the Lambda function ARN. If the target type
-                      is alb, specify the ALB ARN.
+                      is lambda, specify the arn of lambda. If the target type is
+                      alb, specify the arn of alb.
                     type: string
                 type: object
               managementPolicies:
@@ -372,11 +372,11 @@ spec:
                 properties:
                   availabilityZone:
                     description: The Availability Zone where the IP address of the
-                      target is to be registered. If the private IP address is outside
-                      of the VPC scope, this value must be set to all.
+                      target is to be registered. If the private ip address is outside
+                      of the VPC scope, this value must be set to 'all'.
                     type: string
                   id:
-                    description: A unique identifier for the attachment.
+                    description: A unique identifier for the attachment
                     type: string
                   port:
                     description: The port on which targets receive traffic.
@@ -384,14 +384,14 @@ spec:
                     type: integer
                   targetGroupArn:
                     description: The ARN of the target group with which to register
-                      targets.
+                      targets
                     type: string
                   targetId:
                     description: The ID of the target. This is the Instance ID for
                       an instance, or the container ID for an ECS container. If the
                       target type is ip, specify an IP address. If the target type
-                      is lambda, specify the Lambda function ARN. If the target type
-                      is alb, specify the ALB ARN.
+                      is lambda, specify the arn of lambda. If the target type is
+                      alb, specify the arn of alb.
                     type: string
                 type: object
               conditions:

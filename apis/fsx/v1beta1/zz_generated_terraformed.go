@@ -81,12 +81,12 @@ func (tr *Backup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Backup
-func (tr *Backup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Backup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *DataRepositoryAssociation) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this DataRepositoryAssociation
-func (tr *DataRepositoryAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DataRepositoryAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *LustreFileSystem) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this LustreFileSystem
-func (tr *LustreFileSystem) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *LustreFileSystem) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *OntapFileSystem) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this OntapFileSystem
-func (tr *OntapFileSystem) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *OntapFileSystem) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *OntapStorageVirtualMachine) GetInitParameters() (map[string]any, error
 }
 
 // GetInitParameters of this OntapStorageVirtualMachine
-func (tr *OntapStorageVirtualMachine) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *OntapStorageVirtualMachine) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -651,12 +651,12 @@ func (tr *WindowsFileSystem) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this WindowsFileSystem
-func (tr *WindowsFileSystem) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *WindowsFileSystem) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

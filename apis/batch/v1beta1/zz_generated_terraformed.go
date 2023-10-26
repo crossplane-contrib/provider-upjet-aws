@@ -81,12 +81,12 @@ func (tr *JobDefinition) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this JobDefinition
-func (tr *JobDefinition) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *JobDefinition) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *SchedulingPolicy) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SchedulingPolicy
-func (tr *SchedulingPolicy) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SchedulingPolicy) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

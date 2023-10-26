@@ -81,12 +81,12 @@ func (tr *Feature) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Feature
-func (tr *Feature) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Feature) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *Project) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Project
-func (tr *Project) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Project) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *Segment) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Segment
-func (tr *Segment) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Segment) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

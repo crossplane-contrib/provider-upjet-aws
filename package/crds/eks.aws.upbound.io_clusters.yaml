@@ -146,8 +146,9 @@ spec:
                         controlPlanePlacement:
                           description: 'An object representing the placement configuration
                             for all the control plane instances of your local Amazon
-                            EKS cluster on AWS Outpost. The control_plane_placement
-                            configuration block supports the following arguments:'
+                            EKS cluster on AWS Outpost. The following arguments are
+                            supported in the control_plane_placement configuration
+                            block:'
                           items:
                             properties:
                               groupName:
@@ -565,8 +566,9 @@ spec:
                         controlPlanePlacement:
                           description: 'An object representing the placement configuration
                             for all the control plane instances of your local Amazon
-                            EKS cluster on AWS Outpost. The control_plane_placement
-                            configuration block supports the following arguments:'
+                            EKS cluster on AWS Outpost. The following arguments are
+                            supported in the control_plane_placement configuration
+                            block:'
                           items:
                             properties:
                               groupName:
@@ -934,8 +936,9 @@ spec:
                         controlPlanePlacement:
                           description: 'An object representing the placement configuration
                             for all the control plane instances of your local Amazon
-                            EKS cluster on AWS Outpost. The control_plane_placement
-                            configuration block supports the following arguments:'
+                            EKS cluster on AWS Outpost. The following arguments are
+                            supported in the control_plane_placement configuration
+                            block:'
                           items:
                             properties:
                               groupName:

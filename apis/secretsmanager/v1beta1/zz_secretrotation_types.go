@@ -13,49 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RotationRulesInitParameters struct {
-
-	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
-
-	// - The length of the rotation window in hours. For example, 3h for a three hour window.
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
-
-	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
-	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
-}
-
-type RotationRulesObservation struct {
-
-	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
-
-	// - The length of the rotation window in hours. For example, 3h for a three hour window.
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
-
-	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
-	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
-}
-
-type RotationRulesParameters struct {
-
-	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	// +kubebuilder:validation:Optional
-	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
-
-	// - The length of the rotation window in hours. For example, 3h for a three hour window.
-	// +kubebuilder:validation:Optional
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
-
-	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
-	// +kubebuilder:validation:Optional
-	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
-}
-
 type SecretRotationInitParameters struct {
 
 	// A structure that defines the rotation configuration for this secret. Defined below.
-	RotationRules []RotationRulesInitParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
+	RotationRules []SecretRotationRotationRulesInitParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 }
 
 type SecretRotationObservation struct {
@@ -70,7 +31,7 @@ type SecretRotationObservation struct {
 	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
 
 	// A structure that defines the rotation configuration for this secret. Defined below.
-	RotationRules []RotationRulesObservation `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
+	RotationRules []SecretRotationRotationRulesObservation `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
@@ -99,7 +60,7 @@ type SecretRotationParameters struct {
 
 	// A structure that defines the rotation configuration for this secret. Defined below.
 	// +kubebuilder:validation:Optional
-	RotationRules []RotationRulesParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
+	RotationRules []SecretRotationRotationRulesParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
 	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
@@ -114,6 +75,45 @@ type SecretRotationParameters struct {
 	// Selector for a Secret in secretsmanager to populate secretId.
 	// +kubebuilder:validation:Optional
 	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
+}
+
+type SecretRotationRotationRulesInitParameters struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+
+	// - The length of the rotation window in hours. For example, 3h for a three hour window.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+}
+
+type SecretRotationRotationRulesObservation struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+
+	// - The length of the rotation window in hours. For example, 3h for a three hour window.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+}
+
+type SecretRotationRotationRulesParameters struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
+	// +kubebuilder:validation:Optional
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+
+	// - The length of the rotation window in hours. For example, 3h for a three hour window.
+	// +kubebuilder:validation:Optional
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// A cron() or rate() expression that defines the schedule for rotating your secret. Either automatically_after_days or schedule_expression must be specified.
+	// +kubebuilder:validation:Optional
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
 }
 
 // SecretRotationSpec defines the desired state of SecretRotation

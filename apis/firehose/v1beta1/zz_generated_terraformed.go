@@ -81,12 +81,12 @@ func (tr *DeliveryStream) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DeliveryStream
-func (tr *DeliveryStream) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DeliveryStream) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

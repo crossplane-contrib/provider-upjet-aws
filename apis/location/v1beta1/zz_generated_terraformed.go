@@ -81,12 +81,12 @@ func (tr *GeofenceCollection) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this GeofenceCollection
-func (tr *GeofenceCollection) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *GeofenceCollection) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -195,12 +195,12 @@ func (tr *PlaceIndex) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this PlaceIndex
-func (tr *PlaceIndex) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *PlaceIndex) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -309,12 +309,12 @@ func (tr *RouteCalculator) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this RouteCalculator
-func (tr *RouteCalculator) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RouteCalculator) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -423,12 +423,12 @@ func (tr *Tracker) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Tracker
-func (tr *Tracker) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Tracker) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -537,12 +537,12 @@ func (tr *TrackerAssociation) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this TrackerAssociation
-func (tr *TrackerAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *TrackerAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
