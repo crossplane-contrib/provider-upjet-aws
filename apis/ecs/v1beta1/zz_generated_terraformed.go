@@ -85,12 +85,12 @@ func (tr *AccountSettingDefault) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this AccountSettingDefault
-func (tr *AccountSettingDefault) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *AccountSettingDefault) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *CapacityProvider) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this CapacityProvider
-func (tr *CapacityProvider) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *CapacityProvider) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Cluster
-func (tr *Cluster) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Cluster) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *ClusterCapacityProviders) GetInitParameters() (map[string]any, error) 
 }
 
 // GetInitParameters of this ClusterCapacityProviders
-func (tr *ClusterCapacityProviders) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ClusterCapacityProviders) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -541,12 +541,12 @@ func (tr *Service) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Service
-func (tr *Service) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Service) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -655,12 +655,12 @@ func (tr *TaskDefinition) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this TaskDefinition
-func (tr *TaskDefinition) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *TaskDefinition) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

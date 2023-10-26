@@ -36,18 +36,12 @@ type DNSOptionsInitParameters struct {
 
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
-
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
-	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
 type DNSOptionsObservation struct {
 
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
-
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
-	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
 type DNSOptionsParameters struct {
@@ -55,10 +49,6 @@ type DNSOptionsParameters struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	// +kubebuilder:validation:Optional
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
-
-	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
-	// +kubebuilder:validation:Optional
-	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
 type VPCEndpointInitParameters_2 struct {

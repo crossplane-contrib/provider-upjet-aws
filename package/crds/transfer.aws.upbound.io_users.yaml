@@ -134,7 +134,7 @@ spec:
                     type: string
                   role:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to control your user’s access to your Amazon S3
+                      the service to controls your user’s access to your Amazon S3
                       bucket.
                     type: string
                   roleRef:
@@ -606,7 +606,7 @@ spec:
                     type: array
                   role:
                     description: Amazon Resource Name (ARN) of an IAM role that allows
-                      the service to control your user’s access to your Amazon S3
+                      the service to controls your user’s access to your Amazon S3
                       bucket.
                     type: string
                   serverId:

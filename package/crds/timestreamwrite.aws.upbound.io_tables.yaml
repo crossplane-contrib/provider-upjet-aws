@@ -219,39 +219,6 @@ spec:
                           type: integer
                       type: object
                     type: array
-                  schema:
-                    description: The schema of the table. See Schema below for more
-                      details.
-                    items:
-                      properties:
-                        compositePartitionKey:
-                          description: A non-empty list of partition keys defining
-                            the attributes used to partition the table data. The order
-                            of the list determines the partition hierarchy. The name
-                            and type of each partition key as well as the partition
-                            key order cannot be changed after the table is created.
-                            However, the enforcement level of each partition key can
-                            be changed. See Composite Partition Key below for more
-                            details.
-                          items:
-                            properties:
-                              enforcementInRecord:
-                                description: 'The level of enforcement for the specification
-                                  of a dimension key in ingested records. Valid values:
-                                  REQUIRED, OPTIONAL.'
-                                type: string
-                              name:
-                                description: The name of the attribute used for a
-                                  dimension key.
-                                type: string
-                              type:
-                                description: 'The type of the partition key. Valid
-                                  values: DIMENSION, MEASURE.'
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
                   tableName:
                     description: The name of the Timestream table.
                     type: string
@@ -344,39 +311,6 @@ spec:
                             of 8766.
                           format: int64
                           type: integer
-                      type: object
-                    type: array
-                  schema:
-                    description: The schema of the table. See Schema below for more
-                      details.
-                    items:
-                      properties:
-                        compositePartitionKey:
-                          description: A non-empty list of partition keys defining
-                            the attributes used to partition the table data. The order
-                            of the list determines the partition hierarchy. The name
-                            and type of each partition key as well as the partition
-                            key order cannot be changed after the table is created.
-                            However, the enforcement level of each partition key can
-                            be changed. See Composite Partition Key below for more
-                            details.
-                          items:
-                            properties:
-                              enforcementInRecord:
-                                description: 'The level of enforcement for the specification
-                                  of a dimension key in ingested records. Valid values:
-                                  REQUIRED, OPTIONAL.'
-                                type: string
-                              name:
-                                description: The name of the attribute used for a
-                                  dimension key.
-                                type: string
-                              type:
-                                description: 'The type of the partition key. Valid
-                                  values: DIMENSION, MEASURE.'
-                                type: string
-                            type: object
-                          type: array
                       type: object
                     type: array
                   tags:
@@ -628,39 +562,6 @@ spec:
                             of 8766.
                           format: int64
                           type: integer
-                      type: object
-                    type: array
-                  schema:
-                    description: The schema of the table. See Schema below for more
-                      details.
-                    items:
-                      properties:
-                        compositePartitionKey:
-                          description: A non-empty list of partition keys defining
-                            the attributes used to partition the table data. The order
-                            of the list determines the partition hierarchy. The name
-                            and type of each partition key as well as the partition
-                            key order cannot be changed after the table is created.
-                            However, the enforcement level of each partition key can
-                            be changed. See Composite Partition Key below for more
-                            details.
-                          items:
-                            properties:
-                              enforcementInRecord:
-                                description: 'The level of enforcement for the specification
-                                  of a dimension key in ingested records. Valid values:
-                                  REQUIRED, OPTIONAL.'
-                                type: string
-                              name:
-                                description: The name of the attribute used for a
-                                  dimension key.
-                                type: string
-                              type:
-                                description: 'The type of the partition key. Valid
-                                  values: DIMENSION, MEASURE.'
-                                type: string
-                            type: object
-                          type: array
                       type: object
                     type: array
                   tableName:

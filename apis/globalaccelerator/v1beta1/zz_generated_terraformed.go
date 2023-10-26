@@ -85,12 +85,12 @@ func (tr *Accelerator) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Accelerator
-func (tr *Accelerator) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Accelerator) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *EndpointGroup) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this EndpointGroup
-func (tr *EndpointGroup) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *EndpointGroup) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *Listener) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Listener
-func (tr *Listener) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Listener) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

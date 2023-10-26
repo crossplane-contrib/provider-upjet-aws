@@ -167,11 +167,9 @@ type PatchBaselineInitParameters struct {
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
-	// ALMA_LINUX,
 	// AMAZON_LINUX,
 	// AMAZON_LINUX_2,
 	// AMAZON_LINUX_2022,
-	// AMAZON_LINUX_2023,
 	// CENTOS,
 	// DEBIAN,
 	// MACOS,
@@ -241,11 +239,9 @@ type PatchBaselineObservation struct {
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
-	// ALMA_LINUX,
 	// AMAZON_LINUX,
 	// AMAZON_LINUX_2,
 	// AMAZON_LINUX_2022,
-	// AMAZON_LINUX_2023,
 	// CENTOS,
 	// DEBIAN,
 	// MACOS,
@@ -319,11 +315,9 @@ type PatchBaselineParameters struct {
 
 	// The operating system the patch baseline applies to.
 	// Valid values are
-	// ALMA_LINUX,
 	// AMAZON_LINUX,
 	// AMAZON_LINUX_2,
 	// AMAZON_LINUX_2022,
-	// AMAZON_LINUX_2023,
 	// CENTOS,
 	// DEBIAN,
 	// MACOS,

@@ -182,7 +182,7 @@ spec:
                               date:
                                 description: Date objects are transitioned to the
                                   specified storage class. The date value must be
-                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
                                 type: string
                               days:
                                 description: Number of days after creation when objects
@@ -331,7 +331,7 @@ spec:
                               date:
                                 description: Date objects are transitioned to the
                                   specified storage class. The date value must be
-                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
                                 type: string
                               days:
                                 description: Number of days after creation when objects
@@ -399,7 +399,7 @@ spec:
                               date:
                                 description: Date objects are transitioned to the
                                   specified storage class. The date value must be
-                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
                                 type: string
                               days:
                                 description: Number of days after creation when objects
@@ -548,7 +548,7 @@ spec:
                               date:
                                 description: Date objects are transitioned to the
                                   specified storage class. The date value must be
-                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
                                 type: string
                               days:
                                 description: Number of days after creation when objects
@@ -780,7 +780,7 @@ spec:
                               date:
                                 description: Date objects are transitioned to the
                                   specified storage class. The date value must be
-                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
                                 type: string
                               days:
                                 description: Number of days after creation when objects
@@ -929,7 +929,7 @@ spec:
                               date:
                                 description: Date objects are transitioned to the
                                   specified storage class. The date value must be
-                                  in RFC3339 full-date format e.g. 2023-08-22.
+                                  in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
                                 type: string
                               days:
                                 description: Number of days after creation when objects

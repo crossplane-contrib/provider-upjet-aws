@@ -86,15 +86,6 @@ spec:
                           type: integer
                       type: object
                     type: array
-                  signingMaterial:
-                    items:
-                      properties:
-                        certificateArn:
-                          description: The Amazon Resource Name (ARN) for the signing
-                            profile.
-                          type: string
-                      type: object
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -128,15 +119,6 @@ spec:
                         value:
                           format: int64
                           type: integer
-                      type: object
-                    type: array
-                  signingMaterial:
-                    items:
-                      properties:
-                        certificateArn:
-                          description: The Amazon Resource Name (ARN) for the signing
-                            profile.
-                          type: string
                       type: object
                     type: array
                   tags:
@@ -349,15 +331,6 @@ spec:
                         value:
                           format: int64
                           type: integer
-                      type: object
-                    type: array
-                  signingMaterial:
-                    items:
-                      properties:
-                        certificateArn:
-                          description: The Amazon Resource Name (ARN) for the signing
-                            profile.
-                          type: string
                       type: object
                     type: array
                   status:

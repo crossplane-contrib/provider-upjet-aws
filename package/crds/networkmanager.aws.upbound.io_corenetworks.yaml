@@ -91,13 +91,14 @@ spec:
                       VPC Attachments) before applying a policy document provided
                       using the aws_networkmanager_core_network_policy_attachment
                       resource. This base policy is needed if your core network does
-                      not have any LIVE policies and your policy document has static
-                      routes pointing to VPC attachments and you want to attach your
-                      VPCs to the core network before applying the desired policy
-                      document. Valid values are true or false. An example base policy
-                      is shown below. This base policy is overridden with the policy
-                      that you specify in the aws_networkmanager_core_network_policy_attachment
-                      resource.
+                      not have any LIVE policies (e.g. a core network resource created
+                      without the policy_document argument) and your policy document
+                      has static routes pointing to VPC attachments and you want to
+                      attach your VPCs to the core network before applying the desired
+                      policy document. Valid values are true or false. Conflicts with
+                      policy_document. An example base policy is shown below. This
+                      base policy is overridden with the policy that you specify in
+                      the aws_networkmanager_core_network_policy_attachment resource.
                     type: boolean
                   description:
                     description: Description of the Core Network.
@@ -181,6 +182,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  policyDocument:
+                    description: Policy document for creating a core network. Note
+                      that updating this argument will result in the new policy document
+                      version being set as the LATEST and LIVE policy document. Refer
+                      to the Core network policies documentation for more information.
+                      Conflicts with create_base_policy.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -229,16 +237,24 @@ spec:
                       VPC Attachments) before applying a policy document provided
                       using the aws_networkmanager_core_network_policy_attachment
                       resource. This base policy is needed if your core network does
-                      not have any LIVE policies and your policy document has static
-                      routes pointing to VPC attachments and you want to attach your
-                      VPCs to the core network before applying the desired policy
-                      document. Valid values are true or false. An example base policy
-                      is shown below. This base policy is overridden with the policy
-                      that you specify in the aws_networkmanager_core_network_policy_attachment
-                      resource.
+                      not have any LIVE policies (e.g. a core network resource created
+                      without the policy_document argument) and your policy document
+                      has static routes pointing to VPC attachments and you want to
+                      attach your VPCs to the core network before applying the desired
+                      policy document. Valid values are true or false. Conflicts with
+                      policy_document. An example base policy is shown below. This
+                      base policy is overridden with the policy that you specify in
+                      the aws_networkmanager_core_network_policy_attachment resource.
                     type: boolean
                   description:
                     description: Description of the Core Network.
+                    type: string
+                  policyDocument:
+                    description: Policy document for creating a core network. Note
+                      that updating this argument will result in the new policy document
+                      version being set as the LATEST and LIVE policy document. Refer
+                      to the Core network policies documentation for more information.
+                      Conflicts with create_base_policy.
                     type: string
                   tags:
                     additionalProperties:
@@ -438,13 +454,14 @@ spec:
                       VPC Attachments) before applying a policy document provided
                       using the aws_networkmanager_core_network_policy_attachment
                       resource. This base policy is needed if your core network does
-                      not have any LIVE policies and your policy document has static
-                      routes pointing to VPC attachments and you want to attach your
-                      VPCs to the core network before applying the desired policy
-                      document. Valid values are true or false. An example base policy
-                      is shown below. This base policy is overridden with the policy
-                      that you specify in the aws_networkmanager_core_network_policy_attachment
-                      resource.
+                      not have any LIVE policies (e.g. a core network resource created
+                      without the policy_document argument) and your policy document
+                      has static routes pointing to VPC attachments and you want to
+                      attach your VPCs to the core network before applying the desired
+                      policy document. Valid values are true or false. Conflicts with
+                      policy_document. An example base policy is shown below. This
+                      base policy is overridden with the policy that you specify in
+                      the aws_networkmanager_core_network_policy_attachment resource.
                     type: boolean
                   createdAt:
                     description: Timestamp when a core network was created.
@@ -477,6 +494,13 @@ spec:
                     type: string
                   id:
                     description: Core Network ID.
+                    type: string
+                  policyDocument:
+                    description: Policy document for creating a core network. Note
+                      that updating this argument will result in the new policy document
+                      version being set as the LATEST and LIVE policy document. Refer
+                      to the Core network policies documentation for more information.
+                      Conflicts with create_base_policy.
                     type: string
                   segments:
                     description: One or more blocks detailing the segments within

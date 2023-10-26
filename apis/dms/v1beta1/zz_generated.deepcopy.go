@@ -2195,11 +2195,6 @@ func (in *ReplicationInstanceInitParameters) DeepCopyInto(out *ReplicationInstan
 		*out = new(bool)
 		**out = **in
 	}
-	if in.NetworkType != nil {
-		in, out := &in.NetworkType, &out.NetworkType
-		*out = new(string)
-		**out = **in
-	}
 	if in.PreferredMaintenanceWindow != nil {
 		in, out := &in.PreferredMaintenanceWindow, &out.PreferredMaintenanceWindow
 		*out = new(string)
@@ -2321,11 +2316,6 @@ func (in *ReplicationInstanceObservation) DeepCopyInto(out *ReplicationInstanceO
 	if in.MultiAz != nil {
 		in, out := &in.MultiAz, &out.MultiAz
 		*out = new(bool)
-		**out = **in
-	}
-	if in.NetworkType != nil {
-		in, out := &in.NetworkType, &out.NetworkType
-		*out = new(string)
 		**out = **in
 	}
 	if in.PreferredMaintenanceWindow != nil {
@@ -2481,11 +2471,6 @@ func (in *ReplicationInstanceParameters) DeepCopyInto(out *ReplicationInstancePa
 	if in.MultiAz != nil {
 		in, out := &in.MultiAz, &out.MultiAz
 		*out = new(bool)
-		**out = **in
-	}
-	if in.NetworkType != nil {
-		in, out := &in.NetworkType, &out.NetworkType
-		*out = new(string)
 		**out = **in
 	}
 	if in.PreferredMaintenanceWindow != nil {
@@ -4305,6 +4290,11 @@ func (in *S3SettingsInitParameters) DeepCopyInto(out *S3SettingsInitParameters) 
 		*out = new(int64)
 		**out = **in
 	}
+	if in.IgnoreHeadersRow != nil {
+		in, out := &in.IgnoreHeadersRow, &out.IgnoreHeadersRow
+		*out = new(int64)
+		**out = **in
+	}
 	if in.IncludeOpForFullLoad != nil {
 		in, out := &in.IncludeOpForFullLoad, &out.IncludeOpForFullLoad
 		*out = new(bool)
@@ -4505,6 +4495,11 @@ func (in *S3SettingsObservation) DeepCopyInto(out *S3SettingsObservation) {
 		*out = new(int64)
 		**out = **in
 	}
+	if in.IgnoreHeadersRow != nil {
+		in, out := &in.IgnoreHeadersRow, &out.IgnoreHeadersRow
+		*out = new(int64)
+		**out = **in
+	}
 	if in.IncludeOpForFullLoad != nil {
 		in, out := &in.IncludeOpForFullLoad, &out.IncludeOpForFullLoad
 		*out = new(bool)
@@ -4702,6 +4697,11 @@ func (in *S3SettingsParameters) DeepCopyInto(out *S3SettingsParameters) {
 	}
 	if in.IgnoreHeaderRows != nil {
 		in, out := &in.IgnoreHeaderRows, &out.IgnoreHeaderRows
+		*out = new(int64)
+		**out = **in
+	}
+	if in.IgnoreHeadersRow != nil {
+		in, out := &in.IgnoreHeadersRow, &out.IgnoreHeadersRow
 		*out = new(int64)
 		**out = **in
 	}

@@ -17,7 +17,7 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: iam_for_lambda
-    runtime: nodejs18.x
+    runtime: nodejs16.x
     sourceCodeHash: ${data.archive_file.lambda.output_base64sha256}
 
 ---

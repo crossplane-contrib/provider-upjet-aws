@@ -85,12 +85,12 @@ func (tr *ConfigRule) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConfigRule
-func (tr *ConfigRule) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConfigRule) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *ConfigurationAggregator) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConfigurationAggregator
-func (tr *ConfigurationAggregator) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConfigurationAggregator) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *ConfigurationRecorder) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConfigurationRecorder
-func (tr *ConfigurationRecorder) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConfigurationRecorder) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *AWSConfigurationRecorderStatus) GetInitParameters() (map[string]any, e
 }
 
 // GetInitParameters of this AWSConfigurationRecorderStatus
-func (tr *AWSConfigurationRecorderStatus) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *AWSConfigurationRecorderStatus) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -541,12 +541,12 @@ func (tr *ConformancePack) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ConformancePack
-func (tr *ConformancePack) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ConformancePack) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -655,12 +655,12 @@ func (tr *DeliveryChannel) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DeliveryChannel
-func (tr *DeliveryChannel) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DeliveryChannel) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -769,12 +769,12 @@ func (tr *RemediationConfiguration) GetInitParameters() (map[string]any, error) 
 }
 
 // GetInitParameters of this RemediationConfiguration
-func (tr *RemediationConfiguration) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *RemediationConfiguration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

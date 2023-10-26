@@ -14,6 +14,6 @@ spec:
     - name: aws_security_group
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: aws_subnets
+        testing.upbound.io/example-name: aws_subnet_ids
     tags:
       Usage: example

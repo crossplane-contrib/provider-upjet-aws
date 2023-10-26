@@ -85,12 +85,12 @@ func (tr *Pool) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Pool
-func (tr *Pool) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Pool) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *CognitoIdentityPoolProviderPrincipalTag) GetInitParameters() (map[stri
 }
 
 // GetInitParameters of this CognitoIdentityPoolProviderPrincipalTag
-func (tr *CognitoIdentityPoolProviderPrincipalTag) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *CognitoIdentityPoolProviderPrincipalTag) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *PoolRolesAttachment) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this PoolRolesAttachment
-func (tr *PoolRolesAttachment) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *PoolRolesAttachment) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

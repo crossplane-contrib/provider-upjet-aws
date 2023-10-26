@@ -1110,6 +1110,11 @@ func (in *CoreNetworkInitParameters) DeepCopyInto(out *CoreNetworkInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.PolicyDocument != nil {
+		in, out := &in.PolicyDocument, &out.PolicyDocument
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1226,6 +1231,11 @@ func (in *CoreNetworkObservation) DeepCopyInto(out *CoreNetworkObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PolicyDocument != nil {
+		in, out := &in.PolicyDocument, &out.PolicyDocument
+		*out = new(string)
+		**out = **in
+	}
 	if in.Segments != nil {
 		in, out := &in.Segments, &out.Segments
 		*out = make([]SegmentsObservation, len(*in))
@@ -1325,6 +1335,11 @@ func (in *CoreNetworkParameters) DeepCopyInto(out *CoreNetworkParameters) {
 		in, out := &in.GlobalNetworkIDSelector, &out.GlobalNetworkIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PolicyDocument != nil {
+		in, out := &in.PolicyDocument, &out.PolicyDocument
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

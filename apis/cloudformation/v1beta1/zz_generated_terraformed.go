@@ -85,12 +85,12 @@ func (tr *Stack) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Stack
-func (tr *Stack) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Stack) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *StackSet) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this StackSet
-func (tr *StackSet) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *StackSet) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

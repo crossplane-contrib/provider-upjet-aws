@@ -85,12 +85,12 @@ func (tr *App) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this App
-func (tr *App) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *App) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *SMSChannel) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SMSChannel
-func (tr *SMSChannel) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SMSChannel) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

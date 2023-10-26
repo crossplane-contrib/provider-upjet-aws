@@ -52,6 +52,22 @@ type ReplicaParameters struct {
 	Region *string `json:"region" tf:"region,omitempty"`
 }
 
+type RotationRulesInitParameters struct {
+}
+
+type RotationRulesObservation struct {
+
+	// Specifies the number of days between automatic scheduled rotations of the secret.
+	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
+}
+
+type RotationRulesParameters struct {
+}
+
 type SecretInitParameters struct {
 
 	// Description of the secret.
@@ -101,6 +117,15 @@ type SecretObservation struct {
 
 	// Configuration block to support secret replication. See details below.
 	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
+
+	// Whether automatic rotation is enabled for this secret.
+	RotationEnabled *bool `json:"rotationEnabled,omitempty" tf:"rotation_enabled,omitempty"`
+
+	// ARN of the Lambda function that can rotate the secret. Use the aws_secretsmanager_secret_rotation resource to manage this configuration instead. As of version 2.67.0, removal of this configuration will no longer remove rotation due to supporting the new resource. Either import the new resource and remove the configuration or manually remove rotation.
+	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
+
+	// Configuration block for the rotation configuration of this secret. Defined below. Use the aws_secretsmanager_secret_rotation resource to manage this configuration instead. As of version 2.67.0, removal of this configuration will no longer remove rotation due to supporting the new resource. Either import the new resource and remove the configuration or manually remove rotation.
+	RotationRules []RotationRulesObservation `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

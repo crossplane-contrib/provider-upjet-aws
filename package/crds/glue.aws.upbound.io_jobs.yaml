@@ -79,13 +79,6 @@ spec:
                             Python shell job. Allowed values are 2, 3 or 3.9. Version
                             3 refers to Python 3.6.
                           type: string
-                        runtime:
-                          description: In Ray jobs, runtime is used to specify the
-                            versions of Ray, Python and additional libraries available
-                            in your environment. This field is not used in other job
-                            types. For supported runtime environment values, see Working
-                            with Ray jobs in the Glue Developer Guide.
-                          type: string
                         scriptLocation:
                           description: Specifies the S3 path to a script that executes
                             a job.
@@ -129,9 +122,9 @@ spec:
                       type: object
                     type: array
                   glueVersion:
-                    description: The version of glue to use, for example "1.0". Ray
-                      jobs should set this to 4.0 or greater. For information about
-                      available versions, see the AWS Glue Release Notes.
+                    description: The version of glue to use, for example "1.0". For
+                      information about available versions, see the AWS Glue Release
+                      Notes.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
@@ -264,8 +257,7 @@ spec:
                     type: integer
                   workerType:
                     description: The type of predefined worker that is allocated when
-                      a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X
-                      for Spark jobs. Accepts the value Z.2X for Ray jobs.
+                      a job runs. Accepts a value of Standard, G.1X, or G.2X.
                     type: string
                 required:
                 - region
@@ -294,13 +286,6 @@ spec:
                           description: The Python version being used to execute a
                             Python shell job. Allowed values are 2, 3 or 3.9. Version
                             3 refers to Python 3.6.
-                          type: string
-                        runtime:
-                          description: In Ray jobs, runtime is used to specify the
-                            versions of Ray, Python and additional libraries available
-                            in your environment. This field is not used in other job
-                            types. For supported runtime environment values, see Working
-                            with Ray jobs in the Glue Developer Guide.
                           type: string
                         scriptLocation:
                           description: Specifies the S3 path to a script that executes
@@ -345,9 +330,9 @@ spec:
                       type: object
                     type: array
                   glueVersion:
-                    description: The version of glue to use, for example "1.0". Ray
-                      jobs should set this to 4.0 or greater. For information about
-                      available versions, see the AWS Glue Release Notes.
+                    description: The version of glue to use, for example "1.0". For
+                      information about available versions, see the AWS Glue Release
+                      Notes.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
@@ -400,8 +385,7 @@ spec:
                     type: integer
                   workerType:
                     description: The type of predefined worker that is allocated when
-                      a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X
-                      for Spark jobs. Accepts the value Z.2X for Ray jobs.
+                      a job runs. Accepts a value of Standard, G.1X, or G.2X.
                     type: string
                 type: object
               managementPolicies:
@@ -590,13 +574,6 @@ spec:
                             Python shell job. Allowed values are 2, 3 or 3.9. Version
                             3 refers to Python 3.6.
                           type: string
-                        runtime:
-                          description: In Ray jobs, runtime is used to specify the
-                            versions of Ray, Python and additional libraries available
-                            in your environment. This field is not used in other job
-                            types. For supported runtime environment values, see Working
-                            with Ray jobs in the Glue Developer Guide.
-                          type: string
                         scriptLocation:
                           description: Specifies the S3 path to a script that executes
                             a job.
@@ -640,9 +617,9 @@ spec:
                       type: object
                     type: array
                   glueVersion:
-                    description: The version of glue to use, for example "1.0". Ray
-                      jobs should set this to 4.0 or greater. For information about
-                      available versions, see the AWS Glue Release Notes.
+                    description: The version of glue to use, for example "1.0". For
+                      information about available versions, see the AWS Glue Release
+                      Notes.
                     type: string
                   id:
                     description: Job name
@@ -708,8 +685,7 @@ spec:
                     type: integer
                   workerType:
                     description: The type of predefined worker that is allocated when
-                      a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X
-                      for Spark jobs. Accepts the value Z.2X for Ray jobs.
+                      a job runs. Accepts a value of Standard, G.1X, or G.2X.
                     type: string
                 type: object
               conditions:

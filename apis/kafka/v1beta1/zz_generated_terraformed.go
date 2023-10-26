@@ -85,12 +85,12 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Cluster
-func (tr *Cluster) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Cluster) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *Configuration) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Configuration
-func (tr *Configuration) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Configuration) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *ScramSecretAssociation) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ScramSecretAssociation
-func (tr *ScramSecretAssociation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ScramSecretAssociation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

@@ -101,14 +101,12 @@ spec:
                     description: –  Version number of the cache engine to be used.
                       If not set, defaults to the latest version. See Describe Cache
                       Engine Versions in the AWS Documentation for supported versions.
-                      When engine is redis and the version is 7 or higher, the major
-                      and minor version should be set, e.g., 7.2. When the version
-                      is 6, the major and minor version can be set, e.g., 6.2, or
-                      the minor version can be unspecified which will use the latest
-                      version at creation time, e.g., 6.x. Otherwise, specify the
-                      full version desired, e.g., 5.0.6. The actual engine version
-                      used is returned in the attribute engine_version_actual, see
-                      Attribute Reference below.
+                      When engine is redis and the version is 6 or higher, the major
+                      and minor version can be set, e.g., 6.2, or the minor version
+                      can be unspecified which will use the latest version at creation
+                      time, e.g., 6.x. Otherwise, specify the full version desired,
+                      e.g., 5.0.6. The actual engine version used is returned in the
+                      attribute engine_version_actual, see Attributes Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: Name of your final cluster snapshot. If omitted,
@@ -441,6 +439,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  securityGroupNames:
+                    description: create the resource.
+                    items:
+                      type: string
+                    type: array
                   snapshotArns:
                     description: element string list containing an Amazon Resource
                       Name (ARN) of a Redis RDB snapshot file stored in Amazon S3.
@@ -551,11 +554,6 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                  transitEncryptionEnabled:
-                    description: Enable encryption in-transit. Supported only with
-                      Memcached versions 1.6.12 and later, running in a VPC. See the
-                      ElastiCache in-transit encryption documentation for more details.
-                    type: boolean
                 required:
                 - region
                 type: object
@@ -605,14 +603,12 @@ spec:
                     description: –  Version number of the cache engine to be used.
                       If not set, defaults to the latest version. See Describe Cache
                       Engine Versions in the AWS Documentation for supported versions.
-                      When engine is redis and the version is 7 or higher, the major
-                      and minor version should be set, e.g., 7.2. When the version
-                      is 6, the major and minor version can be set, e.g., 6.2, or
-                      the minor version can be unspecified which will use the latest
-                      version at creation time, e.g., 6.x. Otherwise, specify the
-                      full version desired, e.g., 5.0.6. The actual engine version
-                      used is returned in the attribute engine_version_actual, see
-                      Attribute Reference below.
+                      When engine is redis and the version is 6 or higher, the major
+                      and minor version can be set, e.g., 6.2, or the minor version
+                      can be unspecified which will use the latest version at creation
+                      time, e.g., 6.x. Otherwise, specify the full version desired,
+                      e.g., 5.0.6. The actual engine version used is returned in the
+                      attribute engine_version_actual, see Attributes Reference below.
                     type: string
                   finalSnapshotIdentifier:
                     description: Name of your final cluster snapshot. If omitted,
@@ -697,6 +693,11 @@ spec:
                     description: The outpost ARN in which the cache cluster will be
                       created.
                     type: string
+                  securityGroupNames:
+                    description: create the resource.
+                    items:
+                      type: string
+                    type: array
                   snapshotArns:
                     description: element string list containing an Amazon Resource
                       Name (ARN) of a Redis RDB snapshot file stored in Amazon S3.
@@ -729,11 +730,6 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                  transitEncryptionEnabled:
-                    description: Enable encryption in-transit. Supported only with
-                      Memcached versions 1.6.12 and later, running in a VPC. See the
-                      ElastiCache in-transit encryption documentation for more details.
-                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -969,14 +965,12 @@ spec:
                     description: –  Version number of the cache engine to be used.
                       If not set, defaults to the latest version. See Describe Cache
                       Engine Versions in the AWS Documentation for supported versions.
-                      When engine is redis and the version is 7 or higher, the major
-                      and minor version should be set, e.g., 7.2. When the version
-                      is 6, the major and minor version can be set, e.g., 6.2, or
-                      the minor version can be unspecified which will use the latest
-                      version at creation time, e.g., 6.x. Otherwise, specify the
-                      full version desired, e.g., 5.0.6. The actual engine version
-                      used is returned in the attribute engine_version_actual, see
-                      Attribute Reference below.
+                      When engine is redis and the version is 6 or higher, the major
+                      and minor version can be set, e.g., 6.2, or the minor version
+                      can be unspecified which will use the latest version at creation
+                      time, e.g., 6.x. Otherwise, specify the full version desired,
+                      e.g., 5.0.6. The actual engine version used is returned in the
+                      attribute engine_version_actual, see Attributes Reference below.
                     type: string
                   engineVersionActual:
                     description: Because ElastiCache pulls the latest minor or patch
@@ -1085,6 +1079,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  securityGroupNames:
+                    description: create the resource.
+                    items:
+                      type: string
+                    type: array
                   snapshotArns:
                     description: element string list containing an Amazon Resource
                       Name (ARN) of a Redis RDB snapshot file stored in Amazon S3.
@@ -1126,11 +1125,6 @@ spec:
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
-                  transitEncryptionEnabled:
-                    description: Enable encryption in-transit. Supported only with
-                      Memcached versions 1.6.12 and later, running in a VPC. See the
-                      ElastiCache in-transit encryption documentation for more details.
-                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

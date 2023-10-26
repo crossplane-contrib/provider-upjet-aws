@@ -31,7 +31,7 @@ type BrokerInitParameters struct {
 	// Name of the broker.
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
@@ -88,7 +88,7 @@ type BrokerObservation struct {
 	// Name of the broker.
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
@@ -161,7 +161,7 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -521,9 +521,6 @@ type UserInitParameters struct {
 	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
-	// Whether to set set replication user. Defaults to false.
-	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
-
 	// Username of the user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -535,9 +532,6 @@ type UserObservation struct {
 
 	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
-
-	// Whether to set set replication user. Defaults to false.
-	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	// Username of the user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -556,10 +550,6 @@ type UserParameters struct {
 	// Password of the user. It must be 12 to 250 characters long, at least 4 unique characters, and must not contain commas.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
-
-	// Whether to set set replication user. Defaults to false.
-	// +kubebuilder:validation:Optional
-	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	// Username of the user.
 	// +kubebuilder:validation:Optional

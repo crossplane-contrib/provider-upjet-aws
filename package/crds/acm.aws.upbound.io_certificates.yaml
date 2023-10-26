@@ -136,8 +136,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   validationMethod:
-                    description: Which method to use for validation. DNS or EMAIL
-                      are valid.
+                    description: Which method to use for validation.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about
@@ -221,8 +220,7 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   validationMethod:
-                    description: Which method to use for validation. DNS or EMAIL
-                      are valid.
+                    description: Which method to use for validation.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about
@@ -532,8 +530,7 @@ spec:
                       type: string
                     type: array
                   validationMethod:
-                    description: Which method to use for validation. DNS or EMAIL
-                      are valid.
+                    description: Which method to use for validation.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about

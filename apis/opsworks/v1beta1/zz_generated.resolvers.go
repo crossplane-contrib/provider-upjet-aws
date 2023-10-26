@@ -11,8 +11,9 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/rds/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/ecs/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/rds/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -23,6 +24,194 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CustomLayer.
+func (mg *CustomLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this EcsClusterLayer.
+func (mg *EcsClusterLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EcsClusterArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.EcsClusterArnRef,
+		Selector:     mg.Spec.ForProvider.EcsClusterArnSelector,
+		To: reference.To{
+			List:    &v1beta11.ClusterList{},
+			Managed: &v1beta11.Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EcsClusterArn")
+	}
+	mg.Spec.ForProvider.EcsClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EcsClusterArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GangliaLayer.
+func (mg *GangliaLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HAProxyLayer.
+func (mg *HAProxyLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
@@ -102,6 +291,221 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	return nil
 }
 
+// ResolveReferences of this JavaAppLayer.
+func (mg *JavaAppLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MemcachedLayer.
+func (mg *MemcachedLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MySQLLayer.
+func (mg *MySQLLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this NodeJSAppLayer.
+func (mg *NodeJSAppLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PHPAppLayer.
+func (mg *PHPAppLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Permission.
 func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -131,8 +535,8 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.UserArnRef,
 		Selector:     mg.Spec.ForProvider.UserArnSelector,
 		To: reference.To{
-			List:    &v1beta11.UserList{},
-			Managed: &v1beta11.User{},
+			List:    &v1beta12.UserList{},
+			Managed: &v1beta12.User{},
 		},
 	})
 	if err != nil {
@@ -157,8 +561,8 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.RDSDBInstanceArnRef,
 		Selector:     mg.Spec.ForProvider.RDSDBInstanceArnSelector,
 		To: reference.To{
-			List:    &v1beta12.InstanceList{},
-			Managed: &v1beta12.Instance{},
+			List:    &v1beta13.InstanceList{},
+			Managed: &v1beta13.Instance{},
 		},
 	})
 	if err != nil {
@@ -166,6 +570,49 @@ func (mg *RDSDBInstance) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.RDSDBInstanceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RDSDBInstanceArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this RailsAppLayer.
+func (mg *RailsAppLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
@@ -199,8 +646,8 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.DefaultInstanceProfileArnRef,
 		Selector:     mg.Spec.ForProvider.DefaultInstanceProfileArnSelector,
 		To: reference.To{
-			List:    &v1beta11.InstanceProfileList{},
-			Managed: &v1beta11.InstanceProfile{},
+			List:    &v1beta12.InstanceProfileList{},
+			Managed: &v1beta12.InstanceProfile{},
 		},
 	})
 	if err != nil {
@@ -231,8 +678,8 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.ServiceRoleArnRef,
 		Selector:     mg.Spec.ForProvider.ServiceRoleArnSelector,
 		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
 		},
 	})
 	if err != nil {
@@ -260,6 +707,49 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this StaticWebLayer.
+func (mg *StaticWebLayer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CustomSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.CustomSecurityGroupIDRefs,
+		Selector:      mg.Spec.ForProvider.CustomSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CustomSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.CustomSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CustomSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StackIDRef,
+		Selector:     mg.Spec.ForProvider.StackIDSelector,
+		To: reference.To{
+			List:    &StackList{},
+			Managed: &Stack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackID")
+	}
+	mg.Spec.ForProvider.StackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this UserProfile.
 func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -273,8 +763,8 @@ func (mg *UserProfile) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.UserArnRef,
 		Selector:     mg.Spec.ForProvider.UserArnSelector,
 		To: reference.To{
-			List:    &v1beta11.UserList{},
-			Managed: &v1beta11.User{},
+			List:    &v1beta12.UserList{},
+			Managed: &v1beta12.User{},
 		},
 	})
 	if err != nil {

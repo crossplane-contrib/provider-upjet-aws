@@ -85,12 +85,12 @@ func (tr *Domain) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Domain
-func (tr *Domain) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Domain) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *DomainServiceAccessPolicy) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this DomainServiceAccessPolicy
-func (tr *DomainServiceAccessPolicy) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DomainServiceAccessPolicy) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

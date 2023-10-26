@@ -252,6 +252,17 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterSecurityGroups != nil {
+		in, out := &in.ClusterSecurityGroups, &out.ClusterSecurityGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
 		*out = new(string)
@@ -529,11 +540,6 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.ClusterNamespaceArn != nil {
-		in, out := &in.ClusterNamespaceArn, &out.ClusterNamespaceArn
-		*out = new(string)
-		**out = **in
-	}
 	if in.ClusterNodes != nil {
 		in, out := &in.ClusterNodes, &out.ClusterNodes
 		*out = make([]ClusterNodesObservation, len(*in))
@@ -555,6 +561,17 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		in, out := &in.ClusterRevisionNumber, &out.ClusterRevisionNumber
 		*out = new(string)
 		**out = **in
+	}
+	if in.ClusterSecurityGroups != nil {
+		in, out := &in.ClusterSecurityGroups, &out.ClusterSecurityGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
@@ -808,6 +825,17 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.ClusterRevisionNumber, &out.ClusterRevisionNumber
 		*out = new(string)
 		**out = **in
+	}
+	if in.ClusterSecurityGroups != nil {
+		in, out := &in.ClusterSecurityGroups, &out.ClusterSecurityGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName

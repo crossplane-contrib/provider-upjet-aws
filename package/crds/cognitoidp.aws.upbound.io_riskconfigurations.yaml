@@ -873,7 +873,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: 'The user pool ID or the user pool ID and Client
+                    description: 'The user pool ID. or The user pool ID and Client
                       Id separated by a : if the configuration is client specific.'
                     type: string
                   riskExceptionConfiguration:
