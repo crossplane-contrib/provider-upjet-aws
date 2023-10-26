@@ -128,7 +128,7 @@ type Ac3SettingsInitParameters struct {
 	CodingMode *string `json:"codingMode,omitempty" tf:"coding_mode,omitempty"`
 
 	// Sets the dialnorm of the output.
-	Dialnorm *float64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
+	Dialnorm *int64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
 
 	// If set to filmStandard, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.
 	DrcProfile *string `json:"drcProfile,omitempty" tf:"drc_profile,omitempty"`
@@ -152,7 +152,7 @@ type Ac3SettingsObservation struct {
 	CodingMode *string `json:"codingMode,omitempty" tf:"coding_mode,omitempty"`
 
 	// Sets the dialnorm of the output.
-	Dialnorm *float64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
+	Dialnorm *int64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
 
 	// If set to filmStandard, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.
 	DrcProfile *string `json:"drcProfile,omitempty" tf:"drc_profile,omitempty"`
@@ -180,7 +180,7 @@ type Ac3SettingsParameters struct {
 
 	// Sets the dialnorm of the output.
 	// +kubebuilder:validation:Optional
-	Dialnorm *float64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
+	Dialnorm *int64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
 
 	// If set to filmStandard, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.
 	// +kubebuilder:validation:Optional
@@ -196,22 +196,17 @@ type Ac3SettingsParameters struct {
 }
 
 type AncillarySourceSettingsInitParameters struct {
-
-	// Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
-	SourceAncillaryChannelNumber *float64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
+	SourceAncillaryChannelNumber *int64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
 }
 
 type AncillarySourceSettingsObservation struct {
-
-	// Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
-	SourceAncillaryChannelNumber *float64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
+	SourceAncillaryChannelNumber *int64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
 }
 
 type AncillarySourceSettingsParameters struct {
 
-	// Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
 	// +kubebuilder:validation:Optional
-	SourceAncillaryChannelNumber *float64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
+	SourceAncillaryChannelNumber *int64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
 }
 
 type ArchiveCdnSettingsInitParameters struct {
@@ -242,7 +237,7 @@ type ArchiveGroupSettingsInitParameters struct {
 	Destination []DestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Number of seconds to write to archive file before closing and starting a new one.
-	RolloverInterval *float64 `json:"rolloverInterval,omitempty" tf:"rollover_interval,omitempty"`
+	RolloverInterval *int64 `json:"rolloverInterval,omitempty" tf:"rollover_interval,omitempty"`
 }
 
 type ArchiveGroupSettingsObservation struct {
@@ -254,7 +249,7 @@ type ArchiveGroupSettingsObservation struct {
 	Destination []DestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Number of seconds to write to archive file before closing and starting a new one.
-	RolloverInterval *float64 `json:"rolloverInterval,omitempty" tf:"rollover_interval,omitempty"`
+	RolloverInterval *int64 `json:"rolloverInterval,omitempty" tf:"rollover_interval,omitempty"`
 }
 
 type ArchiveGroupSettingsParameters struct {
@@ -269,7 +264,7 @@ type ArchiveGroupSettingsParameters struct {
 
 	// Number of seconds to write to archive file before closing and starting a new one.
 	// +kubebuilder:validation:Optional
-	RolloverInterval *float64 `json:"rolloverInterval,omitempty" tf:"rollover_interval,omitempty"`
+	RolloverInterval *int64 `json:"rolloverInterval,omitempty" tf:"rollover_interval,omitempty"`
 }
 
 type ArchiveOutputSettingsInitParameters struct {
@@ -330,30 +325,12 @@ type ArchiveS3SettingsParameters struct {
 	CannedACL *string `json:"cannedAcl,omitempty" tf:"canned_acl,omitempty"`
 }
 
-type AribDestinationSettingsInitParameters struct {
-}
-
-type AribDestinationSettingsObservation struct {
-}
-
-type AribDestinationSettingsParameters struct {
-}
-
-type AribSourceSettingsInitParameters struct {
-}
-
-type AribSourceSettingsObservation struct {
-}
-
-type AribSourceSettingsParameters struct {
-}
-
 type AudioDescriptionsInitParameters struct {
 
 	// Advanced audio normalization settings. See Audio Normalization Settings for more details.
 	AudioNormalizationSettings []AudioNormalizationSettingsInitParameters `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+	// The name of the audio selector used as the source for this AudioDescription.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
 	// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
@@ -368,7 +345,7 @@ type AudioDescriptionsInitParameters struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []CodecSettingsInitParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	LanguageCodeControl *string `json:"languageCodeControl,omitempty" tf:"language_code_control,omitempty"`
@@ -388,7 +365,7 @@ type AudioDescriptionsObservation struct {
 	// Advanced audio normalization settings. See Audio Normalization Settings for more details.
 	AudioNormalizationSettings []AudioNormalizationSettingsObservation `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+	// The name of the audio selector used as the source for this AudioDescription.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
 	// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
@@ -403,7 +380,7 @@ type AudioDescriptionsObservation struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []CodecSettingsObservation `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	LanguageCodeControl *string `json:"languageCodeControl,omitempty" tf:"language_code_control,omitempty"`
@@ -424,7 +401,7 @@ type AudioDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioNormalizationSettings []AudioNormalizationSettingsParameters `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+	// The name of the audio selector used as the source for this AudioDescription.
 	// +kubebuilder:validation:Optional
 	AudioSelectorName *string `json:"audioSelectorName" tf:"audio_selector_name,omitempty"`
 
@@ -444,7 +421,7 @@ type AudioDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CodecSettings []CodecSettingsParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
@@ -466,7 +443,7 @@ type AudioDescriptionsParameters struct {
 
 type AudioHlsRenditionSelectionInitParameters struct {
 
-	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	// User-specified id. Ths is used in an output group or an output.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// Name of the Channel.
@@ -475,7 +452,7 @@ type AudioHlsRenditionSelectionInitParameters struct {
 
 type AudioHlsRenditionSelectionObservation struct {
 
-	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	// User-specified id. Ths is used in an output group or an output.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// Name of the Channel.
@@ -484,7 +461,7 @@ type AudioHlsRenditionSelectionObservation struct {
 
 type AudioHlsRenditionSelectionParameters struct {
 
-	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
 
@@ -495,29 +472,26 @@ type AudioHlsRenditionSelectionParameters struct {
 
 type AudioLanguageSelectionInitParameters struct {
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// When set to “strict”, the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If “loose”, then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can’t find one with the same language.
 	LanguageSelectionPolicy *string `json:"languageSelectionPolicy,omitempty" tf:"language_selection_policy,omitempty"`
 }
 
 type AudioLanguageSelectionObservation struct {
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// When set to “strict”, the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If “loose”, then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can’t find one with the same language.
 	LanguageSelectionPolicy *string `json:"languageSelectionPolicy,omitempty" tf:"language_selection_policy,omitempty"`
 }
 
 type AudioLanguageSelectionParameters struct {
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
 
-	// When set to “strict”, the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If “loose”, then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can’t find one with the same language.
 	// +kubebuilder:validation:Optional
 	LanguageSelectionPolicy *string `json:"languageSelectionPolicy,omitempty" tf:"language_selection_policy,omitempty"`
 }
@@ -563,7 +537,7 @@ type AudioNormalizationSettingsParameters struct {
 
 type AudioOnlyHlsSettingsInitParameters struct {
 
-	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	// User-specified id. Ths is used in an output group or an output.
 	AudioGroupID *string `json:"audioGroupId,omitempty" tf:"audio_group_id,omitempty"`
 
 	AudioOnlyImage []AudioOnlyImageInitParameters `json:"audioOnlyImage,omitempty" tf:"audio_only_image,omitempty"`
@@ -575,7 +549,7 @@ type AudioOnlyHlsSettingsInitParameters struct {
 
 type AudioOnlyHlsSettingsObservation struct {
 
-	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	// User-specified id. Ths is used in an output group or an output.
 	AudioGroupID *string `json:"audioGroupId,omitempty" tf:"audio_group_id,omitempty"`
 
 	AudioOnlyImage []AudioOnlyImageObservation `json:"audioOnlyImage,omitempty" tf:"audio_only_image,omitempty"`
@@ -587,7 +561,7 @@ type AudioOnlyHlsSettingsObservation struct {
 
 type AudioOnlyHlsSettingsParameters struct {
 
-	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	AudioGroupID *string `json:"audioGroupId,omitempty" tf:"audio_group_id,omitempty"`
 
@@ -606,7 +580,7 @@ type AudioOnlyImageInitParameters struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -618,7 +592,7 @@ type AudioOnlyImageObservation struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -631,7 +605,7 @@ type AudioOnlyImageParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 
@@ -642,21 +616,21 @@ type AudioOnlyImageParameters struct {
 
 type AudioPidSelectionInitParameters struct {
 
-	// Selects a specific PID from within a source.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+	// User-specified id. Ths is used in an output group or an output.
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type AudioPidSelectionObservation struct {
 
-	// Selects a specific PID from within a source.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+	// User-specified id. Ths is used in an output group or an output.
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type AudioPidSelectionParameters struct {
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	Pid *float64 `json:"pid" tf:"pid,omitempty"`
+	Pid *int64 `json:"pid" tf:"pid,omitempty"`
 }
 
 type AudioSelectorInitParameters struct {
@@ -664,7 +638,7 @@ type AudioSelectorInitParameters struct {
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The audio selector settings. See Audio Selector Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	SelectorSettings []SelectorSettingsInitParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
@@ -673,7 +647,7 @@ type AudioSelectorObservation struct {
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The audio selector settings. See Audio Selector Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	SelectorSettings []SelectorSettingsObservation `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
@@ -683,67 +657,49 @@ type AudioSelectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The audio selector settings. See Audio Selector Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	SelectorSettings []SelectorSettingsParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type AudioSilenceSettingsInitParameters struct {
 
-	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+	// The name of the audio selector used as the source for this AudioDescription.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
-	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
-	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
+	AudioSilenceThresholdMsec *int64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioSilenceSettingsObservation struct {
 
-	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+	// The name of the audio selector used as the source for this AudioDescription.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
-	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
-	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
+	AudioSilenceThresholdMsec *int64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioSilenceSettingsParameters struct {
 
-	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
+	// The name of the audio selector used as the source for this AudioDescription.
 	// +kubebuilder:validation:Optional
 	AudioSelectorName *string `json:"audioSelectorName" tf:"audio_selector_name,omitempty"`
 
-	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	// +kubebuilder:validation:Optional
-	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
+	AudioSilenceThresholdMsec *int64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioTrackSelectionInitParameters struct {
-
-	// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337. See Dolby E Decode for more details.
-	DolbyEDecode []DolbyEDecodeInitParameters `json:"dolbyEDecode,omitempty" tf:"dolby_e_decode,omitempty"`
-
-	// Selects one or more unique audio tracks from within a source. See Audio Tracks for more details.
-	Tracks []TracksInitParameters `json:"tracks,omitempty" tf:"tracks,omitempty"`
+	Track []TrackInitParameters `json:"track,omitempty" tf:"track,omitempty"`
 }
 
 type AudioTrackSelectionObservation struct {
-
-	// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337. See Dolby E Decode for more details.
-	DolbyEDecode []DolbyEDecodeObservation `json:"dolbyEDecode,omitempty" tf:"dolby_e_decode,omitempty"`
-
-	// Selects one or more unique audio tracks from within a source. See Audio Tracks for more details.
-	Tracks []TracksObservation `json:"tracks,omitempty" tf:"tracks,omitempty"`
+	Track []TrackObservation `json:"track,omitempty" tf:"track,omitempty"`
 }
 
 type AudioTrackSelectionParameters struct {
 
-	// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337. See Dolby E Decode for more details.
 	// +kubebuilder:validation:Optional
-	DolbyEDecode []DolbyEDecodeParameters `json:"dolbyEDecode,omitempty" tf:"dolby_e_decode,omitempty"`
-
-	// Selects one or more unique audio tracks from within a source. See Audio Tracks for more details.
-	// +kubebuilder:validation:Optional
-	Tracks []TracksParameters `json:"tracks" tf:"tracks,omitempty"`
+	Track []TrackParameters `json:"track" tf:"track,omitempty"`
 }
 
 type AudioWatermarkSettingsInitParameters struct {
@@ -766,47 +722,39 @@ type AudioWatermarkSettingsParameters struct {
 }
 
 type AutomaticInputFailoverSettingsInitParameters struct {
-
-	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
-	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
+	ErrorClearTimeMsec *int64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
 	FailoverCondition []FailoverConditionInitParameters `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
-	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The input ID of the secondary input in the automatic input failover pair.
+	// The ID of the input.
 	SecondaryInputID *string `json:"secondaryInputId,omitempty" tf:"secondary_input_id,omitempty"`
 }
 
 type AutomaticInputFailoverSettingsObservation struct {
-
-	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
-	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
+	ErrorClearTimeMsec *int64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
 	FailoverCondition []FailoverConditionObservation `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
-	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The input ID of the secondary input in the automatic input failover pair.
+	// The ID of the input.
 	SecondaryInputID *string `json:"secondaryInputId,omitempty" tf:"secondary_input_id,omitempty"`
 }
 
 type AutomaticInputFailoverSettingsParameters struct {
 
-	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	// +kubebuilder:validation:Optional
-	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
+	ErrorClearTimeMsec *int64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FailoverCondition []FailoverConditionParameters `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
-	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	// +kubebuilder:validation:Optional
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The input ID of the secondary input in the automatic input failover pair.
+	// The ID of the input.
 	// +kubebuilder:validation:Optional
 	SecondaryInputID *string `json:"secondaryInputId" tf:"secondary_input_id,omitempty"`
 }
@@ -816,7 +764,7 @@ type AvailBlankingImageInitParameters struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -828,7 +776,7 @@ type AvailBlankingImageObservation struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -841,7 +789,7 @@ type AvailBlankingImageParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 
@@ -879,315 +827,64 @@ type AvailBlankingParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
-type BurnInDestinationSettingsInitParameters struct {
-
-	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
-	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
-
-	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
-	Font []FontInitParameters `json:"font,omitempty" tf:"font,omitempty"`
-
-	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
-
-	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
-	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
-	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
-	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
-
-	// Sub/Burn-in outputs.
-	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
-}
-
-type BurnInDestinationSettingsObservation struct {
-
-	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
-	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
-
-	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
-	Font []FontObservation `json:"font,omitempty" tf:"font,omitempty"`
-
-	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
-
-	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
-	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
-	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
-	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
-
-	// Sub/Burn-in outputs.
-	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
-}
-
-type BurnInDestinationSettingsParameters struct {
-
-	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
-
-	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
-	// +kubebuilder:validation:Optional
-	Font []FontParameters `json:"font,omitempty" tf:"font,omitempty"`
-
-	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
-
-	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	OutlineColor *string `json:"outlineColor" tf:"outline_color,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
-
-	// Sub/Burn-in outputs.
-	// +kubebuilder:validation:Optional
-	TeletextGridControl *string `json:"teletextGridControl" tf:"teletext_grid_control,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
-}
-
-type CaptionDescriptionsInitParameters struct {
-
-	// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
-	Accessibility *string `json:"accessibility,omitempty" tf:"accessibility,omitempty"`
-
-	// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
-	CaptionSelectorName *string `json:"captionSelectorName,omitempty" tf:"caption_selector_name,omitempty"`
-
-	// Additional settings for captions destination that depend on the destination type. See Destination Settings for more details.
-	DestinationSettings []DestinationSettingsInitParameters `json:"destinationSettings,omitempty" tf:"destination_settings,omitempty"`
-
-	// Selects a specific three-letter language code from within an audio source.
-	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
-
-	// Human readable information to indicate captions available for players (eg. English, or Spanish).
-	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
-
-	// Name of the Channel.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type CaptionDescriptionsObservation struct {
-
-	// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
-	Accessibility *string `json:"accessibility,omitempty" tf:"accessibility,omitempty"`
-
-	// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
-	CaptionSelectorName *string `json:"captionSelectorName,omitempty" tf:"caption_selector_name,omitempty"`
-
-	// Additional settings for captions destination that depend on the destination type. See Destination Settings for more details.
-	DestinationSettings []DestinationSettingsObservation `json:"destinationSettings,omitempty" tf:"destination_settings,omitempty"`
-
-	// Selects a specific three-letter language code from within an audio source.
-	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
-
-	// Human readable information to indicate captions available for players (eg. English, or Spanish).
-	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
-
-	// Name of the Channel.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type CaptionDescriptionsParameters struct {
-
-	// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
-	// +kubebuilder:validation:Optional
-	Accessibility *string `json:"accessibility,omitempty" tf:"accessibility,omitempty"`
-
-	// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
-	// +kubebuilder:validation:Optional
-	CaptionSelectorName *string `json:"captionSelectorName" tf:"caption_selector_name,omitempty"`
-
-	// Additional settings for captions destination that depend on the destination type. See Destination Settings for more details.
-	// +kubebuilder:validation:Optional
-	DestinationSettings []DestinationSettingsParameters `json:"destinationSettings,omitempty" tf:"destination_settings,omitempty"`
-
-	// Selects a specific three-letter language code from within an audio source.
-	// +kubebuilder:validation:Optional
-	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
-
-	// Human readable information to indicate captions available for players (eg. English, or Spanish).
-	// +kubebuilder:validation:Optional
-	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
-
-	// Name of the Channel.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
-}
-
 type CaptionLanguageMappingsInitParameters struct {
-	CaptionChannel *float64 `json:"captionChannel,omitempty" tf:"caption_channel,omitempty"`
+	CaptionChannel *int64 `json:"captionChannel,omitempty" tf:"caption_channel,omitempty"`
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// Human readable information to indicate captions available for players (eg. English, or Spanish).
 	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
 }
 
 type CaptionLanguageMappingsObservation struct {
-	CaptionChannel *float64 `json:"captionChannel,omitempty" tf:"caption_channel,omitempty"`
+	CaptionChannel *int64 `json:"captionChannel,omitempty" tf:"caption_channel,omitempty"`
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
-	// Human readable information to indicate captions available for players (eg. English, or Spanish).
 	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
 }
 
 type CaptionLanguageMappingsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	CaptionChannel *float64 `json:"captionChannel" tf:"caption_channel,omitempty"`
+	CaptionChannel *int64 `json:"captionChannel" tf:"caption_channel,omitempty"`
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
 
-	// Human readable information to indicate captions available for players (eg. English, or Spanish).
 	// +kubebuilder:validation:Optional
 	LanguageDescription *string `json:"languageDescription" tf:"language_description,omitempty"`
 }
 
 type CaptionSelectorInitParameters struct {
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The audio selector settings. See Audio Selector Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	SelectorSettings []CaptionSelectorSelectorSettingsInitParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type CaptionSelectorObservation struct {
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The audio selector settings. See Audio Selector Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	SelectorSettings []CaptionSelectorSelectorSettingsObservation `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type CaptionSelectorParameters struct {
 
-	// Selects a specific three-letter language code from within an audio source.
+	// When specified this field indicates the three letter language code of the caption track to extract from the source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
@@ -1195,86 +892,76 @@ type CaptionSelectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The audio selector settings. See Audio Selector Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	SelectorSettings []CaptionSelectorSelectorSettingsParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type CaptionSelectorSelectorSettingsInitParameters struct {
 
-	// Ancillary Source Settings. See Ancillary Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	AncillarySourceSettings []AncillarySourceSettingsInitParameters `json:"ancillarySourceSettings,omitempty" tf:"ancillary_source_settings,omitempty"`
 
-	// Arib Source Settings.
-	AribSourceSettings []AribSourceSettingsInitParameters `json:"aribSourceSettings,omitempty" tf:"arib_source_settings,omitempty"`
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	DvbTdtSettings []SelectorSettingsDvbTdtSettingsInitParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// DVB Sub Source Settings. See DVB Sub Source Settings for more details.
-	DvbSubSourceSettings []DvbSubSourceSettingsInitParameters `json:"dvbSubSourceSettings,omitempty" tf:"dvb_sub_source_settings,omitempty"`
-
-	// Embedded Source Settings. See Embedded Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	EmbeddedSourceSettings []EmbeddedSourceSettingsInitParameters `json:"embeddedSourceSettings,omitempty" tf:"embedded_source_settings,omitempty"`
 
-	// SCTE20 Source Settings. See SCTE 20 Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	Scte20SourceSettings []Scte20SourceSettingsInitParameters `json:"scte20SourceSettings,omitempty" tf:"scte20_source_settings,omitempty"`
 
-	// SCTE27 Source Settings. See SCTE 27 Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	Scte27SourceSettings []Scte27SourceSettingsInitParameters `json:"scte27SourceSettings,omitempty" tf:"scte27_source_settings,omitempty"`
 
-	// Teletext Source Settings. See Teletext Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	TeletextSourceSettings []TeletextSourceSettingsInitParameters `json:"teletextSourceSettings,omitempty" tf:"teletext_source_settings,omitempty"`
 }
 
 type CaptionSelectorSelectorSettingsObservation struct {
 
-	// Ancillary Source Settings. See Ancillary Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	AncillarySourceSettings []AncillarySourceSettingsObservation `json:"ancillarySourceSettings,omitempty" tf:"ancillary_source_settings,omitempty"`
 
-	// Arib Source Settings.
-	AribSourceSettings []AribSourceSettingsParameters `json:"aribSourceSettings,omitempty" tf:"arib_source_settings,omitempty"`
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	DvbTdtSettings []SelectorSettingsDvbTdtSettingsObservation `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// DVB Sub Source Settings. See DVB Sub Source Settings for more details.
-	DvbSubSourceSettings []DvbSubSourceSettingsObservation `json:"dvbSubSourceSettings,omitempty" tf:"dvb_sub_source_settings,omitempty"`
-
-	// Embedded Source Settings. See Embedded Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	EmbeddedSourceSettings []EmbeddedSourceSettingsObservation `json:"embeddedSourceSettings,omitempty" tf:"embedded_source_settings,omitempty"`
 
-	// SCTE20 Source Settings. See SCTE 20 Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	Scte20SourceSettings []Scte20SourceSettingsObservation `json:"scte20SourceSettings,omitempty" tf:"scte20_source_settings,omitempty"`
 
-	// SCTE27 Source Settings. See SCTE 27 Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	Scte27SourceSettings []Scte27SourceSettingsObservation `json:"scte27SourceSettings,omitempty" tf:"scte27_source_settings,omitempty"`
 
-	// Teletext Source Settings. See Teletext Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	TeletextSourceSettings []TeletextSourceSettingsObservation `json:"teletextSourceSettings,omitempty" tf:"teletext_source_settings,omitempty"`
 }
 
 type CaptionSelectorSelectorSettingsParameters struct {
 
-	// Ancillary Source Settings. See Ancillary Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	AncillarySourceSettings []AncillarySourceSettingsParameters `json:"ancillarySourceSettings,omitempty" tf:"ancillary_source_settings,omitempty"`
 
-	// Arib Source Settings.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
-	AribSourceSettings []AribSourceSettingsParameters `json:"aribSourceSettings,omitempty" tf:"arib_source_settings,omitempty"`
+	DvbTdtSettings []SelectorSettingsDvbTdtSettingsParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// DVB Sub Source Settings. See DVB Sub Source Settings for more details.
-	// +kubebuilder:validation:Optional
-	DvbSubSourceSettings []DvbSubSourceSettingsParameters `json:"dvbSubSourceSettings,omitempty" tf:"dvb_sub_source_settings,omitempty"`
-
-	// Embedded Source Settings. See Embedded Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	EmbeddedSourceSettings []EmbeddedSourceSettingsParameters `json:"embeddedSourceSettings,omitempty" tf:"embedded_source_settings,omitempty"`
 
-	// SCTE20 Source Settings. See SCTE 20 Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	Scte20SourceSettings []Scte20SourceSettingsParameters `json:"scte20SourceSettings,omitempty" tf:"scte20_source_settings,omitempty"`
 
-	// SCTE27 Source Settings. See SCTE 27 Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	Scte27SourceSettings []Scte27SourceSettingsParameters `json:"scte27SourceSettings,omitempty" tf:"scte27_source_settings,omitempty"`
 
-	// Teletext Source Settings. See Teletext Source Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	TeletextSourceSettings []TeletextSourceSettingsParameters `json:"teletextSourceSettings,omitempty" tf:"teletext_source_settings,omitempty"`
 }
@@ -1340,13 +1027,13 @@ type ChannelInitParameters struct {
 type ChannelMappingsInitParameters struct {
 	InputChannelLevels []InputChannelLevelsInitParameters `json:"inputChannelLevels,omitempty" tf:"input_channel_levels,omitempty"`
 
-	OutputChannel *float64 `json:"outputChannel,omitempty" tf:"output_channel,omitempty"`
+	OutputChannel *int64 `json:"outputChannel,omitempty" tf:"output_channel,omitempty"`
 }
 
 type ChannelMappingsObservation struct {
 	InputChannelLevels []InputChannelLevelsObservation `json:"inputChannelLevels,omitempty" tf:"input_channel_levels,omitempty"`
 
-	OutputChannel *float64 `json:"outputChannel,omitempty" tf:"output_channel,omitempty"`
+	OutputChannel *int64 `json:"outputChannel,omitempty" tf:"output_channel,omitempty"`
 }
 
 type ChannelMappingsParameters struct {
@@ -1355,7 +1042,7 @@ type ChannelMappingsParameters struct {
 	InputChannelLevels []InputChannelLevelsParameters `json:"inputChannelLevels" tf:"input_channel_levels,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	OutputChannel *float64 `json:"outputChannel" tf:"output_channel,omitempty"`
+	OutputChannel *int64 `json:"outputChannel" tf:"output_channel,omitempty"`
 }
 
 type ChannelObservation struct {
@@ -1642,21 +1329,21 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
 
 	AudioBufferModel *string `json:"audioBufferModel,omitempty" tf:"audio_buffer_model,omitempty"`
 
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
 	AudioStreamType *string `json:"audioStreamType,omitempty" tf:"audio_stream_type,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	BufferModel *string `json:"bufferModel,omitempty" tf:"buffer_model,omitempty"`
 
@@ -1673,26 +1360,26 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []M2TsSettingsDvbTdtSettingsInitParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
 
 	EbpAudioInterval *string `json:"ebpAudioInterval,omitempty" tf:"ebp_audio_interval,omitempty"`
 
-	EbpLookaheadMs *float64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
+	EbpLookaheadMs *int64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -1706,21 +1393,21 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 	// Average bitrate in bits/second.
 	NullPacketBitrate *float64 `json:"nullPacketBitrate,omitempty" tf:"null_packet_bitrate,omitempty"`
 
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	RateMode *string `json:"rateMode,omitempty" tf:"rate_mode,omitempty"`
 
@@ -1739,13 +1426,13 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -1754,21 +1441,21 @@ type ContainerSettingsM2TsSettingsObservation struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
 
 	AudioBufferModel *string `json:"audioBufferModel,omitempty" tf:"audio_buffer_model,omitempty"`
 
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
 	AudioStreamType *string `json:"audioStreamType,omitempty" tf:"audio_stream_type,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	BufferModel *string `json:"bufferModel,omitempty" tf:"buffer_model,omitempty"`
 
@@ -1785,26 +1472,26 @@ type ContainerSettingsM2TsSettingsObservation struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []M2TsSettingsDvbTdtSettingsObservation `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
 
 	EbpAudioInterval *string `json:"ebpAudioInterval,omitempty" tf:"ebp_audio_interval,omitempty"`
 
-	EbpLookaheadMs *float64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
+	EbpLookaheadMs *int64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -1818,21 +1505,21 @@ type ContainerSettingsM2TsSettingsObservation struct {
 	// Average bitrate in bits/second.
 	NullPacketBitrate *float64 `json:"nullPacketBitrate,omitempty" tf:"null_packet_bitrate,omitempty"`
 
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	RateMode *string `json:"rateMode,omitempty" tf:"rate_mode,omitempty"`
 
@@ -1851,13 +1538,13 @@ type ContainerSettingsM2TsSettingsObservation struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -1869,7 +1556,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
@@ -1880,7 +1567,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	AudioBufferModel *string `json:"audioBufferModel,omitempty" tf:"audio_buffer_model,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
@@ -1890,7 +1577,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 
 	// Average bitrate in bits/second.
 	// +kubebuilder:validation:Optional
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	BufferModel *string `json:"bufferModel,omitempty" tf:"buffer_model,omitempty"`
@@ -1913,7 +1600,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DvbTdtSettings []M2TsSettingsDvbTdtSettingsParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
@@ -1924,23 +1611,23 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	EbpAudioInterval *string `json:"ebpAudioInterval,omitempty" tf:"ebp_audio_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EbpLookaheadMs *float64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
+	EbpLookaheadMs *int64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
@@ -1961,27 +1648,27 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	NullPacketBitrate *float64 `json:"nullPacketBitrate,omitempty" tf:"null_packet_bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RateMode *string `json:"rateMode,omitempty" tf:"rate_mode,omitempty"`
@@ -2008,15 +1695,15 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
@@ -2058,145 +1745,6 @@ type DestinationParameters struct {
 	// Reference ID for the destination.
 	// +kubebuilder:validation:Optional
 	DestinationRefID *string `json:"destinationRefId" tf:"destination_ref_id,omitempty"`
-}
-
-type DestinationSettingsInitParameters struct {
-
-	// Arib Destination Settings.
-	AribDestinationSettings []AribDestinationSettingsInitParameters `json:"aribDestinationSettings,omitempty" tf:"arib_destination_settings,omitempty"`
-
-	// Burn In Destination Settings. See Burn In Destination Settings for more details.
-	BurnInDestinationSettings []BurnInDestinationSettingsInitParameters `json:"burnInDestinationSettings,omitempty" tf:"burn_in_destination_settings,omitempty"`
-
-	// DVB Sub Destination Settings. See DVB Sub Destination Settings for more details.
-	DvbSubDestinationSettings []DvbSubDestinationSettingsInitParameters `json:"dvbSubDestinationSettings,omitempty" tf:"dvb_sub_destination_settings,omitempty"`
-
-	// EBU TT D Destination Settings. See EBU TT D Destination Settings for more details.
-	EbuTtDDestinationSettings []EbuTtDDestinationSettingsInitParameters `json:"ebuTtDDestinationSettings,omitempty" tf:"ebu_tt_d_destination_settings,omitempty"`
-
-	// Embedded Destination Settings.
-	EmbeddedDestinationSettings []EmbeddedDestinationSettingsInitParameters `json:"embeddedDestinationSettings,omitempty" tf:"embedded_destination_settings,omitempty"`
-
-	// Embedded Plus SCTE20 Destination Settings.
-	EmbeddedPlusScte20DestinationSettings []EmbeddedPlusScte20DestinationSettingsInitParameters `json:"embeddedPlusScte20DestinationSettings,omitempty" tf:"embedded_plus_scte20_destination_settings,omitempty"`
-
-	// RTMP Caption Info Destination Settings.
-	RtmpCaptionInfoDestinationSettings []RtmpCaptionInfoDestinationSettingsInitParameters `json:"rtmpCaptionInfoDestinationSettings,omitempty" tf:"rtmp_caption_info_destination_settings,omitempty"`
-
-	// SCTE20 Plus Embedded Destination Settings.
-	Scte20PlusEmbeddedDestinationSettings []Scte20PlusEmbeddedDestinationSettingsInitParameters `json:"scte20PlusEmbeddedDestinationSettings,omitempty" tf:"scte20_plus_embedded_destination_settings,omitempty"`
-
-	// –  SCTE27 Destination Settings.
-	Scte27DestinationSettings []Scte27DestinationSettingsInitParameters `json:"scte27DestinationSettings,omitempty" tf:"scte27_destination_settings,omitempty"`
-
-	// –  SMPTE TT Destination Settings.
-	SmpteTtDestinationSettings []SmpteTtDestinationSettingsInitParameters `json:"smpteTtDestinationSettings,omitempty" tf:"smpte_tt_destination_settings,omitempty"`
-
-	// –  Teletext Destination Settings.
-	TeletextDestinationSettings []TeletextDestinationSettingsInitParameters `json:"teletextDestinationSettings,omitempty" tf:"teletext_destination_settings,omitempty"`
-
-	// –  TTML Destination Settings. See TTML Destination Settings for more details.
-	TtmlDestinationSettings []TtmlDestinationSettingsInitParameters `json:"ttmlDestinationSettings,omitempty" tf:"ttml_destination_settings,omitempty"`
-
-	// WebVTT Destination Settings. See WebVTT Destination Settings for more details.
-	WebvttDestinationSettings []WebvttDestinationSettingsInitParameters `json:"webvttDestinationSettings,omitempty" tf:"webvtt_destination_settings,omitempty"`
-}
-
-type DestinationSettingsObservation struct {
-
-	// Arib Destination Settings.
-	AribDestinationSettings []AribDestinationSettingsParameters `json:"aribDestinationSettings,omitempty" tf:"arib_destination_settings,omitempty"`
-
-	// Burn In Destination Settings. See Burn In Destination Settings for more details.
-	BurnInDestinationSettings []BurnInDestinationSettingsObservation `json:"burnInDestinationSettings,omitempty" tf:"burn_in_destination_settings,omitempty"`
-
-	// DVB Sub Destination Settings. See DVB Sub Destination Settings for more details.
-	DvbSubDestinationSettings []DvbSubDestinationSettingsObservation `json:"dvbSubDestinationSettings,omitempty" tf:"dvb_sub_destination_settings,omitempty"`
-
-	// EBU TT D Destination Settings. See EBU TT D Destination Settings for more details.
-	EbuTtDDestinationSettings []EbuTtDDestinationSettingsObservation `json:"ebuTtDDestinationSettings,omitempty" tf:"ebu_tt_d_destination_settings,omitempty"`
-
-	// Embedded Destination Settings.
-	EmbeddedDestinationSettings []EmbeddedDestinationSettingsParameters `json:"embeddedDestinationSettings,omitempty" tf:"embedded_destination_settings,omitempty"`
-
-	// Embedded Plus SCTE20 Destination Settings.
-	EmbeddedPlusScte20DestinationSettings []EmbeddedPlusScte20DestinationSettingsParameters `json:"embeddedPlusScte20DestinationSettings,omitempty" tf:"embedded_plus_scte20_destination_settings,omitempty"`
-
-	// RTMP Caption Info Destination Settings.
-	RtmpCaptionInfoDestinationSettings []RtmpCaptionInfoDestinationSettingsParameters `json:"rtmpCaptionInfoDestinationSettings,omitempty" tf:"rtmp_caption_info_destination_settings,omitempty"`
-
-	// SCTE20 Plus Embedded Destination Settings.
-	Scte20PlusEmbeddedDestinationSettings []Scte20PlusEmbeddedDestinationSettingsParameters `json:"scte20PlusEmbeddedDestinationSettings,omitempty" tf:"scte20_plus_embedded_destination_settings,omitempty"`
-
-	// –  SCTE27 Destination Settings.
-	Scte27DestinationSettings []Scte27DestinationSettingsParameters `json:"scte27DestinationSettings,omitempty" tf:"scte27_destination_settings,omitempty"`
-
-	// –  SMPTE TT Destination Settings.
-	SmpteTtDestinationSettings []SmpteTtDestinationSettingsParameters `json:"smpteTtDestinationSettings,omitempty" tf:"smpte_tt_destination_settings,omitempty"`
-
-	// –  Teletext Destination Settings.
-	TeletextDestinationSettings []TeletextDestinationSettingsParameters `json:"teletextDestinationSettings,omitempty" tf:"teletext_destination_settings,omitempty"`
-
-	// –  TTML Destination Settings. See TTML Destination Settings for more details.
-	TtmlDestinationSettings []TtmlDestinationSettingsObservation `json:"ttmlDestinationSettings,omitempty" tf:"ttml_destination_settings,omitempty"`
-
-	// WebVTT Destination Settings. See WebVTT Destination Settings for more details.
-	WebvttDestinationSettings []WebvttDestinationSettingsObservation `json:"webvttDestinationSettings,omitempty" tf:"webvtt_destination_settings,omitempty"`
-}
-
-type DestinationSettingsParameters struct {
-
-	// Arib Destination Settings.
-	// +kubebuilder:validation:Optional
-	AribDestinationSettings []AribDestinationSettingsParameters `json:"aribDestinationSettings,omitempty" tf:"arib_destination_settings,omitempty"`
-
-	// Burn In Destination Settings. See Burn In Destination Settings for more details.
-	// +kubebuilder:validation:Optional
-	BurnInDestinationSettings []BurnInDestinationSettingsParameters `json:"burnInDestinationSettings,omitempty" tf:"burn_in_destination_settings,omitempty"`
-
-	// DVB Sub Destination Settings. See DVB Sub Destination Settings for more details.
-	// +kubebuilder:validation:Optional
-	DvbSubDestinationSettings []DvbSubDestinationSettingsParameters `json:"dvbSubDestinationSettings,omitempty" tf:"dvb_sub_destination_settings,omitempty"`
-
-	// EBU TT D Destination Settings. See EBU TT D Destination Settings for more details.
-	// +kubebuilder:validation:Optional
-	EbuTtDDestinationSettings []EbuTtDDestinationSettingsParameters `json:"ebuTtDDestinationSettings,omitempty" tf:"ebu_tt_d_destination_settings,omitempty"`
-
-	// Embedded Destination Settings.
-	// +kubebuilder:validation:Optional
-	EmbeddedDestinationSettings []EmbeddedDestinationSettingsParameters `json:"embeddedDestinationSettings,omitempty" tf:"embedded_destination_settings,omitempty"`
-
-	// Embedded Plus SCTE20 Destination Settings.
-	// +kubebuilder:validation:Optional
-	EmbeddedPlusScte20DestinationSettings []EmbeddedPlusScte20DestinationSettingsParameters `json:"embeddedPlusScte20DestinationSettings,omitempty" tf:"embedded_plus_scte20_destination_settings,omitempty"`
-
-	// RTMP Caption Info Destination Settings.
-	// +kubebuilder:validation:Optional
-	RtmpCaptionInfoDestinationSettings []RtmpCaptionInfoDestinationSettingsParameters `json:"rtmpCaptionInfoDestinationSettings,omitempty" tf:"rtmp_caption_info_destination_settings,omitempty"`
-
-	// SCTE20 Plus Embedded Destination Settings.
-	// +kubebuilder:validation:Optional
-	Scte20PlusEmbeddedDestinationSettings []Scte20PlusEmbeddedDestinationSettingsParameters `json:"scte20PlusEmbeddedDestinationSettings,omitempty" tf:"scte20_plus_embedded_destination_settings,omitempty"`
-
-	// –  SCTE27 Destination Settings.
-	// +kubebuilder:validation:Optional
-	Scte27DestinationSettings []Scte27DestinationSettingsParameters `json:"scte27DestinationSettings,omitempty" tf:"scte27_destination_settings,omitempty"`
-
-	// –  SMPTE TT Destination Settings.
-	// +kubebuilder:validation:Optional
-	SmpteTtDestinationSettings []SmpteTtDestinationSettingsParameters `json:"smpteTtDestinationSettings,omitempty" tf:"smpte_tt_destination_settings,omitempty"`
-
-	// –  Teletext Destination Settings.
-	// +kubebuilder:validation:Optional
-	TeletextDestinationSettings []TeletextDestinationSettingsParameters `json:"teletextDestinationSettings,omitempty" tf:"teletext_destination_settings,omitempty"`
-
-	// –  TTML Destination Settings. See TTML Destination Settings for more details.
-	// +kubebuilder:validation:Optional
-	TtmlDestinationSettings []TtmlDestinationSettingsParameters `json:"ttmlDestinationSettings,omitempty" tf:"ttml_destination_settings,omitempty"`
-
-	// WebVTT Destination Settings. See WebVTT Destination Settings for more details.
-	// +kubebuilder:validation:Optional
-	WebvttDestinationSettings []WebvttDestinationSettingsParameters `json:"webvttDestinationSettings,omitempty" tf:"webvtt_destination_settings,omitempty"`
 }
 
 type DestinationsInitParameters struct {
@@ -2248,25 +1796,6 @@ type DestinationsParameters struct {
 	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
-type DolbyEDecodeInitParameters struct {
-
-	// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
-	ProgramSelection *string `json:"programSelection,omitempty" tf:"program_selection,omitempty"`
-}
-
-type DolbyEDecodeObservation struct {
-
-	// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
-	ProgramSelection *string `json:"programSelection,omitempty" tf:"program_selection,omitempty"`
-}
-
-type DolbyEDecodeParameters struct {
-
-	// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
-	// +kubebuilder:validation:Optional
-	ProgramSelection *string `json:"programSelection" tf:"program_selection,omitempty"`
-}
-
 type DolbyVision81SettingsInitParameters struct {
 }
 
@@ -2279,43 +1808,43 @@ type DolbyVision81SettingsParameters struct {
 type DvbNitSettingsInitParameters struct {
 
 	// User-specified id. Ths is used in an output group or an output.
-	NetworkID *float64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
+	NetworkID *int64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// Name of the Channel.
 	NetworkName *string `json:"networkName,omitempty" tf:"network_name,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type DvbNitSettingsObservation struct {
 
 	// User-specified id. Ths is used in an output group or an output.
-	NetworkID *float64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
+	NetworkID *int64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// Name of the Channel.
 	NetworkName *string `json:"networkName,omitempty" tf:"network_name,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type DvbNitSettingsParameters struct {
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	NetworkID *float64 `json:"networkId" tf:"network_id,omitempty"`
+	NetworkID *int64 `json:"networkId" tf:"network_id,omitempty"`
 
 	// Name of the Channel.
 	// +kubebuilder:validation:Optional
 	NetworkName *string `json:"networkName" tf:"network_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type DvbSdtSettingsInitParameters struct {
 	OutputSdt *string `json:"outputSdt,omitempty" tf:"output_sdt,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 
 	// Name of the Channel.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -2327,7 +1856,7 @@ type DvbSdtSettingsInitParameters struct {
 type DvbSdtSettingsObservation struct {
 	OutputSdt *string `json:"outputSdt,omitempty" tf:"output_sdt,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 
 	// Name of the Channel.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -2342,7 +1871,7 @@ type DvbSdtSettingsParameters struct {
 	OutputSdt *string `json:"outputSdt,omitempty" tf:"output_sdt,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 
 	// Name of the Channel.
 	// +kubebuilder:validation:Optional
@@ -2353,265 +1882,18 @@ type DvbSdtSettingsParameters struct {
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 }
 
-type DvbSubDestinationSettingsFontInitParameters struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-
-	// Username for destination.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type DvbSubDestinationSettingsFontObservation struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-
-	// Username for destination.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type DvbSubDestinationSettingsFontParameters struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	// +kubebuilder:validation:Optional
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri" tf:"uri,omitempty"`
-
-	// Username for destination.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type DvbSubDestinationSettingsInitParameters struct {
-
-	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
-	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
-
-	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
-	Font []DvbSubDestinationSettingsFontInitParameters `json:"font,omitempty" tf:"font,omitempty"`
-
-	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
-
-	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
-	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
-	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
-	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
-
-	// Sub/Burn-in outputs.
-	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
-}
-
-type DvbSubDestinationSettingsObservation struct {
-
-	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
-	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
-
-	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
-	Font []DvbSubDestinationSettingsFontObservation `json:"font,omitempty" tf:"font,omitempty"`
-
-	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
-
-	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
-	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
-	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
-	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
-
-	// Sub/Burn-in outputs.
-	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
-}
-
-type DvbSubDestinationSettingsParameters struct {
-
-	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
-
-	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
-	// +kubebuilder:validation:Optional
-	Font []DvbSubDestinationSettingsFontParameters `json:"font,omitempty" tf:"font,omitempty"`
-
-	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
-
-	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
-
-	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
-
-	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
-
-	// Sub/Burn-in outputs.
-	// +kubebuilder:validation:Optional
-	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
-
-	// in and DVB-Sub font settings must match.
-	// +kubebuilder:validation:Optional
-	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
-}
-
-type DvbSubSourceSettingsInitParameters struct {
-
-	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
-	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
-
-	// Selects a specific PID from within a source.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
-}
-
-type DvbSubSourceSettingsObservation struct {
-
-	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
-	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
-
-	// Selects a specific PID from within a source.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
-}
-
-type DvbSubSourceSettingsParameters struct {
-
-	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
-	// +kubebuilder:validation:Optional
-	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
-
-	// Selects a specific PID from within a source.
-	// +kubebuilder:validation:Optional
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
-}
-
 type DvbTdtSettingsInitParameters struct {
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type DvbTdtSettingsObservation struct {
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type DvbTdtSettingsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type Eac3AtmosSettingsInitParameters struct {
@@ -2710,7 +1992,7 @@ type Eac3SettingsInitParameters struct {
 	DcFilter *string `json:"dcFilter,omitempty" tf:"dc_filter,omitempty"`
 
 	// Sets the dialnorm of the output.
-	Dialnorm *float64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
+	Dialnorm *int64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
 
 	// Sets the Dolby dynamic range compression profile.
 	DrcLine *string `json:"drcLine,omitempty" tf:"drc_line,omitempty"`
@@ -2766,7 +2048,7 @@ type Eac3SettingsObservation struct {
 	DcFilter *string `json:"dcFilter,omitempty" tf:"dc_filter,omitempty"`
 
 	// Sets the dialnorm of the output.
-	Dialnorm *float64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
+	Dialnorm *int64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
 
 	// Sets the Dolby dynamic range compression profile.
 	DrcLine *string `json:"drcLine,omitempty" tf:"drc_line,omitempty"`
@@ -2828,7 +2110,7 @@ type Eac3SettingsParameters struct {
 
 	// Sets the dialnorm of the output.
 	// +kubebuilder:validation:Optional
-	Dialnorm *float64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
+	Dialnorm *int64 `json:"dialnorm,omitempty" tf:"dialnorm,omitempty"`
 
 	// Sets the Dolby dynamic range compression profile.
 	// +kubebuilder:validation:Optional
@@ -2881,110 +2163,39 @@ type Eac3SettingsParameters struct {
 	SurroundMode *string `json:"surroundMode,omitempty" tf:"surround_mode,omitempty"`
 }
 
-type EbuTtDDestinationSettingsInitParameters struct {
-
-	// –  Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
-	CopyrightHolder *string `json:"copyrightHolder,omitempty" tf:"copyright_holder,omitempty"`
-
-	// line captions). - enabled: Fill with the captions background color (as specified in the input captions). - disabled: Leave the gap unfilled.
-	FillLineGap *string `json:"fillLineGap,omitempty" tf:"fill_line_gap,omitempty"`
-
-	// TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to “monospaced”. (If styleControl is set to exclude, the font family is always set to “monospaced”.) You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size. - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font). - Leave blank to set the family to “monospace”.
-	FontFamily *string `json:"fontFamily,omitempty" tf:"font_family,omitempty"`
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type EbuTtDDestinationSettingsObservation struct {
-
-	// –  Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
-	CopyrightHolder *string `json:"copyrightHolder,omitempty" tf:"copyright_holder,omitempty"`
-
-	// line captions). - enabled: Fill with the captions background color (as specified in the input captions). - disabled: Leave the gap unfilled.
-	FillLineGap *string `json:"fillLineGap,omitempty" tf:"fill_line_gap,omitempty"`
-
-	// TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to “monospaced”. (If styleControl is set to exclude, the font family is always set to “monospaced”.) You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size. - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font). - Leave blank to set the family to “monospace”.
-	FontFamily *string `json:"fontFamily,omitempty" tf:"font_family,omitempty"`
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type EbuTtDDestinationSettingsParameters struct {
-
-	// –  Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
-	// +kubebuilder:validation:Optional
-	CopyrightHolder *string `json:"copyrightHolder,omitempty" tf:"copyright_holder,omitempty"`
-
-	// line captions). - enabled: Fill with the captions background color (as specified in the input captions). - disabled: Leave the gap unfilled.
-	// +kubebuilder:validation:Optional
-	FillLineGap *string `json:"fillLineGap,omitempty" tf:"fill_line_gap,omitempty"`
-
-	// TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to “monospaced”. (If styleControl is set to exclude, the font family is always set to “monospaced”.) You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size. - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font). - Leave blank to set the family to “monospace”.
-	// +kubebuilder:validation:Optional
-	FontFamily *string `json:"fontFamily,omitempty" tf:"font_family,omitempty"`
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	// +kubebuilder:validation:Optional
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type EmbeddedDestinationSettingsInitParameters struct {
-}
-
-type EmbeddedDestinationSettingsObservation struct {
-}
-
-type EmbeddedDestinationSettingsParameters struct {
-}
-
-type EmbeddedPlusScte20DestinationSettingsInitParameters struct {
-}
-
-type EmbeddedPlusScte20DestinationSettingsObservation struct {
-}
-
-type EmbeddedPlusScte20DestinationSettingsParameters struct {
-}
-
 type EmbeddedSourceSettingsInitParameters struct {
-
-	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
-	// Set to “auto” to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
 	Scte20Detection *string `json:"scte20Detection,omitempty" tf:"scte20_detection,omitempty"`
 
-	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
-	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+	Source608ChannelNumber *int64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+
+	Source608TrackNumber *int64 `json:"source608TrackNumber,omitempty" tf:"source_608_track_number,omitempty"`
 }
 
 type EmbeddedSourceSettingsObservation struct {
-
-	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
-	// Set to “auto” to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
 	Scte20Detection *string `json:"scte20Detection,omitempty" tf:"scte20_detection,omitempty"`
 
-	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
-	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+	Source608ChannelNumber *int64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+
+	Source608TrackNumber *int64 `json:"source608TrackNumber,omitempty" tf:"source_608_track_number,omitempty"`
 }
 
 type EmbeddedSourceSettingsParameters struct {
 
-	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	// +kubebuilder:validation:Optional
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
-	// Set to “auto” to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
 	// +kubebuilder:validation:Optional
 	Scte20Detection *string `json:"scte20Detection,omitempty" tf:"scte20_detection,omitempty"`
 
-	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	// +kubebuilder:validation:Optional
-	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+	Source608ChannelNumber *int64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Source608TrackNumber *int64 `json:"source608TrackNumber,omitempty" tf:"source_608_track_number,omitempty"`
 }
 
 type EncoderSettingsInitParameters struct {
@@ -2994,18 +2205,6 @@ type EncoderSettingsInitParameters struct {
 
 	// Settings for ad avail blanking. See Avail Blanking for more details.
 	AvailBlanking []AvailBlankingInitParameters `json:"availBlanking,omitempty" tf:"avail_blanking,omitempty"`
-
-	// Caption Descriptions. See Caption Descriptions for more details.
-	CaptionDescriptions []CaptionDescriptionsInitParameters `json:"captionDescriptions,omitempty" tf:"caption_descriptions,omitempty"`
-
-	// Configuration settings that apply to the event as a whole. See Global Configuration for more details.
-	GlobalConfiguration []GlobalConfigurationInitParameters `json:"globalConfiguration,omitempty" tf:"global_configuration,omitempty"`
-
-	// Settings for motion graphics. See Motion Graphics Configuration for more details.
-	MotionGraphicsConfiguration []MotionGraphicsConfigurationInitParameters `json:"motionGraphicsConfiguration,omitempty" tf:"motion_graphics_configuration,omitempty"`
-
-	// Nielsen configuration settings. See Nielsen Configuration for more details.
-	NielsenConfiguration []NielsenConfigurationInitParameters `json:"nielsenConfiguration,omitempty" tf:"nielsen_configuration,omitempty"`
 
 	// Output groups for the channel. See Output Groups for more details.
 	OutputGroups []OutputGroupsInitParameters `json:"outputGroups,omitempty" tf:"output_groups,omitempty"`
@@ -3024,18 +2223,6 @@ type EncoderSettingsObservation struct {
 
 	// Settings for ad avail blanking. See Avail Blanking for more details.
 	AvailBlanking []AvailBlankingObservation `json:"availBlanking,omitempty" tf:"avail_blanking,omitempty"`
-
-	// Caption Descriptions. See Caption Descriptions for more details.
-	CaptionDescriptions []CaptionDescriptionsObservation `json:"captionDescriptions,omitempty" tf:"caption_descriptions,omitempty"`
-
-	// Configuration settings that apply to the event as a whole. See Global Configuration for more details.
-	GlobalConfiguration []GlobalConfigurationObservation `json:"globalConfiguration,omitempty" tf:"global_configuration,omitempty"`
-
-	// Settings for motion graphics. See Motion Graphics Configuration for more details.
-	MotionGraphicsConfiguration []MotionGraphicsConfigurationObservation `json:"motionGraphicsConfiguration,omitempty" tf:"motion_graphics_configuration,omitempty"`
-
-	// Nielsen configuration settings. See Nielsen Configuration for more details.
-	NielsenConfiguration []NielsenConfigurationObservation `json:"nielsenConfiguration,omitempty" tf:"nielsen_configuration,omitempty"`
 
 	// Output groups for the channel. See Output Groups for more details.
 	OutputGroups []OutputGroupsObservation `json:"outputGroups,omitempty" tf:"output_groups,omitempty"`
@@ -3057,22 +2244,6 @@ type EncoderSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailBlanking []AvailBlankingParameters `json:"availBlanking,omitempty" tf:"avail_blanking,omitempty"`
 
-	// Caption Descriptions. See Caption Descriptions for more details.
-	// +kubebuilder:validation:Optional
-	CaptionDescriptions []CaptionDescriptionsParameters `json:"captionDescriptions,omitempty" tf:"caption_descriptions,omitempty"`
-
-	// Configuration settings that apply to the event as a whole. See Global Configuration for more details.
-	// +kubebuilder:validation:Optional
-	GlobalConfiguration []GlobalConfigurationParameters `json:"globalConfiguration,omitempty" tf:"global_configuration,omitempty"`
-
-	// Settings for motion graphics. See Motion Graphics Configuration for more details.
-	// +kubebuilder:validation:Optional
-	MotionGraphicsConfiguration []MotionGraphicsConfigurationParameters `json:"motionGraphicsConfiguration,omitempty" tf:"motion_graphics_configuration,omitempty"`
-
-	// Nielsen configuration settings. See Nielsen Configuration for more details.
-	// +kubebuilder:validation:Optional
-	NielsenConfiguration []NielsenConfigurationParameters `json:"nielsenConfiguration,omitempty" tf:"nielsen_configuration,omitempty"`
-
 	// Output groups for the channel. See Output Groups for more details.
 	// +kubebuilder:validation:Optional
 	OutputGroups []OutputGroupsParameters `json:"outputGroups" tf:"output_groups,omitempty"`
@@ -3088,58 +2259,58 @@ type EncoderSettingsParameters struct {
 
 type FailoverConditionInitParameters struct {
 
-	// Failover condition type-specific settings. See Failover Condition Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	FailoverConditionSettings []FailoverConditionSettingsInitParameters `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionObservation struct {
 
-	// Failover condition type-specific settings. See Failover Condition Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	FailoverConditionSettings []FailoverConditionSettingsObservation `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionParameters struct {
 
-	// Failover condition type-specific settings. See Failover Condition Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	FailoverConditionSettings []FailoverConditionSettingsParameters `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionSettingsInitParameters struct {
 
-	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	AudioSilenceSettings []AudioSilenceSettingsInitParameters `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	InputLossSettings []InputLossSettingsInitParameters `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	VideoBlackSettings []VideoBlackSettingsInitParameters `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
 
 type FailoverConditionSettingsObservation struct {
 
-	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	AudioSilenceSettings []AudioSilenceSettingsObservation `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	InputLossSettings []InputLossSettingsObservation `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	VideoBlackSettings []VideoBlackSettingsObservation `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
 
 type FailoverConditionSettingsParameters struct {
 
-	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	AudioSilenceSettings []AudioSilenceSettingsParameters `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	InputLossSettings []InputLossSettingsParameters `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	VideoBlackSettings []VideoBlackSettingsParameters `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
@@ -3147,32 +2318,32 @@ type FailoverConditionSettingsParameters struct {
 type FecOutputSettingsInitParameters struct {
 
 	// The height of the FEC protection matrix.
-	ColumnDepth *float64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
+	ColumnDepth *int64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
 
 	// Enables column only or column and row based FEC.
 	IncludeFec *string `json:"includeFec,omitempty" tf:"include_fec,omitempty"`
 
 	// The width of the FEC protection matrix.
-	RowLength *float64 `json:"rowLength,omitempty" tf:"row_length,omitempty"`
+	RowLength *int64 `json:"rowLength,omitempty" tf:"row_length,omitempty"`
 }
 
 type FecOutputSettingsObservation struct {
 
 	// The height of the FEC protection matrix.
-	ColumnDepth *float64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
+	ColumnDepth *int64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
 
 	// Enables column only or column and row based FEC.
 	IncludeFec *string `json:"includeFec,omitempty" tf:"include_fec,omitempty"`
 
 	// The width of the FEC protection matrix.
-	RowLength *float64 `json:"rowLength,omitempty" tf:"row_length,omitempty"`
+	RowLength *int64 `json:"rowLength,omitempty" tf:"row_length,omitempty"`
 }
 
 type FecOutputSettingsParameters struct {
 
 	// The height of the FEC protection matrix.
 	// +kubebuilder:validation:Optional
-	ColumnDepth *float64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
+	ColumnDepth *int64 `json:"columnDepth,omitempty" tf:"column_depth,omitempty"`
 
 	// Enables column only or column and row based FEC.
 	// +kubebuilder:validation:Optional
@@ -3180,7 +2351,7 @@ type FecOutputSettingsParameters struct {
 
 	// The width of the FEC protection matrix.
 	// +kubebuilder:validation:Optional
-	RowLength *float64 `json:"rowLength,omitempty" tf:"row_length,omitempty"`
+	RowLength *int64 `json:"rowLength,omitempty" tf:"row_length,omitempty"`
 }
 
 type FilterSettingsInitParameters struct {
@@ -3257,45 +2428,6 @@ type Fmp4HlsSettingsParameters struct {
 
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
-}
-
-type FontInitParameters struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-
-	// Username for destination.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type FontObservation struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-
-	// Username for destination.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type FontParameters struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	// +kubebuilder:validation:Optional
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri" tf:"uri,omitempty"`
-
-	// Username for destination.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type FrameCaptureCdnSettingsInitParameters struct {
@@ -3415,7 +2547,7 @@ type FrameCaptureS3SettingsParameters struct {
 type FrameCaptureSettingsInitParameters struct {
 
 	// The frequency at which to capture frames for inclusion in the output.
-	CaptureInterval *float64 `json:"captureInterval,omitempty" tf:"capture_interval,omitempty"`
+	CaptureInterval *int64 `json:"captureInterval,omitempty" tf:"capture_interval,omitempty"`
 
 	// Unit for the frame capture interval.
 	CaptureIntervalUnits *string `json:"captureIntervalUnits,omitempty" tf:"capture_interval_units,omitempty"`
@@ -3424,7 +2556,7 @@ type FrameCaptureSettingsInitParameters struct {
 type FrameCaptureSettingsObservation struct {
 
 	// The frequency at which to capture frames for inclusion in the output.
-	CaptureInterval *float64 `json:"captureInterval,omitempty" tf:"capture_interval,omitempty"`
+	CaptureInterval *int64 `json:"captureInterval,omitempty" tf:"capture_interval,omitempty"`
 
 	// Unit for the frame capture interval.
 	CaptureIntervalUnits *string `json:"captureIntervalUnits,omitempty" tf:"capture_interval_units,omitempty"`
@@ -3434,80 +2566,11 @@ type FrameCaptureSettingsParameters struct {
 
 	// The frequency at which to capture frames for inclusion in the output.
 	// +kubebuilder:validation:Optional
-	CaptureInterval *float64 `json:"captureInterval,omitempty" tf:"capture_interval,omitempty"`
+	CaptureInterval *int64 `json:"captureInterval,omitempty" tf:"capture_interval,omitempty"`
 
 	// Unit for the frame capture interval.
 	// +kubebuilder:validation:Optional
 	CaptureIntervalUnits *string `json:"captureIntervalUnits,omitempty" tf:"capture_interval_units,omitempty"`
-}
-
-type GlobalConfigurationInitParameters struct {
-
-	// –  Value to set the initial audio gain for the Live Event.
-	InitialAudioGain *float64 `json:"initialAudioGain,omitempty" tf:"initial_audio_gain,omitempty"`
-
-	// of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input. When “none” is configured the encoder will transcode either black, a solid color, or a user specified slate images per the “Input Loss Behavior” configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
-	InputEndAction *string `json:"inputEndAction,omitempty" tf:"input_end_action,omitempty"`
-
-	// Settings for system actions when input is lost. See Input Loss Behavior for more details.
-	InputLossBehavior []InputLossBehaviorInitParameters `json:"inputLossBehavior,omitempty" tf:"input_loss_behavior,omitempty"`
-
-	// MediaLive will attempt to synchronize the output of each pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
-	OutputLockingMode *string `json:"outputLockingMode,omitempty" tf:"output_locking_mode,omitempty"`
-
-	// –  Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
-	OutputTimingSource *string `json:"outputTimingSource,omitempty" tf:"output_timing_source,omitempty"`
-
-	// –  Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
-	SupportLowFramerateInputs *string `json:"supportLowFramerateInputs,omitempty" tf:"support_low_framerate_inputs,omitempty"`
-}
-
-type GlobalConfigurationObservation struct {
-
-	// –  Value to set the initial audio gain for the Live Event.
-	InitialAudioGain *float64 `json:"initialAudioGain,omitempty" tf:"initial_audio_gain,omitempty"`
-
-	// of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input. When “none” is configured the encoder will transcode either black, a solid color, or a user specified slate images per the “Input Loss Behavior” configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
-	InputEndAction *string `json:"inputEndAction,omitempty" tf:"input_end_action,omitempty"`
-
-	// Settings for system actions when input is lost. See Input Loss Behavior for more details.
-	InputLossBehavior []InputLossBehaviorObservation `json:"inputLossBehavior,omitempty" tf:"input_loss_behavior,omitempty"`
-
-	// MediaLive will attempt to synchronize the output of each pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
-	OutputLockingMode *string `json:"outputLockingMode,omitempty" tf:"output_locking_mode,omitempty"`
-
-	// –  Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
-	OutputTimingSource *string `json:"outputTimingSource,omitempty" tf:"output_timing_source,omitempty"`
-
-	// –  Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
-	SupportLowFramerateInputs *string `json:"supportLowFramerateInputs,omitempty" tf:"support_low_framerate_inputs,omitempty"`
-}
-
-type GlobalConfigurationParameters struct {
-
-	// –  Value to set the initial audio gain for the Live Event.
-	// +kubebuilder:validation:Optional
-	InitialAudioGain *float64 `json:"initialAudioGain,omitempty" tf:"initial_audio_gain,omitempty"`
-
-	// of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input. When “none” is configured the encoder will transcode either black, a solid color, or a user specified slate images per the “Input Loss Behavior” configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
-	// +kubebuilder:validation:Optional
-	InputEndAction *string `json:"inputEndAction,omitempty" tf:"input_end_action,omitempty"`
-
-	// Settings for system actions when input is lost. See Input Loss Behavior for more details.
-	// +kubebuilder:validation:Optional
-	InputLossBehavior []InputLossBehaviorParameters `json:"inputLossBehavior,omitempty" tf:"input_loss_behavior,omitempty"`
-
-	// MediaLive will attempt to synchronize the output of each pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
-	// +kubebuilder:validation:Optional
-	OutputLockingMode *string `json:"outputLockingMode,omitempty" tf:"output_locking_mode,omitempty"`
-
-	// –  Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
-	// +kubebuilder:validation:Optional
-	OutputTimingSource *string `json:"outputTimingSource,omitempty" tf:"output_timing_source,omitempty"`
-
-	// –  Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
-	// +kubebuilder:validation:Optional
-	SupportLowFramerateInputs *string `json:"supportLowFramerateInputs,omitempty" tf:"support_low_framerate_inputs,omitempty"`
 }
 
 type H264SettingsInitParameters struct {
@@ -3519,12 +2582,12 @@ type H264SettingsInitParameters struct {
 	AfdSignaling *string `json:"afdSignaling,omitempty" tf:"afd_signaling,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
-	BufFillPct *float64 `json:"bufFillPct,omitempty" tf:"buf_fill_pct,omitempty"`
+	BufFillPct *int64 `json:"bufFillPct,omitempty" tf:"buf_fill_pct,omitempty"`
 
 	// Size of buffer in bits.
-	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+	BufSize *int64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
 
 	// Includes color space metadata in the output.
 	ColorMetadata *string `json:"colorMetadata,omitempty" tf:"color_metadata,omitempty"`
@@ -3547,19 +2610,19 @@ type H264SettingsInitParameters struct {
 	FramerateControl *string `json:"framerateControl,omitempty" tf:"framerate_control,omitempty"`
 
 	// Framerate denominator.
-	FramerateDenominator *float64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
+	FramerateDenominator *int64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
 
 	// Framerate numerator.
-	FramerateNumerator *float64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
+	FramerateNumerator *int64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
 
 	// GOP-B reference.
 	GopBReference *string `json:"gopBReference,omitempty" tf:"gop_b_reference,omitempty"`
 
 	// Frequency of closed GOPs.
-	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+	GopClosedCadence *int64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
 
 	// Number of B-frames between reference frames.
-	GopNumBFrames *float64 `json:"gopNumBFrames,omitempty" tf:"gop_num_b_frames,omitempty"`
+	GopNumBFrames *int64 `json:"gopNumBFrames,omitempty" tf:"gop_num_b_frames,omitempty"`
 
 	// GOP size in units of either frames of seconds per gop_size_units.
 	GopSize *float64 `json:"gopSize,omitempty" tf:"gop_size,omitempty"`
@@ -3574,21 +2637,21 @@ type H264SettingsInitParameters struct {
 	LookAheadRateControl *string `json:"lookAheadRateControl,omitempty" tf:"look_ahead_rate_control,omitempty"`
 
 	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
-	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+	MaxBitrate *int64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
 
-	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+	MinIInterval *int64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
 	// Number of reference frames to use.
-	NumRefFrames *float64 `json:"numRefFrames,omitempty" tf:"num_ref_frames,omitempty"`
+	NumRefFrames *int64 `json:"numRefFrames,omitempty" tf:"num_ref_frames,omitempty"`
 
 	// Indicates how the output pixel aspect ratio is specified.
 	ParControl *string `json:"parControl,omitempty" tf:"par_control,omitempty"`
 
 	// Pixel Aspect Ratio denominator.
-	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+	ParDenominator *int64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
 	// Pixel Aspect Ratio numerator.
-	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+	ParNumerator *int64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
 
 	// AAC profile.
 	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
@@ -3597,7 +2660,7 @@ type H264SettingsInitParameters struct {
 	QualityLevel *string `json:"qualityLevel,omitempty" tf:"quality_level,omitempty"`
 
 	// Controls the target quality for the video encode.
-	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+	QvbrQualityLevel *int64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
 
 	// The rate control mode.
 	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
@@ -3609,10 +2672,10 @@ type H264SettingsInitParameters struct {
 	SceneChangeDetect *string `json:"sceneChangeDetect,omitempty" tf:"scene_change_detect,omitempty"`
 
 	// Number of slices per picture.
-	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+	Slices *int64 `json:"slices,omitempty" tf:"slices,omitempty"`
 
 	// Softness.
-	Softness *float64 `json:"softness,omitempty" tf:"softness,omitempty"`
+	Softness *int64 `json:"softness,omitempty" tf:"softness,omitempty"`
 
 	// Makes adjustments within each frame based on spatial variation of content complexity.
 	SpatialAq *string `json:"spatialAq,omitempty" tf:"spatial_aq,omitempty"`
@@ -3639,12 +2702,12 @@ type H264SettingsObservation struct {
 	AfdSignaling *string `json:"afdSignaling,omitempty" tf:"afd_signaling,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
-	BufFillPct *float64 `json:"bufFillPct,omitempty" tf:"buf_fill_pct,omitempty"`
+	BufFillPct *int64 `json:"bufFillPct,omitempty" tf:"buf_fill_pct,omitempty"`
 
 	// Size of buffer in bits.
-	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+	BufSize *int64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
 
 	// Includes color space metadata in the output.
 	ColorMetadata *string `json:"colorMetadata,omitempty" tf:"color_metadata,omitempty"`
@@ -3667,19 +2730,19 @@ type H264SettingsObservation struct {
 	FramerateControl *string `json:"framerateControl,omitempty" tf:"framerate_control,omitempty"`
 
 	// Framerate denominator.
-	FramerateDenominator *float64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
+	FramerateDenominator *int64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
 
 	// Framerate numerator.
-	FramerateNumerator *float64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
+	FramerateNumerator *int64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
 
 	// GOP-B reference.
 	GopBReference *string `json:"gopBReference,omitempty" tf:"gop_b_reference,omitempty"`
 
 	// Frequency of closed GOPs.
-	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+	GopClosedCadence *int64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
 
 	// Number of B-frames between reference frames.
-	GopNumBFrames *float64 `json:"gopNumBFrames,omitempty" tf:"gop_num_b_frames,omitempty"`
+	GopNumBFrames *int64 `json:"gopNumBFrames,omitempty" tf:"gop_num_b_frames,omitempty"`
 
 	// GOP size in units of either frames of seconds per gop_size_units.
 	GopSize *float64 `json:"gopSize,omitempty" tf:"gop_size,omitempty"`
@@ -3694,21 +2757,21 @@ type H264SettingsObservation struct {
 	LookAheadRateControl *string `json:"lookAheadRateControl,omitempty" tf:"look_ahead_rate_control,omitempty"`
 
 	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
-	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+	MaxBitrate *int64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
 
-	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+	MinIInterval *int64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
 	// Number of reference frames to use.
-	NumRefFrames *float64 `json:"numRefFrames,omitempty" tf:"num_ref_frames,omitempty"`
+	NumRefFrames *int64 `json:"numRefFrames,omitempty" tf:"num_ref_frames,omitempty"`
 
 	// Indicates how the output pixel aspect ratio is specified.
 	ParControl *string `json:"parControl,omitempty" tf:"par_control,omitempty"`
 
 	// Pixel Aspect Ratio denominator.
-	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+	ParDenominator *int64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
 	// Pixel Aspect Ratio numerator.
-	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+	ParNumerator *int64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
 
 	// AAC profile.
 	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
@@ -3717,7 +2780,7 @@ type H264SettingsObservation struct {
 	QualityLevel *string `json:"qualityLevel,omitempty" tf:"quality_level,omitempty"`
 
 	// Controls the target quality for the video encode.
-	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+	QvbrQualityLevel *int64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
 
 	// The rate control mode.
 	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
@@ -3729,10 +2792,10 @@ type H264SettingsObservation struct {
 	SceneChangeDetect *string `json:"sceneChangeDetect,omitempty" tf:"scene_change_detect,omitempty"`
 
 	// Number of slices per picture.
-	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+	Slices *int64 `json:"slices,omitempty" tf:"slices,omitempty"`
 
 	// Softness.
-	Softness *float64 `json:"softness,omitempty" tf:"softness,omitempty"`
+	Softness *int64 `json:"softness,omitempty" tf:"softness,omitempty"`
 
 	// Makes adjustments within each frame based on spatial variation of content complexity.
 	SpatialAq *string `json:"spatialAq,omitempty" tf:"spatial_aq,omitempty"`
@@ -3762,14 +2825,14 @@ type H264SettingsParameters struct {
 
 	// Average bitrate in bits/second.
 	// +kubebuilder:validation:Optional
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	BufFillPct *float64 `json:"bufFillPct,omitempty" tf:"buf_fill_pct,omitempty"`
+	BufFillPct *int64 `json:"bufFillPct,omitempty" tf:"buf_fill_pct,omitempty"`
 
 	// Size of buffer in bits.
 	// +kubebuilder:validation:Optional
-	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+	BufSize *int64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
 
 	// Includes color space metadata in the output.
 	// +kubebuilder:validation:Optional
@@ -3800,11 +2863,11 @@ type H264SettingsParameters struct {
 
 	// Framerate denominator.
 	// +kubebuilder:validation:Optional
-	FramerateDenominator *float64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
+	FramerateDenominator *int64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
 
 	// Framerate numerator.
 	// +kubebuilder:validation:Optional
-	FramerateNumerator *float64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
+	FramerateNumerator *int64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
 
 	// GOP-B reference.
 	// +kubebuilder:validation:Optional
@@ -3812,11 +2875,11 @@ type H264SettingsParameters struct {
 
 	// Frequency of closed GOPs.
 	// +kubebuilder:validation:Optional
-	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+	GopClosedCadence *int64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
 
 	// Number of B-frames between reference frames.
 	// +kubebuilder:validation:Optional
-	GopNumBFrames *float64 `json:"gopNumBFrames,omitempty" tf:"gop_num_b_frames,omitempty"`
+	GopNumBFrames *int64 `json:"gopNumBFrames,omitempty" tf:"gop_num_b_frames,omitempty"`
 
 	// GOP size in units of either frames of seconds per gop_size_units.
 	// +kubebuilder:validation:Optional
@@ -3836,14 +2899,14 @@ type H264SettingsParameters struct {
 
 	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
 	// +kubebuilder:validation:Optional
-	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+	MaxBitrate *int64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+	MinIInterval *int64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
 	// Number of reference frames to use.
 	// +kubebuilder:validation:Optional
-	NumRefFrames *float64 `json:"numRefFrames,omitempty" tf:"num_ref_frames,omitempty"`
+	NumRefFrames *int64 `json:"numRefFrames,omitempty" tf:"num_ref_frames,omitempty"`
 
 	// Indicates how the output pixel aspect ratio is specified.
 	// +kubebuilder:validation:Optional
@@ -3851,11 +2914,11 @@ type H264SettingsParameters struct {
 
 	// Pixel Aspect Ratio denominator.
 	// +kubebuilder:validation:Optional
-	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+	ParDenominator *int64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
 	// Pixel Aspect Ratio numerator.
 	// +kubebuilder:validation:Optional
-	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+	ParNumerator *int64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
 
 	// AAC profile.
 	// +kubebuilder:validation:Optional
@@ -3867,7 +2930,7 @@ type H264SettingsParameters struct {
 
 	// Controls the target quality for the video encode.
 	// +kubebuilder:validation:Optional
-	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+	QvbrQualityLevel *int64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
 
 	// The rate control mode.
 	// +kubebuilder:validation:Optional
@@ -3883,11 +2946,11 @@ type H264SettingsParameters struct {
 
 	// Number of slices per picture.
 	// +kubebuilder:validation:Optional
-	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+	Slices *int64 `json:"slices,omitempty" tf:"slices,omitempty"`
 
 	// Softness.
 	// +kubebuilder:validation:Optional
-	Softness *float64 `json:"softness,omitempty" tf:"softness,omitempty"`
+	Softness *int64 `json:"softness,omitempty" tf:"softness,omitempty"`
 
 	// Makes adjustments within each frame based on spatial variation of content complexity.
 	// +kubebuilder:validation:Optional
@@ -3941,10 +3004,10 @@ type H265SettingsInitParameters struct {
 	AlternativeTransferFunction *string `json:"alternativeTransferFunction,omitempty" tf:"alternative_transfer_function,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	// Size of buffer in bits.
-	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+	BufSize *int64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
 
 	// Includes color space metadata in the output.
 	ColorMetadata *string `json:"colorMetadata,omitempty" tf:"color_metadata,omitempty"`
@@ -3961,13 +3024,13 @@ type H265SettingsInitParameters struct {
 	FlickerAq *string `json:"flickerAq,omitempty" tf:"flicker_aq,omitempty"`
 
 	// Framerate denominator.
-	FramerateDenominator *float64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
+	FramerateDenominator *int64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
 
 	// Framerate numerator.
-	FramerateNumerator *float64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
+	FramerateNumerator *int64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
 
 	// Frequency of closed GOPs.
-	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+	GopClosedCadence *int64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
 
 	// GOP size in units of either frames of seconds per gop_size_units.
 	GopSize *float64 `json:"gopSize,omitempty" tf:"gop_size,omitempty"`
@@ -3982,21 +3045,21 @@ type H265SettingsInitParameters struct {
 	LookAheadRateControl *string `json:"lookAheadRateControl,omitempty" tf:"look_ahead_rate_control,omitempty"`
 
 	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
-	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+	MaxBitrate *int64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
 
-	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+	MinIInterval *int64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
 	// Pixel Aspect Ratio denominator.
-	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+	ParDenominator *int64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
 	// Pixel Aspect Ratio numerator.
-	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+	ParNumerator *int64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
 
 	// AAC profile.
 	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
 
 	// Controls the target quality for the video encode.
-	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+	QvbrQualityLevel *int64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
 
 	// The rate control mode.
 	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
@@ -4008,7 +3071,7 @@ type H265SettingsInitParameters struct {
 	SceneChangeDetect *string `json:"sceneChangeDetect,omitempty" tf:"scene_change_detect,omitempty"`
 
 	// Number of slices per picture.
-	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+	Slices *int64 `json:"slices,omitempty" tf:"slices,omitempty"`
 
 	// Set the H265 tier in the output.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
@@ -4032,10 +3095,10 @@ type H265SettingsObservation struct {
 	AlternativeTransferFunction *string `json:"alternativeTransferFunction,omitempty" tf:"alternative_transfer_function,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	// Size of buffer in bits.
-	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+	BufSize *int64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
 
 	// Includes color space metadata in the output.
 	ColorMetadata *string `json:"colorMetadata,omitempty" tf:"color_metadata,omitempty"`
@@ -4052,13 +3115,13 @@ type H265SettingsObservation struct {
 	FlickerAq *string `json:"flickerAq,omitempty" tf:"flicker_aq,omitempty"`
 
 	// Framerate denominator.
-	FramerateDenominator *float64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
+	FramerateDenominator *int64 `json:"framerateDenominator,omitempty" tf:"framerate_denominator,omitempty"`
 
 	// Framerate numerator.
-	FramerateNumerator *float64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
+	FramerateNumerator *int64 `json:"framerateNumerator,omitempty" tf:"framerate_numerator,omitempty"`
 
 	// Frequency of closed GOPs.
-	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+	GopClosedCadence *int64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
 
 	// GOP size in units of either frames of seconds per gop_size_units.
 	GopSize *float64 `json:"gopSize,omitempty" tf:"gop_size,omitempty"`
@@ -4073,21 +3136,21 @@ type H265SettingsObservation struct {
 	LookAheadRateControl *string `json:"lookAheadRateControl,omitempty" tf:"look_ahead_rate_control,omitempty"`
 
 	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
-	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+	MaxBitrate *int64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
 
-	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+	MinIInterval *int64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
 	// Pixel Aspect Ratio denominator.
-	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+	ParDenominator *int64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
 	// Pixel Aspect Ratio numerator.
-	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+	ParNumerator *int64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
 
 	// AAC profile.
 	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
 
 	// Controls the target quality for the video encode.
-	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+	QvbrQualityLevel *int64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
 
 	// The rate control mode.
 	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
@@ -4099,7 +3162,7 @@ type H265SettingsObservation struct {
 	SceneChangeDetect *string `json:"sceneChangeDetect,omitempty" tf:"scene_change_detect,omitempty"`
 
 	// Number of slices per picture.
-	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+	Slices *int64 `json:"slices,omitempty" tf:"slices,omitempty"`
 
 	// Set the H265 tier in the output.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
@@ -4127,11 +3190,11 @@ type H265SettingsParameters struct {
 
 	// Average bitrate in bits/second.
 	// +kubebuilder:validation:Optional
-	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate" tf:"bitrate,omitempty"`
 
 	// Size of buffer in bits.
 	// +kubebuilder:validation:Optional
-	BufSize *float64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
+	BufSize *int64 `json:"bufSize,omitempty" tf:"buf_size,omitempty"`
 
 	// Includes color space metadata in the output.
 	// +kubebuilder:validation:Optional
@@ -4154,15 +3217,15 @@ type H265SettingsParameters struct {
 
 	// Framerate denominator.
 	// +kubebuilder:validation:Optional
-	FramerateDenominator *float64 `json:"framerateDenominator" tf:"framerate_denominator,omitempty"`
+	FramerateDenominator *int64 `json:"framerateDenominator" tf:"framerate_denominator,omitempty"`
 
 	// Framerate numerator.
 	// +kubebuilder:validation:Optional
-	FramerateNumerator *float64 `json:"framerateNumerator" tf:"framerate_numerator,omitempty"`
+	FramerateNumerator *int64 `json:"framerateNumerator" tf:"framerate_numerator,omitempty"`
 
 	// Frequency of closed GOPs.
 	// +kubebuilder:validation:Optional
-	GopClosedCadence *float64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
+	GopClosedCadence *int64 `json:"gopClosedCadence,omitempty" tf:"gop_closed_cadence,omitempty"`
 
 	// GOP size in units of either frames of seconds per gop_size_units.
 	// +kubebuilder:validation:Optional
@@ -4182,18 +3245,18 @@ type H265SettingsParameters struct {
 
 	// Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.
 	// +kubebuilder:validation:Optional
-	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+	MaxBitrate *int64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
+	MinIInterval *int64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
 	// Pixel Aspect Ratio denominator.
 	// +kubebuilder:validation:Optional
-	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
+	ParDenominator *int64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
 	// Pixel Aspect Ratio numerator.
 	// +kubebuilder:validation:Optional
-	ParNumerator *float64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
+	ParNumerator *int64 `json:"parNumerator,omitempty" tf:"par_numerator,omitempty"`
 
 	// AAC profile.
 	// +kubebuilder:validation:Optional
@@ -4201,7 +3264,7 @@ type H265SettingsParameters struct {
 
 	// Controls the target quality for the video encode.
 	// +kubebuilder:validation:Optional
-	QvbrQualityLevel *float64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
+	QvbrQualityLevel *int64 `json:"qvbrQualityLevel,omitempty" tf:"qvbr_quality_level,omitempty"`
 
 	// The rate control mode.
 	// +kubebuilder:validation:Optional
@@ -4217,7 +3280,7 @@ type H265SettingsParameters struct {
 
 	// Number of slices per picture.
 	// +kubebuilder:validation:Optional
-	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+	Slices *int64 `json:"slices,omitempty" tf:"slices,omitempty"`
 
 	// Set the H265 tier in the output.
 	// +kubebuilder:validation:Optional
@@ -4232,58 +3295,49 @@ type H265SettingsParameters struct {
 	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
 }
 
-type HTMLMotionGraphicsSettingsInitParameters struct {
-}
-
-type HTMLMotionGraphicsSettingsObservation struct {
-}
-
-type HTMLMotionGraphicsSettingsParameters struct {
-}
-
 type Hdr10SettingsInitParameters struct {
 
 	// Sets the MaxCLL value for HDR10.
-	MaxCll *float64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
+	MaxCll *int64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
 
 	// Sets the MaxFALL value for HDR10.
-	MaxFall *float64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
+	MaxFall *int64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
 }
 
 type Hdr10SettingsObservation struct {
 
 	// Sets the MaxCLL value for HDR10.
-	MaxCll *float64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
+	MaxCll *int64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
 
 	// Sets the MaxFALL value for HDR10.
-	MaxFall *float64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
+	MaxFall *int64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
 }
 
 type Hdr10SettingsParameters struct {
 
 	// Sets the MaxCLL value for HDR10.
 	// +kubebuilder:validation:Optional
-	MaxCll *float64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
+	MaxCll *int64 `json:"maxCll,omitempty" tf:"max_cll,omitempty"`
 
 	// Sets the MaxFALL value for HDR10.
 	// +kubebuilder:validation:Optional
-	MaxFall *float64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
+	MaxFall *int64 `json:"maxFall,omitempty" tf:"max_fall,omitempty"`
 }
 
 type HlsAkamaiSettingsInitParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	HTTPTransferMode *string `json:"httpTransferMode,omitempty" tf:"http_transfer_mode,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 
 	Salt *string `json:"salt,omitempty" tf:"salt,omitempty"`
 
@@ -4293,17 +3347,17 @@ type HlsAkamaiSettingsInitParameters struct {
 type HlsAkamaiSettingsObservation struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	HTTPTransferMode *string `json:"httpTransferMode,omitempty" tf:"http_transfer_mode,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 
 	Salt *string `json:"salt,omitempty" tf:"salt,omitempty"`
 
@@ -4314,21 +3368,21 @@ type HlsAkamaiSettingsParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	HTTPTransferMode *string `json:"httpTransferMode,omitempty" tf:"http_transfer_mode,omitempty"`
 
 	// Number of retry attempts.
 	// +kubebuilder:validation:Optional
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
 	// +kubebuilder:validation:Optional
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Salt *string `json:"salt,omitempty" tf:"salt,omitempty"`
@@ -4340,47 +3394,47 @@ type HlsAkamaiSettingsParameters struct {
 type HlsBasicPutSettingsInitParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsBasicPutSettingsObservation struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsBasicPutSettingsParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// Number of retry attempts.
 	// +kubebuilder:validation:Optional
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
 	// +kubebuilder:validation:Optional
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsCdnSettingsInitParameters struct {
@@ -4503,7 +3557,7 @@ type HlsGroupSettingsInitParameters struct {
 
 	IncompleteSegmentBehavior *string `json:"incompleteSegmentBehavior,omitempty" tf:"incomplete_segment_behavior,omitempty"`
 
-	IndexNSegments *float64 `json:"indexNSegments,omitempty" tf:"index_n_segments,omitempty"`
+	IndexNSegments *int64 `json:"indexNSegments,omitempty" tf:"index_n_segments,omitempty"`
 
 	// Controls the behavior of the RTMP group if input becomes unavailable.
 	InputLossAction *string `json:"inputLossAction,omitempty" tf:"input_loss_action,omitempty"`
@@ -4513,7 +3567,7 @@ type HlsGroupSettingsInitParameters struct {
 	// The source for the timecode that will be associated with the events outputs.
 	IvSource *string `json:"ivSource,omitempty" tf:"iv_source,omitempty"`
 
-	KeepSegments *float64 `json:"keepSegments,omitempty" tf:"keep_segments,omitempty"`
+	KeepSegments *int64 `json:"keepSegments,omitempty" tf:"keep_segments,omitempty"`
 
 	KeyFormat *string `json:"keyFormat,omitempty" tf:"key_format,omitempty"`
 
@@ -4526,7 +3580,7 @@ type HlsGroupSettingsInitParameters struct {
 
 	ManifestDurationFormat *string `json:"manifestDurationFormat,omitempty" tf:"manifest_duration_format,omitempty"`
 
-	MinSegmentLength *float64 `json:"minSegmentLength,omitempty" tf:"min_segment_length,omitempty"`
+	MinSegmentLength *int64 `json:"minSegmentLength,omitempty" tf:"min_segment_length,omitempty"`
 
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -4536,13 +3590,13 @@ type HlsGroupSettingsInitParameters struct {
 
 	ProgramDateTimeClock *string `json:"programDateTimeClock,omitempty" tf:"program_date_time_clock,omitempty"`
 
-	ProgramDateTimePeriod *float64 `json:"programDateTimePeriod,omitempty" tf:"program_date_time_period,omitempty"`
+	ProgramDateTimePeriod *int64 `json:"programDateTimePeriod,omitempty" tf:"program_date_time_period,omitempty"`
 
 	RedundantManifest *string `json:"redundantManifest,omitempty" tf:"redundant_manifest,omitempty"`
 
-	SegmentLength *float64 `json:"segmentLength,omitempty" tf:"segment_length,omitempty"`
+	SegmentLength *int64 `json:"segmentLength,omitempty" tf:"segment_length,omitempty"`
 
-	SegmentsPerSubdirectory *float64 `json:"segmentsPerSubdirectory,omitempty" tf:"segments_per_subdirectory,omitempty"`
+	SegmentsPerSubdirectory *int64 `json:"segmentsPerSubdirectory,omitempty" tf:"segments_per_subdirectory,omitempty"`
 
 	// - Maximum CDI input resolution.
 	StreamInfResolution *string `json:"streamInfResolution,omitempty" tf:"stream_inf_resolution,omitempty"`
@@ -4552,9 +3606,9 @@ type HlsGroupSettingsInitParameters struct {
 	// Indicates ID3 frame that has the timecode.
 	TimedMetadataId3Frame *string `json:"timedMetadataId3Frame,omitempty" tf:"timed_metadata_id3_frame,omitempty"`
 
-	TimedMetadataId3Period *float64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
+	TimedMetadataId3Period *int64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
 
-	TimestampDeltaMilliseconds *float64 `json:"timestampDeltaMilliseconds,omitempty" tf:"timestamp_delta_milliseconds,omitempty"`
+	TimestampDeltaMilliseconds *int64 `json:"timestampDeltaMilliseconds,omitempty" tf:"timestamp_delta_milliseconds,omitempty"`
 }
 
 type HlsGroupSettingsObservation struct {
@@ -4599,7 +3653,7 @@ type HlsGroupSettingsObservation struct {
 
 	IncompleteSegmentBehavior *string `json:"incompleteSegmentBehavior,omitempty" tf:"incomplete_segment_behavior,omitempty"`
 
-	IndexNSegments *float64 `json:"indexNSegments,omitempty" tf:"index_n_segments,omitempty"`
+	IndexNSegments *int64 `json:"indexNSegments,omitempty" tf:"index_n_segments,omitempty"`
 
 	// Controls the behavior of the RTMP group if input becomes unavailable.
 	InputLossAction *string `json:"inputLossAction,omitempty" tf:"input_loss_action,omitempty"`
@@ -4609,7 +3663,7 @@ type HlsGroupSettingsObservation struct {
 	// The source for the timecode that will be associated with the events outputs.
 	IvSource *string `json:"ivSource,omitempty" tf:"iv_source,omitempty"`
 
-	KeepSegments *float64 `json:"keepSegments,omitempty" tf:"keep_segments,omitempty"`
+	KeepSegments *int64 `json:"keepSegments,omitempty" tf:"keep_segments,omitempty"`
 
 	KeyFormat *string `json:"keyFormat,omitempty" tf:"key_format,omitempty"`
 
@@ -4622,7 +3676,7 @@ type HlsGroupSettingsObservation struct {
 
 	ManifestDurationFormat *string `json:"manifestDurationFormat,omitempty" tf:"manifest_duration_format,omitempty"`
 
-	MinSegmentLength *float64 `json:"minSegmentLength,omitempty" tf:"min_segment_length,omitempty"`
+	MinSegmentLength *int64 `json:"minSegmentLength,omitempty" tf:"min_segment_length,omitempty"`
 
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -4632,13 +3686,13 @@ type HlsGroupSettingsObservation struct {
 
 	ProgramDateTimeClock *string `json:"programDateTimeClock,omitempty" tf:"program_date_time_clock,omitempty"`
 
-	ProgramDateTimePeriod *float64 `json:"programDateTimePeriod,omitempty" tf:"program_date_time_period,omitempty"`
+	ProgramDateTimePeriod *int64 `json:"programDateTimePeriod,omitempty" tf:"program_date_time_period,omitempty"`
 
 	RedundantManifest *string `json:"redundantManifest,omitempty" tf:"redundant_manifest,omitempty"`
 
-	SegmentLength *float64 `json:"segmentLength,omitempty" tf:"segment_length,omitempty"`
+	SegmentLength *int64 `json:"segmentLength,omitempty" tf:"segment_length,omitempty"`
 
-	SegmentsPerSubdirectory *float64 `json:"segmentsPerSubdirectory,omitempty" tf:"segments_per_subdirectory,omitempty"`
+	SegmentsPerSubdirectory *int64 `json:"segmentsPerSubdirectory,omitempty" tf:"segments_per_subdirectory,omitempty"`
 
 	// - Maximum CDI input resolution.
 	StreamInfResolution *string `json:"streamInfResolution,omitempty" tf:"stream_inf_resolution,omitempty"`
@@ -4648,9 +3702,9 @@ type HlsGroupSettingsObservation struct {
 	// Indicates ID3 frame that has the timecode.
 	TimedMetadataId3Frame *string `json:"timedMetadataId3Frame,omitempty" tf:"timed_metadata_id3_frame,omitempty"`
 
-	TimedMetadataId3Period *float64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
+	TimedMetadataId3Period *int64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
 
-	TimestampDeltaMilliseconds *float64 `json:"timestampDeltaMilliseconds,omitempty" tf:"timestamp_delta_milliseconds,omitempty"`
+	TimestampDeltaMilliseconds *int64 `json:"timestampDeltaMilliseconds,omitempty" tf:"timestamp_delta_milliseconds,omitempty"`
 }
 
 type HlsGroupSettingsParameters struct {
@@ -4714,7 +3768,7 @@ type HlsGroupSettingsParameters struct {
 	IncompleteSegmentBehavior *string `json:"incompleteSegmentBehavior,omitempty" tf:"incomplete_segment_behavior,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IndexNSegments *float64 `json:"indexNSegments,omitempty" tf:"index_n_segments,omitempty"`
+	IndexNSegments *int64 `json:"indexNSegments,omitempty" tf:"index_n_segments,omitempty"`
 
 	// Controls the behavior of the RTMP group if input becomes unavailable.
 	// +kubebuilder:validation:Optional
@@ -4728,7 +3782,7 @@ type HlsGroupSettingsParameters struct {
 	IvSource *string `json:"ivSource,omitempty" tf:"iv_source,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	KeepSegments *float64 `json:"keepSegments,omitempty" tf:"keep_segments,omitempty"`
+	KeepSegments *int64 `json:"keepSegments,omitempty" tf:"keep_segments,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	KeyFormat *string `json:"keyFormat,omitempty" tf:"key_format,omitempty"`
@@ -4747,7 +3801,7 @@ type HlsGroupSettingsParameters struct {
 	ManifestDurationFormat *string `json:"manifestDurationFormat,omitempty" tf:"manifest_duration_format,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MinSegmentLength *float64 `json:"minSegmentLength,omitempty" tf:"min_segment_length,omitempty"`
+	MinSegmentLength *int64 `json:"minSegmentLength,omitempty" tf:"min_segment_length,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -4762,16 +3816,16 @@ type HlsGroupSettingsParameters struct {
 	ProgramDateTimeClock *string `json:"programDateTimeClock,omitempty" tf:"program_date_time_clock,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ProgramDateTimePeriod *float64 `json:"programDateTimePeriod,omitempty" tf:"program_date_time_period,omitempty"`
+	ProgramDateTimePeriod *int64 `json:"programDateTimePeriod,omitempty" tf:"program_date_time_period,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RedundantManifest *string `json:"redundantManifest,omitempty" tf:"redundant_manifest,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SegmentLength *float64 `json:"segmentLength,omitempty" tf:"segment_length,omitempty"`
+	SegmentLength *int64 `json:"segmentLength,omitempty" tf:"segment_length,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SegmentsPerSubdirectory *float64 `json:"segmentsPerSubdirectory,omitempty" tf:"segments_per_subdirectory,omitempty"`
+	SegmentsPerSubdirectory *int64 `json:"segmentsPerSubdirectory,omitempty" tf:"segments_per_subdirectory,omitempty"`
 
 	// - Maximum CDI input resolution.
 	// +kubebuilder:validation:Optional
@@ -4785,25 +3839,25 @@ type HlsGroupSettingsParameters struct {
 	TimedMetadataId3Frame *string `json:"timedMetadataId3Frame,omitempty" tf:"timed_metadata_id3_frame,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	TimedMetadataId3Period *float64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
+	TimedMetadataId3Period *int64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	TimestampDeltaMilliseconds *float64 `json:"timestampDeltaMilliseconds,omitempty" tf:"timestamp_delta_milliseconds,omitempty"`
+	TimestampDeltaMilliseconds *int64 `json:"timestampDeltaMilliseconds,omitempty" tf:"timestamp_delta_milliseconds,omitempty"`
 }
 
 type HlsInputSettingsInitParameters struct {
 
 	// The bitrate is specified in bits per second, as in an HLS manifest.
-	Bandwidth *float64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
+	Bandwidth *int64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
 	// Buffer segments.
-	BufferSegments *float64 `json:"bufferSegments,omitempty" tf:"buffer_segments,omitempty"`
+	BufferSegments *int64 `json:"bufferSegments,omitempty" tf:"buffer_segments,omitempty"`
 
 	// The number of consecutive times that attempts to read a manifest or segment must fail before the input is considered unavailable.
-	Retries *float64 `json:"retries,omitempty" tf:"retries,omitempty"`
+	Retries *int64 `json:"retries,omitempty" tf:"retries,omitempty"`
 
 	// The number of seconds between retries when an attempt to read a manifest or segment fails.
-	RetryInterval *float64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
+	RetryInterval *int64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
 	// The source for the timecode that will be associated with the events outputs.
 	Scte35Source *string `json:"scte35Source,omitempty" tf:"scte35_source,omitempty"`
@@ -4812,16 +3866,16 @@ type HlsInputSettingsInitParameters struct {
 type HlsInputSettingsObservation struct {
 
 	// The bitrate is specified in bits per second, as in an HLS manifest.
-	Bandwidth *float64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
+	Bandwidth *int64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
 	// Buffer segments.
-	BufferSegments *float64 `json:"bufferSegments,omitempty" tf:"buffer_segments,omitempty"`
+	BufferSegments *int64 `json:"bufferSegments,omitempty" tf:"buffer_segments,omitempty"`
 
 	// The number of consecutive times that attempts to read a manifest or segment must fail before the input is considered unavailable.
-	Retries *float64 `json:"retries,omitempty" tf:"retries,omitempty"`
+	Retries *int64 `json:"retries,omitempty" tf:"retries,omitempty"`
 
 	// The number of seconds between retries when an attempt to read a manifest or segment fails.
-	RetryInterval *float64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
+	RetryInterval *int64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
 	// The source for the timecode that will be associated with the events outputs.
 	Scte35Source *string `json:"scte35Source,omitempty" tf:"scte35_source,omitempty"`
@@ -4831,19 +3885,19 @@ type HlsInputSettingsParameters struct {
 
 	// The bitrate is specified in bits per second, as in an HLS manifest.
 	// +kubebuilder:validation:Optional
-	Bandwidth *float64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
+	Bandwidth *int64 `json:"bandwidth,omitempty" tf:"bandwidth,omitempty"`
 
 	// Buffer segments.
 	// +kubebuilder:validation:Optional
-	BufferSegments *float64 `json:"bufferSegments,omitempty" tf:"buffer_segments,omitempty"`
+	BufferSegments *int64 `json:"bufferSegments,omitempty" tf:"buffer_segments,omitempty"`
 
 	// The number of consecutive times that attempts to read a manifest or segment must fail before the input is considered unavailable.
 	// +kubebuilder:validation:Optional
-	Retries *float64 `json:"retries,omitempty" tf:"retries,omitempty"`
+	Retries *int64 `json:"retries,omitempty" tf:"retries,omitempty"`
 
 	// The number of seconds between retries when an attempt to read a manifest or segment fails.
 	// +kubebuilder:validation:Optional
-	RetryInterval *float64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
+	RetryInterval *int64 `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
 	// The source for the timecode that will be associated with the events outputs.
 	// +kubebuilder:validation:Optional
@@ -4853,54 +3907,54 @@ type HlsInputSettingsParameters struct {
 type HlsMediaStoreSettingsInitParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	MediaStoreStorageClass *string `json:"mediaStoreStorageClass,omitempty" tf:"media_store_storage_class,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsMediaStoreSettingsObservation struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	MediaStoreStorageClass *string `json:"mediaStoreStorageClass,omitempty" tf:"media_store_storage_class,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsMediaStoreSettingsParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MediaStoreStorageClass *string `json:"mediaStoreStorageClass,omitempty" tf:"media_store_storage_class,omitempty"`
 
 	// Number of retry attempts.
 	// +kubebuilder:validation:Optional
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
 	// +kubebuilder:validation:Optional
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsOutputSettingsInitParameters struct {
@@ -5015,71 +4069,71 @@ type HlsSettingsParameters struct {
 type HlsWebdavSettingsInitParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	HTTPTransferMode *string `json:"httpTransferMode,omitempty" tf:"http_transfer_mode,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsWebdavSettingsObservation struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	HTTPTransferMode *string `json:"httpTransferMode,omitempty" tf:"http_transfer_mode,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type HlsWebdavSettingsParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	HTTPTransferMode *string `json:"httpTransferMode,omitempty" tf:"http_transfer_mode,omitempty"`
 
 	// Number of retry attempts.
 	// +kubebuilder:validation:Optional
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
 	// +kubebuilder:validation:Optional
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type InputAttachmentsInitParameters struct {
 
-	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsInitParameters `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
 	// User-specified name for the attachment.
 	InputAttachmentName *string `json:"inputAttachmentName,omitempty" tf:"input_attachment_name,omitempty"`
 
-	// Settings of an input. See Input Settings for more details.
+	// Settings of an input. See Input Settings for more details
 	InputSettings []InputSettingsInitParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputAttachmentsObservation struct {
 
-	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsObservation `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
 	// User-specified name for the attachment.
@@ -5088,13 +4142,13 @@ type InputAttachmentsObservation struct {
 	// The ID of the input.
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 
-	// Settings of an input. See Input Settings for more details.
+	// Settings of an input. See Input Settings for more details
 	InputSettings []InputSettingsObservation `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputAttachmentsParameters struct {
 
-	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
+	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsParameters `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
@@ -5116,130 +4170,44 @@ type InputAttachmentsParameters struct {
 	// +kubebuilder:validation:Optional
 	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
 
-	// Settings of an input. See Input Settings for more details.
+	// Settings of an input. See Input Settings for more details
 	// +kubebuilder:validation:Optional
 	InputSettings []InputSettingsParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputChannelLevelsInitParameters struct {
-	Gain *float64 `json:"gain,omitempty" tf:"gain,omitempty"`
+	Gain *int64 `json:"gain,omitempty" tf:"gain,omitempty"`
 
-	InputChannel *float64 `json:"inputChannel,omitempty" tf:"input_channel,omitempty"`
+	InputChannel *int64 `json:"inputChannel,omitempty" tf:"input_channel,omitempty"`
 }
 
 type InputChannelLevelsObservation struct {
-	Gain *float64 `json:"gain,omitempty" tf:"gain,omitempty"`
+	Gain *int64 `json:"gain,omitempty" tf:"gain,omitempty"`
 
-	InputChannel *float64 `json:"inputChannel,omitempty" tf:"input_channel,omitempty"`
+	InputChannel *int64 `json:"inputChannel,omitempty" tf:"input_channel,omitempty"`
 }
 
 type InputChannelLevelsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Gain *float64 `json:"gain" tf:"gain,omitempty"`
+	Gain *int64 `json:"gain" tf:"gain,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	InputChannel *float64 `json:"inputChannel" tf:"input_channel,omitempty"`
-}
-
-type InputLossBehaviorInitParameters struct {
-	BlackFrameMsec *float64 `json:"blackFrameMsec,omitempty" tf:"black_frame_msec,omitempty"`
-
-	InputLossImageColor *string `json:"inputLossImageColor,omitempty" tf:"input_loss_image_color,omitempty"`
-
-	InputLossImageSlate []InputLossImageSlateInitParameters `json:"inputLossImageSlate,omitempty" tf:"input_loss_image_slate,omitempty"`
-
-	InputLossImageType *string `json:"inputLossImageType,omitempty" tf:"input_loss_image_type,omitempty"`
-
-	RepeatFrameMsec *float64 `json:"repeatFrameMsec,omitempty" tf:"repeat_frame_msec,omitempty"`
-}
-
-type InputLossBehaviorObservation struct {
-	BlackFrameMsec *float64 `json:"blackFrameMsec,omitempty" tf:"black_frame_msec,omitempty"`
-
-	InputLossImageColor *string `json:"inputLossImageColor,omitempty" tf:"input_loss_image_color,omitempty"`
-
-	InputLossImageSlate []InputLossImageSlateObservation `json:"inputLossImageSlate,omitempty" tf:"input_loss_image_slate,omitempty"`
-
-	InputLossImageType *string `json:"inputLossImageType,omitempty" tf:"input_loss_image_type,omitempty"`
-
-	RepeatFrameMsec *float64 `json:"repeatFrameMsec,omitempty" tf:"repeat_frame_msec,omitempty"`
-}
-
-type InputLossBehaviorParameters struct {
-
-	// +kubebuilder:validation:Optional
-	BlackFrameMsec *float64 `json:"blackFrameMsec,omitempty" tf:"black_frame_msec,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	InputLossImageColor *string `json:"inputLossImageColor,omitempty" tf:"input_loss_image_color,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	InputLossImageSlate []InputLossImageSlateParameters `json:"inputLossImageSlate,omitempty" tf:"input_loss_image_slate,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	InputLossImageType *string `json:"inputLossImageType,omitempty" tf:"input_loss_image_type,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	RepeatFrameMsec *float64 `json:"repeatFrameMsec,omitempty" tf:"repeat_frame_msec,omitempty"`
-}
-
-type InputLossImageSlateInitParameters struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-
-	// Username for destination.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type InputLossImageSlateObservation struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-
-	// Username for destination.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type InputLossImageSlateParameters struct {
-
-	// Key used to extract the password from EC2 Parameter store.
-	// +kubebuilder:validation:Optional
-	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
-
-	// –  Path to a file accessible to the live stream.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri" tf:"uri,omitempty"`
-
-	// Username for destination.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	InputChannel *int64 `json:"inputChannel" tf:"input_channel,omitempty"`
 }
 
 type InputLossSettingsInitParameters struct {
-
-	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
-	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
+	InputLossThresholdMsec *int64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputLossSettingsObservation struct {
-
-	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
-	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
+	InputLossThresholdMsec *int64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputLossSettingsParameters struct {
 
-	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	// +kubebuilder:validation:Optional
-	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
+	InputLossThresholdMsec *int64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputSettingsInitParameters struct {
@@ -5254,7 +4222,7 @@ type InputSettingsInitParameters struct {
 	DenoiseFilter *string `json:"denoiseFilter,omitempty" tf:"denoise_filter,omitempty"`
 
 	// Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
-	FilterStrength *float64 `json:"filterStrength,omitempty" tf:"filter_strength,omitempty"`
+	FilterStrength *int64 `json:"filterStrength,omitempty" tf:"filter_strength,omitempty"`
 
 	// Turns on the filter for the input.
 	InputFilter *string `json:"inputFilter,omitempty" tf:"input_filter,omitempty"`
@@ -5263,7 +4231,7 @@ type InputSettingsInitParameters struct {
 	NetworkInputSettings []NetworkInputSettingsInitParameters `json:"networkInputSettings,omitempty" tf:"network_input_settings,omitempty"`
 
 	// PID from which to read SCTE-35 messages.
-	Scte35Pid *float64 `json:"scte35Pid,omitempty" tf:"scte35_pid,omitempty"`
+	Scte35Pid *int64 `json:"scte35Pid,omitempty" tf:"scte35_pid,omitempty"`
 
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in the input.
 	Smpte2038DataPreference *string `json:"smpte2038DataPreference,omitempty" tf:"smpte2038_data_preference,omitempty"`
@@ -5286,7 +4254,7 @@ type InputSettingsObservation struct {
 	DenoiseFilter *string `json:"denoiseFilter,omitempty" tf:"denoise_filter,omitempty"`
 
 	// Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
-	FilterStrength *float64 `json:"filterStrength,omitempty" tf:"filter_strength,omitempty"`
+	FilterStrength *int64 `json:"filterStrength,omitempty" tf:"filter_strength,omitempty"`
 
 	// Turns on the filter for the input.
 	InputFilter *string `json:"inputFilter,omitempty" tf:"input_filter,omitempty"`
@@ -5295,7 +4263,7 @@ type InputSettingsObservation struct {
 	NetworkInputSettings []NetworkInputSettingsObservation `json:"networkInputSettings,omitempty" tf:"network_input_settings,omitempty"`
 
 	// PID from which to read SCTE-35 messages.
-	Scte35Pid *float64 `json:"scte35Pid,omitempty" tf:"scte35_pid,omitempty"`
+	Scte35Pid *int64 `json:"scte35Pid,omitempty" tf:"scte35_pid,omitempty"`
 
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in the input.
 	Smpte2038DataPreference *string `json:"smpte2038DataPreference,omitempty" tf:"smpte2038_data_preference,omitempty"`
@@ -5324,7 +4292,7 @@ type InputSettingsParameters struct {
 
 	// Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).
 	// +kubebuilder:validation:Optional
-	FilterStrength *float64 `json:"filterStrength,omitempty" tf:"filter_strength,omitempty"`
+	FilterStrength *int64 `json:"filterStrength,omitempty" tf:"filter_strength,omitempty"`
 
 	// Turns on the filter for the input.
 	// +kubebuilder:validation:Optional
@@ -5336,7 +4304,7 @@ type InputSettingsParameters struct {
 
 	// PID from which to read SCTE-35 messages.
 	// +kubebuilder:validation:Optional
-	Scte35Pid *float64 `json:"scte35Pid,omitempty" tf:"scte35_pid,omitempty"`
+	Scte35Pid *int64 `json:"scte35Pid,omitempty" tf:"scte35_pid,omitempty"`
 
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in the input.
 	// +kubebuilder:validation:Optional
@@ -5389,7 +4357,7 @@ type KeyProviderServerInitParameters struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -5401,7 +4369,7 @@ type KeyProviderServerObservation struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -5414,7 +4382,7 @@ type KeyProviderServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// –  Path to a file accessible to the live stream.
+	// Path to a file accessible to the live stream.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 
@@ -5445,43 +4413,43 @@ type KeyProviderSettingsParameters struct {
 type M2TsSettingsDvbNitSettingsInitParameters struct {
 
 	// User-specified id. Ths is used in an output group or an output.
-	NetworkID *float64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
+	NetworkID *int64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// Name of the Channel.
 	NetworkName *string `json:"networkName,omitempty" tf:"network_name,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type M2TsSettingsDvbNitSettingsObservation struct {
 
 	// User-specified id. Ths is used in an output group or an output.
-	NetworkID *float64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
+	NetworkID *int64 `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// Name of the Channel.
 	NetworkName *string `json:"networkName,omitempty" tf:"network_name,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type M2TsSettingsDvbNitSettingsParameters struct {
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	NetworkID *float64 `json:"networkId" tf:"network_id,omitempty"`
+	NetworkID *int64 `json:"networkId" tf:"network_id,omitempty"`
 
 	// Name of the Channel.
 	// +kubebuilder:validation:Optional
 	NetworkName *string `json:"networkName" tf:"network_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type M2TsSettingsDvbSdtSettingsInitParameters struct {
 	OutputSdt *string `json:"outputSdt,omitempty" tf:"output_sdt,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 
 	// Name of the Channel.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -5493,7 +4461,7 @@ type M2TsSettingsDvbSdtSettingsInitParameters struct {
 type M2TsSettingsDvbSdtSettingsObservation struct {
 	OutputSdt *string `json:"outputSdt,omitempty" tf:"output_sdt,omitempty"`
 
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 
 	// Name of the Channel.
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
@@ -5508,7 +4476,7 @@ type M2TsSettingsDvbSdtSettingsParameters struct {
 	OutputSdt *string `json:"outputSdt,omitempty" tf:"output_sdt,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 
 	// Name of the Channel.
 	// +kubebuilder:validation:Optional
@@ -5520,17 +4488,17 @@ type M2TsSettingsDvbSdtSettingsParameters struct {
 }
 
 type M2TsSettingsDvbTdtSettingsInitParameters struct {
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type M2TsSettingsDvbTdtSettingsObservation struct {
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type M2TsSettingsDvbTdtSettingsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	RepInterval *float64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
+	RepInterval *int64 `json:"repInterval,omitempty" tf:"rep_interval,omitempty"`
 }
 
 type M2TsSettingsInitParameters struct {
@@ -5538,21 +4506,21 @@ type M2TsSettingsInitParameters struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
 
 	AudioBufferModel *string `json:"audioBufferModel,omitempty" tf:"audio_buffer_model,omitempty"`
 
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
 	AudioStreamType *string `json:"audioStreamType,omitempty" tf:"audio_stream_type,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	BufferModel *string `json:"bufferModel,omitempty" tf:"buffer_model,omitempty"`
 
@@ -5569,26 +4537,26 @@ type M2TsSettingsInitParameters struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []DvbTdtSettingsInitParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
 
 	EbpAudioInterval *string `json:"ebpAudioInterval,omitempty" tf:"ebp_audio_interval,omitempty"`
 
-	EbpLookaheadMs *float64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
+	EbpLookaheadMs *int64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -5602,21 +4570,21 @@ type M2TsSettingsInitParameters struct {
 	// Average bitrate in bits/second.
 	NullPacketBitrate *float64 `json:"nullPacketBitrate,omitempty" tf:"null_packet_bitrate,omitempty"`
 
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	RateMode *string `json:"rateMode,omitempty" tf:"rate_mode,omitempty"`
 
@@ -5635,13 +4603,13 @@ type M2TsSettingsInitParameters struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -5650,21 +4618,21 @@ type M2TsSettingsObservation struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
 
 	AudioBufferModel *string `json:"audioBufferModel,omitempty" tf:"audio_buffer_model,omitempty"`
 
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
 	AudioStreamType *string `json:"audioStreamType,omitempty" tf:"audio_stream_type,omitempty"`
 
 	// Average bitrate in bits/second.
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	BufferModel *string `json:"bufferModel,omitempty" tf:"buffer_model,omitempty"`
 
@@ -5681,26 +4649,26 @@ type M2TsSettingsObservation struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []DvbTdtSettingsObservation `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
 
 	EbpAudioInterval *string `json:"ebpAudioInterval,omitempty" tf:"ebp_audio_interval,omitempty"`
 
-	EbpLookaheadMs *float64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
+	EbpLookaheadMs *int64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -5714,21 +4682,21 @@ type M2TsSettingsObservation struct {
 	// Average bitrate in bits/second.
 	NullPacketBitrate *float64 `json:"nullPacketBitrate,omitempty" tf:"null_packet_bitrate,omitempty"`
 
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	RateMode *string `json:"rateMode,omitempty" tf:"rate_mode,omitempty"`
 
@@ -5747,13 +4715,13 @@ type M2TsSettingsObservation struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -5765,7 +4733,7 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
@@ -5776,7 +4744,7 @@ type M2TsSettingsParameters struct {
 	AudioBufferModel *string `json:"audioBufferModel,omitempty" tf:"audio_buffer_model,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
@@ -5786,7 +4754,7 @@ type M2TsSettingsParameters struct {
 
 	// Average bitrate in bits/second.
 	// +kubebuilder:validation:Optional
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *int64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	BufferModel *string `json:"bufferModel,omitempty" tf:"buffer_model,omitempty"`
@@ -5809,7 +4777,7 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DvbTdtSettings []DvbTdtSettingsParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
@@ -5820,23 +4788,23 @@ type M2TsSettingsParameters struct {
 	EbpAudioInterval *string `json:"ebpAudioInterval,omitempty" tf:"ebp_audio_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EbpLookaheadMs *float64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
+	EbpLookaheadMs *int64 `json:"ebpLookaheadMs,omitempty" tf:"ebp_lookahead_ms,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
@@ -5857,27 +4825,27 @@ type M2TsSettingsParameters struct {
 	NullPacketBitrate *float64 `json:"nullPacketBitrate,omitempty" tf:"null_packet_bitrate,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RateMode *string `json:"rateMode,omitempty" tf:"rate_mode,omitempty"`
@@ -5904,44 +4872,44 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
 type M3U8SettingsInitParameters struct {
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	NielsenId3Behavior *string `json:"nielsenId3Behavior,omitempty" tf:"nielsen_id3_behavior,omitempty"`
 
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	Scte35Behavior *string `json:"scte35Behavior,omitempty" tf:"scte35_behavior,omitempty"`
 
@@ -5950,41 +4918,41 @@ type M3U8SettingsInitParameters struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
 type M3U8SettingsObservation struct {
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	NielsenId3Behavior *string `json:"nielsenId3Behavior,omitempty" tf:"nielsen_id3_behavior,omitempty"`
 
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	Scte35Behavior *string `json:"scte35Behavior,omitempty" tf:"scte35_behavior,omitempty"`
 
@@ -5993,25 +4961,25 @@ type M3U8SettingsObservation struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
 type M3U8SettingsParameters struct {
 
 	// +kubebuilder:validation:Optional
-	AudioFramesPerPes *float64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
+	AudioFramesPerPes *int64 `json:"audioFramesPerPes,omitempty" tf:"audio_frames_per_pes,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
@@ -6019,27 +4987,27 @@ type M3U8SettingsParameters struct {
 	NielsenId3Behavior *string `json:"nielsenId3Behavior,omitempty" tf:"nielsen_id3_behavior,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PatInterval *float64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
+	PatInterval *int64 `json:"patInterval,omitempty" tf:"pat_interval,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PcrControl *string `json:"pcrControl,omitempty" tf:"pcr_control,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
+	PcrPeriod *int64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
+	PmtInterval *int64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
+	ProgramNum *int64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Scte35Behavior *string `json:"scte35Behavior,omitempty" tf:"scte35_behavior,omitempty"`
@@ -6051,15 +5019,15 @@ type M3U8SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
+	TransportStreamID *int64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
@@ -6159,54 +5127,6 @@ type MediaPackageSettingsParameters struct {
 	ChannelID *string `json:"channelId" tf:"channel_id,omitempty"`
 }
 
-type MotionGraphicsConfigurationInitParameters struct {
-
-	// –  Motion Graphics Insertion.
-	MotionGraphicsInsertion *string `json:"motionGraphicsInsertion,omitempty" tf:"motion_graphics_insertion,omitempty"`
-
-	// –  Motion Graphics Settings. See Motion Graphics Settings for more details.
-	MotionGraphicsSettings []MotionGraphicsSettingsInitParameters `json:"motionGraphicsSettings,omitempty" tf:"motion_graphics_settings,omitempty"`
-}
-
-type MotionGraphicsConfigurationObservation struct {
-
-	// –  Motion Graphics Insertion.
-	MotionGraphicsInsertion *string `json:"motionGraphicsInsertion,omitempty" tf:"motion_graphics_insertion,omitempty"`
-
-	// –  Motion Graphics Settings. See Motion Graphics Settings for more details.
-	MotionGraphicsSettings []MotionGraphicsSettingsObservation `json:"motionGraphicsSettings,omitempty" tf:"motion_graphics_settings,omitempty"`
-}
-
-type MotionGraphicsConfigurationParameters struct {
-
-	// –  Motion Graphics Insertion.
-	// +kubebuilder:validation:Optional
-	MotionGraphicsInsertion *string `json:"motionGraphicsInsertion,omitempty" tf:"motion_graphics_insertion,omitempty"`
-
-	// –  Motion Graphics Settings. See Motion Graphics Settings for more details.
-	// +kubebuilder:validation:Optional
-	MotionGraphicsSettings []MotionGraphicsSettingsParameters `json:"motionGraphicsSettings" tf:"motion_graphics_settings,omitempty"`
-}
-
-type MotionGraphicsSettingsInitParameters struct {
-
-	// –  Html Motion Graphics Settings.
-	HTMLMotionGraphicsSettings []HTMLMotionGraphicsSettingsInitParameters `json:"htmlMotionGraphicsSettings,omitempty" tf:"html_motion_graphics_settings,omitempty"`
-}
-
-type MotionGraphicsSettingsObservation struct {
-
-	// –  Html Motion Graphics Settings.
-	HTMLMotionGraphicsSettings []HTMLMotionGraphicsSettingsParameters `json:"htmlMotionGraphicsSettings,omitempty" tf:"html_motion_graphics_settings,omitempty"`
-}
-
-type MotionGraphicsSettingsParameters struct {
-
-	// –  Html Motion Graphics Settings.
-	// +kubebuilder:validation:Optional
-	HTMLMotionGraphicsSettings []HTMLMotionGraphicsSettingsParameters `json:"htmlMotionGraphicsSettings,omitempty" tf:"html_motion_graphics_settings,omitempty"`
-}
-
 type Mp2SettingsInitParameters struct {
 
 	// Average bitrate in bits/second.
@@ -6276,7 +5196,7 @@ type MsSmoothGroupSettingsInitParameters struct {
 	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// A director and base filename where archive files should be written. See Destination for more details.
 	Destination []MsSmoothGroupSettingsDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -6288,22 +5208,22 @@ type MsSmoothGroupSettingsInitParameters struct {
 
 	EventStopBehavior *string `json:"eventStopBehavior,omitempty" tf:"event_stop_behavior,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
-	FragmentLength *float64 `json:"fragmentLength,omitempty" tf:"fragment_length,omitempty"`
+	FragmentLength *int64 `json:"fragmentLength,omitempty" tf:"fragment_length,omitempty"`
 
 	// Controls the behavior of the RTMP group if input becomes unavailable.
 	InputLossAction *string `json:"inputLossAction,omitempty" tf:"input_loss_action,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 
 	SegmentationMode *string `json:"segmentationMode,omitempty" tf:"segmentation_mode,omitempty"`
 
-	SendDelayMs *float64 `json:"sendDelayMs,omitempty" tf:"send_delay_ms,omitempty"`
+	SendDelayMs *int64 `json:"sendDelayMs,omitempty" tf:"send_delay_ms,omitempty"`
 
 	SparseTrackType *string `json:"sparseTrackType,omitempty" tf:"sparse_track_type,omitempty"`
 
@@ -6325,7 +5245,7 @@ type MsSmoothGroupSettingsObservation struct {
 	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// A director and base filename where archive files should be written. See Destination for more details.
 	Destination []MsSmoothGroupSettingsDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -6337,22 +5257,22 @@ type MsSmoothGroupSettingsObservation struct {
 
 	EventStopBehavior *string `json:"eventStopBehavior,omitempty" tf:"event_stop_behavior,omitempty"`
 
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
-	FragmentLength *float64 `json:"fragmentLength,omitempty" tf:"fragment_length,omitempty"`
+	FragmentLength *int64 `json:"fragmentLength,omitempty" tf:"fragment_length,omitempty"`
 
 	// Controls the behavior of the RTMP group if input becomes unavailable.
 	InputLossAction *string `json:"inputLossAction,omitempty" tf:"input_loss_action,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 
 	SegmentationMode *string `json:"segmentationMode,omitempty" tf:"segmentation_mode,omitempty"`
 
-	SendDelayMs *float64 `json:"sendDelayMs,omitempty" tf:"send_delay_ms,omitempty"`
+	SendDelayMs *int64 `json:"sendDelayMs,omitempty" tf:"send_delay_ms,omitempty"`
 
 	SparseTrackType *string `json:"sparseTrackType,omitempty" tf:"sparse_track_type,omitempty"`
 
@@ -6378,7 +5298,7 @@ type MsSmoothGroupSettingsParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// A director and base filename where archive files should be written. See Destination for more details.
 	// +kubebuilder:validation:Optional
@@ -6395,10 +5315,10 @@ type MsSmoothGroupSettingsParameters struct {
 	EventStopBehavior *string `json:"eventStopBehavior,omitempty" tf:"event_stop_behavior,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FilecacheDuration *float64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
+	FilecacheDuration *int64 `json:"filecacheDuration,omitempty" tf:"filecache_duration,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FragmentLength *float64 `json:"fragmentLength,omitempty" tf:"fragment_length,omitempty"`
+	FragmentLength *int64 `json:"fragmentLength,omitempty" tf:"fragment_length,omitempty"`
 
 	// Controls the behavior of the RTMP group if input becomes unavailable.
 	// +kubebuilder:validation:Optional
@@ -6406,17 +5326,17 @@ type MsSmoothGroupSettingsParameters struct {
 
 	// Number of retry attempts.
 	// +kubebuilder:validation:Optional
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
 	// +kubebuilder:validation:Optional
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	SegmentationMode *string `json:"segmentationMode,omitempty" tf:"segmentation_mode,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SendDelayMs *float64 `json:"sendDelayMs,omitempty" tf:"send_delay_ms,omitempty"`
+	SendDelayMs *int64 `json:"sendDelayMs,omitempty" tf:"send_delay_ms,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	SparseTrackType *string `json:"sparseTrackType,omitempty" tf:"sparse_track_type,omitempty"`
@@ -6592,35 +5512,6 @@ type NielsenCbetSettingsParameters struct {
 	// CBET source ID to use in the watermark.
 	// +kubebuilder:validation:Optional
 	Csid *string `json:"csid" tf:"csid,omitempty"`
-}
-
-type NielsenConfigurationInitParameters struct {
-
-	// –  Enter the Distributor ID assigned to your organization by Nielsen.
-	DistributorID *string `json:"distributorId,omitempty" tf:"distributor_id,omitempty"`
-
-	// –  Enables Nielsen PCM to ID3 tagging.
-	NielsenPcmToId3Tagging *string `json:"nielsenPcmToId3Tagging,omitempty" tf:"nielsen_pcm_to_id3_tagging,omitempty"`
-}
-
-type NielsenConfigurationObservation struct {
-
-	// –  Enter the Distributor ID assigned to your organization by Nielsen.
-	DistributorID *string `json:"distributorId,omitempty" tf:"distributor_id,omitempty"`
-
-	// –  Enables Nielsen PCM to ID3 tagging.
-	NielsenPcmToId3Tagging *string `json:"nielsenPcmToId3Tagging,omitempty" tf:"nielsen_pcm_to_id3_tagging,omitempty"`
-}
-
-type NielsenConfigurationParameters struct {
-
-	// –  Enter the Distributor ID assigned to your organization by Nielsen.
-	// +kubebuilder:validation:Optional
-	DistributorID *string `json:"distributorId,omitempty" tf:"distributor_id,omitempty"`
-
-	// –  Enables Nielsen PCM to ID3 tagging.
-	// +kubebuilder:validation:Optional
-	NielsenPcmToId3Tagging *string `json:"nielsenPcmToId3Tagging,omitempty" tf:"nielsen_pcm_to_id3_tagging,omitempty"`
 }
 
 type NielsenNaesIiNwSettingsInitParameters struct {
@@ -6816,49 +5707,43 @@ type OutputGroupsParameters struct {
 
 type OutputRectangleInitParameters struct {
 
-	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
+	// Output video height in pixels.
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
-	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don’t have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages. If you specify a value for one of these fields, you must specify a value for all of them. For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, "10" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame. This field corresponds to tts:origin - X in the TTML standard.
 	LeftOffset *float64 `json:"leftOffset,omitempty" tf:"left_offset,omitempty"`
 
-	// See the description in left_offset. For top_offset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, "10" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame. This field corresponds to tts:origin - Y in the TTML standard.
 	TopOffset *float64 `json:"topOffset,omitempty" tf:"top_offset,omitempty"`
 
-	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
+	// Output video width in pixels.
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type OutputRectangleObservation struct {
 
-	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
+	// Output video height in pixels.
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
-	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don’t have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages. If you specify a value for one of these fields, you must specify a value for all of them. For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, "10" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame. This field corresponds to tts:origin - X in the TTML standard.
 	LeftOffset *float64 `json:"leftOffset,omitempty" tf:"left_offset,omitempty"`
 
-	// See the description in left_offset. For top_offset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, "10" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame. This field corresponds to tts:origin - Y in the TTML standard.
 	TopOffset *float64 `json:"topOffset,omitempty" tf:"top_offset,omitempty"`
 
-	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
+	// Output video width in pixels.
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type OutputRectangleParameters struct {
 
-	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
+	// Output video height in pixels.
 	// +kubebuilder:validation:Optional
 	Height *float64 `json:"height" tf:"height,omitempty"`
 
-	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don’t have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages. If you specify a value for one of these fields, you must specify a value for all of them. For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, "10" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame. This field corresponds to tts:origin - X in the TTML standard.
 	// +kubebuilder:validation:Optional
 	LeftOffset *float64 `json:"leftOffset" tf:"left_offset,omitempty"`
 
-	// See the description in left_offset. For top_offset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, "10" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame. This field corresponds to tts:origin - Y in the TTML standard.
 	// +kubebuilder:validation:Optional
 	TopOffset *float64 `json:"topOffset" tf:"top_offset,omitempty"`
 
-	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
+	// Output video width in pixels.
 	// +kubebuilder:validation:Optional
 	Width *float64 `json:"width" tf:"width,omitempty"`
 }
@@ -6886,7 +5771,7 @@ type OutputSettingsInitParameters struct {
 	// RTMP output settings. See RTMP Output Settings for more details.
 	RtmpOutputSettings []RtmpOutputSettingsInitParameters `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details.
+	// UDP output settings. See UDP Output Settings for more details
 	UDPOutputSettings []UDPOutputSettingsInitParameters `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
 
@@ -6913,7 +5798,7 @@ type OutputSettingsObservation struct {
 	// RTMP output settings. See RTMP Output Settings for more details.
 	RtmpOutputSettings []RtmpOutputSettingsObservation `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details.
+	// UDP output settings. See UDP Output Settings for more details
 	UDPOutputSettings []UDPOutputSettingsObservation `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
 
@@ -6947,7 +5832,7 @@ type OutputSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RtmpOutputSettings []RtmpOutputSettingsParameters `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details.
+	// UDP output settings. See UDP Output Settings for more details
 	// +kubebuilder:validation:Optional
 	UDPOutputSettings []UDPOutputSettingsParameters `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
@@ -7050,17 +5935,17 @@ type Rec709SettingsParameters struct {
 type RemixSettingsInitParameters struct {
 	ChannelMappings []ChannelMappingsInitParameters `json:"channelMappings,omitempty" tf:"channel_mappings,omitempty"`
 
-	ChannelsIn *float64 `json:"channelsIn,omitempty" tf:"channels_in,omitempty"`
+	ChannelsIn *int64 `json:"channelsIn,omitempty" tf:"channels_in,omitempty"`
 
-	ChannelsOut *float64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
+	ChannelsOut *int64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
 }
 
 type RemixSettingsObservation struct {
 	ChannelMappings []ChannelMappingsObservation `json:"channelMappings,omitempty" tf:"channel_mappings,omitempty"`
 
-	ChannelsIn *float64 `json:"channelsIn,omitempty" tf:"channels_in,omitempty"`
+	ChannelsIn *int64 `json:"channelsIn,omitempty" tf:"channels_in,omitempty"`
 
-	ChannelsOut *float64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
+	ChannelsOut *int64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
 }
 
 type RemixSettingsParameters struct {
@@ -7069,19 +5954,10 @@ type RemixSettingsParameters struct {
 	ChannelMappings []ChannelMappingsParameters `json:"channelMappings" tf:"channel_mappings,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ChannelsIn *float64 `json:"channelsIn,omitempty" tf:"channels_in,omitempty"`
+	ChannelsIn *int64 `json:"channelsIn,omitempty" tf:"channels_in,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ChannelsOut *float64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
-}
-
-type RtmpCaptionInfoDestinationSettingsInitParameters struct {
-}
-
-type RtmpCaptionInfoDestinationSettingsObservation struct {
-}
-
-type RtmpCaptionInfoDestinationSettingsParameters struct {
+	ChannelsOut *int64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
 }
 
 type RtmpGroupSettingsInitParameters struct {
@@ -7096,7 +5972,7 @@ type RtmpGroupSettingsInitParameters struct {
 	CacheFullBehavior *string `json:"cacheFullBehavior,omitempty" tf:"cache_full_behavior,omitempty"`
 
 	// Cache length in seconds, is used to calculate buffer size.
-	CacheLength *float64 `json:"cacheLength,omitempty" tf:"cache_length,omitempty"`
+	CacheLength *int64 `json:"cacheLength,omitempty" tf:"cache_length,omitempty"`
 
 	// Controls the types of data that passes to onCaptionInfo outputs.
 	CaptionData *string `json:"captionData,omitempty" tf:"caption_data,omitempty"`
@@ -7105,7 +5981,7 @@ type RtmpGroupSettingsInitParameters struct {
 	InputLossAction *string `json:"inputLossAction,omitempty" tf:"input_loss_action,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type RtmpGroupSettingsObservation struct {
@@ -7120,7 +5996,7 @@ type RtmpGroupSettingsObservation struct {
 	CacheFullBehavior *string `json:"cacheFullBehavior,omitempty" tf:"cache_full_behavior,omitempty"`
 
 	// Cache length in seconds, is used to calculate buffer size.
-	CacheLength *float64 `json:"cacheLength,omitempty" tf:"cache_length,omitempty"`
+	CacheLength *int64 `json:"cacheLength,omitempty" tf:"cache_length,omitempty"`
 
 	// Controls the types of data that passes to onCaptionInfo outputs.
 	CaptionData *string `json:"captionData,omitempty" tf:"caption_data,omitempty"`
@@ -7129,7 +6005,7 @@ type RtmpGroupSettingsObservation struct {
 	InputLossAction *string `json:"inputLossAction,omitempty" tf:"input_loss_action,omitempty"`
 
 	// Number of seconds to wait until a restart is initiated.
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type RtmpGroupSettingsParameters struct {
@@ -7148,7 +6024,7 @@ type RtmpGroupSettingsParameters struct {
 
 	// Cache length in seconds, is used to calculate buffer size.
 	// +kubebuilder:validation:Optional
-	CacheLength *float64 `json:"cacheLength,omitempty" tf:"cache_length,omitempty"`
+	CacheLength *int64 `json:"cacheLength,omitempty" tf:"cache_length,omitempty"`
 
 	// Controls the types of data that passes to onCaptionInfo outputs.
 	// +kubebuilder:validation:Optional
@@ -7160,7 +6036,7 @@ type RtmpGroupSettingsParameters struct {
 
 	// Number of seconds to wait until a restart is initiated.
 	// +kubebuilder:validation:Optional
-	RestartDelay *float64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
+	RestartDelay *int64 `json:"restartDelay,omitempty" tf:"restart_delay,omitempty"`
 }
 
 type RtmpOutputSettingsDestinationInitParameters struct {
@@ -7188,13 +6064,13 @@ type RtmpOutputSettingsInitParameters struct {
 	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// A director and base filename where archive files should be written. See Destination for more details.
 	Destination []RtmpOutputSettingsDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 }
 
 type RtmpOutputSettingsObservation struct {
@@ -7203,13 +6079,13 @@ type RtmpOutputSettingsObservation struct {
 	CertificateMode *string `json:"certificateMode,omitempty" tf:"certificate_mode,omitempty"`
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// A director and base filename where archive files should be written. See Destination for more details.
 	Destination []RtmpOutputSettingsDestinationObservation `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Number of retry attempts.
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 }
 
 type RtmpOutputSettingsParameters struct {
@@ -7220,7 +6096,7 @@ type RtmpOutputSettingsParameters struct {
 
 	// Number of seconds to wait before retrying connection to the flash media server if the connection is lost.
 	// +kubebuilder:validation:Optional
-	ConnectionRetryInterval *float64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
+	ConnectionRetryInterval *int64 `json:"connectionRetryInterval,omitempty" tf:"connection_retry_interval,omitempty"`
 
 	// A director and base filename where archive files should be written. See Destination for more details.
 	// +kubebuilder:validation:Optional
@@ -7228,130 +6104,109 @@ type RtmpOutputSettingsParameters struct {
 
 	// Number of retry attempts.
 	// +kubebuilder:validation:Optional
-	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
-}
-
-type Scte20PlusEmbeddedDestinationSettingsInitParameters struct {
-}
-
-type Scte20PlusEmbeddedDestinationSettingsObservation struct {
-}
-
-type Scte20PlusEmbeddedDestinationSettingsParameters struct {
+	NumRetries *int64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 }
 
 type Scte20SourceSettingsInitParameters struct {
-
-	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
-	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
-	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+	Source608ChannelNumber *int64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
 }
 
 type Scte20SourceSettingsObservation struct {
-
-	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
-	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
-	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
+	Source608ChannelNumber *int64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
 }
 
 type Scte20SourceSettingsParameters struct {
 
-	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	// +kubebuilder:validation:Optional
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
-	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	// +kubebuilder:validation:Optional
-	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
-}
-
-type Scte27DestinationSettingsInitParameters struct {
-}
-
-type Scte27DestinationSettingsObservation struct {
-}
-
-type Scte27DestinationSettingsParameters struct {
+	Source608ChannelNumber *int64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
 }
 
 type Scte27SourceSettingsInitParameters struct {
-
-	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
 	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
 
-	// Selects a specific PID from within a source.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+	// User-specified id. Ths is used in an output group or an output.
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type Scte27SourceSettingsObservation struct {
-
-	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
 	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
 
-	// Selects a specific PID from within a source.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+	// User-specified id. Ths is used in an output group or an output.
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type Scte27SourceSettingsParameters struct {
 
-	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
 	// +kubebuilder:validation:Optional
 	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
 
-	// Selects a specific PID from within a source.
+	// User-specified id. Ths is used in an output group or an output.
 	// +kubebuilder:validation:Optional
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
+}
+
+type SelectorSettingsDvbTdtSettingsInitParameters struct {
+	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
+
+	// User-specified id. Ths is used in an output group or an output.
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
+}
+
+type SelectorSettingsDvbTdtSettingsObservation struct {
+	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
+
+	// User-specified id. Ths is used in an output group or an output.
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
+}
+
+type SelectorSettingsDvbTdtSettingsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
+
+	// User-specified id. Ths is used in an output group or an output.
+	// +kubebuilder:validation:Optional
+	Pid *int64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type SelectorSettingsInitParameters struct {
-
-	// Audio HLS Rendition Selection. See Audio HLS Rendition Selection for more details.
 	AudioHlsRenditionSelection []AudioHlsRenditionSelectionInitParameters `json:"audioHlsRenditionSelection,omitempty" tf:"audio_hls_rendition_selection,omitempty"`
 
-	// Audio Language Selection. See Audio Language Selection for more details.
 	AudioLanguageSelection []AudioLanguageSelectionInitParameters `json:"audioLanguageSelection,omitempty" tf:"audio_language_selection,omitempty"`
 
-	// Audio Pid Selection. See Audio PID Selection for more details.
 	AudioPidSelection []AudioPidSelectionInitParameters `json:"audioPidSelection,omitempty" tf:"audio_pid_selection,omitempty"`
 
-	// Audio Track Selection. See Audio Track Selection for more details.
 	AudioTrackSelection []AudioTrackSelectionInitParameters `json:"audioTrackSelection,omitempty" tf:"audio_track_selection,omitempty"`
 }
 
 type SelectorSettingsObservation struct {
-
-	// Audio HLS Rendition Selection. See Audio HLS Rendition Selection for more details.
 	AudioHlsRenditionSelection []AudioHlsRenditionSelectionObservation `json:"audioHlsRenditionSelection,omitempty" tf:"audio_hls_rendition_selection,omitempty"`
 
-	// Audio Language Selection. See Audio Language Selection for more details.
 	AudioLanguageSelection []AudioLanguageSelectionObservation `json:"audioLanguageSelection,omitempty" tf:"audio_language_selection,omitempty"`
 
-	// Audio Pid Selection. See Audio PID Selection for more details.
 	AudioPidSelection []AudioPidSelectionObservation `json:"audioPidSelection,omitempty" tf:"audio_pid_selection,omitempty"`
 
-	// Audio Track Selection. See Audio Track Selection for more details.
 	AudioTrackSelection []AudioTrackSelectionObservation `json:"audioTrackSelection,omitempty" tf:"audio_track_selection,omitempty"`
 }
 
 type SelectorSettingsParameters struct {
 
-	// Audio HLS Rendition Selection. See Audio HLS Rendition Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioHlsRenditionSelection []AudioHlsRenditionSelectionParameters `json:"audioHlsRenditionSelection,omitempty" tf:"audio_hls_rendition_selection,omitempty"`
 
-	// Audio Language Selection. See Audio Language Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioLanguageSelection []AudioLanguageSelectionParameters `json:"audioLanguageSelection,omitempty" tf:"audio_language_selection,omitempty"`
 
-	// Audio Pid Selection. See Audio PID Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioPidSelection []AudioPidSelectionParameters `json:"audioPidSelection,omitempty" tf:"audio_pid_selection,omitempty"`
 
-	// Audio Track Selection. See Audio Track Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioTrackSelection []AudioTrackSelectionParameters `json:"audioTrackSelection,omitempty" tf:"audio_track_selection,omitempty"`
 }
@@ -7405,15 +6260,6 @@ type SettingsParameters struct {
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
-type SmpteTtDestinationSettingsInitParameters struct {
-}
-
-type SmpteTtDestinationSettingsObservation struct {
-}
-
-type SmpteTtDestinationSettingsParameters struct {
-}
-
 type StandardHlsSettingsInitParameters struct {
 	AudioRenditionSets *string `json:"audioRenditionSets,omitempty" tf:"audio_rendition_sets,omitempty"`
 
@@ -7459,40 +6305,23 @@ type StaticKeySettingsParameters struct {
 	StaticKeyValue *string `json:"staticKeyValue" tf:"static_key_value,omitempty"`
 }
 
-type TeletextDestinationSettingsInitParameters struct {
-}
-
-type TeletextDestinationSettingsObservation struct {
-}
-
-type TeletextDestinationSettingsParameters struct {
-}
-
 type TeletextSourceSettingsInitParameters struct {
-
-	// Optionally defines a region where TTML style captions will be displayed. See Caption Rectangle for more details.
 	OutputRectangle []OutputRectangleInitParameters `json:"outputRectangle,omitempty" tf:"output_rectangle,omitempty"`
 
-	// Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no “0x” prefix.
 	PageNumber *string `json:"pageNumber,omitempty" tf:"page_number,omitempty"`
 }
 
 type TeletextSourceSettingsObservation struct {
-
-	// Optionally defines a region where TTML style captions will be displayed. See Caption Rectangle for more details.
 	OutputRectangle []OutputRectangleObservation `json:"outputRectangle,omitempty" tf:"output_rectangle,omitempty"`
 
-	// Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no “0x” prefix.
 	PageNumber *string `json:"pageNumber,omitempty" tf:"page_number,omitempty"`
 }
 
 type TeletextSourceSettingsParameters struct {
 
-	// Optionally defines a region where TTML style captions will be displayed. See Caption Rectangle for more details.
 	// +kubebuilder:validation:Optional
 	OutputRectangle []OutputRectangleParameters `json:"outputRectangle,omitempty" tf:"output_rectangle,omitempty"`
 
-	// Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no “0x” prefix.
 	// +kubebuilder:validation:Optional
 	PageNumber *string `json:"pageNumber,omitempty" tf:"page_number,omitempty"`
 }
@@ -7571,7 +6400,7 @@ type TimecodeConfigInitParameters struct {
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Threshold in frames beyond which output timecode is resynchronized to the input timecode.
-	SyncThreshold *float64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
+	SyncThreshold *int64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
 }
 
 type TimecodeConfigObservation struct {
@@ -7580,7 +6409,7 @@ type TimecodeConfigObservation struct {
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Threshold in frames beyond which output timecode is resynchronized to the input timecode.
-	SyncThreshold *float64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
+	SyncThreshold *int64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
 }
 
 type TimecodeConfigParameters struct {
@@ -7591,45 +6420,21 @@ type TimecodeConfigParameters struct {
 
 	// Threshold in frames beyond which output timecode is resynchronized to the input timecode.
 	// +kubebuilder:validation:Optional
-	SyncThreshold *float64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
+	SyncThreshold *int64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
 }
 
-type TracksInitParameters struct {
-
-	// 1-based integer value that maps to a specific audio track.
-	Track *float64 `json:"track,omitempty" tf:"track,omitempty"`
+type TrackInitParameters struct {
+	Track *int64 `json:"track,omitempty" tf:"track,omitempty"`
 }
 
-type TracksObservation struct {
-
-	// 1-based integer value that maps to a specific audio track.
-	Track *float64 `json:"track,omitempty" tf:"track,omitempty"`
+type TrackObservation struct {
+	Track *int64 `json:"track,omitempty" tf:"track,omitempty"`
 }
 
-type TracksParameters struct {
+type TrackParameters struct {
 
-	// 1-based integer value that maps to a specific audio track.
 	// +kubebuilder:validation:Optional
-	Track *float64 `json:"track" tf:"track,omitempty"`
-}
-
-type TtmlDestinationSettingsInitParameters struct {
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type TtmlDestinationSettingsObservation struct {
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type TtmlDestinationSettingsParameters struct {
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	// +kubebuilder:validation:Optional
-	StyleControl *string `json:"styleControl" tf:"style_control,omitempty"`
+	Track *int64 `json:"track" tf:"track,omitempty"`
 }
 
 type UDPGroupSettingsInitParameters struct {
@@ -7640,7 +6445,7 @@ type UDPGroupSettingsInitParameters struct {
 	// Indicates ID3 frame that has the timecode.
 	TimedMetadataId3Frame *string `json:"timedMetadataId3Frame,omitempty" tf:"timed_metadata_id3_frame,omitempty"`
 
-	TimedMetadataId3Period *float64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
+	TimedMetadataId3Period *int64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
 }
 
 type UDPGroupSettingsObservation struct {
@@ -7651,7 +6456,7 @@ type UDPGroupSettingsObservation struct {
 	// Indicates ID3 frame that has the timecode.
 	TimedMetadataId3Frame *string `json:"timedMetadataId3Frame,omitempty" tf:"timed_metadata_id3_frame,omitempty"`
 
-	TimedMetadataId3Period *float64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
+	TimedMetadataId3Period *int64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
 }
 
 type UDPGroupSettingsParameters struct {
@@ -7665,7 +6470,7 @@ type UDPGroupSettingsParameters struct {
 	TimedMetadataId3Frame *string `json:"timedMetadataId3Frame,omitempty" tf:"timed_metadata_id3_frame,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	TimedMetadataId3Period *float64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
+	TimedMetadataId3Period *int64 `json:"timedMetadataId3Period,omitempty" tf:"timed_metadata_id3_period,omitempty"`
 }
 
 type UDPOutputSettingsContainerSettingsInitParameters struct {
@@ -7709,7 +6514,7 @@ type UDPOutputSettingsDestinationParameters struct {
 type UDPOutputSettingsInitParameters struct {
 
 	// UDP output buffering in milliseconds.
-	BufferMsec *float64 `json:"bufferMsec,omitempty" tf:"buffer_msec,omitempty"`
+	BufferMsec *int64 `json:"bufferMsec,omitempty" tf:"buffer_msec,omitempty"`
 
 	// Settings specific to the container type of the file. See Container Settings for more details.
 	ContainerSettings []UDPOutputSettingsContainerSettingsInitParameters `json:"containerSettings,omitempty" tf:"container_settings,omitempty"`
@@ -7724,7 +6529,7 @@ type UDPOutputSettingsInitParameters struct {
 type UDPOutputSettingsObservation struct {
 
 	// UDP output buffering in milliseconds.
-	BufferMsec *float64 `json:"bufferMsec,omitempty" tf:"buffer_msec,omitempty"`
+	BufferMsec *int64 `json:"bufferMsec,omitempty" tf:"buffer_msec,omitempty"`
 
 	// Settings specific to the container type of the file. See Container Settings for more details.
 	ContainerSettings []UDPOutputSettingsContainerSettingsObservation `json:"containerSettings,omitempty" tf:"container_settings,omitempty"`
@@ -7740,7 +6545,7 @@ type UDPOutputSettingsParameters struct {
 
 	// UDP output buffering in milliseconds.
 	// +kubebuilder:validation:Optional
-	BufferMsec *float64 `json:"bufferMsec,omitempty" tf:"buffer_msec,omitempty"`
+	BufferMsec *int64 `json:"bufferMsec,omitempty" tf:"buffer_msec,omitempty"`
 
 	// Settings specific to the container type of the file. See Container Settings for more details.
 	// +kubebuilder:validation:Optional
@@ -7786,32 +6591,24 @@ type VPCParameters struct {
 }
 
 type VideoBlackSettingsInitParameters struct {
-
-	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
-	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
-	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
+	VideoBlackThresholdMsec *int64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoBlackSettingsObservation struct {
-
-	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
-	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
-	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
+	VideoBlackThresholdMsec *int64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoBlackSettingsParameters struct {
 
-	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	// +kubebuilder:validation:Optional
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
-	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	// +kubebuilder:validation:Optional
-	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
+	VideoBlackThresholdMsec *int64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoDescriptionsCodecSettingsInitParameters struct {
@@ -7858,8 +6655,8 @@ type VideoDescriptionsInitParameters struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []VideoDescriptionsCodecSettingsInitParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
-	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
+	// Output video height in pixels.
+	Height *int64 `json:"height,omitempty" tf:"height,omitempty"`
 
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -7871,10 +6668,10 @@ type VideoDescriptionsInitParameters struct {
 	ScalingBehavior *string `json:"scalingBehavior,omitempty" tf:"scaling_behavior,omitempty"`
 
 	// Changes the strength of the anti-alias filter used for scaling.
-	Sharpness *float64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
+	Sharpness *int64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
 
-	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
-	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
+	// Output video width in pixels.
+	Width *int64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type VideoDescriptionsObservation struct {
@@ -7882,8 +6679,8 @@ type VideoDescriptionsObservation struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []VideoDescriptionsCodecSettingsObservation `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
-	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
+	// Output video height in pixels.
+	Height *int64 `json:"height,omitempty" tf:"height,omitempty"`
 
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -7895,10 +6692,10 @@ type VideoDescriptionsObservation struct {
 	ScalingBehavior *string `json:"scalingBehavior,omitempty" tf:"scaling_behavior,omitempty"`
 
 	// Changes the strength of the anti-alias filter used for scaling.
-	Sharpness *float64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
+	Sharpness *int64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
 
-	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
-	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
+	// Output video width in pixels.
+	Width *int64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type VideoDescriptionsParameters struct {
@@ -7907,9 +6704,9 @@ type VideoDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CodecSettings []VideoDescriptionsCodecSettingsParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
+	// Output video height in pixels.
 	// +kubebuilder:validation:Optional
-	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
+	Height *int64 `json:"height,omitempty" tf:"height,omitempty"`
 
 	// Name of the Channel.
 	// +kubebuilder:validation:Optional
@@ -7925,11 +6722,11 @@ type VideoDescriptionsParameters struct {
 
 	// Changes the strength of the anti-alias filter used for scaling.
 	// +kubebuilder:validation:Optional
-	Sharpness *float64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
+	Sharpness *int64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
 
-	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
+	// Output video width in pixels.
 	// +kubebuilder:validation:Optional
-	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
+	Width *int64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type VideoSelectorInitParameters struct {
@@ -7985,25 +6782,6 @@ type WavSettingsParameters struct {
 	// Sample rate in Hz.
 	// +kubebuilder:validation:Optional
 	SampleRate *float64 `json:"sampleRate,omitempty" tf:"sample_rate,omitempty"`
-}
-
-type WebvttDestinationSettingsInitParameters struct {
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type WebvttDestinationSettingsObservation struct {
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
-}
-
-type WebvttDestinationSettingsParameters struct {
-
-	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
-	// +kubebuilder:validation:Optional
-	StyleControl *string `json:"styleControl" tf:"style_control,omitempty"`
 }
 
 // ChannelSpec defines the desired state of Channel
