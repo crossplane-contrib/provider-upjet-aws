@@ -245,4 +245,4 @@ require (
 
 replace github.com/upbound/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231025133950-8dd0329c5aaf
 
-replace github.com/hashicorp/terraform-provider-aws => github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231005210731-1dd260247cb7
+replace github.com/hashicorp/terraform-provider-aws => github.com/ulucinar/terraform-provider-aws v1.60.1-0.20231026091456-f2d38ee240d7
