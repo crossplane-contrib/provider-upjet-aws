@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -14,9 +18,9 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	tjcontroller "github.com/upbound/upjet/pkg/controller"
-	"github.com/upbound/upjet/pkg/controller/handler"
-	"github.com/upbound/upjet/pkg/metrics"
+	tjcontroller "github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller/handler"
+	"github.com/crossplane/upjet/pkg/metrics"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-aws/apis/imagebuilder/v1beta1"
@@ -39,7 +43,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithExternalConnecter(tjcontroller.NewNoForkConnector(mgr.GetClient(), o.SetupFn, o.Provider.Resources["aws_imagebuilder_infrastructure_configuration"], o.OperationTrackerStore,
 			tjcontroller.WithNoForkLogger(o.Logger),
 			tjcontroller.WithNoForkMetricRecorder(metrics.NewMetricRecorder(v1beta1.InfrastructureConfiguration_GroupVersionKind, mgr, o.PollInterval)),
-			tjcontroller.WithNoForkManagementPolicies(o.Features.Enabled(features.EnableAlphaManagementPolicies)))),
+			tjcontroller.WithNoForkManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
 
@@ -51,7 +55,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.PollJitter != 0 {
 		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
 	}
-	if o.Features.Enabled(features.EnableAlphaManagementPolicies) {
+	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
 	}
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.InfrastructureConfiguration_GroupVersionKind), opts...)

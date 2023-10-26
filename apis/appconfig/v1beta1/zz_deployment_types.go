@@ -22,6 +22,9 @@ type DeploymentInitParameters struct {
 	// Description of the deployment. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Environment ID. Must be between 4 and 7 characters in length.
+	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
+
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -128,18 +131,8 @@ type DeploymentParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Environment ID. Must be between 4 and 7 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("environment_id",true)
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
-
-	// Reference to a Environment in appconfig to populate environmentId.
-	// +kubebuilder:validation:Optional
-	EnvironmentIDRef *v1.Reference `json:"environmentIdRef,omitempty" tf:"-"`
-
-	// Selector for a Environment in appconfig to populate environmentId.
-	// +kubebuilder:validation:Optional
-	EnvironmentIDSelector *v1.Selector `json:"environmentIdSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -186,8 +179,9 @@ type DeploymentStatus struct {
 type Deployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeploymentSpec   `json:"spec"`
-	Status            DeploymentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.environmentId) || (has(self.initProvider) && has(self.initProvider.environmentId))",message="spec.forProvider.environmentId is a required parameter"
+	Spec   DeploymentSpec   `json:"spec"`
+	Status DeploymentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

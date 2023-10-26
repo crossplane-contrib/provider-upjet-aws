@@ -18,6 +18,9 @@ import (
 )
 
 type CognitoConfigInitParameters struct {
+
+	// The client ID for your Amazon Cognito user pool.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
 type CognitoConfigObservation struct {
@@ -32,18 +35,8 @@ type CognitoConfigObservation struct {
 type CognitoConfigParameters struct {
 
 	// The client ID for your Amazon Cognito user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// Reference to a UserPoolClient in cognitoidp to populate clientId.
-	// +kubebuilder:validation:Optional
-	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
-
-	// Selector for a UserPoolClient in cognitoidp to populate clientId.
-	// +kubebuilder:validation:Optional
-	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// ID for your Amazon Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain

@@ -82,8 +82,7 @@ spec:
                   regularExpression:
                     description: One or more blocks of regular expression patterns
                       that you want AWS WAF to search for, such as B[a@]dB[o0]t. See
-                      Regular Expression below for details. A maximum of 10 regular_expression
-                      blocks may be specified.
+                      Regular Expression below for details.
                     items:
                       properties:
                         regexString:
@@ -129,8 +128,7 @@ spec:
                   regularExpression:
                     description: One or more blocks of regular expression patterns
                       that you want AWS WAF to search for, such as B[a@]dB[o0]t. See
-                      Regular Expression below for details. A maximum of 10 regular_expression
-                      blocks may be specified.
+                      Regular Expression below for details.
                     items:
                       properties:
                         regexString:
@@ -345,8 +343,7 @@ spec:
                   regularExpression:
                     description: One or more blocks of regular expression patterns
                       that you want AWS WAF to search for, such as B[a@]dB[o0]t. See
-                      Regular Expression below for details. A maximum of 10 regular_expression
-                      blocks may be specified.
+                      Regular Expression below for details.
                     items:
                       properties:
                         regexString:
