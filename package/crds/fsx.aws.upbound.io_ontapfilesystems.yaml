@@ -85,7 +85,7 @@ spec:
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
-                      NetApp ONTAP file system. See Disk Iops Configuration below.
+                      NetApp ONTAP file system. See Disk Iops Configuration Below.
                     items:
                       properties:
                         iops:
@@ -515,7 +515,7 @@ spec:
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
-                      NetApp ONTAP file system. See Disk Iops Configuration below.
+                      NetApp ONTAP file system. See Disk Iops Configuration Below.
                     items:
                       properties:
                         iops:
@@ -764,7 +764,7 @@ spec:
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
-                      NetApp ONTAP file system. See Disk Iops Configuration below.
+                      NetApp ONTAP file system. See Disk Iops Configuration Below.
                     items:
                       properties:
                         iops:

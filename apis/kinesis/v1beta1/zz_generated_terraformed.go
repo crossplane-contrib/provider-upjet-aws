@@ -85,12 +85,12 @@ func (tr *Stream) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Stream
-func (tr *Stream) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Stream) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -200,12 +200,12 @@ func (tr *StreamConsumer) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this StreamConsumer
-func (tr *StreamConsumer) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *StreamConsumer) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

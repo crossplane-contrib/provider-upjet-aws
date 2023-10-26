@@ -85,12 +85,12 @@ func (tr *AppMonitor) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this AppMonitor
-func (tr *AppMonitor) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *AppMonitor) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *MetricsDestination) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this MetricsDestination
-func (tr *MetricsDestination) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *MetricsDestination) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

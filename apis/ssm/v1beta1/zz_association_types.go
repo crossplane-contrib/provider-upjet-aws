@@ -34,13 +34,13 @@ type AssociationInitParameters struct {
 	// The document version you want to associate with the target(s). Can be a specific version or the default version.
 	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
 
-	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above. Use the targets attribute instead.
+	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%. If you specify a threshold of 3, the stop command is sent when the fourth error is returned. If you specify a threshold of 10% for 50 associations, the stop command is sent when the sixth error is returned.
+	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
 	// An output location block. Output Location is documented below.
@@ -51,9 +51,6 @@ type AssociationInitParameters struct {
 
 	// A cron or rate expression that specifies when the association runs.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
-
-	// The mode for generating association compliance. You can specify AUTO or MANUAL.
-	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
@@ -87,13 +84,13 @@ type AssociationObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above. Use the targets attribute instead.
+	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// The maximum number of targets allowed to run the association at the same time. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%. If you specify a threshold of 3, the stop command is sent when the fourth error is returned. If you specify a threshold of 10% for 50 associations, the stop command is sent when the sixth error is returned.
+	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
 	// The name of the SSM document to apply.
@@ -107,9 +104,6 @@ type AssociationObservation struct {
 
 	// A cron or rate expression that specifies when the association runs.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
-
-	// The mode for generating association compliance. You can specify AUTO or MANUAL.
-	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
@@ -140,7 +134,7 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
 
-	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above. Use the targets attribute instead.
+	// The instance ID to apply an SSM document to. Use targets with key InstanceIds for document schema versions 2.0 and above.
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -148,7 +142,7 @@ type AssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxConcurrency *string `json:"maxConcurrency,omitempty" tf:"max_concurrency,omitempty"`
 
-	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%. If you specify a threshold of 3, the stop command is sent when the fourth error is returned. If you specify a threshold of 10% for 50 associations, the stop command is sent when the sixth error is returned.
+	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	// +kubebuilder:validation:Optional
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
@@ -181,10 +175,6 @@ type AssociationParameters struct {
 	// A cron or rate expression that specifies when the association runs.
 	// +kubebuilder:validation:Optional
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`
-
-	// The mode for generating association compliance. You can specify AUTO or MANUAL.
-	// +kubebuilder:validation:Optional
-	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	// +kubebuilder:validation:Optional

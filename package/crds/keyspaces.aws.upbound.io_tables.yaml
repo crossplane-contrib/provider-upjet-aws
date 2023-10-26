@@ -89,17 +89,6 @@ spec:
                           type: integer
                       type: object
                     type: array
-                  clientSideTimestamps:
-                    description: Enables client-side timestamps for the table. By
-                      default, the setting is disabled.
-                    items:
-                      properties:
-                        status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
-                          type: string
-                      type: object
-                    type: array
                   comment:
                     description: A description of the table.
                     items:
@@ -217,8 +206,8 @@ spec:
                     items:
                       properties:
                         status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
                           type: string
                       type: object
                     type: array
@@ -295,8 +284,8 @@ spec:
                     items:
                       properties:
                         status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
                           type: string
                       type: object
                     type: array
@@ -337,17 +326,6 @@ spec:
                           type: integer
                       type: object
                     type: array
-                  clientSideTimestamps:
-                    description: Enables client-side timestamps for the table. By
-                      default, the setting is disabled.
-                    items:
-                      properties:
-                        status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
-                          type: string
-                      type: object
-                    type: array
                   comment:
                     description: A description of the table.
                     items:
@@ -386,8 +364,8 @@ spec:
                     items:
                       properties:
                         status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
                           type: string
                       type: object
                     type: array
@@ -460,8 +438,8 @@ spec:
                     items:
                       properties:
                         status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
                           type: string
                       type: object
                     type: array
@@ -665,17 +643,6 @@ spec:
                           type: integer
                       type: object
                     type: array
-                  clientSideTimestamps:
-                    description: Enables client-side timestamps for the table. By
-                      default, the setting is disabled.
-                    items:
-                      properties:
-                        status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
-                          type: string
-                      type: object
-                    type: array
                   comment:
                     description: A description of the table.
                     items:
@@ -720,8 +687,8 @@ spec:
                     items:
                       properties:
                         status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
                           type: string
                       type: object
                     type: array
@@ -801,8 +768,8 @@ spec:
                     items:
                       properties:
                         status:
-                          description: 'Shows how to enable client-side timestamps
-                            settings for the specified table. Valid values: ENABLED.'
+                          description: 'Valid values: ENABLED, DISABLED. The default
+                            value is DISABLED.'
                           type: string
                       type: object
                     type: array

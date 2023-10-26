@@ -85,12 +85,12 @@ func (tr *HTTPNamespace) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this HTTPNamespace
-func (tr *HTTPNamespace) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *HTTPNamespace) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *PrivateDNSNamespace) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this PrivateDNSNamespace
-func (tr *PrivateDNSNamespace) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *PrivateDNSNamespace) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *PublicDNSNamespace) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this PublicDNSNamespace
-func (tr *PublicDNSNamespace) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *PublicDNSNamespace) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *Service) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Service
-func (tr *Service) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Service) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

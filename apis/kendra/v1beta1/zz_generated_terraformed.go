@@ -85,12 +85,12 @@ func (tr *DataSource) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this DataSource
-func (tr *DataSource) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *DataSource) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *Experience) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Experience
-func (tr *Experience) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Experience) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *Index) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Index
-func (tr *Index) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Index) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *QuerySuggestionsBlockList) GetInitParameters() (map[string]any, error)
 }
 
 // GetInitParameters of this QuerySuggestionsBlockList
-func (tr *QuerySuggestionsBlockList) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *QuerySuggestionsBlockList) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -541,12 +541,12 @@ func (tr *Thesaurus) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Thesaurus
-func (tr *Thesaurus) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Thesaurus) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

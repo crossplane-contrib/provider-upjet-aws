@@ -85,12 +85,12 @@ func (tr *Budget) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Budget
-func (tr *Budget) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Budget) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *BudgetAction) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this BudgetAction
-func (tr *BudgetAction) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *BudgetAction) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

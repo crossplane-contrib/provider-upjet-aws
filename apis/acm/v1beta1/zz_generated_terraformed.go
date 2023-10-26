@@ -85,12 +85,12 @@ func (tr *Certificate) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Certificate
-func (tr *Certificate) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Certificate) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -204,12 +204,12 @@ func (tr *CertificateValidation) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this CertificateValidation
-func (tr *CertificateValidation) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *CertificateValidation) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

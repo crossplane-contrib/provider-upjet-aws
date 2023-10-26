@@ -92,9 +92,6 @@ type OptionsInitParameters struct {
 	// A file metadata that indicates the last time a file was modified (written to) before the sync PREPARING phase. Value values: NONE, PRESERVE. Default: PRESERVE.
 	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
 
-	// Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Valid values: PRESERVE, NONE. Default value: PRESERVE.
-	ObjectTags *string `json:"objectTags,omitempty" tf:"object_tags,omitempty"`
-
 	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
 	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
 
@@ -107,7 +104,7 @@ type OptionsInitParameters struct {
 	// Whether the DataSync Task should preserve the metadata of block and character devices in the source files system, and recreate the files with that device name and metadata on the destination. The DataSync Task can’t sync the actual contents of such devices, because many of the devices are non-terminal and don’t return an end of file (EOF) marker. Valid values: NONE, PRESERVE. Default: NONE (ignore special devices).
 	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
 
-	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
 	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
 
 	// Determines whether tasks should be queued before executing the tasks. Valid values: ENABLED, DISABLED. Default ENABLED.
@@ -140,9 +137,6 @@ type OptionsObservation struct {
 	// A file metadata that indicates the last time a file was modified (written to) before the sync PREPARING phase. Value values: NONE, PRESERVE. Default: PRESERVE.
 	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
 
-	// Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Valid values: PRESERVE, NONE. Default value: PRESERVE.
-	ObjectTags *string `json:"objectTags,omitempty" tf:"object_tags,omitempty"`
-
 	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
 	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
 
@@ -155,7 +149,7 @@ type OptionsObservation struct {
 	// Whether the DataSync Task should preserve the metadata of block and character devices in the source files system, and recreate the files with that device name and metadata on the destination. The DataSync Task can’t sync the actual contents of such devices, because many of the devices are non-terminal and don’t return an end of file (EOF) marker. Valid values: NONE, PRESERVE. Default: NONE (ignore special devices).
 	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
 
-	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
 	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
 
 	// Determines whether tasks should be queued before executing the tasks. Valid values: ENABLED, DISABLED. Default ENABLED.
@@ -193,10 +187,6 @@ type OptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
 
-	// Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Valid values: PRESERVE, NONE. Default value: PRESERVE.
-	// +kubebuilder:validation:Optional
-	ObjectTags *string `json:"objectTags,omitempty" tf:"object_tags,omitempty"`
-
 	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
 	// +kubebuilder:validation:Optional
 	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
@@ -213,7 +203,7 @@ type OptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
 
-	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
 	// +kubebuilder:validation:Optional
 	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
 

@@ -285,8 +285,8 @@ spec:
                     type: integer
                   queues:
                     description: The name of the Amazon MQ broker destination queue
-                      to consume. Only available for MQ sources. The list must contain
-                      exactly one queue name.
+                      to consume. Only available for MQ sources. A single queue name
+                      must be specified.
                     items:
                       type: string
                     type: array
@@ -543,8 +543,8 @@ spec:
                     type: integer
                   queues:
                     description: The name of the Amazon MQ broker destination queue
-                      to consume. Only available for MQ sources. The list must contain
-                      exactly one queue name.
+                      to consume. Only available for MQ sources. A single queue name
+                      must be specified.
                     items:
                       type: string
                     type: array
@@ -966,8 +966,8 @@ spec:
                     type: integer
                   queues:
                     description: The name of the Amazon MQ broker destination queue
-                      to consume. Only available for MQ sources. The list must contain
-                      exactly one queue name.
+                      to consume. Only available for MQ sources. A single queue name
+                      must be specified.
                     items:
                       type: string
                     type: array

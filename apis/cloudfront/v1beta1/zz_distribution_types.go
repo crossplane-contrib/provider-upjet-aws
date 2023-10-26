@@ -95,13 +95,13 @@ type CustomOriginConfigInitParameters struct {
 	// HTTPS port the custom origin listens on.
 	HTTPSPort *int64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	OriginKeepaliveTimeout *int64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
-	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
+	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	OriginReadTimeout *int64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
@@ -116,13 +116,13 @@ type CustomOriginConfigObservation struct {
 	// HTTPS port the custom origin listens on.
 	HTTPSPort *int64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
-	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	OriginKeepaliveTimeout *int64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
-	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
+	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	OriginReadTimeout *int64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
@@ -139,7 +139,7 @@ type CustomOriginConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPSPort *int64 `json:"httpsPort" tf:"https_port,omitempty"`
 
-	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	// +kubebuilder:validation:Optional
 	OriginKeepaliveTimeout *int64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
@@ -147,7 +147,7 @@ type CustomOriginConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginProtocolPolicy *string `json:"originProtocolPolicy" tf:"origin_protocol_policy,omitempty"`
 
-	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
+	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	// +kubebuilder:validation:Optional
 	OriginReadTimeout *int64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
@@ -363,9 +363,6 @@ type DistributionInitParameters struct {
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
-	// Identifier of a continuous deployment policy. This argument should only be set on a production distribution. See the aws_cloudfront_continuous_deployment_policy resource for additional details.
-	ContinuousDeploymentPolicyID *string `json:"continuousDeploymentPolicyId,omitempty" tf:"continuous_deployment_policy_id,omitempty"`
-
 	// One or more custom error response elements (multiples allowed).
 	CustomErrorResponse []CustomErrorResponseInitParameters `json:"customErrorResponse,omitempty" tf:"custom_error_response,omitempty"`
 
@@ -405,9 +402,6 @@ type DistributionInitParameters struct {
 	// If this is set, the distribution needs to be deleted manually afterwards. Default: false.
 	RetainOnDelete *bool `json:"retainOnDelete,omitempty" tf:"retain_on_delete,omitempty"`
 
-	// A Boolean that indicates whether this is a staging distribution. Defaults to false.
-	Staging *bool `json:"staging,omitempty" tf:"staging,omitempty"`
-
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -434,9 +428,6 @@ type DistributionObservation struct {
 
 	// Any comments you want to include about the distribution.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
-
-	// Identifier of a continuous deployment policy. This argument should only be set on a production distribution. See the aws_cloudfront_continuous_deployment_policy resource for additional details.
-	ContinuousDeploymentPolicyID *string `json:"continuousDeploymentPolicyId,omitempty" tf:"continuous_deployment_policy_id,omitempty"`
 
 	// One or more custom error response elements (multiples allowed).
 	CustomErrorResponse []CustomErrorResponseObservation `json:"customErrorResponse,omitempty" tf:"custom_error_response,omitempty"`
@@ -495,9 +486,6 @@ type DistributionObservation struct {
 	// If this is set, the distribution needs to be deleted manually afterwards. Default: false.
 	RetainOnDelete *bool `json:"retainOnDelete,omitempty" tf:"retain_on_delete,omitempty"`
 
-	// A Boolean that indicates whether this is a staging distribution. Defaults to false.
-	Staging *bool `json:"staging,omitempty" tf:"staging,omitempty"`
-
 	// Current status of the distribution. Deployed if the distribution's information is fully propagated throughout the Amazon CloudFront system.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -532,10 +520,6 @@ type DistributionParameters struct {
 	// Any comments you want to include about the distribution.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
-
-	// Identifier of a continuous deployment policy. This argument should only be set on a production distribution. See the aws_cloudfront_continuous_deployment_policy resource for additional details.
-	// +kubebuilder:validation:Optional
-	ContinuousDeploymentPolicyID *string `json:"continuousDeploymentPolicyId,omitempty" tf:"continuous_deployment_policy_id,omitempty"`
 
 	// One or more custom error response elements (multiples allowed).
 	// +kubebuilder:validation:Optional
@@ -593,10 +577,6 @@ type DistributionParameters struct {
 	// If this is set, the distribution needs to be deleted manually afterwards. Default: false.
 	// +kubebuilder:validation:Optional
 	RetainOnDelete *bool `json:"retainOnDelete,omitempty" tf:"retain_on_delete,omitempty"`
-
-	// A Boolean that indicates whether this is a staging distribution. Defaults to false.
-	// +kubebuilder:validation:Optional
-	Staging *bool `json:"staging,omitempty" tf:"staging,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -1313,10 +1293,10 @@ type OriginInitParameters struct {
 	// Optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
-	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
+	// The CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	OriginShield []OriginShieldInitParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
-	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
+	// The CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig []S3OriginConfigInitParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
 
@@ -1346,10 +1326,10 @@ type OriginObservation struct {
 	// Optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
-	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
+	// The CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	OriginShield []OriginShieldObservation `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
-	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
+	// The CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig []S3OriginConfigObservation `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
 
@@ -1397,11 +1377,11 @@ type OriginParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginPath *string `json:"originPath,omitempty" tf:"origin_path,omitempty"`
 
-	// CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
+	// The CloudFront Origin Shield configuration information. Using Origin Shield can help reduce the load on your origin. For more information, see Using Origin Shield in the Amazon CloudFront Developer Guide.
 	// +kubebuilder:validation:Optional
 	OriginShield []OriginShieldParameters `json:"originShield,omitempty" tf:"origin_shield,omitempty"`
 
-	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
+	// The CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	// +kubebuilder:validation:Optional
 	S3OriginConfig []S3OriginConfigParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 }
@@ -1432,7 +1412,7 @@ type OriginShieldParameters struct {
 
 	// AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2.
 	// +kubebuilder:validation:Optional
-	OriginShieldRegion *string `json:"originShieldRegion,omitempty" tf:"origin_shield_region,omitempty"`
+	OriginShieldRegion *string `json:"originShieldRegion" tf:"origin_shield_region,omitempty"`
 }
 
 type RestrictionsInitParameters struct {

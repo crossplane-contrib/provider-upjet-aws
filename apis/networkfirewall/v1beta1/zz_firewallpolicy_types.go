@@ -86,9 +86,6 @@ type FirewallPolicyEncryptionConfigurationParameters struct {
 
 type FirewallPolicyFirewallPolicyInitParameters struct {
 
-	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
-	PolicyVariables []PolicyVariablesInitParameters `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
-
 	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
 	StatefulDefaultActions []*string `json:"statefulDefaultActions,omitempty" tf:"stateful_default_actions,omitempty"`
 
@@ -115,9 +112,6 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 
 type FirewallPolicyFirewallPolicyObservation struct {
 
-	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
-	PolicyVariables []PolicyVariablesObservation `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
-
 	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
 	StatefulDefaultActions []*string `json:"statefulDefaultActions,omitempty" tf:"stateful_default_actions,omitempty"`
 
@@ -143,10 +137,6 @@ type FirewallPolicyFirewallPolicyObservation struct {
 }
 
 type FirewallPolicyFirewallPolicyParameters struct {
-
-	// . Contains variables that you can use to override default Suricata settings in your firewall policy. See Rule Variables for details.
-	// +kubebuilder:validation:Optional
-	PolicyVariables []PolicyVariablesParameters `json:"policyVariables,omitempty" tf:"policy_variables,omitempty"`
 
 	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
 	// +kubebuilder:validation:Optional
@@ -245,25 +235,6 @@ type FirewallPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type IPSetInitParameters struct {
-
-	// Set of IPv4 or IPv6 addresses in CIDR notation to use for the Suricata HOME_NET variable.
-	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
-}
-
-type IPSetObservation struct {
-
-	// Set of IPv4 or IPv6 addresses in CIDR notation to use for the Suricata HOME_NET variable.
-	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
-}
-
-type IPSetParameters struct {
-
-	// Set of IPv4 or IPv6 addresses in CIDR notation to use for the Suricata HOME_NET variable.
-	// +kubebuilder:validation:Optional
-	Definition []*string `json:"definition" tf:"definition,omitempty"`
-}
-
 type OverrideInitParameters struct {
 
 	// The action that changes the rule group from DROP to ALERT . This only applies to managed rule groups.
@@ -281,20 +252,6 @@ type OverrideParameters struct {
 	// The action that changes the rule group from DROP to ALERT . This only applies to managed rule groups.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-}
-
-type PolicyVariablesInitParameters struct {
-	RuleVariables []RuleVariablesInitParameters `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
-}
-
-type PolicyVariablesObservation struct {
-	RuleVariables []RuleVariablesObservation `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
-}
-
-type PolicyVariablesParameters struct {
-
-	// +kubebuilder:validation:Optional
-	RuleVariables []RuleVariablesParameters `json:"ruleVariables,omitempty" tf:"rule_variables,omitempty"`
 }
 
 type PublishMetricActionInitParameters struct {
@@ -316,62 +273,23 @@ type PublishMetricActionParameters struct {
 	Dimension []DimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 }
 
-type RuleVariablesInitParameters struct {
-
-	// A configuration block that defines a set of IP addresses. See IP Set below for details.
-	IPSet []IPSetInitParameters `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
-
-	// An alphanumeric string to identify the ip_set. Valid values: HOME_NET
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type RuleVariablesObservation struct {
-
-	// A configuration block that defines a set of IP addresses. See IP Set below for details.
-	IPSet []IPSetObservation `json:"ipSet,omitempty" tf:"ip_set,omitempty"`
-
-	// An alphanumeric string to identify the ip_set. Valid values: HOME_NET
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-}
-
-type RuleVariablesParameters struct {
-
-	// A configuration block that defines a set of IP addresses. See IP Set below for details.
-	// +kubebuilder:validation:Optional
-	IPSet []IPSetParameters `json:"ipSet" tf:"ip_set,omitempty"`
-
-	// An alphanumeric string to identify the ip_set. Valid values: HOME_NET
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-}
-
 type StatefulEngineOptionsInitParameters struct {
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
-
-	// Describes how to treat traffic which has broken midstream. Default value: DROP. Valid values: DROP, CONTINUE, REJECT.
-	StreamExceptionPolicy *string `json:"streamExceptionPolicy,omitempty" tf:"stream_exception_policy,omitempty"`
 }
 
 type StatefulEngineOptionsObservation struct {
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
-
-	// Describes how to treat traffic which has broken midstream. Default value: DROP. Valid values: DROP, CONTINUE, REJECT.
-	StreamExceptionPolicy *string `json:"streamExceptionPolicy,omitempty" tf:"stream_exception_policy,omitempty"`
 }
 
 type StatefulEngineOptionsParameters struct {
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	// +kubebuilder:validation:Optional
-	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
-
-	// Describes how to treat traffic which has broken midstream. Default value: DROP. Valid values: DROP, CONTINUE, REJECT.
-	// +kubebuilder:validation:Optional
-	StreamExceptionPolicy *string `json:"streamExceptionPolicy,omitempty" tf:"stream_exception_policy,omitempty"`
+	RuleOrder *string `json:"ruleOrder" tf:"rule_order,omitempty"`
 }
 
 type StatefulRuleGroupReferenceInitParameters struct {

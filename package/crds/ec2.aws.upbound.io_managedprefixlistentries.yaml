@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ManagedPrefixListEntry is the Schema for the ManagedPrefixListEntrys
-          API. Use the
+          API. Provides a managed prefix list entry resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -144,9 +144,9 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: Description of this entry. Please note that due to
-                      API limitations, updating only the description of an entry will
-                      require recreating the entry.
+                    description: Description of this entry. Due to API limitations,
+                      updating only the description of an entry requires recreating
+                      the entry.
                     type: string
                   prefixListId:
                     description: CIDR block of this entry.
@@ -246,9 +246,9 @@ spec:
                   like an autoscaler.
                 properties:
                   description:
-                    description: Description of this entry. Please note that due to
-                      API limitations, updating only the description of an entry will
-                      require recreating the entry.
+                    description: Description of this entry. Due to API limitations,
+                      updating only the description of an entry requires recreating
+                      the entry.
                     type: string
                 type: object
               managementPolicies:
@@ -421,9 +421,9 @@ spec:
                     description: CIDR block of this entry.
                     type: string
                   description:
-                    description: Description of this entry. Please note that due to
-                      API limitations, updating only the description of an entry will
-                      require recreating the entry.
+                    description: Description of this entry. Due to API limitations,
+                      updating only the description of an entry requires recreating
+                      the entry.
                     type: string
                   id:
                     description: ID of the managed prefix list entry.

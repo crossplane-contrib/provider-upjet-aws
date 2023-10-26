@@ -85,12 +85,12 @@ func (tr *Bot) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Bot
-func (tr *Bot) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Bot) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *BotAlias) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this BotAlias
-func (tr *BotAlias) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *BotAlias) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *Intent) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Intent
-func (tr *Intent) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Intent) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *SlotType) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this SlotType
-func (tr *SlotType) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *SlotType) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

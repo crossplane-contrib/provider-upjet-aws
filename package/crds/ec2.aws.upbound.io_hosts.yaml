@@ -67,12 +67,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  assetId:
-                    description: The ID of the Outpost hardware asset on which to
-                      allocate the Dedicated Hosts. This parameter is supported only
-                      if you specify OutpostArn. If you are allocating the Dedicated
-                      Hosts in a Region, omit this parameter.
-                    type: string
                   autoPlacement:
                     description: 'Indicates whether the host accepts any untargeted
                       instance launches that match its instance type configuration,
@@ -128,12 +122,6 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
-                  assetId:
-                    description: The ID of the Outpost hardware asset on which to
-                      allocate the Dedicated Hosts. This parameter is supported only
-                      if you specify OutpostArn. If you are allocating the Dedicated
-                      Hosts in a Region, omit this parameter.
-                    type: string
                   autoPlacement:
                     description: 'Indicates whether the host accepts any untargeted
                       instance launches that match its instance type configuration,
@@ -343,12 +331,6 @@ spec:
                 properties:
                   arn:
                     description: The ARN of the Dedicated Host.
-                    type: string
-                  assetId:
-                    description: The ID of the Outpost hardware asset on which to
-                      allocate the Dedicated Hosts. This parameter is supported only
-                      if you specify OutpostArn. If you are allocating the Dedicated
-                      Hosts in a Region, omit this parameter.
                     type: string
                   autoPlacement:
                     description: 'Indicates whether the host accepts any untargeted

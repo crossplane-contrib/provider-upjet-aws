@@ -40,11 +40,8 @@ type NetworkInsightsPathObservation struct {
 	// ARN of the Network Insights Path.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
-
-	// ARN of the destination.
-	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// IP address of the destination resource.
 	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
@@ -58,11 +55,8 @@ type NetworkInsightsPathObservation struct {
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// ID or ARN of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
-
-	// ARN of the source.
-	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
 	// IP address of the source resource.
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
@@ -76,7 +70,7 @@ type NetworkInsightsPathObservation struct {
 
 type NetworkInsightsPathParameters struct {
 
-	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -107,7 +101,7 @@ type NetworkInsightsPathParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// ID or ARN of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

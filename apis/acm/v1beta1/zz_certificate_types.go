@@ -50,7 +50,7 @@ type CertificateInitParameters struct {
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Which method to use for validation. DNS or EMAIL are valid.
+	// Which method to use for validation.
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 
 	// Configuration block used to specify information about the initial validation of each domain name. Detailed below.
@@ -128,7 +128,7 @@ type CertificateObservation struct {
 	// List of addresses that received a validation email. Only set if EMAIL validation was used.
 	ValidationEmails []*string `json:"validationEmails,omitempty" tf:"validation_emails,omitempty"`
 
-	// Which method to use for validation. DNS or EMAIL are valid.
+	// Which method to use for validation.
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 
 	// Configuration block used to specify information about the initial validation of each domain name. Detailed below.
@@ -186,7 +186,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Which method to use for validation. DNS or EMAIL are valid.
+	// Which method to use for validation.
 	// +kubebuilder:validation:Optional
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 

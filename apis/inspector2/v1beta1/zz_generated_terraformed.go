@@ -85,12 +85,12 @@ func (tr *Enabler) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Enabler
-func (tr *Enabler) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Enabler) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

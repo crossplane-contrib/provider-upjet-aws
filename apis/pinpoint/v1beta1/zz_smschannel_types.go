@@ -19,42 +19,42 @@ import (
 
 type SMSChannelInitParameters struct {
 
-	// Whether the channel is enabled or disabled. By default, it is set to true.
+	// Whether the channel is enabled or disabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Identifier of the sender for your messages.
+	// Sender identifier of your messages.
 	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
 
-	// Short Code registered with the phone provider.
+	// The Short Code registered with the phone provider.
 	ShortCode *string `json:"shortCode,omitempty" tf:"short_code,omitempty"`
 }
 
 type SMSChannelObservation struct {
 
-	// ID of the application.
+	// The application ID.
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
-	// Whether the channel is enabled or disabled. By default, it is set to true.
+	// Whether the channel is enabled or disabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Maximum number of promotional messages that can be sent per second.
+	// Promotional messages per second that can be sent.
 	PromotionalMessagesPerSecond *int64 `json:"promotionalMessagesPerSecond,omitempty" tf:"promotional_messages_per_second,omitempty"`
 
-	// Identifier of the sender for your messages.
+	// Sender identifier of your messages.
 	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
 
-	// Short Code registered with the phone provider.
+	// The Short Code registered with the phone provider.
 	ShortCode *string `json:"shortCode,omitempty" tf:"short_code,omitempty"`
 
-	// Maximum number of transactional messages per second that can be sent.
+	// Transactional messages per second that can be sent.
 	TransactionalMessagesPerSecond *int64 `json:"transactionalMessagesPerSecond,omitempty" tf:"transactional_messages_per_second,omitempty"`
 }
 
 type SMSChannelParameters struct {
 
-	// ID of the application.
+	// The application ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("application_id",true)
 	// +kubebuilder:validation:Optional
@@ -68,7 +68,7 @@ type SMSChannelParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
 
-	// Whether the channel is enabled or disabled. By default, it is set to true.
+	// Whether the channel is enabled or disabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -77,11 +77,11 @@ type SMSChannelParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Identifier of the sender for your messages.
+	// Sender identifier of your messages.
 	// +kubebuilder:validation:Optional
 	SenderID *string `json:"senderId,omitempty" tf:"sender_id,omitempty"`
 
-	// Short Code registered with the phone provider.
+	// The Short Code registered with the phone provider.
 	// +kubebuilder:validation:Optional
 	ShortCode *string `json:"shortCode,omitempty" tf:"short_code,omitempty"`
 }
@@ -111,7 +111,7 @@ type SMSChannelStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SMSChannel is the Schema for the SMSChannels API. Use the
+// SMSChannel is the Schema for the SMSChannels API. Provides a Pinpoint SMS Channel resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

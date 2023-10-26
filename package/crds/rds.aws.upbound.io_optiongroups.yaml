@@ -76,59 +76,49 @@ spec:
                       option group should be associated with.
                     type: string
                   option:
-                    description: List of options to apply.
+                    description: A list of Options to apply.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
-                          description: List of DB Security Groups for which the option
-                            is enabled.
+                          description: A list of DB Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                         optionName:
-                          description: Name of the option (e.g., MEMCACHED).
+                          description: The Name of the Option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: List of option settings to apply.
+                          description: A list of option settings to apply.
                           items:
                             properties:
                               name:
-                                description: Name of the setting.
+                                description: The name of the option group. Must be
+                                  lowercase, to match as it is stored in AWS.
                                 type: string
                               value:
-                                description: Value of the setting.
+                                description: The Value of the setting.
                                 type: string
                             type: object
                           type: array
                         port:
-                          description: Port number when connecting to the option (e.g.,
-                            11211). Leaving out or removing port from your configuration
-                            does not remove or clear a port from the option in AWS.
-                            AWS may assign a default port. Not including port in your
-                            configuration means that the AWS provider will ignore
-                            a previously set value, a value set by AWS, and any port
-                            changes.
+                          description: The Port number when connecting to the Option
+                            (e.g., 11211).
                           format: int64
                           type: integer
                         version:
-                          description: Version of the option (e.g., 13.1.0.0). Leaving
-                            out or removing version from your configuration does not
-                            remove or clear a version from the option in AWS. AWS
-                            may assign a default version. Not including version in
-                            your configuration means that the AWS provider will ignore
-                            a previously set value, a value set by AWS, and any version
-                            changes.
+                          description: The version of the option (e.g., 13.1.0.0).
                           type: string
                         vpcSecurityGroupMemberships:
-                          description: List of VPC Security Groups for which the option
-                            is enabled.
+                          description: A list of VPC Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   optionGroupDescription:
-                    description: Description of the option group.
+                    description: The description of the option group.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -163,59 +153,49 @@ spec:
                       option group should be associated with.
                     type: string
                   option:
-                    description: List of options to apply.
+                    description: A list of Options to apply.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
-                          description: List of DB Security Groups for which the option
-                            is enabled.
+                          description: A list of DB Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                         optionName:
-                          description: Name of the option (e.g., MEMCACHED).
+                          description: The Name of the Option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: List of option settings to apply.
+                          description: A list of option settings to apply.
                           items:
                             properties:
                               name:
-                                description: Name of the setting.
+                                description: The name of the option group. Must be
+                                  lowercase, to match as it is stored in AWS.
                                 type: string
                               value:
-                                description: Value of the setting.
+                                description: The Value of the setting.
                                 type: string
                             type: object
                           type: array
                         port:
-                          description: Port number when connecting to the option (e.g.,
-                            11211). Leaving out or removing port from your configuration
-                            does not remove or clear a port from the option in AWS.
-                            AWS may assign a default port. Not including port in your
-                            configuration means that the AWS provider will ignore
-                            a previously set value, a value set by AWS, and any port
-                            changes.
+                          description: The Port number when connecting to the Option
+                            (e.g., 11211).
                           format: int64
                           type: integer
                         version:
-                          description: Version of the option (e.g., 13.1.0.0). Leaving
-                            out or removing version from your configuration does not
-                            remove or clear a version from the option in AWS. AWS
-                            may assign a default version. Not including version in
-                            your configuration means that the AWS provider will ignore
-                            a previously set value, a value set by AWS, and any version
-                            changes.
+                          description: The version of the option (e.g., 13.1.0.0).
                           type: string
                         vpcSecurityGroupMemberships:
-                          description: List of VPC Security Groups for which the option
-                            is enabled.
+                          description: A list of VPC Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   optionGroupDescription:
-                    description: Description of the option group.
+                    description: The description of the option group.
                     type: string
                   tags:
                     additionalProperties:
@@ -398,73 +378,63 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: ARN of the DB option group.
+                    description: The ARN of the db option group.
                     type: string
                   engineName:
                     description: Specifies the name of the engine that this option
                       group should be associated with.
                     type: string
                   id:
-                    description: DB option group name.
+                    description: The db option group name.
                     type: string
                   majorEngineVersion:
                     description: Specifies the major version of the engine that this
                       option group should be associated with.
                     type: string
                   option:
-                    description: List of options to apply.
+                    description: A list of Options to apply.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
-                          description: List of DB Security Groups for which the option
-                            is enabled.
+                          description: A list of DB Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                         optionName:
-                          description: Name of the option (e.g., MEMCACHED).
+                          description: The Name of the Option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: List of option settings to apply.
+                          description: A list of option settings to apply.
                           items:
                             properties:
                               name:
-                                description: Name of the setting.
+                                description: The name of the option group. Must be
+                                  lowercase, to match as it is stored in AWS.
                                 type: string
                               value:
-                                description: Value of the setting.
+                                description: The Value of the setting.
                                 type: string
                             type: object
                           type: array
                         port:
-                          description: Port number when connecting to the option (e.g.,
-                            11211). Leaving out or removing port from your configuration
-                            does not remove or clear a port from the option in AWS.
-                            AWS may assign a default port. Not including port in your
-                            configuration means that the AWS provider will ignore
-                            a previously set value, a value set by AWS, and any port
-                            changes.
+                          description: The Port number when connecting to the Option
+                            (e.g., 11211).
                           format: int64
                           type: integer
                         version:
-                          description: Version of the option (e.g., 13.1.0.0). Leaving
-                            out or removing version from your configuration does not
-                            remove or clear a version from the option in AWS. AWS
-                            may assign a default version. Not including version in
-                            your configuration means that the AWS provider will ignore
-                            a previously set value, a value set by AWS, and any version
-                            changes.
+                          description: The version of the option (e.g., 13.1.0.0).
                           type: string
                         vpcSecurityGroupMemberships:
-                          description: List of VPC Security Groups for which the option
-                            is enabled.
+                          description: A list of VPC Security Groups for which the
+                            option is enabled.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   optionGroupDescription:
-                    description: Description of the option group.
+                    description: The description of the option group.
                     type: string
                   tags:
                     additionalProperties:
@@ -474,8 +444,9 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: Map of tags assigned to the resource, including those
-                      inherited from the provider default_tags configuration block.
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
                     type: object
                 type: object
               conditions:

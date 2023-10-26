@@ -19,7 +19,7 @@ import (
 
 type ManagedPrefixListEntryInitParameters struct {
 
-	// Description of this entry. Please note that due to API limitations, updating only the description of an entry will require recreating the entry.
+	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }
 
@@ -28,7 +28,7 @@ type ManagedPrefixListEntryObservation struct {
 	// CIDR block of this entry.
 	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
 
-	// Description of this entry. Please note that due to API limitations, updating only the description of an entry will require recreating the entry.
+	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// ID of the managed prefix list entry.
@@ -54,7 +54,7 @@ type ManagedPrefixListEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
 
-	// Description of this entry. Please note that due to API limitations, updating only the description of an entry will require recreating the entry.
+	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -103,7 +103,7 @@ type ManagedPrefixListEntryStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagedPrefixListEntry is the Schema for the ManagedPrefixListEntrys API. Use the
+// ManagedPrefixListEntry is the Schema for the ManagedPrefixListEntrys API. Provides a managed prefix list entry resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

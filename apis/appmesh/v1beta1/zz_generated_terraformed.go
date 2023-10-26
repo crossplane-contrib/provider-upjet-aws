@@ -85,12 +85,12 @@ func (tr *GatewayRoute) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this GatewayRoute
-func (tr *GatewayRoute) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *GatewayRoute) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *Mesh) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Mesh
-func (tr *Mesh) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Mesh) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *Route) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Route
-func (tr *Route) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Route) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *VirtualGateway) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VirtualGateway
-func (tr *VirtualGateway) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VirtualGateway) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -541,12 +541,12 @@ func (tr *VirtualNode) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VirtualNode
-func (tr *VirtualNode) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VirtualNode) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -655,12 +655,12 @@ func (tr *VirtualRouter) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VirtualRouter
-func (tr *VirtualRouter) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VirtualRouter) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -769,12 +769,12 @@ func (tr *VirtualService) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this VirtualService
-func (tr *VirtualService) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *VirtualService) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

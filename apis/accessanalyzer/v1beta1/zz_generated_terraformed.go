@@ -85,12 +85,12 @@ func (tr *Analyzer) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Analyzer
-func (tr *Analyzer) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Analyzer) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *ArchiveRule) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ArchiveRule
-func (tr *ArchiveRule) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ArchiveRule) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

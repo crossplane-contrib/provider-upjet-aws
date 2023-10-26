@@ -61,38 +61,13 @@ type ConfigurationRecorderParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
-type ExclusionByResourceTypesInitParameters struct {
-
-	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
-	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
-}
-
-type ExclusionByResourceTypesObservation struct {
-
-	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
-	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
-}
-
-type ExclusionByResourceTypesParameters struct {
-
-	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
-	// +kubebuilder:validation:Optional
-	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
-}
-
 type RecordingGroupInitParameters struct {
 
 	// Specifies whether AWS Config records configuration changes for every supported type of regional resource (which includes any new type that will become supported in the future). Conflicts with resource_types. Defaults to true.
 	AllSupported *bool `json:"allSupported,omitempty" tf:"all_supported,omitempty"`
 
-	// An object that specifies how AWS Config excludes resource types from being recorded by the configuration recorder.To use this option, you must set the useOnly field of RecordingStrategy to EXCLUSION_BY_RESOURCE_TYPES Requires all_supported = false. Conflicts with resource_types.
-	ExclusionByResourceTypes []ExclusionByResourceTypesInitParameters `json:"exclusionByResourceTypes,omitempty" tf:"exclusion_by_resource_types,omitempty"`
-
 	// Specifies whether AWS Config includes all supported types of global resources with the resources that it records. Requires all_supported = true. Conflicts with resource_types.
 	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
-
-	// Recording Strategy - see below..
-	RecordingStrategy []RecordingStrategyInitParameters `json:"recordingStrategy,omitempty" tf:"recording_strategy,omitempty"`
 
 	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
@@ -103,14 +78,8 @@ type RecordingGroupObservation struct {
 	// Specifies whether AWS Config records configuration changes for every supported type of regional resource (which includes any new type that will become supported in the future). Conflicts with resource_types. Defaults to true.
 	AllSupported *bool `json:"allSupported,omitempty" tf:"all_supported,omitempty"`
 
-	// An object that specifies how AWS Config excludes resource types from being recorded by the configuration recorder.To use this option, you must set the useOnly field of RecordingStrategy to EXCLUSION_BY_RESOURCE_TYPES Requires all_supported = false. Conflicts with resource_types.
-	ExclusionByResourceTypes []ExclusionByResourceTypesObservation `json:"exclusionByResourceTypes,omitempty" tf:"exclusion_by_resource_types,omitempty"`
-
 	// Specifies whether AWS Config includes all supported types of global resources with the resources that it records. Requires all_supported = true. Conflicts with resource_types.
 	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
-
-	// Recording Strategy - see below..
-	RecordingStrategy []RecordingStrategyObservation `json:"recordingStrategy,omitempty" tf:"recording_strategy,omitempty"`
 
 	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
@@ -122,35 +91,13 @@ type RecordingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AllSupported *bool `json:"allSupported,omitempty" tf:"all_supported,omitempty"`
 
-	// An object that specifies how AWS Config excludes resource types from being recorded by the configuration recorder.To use this option, you must set the useOnly field of RecordingStrategy to EXCLUSION_BY_RESOURCE_TYPES Requires all_supported = false. Conflicts with resource_types.
-	// +kubebuilder:validation:Optional
-	ExclusionByResourceTypes []ExclusionByResourceTypesParameters `json:"exclusionByResourceTypes,omitempty" tf:"exclusion_by_resource_types,omitempty"`
-
 	// Specifies whether AWS Config includes all supported types of global resources with the resources that it records. Requires all_supported = true. Conflicts with resource_types.
 	// +kubebuilder:validation:Optional
 	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
 
-	// Recording Strategy - see below..
-	// +kubebuilder:validation:Optional
-	RecordingStrategy []RecordingStrategyParameters `json:"recordingStrategy,omitempty" tf:"recording_strategy,omitempty"`
-
 	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
 	// +kubebuilder:validation:Optional
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
-}
-
-type RecordingStrategyInitParameters struct {
-	UseOnly *string `json:"useOnly,omitempty" tf:"use_only,omitempty"`
-}
-
-type RecordingStrategyObservation struct {
-	UseOnly *string `json:"useOnly,omitempty" tf:"use_only,omitempty"`
-}
-
-type RecordingStrategyParameters struct {
-
-	// +kubebuilder:validation:Optional
-	UseOnly *string `json:"useOnly,omitempty" tf:"use_only,omitempty"`
 }
 
 // ConfigurationRecorderSpec defines the desired state of ConfigurationRecorder

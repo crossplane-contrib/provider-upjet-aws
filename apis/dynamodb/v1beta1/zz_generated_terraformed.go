@@ -85,12 +85,12 @@ func (tr *ContributorInsights) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this ContributorInsights
-func (tr *ContributorInsights) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *ContributorInsights) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -199,12 +199,12 @@ func (tr *GlobalTable) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this GlobalTable
-func (tr *GlobalTable) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *GlobalTable) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -313,12 +313,12 @@ func (tr *KinesisStreamingDestination) GetInitParameters() (map[string]any, erro
 }
 
 // GetInitParameters of this KinesisStreamingDestination
-func (tr *KinesisStreamingDestination) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *KinesisStreamingDestination) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -427,12 +427,12 @@ func (tr *Table) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Table
-func (tr *Table) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Table) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -541,12 +541,12 @@ func (tr *TableItem) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this TableItem
-func (tr *TableItem) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *TableItem) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -655,12 +655,12 @@ func (tr *TableReplica) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this TableReplica
-func (tr *TableReplica) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *TableReplica) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 
@@ -769,12 +769,12 @@ func (tr *Tag) GetInitParameters() (map[string]any, error) {
 }
 
 // GetInitParameters of this Tag
-func (tr *Tag) GetMergedParameters(isManagementPoliciesEnabled bool) (map[string]any, error) {
+func (tr *Tag) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
 	params, err := tr.GetParameters()
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
 	}
-	if !isManagementPoliciesEnabled {
+	if !shouldMergeInitProvider {
 		return params, nil
 	}
 

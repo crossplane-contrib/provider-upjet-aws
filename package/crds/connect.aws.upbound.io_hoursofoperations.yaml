@@ -505,6 +505,10 @@ spec:
                   description:
                     description: Specifies the description of the Hours of Operation.
                     type: string
+                  hoursOfOperationArn:
+                    description: (Deprecated) The Amazon Resource Name (ARN) of the
+                      Hours of Operation.
+                    type: string
                   hoursOfOperationId:
                     description: The identifier for the hours of operation.
                     type: string

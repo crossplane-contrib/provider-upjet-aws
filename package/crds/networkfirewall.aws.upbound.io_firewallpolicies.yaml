@@ -95,38 +95,6 @@ spec:
                       Policy below for details.
                     items:
                       properties:
-                        policyVariables:
-                          description: . Contains variables that you can use to override
-                            default Suricata settings in your firewall policy. See
-                            Rule Variables for details.
-                          items:
-                            properties:
-                              ruleVariables:
-                                items:
-                                  properties:
-                                    ipSet:
-                                      description: A configuration block that defines
-                                        a set of IP addresses. See IP Set below for
-                                        details.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Set of IPv4 or IPv6 addresses
-                                              in CIDR notation to use for the Suricata
-                                              HOME_NET variable.
-                                            items:
-                                              type: string
-                                            type: array
-                                        type: object
-                                      type: array
-                                    key:
-                                      description: 'An alphanumeric string to identify
-                                        the ip_set. Valid values: HOME_NET'
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
                         statefulDefaultActions:
                           description: Set of actions to take on a packet if it does
                             not match any stateful rules in the policy. This can only
@@ -149,11 +117,6 @@ spec:
                                   stateful rule evaluation for the policy. Default
                                   value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER,
                                   STRICT_ORDER.'
-                                type: string
-                              streamExceptionPolicy:
-                                description: 'Describes how to treat traffic which
-                                  has broken midstream. Default value: DROP. Valid
-                                  values: DROP, CONTINUE, REJECT.'
                                 type: string
                             type: object
                           type: array
@@ -490,38 +453,6 @@ spec:
                       Policy below for details.
                     items:
                       properties:
-                        policyVariables:
-                          description: . Contains variables that you can use to override
-                            default Suricata settings in your firewall policy. See
-                            Rule Variables for details.
-                          items:
-                            properties:
-                              ruleVariables:
-                                items:
-                                  properties:
-                                    ipSet:
-                                      description: A configuration block that defines
-                                        a set of IP addresses. See IP Set below for
-                                        details.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Set of IPv4 or IPv6 addresses
-                                              in CIDR notation to use for the Suricata
-                                              HOME_NET variable.
-                                            items:
-                                              type: string
-                                            type: array
-                                        type: object
-                                      type: array
-                                    key:
-                                      description: 'An alphanumeric string to identify
-                                        the ip_set. Valid values: HOME_NET'
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
                         statefulDefaultActions:
                           description: Set of actions to take on a packet if it does
                             not match any stateful rules in the policy. This can only
@@ -544,11 +475,6 @@ spec:
                                   stateful rule evaluation for the policy. Default
                                   value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER,
                                   STRICT_ORDER.'
-                                type: string
-                              streamExceptionPolicy:
-                                description: 'Describes how to treat traffic which
-                                  has broken midstream. Default value: DROP. Valid
-                                  values: DROP, CONTINUE, REJECT.'
                                 type: string
                             type: object
                           type: array
@@ -873,38 +799,6 @@ spec:
                       Policy below for details.
                     items:
                       properties:
-                        policyVariables:
-                          description: . Contains variables that you can use to override
-                            default Suricata settings in your firewall policy. See
-                            Rule Variables for details.
-                          items:
-                            properties:
-                              ruleVariables:
-                                items:
-                                  properties:
-                                    ipSet:
-                                      description: A configuration block that defines
-                                        a set of IP addresses. See IP Set below for
-                                        details.
-                                      items:
-                                        properties:
-                                          definition:
-                                            description: Set of IPv4 or IPv6 addresses
-                                              in CIDR notation to use for the Suricata
-                                              HOME_NET variable.
-                                            items:
-                                              type: string
-                                            type: array
-                                        type: object
-                                      type: array
-                                    key:
-                                      description: 'An alphanumeric string to identify
-                                        the ip_set. Valid values: HOME_NET'
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
                         statefulDefaultActions:
                           description: Set of actions to take on a packet if it does
                             not match any stateful rules in the policy. This can only
@@ -927,11 +821,6 @@ spec:
                                   stateful rule evaluation for the policy. Default
                                   value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER,
                                   STRICT_ORDER.'
-                                type: string
-                              streamExceptionPolicy:
-                                description: 'Describes how to treat traffic which
-                                  has broken midstream. Default value: DROP. Valid
-                                  values: DROP, CONTINUE, REJECT.'
                                 type: string
                             type: object
                           type: array

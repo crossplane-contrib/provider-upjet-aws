@@ -2313,11 +2313,6 @@ func (in *DistributionInitParameters) DeepCopyInto(out *DistributionInitParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.ContinuousDeploymentPolicyID != nil {
-		in, out := &in.ContinuousDeploymentPolicyID, &out.ContinuousDeploymentPolicyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.CustomErrorResponse != nil {
 		in, out := &in.CustomErrorResponse, &out.CustomErrorResponse
 		*out = make([]CustomErrorResponseInitParameters, len(*in))
@@ -2394,11 +2389,6 @@ func (in *DistributionInitParameters) DeepCopyInto(out *DistributionInitParamete
 	}
 	if in.RetainOnDelete != nil {
 		in, out := &in.RetainOnDelete, &out.RetainOnDelete
-		*out = new(bool)
-		**out = **in
-	}
-	if in.Staging != nil {
-		in, out := &in.Staging, &out.Staging
 		*out = new(bool)
 		**out = **in
 	}
@@ -2505,11 +2495,6 @@ func (in *DistributionObservation) DeepCopyInto(out *DistributionObservation) {
 	}
 	if in.Comment != nil {
 		in, out := &in.Comment, &out.Comment
-		*out = new(string)
-		**out = **in
-	}
-	if in.ContinuousDeploymentPolicyID != nil {
-		in, out := &in.ContinuousDeploymentPolicyID, &out.ContinuousDeploymentPolicyID
 		*out = new(string)
 		**out = **in
 	}
@@ -2622,11 +2607,6 @@ func (in *DistributionObservation) DeepCopyInto(out *DistributionObservation) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Staging != nil {
-		in, out := &in.Staging, &out.Staging
-		*out = new(bool)
-		**out = **in
-	}
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
@@ -2726,11 +2706,6 @@ func (in *DistributionParameters) DeepCopyInto(out *DistributionParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ContinuousDeploymentPolicyID != nil {
-		in, out := &in.ContinuousDeploymentPolicyID, &out.ContinuousDeploymentPolicyID
-		*out = new(string)
-		**out = **in
-	}
 	if in.CustomErrorResponse != nil {
 		in, out := &in.CustomErrorResponse, &out.CustomErrorResponse
 		*out = make([]CustomErrorResponseParameters, len(*in))
@@ -2812,11 +2787,6 @@ func (in *DistributionParameters) DeepCopyInto(out *DistributionParameters) {
 	}
 	if in.RetainOnDelete != nil {
 		in, out := &in.RetainOnDelete, &out.RetainOnDelete
-		*out = new(bool)
-		**out = **in
-	}
-	if in.Staging != nil {
-		in, out := &in.Staging, &out.Staging
 		*out = new(bool)
 		**out = **in
 	}

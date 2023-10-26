@@ -555,6 +555,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  quickConnectIdsAssociated:
+                    items:
+                      type: string
+                    type: array
                   status:
                     description: Specifies the description of the Queue. Valid values
                       are ENABLED, DISABLED.

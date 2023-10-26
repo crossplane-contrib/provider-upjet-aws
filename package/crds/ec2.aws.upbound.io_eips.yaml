@@ -81,9 +81,6 @@ spec:
                       customer owned IP addressed check out Customer-owned IP addresses
                       guide.
                     type: string
-                  domain:
-                    description: Indicates if this EIP is for use in VPC (vpc).
-                    type: string
                   instance:
                     description: EC2 instance ID.
                     type: string
@@ -254,8 +251,8 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   vpc:
-                    description: Boolean if the EIP is in a VPC or not. Use domain
-                      instead. Defaults to true unless the region supports EC2-Classic.
+                    description: Boolean if the EIP is in a VPC or not. Defaults to
+                      true unless the region supports EC2-Classic.
                     type: boolean
                 required:
                 - region
@@ -287,9 +284,6 @@ spec:
                       customer owned IP addressed check out Customer-owned IP addresses
                       guide.
                     type: string
-                  domain:
-                    description: Indicates if this EIP is for use in VPC (vpc).
-                    type: string
                   networkBorderGroup:
                     description: Location from which the IP address is advertised.
                       Use this parameter to limit the address to this location.
@@ -304,8 +298,8 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                   vpc:
-                    description: Boolean if the EIP is in a VPC or not. Use domain
-                      instead. Defaults to true unless the region supports EC2-Classic.
+                    description: Boolean if the EIP is in a VPC or not. Defaults to
+                      true unless the region supports EC2-Classic.
                     type: boolean
                 type: object
               managementPolicies:
@@ -503,7 +497,8 @@ spec:
                       guide.
                     type: string
                   domain:
-                    description: Indicates if this EIP is for use in VPC (vpc).
+                    description: Indicates if this EIP is for use in VPC (vpc) or
+                      EC2-Classic (standard).
                     type: string
                   id:
                     description: Contains the EIP allocation ID.
@@ -548,8 +543,8 @@ spec:
                       block.
                     type: object
                   vpc:
-                    description: Boolean if the EIP is in a VPC or not. Use domain
-                      instead. Defaults to true unless the region supports EC2-Classic.
+                    description: Boolean if the EIP is in a VPC or not. Defaults to
+                      true unless the region supports EC2-Classic.
                     type: boolean
                 type: object
               conditions:
