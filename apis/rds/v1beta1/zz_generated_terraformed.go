@@ -351,7 +351,6 @@ func (tr *Instance) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("DBName"))
-	opts = append(opts, resource.WithNameFilter("IdentifierPrefix"))
 	opts = append(opts, resource.WithNameFilter("Name"))
 
 	li := resource.NewGenericLateInitializer(opts...)
