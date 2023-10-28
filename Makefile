@@ -224,6 +224,10 @@ family-e2e:
 	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
 	  	$(INFO) Processing the example manifest "$${m}"; \
 		for api in $$(sed -nE 's/^apiVersion: *(.+)/\1/p' "$${m}" | cut -d. -f1); do \
+		    if [[ $${api} == "v1" ]]; then \
+		        $(INFO) v1 is not a valid provider. Skipping...; \
+		        continue; \
+		    fi; \
 			if [[ $${INSTALL_APIS} =~ " $${api} " ]]; then \
 				$(INFO) Resource provider $(PROJECT_NAME)-$${api} is already installed. Skipping...; \
 				continue; \
