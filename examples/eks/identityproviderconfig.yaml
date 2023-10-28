@@ -7,9 +7,8 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    clusterNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    clusterName: test
     oidc:
     - clientId: test-audience
+      identityProviderConfigName: example
       issuerUrl: https://issuer.url

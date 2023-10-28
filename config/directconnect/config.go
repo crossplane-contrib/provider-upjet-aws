@@ -34,6 +34,7 @@ func Configure(p *config.Provider) {
 		r.References["vpn_gateway_id"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_dx_gateway_association", func(r *config.Resource) {
 		r.TerraformResource.Schema["associated_gateway_id"].Required = true
@@ -92,5 +93,9 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret",
 			Extractor: common.PathARNExtractor,
 		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_bgp_peer", func(r *config.Resource) {
+		r.UseAsync = true
 	})
 }

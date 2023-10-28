@@ -61,6 +61,9 @@ type IdentityProviderConfigOidcInitParameters struct {
 	// A prefix that is prepended to group claims e.g., oidc:.
 	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
 
+	// –  The name of the identity provider config.
+	IdentityProviderConfigName *string `json:"identityProviderConfigName,omitempty" tf:"identity_provider_config_name,omitempty"`
+
 	// Issuer URL for the OpenID Connect identity provider.
 	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
 
@@ -84,6 +87,9 @@ type IdentityProviderConfigOidcObservation struct {
 
 	// A prefix that is prepended to group claims e.g., oidc:.
 	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
+
+	// –  The name of the identity provider config.
+	IdentityProviderConfigName *string `json:"identityProviderConfigName,omitempty" tf:"identity_provider_config_name,omitempty"`
 
 	// Issuer URL for the OpenID Connect identity provider.
 	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
@@ -111,6 +117,10 @@ type IdentityProviderConfigOidcParameters struct {
 	// A prefix that is prepended to group claims e.g., oidc:.
 	// +kubebuilder:validation:Optional
 	GroupsPrefix *string `json:"groupsPrefix,omitempty" tf:"groups_prefix,omitempty"`
+
+	// –  The name of the identity provider config.
+	// +kubebuilder:validation:Optional
+	IdentityProviderConfigName *string `json:"identityProviderConfigName" tf:"identity_provider_config_name,omitempty"`
 
 	// Issuer URL for the OpenID Connect identity provider.
 	// +kubebuilder:validation:Optional

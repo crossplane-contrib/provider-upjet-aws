@@ -13,6 +13,7 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
 			Extractor: common.PathARNExtractor,
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_grafana_role_association", func(r *config.Resource) {
@@ -25,5 +26,9 @@ func Configure(p *config.Provider) {
 		r.References["workspace_id"] = config.Reference{
 			Type: "Workspace",
 		}
+	})
+
+	p.AddResourceConfigurator("aws_grafana_license_association", func(r *config.Resource) {
+		r.UseAsync = true
 	})
 }

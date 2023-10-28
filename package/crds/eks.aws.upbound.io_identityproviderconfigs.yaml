@@ -160,6 +160,9 @@ spec:
                           description: A prefix that is prepended to group claims
                             e.g., oidc:.
                           type: string
+                        identityProviderConfigName:
+                          description: –  The name of the identity provider config.
+                          type: string
                         issuerUrl:
                           description: Issuer URL for the OpenID Connect identity
                             provider.
@@ -219,6 +222,9 @@ spec:
                         groupsPrefix:
                           description: A prefix that is prepended to group claims
                             e.g., oidc:.
+                          type: string
+                        identityProviderConfigName:
+                          description: –  The name of the identity provider config.
                           type: string
                         issuerUrl:
                           description: Issuer URL for the OpenID Connect identity
@@ -443,6 +449,9 @@ spec:
                         groupsPrefix:
                           description: A prefix that is prepended to group claims
                             e.g., oidc:.
+                          type: string
+                        identityProviderConfigName:
+                          description: –  The name of the identity provider config.
                           type: string
                         issuerUrl:
                           description: Issuer URL for the OpenID Connect identity
