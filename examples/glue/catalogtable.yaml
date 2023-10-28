@@ -7,7 +7,7 @@ spec:
     region: us-east-1
     databaseNameRef:
       name: example
-    catalogId: "609897127049"
+    catalogId: "${data.aws_account_id}"
     tableType: EXTERNAL
     storageDescriptor:
       - columns:
