@@ -380,6 +380,21 @@ func Configure(p *config.Provider) {
 				"spot_type",
 			},
 		}
+
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "enclave_options.#")
+				delete(diff.Attributes, "metadata_options.#")
+				delete(diff.Attributes, "maintenance_options.#")
+				delete(diff.Attributes, "cpu_options.#")
+				delete(diff.Attributes, "network_interface.#")
+				delete(diff.Attributes, "capacity_reservation_specification.#")
+				delete(diff.Attributes, "ephemeral_block_device.#")
+				delete(diff.Attributes, "secondary_private_ips.#")
+				delete(diff.Attributes, "private_dns_name_options.#")
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_traffic_mirror_target", func(r *config.Resource) {

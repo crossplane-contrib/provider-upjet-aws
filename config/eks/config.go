@@ -5,8 +5,6 @@ Copyright 2021 Upbound Inc.
 package eks
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
@@ -59,12 +57,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_eks_identity_provider_config", func(r *config.Resource) {
 		r.Version = common.VersionV1Beta1
 		// OmittedFields in config.ExternalName works only for the top-level fields.
-		delete(r.TerraformResource.Schema["oidc"].Elem.(*schema.Resource).Schema, "identity_provider_config_name")
 		r.References = config.References{
 			"cluster_name": {
 				Type: "Cluster",
 			},
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_eks_fargate_profile", func(r *config.Resource) {
