@@ -274,7 +274,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
 	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
 	// VPC Endpoint security group Associations can be imported using vpc_endpoint_id together with security_group_id
-	"aws_vpc_endpoint_security_group_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "security_group_id"),
+	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
 	// Default VPC route tables can be imported using the vpc_id
 	"aws_default_route_table": config.IdentifierFromProvider,
 	// Hosts can be imported using the host id
