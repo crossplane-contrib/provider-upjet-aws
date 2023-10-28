@@ -83,6 +83,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"encryption_mode"},
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_dx_macsec_key_association", func(r *config.Resource) {
