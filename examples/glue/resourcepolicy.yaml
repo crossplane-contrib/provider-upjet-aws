@@ -15,10 +15,10 @@ spec:
               "glue:CreateTable"
             ],
             "Principal": {"AWS": [
-              "arn:aws:iam::609897127049:root"
+              "arn:aws:iam::${data.aws_account_id}:root"
             ]},
             "Resource": [
-              "arn:aws:glue:us-east-1:609897127049:catalog"
+              "arn:aws:glue:us-east-1:${data.aws_account_id}:catalog"
             ]
           }
         ]
