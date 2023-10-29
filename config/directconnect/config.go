@@ -99,4 +99,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dx_bgp_peer", func(r *config.Resource) {
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("aws_dx_transit_virtual_interface", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }
