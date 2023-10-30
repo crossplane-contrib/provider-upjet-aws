@@ -186,9 +186,3 @@ func DocumentationForTags() config.ResourceOption {
 		}
 	}
 }
-
-func noForkClientConfig() config.ResourceOption {
-	return func(r *config.Resource) {
-		r.UseAsync = false
-	}
-}

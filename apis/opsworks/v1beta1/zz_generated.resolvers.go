@@ -241,6 +241,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var err error
 
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.LayerIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.ForProvider.LayerIdsRefs,
+		Selector:      mg.Spec.ForProvider.LayerIdsSelector,
+		To: reference.To{
+			List:    &CustomLayerList{},
+			Managed: &CustomLayer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LayerIds")
+	}
+	mg.Spec.ForProvider.LayerIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.LayerIdsRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.SecurityGroupIDRefs,

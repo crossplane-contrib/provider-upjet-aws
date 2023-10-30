@@ -109,8 +109,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// us-west-2_abc123
 	"aws_cognito_user_pool": config.IdentifierFromProvider,
-	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
-	// "aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
 	// auth.example.org
 	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
 	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
@@ -1764,9 +1762,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appconfig_application": config.IdentifierFromProvider,
 	// AppConfig Deployment Strategies can be imported by using their deployment strategy ID
 	"aws_appconfig_deployment_strategy": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	// "aws_appconfig_environment": config.IdentifierFromProvider,
 	// AppConfig Configuration Profiles can be imported by using the configuration profile ID and application ID separated by a colon (:)
 	"aws_appconfig_configuration_profile": config.IdentifierFromProvider,
 	// AppConfig Hosted Configuration Versions can be imported by using the application ID, configuration profile ID, and version number separated by a slash (/)
@@ -2255,11 +2250,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// Example: prod_profile_DdW3Mk1foYL88fajut4mTVFGpuwfd4ACO6ANL0D1uIj7lrn8adK/ProdAccountStartSigningJobStatementId
 	"aws_signer_signing_profile_permission": config.TemplatedStringAsIdentifier("", "{{ .parameters.profile_name }}/{{ .parameters.statement_id }}"),
 
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	// "aws_simpledb_domain": config.NameAsIdentifier,
-
 	// networkfirewall
 	//
 	// Network Firewall Firewalls can be imported using their ARN
@@ -2638,6 +2628,15 @@ var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": config.IdentifierFromProvider,
+	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
+	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
+	// simpledb
+	//
+	// SimpleDB Domains can be imported using the name
+	"aws_simpledb_domain": config.NameAsIdentifier,
 }
 
 func lambdaFunctionURL() config.ExternalName {
@@ -2772,38 +2771,6 @@ func route() config.ExternalName {
 		return "", errors.New("destination_cidr_block or destination_ipv6_cidr_block or destination_prefix_list_id has to be given")
 	}
 	return e
-}
-
-func eksOIDCIdentityProvider() config.ExternalName {
-	// OmittedFields in config.ExternalName works only for the top-level fields.
-	// Hence, omitting is done in individual config override in `eks/config.go`
-	return config.ExternalName{
-		SetIdentifierArgumentFn: func(base map[string]interface{}, externalName string) {
-			if _, ok := base["oidc"]; !ok {
-				base["oidc"] = map[string]interface{}{}
-			}
-			// max length is 1:
-			// https://github.com/hashicorp/terraform-provider-aws/blob/7ff39c5b11aafe812e3a4b414aa6d345286b95ec/internal/service/eks/identity_provider_config.go#L58
-			if arr, ok := base["oidc"].([]interface{}); ok && len(arr) == 1 {
-				if m, ok := arr[0].(map[string]interface{}); ok {
-					m["identity_provider_config_name"] = externalName
-				}
-			}
-		},
-		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
-			if id, ok := tfstate["id"]; ok {
-				return strings.Split(id.(string), ":")[1], nil
-			}
-			return "", errors.New("there is no id in tfstate")
-		},
-		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-			cl, ok := parameters["cluster_name"]
-			if !ok {
-				return "", errors.New("cluster_name cannot be empty")
-			}
-			return fmt.Sprintf("%s:%s", cl.(string), externalName), nil
-		},
-	}
 }
 
 // FormattedIdentifierFromProvider is a helper function to construct Terraform

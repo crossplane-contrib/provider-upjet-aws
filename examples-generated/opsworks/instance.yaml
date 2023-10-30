@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     instanceType: t2.micro
-    layerIds:
-    - ${aws_opsworks_custom_layer.my-layer.id}
+    layerIdsRefs:
+    - name: my-layer
     os: Amazon Linux 2015.09
     stackIdSelector:
       matchLabels:

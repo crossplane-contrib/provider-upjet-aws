@@ -18,9 +18,6 @@ import (
 )
 
 type CognitoMemberDefinitionInitParameters struct {
-
-	// An identifier for an application client. You must create the app client ID using Amazon Cognito.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
 type CognitoMemberDefinitionObservation struct {
@@ -38,8 +35,18 @@ type CognitoMemberDefinitionObservation struct {
 type CognitoMemberDefinitionParameters struct {
 
 	// An identifier for an application client. You must create the app client ID using Amazon Cognito.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserGroup

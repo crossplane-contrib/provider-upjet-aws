@@ -573,6 +573,24 @@ func (mg *Workforce) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CognitoConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitoConfig[i3].ClientID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.CognitoConfig[i3].ClientIDRef,
+			Selector:     mg.Spec.ForProvider.CognitoConfig[i3].ClientIDSelector,
+			To: reference.To{
+				List:    &v1beta14.UserPoolClientList{},
+				Managed: &v1beta14.UserPoolClient{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CognitoConfig[i3].ClientID")
+		}
+		mg.Spec.ForProvider.CognitoConfig[i3].ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CognitoConfig[i3].ClientIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CognitoConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitoConfig[i3].UserPool),
 			Extract:      resource.ExtractParamPath("user_pool_id", false),
 			Reference:    mg.Spec.ForProvider.CognitoConfig[i3].UserPoolRef,
@@ -600,6 +618,26 @@ func (mg *Workteam) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.MemberDefinition); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition[i4].ClientID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition[i4].ClientIDRef,
+				Selector:     mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition[i4].ClientIDSelector,
+				To: reference.To{
+					List:    &v1beta14.UserPoolClientList{},
+					Managed: &v1beta14.UserPoolClient{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition[i4].ClientID")
+			}
+			mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition[i4].ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition[i4].ClientIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.MemberDefinition); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
