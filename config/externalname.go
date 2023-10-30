@@ -10,16 +10,15 @@ import (
 	"strings"
 
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
-
 	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// ExternalNameConfigs contains all external name configurations for this
-// provider.
-var ExternalNameConfigs = map[string]config.ExternalName{
-
+// NoForkExternalNameConfigs contains all external name configurations
+// belonging to Terraform resources to be reconciled under the no-fork
+// architecture for this provider.
+var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// ACM
 	// Imported using ARN that has a random substring:
 	// arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
@@ -187,10 +186,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using a very complex format:
 	// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 	"aws_security_group_rule": config.IdentifierFromProvider,
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
 	// Imported by using the VPC CIDR Association ID: vpc-cidr-assoc-xxxxxxxx
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
@@ -2638,6 +2633,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fis_experiment_template": config.IdentifierFromProvider,
 }
 
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+}
+
 func lambdaFunctionURL() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
@@ -2919,19 +2921,29 @@ func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	return e
 }
 
-// ExternalNameConfigurations applies all external name configs listed in the
-// table ExternalNameConfigs and sets the version of those resources to v1beta1
-// assuming they will be tested.
-func ExternalNameConfigurations() config.ResourceOption {
+// ResourceConfigurator applies all external name configs
+// listed in the table NoForkExternalNameConfigs and
+// CLIReconciledExternalNameConfigs and sets the version
+// of those resources to v1beta1. For those resource in
+// NoForkExternalNameConfigs, it also sets
+// config.Resource.UseNoForkClient to `true`.
+func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		if e, ok := ExternalNameConfigs[r.Name]; ok {
-			r.Version = common.VersionV1Beta1
-			r.ExternalName = e
-			// Note(turkenh): This is special to provider-aws. We had injected
-			// region as a parameter for all resources to be consistent with
-			// the native aws provider, and now, we need to add manually it to
-			// the identifier fields for all resources.
-			r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
+		// if configured both for the no-fork and CLI based architectures,
+		// no-fork configuration prevails
+		e, configured := NoForkExternalNameConfigs[r.Name]
+		if !configured {
+			e, configured = CLIReconciledExternalNameConfigs[r.Name]
 		}
+		if !configured {
+			return
+		}
+		r.Version = common.VersionV1Beta1
+		r.ExternalName = e
+		// Note(turkenh): This is special to provider-aws. We had injected
+		// region as a parameter for all resources to be consistent with
+		// the native aws provider, and now, we need to add manually it to
+		// the identifier fields for all resources.
+		r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
 	}
 }
