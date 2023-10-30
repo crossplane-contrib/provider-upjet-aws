@@ -98,6 +98,9 @@ import (
 )
 
 var (
+	//go:embed schema.json
+	providerSchema string
+
 	//go:embed provider-metadata.yaml
 	providerMetadata []byte
 )
@@ -129,14 +132,17 @@ func GetProvider(ctx context.Context) (*config.Provider, error) {
 		return nil, errors.Wrap(err, "cannot get the Terraform provider schema")
 	}
 	modulePath := "github.com/upbound/provider-aws"
-	pc := config.NewProvider(p.ResourcesMap, "aws",
+	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
-		config.WithIncludeList(ResourcesWithExternalNameConfig()),
+		config.WithIncludeList(CLIReconciledResourceList()),
+		config.WithNoForkIncludeList(NoForkResourceList()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithFeaturesPackage("internal/features"),
+		config.WithMainTemplate(hack.MainTemplate),
+		config.WithTerraformProvider(p),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
@@ -145,15 +151,13 @@ func GetProvider(ctx context.Context) (*config.Provider, error) {
 			IdentifierAssignedByAWS(),
 			KnownReferencers(),
 			AddExternalTagsField(),
-			ExternalNameConfigurations(),
+			ResourceConfigurator(),
 			NamePrefixRemoval(),
 			DocumentationForTags(),
 			noForkClientConfig(),
 		),
-		config.WithMainTemplate(hack.MainTemplate),
 	)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
-	pc.TerraformProvider = p
 
 	for _, configure := range []func(provider *config.Provider){
 		acm.Configure,
@@ -244,12 +248,27 @@ func GetProvider(ctx context.Context) (*config.Provider, error) {
 	return pc, nil
 }
 
-// ResourcesWithExternalNameConfig returns the list of resources that have external
-// name configured in ExternalNameConfigs table.
-func ResourcesWithExternalNameConfig() []string {
-	l := make([]string, len(ExternalNameConfigs))
+// CLIReconciledResourceList returns the list of resources that have external
+// name configured in ExternalNameConfigs table and to be reconciled under
+// the TF CLI based architecture.
+func CLIReconciledResourceList() []string {
+	l := make([]string, len(CLIReconciledExternalNameConfigs))
 	i := 0
-	for name := range ExternalNameConfigs {
+	for name := range CLIReconciledExternalNameConfigs {
+		// Expected format is regex and we'd like to have exact matches.
+		l[i] = name + "$"
+		i++
+	}
+	return l
+}
+
+// NoForkResourceList returns the list of resources that have external
+// name configured in ExternalNameConfigs table and to be reconciled under
+// the no-fork architecture.
+func NoForkResourceList() []string {
+	l := make([]string, len(NoForkExternalNameConfigs))
+	i := 0
+	for name := range NoForkExternalNameConfigs {
 		// Expected format is regex and we'd like to have exact matches.
 		l[i] = name + "$"
 		i++
