@@ -33,9 +33,6 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// The maximum duration of the authentication session, in seconds.
 	SessionTimeout *int64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
-
-	// The ID of the Cognito user pool client.
-	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
 }
 
 type ActionAuthenticateCognitoObservation struct {
@@ -102,8 +99,18 @@ type ActionAuthenticateCognitoParameters struct {
 	UserPoolArnSelector *v1.Selector `json:"userPoolArnSelector,omitempty" tf:"-"`
 
 	// The ID of the Cognito user pool client.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	UserPoolClientID *string `json:"userPoolClientId" tf:"user_pool_client_id,omitempty"`
+	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate userPoolClientId.
+	// +kubebuilder:validation:Optional
+	UserPoolClientIDRef *v1.Reference `json:"userPoolClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate userPoolClientId.
+	// +kubebuilder:validation:Optional
+	UserPoolClientIDSelector *v1.Selector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
 
 	// The domain prefix or fully-qualified domain name of the Cognito user pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain

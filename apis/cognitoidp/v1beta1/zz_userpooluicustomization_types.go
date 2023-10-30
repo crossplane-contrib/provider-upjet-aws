@@ -22,9 +22,6 @@ type UserPoolUICustomizationInitParameters struct {
 	// The CSS values in the UI customization, provided as a String. At least one of css or image_file is required.
 	CSS *string `json:"css,omitempty" tf:"css,omitempty"`
 
-	// The client ID for the client app. Defaults to ALL. If ALL is specified, the css and/or image_file settings will be used for every client that has no UI customization set previously.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
 	// The uploaded logo image for the UI customization, provided as a base64-encoded String. Drift detection is not possible for this argument. At least one of css or image_file is required.
 	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
 }
@@ -65,8 +62,17 @@ type UserPoolUICustomizationParameters struct {
 	CSS *string `json:"css,omitempty" tf:"css,omitempty"`
 
 	// The client ID for the client app. Defaults to ALL. If ALL is specified, the css and/or image_file settings will be used for every client that has no UI customization set previously.
+	// +crossplane:generate:reference:type=UserPoolClient
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Reference to a UserPoolClient to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
 	// The uploaded logo image for the UI customization, provided as a base64-encoded String. Drift detection is not possible for this argument. At least one of css or image_file is required.
 	// +kubebuilder:validation:Optional

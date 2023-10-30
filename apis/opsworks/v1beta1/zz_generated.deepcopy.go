@@ -6749,17 +6749,6 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.LayerIds != nil {
-		in, out := &in.LayerIds, &out.LayerIds
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.Os != nil {
 		in, out := &in.Os, &out.Os
 		*out = new(string)
@@ -7216,6 +7205,18 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.LayerIdsRefs != nil {
+		in, out := &in.LayerIdsRefs, &out.LayerIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.LayerIdsSelector != nil {
+		in, out := &in.LayerIdsSelector, &out.LayerIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Os != nil {
 		in, out := &in.Os, &out.Os

@@ -10,8 +10,9 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/acm/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/acm/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -249,6 +250,68 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	return nil
 }
 
+// ResolveReferences of this UserPoolClient.
+func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AnalyticsConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationID),
+			Extract:      resource.ExtractParamPath("application_id", true),
+			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDRef,
+			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDSelector,
+			To: reference.To{
+				List:    &v1beta11.AppList{},
+				Managed: &v1beta11.App{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationID")
+		}
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AnalyticsConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AnalyticsConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.UserPoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserPoolID")
+	}
+	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this UserPoolDomain.
 func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -262,8 +325,8 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.CertificateArnRef,
 		Selector:     mg.Spec.ForProvider.CertificateArnSelector,
 		To: reference.To{
-			List:    &v1beta11.CertificateList{},
-			Managed: &v1beta11.Certificate{},
+			List:    &v1beta12.CertificateList{},
+			Managed: &v1beta12.Certificate{},
 		},
 	})
 	if err != nil {
@@ -297,6 +360,22 @@ func (mg *UserPoolUICustomization) ResolveReferences(ctx context.Context, c clie
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClientID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ClientIDRef,
+		Selector:     mg.Spec.ForProvider.ClientIDSelector,
+		To: reference.To{
+			List:    &UserPoolClientList{},
+			Managed: &UserPoolClient{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClientID")
+	}
+	mg.Spec.ForProvider.ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClientIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPoolID),

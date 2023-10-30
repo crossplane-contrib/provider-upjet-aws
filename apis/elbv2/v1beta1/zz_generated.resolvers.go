@@ -191,6 +191,26 @@ func (mg *LBListenerRule) ResolveReferences(ctx context.Context, c client.Reader
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Action[i3].AuthenticateCognito); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDRef,
+				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDSelector,
+				To: reference.To{
+					List:    &v1beta12.UserPoolClientList{},
+					Managed: &v1beta12.UserPoolClient{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientID")
+			}
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Action); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Action[i3].AuthenticateCognito); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomain),
 				Extract:      resource.ExtractParamPath("domain", false),
 				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomainRef,

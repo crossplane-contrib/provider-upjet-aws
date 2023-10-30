@@ -9,7 +9,9 @@ metadata:
 spec:
   forProvider:
     cognitoConfig:
-    - clientId: ${aws_cognito_user_pool_client.example.id}
+    - clientIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       userPoolSelector:
         matchLabels:
           testing.upbound.io/example-name: example
@@ -29,6 +31,25 @@ spec:
   forProvider:
     name: example
     region: us-west-1
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolClient
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/workforce
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    generateSecret: true
+    name: example
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

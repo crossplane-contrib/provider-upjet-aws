@@ -154,7 +154,6 @@ func GetProvider(ctx context.Context) (*config.Provider, error) {
 			ResourceConfigurator(),
 			NamePrefixRemoval(),
 			DocumentationForTags(),
-			noForkClientConfig(),
 		),
 	)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"

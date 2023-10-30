@@ -9,4 +9,10 @@ func Configure(p *config.Provider) {
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
 		}
 	})
+
+	p.AddResourceConfigurator("aws_opsworks_instance", func(r *config.Resource) {
+		r.References["layer_ids"] = config.Reference{
+			Type: "CustomLayer",
+		}
+	})
 }
