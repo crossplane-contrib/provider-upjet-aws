@@ -20,7 +20,7 @@ import (
 
 // RegionAddition adds region to the spec of all resources except iam group which
 // does not have a region notion.
-func RegionAddition() config.ResourceOption {
+func RegionAddition() config.ResourceOption { //nolint:gocyclo
 	return func(r *config.Resource) {
 		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
 			return
