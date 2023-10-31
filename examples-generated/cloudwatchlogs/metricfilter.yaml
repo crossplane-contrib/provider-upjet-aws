@@ -15,7 +15,6 @@ spec:
     - name: EventCount
       namespace: YourNamespace
       value: "1"
-    name: MyAppAccessCount
     pattern: ""
     region: us-west-1
 
