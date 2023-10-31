@@ -72,7 +72,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// response identifier.
 	"aws_apigatewayv2_route_response": config.IdentifierFromProvider,
 	// Imported by using the API identifier and stage name.
-	"aws_apigatewayv2_stage": config.IdentifierFromProvider,
+	"aws_apigatewayv2_stage": config.NameAsIdentifier,
 	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
 	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
 
