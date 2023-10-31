@@ -311,7 +311,7 @@ func (in *ReservationPlanSettingsInitParameters) DeepCopyInto(out *ReservationPl
 	}
 	if in.ReservedSlots != nil {
 		in, out := &in.ReservedSlots, &out.ReservedSlots
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -341,7 +341,7 @@ func (in *ReservationPlanSettingsObservation) DeepCopyInto(out *ReservationPlanS
 	}
 	if in.ReservedSlots != nil {
 		in, out := &in.ReservedSlots, &out.ReservedSlots
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -371,7 +371,7 @@ func (in *ReservationPlanSettingsParameters) DeepCopyInto(out *ReservationPlanSe
 	}
 	if in.ReservedSlots != nil {
 		in, out := &in.ReservedSlots, &out.ReservedSlots
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

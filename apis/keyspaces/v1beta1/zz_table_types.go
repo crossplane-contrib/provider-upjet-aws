@@ -20,32 +20,32 @@ import (
 type CapacitySpecificationInitParameters struct {
 
 	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
-	ReadCapacityUnits *int64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
+	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
 
 	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 
 	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
-	WriteCapacityUnits *int64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
+	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
 type CapacitySpecificationObservation struct {
 
 	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
-	ReadCapacityUnits *int64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
+	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
 
 	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
 	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
 
 	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
-	WriteCapacityUnits *int64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
+	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
 type CapacitySpecificationParameters struct {
 
 	// The throughput capacity specified for read operations defined in read capacity units (RCUs).
 	// +kubebuilder:validation:Optional
-	ReadCapacityUnits *int64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
+	ReadCapacityUnits *float64 `json:"readCapacityUnits,omitempty" tf:"read_capacity_units,omitempty"`
 
 	// The read/write throughput capacity mode for a table. Valid values: PAY_PER_REQUEST, PROVISIONED. The default value is PAY_PER_REQUEST.
 	// +kubebuilder:validation:Optional
@@ -53,7 +53,7 @@ type CapacitySpecificationParameters struct {
 
 	// The throughput capacity specified for write operations defined in write capacity units (WCUs).
 	// +kubebuilder:validation:Optional
-	WriteCapacityUnits *int64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
+	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
 type ClusteringKeyInitParameters struct {
@@ -296,7 +296,7 @@ type TableInitParameters struct {
 	Comment []CommentInitParameters `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
-	DefaultTimeToLive *int64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
+	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
 
 	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
 	EncryptionSpecification []EncryptionSpecificationInitParameters `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
@@ -329,7 +329,7 @@ type TableObservation struct {
 	Comment []CommentObservation `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
-	DefaultTimeToLive *int64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
+	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
 
 	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
 	EncryptionSpecification []EncryptionSpecificationObservation `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
@@ -370,7 +370,7 @@ type TableParameters struct {
 
 	// The default Time to Live setting in seconds for the table. More information can be found in the Developer Guide.
 	// +kubebuilder:validation:Optional
-	DefaultTimeToLive *int64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
+	DefaultTimeToLive *float64 `json:"defaultTimeToLive,omitempty" tf:"default_time_to_live,omitempty"`
 
 	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
 	// +kubebuilder:validation:Optional

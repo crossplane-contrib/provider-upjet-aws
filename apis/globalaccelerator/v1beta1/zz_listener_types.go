@@ -83,30 +83,30 @@ type ListenerParameters struct {
 type PortRangeInitParameters struct {
 
 	// The first port in the range of ports, inclusive.
-	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// The last port in the range of ports, inclusive.
-	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortRangeObservation struct {
 
 	// The first port in the range of ports, inclusive.
-	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// The last port in the range of ports, inclusive.
-	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 type PortRangeParameters struct {
 
 	// The first port in the range of ports, inclusive.
 	// +kubebuilder:validation:Optional
-	FromPort *int64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
+	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// The last port in the range of ports, inclusive.
 	// +kubebuilder:validation:Optional
-	ToPort *int64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
+	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`
 }
 
 // ListenerSpec defines the desired state of Listener

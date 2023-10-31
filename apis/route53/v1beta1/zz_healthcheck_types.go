@@ -20,7 +20,7 @@ import (
 type HealthCheckInitParameters struct {
 
 	// The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive
-	ChildHealthThreshold *int64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
+	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
@@ -35,7 +35,7 @@ type HealthCheckInitParameters struct {
 	EnableSni *bool `json:"enableSni,omitempty" tf:"enable_sni,omitempty"`
 
 	// The number of consecutive health checks that an endpoint must pass or fail.
-	FailureThreshold *int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
 	// The fully qualified domain name of the endpoint to be checked.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
@@ -53,7 +53,7 @@ type HealthCheckInitParameters struct {
 	MeasureLatency *bool `json:"measureLatency,omitempty" tf:"measure_latency,omitempty"`
 
 	// The port of the endpoint to be checked.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// This is a reference name used in Caller Reference
 	// (helpful for identifying single health_check set amongst others)
@@ -63,7 +63,7 @@ type HealthCheckInitParameters struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
-	RequestInterval *int64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
+	RequestInterval *float64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
 
 	// The path that you want Amazon Route 53 to request when performing health checks.
 	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
@@ -87,7 +87,7 @@ type HealthCheckObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive
-	ChildHealthThreshold *int64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
+	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
@@ -105,7 +105,7 @@ type HealthCheckObservation struct {
 	EnableSni *bool `json:"enableSni,omitempty" tf:"enable_sni,omitempty"`
 
 	// The number of consecutive health checks that an endpoint must pass or fail.
-	FailureThreshold *int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
 	// The fully qualified domain name of the endpoint to be checked.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
@@ -126,7 +126,7 @@ type HealthCheckObservation struct {
 	MeasureLatency *bool `json:"measureLatency,omitempty" tf:"measure_latency,omitempty"`
 
 	// The port of the endpoint to be checked.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// This is a reference name used in Caller Reference
 	// (helpful for identifying single health_check set amongst others)
@@ -136,7 +136,7 @@ type HealthCheckObservation struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
-	RequestInterval *int64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
+	RequestInterval *float64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
 
 	// The path that you want Amazon Route 53 to request when performing health checks.
 	ResourcePath *string `json:"resourcePath,omitempty" tf:"resource_path,omitempty"`
@@ -161,7 +161,7 @@ type HealthCheckParameters struct {
 
 	// The minimum number of child health checks that must be healthy for Route 53 to consider the parent health check to be healthy. Valid values are integers between 0 and 256, inclusive
 	// +kubebuilder:validation:Optional
-	ChildHealthThreshold *int64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
+	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	// +kubebuilder:validation:Optional
@@ -194,7 +194,7 @@ type HealthCheckParameters struct {
 
 	// The number of consecutive health checks that an endpoint must pass or fail.
 	// +kubebuilder:validation:Optional
-	FailureThreshold *int64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
+	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
 	// The fully qualified domain name of the endpoint to be checked.
 	// +kubebuilder:validation:Optional
@@ -218,7 +218,7 @@ type HealthCheckParameters struct {
 
 	// The port of the endpoint to be checked.
 	// +kubebuilder:validation:Optional
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// This is a reference name used in Caller Reference
 	// (helpful for identifying single health_check set amongst others)
@@ -236,7 +236,7 @@ type HealthCheckParameters struct {
 
 	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
 	// +kubebuilder:validation:Optional
-	RequestInterval *int64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
+	RequestInterval *float64 `json:"requestInterval,omitempty" tf:"request_interval,omitempty"`
 
 	// The path that you want Amazon Route 53 to request when performing health checks.
 	// +kubebuilder:validation:Optional

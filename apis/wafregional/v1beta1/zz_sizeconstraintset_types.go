@@ -108,7 +108,7 @@ type SizeConstraintsInitParameters struct {
 
 	// The size in bytes that you want to compare against the size of the specified field_to_match.
 	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
-	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
@@ -131,7 +131,7 @@ type SizeConstraintsObservation struct {
 
 	// The size in bytes that you want to compare against the size of the specified field_to_match.
 	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
-	Size *int64 `json:"size,omitempty" tf:"size,omitempty"`
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
@@ -157,7 +157,7 @@ type SizeConstraintsParameters struct {
 	// The size in bytes that you want to compare against the size of the specified field_to_match.
 	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
 	// +kubebuilder:validation:Optional
-	Size *int64 `json:"size" tf:"size,omitempty"`
+	Size *float64 `json:"size" tf:"size,omitempty"`
 
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.

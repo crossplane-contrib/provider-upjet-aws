@@ -271,8 +271,7 @@ spec:
                       The sampling rate determines the percentage of viewer requests
                       that are represented in the real-time log data. An integer between
                       1 and 100, inclusive.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -318,8 +317,7 @@ spec:
                       The sampling rate determines the percentage of viewer requests
                       that are represented in the real-time log data. An integer between
                       1 and 100, inclusive.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -550,8 +548,7 @@ spec:
                       The sampling rate determines the percentage of viewer requests
                       that are represented in the real-time log data. An integer between
                       1 and 100, inclusive.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

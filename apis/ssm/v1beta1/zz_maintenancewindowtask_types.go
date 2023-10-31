@@ -155,7 +155,7 @@ type MaintenanceWindowTaskInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	Targets []MaintenanceWindowTaskTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
@@ -191,7 +191,7 @@ type MaintenanceWindowTaskObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
@@ -239,7 +239,7 @@ type MaintenanceWindowTaskParameters struct {
 
 	// The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
 	// +kubebuilder:validation:Optional
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -398,7 +398,7 @@ type RunCommandParametersInitParameters struct {
 	Parameter []RunCommandParametersParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// If this time is reached and the command has not already started executing, it doesn't run.
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type RunCommandParametersObservation struct {
@@ -434,7 +434,7 @@ type RunCommandParametersObservation struct {
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
 	// If this time is reached and the command has not already started executing, it doesn't run.
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type RunCommandParametersParameterInitParameters struct {
@@ -530,7 +530,7 @@ type RunCommandParametersParameters struct {
 
 	// If this time is reached and the command has not already started executing, it doesn't run.
 	// +kubebuilder:validation:Optional
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type StepFunctionsParametersInitParameters struct {

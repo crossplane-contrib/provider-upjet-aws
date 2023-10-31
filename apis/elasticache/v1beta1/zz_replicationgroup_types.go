@@ -21,24 +21,24 @@ type ClusterModeInitParameters struct {
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	NumNodeGroups *int64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
+	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
-	ReplicasPerNodeGroup *int64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
+	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 }
 
 type ClusterModeObservation struct {
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	NumNodeGroups *int64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
+	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
-	ReplicasPerNodeGroup *int64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
+	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 }
 
 type ClusterModeParameters struct {
@@ -46,13 +46,13 @@ type ClusterModeParameters struct {
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// +kubebuilder:validation:Optional
-	NumNodeGroups *int64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
+	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
 	// +kubebuilder:validation:Optional
-	ReplicasPerNodeGroup *int64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
+	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 }
 
 type ReplicationGroupInitParameters struct {
@@ -115,20 +115,20 @@ type ReplicationGroupInitParameters struct {
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
 	// 00#.
-	NumCacheClusters *int64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
+	NumCacheClusters *float64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	NumNodeGroups *int64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
+	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Number of cache clusters (primary and replicas) this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_cache_clusters, num_node_groups, or the deprecated cluster_mode. Defaults to 1.
-	NumberCacheClusters *int64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
+	NumberCacheClusters *float64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
 
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// –  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is considered. The first item in the list will be the primary node. Ignored when updating.
 	PreferredCacheClusterAzs []*string `json:"preferredCacheClusterAzs,omitempty" tf:"preferred_cache_cluster_azs,omitempty"`
@@ -136,7 +136,7 @@ type ReplicationGroupInitParameters struct {
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
-	ReplicasPerNodeGroup *int64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
+	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
 	// created description for the replication group. Must not be empty.
 	ReplicationGroupDescription *string `json:"replicationGroupDescription,omitempty" tf:"replication_group_description,omitempty"`
@@ -151,7 +151,7 @@ type ReplicationGroupInitParameters struct {
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
 	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of snapshot_retention_limit is set to zero (0), backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
-	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
@@ -296,20 +296,20 @@ type ReplicationGroupObservation struct {
 	NotificationTopicArn *string `json:"notificationTopicArn,omitempty" tf:"notification_topic_arn,omitempty"`
 
 	// 00#.
-	NumCacheClusters *int64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
+	NumCacheClusters *float64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
-	NumNodeGroups *int64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
+	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Number of cache clusters (primary and replicas) this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_cache_clusters, num_node_groups, or the deprecated cluster_mode. Defaults to 1.
-	NumberCacheClusters *int64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
+	NumberCacheClusters *float64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
 
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// –  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is considered. The first item in the list will be the primary node. Ignored when updating.
 	PreferredCacheClusterAzs []*string `json:"preferredCacheClusterAzs,omitempty" tf:"preferred_cache_cluster_azs,omitempty"`
@@ -323,7 +323,7 @@ type ReplicationGroupObservation struct {
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
-	ReplicasPerNodeGroup *int64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
+	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
 	// created description for the replication group. Must not be empty.
 	ReplicationGroupDescription *string `json:"replicationGroupDescription,omitempty" tf:"replication_group_description,omitempty"`
@@ -341,7 +341,7 @@ type ReplicationGroupObservation struct {
 	SnapshotName *string `json:"snapshotName,omitempty" tf:"snapshot_name,omitempty"`
 
 	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of snapshot_retention_limit is set to zero (0), backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
-	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
@@ -457,16 +457,16 @@ type ReplicationGroupParameters struct {
 
 	// 00#.
 	// +kubebuilder:validation:Optional
-	NumCacheClusters *int64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
+	NumCacheClusters *float64 `json:"numCacheClusters,omitempty" tf:"num_cache_clusters,omitempty"`
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// +kubebuilder:validation:Optional
-	NumNodeGroups *int64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
+	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Number of cache clusters (primary and replicas) this replication group will have. If Multi-AZ is enabled, the value of this parameter must be at least 2. Updates will occur before other modifications. Conflicts with num_cache_clusters, num_node_groups, or the deprecated cluster_mode. Defaults to 1.
 	// +kubebuilder:validation:Optional
-	NumberCacheClusters *int64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
+	NumberCacheClusters *float64 `json:"numberCacheClusters,omitempty" tf:"number_cache_clusters,omitempty"`
 
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
 	// +kubebuilder:validation:Optional
@@ -474,7 +474,7 @@ type ReplicationGroupParameters struct {
 
 	// –  Port number on which each of the cache nodes will accept connections. For Memcache the default is 11211, and for Redis the default port is 6379.
 	// +kubebuilder:validation:Optional
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is considered. The first item in the list will be the primary node. Ignored when updating.
 	// +kubebuilder:validation:Optional
@@ -489,7 +489,7 @@ type ReplicationGroupParameters struct {
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
 	// +kubebuilder:validation:Optional
-	ReplicasPerNodeGroup *int64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
+	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
 	// created description for the replication group. Must not be empty.
 	// +kubebuilder:validation:Optional
@@ -524,7 +524,7 @@ type ReplicationGroupParameters struct {
 
 	// Number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, then a snapshot that was taken today will be retained for 5 days before being deleted. If the value of snapshot_retention_limit is set to zero (0), backups are turned off. Please note that setting a snapshot_retention_limit is not supported on cache.t1.micro cache nodes
 	// +kubebuilder:validation:Optional
-	SnapshotRetentionLimit *int64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
+	SnapshotRetentionLimit *float64 `json:"snapshotRetentionLimit,omitempty" tf:"snapshot_retention_limit,omitempty"`
 
 	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. The minimum snapshot window is a 60 minute period. Example: 05:00-09:00
 	// +kubebuilder:validation:Optional

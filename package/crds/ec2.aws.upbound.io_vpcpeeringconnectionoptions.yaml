@@ -68,10 +68,66 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  accepter:
+                    description: An optional configuration block that allows for [VPC
+                      Peering Connection] (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+                      options to be set for the VPC that accepts the peering connection
+                      (a maximum of one).
+                    items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          description: Allow a local linked EC2-Classic instance to
+                            communicate with instances in a peer VPC. This enables
+                            an outbound communication from the local ClassicLink connection
+                            to the remote VPC. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          description: Allow a local VPC to resolve public DNS hostnames
+                            to private IP addresses when queried from instances in
+                            the peer VPC.
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          description: Allow a local VPC to communicate with a linked
+                            EC2-Classic instance in a peer VPC. This enables an outbound
+                            communication from the local VPC to the remote ClassicLink
+                            connection. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  requester:
+                    description: A optional configuration block that allows for [VPC
+                      Peering Connection] (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+                      options to be set for the VPC that requests the peering connection
+                      (a maximum of one).
+                    items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          description: Allow a local linked EC2-Classic instance to
+                            communicate with instances in a peer VPC. This enables
+                            an outbound communication from the local ClassicLink connection
+                            to the remote VPC. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          description: Allow a local VPC to resolve public DNS hostnames
+                            to private IP addresses when queried from instances in
+                            the peer VPC.
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          description: Allow a local VPC to communicate with a linked
+                            EC2-Classic instance in a peer VPC. This enables an outbound
+                            communication from the local VPC to the remote ClassicLink
+                            connection. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                      type: object
+                    type: array
                   vpcPeeringConnectionId:
                     description: The ID of the requester VPC peering connection.
                     type: string
@@ -164,6 +220,63 @@ spec:
                   on creation, but we do not desire to update them after creation,
                   for example because of an external controller is managing them,
                   like an autoscaler.
+                properties:
+                  accepter:
+                    description: An optional configuration block that allows for [VPC
+                      Peering Connection] (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+                      options to be set for the VPC that accepts the peering connection
+                      (a maximum of one).
+                    items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          description: Allow a local linked EC2-Classic instance to
+                            communicate with instances in a peer VPC. This enables
+                            an outbound communication from the local ClassicLink connection
+                            to the remote VPC. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          description: Allow a local VPC to resolve public DNS hostnames
+                            to private IP addresses when queried from instances in
+                            the peer VPC.
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          description: Allow a local VPC to communicate with a linked
+                            EC2-Classic instance in a peer VPC. This enables an outbound
+                            communication from the local VPC to the remote ClassicLink
+                            connection. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                      type: object
+                    type: array
+                  requester:
+                    description: A optional configuration block that allows for [VPC
+                      Peering Connection] (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+                      options to be set for the VPC that requests the peering connection
+                      (a maximum of one).
+                    items:
+                      properties:
+                        allowClassicLinkToRemoteVpc:
+                          description: Allow a local linked EC2-Classic instance to
+                            communicate with instances in a peer VPC. This enables
+                            an outbound communication from the local ClassicLink connection
+                            to the remote VPC. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                        allowRemoteVpcDnsResolution:
+                          description: Allow a local VPC to resolve public DNS hostnames
+                            to private IP addresses when queried from instances in
+                            the peer VPC.
+                          type: boolean
+                        allowVpcToRemoteClassicLink:
+                          description: Allow a local VPC to communicate with a linked
+                            EC2-Classic instance in a peer VPC. This enables an outbound
+                            communication from the local VPC to the remote ClassicLink
+                            connection. This option is not supported for inter-region
+                            VPC peering.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

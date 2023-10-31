@@ -413,8 +413,7 @@ spec:
                     type: string
                   attachmentPolicyRuleNumber:
                     description: The policy rule number associated with the attachment.
-                    format: int64
-                    type: integer
+                    type: number
                   attachmentType:
                     description: The type of attachment. Valid values can be found
                       in the AWS Documentation

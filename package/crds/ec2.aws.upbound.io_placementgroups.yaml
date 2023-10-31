@@ -71,8 +71,7 @@ spec:
                     description: The number of partitions to create in the placement
                       group.  Can only be specified when the strategy is set to partition.  Valid
                       values are 1 - 7 (default is 2).
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -111,8 +110,7 @@ spec:
                     description: The number of partitions to create in the placement
                       group.  Can only be specified when the strategy is set to partition.  Valid
                       values are 1 - 7 (default is 2).
-                    format: int64
-                    type: integer
+                    type: number
                   spreadLevel:
                     description: Determines how placement groups spread instances.
                       Can only be used when the strategy is set to spread. Can be
@@ -309,8 +307,7 @@ spec:
                     description: The number of partitions to create in the placement
                       group.  Can only be specified when the strategy is set to partition.  Valid
                       values are 1 - 7 (default is 2).
-                    format: int64
-                    type: integer
+                    type: number
                   placementGroupId:
                     description: The ID of the placement group.
                     type: string

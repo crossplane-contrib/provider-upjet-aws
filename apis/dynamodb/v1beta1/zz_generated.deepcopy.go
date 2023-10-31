@@ -308,12 +308,12 @@ func (in *GlobalSecondaryIndexInitParameters) DeepCopyInto(out *GlobalSecondaryI
 	}
 	if in.ReadCapacity != nil {
 		in, out := &in.ReadCapacity, &out.ReadCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -364,12 +364,12 @@ func (in *GlobalSecondaryIndexObservation) DeepCopyInto(out *GlobalSecondaryInde
 	}
 	if in.ReadCapacity != nil {
 		in, out := &in.ReadCapacity, &out.ReadCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -420,12 +420,12 @@ func (in *GlobalSecondaryIndexParameters) DeepCopyInto(out *GlobalSecondaryIndex
 	}
 	if in.ReadCapacity != nil {
 		in, out := &in.ReadCapacity, &out.ReadCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1277,7 +1277,7 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 	}
 	if in.ReadCapacity != nil {
 		in, out := &in.ReadCapacity, &out.ReadCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Replica != nil {
@@ -1349,7 +1349,7 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1673,7 +1673,7 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 	}
 	if in.ReadCapacity != nil {
 		in, out := &in.ReadCapacity, &out.ReadCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Replica != nil {
@@ -1771,7 +1771,7 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1839,7 +1839,7 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	}
 	if in.ReadCapacity != nil {
 		in, out := &in.ReadCapacity, &out.ReadCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -1916,7 +1916,7 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	}
 	if in.WriteCapacity != nil {
 		in, out := &in.WriteCapacity, &out.WriteCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

@@ -81,10 +81,10 @@ type FunctionEventInvokeConfigInitParameters struct {
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
-	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// Maximum number of times to retry when the function returns an error. Valid values between 0 and 2. Defaults to 2.
-	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// Lambda Function published version, $LATEST, or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -102,10 +102,10 @@ type FunctionEventInvokeConfigObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
-	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// Maximum number of times to retry when the function returns an error. Valid values between 0 and 2. Defaults to 2.
-	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// Lambda Function published version, $LATEST, or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -123,11 +123,11 @@ type FunctionEventInvokeConfigParameters struct {
 
 	// Maximum age of a request that Lambda sends to a function for processing in seconds. Valid values between 60 and 21600.
 	// +kubebuilder:validation:Optional
-	MaximumEventAgeInSeconds *int64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
+	MaximumEventAgeInSeconds *float64 `json:"maximumEventAgeInSeconds,omitempty" tf:"maximum_event_age_in_seconds,omitempty"`
 
 	// Maximum number of times to retry when the function returns an error. Valid values between 0 and 2. Defaults to 2.
 	// +kubebuilder:validation:Optional
-	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// Lambda Function published version, $LATEST, or Lambda Alias name.
 	// +kubebuilder:validation:Optional

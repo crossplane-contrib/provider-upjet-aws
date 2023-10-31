@@ -194,7 +194,7 @@ type UserParameters struct {
 type UserPhoneConfigInitParameters struct {
 
 	// The After Call Work (ACW) timeout setting, in seconds. Minimum value of 0.
-	AfterContactWorkTimeLimit *int64 `json:"afterContactWorkTimeLimit,omitempty" tf:"after_contact_work_time_limit,omitempty"`
+	AfterContactWorkTimeLimit *float64 `json:"afterContactWorkTimeLimit,omitempty" tf:"after_contact_work_time_limit,omitempty"`
 
 	// When Auto-Accept Call is enabled for an available agent, the agent connects to contacts automatically.
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
@@ -209,7 +209,7 @@ type UserPhoneConfigInitParameters struct {
 type UserPhoneConfigObservation struct {
 
 	// The After Call Work (ACW) timeout setting, in seconds. Minimum value of 0.
-	AfterContactWorkTimeLimit *int64 `json:"afterContactWorkTimeLimit,omitempty" tf:"after_contact_work_time_limit,omitempty"`
+	AfterContactWorkTimeLimit *float64 `json:"afterContactWorkTimeLimit,omitempty" tf:"after_contact_work_time_limit,omitempty"`
 
 	// When Auto-Accept Call is enabled for an available agent, the agent connects to contacts automatically.
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
@@ -225,7 +225,7 @@ type UserPhoneConfigParameters struct {
 
 	// The After Call Work (ACW) timeout setting, in seconds. Minimum value of 0.
 	// +kubebuilder:validation:Optional
-	AfterContactWorkTimeLimit *int64 `json:"afterContactWorkTimeLimit,omitempty" tf:"after_contact_work_time_limit,omitempty"`
+	AfterContactWorkTimeLimit *float64 `json:"afterContactWorkTimeLimit,omitempty" tf:"after_contact_work_time_limit,omitempty"`
 
 	// When Auto-Accept Call is enabled for an available agent, the agent connects to contacts automatically.
 	// +kubebuilder:validation:Optional

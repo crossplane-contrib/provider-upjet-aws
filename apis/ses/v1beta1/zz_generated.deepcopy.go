@@ -197,7 +197,7 @@ func (in *AddHeaderActionInitParameters) DeepCopyInto(out *AddHeaderActionInitPa
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -227,7 +227,7 @@ func (in *AddHeaderActionObservation) DeepCopyInto(out *AddHeaderActionObservati
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -257,7 +257,7 @@ func (in *AddHeaderActionParameters) DeepCopyInto(out *AddHeaderActionParameters
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -282,7 +282,7 @@ func (in *BounceActionInitParameters) DeepCopyInto(out *BounceActionInitParamete
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SMTPReplyCode != nil {
@@ -327,7 +327,7 @@ func (in *BounceActionObservation) DeepCopyInto(out *BounceActionObservation) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SMTPReplyCode != nil {
@@ -372,7 +372,7 @@ func (in *BounceActionParameters) DeepCopyInto(out *BounceActionParameters) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SMTPReplyCode != nil {
@@ -2289,7 +2289,7 @@ func (in *LambdaActionInitParameters) DeepCopyInto(out *LambdaActionInitParamete
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -2324,7 +2324,7 @@ func (in *LambdaActionObservation) DeepCopyInto(out *LambdaActionObservation) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -2359,7 +2359,7 @@ func (in *LambdaActionParameters) DeepCopyInto(out *LambdaActionParameters) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3176,7 +3176,7 @@ func (in *S3ActionInitParameters) DeepCopyInto(out *S3ActionInitParameters) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3216,7 +3216,7 @@ func (in *S3ActionObservation) DeepCopyInto(out *S3ActionObservation) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3256,7 +3256,7 @@ func (in *S3ActionParameters) DeepCopyInto(out *S3ActionParameters) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3286,7 +3286,7 @@ func (in *SnsActionInitParameters) DeepCopyInto(out *SnsActionInitParameters) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3316,7 +3316,7 @@ func (in *SnsActionObservation) DeepCopyInto(out *SnsActionObservation) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3346,7 +3346,7 @@ func (in *SnsActionParameters) DeepCopyInto(out *SnsActionParameters) {
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3436,7 +3436,7 @@ func (in *StopActionInitParameters) DeepCopyInto(out *StopActionInitParameters) 
 	*out = *in
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scope != nil {
@@ -3466,7 +3466,7 @@ func (in *StopActionObservation) DeepCopyInto(out *StopActionObservation) {
 	*out = *in
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scope != nil {
@@ -3496,7 +3496,7 @@ func (in *StopActionParameters) DeepCopyInto(out *StopActionParameters) {
 	*out = *in
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scope != nil {
@@ -3790,7 +3790,7 @@ func (in *WorkmailActionInitParameters) DeepCopyInto(out *WorkmailActionInitPara
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3820,7 +3820,7 @@ func (in *WorkmailActionObservation) DeepCopyInto(out *WorkmailActionObservation
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {
@@ -3850,7 +3850,7 @@ func (in *WorkmailActionParameters) DeepCopyInto(out *WorkmailActionParameters) 
 	}
 	if in.Position != nil {
 		in, out := &in.Position, &out.Position
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TopicArn != nil {

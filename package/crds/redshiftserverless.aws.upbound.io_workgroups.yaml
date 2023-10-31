@@ -70,8 +70,7 @@ spec:
                   baseCapacity:
                     description: The base data warehouse capacity of the workgroup
                       in Redshift Processing Units (RPUs).
-                    format: int64
-                    type: integer
+                    type: number
                   configParameter:
                     description: An array of parameters to set for more control over
                       a serverless database. See Config Parameter below.
@@ -296,8 +295,7 @@ spec:
                   baseCapacity:
                     description: The base data warehouse capacity of the workgroup
                       in Redshift Processing Units (RPUs).
-                    format: int64
-                    type: integer
+                    type: number
                   configParameter:
                     description: An array of parameters to set for more control over
                       a serverless database. See Config Parameter below.
@@ -509,8 +507,7 @@ spec:
                   baseCapacity:
                     description: The base data warehouse capacity of the workgroup
                       in Redshift Processing Units (RPUs).
-                    format: int64
-                    type: integer
+                    type: number
                   configParameter:
                     description: An array of parameters to set for more control over
                       a serverless database. See Config Parameter below.
@@ -537,8 +534,7 @@ spec:
                         port:
                           description: The port that Amazon Redshift Serverless listens
                             on.
-                          format: int64
-                          type: integer
+                          type: number
                         vpcEndpoint:
                           description: The VPC endpoint or the Redshift Serverless
                             workgroup. See VPC Endpoint below.

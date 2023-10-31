@@ -326,8 +326,7 @@ spec:
                   port:
                     description: The port on which the DB accepts connections. Defaults
                       to 8182.
-                    format: int64
-                    type: integer
+                    type: number
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00"'
@@ -340,8 +339,7 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoter to writer.
-                    format: int64
-                    type: integer
+                    type: number
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
                       Default is false.
@@ -397,8 +395,7 @@ spec:
                   port:
                     description: The port on which the DB accepts connections. Defaults
                       to 8182.
-                    format: int64
-                    type: integer
+                    type: number
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00"'
@@ -411,8 +408,7 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoter to writer.
-                    format: int64
-                    type: integer
+                    type: number
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
                       Default is false.
@@ -654,8 +650,7 @@ spec:
                   port:
                     description: The port on which the DB accepts connections. Defaults
                       to 8182.
-                    format: int64
-                    type: integer
+                    type: number
                   preferredBackupWindow:
                     description: 'The daily time range during which automated backups
                       are created if automated backups are enabled. Eg: "04:00-09:00"'
@@ -668,8 +663,7 @@ spec:
                     description: Default 0. Failover Priority setting on instance
                       level. The reader who has lower tier has higher priority to
                       get promoter to writer.
-                    format: int64
-                    type: integer
+                    type: number
                   publiclyAccessible:
                     description: Bool to control if instance is publicly accessible.
                       Default is false.

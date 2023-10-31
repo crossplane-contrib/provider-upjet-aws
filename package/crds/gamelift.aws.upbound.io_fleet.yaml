@@ -167,8 +167,7 @@ spec:
                         fromPort:
                           description: Starting value for a range of allowed port
                             numbers.
-                          format: int64
-                          type: integer
+                          type: number
                         ipRange:
                           description: Range of allowed IP addresses expressed in
                             CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet
@@ -182,8 +181,7 @@ spec:
                           description: Ending value for a range of allowed port numbers.
                             Port numbers are end-inclusive. This value must be higher
                             than from_port.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   ec2InstanceType:
@@ -297,13 +295,11 @@ spec:
                         newGameSessionsPerCreator:
                           description: Maximum number of game sessions that an individual
                             can create during the policy period.
-                          format: int64
-                          type: integer
+                          type: number
                         policyPeriodInMinutes:
                           description: Time span used in evaluating the resource creation
                             limit policy.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   runtimeConfiguration:
@@ -314,13 +310,11 @@ spec:
                         gameSessionActivationTimeoutSeconds:
                           description: Maximum amount of time (in seconds) that a
                             game session can remain in status ACTIVATING.
-                          format: int64
-                          type: integer
+                          type: number
                         maxConcurrentGameSessionActivations:
                           description: Maximum number of game sessions with status
                             ACTIVATING to allow on an instance simultaneously.
-                          format: int64
-                          type: integer
+                          type: number
                         serverProcess:
                           description: Collection of server process configurations
                             that describe which server processes to run on each instance
@@ -330,8 +324,7 @@ spec:
                               concurrentExecutions:
                                 description: Number of server processes using this
                                   configuration to run concurrently on an instance.
-                                format: int64
-                                type: integer
+                                type: number
                               launchPath:
                                 description: 'Location of the server executable in
                                   a game build. All game builds are installed on instances
@@ -393,8 +386,7 @@ spec:
                         fromPort:
                           description: Starting value for a range of allowed port
                             numbers.
-                          format: int64
-                          type: integer
+                          type: number
                         ipRange:
                           description: Range of allowed IP addresses expressed in
                             CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet
@@ -408,8 +400,7 @@ spec:
                           description: Ending value for a range of allowed port numbers.
                             Port numbers are end-inclusive. This value must be higher
                             than from_port.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   ec2InstanceType:
@@ -442,13 +433,11 @@ spec:
                         newGameSessionsPerCreator:
                           description: Maximum number of game sessions that an individual
                             can create during the policy period.
-                          format: int64
-                          type: integer
+                          type: number
                         policyPeriodInMinutes:
                           description: Time span used in evaluating the resource creation
                             limit policy.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   runtimeConfiguration:
@@ -459,13 +448,11 @@ spec:
                         gameSessionActivationTimeoutSeconds:
                           description: Maximum amount of time (in seconds) that a
                             game session can remain in status ACTIVATING.
-                          format: int64
-                          type: integer
+                          type: number
                         maxConcurrentGameSessionActivations:
                           description: Maximum number of game sessions with status
                             ACTIVATING to allow on an instance simultaneously.
-                          format: int64
-                          type: integer
+                          type: number
                         serverProcess:
                           description: Collection of server process configurations
                             that describe which server processes to run on each instance
@@ -475,8 +462,7 @@ spec:
                               concurrentExecutions:
                                 description: Number of server processes using this
                                   configuration to run concurrently on an instance.
-                                format: int64
-                                type: integer
+                                type: number
                               launchPath:
                                 description: 'Location of the server executable in
                                   a game build. All game builds are installed on instances
@@ -707,8 +693,7 @@ spec:
                         fromPort:
                           description: Starting value for a range of allowed port
                             numbers.
-                          format: int64
-                          type: integer
+                          type: number
                         ipRange:
                           description: Range of allowed IP addresses expressed in
                             CIDR notationE.g., 000.000.000.000/[subnet mask] or 0.0.0.0/[subnet
@@ -722,8 +707,7 @@ spec:
                           description: Ending value for a range of allowed port numbers.
                             Port numbers are end-inclusive. This value must be higher
                             than from_port.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   ec2InstanceType:
@@ -770,13 +754,11 @@ spec:
                         newGameSessionsPerCreator:
                           description: Maximum number of game sessions that an individual
                             can create during the policy period.
-                          format: int64
-                          type: integer
+                          type: number
                         policyPeriodInMinutes:
                           description: Time span used in evaluating the resource creation
                             limit policy.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   runtimeConfiguration:
@@ -787,13 +769,11 @@ spec:
                         gameSessionActivationTimeoutSeconds:
                           description: Maximum amount of time (in seconds) that a
                             game session can remain in status ACTIVATING.
-                          format: int64
-                          type: integer
+                          type: number
                         maxConcurrentGameSessionActivations:
                           description: Maximum number of game sessions with status
                             ACTIVATING to allow on an instance simultaneously.
-                          format: int64
-                          type: integer
+                          type: number
                         serverProcess:
                           description: Collection of server process configurations
                             that describe which server processes to run on each instance
@@ -803,8 +783,7 @@ spec:
                               concurrentExecutions:
                                 description: Number of server processes using this
                                   configuration to run concurrently on an instance.
-                                format: int64
-                                type: integer
+                                type: number
                               launchPath:
                                 description: 'Location of the server executable in
                                   a game build. All game builds are installed on instances

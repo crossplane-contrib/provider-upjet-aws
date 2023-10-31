@@ -69,8 +69,7 @@ spec:
                 properties:
                   duration:
                     description: The duration of the inspector run.
-                    format: int64
-                    type: integer
+                    type: number
                   eventSubscription:
                     description: A block that enables sending notifications about
                       a specified assessment template event to a designated SNS topic.
@@ -278,8 +277,7 @@ spec:
                 properties:
                   duration:
                     description: The duration of the inspector run.
-                    format: int64
-                    type: integer
+                    type: number
                   eventSubscription:
                     description: A block that enables sending notifications about
                       a specified assessment template event to a designated SNS topic.
@@ -491,8 +489,7 @@ spec:
                     type: string
                   duration:
                     description: The duration of the inspector run.
-                    format: int64
-                    type: integer
+                    type: number
                   eventSubscription:
                     description: A block that enables sending notifications about
                       a specified assessment template event to a designated SNS topic.

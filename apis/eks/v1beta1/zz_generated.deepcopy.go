@@ -2211,7 +2211,7 @@ func (in *NodeGroupInitParameters) DeepCopyInto(out *NodeGroupInitParameters) {
 	}
 	if in.DiskSize != nil {
 		in, out := &in.DiskSize, &out.DiskSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ForceUpdateVersion != nil {
@@ -2371,7 +2371,7 @@ func (in *NodeGroupObservation) DeepCopyInto(out *NodeGroupObservation) {
 	}
 	if in.DiskSize != nil {
 		in, out := &in.DiskSize, &out.DiskSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ForceUpdateVersion != nil {
@@ -2558,7 +2558,7 @@ func (in *NodeGroupParameters) DeepCopyInto(out *NodeGroupParameters) {
 	}
 	if in.DiskSize != nil {
 		in, out := &in.DiskSize, &out.DiskSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ForceUpdateVersion != nil {
@@ -3134,17 +3134,17 @@ func (in *ScalingConfigInitParameters) DeepCopyInto(out *ScalingConfigInitParame
 	*out = *in
 	if in.DesiredSize != nil {
 		in, out := &in.DesiredSize, &out.DesiredSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxSize != nil {
 		in, out := &in.MaxSize, &out.MaxSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinSize != nil {
 		in, out := &in.MinSize, &out.MinSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3164,17 +3164,17 @@ func (in *ScalingConfigObservation) DeepCopyInto(out *ScalingConfigObservation) 
 	*out = *in
 	if in.DesiredSize != nil {
 		in, out := &in.DesiredSize, &out.DesiredSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxSize != nil {
 		in, out := &in.MaxSize, &out.MaxSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinSize != nil {
 		in, out := &in.MinSize, &out.MinSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3194,17 +3194,17 @@ func (in *ScalingConfigParameters) DeepCopyInto(out *ScalingConfigParameters) {
 	*out = *in
 	if in.DesiredSize != nil {
 		in, out := &in.DesiredSize, &out.DesiredSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxSize != nil {
 		in, out := &in.MaxSize, &out.MaxSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinSize != nil {
 		in, out := &in.MinSize, &out.MinSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3422,12 +3422,12 @@ func (in *UpdateConfigInitParameters) DeepCopyInto(out *UpdateConfigInitParamete
 	*out = *in
 	if in.MaxUnavailable != nil {
 		in, out := &in.MaxUnavailable, &out.MaxUnavailable
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxUnavailablePercentage != nil {
 		in, out := &in.MaxUnavailablePercentage, &out.MaxUnavailablePercentage
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3447,12 +3447,12 @@ func (in *UpdateConfigObservation) DeepCopyInto(out *UpdateConfigObservation) {
 	*out = *in
 	if in.MaxUnavailable != nil {
 		in, out := &in.MaxUnavailable, &out.MaxUnavailable
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxUnavailablePercentage != nil {
 		in, out := &in.MaxUnavailablePercentage, &out.MaxUnavailablePercentage
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3472,12 +3472,12 @@ func (in *UpdateConfigParameters) DeepCopyInto(out *UpdateConfigParameters) {
 	*out = *in
 	if in.MaxUnavailable != nil {
 		in, out := &in.MaxUnavailable, &out.MaxUnavailable
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxUnavailablePercentage != nil {
 		in, out := &in.MaxUnavailablePercentage, &out.MaxUnavailablePercentage
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

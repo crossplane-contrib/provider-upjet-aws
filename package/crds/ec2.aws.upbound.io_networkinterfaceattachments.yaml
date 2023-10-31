@@ -70,8 +70,7 @@ spec:
                 properties:
                   deviceIndex:
                     description: Network interface index (int).
-                    format: int64
-                    type: integer
+                    type: number
                   instanceId:
                     description: Instance ID to attach.
                     type: string
@@ -247,8 +246,7 @@ spec:
                 properties:
                   deviceIndex:
                     description: Network interface index (int).
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -426,8 +424,7 @@ spec:
                     type: string
                   deviceIndex:
                     description: Network interface index (int).
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     type: string
                   instanceId:

@@ -227,7 +227,7 @@ type DateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DateRangeObservation struct {
@@ -236,7 +236,7 @@ type DateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DateRangeParameters struct {
@@ -247,7 +247,7 @@ type DateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type DescriptionInitParameters struct {
@@ -1397,7 +1397,7 @@ type FirstObservedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FirstObservedAtDateRangeObservation struct {
@@ -1406,7 +1406,7 @@ type FirstObservedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FirstObservedAtDateRangeParameters struct {
@@ -1417,7 +1417,7 @@ type FirstObservedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type FirstObservedAtInitParameters struct {
@@ -1592,7 +1592,7 @@ type LastObservedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type LastObservedAtDateRangeObservation struct {
@@ -1601,7 +1601,7 @@ type LastObservedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type LastObservedAtDateRangeParameters struct {
@@ -1612,7 +1612,7 @@ type LastObservedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type LastObservedAtInitParameters struct {
@@ -2104,7 +2104,7 @@ type NoteUpdatedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NoteUpdatedAtDateRangeObservation struct {
@@ -2113,7 +2113,7 @@ type NoteUpdatedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NoteUpdatedAtDateRangeParameters struct {
@@ -2124,7 +2124,7 @@ type NoteUpdatedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type NoteUpdatedAtInitParameters struct {
@@ -2201,7 +2201,7 @@ type ProcessLaunchedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessLaunchedAtDateRangeObservation struct {
@@ -2210,7 +2210,7 @@ type ProcessLaunchedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessLaunchedAtDateRangeParameters struct {
@@ -2221,7 +2221,7 @@ type ProcessLaunchedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ProcessLaunchedAtInitParameters struct {
@@ -2405,7 +2405,7 @@ type ProcessTerminatedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessTerminatedAtDateRangeObservation struct {
@@ -2414,7 +2414,7 @@ type ProcessTerminatedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ProcessTerminatedAtDateRangeParameters struct {
@@ -2425,7 +2425,7 @@ type ProcessTerminatedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ProcessTerminatedAtInitParameters struct {
@@ -2811,7 +2811,7 @@ type ResourceAwsEC2InstanceLaunchedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceLaunchedAtDateRangeObservation struct {
@@ -2820,7 +2820,7 @@ type ResourceAwsEC2InstanceLaunchedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceLaunchedAtDateRangeParameters struct {
@@ -2831,7 +2831,7 @@ type ResourceAwsEC2InstanceLaunchedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ResourceAwsEC2InstanceLaunchedAtInitParameters struct {
@@ -2966,7 +2966,7 @@ type ResourceAwsIAMAccessKeyCreatedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtDateRangeObservation struct {
@@ -2975,7 +2975,7 @@ type ResourceAwsIAMAccessKeyCreatedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtDateRangeParameters struct {
@@ -2986,7 +2986,7 @@ type ResourceAwsIAMAccessKeyCreatedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ResourceAwsIAMAccessKeyCreatedAtInitParameters struct {
@@ -3208,7 +3208,7 @@ type ResourceContainerLaunchedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceContainerLaunchedAtDateRangeObservation struct {
@@ -3217,7 +3217,7 @@ type ResourceContainerLaunchedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourceContainerLaunchedAtDateRangeParameters struct {
@@ -3228,7 +3228,7 @@ type ResourceContainerLaunchedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ResourceContainerLaunchedAtInitParameters struct {
@@ -3586,7 +3586,7 @@ type ThreatIntelIndicatorLastObservedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorLastObservedAtDateRangeObservation struct {
@@ -3595,7 +3595,7 @@ type ThreatIntelIndicatorLastObservedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorLastObservedAtDateRangeParameters struct {
@@ -3606,7 +3606,7 @@ type ThreatIntelIndicatorLastObservedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type ThreatIntelIndicatorLastObservedAtInitParameters struct {
@@ -3828,7 +3828,7 @@ type UpdatedAtDateRangeInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type UpdatedAtDateRangeObservation struct {
@@ -3837,7 +3837,7 @@ type UpdatedAtDateRangeObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// A value for the keyword.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type UpdatedAtDateRangeParameters struct {
@@ -3848,7 +3848,7 @@ type UpdatedAtDateRangeParameters struct {
 
 	// A value for the keyword.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type UpdatedAtInitParameters struct {

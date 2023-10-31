@@ -159,8 +159,7 @@ spec:
                   retentionPeriod:
                     description: The retention period for the replicated automated
                       backups, defaults to 7.
-                    format: int64
-                    type: integer
+                    type: number
                   sourceDbInstanceArn:
                     description: The Amazon Resource Name (ARN) of the source DB instance
                       for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
@@ -261,8 +260,7 @@ spec:
                   retentionPeriod:
                     description: The retention period for the replicated automated
                       backups, defaults to 7.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -448,8 +446,7 @@ spec:
                   retentionPeriod:
                     description: The retention period for the replicated automated
                       backups, defaults to 7.
-                    format: int64
-                    type: integer
+                    type: number
                   sourceDbInstanceArn:
                     description: The Amazon Resource Name (ARN) of the source DB instance
                       for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.

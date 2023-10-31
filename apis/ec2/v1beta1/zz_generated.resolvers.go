@@ -165,6 +165,24 @@ func (mg *DefaultNetworkACL) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.DefaultNetworkACLID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DefaultNetworkACLIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Ingress); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Ingress[i3].CidrBlock),
+			Extract:      resource.ExtractParamPath("cidr_block", true),
+			Reference:    mg.Spec.ForProvider.Ingress[i3].CidrBlockRef,
+			Selector:     mg.Spec.ForProvider.Ingress[i3].CidrBlockSelector,
+			To: reference.To{
+				List:    &DefaultVPCList{},
+				Managed: &DefaultVPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Ingress[i3].CidrBlock")
+		}
+		mg.Spec.ForProvider.Ingress[i3].CidrBlock = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Ingress[i3].CidrBlockRef = rsp.ResolvedReference
+
+	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SubnetIds),
 		Extract:       reference.ExternalName(),

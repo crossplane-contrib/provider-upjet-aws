@@ -59,20 +59,20 @@ type CommandParameters struct {
 type ExecutionPropertyInitParameters struct {
 
 	// The maximum number of concurrent runs allowed for a job. The default is 1.
-	MaxConcurrentRuns *int64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 }
 
 type ExecutionPropertyObservation struct {
 
 	// The maximum number of concurrent runs allowed for a job. The default is 1.
-	MaxConcurrentRuns *int64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 }
 
 type ExecutionPropertyParameters struct {
 
 	// The maximum number of concurrent runs allowed for a job. The default is 1.
 	// +kubebuilder:validation:Optional
-	MaxConcurrentRuns *int64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
+	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 }
 
 type JobInitParameters struct {
@@ -102,7 +102,7 @@ type JobInitParameters struct {
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// –  The maximum number of times to retry this job if it fails.
-	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// overridable arguments for this job, specified as name-value pairs.
 	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
@@ -111,7 +111,7 @@ type JobInitParameters struct {
 	NotificationProperty []NotificationPropertyInitParameters `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
 
 	// The number of workers of a defined workerType that are allocated when a job runs.
-	NumberOfWorkers *int64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
+	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
 	// The name of the Security Configuration to be associated with the job.
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
@@ -120,7 +120,7 @@ type JobInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
@@ -159,7 +159,7 @@ type JobObservation struct {
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// –  The maximum number of times to retry this job if it fails.
-	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// overridable arguments for this job, specified as name-value pairs.
 	NonOverridableArguments map[string]*string `json:"nonOverridableArguments,omitempty" tf:"non_overridable_arguments,omitempty"`
@@ -168,7 +168,7 @@ type JobObservation struct {
 	NotificationProperty []NotificationPropertyObservation `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
 
 	// The number of workers of a defined workerType that are allocated when a job runs.
-	NumberOfWorkers *int64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
+	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
 	// –  The ARN of the IAM role associated with this job.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -183,7 +183,7 @@ type JobObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
 	WorkerType *string `json:"workerType,omitempty" tf:"worker_type,omitempty"`
@@ -225,7 +225,7 @@ type JobParameters struct {
 
 	// –  The maximum number of times to retry this job if it fails.
 	// +kubebuilder:validation:Optional
-	MaxRetries *int64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
+	MaxRetries *float64 `json:"maxRetries,omitempty" tf:"max_retries,omitempty"`
 
 	// overridable arguments for this job, specified as name-value pairs.
 	// +kubebuilder:validation:Optional
@@ -237,7 +237,7 @@ type JobParameters struct {
 
 	// The number of workers of a defined workerType that are allocated when a job runs.
 	// +kubebuilder:validation:Optional
-	NumberOfWorkers *int64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
+	NumberOfWorkers *float64 `json:"numberOfWorkers,omitempty" tf:"number_of_workers,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -268,7 +268,7 @@ type JobParameters struct {
 
 	// –  The job timeout in minutes. The default is 2880 minutes (48 hours) for glueetl and pythonshell jobs, and null (unlimited) for gluestreaming jobs.
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.
 	// +kubebuilder:validation:Optional
@@ -278,20 +278,20 @@ type JobParameters struct {
 type NotificationPropertyInitParameters struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
-	NotifyDelayAfter *int64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 type NotificationPropertyObservation struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
-	NotifyDelayAfter *int64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 type NotificationPropertyParameters struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
 	// +kubebuilder:validation:Optional
-	NotifyDelayAfter *int64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 // JobSpec defines the desired state of Job

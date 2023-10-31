@@ -162,15 +162,13 @@ spec:
                         maximumIndividualPlayerLatencyMilliseconds:
                           description: Maximum latency value that is allowed for any
                             player.
-                          format: int64
-                          type: integer
+                          type: number
                         policyDurationSeconds:
                           description: Length of time that the policy is enforced
                             while placing a new game session. Absence of value for
                             this attribute means that the policy is enforced until
                             the queue times out.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   region:
@@ -185,8 +183,7 @@ spec:
                   timeoutInSeconds:
                     description: Maximum time a game session request can remain in
                       the queue.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -220,15 +217,13 @@ spec:
                         maximumIndividualPlayerLatencyMilliseconds:
                           description: Maximum latency value that is allowed for any
                             player.
-                          format: int64
-                          type: integer
+                          type: number
                         policyDurationSeconds:
                           description: Length of time that the policy is enforced
                             while placing a new game session. Absence of value for
                             this attribute means that the policy is enforced until
                             the queue times out.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -239,8 +234,7 @@ spec:
                   timeoutInSeconds:
                     description: Maximum time a game session request can remain in
                       the queue.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -434,15 +428,13 @@ spec:
                         maximumIndividualPlayerLatencyMilliseconds:
                           description: Maximum latency value that is allowed for any
                             player.
-                          format: int64
-                          type: integer
+                          type: number
                         policyDurationSeconds:
                           description: Length of time that the policy is enforced
                             while placing a new game session. Absence of value for
                             this attribute means that the policy is enforced until
                             the queue times out.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -460,8 +452,7 @@ spec:
                   timeoutInSeconds:
                     description: Maximum time a game session request can remain in
                       the queue.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

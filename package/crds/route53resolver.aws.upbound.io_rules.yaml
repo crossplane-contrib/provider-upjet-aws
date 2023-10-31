@@ -182,8 +182,7 @@ spec:
                         port:
                           description: The port at ip that you want to forward DNS
                             queries to. Default value is 53
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 required:
@@ -231,8 +230,7 @@ spec:
                         port:
                           description: The port at ip that you want to forward DNS
                             queries to. Default value is 53
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -469,8 +467,7 @@ spec:
                         port:
                           description: The port at ip that you want to forward DNS
                             queries to. Default value is 53
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object

@@ -277,8 +277,7 @@ spec:
                           description: 'Limits the bandwidth utilized. For example,
                             to set a maximum of 1 MB, set this value to 1048576. Value
                             values: -1 or greater. Default: -1 (unlimited).'
-                          format: int64
-                          type: integer
+                          type: number
                         gid:
                           description: 'Group identifier of the file''s owners. Valid
                             values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE
@@ -522,8 +521,7 @@ spec:
                           description: 'Limits the bandwidth utilized. For example,
                             to set a maximum of 1 MB, set this value to 1048576. Value
                             values: -1 or greater. Default: -1 (unlimited).'
-                          format: int64
-                          type: integer
+                          type: number
                         gid:
                           description: 'Group identifier of the file''s owners. Valid
                             values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE
@@ -852,8 +850,7 @@ spec:
                           description: 'Limits the bandwidth utilized. For example,
                             to set a maximum of 1 MB, set this value to 1048576. Value
                             values: -1 or greater. Default: -1 (unlimited).'
-                          format: int64
-                          type: integer
+                          type: number
                         gid:
                           description: 'Group identifier of the file''s owners. Valid
                             values: BOTH, INT_VALUE, NAME, NONE. Default: INT_VALUE

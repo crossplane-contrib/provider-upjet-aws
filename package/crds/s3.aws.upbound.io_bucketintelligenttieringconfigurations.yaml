@@ -186,8 +186,7 @@ spec:
                           description: Number of consecutive days of no access after
                             which an object will be eligible to be transitioned to
                             the corresponding tier.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 required:
@@ -242,8 +241,7 @@ spec:
                           description: Number of consecutive days of no access after
                             which an object will be eligible to be transitioned to
                             the corresponding tier.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -465,8 +463,7 @@ spec:
                           description: Number of consecutive days of no access after
                             which an object will be eligible to be transitioned to
                             the corresponding tier.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object

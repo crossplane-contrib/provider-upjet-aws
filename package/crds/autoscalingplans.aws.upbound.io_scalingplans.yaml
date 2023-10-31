@@ -140,12 +140,10 @@ spec:
                           description: Maximum capacity of the resource. The exception
                             to this upper limit is if you specify a non-default setting
                             for predictive_scaling_max_capacity_behavior.
-                          format: int64
-                          type: integer
+                          type: number
                         minCapacity:
                           description: Minimum capacity of the resource.
-                          format: int64
-                          type: integer
+                          type: number
                         predefinedLoadMetricSpecification:
                           description: Predefined load metric to use for predictive
                             scaling. You must specify either predefined_load_metric_specification
@@ -173,8 +171,7 @@ spec:
                         predictiveScalingMaxCapacityBuffer:
                           description: Size of the capacity buffer to use when the
                             forecast capacity is close to or exceeds the maximum capacity.
-                          format: int64
-                          type: integer
+                          type: number
                         predictiveScalingMode:
                           description: 'Predictive scaling mode. Valid values: ForecastAndScale,
                             ForecastOnly.'
@@ -200,8 +197,7 @@ spec:
                         scheduledActionBufferTime:
                           description: Amount of time, in seconds, to buffer the run
                             time of scheduled scaling actions when scaling out.
-                          format: int64
-                          type: integer
+                          type: number
                         serviceNamespace:
                           description: 'Namespace of the AWS service. Valid values:
                             autoscaling, dynamodb, ecs, ec2, rds.'
@@ -251,8 +247,7 @@ spec:
                                   launched instance can contribute to the CloudWatch
                                   metrics. This value is used only if the resource
                                   is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               predefinedScalingMetricSpecification:
                                 description: Predefined metric. You can specify either
                                   predefined_scaling_metric_specification or customized_scaling_metric_specification.
@@ -280,15 +275,13 @@ spec:
                                   in activity completes before another scale in activity
                                   can start. This value is not used if the scalable
                                   resource is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               scaleOutCooldown:
                                 description: Amount of time, in seconds, after a scale-out
                                   activity completes before another scale-out activity
                                   can start. This value is not used if the scalable
                                   resource is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               targetValue:
                                 description: Target value for the metric.
                                 type: number
@@ -380,12 +373,10 @@ spec:
                           description: Maximum capacity of the resource. The exception
                             to this upper limit is if you specify a non-default setting
                             for predictive_scaling_max_capacity_behavior.
-                          format: int64
-                          type: integer
+                          type: number
                         minCapacity:
                           description: Minimum capacity of the resource.
-                          format: int64
-                          type: integer
+                          type: number
                         predefinedLoadMetricSpecification:
                           description: Predefined load metric to use for predictive
                             scaling. You must specify either predefined_load_metric_specification
@@ -413,8 +404,7 @@ spec:
                         predictiveScalingMaxCapacityBuffer:
                           description: Size of the capacity buffer to use when the
                             forecast capacity is close to or exceeds the maximum capacity.
-                          format: int64
-                          type: integer
+                          type: number
                         predictiveScalingMode:
                           description: 'Predictive scaling mode. Valid values: ForecastAndScale,
                             ForecastOnly.'
@@ -440,8 +430,7 @@ spec:
                         scheduledActionBufferTime:
                           description: Amount of time, in seconds, to buffer the run
                             time of scheduled scaling actions when scaling out.
-                          format: int64
-                          type: integer
+                          type: number
                         serviceNamespace:
                           description: 'Namespace of the AWS service. Valid values:
                             autoscaling, dynamodb, ecs, ec2, rds.'
@@ -491,8 +480,7 @@ spec:
                                   launched instance can contribute to the CloudWatch
                                   metrics. This value is used only if the resource
                                   is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               predefinedScalingMetricSpecification:
                                 description: Predefined metric. You can specify either
                                   predefined_scaling_metric_specification or customized_scaling_metric_specification.
@@ -520,15 +508,13 @@ spec:
                                   in activity completes before another scale in activity
                                   can start. This value is not used if the scalable
                                   resource is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               scaleOutCooldown:
                                 description: Amount of time, in seconds, after a scale-out
                                   activity completes before another scale-out activity
                                   can start. This value is not used if the scalable
                                   resource is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               targetValue:
                                 description: Target value for the metric.
                                 type: number
@@ -787,12 +773,10 @@ spec:
                           description: Maximum capacity of the resource. The exception
                             to this upper limit is if you specify a non-default setting
                             for predictive_scaling_max_capacity_behavior.
-                          format: int64
-                          type: integer
+                          type: number
                         minCapacity:
                           description: Minimum capacity of the resource.
-                          format: int64
-                          type: integer
+                          type: number
                         predefinedLoadMetricSpecification:
                           description: Predefined load metric to use for predictive
                             scaling. You must specify either predefined_load_metric_specification
@@ -820,8 +804,7 @@ spec:
                         predictiveScalingMaxCapacityBuffer:
                           description: Size of the capacity buffer to use when the
                             forecast capacity is close to or exceeds the maximum capacity.
-                          format: int64
-                          type: integer
+                          type: number
                         predictiveScalingMode:
                           description: 'Predictive scaling mode. Valid values: ForecastAndScale,
                             ForecastOnly.'
@@ -847,8 +830,7 @@ spec:
                         scheduledActionBufferTime:
                           description: Amount of time, in seconds, to buffer the run
                             time of scheduled scaling actions when scaling out.
-                          format: int64
-                          type: integer
+                          type: number
                         serviceNamespace:
                           description: 'Namespace of the AWS service. Valid values:
                             autoscaling, dynamodb, ecs, ec2, rds.'
@@ -898,8 +880,7 @@ spec:
                                   launched instance can contribute to the CloudWatch
                                   metrics. This value is used only if the resource
                                   is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               predefinedScalingMetricSpecification:
                                 description: Predefined metric. You can specify either
                                   predefined_scaling_metric_specification or customized_scaling_metric_specification.
@@ -927,15 +908,13 @@ spec:
                                   in activity completes before another scale in activity
                                   can start. This value is not used if the scalable
                                   resource is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               scaleOutCooldown:
                                 description: Amount of time, in seconds, after a scale-out
                                   activity completes before another scale-out activity
                                   can start. This value is not used if the scalable
                                   resource is an Auto Scaling group.
-                                format: int64
-                                type: integer
+                                type: number
                               targetValue:
                                 description: Target value for the metric.
                                 type: number
@@ -946,8 +925,7 @@ spec:
                   scalingPlanVersion:
                     description: The version number of the scaling plan. This value
                       is always 1.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

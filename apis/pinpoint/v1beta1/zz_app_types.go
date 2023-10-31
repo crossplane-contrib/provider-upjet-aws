@@ -134,50 +134,50 @@ type CampaignHookParameters struct {
 type LimitsInitParameters struct {
 
 	// The maximum number of messages that the campaign can send daily.
-	Daily *int64 `json:"daily,omitempty" tf:"daily,omitempty"`
+	Daily *float64 `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
-	MaximumDuration *int64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
+	MaximumDuration *float64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
 
 	// The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.
-	MessagesPerSecond *int64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
+	MessagesPerSecond *float64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
 
 	// The maximum total number of messages that the campaign can send.
-	Total *int64 `json:"total,omitempty" tf:"total,omitempty"`
+	Total *float64 `json:"total,omitempty" tf:"total,omitempty"`
 }
 
 type LimitsObservation struct {
 
 	// The maximum number of messages that the campaign can send daily.
-	Daily *int64 `json:"daily,omitempty" tf:"daily,omitempty"`
+	Daily *float64 `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
-	MaximumDuration *int64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
+	MaximumDuration *float64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
 
 	// The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.
-	MessagesPerSecond *int64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
+	MessagesPerSecond *float64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
 
 	// The maximum total number of messages that the campaign can send.
-	Total *int64 `json:"total,omitempty" tf:"total,omitempty"`
+	Total *float64 `json:"total,omitempty" tf:"total,omitempty"`
 }
 
 type LimitsParameters struct {
 
 	// The maximum number of messages that the campaign can send daily.
 	// +kubebuilder:validation:Optional
-	Daily *int64 `json:"daily,omitempty" tf:"daily,omitempty"`
+	Daily *float64 `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// The length of time (in seconds) that the campaign can run before it ends and message deliveries stop. This duration begins at the scheduled start time for the campaign. The minimum value is 60.
 	// +kubebuilder:validation:Optional
-	MaximumDuration *int64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
+	MaximumDuration *float64 `json:"maximumDuration,omitempty" tf:"maximum_duration,omitempty"`
 
 	// The number of messages that the campaign can send per second. The minimum value is 50, and the maximum is 20000.
 	// +kubebuilder:validation:Optional
-	MessagesPerSecond *int64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
+	MessagesPerSecond *float64 `json:"messagesPerSecond,omitempty" tf:"messages_per_second,omitempty"`
 
 	// The maximum total number of messages that the campaign can send.
 	// +kubebuilder:validation:Optional
-	Total *int64 `json:"total,omitempty" tf:"total,omitempty"`
+	Total *float64 `json:"total,omitempty" tf:"total,omitempty"`
 }
 
 type QuietTimeInitParameters struct {

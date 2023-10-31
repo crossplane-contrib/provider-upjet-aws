@@ -213,8 +213,7 @@ spec:
                     description: 'The time in seconds that the connection is allowed
                       to be idle. Only valid for Load Balancers of type application.
                       Default: 60.'
-                    format: int64
-                    type: integer
+                    type: number
                   internal:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
@@ -605,8 +604,7 @@ spec:
                     description: 'The time in seconds that the connection is allowed
                       to be idle. Only valid for Load Balancers of type application.
                       Default: 60.'
-                    format: int64
-                    type: integer
+                    type: number
                   internal:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
@@ -910,8 +908,7 @@ spec:
                     description: 'The time in seconds that the connection is allowed
                       to be idle. Only valid for Load Balancers of type application.
                       Default: 60.'
-                    format: int64
-                    type: integer
+                    type: number
                   internal:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean

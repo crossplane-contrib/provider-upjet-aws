@@ -25,7 +25,7 @@ func (mg *Channel) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Channel
 func (tr *Channel) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"hls_ingest[*].ingest_endpoints[*].password": "status.atProvider.hlsIngest[*].ingestEndpoints[*].password"}
+	return nil
 }
 
 // GetObservation of this Channel

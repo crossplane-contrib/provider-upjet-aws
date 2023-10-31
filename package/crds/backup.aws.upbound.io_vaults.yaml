@@ -367,8 +367,7 @@ spec:
                   recoveryPoints:
                     description: The number of recovery points that are stored in
                       a backup vault.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

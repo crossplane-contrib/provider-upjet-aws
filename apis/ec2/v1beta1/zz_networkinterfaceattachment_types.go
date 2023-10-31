@@ -20,7 +20,7 @@ import (
 type NetworkInterfaceAttachmentInitParameters struct {
 
 	// Network interface index (int).
-	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 }
 
 type NetworkInterfaceAttachmentObservation struct {
@@ -29,7 +29,7 @@ type NetworkInterfaceAttachmentObservation struct {
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
 	// Network interface index (int).
-	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -47,7 +47,7 @@ type NetworkInterfaceAttachmentParameters struct {
 
 	// Network interface index (int).
 	// +kubebuilder:validation:Optional
-	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Instance ID to attach.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance

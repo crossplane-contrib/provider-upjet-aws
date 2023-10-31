@@ -78,14 +78,12 @@ spec:
                           description: The number of days to retain an application
                             version ('max_age_in_days' and 'max_count' cannot be enabled
                             simultaneously.).
-                          format: int64
-                          type: integer
+                          type: number
                         maxCount:
                           description: The maximum number of application versions
                             to retain ('max_age_in_days' and 'max_count' cannot be
                             enabled simultaneously.).
-                          format: int64
-                          type: integer
+                          type: number
                         serviceRole:
                           description: The ARN of an IAM service role under which
                             the application version is deleted.  Elastic Beanstalk
@@ -207,14 +205,12 @@ spec:
                           description: The number of days to retain an application
                             version ('max_age_in_days' and 'max_count' cannot be enabled
                             simultaneously.).
-                          format: int64
-                          type: integer
+                          type: number
                         maxCount:
                           description: The maximum number of application versions
                             to retain ('max_age_in_days' and 'max_count' cannot be
                             enabled simultaneously.).
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   description:
@@ -402,14 +398,12 @@ spec:
                           description: The number of days to retain an application
                             version ('max_age_in_days' and 'max_count' cannot be enabled
                             simultaneously.).
-                          format: int64
-                          type: integer
+                          type: number
                         maxCount:
                           description: The maximum number of application versions
                             to retain ('max_age_in_days' and 'max_count' cannot be
                             enabled simultaneously.).
-                          format: int64
-                          type: integer
+                          type: number
                         serviceRole:
                           description: The ARN of an IAM service role under which
                             the application version is deleted.  Elastic Beanstalk

@@ -1329,7 +1329,7 @@ func (in *RateBasedRuleInitParameters) DeepCopyInto(out *RateBasedRuleInitParame
 	}
 	if in.RateLimit != nil {
 		in, out := &in.RateLimit, &out.RateLimit
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1429,7 +1429,7 @@ func (in *RateBasedRuleObservation) DeepCopyInto(out *RateBasedRuleObservation) 
 	}
 	if in.RateLimit != nil {
 		in, out := &in.RateLimit, &out.RateLimit
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1503,7 +1503,7 @@ func (in *RateBasedRuleParameters) DeepCopyInto(out *RateBasedRuleParameters) {
 	}
 	if in.RateLimit != nil {
 		in, out := &in.RateLimit, &out.RateLimit
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -2666,7 +2666,7 @@ func (in *RulesInitParameters) DeepCopyInto(out *RulesInitParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -2705,7 +2705,7 @@ func (in *RulesObservation) DeepCopyInto(out *RulesObservation) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RuleID != nil {
@@ -2749,7 +2749,7 @@ func (in *RulesParameters) DeepCopyInto(out *RulesParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RuleID != nil {
@@ -3407,7 +3407,7 @@ func (in *SizeConstraintsInitParameters) DeepCopyInto(out *SizeConstraintsInitPa
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TextTransformation != nil {
@@ -3444,7 +3444,7 @@ func (in *SizeConstraintsObservation) DeepCopyInto(out *SizeConstraintsObservati
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TextTransformation != nil {
@@ -3481,7 +3481,7 @@ func (in *SizeConstraintsParameters) DeepCopyInto(out *SizeConstraintsParameters
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TextTransformation != nil {

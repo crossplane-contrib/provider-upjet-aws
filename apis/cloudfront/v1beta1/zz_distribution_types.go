@@ -20,13 +20,13 @@ import (
 type CustomErrorResponseInitParameters struct {
 
 	// Minimum amount of time you want HTTP error codes to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.
-	ErrorCachingMinTTL *int64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
+	ErrorCachingMinTTL *float64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
 
 	// 4xx or 5xx HTTP status code that you want to customize.
-	ErrorCode *int64 `json:"errorCode,omitempty" tf:"error_code,omitempty"`
+	ErrorCode *float64 `json:"errorCode,omitempty" tf:"error_code,omitempty"`
 
 	// HTTP status code that you want CloudFront to return with the custom error page to the viewer.
-	ResponseCode *int64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
+	ResponseCode *float64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
 
 	// Path of the custom error page (for example, /custom_404.html).
 	ResponsePagePath *string `json:"responsePagePath,omitempty" tf:"response_page_path,omitempty"`
@@ -35,13 +35,13 @@ type CustomErrorResponseInitParameters struct {
 type CustomErrorResponseObservation struct {
 
 	// Minimum amount of time you want HTTP error codes to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.
-	ErrorCachingMinTTL *int64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
+	ErrorCachingMinTTL *float64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
 
 	// 4xx or 5xx HTTP status code that you want to customize.
-	ErrorCode *int64 `json:"errorCode,omitempty" tf:"error_code,omitempty"`
+	ErrorCode *float64 `json:"errorCode,omitempty" tf:"error_code,omitempty"`
 
 	// HTTP status code that you want CloudFront to return with the custom error page to the viewer.
-	ResponseCode *int64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
+	ResponseCode *float64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
 
 	// Path of the custom error page (for example, /custom_404.html).
 	ResponsePagePath *string `json:"responsePagePath,omitempty" tf:"response_page_path,omitempty"`
@@ -51,15 +51,15 @@ type CustomErrorResponseParameters struct {
 
 	// Minimum amount of time you want HTTP error codes to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated.
 	// +kubebuilder:validation:Optional
-	ErrorCachingMinTTL *int64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
+	ErrorCachingMinTTL *float64 `json:"errorCachingMinTtl,omitempty" tf:"error_caching_min_ttl,omitempty"`
 
 	// 4xx or 5xx HTTP status code that you want to customize.
 	// +kubebuilder:validation:Optional
-	ErrorCode *int64 `json:"errorCode" tf:"error_code,omitempty"`
+	ErrorCode *float64 `json:"errorCode" tf:"error_code,omitempty"`
 
 	// HTTP status code that you want CloudFront to return with the custom error page to the viewer.
 	// +kubebuilder:validation:Optional
-	ResponseCode *int64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
+	ResponseCode *float64 `json:"responseCode,omitempty" tf:"response_code,omitempty"`
 
 	// Path of the custom error page (for example, /custom_404.html).
 	// +kubebuilder:validation:Optional
@@ -90,19 +90,19 @@ type CustomHeaderParameters struct {
 type CustomOriginConfigInitParameters struct {
 
 	// HTTP port the custom origin listens on.
-	HTTPPort *int64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
 
 	// HTTPS port the custom origin listens on.
-	HTTPSPort *int64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
-	OriginKeepaliveTimeout *int64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
 	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
-	OriginReadTimeout *int64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
 	OriginSSLProtocols []*string `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
@@ -111,19 +111,19 @@ type CustomOriginConfigInitParameters struct {
 type CustomOriginConfigObservation struct {
 
 	// HTTP port the custom origin listens on.
-	HTTPPort *int64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
 
 	// HTTPS port the custom origin listens on.
-	HTTPSPort *int64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
-	OriginKeepaliveTimeout *int64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	OriginProtocolPolicy *string `json:"originProtocolPolicy,omitempty" tf:"origin_protocol_policy,omitempty"`
 
 	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
-	OriginReadTimeout *int64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
 	OriginSSLProtocols []*string `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
@@ -133,15 +133,15 @@ type CustomOriginConfigParameters struct {
 
 	// HTTP port the custom origin listens on.
 	// +kubebuilder:validation:Optional
-	HTTPPort *int64 `json:"httpPort" tf:"http_port,omitempty"`
+	HTTPPort *float64 `json:"httpPort" tf:"http_port,omitempty"`
 
 	// HTTPS port the custom origin listens on.
 	// +kubebuilder:validation:Optional
-	HTTPSPort *int64 `json:"httpsPort" tf:"https_port,omitempty"`
+	HTTPSPort *float64 `json:"httpsPort" tf:"https_port,omitempty"`
 
 	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	// +kubebuilder:validation:Optional
-	OriginKeepaliveTimeout *int64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
 
 	// Origin protocol policy to apply to your origin. One of http-only, https-only, or match-viewer.
 	// +kubebuilder:validation:Optional
@@ -149,7 +149,7 @@ type CustomOriginConfigParameters struct {
 
 	// The Custom Read timeout, in seconds. By default, AWS enforces a limit of 60. But you can request an increase.
 	// +kubebuilder:validation:Optional
-	OriginReadTimeout *int64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
 	// +kubebuilder:validation:Optional
@@ -171,7 +171,7 @@ type DefaultCacheBehaviorInitParameters struct {
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
 	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
 	FieldLevelEncryptionID *string `json:"fieldLevelEncryptionId,omitempty" tf:"field_level_encryption_id,omitempty"`
@@ -186,10 +186,10 @@ type DefaultCacheBehaviorInitParameters struct {
 	LambdaFunctionAssociation []LambdaFunctionAssociationInitParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
 	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
@@ -231,7 +231,7 @@ type DefaultCacheBehaviorObservation struct {
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
 	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
 	FieldLevelEncryptionID *string `json:"fieldLevelEncryptionId,omitempty" tf:"field_level_encryption_id,omitempty"`
@@ -246,10 +246,10 @@ type DefaultCacheBehaviorObservation struct {
 	LambdaFunctionAssociation []LambdaFunctionAssociationObservation `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
 	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
@@ -296,7 +296,7 @@ type DefaultCacheBehaviorParameters struct {
 
 	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
 	// +kubebuilder:validation:Optional
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
 	// +kubebuilder:validation:Optional
@@ -316,11 +316,11 @@ type DefaultCacheBehaviorParameters struct {
 
 	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
 	// +kubebuilder:validation:Optional
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
 	// +kubebuilder:validation:Optional
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
 	// +kubebuilder:validation:Optional
@@ -457,7 +457,7 @@ type DistributionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Number of invalidation batches currently in progress.
-	InProgressValidationBatches *int64 `json:"inProgressValidationBatches,omitempty" tf:"in_progress_validation_batches,omitempty"`
+	InProgressValidationBatches *float64 `json:"inProgressValidationBatches,omitempty" tf:"in_progress_validation_batches,omitempty"`
 
 	// Whether the IPv6 is enabled for the distribution.
 	IsIPv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6_enabled,omitempty"`
@@ -598,20 +598,20 @@ type DistributionParameters struct {
 type FailoverCriteriaInitParameters struct {
 
 	// List of HTTP status codes for the origin group.
-	StatusCodes []*int64 `json:"statusCodes,omitempty" tf:"status_codes,omitempty"`
+	StatusCodes []*float64 `json:"statusCodes,omitempty" tf:"status_codes,omitempty"`
 }
 
 type FailoverCriteriaObservation struct {
 
 	// List of HTTP status codes for the origin group.
-	StatusCodes []*int64 `json:"statusCodes,omitempty" tf:"status_codes,omitempty"`
+	StatusCodes []*float64 `json:"statusCodes,omitempty" tf:"status_codes,omitempty"`
 }
 
 type FailoverCriteriaParameters struct {
 
 	// List of HTTP status codes for the origin group.
 	// +kubebuilder:validation:Optional
-	StatusCodes []*int64 `json:"statusCodes" tf:"status_codes,omitempty"`
+	StatusCodes []*float64 `json:"statusCodes" tf:"status_codes,omitempty"`
 }
 
 type ForwardedValuesCookiesInitParameters struct {
@@ -991,7 +991,7 @@ type OrderedCacheBehaviorInitParameters struct {
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
 	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
 	FieldLevelEncryptionID *string `json:"fieldLevelEncryptionId,omitempty" tf:"field_level_encryption_id,omitempty"`
@@ -1006,10 +1006,10 @@ type OrderedCacheBehaviorInitParameters struct {
 	LambdaFunctionAssociation []OrderedCacheBehaviorLambdaFunctionAssociationInitParameters `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
 	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
@@ -1100,7 +1100,7 @@ type OrderedCacheBehaviorObservation struct {
 	Compress *bool `json:"compress,omitempty" tf:"compress,omitempty"`
 
 	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
 	FieldLevelEncryptionID *string `json:"fieldLevelEncryptionId,omitempty" tf:"field_level_encryption_id,omitempty"`
@@ -1115,10 +1115,10 @@ type OrderedCacheBehaviorObservation struct {
 	LambdaFunctionAssociation []OrderedCacheBehaviorLambdaFunctionAssociationObservation `json:"lambdaFunctionAssociation,omitempty" tf:"lambda_function_association,omitempty"`
 
 	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
 	OriginRequestPolicyID *string `json:"originRequestPolicyId,omitempty" tf:"origin_request_policy_id,omitempty"`
@@ -1168,7 +1168,7 @@ type OrderedCacheBehaviorParameters struct {
 
 	// Default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header.
 	// +kubebuilder:validation:Optional
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// Field level encryption configuration ID.
 	// +kubebuilder:validation:Optional
@@ -1188,11 +1188,11 @@ type OrderedCacheBehaviorParameters struct {
 
 	// Maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. Only effective in the presence of Cache-Control max-age, Cache-Control s-maxage, and Expires headers.
 	// +kubebuilder:validation:Optional
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// Minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds.
 	// +kubebuilder:validation:Optional
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// Unique identifier of the origin request policy that is attached to the behavior.
 	// +kubebuilder:validation:Optional
@@ -1273,10 +1273,10 @@ type OriginGroupParameters struct {
 type OriginInitParameters struct {
 
 	// Number of times that CloudFront attempts to connect to the origin. Must be between 1-3. Defaults to 3.
-	ConnectionAttempts *int64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
+	ConnectionAttempts *float64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
 
 	// Number of seconds that CloudFront waits when trying to establish a connection to the origin. Must be between 1-10. Defaults to 10.
-	ConnectionTimeout *int64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
 	// One or more sub-resources with name and value parameters that specify header data that will be sent to the origin (multiples allowed).
 	CustomHeader []CustomHeaderInitParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
@@ -1303,10 +1303,10 @@ type OriginInitParameters struct {
 type OriginObservation struct {
 
 	// Number of times that CloudFront attempts to connect to the origin. Must be between 1-3. Defaults to 3.
-	ConnectionAttempts *int64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
+	ConnectionAttempts *float64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
 
 	// Number of seconds that CloudFront waits when trying to establish a connection to the origin. Must be between 1-10. Defaults to 10.
-	ConnectionTimeout *int64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
 	// One or more sub-resources with name and value parameters that specify header data that will be sent to the origin (multiples allowed).
 	CustomHeader []CustomHeaderObservation `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
@@ -1337,11 +1337,11 @@ type OriginParameters struct {
 
 	// Number of times that CloudFront attempts to connect to the origin. Must be between 1-3. Defaults to 3.
 	// +kubebuilder:validation:Optional
-	ConnectionAttempts *int64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
+	ConnectionAttempts *float64 `json:"connectionAttempts,omitempty" tf:"connection_attempts,omitempty"`
 
 	// Number of seconds that CloudFront waits when trying to establish a connection to the origin. Must be between 1-10. Defaults to 10.
 	// +kubebuilder:validation:Optional
-	ConnectionTimeout *int64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
 	// One or more sub-resources with name and value parameters that specify header data that will be sent to the origin (multiples allowed).
 	// +kubebuilder:validation:Optional

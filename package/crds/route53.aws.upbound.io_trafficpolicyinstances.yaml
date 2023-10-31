@@ -233,14 +233,12 @@ spec:
                     type: object
                   trafficPolicyVersion:
                     description: Version of the traffic policy
-                    format: int64
-                    type: integer
+                    type: number
                   ttl:
                     description: TTL that you want Amazon Route 53 to assign to all
                       the resource record sets that it creates in the specified hosted
                       zone.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -263,14 +261,12 @@ spec:
                     type: string
                   trafficPolicyVersion:
                     description: Version of the traffic policy
-                    format: int64
-                    type: integer
+                    type: number
                   ttl:
                     description: TTL that you want Amazon Route 53 to assign to all
                       the resource record sets that it creates in the specified hosted
                       zone.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -470,14 +466,12 @@ spec:
                     type: string
                   trafficPolicyVersion:
                     description: Version of the traffic policy
-                    format: int64
-                    type: integer
+                    type: number
                   ttl:
                     description: TTL that you want Amazon Route 53 to assign to all
                       the resource record sets that it creates in the specified hosted
                       zone.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

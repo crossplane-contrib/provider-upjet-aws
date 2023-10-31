@@ -39,88 +39,88 @@ type CapacityRebalanceParameters struct {
 type InstanceRequirementsAcceleratorCountInitParameters struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsAcceleratorCountObservation struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsAcceleratorCountParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsAcceleratorTotalMemoryMibInitParameters struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsAcceleratorTotalMemoryMibObservation struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsAcceleratorTotalMemoryMibParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsBaselineEBSBandwidthMbpsInitParameters struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsBaselineEBSBandwidthMbpsObservation struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsBaselineEBSBandwidthMbpsParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsMemoryGibPerVcpuInitParameters struct {
@@ -155,30 +155,30 @@ type InstanceRequirementsMemoryGibPerVcpuParameters struct {
 type InstanceRequirementsMemoryMibInitParameters struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsMemoryMibObservation struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsMemoryMibParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsNetworkBandwidthGbpsInitParameters struct {
@@ -213,30 +213,30 @@ type InstanceRequirementsNetworkBandwidthGbpsParameters struct {
 type InstanceRequirementsNetworkInterfaceCountInitParameters struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsNetworkInterfaceCountObservation struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsNetworkInterfaceCountParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsTotalLocalStorageGbInitParameters struct {
@@ -271,30 +271,30 @@ type InstanceRequirementsTotalLocalStorageGbParameters struct {
 type InstanceRequirementsVcpuCountInitParameters struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsVcpuCountObservation struct {
 
 	// Maximum.
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type InstanceRequirementsVcpuCountParameters struct {
 
 	// Maximum.
 	// +kubebuilder:validation:Optional
-	Max *int64 `json:"max,omitempty" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// Minimum.
 	// +kubebuilder:validation:Optional
-	Min *int64 `json:"min,omitempty" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
 type LaunchSpecificationEBSBlockDeviceInitParameters struct {
@@ -305,7 +305,7 @@ type LaunchSpecificationEBSBlockDeviceInitParameters struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -313,9 +313,9 @@ type LaunchSpecificationEBSBlockDeviceInitParameters struct {
 	// The ID of the launch template. Conflicts with name.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -328,7 +328,7 @@ type LaunchSpecificationEBSBlockDeviceObservation struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -336,9 +336,9 @@ type LaunchSpecificationEBSBlockDeviceObservation struct {
 	// The ID of the launch template. Conflicts with name.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -356,7 +356,7 @@ type LaunchSpecificationEBSBlockDeviceParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	// +kubebuilder:validation:Optional
@@ -367,10 +367,10 @@ type LaunchSpecificationEBSBlockDeviceParameters struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -588,14 +588,14 @@ type LaunchSpecificationRootBlockDeviceInitParameters struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -605,14 +605,14 @@ type LaunchSpecificationRootBlockDeviceObservation struct {
 
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
@@ -626,17 +626,17 @@ type LaunchSpecificationRootBlockDeviceParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The ID of the launch template. Conflicts with name.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -805,13 +805,13 @@ type OverridesInstanceRequirementsInitParameters struct {
 	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountInitParameters `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
-	OnDemandMaxPricePercentageOverLowestPrice *int64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
 	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	SpotMaxPricePercentageOverLowestPrice *int64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbInitParameters `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
@@ -877,13 +877,13 @@ type OverridesInstanceRequirementsObservation struct {
 	NetworkInterfaceCount []InstanceRequirementsNetworkInterfaceCountObservation `json:"networkInterfaceCount,omitempty" tf:"network_interface_count,omitempty"`
 
 	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
-	OnDemandMaxPricePercentageOverLowestPrice *int64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
 	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
-	SpotMaxPricePercentageOverLowestPrice *int64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	TotalLocalStorageGb []InstanceRequirementsTotalLocalStorageGbObservation `json:"totalLocalStorageGb,omitempty" tf:"total_local_storage_gb,omitempty"`
@@ -968,7 +968,7 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 20.
 	// +kubebuilder:validation:Optional
-	OnDemandMaxPricePercentageOverLowestPrice *int64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
+	OnDemandMaxPricePercentageOverLowestPrice *float64 `json:"onDemandMaxPricePercentageOverLowestPrice,omitempty" tf:"on_demand_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	// +kubebuilder:validation:Optional
@@ -976,7 +976,7 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
 	// +kubebuilder:validation:Optional
-	SpotMaxPricePercentageOverLowestPrice *int64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
+	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -1076,7 +1076,7 @@ type SpotFleetRequestInitParameters struct {
 	// Valid only when allocation_strategy is set to lowestPrice. Spot Fleet selects
 	// the cheapest Spot pools and evenly allocates your target Spot capacity across
 	// the number of Spot pools that you specify.
-	InstancePoolsToUseCount *int64 `json:"instancePoolsToUseCount,omitempty" tf:"instance_pools_to_use_count,omitempty"`
+	InstancePoolsToUseCount *float64 `json:"instancePoolsToUseCount,omitempty" tf:"instance_pools_to_use_count,omitempty"`
 
 	// Used to define the launch configuration of the
 	// spot-fleet request. Can be specified multiple times to define different bids
@@ -1096,7 +1096,7 @@ type SpotFleetRequestInitParameters struct {
 	OnDemandMaxTotalPrice *string `json:"onDemandMaxTotalPrice,omitempty" tf:"on_demand_max_total_price,omitempty"`
 
 	// The number of On-Demand units to request. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
-	OnDemandTargetCapacity *int64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
+	OnDemandTargetCapacity *float64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
 
 	// Indicates whether Spot fleet should replace unhealthy instances. Default false.
 	ReplaceUnhealthyInstances *bool `json:"replaceUnhealthyInstances,omitempty" tf:"replace_unhealthy_instances,omitempty"`
@@ -1113,7 +1113,7 @@ type SpotFleetRequestInitParameters struct {
 	// The number of units to request. You can choose to set the
 	// target capacity in terms of instances or a performance characteristic that is
 	// important to your application workload, such as vCPUs, memory, or I/O.
-	TargetCapacity *int64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
+	TargetCapacity *float64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
 
 	// The unit for the target capacity. This can only be done with instance_requirements defined
 	TargetCapacityUnitType *string `json:"targetCapacityUnitType,omitempty" tf:"target_capacity_unit_type,omitempty"`
@@ -1178,7 +1178,7 @@ type SpotFleetRequestObservation struct {
 	// Valid only when allocation_strategy is set to lowestPrice. Spot Fleet selects
 	// the cheapest Spot pools and evenly allocates your target Spot capacity across
 	// the number of Spot pools that you specify.
-	InstancePoolsToUseCount *int64 `json:"instancePoolsToUseCount,omitempty" tf:"instance_pools_to_use_count,omitempty"`
+	InstancePoolsToUseCount *float64 `json:"instancePoolsToUseCount,omitempty" tf:"instance_pools_to_use_count,omitempty"`
 
 	// Used to define the launch configuration of the
 	// spot-fleet request. Can be specified multiple times to define different bids
@@ -1198,7 +1198,7 @@ type SpotFleetRequestObservation struct {
 	OnDemandMaxTotalPrice *string `json:"onDemandMaxTotalPrice,omitempty" tf:"on_demand_max_total_price,omitempty"`
 
 	// The number of On-Demand units to request. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
-	OnDemandTargetCapacity *int64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
+	OnDemandTargetCapacity *float64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
 
 	// Indicates whether Spot fleet should replace unhealthy instances. Default false.
 	ReplaceUnhealthyInstances *bool `json:"replaceUnhealthyInstances,omitempty" tf:"replace_unhealthy_instances,omitempty"`
@@ -1221,7 +1221,7 @@ type SpotFleetRequestObservation struct {
 	// The number of units to request. You can choose to set the
 	// target capacity in terms of instances or a performance characteristic that is
 	// important to your application workload, such as vCPUs, memory, or I/O.
-	TargetCapacity *int64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
+	TargetCapacity *float64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
 
 	// The unit for the target capacity. This can only be done with instance_requirements defined
 	TargetCapacityUnitType *string `json:"targetCapacityUnitType,omitempty" tf:"target_capacity_unit_type,omitempty"`
@@ -1288,7 +1288,7 @@ type SpotFleetRequestParameters struct {
 	// the cheapest Spot pools and evenly allocates your target Spot capacity across
 	// the number of Spot pools that you specify.
 	// +kubebuilder:validation:Optional
-	InstancePoolsToUseCount *int64 `json:"instancePoolsToUseCount,omitempty" tf:"instance_pools_to_use_count,omitempty"`
+	InstancePoolsToUseCount *float64 `json:"instancePoolsToUseCount,omitempty" tf:"instance_pools_to_use_count,omitempty"`
 
 	// Used to define the launch configuration of the
 	// spot-fleet request. Can be specified multiple times to define different bids
@@ -1314,7 +1314,7 @@ type SpotFleetRequestParameters struct {
 
 	// The number of On-Demand units to request. If the request type is maintain, you can specify a target capacity of 0 and add capacity later.
 	// +kubebuilder:validation:Optional
-	OnDemandTargetCapacity *int64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
+	OnDemandTargetCapacity *float64 `json:"onDemandTargetCapacity,omitempty" tf:"on_demand_target_capacity,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -1341,7 +1341,7 @@ type SpotFleetRequestParameters struct {
 	// target capacity in terms of instances or a performance characteristic that is
 	// important to your application workload, such as vCPUs, memory, or I/O.
 	// +kubebuilder:validation:Optional
-	TargetCapacity *int64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
+	TargetCapacity *float64 `json:"targetCapacity,omitempty" tf:"target_capacity,omitempty"`
 
 	// The unit for the target capacity. This can only be done with instance_requirements defined
 	// +kubebuilder:validation:Optional

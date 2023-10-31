@@ -370,8 +370,7 @@ spec:
                     type: boolean
                   poolCount:
                     description: The number of pools in the scope.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

@@ -412,12 +412,12 @@ func (in *DestinationPortInitParameters) DeepCopyInto(out *DestinationPortInitPa
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -437,12 +437,12 @@ func (in *DestinationPortObservation) DeepCopyInto(out *DestinationPortObservati
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -462,12 +462,12 @@ func (in *DestinationPortParameters) DeepCopyInto(out *DestinationPortParameters
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2475,11 +2475,11 @@ func (in *MatchAttributesInitParameters) DeepCopyInto(out *MatchAttributesInitPa
 	}
 	if in.Protocols != nil {
 		in, out := &in.Protocols, &out.Protocols
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -2536,11 +2536,11 @@ func (in *MatchAttributesObservation) DeepCopyInto(out *MatchAttributesObservati
 	}
 	if in.Protocols != nil {
 		in, out := &in.Protocols, &out.Protocols
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -2597,11 +2597,11 @@ func (in *MatchAttributesParameters) DeepCopyInto(out *MatchAttributesParameters
 	}
 	if in.Protocols != nil {
 		in, out := &in.Protocols, &out.Protocols
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -3256,7 +3256,7 @@ func (in *RuleGroupInitParameters) DeepCopyInto(out *RuleGroupInitParameters) {
 	*out = *in
 	if in.Capacity != nil {
 		in, out := &in.Capacity, &out.Capacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -3363,7 +3363,7 @@ func (in *RuleGroupObservation) DeepCopyInto(out *RuleGroupObservation) {
 	}
 	if in.Capacity != nil {
 		in, out := &in.Capacity, &out.Capacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -3459,7 +3459,7 @@ func (in *RuleGroupParameters) DeepCopyInto(out *RuleGroupParameters) {
 	*out = *in
 	if in.Capacity != nil {
 		in, out := &in.Capacity, &out.Capacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -4187,12 +4187,12 @@ func (in *SourcePortInitParameters) DeepCopyInto(out *SourcePortInitParameters) 
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4212,12 +4212,12 @@ func (in *SourcePortObservation) DeepCopyInto(out *SourcePortObservation) {
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4237,12 +4237,12 @@ func (in *SourcePortParameters) DeepCopyInto(out *SourcePortParameters) {
 	*out = *in
 	if in.FromPort != nil {
 		in, out := &in.FromPort, &out.FromPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ToPort != nil {
 		in, out := &in.ToPort, &out.ToPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4329,7 +4329,7 @@ func (in *StatefulRuleGroupReferenceInitParameters) DeepCopyInto(out *StatefulRu
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4356,7 +4356,7 @@ func (in *StatefulRuleGroupReferenceObservation) DeepCopyInto(out *StatefulRuleG
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -4388,7 +4388,7 @@ func (in *StatefulRuleGroupReferenceParameters) DeepCopyInto(out *StatefulRuleGr
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -4666,7 +4666,7 @@ func (in *StatelessRuleGroupReferenceInitParameters) DeepCopyInto(out *Stateless
 	*out = *in
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4686,7 +4686,7 @@ func (in *StatelessRuleGroupReferenceObservation) DeepCopyInto(out *StatelessRul
 	*out = *in
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -4711,7 +4711,7 @@ func (in *StatelessRuleGroupReferenceParameters) DeepCopyInto(out *StatelessRule
 	*out = *in
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourceArn != nil {
@@ -4746,7 +4746,7 @@ func (in *StatelessRuleInitParameters) DeepCopyInto(out *StatelessRuleInitParame
 	*out = *in
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RuleDefinition != nil {
@@ -4773,7 +4773,7 @@ func (in *StatelessRuleObservation) DeepCopyInto(out *StatelessRuleObservation) 
 	*out = *in
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RuleDefinition != nil {
@@ -4800,7 +4800,7 @@ func (in *StatelessRuleParameters) DeepCopyInto(out *StatelessRuleParameters) {
 	*out = *in
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RuleDefinition != nil {

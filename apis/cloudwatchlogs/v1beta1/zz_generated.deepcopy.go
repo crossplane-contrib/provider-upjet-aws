@@ -699,7 +699,7 @@ func (in *GroupInitParameters) DeepCopyInto(out *GroupInitParameters) {
 	*out = *in
 	if in.RetentionInDays != nil {
 		in, out := &in.RetentionInDays, &out.RetentionInDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SkipDestroy != nil {
@@ -787,7 +787,7 @@ func (in *GroupObservation) DeepCopyInto(out *GroupObservation) {
 	}
 	if in.RetentionInDays != nil {
 		in, out := &in.RetentionInDays, &out.RetentionInDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SkipDestroy != nil {
@@ -864,7 +864,7 @@ func (in *GroupParameters) DeepCopyInto(out *GroupParameters) {
 	}
 	if in.RetentionInDays != nil {
 		in, out := &in.RetentionInDays, &out.RetentionInDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SkipDestroy != nil {

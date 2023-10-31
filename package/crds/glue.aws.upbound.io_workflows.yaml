@@ -81,8 +81,7 @@ spec:
                       runs of any of the component jobs. If you leave this parameter
                       blank, there is no limit to the number of concurrent workflow
                       runs.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -121,8 +120,7 @@ spec:
                       runs of any of the component jobs. If you leave this parameter
                       blank, there is no limit to the number of concurrent workflow
                       runs.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -314,8 +312,7 @@ spec:
                       runs of any of the component jobs. If you leave this parameter
                       blank, there is no limit to the number of concurrent workflow
                       runs.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

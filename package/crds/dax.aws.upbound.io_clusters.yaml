@@ -180,8 +180,7 @@ spec:
                     type: string
                   replicationFactor:
                     description: node cluster, without any read replicas
-                    format: int64
-                    type: integer
+                    type: number
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
                     items:
@@ -329,8 +328,7 @@ spec:
                     type: string
                   replicationFactor:
                     description: node cluster, without any read replicas
-                    format: int64
-                    type: integer
+                    type: number
                   serverSideEncryption:
                     description: Encrypt at rest options
                     items:
@@ -577,8 +575,7 @@ spec:
                           type: string
                         port:
                           description: The port used by the configuration endpoint
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   notificationTopicArn:
@@ -590,12 +587,10 @@ spec:
                     type: string
                   port:
                     description: The port used by the configuration endpoint
-                    format: int64
-                    type: integer
+                    type: number
                   replicationFactor:
                     description: node cluster, without any read replicas
-                    format: int64
-                    type: integer
+                    type: number
                   securityGroupIds:
                     description: –  One or more VPC security groups associated with
                       the cluster

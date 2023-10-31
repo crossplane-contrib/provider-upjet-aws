@@ -244,8 +244,7 @@ spec:
                                   rate limit over a time ranging from one to a few
                                   seconds, depending upon whether the underlying token
                                   bucket is at its full capacity.
-                                format: int64
-                                type: integer
+                                type: number
                               path:
                                 description: Method to apply the throttle settings
                                   for. Specfiy the path and method, for example /test/GET.
@@ -274,13 +273,11 @@ spec:
                         limit:
                           description: Maximum number of requests that can be made
                             in a given time period.
-                          format: int64
-                          type: integer
+                          type: number
                         offset:
                           description: Number of requests subtracted from the given
                             limit in the initial time period.
-                          format: int64
-                          type: integer
+                          type: number
                         period:
                           description: Time period in which the limit applies. Valid
                             values are "DAY", "WEEK" or "MONTH".
@@ -305,8 +302,7 @@ spec:
                             limit over a time ranging from one to a few seconds, depending
                             upon whether the underlying token bucket is at its full
                             capacity.
-                          format: int64
-                          type: integer
+                          type: number
                         rateLimit:
                           description: The API request steady-state rate limit.
                           type: number
@@ -340,8 +336,7 @@ spec:
                                   rate limit over a time ranging from one to a few
                                   seconds, depending upon whether the underlying token
                                   bucket is at its full capacity.
-                                format: int64
-                                type: integer
+                                type: number
                               path:
                                 description: Method to apply the throttle settings
                                   for. Specfiy the path and method, for example /test/GET.
@@ -370,13 +365,11 @@ spec:
                         limit:
                           description: Maximum number of requests that can be made
                             in a given time period.
-                          format: int64
-                          type: integer
+                          type: number
                         offset:
                           description: Number of requests subtracted from the given
                             limit in the initial time period.
-                          format: int64
-                          type: integer
+                          type: number
                         period:
                           description: Time period in which the limit applies. Valid
                             values are "DAY", "WEEK" or "MONTH".
@@ -397,8 +390,7 @@ spec:
                             limit over a time ranging from one to a few seconds, depending
                             upon whether the underlying token bucket is at its full
                             capacity.
-                          format: int64
-                          type: integer
+                          type: number
                         rateLimit:
                           description: The API request steady-state rate limit.
                           type: number
@@ -596,8 +588,7 @@ spec:
                                   rate limit over a time ranging from one to a few
                                   seconds, depending upon whether the underlying token
                                   bucket is at its full capacity.
-                                format: int64
-                                type: integer
+                                type: number
                               path:
                                 description: Method to apply the throttle settings
                                   for. Specfiy the path and method, for example /test/GET.
@@ -632,13 +623,11 @@ spec:
                         limit:
                           description: Maximum number of requests that can be made
                             in a given time period.
-                          format: int64
-                          type: integer
+                          type: number
                         offset:
                           description: Number of requests subtracted from the given
                             limit in the initial time period.
-                          format: int64
-                          type: integer
+                          type: number
                         period:
                           description: Time period in which the limit applies. Valid
                             values are "DAY", "WEEK" or "MONTH".
@@ -665,8 +654,7 @@ spec:
                             limit over a time ranging from one to a few seconds, depending
                             upon whether the underlying token bucket is at its full
                             capacity.
-                          format: int64
-                          type: integer
+                          type: number
                         rateLimit:
                           description: The API request steady-state rate limit.
                           type: number

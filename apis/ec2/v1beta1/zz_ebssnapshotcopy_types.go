@@ -38,7 +38,7 @@ type EBSSnapshotCopyInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
-	TemporaryRestoreDays *int64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
+	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 }
 
 type EBSSnapshotCopyObservation struct {
@@ -89,13 +89,13 @@ type EBSSnapshotCopyObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
-	TemporaryRestoreDays *int64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
+	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 
 	// The snapshot ID (e.g., snap-59fcb34e).
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
 	// The size of the drive in GiBs.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EBSSnapshotCopyParameters struct {
@@ -158,7 +158,7 @@ type EBSSnapshotCopyParameters struct {
 
 	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
 	// +kubebuilder:validation:Optional
-	TemporaryRestoreDays *int64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
+	TemporaryRestoreDays *float64 `json:"temporaryRestoreDays,omitempty" tf:"temporary_restore_days,omitempty"`
 }
 
 // EBSSnapshotCopySpec defines the desired state of EBSSnapshotCopy

@@ -35,7 +35,7 @@ type DatabaseObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The total number of tables found within the Timestream database.
-	TableCount *int64 `json:"tableCount,omitempty" tf:"table_count,omitempty"`
+	TableCount *float64 `json:"tableCount,omitempty" tf:"table_count,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

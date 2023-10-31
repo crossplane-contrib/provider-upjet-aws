@@ -213,7 +213,7 @@ func (in *Ac3SettingsInitParameters) DeepCopyInto(out *Ac3SettingsInitParameters
 	}
 	if in.Dialnorm != nil {
 		in, out := &in.Dialnorm, &out.Dialnorm
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DrcProfile != nil {
@@ -263,7 +263,7 @@ func (in *Ac3SettingsObservation) DeepCopyInto(out *Ac3SettingsObservation) {
 	}
 	if in.Dialnorm != nil {
 		in, out := &in.Dialnorm, &out.Dialnorm
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DrcProfile != nil {
@@ -313,7 +313,7 @@ func (in *Ac3SettingsParameters) DeepCopyInto(out *Ac3SettingsParameters) {
 	}
 	if in.Dialnorm != nil {
 		in, out := &in.Dialnorm, &out.Dialnorm
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DrcProfile != nil {
@@ -348,7 +348,7 @@ func (in *AncillarySourceSettingsInitParameters) DeepCopyInto(out *AncillarySour
 	*out = *in
 	if in.SourceAncillaryChannelNumber != nil {
 		in, out := &in.SourceAncillaryChannelNumber, &out.SourceAncillaryChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -368,7 +368,7 @@ func (in *AncillarySourceSettingsObservation) DeepCopyInto(out *AncillarySourceS
 	*out = *in
 	if in.SourceAncillaryChannelNumber != nil {
 		in, out := &in.SourceAncillaryChannelNumber, &out.SourceAncillaryChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -388,7 +388,7 @@ func (in *AncillarySourceSettingsParameters) DeepCopyInto(out *AncillarySourceSe
 	*out = *in
 	if in.SourceAncillaryChannelNumber != nil {
 		in, out := &in.SourceAncillaryChannelNumber, &out.SourceAncillaryChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -488,7 +488,7 @@ func (in *ArchiveGroupSettingsInitParameters) DeepCopyInto(out *ArchiveGroupSett
 	}
 	if in.RolloverInterval != nil {
 		in, out := &in.RolloverInterval, &out.RolloverInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -522,7 +522,7 @@ func (in *ArchiveGroupSettingsObservation) DeepCopyInto(out *ArchiveGroupSetting
 	}
 	if in.RolloverInterval != nil {
 		in, out := &in.RolloverInterval, &out.RolloverInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -556,7 +556,7 @@ func (in *ArchiveGroupSettingsParameters) DeepCopyInto(out *ArchiveGroupSettings
 	}
 	if in.RolloverInterval != nil {
 		in, out := &in.RolloverInterval, &out.RolloverInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1407,7 +1407,7 @@ func (in *AudioPidSelectionInitParameters) DeepCopyInto(out *AudioPidSelectionIn
 	*out = *in
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1427,7 +1427,7 @@ func (in *AudioPidSelectionObservation) DeepCopyInto(out *AudioPidSelectionObser
 	*out = *in
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1447,7 +1447,7 @@ func (in *AudioPidSelectionParameters) DeepCopyInto(out *AudioPidSelectionParame
 	*out = *in
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1553,7 +1553,7 @@ func (in *AudioSilenceSettingsInitParameters) DeepCopyInto(out *AudioSilenceSett
 	}
 	if in.AudioSilenceThresholdMsec != nil {
 		in, out := &in.AudioSilenceThresholdMsec, &out.AudioSilenceThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1578,7 +1578,7 @@ func (in *AudioSilenceSettingsObservation) DeepCopyInto(out *AudioSilenceSetting
 	}
 	if in.AudioSilenceThresholdMsec != nil {
 		in, out := &in.AudioSilenceThresholdMsec, &out.AudioSilenceThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1603,7 +1603,7 @@ func (in *AudioSilenceSettingsParameters) DeepCopyInto(out *AudioSilenceSettings
 	}
 	if in.AudioSilenceThresholdMsec != nil {
 		in, out := &in.AudioSilenceThresholdMsec, &out.AudioSilenceThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1755,7 +1755,7 @@ func (in *AutomaticInputFailoverSettingsInitParameters) DeepCopyInto(out *Automa
 	*out = *in
 	if in.ErrorClearTimeMsec != nil {
 		in, out := &in.ErrorClearTimeMsec, &out.ErrorClearTimeMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FailoverCondition != nil {
@@ -1792,7 +1792,7 @@ func (in *AutomaticInputFailoverSettingsObservation) DeepCopyInto(out *Automatic
 	*out = *in
 	if in.ErrorClearTimeMsec != nil {
 		in, out := &in.ErrorClearTimeMsec, &out.ErrorClearTimeMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FailoverCondition != nil {
@@ -1829,7 +1829,7 @@ func (in *AutomaticInputFailoverSettingsParameters) DeepCopyInto(out *AutomaticI
 	*out = *in
 	if in.ErrorClearTimeMsec != nil {
 		in, out := &in.ErrorClearTimeMsec, &out.ErrorClearTimeMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FailoverCondition != nil {
@@ -2037,7 +2037,7 @@ func (in *CaptionLanguageMappingsInitParameters) DeepCopyInto(out *CaptionLangua
 	*out = *in
 	if in.CaptionChannel != nil {
 		in, out := &in.CaptionChannel, &out.CaptionChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LanguageCode != nil {
@@ -2067,7 +2067,7 @@ func (in *CaptionLanguageMappingsObservation) DeepCopyInto(out *CaptionLanguageM
 	*out = *in
 	if in.CaptionChannel != nil {
 		in, out := &in.CaptionChannel, &out.CaptionChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LanguageCode != nil {
@@ -2097,7 +2097,7 @@ func (in *CaptionLanguageMappingsParameters) DeepCopyInto(out *CaptionLanguageMa
 	*out = *in
 	if in.CaptionChannel != nil {
 		in, out := &in.CaptionChannel, &out.CaptionChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LanguageCode != nil {
@@ -2620,7 +2620,7 @@ func (in *ChannelMappingsInitParameters) DeepCopyInto(out *ChannelMappingsInitPa
 	}
 	if in.OutputChannel != nil {
 		in, out := &in.OutputChannel, &out.OutputChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2647,7 +2647,7 @@ func (in *ChannelMappingsObservation) DeepCopyInto(out *ChannelMappingsObservati
 	}
 	if in.OutputChannel != nil {
 		in, out := &in.OutputChannel, &out.OutputChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2674,7 +2674,7 @@ func (in *ChannelMappingsParameters) DeepCopyInto(out *ChannelMappingsParameters
 	}
 	if in.OutputChannel != nil {
 		in, out := &in.OutputChannel, &out.OutputChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3394,7 +3394,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -3409,7 +3409,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferModel != nil {
@@ -3465,7 +3465,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.EbpLookaheadMs != nil {
 		in, out := &in.EbpLookaheadMs, &out.EbpLookaheadMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EbpPlacement != nil {
@@ -3520,7 +3520,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -3530,7 +3530,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -3540,7 +3540,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -3550,7 +3550,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateMode != nil {
@@ -3600,7 +3600,7 @@ func (in *ContainerSettingsM2TsSettingsInitParameters) DeepCopyInto(out *Contain
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -3650,7 +3650,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -3665,7 +3665,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferModel != nil {
@@ -3721,7 +3721,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.EbpLookaheadMs != nil {
 		in, out := &in.EbpLookaheadMs, &out.EbpLookaheadMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EbpPlacement != nil {
@@ -3776,7 +3776,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -3786,7 +3786,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -3796,7 +3796,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -3806,7 +3806,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateMode != nil {
@@ -3856,7 +3856,7 @@ func (in *ContainerSettingsM2TsSettingsObservation) DeepCopyInto(out *ContainerS
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -3906,7 +3906,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -3921,7 +3921,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferModel != nil {
@@ -3977,7 +3977,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.EbpLookaheadMs != nil {
 		in, out := &in.EbpLookaheadMs, &out.EbpLookaheadMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EbpPlacement != nil {
@@ -4032,7 +4032,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -4042,7 +4042,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -4052,7 +4052,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -4062,7 +4062,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateMode != nil {
@@ -4112,7 +4112,7 @@ func (in *ContainerSettingsM2TsSettingsParameters) DeepCopyInto(out *ContainerSe
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -4419,7 +4419,7 @@ func (in *DvbNitSettingsInitParameters) DeepCopyInto(out *DvbNitSettingsInitPara
 	*out = *in
 	if in.NetworkID != nil {
 		in, out := &in.NetworkID, &out.NetworkID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NetworkName != nil {
@@ -4429,7 +4429,7 @@ func (in *DvbNitSettingsInitParameters) DeepCopyInto(out *DvbNitSettingsInitPara
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4449,7 +4449,7 @@ func (in *DvbNitSettingsObservation) DeepCopyInto(out *DvbNitSettingsObservation
 	*out = *in
 	if in.NetworkID != nil {
 		in, out := &in.NetworkID, &out.NetworkID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NetworkName != nil {
@@ -4459,7 +4459,7 @@ func (in *DvbNitSettingsObservation) DeepCopyInto(out *DvbNitSettingsObservation
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4479,7 +4479,7 @@ func (in *DvbNitSettingsParameters) DeepCopyInto(out *DvbNitSettingsParameters) 
 	*out = *in
 	if in.NetworkID != nil {
 		in, out := &in.NetworkID, &out.NetworkID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NetworkName != nil {
@@ -4489,7 +4489,7 @@ func (in *DvbNitSettingsParameters) DeepCopyInto(out *DvbNitSettingsParameters) 
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4514,7 +4514,7 @@ func (in *DvbSdtSettingsInitParameters) DeepCopyInto(out *DvbSdtSettingsInitPara
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -4549,7 +4549,7 @@ func (in *DvbSdtSettingsObservation) DeepCopyInto(out *DvbSdtSettingsObservation
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -4584,7 +4584,7 @@ func (in *DvbSdtSettingsParameters) DeepCopyInto(out *DvbSdtSettingsParameters) 
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -4614,7 +4614,7 @@ func (in *DvbTdtSettingsInitParameters) DeepCopyInto(out *DvbTdtSettingsInitPara
 	*out = *in
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4634,7 +4634,7 @@ func (in *DvbTdtSettingsObservation) DeepCopyInto(out *DvbTdtSettingsObservation
 	*out = *in
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4654,7 +4654,7 @@ func (in *DvbTdtSettingsParameters) DeepCopyInto(out *DvbTdtSettingsParameters) 
 	*out = *in
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4849,7 +4849,7 @@ func (in *Eac3SettingsInitParameters) DeepCopyInto(out *Eac3SettingsInitParamete
 	}
 	if in.Dialnorm != nil {
 		in, out := &in.Dialnorm, &out.Dialnorm
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DrcLine != nil {
@@ -4964,7 +4964,7 @@ func (in *Eac3SettingsObservation) DeepCopyInto(out *Eac3SettingsObservation) {
 	}
 	if in.Dialnorm != nil {
 		in, out := &in.Dialnorm, &out.Dialnorm
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DrcLine != nil {
@@ -5079,7 +5079,7 @@ func (in *Eac3SettingsParameters) DeepCopyInto(out *Eac3SettingsParameters) {
 	}
 	if in.Dialnorm != nil {
 		in, out := &in.Dialnorm, &out.Dialnorm
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DrcLine != nil {
@@ -5179,12 +5179,12 @@ func (in *EmbeddedSourceSettingsInitParameters) DeepCopyInto(out *EmbeddedSource
 	}
 	if in.Source608ChannelNumber != nil {
 		in, out := &in.Source608ChannelNumber, &out.Source608ChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Source608TrackNumber != nil {
 		in, out := &in.Source608TrackNumber, &out.Source608TrackNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5214,12 +5214,12 @@ func (in *EmbeddedSourceSettingsObservation) DeepCopyInto(out *EmbeddedSourceSet
 	}
 	if in.Source608ChannelNumber != nil {
 		in, out := &in.Source608ChannelNumber, &out.Source608ChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Source608TrackNumber != nil {
 		in, out := &in.Source608TrackNumber, &out.Source608TrackNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5249,12 +5249,12 @@ func (in *EmbeddedSourceSettingsParameters) DeepCopyInto(out *EmbeddedSourceSett
 	}
 	if in.Source608ChannelNumber != nil {
 		in, out := &in.Source608ChannelNumber, &out.Source608ChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Source608TrackNumber != nil {
 		in, out := &in.Source608TrackNumber, &out.Source608TrackNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5598,7 +5598,7 @@ func (in *FecOutputSettingsInitParameters) DeepCopyInto(out *FecOutputSettingsIn
 	*out = *in
 	if in.ColumnDepth != nil {
 		in, out := &in.ColumnDepth, &out.ColumnDepth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IncludeFec != nil {
@@ -5608,7 +5608,7 @@ func (in *FecOutputSettingsInitParameters) DeepCopyInto(out *FecOutputSettingsIn
 	}
 	if in.RowLength != nil {
 		in, out := &in.RowLength, &out.RowLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5628,7 +5628,7 @@ func (in *FecOutputSettingsObservation) DeepCopyInto(out *FecOutputSettingsObser
 	*out = *in
 	if in.ColumnDepth != nil {
 		in, out := &in.ColumnDepth, &out.ColumnDepth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IncludeFec != nil {
@@ -5638,7 +5638,7 @@ func (in *FecOutputSettingsObservation) DeepCopyInto(out *FecOutputSettingsObser
 	}
 	if in.RowLength != nil {
 		in, out := &in.RowLength, &out.RowLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5658,7 +5658,7 @@ func (in *FecOutputSettingsParameters) DeepCopyInto(out *FecOutputSettingsParame
 	*out = *in
 	if in.ColumnDepth != nil {
 		in, out := &in.ColumnDepth, &out.ColumnDepth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IncludeFec != nil {
@@ -5668,7 +5668,7 @@ func (in *FecOutputSettingsParameters) DeepCopyInto(out *FecOutputSettingsParame
 	}
 	if in.RowLength != nil {
 		in, out := &in.RowLength, &out.RowLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6297,7 +6297,7 @@ func (in *FrameCaptureSettingsInitParameters) DeepCopyInto(out *FrameCaptureSett
 	*out = *in
 	if in.CaptureInterval != nil {
 		in, out := &in.CaptureInterval, &out.CaptureInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CaptureIntervalUnits != nil {
@@ -6322,7 +6322,7 @@ func (in *FrameCaptureSettingsObservation) DeepCopyInto(out *FrameCaptureSetting
 	*out = *in
 	if in.CaptureInterval != nil {
 		in, out := &in.CaptureInterval, &out.CaptureInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CaptureIntervalUnits != nil {
@@ -6347,7 +6347,7 @@ func (in *FrameCaptureSettingsParameters) DeepCopyInto(out *FrameCaptureSettings
 	*out = *in
 	if in.CaptureInterval != nil {
 		in, out := &in.CaptureInterval, &out.CaptureInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CaptureIntervalUnits != nil {
@@ -6382,17 +6382,17 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufFillPct != nil {
 		in, out := &in.BufFillPct, &out.BufFillPct
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufSize != nil {
 		in, out := &in.BufSize, &out.BufSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ColorMetadata != nil {
@@ -6434,12 +6434,12 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.FramerateDenominator != nil {
 		in, out := &in.FramerateDenominator, &out.FramerateDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FramerateNumerator != nil {
 		in, out := &in.FramerateNumerator, &out.FramerateNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopBReference != nil {
@@ -6449,12 +6449,12 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.GopClosedCadence != nil {
 		in, out := &in.GopClosedCadence, &out.GopClosedCadence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopNumBFrames != nil {
 		in, out := &in.GopNumBFrames, &out.GopNumBFrames
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopSize != nil {
@@ -6479,17 +6479,17 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.MaxBitrate != nil {
 		in, out := &in.MaxBitrate, &out.MaxBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinIInterval != nil {
 		in, out := &in.MinIInterval, &out.MinIInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NumRefFrames != nil {
 		in, out := &in.NumRefFrames, &out.NumRefFrames
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParControl != nil {
@@ -6499,12 +6499,12 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParNumerator != nil {
 		in, out := &in.ParNumerator, &out.ParNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Profile != nil {
@@ -6519,7 +6519,7 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.QvbrQualityLevel != nil {
 		in, out := &in.QvbrQualityLevel, &out.QvbrQualityLevel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateControlMode != nil {
@@ -6539,12 +6539,12 @@ func (in *H264SettingsInitParameters) DeepCopyInto(out *H264SettingsInitParamete
 	}
 	if in.Slices != nil {
 		in, out := &in.Slices, &out.Slices
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Softness != nil {
 		in, out := &in.Softness, &out.Softness
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SpatialAq != nil {
@@ -6599,17 +6599,17 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufFillPct != nil {
 		in, out := &in.BufFillPct, &out.BufFillPct
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufSize != nil {
 		in, out := &in.BufSize, &out.BufSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ColorMetadata != nil {
@@ -6651,12 +6651,12 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.FramerateDenominator != nil {
 		in, out := &in.FramerateDenominator, &out.FramerateDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FramerateNumerator != nil {
 		in, out := &in.FramerateNumerator, &out.FramerateNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopBReference != nil {
@@ -6666,12 +6666,12 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.GopClosedCadence != nil {
 		in, out := &in.GopClosedCadence, &out.GopClosedCadence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopNumBFrames != nil {
 		in, out := &in.GopNumBFrames, &out.GopNumBFrames
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopSize != nil {
@@ -6696,17 +6696,17 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.MaxBitrate != nil {
 		in, out := &in.MaxBitrate, &out.MaxBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinIInterval != nil {
 		in, out := &in.MinIInterval, &out.MinIInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NumRefFrames != nil {
 		in, out := &in.NumRefFrames, &out.NumRefFrames
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParControl != nil {
@@ -6716,12 +6716,12 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParNumerator != nil {
 		in, out := &in.ParNumerator, &out.ParNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Profile != nil {
@@ -6736,7 +6736,7 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.QvbrQualityLevel != nil {
 		in, out := &in.QvbrQualityLevel, &out.QvbrQualityLevel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateControlMode != nil {
@@ -6756,12 +6756,12 @@ func (in *H264SettingsObservation) DeepCopyInto(out *H264SettingsObservation) {
 	}
 	if in.Slices != nil {
 		in, out := &in.Slices, &out.Slices
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Softness != nil {
 		in, out := &in.Softness, &out.Softness
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SpatialAq != nil {
@@ -6816,17 +6816,17 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufFillPct != nil {
 		in, out := &in.BufFillPct, &out.BufFillPct
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufSize != nil {
 		in, out := &in.BufSize, &out.BufSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ColorMetadata != nil {
@@ -6868,12 +6868,12 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.FramerateDenominator != nil {
 		in, out := &in.FramerateDenominator, &out.FramerateDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FramerateNumerator != nil {
 		in, out := &in.FramerateNumerator, &out.FramerateNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopBReference != nil {
@@ -6883,12 +6883,12 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.GopClosedCadence != nil {
 		in, out := &in.GopClosedCadence, &out.GopClosedCadence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopNumBFrames != nil {
 		in, out := &in.GopNumBFrames, &out.GopNumBFrames
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopSize != nil {
@@ -6913,17 +6913,17 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.MaxBitrate != nil {
 		in, out := &in.MaxBitrate, &out.MaxBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinIInterval != nil {
 		in, out := &in.MinIInterval, &out.MinIInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NumRefFrames != nil {
 		in, out := &in.NumRefFrames, &out.NumRefFrames
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParControl != nil {
@@ -6933,12 +6933,12 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParNumerator != nil {
 		in, out := &in.ParNumerator, &out.ParNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Profile != nil {
@@ -6953,7 +6953,7 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.QvbrQualityLevel != nil {
 		in, out := &in.QvbrQualityLevel, &out.QvbrQualityLevel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateControlMode != nil {
@@ -6973,12 +6973,12 @@ func (in *H264SettingsParameters) DeepCopyInto(out *H264SettingsParameters) {
 	}
 	if in.Slices != nil {
 		in, out := &in.Slices, &out.Slices
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Softness != nil {
 		in, out := &in.Softness, &out.Softness
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SpatialAq != nil {
@@ -7104,12 +7104,12 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufSize != nil {
 		in, out := &in.BufSize, &out.BufSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ColorMetadata != nil {
@@ -7143,17 +7143,17 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 	}
 	if in.FramerateDenominator != nil {
 		in, out := &in.FramerateDenominator, &out.FramerateDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FramerateNumerator != nil {
 		in, out := &in.FramerateNumerator, &out.FramerateNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopClosedCadence != nil {
 		in, out := &in.GopClosedCadence, &out.GopClosedCadence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopSize != nil {
@@ -7178,22 +7178,22 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 	}
 	if in.MaxBitrate != nil {
 		in, out := &in.MaxBitrate, &out.MaxBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinIInterval != nil {
 		in, out := &in.MinIInterval, &out.MinIInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParNumerator != nil {
 		in, out := &in.ParNumerator, &out.ParNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Profile != nil {
@@ -7203,7 +7203,7 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 	}
 	if in.QvbrQualityLevel != nil {
 		in, out := &in.QvbrQualityLevel, &out.QvbrQualityLevel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateControlMode != nil {
@@ -7223,7 +7223,7 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 	}
 	if in.Slices != nil {
 		in, out := &in.Slices, &out.Slices
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tier != nil {
@@ -7275,12 +7275,12 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufSize != nil {
 		in, out := &in.BufSize, &out.BufSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ColorMetadata != nil {
@@ -7314,17 +7314,17 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 	}
 	if in.FramerateDenominator != nil {
 		in, out := &in.FramerateDenominator, &out.FramerateDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FramerateNumerator != nil {
 		in, out := &in.FramerateNumerator, &out.FramerateNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopClosedCadence != nil {
 		in, out := &in.GopClosedCadence, &out.GopClosedCadence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopSize != nil {
@@ -7349,22 +7349,22 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 	}
 	if in.MaxBitrate != nil {
 		in, out := &in.MaxBitrate, &out.MaxBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinIInterval != nil {
 		in, out := &in.MinIInterval, &out.MinIInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParNumerator != nil {
 		in, out := &in.ParNumerator, &out.ParNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Profile != nil {
@@ -7374,7 +7374,7 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 	}
 	if in.QvbrQualityLevel != nil {
 		in, out := &in.QvbrQualityLevel, &out.QvbrQualityLevel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateControlMode != nil {
@@ -7394,7 +7394,7 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 	}
 	if in.Slices != nil {
 		in, out := &in.Slices, &out.Slices
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tier != nil {
@@ -7446,12 +7446,12 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufSize != nil {
 		in, out := &in.BufSize, &out.BufSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ColorMetadata != nil {
@@ -7485,17 +7485,17 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 	}
 	if in.FramerateDenominator != nil {
 		in, out := &in.FramerateDenominator, &out.FramerateDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FramerateNumerator != nil {
 		in, out := &in.FramerateNumerator, &out.FramerateNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopClosedCadence != nil {
 		in, out := &in.GopClosedCadence, &out.GopClosedCadence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.GopSize != nil {
@@ -7520,22 +7520,22 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 	}
 	if in.MaxBitrate != nil {
 		in, out := &in.MaxBitrate, &out.MaxBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinIInterval != nil {
 		in, out := &in.MinIInterval, &out.MinIInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParNumerator != nil {
 		in, out := &in.ParNumerator, &out.ParNumerator
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Profile != nil {
@@ -7545,7 +7545,7 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 	}
 	if in.QvbrQualityLevel != nil {
 		in, out := &in.QvbrQualityLevel, &out.QvbrQualityLevel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateControlMode != nil {
@@ -7565,7 +7565,7 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 	}
 	if in.Slices != nil {
 		in, out := &in.Slices, &out.Slices
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tier != nil {
@@ -7602,12 +7602,12 @@ func (in *Hdr10SettingsInitParameters) DeepCopyInto(out *Hdr10SettingsInitParame
 	*out = *in
 	if in.MaxCll != nil {
 		in, out := &in.MaxCll, &out.MaxCll
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxFall != nil {
 		in, out := &in.MaxFall, &out.MaxFall
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7627,12 +7627,12 @@ func (in *Hdr10SettingsObservation) DeepCopyInto(out *Hdr10SettingsObservation) 
 	*out = *in
 	if in.MaxCll != nil {
 		in, out := &in.MaxCll, &out.MaxCll
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxFall != nil {
 		in, out := &in.MaxFall, &out.MaxFall
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7652,12 +7652,12 @@ func (in *Hdr10SettingsParameters) DeepCopyInto(out *Hdr10SettingsParameters) {
 	*out = *in
 	if in.MaxCll != nil {
 		in, out := &in.MaxCll, &out.MaxCll
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxFall != nil {
 		in, out := &in.MaxFall, &out.MaxFall
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7677,12 +7677,12 @@ func (in *HlsAkamaiSettingsInitParameters) DeepCopyInto(out *HlsAkamaiSettingsIn
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPTransferMode != nil {
@@ -7692,12 +7692,12 @@ func (in *HlsAkamaiSettingsInitParameters) DeepCopyInto(out *HlsAkamaiSettingsIn
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Salt != nil {
@@ -7727,12 +7727,12 @@ func (in *HlsAkamaiSettingsObservation) DeepCopyInto(out *HlsAkamaiSettingsObser
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPTransferMode != nil {
@@ -7742,12 +7742,12 @@ func (in *HlsAkamaiSettingsObservation) DeepCopyInto(out *HlsAkamaiSettingsObser
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Salt != nil {
@@ -7777,12 +7777,12 @@ func (in *HlsAkamaiSettingsParameters) DeepCopyInto(out *HlsAkamaiSettingsParame
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPTransferMode != nil {
@@ -7792,12 +7792,12 @@ func (in *HlsAkamaiSettingsParameters) DeepCopyInto(out *HlsAkamaiSettingsParame
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Salt != nil {
@@ -7827,22 +7827,22 @@ func (in *HlsBasicPutSettingsInitParameters) DeepCopyInto(out *HlsBasicPutSettin
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7862,22 +7862,22 @@ func (in *HlsBasicPutSettingsObservation) DeepCopyInto(out *HlsBasicPutSettingsO
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7897,22 +7897,22 @@ func (in *HlsBasicPutSettingsParameters) DeepCopyInto(out *HlsBasicPutSettingsPa
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8244,7 +8244,7 @@ func (in *HlsGroupSettingsInitParameters) DeepCopyInto(out *HlsGroupSettingsInit
 	}
 	if in.IndexNSegments != nil {
 		in, out := &in.IndexNSegments, &out.IndexNSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputLossAction != nil {
@@ -8264,7 +8264,7 @@ func (in *HlsGroupSettingsInitParameters) DeepCopyInto(out *HlsGroupSettingsInit
 	}
 	if in.KeepSegments != nil {
 		in, out := &in.KeepSegments, &out.KeepSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KeyFormat != nil {
@@ -8296,7 +8296,7 @@ func (in *HlsGroupSettingsInitParameters) DeepCopyInto(out *HlsGroupSettingsInit
 	}
 	if in.MinSegmentLength != nil {
 		in, out := &in.MinSegmentLength, &out.MinSegmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -8321,7 +8321,7 @@ func (in *HlsGroupSettingsInitParameters) DeepCopyInto(out *HlsGroupSettingsInit
 	}
 	if in.ProgramDateTimePeriod != nil {
 		in, out := &in.ProgramDateTimePeriod, &out.ProgramDateTimePeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RedundantManifest != nil {
@@ -8331,12 +8331,12 @@ func (in *HlsGroupSettingsInitParameters) DeepCopyInto(out *HlsGroupSettingsInit
 	}
 	if in.SegmentLength != nil {
 		in, out := &in.SegmentLength, &out.SegmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SegmentsPerSubdirectory != nil {
 		in, out := &in.SegmentsPerSubdirectory, &out.SegmentsPerSubdirectory
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.StreamInfResolution != nil {
@@ -8356,12 +8356,12 @@ func (in *HlsGroupSettingsInitParameters) DeepCopyInto(out *HlsGroupSettingsInit
 	}
 	if in.TimedMetadataId3Period != nil {
 		in, out := &in.TimedMetadataId3Period, &out.TimedMetadataId3Period
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TimestampDeltaMilliseconds != nil {
 		in, out := &in.TimestampDeltaMilliseconds, &out.TimestampDeltaMilliseconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8483,7 +8483,7 @@ func (in *HlsGroupSettingsObservation) DeepCopyInto(out *HlsGroupSettingsObserva
 	}
 	if in.IndexNSegments != nil {
 		in, out := &in.IndexNSegments, &out.IndexNSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputLossAction != nil {
@@ -8503,7 +8503,7 @@ func (in *HlsGroupSettingsObservation) DeepCopyInto(out *HlsGroupSettingsObserva
 	}
 	if in.KeepSegments != nil {
 		in, out := &in.KeepSegments, &out.KeepSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KeyFormat != nil {
@@ -8535,7 +8535,7 @@ func (in *HlsGroupSettingsObservation) DeepCopyInto(out *HlsGroupSettingsObserva
 	}
 	if in.MinSegmentLength != nil {
 		in, out := &in.MinSegmentLength, &out.MinSegmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -8560,7 +8560,7 @@ func (in *HlsGroupSettingsObservation) DeepCopyInto(out *HlsGroupSettingsObserva
 	}
 	if in.ProgramDateTimePeriod != nil {
 		in, out := &in.ProgramDateTimePeriod, &out.ProgramDateTimePeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RedundantManifest != nil {
@@ -8570,12 +8570,12 @@ func (in *HlsGroupSettingsObservation) DeepCopyInto(out *HlsGroupSettingsObserva
 	}
 	if in.SegmentLength != nil {
 		in, out := &in.SegmentLength, &out.SegmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SegmentsPerSubdirectory != nil {
 		in, out := &in.SegmentsPerSubdirectory, &out.SegmentsPerSubdirectory
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.StreamInfResolution != nil {
@@ -8595,12 +8595,12 @@ func (in *HlsGroupSettingsObservation) DeepCopyInto(out *HlsGroupSettingsObserva
 	}
 	if in.TimedMetadataId3Period != nil {
 		in, out := &in.TimedMetadataId3Period, &out.TimedMetadataId3Period
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TimestampDeltaMilliseconds != nil {
 		in, out := &in.TimestampDeltaMilliseconds, &out.TimestampDeltaMilliseconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8722,7 +8722,7 @@ func (in *HlsGroupSettingsParameters) DeepCopyInto(out *HlsGroupSettingsParamete
 	}
 	if in.IndexNSegments != nil {
 		in, out := &in.IndexNSegments, &out.IndexNSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputLossAction != nil {
@@ -8742,7 +8742,7 @@ func (in *HlsGroupSettingsParameters) DeepCopyInto(out *HlsGroupSettingsParamete
 	}
 	if in.KeepSegments != nil {
 		in, out := &in.KeepSegments, &out.KeepSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KeyFormat != nil {
@@ -8774,7 +8774,7 @@ func (in *HlsGroupSettingsParameters) DeepCopyInto(out *HlsGroupSettingsParamete
 	}
 	if in.MinSegmentLength != nil {
 		in, out := &in.MinSegmentLength, &out.MinSegmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Mode != nil {
@@ -8799,7 +8799,7 @@ func (in *HlsGroupSettingsParameters) DeepCopyInto(out *HlsGroupSettingsParamete
 	}
 	if in.ProgramDateTimePeriod != nil {
 		in, out := &in.ProgramDateTimePeriod, &out.ProgramDateTimePeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RedundantManifest != nil {
@@ -8809,12 +8809,12 @@ func (in *HlsGroupSettingsParameters) DeepCopyInto(out *HlsGroupSettingsParamete
 	}
 	if in.SegmentLength != nil {
 		in, out := &in.SegmentLength, &out.SegmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SegmentsPerSubdirectory != nil {
 		in, out := &in.SegmentsPerSubdirectory, &out.SegmentsPerSubdirectory
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.StreamInfResolution != nil {
@@ -8834,12 +8834,12 @@ func (in *HlsGroupSettingsParameters) DeepCopyInto(out *HlsGroupSettingsParamete
 	}
 	if in.TimedMetadataId3Period != nil {
 		in, out := &in.TimedMetadataId3Period, &out.TimedMetadataId3Period
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TimestampDeltaMilliseconds != nil {
 		in, out := &in.TimestampDeltaMilliseconds, &out.TimestampDeltaMilliseconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8859,22 +8859,22 @@ func (in *HlsInputSettingsInitParameters) DeepCopyInto(out *HlsInputSettingsInit
 	*out = *in
 	if in.Bandwidth != nil {
 		in, out := &in.Bandwidth, &out.Bandwidth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferSegments != nil {
 		in, out := &in.BufferSegments, &out.BufferSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Retries != nil {
 		in, out := &in.Retries, &out.Retries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RetryInterval != nil {
 		in, out := &in.RetryInterval, &out.RetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scte35Source != nil {
@@ -8899,22 +8899,22 @@ func (in *HlsInputSettingsObservation) DeepCopyInto(out *HlsInputSettingsObserva
 	*out = *in
 	if in.Bandwidth != nil {
 		in, out := &in.Bandwidth, &out.Bandwidth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferSegments != nil {
 		in, out := &in.BufferSegments, &out.BufferSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Retries != nil {
 		in, out := &in.Retries, &out.Retries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RetryInterval != nil {
 		in, out := &in.RetryInterval, &out.RetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scte35Source != nil {
@@ -8939,22 +8939,22 @@ func (in *HlsInputSettingsParameters) DeepCopyInto(out *HlsInputSettingsParamete
 	*out = *in
 	if in.Bandwidth != nil {
 		in, out := &in.Bandwidth, &out.Bandwidth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferSegments != nil {
 		in, out := &in.BufferSegments, &out.BufferSegments
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Retries != nil {
 		in, out := &in.Retries, &out.Retries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RetryInterval != nil {
 		in, out := &in.RetryInterval, &out.RetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scte35Source != nil {
@@ -8979,12 +8979,12 @@ func (in *HlsMediaStoreSettingsInitParameters) DeepCopyInto(out *HlsMediaStoreSe
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MediaStoreStorageClass != nil {
@@ -8994,12 +8994,12 @@ func (in *HlsMediaStoreSettingsInitParameters) DeepCopyInto(out *HlsMediaStoreSe
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9019,12 +9019,12 @@ func (in *HlsMediaStoreSettingsObservation) DeepCopyInto(out *HlsMediaStoreSetti
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MediaStoreStorageClass != nil {
@@ -9034,12 +9034,12 @@ func (in *HlsMediaStoreSettingsObservation) DeepCopyInto(out *HlsMediaStoreSetti
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9059,12 +9059,12 @@ func (in *HlsMediaStoreSettingsParameters) DeepCopyInto(out *HlsMediaStoreSettin
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MediaStoreStorageClass != nil {
@@ -9074,12 +9074,12 @@ func (in *HlsMediaStoreSettingsParameters) DeepCopyInto(out *HlsMediaStoreSettin
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9393,12 +9393,12 @@ func (in *HlsWebdavSettingsInitParameters) DeepCopyInto(out *HlsWebdavSettingsIn
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPTransferMode != nil {
@@ -9408,12 +9408,12 @@ func (in *HlsWebdavSettingsInitParameters) DeepCopyInto(out *HlsWebdavSettingsIn
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9433,12 +9433,12 @@ func (in *HlsWebdavSettingsObservation) DeepCopyInto(out *HlsWebdavSettingsObser
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPTransferMode != nil {
@@ -9448,12 +9448,12 @@ func (in *HlsWebdavSettingsObservation) DeepCopyInto(out *HlsWebdavSettingsObser
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9473,12 +9473,12 @@ func (in *HlsWebdavSettingsParameters) DeepCopyInto(out *HlsWebdavSettingsParame
 	*out = *in
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPTransferMode != nil {
@@ -9488,12 +9488,12 @@ func (in *HlsWebdavSettingsParameters) DeepCopyInto(out *HlsWebdavSettingsParame
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9662,12 +9662,12 @@ func (in *InputChannelLevelsInitParameters) DeepCopyInto(out *InputChannelLevels
 	*out = *in
 	if in.Gain != nil {
 		in, out := &in.Gain, &out.Gain
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputChannel != nil {
 		in, out := &in.InputChannel, &out.InputChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9687,12 +9687,12 @@ func (in *InputChannelLevelsObservation) DeepCopyInto(out *InputChannelLevelsObs
 	*out = *in
 	if in.Gain != nil {
 		in, out := &in.Gain, &out.Gain
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputChannel != nil {
 		in, out := &in.InputChannel, &out.InputChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9712,12 +9712,12 @@ func (in *InputChannelLevelsParameters) DeepCopyInto(out *InputChannelLevelsPara
 	*out = *in
 	if in.Gain != nil {
 		in, out := &in.Gain, &out.Gain
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputChannel != nil {
 		in, out := &in.InputChannel, &out.InputChannel
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9976,7 +9976,7 @@ func (in *InputLossSettingsInitParameters) DeepCopyInto(out *InputLossSettingsIn
 	*out = *in
 	if in.InputLossThresholdMsec != nil {
 		in, out := &in.InputLossThresholdMsec, &out.InputLossThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9996,7 +9996,7 @@ func (in *InputLossSettingsObservation) DeepCopyInto(out *InputLossSettingsObser
 	*out = *in
 	if in.InputLossThresholdMsec != nil {
 		in, out := &in.InputLossThresholdMsec, &out.InputLossThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10016,7 +10016,7 @@ func (in *InputLossSettingsParameters) DeepCopyInto(out *InputLossSettingsParame
 	*out = *in
 	if in.InputLossThresholdMsec != nil {
 		in, out := &in.InputLossThresholdMsec, &out.InputLossThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10567,7 +10567,7 @@ func (in *InputSettingsInitParameters) DeepCopyInto(out *InputSettingsInitParame
 	}
 	if in.FilterStrength != nil {
 		in, out := &in.FilterStrength, &out.FilterStrength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputFilter != nil {
@@ -10584,7 +10584,7 @@ func (in *InputSettingsInitParameters) DeepCopyInto(out *InputSettingsInitParame
 	}
 	if in.Scte35Pid != nil {
 		in, out := &in.Scte35Pid, &out.Scte35Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Smpte2038DataPreference != nil {
@@ -10645,7 +10645,7 @@ func (in *InputSettingsObservation) DeepCopyInto(out *InputSettingsObservation) 
 	}
 	if in.FilterStrength != nil {
 		in, out := &in.FilterStrength, &out.FilterStrength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputFilter != nil {
@@ -10662,7 +10662,7 @@ func (in *InputSettingsObservation) DeepCopyInto(out *InputSettingsObservation) 
 	}
 	if in.Scte35Pid != nil {
 		in, out := &in.Scte35Pid, &out.Scte35Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Smpte2038DataPreference != nil {
@@ -10723,7 +10723,7 @@ func (in *InputSettingsParameters) DeepCopyInto(out *InputSettingsParameters) {
 	}
 	if in.FilterStrength != nil {
 		in, out := &in.FilterStrength, &out.FilterStrength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputFilter != nil {
@@ -10740,7 +10740,7 @@ func (in *InputSettingsParameters) DeepCopyInto(out *InputSettingsParameters) {
 	}
 	if in.Scte35Pid != nil {
 		in, out := &in.Scte35Pid, &out.Scte35Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Smpte2038DataPreference != nil {
@@ -11169,7 +11169,7 @@ func (in *M2TsSettingsDvbNitSettingsInitParameters) DeepCopyInto(out *M2TsSettin
 	*out = *in
 	if in.NetworkID != nil {
 		in, out := &in.NetworkID, &out.NetworkID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NetworkName != nil {
@@ -11179,7 +11179,7 @@ func (in *M2TsSettingsDvbNitSettingsInitParameters) DeepCopyInto(out *M2TsSettin
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11199,7 +11199,7 @@ func (in *M2TsSettingsDvbNitSettingsObservation) DeepCopyInto(out *M2TsSettingsD
 	*out = *in
 	if in.NetworkID != nil {
 		in, out := &in.NetworkID, &out.NetworkID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NetworkName != nil {
@@ -11209,7 +11209,7 @@ func (in *M2TsSettingsDvbNitSettingsObservation) DeepCopyInto(out *M2TsSettingsD
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11229,7 +11229,7 @@ func (in *M2TsSettingsDvbNitSettingsParameters) DeepCopyInto(out *M2TsSettingsDv
 	*out = *in
 	if in.NetworkID != nil {
 		in, out := &in.NetworkID, &out.NetworkID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NetworkName != nil {
@@ -11239,7 +11239,7 @@ func (in *M2TsSettingsDvbNitSettingsParameters) DeepCopyInto(out *M2TsSettingsDv
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11264,7 +11264,7 @@ func (in *M2TsSettingsDvbSdtSettingsInitParameters) DeepCopyInto(out *M2TsSettin
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -11299,7 +11299,7 @@ func (in *M2TsSettingsDvbSdtSettingsObservation) DeepCopyInto(out *M2TsSettingsD
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -11334,7 +11334,7 @@ func (in *M2TsSettingsDvbSdtSettingsParameters) DeepCopyInto(out *M2TsSettingsDv
 	}
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -11364,7 +11364,7 @@ func (in *M2TsSettingsDvbTdtSettingsInitParameters) DeepCopyInto(out *M2TsSettin
 	*out = *in
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11384,7 +11384,7 @@ func (in *M2TsSettingsDvbTdtSettingsObservation) DeepCopyInto(out *M2TsSettingsD
 	*out = *in
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11404,7 +11404,7 @@ func (in *M2TsSettingsDvbTdtSettingsParameters) DeepCopyInto(out *M2TsSettingsDv
 	*out = *in
 	if in.RepInterval != nil {
 		in, out := &in.RepInterval, &out.RepInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11449,7 +11449,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -11464,7 +11464,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferModel != nil {
@@ -11520,7 +11520,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.EbpLookaheadMs != nil {
 		in, out := &in.EbpLookaheadMs, &out.EbpLookaheadMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EbpPlacement != nil {
@@ -11575,7 +11575,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -11585,7 +11585,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -11595,7 +11595,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -11605,7 +11605,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateMode != nil {
@@ -11655,7 +11655,7 @@ func (in *M2TsSettingsInitParameters) DeepCopyInto(out *M2TsSettingsInitParamete
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -11705,7 +11705,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -11720,7 +11720,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferModel != nil {
@@ -11776,7 +11776,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.EbpLookaheadMs != nil {
 		in, out := &in.EbpLookaheadMs, &out.EbpLookaheadMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EbpPlacement != nil {
@@ -11831,7 +11831,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -11841,7 +11841,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -11851,7 +11851,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -11861,7 +11861,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateMode != nil {
@@ -11911,7 +11911,7 @@ func (in *M2TsSettingsObservation) DeepCopyInto(out *M2TsSettingsObservation) {
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -11961,7 +11961,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -11976,7 +11976,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.Bitrate != nil {
 		in, out := &in.Bitrate, &out.Bitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BufferModel != nil {
@@ -12032,7 +12032,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.EbpLookaheadMs != nil {
 		in, out := &in.EbpLookaheadMs, &out.EbpLookaheadMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EbpPlacement != nil {
@@ -12087,7 +12087,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -12097,7 +12097,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -12107,7 +12107,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -12117,7 +12117,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RateMode != nil {
@@ -12167,7 +12167,7 @@ func (in *M2TsSettingsParameters) DeepCopyInto(out *M2TsSettingsParameters) {
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -12192,7 +12192,7 @@ func (in *M3U8SettingsInitParameters) DeepCopyInto(out *M3U8SettingsInitParamete
 	*out = *in
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -12212,7 +12212,7 @@ func (in *M3U8SettingsInitParameters) DeepCopyInto(out *M3U8SettingsInitParamete
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -12222,7 +12222,7 @@ func (in *M3U8SettingsInitParameters) DeepCopyInto(out *M3U8SettingsInitParamete
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -12232,7 +12232,7 @@ func (in *M3U8SettingsInitParameters) DeepCopyInto(out *M3U8SettingsInitParamete
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -12242,7 +12242,7 @@ func (in *M3U8SettingsInitParameters) DeepCopyInto(out *M3U8SettingsInitParamete
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scte35Behavior != nil {
@@ -12267,7 +12267,7 @@ func (in *M3U8SettingsInitParameters) DeepCopyInto(out *M3U8SettingsInitParamete
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -12292,7 +12292,7 @@ func (in *M3U8SettingsObservation) DeepCopyInto(out *M3U8SettingsObservation) {
 	*out = *in
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -12312,7 +12312,7 @@ func (in *M3U8SettingsObservation) DeepCopyInto(out *M3U8SettingsObservation) {
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -12322,7 +12322,7 @@ func (in *M3U8SettingsObservation) DeepCopyInto(out *M3U8SettingsObservation) {
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -12332,7 +12332,7 @@ func (in *M3U8SettingsObservation) DeepCopyInto(out *M3U8SettingsObservation) {
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -12342,7 +12342,7 @@ func (in *M3U8SettingsObservation) DeepCopyInto(out *M3U8SettingsObservation) {
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scte35Behavior != nil {
@@ -12367,7 +12367,7 @@ func (in *M3U8SettingsObservation) DeepCopyInto(out *M3U8SettingsObservation) {
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -12392,7 +12392,7 @@ func (in *M3U8SettingsParameters) DeepCopyInto(out *M3U8SettingsParameters) {
 	*out = *in
 	if in.AudioFramesPerPes != nil {
 		in, out := &in.AudioFramesPerPes, &out.AudioFramesPerPes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AudioPids != nil {
@@ -12412,7 +12412,7 @@ func (in *M3U8SettingsParameters) DeepCopyInto(out *M3U8SettingsParameters) {
 	}
 	if in.PatInterval != nil {
 		in, out := &in.PatInterval, &out.PatInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrControl != nil {
@@ -12422,7 +12422,7 @@ func (in *M3U8SettingsParameters) DeepCopyInto(out *M3U8SettingsParameters) {
 	}
 	if in.PcrPeriod != nil {
 		in, out := &in.PcrPeriod, &out.PcrPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PcrPid != nil {
@@ -12432,7 +12432,7 @@ func (in *M3U8SettingsParameters) DeepCopyInto(out *M3U8SettingsParameters) {
 	}
 	if in.PmtInterval != nil {
 		in, out := &in.PmtInterval, &out.PmtInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PmtPid != nil {
@@ -12442,7 +12442,7 @@ func (in *M3U8SettingsParameters) DeepCopyInto(out *M3U8SettingsParameters) {
 	}
 	if in.ProgramNum != nil {
 		in, out := &in.ProgramNum, &out.ProgramNum
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Scte35Behavior != nil {
@@ -12467,7 +12467,7 @@ func (in *M3U8SettingsParameters) DeepCopyInto(out *M3U8SettingsParameters) {
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VideoPid != nil {
@@ -13023,7 +13023,7 @@ func (in *MsSmoothGroupSettingsInitParameters) DeepCopyInto(out *MsSmoothGroupSe
 	}
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Destination != nil {
@@ -13050,12 +13050,12 @@ func (in *MsSmoothGroupSettingsInitParameters) DeepCopyInto(out *MsSmoothGroupSe
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FragmentLength != nil {
 		in, out := &in.FragmentLength, &out.FragmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputLossAction != nil {
@@ -13065,12 +13065,12 @@ func (in *MsSmoothGroupSettingsInitParameters) DeepCopyInto(out *MsSmoothGroupSe
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SegmentationMode != nil {
@@ -13080,7 +13080,7 @@ func (in *MsSmoothGroupSettingsInitParameters) DeepCopyInto(out *MsSmoothGroupSe
 	}
 	if in.SendDelayMs != nil {
 		in, out := &in.SendDelayMs, &out.SendDelayMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SparseTrackType != nil {
@@ -13135,7 +13135,7 @@ func (in *MsSmoothGroupSettingsObservation) DeepCopyInto(out *MsSmoothGroupSetti
 	}
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Destination != nil {
@@ -13162,12 +13162,12 @@ func (in *MsSmoothGroupSettingsObservation) DeepCopyInto(out *MsSmoothGroupSetti
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FragmentLength != nil {
 		in, out := &in.FragmentLength, &out.FragmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputLossAction != nil {
@@ -13177,12 +13177,12 @@ func (in *MsSmoothGroupSettingsObservation) DeepCopyInto(out *MsSmoothGroupSetti
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SegmentationMode != nil {
@@ -13192,7 +13192,7 @@ func (in *MsSmoothGroupSettingsObservation) DeepCopyInto(out *MsSmoothGroupSetti
 	}
 	if in.SendDelayMs != nil {
 		in, out := &in.SendDelayMs, &out.SendDelayMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SparseTrackType != nil {
@@ -13247,7 +13247,7 @@ func (in *MsSmoothGroupSettingsParameters) DeepCopyInto(out *MsSmoothGroupSettin
 	}
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Destination != nil {
@@ -13274,12 +13274,12 @@ func (in *MsSmoothGroupSettingsParameters) DeepCopyInto(out *MsSmoothGroupSettin
 	}
 	if in.FilecacheDuration != nil {
 		in, out := &in.FilecacheDuration, &out.FilecacheDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FragmentLength != nil {
 		in, out := &in.FragmentLength, &out.FragmentLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InputLossAction != nil {
@@ -13289,12 +13289,12 @@ func (in *MsSmoothGroupSettingsParameters) DeepCopyInto(out *MsSmoothGroupSettin
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SegmentationMode != nil {
@@ -13304,7 +13304,7 @@ func (in *MsSmoothGroupSettingsParameters) DeepCopyInto(out *MsSmoothGroupSettin
 	}
 	if in.SendDelayMs != nil {
 		in, out := &in.SendDelayMs, &out.SendDelayMs
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.SparseTrackType != nil {
@@ -13582,22 +13582,22 @@ func (in *MultiplexMultiplexSettingsInitParameters) DeepCopyInto(out *MultiplexM
 	*out = *in
 	if in.MaximumVideoBufferDelayMilliseconds != nil {
 		in, out := &in.MaximumVideoBufferDelayMilliseconds, &out.MaximumVideoBufferDelayMilliseconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamBitrate != nil {
 		in, out := &in.TransportStreamBitrate, &out.TransportStreamBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamReservedBitrate != nil {
 		in, out := &in.TransportStreamReservedBitrate, &out.TransportStreamReservedBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13617,22 +13617,22 @@ func (in *MultiplexMultiplexSettingsObservation) DeepCopyInto(out *MultiplexMult
 	*out = *in
 	if in.MaximumVideoBufferDelayMilliseconds != nil {
 		in, out := &in.MaximumVideoBufferDelayMilliseconds, &out.MaximumVideoBufferDelayMilliseconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamBitrate != nil {
 		in, out := &in.TransportStreamBitrate, &out.TransportStreamBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamReservedBitrate != nil {
 		in, out := &in.TransportStreamReservedBitrate, &out.TransportStreamReservedBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13652,22 +13652,22 @@ func (in *MultiplexMultiplexSettingsParameters) DeepCopyInto(out *MultiplexMulti
 	*out = *in
 	if in.MaximumVideoBufferDelayMilliseconds != nil {
 		in, out := &in.MaximumVideoBufferDelayMilliseconds, &out.MaximumVideoBufferDelayMilliseconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamBitrate != nil {
 		in, out := &in.TransportStreamBitrate, &out.TransportStreamBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamID != nil {
 		in, out := &in.TransportStreamID, &out.TransportStreamID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransportStreamReservedBitrate != nil {
 		in, out := &in.TransportStreamReservedBitrate, &out.TransportStreamReservedBitrate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15390,12 +15390,12 @@ func (in *RemixSettingsInitParameters) DeepCopyInto(out *RemixSettingsInitParame
 	}
 	if in.ChannelsIn != nil {
 		in, out := &in.ChannelsIn, &out.ChannelsIn
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ChannelsOut != nil {
 		in, out := &in.ChannelsOut, &out.ChannelsOut
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15422,12 +15422,12 @@ func (in *RemixSettingsObservation) DeepCopyInto(out *RemixSettingsObservation) 
 	}
 	if in.ChannelsIn != nil {
 		in, out := &in.ChannelsIn, &out.ChannelsIn
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ChannelsOut != nil {
 		in, out := &in.ChannelsOut, &out.ChannelsOut
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15454,12 +15454,12 @@ func (in *RemixSettingsParameters) DeepCopyInto(out *RemixSettingsParameters) {
 	}
 	if in.ChannelsIn != nil {
 		in, out := &in.ChannelsIn, &out.ChannelsIn
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ChannelsOut != nil {
 		in, out := &in.ChannelsOut, &out.ChannelsOut
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15500,7 +15500,7 @@ func (in *RtmpGroupSettingsInitParameters) DeepCopyInto(out *RtmpGroupSettingsIn
 	}
 	if in.CacheLength != nil {
 		in, out := &in.CacheLength, &out.CacheLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CaptionData != nil {
@@ -15515,7 +15515,7 @@ func (in *RtmpGroupSettingsInitParameters) DeepCopyInto(out *RtmpGroupSettingsIn
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15556,7 +15556,7 @@ func (in *RtmpGroupSettingsObservation) DeepCopyInto(out *RtmpGroupSettingsObser
 	}
 	if in.CacheLength != nil {
 		in, out := &in.CacheLength, &out.CacheLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CaptionData != nil {
@@ -15571,7 +15571,7 @@ func (in *RtmpGroupSettingsObservation) DeepCopyInto(out *RtmpGroupSettingsObser
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15612,7 +15612,7 @@ func (in *RtmpGroupSettingsParameters) DeepCopyInto(out *RtmpGroupSettingsParame
 	}
 	if in.CacheLength != nil {
 		in, out := &in.CacheLength, &out.CacheLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CaptionData != nil {
@@ -15627,7 +15627,7 @@ func (in *RtmpGroupSettingsParameters) DeepCopyInto(out *RtmpGroupSettingsParame
 	}
 	if in.RestartDelay != nil {
 		in, out := &in.RestartDelay, &out.RestartDelay
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15712,7 +15712,7 @@ func (in *RtmpOutputSettingsInitParameters) DeepCopyInto(out *RtmpOutputSettings
 	}
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Destination != nil {
@@ -15724,7 +15724,7 @@ func (in *RtmpOutputSettingsInitParameters) DeepCopyInto(out *RtmpOutputSettings
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15749,7 +15749,7 @@ func (in *RtmpOutputSettingsObservation) DeepCopyInto(out *RtmpOutputSettingsObs
 	}
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Destination != nil {
@@ -15761,7 +15761,7 @@ func (in *RtmpOutputSettingsObservation) DeepCopyInto(out *RtmpOutputSettingsObs
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15786,7 +15786,7 @@ func (in *RtmpOutputSettingsParameters) DeepCopyInto(out *RtmpOutputSettingsPara
 	}
 	if in.ConnectionRetryInterval != nil {
 		in, out := &in.ConnectionRetryInterval, &out.ConnectionRetryInterval
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Destination != nil {
@@ -15798,7 +15798,7 @@ func (in *RtmpOutputSettingsParameters) DeepCopyInto(out *RtmpOutputSettingsPara
 	}
 	if in.NumRetries != nil {
 		in, out := &in.NumRetries, &out.NumRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15823,7 +15823,7 @@ func (in *Scte20SourceSettingsInitParameters) DeepCopyInto(out *Scte20SourceSett
 	}
 	if in.Source608ChannelNumber != nil {
 		in, out := &in.Source608ChannelNumber, &out.Source608ChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15848,7 +15848,7 @@ func (in *Scte20SourceSettingsObservation) DeepCopyInto(out *Scte20SourceSetting
 	}
 	if in.Source608ChannelNumber != nil {
 		in, out := &in.Source608ChannelNumber, &out.Source608ChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15873,7 +15873,7 @@ func (in *Scte20SourceSettingsParameters) DeepCopyInto(out *Scte20SourceSettings
 	}
 	if in.Source608ChannelNumber != nil {
 		in, out := &in.Source608ChannelNumber, &out.Source608ChannelNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15898,7 +15898,7 @@ func (in *Scte27SourceSettingsInitParameters) DeepCopyInto(out *Scte27SourceSett
 	}
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15923,7 +15923,7 @@ func (in *Scte27SourceSettingsObservation) DeepCopyInto(out *Scte27SourceSetting
 	}
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15948,7 +15948,7 @@ func (in *Scte27SourceSettingsParameters) DeepCopyInto(out *Scte27SourceSettings
 	}
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15973,7 +15973,7 @@ func (in *SelectorSettingsDvbTdtSettingsInitParameters) DeepCopyInto(out *Select
 	}
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15998,7 +15998,7 @@ func (in *SelectorSettingsDvbTdtSettingsObservation) DeepCopyInto(out *SelectorS
 	}
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16023,7 +16023,7 @@ func (in *SelectorSettingsDvbTdtSettingsParameters) DeepCopyInto(out *SelectorSe
 	}
 	if in.Pid != nil {
 		in, out := &in.Pid, &out.Pid
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16780,7 +16780,7 @@ func (in *TimecodeConfigInitParameters) DeepCopyInto(out *TimecodeConfigInitPara
 	}
 	if in.SyncThreshold != nil {
 		in, out := &in.SyncThreshold, &out.SyncThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16805,7 +16805,7 @@ func (in *TimecodeConfigObservation) DeepCopyInto(out *TimecodeConfigObservation
 	}
 	if in.SyncThreshold != nil {
 		in, out := &in.SyncThreshold, &out.SyncThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16830,7 +16830,7 @@ func (in *TimecodeConfigParameters) DeepCopyInto(out *TimecodeConfigParameters) 
 	}
 	if in.SyncThreshold != nil {
 		in, out := &in.SyncThreshold, &out.SyncThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16850,7 +16850,7 @@ func (in *TrackInitParameters) DeepCopyInto(out *TrackInitParameters) {
 	*out = *in
 	if in.Track != nil {
 		in, out := &in.Track, &out.Track
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16870,7 +16870,7 @@ func (in *TrackObservation) DeepCopyInto(out *TrackObservation) {
 	*out = *in
 	if in.Track != nil {
 		in, out := &in.Track, &out.Track
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16890,7 +16890,7 @@ func (in *TrackParameters) DeepCopyInto(out *TrackParameters) {
 	*out = *in
 	if in.Track != nil {
 		in, out := &in.Track, &out.Track
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16920,7 +16920,7 @@ func (in *UDPGroupSettingsInitParameters) DeepCopyInto(out *UDPGroupSettingsInit
 	}
 	if in.TimedMetadataId3Period != nil {
 		in, out := &in.TimedMetadataId3Period, &out.TimedMetadataId3Period
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16950,7 +16950,7 @@ func (in *UDPGroupSettingsObservation) DeepCopyInto(out *UDPGroupSettingsObserva
 	}
 	if in.TimedMetadataId3Period != nil {
 		in, out := &in.TimedMetadataId3Period, &out.TimedMetadataId3Period
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16980,7 +16980,7 @@ func (in *UDPGroupSettingsParameters) DeepCopyInto(out *UDPGroupSettingsParamete
 	}
 	if in.TimedMetadataId3Period != nil {
 		in, out := &in.TimedMetadataId3Period, &out.TimedMetadataId3Period
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -17126,7 +17126,7 @@ func (in *UDPOutputSettingsInitParameters) DeepCopyInto(out *UDPOutputSettingsIn
 	*out = *in
 	if in.BufferMsec != nil {
 		in, out := &in.BufferMsec, &out.BufferMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ContainerSettings != nil {
@@ -17167,7 +17167,7 @@ func (in *UDPOutputSettingsObservation) DeepCopyInto(out *UDPOutputSettingsObser
 	*out = *in
 	if in.BufferMsec != nil {
 		in, out := &in.BufferMsec, &out.BufferMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ContainerSettings != nil {
@@ -17208,7 +17208,7 @@ func (in *UDPOutputSettingsParameters) DeepCopyInto(out *UDPOutputSettingsParame
 	*out = *in
 	if in.BufferMsec != nil {
 		in, out := &in.BufferMsec, &out.BufferMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ContainerSettings != nil {
@@ -17409,7 +17409,7 @@ func (in *VideoBlackSettingsInitParameters) DeepCopyInto(out *VideoBlackSettings
 	}
 	if in.VideoBlackThresholdMsec != nil {
 		in, out := &in.VideoBlackThresholdMsec, &out.VideoBlackThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -17434,7 +17434,7 @@ func (in *VideoBlackSettingsObservation) DeepCopyInto(out *VideoBlackSettingsObs
 	}
 	if in.VideoBlackThresholdMsec != nil {
 		in, out := &in.VideoBlackThresholdMsec, &out.VideoBlackThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -17459,7 +17459,7 @@ func (in *VideoBlackSettingsParameters) DeepCopyInto(out *VideoBlackSettingsPara
 	}
 	if in.VideoBlackThresholdMsec != nil {
 		in, out := &in.VideoBlackThresholdMsec, &out.VideoBlackThresholdMsec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -17594,7 +17594,7 @@ func (in *VideoDescriptionsInitParameters) DeepCopyInto(out *VideoDescriptionsIn
 	}
 	if in.Height != nil {
 		in, out := &in.Height, &out.Height
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -17614,12 +17614,12 @@ func (in *VideoDescriptionsInitParameters) DeepCopyInto(out *VideoDescriptionsIn
 	}
 	if in.Sharpness != nil {
 		in, out := &in.Sharpness, &out.Sharpness
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Width != nil {
 		in, out := &in.Width, &out.Width
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -17646,7 +17646,7 @@ func (in *VideoDescriptionsObservation) DeepCopyInto(out *VideoDescriptionsObser
 	}
 	if in.Height != nil {
 		in, out := &in.Height, &out.Height
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -17666,12 +17666,12 @@ func (in *VideoDescriptionsObservation) DeepCopyInto(out *VideoDescriptionsObser
 	}
 	if in.Sharpness != nil {
 		in, out := &in.Sharpness, &out.Sharpness
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Width != nil {
 		in, out := &in.Width, &out.Width
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -17698,7 +17698,7 @@ func (in *VideoDescriptionsParameters) DeepCopyInto(out *VideoDescriptionsParame
 	}
 	if in.Height != nil {
 		in, out := &in.Height, &out.Height
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -17718,12 +17718,12 @@ func (in *VideoDescriptionsParameters) DeepCopyInto(out *VideoDescriptionsParame
 	}
 	if in.Sharpness != nil {
 		in, out := &in.Sharpness, &out.Sharpness
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Width != nil {
 		in, out := &in.Width, &out.Width
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

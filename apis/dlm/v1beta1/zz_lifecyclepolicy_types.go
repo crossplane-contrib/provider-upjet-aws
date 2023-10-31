@@ -52,7 +52,7 @@ type CreateRuleInitParameters struct {
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -70,7 +70,7 @@ type CreateRuleObservation struct {
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -90,7 +90,7 @@ type CreateRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -223,7 +223,7 @@ type CrossRegionCopyRuleParameters struct {
 type CrossRegionCopyRuleRetainRuleInitParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -232,7 +232,7 @@ type CrossRegionCopyRuleRetainRuleInitParameters struct {
 type CrossRegionCopyRuleRetainRuleObservation struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -242,7 +242,7 @@ type CrossRegionCopyRuleRetainRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -252,7 +252,7 @@ type CrossRegionCopyRuleRetainRuleParameters struct {
 type DeprecateRuleInitParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -261,7 +261,7 @@ type DeprecateRuleInitParameters struct {
 type DeprecateRuleObservation struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -271,7 +271,7 @@ type DeprecateRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -342,10 +342,10 @@ type FastRestoreRuleInitParameters struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -357,10 +357,10 @@ type FastRestoreRuleObservation struct {
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -374,11 +374,11 @@ type FastRestoreRuleParameters struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
 	// +kubebuilder:validation:Optional
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -625,7 +625,7 @@ type PolicyDetailsParametersParameters struct {
 type RetainRuleInitParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -634,7 +634,7 @@ type RetainRuleInitParameters struct {
 type RetainRuleObservation struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -644,7 +644,7 @@ type RetainRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -654,10 +654,10 @@ type RetainRuleParameters struct {
 type ScheduleDeprecateRuleInitParameters struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -666,10 +666,10 @@ type ScheduleDeprecateRuleInitParameters struct {
 type ScheduleDeprecateRuleObservation struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -679,11 +679,11 @@ type ScheduleDeprecateRuleParameters struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
 	// +kubebuilder:validation:Optional
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -802,10 +802,10 @@ type ScheduleParameters struct {
 type ScheduleRetainRuleInitParameters struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -814,10 +814,10 @@ type ScheduleRetainRuleInitParameters struct {
 type ScheduleRetainRuleObservation struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	IntervalUnit *string `json:"intervalUnit,omitempty" tf:"interval_unit,omitempty"`
@@ -827,11 +827,11 @@ type ScheduleRetainRuleParameters struct {
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
 	// +kubebuilder:validation:Optional
-	Count *int64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional
@@ -844,7 +844,7 @@ type ShareRuleInitParameters struct {
 	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	UnshareInterval *int64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
+	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
@@ -856,7 +856,7 @@ type ShareRuleObservation struct {
 	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
-	UnshareInterval *int64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
+	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	UnshareIntervalUnit *string `json:"unshareIntervalUnit,omitempty" tf:"unshare_interval_unit,omitempty"`
@@ -870,7 +870,7 @@ type ShareRuleParameters struct {
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
 	// +kubebuilder:validation:Optional
-	UnshareInterval *int64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
+	UnshareInterval *float64 `json:"unshareInterval,omitempty" tf:"unshare_interval,omitempty"`
 
 	// The unit for how often the lifecycle policy should be evaluated. HOURS is currently the only allowed value and also the default value.
 	// +kubebuilder:validation:Optional

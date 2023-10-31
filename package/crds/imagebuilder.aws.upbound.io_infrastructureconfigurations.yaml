@@ -80,8 +80,7 @@ spec:
                         httpPutResponseHopLimit:
                           description: The number of hops that an instance can traverse
                             to reach its destonation.
-                          format: int64
-                          type: integer
+                          type: number
                         httpTokens:
                           description: 'Whether a signed token is required for instance
                             metadata retrieval requests. Valid values: required, optional.'
@@ -632,8 +631,7 @@ spec:
                         httpPutResponseHopLimit:
                           description: The number of hops that an instance can traverse
                             to reach its destonation.
-                          format: int64
-                          type: integer
+                          type: number
                         httpTokens:
                           description: 'Whether a signed token is required for instance
                             metadata retrieval requests. Valid values: required, optional.'
@@ -877,8 +875,7 @@ spec:
                         httpPutResponseHopLimit:
                           description: The number of hops that an instance can traverse
                             to reach its destonation.
-                          format: int64
-                          type: integer
+                          type: number
                         httpTokens:
                           description: 'Whether a signed token is required for instance
                             metadata retrieval requests. Valid values: required, optional.'

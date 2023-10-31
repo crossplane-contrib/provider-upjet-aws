@@ -74,11 +74,9 @@ spec:
                           description: A value used to reserve some of the available
                             maximum vCPU for fair share identifiers that have not
                             yet been used. For more information, see FairsharePolicy.
-                          format: int64
-                          type: integer
+                          type: number
                         shareDecaySeconds:
-                          format: int64
-                          type: integer
+                          type: number
                         shareDistribution:
                           description: One or more share distribution blocks which
                             define the weights for the fair share identifiers for
@@ -129,11 +127,9 @@ spec:
                           description: A value used to reserve some of the available
                             maximum vCPU for fair share identifiers that have not
                             yet been used. For more information, see FairsharePolicy.
-                          format: int64
-                          type: integer
+                          type: number
                         shareDecaySeconds:
-                          format: int64
-                          type: integer
+                          type: number
                         shareDistribution:
                           description: One or more share distribution blocks which
                             define the weights for the fair share identifiers for
@@ -334,11 +330,9 @@ spec:
                           description: A value used to reserve some of the available
                             maximum vCPU for fair share identifiers that have not
                             yet been used. For more information, see FairsharePolicy.
-                          format: int64
-                          type: integer
+                          type: number
                         shareDecaySeconds:
-                          format: int64
-                          type: integer
+                          type: number
                         shareDistribution:
                           description: One or more share distribution blocks which
                             define the weights for the fair share identifiers for

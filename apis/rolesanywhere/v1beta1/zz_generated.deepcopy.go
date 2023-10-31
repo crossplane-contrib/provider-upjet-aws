@@ -45,7 +45,7 @@ func (in *ProfileInitParameters) DeepCopyInto(out *ProfileInitParameters) {
 	*out = *in
 	if in.DurationSeconds != nil {
 		in, out := &in.DurationSeconds, &out.DurationSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -149,7 +149,7 @@ func (in *ProfileObservation) DeepCopyInto(out *ProfileObservation) {
 	}
 	if in.DurationSeconds != nil {
 		in, out := &in.DurationSeconds, &out.DurationSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -248,7 +248,7 @@ func (in *ProfileParameters) DeepCopyInto(out *ProfileParameters) {
 	*out = *in
 	if in.DurationSeconds != nil {
 		in, out := &in.DurationSeconds, &out.DurationSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Enabled != nil {

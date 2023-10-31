@@ -260,8 +260,7 @@ spec:
                     type: string
                   ttl:
                     description: The TTL of the record.
-                    format: int64
-                    type: integer
+                    type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
                       DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
@@ -274,8 +273,7 @@ spec:
                         weight:
                           description: A numeric value indicating the relative weight
                             of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   zoneId:
@@ -472,8 +470,7 @@ spec:
                     type: string
                   ttl:
                     description: The TTL of the record.
-                    format: int64
-                    type: integer
+                    type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
                       DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
@@ -486,8 +483,7 @@ spec:
                         weight:
                           description: A numeric value indicating the relative weight
                             of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -782,8 +778,7 @@ spec:
                     type: string
                   ttl:
                     description: The TTL of the record.
-                    format: int64
-                    type: integer
+                    type: number
                   type:
                     description: The record type. Valid values are A, AAAA, CAA, CNAME,
                       DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
@@ -796,8 +791,7 @@ spec:
                         weight:
                           description: A numeric value indicating the relative weight
                             of the record. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   zoneId:

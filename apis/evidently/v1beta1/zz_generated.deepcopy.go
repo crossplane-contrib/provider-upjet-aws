@@ -706,12 +706,12 @@ func (in *ProjectObservation) DeepCopyInto(out *ProjectObservation) {
 	*out = *in
 	if in.ActiveExperimentCount != nil {
 		in, out := &in.ActiveExperimentCount, &out.ActiveExperimentCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ActiveLaunchCount != nil {
 		in, out := &in.ActiveLaunchCount, &out.ActiveLaunchCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Arn != nil {
@@ -738,12 +738,12 @@ func (in *ProjectObservation) DeepCopyInto(out *ProjectObservation) {
 	}
 	if in.ExperimentCount != nil {
 		in, out := &in.ExperimentCount, &out.ExperimentCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FeatureCount != nil {
 		in, out := &in.FeatureCount, &out.FeatureCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -758,7 +758,7 @@ func (in *ProjectObservation) DeepCopyInto(out *ProjectObservation) {
 	}
 	if in.LaunchCount != nil {
 		in, out := &in.LaunchCount, &out.LaunchCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1098,7 +1098,7 @@ func (in *SegmentObservation) DeepCopyInto(out *SegmentObservation) {
 	}
 	if in.ExperimentCount != nil {
 		in, out := &in.ExperimentCount, &out.ExperimentCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ID != nil {
@@ -1113,7 +1113,7 @@ func (in *SegmentObservation) DeepCopyInto(out *SegmentObservation) {
 	}
 	if in.LaunchCount != nil {
 		in, out := &in.LaunchCount, &out.LaunchCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Pattern != nil {

@@ -20,30 +20,30 @@ import (
 type BandwidthInitParameters struct {
 
 	// Download speed in Mbps.
-	DownloadSpeed *int64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
+	DownloadSpeed *float64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
 
 	// Upload speed in Mbps.
-	UploadSpeed *int64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
+	UploadSpeed *float64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
 }
 
 type BandwidthObservation struct {
 
 	// Download speed in Mbps.
-	DownloadSpeed *int64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
+	DownloadSpeed *float64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
 
 	// Upload speed in Mbps.
-	UploadSpeed *int64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
+	UploadSpeed *float64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
 }
 
 type BandwidthParameters struct {
 
 	// Download speed in Mbps.
 	// +kubebuilder:validation:Optional
-	DownloadSpeed *int64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
+	DownloadSpeed *float64 `json:"downloadSpeed,omitempty" tf:"download_speed,omitempty"`
 
 	// Upload speed in Mbps.
 	// +kubebuilder:validation:Optional
-	UploadSpeed *int64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
+	UploadSpeed *float64 `json:"uploadSpeed,omitempty" tf:"upload_speed,omitempty"`
 }
 
 type LinkInitParameters struct {

@@ -116,8 +116,7 @@ spec:
                             web browsers can cache results of a preflight request.
                             By default, this is set to 0, which means that the browser
                             doesn't cache results. The maximum value is 86400.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   functionName:
@@ -272,8 +271,7 @@ spec:
                             web browsers can cache results of a preflight request.
                             By default, this is set to 0, which means that the browser
                             doesn't cache results. The maximum value is 86400.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   invokeMode:
@@ -504,8 +502,7 @@ spec:
                             web browsers can cache results of a preflight request.
                             By default, this is set to 0, which means that the browser
                             doesn't cache results. The maximum value is 86400.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   functionArn:

@@ -75,18 +75,15 @@ spec:
                     description: Maximal number of concurrent requests that you want
                       an instance to process. When the number of concurrent requests
                       goes over this limit, App Runner scales up your service.
-                    format: int64
-                    type: integer
+                    type: number
                   maxSize:
                     description: Maximal number of instances that App Runner provisions
                       for your service.
-                    format: int64
-                    type: integer
+                    type: number
                   minSize:
                     description: Minimal number of instances that App Runner provisions
                       for your service.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -118,18 +115,15 @@ spec:
                     description: Maximal number of concurrent requests that you want
                       an instance to process. When the number of concurrent requests
                       goes over this limit, App Runner scales up your service.
-                    format: int64
-                    type: integer
+                    type: number
                   maxSize:
                     description: Maximal number of instances that App Runner provisions
                       for your service.
-                    format: int64
-                    type: integer
+                    type: number
                   minSize:
                     description: Minimal number of instances that App Runner provisions
                       for your service.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -316,8 +310,7 @@ spec:
                     type: string
                   autoScalingConfigurationRevision:
                     description: The revision of this auto scaling configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     type: string
                   latest:
@@ -329,18 +322,15 @@ spec:
                     description: Maximal number of concurrent requests that you want
                       an instance to process. When the number of concurrent requests
                       goes over this limit, App Runner scales up your service.
-                    format: int64
-                    type: integer
+                    type: number
                   maxSize:
                     description: Maximal number of instances that App Runner provisions
                       for your service.
-                    format: int64
-                    type: integer
+                    type: number
                   minSize:
                     description: Minimal number of instances that App Runner provisions
                       for your service.
-                    format: int64
-                    type: integer
+                    type: number
                   status:
                     description: Current state of the auto scaling configuration.
                       An INACTIVE configuration revision has been deleted and can't

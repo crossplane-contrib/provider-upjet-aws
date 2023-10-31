@@ -222,8 +222,7 @@ spec:
                     type: object
                   applicationSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   contentBasedDeduplication:
                     description: Enables content-based deduplication for FIFO topics.
                       For more information, see the related documentation
@@ -393,8 +392,7 @@ spec:
                     type: object
                   firehoseSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   httpFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
                     type: string
@@ -550,8 +548,7 @@ spec:
                     type: object
                   httpSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   kmsMasterKeyId:
                     description: The ID of an AWS-managed customer master key (CMK)
                       for Amazon SNS or a custom CMK. For more information, see Key
@@ -712,8 +709,7 @@ spec:
                     type: object
                   lambdaSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   policy:
                     description: The fully-formed AWS policy as JSON.
                     type: string
@@ -727,8 +723,7 @@ spec:
                       while creating the signature of the notifications, subscription
                       confirmations, or unsubscribe confirmation messages sent by
                       Amazon SNS.
-                    format: int64
-                    type: integer
+                    type: number
                   sqsFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
                     type: string
@@ -884,8 +879,7 @@ spec:
                     type: object
                   sqsSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -912,8 +906,7 @@ spec:
                 properties:
                   applicationSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   contentBasedDeduplication:
                     description: Enables content-based deduplication for FIFO topics.
                       For more information, see the related documentation
@@ -930,12 +923,10 @@ spec:
                     type: boolean
                   firehoseSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   httpSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   kmsMasterKeyId:
                     description: The ID of an AWS-managed customer master key (CMK)
                       for Amazon SNS or a custom CMK. For more information, see Key
@@ -943,8 +934,7 @@ spec:
                     type: string
                   lambdaSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   policy:
                     description: The fully-formed AWS policy as JSON.
                     type: string
@@ -954,12 +944,10 @@ spec:
                       while creating the signature of the notifications, subscription
                       confirmations, or unsubscribe confirmation messages sent by
                       Amazon SNS.
-                    format: int64
-                    type: integer
+                    type: number
                   sqsSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -1144,8 +1132,7 @@ spec:
                     type: string
                   applicationSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   arn:
                     description: The ARN of the SNS topic, as a more obvious property
                       (clone of id)
@@ -1173,8 +1160,7 @@ spec:
                     type: string
                   firehoseSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   httpFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
                     type: string
@@ -1184,8 +1170,7 @@ spec:
                     type: string
                   httpSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     description: The ARN of the SNS topic
                     type: string
@@ -1203,8 +1188,7 @@ spec:
                     type: string
                   lambdaSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   owner:
                     description: The AWS Account ID of the SNS topic owner
                     type: string
@@ -1217,8 +1201,7 @@ spec:
                       while creating the signature of the notifications, subscription
                       confirmations, or unsubscribe confirmation messages sent by
                       Amazon SNS.
-                    format: int64
-                    type: integer
+                    type: number
                   sqsFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
                     type: string
@@ -1228,8 +1211,7 @@ spec:
                     type: string
                   sqsSuccessFeedbackSampleRate:
                     description: Percentage of success to sample
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

@@ -96,13 +96,11 @@ spec:
                           description: Number of consecutive checks that must succeed
                             before App Runner decides that the service is healthy.
                             Defaults to 1. Minimum value of 1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         interval:
                           description: Time interval, in seconds, between health checks.
                             Defaults to 5. Minimum value of 1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         path:
                           description: URL to send requests to for health checks.
                             Defaults to /. Minimum length of 0. Maximum length of
@@ -119,14 +117,12 @@ spec:
                           description: Time, in seconds, to wait for a health check
                             response before deciding it failed. Defaults to 2. Minimum
                             value of  1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         unhealthyThreshold:
                           description: Number of consecutive checks that must fail
                             before App Runner decides that the service is unhealthy.
                             Defaults to 5. Minimum value of  1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   instanceConfiguration:
@@ -697,13 +693,11 @@ spec:
                           description: Number of consecutive checks that must succeed
                             before App Runner decides that the service is healthy.
                             Defaults to 1. Minimum value of 1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         interval:
                           description: Time interval, in seconds, between health checks.
                             Defaults to 5. Minimum value of 1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         path:
                           description: URL to send requests to for health checks.
                             Defaults to /. Minimum length of 0. Maximum length of
@@ -720,14 +714,12 @@ spec:
                           description: Time, in seconds, to wait for a health check
                             response before deciding it failed. Defaults to 2. Minimum
                             value of  1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         unhealthyThreshold:
                           description: Number of consecutive checks that must fail
                             before App Runner decides that the service is unhealthy.
                             Defaults to 5. Minimum value of  1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   instanceConfiguration:
@@ -1204,13 +1196,11 @@ spec:
                           description: Number of consecutive checks that must succeed
                             before App Runner decides that the service is healthy.
                             Defaults to 1. Minimum value of 1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         interval:
                           description: Time interval, in seconds, between health checks.
                             Defaults to 5. Minimum value of 1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         path:
                           description: URL to send requests to for health checks.
                             Defaults to /. Minimum length of 0. Maximum length of
@@ -1227,14 +1217,12 @@ spec:
                           description: Time, in seconds, to wait for a health check
                             response before deciding it failed. Defaults to 2. Minimum
                             value of  1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                         unhealthyThreshold:
                           description: Number of consecutive checks that must fail
                             before App Runner decides that the service is unhealthy.
                             Defaults to 5. Minimum value of  1. Maximum value of 20.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   id:

@@ -26,7 +26,7 @@ type AddHeaderActionInitParameters struct {
 	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 }
 
 type AddHeaderActionObservation struct {
@@ -38,7 +38,7 @@ type AddHeaderActionObservation struct {
 	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 }
 
 type AddHeaderActionParameters struct {
@@ -53,7 +53,7 @@ type AddHeaderActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 }
 
 type BounceActionInitParameters struct {
@@ -62,7 +62,7 @@ type BounceActionInitParameters struct {
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The RFC 5321 SMTP reply code
 	SMTPReplyCode *string `json:"smtpReplyCode,omitempty" tf:"smtp_reply_code,omitempty"`
@@ -83,7 +83,7 @@ type BounceActionObservation struct {
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The RFC 5321 SMTP reply code
 	SMTPReplyCode *string `json:"smtpReplyCode,omitempty" tf:"smtp_reply_code,omitempty"`
@@ -106,7 +106,7 @@ type BounceActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The RFC 5321 SMTP reply code
 	// +kubebuilder:validation:Optional
@@ -134,7 +134,7 @@ type LambdaActionInitParameters struct {
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -149,7 +149,7 @@ type LambdaActionObservation struct {
 	InvocationType *string `json:"invocationType,omitempty" tf:"invocation_type,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -167,7 +167,7 @@ type LambdaActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -346,7 +346,7 @@ type S3ActionInitParameters struct {
 	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -364,7 +364,7 @@ type S3ActionObservation struct {
 	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -386,7 +386,7 @@ type S3ActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -399,7 +399,7 @@ type SnsActionInitParameters struct {
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -411,7 +411,7 @@ type SnsActionObservation struct {
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -425,7 +425,7 @@ type SnsActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional
@@ -435,7 +435,7 @@ type SnsActionParameters struct {
 type StopActionInitParameters struct {
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The scope to apply. The only acceptable value is RuleSet.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
@@ -447,7 +447,7 @@ type StopActionInitParameters struct {
 type StopActionObservation struct {
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The scope to apply. The only acceptable value is RuleSet.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
@@ -460,7 +460,7 @@ type StopActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The scope to apply. The only acceptable value is RuleSet.
 	// +kubebuilder:validation:Optional
@@ -477,7 +477,7 @@ type WorkmailActionInitParameters struct {
 	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -489,7 +489,7 @@ type WorkmailActionObservation struct {
 	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
 
 	// The position of the action in the receipt rule
-	Position *int64 `json:"position,omitempty" tf:"position,omitempty"`
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
@@ -503,7 +503,7 @@ type WorkmailActionParameters struct {
 
 	// The position of the action in the receipt rule
 	// +kubebuilder:validation:Optional
-	Position *int64 `json:"position" tf:"position,omitempty"`
+	Position *float64 `json:"position" tf:"position,omitempty"`
 
 	// The ARN of an SNS topic to notify
 	// +kubebuilder:validation:Optional

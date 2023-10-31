@@ -413,17 +413,17 @@ func (in *AccountPasswordPolicyInitParameters) DeepCopyInto(out *AccountPassword
 	}
 	if in.MaxPasswordAge != nil {
 		in, out := &in.MaxPasswordAge, &out.MaxPasswordAge
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinimumPasswordLength != nil {
 		in, out := &in.MinimumPasswordLength, &out.MinimumPasswordLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PasswordReusePrevention != nil {
 		in, out := &in.PasswordReusePrevention, &out.PasswordReusePrevention
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RequireLowercaseCharacters != nil {
@@ -515,17 +515,17 @@ func (in *AccountPasswordPolicyObservation) DeepCopyInto(out *AccountPasswordPol
 	}
 	if in.MaxPasswordAge != nil {
 		in, out := &in.MaxPasswordAge, &out.MaxPasswordAge
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinimumPasswordLength != nil {
 		in, out := &in.MinimumPasswordLength, &out.MinimumPasswordLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PasswordReusePrevention != nil {
 		in, out := &in.PasswordReusePrevention, &out.PasswordReusePrevention
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RequireLowercaseCharacters != nil {
@@ -575,17 +575,17 @@ func (in *AccountPasswordPolicyParameters) DeepCopyInto(out *AccountPasswordPoli
 	}
 	if in.MaxPasswordAge != nil {
 		in, out := &in.MaxPasswordAge, &out.MaxPasswordAge
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinimumPasswordLength != nil {
 		in, out := &in.MinimumPasswordLength, &out.MinimumPasswordLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PasswordReusePrevention != nil {
 		in, out := &in.PasswordReusePrevention, &out.PasswordReusePrevention
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RequireLowercaseCharacters != nil {
@@ -2176,7 +2176,7 @@ func (in *RoleInitParameters) DeepCopyInto(out *RoleInitParameters) {
 	}
 	if in.MaxSessionDuration != nil {
 		in, out := &in.MaxSessionDuration, &out.MaxSessionDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -2357,7 +2357,7 @@ func (in *RoleObservation) DeepCopyInto(out *RoleObservation) {
 	}
 	if in.MaxSessionDuration != nil {
 		in, out := &in.MaxSessionDuration, &out.MaxSessionDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -2464,7 +2464,7 @@ func (in *RoleParameters) DeepCopyInto(out *RoleParameters) {
 	}
 	if in.MaxSessionDuration != nil {
 		in, out := &in.MaxSessionDuration, &out.MaxSessionDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -4416,7 +4416,7 @@ func (in *UserLoginProfileInitParameters) DeepCopyInto(out *UserLoginProfileInit
 	*out = *in
 	if in.PasswordLength != nil {
 		in, out := &in.PasswordLength, &out.PasswordLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PasswordResetRequired != nil {
@@ -4498,7 +4498,7 @@ func (in *UserLoginProfileObservation) DeepCopyInto(out *UserLoginProfileObserva
 	}
 	if in.PasswordLength != nil {
 		in, out := &in.PasswordLength, &out.PasswordLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PasswordResetRequired != nil {
@@ -4533,7 +4533,7 @@ func (in *UserLoginProfileParameters) DeepCopyInto(out *UserLoginProfileParamete
 	*out = *in
 	if in.PasswordLength != nil {
 		in, out := &in.PasswordLength, &out.PasswordLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PasswordResetRequired != nil {

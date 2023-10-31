@@ -88,8 +88,7 @@ spec:
                                   a ttlOverride key in its response. A value of 0
                                   disables caching of responses. Minimum value of
                                   0. Maximum value of 3600.
-                                format: int64
-                                type: integer
+                                type: number
                               authorizerUri:
                                 description: 'ARN of the Lambda function to be called
                                   for authorization. Note: This Lambda function must
@@ -111,8 +110,7 @@ spec:
                               authTtl:
                                 description: Number of milliseconds a token is valid
                                   after being authenticated.
-                                format: int64
-                                type: integer
+                                type: number
                               clientId:
                                 description: Client identifier of the Relying party
                                   at the OpenID identity provider. This identifier
@@ -125,8 +123,7 @@ spec:
                               iatTtl:
                                 description: Number of milliseconds a token is valid
                                   after being issued to a user.
-                                format: int64
-                                type: integer
+                                type: number
                               issuer:
                                 description: Issuer for the OpenID Connect configuration.
                                   The issuer returned by discovery MUST exactly match
@@ -169,8 +166,7 @@ spec:
                             function can override this by returning a ttlOverride
                             key in its response. A value of 0 disables caching of
                             responses. Minimum value of 0. Maximum value of 3600.
-                          format: int64
-                          type: integer
+                          type: number
                         authorizerUri:
                           description: 'ARN of the Lambda function to be called for
                             authorization. Note: This Lambda function must have a
@@ -292,8 +288,7 @@ spec:
                         authTtl:
                           description: Number of milliseconds a token is valid after
                             being authenticated.
-                          format: int64
-                          type: integer
+                          type: number
                         clientId:
                           description: Client identifier of the Relying party at the
                             OpenID identity provider. This identifier is typically
@@ -305,8 +300,7 @@ spec:
                         iatTtl:
                           description: Number of milliseconds a token is valid after
                             being issued to a user.
-                          format: int64
-                          type: integer
+                          type: number
                         issuer:
                           description: Issuer for the OpenID Connect configuration.
                             The issuer returned by discovery MUST exactly match the
@@ -466,8 +460,7 @@ spec:
                                   a ttlOverride key in its response. A value of 0
                                   disables caching of responses. Minimum value of
                                   0. Maximum value of 3600.
-                                format: int64
-                                type: integer
+                                type: number
                               authorizerUri:
                                 description: 'ARN of the Lambda function to be called
                                   for authorization. Note: This Lambda function must
@@ -489,8 +482,7 @@ spec:
                               authTtl:
                                 description: Number of milliseconds a token is valid
                                   after being authenticated.
-                                format: int64
-                                type: integer
+                                type: number
                               clientId:
                                 description: Client identifier of the Relying party
                                   at the OpenID identity provider. This identifier
@@ -503,8 +495,7 @@ spec:
                               iatTtl:
                                 description: Number of milliseconds a token is valid
                                   after being issued to a user.
-                                format: int64
-                                type: integer
+                                type: number
                               issuer:
                                 description: Issuer for the OpenID Connect configuration.
                                   The issuer returned by discovery MUST exactly match
@@ -547,8 +538,7 @@ spec:
                             function can override this by returning a ttlOverride
                             key in its response. A value of 0 disables caching of
                             responses. Minimum value of 0. Maximum value of 3600.
-                          format: int64
-                          type: integer
+                          type: number
                         authorizerUri:
                           description: 'ARN of the Lambda function to be called for
                             authorization. Note: This Lambda function must have a
@@ -589,8 +579,7 @@ spec:
                         authTtl:
                           description: Number of milliseconds a token is valid after
                             being authenticated.
-                          format: int64
-                          type: integer
+                          type: number
                         clientId:
                           description: Client identifier of the Relying party at the
                             OpenID identity provider. This identifier is typically
@@ -602,8 +591,7 @@ spec:
                         iatTtl:
                           description: Number of milliseconds a token is valid after
                             being issued to a user.
-                          format: int64
-                          type: integer
+                          type: number
                         issuer:
                           description: Issuer for the OpenID Connect configuration.
                             The issuer returned by discovery MUST exactly match the
@@ -838,8 +826,7 @@ spec:
                                   a ttlOverride key in its response. A value of 0
                                   disables caching of responses. Minimum value of
                                   0. Maximum value of 3600.
-                                format: int64
-                                type: integer
+                                type: number
                               authorizerUri:
                                 description: 'ARN of the Lambda function to be called
                                   for authorization. Note: This Lambda function must
@@ -861,8 +848,7 @@ spec:
                               authTtl:
                                 description: Number of milliseconds a token is valid
                                   after being authenticated.
-                                format: int64
-                                type: integer
+                                type: number
                               clientId:
                                 description: Client identifier of the Relying party
                                   at the OpenID identity provider. This identifier
@@ -875,8 +861,7 @@ spec:
                               iatTtl:
                                 description: Number of milliseconds a token is valid
                                   after being issued to a user.
-                                format: int64
-                                type: integer
+                                type: number
                               issuer:
                                 description: Issuer for the OpenID Connect configuration.
                                   The issuer returned by discovery MUST exactly match
@@ -925,8 +910,7 @@ spec:
                             function can override this by returning a ttlOverride
                             key in its response. A value of 0 disables caching of
                             responses. Minimum value of 0. Maximum value of 3600.
-                          format: int64
-                          type: integer
+                          type: number
                         authorizerUri:
                           description: 'ARN of the Lambda function to be called for
                             authorization. Note: This Lambda function must have a
@@ -972,8 +956,7 @@ spec:
                         authTtl:
                           description: Number of milliseconds a token is valid after
                             being authenticated.
-                          format: int64
-                          type: integer
+                          type: number
                         clientId:
                           description: Client identifier of the Relying party at the
                             OpenID identity provider. This identifier is typically
@@ -985,8 +968,7 @@ spec:
                         iatTtl:
                           description: Number of milliseconds a token is valid after
                             being issued to a user.
-                          format: int64
-                          type: integer
+                          type: number
                         issuer:
                           description: Issuer for the OpenID Connect configuration.
                             The issuer returned by discovery MUST exactly match the

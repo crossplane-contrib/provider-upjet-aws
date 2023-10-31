@@ -29,26 +29,26 @@ type ActionsInitParameters struct {
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
 
 	// The job run timeout in minutes. It overrides the timeout value of the job.
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ActionsNotificationPropertyInitParameters struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
-	NotifyDelayAfter *int64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 type ActionsNotificationPropertyObservation struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
-	NotifyDelayAfter *int64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 type ActionsNotificationPropertyParameters struct {
 
 	// After a job run starts, the number of minutes to wait before sending a job run delay notification.
 	// +kubebuilder:validation:Optional
-	NotifyDelayAfter *int64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
+	NotifyDelayAfter *float64 `json:"notifyDelayAfter,omitempty" tf:"notify_delay_after,omitempty"`
 }
 
 type ActionsObservation struct {
@@ -69,7 +69,7 @@ type ActionsObservation struct {
 	SecurityConfiguration *string `json:"securityConfiguration,omitempty" tf:"security_configuration,omitempty"`
 
 	// The job run timeout in minutes. It overrides the timeout value of the job.
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ActionsParameters struct {
@@ -114,7 +114,7 @@ type ActionsParameters struct {
 
 	// The job run timeout in minutes. It overrides the timeout value of the job.
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ConditionsInitParameters struct {
@@ -191,30 +191,30 @@ type ConditionsParameters struct {
 type EventBatchingConditionInitParameters struct {
 
 	// Number of events that must be received from Amazon EventBridge before EventBridge  event trigger fires.
-	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received. Default value is 900.
-	BatchWindow *int64 `json:"batchWindow,omitempty" tf:"batch_window,omitempty"`
+	BatchWindow *float64 `json:"batchWindow,omitempty" tf:"batch_window,omitempty"`
 }
 
 type EventBatchingConditionObservation struct {
 
 	// Number of events that must be received from Amazon EventBridge before EventBridge  event trigger fires.
-	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received. Default value is 900.
-	BatchWindow *int64 `json:"batchWindow,omitempty" tf:"batch_window,omitempty"`
+	BatchWindow *float64 `json:"batchWindow,omitempty" tf:"batch_window,omitempty"`
 }
 
 type EventBatchingConditionParameters struct {
 
 	// Number of events that must be received from Amazon EventBridge before EventBridge  event trigger fires.
 	// +kubebuilder:validation:Optional
-	BatchSize *int64 `json:"batchSize" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize" tf:"batch_size,omitempty"`
 
 	// Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received. Default value is 900.
 	// +kubebuilder:validation:Optional
-	BatchWindow *int64 `json:"batchWindow,omitempty" tf:"batch_window,omitempty"`
+	BatchWindow *float64 `json:"batchWindow,omitempty" tf:"batch_window,omitempty"`
 }
 
 type PredicateInitParameters struct {

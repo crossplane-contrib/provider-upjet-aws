@@ -159,8 +159,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -583,8 +582,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -641,8 +639,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -1189,8 +1186,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -1360,8 +1356,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -1418,8 +1413,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -1894,8 +1888,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -2074,8 +2067,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:
@@ -2132,8 +2124,7 @@ spec:
                                     imageVersionNumber:
                                       description: The version number of the Custom
                                         Image.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               defaultResourceSpec:

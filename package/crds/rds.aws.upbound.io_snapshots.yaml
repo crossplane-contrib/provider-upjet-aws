@@ -354,8 +354,7 @@ spec:
                   allocatedStorage:
                     description: Specifies the allocated storage size in gigabytes
                       (GB).
-                    format: int64
-                    type: integer
+                    type: number
                   availabilityZone:
                     description: Specifies the name of the Availability Zone the DB
                       instance was located in at the time of the DB snapshot.
@@ -381,8 +380,7 @@ spec:
                   iops:
                     description: Specifies the Provisioned IOPS (I/O operations per
                       second) value of the DB instance at the time of the snapshot.
-                    format: int64
-                    type: integer
+                    type: number
                   kmsKeyId:
                     description: The ARN for the KMS encryption key.
                     type: string
@@ -393,8 +391,7 @@ spec:
                     description: Provides the option group name for the DB snapshot.
                     type: string
                   port:
-                    format: int64
-                    type: integer
+                    type: number
                   sharedAccounts:
                     description: List of AWS Account ids to share snapshot with, use
                       all to make snaphot public.

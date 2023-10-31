@@ -119,7 +119,7 @@ func (in *DNSRecordsInitParameters) DeepCopyInto(out *DNSRecordsInitParameters) 
 	*out = *in
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -144,7 +144,7 @@ func (in *DNSRecordsObservation) DeepCopyInto(out *DNSRecordsObservation) {
 	*out = *in
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -169,7 +169,7 @@ func (in *DNSRecordsParameters) DeepCopyInto(out *DNSRecordsParameters) {
 	*out = *in
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Type != nil {
@@ -447,7 +447,7 @@ func (in *HealthCheckConfigInitParameters) DeepCopyInto(out *HealthCheckConfigIn
 	*out = *in
 	if in.FailureThreshold != nil {
 		in, out := &in.FailureThreshold, &out.FailureThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourcePath != nil {
@@ -477,7 +477,7 @@ func (in *HealthCheckConfigObservation) DeepCopyInto(out *HealthCheckConfigObser
 	*out = *in
 	if in.FailureThreshold != nil {
 		in, out := &in.FailureThreshold, &out.FailureThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourcePath != nil {
@@ -507,7 +507,7 @@ func (in *HealthCheckConfigParameters) DeepCopyInto(out *HealthCheckConfigParame
 	*out = *in
 	if in.FailureThreshold != nil {
 		in, out := &in.FailureThreshold, &out.FailureThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResourcePath != nil {
@@ -537,7 +537,7 @@ func (in *HealthCheckCustomConfigInitParameters) DeepCopyInto(out *HealthCheckCu
 	*out = *in
 	if in.FailureThreshold != nil {
 		in, out := &in.FailureThreshold, &out.FailureThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -557,7 +557,7 @@ func (in *HealthCheckCustomConfigObservation) DeepCopyInto(out *HealthCheckCusto
 	*out = *in
 	if in.FailureThreshold != nil {
 		in, out := &in.FailureThreshold, &out.FailureThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -577,7 +577,7 @@ func (in *HealthCheckCustomConfigParameters) DeepCopyInto(out *HealthCheckCustom
 	*out = *in
 	if in.FailureThreshold != nil {
 		in, out := &in.FailureThreshold, &out.FailureThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

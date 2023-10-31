@@ -90,14 +90,12 @@ spec:
                         port:
                           description: The designated origination route port. Defaults
                             to 5060.
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: The priority associated with the host, with
                             1 being the highest priority. Higher priority hosts are
                             attempted first.
-                          format: int64
-                          type: integer
+                          type: number
                         protocol:
                           description: The protocol to use for the origination route.
                             Encryption-enabled Amazon Chime Voice Connectors use TCP
@@ -107,8 +105,7 @@ spec:
                           description: The weight associated with the host. If hosts
                             are equal in priority, calls are redistributed among them
                             based on their relative weight.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   voiceConnectorId:
@@ -221,14 +218,12 @@ spec:
                         port:
                           description: The designated origination route port. Defaults
                             to 5060.
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: The priority associated with the host, with
                             1 being the highest priority. Higher priority hosts are
                             attempted first.
-                          format: int64
-                          type: integer
+                          type: number
                         protocol:
                           description: The protocol to use for the origination route.
                             Encryption-enabled Amazon Chime Voice Connectors use TCP
@@ -238,8 +233,7 @@ spec:
                           description: The weight associated with the host. If hosts
                             are equal in priority, calls are redistributed among them
                             based on their relative weight.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -434,14 +428,12 @@ spec:
                         port:
                           description: The designated origination route port. Defaults
                             to 5060.
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: The priority associated with the host, with
                             1 being the highest priority. Higher priority hosts are
                             attempted first.
-                          format: int64
-                          type: integer
+                          type: number
                         protocol:
                           description: The protocol to use for the origination route.
                             Encryption-enabled Amazon Chime Voice Connectors use TCP
@@ -451,8 +443,7 @@ spec:
                           description: The weight associated with the host. If hosts
                             are equal in priority, calls are redistributed among them
                             based on their relative weight.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   voiceConnectorId:

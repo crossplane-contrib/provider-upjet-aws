@@ -84,8 +84,7 @@ spec:
                               priority:
                                 description: Positive integer specifying priority
                                   of a method with 1 being the highest priority.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -301,8 +300,7 @@ spec:
                         minimumLength:
                           description: Minimum length of the password policy that
                             you have set.
-                          format: int64
-                          type: integer
+                          type: number
                         requireLowercase:
                           description: Whether you have required users to use at least
                             one lowercase letter in their password.
@@ -324,8 +322,7 @@ spec:
                             to the number of days a temporary password is valid. If
                             the user does not sign-in during this time, their password
                             will need to be reset by an administrator.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   region:
@@ -637,8 +634,7 @@ spec:
                               priority:
                                 description: Positive integer specifying priority
                                   of a method with 1 being the highest priority.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -854,8 +850,7 @@ spec:
                         minimumLength:
                           description: Minimum length of the password policy that
                             you have set.
-                          format: int64
-                          type: integer
+                          type: number
                         requireLowercase:
                           description: Whether you have required users to use at least
                             one lowercase letter in their password.
@@ -877,8 +872,7 @@ spec:
                             to the number of days a temporary password is valid. If
                             the user does not sign-in during this time, their password
                             will need to be reset by an administrator.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   schema:
@@ -1262,8 +1256,7 @@ spec:
                               priority:
                                 description: Positive integer specifying priority
                                   of a method with 1 being the highest priority.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -1399,8 +1392,7 @@ spec:
                     type: string
                   estimatedNumberOfUsers:
                     description: A number estimating the size of the user pool.
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     description: ID of the user pool.
                     type: string
@@ -1509,8 +1501,7 @@ spec:
                         minimumLength:
                           description: Minimum length of the password policy that
                             you have set.
-                          format: int64
-                          type: integer
+                          type: number
                         requireLowercase:
                           description: Whether you have required users to use at least
                             one lowercase letter in their password.
@@ -1532,8 +1523,7 @@ spec:
                             to the number of days a temporary password is valid. If
                             the user does not sign-in during this time, their password
                             will need to be reset by an administrator.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   schema:

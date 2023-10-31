@@ -146,8 +146,7 @@ spec:
                   loadBalancerPort:
                     description: The load balancer listener port to apply the policy
                       to.
-                    format: int64
-                    type: integer
+                    type: number
                   policyNames:
                     description: List of Policy Names to apply to the backend server.
                     items:
@@ -181,8 +180,7 @@ spec:
                   loadBalancerPort:
                     description: The load balancer listener port to apply the policy
                       to.
-                    format: int64
-                    type: integer
+                    type: number
                   policyNames:
                     description: List of Policy Names to apply to the backend server.
                     items:
@@ -374,8 +372,7 @@ spec:
                   loadBalancerPort:
                     description: The load balancer listener port to apply the policy
                       to.
-                    format: int64
-                    type: integer
+                    type: number
                   policyNames:
                     description: List of Policy Names to apply to the backend server.
                     items:

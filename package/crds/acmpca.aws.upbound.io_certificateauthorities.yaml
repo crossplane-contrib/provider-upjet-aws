@@ -183,8 +183,7 @@ spec:
                     description: Number of days to make a CA restorable after it has
                       been deleted, must be between 7 to 30 days, with default to
                       30 days.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -216,8 +215,7 @@ spec:
                               expirationInDays:
                                 description: Number of days until a certificate expires.
                                   Must be between 1 and 5000.
-                                format: int64
-                                type: integer
+                                type: number
                               s3BucketName:
                                 description: Name of the S3 bucket that contains the
                                   CRL. If you do not provide a value for the custom_cname
@@ -399,8 +397,7 @@ spec:
                     description: Number of days to make a CA restorable after it has
                       been deleted, must be between 7 to 30 days, with default to
                       30 days.
-                    format: int64
-                    type: integer
+                    type: number
                   revocationConfiguration:
                     description: Nested argument containing revocation configuration.
                       Defined below.
@@ -428,8 +425,7 @@ spec:
                               expirationInDays:
                                 description: Number of days until a certificate expires.
                                   Must be between 1 and 5000.
-                                format: int64
-                                type: integer
+                                type: number
                               s3BucketName:
                                 description: Name of the S3 bucket that contains the
                                   CRL. If you do not provide a value for the custom_cname
@@ -802,8 +798,7 @@ spec:
                     description: Number of days to make a CA restorable after it has
                       been deleted, must be between 7 to 30 days, with default to
                       30 days.
-                    format: int64
-                    type: integer
+                    type: number
                   revocationConfiguration:
                     description: Nested argument containing revocation configuration.
                       Defined below.
@@ -831,8 +826,7 @@ spec:
                               expirationInDays:
                                 description: Number of days until a certificate expires.
                                   Must be between 1 and 5000.
-                                format: int64
-                                type: integer
+                                type: number
                               s3BucketName:
                                 description: Name of the S3 bucket that contains the
                                   CRL. If you do not provide a value for the custom_cname

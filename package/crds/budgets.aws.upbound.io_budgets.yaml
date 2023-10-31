@@ -82,8 +82,7 @@ spec:
                           items:
                             properties:
                               budgetAdjustmentPeriod:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -275,8 +274,7 @@ spec:
                           items:
                             properties:
                               budgetAdjustmentPeriod:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -627,11 +625,9 @@ spec:
                           items:
                             properties:
                               budgetAdjustmentPeriod:
-                                format: int64
-                                type: integer
+                                type: number
                               lookbackAvailablePeriods:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         lastAutoAdjustTime:

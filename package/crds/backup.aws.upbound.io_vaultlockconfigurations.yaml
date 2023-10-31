@@ -148,18 +148,15 @@ spec:
                     description: The number of days before the lock date. If omitted
                       creates a vault lock in governance mode, otherwise it will create
                       a vault lock in compliance mode.
-                    format: int64
-                    type: integer
+                    type: number
                   maxRetentionDays:
                     description: The maximum retention period that the vault retains
                       its recovery points.
-                    format: int64
-                    type: integer
+                    type: number
                   minRetentionDays:
                     description: The minimum retention period that the vault retains
                       its recovery points.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -183,18 +180,15 @@ spec:
                     description: The number of days before the lock date. If omitted
                       creates a vault lock in governance mode, otherwise it will create
                       a vault lock in compliance mode.
-                    format: int64
-                    type: integer
+                    type: number
                   maxRetentionDays:
                     description: The maximum retention period that the vault retains
                       its recovery points.
-                    format: int64
-                    type: integer
+                    type: number
                   minRetentionDays:
                     description: The minimum retention period that the vault retains
                       its recovery points.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -373,20 +367,17 @@ spec:
                     description: The number of days before the lock date. If omitted
                       creates a vault lock in governance mode, otherwise it will create
                       a vault lock in compliance mode.
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     type: string
                   maxRetentionDays:
                     description: The maximum retention period that the vault retains
                       its recovery points.
-                    format: int64
-                    type: integer
+                    type: number
                   minRetentionDays:
                     description: The minimum retention period that the vault retains
                       its recovery points.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

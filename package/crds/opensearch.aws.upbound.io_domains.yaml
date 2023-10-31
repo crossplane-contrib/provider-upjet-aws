@@ -163,8 +163,7 @@ spec:
                                       description: An integer specifying the value
                                         of the duration of an Auto-Tune maintenance
                                         window.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               startAt:
@@ -199,8 +198,7 @@ spec:
                           type: array
                         dedicatedMasterCount:
                           description: Number of dedicated main nodes in the cluster.
-                          format: int64
-                          type: integer
+                          type: number
                         dedicatedMasterEnabled:
                           description: Whether dedicated main nodes are enabled for
                             the cluster.
@@ -211,8 +209,7 @@ spec:
                           type: string
                         instanceCount:
                           description: Number of instances in the cluster.
-                          format: int64
-                          type: integer
+                          type: number
                         instanceType:
                           description: Instance type of data nodes in the cluster.
                           type: string
@@ -220,8 +217,7 @@ spec:
                           description: Number of warm nodes in the cluster. Valid
                             values are between 2 and 150. warm_count can be only and
                             must be set when warm_enabled is set to true.
-                          format: int64
-                          type: integer
+                          type: number
                         warmEnabled:
                           description: Whether to enable warm storage.
                           type: boolean
@@ -241,8 +237,7 @@ spec:
                                 description: 'Number of Availability Zones for the
                                   domain to use with zone_awareness_enabled. Defaults
                                   to 2. Valid values: 2 or 3.'
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         zoneAwarenessEnabled:
@@ -316,19 +311,16 @@ spec:
                           description: Baseline input/output (I/O) performance of
                             EBS volumes attached to data nodes. Applicable only for
                             the GP3 and Provisioned IOPS EBS volume types.
-                          format: int64
-                          type: integer
+                          type: number
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
                             the gp3 volume type.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes
                             (in GiB).
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: Type of EBS volumes attached to data nodes.
                           type: string
@@ -485,8 +477,7 @@ spec:
                         automatedSnapshotStartHour:
                           description: Hour during which the service takes an automated
                             daily snapshot of the indices in the domain.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -607,8 +598,7 @@ spec:
                                       description: An integer specifying the value
                                         of the duration of an Auto-Tune maintenance
                                         window.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               startAt:
@@ -643,8 +633,7 @@ spec:
                           type: array
                         dedicatedMasterCount:
                           description: Number of dedicated main nodes in the cluster.
-                          format: int64
-                          type: integer
+                          type: number
                         dedicatedMasterEnabled:
                           description: Whether dedicated main nodes are enabled for
                             the cluster.
@@ -655,8 +644,7 @@ spec:
                           type: string
                         instanceCount:
                           description: Number of instances in the cluster.
-                          format: int64
-                          type: integer
+                          type: number
                         instanceType:
                           description: Instance type of data nodes in the cluster.
                           type: string
@@ -664,8 +652,7 @@ spec:
                           description: Number of warm nodes in the cluster. Valid
                             values are between 2 and 150. warm_count can be only and
                             must be set when warm_enabled is set to true.
-                          format: int64
-                          type: integer
+                          type: number
                         warmEnabled:
                           description: Whether to enable warm storage.
                           type: boolean
@@ -685,8 +672,7 @@ spec:
                                 description: 'Number of Availability Zones for the
                                   domain to use with zone_awareness_enabled. Defaults
                                   to 2. Valid values: 2 or 3.'
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         zoneAwarenessEnabled:
@@ -760,19 +746,16 @@ spec:
                           description: Baseline input/output (I/O) performance of
                             EBS volumes attached to data nodes. Applicable only for
                             the GP3 and Provisioned IOPS EBS volume types.
-                          format: int64
-                          type: integer
+                          type: number
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
                             the gp3 volume type.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes
                             (in GiB).
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: Type of EBS volumes attached to data nodes.
                           type: string
@@ -843,8 +826,7 @@ spec:
                         automatedSnapshotStartHour:
                           description: Hour during which the service takes an automated
                             daily snapshot of the indices in the domain.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -1127,8 +1109,7 @@ spec:
                                       description: An integer specifying the value
                                         of the duration of an Auto-Tune maintenance
                                         window.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               startAt:
@@ -1163,8 +1144,7 @@ spec:
                           type: array
                         dedicatedMasterCount:
                           description: Number of dedicated main nodes in the cluster.
-                          format: int64
-                          type: integer
+                          type: number
                         dedicatedMasterEnabled:
                           description: Whether dedicated main nodes are enabled for
                             the cluster.
@@ -1175,8 +1155,7 @@ spec:
                           type: string
                         instanceCount:
                           description: Number of instances in the cluster.
-                          format: int64
-                          type: integer
+                          type: number
                         instanceType:
                           description: Instance type of data nodes in the cluster.
                           type: string
@@ -1184,8 +1163,7 @@ spec:
                           description: Number of warm nodes in the cluster. Valid
                             values are between 2 and 150. warm_count can be only and
                             must be set when warm_enabled is set to true.
-                          format: int64
-                          type: integer
+                          type: number
                         warmEnabled:
                           description: Whether to enable warm storage.
                           type: boolean
@@ -1205,8 +1183,7 @@ spec:
                                 description: 'Number of Availability Zones for the
                                   domain to use with zone_awareness_enabled. Defaults
                                   to 2. Valid values: 2 or 3.'
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         zoneAwarenessEnabled:
@@ -1287,19 +1264,16 @@ spec:
                           description: Baseline input/output (I/O) performance of
                             EBS volumes attached to data nodes. Applicable only for
                             the GP3 and Provisioned IOPS EBS volume types.
-                          format: int64
-                          type: integer
+                          type: number
                         throughput:
                           description: Specifies the throughput (in MiB/s) of the
                             EBS volumes attached to data nodes. Applicable only for
                             the gp3 volume type.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: Size of EBS volumes attached to data nodes
                             (in GiB).
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: Type of EBS volumes attached to data nodes.
                           type: string
@@ -1385,8 +1359,7 @@ spec:
                         automatedSnapshotStartHour:
                           description: Hour during which the service takes an automated
                             daily snapshot of the indices in the domain.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:

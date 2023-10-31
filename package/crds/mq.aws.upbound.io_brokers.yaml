@@ -172,8 +172,7 @@ spec:
                           type: object
                         revision:
                           description: Revision of the Configuration.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   deploymentMode:
@@ -581,8 +580,7 @@ spec:
                       properties:
                         revision:
                           description: Revision of the Configuration.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   deploymentMode:
@@ -960,8 +958,7 @@ spec:
                           type: string
                         revision:
                           description: Revision of the Configuration.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   deploymentMode:

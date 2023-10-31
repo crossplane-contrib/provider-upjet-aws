@@ -78,8 +78,7 @@ spec:
                   bgpAsn:
                     description: The autonomous system (AS) number for Border Gateway
                       Protocol (BGP) configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
                     type: string
@@ -173,8 +172,7 @@ spec:
                       in bytes, of the largest permissible packet that can be passed
                       over the connection. The MTU of a virtual private interface
                       can be either 1500 or 9001 (jumbo frames). Default is 1500.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: The name for the virtual interface.
                     type: string
@@ -192,8 +190,7 @@ spec:
                     type: object
                   vlan:
                     description: The VLAN ID.
-                    format: int64
-                    type: integer
+                    type: number
                   vpnGatewayId:
                     description: The ID of the virtual private gateway to which to
                       connect the virtual interface.
@@ -296,8 +293,7 @@ spec:
                   bgpAsn:
                     description: The autonomous system (AS) number for Border Gateway
                       Protocol (BGP) configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
                     type: string
@@ -314,8 +310,7 @@ spec:
                       in bytes, of the largest permissible packet that can be passed
                       over the connection. The MTU of a virtual private interface
                       can be either 1500 or 9001 (jumbo frames). Default is 1500.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: The name for the virtual interface.
                     type: string
@@ -329,8 +324,7 @@ spec:
                     type: object
                   vlan:
                     description: The VLAN ID.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -534,8 +528,7 @@ spec:
                   bgpAsn:
                     description: The autonomous system (AS) number for Border Gateway
                       Protocol (BGP) configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
                     type: string
@@ -562,8 +555,7 @@ spec:
                       in bytes, of the largest permissible packet that can be passed
                       over the connection. The MTU of a virtual private interface
                       can be either 1500 or 9001 (jumbo frames). Default is 1500.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: The name for the virtual interface.
                     type: string
@@ -584,8 +576,7 @@ spec:
                     type: object
                   vlan:
                     description: The VLAN ID.
-                    format: int64
-                    type: integer
+                    type: number
                   vpnGatewayId:
                     description: The ID of the virtual private gateway to which to
                       connect the virtual interface.

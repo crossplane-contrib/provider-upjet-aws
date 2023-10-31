@@ -408,11 +408,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -420,8 +418,7 @@ spec:
                               ruleAction:
                                 type: string
                               ruleNumber:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         address:
@@ -455,11 +452,9 @@ spec:
                           items:
                             properties:
                               instancePort:
-                                format: int64
-                                type: integer
+                                type: number
                               loadBalancerPort:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         component:
@@ -561,8 +556,7 @@ spec:
                           description: ARN of the Network Insights Analysis.
                           type: string
                         loadBalancerListenerPort:
-                          format: int64
-                          type: integer
+                          type: number
                         loadBalancerTargetGroup:
                           items:
                             properties:
@@ -590,8 +584,7 @@ spec:
                             type: object
                           type: array
                         loadBalancerTargetPort:
-                          format: int64
-                          type: integer
+                          type: number
                         missingComponent:
                           type: string
                         natGateway:
@@ -623,17 +616,14 @@ spec:
                         packetField:
                           type: string
                         port:
-                          format: int64
-                          type: integer
+                          type: number
                         portRanges:
                           items:
                             properties:
                               from:
-                                format: int64
-                                type: integer
+                                type: number
                               to:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         prefixList:
@@ -723,11 +713,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               prefixListId:
@@ -943,11 +931,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -955,8 +941,7 @@ spec:
                               ruleAction:
                                 type: string
                               ruleNumber:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         additionalDetails:
@@ -1029,11 +1014,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -1046,11 +1029,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -1066,11 +1047,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -1083,11 +1062,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -1136,11 +1113,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               prefixListId:
@@ -1154,8 +1129,7 @@ spec:
                             type: object
                           type: array
                         sequenceNumber:
-                          format: int64
-                          type: integer
+                          type: number
                         sourceVpc:
                           items:
                             properties:
@@ -1258,11 +1232,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -1270,8 +1242,7 @@ spec:
                               ruleAction:
                                 type: string
                               ruleNumber:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         additionalDetails:
@@ -1344,11 +1315,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -1361,11 +1330,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -1381,11 +1348,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               protocol:
@@ -1398,11 +1363,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -1451,11 +1414,9 @@ spec:
                                 items:
                                   properties:
                                     from:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     to:
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               prefixListId:
@@ -1469,8 +1430,7 @@ spec:
                             type: object
                           type: array
                         sequenceNumber:
-                          format: int64
-                          type: integer
+                          type: number
                         sourceVpc:
                           items:
                             properties:

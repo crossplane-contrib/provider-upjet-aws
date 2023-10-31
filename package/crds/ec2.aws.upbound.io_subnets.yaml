@@ -99,8 +99,7 @@ spec:
                       in this subnet are the secondary network interface (eth1). A
                       local network interface cannot be the primary network interface
                       (eth0).
-                    format: int64
-                    type: integer
+                    type: number
                   enableResourceNameDnsARecordOnLaunch:
                     description: 'Indicates whether to respond to DNS queries for
                       instance hostnames with DNS A records. Default: false.'
@@ -270,8 +269,7 @@ spec:
                       in this subnet are the secondary network interface (eth1). A
                       local network interface cannot be the primary network interface
                       (eth0).
-                    format: int64
-                    type: integer
+                    type: number
                   enableResourceNameDnsARecordOnLaunch:
                     description: 'Indicates whether to respond to DNS queries for
                       instance hostnames with DNS A records. Default: false.'
@@ -515,8 +513,7 @@ spec:
                       in this subnet are the secondary network interface (eth1). A
                       local network interface cannot be the primary network interface
                       (eth0).
-                    format: int64
-                    type: integer
+                    type: number
                   enableResourceNameDnsARecordOnLaunch:
                     description: 'Indicates whether to respond to DNS queries for
                       instance hostnames with DNS A records. Default: false.'

@@ -85,8 +85,7 @@ spec:
                                 description: The amount of time, in seconds, that
                                   you want DNS resolvers to cache the settings for
                                   this resource record set.
-                                format: int64
-                                type: integer
+                                type: number
                               type:
                                 description: 'The type of the resource, which indicates
                                   the value that Amazon Route 53 returns in response
@@ -196,8 +195,7 @@ spec:
                         failureThreshold:
                           description: The number of consecutive health checks. Maximum
                             value of 10.
-                          format: int64
-                          type: integer
+                          type: number
                         resourcePath:
                           description: The path that you want Route 53 to request
                             when performing health checks. Route 53 automatically
@@ -220,8 +218,7 @@ spec:
                           description: The number of 30-second intervals that you
                             want service discovery to wait before it changes the health
                             status of a service instance.  Maximum value of 10.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -279,8 +276,7 @@ spec:
                                 description: The amount of time, in seconds, that
                                   you want DNS resolvers to cache the settings for
                                   this resource record set.
-                                format: int64
-                                type: integer
+                                type: number
                               type:
                                 description: 'The type of the resource, which indicates
                                   the value that Amazon Route 53 returns in response
@@ -309,8 +305,7 @@ spec:
                         failureThreshold:
                           description: The number of consecutive health checks. Maximum
                             value of 10.
-                          format: int64
-                          type: integer
+                          type: number
                         resourcePath:
                           description: The path that you want Route 53 to request
                             when performing health checks. Route 53 automatically
@@ -333,8 +328,7 @@ spec:
                           description: The number of 30-second intervals that you
                             want service discovery to wait before it changes the health
                             status of a service instance.  Maximum value of 10.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -547,8 +541,7 @@ spec:
                                 description: The amount of time, in seconds, that
                                   you want DNS resolvers to cache the settings for
                                   this resource record set.
-                                format: int64
-                                type: integer
+                                type: number
                               type:
                                 description: 'The type of the resource, which indicates
                                   the value that Amazon Route 53 returns in response
@@ -580,8 +573,7 @@ spec:
                         failureThreshold:
                           description: The number of consecutive health checks. Maximum
                             value of 10.
-                          format: int64
-                          type: integer
+                          type: number
                         resourcePath:
                           description: The path that you want Route 53 to request
                             when performing health checks. Route 53 automatically
@@ -604,8 +596,7 @@ spec:
                           description: The number of 30-second intervals that you
                             want service discovery to wait before it changes the health
                             status of a service instance.  Maximum value of 10.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   id:

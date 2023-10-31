@@ -55,7 +55,7 @@ type StackInitParameters struct {
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED.
-	TimeoutInMinutes *int64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 }
 
 type StackObservation struct {
@@ -111,7 +111,7 @@ type StackObservation struct {
 	TemplateURL *string `json:"templateUrl,omitempty" tf:"template_url,omitempty"`
 
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED.
-	TimeoutInMinutes *int64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 }
 
 type StackParameters struct {
@@ -186,7 +186,7 @@ type StackParameters struct {
 
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED.
 	// +kubebuilder:validation:Optional
-	TimeoutInMinutes *int64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 }
 
 // StackSpec defines the desired state of Stack

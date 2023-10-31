@@ -85,18 +85,15 @@ spec:
                           description: Minimum amount of time you want HTTP error
                             codes to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                          format: int64
-                          type: integer
+                          type: number
                         errorCode:
                           description: 4xx or 5xx HTTP status code that you want to
                             customize.
-                          format: int64
-                          type: integer
+                          type: number
                         responseCode:
                           description: HTTP status code that you want CloudFront to
                             return with the custom error page to the viewer.
-                          format: int64
-                          type: integer
+                          type: number
                         responsePagePath:
                           description: Path of the custom error page (for example,
                             /custom_404.html).
@@ -137,8 +134,7 @@ spec:
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
                             or Expires header.
-                          format: int64
-                          type: integer
+                          type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
                           type: string
@@ -235,15 +231,13 @@ spec:
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
                             Expires headers.
-                          format: int64
-                          type: integer
+                          type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
                             Defaults to 0 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
                             that is attached to the behavior.
@@ -357,8 +351,7 @@ spec:
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
                             or Expires header.
-                          format: int64
-                          type: integer
+                          type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
                           type: string
@@ -615,15 +608,13 @@ spec:
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
                             Expires headers.
-                          format: int64
-                          type: integer
+                          type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
                             Defaults to 0 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
                             that is attached to the behavior.
@@ -681,14 +672,12 @@ spec:
                           description: Number of times that CloudFront attempts to
                             connect to the origin. Must be between 1-3. Defaults to
                             3.
-                          format: int64
-                          type: integer
+                          type: number
                         connectionTimeout:
                           description: Number of seconds that CloudFront waits when
                             trying to establish a connection to the origin. Must be
                             between 1-10. Defaults to 10.
-                          format: int64
-                          type: integer
+                          type: number
                         customHeader:
                           description: One or more sub-resources with name and value
                             parameters that specify header data that will be sent
@@ -709,19 +698,16 @@ spec:
                             properties:
                               httpPort:
                                 description: HTTP port the custom origin listens on.
-                                format: int64
-                                type: integer
+                                type: number
                               httpsPort:
                                 description: HTTPS port the custom origin listens
                                   on.
-                                format: int64
-                                type: integer
+                                type: number
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
                                   By default, AWS enforces a limit of 60. But you
                                   can request an increase.
-                                format: int64
-                                type: integer
+                                type: number
                               originProtocolPolicy:
                                 description: Origin protocol policy to apply to your
                                   origin. One of http-only, https-only, or match-viewer.
@@ -730,8 +716,7 @@ spec:
                                 description: The Custom Read timeout, in seconds.
                                   By default, AWS enforces a limit of 60. But you
                                   can request an increase.
-                                format: int64
-                                type: integer
+                                type: number
                               originSslProtocols:
                                 description: SSL/TLS protocols that you want CloudFront
                                   to use when communicating with your origin over
@@ -963,8 +948,7 @@ spec:
                                 description: List of HTTP status codes for the origin
                                   group.
                                 items:
-                                  format: int64
-                                  type: integer
+                                  type: number
                                 type: array
                             type: object
                           type: array
@@ -1120,18 +1104,15 @@ spec:
                           description: Minimum amount of time you want HTTP error
                             codes to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                          format: int64
-                          type: integer
+                          type: number
                         errorCode:
                           description: 4xx or 5xx HTTP status code that you want to
                             customize.
-                          format: int64
-                          type: integer
+                          type: number
                         responseCode:
                           description: HTTP status code that you want CloudFront to
                             return with the custom error page to the viewer.
-                          format: int64
-                          type: integer
+                          type: number
                         responsePagePath:
                           description: Path of the custom error page (for example,
                             /custom_404.html).
@@ -1172,8 +1153,7 @@ spec:
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
                             or Expires header.
-                          format: int64
-                          type: integer
+                          type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
                           type: string
@@ -1270,15 +1250,13 @@ spec:
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
                             Expires headers.
-                          format: int64
-                          type: integer
+                          type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
                             Defaults to 0 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
                             that is attached to the behavior.
@@ -1392,8 +1370,7 @@ spec:
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
                             or Expires header.
-                          format: int64
-                          type: integer
+                          type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
                           type: string
@@ -1484,15 +1461,13 @@ spec:
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
                             Expires headers.
-                          format: int64
-                          type: integer
+                          type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
                             Defaults to 0 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
                             that is attached to the behavior.
@@ -1550,14 +1525,12 @@ spec:
                           description: Number of times that CloudFront attempts to
                             connect to the origin. Must be between 1-3. Defaults to
                             3.
-                          format: int64
-                          type: integer
+                          type: number
                         connectionTimeout:
                           description: Number of seconds that CloudFront waits when
                             trying to establish a connection to the origin. Must be
                             between 1-10. Defaults to 10.
-                          format: int64
-                          type: integer
+                          type: number
                         customHeader:
                           description: One or more sub-resources with name and value
                             parameters that specify header data that will be sent
@@ -1578,19 +1551,16 @@ spec:
                             properties:
                               httpPort:
                                 description: HTTP port the custom origin listens on.
-                                format: int64
-                                type: integer
+                                type: number
                               httpsPort:
                                 description: HTTPS port the custom origin listens
                                   on.
-                                format: int64
-                                type: integer
+                                type: number
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
                                   By default, AWS enforces a limit of 60. But you
                                   can request an increase.
-                                format: int64
-                                type: integer
+                                type: number
                               originProtocolPolicy:
                                 description: Origin protocol policy to apply to your
                                   origin. One of http-only, https-only, or match-viewer.
@@ -1599,8 +1569,7 @@ spec:
                                 description: The Custom Read timeout, in seconds.
                                   By default, AWS enforces a limit of 60. But you
                                   can request an increase.
-                                format: int64
-                                type: integer
+                                type: number
                               originSslProtocols:
                                 description: SSL/TLS protocols that you want CloudFront
                                   to use when communicating with your origin over
@@ -1665,8 +1634,7 @@ spec:
                                 description: List of HTTP status codes for the origin
                                   group.
                                 items:
-                                  format: int64
-                                  type: integer
+                                  type: number
                                 type: array
                             type: object
                           type: array
@@ -1998,18 +1966,15 @@ spec:
                           description: Minimum amount of time you want HTTP error
                             codes to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
-                          format: int64
-                          type: integer
+                          type: number
                         errorCode:
                           description: 4xx or 5xx HTTP status code that you want to
                             customize.
-                          format: int64
-                          type: integer
+                          type: number
                         responseCode:
                           description: HTTP status code that you want CloudFront to
                             return with the custom error page to the viewer.
-                          format: int64
-                          type: integer
+                          type: number
                         responsePagePath:
                           description: Path of the custom error page (for example,
                             /custom_404.html).
@@ -2050,8 +2015,7 @@ spec:
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
                             or Expires header.
-                          format: int64
-                          type: integer
+                          type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
                           type: string
@@ -2148,15 +2112,13 @@ spec:
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
                             Expires headers.
-                          format: int64
-                          type: integer
+                          type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
                             Defaults to 0 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
                             that is attached to the behavior.
@@ -2232,8 +2194,7 @@ spec:
                     type: string
                   inProgressValidationBatches:
                     description: Number of invalidation batches currently in progress.
-                    format: int64
-                    type: integer
+                    type: number
                   isIpv6Enabled:
                     description: Whether the IPv6 is enabled for the distribution.
                     type: boolean
@@ -2293,8 +2254,7 @@ spec:
                             object is in a CloudFront cache before CloudFront forwards
                             another request in the absence of an Cache-Control max-age
                             or Expires header.
-                          format: int64
-                          type: integer
+                          type: number
                         fieldLevelEncryptionId:
                           description: Field level encryption configuration ID.
                           type: string
@@ -2391,15 +2351,13 @@ spec:
                             object has been updated. Only effective in the presence
                             of Cache-Control max-age, Cache-Control s-maxage, and
                             Expires headers.
-                          format: int64
-                          type: integer
+                          type: number
                         minTtl:
                           description: Minimum amount of time that you want objects
                             to stay in CloudFront caches before CloudFront queries
                             your origin to see whether the object has been updated.
                             Defaults to 0 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                         originRequestPolicyId:
                           description: Unique identifier of the origin request policy
                             that is attached to the behavior.
@@ -2457,14 +2415,12 @@ spec:
                           description: Number of times that CloudFront attempts to
                             connect to the origin. Must be between 1-3. Defaults to
                             3.
-                          format: int64
-                          type: integer
+                          type: number
                         connectionTimeout:
                           description: Number of seconds that CloudFront waits when
                             trying to establish a connection to the origin. Must be
                             between 1-10. Defaults to 10.
-                          format: int64
-                          type: integer
+                          type: number
                         customHeader:
                           description: One or more sub-resources with name and value
                             parameters that specify header data that will be sent
@@ -2485,19 +2441,16 @@ spec:
                             properties:
                               httpPort:
                                 description: HTTP port the custom origin listens on.
-                                format: int64
-                                type: integer
+                                type: number
                               httpsPort:
                                 description: HTTPS port the custom origin listens
                                   on.
-                                format: int64
-                                type: integer
+                                type: number
                               originKeepaliveTimeout:
                                 description: The Custom KeepAlive timeout, in seconds.
                                   By default, AWS enforces a limit of 60. But you
                                   can request an increase.
-                                format: int64
-                                type: integer
+                                type: number
                               originProtocolPolicy:
                                 description: Origin protocol policy to apply to your
                                   origin. One of http-only, https-only, or match-viewer.
@@ -2506,8 +2459,7 @@ spec:
                                 description: The Custom Read timeout, in seconds.
                                   By default, AWS enforces a limit of 60. But you
                                   can request an increase.
-                                format: int64
-                                type: integer
+                                type: number
                               originSslProtocols:
                                 description: SSL/TLS protocols that you want CloudFront
                                   to use when communicating with your origin over
@@ -2581,8 +2533,7 @@ spec:
                                 description: List of HTTP status codes for the origin
                                   group.
                                 items:
-                                  format: int64
-                                  type: integer
+                                  type: number
                                 type: array
                             type: object
                           type: array

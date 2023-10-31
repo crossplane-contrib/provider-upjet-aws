@@ -70,8 +70,7 @@ spec:
                   cookieDuration:
                     description: The cookie duration in seconds. This determines the
                       length of the session stickiness.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: '- The Session Stickiness state of the load balancer.
                       true to activate session stickiness or false to deactivate session
@@ -99,8 +98,7 @@ spec:
                   cookieDuration:
                     description: The cookie duration in seconds. This determines the
                       length of the session stickiness.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: '- The Session Stickiness state of the load balancer.
                       true to activate session stickiness or false to deactivate session
@@ -284,8 +282,7 @@ spec:
                   cookieDuration:
                     description: The cookie duration in seconds. This determines the
                       length of the session stickiness.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: '- The Session Stickiness state of the load balancer.
                       true to activate session stickiness or false to deactivate session

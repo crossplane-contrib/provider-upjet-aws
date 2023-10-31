@@ -224,7 +224,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.AutomatedSnapshotRetentionPeriod != nil {
 		in, out := &in.AutomatedSnapshotRetentionPeriod, &out.AutomatedSnapshotRetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AvailabilityZone != nil {
@@ -322,7 +322,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.ManualSnapshotRetentionPeriod != nil {
 		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -337,7 +337,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.NumberOfNodes != nil {
 		in, out := &in.NumberOfNodes, &out.NumberOfNodes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OwnerAccount != nil {
@@ -347,7 +347,7 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PreferredMaintenanceWindow != nil {
@@ -527,7 +527,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.AutomatedSnapshotRetentionPeriod != nil {
 		in, out := &in.AutomatedSnapshotRetentionPeriod, &out.AutomatedSnapshotRetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AvailabilityZone != nil {
@@ -663,7 +663,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.ManualSnapshotRetentionPeriod != nil {
 		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -678,7 +678,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.NumberOfNodes != nil {
 		in, out := &in.NumberOfNodes, &out.NumberOfNodes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OwnerAccount != nil {
@@ -688,7 +688,7 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PreferredMaintenanceWindow != nil {
@@ -798,7 +798,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.AutomatedSnapshotRetentionPeriod != nil {
 		in, out := &in.AutomatedSnapshotRetentionPeriod, &out.AutomatedSnapshotRetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AvailabilityZone != nil {
@@ -949,7 +949,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.ManualSnapshotRetentionPeriod != nil {
 		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MasterPasswordSecretRef != nil {
@@ -969,7 +969,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.NumberOfNodes != nil {
 		in, out := &in.NumberOfNodes, &out.NumberOfNodes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OwnerAccount != nil {
@@ -979,7 +979,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PreferredMaintenanceWindow != nil {
@@ -2548,7 +2548,7 @@ func (in *ResizeClusterInitParameters) DeepCopyInto(out *ResizeClusterInitParame
 	}
 	if in.NumberOfNodes != nil {
 		in, out := &in.NumberOfNodes, &out.NumberOfNodes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2588,7 +2588,7 @@ func (in *ResizeClusterObservation) DeepCopyInto(out *ResizeClusterObservation) 
 	}
 	if in.NumberOfNodes != nil {
 		in, out := &in.NumberOfNodes, &out.NumberOfNodes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2628,7 +2628,7 @@ func (in *ResizeClusterParameters) DeepCopyInto(out *ResizeClusterParameters) {
 	}
 	if in.NumberOfNodes != nil {
 		in, out := &in.NumberOfNodes, &out.NumberOfNodes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3236,7 +3236,7 @@ func (in *SnapshotCopyInitParameters) DeepCopyInto(out *SnapshotCopyInitParamete
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3266,7 +3266,7 @@ func (in *SnapshotCopyObservation) DeepCopyInto(out *SnapshotCopyObservation) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3296,7 +3296,7 @@ func (in *SnapshotCopyParameters) DeepCopyInto(out *SnapshotCopyParameters) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4188,7 +4188,7 @@ func (in *UsageLimitInitParameters) DeepCopyInto(out *UsageLimitInitParameters) 
 	*out = *in
 	if in.Amount != nil {
 		in, out := &in.Amount, &out.Amount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BreachAction != nil {
@@ -4276,7 +4276,7 @@ func (in *UsageLimitObservation) DeepCopyInto(out *UsageLimitObservation) {
 	*out = *in
 	if in.Amount != nil {
 		in, out := &in.Amount, &out.Amount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Arn != nil {
@@ -4363,7 +4363,7 @@ func (in *UsageLimitParameters) DeepCopyInto(out *UsageLimitParameters) {
 	*out = *in
 	if in.Amount != nil {
 		in, out := &in.Amount, &out.Amount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BreachAction != nil {

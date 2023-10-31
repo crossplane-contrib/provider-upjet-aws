@@ -425,7 +425,7 @@ func (in *RecordingConfigurationInitParameters) DeepCopyInto(out *RecordingConfi
 	}
 	if in.RecordingReconnectWindowSeconds != nil {
 		in, out := &in.RecordingReconnectWindowSeconds, &out.RecordingReconnectWindowSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -522,7 +522,7 @@ func (in *RecordingConfigurationObservation) DeepCopyInto(out *RecordingConfigur
 	}
 	if in.RecordingReconnectWindowSeconds != nil {
 		in, out := &in.RecordingReconnectWindowSeconds, &out.RecordingReconnectWindowSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.State != nil {
@@ -598,7 +598,7 @@ func (in *RecordingConfigurationParameters) DeepCopyInto(out *RecordingConfigura
 	}
 	if in.RecordingReconnectWindowSeconds != nil {
 		in, out := &in.RecordingReconnectWindowSeconds, &out.RecordingReconnectWindowSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -746,7 +746,7 @@ func (in *ThumbnailConfigurationInitParameters) DeepCopyInto(out *ThumbnailConfi
 	}
 	if in.TargetIntervalSeconds != nil {
 		in, out := &in.TargetIntervalSeconds, &out.TargetIntervalSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -771,7 +771,7 @@ func (in *ThumbnailConfigurationObservation) DeepCopyInto(out *ThumbnailConfigur
 	}
 	if in.TargetIntervalSeconds != nil {
 		in, out := &in.TargetIntervalSeconds, &out.TargetIntervalSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -796,7 +796,7 @@ func (in *ThumbnailConfigurationParameters) DeepCopyInto(out *ThumbnailConfigura
 	}
 	if in.TargetIntervalSeconds != nil {
 		in, out := &in.TargetIntervalSeconds, &out.TargetIntervalSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

@@ -78,13 +78,11 @@ spec:
                         arraySize:
                           description: The size of the array, if this is an array
                             batch job. Valid values are integers between 2 and 10,000.
-                          format: int64
-                          type: integer
+                          type: number
                         jobAttempts:
                           description: The number of times to attempt to retry, if
                             the job fails. Valid values are 1 to 10.
-                          format: int64
-                          type: integer
+                          type: number
                         jobDefinition:
                           description: The ARN or name of the job definition to use
                             if the event target is an AWS Batch job. This job definition
@@ -126,8 +124,7 @@ spec:
                                   at a minimum, to run on the specified capacity provider.
                                   Only one capacity provider in a capacity provider
                                   strategy can have a base defined. Defaults to 0.
-                                format: int64
-                                type: integer
+                                type: number
                               capacityProvider:
                                 description: Short name of the capacity provider.
                                 type: string
@@ -137,8 +134,7 @@ spec:
                                   that should use the specified capacity provider.
                                   The weight value is taken into consideration after
                                   the base value, if defined, is satisfied.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         enableEcsManagedTags:
@@ -256,8 +252,7 @@ spec:
                         taskCount:
                           description: The number of tasks to create based on the
                             TaskDefinition. Defaults to 1.
-                          format: int64
-                          type: integer
+                          type: number
                         taskDefinitionArn:
                           description: The ARN of the task definition to use if the
                             event target is an Amazon ECS cluster.
@@ -527,13 +522,11 @@ spec:
                         maximumEventAgeInSeconds:
                           description: The age in seconds to continue to make retry
                             attempts.
-                          format: int64
-                          type: integer
+                          type: number
                         maximumRetryAttempts:
                           description: maximum number of retry attempts to make before
                             the request fails
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   roleArn:
@@ -752,13 +745,11 @@ spec:
                         arraySize:
                           description: The size of the array, if this is an array
                             batch job. Valid values are integers between 2 and 10,000.
-                          format: int64
-                          type: integer
+                          type: number
                         jobAttempts:
                           description: The number of times to attempt to retry, if
                             the job fails. Valid values are 1 to 10.
-                          format: int64
-                          type: integer
+                          type: number
                         jobDefinition:
                           description: The ARN or name of the job definition to use
                             if the event target is an AWS Batch job. This job definition
@@ -800,8 +791,7 @@ spec:
                                   at a minimum, to run on the specified capacity provider.
                                   Only one capacity provider in a capacity provider
                                   strategy can have a base defined. Defaults to 0.
-                                format: int64
-                                type: integer
+                                type: number
                               capacityProvider:
                                 description: Short name of the capacity provider.
                                 type: string
@@ -811,8 +801,7 @@ spec:
                                   that should use the specified capacity provider.
                                   The weight value is taken into consideration after
                                   the base value, if defined, is satisfied.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         enableEcsManagedTags:
@@ -930,8 +919,7 @@ spec:
                         taskCount:
                           description: The number of tasks to create based on the
                             TaskDefinition. Defaults to 1.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   httpTarget:
@@ -1038,13 +1026,11 @@ spec:
                         maximumEventAgeInSeconds:
                           description: The age in seconds to continue to make retry
                             attempts.
-                          format: int64
-                          type: integer
+                          type: number
                         maximumRetryAttempts:
                           description: maximum number of retry attempts to make before
                             the request fails
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   runCommandTargets:
@@ -1261,13 +1247,11 @@ spec:
                         arraySize:
                           description: The size of the array, if this is an array
                             batch job. Valid values are integers between 2 and 10,000.
-                          format: int64
-                          type: integer
+                          type: number
                         jobAttempts:
                           description: The number of times to attempt to retry, if
                             the job fails. Valid values are 1 to 10.
-                          format: int64
-                          type: integer
+                          type: number
                         jobDefinition:
                           description: The ARN or name of the job definition to use
                             if the event target is an AWS Batch job. This job definition
@@ -1309,8 +1293,7 @@ spec:
                                   at a minimum, to run on the specified capacity provider.
                                   Only one capacity provider in a capacity provider
                                   strategy can have a base defined. Defaults to 0.
-                                format: int64
-                                type: integer
+                                type: number
                               capacityProvider:
                                 description: Short name of the capacity provider.
                                 type: string
@@ -1320,8 +1303,7 @@ spec:
                                   that should use the specified capacity provider.
                                   The weight value is taken into consideration after
                                   the base value, if defined, is satisfied.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         enableEcsManagedTags:
@@ -1439,8 +1421,7 @@ spec:
                         taskCount:
                           description: The number of tasks to create based on the
                             TaskDefinition. Defaults to 1.
-                          format: int64
-                          type: integer
+                          type: number
                         taskDefinitionArn:
                           description: The ARN of the task definition to use if the
                             event target is an Amazon ECS cluster.
@@ -1557,13 +1538,11 @@ spec:
                         maximumEventAgeInSeconds:
                           description: The age in seconds to continue to make retry
                             attempts.
-                          format: int64
-                          type: integer
+                          type: number
                         maximumRetryAttempts:
                           description: maximum number of retry attempts to make before
                             the request fails
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   roleArn:

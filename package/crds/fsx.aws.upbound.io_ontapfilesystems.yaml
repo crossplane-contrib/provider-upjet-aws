@@ -71,8 +71,7 @@ spec:
                     description: The number of days to retain automatic backups. Setting
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days.
-                    format: int64
-                    type: integer
+                    type: number
                   dailyAutomaticBackupStartTime:
                     description: A recurring daily time, in the format HH:MM. HH is
                       the zero-padded hour of the day (0-23), and MM is the zero-padded
@@ -91,8 +90,7 @@ spec:
                         iops:
                           description: '- The total number of SSD IOPS provisioned
                             for the file system.'
-                          format: int64
-                          type: integer
+                          type: number
                         mode:
                           description: '- Specifies whether the number of IOPS for
                             the file system is using the system. Valid values are
@@ -379,8 +377,7 @@ spec:
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Valid
                       values between 1024 and 196608.
-                    format: int64
-                    type: integer
+                    type: number
                   storageType:
                     description: '- The filesystem storage type. defaults to SSD.'
                     type: string
@@ -476,8 +473,7 @@ spec:
                     description: Sets the throughput capacity (in MBps) for the file
                       system that you're creating. Valid values are 128, 256, 512,
                       1024, 2048, and 4096.
-                    format: int64
-                    type: integer
+                    type: number
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -501,8 +497,7 @@ spec:
                     description: The number of days to retain automatic backups. Setting
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days.
-                    format: int64
-                    type: integer
+                    type: number
                   dailyAutomaticBackupStartTime:
                     description: A recurring daily time, in the format HH:MM. HH is
                       the zero-padded hour of the day (0-23), and MM is the zero-padded
@@ -521,8 +516,7 @@ spec:
                         iops:
                           description: '- The total number of SSD IOPS provisioned
                             for the file system.'
-                          format: int64
-                          type: integer
+                          type: number
                         mode:
                           description: '- Specifies whether the number of IOPS for
                             the file system is using the system. Valid values are
@@ -548,8 +542,7 @@ spec:
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Valid
                       values between 1024 and 196608.
-                    format: int64
-                    type: integer
+                    type: number
                   storageType:
                     description: '- The filesystem storage type. defaults to SSD.'
                     type: string
@@ -562,8 +555,7 @@ spec:
                     description: Sets the throughput capacity (in MBps) for the file
                       system that you're creating. Valid values are 128, 256, 512,
                       1024, 2048, and 4096.
-                    format: int64
-                    type: integer
+                    type: number
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -750,8 +742,7 @@ spec:
                     description: The number of days to retain automatic backups. Setting
                       this to 0 disables automatic backups. You can retain automatic
                       backups for a maximum of 90 days.
-                    format: int64
-                    type: integer
+                    type: number
                   dailyAutomaticBackupStartTime:
                     description: A recurring daily time, in the format HH:MM. HH is
                       the zero-padded hour of the day (0-23), and MM is the zero-padded
@@ -770,8 +761,7 @@ spec:
                         iops:
                           description: '- The total number of SSD IOPS provisioned
                             for the file system.'
-                          format: int64
-                          type: integer
+                          type: number
                         mode:
                           description: '- Specifies whether the number of IOPS for
                             the file system is using the system. Valid values are
@@ -867,8 +857,7 @@ spec:
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Valid
                       values between 1024 and 196608.
-                    format: int64
-                    type: integer
+                    type: number
                   storageType:
                     description: '- The filesystem storage type. defaults to SSD.'
                     type: string
@@ -894,8 +883,7 @@ spec:
                     description: Sets the throughput capacity (in MBps) for the file
                       system that you're creating. Valid values are 128, 256, 512,
                       1024, 2048, and 4096.
-                    format: int64
-                    type: integer
+                    type: number
                   vpcId:
                     description: Identifier of the Virtual Private Cloud for the file
                       system.

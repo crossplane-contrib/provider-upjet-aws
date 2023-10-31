@@ -55,7 +55,7 @@ func (in *APICacheInitParameters) DeepCopyInto(out *APICacheInitParameters) {
 	}
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransitEncryptionEnabled != nil {
@@ -137,7 +137,7 @@ func (in *APICacheObservation) DeepCopyInto(out *APICacheObservation) {
 	}
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransitEncryptionEnabled != nil {
@@ -197,7 +197,7 @@ func (in *APICacheParameters) DeepCopyInto(out *APICacheParameters) {
 	}
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TransitEncryptionEnabled != nil {
@@ -751,7 +751,7 @@ func (in *CachingConfigInitParameters) DeepCopyInto(out *CachingConfigInitParame
 	}
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -782,7 +782,7 @@ func (in *CachingConfigObservation) DeepCopyInto(out *CachingConfigObservation) 
 	}
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -813,7 +813,7 @@ func (in *CachingConfigParameters) DeepCopyInto(out *CachingConfigParameters) {
 	}
 	if in.TTL != nil {
 		in, out := &in.TTL, &out.TTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1204,7 +1204,7 @@ func (in *DeltaSyncConfigInitParameters) DeepCopyInto(out *DeltaSyncConfigInitPa
 	*out = *in
 	if in.BaseTableTTL != nil {
 		in, out := &in.BaseTableTTL, &out.BaseTableTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeltaSyncTableName != nil {
@@ -1214,7 +1214,7 @@ func (in *DeltaSyncConfigInitParameters) DeepCopyInto(out *DeltaSyncConfigInitPa
 	}
 	if in.DeltaSyncTableTTL != nil {
 		in, out := &in.DeltaSyncTableTTL, &out.DeltaSyncTableTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1234,7 +1234,7 @@ func (in *DeltaSyncConfigObservation) DeepCopyInto(out *DeltaSyncConfigObservati
 	*out = *in
 	if in.BaseTableTTL != nil {
 		in, out := &in.BaseTableTTL, &out.BaseTableTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeltaSyncTableName != nil {
@@ -1244,7 +1244,7 @@ func (in *DeltaSyncConfigObservation) DeepCopyInto(out *DeltaSyncConfigObservati
 	}
 	if in.DeltaSyncTableTTL != nil {
 		in, out := &in.DeltaSyncTableTTL, &out.DeltaSyncTableTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1264,7 +1264,7 @@ func (in *DeltaSyncConfigParameters) DeepCopyInto(out *DeltaSyncConfigParameters
 	*out = *in
 	if in.BaseTableTTL != nil {
 		in, out := &in.BaseTableTTL, &out.BaseTableTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeltaSyncTableName != nil {
@@ -1274,7 +1274,7 @@ func (in *DeltaSyncConfigParameters) DeepCopyInto(out *DeltaSyncConfigParameters
 	}
 	if in.DeltaSyncTableTTL != nil {
 		in, out := &in.DeltaSyncTableTTL, &out.DeltaSyncTableTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1592,7 +1592,7 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 	}
 	if in.MaxBatchSize != nil {
 		in, out := &in.MaxBatchSize, &out.MaxBatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1713,7 +1713,7 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 	}
 	if in.MaxBatchSize != nil {
 		in, out := &in.MaxBatchSize, &out.MaxBatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1807,7 +1807,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	}
 	if in.MaxBatchSize != nil {
 		in, out := &in.MaxBatchSize, &out.MaxBatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -2009,7 +2009,7 @@ func (in *GraphQLAPILambdaAuthorizerConfigInitParameters) DeepCopyInto(out *Grap
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -2039,7 +2039,7 @@ func (in *GraphQLAPILambdaAuthorizerConfigObservation) DeepCopyInto(out *GraphQL
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -2069,7 +2069,7 @@ func (in *GraphQLAPILambdaAuthorizerConfigParameters) DeepCopyInto(out *GraphQLA
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -2259,7 +2259,7 @@ func (in *GraphQLAPIOpenIDConnectConfigInitParameters) DeepCopyInto(out *GraphQL
 	*out = *in
 	if in.AuthTTL != nil {
 		in, out := &in.AuthTTL, &out.AuthTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ClientID != nil {
@@ -2269,7 +2269,7 @@ func (in *GraphQLAPIOpenIDConnectConfigInitParameters) DeepCopyInto(out *GraphQL
 	}
 	if in.IatTTL != nil {
 		in, out := &in.IatTTL, &out.IatTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Issuer != nil {
@@ -2294,7 +2294,7 @@ func (in *GraphQLAPIOpenIDConnectConfigObservation) DeepCopyInto(out *GraphQLAPI
 	*out = *in
 	if in.AuthTTL != nil {
 		in, out := &in.AuthTTL, &out.AuthTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ClientID != nil {
@@ -2304,7 +2304,7 @@ func (in *GraphQLAPIOpenIDConnectConfigObservation) DeepCopyInto(out *GraphQLAPI
 	}
 	if in.IatTTL != nil {
 		in, out := &in.IatTTL, &out.IatTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Issuer != nil {
@@ -2329,7 +2329,7 @@ func (in *GraphQLAPIOpenIDConnectConfigParameters) DeepCopyInto(out *GraphQLAPIO
 	*out = *in
 	if in.AuthTTL != nil {
 		in, out := &in.AuthTTL, &out.AuthTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ClientID != nil {
@@ -2339,7 +2339,7 @@ func (in *GraphQLAPIOpenIDConnectConfigParameters) DeepCopyInto(out *GraphQLAPIO
 	}
 	if in.IatTTL != nil {
 		in, out := &in.IatTTL, &out.IatTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Issuer != nil {
@@ -2796,7 +2796,7 @@ func (in *LambdaAuthorizerConfigInitParameters) DeepCopyInto(out *LambdaAuthoriz
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -2826,7 +2826,7 @@ func (in *LambdaAuthorizerConfigObservation) DeepCopyInto(out *LambdaAuthorizerC
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -2856,7 +2856,7 @@ func (in *LambdaAuthorizerConfigParameters) DeepCopyInto(out *LambdaAuthorizerCo
 	*out = *in
 	if in.AuthorizerResultTTLInSeconds != nil {
 		in, out := &in.AuthorizerResultTTLInSeconds, &out.AuthorizerResultTTLInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.AuthorizerURI != nil {
@@ -3101,7 +3101,7 @@ func (in *OpenIDConnectConfigInitParameters) DeepCopyInto(out *OpenIDConnectConf
 	*out = *in
 	if in.AuthTTL != nil {
 		in, out := &in.AuthTTL, &out.AuthTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ClientID != nil {
@@ -3111,7 +3111,7 @@ func (in *OpenIDConnectConfigInitParameters) DeepCopyInto(out *OpenIDConnectConf
 	}
 	if in.IatTTL != nil {
 		in, out := &in.IatTTL, &out.IatTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Issuer != nil {
@@ -3136,7 +3136,7 @@ func (in *OpenIDConnectConfigObservation) DeepCopyInto(out *OpenIDConnectConfigO
 	*out = *in
 	if in.AuthTTL != nil {
 		in, out := &in.AuthTTL, &out.AuthTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ClientID != nil {
@@ -3146,7 +3146,7 @@ func (in *OpenIDConnectConfigObservation) DeepCopyInto(out *OpenIDConnectConfigO
 	}
 	if in.IatTTL != nil {
 		in, out := &in.IatTTL, &out.IatTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Issuer != nil {
@@ -3171,7 +3171,7 @@ func (in *OpenIDConnectConfigParameters) DeepCopyInto(out *OpenIDConnectConfigPa
 	*out = *in
 	if in.AuthTTL != nil {
 		in, out := &in.AuthTTL, &out.AuthTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ClientID != nil {
@@ -3181,7 +3181,7 @@ func (in *OpenIDConnectConfigParameters) DeepCopyInto(out *OpenIDConnectConfigPa
 	}
 	if in.IatTTL != nil {
 		in, out := &in.IatTTL, &out.IatTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Issuer != nil {
@@ -3479,7 +3479,7 @@ func (in *ResolverInitParameters) DeepCopyInto(out *ResolverInitParameters) {
 	}
 	if in.MaxBatchSize != nil {
 		in, out := &in.MaxBatchSize, &out.MaxBatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PipelineConfig != nil {
@@ -3604,7 +3604,7 @@ func (in *ResolverObservation) DeepCopyInto(out *ResolverObservation) {
 	}
 	if in.MaxBatchSize != nil {
 		in, out := &in.MaxBatchSize, &out.MaxBatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PipelineConfig != nil {
@@ -3712,7 +3712,7 @@ func (in *ResolverParameters) DeepCopyInto(out *ResolverParameters) {
 	}
 	if in.MaxBatchSize != nil {
 		in, out := &in.MaxBatchSize, &out.MaxBatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PipelineConfig != nil {

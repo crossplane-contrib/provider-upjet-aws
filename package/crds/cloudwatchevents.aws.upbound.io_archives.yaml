@@ -161,8 +161,7 @@ spec:
                   retentionDays:
                     description: The maximum number of days to retain events in the
                       new event archive. By default, it archives indefinitely.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -189,8 +188,7 @@ spec:
                   retentionDays:
                     description: The maximum number of days to retain events in the
                       new event archive. By default, it archives indefinitely.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -377,8 +375,7 @@ spec:
                   retentionDays:
                     description: The maximum number of days to retain events in the
                       new event archive. By default, it archives indefinitely.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -339,8 +339,7 @@ spec:
                   applicationVersionId:
                     description: The current application version ID when the snapshot
                       was created.
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     description: The application snapshot identifier.
                     type: string

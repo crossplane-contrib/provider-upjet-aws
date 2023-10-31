@@ -77,18 +77,15 @@ spec:
                       10.0.0.0/8 and you enter 16 here, new allocations will default
                       to 10.0.0.0/16 (unless you provide a different netmask value
                       when you create the new allocation).
-                    format: int64
-                    type: integer
+                    type: number
                   allocationMaxNetmaskLength:
                     description: The maximum netmask length that will be required
                       for CIDR allocations in this pool.
-                    format: int64
-                    type: integer
+                    type: number
                   allocationMinNetmaskLength:
                     description: The minimum netmask length that will be required
                       for CIDR allocations in this pool.
-                    format: int64
-                    type: integer
+                    type: number
                   allocationResourceTags:
                     additionalProperties:
                       type: string
@@ -319,18 +316,15 @@ spec:
                       10.0.0.0/8 and you enter 16 here, new allocations will default
                       to 10.0.0.0/16 (unless you provide a different netmask value
                       when you create the new allocation).
-                    format: int64
-                    type: integer
+                    type: number
                   allocationMaxNetmaskLength:
                     description: The maximum netmask length that will be required
                       for CIDR allocations in this pool.
-                    format: int64
-                    type: integer
+                    type: number
                   allocationMinNetmaskLength:
                     description: The minimum netmask length that will be required
                       for CIDR allocations in this pool.
-                    format: int64
-                    type: integer
+                    type: number
                   allocationResourceTags:
                     additionalProperties:
                       type: string
@@ -559,18 +553,15 @@ spec:
                       10.0.0.0/8 and you enter 16 here, new allocations will default
                       to 10.0.0.0/16 (unless you provide a different netmask value
                       when you create the new allocation).
-                    format: int64
-                    type: integer
+                    type: number
                   allocationMaxNetmaskLength:
                     description: The maximum netmask length that will be required
                       for CIDR allocations in this pool.
-                    format: int64
-                    type: integer
+                    type: number
                   allocationMinNetmaskLength:
                     description: The minimum netmask length that will be required
                       for CIDR allocations in this pool.
-                    format: int64
-                    type: integer
+                    type: number
                   allocationResourceTags:
                     additionalProperties:
                       type: string
@@ -614,8 +605,7 @@ spec:
                       Region. Possible values: Any AWS region, such as us-east-1.'
                     type: string
                   poolDepth:
-                    format: int64
-                    type: integer
+                    type: number
                   publicIpSource:
                     description: The IP address source for pools in the public scope.
                       Only used for provisioning IP address CIDRs to pools in the

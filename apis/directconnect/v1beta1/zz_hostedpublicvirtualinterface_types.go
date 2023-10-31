@@ -26,7 +26,7 @@ type HostedPublicVirtualInterfaceInitParameters struct {
 	AmazonAddress *string `json:"amazonAddress,omitempty" tf:"amazon_address,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -44,7 +44,7 @@ type HostedPublicVirtualInterfaceInitParameters struct {
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// The VLAN ID.
-	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type HostedPublicVirtualInterfaceObservation struct {
@@ -64,7 +64,7 @@ type HostedPublicVirtualInterfaceObservation struct {
 	AwsDevice *string `json:"awsDevice,omitempty" tf:"aws_device,omitempty"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
@@ -88,7 +88,7 @@ type HostedPublicVirtualInterfaceObservation struct {
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// The VLAN ID.
-	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 type HostedPublicVirtualInterfaceParameters struct {
@@ -103,7 +103,7 @@ type HostedPublicVirtualInterfaceParameters struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	// +kubebuilder:validation:Optional
-	BGPAsn *int64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
+	BGPAsn *float64 `json:"bgpAsn,omitempty" tf:"bgp_asn,omitempty"`
 
 	// The authentication key for BGP configuration.
 	// +kubebuilder:validation:Optional
@@ -145,7 +145,7 @@ type HostedPublicVirtualInterfaceParameters struct {
 
 	// The VLAN ID.
 	// +kubebuilder:validation:Optional
-	Vlan *int64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
+	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 }
 
 // HostedPublicVirtualInterfaceSpec defines the desired state of HostedPublicVirtualInterface

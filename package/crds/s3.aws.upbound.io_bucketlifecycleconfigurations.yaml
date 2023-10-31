@@ -169,8 +169,7 @@ spec:
                               daysAfterInitiation:
                                 description: Number of days after which Amazon S3
                                   aborts an incomplete multipart upload.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         expiration:
@@ -191,8 +190,7 @@ spec:
                                   and date are not specified, defaults to 0. Valid
                                   values depend on storage_class, see Transition objects
                                   using Amazon S3 Lifecycle for more details.
-                                format: int64
-                                type: integer
+                                type: number
                               expiredObjectDeleteMarker:
                                 description: Indicates whether Amazon S3 will remove
                                   a delete marker with no noncurrent versions. If
@@ -217,13 +215,11 @@ spec:
                                     objectSizeGreaterThan:
                                       description: Minimum object size (in bytes)
                                         to which the rule applies.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     objectSizeLessThan:
                                       description: Maximum object size (in bytes)
                                         to which the rule applies.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: DEPRECATED Use filter instead.
                                         This has been deprecated by Amazon S3. Prefix
@@ -285,8 +281,7 @@ spec:
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         noncurrentVersionTransition:
@@ -303,8 +298,7 @@ spec:
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
-                                format: int64
-                                type: integer
+                                type: number
                               storageClass:
                                 description: 'Class of storage used to store the object.
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
@@ -340,8 +334,7 @@ spec:
                                   and date are not specified, defaults to 0. Valid
                                   values depend on storage_class, see Transition objects
                                   using Amazon S3 Lifecycle for more details.
-                                format: int64
-                                type: integer
+                                type: number
                               storageClass:
                                 description: 'Class of storage used to store the object.
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
@@ -386,8 +379,7 @@ spec:
                               daysAfterInitiation:
                                 description: Number of days after which Amazon S3
                                   aborts an incomplete multipart upload.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         expiration:
@@ -408,8 +400,7 @@ spec:
                                   and date are not specified, defaults to 0. Valid
                                   values depend on storage_class, see Transition objects
                                   using Amazon S3 Lifecycle for more details.
-                                format: int64
-                                type: integer
+                                type: number
                               expiredObjectDeleteMarker:
                                 description: Indicates whether Amazon S3 will remove
                                   a delete marker with no noncurrent versions. If
@@ -434,13 +425,11 @@ spec:
                                     objectSizeGreaterThan:
                                       description: Minimum object size (in bytes)
                                         to which the rule applies.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     objectSizeLessThan:
                                       description: Maximum object size (in bytes)
                                         to which the rule applies.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: DEPRECATED Use filter instead.
                                         This has been deprecated by Amazon S3. Prefix
@@ -502,8 +491,7 @@ spec:
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         noncurrentVersionTransition:
@@ -520,8 +508,7 @@ spec:
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
-                                format: int64
-                                type: integer
+                                type: number
                               storageClass:
                                 description: 'Class of storage used to store the object.
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
@@ -557,8 +544,7 @@ spec:
                                   and date are not specified, defaults to 0. Valid
                                   values depend on storage_class, see Transition objects
                                   using Amazon S3 Lifecycle for more details.
-                                format: int64
-                                type: integer
+                                type: number
                               storageClass:
                                 description: 'Class of storage used to store the object.
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
@@ -767,8 +753,7 @@ spec:
                               daysAfterInitiation:
                                 description: Number of days after which Amazon S3
                                   aborts an incomplete multipart upload.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         expiration:
@@ -789,8 +774,7 @@ spec:
                                   and date are not specified, defaults to 0. Valid
                                   values depend on storage_class, see Transition objects
                                   using Amazon S3 Lifecycle for more details.
-                                format: int64
-                                type: integer
+                                type: number
                               expiredObjectDeleteMarker:
                                 description: Indicates whether Amazon S3 will remove
                                   a delete marker with no noncurrent versions. If
@@ -815,13 +799,11 @@ spec:
                                     objectSizeGreaterThan:
                                       description: Minimum object size (in bytes)
                                         to which the rule applies.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     objectSizeLessThan:
                                       description: Maximum object size (in bytes)
                                         to which the rule applies.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: DEPRECATED Use filter instead.
                                         This has been deprecated by Amazon S3. Prefix
@@ -883,8 +865,7 @@ spec:
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         noncurrentVersionTransition:
@@ -901,8 +882,7 @@ spec:
                               noncurrentDays:
                                 description: Number of days an object is noncurrent
                                   before Amazon S3 can perform the associated action.
-                                format: int64
-                                type: integer
+                                type: number
                               storageClass:
                                 description: 'Class of storage used to store the object.
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,
@@ -938,8 +918,7 @@ spec:
                                   and date are not specified, defaults to 0. Valid
                                   values depend on storage_class, see Transition objects
                                   using Amazon S3 Lifecycle for more details.
-                                format: int64
-                                type: integer
+                                type: number
                               storageClass:
                                 description: 'Class of storage used to store the object.
                                   Valid Values: GLACIER, STANDARD_IA, ONEZONE_IA,

@@ -1187,7 +1187,7 @@ func (in *ClientConfigInitParameters) DeepCopyInto(out *ClientConfigInitParamete
 	*out = *in
 	if in.MaxConcurrentInvocationsPerInstance != nil {
 		in, out := &in.MaxConcurrentInvocationsPerInstance, &out.MaxConcurrentInvocationsPerInstance
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1207,7 +1207,7 @@ func (in *ClientConfigObservation) DeepCopyInto(out *ClientConfigObservation) {
 	*out = *in
 	if in.MaxConcurrentInvocationsPerInstance != nil {
 		in, out := &in.MaxConcurrentInvocationsPerInstance, &out.MaxConcurrentInvocationsPerInstance
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1227,7 +1227,7 @@ func (in *ClientConfigParameters) DeepCopyInto(out *ClientConfigParameters) {
 	*out = *in
 	if in.MaxConcurrentInvocationsPerInstance != nil {
 		in, out := &in.MaxConcurrentInvocationsPerInstance, &out.MaxConcurrentInvocationsPerInstance
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1935,7 +1935,7 @@ func (in *CustomImageInitParameters) DeepCopyInto(out *CustomImageInitParameters
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1965,7 +1965,7 @@ func (in *CustomImageObservation) DeepCopyInto(out *CustomImageObservation) {
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1995,7 +1995,7 @@ func (in *CustomImageParameters) DeepCopyInto(out *CustomImageParameters) {
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2039,7 +2039,7 @@ func (in *DataCaptureConfigInitParameters) DeepCopyInto(out *DataCaptureConfigIn
 	}
 	if in.InitialSamplingPercentage != nil {
 		in, out := &in.InitialSamplingPercentage, &out.InitialSamplingPercentage
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KMSKeyID != nil {
@@ -2088,7 +2088,7 @@ func (in *DataCaptureConfigObservation) DeepCopyInto(out *DataCaptureConfigObser
 	}
 	if in.InitialSamplingPercentage != nil {
 		in, out := &in.InitialSamplingPercentage, &out.InitialSamplingPercentage
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KMSKeyID != nil {
@@ -2137,7 +2137,7 @@ func (in *DataCaptureConfigParameters) DeepCopyInto(out *DataCaptureConfigParame
 	}
 	if in.InitialSamplingPercentage != nil {
 		in, out := &in.InitialSamplingPercentage, &out.InitialSamplingPercentage
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KMSKeyID != nil {
@@ -5039,12 +5039,12 @@ func (in *FileSystemConfigInitParameters) DeepCopyInto(out *FileSystemConfigInit
 	*out = *in
 	if in.DefaultGID != nil {
 		in, out := &in.DefaultGID, &out.DefaultGID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DefaultUID != nil {
 		in, out := &in.DefaultUID, &out.DefaultUID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MountPath != nil {
@@ -5069,12 +5069,12 @@ func (in *FileSystemConfigObservation) DeepCopyInto(out *FileSystemConfigObserva
 	*out = *in
 	if in.DefaultGID != nil {
 		in, out := &in.DefaultGID, &out.DefaultGID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DefaultUID != nil {
 		in, out := &in.DefaultUID, &out.DefaultUID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MountPath != nil {
@@ -5099,12 +5099,12 @@ func (in *FileSystemConfigParameters) DeepCopyInto(out *FileSystemConfigParamete
 	*out = *in
 	if in.DefaultGID != nil {
 		in, out := &in.DefaultGID, &out.DefaultGID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DefaultUID != nil {
 		in, out := &in.DefaultUID, &out.DefaultUID
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MountPath != nil {
@@ -5742,7 +5742,7 @@ func (in *ImageVersionObservation) DeepCopyInto(out *ImageVersionObservation) {
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6242,7 +6242,7 @@ func (in *KernelGatewayAppSettingsCustomImageInitParameters) DeepCopyInto(out *K
 	*out = *in
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6272,7 +6272,7 @@ func (in *KernelGatewayAppSettingsCustomImageObservation) DeepCopyInto(out *Kern
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6322,7 +6322,7 @@ func (in *KernelGatewayAppSettingsCustomImageParameters) DeepCopyInto(out *Kerne
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7751,7 +7751,7 @@ func (in *NotebookInstanceInitParameters) DeepCopyInto(out *NotebookInstanceInit
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8124,7 +8124,7 @@ func (in *NotebookInstanceObservation) DeepCopyInto(out *NotebookInstanceObserva
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8290,7 +8290,7 @@ func (in *NotebookInstanceParameters) DeepCopyInto(out *NotebookInstanceParamete
 	}
 	if in.VolumeSize != nil {
 		in, out := &in.VolumeSize, &out.VolumeSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9275,7 +9275,7 @@ func (in *ProductionVariantsInitParameters) DeepCopyInto(out *ProductionVariants
 	}
 	if in.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		in, out := &in.ContainerStartupHealthCheckTimeoutInSeconds, &out.ContainerStartupHealthCheckTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CoreDumpConfig != nil {
@@ -9292,7 +9292,7 @@ func (in *ProductionVariantsInitParameters) DeepCopyInto(out *ProductionVariants
 	}
 	if in.InitialInstanceCount != nil {
 		in, out := &in.InitialInstanceCount, &out.InitialInstanceCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InitialVariantWeight != nil {
@@ -9307,7 +9307,7 @@ func (in *ProductionVariantsInitParameters) DeepCopyInto(out *ProductionVariants
 	}
 	if in.ModelDataDownloadTimeoutInSeconds != nil {
 		in, out := &in.ModelDataDownloadTimeoutInSeconds, &out.ModelDataDownloadTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServerlessConfig != nil {
@@ -9324,7 +9324,7 @@ func (in *ProductionVariantsInitParameters) DeepCopyInto(out *ProductionVariants
 	}
 	if in.VolumeSizeInGb != nil {
 		in, out := &in.VolumeSizeInGb, &out.VolumeSizeInGb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9349,7 +9349,7 @@ func (in *ProductionVariantsObservation) DeepCopyInto(out *ProductionVariantsObs
 	}
 	if in.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		in, out := &in.ContainerStartupHealthCheckTimeoutInSeconds, &out.ContainerStartupHealthCheckTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CoreDumpConfig != nil {
@@ -9366,7 +9366,7 @@ func (in *ProductionVariantsObservation) DeepCopyInto(out *ProductionVariantsObs
 	}
 	if in.InitialInstanceCount != nil {
 		in, out := &in.InitialInstanceCount, &out.InitialInstanceCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InitialVariantWeight != nil {
@@ -9381,7 +9381,7 @@ func (in *ProductionVariantsObservation) DeepCopyInto(out *ProductionVariantsObs
 	}
 	if in.ModelDataDownloadTimeoutInSeconds != nil {
 		in, out := &in.ModelDataDownloadTimeoutInSeconds, &out.ModelDataDownloadTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ModelName != nil {
@@ -9403,7 +9403,7 @@ func (in *ProductionVariantsObservation) DeepCopyInto(out *ProductionVariantsObs
 	}
 	if in.VolumeSizeInGb != nil {
 		in, out := &in.VolumeSizeInGb, &out.VolumeSizeInGb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9428,7 +9428,7 @@ func (in *ProductionVariantsParameters) DeepCopyInto(out *ProductionVariantsPara
 	}
 	if in.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		in, out := &in.ContainerStartupHealthCheckTimeoutInSeconds, &out.ContainerStartupHealthCheckTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CoreDumpConfig != nil {
@@ -9445,7 +9445,7 @@ func (in *ProductionVariantsParameters) DeepCopyInto(out *ProductionVariantsPara
 	}
 	if in.InitialInstanceCount != nil {
 		in, out := &in.InitialInstanceCount, &out.InitialInstanceCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InitialVariantWeight != nil {
@@ -9460,7 +9460,7 @@ func (in *ProductionVariantsParameters) DeepCopyInto(out *ProductionVariantsPara
 	}
 	if in.ModelDataDownloadTimeoutInSeconds != nil {
 		in, out := &in.ModelDataDownloadTimeoutInSeconds, &out.ModelDataDownloadTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ModelName != nil {
@@ -9492,7 +9492,7 @@ func (in *ProductionVariantsParameters) DeepCopyInto(out *ProductionVariantsPara
 	}
 	if in.VolumeSizeInGb != nil {
 		in, out := &in.VolumeSizeInGb, &out.VolumeSizeInGb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9522,7 +9522,7 @@ func (in *RSessionAppSettingsCustomImageInitParameters) DeepCopyInto(out *RSessi
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9552,7 +9552,7 @@ func (in *RSessionAppSettingsCustomImageObservation) DeepCopyInto(out *RSessionA
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9582,7 +9582,7 @@ func (in *RSessionAppSettingsCustomImageParameters) DeepCopyInto(out *RSessionAp
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10445,12 +10445,12 @@ func (in *ServerlessConfigInitParameters) DeepCopyInto(out *ServerlessConfigInit
 	*out = *in
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemorySizeInMb != nil {
 		in, out := &in.MemorySizeInMb, &out.MemorySizeInMb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10470,12 +10470,12 @@ func (in *ServerlessConfigObservation) DeepCopyInto(out *ServerlessConfigObserva
 	*out = *in
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemorySizeInMb != nil {
 		in, out := &in.MemorySizeInMb, &out.MemorySizeInMb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10495,12 +10495,12 @@ func (in *ServerlessConfigParameters) DeepCopyInto(out *ServerlessConfigParamete
 	*out = *in
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemorySizeInMb != nil {
 		in, out := &in.MemorySizeInMb, &out.MemorySizeInMb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10764,7 +10764,7 @@ func (in *ShadowProductionVariantsInitParameters) DeepCopyInto(out *ShadowProduc
 	}
 	if in.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		in, out := &in.ContainerStartupHealthCheckTimeoutInSeconds, &out.ContainerStartupHealthCheckTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CoreDumpConfig != nil {
@@ -10781,7 +10781,7 @@ func (in *ShadowProductionVariantsInitParameters) DeepCopyInto(out *ShadowProduc
 	}
 	if in.InitialInstanceCount != nil {
 		in, out := &in.InitialInstanceCount, &out.InitialInstanceCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InitialVariantWeight != nil {
@@ -10796,7 +10796,7 @@ func (in *ShadowProductionVariantsInitParameters) DeepCopyInto(out *ShadowProduc
 	}
 	if in.ModelDataDownloadTimeoutInSeconds != nil {
 		in, out := &in.ModelDataDownloadTimeoutInSeconds, &out.ModelDataDownloadTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ModelName != nil {
@@ -10818,7 +10818,7 @@ func (in *ShadowProductionVariantsInitParameters) DeepCopyInto(out *ShadowProduc
 	}
 	if in.VolumeSizeInGb != nil {
 		in, out := &in.VolumeSizeInGb, &out.VolumeSizeInGb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10843,7 +10843,7 @@ func (in *ShadowProductionVariantsObservation) DeepCopyInto(out *ShadowProductio
 	}
 	if in.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		in, out := &in.ContainerStartupHealthCheckTimeoutInSeconds, &out.ContainerStartupHealthCheckTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CoreDumpConfig != nil {
@@ -10860,7 +10860,7 @@ func (in *ShadowProductionVariantsObservation) DeepCopyInto(out *ShadowProductio
 	}
 	if in.InitialInstanceCount != nil {
 		in, out := &in.InitialInstanceCount, &out.InitialInstanceCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InitialVariantWeight != nil {
@@ -10875,7 +10875,7 @@ func (in *ShadowProductionVariantsObservation) DeepCopyInto(out *ShadowProductio
 	}
 	if in.ModelDataDownloadTimeoutInSeconds != nil {
 		in, out := &in.ModelDataDownloadTimeoutInSeconds, &out.ModelDataDownloadTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ModelName != nil {
@@ -10897,7 +10897,7 @@ func (in *ShadowProductionVariantsObservation) DeepCopyInto(out *ShadowProductio
 	}
 	if in.VolumeSizeInGb != nil {
 		in, out := &in.VolumeSizeInGb, &out.VolumeSizeInGb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10922,7 +10922,7 @@ func (in *ShadowProductionVariantsParameters) DeepCopyInto(out *ShadowProduction
 	}
 	if in.ContainerStartupHealthCheckTimeoutInSeconds != nil {
 		in, out := &in.ContainerStartupHealthCheckTimeoutInSeconds, &out.ContainerStartupHealthCheckTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CoreDumpConfig != nil {
@@ -10939,7 +10939,7 @@ func (in *ShadowProductionVariantsParameters) DeepCopyInto(out *ShadowProduction
 	}
 	if in.InitialInstanceCount != nil {
 		in, out := &in.InitialInstanceCount, &out.InitialInstanceCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.InitialVariantWeight != nil {
@@ -10954,7 +10954,7 @@ func (in *ShadowProductionVariantsParameters) DeepCopyInto(out *ShadowProduction
 	}
 	if in.ModelDataDownloadTimeoutInSeconds != nil {
 		in, out := &in.ModelDataDownloadTimeoutInSeconds, &out.ModelDataDownloadTimeoutInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ModelName != nil {
@@ -10976,7 +10976,7 @@ func (in *ShadowProductionVariantsParameters) DeepCopyInto(out *ShadowProduction
 	}
 	if in.VolumeSizeInGb != nil {
 		in, out := &in.VolumeSizeInGb, &out.VolumeSizeInGb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10996,12 +10996,12 @@ func (in *ShadowProductionVariantsServerlessConfigInitParameters) DeepCopyInto(o
 	*out = *in
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemorySizeInMb != nil {
 		in, out := &in.MemorySizeInMb, &out.MemorySizeInMb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11021,12 +11021,12 @@ func (in *ShadowProductionVariantsServerlessConfigObservation) DeepCopyInto(out 
 	*out = *in
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemorySizeInMb != nil {
 		in, out := &in.MemorySizeInMb, &out.MemorySizeInMb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11046,12 +11046,12 @@ func (in *ShadowProductionVariantsServerlessConfigParameters) DeepCopyInto(out *
 	*out = *in
 	if in.MaxConcurrency != nil {
 		in, out := &in.MaxConcurrency, &out.MaxConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemorySizeInMb != nil {
 		in, out := &in.MemorySizeInMb, &out.MemorySizeInMb
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11807,7 +11807,7 @@ func (in *SpaceSettingsKernelGatewayAppSettingsCustomImageInitParameters) DeepCo
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11837,7 +11837,7 @@ func (in *SpaceSettingsKernelGatewayAppSettingsCustomImageObservation) DeepCopyI
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11867,7 +11867,7 @@ func (in *SpaceSettingsKernelGatewayAppSettingsCustomImageParameters) DeepCopyIn
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13470,7 +13470,7 @@ func (in *UserSettingsKernelGatewayAppSettingsCustomImageInitParameters) DeepCop
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13500,7 +13500,7 @@ func (in *UserSettingsKernelGatewayAppSettingsCustomImageObservation) DeepCopyIn
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13530,7 +13530,7 @@ func (in *UserSettingsKernelGatewayAppSettingsCustomImageParameters) DeepCopyInt
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13945,7 +13945,7 @@ func (in *UserSettingsRSessionAppSettingsCustomImageInitParameters) DeepCopyInto
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13975,7 +13975,7 @@ func (in *UserSettingsRSessionAppSettingsCustomImageObservation) DeepCopyInto(ou
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14005,7 +14005,7 @@ func (in *UserSettingsRSessionAppSettingsCustomImageParameters) DeepCopyInto(out
 	}
 	if in.ImageVersionNumber != nil {
 		in, out := &in.ImageVersionNumber, &out.ImageVersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

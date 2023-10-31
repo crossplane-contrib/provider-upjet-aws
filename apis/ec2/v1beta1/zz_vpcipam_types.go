@@ -82,7 +82,7 @@ type VPCIpamObservation struct {
 	PublicDefaultScopeID *string `json:"publicDefaultScopeId,omitempty" tf:"public_default_scope_id,omitempty"`
 
 	// The number of scopes in the IPAM.
-	ScopeCount *int64 `json:"scopeCount,omitempty" tf:"scope_count,omitempty"`
+	ScopeCount *float64 `json:"scopeCount,omitempty" tf:"scope_count,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

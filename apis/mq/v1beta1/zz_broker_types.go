@@ -252,7 +252,7 @@ type BrokerParameters struct {
 type ConfigurationInitParameters struct {
 
 	// Revision of the Configuration.
-	Revision *int64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type ConfigurationObservation struct {
@@ -261,7 +261,7 @@ type ConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Revision of the Configuration.
-	Revision *int64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -282,7 +282,7 @@ type ConfigurationParameters struct {
 
 	// Revision of the Configuration.
 	// +kubebuilder:validation:Optional
-	Revision *int64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type EncryptionOptionsInitParameters struct {

@@ -372,8 +372,7 @@ spec:
                     type: string
                   scopeCount:
                     description: The number of scopes in the IPAM.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

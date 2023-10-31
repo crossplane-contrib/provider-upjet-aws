@@ -160,8 +160,7 @@ spec:
                   monthlySpendLimit:
                     description: The maximum amount in USD that you are willing to
                       spend each month to send SMS messages.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -201,8 +200,7 @@ spec:
                   monthlySpendLimit:
                     description: The maximum amount in USD that you are willing to
                       spend each month to send SMS messages.
-                    format: int64
-                    type: integer
+                    type: number
                   usageReportS3Bucket:
                     description: The name of the Amazon S3 bucket to receive daily
                       SMS usage reports from Amazon SNS.
@@ -395,8 +393,7 @@ spec:
                   monthlySpendLimit:
                     description: The maximum amount in USD that you are willing to
                       spend each month to send SMS messages.
-                    format: int64
-                    type: integer
+                    type: number
                   usageReportS3Bucket:
                     description: The name of the Amazon S3 bucket to receive daily
                       SMS usage reports from Amazon SNS.

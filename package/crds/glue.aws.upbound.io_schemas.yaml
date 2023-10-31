@@ -415,13 +415,11 @@ spec:
                   latestSchemaVersion:
                     description: The latest version of the schema associated with
                       the returned schema definition.
-                    format: int64
-                    type: integer
+                    type: number
                   nextSchemaVersion:
                     description: The next version of the schema associated with the
                       returned schema definition.
-                    format: int64
-                    type: integer
+                    type: number
                   registryArn:
                     description: The ARN of the Glue Registry to create the schema
                       in.
@@ -432,8 +430,7 @@ spec:
                   schemaCheckpoint:
                     description: The version number of the checkpoint (the last time
                       the compatibility mode was changed).
-                    format: int64
-                    type: integer
+                    type: number
                   schemaDefinition:
                     description: The schema definition using the data_format setting
                       for schema_name.

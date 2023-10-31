@@ -153,8 +153,7 @@ spec:
                   cooldown:
                     description: Amount of time, in seconds, after a scaling activity
                       completes and before the next scaling activity can start.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: 'Whether the scaling policy is enabled or disabled.
                       Default: true.'
@@ -163,8 +162,7 @@ spec:
                     description: Estimated time, in seconds, until a newly launched
                       instance will contribute CloudWatch metrics. Without a value,
                       AWS will default to the group's specified cooldown period.
-                    format: int64
-                    type: integer
+                    type: number
                   metricAggregationType:
                     description: Aggregation type for the policy's metrics. Valid
                       values are "Minimum", "Maximum", and "Average". Without a value,
@@ -173,8 +171,7 @@ spec:
                   minAdjustmentMagnitude:
                     description: Minimum value to scale by when adjustment_type is
                       set to PercentChangeInCapacity.
-                    format: int64
-                    type: integer
+                    type: number
                   policyType:
                     description: Policy type, either "SimpleScaling", "StepScaling",
                       "TargetTrackingScaling", or "PredictiveScaling". If this value
@@ -529,8 +526,7 @@ spec:
                       number or as a percentage of the existing Auto Scaling group
                       size). A positive increment adds to the current capacity and
                       a negative value removes from the current capacity.
-                    format: int64
-                    type: integer
+                    type: number
                   stepAdjustment:
                     description: 'Set of adjustments that manage group scaling. These
                       have the following structure:'
@@ -554,8 +550,7 @@ spec:
                             Auto Scaling group size). A positive increment adds to
                             the current capacity and a negative value removes from
                             the current capacity.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   targetTrackingConfiguration:
@@ -710,8 +705,7 @@ spec:
                   cooldown:
                     description: Amount of time, in seconds, after a scaling activity
                       completes and before the next scaling activity can start.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: 'Whether the scaling policy is enabled or disabled.
                       Default: true.'
@@ -720,8 +714,7 @@ spec:
                     description: Estimated time, in seconds, until a newly launched
                       instance will contribute CloudWatch metrics. Without a value,
                       AWS will default to the group's specified cooldown period.
-                    format: int64
-                    type: integer
+                    type: number
                   metricAggregationType:
                     description: Aggregation type for the policy's metrics. Valid
                       values are "Minimum", "Maximum", and "Average". Without a value,
@@ -730,8 +723,7 @@ spec:
                   minAdjustmentMagnitude:
                     description: Minimum value to scale by when adjustment_type is
                       set to PercentChangeInCapacity.
-                    format: int64
-                    type: integer
+                    type: number
                   policyType:
                     description: Policy type, either "SimpleScaling", "StepScaling",
                       "TargetTrackingScaling", or "PredictiveScaling". If this value
@@ -1082,8 +1074,7 @@ spec:
                       number or as a percentage of the existing Auto Scaling group
                       size). A positive increment adds to the current capacity and
                       a negative value removes from the current capacity.
-                    format: int64
-                    type: integer
+                    type: number
                   stepAdjustment:
                     description: 'Set of adjustments that manage group scaling. These
                       have the following structure:'
@@ -1107,8 +1098,7 @@ spec:
                             Auto Scaling group size). A positive increment adds to
                             the current capacity and a negative value removes from
                             the current capacity.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   targetTrackingConfiguration:
@@ -1420,8 +1410,7 @@ spec:
                   cooldown:
                     description: Amount of time, in seconds, after a scaling activity
                       completes and before the next scaling activity can start.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: 'Whether the scaling policy is enabled or disabled.
                       Default: true.'
@@ -1430,8 +1419,7 @@ spec:
                     description: Estimated time, in seconds, until a newly launched
                       instance will contribute CloudWatch metrics. Without a value,
                       AWS will default to the group's specified cooldown period.
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     description: Short name for the metric used in predictive scaling
                       policy.
@@ -1444,8 +1432,7 @@ spec:
                   minAdjustmentMagnitude:
                     description: Minimum value to scale by when adjustment_type is
                       set to PercentChangeInCapacity.
-                    format: int64
-                    type: integer
+                    type: number
                   policyType:
                     description: Policy type, either "SimpleScaling", "StepScaling",
                       "TargetTrackingScaling", or "PredictiveScaling". If this value
@@ -1796,8 +1783,7 @@ spec:
                       number or as a percentage of the existing Auto Scaling group
                       size). A positive increment adds to the current capacity and
                       a negative value removes from the current capacity.
-                    format: int64
-                    type: integer
+                    type: number
                   stepAdjustment:
                     description: 'Set of adjustments that manage group scaling. These
                       have the following structure:'
@@ -1821,8 +1807,7 @@ spec:
                             Auto Scaling group size). A positive increment adds to
                             the current capacity and a negative value removes from
                             the current capacity.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   targetTrackingConfiguration:

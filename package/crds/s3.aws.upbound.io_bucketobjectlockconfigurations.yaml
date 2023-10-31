@@ -169,8 +169,7 @@ spec:
                               days:
                                 description: Number of days that you want to specify
                                   for the default retention period.
-                                format: int64
-                                type: integer
+                                type: number
                               mode:
                                 description: 'Default Object Lock retention mode you
                                   want to apply to new objects placed in the specified
@@ -179,8 +178,7 @@ spec:
                               years:
                                 description: Number of years that you want to specify
                                   for the default retention period.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -242,8 +240,7 @@ spec:
                               days:
                                 description: Number of days that you want to specify
                                   for the default retention period.
-                                format: int64
-                                type: integer
+                                type: number
                               mode:
                                 description: 'Default Object Lock retention mode you
                                   want to apply to new objects placed in the specified
@@ -252,8 +249,7 @@ spec:
                               years:
                                 description: Number of years that you want to specify
                                   for the default retention period.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -453,8 +449,7 @@ spec:
                               days:
                                 description: Number of days that you want to specify
                                   for the default retention period.
-                                format: int64
-                                type: integer
+                                type: number
                               mode:
                                 description: 'Default Object Lock retention mode you
                                   want to apply to new objects placed in the specified
@@ -463,8 +458,7 @@ spec:
                               years:
                                 description: Number of years that you want to specify
                                   for the default retention period.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object

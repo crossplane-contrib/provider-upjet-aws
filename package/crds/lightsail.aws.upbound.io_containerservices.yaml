@@ -135,8 +135,7 @@ spec:
                     description: The scale specification for the container service.
                       The scale specifies the allocated compute nodes of the container
                       service.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -221,8 +220,7 @@ spec:
                     description: The scale specification for the container service.
                       The scale specifies the allocated compute nodes of the container
                       service.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -507,8 +505,7 @@ spec:
                     description: The scale specification for the container service.
                       The scale specifies the allocated compute nodes of the container
                       service.
-                    format: int64
-                    type: integer
+                    type: number
                   state:
                     description: The current state of the container service.
                     type: string

@@ -109,8 +109,7 @@ spec:
                         maxAge:
                           description: Number of seconds that the browser should cache
                             preflight request results.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   credentialsArn:
@@ -227,8 +226,7 @@ spec:
                         maxAge:
                           description: Number of seconds that the browser should cache
                             preflight request results.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   credentialsArn:
@@ -509,8 +507,7 @@ spec:
                         maxAge:
                           description: Number of seconds that the browser should cache
                             preflight request results.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   credentialsArn:

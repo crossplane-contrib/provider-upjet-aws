@@ -171,7 +171,7 @@ type KinesisVideoStreamConfigInitParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. Minimum value of 0. Maximum value of 87600. A value of 0, indicates that the stream does not persist data.
-	RetentionPeriodHours *int64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
+	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
 }
 
 type KinesisVideoStreamConfigObservation struct {
@@ -183,7 +183,7 @@ type KinesisVideoStreamConfigObservation struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. Minimum value of 0. Maximum value of 87600. A value of 0, indicates that the stream does not persist data.
-	RetentionPeriodHours *int64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
+	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
 }
 
 type KinesisVideoStreamConfigParameters struct {
@@ -198,7 +198,7 @@ type KinesisVideoStreamConfigParameters struct {
 
 	// The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. Minimum value of 0. Maximum value of 87600. A value of 0, indicates that the stream does not persist data.
 	// +kubebuilder:validation:Optional
-	RetentionPeriodHours *int64 `json:"retentionPeriodHours" tf:"retention_period_hours,omitempty"`
+	RetentionPeriodHours *float64 `json:"retentionPeriodHours" tf:"retention_period_hours,omitempty"`
 }
 
 type S3ConfigEncryptionConfigInitParameters struct {

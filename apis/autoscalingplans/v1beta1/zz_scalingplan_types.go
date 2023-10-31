@@ -232,10 +232,10 @@ type ScalingInstructionInitParameters struct {
 	DisableDynamicScaling *bool `json:"disableDynamicScaling,omitempty" tf:"disable_dynamic_scaling,omitempty"`
 
 	// Maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for predictive_scaling_max_capacity_behavior.
-	MaxCapacity *int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// Minimum capacity of the resource.
-	MinCapacity *int64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -246,7 +246,7 @@ type ScalingInstructionInitParameters struct {
 	PredictiveScalingMaxCapacityBehavior *string `json:"predictiveScalingMaxCapacityBehavior,omitempty" tf:"predictive_scaling_max_capacity_behavior,omitempty"`
 
 	// Size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity.
-	PredictiveScalingMaxCapacityBuffer *int64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
+	PredictiveScalingMaxCapacityBuffer *float64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
 
 	// Predictive scaling mode. Valid values: ForecastAndScale, ForecastOnly.
 	PredictiveScalingMode *string `json:"predictiveScalingMode,omitempty" tf:"predictive_scaling_mode,omitempty"`
@@ -261,7 +261,7 @@ type ScalingInstructionInitParameters struct {
 	ScalingPolicyUpdateBehavior *string `json:"scalingPolicyUpdateBehavior,omitempty" tf:"scaling_policy_update_behavior,omitempty"`
 
 	// Amount of time, in seconds, to buffer the run time of scheduled scaling actions when scaling out.
-	ScheduledActionBufferTime *int64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
+	ScheduledActionBufferTime *float64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
 
 	// Namespace of the AWS service. Valid values: autoscaling, dynamodb, ecs, ec2, rds.
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
@@ -281,10 +281,10 @@ type ScalingInstructionObservation struct {
 	DisableDynamicScaling *bool `json:"disableDynamicScaling,omitempty" tf:"disable_dynamic_scaling,omitempty"`
 
 	// Maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for predictive_scaling_max_capacity_behavior.
-	MaxCapacity *int64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
 	// Minimum capacity of the resource.
-	MinCapacity *int64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -295,7 +295,7 @@ type ScalingInstructionObservation struct {
 	PredictiveScalingMaxCapacityBehavior *string `json:"predictiveScalingMaxCapacityBehavior,omitempty" tf:"predictive_scaling_max_capacity_behavior,omitempty"`
 
 	// Size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity.
-	PredictiveScalingMaxCapacityBuffer *int64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
+	PredictiveScalingMaxCapacityBuffer *float64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
 
 	// Predictive scaling mode. Valid values: ForecastAndScale, ForecastOnly.
 	PredictiveScalingMode *string `json:"predictiveScalingMode,omitempty" tf:"predictive_scaling_mode,omitempty"`
@@ -310,7 +310,7 @@ type ScalingInstructionObservation struct {
 	ScalingPolicyUpdateBehavior *string `json:"scalingPolicyUpdateBehavior,omitempty" tf:"scaling_policy_update_behavior,omitempty"`
 
 	// Amount of time, in seconds, to buffer the run time of scheduled scaling actions when scaling out.
-	ScheduledActionBufferTime *int64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
+	ScheduledActionBufferTime *float64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
 
 	// Namespace of the AWS service. Valid values: autoscaling, dynamodb, ecs, ec2, rds.
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
@@ -333,11 +333,11 @@ type ScalingInstructionParameters struct {
 
 	// Maximum capacity of the resource. The exception to this upper limit is if you specify a non-default setting for predictive_scaling_max_capacity_behavior.
 	// +kubebuilder:validation:Optional
-	MaxCapacity *int64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
+	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
 
 	// Minimum capacity of the resource.
 	// +kubebuilder:validation:Optional
-	MinCapacity *int64 `json:"minCapacity" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 
 	// Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -351,7 +351,7 @@ type ScalingInstructionParameters struct {
 
 	// Size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity.
 	// +kubebuilder:validation:Optional
-	PredictiveScalingMaxCapacityBuffer *int64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
+	PredictiveScalingMaxCapacityBuffer *float64 `json:"predictiveScalingMaxCapacityBuffer,omitempty" tf:"predictive_scaling_max_capacity_buffer,omitempty"`
 
 	// Predictive scaling mode. Valid values: ForecastAndScale, ForecastOnly.
 	// +kubebuilder:validation:Optional
@@ -371,7 +371,7 @@ type ScalingInstructionParameters struct {
 
 	// Amount of time, in seconds, to buffer the run time of scheduled scaling actions when scaling out.
 	// +kubebuilder:validation:Optional
-	ScheduledActionBufferTime *int64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
+	ScheduledActionBufferTime *float64 `json:"scheduledActionBufferTime,omitempty" tf:"scheduled_action_buffer_time,omitempty"`
 
 	// Namespace of the AWS service. Valid values: autoscaling, dynamodb, ecs, ec2, rds.
 	// +kubebuilder:validation:Optional
@@ -410,7 +410,7 @@ type ScalingPlanObservation struct {
 	ScalingInstruction []ScalingInstructionObservation `json:"scalingInstruction,omitempty" tf:"scaling_instruction,omitempty"`
 
 	// The version number of the scaling plan. This value is always 1.
-	ScalingPlanVersion *int64 `json:"scalingPlanVersion,omitempty" tf:"scaling_plan_version,omitempty"`
+	ScalingPlanVersion *float64 `json:"scalingPlanVersion,omitempty" tf:"scaling_plan_version,omitempty"`
 }
 
 type ScalingPlanParameters struct {
@@ -473,7 +473,7 @@ type TargetTrackingConfigurationInitParameters struct {
 
 	// Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
 	// This value is used only if the resource is an Auto Scaling group.
-	EstimatedInstanceWarmup *int64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
 	// Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -481,11 +481,11 @@ type TargetTrackingConfigurationInitParameters struct {
 
 	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
-	ScaleInCooldown *int64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
+	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
 	// Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
-	ScaleOutCooldown *int64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
+	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
 	// Target value for the metric.
 	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
@@ -502,7 +502,7 @@ type TargetTrackingConfigurationObservation struct {
 
 	// Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
 	// This value is used only if the resource is an Auto Scaling group.
-	EstimatedInstanceWarmup *int64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
 	// Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -510,11 +510,11 @@ type TargetTrackingConfigurationObservation struct {
 
 	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
-	ScaleInCooldown *int64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
+	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
 	// Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
-	ScaleOutCooldown *int64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
+	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
 	// Target value for the metric.
 	TargetValue *float64 `json:"targetValue,omitempty" tf:"target_value,omitempty"`
@@ -534,7 +534,7 @@ type TargetTrackingConfigurationParameters struct {
 	// Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
 	// This value is used only if the resource is an Auto Scaling group.
 	// +kubebuilder:validation:Optional
-	EstimatedInstanceWarmup *int64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
+	EstimatedInstanceWarmup *float64 `json:"estimatedInstanceWarmup,omitempty" tf:"estimated_instance_warmup,omitempty"`
 
 	// Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
 	// More details can be found in the AWS Auto Scaling API Reference.
@@ -544,12 +544,12 @@ type TargetTrackingConfigurationParameters struct {
 	// Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
 	// +kubebuilder:validation:Optional
-	ScaleInCooldown *int64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
+	ScaleInCooldown *float64 `json:"scaleInCooldown,omitempty" tf:"scale_in_cooldown,omitempty"`
 
 	// Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
 	// This value is not used if the scalable resource is an Auto Scaling group.
 	// +kubebuilder:validation:Optional
-	ScaleOutCooldown *int64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
+	ScaleOutCooldown *float64 `json:"scaleOutCooldown,omitempty" tf:"scale_out_cooldown,omitempty"`
 
 	// Target value for the metric.
 	// +kubebuilder:validation:Optional

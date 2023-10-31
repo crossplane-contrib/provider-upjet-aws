@@ -445,8 +445,7 @@ spec:
                             properties:
                               count:
                                 description: The Count of streams.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         processingConfiguration:
@@ -959,8 +958,7 @@ spec:
                             properties:
                               count:
                                 description: The Count of streams.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         processingConfiguration:
@@ -1483,8 +1481,7 @@ spec:
                             properties:
                               count:
                                 description: The Count of streams.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         processingConfiguration:
@@ -1802,8 +1799,7 @@ spec:
                     type: object
                   version:
                     description: The Version of the application.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

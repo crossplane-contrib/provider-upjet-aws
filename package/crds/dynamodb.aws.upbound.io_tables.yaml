@@ -124,13 +124,11 @@ spec:
                         readCapacity:
                           description: Number of read units for this index. Must be
                             set if billing_mode is set to PROVISIONED.
-                          format: int64
-                          type: integer
+                          type: number
                         writeCapacity:
                           description: Number of write units for this index. Must
                             be set if billing_mode is set to PROVISIONED.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   hashKey:
@@ -184,8 +182,7 @@ spec:
                   readCapacity:
                     description: Number of read units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -292,8 +289,7 @@ spec:
                   writeCapacity:
                     description: Number of write units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -366,13 +362,11 @@ spec:
                         readCapacity:
                           description: Number of read units for this index. Must be
                             set if billing_mode is set to PROVISIONED.
-                          format: int64
-                          type: integer
+                          type: number
                         writeCapacity:
                           description: Number of write units for this index. Must
                             be set if billing_mode is set to PROVISIONED.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   hashKey:
@@ -426,8 +420,7 @@ spec:
                   readCapacity:
                     description: Number of read units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
-                    format: int64
-                    type: integer
+                    type: number
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
@@ -530,8 +523,7 @@ spec:
                   writeCapacity:
                     description: Number of write units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -758,13 +750,11 @@ spec:
                         readCapacity:
                           description: Number of read units for this index. Must be
                             set if billing_mode is set to PROVISIONED.
-                          format: int64
-                          type: integer
+                          type: number
                         writeCapacity:
                           description: Number of write units for this index. Must
                             be set if billing_mode is set to PROVISIONED.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   hashKey:
@@ -821,8 +811,7 @@ spec:
                   readCapacity:
                     description: Number of read units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
-                    format: int64
-                    type: integer
+                    type: number
                   replica:
                     description: Configuration block(s) with DynamoDB Global Tables
                       V2 (version 2019.11.21) replication configurations. See below.
@@ -958,8 +947,7 @@ spec:
                   writeCapacity:
                     description: Number of write units for this table. If the billing_mode
                       is PROVISIONED, this field is required.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

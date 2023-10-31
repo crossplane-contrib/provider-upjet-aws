@@ -403,8 +403,7 @@ spec:
                     type: string
                   defaultVersionId:
                     description: The default version of the fleet provisioning template.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: The description of the fleet provisioning template.
                     type: string
