@@ -337,9 +337,6 @@ spec:
                     items:
                       type: string
                     type: array
-                  name:
-                    description: The name of the event destination
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -474,9 +471,6 @@ spec:
                     items:
                       type: string
                     type: array
-                  name:
-                    description: The name of the event destination
-                    type: string
                   snsDestination:
                     description: Send the events to an SNS Topic destination
                     items:
@@ -648,10 +642,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.matchingTypes)
                 || (has(self.initProvider) && has(self.initProvider.matchingTypes))'
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: EventDestinationStatus defines the observed state of EventDestination.
             properties:
@@ -704,9 +694,6 @@ spec:
                     items:
                       type: string
                     type: array
-                  name:
-                    description: The name of the event destination
-                    type: string
                   snsDestination:
                     description: Send the events to an SNS Topic destination
                     items:
