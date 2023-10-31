@@ -26,7 +26,7 @@ type ApplicationSnapshotObservation struct {
 	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
 
 	// The current application version ID when the snapshot was created.
-	ApplicationVersionID *int64 `json:"applicationVersionId,omitempty" tf:"application_version_id,omitempty"`
+	ApplicationVersionID *float64 `json:"applicationVersionId,omitempty" tf:"application_version_id,omitempty"`
 
 	// The application snapshot identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

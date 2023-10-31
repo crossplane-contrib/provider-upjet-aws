@@ -92,8 +92,7 @@ spec:
                     type: boolean
                   instanceCount:
                     description: The number of instances for which to reserve capacity.
-                    format: int64
-                    type: integer
+                    type: number
                   instanceMatchCriteria:
                     description: Indicates the type of instance launches that the
                       Capacity Reservation accepts. Specify either open or targeted.
@@ -168,8 +167,7 @@ spec:
                     type: boolean
                   instanceCount:
                     description: The number of instances for which to reserve capacity.
-                    format: int64
-                    type: integer
+                    type: number
                   instanceMatchCriteria:
                     description: Indicates the type of instance launches that the
                       Capacity Reservation accepts. Specify either open or targeted.
@@ -414,8 +412,7 @@ spec:
                     type: string
                   instanceCount:
                     description: The number of instances for which to reserve capacity.
-                    format: int64
-                    type: integer
+                    type: number
                   instanceMatchCriteria:
                     description: Indicates the type of instance launches that the
                       Capacity Reservation accepts. Specify either open or targeted.

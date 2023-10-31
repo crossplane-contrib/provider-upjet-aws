@@ -54,7 +54,7 @@ type BrokerNodeGroupInfoInitParameters struct {
 	ConnectivityInfo []ConnectivityInfoInitParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
-	EBSVolumeSize *int64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
+	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -75,7 +75,7 @@ type BrokerNodeGroupInfoObservation struct {
 	ConnectivityInfo []ConnectivityInfoObservation `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
-	EBSVolumeSize *int64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
+	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
@@ -112,7 +112,7 @@ type BrokerNodeGroupInfoParameters struct {
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
 	// +kubebuilder:validation:Optional
-	EBSVolumeSize *int64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
+	EBSVolumeSize *float64 `json:"ebsVolumeSize,omitempty" tf:"ebs_volume_size,omitempty"`
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	// +kubebuilder:validation:Optional
@@ -237,7 +237,7 @@ type ClusterInitParameters struct {
 	LoggingInfo []LoggingInfoInitParameters `json:"loggingInfo,omitempty" tf:"logging_info,omitempty"`
 
 	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
-	NumberOfBrokerNodes *int64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
+	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See below.
 	OpenMonitoring []OpenMonitoringInitParameters `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
@@ -305,7 +305,7 @@ type ClusterObservation struct {
 	LoggingInfo []LoggingInfoObservation `json:"loggingInfo,omitempty" tf:"logging_info,omitempty"`
 
 	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
-	NumberOfBrokerNodes *int64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
+	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See below.
 	OpenMonitoring []OpenMonitoringObservation `json:"openMonitoring,omitempty" tf:"open_monitoring,omitempty"`
@@ -362,7 +362,7 @@ type ClusterParameters struct {
 
 	// The desired total number of broker nodes in the kafka cluster.  It must be a multiple of the number of specified client subnets.
 	// +kubebuilder:validation:Optional
-	NumberOfBrokerNodes *int64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
+	NumberOfBrokerNodes *float64 `json:"numberOfBrokerNodes,omitempty" tf:"number_of_broker_nodes,omitempty"`
 
 	// Configuration block for JMX and Node monitoring for the MSK cluster. See below.
 	// +kubebuilder:validation:Optional
@@ -385,7 +385,7 @@ type ClusterParameters struct {
 type ConfigurationInfoInitParameters struct {
 
 	// Revision of the MSK Configuration to use in the cluster.
-	Revision *int64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type ConfigurationInfoObservation struct {
@@ -394,7 +394,7 @@ type ConfigurationInfoObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Revision of the MSK Configuration to use in the cluster.
-	Revision *int64 `json:"revision,omitempty" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 }
 
 type ConfigurationInfoParameters struct {
@@ -415,7 +415,7 @@ type ConfigurationInfoParameters struct {
 
 	// Revision of the MSK Configuration to use in the cluster.
 	// +kubebuilder:validation:Optional
-	Revision *int64 `json:"revision" tf:"revision,omitempty"`
+	Revision *float64 `json:"revision" tf:"revision,omitempty"`
 }
 
 type ConnectivityInfoInitParameters struct {
@@ -443,7 +443,7 @@ type EBSStorageInfoInitParameters struct {
 	ProvisionedThroughput []ProvisionedThroughputInitParameters `json:"provisionedThroughput,omitempty" tf:"provisioned_throughput,omitempty"`
 
 	// The size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EBSStorageInfoObservation struct {
@@ -452,7 +452,7 @@ type EBSStorageInfoObservation struct {
 	ProvisionedThroughput []ProvisionedThroughputObservation `json:"provisionedThroughput,omitempty" tf:"provisioned_throughput,omitempty"`
 
 	// The size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EBSStorageInfoParameters struct {
@@ -463,7 +463,7 @@ type EBSStorageInfoParameters struct {
 
 	// The size in GiB of the EBS volume for the data drive on each broker node. Minimum value of 1 and maximum value of 16384.
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 }
 
 type EncryptionInTransitInitParameters struct {
@@ -678,7 +678,7 @@ type ProvisionedThroughputInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks
-	VolumeThroughput *int64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
+	VolumeThroughput *float64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
 }
 
 type ProvisionedThroughputObservation struct {
@@ -687,7 +687,7 @@ type ProvisionedThroughputObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks
-	VolumeThroughput *int64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
+	VolumeThroughput *float64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
 }
 
 type ProvisionedThroughputParameters struct {
@@ -698,7 +698,7 @@ type ProvisionedThroughputParameters struct {
 
 	// Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second. The minimum value is 250. The maximum value varies between broker type. You can refer to the valid values for the maximum volume throughput at the following documentation on throughput bottlenecks
 	// +kubebuilder:validation:Optional
-	VolumeThroughput *int64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
+	VolumeThroughput *float64 `json:"volumeThroughput,omitempty" tf:"volume_throughput,omitempty"`
 }
 
 type PublicAccessInitParameters struct {

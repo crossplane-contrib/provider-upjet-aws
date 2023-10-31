@@ -105,8 +105,7 @@ spec:
                         iops:
                           description: Number of I/O operations per second the created
                             volumes will support.
-                          format: int64
-                          type: integer
+                          type: number
                         outpostArn:
                           description: ARN of the Outpost on which the snapshot is
                             stored.
@@ -196,14 +195,12 @@ spec:
                         throughput:
                           description: Throughput that the EBS volume supports, in
                             MiB/s. Only valid for volume_type of gp3.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: Size of created volumes in GiB. If snapshot_id
                             is set and volume_size is omitted then the volume will
                             have the same size as the selected snapshot.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: 'Type of EBS volume to create. Can be standard,
                             gp2, gp3, io1, io2, sc1 or st1 (Default: standard).'
@@ -335,8 +332,7 @@ spec:
                         iops:
                           description: Number of I/O operations per second the created
                             volumes will support.
-                          format: int64
-                          type: integer
+                          type: number
                         outpostArn:
                           description: ARN of the Outpost on which the snapshot is
                             stored.
@@ -344,14 +340,12 @@ spec:
                         throughput:
                           description: Throughput that the EBS volume supports, in
                             MiB/s. Only valid for volume_type of gp3.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: Size of created volumes in GiB. If snapshot_id
                             is set and volume_size is omitted then the volume will
                             have the same size as the selected snapshot.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: 'Type of EBS volume to create. Can be standard,
                             gp2, gp3, io1, io2, sc1 or st1 (Default: standard).'
@@ -638,8 +632,7 @@ spec:
                         iops:
                           description: Number of I/O operations per second the created
                             volumes will support.
-                          format: int64
-                          type: integer
+                          type: number
                         outpostArn:
                           description: ARN of the Outpost on which the snapshot is
                             stored.
@@ -653,14 +646,12 @@ spec:
                         throughput:
                           description: Throughput that the EBS volume supports, in
                             MiB/s. Only valid for volume_type of gp3.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: Size of created volumes in GiB. If snapshot_id
                             is set and volume_size is omitted then the volume will
                             have the same size as the selected snapshot.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: 'Type of EBS volume to create. Can be standard,
                             gp2, gp3, io1, io2, sc1 or st1 (Default: standard).'

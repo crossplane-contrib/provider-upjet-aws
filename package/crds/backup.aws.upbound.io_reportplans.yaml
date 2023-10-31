@@ -126,8 +126,7 @@ spec:
                         numberOfFrameworks:
                           description: Specifies the number of frameworks a report
                             covers.
-                          format: int64
-                          type: integer
+                          type: number
                         organizationUnits:
                           description: Specifies the list of Organizational Units
                             a report covers.
@@ -222,8 +221,7 @@ spec:
                         numberOfFrameworks:
                           description: Specifies the number of frameworks a report
                             covers.
-                          format: int64
-                          type: integer
+                          type: number
                         organizationUnits:
                           description: Specifies the list of Organizational Units
                             a report covers.
@@ -497,8 +495,7 @@ spec:
                         numberOfFrameworks:
                           description: Specifies the number of frameworks a report
                             covers.
-                          format: int64
-                          type: integer
+                          type: number
                         organizationUnits:
                           description: Specifies the list of Organizational Units
                             a report covers.

@@ -95,26 +95,22 @@ spec:
                         daily:
                           description: The maximum number of messages that the campaign
                             can send daily.
-                          format: int64
-                          type: integer
+                          type: number
                         maximumDuration:
                           description: The length of time (in seconds) that the campaign
                             can run before it ends and message deliveries stop. This
                             duration begins at the scheduled start time for the campaign.
                             The minimum value is 60.
-                          format: int64
-                          type: integer
+                          type: number
                         messagesPerSecond:
                           description: The number of messages that the campaign can
                             send per second. The minimum value is 50, and the maximum
                             is 20000.
-                          format: int64
-                          type: integer
+                          type: number
                         total:
                           description: The maximum total number of messages that the
                             campaign can send.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -189,26 +185,22 @@ spec:
                         daily:
                           description: The maximum number of messages that the campaign
                             can send daily.
-                          format: int64
-                          type: integer
+                          type: number
                         maximumDuration:
                           description: The length of time (in seconds) that the campaign
                             can run before it ends and message deliveries stop. This
                             duration begins at the scheduled start time for the campaign.
                             The minimum value is 60.
-                          format: int64
-                          type: integer
+                          type: number
                         messagesPerSecond:
                           description: The number of messages that the campaign can
                             send per second. The minimum value is 50, and the maximum
                             is 20000.
-                          format: int64
-                          type: integer
+                          type: number
                         total:
                           description: The maximum total number of messages that the
                             campaign can send.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -438,26 +430,22 @@ spec:
                         daily:
                           description: The maximum number of messages that the campaign
                             can send daily.
-                          format: int64
-                          type: integer
+                          type: number
                         maximumDuration:
                           description: The length of time (in seconds) that the campaign
                             can run before it ends and message deliveries stop. This
                             duration begins at the scheduled start time for the campaign.
                             The minimum value is 60.
-                          format: int64
-                          type: integer
+                          type: number
                         messagesPerSecond:
                           description: The number of messages that the campaign can
                             send per second. The minimum value is 50, and the maximum
                             is 20000.
-                          format: int64
-                          type: integer
+                          type: number
                         total:
                           description: The maximum total number of messages that the
                             campaign can send.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:

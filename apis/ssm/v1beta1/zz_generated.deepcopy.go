@@ -60,7 +60,7 @@ func (in *ActivationInitParameters) DeepCopyInto(out *ActivationInitParameters) 
 	}
 	if in.RegistrationLimit != nil {
 		in, out := &in.RegistrationLimit, &out.RegistrationLimit
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -163,12 +163,12 @@ func (in *ActivationObservation) DeepCopyInto(out *ActivationObservation) {
 	}
 	if in.RegistrationCount != nil {
 		in, out := &in.RegistrationCount, &out.RegistrationCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RegistrationLimit != nil {
 		in, out := &in.RegistrationLimit, &out.RegistrationLimit
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -255,7 +255,7 @@ func (in *ActivationParameters) DeepCopyInto(out *ActivationParameters) {
 	}
 	if in.RegistrationLimit != nil {
 		in, out := &in.RegistrationLimit, &out.RegistrationLimit
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -326,7 +326,7 @@ func (in *ApprovalRuleInitParameters) DeepCopyInto(out *ApprovalRuleInitParamete
 	*out = *in
 	if in.ApproveAfterDays != nil {
 		in, out := &in.ApproveAfterDays, &out.ApproveAfterDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ApproveUntilDate != nil {
@@ -368,7 +368,7 @@ func (in *ApprovalRuleObservation) DeepCopyInto(out *ApprovalRuleObservation) {
 	*out = *in
 	if in.ApproveAfterDays != nil {
 		in, out := &in.ApproveAfterDays, &out.ApproveAfterDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ApproveUntilDate != nil {
@@ -410,7 +410,7 @@ func (in *ApprovalRuleParameters) DeepCopyInto(out *ApprovalRuleParameters) {
 	*out = *in
 	if in.ApproveAfterDays != nil {
 		in, out := &in.ApproveAfterDays, &out.ApproveAfterDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ApproveUntilDate != nil {
@@ -554,7 +554,7 @@ func (in *AssociationInitParameters) DeepCopyInto(out *AssociationInitParameters
 	}
 	if in.WaitForSuccessTimeoutSeconds != nil {
 		in, out := &in.WaitForSuccessTimeoutSeconds, &out.WaitForSuccessTimeoutSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -701,7 +701,7 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 	}
 	if in.WaitForSuccessTimeoutSeconds != nil {
 		in, out := &in.WaitForSuccessTimeoutSeconds, &out.WaitForSuccessTimeoutSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -816,7 +816,7 @@ func (in *AssociationParameters) DeepCopyInto(out *AssociationParameters) {
 	}
 	if in.WaitForSuccessTimeoutSeconds != nil {
 		in, out := &in.WaitForSuccessTimeoutSeconds, &out.WaitForSuccessTimeoutSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2052,7 +2052,7 @@ func (in *MaintenanceWindowInitParameters) DeepCopyInto(out *MaintenanceWindowIn
 	}
 	if in.Cutoff != nil {
 		in, out := &in.Cutoff, &out.Cutoff
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -2062,7 +2062,7 @@ func (in *MaintenanceWindowInitParameters) DeepCopyInto(out *MaintenanceWindowIn
 	}
 	if in.Duration != nil {
 		in, out := &in.Duration, &out.Duration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -2087,7 +2087,7 @@ func (in *MaintenanceWindowInitParameters) DeepCopyInto(out *MaintenanceWindowIn
 	}
 	if in.ScheduleOffset != nil {
 		in, out := &in.ScheduleOffset, &out.ScheduleOffset
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ScheduleTimezone != nil {
@@ -2170,7 +2170,7 @@ func (in *MaintenanceWindowObservation) DeepCopyInto(out *MaintenanceWindowObser
 	}
 	if in.Cutoff != nil {
 		in, out := &in.Cutoff, &out.Cutoff
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -2180,7 +2180,7 @@ func (in *MaintenanceWindowObservation) DeepCopyInto(out *MaintenanceWindowObser
 	}
 	if in.Duration != nil {
 		in, out := &in.Duration, &out.Duration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -2210,7 +2210,7 @@ func (in *MaintenanceWindowObservation) DeepCopyInto(out *MaintenanceWindowObser
 	}
 	if in.ScheduleOffset != nil {
 		in, out := &in.ScheduleOffset, &out.ScheduleOffset
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ScheduleTimezone != nil {
@@ -2277,7 +2277,7 @@ func (in *MaintenanceWindowParameters) DeepCopyInto(out *MaintenanceWindowParame
 	}
 	if in.Cutoff != nil {
 		in, out := &in.Cutoff, &out.Cutoff
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -2287,7 +2287,7 @@ func (in *MaintenanceWindowParameters) DeepCopyInto(out *MaintenanceWindowParame
 	}
 	if in.Duration != nil {
 		in, out := &in.Duration, &out.Duration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Enabled != nil {
@@ -2317,7 +2317,7 @@ func (in *MaintenanceWindowParameters) DeepCopyInto(out *MaintenanceWindowParame
 	}
 	if in.ScheduleOffset != nil {
 		in, out := &in.ScheduleOffset, &out.ScheduleOffset
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ScheduleTimezone != nil {
@@ -2793,7 +2793,7 @@ func (in *MaintenanceWindowTaskInitParameters) DeepCopyInto(out *MaintenanceWind
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Targets != nil {
@@ -2899,7 +2899,7 @@ func (in *MaintenanceWindowTaskObservation) DeepCopyInto(out *MaintenanceWindowT
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceRoleArn != nil {
@@ -2983,7 +2983,7 @@ func (in *MaintenanceWindowTaskParameters) DeepCopyInto(out *MaintenanceWindowTa
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -3670,7 +3670,7 @@ func (in *ParameterObservation_2) DeepCopyInto(out *ParameterObservation_2) {
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4756,7 +4756,7 @@ func (in *RunCommandParametersInitParameters) DeepCopyInto(out *RunCommandParame
 	}
 	if in.TimeoutSeconds != nil {
 		in, out := &in.TimeoutSeconds, &out.TimeoutSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4832,7 +4832,7 @@ func (in *RunCommandParametersObservation) DeepCopyInto(out *RunCommandParameter
 	}
 	if in.TimeoutSeconds != nil {
 		in, out := &in.TimeoutSeconds, &out.TimeoutSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5021,7 +5021,7 @@ func (in *RunCommandParametersParameters) DeepCopyInto(out *RunCommandParameters
 	}
 	if in.TimeoutSeconds != nil {
 		in, out := &in.TimeoutSeconds, &out.TimeoutSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

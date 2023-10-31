@@ -184,7 +184,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1DpdTimeoutAction *string `json:"tunnel1DpdTimeoutAction,omitempty" tf:"tunnel1_dpd_timeout_action,omitempty"`
 
 	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
-	Tunnel1DpdTimeoutSeconds *int64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
+	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
 	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
@@ -202,7 +202,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1LogOptions []Tunnel1LogOptionsInitParameters `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel1Phase1DhGroupNumbers []*int64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
+	Tunnel1Phase1DhGroupNumbers []*float64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel1Phase1EncryptionAlgorithms []*string `json:"tunnel1Phase1EncryptionAlgorithms,omitempty" tf:"tunnel1_phase1_encryption_algorithms,omitempty"`
@@ -211,10 +211,10 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
-	Tunnel1Phase1LifetimeSeconds *int64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
+	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel1Phase2DhGroupNumbers []*int64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
+	Tunnel1Phase2DhGroupNumbers []*float64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel1Phase2EncryptionAlgorithms []*string `json:"tunnel1Phase2EncryptionAlgorithms,omitempty" tf:"tunnel1_phase2_encryption_algorithms,omitempty"`
@@ -223,16 +223,16 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
-	Tunnel1Phase2LifetimeSeconds *int64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
+	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
 	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
-	Tunnel1RekeyFuzzPercentage *int64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
+	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
-	Tunnel1RekeyMarginTimeSeconds *int64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
+	Tunnel1RekeyMarginTimeSeconds *float64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
 
 	// The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
-	Tunnel1ReplayWindowSize *int64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
+	Tunnel1ReplayWindowSize *float64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
 
 	// The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel1StartupAction *string `json:"tunnel1StartupAction,omitempty" tf:"tunnel1_startup_action,omitempty"`
@@ -241,7 +241,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2DpdTimeoutAction *string `json:"tunnel2DpdTimeoutAction,omitempty" tf:"tunnel2_dpd_timeout_action,omitempty"`
 
 	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
-	Tunnel2DpdTimeoutSeconds *int64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
+	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
 
 	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
@@ -259,7 +259,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2LogOptions []Tunnel2LogOptionsInitParameters `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel2Phase1DhGroupNumbers []*int64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
+	Tunnel2Phase1DhGroupNumbers []*float64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel2Phase1EncryptionAlgorithms []*string `json:"tunnel2Phase1EncryptionAlgorithms,omitempty" tf:"tunnel2_phase1_encryption_algorithms,omitempty"`
@@ -268,10 +268,10 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
-	Tunnel2Phase1LifetimeSeconds *int64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
+	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel2Phase2DhGroupNumbers []*int64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
+	Tunnel2Phase2DhGroupNumbers []*float64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel2Phase2EncryptionAlgorithms []*string `json:"tunnel2Phase2EncryptionAlgorithms,omitempty" tf:"tunnel2_phase2_encryption_algorithms,omitempty"`
@@ -280,16 +280,16 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
-	Tunnel2Phase2LifetimeSeconds *int64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
+	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
 	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
-	Tunnel2RekeyFuzzPercentage *int64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
+	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
-	Tunnel2RekeyMarginTimeSeconds *int64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
+	Tunnel2RekeyMarginTimeSeconds *float64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
 
 	// The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
-	Tunnel2ReplayWindowSize *int64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
+	Tunnel2ReplayWindowSize *float64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
 
 	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
@@ -361,7 +361,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1BGPAsn *string `json:"tunnel1BgpAsn,omitempty" tf:"tunnel1_bgp_asn,omitempty"`
 
 	// The bgp holdtime of the first VPN tunnel.
-	Tunnel1BGPHoldtime *int64 `json:"tunnel1BgpHoldtime,omitempty" tf:"tunnel1_bgp_holdtime,omitempty"`
+	Tunnel1BGPHoldtime *float64 `json:"tunnel1BgpHoldtime,omitempty" tf:"tunnel1_bgp_holdtime,omitempty"`
 
 	// The RFC 6890 link-local address of the first VPN tunnel (Customer Gateway Side).
 	Tunnel1CgwInsideAddress *string `json:"tunnel1CgwInsideAddress,omitempty" tf:"tunnel1_cgw_inside_address,omitempty"`
@@ -370,7 +370,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1DpdTimeoutAction *string `json:"tunnel1DpdTimeoutAction,omitempty" tf:"tunnel1_dpd_timeout_action,omitempty"`
 
 	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
-	Tunnel1DpdTimeoutSeconds *int64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
+	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
 	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
@@ -388,7 +388,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1LogOptions []Tunnel1LogOptionsObservation `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel1Phase1DhGroupNumbers []*int64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
+	Tunnel1Phase1DhGroupNumbers []*float64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel1Phase1EncryptionAlgorithms []*string `json:"tunnel1Phase1EncryptionAlgorithms,omitempty" tf:"tunnel1_phase1_encryption_algorithms,omitempty"`
@@ -397,10 +397,10 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
-	Tunnel1Phase1LifetimeSeconds *int64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
+	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel1Phase2DhGroupNumbers []*int64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
+	Tunnel1Phase2DhGroupNumbers []*float64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel1Phase2EncryptionAlgorithms []*string `json:"tunnel1Phase2EncryptionAlgorithms,omitempty" tf:"tunnel1_phase2_encryption_algorithms,omitempty"`
@@ -409,16 +409,16 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
-	Tunnel1Phase2LifetimeSeconds *int64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
+	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
 	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
-	Tunnel1RekeyFuzzPercentage *int64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
+	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
-	Tunnel1RekeyMarginTimeSeconds *int64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
+	Tunnel1RekeyMarginTimeSeconds *float64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
 
 	// The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
-	Tunnel1ReplayWindowSize *int64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
+	Tunnel1ReplayWindowSize *float64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
 
 	// The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel1StartupAction *string `json:"tunnel1StartupAction,omitempty" tf:"tunnel1_startup_action,omitempty"`
@@ -433,7 +433,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2BGPAsn *string `json:"tunnel2BgpAsn,omitempty" tf:"tunnel2_bgp_asn,omitempty"`
 
 	// The bgp holdtime of the second VPN tunnel.
-	Tunnel2BGPHoldtime *int64 `json:"tunnel2BgpHoldtime,omitempty" tf:"tunnel2_bgp_holdtime,omitempty"`
+	Tunnel2BGPHoldtime *float64 `json:"tunnel2BgpHoldtime,omitempty" tf:"tunnel2_bgp_holdtime,omitempty"`
 
 	// The RFC 6890 link-local address of the second VPN tunnel (Customer Gateway Side).
 	Tunnel2CgwInsideAddress *string `json:"tunnel2CgwInsideAddress,omitempty" tf:"tunnel2_cgw_inside_address,omitempty"`
@@ -442,7 +442,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2DpdTimeoutAction *string `json:"tunnel2DpdTimeoutAction,omitempty" tf:"tunnel2_dpd_timeout_action,omitempty"`
 
 	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
-	Tunnel2DpdTimeoutSeconds *int64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
+	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
 
 	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
@@ -460,7 +460,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2LogOptions []Tunnel2LogOptionsObservation `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel2Phase1DhGroupNumbers []*int64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
+	Tunnel2Phase1DhGroupNumbers []*float64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel2Phase1EncryptionAlgorithms []*string `json:"tunnel2Phase1EncryptionAlgorithms,omitempty" tf:"tunnel2_phase1_encryption_algorithms,omitempty"`
@@ -469,10 +469,10 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
-	Tunnel2Phase1LifetimeSeconds *int64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
+	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
-	Tunnel2Phase2DhGroupNumbers []*int64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
+	Tunnel2Phase2DhGroupNumbers []*float64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	Tunnel2Phase2EncryptionAlgorithms []*string `json:"tunnel2Phase2EncryptionAlgorithms,omitempty" tf:"tunnel2_phase2_encryption_algorithms,omitempty"`
@@ -481,16 +481,16 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
-	Tunnel2Phase2LifetimeSeconds *int64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
+	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
 	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
-	Tunnel2RekeyFuzzPercentage *int64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
+	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
-	Tunnel2RekeyMarginTimeSeconds *int64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
+	Tunnel2RekeyMarginTimeSeconds *float64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
 
 	// The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
-	Tunnel2ReplayWindowSize *int64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
+	Tunnel2ReplayWindowSize *float64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
 
 	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	Tunnel2StartupAction *string `json:"tunnel2StartupAction,omitempty" tf:"tunnel2_startup_action,omitempty"`
@@ -588,7 +588,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The number of seconds after which a DPD timeout occurs for the first VPN tunnel. Valid value is equal or higher than 30.
 	// +kubebuilder:validation:Optional
-	Tunnel1DpdTimeoutSeconds *int64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
+	Tunnel1DpdTimeoutSeconds *float64 `json:"tunnel1DpdTimeoutSeconds,omitempty" tf:"tunnel1_dpd_timeout_seconds,omitempty"`
 
 	// Turn on or off tunnel endpoint lifecycle control feature for the first VPN tunnel. Valid values are true | false.
 	// +kubebuilder:validation:Optional
@@ -612,7 +612,7 @@ type VPNConnectionParameters_2 struct {
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
-	Tunnel1Phase1DhGroupNumbers []*int64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
+	Tunnel1Phase1DhGroupNumbers []*float64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
@@ -624,11 +624,11 @@ type VPNConnectionParameters_2 struct {
 
 	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	// +kubebuilder:validation:Optional
-	Tunnel1Phase1LifetimeSeconds *int64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
+	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
-	Tunnel1Phase2DhGroupNumbers []*int64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
+	Tunnel1Phase2DhGroupNumbers []*float64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
@@ -640,7 +640,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	// +kubebuilder:validation:Optional
-	Tunnel1Phase2LifetimeSeconds *int64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
+	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
 	// The preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	// +kubebuilder:validation:Optional
@@ -648,15 +648,15 @@ type VPNConnectionParameters_2 struct {
 
 	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	// +kubebuilder:validation:Optional
-	Tunnel1RekeyFuzzPercentage *int64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
+	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the first VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel1_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel1_phase2_lifetime_seconds.
 	// +kubebuilder:validation:Optional
-	Tunnel1RekeyMarginTimeSeconds *int64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
+	Tunnel1RekeyMarginTimeSeconds *float64 `json:"tunnel1RekeyMarginTimeSeconds,omitempty" tf:"tunnel1_rekey_margin_time_seconds,omitempty"`
 
 	// The number of packets in an IKE replay window for the first VPN tunnel. Valid value is between 64 and 2048.
 	// +kubebuilder:validation:Optional
-	Tunnel1ReplayWindowSize *int64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
+	Tunnel1ReplayWindowSize *float64 `json:"tunnel1ReplayWindowSize,omitempty" tf:"tunnel1_replay_window_size,omitempty"`
 
 	// The action to take when the establishing the tunnel for the first VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	// +kubebuilder:validation:Optional
@@ -668,7 +668,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The number of seconds after which a DPD timeout occurs for the second VPN tunnel. Valid value is equal or higher than 30.
 	// +kubebuilder:validation:Optional
-	Tunnel2DpdTimeoutSeconds *int64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
+	Tunnel2DpdTimeoutSeconds *float64 `json:"tunnel2DpdTimeoutSeconds,omitempty" tf:"tunnel2_dpd_timeout_seconds,omitempty"`
 
 	// Turn on or off tunnel endpoint lifecycle control feature for the second VPN tunnel. Valid values are true | false.
 	// +kubebuilder:validation:Optional
@@ -692,7 +692,7 @@ type VPNConnectionParameters_2 struct {
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
-	Tunnel2Phase1DhGroupNumbers []*int64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
+	Tunnel2Phase1DhGroupNumbers []*float64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
@@ -704,11 +704,11 @@ type VPNConnectionParameters_2 struct {
 
 	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	// +kubebuilder:validation:Optional
-	Tunnel2Phase1LifetimeSeconds *int64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
+	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
-	Tunnel2Phase2DhGroupNumbers []*int64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
+	Tunnel2Phase2DhGroupNumbers []*float64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
@@ -720,7 +720,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	// +kubebuilder:validation:Optional
-	Tunnel2Phase2LifetimeSeconds *int64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
+	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
 
 	// The preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
 	// +kubebuilder:validation:Optional
@@ -728,15 +728,15 @@ type VPNConnectionParameters_2 struct {
 
 	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	// +kubebuilder:validation:Optional
-	Tunnel2RekeyFuzzPercentage *int64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
+	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the second VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for tunnel2_rekey_fuzz_percentage. Valid value is between 60 and half of tunnel2_phase2_lifetime_seconds.
 	// +kubebuilder:validation:Optional
-	Tunnel2RekeyMarginTimeSeconds *int64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
+	Tunnel2RekeyMarginTimeSeconds *float64 `json:"tunnel2RekeyMarginTimeSeconds,omitempty" tf:"tunnel2_rekey_margin_time_seconds,omitempty"`
 
 	// The number of packets in an IKE replay window for the second VPN tunnel. Valid value is between 64 and 2048.
 	// +kubebuilder:validation:Optional
-	Tunnel2ReplayWindowSize *int64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
+	Tunnel2ReplayWindowSize *float64 `json:"tunnel2ReplayWindowSize,omitempty" tf:"tunnel2_replay_window_size,omitempty"`
 
 	// The action to take when the establishing the tunnel for the second VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid values are add | start.
 	// +kubebuilder:validation:Optional
@@ -780,7 +780,7 @@ type VgwTelemetryInitParameters struct {
 type VgwTelemetryObservation struct {
 
 	// The number of accepted routes.
-	AcceptedRouteCount *int64 `json:"acceptedRouteCount,omitempty" tf:"accepted_route_count,omitempty"`
+	AcceptedRouteCount *float64 `json:"acceptedRouteCount,omitempty" tf:"accepted_route_count,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`

@@ -115,32 +115,32 @@ type ConfigurationParameters struct {
 type DefaultCapacityProviderStrategyInitParameters struct {
 
 	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
-	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// The short name of the capacity provider.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
-	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type DefaultCapacityProviderStrategyObservation struct {
 
 	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
-	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// The short name of the capacity provider.
 	CapacityProvider *string `json:"capacityProvider,omitempty" tf:"capacity_provider,omitempty"`
 
 	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
-	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type DefaultCapacityProviderStrategyParameters struct {
 
 	// The number of tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.
 	// +kubebuilder:validation:Optional
-	Base *int64 `json:"base,omitempty" tf:"base,omitempty"`
+	Base *float64 `json:"base,omitempty" tf:"base,omitempty"`
 
 	// The short name of the capacity provider.
 	// +kubebuilder:validation:Optional
@@ -148,7 +148,7 @@ type DefaultCapacityProviderStrategyParameters struct {
 
 	// The relative percentage of the total number of launched tasks that should use the specified capacity provider.
 	// +kubebuilder:validation:Optional
-	Weight *int64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type ExecuteCommandConfigurationInitParameters struct {

@@ -359,8 +359,7 @@ spec:
                     type: string
                   promotionalMessagesPerSecond:
                     description: Promotional messages per second that can be sent.
-                    format: int64
-                    type: integer
+                    type: number
                   senderId:
                     description: Sender identifier of your messages.
                     type: string
@@ -369,8 +368,7 @@ spec:
                     type: string
                   transactionalMessagesPerSecond:
                     description: Transactional messages per second that can be sent.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

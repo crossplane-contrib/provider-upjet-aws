@@ -102,8 +102,7 @@ spec:
                       is set to lowestPrice. Spot Fleet selects the cheapest Spot
                       pools and evenly allocates your target Spot capacity across
                       the number of Spot pools that you specify.
-                    format: int64
-                    type: integer
+                    type: number
                   launchSpecification:
                     description: Used to define the launch configuration of the spot-fleet
                       request. Can be specified multiple times to define different
@@ -132,8 +131,7 @@ spec:
                               encrypted:
                                 type: boolean
                               iops:
-                                format: int64
-                                type: integer
+                                type: number
                               kmsKeyId:
                                 description: The ID of the launch template. Conflicts
                                   with name.
@@ -143,11 +141,9 @@ spec:
                                   with name.
                                 type: string
                               throughput:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeSize:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeType:
                                 type: string
                             type: object
@@ -272,18 +268,15 @@ spec:
                               encrypted:
                                 type: boolean
                               iops:
-                                format: int64
-                                type: integer
+                                type: number
                               kmsKeyId:
                                 description: The ID of the launch template. Conflicts
                                   with name.
                                 type: string
                               throughput:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeSize:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeType:
                                 type: string
                             type: object
@@ -523,12 +516,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     acceleratorManufacturers:
@@ -551,12 +542,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     acceleratorTypes:
@@ -598,12 +587,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     burstablePerformance:
@@ -673,12 +660,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     networkBandwidthGbps:
@@ -704,12 +689,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     onDemandMaxPricePercentageOverLowestPrice:
@@ -726,8 +709,7 @@ spec:
                                         interprets as a percentage. To turn off price
                                         protection, specify a high value, such as
                                         999999. Default is 20.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     requireHibernateSupport:
                                       description: Indicate whether instance types
                                         must support On-Demand Instance Hibernation,
@@ -746,8 +728,7 @@ spec:
                                         EC2 Auto Scaling interprets as a percentage.
                                         To turn off price protection, specify a high
                                         value, such as 999999. Default is 100.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     totalLocalStorageGb:
                                       description: Block describing the minimum and
                                         maximum total local storage (GB). Default
@@ -769,12 +750,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -824,8 +803,7 @@ spec:
                     description: The number of On-Demand units to request. If the
                       request type is maintain, you can specify a target capacity
                       of 0 and add capacity later.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -867,8 +845,7 @@ spec:
                       set the target capacity in terms of instances or a performance
                       characteristic that is important to your application workload,
                       such as vCPUs, memory, or I/O.
-                    format: int64
-                    type: integer
+                    type: number
                   targetCapacityUnitType:
                     description: The unit for the target capacity. This can only be
                       done with instance_requirements defined
@@ -952,8 +929,7 @@ spec:
                       is set to lowestPrice. Spot Fleet selects the cheapest Spot
                       pools and evenly allocates your target Spot capacity across
                       the number of Spot pools that you specify.
-                    format: int64
-                    type: integer
+                    type: number
                   launchSpecification:
                     description: Used to define the launch configuration of the spot-fleet
                       request. Can be specified multiple times to define different
@@ -982,8 +958,7 @@ spec:
                               encrypted:
                                 type: boolean
                               iops:
-                                format: int64
-                                type: integer
+                                type: number
                               kmsKeyId:
                                 description: The ID of the launch template. Conflicts
                                   with name.
@@ -993,11 +968,9 @@ spec:
                                   with name.
                                 type: string
                               throughput:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeSize:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeType:
                                 type: string
                             type: object
@@ -1040,18 +1013,15 @@ spec:
                               encrypted:
                                 type: boolean
                               iops:
-                                format: int64
-                                type: integer
+                                type: number
                               kmsKeyId:
                                 description: The ID of the launch template. Conflicts
                                   with name.
                                 type: string
                               throughput:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeSize:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeType:
                                 type: string
                             type: object
@@ -1120,12 +1090,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     acceleratorManufacturers:
@@ -1148,12 +1116,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     acceleratorTypes:
@@ -1195,12 +1161,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     burstablePerformance:
@@ -1270,12 +1234,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     networkBandwidthGbps:
@@ -1301,12 +1263,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     onDemandMaxPricePercentageOverLowestPrice:
@@ -1323,8 +1283,7 @@ spec:
                                         interprets as a percentage. To turn off price
                                         protection, specify a high value, such as
                                         999999. Default is 20.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     requireHibernateSupport:
                                       description: Indicate whether instance types
                                         must support On-Demand Instance Hibernation,
@@ -1343,8 +1302,7 @@ spec:
                                         EC2 Auto Scaling interprets as a percentage.
                                         To turn off price protection, specify a high
                                         value, such as 999999. Default is 100.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     totalLocalStorageGb:
                                       description: Block describing the minimum and
                                         maximum total local storage (GB). Default
@@ -1366,12 +1324,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -1421,8 +1377,7 @@ spec:
                     description: The number of On-Demand units to request. If the
                       request type is maintain, you can specify a target capacity
                       of 0 and add capacity later.
-                    format: int64
-                    type: integer
+                    type: number
                   replaceUnhealthyInstances:
                     description: Indicates whether Spot fleet should replace unhealthy
                       instances. Default false.
@@ -1460,8 +1415,7 @@ spec:
                       set the target capacity in terms of instances or a performance
                       characteristic that is important to your application workload,
                       such as vCPUs, memory, or I/O.
-                    format: int64
-                    type: integer
+                    type: number
                   targetCapacityUnitType:
                     description: The unit for the target capacity. This can only be
                       done with instance_requirements defined
@@ -1710,8 +1664,7 @@ spec:
                       is set to lowestPrice. Spot Fleet selects the cheapest Spot
                       pools and evenly allocates your target Spot capacity across
                       the number of Spot pools that you specify.
-                    format: int64
-                    type: integer
+                    type: number
                   launchSpecification:
                     description: Used to define the launch configuration of the spot-fleet
                       request. Can be specified multiple times to define different
@@ -1740,8 +1693,7 @@ spec:
                               encrypted:
                                 type: boolean
                               iops:
-                                format: int64
-                                type: integer
+                                type: number
                               kmsKeyId:
                                 description: The ID of the launch template. Conflicts
                                   with name.
@@ -1751,11 +1703,9 @@ spec:
                                   with name.
                                 type: string
                               throughput:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeSize:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeType:
                                 type: string
                             type: object
@@ -1802,18 +1752,15 @@ spec:
                               encrypted:
                                 type: boolean
                               iops:
-                                format: int64
-                                type: integer
+                                type: number
                               kmsKeyId:
                                 description: The ID of the launch template. Conflicts
                                   with name.
                                 type: string
                               throughput:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeSize:
-                                format: int64
-                                type: integer
+                                type: number
                               volumeType:
                                 type: string
                             type: object
@@ -1893,12 +1840,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     acceleratorManufacturers:
@@ -1921,12 +1866,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     acceleratorTypes:
@@ -1968,12 +1911,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     burstablePerformance:
@@ -2043,12 +1984,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     networkBandwidthGbps:
@@ -2074,12 +2013,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     onDemandMaxPricePercentageOverLowestPrice:
@@ -2096,8 +2033,7 @@ spec:
                                         interprets as a percentage. To turn off price
                                         protection, specify a high value, such as
                                         999999. Default is 20.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     requireHibernateSupport:
                                       description: Indicate whether instance types
                                         must support On-Demand Instance Hibernation,
@@ -2116,8 +2052,7 @@ spec:
                                         EC2 Auto Scaling interprets as a percentage.
                                         To turn off price protection, specify a high
                                         value, such as 999999. Default is 100.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     totalLocalStorageGb:
                                       description: Block describing the minimum and
                                         maximum total local storage (GB). Default
@@ -2139,12 +2074,10 @@ spec:
                                         properties:
                                           max:
                                             description: Maximum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           min:
                                             description: Minimum.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -2194,8 +2127,7 @@ spec:
                     description: The number of On-Demand units to request. If the
                       request type is maintain, you can specify a target capacity
                       of 0 and add capacity later.
-                    format: int64
-                    type: integer
+                    type: number
                   replaceUnhealthyInstances:
                     description: Indicates whether Spot fleet should replace unhealthy
                       instances. Default false.
@@ -2243,8 +2175,7 @@ spec:
                       set the target capacity in terms of instances or a performance
                       characteristic that is important to your application workload,
                       such as vCPUs, memory, or I/O.
-                    format: int64
-                    type: integer
+                    type: number
                   targetCapacityUnitType:
                     description: The unit for the target capacity. This can only be
                       done with instance_requirements defined

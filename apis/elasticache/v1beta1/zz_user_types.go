@@ -24,7 +24,7 @@ type AuthenticationModeInitParameters struct {
 }
 
 type AuthenticationModeObservation struct {
-	PasswordCount *int64 `json:"passwordCount,omitempty" tf:"password_count,omitempty"`
+	PasswordCount *float64 `json:"passwordCount,omitempty" tf:"password_count,omitempty"`
 
 	// Specifies the authentication type. Possible options are: password, no-password-required or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

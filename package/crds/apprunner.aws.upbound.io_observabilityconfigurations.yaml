@@ -317,8 +317,7 @@ spec:
                     type: string
                   observabilityConfigurationRevision:
                     description: The revision of this observability configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   status:
                     description: Current state of the observability configuration.
                       An INACTIVE configuration revision has been deleted and can't

@@ -85,8 +85,7 @@ spec:
                         maximumWindowInMinutes:
                           description: Maximum time window during which a schedule
                             can be invoked. Ranges from 1 to 1440 minutes.
-                          format: int64
-                          type: integer
+                          type: number
                         mode:
                           description: 'Determines whether the schedule is invoked
                             within a flexible time window. One of: OFF, FLEXIBLE.'
@@ -316,8 +315,7 @@ spec:
                                         one capacity provider in a capacity provider
                                         strategy can have a base defined. Ranges from
                                         0 (default) to 100000.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     capacityProvider:
                                       description: Short name of the capacity provider.
                                       type: string
@@ -328,8 +326,7 @@ spec:
                                         The weight value is taken into consideration
                                         after the base value, if defined, is satisfied.
                                         Ranges from from 0 to 1000.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               enableEcsManagedTags:
@@ -435,8 +432,7 @@ spec:
                               taskCount:
                                 description: The number of tasks to create. Ranges
                                   from 1 (default) to 10.
-                                format: int64
-                                type: integer
+                                type: number
                               taskDefinitionArn:
                                 description: ARN of the task definition to use.
                                 type: string
@@ -481,13 +477,11 @@ spec:
                                 description: Maximum amount of time, in seconds, to
                                   continue to make retry attempts. Ranges from 60
                                   to 86400 (default).
-                                format: int64
-                                type: integer
+                                type: number
                               maximumRetryAttempts:
                                 description: Maximum number of retry attempts to make
                                   before the request fails. Ranges from 0 to 185 (default).
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         roleArn:
@@ -639,8 +633,7 @@ spec:
                         maximumWindowInMinutes:
                           description: Maximum time window during which a schedule
                             can be invoked. Ranges from 1 to 1440 minutes.
-                          format: int64
-                          type: integer
+                          type: number
                         mode:
                           description: 'Determines whether the schedule is invoked
                             within a flexible time window. One of: OFF, FLEXIBLE.'
@@ -708,8 +701,7 @@ spec:
                                         one capacity provider in a capacity provider
                                         strategy can have a base defined. Ranges from
                                         0 (default) to 100000.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     capacityProvider:
                                       description: Short name of the capacity provider.
                                       type: string
@@ -720,8 +712,7 @@ spec:
                                         The weight value is taken into consideration
                                         after the base value, if defined, is satisfied.
                                         Ranges from from 0 to 1000.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               enableEcsManagedTags:
@@ -827,8 +818,7 @@ spec:
                               taskCount:
                                 description: The number of tasks to create. Ranges
                                   from 1 (default) to 10.
-                                format: int64
-                                type: integer
+                                type: number
                               taskDefinitionArn:
                                 description: ARN of the task definition to use.
                                 type: string
@@ -873,13 +863,11 @@ spec:
                                 description: Maximum amount of time, in seconds, to
                                   continue to make retry attempts. Ranges from 60
                                   to 86400 (default).
-                                format: int64
-                                type: integer
+                                type: number
                               maximumRetryAttempts:
                                 description: Maximum number of retry attempts to make
                                   before the request fails. Ranges from 0 to 185 (default).
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         sagemakerPipelineParameters:
@@ -1118,8 +1106,7 @@ spec:
                         maximumWindowInMinutes:
                           description: Maximum time window during which a schedule
                             can be invoked. Ranges from 1 to 1440 minutes.
-                          format: int64
-                          type: integer
+                          type: number
                         mode:
                           description: 'Determines whether the schedule is invoked
                             within a flexible time window. One of: OFF, FLEXIBLE.'
@@ -1199,8 +1186,7 @@ spec:
                                         one capacity provider in a capacity provider
                                         strategy can have a base defined. Ranges from
                                         0 (default) to 100000.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     capacityProvider:
                                       description: Short name of the capacity provider.
                                       type: string
@@ -1211,8 +1197,7 @@ spec:
                                         The weight value is taken into consideration
                                         after the base value, if defined, is satisfied.
                                         Ranges from from 0 to 1000.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               enableEcsManagedTags:
@@ -1318,8 +1303,7 @@ spec:
                               taskCount:
                                 description: The number of tasks to create. Ranges
                                   from 1 (default) to 10.
-                                format: int64
-                                type: integer
+                                type: number
                               taskDefinitionArn:
                                 description: ARN of the task definition to use.
                                 type: string
@@ -1364,13 +1348,11 @@ spec:
                                 description: Maximum amount of time, in seconds, to
                                   continue to make retry attempts. Ranges from 60
                                   to 86400 (default).
-                                format: int64
-                                type: integer
+                                type: number
                               maximumRetryAttempts:
                                 description: Maximum number of retry attempts to make
                                   before the request fails. Ranges from 0 to 185 (default).
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         roleArn:

@@ -78,8 +78,7 @@ spec:
                   bgpAsn:
                     description: The autonomous system (AS) number for Border Gateway
                       Protocol (BGP) configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
                     type: string
@@ -182,8 +181,7 @@ spec:
                     type: array
                   vlan:
                     description: The VLAN ID.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -209,8 +207,7 @@ spec:
                   bgpAsn:
                     description: The autonomous system (AS) number for Border Gateway
                       Protocol (BGP) configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
                     type: string
@@ -232,8 +229,7 @@ spec:
                     type: array
                   vlan:
                     description: The VLAN ID.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -445,8 +441,7 @@ spec:
                   bgpAsn:
                     description: The autonomous system (AS) number for Border Gateway
                       Protocol (BGP) configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   bgpAuthKey:
                     description: The authentication key for BGP configuration.
                     type: string
@@ -475,8 +470,7 @@ spec:
                     type: array
                   vlan:
                     description: The VLAN ID.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

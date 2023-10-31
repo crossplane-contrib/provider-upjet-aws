@@ -78,8 +78,7 @@ spec:
                             of each patch matched by the rule the patch is marked
                             as approved in the patch baseline. Valid Range: 0 to 100.
                             Conflicts with approve_until_date.'
-                          format: int64
-                          type: integer
+                          type: number
                         approveUntilDate:
                           description: The cutoff date for auto approval of released
                             patches. Any patches released on or before this date are
@@ -230,8 +229,7 @@ spec:
                             of each patch matched by the rule the patch is marked
                             as approved in the patch baseline. Valid Range: 0 to 100.
                             Conflicts with approve_until_date.'
-                          format: int64
-                          type: integer
+                          type: number
                         approveUntilDate:
                           description: The cutoff date for auto approval of released
                             patches. Any patches released on or before this date are
@@ -534,8 +532,7 @@ spec:
                             of each patch matched by the rule the patch is marked
                             as approved in the patch baseline. Valid Range: 0 to 100.
                             Conflicts with approve_until_date.'
-                          format: int64
-                          type: integer
+                          type: number
                         approveUntilDate:
                           description: The cutoff date for auto approval of released
                             patches. Any patches released on or before this date are

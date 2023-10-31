@@ -396,7 +396,7 @@ func (in *ActionTargetInitParameters) DeepCopyInto(out *ActionTargetInitParamete
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -423,7 +423,7 @@ func (in *ActionTargetObservation) DeepCopyInto(out *ActionTargetObservation) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -450,7 +450,7 @@ func (in *ActionTargetParameters) DeepCopyInto(out *ActionTargetParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -542,7 +542,7 @@ func (in *ActionWeightedTargetInitParameters) DeepCopyInto(out *ActionWeightedTa
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -552,7 +552,7 @@ func (in *ActionWeightedTargetInitParameters) DeepCopyInto(out *ActionWeightedTa
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -572,7 +572,7 @@ func (in *ActionWeightedTargetObservation) DeepCopyInto(out *ActionWeightedTarge
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -582,7 +582,7 @@ func (in *ActionWeightedTargetObservation) DeepCopyInto(out *ActionWeightedTarge
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -602,7 +602,7 @@ func (in *ActionWeightedTargetParameters) DeepCopyInto(out *ActionWeightedTarget
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -612,7 +612,7 @@ func (in *ActionWeightedTargetParameters) DeepCopyInto(out *ActionWeightedTarget
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -925,11 +925,11 @@ func (in *BackendDefaultsClientPolicyTLSInitParameters) DeepCopyInto(out *Backen
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -970,11 +970,11 @@ func (in *BackendDefaultsClientPolicyTLSObservation) DeepCopyInto(out *BackendDe
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -1015,11 +1015,11 @@ func (in *BackendDefaultsClientPolicyTLSParameters) DeepCopyInto(out *BackendDef
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -1353,7 +1353,7 @@ func (in *BaseEjectionDurationInitParameters) DeepCopyInto(out *BaseEjectionDura
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1378,7 +1378,7 @@ func (in *BaseEjectionDurationObservation) DeepCopyInto(out *BaseEjectionDuratio
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1403,7 +1403,7 @@ func (in *BaseEjectionDurationParameters) DeepCopyInto(out *BaseEjectionDuration
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2010,11 +2010,11 @@ func (in *ClientPolicyTLSInitParameters) DeepCopyInto(out *ClientPolicyTLSInitPa
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -2055,11 +2055,11 @@ func (in *ClientPolicyTLSObservation) DeepCopyInto(out *ClientPolicyTLSObservati
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -2100,11 +2100,11 @@ func (in *ClientPolicyTLSParameters) DeepCopyInto(out *ClientPolicyTLSParameters
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -2592,7 +2592,7 @@ func (in *ConnectionPoolGRPCInitParameters) DeepCopyInto(out *ConnectionPoolGRPC
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2612,7 +2612,7 @@ func (in *ConnectionPoolGRPCObservation) DeepCopyInto(out *ConnectionPoolGRPCObs
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2632,7 +2632,7 @@ func (in *ConnectionPoolGRPCParameters) DeepCopyInto(out *ConnectionPoolGRPCPara
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2652,12 +2652,12 @@ func (in *ConnectionPoolHTTPInitParameters) DeepCopyInto(out *ConnectionPoolHTTP
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxPendingRequests != nil {
 		in, out := &in.MaxPendingRequests, &out.MaxPendingRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2677,12 +2677,12 @@ func (in *ConnectionPoolHTTPObservation) DeepCopyInto(out *ConnectionPoolHTTPObs
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxPendingRequests != nil {
 		in, out := &in.MaxPendingRequests, &out.MaxPendingRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2702,12 +2702,12 @@ func (in *ConnectionPoolHTTPParameters) DeepCopyInto(out *ConnectionPoolHTTPPara
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxPendingRequests != nil {
 		in, out := &in.MaxPendingRequests, &out.MaxPendingRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2727,7 +2727,7 @@ func (in *ConnectionPoolHttp2InitParameters) DeepCopyInto(out *ConnectionPoolHtt
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2747,7 +2747,7 @@ func (in *ConnectionPoolHttp2Observation) DeepCopyInto(out *ConnectionPoolHttp2O
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2767,7 +2767,7 @@ func (in *ConnectionPoolHttp2Parameters) DeepCopyInto(out *ConnectionPoolHttp2Pa
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3362,7 +3362,7 @@ func (in *GRPCIdleInitParameters) DeepCopyInto(out *GRPCIdleInitParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3387,7 +3387,7 @@ func (in *GRPCIdleObservation) DeepCopyInto(out *GRPCIdleObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3412,7 +3412,7 @@ func (in *GRPCIdleParameters) DeepCopyInto(out *GRPCIdleParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3432,7 +3432,7 @@ func (in *GRPCInitParameters) DeepCopyInto(out *GRPCInitParameters) {
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3452,7 +3452,7 @@ func (in *GRPCObservation) DeepCopyInto(out *GRPCObservation) {
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3472,7 +3472,7 @@ func (in *GRPCParameters) DeepCopyInto(out *GRPCParameters) {
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3497,7 +3497,7 @@ func (in *GRPCPerRequestInitParameters) DeepCopyInto(out *GRPCPerRequestInitPara
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3522,7 +3522,7 @@ func (in *GRPCPerRequestObservation) DeepCopyInto(out *GRPCPerRequestObservation
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3547,7 +3547,7 @@ func (in *GRPCPerRequestParameters) DeepCopyInto(out *GRPCPerRequestParameters) 
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3674,7 +3674,7 @@ func (in *GRPCRouteMatchInitParameters) DeepCopyInto(out *GRPCRouteMatchInitPara
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -3716,7 +3716,7 @@ func (in *GRPCRouteMatchObservation) DeepCopyInto(out *GRPCRouteMatchObservation
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -3758,7 +3758,7 @@ func (in *GRPCRouteMatchParameters) DeepCopyInto(out *GRPCRouteMatchParameters) 
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -4170,7 +4170,7 @@ func (in *HTTPIdleInitParameters) DeepCopyInto(out *HTTPIdleInitParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4195,7 +4195,7 @@ func (in *HTTPIdleObservation) DeepCopyInto(out *HTTPIdleObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4220,7 +4220,7 @@ func (in *HTTPIdleParameters) DeepCopyInto(out *HTTPIdleParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4240,12 +4240,12 @@ func (in *HTTPInitParameters) DeepCopyInto(out *HTTPInitParameters) {
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxPendingRequests != nil {
 		in, out := &in.MaxPendingRequests, &out.MaxPendingRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4265,12 +4265,12 @@ func (in *HTTPObservation) DeepCopyInto(out *HTTPObservation) {
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxPendingRequests != nil {
 		in, out := &in.MaxPendingRequests, &out.MaxPendingRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4290,12 +4290,12 @@ func (in *HTTPParameters) DeepCopyInto(out *HTTPParameters) {
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxPendingRequests != nil {
 		in, out := &in.MaxPendingRequests, &out.MaxPendingRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4320,7 +4320,7 @@ func (in *HTTPPerRequestInitParameters) DeepCopyInto(out *HTTPPerRequestInitPara
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4345,7 +4345,7 @@ func (in *HTTPPerRequestObservation) DeepCopyInto(out *HTTPPerRequestObservation
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4370,7 +4370,7 @@ func (in *HTTPPerRequestParameters) DeepCopyInto(out *HTTPPerRequestParameters) 
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4477,7 +4477,7 @@ func (in *HTTPRouteActionTargetInitParameters) DeepCopyInto(out *HTTPRouteAction
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -4502,7 +4502,7 @@ func (in *HTTPRouteActionTargetObservation) DeepCopyInto(out *HTTPRouteActionTar
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -4529,7 +4529,7 @@ func (in *HTTPRouteActionTargetParameters) DeepCopyInto(out *HTTPRouteActionTarg
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -4556,12 +4556,12 @@ func (in *HTTPRouteActionWeightedTargetInitParameters) DeepCopyInto(out *HTTPRou
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4581,7 +4581,7 @@ func (in *HTTPRouteActionWeightedTargetObservation) DeepCopyInto(out *HTTPRouteA
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -4591,7 +4591,7 @@ func (in *HTTPRouteActionWeightedTargetObservation) DeepCopyInto(out *HTTPRouteA
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4611,7 +4611,7 @@ func (in *HTTPRouteActionWeightedTargetParameters) DeepCopyInto(out *HTTPRouteAc
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -4631,7 +4631,7 @@ func (in *HTTPRouteActionWeightedTargetParameters) DeepCopyInto(out *HTTPRouteAc
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4998,7 +4998,7 @@ func (in *HTTPRouteMatchInitParameters) DeepCopyInto(out *HTTPRouteMatchInitPara
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -5051,7 +5051,7 @@ func (in *HTTPRouteMatchObservation) DeepCopyInto(out *HTTPRouteMatchObservation
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -5104,7 +5104,7 @@ func (in *HTTPRouteMatchParameters) DeepCopyInto(out *HTTPRouteMatchParameters) 
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -5421,7 +5421,7 @@ func (in *HTTPRouteRetryPolicyInitParameters) DeepCopyInto(out *HTTPRouteRetryPo
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -5470,7 +5470,7 @@ func (in *HTTPRouteRetryPolicyObservation) DeepCopyInto(out *HTTPRouteRetryPolic
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -5519,7 +5519,7 @@ func (in *HTTPRouteRetryPolicyParameters) DeepCopyInto(out *HTTPRouteRetryPolicy
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -5562,7 +5562,7 @@ func (in *HTTPRouteRetryPolicyPerRetryTimeoutInitParameters) DeepCopyInto(out *H
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5587,7 +5587,7 @@ func (in *HTTPRouteRetryPolicyPerRetryTimeoutObservation) DeepCopyInto(out *HTTP
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5612,7 +5612,7 @@ func (in *HTTPRouteRetryPolicyPerRetryTimeoutParameters) DeepCopyInto(out *HTTPR
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5637,7 +5637,7 @@ func (in *HTTPRouteTimeoutIdleInitParameters) DeepCopyInto(out *HTTPRouteTimeout
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5662,7 +5662,7 @@ func (in *HTTPRouteTimeoutIdleObservation) DeepCopyInto(out *HTTPRouteTimeoutIdl
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5687,7 +5687,7 @@ func (in *HTTPRouteTimeoutIdleParameters) DeepCopyInto(out *HTTPRouteTimeoutIdle
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5799,7 +5799,7 @@ func (in *HTTPRouteTimeoutPerRequestInitParameters) DeepCopyInto(out *HTTPRouteT
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5824,7 +5824,7 @@ func (in *HTTPRouteTimeoutPerRequestObservation) DeepCopyInto(out *HTTPRouteTime
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5849,7 +5849,7 @@ func (in *HTTPRouteTimeoutPerRequestParameters) DeepCopyInto(out *HTTPRouteTimeo
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6027,12 +6027,12 @@ func (in *HeaderMatchRangeInitParameters) DeepCopyInto(out *HeaderMatchRangeInit
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6052,12 +6052,12 @@ func (in *HeaderMatchRangeObservation) DeepCopyInto(out *HeaderMatchRangeObserva
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6077,12 +6077,12 @@ func (in *HeaderMatchRangeParameters) DeepCopyInto(out *HeaderMatchRangeParamete
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6166,12 +6166,12 @@ func (in *HealthCheckInitParameters) DeepCopyInto(out *HealthCheckInitParameters
 	*out = *in
 	if in.HealthyThreshold != nil {
 		in, out := &in.HealthyThreshold, &out.HealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IntervalMillis != nil {
 		in, out := &in.IntervalMillis, &out.IntervalMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -6181,7 +6181,7 @@ func (in *HealthCheckInitParameters) DeepCopyInto(out *HealthCheckInitParameters
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -6191,12 +6191,12 @@ func (in *HealthCheckInitParameters) DeepCopyInto(out *HealthCheckInitParameters
 	}
 	if in.TimeoutMillis != nil {
 		in, out := &in.TimeoutMillis, &out.TimeoutMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UnhealthyThreshold != nil {
 		in, out := &in.UnhealthyThreshold, &out.UnhealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6216,12 +6216,12 @@ func (in *HealthCheckObservation) DeepCopyInto(out *HealthCheckObservation) {
 	*out = *in
 	if in.HealthyThreshold != nil {
 		in, out := &in.HealthyThreshold, &out.HealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IntervalMillis != nil {
 		in, out := &in.IntervalMillis, &out.IntervalMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -6231,7 +6231,7 @@ func (in *HealthCheckObservation) DeepCopyInto(out *HealthCheckObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -6241,12 +6241,12 @@ func (in *HealthCheckObservation) DeepCopyInto(out *HealthCheckObservation) {
 	}
 	if in.TimeoutMillis != nil {
 		in, out := &in.TimeoutMillis, &out.TimeoutMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UnhealthyThreshold != nil {
 		in, out := &in.UnhealthyThreshold, &out.UnhealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6266,12 +6266,12 @@ func (in *HealthCheckParameters) DeepCopyInto(out *HealthCheckParameters) {
 	*out = *in
 	if in.HealthyThreshold != nil {
 		in, out := &in.HealthyThreshold, &out.HealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IntervalMillis != nil {
 		in, out := &in.IntervalMillis, &out.IntervalMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -6281,7 +6281,7 @@ func (in *HealthCheckParameters) DeepCopyInto(out *HealthCheckParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -6291,12 +6291,12 @@ func (in *HealthCheckParameters) DeepCopyInto(out *HealthCheckParameters) {
 	}
 	if in.TimeoutMillis != nil {
 		in, out := &in.TimeoutMillis, &out.TimeoutMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UnhealthyThreshold != nil {
 		in, out := &in.UnhealthyThreshold, &out.UnhealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6381,7 +6381,7 @@ func (in *Http2IdleInitParameters) DeepCopyInto(out *Http2IdleInitParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6406,7 +6406,7 @@ func (in *Http2IdleObservation) DeepCopyInto(out *Http2IdleObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6431,7 +6431,7 @@ func (in *Http2IdleParameters) DeepCopyInto(out *Http2IdleParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6451,7 +6451,7 @@ func (in *Http2InitParameters) DeepCopyInto(out *Http2InitParameters) {
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6471,7 +6471,7 @@ func (in *Http2Observation) DeepCopyInto(out *Http2Observation) {
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6491,7 +6491,7 @@ func (in *Http2Parameters) DeepCopyInto(out *Http2Parameters) {
 	*out = *in
 	if in.MaxRequests != nil {
 		in, out := &in.MaxRequests, &out.MaxRequests
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6516,7 +6516,7 @@ func (in *Http2PerRequestInitParameters) DeepCopyInto(out *Http2PerRequestInitPa
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6541,7 +6541,7 @@ func (in *Http2PerRequestObservation) DeepCopyInto(out *Http2PerRequestObservati
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6566,7 +6566,7 @@ func (in *Http2PerRequestParameters) DeepCopyInto(out *Http2PerRequestParameters
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -6945,7 +6945,7 @@ func (in *Http2RouteMatchInitParameters) DeepCopyInto(out *Http2RouteMatchInitPa
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -6998,7 +6998,7 @@ func (in *Http2RouteMatchObservation) DeepCopyInto(out *Http2RouteMatchObservati
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -7051,7 +7051,7 @@ func (in *Http2RouteMatchParameters) DeepCopyInto(out *Http2RouteMatchParameters
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -7368,7 +7368,7 @@ func (in *Http2RouteRetryPolicyInitParameters) DeepCopyInto(out *Http2RouteRetry
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -7417,7 +7417,7 @@ func (in *Http2RouteRetryPolicyObservation) DeepCopyInto(out *Http2RouteRetryPol
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -7466,7 +7466,7 @@ func (in *Http2RouteRetryPolicyParameters) DeepCopyInto(out *Http2RouteRetryPoli
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -7596,7 +7596,7 @@ func (in *IdleInitParameters) DeepCopyInto(out *IdleInitParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7621,7 +7621,7 @@ func (in *IdleObservation) DeepCopyInto(out *IdleObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7646,7 +7646,7 @@ func (in *IdleParameters) DeepCopyInto(out *IdleParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7671,7 +7671,7 @@ func (in *IntervalInitParameters) DeepCopyInto(out *IntervalInitParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7696,7 +7696,7 @@ func (in *IntervalObservation) DeepCopyInto(out *IntervalObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7721,7 +7721,7 @@ func (in *IntervalParameters) DeepCopyInto(out *IntervalParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7945,12 +7945,12 @@ func (in *ListenerHealthCheckInitParameters) DeepCopyInto(out *ListenerHealthChe
 	*out = *in
 	if in.HealthyThreshold != nil {
 		in, out := &in.HealthyThreshold, &out.HealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IntervalMillis != nil {
 		in, out := &in.IntervalMillis, &out.IntervalMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -7960,7 +7960,7 @@ func (in *ListenerHealthCheckInitParameters) DeepCopyInto(out *ListenerHealthChe
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -7970,12 +7970,12 @@ func (in *ListenerHealthCheckInitParameters) DeepCopyInto(out *ListenerHealthChe
 	}
 	if in.TimeoutMillis != nil {
 		in, out := &in.TimeoutMillis, &out.TimeoutMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UnhealthyThreshold != nil {
 		in, out := &in.UnhealthyThreshold, &out.UnhealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -7995,12 +7995,12 @@ func (in *ListenerHealthCheckObservation) DeepCopyInto(out *ListenerHealthCheckO
 	*out = *in
 	if in.HealthyThreshold != nil {
 		in, out := &in.HealthyThreshold, &out.HealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IntervalMillis != nil {
 		in, out := &in.IntervalMillis, &out.IntervalMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -8010,7 +8010,7 @@ func (in *ListenerHealthCheckObservation) DeepCopyInto(out *ListenerHealthCheckO
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -8020,12 +8020,12 @@ func (in *ListenerHealthCheckObservation) DeepCopyInto(out *ListenerHealthCheckO
 	}
 	if in.TimeoutMillis != nil {
 		in, out := &in.TimeoutMillis, &out.TimeoutMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UnhealthyThreshold != nil {
 		in, out := &in.UnhealthyThreshold, &out.UnhealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8045,12 +8045,12 @@ func (in *ListenerHealthCheckParameters) DeepCopyInto(out *ListenerHealthCheckPa
 	*out = *in
 	if in.HealthyThreshold != nil {
 		in, out := &in.HealthyThreshold, &out.HealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IntervalMillis != nil {
 		in, out := &in.IntervalMillis, &out.IntervalMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Path != nil {
@@ -8060,7 +8060,7 @@ func (in *ListenerHealthCheckParameters) DeepCopyInto(out *ListenerHealthCheckPa
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -8070,12 +8070,12 @@ func (in *ListenerHealthCheckParameters) DeepCopyInto(out *ListenerHealthCheckPa
 	}
 	if in.TimeoutMillis != nil {
 		in, out := &in.TimeoutMillis, &out.TimeoutMillis
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UnhealthyThreshold != nil {
 		in, out := &in.UnhealthyThreshold, &out.UnhealthyThreshold
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8224,7 +8224,7 @@ func (in *ListenerPortMappingInitParameters) DeepCopyInto(out *ListenerPortMappi
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -8249,7 +8249,7 @@ func (in *ListenerPortMappingObservation) DeepCopyInto(out *ListenerPortMappingO
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -8274,7 +8274,7 @@ func (in *ListenerPortMappingParameters) DeepCopyInto(out *ListenerPortMappingPa
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -9582,12 +9582,12 @@ func (in *MatchHeaderMatchRangeInitParameters) DeepCopyInto(out *MatchHeaderMatc
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9607,12 +9607,12 @@ func (in *MatchHeaderMatchRangeObservation) DeepCopyInto(out *MatchHeaderMatchRa
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9632,12 +9632,12 @@ func (in *MatchHeaderMatchRangeParameters) DeepCopyInto(out *MatchHeaderMatchRan
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9796,7 +9796,7 @@ func (in *MatchInitParameters) DeepCopyInto(out *MatchInitParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -9821,7 +9821,7 @@ func (in *MatchObservation) DeepCopyInto(out *MatchObservation) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -9846,7 +9846,7 @@ func (in *MatchParameters) DeepCopyInto(out *MatchParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ServiceName != nil {
@@ -10087,12 +10087,12 @@ func (in *MatchRangeInitParameters) DeepCopyInto(out *MatchRangeInitParameters) 
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10112,12 +10112,12 @@ func (in *MatchRangeObservation) DeepCopyInto(out *MatchRangeObservation) {
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10137,12 +10137,12 @@ func (in *MatchRangeParameters) DeepCopyInto(out *MatchRangeParameters) {
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10645,12 +10645,12 @@ func (in *MetadataMatchRangeInitParameters) DeepCopyInto(out *MetadataMatchRange
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10670,12 +10670,12 @@ func (in *MetadataMatchRangeObservation) DeepCopyInto(out *MetadataMatchRangeObs
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10695,12 +10695,12 @@ func (in *MetadataMatchRangeParameters) DeepCopyInto(out *MetadataMatchRangePara
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10798,12 +10798,12 @@ func (in *OutlierDetectionInitParameters) DeepCopyInto(out *OutlierDetectionInit
 	}
 	if in.MaxEjectionPercent != nil {
 		in, out := &in.MaxEjectionPercent, &out.MaxEjectionPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxServerErrors != nil {
 		in, out := &in.MaxServerErrors, &out.MaxServerErrors
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10837,12 +10837,12 @@ func (in *OutlierDetectionObservation) DeepCopyInto(out *OutlierDetectionObserva
 	}
 	if in.MaxEjectionPercent != nil {
 		in, out := &in.MaxEjectionPercent, &out.MaxEjectionPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxServerErrors != nil {
 		in, out := &in.MaxServerErrors, &out.MaxServerErrors
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10876,12 +10876,12 @@ func (in *OutlierDetectionParameters) DeepCopyInto(out *OutlierDetectionParamete
 	}
 	if in.MaxEjectionPercent != nil {
 		in, out := &in.MaxEjectionPercent, &out.MaxEjectionPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxServerErrors != nil {
 		in, out := &in.MaxServerErrors, &out.MaxServerErrors
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -10981,7 +10981,7 @@ func (in *PerRequestInitParameters) DeepCopyInto(out *PerRequestInitParameters) 
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11006,7 +11006,7 @@ func (in *PerRequestObservation) DeepCopyInto(out *PerRequestObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11031,7 +11031,7 @@ func (in *PerRequestParameters) DeepCopyInto(out *PerRequestParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11056,7 +11056,7 @@ func (in *PerRetryTimeoutInitParameters) DeepCopyInto(out *PerRetryTimeoutInitPa
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11081,7 +11081,7 @@ func (in *PerRetryTimeoutObservation) DeepCopyInto(out *PerRetryTimeoutObservati
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11106,7 +11106,7 @@ func (in *PerRetryTimeoutParameters) DeepCopyInto(out *PerRetryTimeoutParameters
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11126,7 +11126,7 @@ func (in *PortMappingInitParameters) DeepCopyInto(out *PortMappingInitParameters
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -11151,7 +11151,7 @@ func (in *PortMappingObservation) DeepCopyInto(out *PortMappingObservation) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -11176,7 +11176,7 @@ func (in *PortMappingParameters) DeepCopyInto(out *PortMappingParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -11630,12 +11630,12 @@ func (in *RangeInitParameters) DeepCopyInto(out *RangeInitParameters) {
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11655,12 +11655,12 @@ func (in *RangeObservation) DeepCopyInto(out *RangeObservation) {
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11680,12 +11680,12 @@ func (in *RangeParameters) DeepCopyInto(out *RangeParameters) {
 	*out = *in
 	if in.End != nil {
 		in, out := &in.End, &out.End
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Start != nil {
 		in, out := &in.Start, &out.Start
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11727,7 +11727,7 @@ func (in *RetryPolicyInitParameters) DeepCopyInto(out *RetryPolicyInitParameters
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -11787,7 +11787,7 @@ func (in *RetryPolicyObservation) DeepCopyInto(out *RetryPolicyObservation) {
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -11847,7 +11847,7 @@ func (in *RetryPolicyParameters) DeepCopyInto(out *RetryPolicyParameters) {
 	}
 	if in.MaxRetries != nil {
 		in, out := &in.MaxRetries, &out.MaxRetries
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PerRetryTimeout != nil {
@@ -11890,7 +11890,7 @@ func (in *RetryPolicyPerRetryTimeoutInitParameters) DeepCopyInto(out *RetryPolic
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11915,7 +11915,7 @@ func (in *RetryPolicyPerRetryTimeoutObservation) DeepCopyInto(out *RetryPolicyPe
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -11940,7 +11940,7 @@ func (in *RetryPolicyPerRetryTimeoutParameters) DeepCopyInto(out *RetryPolicyPer
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -12510,7 +12510,7 @@ func (in *RouteSpecInitParameters) DeepCopyInto(out *RouteSpecInitParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TCPRoute != nil {
@@ -12558,7 +12558,7 @@ func (in *RouteSpecObservation) DeepCopyInto(out *RouteSpecObservation) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TCPRoute != nil {
@@ -12606,7 +12606,7 @@ func (in *RouteSpecParameters) DeepCopyInto(out *RouteSpecParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TCPRoute != nil {
@@ -13120,7 +13120,7 @@ func (in *SpecHTTPRouteMatchInitParameters) DeepCopyInto(out *SpecHTTPRouteMatch
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -13176,7 +13176,7 @@ func (in *SpecHTTPRouteMatchObservation) DeepCopyInto(out *SpecHTTPRouteMatchObs
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -13232,7 +13232,7 @@ func (in *SpecHTTPRouteMatchParameters) DeepCopyInto(out *SpecHTTPRouteMatchPara
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -13483,7 +13483,7 @@ func (in *SpecHttp2RouteMatchInitParameters) DeepCopyInto(out *SpecHttp2RouteMat
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -13539,7 +13539,7 @@ func (in *SpecHttp2RouteMatchObservation) DeepCopyInto(out *SpecHttp2RouteMatchO
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -13595,7 +13595,7 @@ func (in *SpecHttp2RouteMatchParameters) DeepCopyInto(out *SpecHttp2RouteMatchPa
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Prefix != nil {
@@ -13739,7 +13739,7 @@ func (in *SpecInitParameters) DeepCopyInto(out *SpecInitParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -13930,7 +13930,7 @@ func (in *SpecListenerPortMappingInitParameters) DeepCopyInto(out *SpecListenerP
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -13955,7 +13955,7 @@ func (in *SpecListenerPortMappingObservation) DeepCopyInto(out *SpecListenerPort
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -13980,7 +13980,7 @@ func (in *SpecListenerPortMappingParameters) DeepCopyInto(out *SpecListenerPortM
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Protocol != nil {
@@ -14194,7 +14194,7 @@ func (in *SpecObservation) DeepCopyInto(out *SpecObservation) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14235,7 +14235,7 @@ func (in *SpecParameters) DeepCopyInto(out *SpecParameters) {
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14404,7 +14404,7 @@ func (in *TCPIdleInitParameters) DeepCopyInto(out *TCPIdleInitParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14429,7 +14429,7 @@ func (in *TCPIdleObservation) DeepCopyInto(out *TCPIdleObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14454,7 +14454,7 @@ func (in *TCPIdleParameters) DeepCopyInto(out *TCPIdleParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14474,7 +14474,7 @@ func (in *TCPInitParameters) DeepCopyInto(out *TCPInitParameters) {
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14494,7 +14494,7 @@ func (in *TCPObservation) DeepCopyInto(out *TCPObservation) {
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14514,7 +14514,7 @@ func (in *TCPParameters) DeepCopyInto(out *TCPParameters) {
 	*out = *in
 	if in.MaxConnections != nil {
 		in, out := &in.MaxConnections, &out.MaxConnections
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14600,12 +14600,12 @@ func (in *TCPRouteActionWeightedTargetInitParameters) DeepCopyInto(out *TCPRoute
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14625,7 +14625,7 @@ func (in *TCPRouteActionWeightedTargetObservation) DeepCopyInto(out *TCPRouteAct
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -14635,7 +14635,7 @@ func (in *TCPRouteActionWeightedTargetObservation) DeepCopyInto(out *TCPRouteAct
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14655,7 +14655,7 @@ func (in *TCPRouteActionWeightedTargetParameters) DeepCopyInto(out *TCPRouteActi
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -14675,7 +14675,7 @@ func (in *TCPRouteActionWeightedTargetParameters) DeepCopyInto(out *TCPRouteActi
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14731,7 +14731,7 @@ func (in *TCPRouteMatchInitParameters) DeepCopyInto(out *TCPRouteMatchInitParame
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14751,7 +14751,7 @@ func (in *TCPRouteMatchObservation) DeepCopyInto(out *TCPRouteMatchObservation) 
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14771,7 +14771,7 @@ func (in *TCPRouteMatchParameters) DeepCopyInto(out *TCPRouteMatchParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14868,7 +14868,7 @@ func (in *TCPRouteTimeoutIdleInitParameters) DeepCopyInto(out *TCPRouteTimeoutId
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14893,7 +14893,7 @@ func (in *TCPRouteTimeoutIdleObservation) DeepCopyInto(out *TCPRouteTimeoutIdleO
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -14918,7 +14918,7 @@ func (in *TCPRouteTimeoutIdleParameters) DeepCopyInto(out *TCPRouteTimeoutIdlePa
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -15317,11 +15317,11 @@ func (in *TLSInitParameters) DeepCopyInto(out *TLSInitParameters) {
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -15362,11 +15362,11 @@ func (in *TLSObservation) DeepCopyInto(out *TLSObservation) {
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -15407,11 +15407,11 @@ func (in *TLSParameters) DeepCopyInto(out *TLSParameters) {
 	}
 	if in.Ports != nil {
 		in, out := &in.Ports, &out.Ports
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -15899,7 +15899,7 @@ func (in *TargetInitParameters) DeepCopyInto(out *TargetInitParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -15926,7 +15926,7 @@ func (in *TargetObservation) DeepCopyInto(out *TargetObservation) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -15953,7 +15953,7 @@ func (in *TargetParameters) DeepCopyInto(out *TargetParameters) {
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualService != nil {
@@ -16306,7 +16306,7 @@ func (in *TimeoutIdleInitParameters) DeepCopyInto(out *TimeoutIdleInitParameters
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16331,7 +16331,7 @@ func (in *TimeoutIdleObservation) DeepCopyInto(out *TimeoutIdleObservation) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16356,7 +16356,7 @@ func (in *TimeoutIdleParameters) DeepCopyInto(out *TimeoutIdleParameters) {
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16468,7 +16468,7 @@ func (in *TimeoutPerRequestInitParameters) DeepCopyInto(out *TimeoutPerRequestIn
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16493,7 +16493,7 @@ func (in *TimeoutPerRequestObservation) DeepCopyInto(out *TimeoutPerRequestObser
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -16518,7 +16518,7 @@ func (in *TimeoutPerRequestParameters) DeepCopyInto(out *TimeoutPerRequestParame
 	}
 	if in.Value != nil {
 		in, out := &in.Value, &out.Value
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -19219,7 +19219,7 @@ func (in *WeightedTargetInitParameters) DeepCopyInto(out *WeightedTargetInitPara
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -19229,7 +19229,7 @@ func (in *WeightedTargetInitParameters) DeepCopyInto(out *WeightedTargetInitPara
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -19249,7 +19249,7 @@ func (in *WeightedTargetObservation) DeepCopyInto(out *WeightedTargetObservation
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -19259,7 +19259,7 @@ func (in *WeightedTargetObservation) DeepCopyInto(out *WeightedTargetObservation
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -19279,7 +19279,7 @@ func (in *WeightedTargetParameters) DeepCopyInto(out *WeightedTargetParameters) 
 	*out = *in
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.VirtualNode != nil {
@@ -19289,7 +19289,7 @@ func (in *WeightedTargetParameters) DeepCopyInto(out *WeightedTargetParameters) 
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

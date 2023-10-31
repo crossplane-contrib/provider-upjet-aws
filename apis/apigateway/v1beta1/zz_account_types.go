@@ -59,7 +59,7 @@ type ThrottleSettingsInitParameters struct {
 type ThrottleSettingsObservation struct {
 
 	// Absolute maximum number of times API Gateway allows the API to be called per second (RPS).
-	BurstLimit *int64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
+	BurstLimit *float64 `json:"burstLimit,omitempty" tf:"burst_limit,omitempty"`
 
 	// Number of times API Gateway allows the API to be called per second on average (RPS).
 	RateLimit *float64 `json:"rateLimit,omitempty" tf:"rate_limit,omitempty"`

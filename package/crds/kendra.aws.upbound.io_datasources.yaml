@@ -357,8 +357,7 @@ spec:
                                               credentials. For example, the port for
                                               https://a.example.com/page1.html is
                                               443, the standard port for HTTPS.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -374,8 +373,7 @@ spec:
                                   0-1), you can set your depth to 1. The default crawl
                                   depth is set to 2. Minimum value of 0. Maximum value
                                   of 10.
-                                format: int64
-                                type: integer
+                                type: number
                               maxContentSizePerPageInMegaBytes:
                                 description: The maximum size (in MB) of a webpage
                                   or attachment to crawl. Files larger than this size
@@ -391,15 +389,13 @@ spec:
                                   URLs on a webpage are crawled in order of appearance.
                                   The default maximum links per page is 100. Minimum
                                   value of 1. Maximum value of 1000.
-                                format: int64
-                                type: integer
+                                type: number
                               maxUrlsPerMinuteCrawlRate:
                                 description: The maximum number of URLs crawled per
                                   website host per minute. The default maximum number
                                   of URLs crawled per website host per minute is 300.
                                   Minimum value of 1. Maximum value of 300.
-                                format: int64
-                                type: integer
+                                type: number
                               proxyConfiguration:
                                 description: Configuration information required to
                                   connect to your internal websites via a web proxy.
@@ -515,8 +511,7 @@ spec:
                                         host you want to connect to using authentication
                                         credentials. For example, the port for https://a.example.com/page1.html
                                         is 443, the standard port for HTTPS.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               urlExclusionPatterns:
@@ -667,8 +662,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -723,8 +717,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -792,8 +785,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -872,8 +864,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -1229,8 +1220,7 @@ spec:
                                               credentials. For example, the port for
                                               https://a.example.com/page1.html is
                                               443, the standard port for HTTPS.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -1246,8 +1236,7 @@ spec:
                                   0-1), you can set your depth to 1. The default crawl
                                   depth is set to 2. Minimum value of 0. Maximum value
                                   of 10.
-                                format: int64
-                                type: integer
+                                type: number
                               maxContentSizePerPageInMegaBytes:
                                 description: The maximum size (in MB) of a webpage
                                   or attachment to crawl. Files larger than this size
@@ -1263,15 +1252,13 @@ spec:
                                   URLs on a webpage are crawled in order of appearance.
                                   The default maximum links per page is 100. Minimum
                                   value of 1. Maximum value of 1000.
-                                format: int64
-                                type: integer
+                                type: number
                               maxUrlsPerMinuteCrawlRate:
                                 description: The maximum number of URLs crawled per
                                   website host per minute. The default maximum number
                                   of URLs crawled per website host per minute is 300.
                                   Minimum value of 1. Maximum value of 300.
-                                format: int64
-                                type: integer
+                                type: number
                               proxyConfiguration:
                                 description: Configuration information required to
                                   connect to your internal websites via a web proxy.
@@ -1296,8 +1283,7 @@ spec:
                                         host you want to connect to using authentication
                                         credentials. For example, the port for https://a.example.com/page1.html
                                         is 443, the standard port for HTTPS.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               urlExclusionPatterns:
@@ -1448,8 +1434,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -1504,8 +1489,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -1573,8 +1557,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -1653,8 +1636,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -2024,8 +2006,7 @@ spec:
                                               credentials. For example, the port for
                                               https://a.example.com/page1.html is
                                               443, the standard port for HTTPS.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -2041,8 +2022,7 @@ spec:
                                   0-1), you can set your depth to 1. The default crawl
                                   depth is set to 2. Minimum value of 0. Maximum value
                                   of 10.
-                                format: int64
-                                type: integer
+                                type: number
                               maxContentSizePerPageInMegaBytes:
                                 description: The maximum size (in MB) of a webpage
                                   or attachment to crawl. Files larger than this size
@@ -2058,15 +2038,13 @@ spec:
                                   URLs on a webpage are crawled in order of appearance.
                                   The default maximum links per page is 100. Minimum
                                   value of 1. Maximum value of 1000.
-                                format: int64
-                                type: integer
+                                type: number
                               maxUrlsPerMinuteCrawlRate:
                                 description: The maximum number of URLs crawled per
                                   website host per minute. The default maximum number
                                   of URLs crawled per website host per minute is 300.
                                   Minimum value of 1. Maximum value of 300.
-                                format: int64
-                                type: integer
+                                type: number
                               proxyConfiguration:
                                 description: Configuration information required to
                                   connect to your internal websites via a web proxy.
@@ -2098,8 +2076,7 @@ spec:
                                         host you want to connect to using authentication
                                         credentials. For example, the port for https://a.example.com/page1.html
                                         is 443, the standard port for HTTPS.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               urlExclusionPatterns:
@@ -2253,8 +2230,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -2309,8 +2285,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -2378,8 +2353,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:
@@ -2458,8 +2432,7 @@ spec:
                                             type: string
                                           longValue:
                                             description: A long integer value.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           stringListValue:
                                             description: A list of strings.
                                             items:

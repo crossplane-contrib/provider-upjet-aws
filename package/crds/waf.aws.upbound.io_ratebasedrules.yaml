@@ -182,8 +182,7 @@ spec:
                     description: The maximum number of requests, which have an identical
                       value in the field specified by the RateKey, allowed in a five-minute
                       period. Minimum value is 100.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -243,8 +242,7 @@ spec:
                     description: The maximum number of requests, which have an identical
                       value in the field specified by the RateKey, allowed in a five-minute
                       period. Minimum value is 100.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -478,8 +476,7 @@ spec:
                     description: The maximum number of requests, which have an identical
                       value in the field specified by the RateKey, allowed in a five-minute
                       period. Minimum value is 100.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

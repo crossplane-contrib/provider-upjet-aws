@@ -346,8 +346,7 @@ spec:
                         burstLimit:
                           description: Absolute maximum number of times API Gateway
                             allows the API to be called per second (RPS).
-                          format: int64
-                          type: integer
+                          type: number
                         rateLimit:
                           description: Number of times API Gateway allows the API
                             to be called per second on average (RPS).

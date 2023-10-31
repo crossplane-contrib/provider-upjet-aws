@@ -342,8 +342,7 @@ spec:
                   enableDns64:
                     type: boolean
                   enableLniAtDeviceIndex:
-                    format: int64
-                    type: integer
+                    type: number
                   enableResourceNameDnsARecordOnLaunch:
                     type: boolean
                   enableResourceNameDnsAaaaRecordOnLaunch:

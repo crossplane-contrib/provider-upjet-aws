@@ -74,15 +74,13 @@ spec:
                   cutoff:
                     description: The number of hours before the end of the Maintenance
                       Window that Systems Manager stops scheduling new tasks for execution.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: A description for the maintenance window.
                     type: string
                   duration:
                     description: The duration of the Maintenance Window in hours.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: 'Whether the maintenance window is enabled. Default:
                       true.'
@@ -106,8 +104,7 @@ spec:
                     description: The number of days to wait after the date and time
                       specified by a CRON expression before running the maintenance
                       window.
-                    format: int64
-                    type: integer
+                    type: number
                   scheduleTimezone:
                     description: 'Timezone for schedule in Internet Assigned Numbers
                       Authority (IANA) Time Zone Database format. For example: America/Los_Angeles,
@@ -144,15 +141,13 @@ spec:
                   cutoff:
                     description: The number of hours before the end of the Maintenance
                       Window that Systems Manager stops scheduling new tasks for execution.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: A description for the maintenance window.
                     type: string
                   duration:
                     description: The duration of the Maintenance Window in hours.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: 'Whether the maintenance window is enabled. Default:
                       true.'
@@ -172,8 +167,7 @@ spec:
                     description: The number of days to wait after the date and time
                       specified by a CRON expression before running the maintenance
                       window.
-                    format: int64
-                    type: integer
+                    type: number
                   scheduleTimezone:
                     description: 'Timezone for schedule in Internet Assigned Numbers
                       Authority (IANA) Time Zone Database format. For example: America/Los_Angeles,
@@ -378,15 +372,13 @@ spec:
                   cutoff:
                     description: The number of hours before the end of the Maintenance
                       Window that Systems Manager stops scheduling new tasks for execution.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: A description for the maintenance window.
                     type: string
                   duration:
                     description: The duration of the Maintenance Window in hours.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: 'Whether the maintenance window is enabled. Default:
                       true.'
@@ -409,8 +401,7 @@ spec:
                     description: The number of days to wait after the date and time
                       specified by a CRON expression before running the maintenance
                       window.
-                    format: int64
-                    type: integer
+                    type: number
                   scheduleTimezone:
                     description: 'Timezone for schedule in Internet Assigned Numbers
                       Authority (IANA) Time Zone Database format. For example: America/Los_Angeles,

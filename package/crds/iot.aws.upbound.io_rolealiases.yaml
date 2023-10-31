@@ -75,8 +75,7 @@ spec:
                       do not specify a value for this setting, the default maximum
                       of one hour is applied. This setting can have a value from 900
                       seconds (15 minutes) to 43200 seconds (12 hours).
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -180,8 +179,7 @@ spec:
                       do not specify a value for this setting, the default maximum
                       of one hour is applied. This setting can have a value from 900
                       seconds (15 minutes) to 43200 seconds (12 hours).
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -364,8 +362,7 @@ spec:
                       do not specify a value for this setting, the default maximum
                       of one hour is applied. This setting can have a value from 900
                       seconds (15 minutes) to 43200 seconds (12 hours).
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     type: string
                   roleArn:

@@ -75,7 +75,7 @@ type ConclusionStatementMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConclusionStatementMessageObservation struct {
@@ -88,7 +88,7 @@ type ConclusionStatementMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConclusionStatementMessageParameters struct {
@@ -104,7 +104,7 @@ type ConclusionStatementMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConclusionStatementObservation struct {
@@ -138,7 +138,7 @@ type ConclusionStatementParameters struct {
 type ConfirmationPromptInitParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
-	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -161,7 +161,7 @@ type ConfirmationPromptMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConfirmationPromptMessageObservation struct {
@@ -174,7 +174,7 @@ type ConfirmationPromptMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConfirmationPromptMessageParameters struct {
@@ -190,13 +190,13 @@ type ConfirmationPromptMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ConfirmationPromptObservation struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
-	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -213,7 +213,7 @@ type ConfirmationPromptParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaxAttempts *int64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -564,7 +564,7 @@ type IntentRejectionStatementMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type IntentRejectionStatementMessageObservation struct {
@@ -577,7 +577,7 @@ type IntentRejectionStatementMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type IntentRejectionStatementMessageParameters struct {
@@ -593,7 +593,7 @@ type IntentRejectionStatementMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type IntentRejectionStatementObservation struct {
@@ -627,7 +627,7 @@ type IntentRejectionStatementParameters struct {
 type PromptInitParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
-	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -650,7 +650,7 @@ type PromptMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type PromptMessageObservation struct {
@@ -663,7 +663,7 @@ type PromptMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type PromptMessageParameters struct {
@@ -679,13 +679,13 @@ type PromptMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type PromptObservation struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
-	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -702,7 +702,7 @@ type PromptParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaxAttempts *int64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -740,7 +740,7 @@ type RejectionStatementMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type RejectionStatementMessageObservation struct {
@@ -753,7 +753,7 @@ type RejectionStatementMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type RejectionStatementMessageParameters struct {
@@ -769,7 +769,7 @@ type RejectionStatementMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type RejectionStatementObservation struct {
@@ -812,7 +812,7 @@ type SlotInitParameters struct {
 	// For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for
 	// the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits
 	// values is arbitrary. Must be between 1 and 100.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -851,7 +851,7 @@ type SlotObservation struct {
 	// For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for
 	// the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits
 	// values is arbitrary. Must be between 1 and 100.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -893,7 +893,7 @@ type SlotParameters struct {
 	// the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits
 	// values is arbitrary. Must be between 1 and 100.
 	// +kubebuilder:validation:Optional
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The response card. Amazon Lex will substitute session attributes and
 	// slot values into the response card. For more information, see
@@ -929,7 +929,7 @@ type SlotParameters struct {
 type ValueElicitationPromptInitParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
-	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -952,7 +952,7 @@ type ValueElicitationPromptMessageInitParameters struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ValueElicitationPromptMessageObservation struct {
@@ -965,7 +965,7 @@ type ValueElicitationPromptMessageObservation struct {
 
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ValueElicitationPromptMessageParameters struct {
@@ -981,13 +981,13 @@ type ValueElicitationPromptMessageParameters struct {
 	// Identifies the message group that the message belongs to. When a group
 	// is assigned to a message, Amazon Lex returns one message from each group in the response. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	GroupNumber *int64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
+	GroupNumber *float64 `json:"groupNumber,omitempty" tf:"group_number,omitempty"`
 }
 
 type ValueElicitationPromptObservation struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
-	MaxAttempts *int64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts,omitempty" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -1004,7 +1004,7 @@ type ValueElicitationPromptParameters struct {
 
 	// The number of times to prompt the user for information. Must be a number between 1 and 5 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaxAttempts *int64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
+	MaxAttempts *float64 `json:"maxAttempts" tf:"max_attempts,omitempty"`
 
 	// A set of messages, each of which provides a message string and its type.
 	// You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).

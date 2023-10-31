@@ -125,7 +125,7 @@ type TargetIPInitParameters struct {
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// The port at ip that you want to forward DNS queries to. Default value is 53
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TargetIPObservation struct {
@@ -134,7 +134,7 @@ type TargetIPObservation struct {
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
 	// The port at ip that you want to forward DNS queries to. Default value is 53
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type TargetIPParameters struct {
@@ -145,7 +145,7 @@ type TargetIPParameters struct {
 
 	// The port at ip that you want to forward DNS queries to. Default value is 53
 	// +kubebuilder:validation:Optional
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 // RuleSpec defines the desired state of Rule

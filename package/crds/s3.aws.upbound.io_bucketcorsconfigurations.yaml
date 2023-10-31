@@ -182,8 +182,7 @@ spec:
                         maxAgeSeconds:
                           description: Time in seconds that your browser is to cache
                             the preflight response for the specified resource.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   expectedBucketOwner:
@@ -246,8 +245,7 @@ spec:
                         maxAgeSeconds:
                           description: Time in seconds that your browser is to cache
                             the preflight response for the specified resource.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   expectedBucketOwner:
@@ -466,8 +464,7 @@ spec:
                         maxAgeSeconds:
                           description: Time in seconds that your browser is to cache
                             the preflight response for the specified resource.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   expectedBucketOwner:

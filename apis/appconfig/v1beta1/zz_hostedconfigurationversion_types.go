@@ -47,7 +47,7 @@ type HostedConfigurationVersionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Version number of the hosted configuration.
-	VersionNumber *int64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 type HostedConfigurationVersionParameters struct {

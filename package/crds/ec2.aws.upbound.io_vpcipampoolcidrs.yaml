@@ -169,8 +169,7 @@ spec:
                     description: If provided, the cidr provisioned into the specified
                       pool will be the next available cidr given this declared netmask
                       length. Conflicts with cidr.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -215,8 +214,7 @@ spec:
                     description: If provided, the cidr provisioned into the specified
                       pool will be the next available cidr given this declared netmask
                       length. Conflicts with cidr.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -419,8 +417,7 @@ spec:
                     description: If provided, the cidr provisioned into the specified
                       pool will be the next available cidr given this declared netmask
                       length. Conflicts with cidr.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

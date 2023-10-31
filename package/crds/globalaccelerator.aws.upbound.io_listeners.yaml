@@ -159,12 +159,10 @@ spec:
                       properties:
                         fromPort:
                           description: The first port in the range of ports, inclusive.
-                          format: int64
-                          type: integer
+                          type: number
                         toPort:
                           description: The last port in the range of ports, inclusive.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   protocol:
@@ -206,12 +204,10 @@ spec:
                       properties:
                         fromPort:
                           description: The first port in the range of ports, inclusive.
-                          format: int64
-                          type: integer
+                          type: number
                         toPort:
                           description: The last port in the range of ports, inclusive.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   protocol:
@@ -415,12 +411,10 @@ spec:
                       properties:
                         fromPort:
                           description: The first port in the range of ports, inclusive.
-                          format: int64
-                          type: integer
+                          type: number
                         toPort:
                           description: The last port in the range of ports, inclusive.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   protocol:

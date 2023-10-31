@@ -68,7 +68,7 @@ type CertificateAuthorityInitParameters struct {
 	KeyStorageSecurityStandard *string `json:"keyStorageSecurityStandard,omitempty" tf:"key_storage_security_standard,omitempty"`
 
 	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
-	PermanentDeletionTimeInDays *int64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
+	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
 	// Nested argument containing revocation configuration. Defined below.
 	RevocationConfiguration []RevocationConfigurationInitParameters `json:"revocationConfiguration,omitempty" tf:"revocation_configuration,omitempty"`
@@ -116,7 +116,7 @@ type CertificateAuthorityObservation struct {
 	NotBefore *string `json:"notBefore,omitempty" tf:"not_before,omitempty"`
 
 	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
-	PermanentDeletionTimeInDays *int64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
+	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
 	// Nested argument containing revocation configuration. Defined below.
 	RevocationConfiguration []RevocationConfigurationObservation `json:"revocationConfiguration,omitempty" tf:"revocation_configuration,omitempty"`
@@ -156,7 +156,7 @@ type CertificateAuthorityParameters struct {
 
 	// Number of days to make a CA restorable after it has been deleted, must be between 7 to 30 days, with default to 30 days.
 	// +kubebuilder:validation:Optional
-	PermanentDeletionTimeInDays *int64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
+	PermanentDeletionTimeInDays *float64 `json:"permanentDeletionTimeInDays,omitempty" tf:"permanent_deletion_time_in_days,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -189,7 +189,7 @@ type CrlConfigurationInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Number of days until a certificate expires. Must be between 1 and 5000.
-	ExpirationInDays *int64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
+	ExpirationInDays *float64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
 
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value for the custom_cname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You must specify a bucket policy that allows ACM PCA to write the CRL to your bucket. Must be between 3 and 255 characters in length.
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
@@ -207,7 +207,7 @@ type CrlConfigurationObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Number of days until a certificate expires. Must be between 1 and 5000.
-	ExpirationInDays *int64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
+	ExpirationInDays *float64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
 
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value for the custom_cname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You must specify a bucket policy that allows ACM PCA to write the CRL to your bucket. Must be between 3 and 255 characters in length.
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
@@ -228,7 +228,7 @@ type CrlConfigurationParameters struct {
 
 	// Number of days until a certificate expires. Must be between 1 and 5000.
 	// +kubebuilder:validation:Optional
-	ExpirationInDays *int64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
+	ExpirationInDays *float64 `json:"expirationInDays,omitempty" tf:"expiration_in_days,omitempty"`
 
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value for the custom_cname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You must specify a bucket policy that allows ACM PCA to write the CRL to your bucket. Must be between 3 and 255 characters in length.
 	// +kubebuilder:validation:Optional

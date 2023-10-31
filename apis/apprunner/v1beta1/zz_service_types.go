@@ -248,10 +248,10 @@ type EncryptionConfigurationParameters struct {
 type HealthCheckConfigurationInitParameters struct {
 
 	// Number of consecutive checks that must succeed before App Runner decides that the service is healthy. Defaults to 1. Minimum value of 1. Maximum value of 20.
-	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time interval, in seconds, between health checks. Defaults to 5. Minimum value of 1. Maximum value of 20.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// URL to send requests to for health checks. Defaults to /. Minimum length of 0. Maximum length of 51200.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -260,19 +260,19 @@ type HealthCheckConfigurationInitParameters struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Time, in seconds, to wait for a health check response before deciding it failed. Defaults to 2. Minimum value of  1. Maximum value of 20.
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Number of consecutive checks that must fail before App Runner decides that the service is unhealthy. Defaults to 5. Minimum value of  1. Maximum value of 20.
-	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckConfigurationObservation struct {
 
 	// Number of consecutive checks that must succeed before App Runner decides that the service is healthy. Defaults to 1. Minimum value of 1. Maximum value of 20.
-	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time interval, in seconds, between health checks. Defaults to 5. Minimum value of 1. Maximum value of 20.
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// URL to send requests to for health checks. Defaults to /. Minimum length of 0. Maximum length of 51200.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -281,21 +281,21 @@ type HealthCheckConfigurationObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Time, in seconds, to wait for a health check response before deciding it failed. Defaults to 2. Minimum value of  1. Maximum value of 20.
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Number of consecutive checks that must fail before App Runner decides that the service is unhealthy. Defaults to 5. Minimum value of  1. Maximum value of 20.
-	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckConfigurationParameters struct {
 
 	// Number of consecutive checks that must succeed before App Runner decides that the service is healthy. Defaults to 1. Minimum value of 1. Maximum value of 20.
 	// +kubebuilder:validation:Optional
-	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time interval, in seconds, between health checks. Defaults to 5. Minimum value of 1. Maximum value of 20.
 	// +kubebuilder:validation:Optional
-	Interval *int64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// URL to send requests to for health checks. Defaults to /. Minimum length of 0. Maximum length of 51200.
 	// +kubebuilder:validation:Optional
@@ -307,11 +307,11 @@ type HealthCheckConfigurationParameters struct {
 
 	// Time, in seconds, to wait for a health check response before deciding it failed. Defaults to 2. Minimum value of  1. Maximum value of 20.
 	// +kubebuilder:validation:Optional
-	Timeout *int64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Number of consecutive checks that must fail before App Runner decides that the service is unhealthy. Defaults to 5. Minimum value of  1. Maximum value of 20.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ImageConfigurationInitParameters struct {

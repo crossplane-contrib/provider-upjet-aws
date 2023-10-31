@@ -45,7 +45,7 @@ func (in *StreamInitParameters) DeepCopyInto(out *StreamInitParameters) {
 	*out = *in
 	if in.DataRetentionInHours != nil {
 		in, out := &in.DataRetentionInHours, &out.DataRetentionInHours
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeviceName != nil {
@@ -138,7 +138,7 @@ func (in *StreamObservation) DeepCopyInto(out *StreamObservation) {
 	}
 	if in.DataRetentionInHours != nil {
 		in, out := &in.DataRetentionInHours, &out.DataRetentionInHours
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeviceName != nil {
@@ -220,7 +220,7 @@ func (in *StreamParameters) DeepCopyInto(out *StreamParameters) {
 	*out = *in
 	if in.DataRetentionInHours != nil {
 		in, out := &in.DataRetentionInHours, &out.DataRetentionInHours
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeviceName != nil {

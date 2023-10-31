@@ -32,7 +32,7 @@ type EBSBlockDeviceInitParameters struct {
 	// The amount of provisioned
 	// IOPS.
 	// This must be set with a volume_type of "io1".
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Whether the device in the block device mapping of the AMI is suppressed.
 	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
@@ -41,10 +41,10 @@ type EBSBlockDeviceInitParameters struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// The throughput (MiBps) to provision for a gp3 volume.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The size of the volume in gigabytes.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -65,7 +65,7 @@ type EBSBlockDeviceObservation struct {
 	// The amount of provisioned
 	// IOPS.
 	// This must be set with a volume_type of "io1".
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Whether the device in the block device mapping of the AMI is suppressed.
 	NoDevice *bool `json:"noDevice,omitempty" tf:"no_device,omitempty"`
@@ -74,10 +74,10 @@ type EBSBlockDeviceObservation struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// The throughput (MiBps) to provision for a gp3 volume.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The size of the volume in gigabytes.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -102,7 +102,7 @@ type EBSBlockDeviceParameters struct {
 	// IOPS.
 	// This must be set with a volume_type of "io1".
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Whether the device in the block device mapping of the AMI is suppressed.
 	// +kubebuilder:validation:Optional
@@ -114,11 +114,11 @@ type EBSBlockDeviceParameters struct {
 
 	// The throughput (MiBps) to provision for a gp3 volume.
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	// +kubebuilder:validation:Optional
@@ -370,7 +370,7 @@ type MetadataOptionsInitParameters struct {
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
 	// The desired HTTP PUT response hop limit for instance metadata requests.
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// If session tokens are required: optional, required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -382,7 +382,7 @@ type MetadataOptionsObservation struct {
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
 	// The desired HTTP PUT response hop limit for instance metadata requests.
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// If session tokens are required: optional, required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -396,7 +396,7 @@ type MetadataOptionsParameters struct {
 
 	// The desired HTTP PUT response hop limit for instance metadata requests.
 	// +kubebuilder:validation:Optional
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// If session tokens are required: optional, required.
 	// +kubebuilder:validation:Optional
@@ -412,13 +412,13 @@ type RootBlockDeviceInitParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// The amount of provisioned IOPS. This must be set with a volume_type of io1.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The throughput (MiBps) to provision for a gp3 volume.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The size of the volume in gigabytes.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -433,13 +433,13 @@ type RootBlockDeviceObservation struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// The amount of provisioned IOPS. This must be set with a volume_type of io1.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The throughput (MiBps) to provision for a gp3 volume.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The size of the volume in gigabytes.
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -457,15 +457,15 @@ type RootBlockDeviceParameters struct {
 
 	// The amount of provisioned IOPS. This must be set with a volume_type of io1.
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The throughput (MiBps) to provision for a gp3 volume.
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// The size of the volume in gigabytes.
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// The type of volume. Can be standard, gp2, gp3, st1, sc1 or io1.
 	// +kubebuilder:validation:Optional

@@ -70,8 +70,7 @@ spec:
                   deploymentDurationInMinutes:
                     description: Total amount of time for a deployment to last. Minimum
                       value of 0, maximum value of 1440.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: Description of the deployment strategy. Can be at
                       most 1024 characters.
@@ -81,8 +80,7 @@ spec:
                       before considering the deployment to be complete and no longer
                       eligible for automatic roll back. Minimum value of 0, maximum
                       value of 1440.
-                    format: int64
-                    type: integer
+                    type: number
                   growthFactor:
                     description: Percentage of targets to receive a deployed configuration
                       during each interval. Minimum value of 1.0, maximum value of
@@ -127,8 +125,7 @@ spec:
                   deploymentDurationInMinutes:
                     description: Total amount of time for a deployment to last. Minimum
                       value of 0, maximum value of 1440.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: Description of the deployment strategy. Can be at
                       most 1024 characters.
@@ -138,8 +135,7 @@ spec:
                       before considering the deployment to be complete and no longer
                       eligible for automatic roll back. Minimum value of 0, maximum
                       value of 1440.
-                    format: int64
-                    type: integer
+                    type: number
                   growthFactor:
                     description: Percentage of targets to receive a deployed configuration
                       during each interval. Minimum value of 1.0, maximum value of
@@ -352,8 +348,7 @@ spec:
                   deploymentDurationInMinutes:
                     description: Total amount of time for a deployment to last. Minimum
                       value of 0, maximum value of 1440.
-                    format: int64
-                    type: integer
+                    type: number
                   description:
                     description: Description of the deployment strategy. Can be at
                       most 1024 characters.
@@ -363,8 +358,7 @@ spec:
                       before considering the deployment to be complete and no longer
                       eligible for automatic roll back. Minimum value of 0, maximum
                       value of 1440.
-                    format: int64
-                    type: integer
+                    type: number
                   growthFactor:
                     description: Percentage of targets to receive a deployed configuration
                       during each interval. Minimum value of 1.0, maximum value of

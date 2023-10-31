@@ -72,8 +72,7 @@ spec:
                     type: string
                   instancePort:
                     description: The instance port the load balancer will connect.
-                    format: int64
-                    type: integer
+                    type: number
                   ipAddressType:
                     type: string
                   region:
@@ -106,8 +105,7 @@ spec:
                     type: string
                   instancePort:
                     description: The instance port the load balancer will connect.
-                    format: int64
-                    type: integer
+                    type: number
                   ipAddressType:
                     type: string
                   tags:
@@ -304,8 +302,7 @@ spec:
                     type: string
                   instancePort:
                     description: The instance port the load balancer will connect.
-                    format: int64
-                    type: integer
+                    type: number
                   ipAddressType:
                     type: string
                   protocol:
@@ -314,8 +311,7 @@ spec:
                   publicPorts:
                     description: The public ports of the load balancer.
                     items:
-                      format: int64
-                      type: integer
+                      type: number
                     type: array
                   supportCode:
                     description: The support code for the database. Include this code

@@ -457,8 +457,7 @@ spec:
                   volumeSize:
                     description: The size, in GB, of the ML storage volume to attach
                       to the notebook instance. The default value is 5 GB.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -546,8 +545,7 @@ spec:
                   volumeSize:
                     description: The size, in GB, of the ML storage volume to attach
                       to the notebook instance. The default value is 5 GB.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -834,8 +832,7 @@ spec:
                   volumeSize:
                     description: The size, in GB, of the ML storage volume to attach
                       to the notebook instance. The default value is 5 GB.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

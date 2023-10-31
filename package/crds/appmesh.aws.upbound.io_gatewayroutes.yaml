@@ -106,8 +106,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -135,8 +134,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     serviceName:
                                       description: Fully qualified domain name for
                                         the service to match from the request.
@@ -199,8 +197,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -255,13 +252,11 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 regex:
@@ -319,8 +314,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -407,8 +401,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -563,13 +556,11 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 regex:
@@ -627,8 +618,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -664,8 +654,7 @@ spec:
                         priority:
                           description: Priority for the gateway route, between 0 and
                             1000.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -802,8 +791,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -831,8 +819,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     serviceName:
                                       description: Fully qualified domain name for
                                         the service to match from the request.
@@ -895,8 +882,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -951,13 +937,11 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1015,8 +999,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -1103,8 +1086,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -1152,13 +1134,11 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1216,8 +1196,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -1253,8 +1232,7 @@ spec:
                         priority:
                           description: Priority for the gateway route, between 0 and
                             1000.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -1491,8 +1469,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -1520,8 +1497,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     serviceName:
                                       description: Fully qualified domain name for
                                         the service to match from the request.
@@ -1584,8 +1560,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -1640,13 +1615,11 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1704,8 +1677,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -1792,8 +1764,7 @@ spec:
                                               port. This is required when the provider
                                               (router or node) of the Virtual Service
                                               has multiple listeners.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           virtualService:
                                             description: Virtual service gateway route
                                               target.
@@ -1848,13 +1819,11 @@ spec:
                                                     properties:
                                                       end:
                                                         description: End of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                       start:
                                                         description: (Requited) Start
                                                           of the range.
-                                                        format: int64
-                                                        type: integer
+                                                        type: number
                                                     type: object
                                                   type: array
                                                 regex:
@@ -1912,8 +1881,7 @@ spec:
                                         port. This is required when the provider (router
                                         or node) of the Virtual Service has multiple
                                         listeners.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     prefix:
                                       description: Specified beginning characters
                                         to rewrite.
@@ -1949,8 +1917,7 @@ spec:
                         priority:
                           description: Priority for the gateway route, between 0 and
                             1000.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:

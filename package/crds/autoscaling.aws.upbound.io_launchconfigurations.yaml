@@ -91,8 +91,7 @@ spec:
                         iops:
                           description: The amount of provisioned IOPS. This must be
                             set with a volume_type of "io1".
-                          format: int64
-                          type: integer
+                          type: number
                         noDevice:
                           description: Whether the device in the block device mapping
                             of the AMI is suppressed.
@@ -103,12 +102,10 @@ spec:
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
                             volume.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.
@@ -164,8 +161,7 @@ spec:
                         httpPutResponseHopLimit:
                           description: The desired HTTP PUT response hop limit for
                             instance metadata requests.
-                          format: int64
-                          type: integer
+                          type: number
                         httpTokens:
                           description: 'If session tokens are required: optional,
                             required.'
@@ -197,17 +193,14 @@ spec:
                         iops:
                           description: The amount of provisioned IOPS. This must be
                             set with a volume_type of io1.
-                          format: int64
-                          type: integer
+                          type: number
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
                             volume.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.
@@ -282,8 +275,7 @@ spec:
                         iops:
                           description: The amount of provisioned IOPS. This must be
                             set with a volume_type of "io1".
-                          format: int64
-                          type: integer
+                          type: number
                         noDevice:
                           description: Whether the device in the block device mapping
                             of the AMI is suppressed.
@@ -294,12 +286,10 @@ spec:
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
                             volume.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.
@@ -355,8 +345,7 @@ spec:
                         httpPutResponseHopLimit:
                           description: The desired HTTP PUT response hop limit for
                             instance metadata requests.
-                          format: int64
-                          type: integer
+                          type: number
                         httpTokens:
                           description: 'If session tokens are required: optional,
                             required.'
@@ -384,17 +373,14 @@ spec:
                         iops:
                           description: The amount of provisioned IOPS. This must be
                             set with a volume_type of io1.
-                          format: int64
-                          type: integer
+                          type: number
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
                             volume.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.
@@ -632,8 +618,7 @@ spec:
                         iops:
                           description: The amount of provisioned IOPS. This must be
                             set with a volume_type of "io1".
-                          format: int64
-                          type: integer
+                          type: number
                         noDevice:
                           description: Whether the device in the block device mapping
                             of the AMI is suppressed.
@@ -644,12 +629,10 @@ spec:
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
                             volume.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.
@@ -708,8 +691,7 @@ spec:
                         httpPutResponseHopLimit:
                           description: The desired HTTP PUT response hop limit for
                             instance metadata requests.
-                          format: int64
-                          type: integer
+                          type: number
                         httpTokens:
                           description: 'If session tokens are required: optional,
                             required.'
@@ -737,17 +719,14 @@ spec:
                         iops:
                           description: The amount of provisioned IOPS. This must be
                             set with a volume_type of io1.
-                          format: int64
-                          type: integer
+                          type: number
                         throughput:
                           description: The throughput (MiBps) to provision for a gp3
                             volume.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeSize:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         volumeType:
                           description: The type of volume. Can be standard, gp2, gp3,
                             st1, sc1 or io1.

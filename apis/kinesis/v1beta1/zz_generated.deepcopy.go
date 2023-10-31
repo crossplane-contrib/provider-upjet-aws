@@ -249,12 +249,12 @@ func (in *StreamInitParameters) DeepCopyInto(out *StreamInitParameters) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ShardCount != nil {
 		in, out := &in.ShardCount, &out.ShardCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ShardLevelMetrics != nil {
@@ -425,12 +425,12 @@ func (in *StreamObservation) DeepCopyInto(out *StreamObservation) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ShardCount != nil {
 		in, out := &in.ShardCount, &out.ShardCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ShardLevelMetrics != nil {
@@ -530,12 +530,12 @@ func (in *StreamParameters) DeepCopyInto(out *StreamParameters) {
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ShardCount != nil {
 		in, out := &in.ShardCount, &out.ShardCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ShardLevelMetrics != nil {

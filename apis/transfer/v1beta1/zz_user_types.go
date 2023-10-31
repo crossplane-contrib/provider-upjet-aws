@@ -49,40 +49,40 @@ type HomeDirectoryMappingsParameters struct {
 type PosixProfileInitParameters struct {
 
 	// The POSIX group ID used for all EFS operations by this user.
-	GID *int64 `json:"gid,omitempty" tf:"gid,omitempty"`
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
-	SecondaryGids []*int64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
+	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
-	UID *int64 `json:"uid,omitempty" tf:"uid,omitempty"`
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type PosixProfileObservation struct {
 
 	// The POSIX group ID used for all EFS operations by this user.
-	GID *int64 `json:"gid,omitempty" tf:"gid,omitempty"`
+	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
-	SecondaryGids []*int64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
+	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
-	UID *int64 `json:"uid,omitempty" tf:"uid,omitempty"`
+	UID *float64 `json:"uid,omitempty" tf:"uid,omitempty"`
 }
 
 type PosixProfileParameters struct {
 
 	// The POSIX group ID used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
-	GID *int64 `json:"gid" tf:"gid,omitempty"`
+	GID *float64 `json:"gid" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
-	SecondaryGids []*int64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
+	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
-	UID *int64 `json:"uid" tf:"uid,omitempty"`
+	UID *float64 `json:"uid" tf:"uid,omitempty"`
 }
 
 type UserInitParameters struct {

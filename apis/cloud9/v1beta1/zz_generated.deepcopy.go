@@ -45,7 +45,7 @@ func (in *EnvironmentEC2InitParameters) DeepCopyInto(out *EnvironmentEC2InitPara
 	*out = *in
 	if in.AutomaticStopTimeMinutes != nil {
 		in, out := &in.AutomaticStopTimeMinutes, &out.AutomaticStopTimeMinutes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ConnectionType != nil {
@@ -148,7 +148,7 @@ func (in *EnvironmentEC2Observation) DeepCopyInto(out *EnvironmentEC2Observation
 	}
 	if in.AutomaticStopTimeMinutes != nil {
 		in, out := &in.AutomaticStopTimeMinutes, &out.AutomaticStopTimeMinutes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ConnectionType != nil {
@@ -245,7 +245,7 @@ func (in *EnvironmentEC2Parameters) DeepCopyInto(out *EnvironmentEC2Parameters) 
 	*out = *in
 	if in.AutomaticStopTimeMinutes != nil {
 		in, out := &in.AutomaticStopTimeMinutes, &out.AutomaticStopTimeMinutes
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ConnectionType != nil {

@@ -580,7 +580,7 @@ func (in *EventDataStoreInitParameters) DeepCopyInto(out *EventDataStoreInitPara
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -690,7 +690,7 @@ func (in *EventDataStoreObservation) DeepCopyInto(out *EventDataStoreObservation
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -789,7 +789,7 @@ func (in *EventDataStoreParameters) DeepCopyInto(out *EventDataStoreParameters) 
 	}
 	if in.RetentionPeriod != nil {
 		in, out := &in.RetentionPeriod, &out.RetentionPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {

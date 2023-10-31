@@ -29,7 +29,7 @@ type APIDestinationInitParameters struct {
 	InvocationEndpoint *string `json:"invocationEndpoint,omitempty" tf:"invocation_endpoint,omitempty"`
 
 	// Enter the maximum number of invocations per second to allow for this destination. Enter a value greater than 0 (default 300).
-	InvocationRateLimitPerSecond *int64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
+	InvocationRateLimitPerSecond *float64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
 }
 
 type APIDestinationObservation struct {
@@ -52,7 +52,7 @@ type APIDestinationObservation struct {
 	InvocationEndpoint *string `json:"invocationEndpoint,omitempty" tf:"invocation_endpoint,omitempty"`
 
 	// Enter the maximum number of invocations per second to allow for this destination. Enter a value greater than 0 (default 300).
-	InvocationRateLimitPerSecond *int64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
+	InvocationRateLimitPerSecond *float64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
 }
 
 type APIDestinationParameters struct {
@@ -85,7 +85,7 @@ type APIDestinationParameters struct {
 
 	// Enter the maximum number of invocations per second to allow for this destination. Enter a value greater than 0 (default 300).
 	// +kubebuilder:validation:Optional
-	InvocationRateLimitPerSecond *int64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
+	InvocationRateLimitPerSecond *float64 `json:"invocationRateLimitPerSecond,omitempty" tf:"invocation_rate_limit_per_second,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

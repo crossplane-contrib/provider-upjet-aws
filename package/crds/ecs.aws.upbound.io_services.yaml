@@ -100,8 +100,7 @@ spec:
                           description: Number of tasks, at a minimum, to run on the
                             specified capacity provider. Only one capacity provider
                             in a capacity provider strategy can have a base defined.
-                          format: int64
-                          type: integer
+                          type: number
                         capacityProvider:
                           description: Short name of the capacity provider.
                           type: string
@@ -109,8 +108,7 @@ spec:
                           description: Relative percentage of the total number of
                             launched tasks that should use the specified capacity
                             provider.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   cluster:
@@ -222,20 +220,17 @@ spec:
                       of the number of running tasks that can be running in a service
                       during a deployment. Not valid when using the DAEMON scheduling
                       strategy.
-                    format: int64
-                    type: integer
+                    type: number
                   deploymentMinimumHealthyPercent:
                     description: Lower limit (as a percentage of the service's desiredCount)
                       of the number of running tasks that must remain running and
                       healthy in a service during a deployment.
-                    format: int64
-                    type: integer
+                    type: number
                   desiredCount:
                     description: Number of instances of the task definition to place
                       and keep running. Defaults to 0. Do not specify if using the
                       DAEMON scheduling strategy.
-                    format: int64
-                    type: integer
+                    type: number
                   enableEcsManagedTags:
                     description: Specifies whether to enable Amazon ECS managed tags
                       for the tasks within the service.
@@ -257,8 +252,7 @@ spec:
                       on newly instantiated tasks to prevent premature shutdown, up
                       to 2147483647. Only valid for services configured to use load
                       balancers.
-                    format: int64
-                    type: integer
+                    type: number
                   iamRole:
                     description: ARN of the IAM role that allows Amazon ECS to make
                       calls to your load balancer on your behalf. This parameter is
@@ -357,8 +351,7 @@ spec:
                         containerPort:
                           description: Port on the container to associate with the
                             load balancer.
-                          format: int64
-                          type: integer
+                          type: number
                         elbName:
                           description: Name of the ELB (Classic) to associate with
                             the service.
@@ -768,8 +761,7 @@ spec:
                                         Service Connect proxy. This port is available
                                         inside of all of the tasks within the same
                                         namespace.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               discoveryName:
@@ -779,8 +771,7 @@ spec:
                               ingressPortOverride:
                                 description: The port number for the Service Connect
                                   proxy to listen on.
-                                format: int64
-                                type: integer
+                                type: number
                               portName:
                                 description: The name of one of the portMappings from
                                   all the containers in the task definition of this
@@ -803,13 +794,11 @@ spec:
                         containerPort:
                           description: Port value, already specified in the task definition,
                             to be used for your service discovery service.
-                          format: int64
-                          type: integer
+                          type: number
                         port:
                           description: Port value used if your Service Discovery service
                             specified an SRV record.
-                          format: int64
-                          type: integer
+                          type: number
                         registryArn:
                           description: ARN of the Service Registry. The currently
                             supported service registry is Amazon Route 53 Auto Naming
@@ -961,8 +950,7 @@ spec:
                           description: Number of tasks, at a minimum, to run on the
                             specified capacity provider. Only one capacity provider
                             in a capacity provider strategy can have a base defined.
-                          format: int64
-                          type: integer
+                          type: number
                         capacityProvider:
                           description: Short name of the capacity provider.
                           type: string
@@ -970,8 +958,7 @@ spec:
                           description: Relative percentage of the total number of
                             launched tasks that should use the specified capacity
                             provider.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   deploymentCircuitBreaker:
@@ -1007,20 +994,17 @@ spec:
                       of the number of running tasks that can be running in a service
                       during a deployment. Not valid when using the DAEMON scheduling
                       strategy.
-                    format: int64
-                    type: integer
+                    type: number
                   deploymentMinimumHealthyPercent:
                     description: Lower limit (as a percentage of the service's desiredCount)
                       of the number of running tasks that must remain running and
                       healthy in a service during a deployment.
-                    format: int64
-                    type: integer
+                    type: number
                   desiredCount:
                     description: Number of instances of the task definition to place
                       and keep running. Defaults to 0. Do not specify if using the
                       DAEMON scheduling strategy.
-                    format: int64
-                    type: integer
+                    type: number
                   enableEcsManagedTags:
                     description: Specifies whether to enable Amazon ECS managed tags
                       for the tasks within the service.
@@ -1042,8 +1026,7 @@ spec:
                       on newly instantiated tasks to prevent premature shutdown, up
                       to 2147483647. Only valid for services configured to use load
                       balancers.
-                    format: int64
-                    type: integer
+                    type: number
                   launchType:
                     description: Launch type on which to run your service. The valid
                       values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
@@ -1059,8 +1042,7 @@ spec:
                         containerPort:
                           description: Port on the container to associate with the
                             load balancer.
-                          format: int64
-                          type: integer
+                          type: number
                         elbName:
                           description: Name of the ELB (Classic) to associate with
                             the service.
@@ -1209,8 +1191,7 @@ spec:
                                         Service Connect proxy. This port is available
                                         inside of all of the tasks within the same
                                         namespace.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               discoveryName:
@@ -1220,8 +1201,7 @@ spec:
                               ingressPortOverride:
                                 description: The port number for the Service Connect
                                   proxy to listen on.
-                                format: int64
-                                type: integer
+                                type: number
                               portName:
                                 description: The name of one of the portMappings from
                                   all the containers in the task definition of this
@@ -1244,13 +1224,11 @@ spec:
                         containerPort:
                           description: Port value, already specified in the task definition,
                             to be used for your service discovery service.
-                          format: int64
-                          type: integer
+                          type: number
                         port:
                           description: Port value used if your Service Discovery service
                             specified an SRV record.
-                          format: int64
-                          type: integer
+                          type: number
                         registryArn:
                           description: ARN of the Service Registry. The currently
                             supported service registry is Amazon Route 53 Auto Naming
@@ -1474,8 +1452,7 @@ spec:
                           description: Number of tasks, at a minimum, to run on the
                             specified capacity provider. Only one capacity provider
                             in a capacity provider strategy can have a base defined.
-                          format: int64
-                          type: integer
+                          type: number
                         capacityProvider:
                           description: Short name of the capacity provider.
                           type: string
@@ -1483,8 +1460,7 @@ spec:
                           description: Relative percentage of the total number of
                             launched tasks that should use the specified capacity
                             provider.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   cluster:
@@ -1523,20 +1499,17 @@ spec:
                       of the number of running tasks that can be running in a service
                       during a deployment. Not valid when using the DAEMON scheduling
                       strategy.
-                    format: int64
-                    type: integer
+                    type: number
                   deploymentMinimumHealthyPercent:
                     description: Lower limit (as a percentage of the service's desiredCount)
                       of the number of running tasks that must remain running and
                       healthy in a service during a deployment.
-                    format: int64
-                    type: integer
+                    type: number
                   desiredCount:
                     description: Number of instances of the task definition to place
                       and keep running. Defaults to 0. Do not specify if using the
                       DAEMON scheduling strategy.
-                    format: int64
-                    type: integer
+                    type: number
                   enableEcsManagedTags:
                     description: Specifies whether to enable Amazon ECS managed tags
                       for the tasks within the service.
@@ -1558,8 +1531,7 @@ spec:
                       on newly instantiated tasks to prevent premature shutdown, up
                       to 2147483647. Only valid for services configured to use load
                       balancers.
-                    format: int64
-                    type: integer
+                    type: number
                   iamRole:
                     description: ARN of the IAM role that allows Amazon ECS to make
                       calls to your load balancer on your behalf. This parameter is
@@ -1588,8 +1560,7 @@ spec:
                         containerPort:
                           description: Port on the container to associate with the
                             load balancer.
-                          format: int64
-                          type: integer
+                          type: number
                         elbName:
                           description: Name of the ELB (Classic) to associate with
                             the service.
@@ -1754,8 +1725,7 @@ spec:
                                         Service Connect proxy. This port is available
                                         inside of all of the tasks within the same
                                         namespace.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               discoveryName:
@@ -1765,8 +1735,7 @@ spec:
                               ingressPortOverride:
                                 description: The port number for the Service Connect
                                   proxy to listen on.
-                                format: int64
-                                type: integer
+                                type: number
                               portName:
                                 description: The name of one of the portMappings from
                                   all the containers in the task definition of this
@@ -1789,13 +1758,11 @@ spec:
                         containerPort:
                           description: Port value, already specified in the task definition,
                             to be used for your service discovery service.
-                          format: int64
-                          type: integer
+                          type: number
                         port:
                           description: Port value used if your Service Discovery service
                             specified an SRV record.
-                          format: int64
-                          type: integer
+                          type: number
                         registryArn:
                           description: ARN of the Service Registry. The currently
                             supported service registry is Amazon Route 53 Auto Naming

@@ -23,7 +23,7 @@ type ExternalKeyInitParameters struct {
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
-	DeletionWindowInDays *int64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
 	// Description of the key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -53,7 +53,7 @@ type ExternalKeyObservation struct {
 	BypassPolicyLockoutSafetyCheck *bool `json:"bypassPolicyLockoutSafetyCheck,omitempty" tf:"bypass_policy_lockout_safety_check,omitempty"`
 
 	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
-	DeletionWindowInDays *int64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
 	// Description of the key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -97,7 +97,7 @@ type ExternalKeyParameters struct {
 
 	// Duration in days after which the key is deleted after destruction of the resource. Must be between 7 and 30 days. Defaults to 30.
 	// +kubebuilder:validation:Optional
-	DeletionWindowInDays *int64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
+	DeletionWindowInDays *float64 `json:"deletionWindowInDays,omitempty" tf:"deletion_window_in_days,omitempty"`
 
 	// Description of the key.
 	// +kubebuilder:validation:Optional

@@ -72,8 +72,7 @@ spec:
                       be healthy for Route 53 to consider the parent health check
                       to be healthy. Valid values are integers between 0 and 256,
                       inclusive
-                    format: int64
-                    type: integer
+                    type: number
                   childHealthchecks:
                     description: For a specified parent health check, a list of HealthCheckId
                       values for the associated child health checks.
@@ -177,8 +176,7 @@ spec:
                   failureThreshold:
                     description: The number of consecutive health checks that an endpoint
                       must pass or fail.
-                    format: int64
-                    type: integer
+                    type: number
                   fqdn:
                     description: The fully qualified domain name of the endpoint to
                       be checked.
@@ -205,8 +203,7 @@ spec:
                     type: boolean
                   port:
                     description: The port of the endpoint to be checked.
-                    format: int64
-                    type: integer
+                    type: number
                   referenceName:
                     description: This is a reference name used in Caller Reference
                       (helpful for identifying single health_check set amongst others)
@@ -225,8 +222,7 @@ spec:
                     description: The number of seconds between the time that Amazon
                       Route 53 gets a response from your endpoint and the time that
                       it sends the next health-check request.
-                    format: int64
-                    type: integer
+                    type: number
                   resourcePath:
                     description: The path that you want Amazon Route 53 to request
                       when performing health checks.
@@ -271,8 +267,7 @@ spec:
                       be healthy for Route 53 to consider the parent health check
                       to be healthy. Valid values are integers between 0 and 256,
                       inclusive
-                    format: int64
-                    type: integer
+                    type: number
                   childHealthchecks:
                     description: For a specified parent health check, a list of HealthCheckId
                       values for the associated child health checks.
@@ -298,8 +293,7 @@ spec:
                   failureThreshold:
                     description: The number of consecutive health checks that an endpoint
                       must pass or fail.
-                    format: int64
-                    type: integer
+                    type: number
                   fqdn:
                     description: The fully qualified domain name of the endpoint to
                       be checked.
@@ -326,8 +320,7 @@ spec:
                     type: boolean
                   port:
                     description: The port of the endpoint to be checked.
-                    format: int64
-                    type: integer
+                    type: number
                   referenceName:
                     description: This is a reference name used in Caller Reference
                       (helpful for identifying single health_check set amongst others)
@@ -342,8 +335,7 @@ spec:
                     description: The number of seconds between the time that Amazon
                       Route 53 gets a response from your endpoint and the time that
                       it sends the next health-check request.
-                    format: int64
-                    type: integer
+                    type: number
                   resourcePath:
                     description: The path that you want Amazon Route 53 to request
                       when performing health checks.
@@ -547,8 +539,7 @@ spec:
                       be healthy for Route 53 to consider the parent health check
                       to be healthy. Valid values are integers between 0 and 256,
                       inclusive
-                    format: int64
-                    type: integer
+                    type: number
                   childHealthchecks:
                     description: For a specified parent health check, a list of HealthCheckId
                       values for the associated child health checks.
@@ -577,8 +568,7 @@ spec:
                   failureThreshold:
                     description: The number of consecutive health checks that an endpoint
                       must pass or fail.
-                    format: int64
-                    type: integer
+                    type: number
                   fqdn:
                     description: The fully qualified domain name of the endpoint to
                       be checked.
@@ -608,8 +598,7 @@ spec:
                     type: boolean
                   port:
                     description: The port of the endpoint to be checked.
-                    format: int64
-                    type: integer
+                    type: number
                   referenceName:
                     description: This is a reference name used in Caller Reference
                       (helpful for identifying single health_check set amongst others)
@@ -624,8 +613,7 @@ spec:
                     description: The number of seconds between the time that Amazon
                       Route 53 gets a response from your endpoint and the time that
                       it sends the next health-check request.
-                    format: int64
-                    type: integer
+                    type: number
                   resourcePath:
                     description: The path that you want Amazon Route 53 to request
                       when performing health checks.

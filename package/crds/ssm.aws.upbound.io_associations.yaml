@@ -237,8 +237,7 @@ spec:
                     description: The number of seconds to wait for the association
                       status to be Success. If Success status is not reached within
                       the given time, create opration will fail.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -344,8 +343,7 @@ spec:
                     description: The number of seconds to wait for the association
                       status to be Success. If Success status is not reached within
                       the given time, create opration will fail.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -613,8 +611,7 @@ spec:
                     description: The number of seconds to wait for the association
                       status to be Success. If Success status is not reached within
                       the given time, create opration will fail.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

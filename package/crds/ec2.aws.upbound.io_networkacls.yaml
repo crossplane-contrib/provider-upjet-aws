@@ -437,16 +437,13 @@ spec:
                           type: string
                         fromPort:
                           description: The from port to match.
-                          format: int64
-                          type: integer
+                          type: number
                         icmpCode:
                           description: The ICMP type code to be used. Default 0.
-                          format: int64
-                          type: integer
+                          type: number
                         icmpType:
                           description: The ICMP type to be used. Default 0.
-                          format: int64
-                          type: integer
+                          type: number
                         ipv6CidrBlock:
                           description: The IPv6 CIDR block.
                           type: string
@@ -456,12 +453,10 @@ spec:
                           type: string
                         ruleNo:
                           description: The rule number. Used for ordering.
-                          format: int64
-                          type: integer
+                          type: number
                         toPort:
                           description: The to port to match.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   id:
@@ -481,16 +476,13 @@ spec:
                           type: string
                         fromPort:
                           description: The from port to match.
-                          format: int64
-                          type: integer
+                          type: number
                         icmpCode:
                           description: The ICMP type code to be used. Default 0.
-                          format: int64
-                          type: integer
+                          type: number
                         icmpType:
                           description: The ICMP type to be used. Default 0.
-                          format: int64
-                          type: integer
+                          type: number
                         ipv6CidrBlock:
                           description: The IPv6 CIDR block.
                           type: string
@@ -500,12 +492,10 @@ spec:
                           type: string
                         ruleNo:
                           description: The rule number. Used for ordering.
-                          format: int64
-                          type: integer
+                          type: number
                         toPort:
                           description: The to port to match.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   ownerId:

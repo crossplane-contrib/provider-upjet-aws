@@ -220,34 +220,34 @@ type DatasourceParameters struct {
 }
 
 type DeltaSyncConfigInitParameters struct {
-	BaseTableTTL *int64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
+	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
 	// User-supplied name for the data source.
 	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
-	DeltaSyncTableTTL *int64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
+	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigObservation struct {
-	BaseTableTTL *int64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
+	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
 	// User-supplied name for the data source.
 	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
-	DeltaSyncTableTTL *int64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
+	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigParameters struct {
 
 	// +kubebuilder:validation:Optional
-	BaseTableTTL *int64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
+	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
 	// User-supplied name for the data source.
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableName *string `json:"deltaSyncTableName" tf:"delta_sync_table_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DeltaSyncTableTTL *int64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
+	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DynamodbConfigInitParameters struct {

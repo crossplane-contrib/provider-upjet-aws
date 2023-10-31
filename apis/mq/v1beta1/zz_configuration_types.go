@@ -65,7 +65,7 @@ type ConfigurationObservation_2 struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Latest revision of the configuration.
-	LatestRevision *int64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
+	LatestRevision *float64 `json:"latestRevision,omitempty" tf:"latest_revision,omitempty"`
 
 	// Name of the configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

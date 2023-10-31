@@ -35,7 +35,7 @@ type LayerVersionPermissionInitParameters struct {
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
 	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
-	VersionNumber *int64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 type LayerVersionPermissionObservation struct {
@@ -65,7 +65,7 @@ type LayerVersionPermissionObservation struct {
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
 	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
-	VersionNumber *int64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 type LayerVersionPermissionParameters struct {
@@ -97,7 +97,7 @@ type LayerVersionPermissionParameters struct {
 
 	// Version of Lambda Layer, which you want to grant access to. Note: permissions only apply to a single version of a layer.
 	// +kubebuilder:validation:Optional
-	VersionNumber *int64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
+	VersionNumber *float64 `json:"versionNumber,omitempty" tf:"version_number,omitempty"`
 }
 
 // LayerVersionPermissionSpec defines the desired state of LayerVersionPermission

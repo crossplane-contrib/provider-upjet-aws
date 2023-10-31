@@ -231,8 +231,7 @@ spec:
                                                   description: One or more ports that
                                                     the policy is enforced for.
                                                   items:
-                                                    format: int64
-                                                    type: integer
+                                                    type: number
                                                   type: array
                                                 validation:
                                                   description: TLS validation context.
@@ -394,8 +393,7 @@ spec:
                                             description: One or more ports that the
                                               policy is enforced for.
                                             items:
-                                              format: int64
-                                              type: integer
+                                              type: number
                                             type: array
                                           validation:
                                             description: TLS validation context.
@@ -499,8 +497,7 @@ spec:
                                               requests Envoy can concurrently support
                                               across hosts in upstream cluster. Minimum
                                               value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     http:
@@ -513,15 +510,13 @@ spec:
                                               TCP connections Envoy can establish
                                               concurrently with all hosts in upstream
                                               cluster. Minimum value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           maxPendingRequests:
                                             description: Number of overflowing requests
                                               after max_connections Envoy will queue
                                               to upstream cluster. Minimum value of
                                               1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     http2:
@@ -534,8 +529,7 @@ spec:
                                               requests Envoy can concurrently support
                                               across hosts in upstream cluster. Minimum
                                               value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     tcp:
@@ -548,8 +542,7 @@ spec:
                                               TCP connections Envoy can establish
                                               concurrently with all hosts in upstream
                                               cluster. Minimum value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -562,13 +555,11 @@ spec:
                                       description: Number of consecutive successful
                                         health checks that must occur before declaring
                                         listener healthy.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     intervalMillis:
                                       description: Time period in milliseconds between
                                         each health check execution.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     path:
                                       description: File path to write access logs
                                         to. You can use /dev/stdout to send access
@@ -577,8 +568,7 @@ spec:
                                       type: string
                                     port:
                                       description: Port used for the port mapping.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http, http2, tcp and grpc.
@@ -586,14 +576,12 @@ spec:
                                     timeoutMillis:
                                       description: Amount of time to wait when receiving
                                         a response from the health check, in milliseconds.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     unhealthyThreshold:
                                       description: Number of consecutive failed health
                                         checks that must occur before declaring a
                                         virtual node unhealthy.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               outlierDetection:
@@ -614,8 +602,7 @@ spec:
                                             description: The specified value for the
                                               JSON. Must be between 1 and 100 characters
                                               in length.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     interval:
@@ -631,8 +618,7 @@ spec:
                                             description: The specified value for the
                                               JSON. Must be between 1 and 100 characters
                                               in length.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     maxEjectionPercent:
@@ -641,13 +627,11 @@ spec:
                                         can be ejected. Will eject at least one host
                                         regardless of the value. Minimum value of
                                         0. Maximum value of 100.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     maxServerErrors:
                                       description: Number of consecutive 5xx errors
                                         required for ejection. Minimum value of 1.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               portMapping:
@@ -656,8 +640,7 @@ spec:
                                   properties:
                                     port:
                                       description: Port used for the port mapping.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http, http2, tcp and grpc.
@@ -687,8 +670,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -703,8 +685,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -728,8 +709,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -744,8 +724,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -769,8 +748,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -785,8 +763,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -810,8 +787,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -1239,8 +1215,7 @@ spec:
                                                   description: One or more ports that
                                                     the policy is enforced for.
                                                   items:
-                                                    format: int64
-                                                    type: integer
+                                                    type: number
                                                   type: array
                                                 validation:
                                                   description: TLS validation context.
@@ -1402,8 +1377,7 @@ spec:
                                             description: One or more ports that the
                                               policy is enforced for.
                                             items:
-                                              format: int64
-                                              type: integer
+                                              type: number
                                             type: array
                                           validation:
                                             description: TLS validation context.
@@ -1507,8 +1481,7 @@ spec:
                                               requests Envoy can concurrently support
                                               across hosts in upstream cluster. Minimum
                                               value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     http:
@@ -1521,15 +1494,13 @@ spec:
                                               TCP connections Envoy can establish
                                               concurrently with all hosts in upstream
                                               cluster. Minimum value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           maxPendingRequests:
                                             description: Number of overflowing requests
                                               after max_connections Envoy will queue
                                               to upstream cluster. Minimum value of
                                               1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     http2:
@@ -1542,8 +1513,7 @@ spec:
                                               requests Envoy can concurrently support
                                               across hosts in upstream cluster. Minimum
                                               value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     tcp:
@@ -1556,8 +1526,7 @@ spec:
                                               TCP connections Envoy can establish
                                               concurrently with all hosts in upstream
                                               cluster. Minimum value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -1570,13 +1539,11 @@ spec:
                                       description: Number of consecutive successful
                                         health checks that must occur before declaring
                                         listener healthy.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     intervalMillis:
                                       description: Time period in milliseconds between
                                         each health check execution.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     path:
                                       description: File path to write access logs
                                         to. You can use /dev/stdout to send access
@@ -1585,8 +1552,7 @@ spec:
                                       type: string
                                     port:
                                       description: Port used for the port mapping.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http, http2, tcp and grpc.
@@ -1594,14 +1560,12 @@ spec:
                                     timeoutMillis:
                                       description: Amount of time to wait when receiving
                                         a response from the health check, in milliseconds.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     unhealthyThreshold:
                                       description: Number of consecutive failed health
                                         checks that must occur before declaring a
                                         virtual node unhealthy.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               outlierDetection:
@@ -1622,8 +1586,7 @@ spec:
                                             description: The specified value for the
                                               JSON. Must be between 1 and 100 characters
                                               in length.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     interval:
@@ -1639,8 +1602,7 @@ spec:
                                             description: The specified value for the
                                               JSON. Must be between 1 and 100 characters
                                               in length.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     maxEjectionPercent:
@@ -1649,13 +1611,11 @@ spec:
                                         can be ejected. Will eject at least one host
                                         regardless of the value. Minimum value of
                                         0. Maximum value of 100.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     maxServerErrors:
                                       description: Number of consecutive 5xx errors
                                         required for ejection. Minimum value of 1.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               portMapping:
@@ -1664,8 +1624,7 @@ spec:
                                   properties:
                                     port:
                                       description: Port used for the port mapping.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http, http2, tcp and grpc.
@@ -1695,8 +1654,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -1711,8 +1669,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -1736,8 +1693,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -1752,8 +1708,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -1777,8 +1732,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -1793,8 +1747,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -1818,8 +1771,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -2336,8 +2288,7 @@ spec:
                                                   description: One or more ports that
                                                     the policy is enforced for.
                                                   items:
-                                                    format: int64
-                                                    type: integer
+                                                    type: number
                                                   type: array
                                                 validation:
                                                   description: TLS validation context.
@@ -2499,8 +2450,7 @@ spec:
                                             description: One or more ports that the
                                               policy is enforced for.
                                             items:
-                                              format: int64
-                                              type: integer
+                                              type: number
                                             type: array
                                           validation:
                                             description: TLS validation context.
@@ -2604,8 +2554,7 @@ spec:
                                               requests Envoy can concurrently support
                                               across hosts in upstream cluster. Minimum
                                               value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     http:
@@ -2618,15 +2567,13 @@ spec:
                                               TCP connections Envoy can establish
                                               concurrently with all hosts in upstream
                                               cluster. Minimum value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                           maxPendingRequests:
                                             description: Number of overflowing requests
                                               after max_connections Envoy will queue
                                               to upstream cluster. Minimum value of
                                               1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     http2:
@@ -2639,8 +2586,7 @@ spec:
                                               requests Envoy can concurrently support
                                               across hosts in upstream cluster. Minimum
                                               value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     tcp:
@@ -2653,8 +2599,7 @@ spec:
                                               TCP connections Envoy can establish
                                               concurrently with all hosts in upstream
                                               cluster. Minimum value of 1.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -2667,13 +2612,11 @@ spec:
                                       description: Number of consecutive successful
                                         health checks that must occur before declaring
                                         listener healthy.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     intervalMillis:
                                       description: Time period in milliseconds between
                                         each health check execution.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     path:
                                       description: File path to write access logs
                                         to. You can use /dev/stdout to send access
@@ -2682,8 +2625,7 @@ spec:
                                       type: string
                                     port:
                                       description: Port used for the port mapping.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http, http2, tcp and grpc.
@@ -2691,14 +2633,12 @@ spec:
                                     timeoutMillis:
                                       description: Amount of time to wait when receiving
                                         a response from the health check, in milliseconds.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     unhealthyThreshold:
                                       description: Number of consecutive failed health
                                         checks that must occur before declaring a
                                         virtual node unhealthy.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               outlierDetection:
@@ -2719,8 +2659,7 @@ spec:
                                             description: The specified value for the
                                               JSON. Must be between 1 and 100 characters
                                               in length.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     interval:
@@ -2736,8 +2675,7 @@ spec:
                                             description: The specified value for the
                                               JSON. Must be between 1 and 100 characters
                                               in length.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     maxEjectionPercent:
@@ -2746,13 +2684,11 @@ spec:
                                         can be ejected. Will eject at least one host
                                         regardless of the value. Minimum value of
                                         0. Maximum value of 100.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     maxServerErrors:
                                       description: Number of consecutive 5xx errors
                                         required for ejection. Minimum value of 1.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               portMapping:
@@ -2761,8 +2697,7 @@ spec:
                                   properties:
                                     port:
                                       description: Port used for the port mapping.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     protocol:
                                       description: Protocol used for the port mapping.
                                         Valid values are http, http2, tcp and grpc.
@@ -2792,8 +2727,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -2808,8 +2742,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -2833,8 +2766,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -2849,8 +2781,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -2874,8 +2805,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                           perRequest:
@@ -2890,8 +2820,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object
@@ -2915,8 +2844,7 @@ spec:
                                                   description: The specified value
                                                     for the JSON. Must be between
                                                     1 and 100 characters in length.
-                                                  format: int64
-                                                  type: integer
+                                                  type: number
                                               type: object
                                             type: array
                                         type: object

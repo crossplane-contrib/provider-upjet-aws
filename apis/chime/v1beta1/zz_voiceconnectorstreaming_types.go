@@ -49,7 +49,7 @@ type MediaInsightsConfigurationParameters struct {
 type VoiceConnectorStreamingInitParameters struct {
 
 	// The retention period, in hours, for the Amazon Kinesis data.
-	DataRetention *int64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
+	DataRetention *float64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
 
 	// When true, media streaming to Amazon Kinesis is turned off. Default: false
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
@@ -64,7 +64,7 @@ type VoiceConnectorStreamingInitParameters struct {
 type VoiceConnectorStreamingObservation struct {
 
 	// The retention period, in hours, for the Amazon Kinesis data.
-	DataRetention *int64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
+	DataRetention *float64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
 
 	// When true, media streaming to Amazon Kinesis is turned off. Default: false
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
@@ -86,7 +86,7 @@ type VoiceConnectorStreamingParameters struct {
 
 	// The retention period, in hours, for the Amazon Kinesis data.
 	// +kubebuilder:validation:Optional
-	DataRetention *int64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
+	DataRetention *float64 `json:"dataRetention,omitempty" tf:"data_retention,omitempty"`
 
 	// When true, media streaming to Amazon Kinesis is turned off. Default: false
 	// +kubebuilder:validation:Optional

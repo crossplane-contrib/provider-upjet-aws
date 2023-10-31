@@ -250,8 +250,7 @@ spec:
                       restore an archived snapshot. Required for temporary restores
                       only. The snapshot will be automatically re-archived after this
                       period.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -294,8 +293,7 @@ spec:
                       restore an archived snapshot. Required for temporary restores
                       only. The snapshot will be automatically re-archived after this
                       period.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -526,15 +524,13 @@ spec:
                       restore an archived snapshot. Required for temporary restores
                       only. The snapshot will be automatically re-archived after this
                       period.
-                    format: int64
-                    type: integer
+                    type: number
                   volumeId:
                     description: The snapshot ID (e.g., snap-59fcb34e).
                     type: string
                   volumeSize:
                     description: The size of the drive in GiBs.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

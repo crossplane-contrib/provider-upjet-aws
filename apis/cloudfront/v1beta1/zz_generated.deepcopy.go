@@ -362,17 +362,17 @@ func (in *CachePolicyInitParameters) DeepCopyInto(out *CachePolicyInitParameters
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -441,7 +441,7 @@ func (in *CachePolicyObservation) DeepCopyInto(out *CachePolicyObservation) {
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Etag != nil {
@@ -456,12 +456,12 @@ func (in *CachePolicyObservation) DeepCopyInto(out *CachePolicyObservation) {
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -498,17 +498,17 @@ func (in *CachePolicyParameters) DeepCopyInto(out *CachePolicyParameters) {
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Name != nil {
@@ -1222,7 +1222,7 @@ func (in *CorsConfigInitParameters) DeepCopyInto(out *CorsConfigInitParameters) 
 	}
 	if in.AccessControlMaxAgeSec != nil {
 		in, out := &in.AccessControlMaxAgeSec, &out.AccessControlMaxAgeSec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginOverride != nil {
@@ -1280,7 +1280,7 @@ func (in *CorsConfigObservation) DeepCopyInto(out *CorsConfigObservation) {
 	}
 	if in.AccessControlMaxAgeSec != nil {
 		in, out := &in.AccessControlMaxAgeSec, &out.AccessControlMaxAgeSec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginOverride != nil {
@@ -1338,7 +1338,7 @@ func (in *CorsConfigParameters) DeepCopyInto(out *CorsConfigParameters) {
 	}
 	if in.AccessControlMaxAgeSec != nil {
 		in, out := &in.AccessControlMaxAgeSec, &out.AccessControlMaxAgeSec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginOverride != nil {
@@ -1363,17 +1363,17 @@ func (in *CustomErrorResponseInitParameters) DeepCopyInto(out *CustomErrorRespon
 	*out = *in
 	if in.ErrorCachingMinTTL != nil {
 		in, out := &in.ErrorCachingMinTTL, &out.ErrorCachingMinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ErrorCode != nil {
 		in, out := &in.ErrorCode, &out.ErrorCode
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResponseCode != nil {
 		in, out := &in.ResponseCode, &out.ResponseCode
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResponsePagePath != nil {
@@ -1398,17 +1398,17 @@ func (in *CustomErrorResponseObservation) DeepCopyInto(out *CustomErrorResponseO
 	*out = *in
 	if in.ErrorCachingMinTTL != nil {
 		in, out := &in.ErrorCachingMinTTL, &out.ErrorCachingMinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ErrorCode != nil {
 		in, out := &in.ErrorCode, &out.ErrorCode
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResponseCode != nil {
 		in, out := &in.ResponseCode, &out.ResponseCode
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResponsePagePath != nil {
@@ -1433,17 +1433,17 @@ func (in *CustomErrorResponseParameters) DeepCopyInto(out *CustomErrorResponsePa
 	*out = *in
 	if in.ErrorCachingMinTTL != nil {
 		in, out := &in.ErrorCachingMinTTL, &out.ErrorCachingMinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ErrorCode != nil {
 		in, out := &in.ErrorCode, &out.ErrorCode
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResponseCode != nil {
 		in, out := &in.ResponseCode, &out.ResponseCode
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ResponsePagePath != nil {
@@ -1699,17 +1699,17 @@ func (in *CustomOriginConfigInitParameters) DeepCopyInto(out *CustomOriginConfig
 	*out = *in
 	if in.HTTPPort != nil {
 		in, out := &in.HTTPPort, &out.HTTPPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPSPort != nil {
 		in, out := &in.HTTPSPort, &out.HTTPSPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginKeepaliveTimeout != nil {
 		in, out := &in.OriginKeepaliveTimeout, &out.OriginKeepaliveTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginProtocolPolicy != nil {
@@ -1719,7 +1719,7 @@ func (in *CustomOriginConfigInitParameters) DeepCopyInto(out *CustomOriginConfig
 	}
 	if in.OriginReadTimeout != nil {
 		in, out := &in.OriginReadTimeout, &out.OriginReadTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginSSLProtocols != nil {
@@ -1750,17 +1750,17 @@ func (in *CustomOriginConfigObservation) DeepCopyInto(out *CustomOriginConfigObs
 	*out = *in
 	if in.HTTPPort != nil {
 		in, out := &in.HTTPPort, &out.HTTPPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPSPort != nil {
 		in, out := &in.HTTPSPort, &out.HTTPSPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginKeepaliveTimeout != nil {
 		in, out := &in.OriginKeepaliveTimeout, &out.OriginKeepaliveTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginProtocolPolicy != nil {
@@ -1770,7 +1770,7 @@ func (in *CustomOriginConfigObservation) DeepCopyInto(out *CustomOriginConfigObs
 	}
 	if in.OriginReadTimeout != nil {
 		in, out := &in.OriginReadTimeout, &out.OriginReadTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginSSLProtocols != nil {
@@ -1801,17 +1801,17 @@ func (in *CustomOriginConfigParameters) DeepCopyInto(out *CustomOriginConfigPara
 	*out = *in
 	if in.HTTPPort != nil {
 		in, out := &in.HTTPPort, &out.HTTPPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.HTTPSPort != nil {
 		in, out := &in.HTTPSPort, &out.HTTPSPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginKeepaliveTimeout != nil {
 		in, out := &in.OriginKeepaliveTimeout, &out.OriginKeepaliveTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginProtocolPolicy != nil {
@@ -1821,7 +1821,7 @@ func (in *CustomOriginConfigParameters) DeepCopyInto(out *CustomOriginConfigPara
 	}
 	if in.OriginReadTimeout != nil {
 		in, out := &in.OriginReadTimeout, &out.OriginReadTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginSSLProtocols != nil {
@@ -1884,7 +1884,7 @@ func (in *DefaultCacheBehaviorInitParameters) DeepCopyInto(out *DefaultCacheBeha
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FieldLevelEncryptionID != nil {
@@ -1915,12 +1915,12 @@ func (in *DefaultCacheBehaviorInitParameters) DeepCopyInto(out *DefaultCacheBeha
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginRequestPolicyID != nil {
@@ -2024,7 +2024,7 @@ func (in *DefaultCacheBehaviorObservation) DeepCopyInto(out *DefaultCacheBehavio
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FieldLevelEncryptionID != nil {
@@ -2055,12 +2055,12 @@ func (in *DefaultCacheBehaviorObservation) DeepCopyInto(out *DefaultCacheBehavio
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginRequestPolicyID != nil {
@@ -2164,7 +2164,7 @@ func (in *DefaultCacheBehaviorParameters) DeepCopyInto(out *DefaultCacheBehavior
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FieldLevelEncryptionID != nil {
@@ -2195,12 +2195,12 @@ func (in *DefaultCacheBehaviorParameters) DeepCopyInto(out *DefaultCacheBehavior
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginRequestPolicyID != nil {
@@ -2549,7 +2549,7 @@ func (in *DistributionObservation) DeepCopyInto(out *DistributionObservation) {
 	}
 	if in.InProgressValidationBatches != nil {
 		in, out := &in.InProgressValidationBatches, &out.InProgressValidationBatches
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IsIPv6Enabled != nil {
@@ -3121,11 +3121,11 @@ func (in *FailoverCriteriaInitParameters) DeepCopyInto(out *FailoverCriteriaInit
 	*out = *in
 	if in.StatusCodes != nil {
 		in, out := &in.StatusCodes, &out.StatusCodes
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -3147,11 +3147,11 @@ func (in *FailoverCriteriaObservation) DeepCopyInto(out *FailoverCriteriaObserva
 	*out = *in
 	if in.StatusCodes != nil {
 		in, out := &in.StatusCodes, &out.StatusCodes
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -3173,11 +3173,11 @@ func (in *FailoverCriteriaParameters) DeepCopyInto(out *FailoverCriteriaParamete
 	*out = *in
 	if in.StatusCodes != nil {
 		in, out := &in.StatusCodes, &out.StatusCodes
-		*out = make([]*int64, len(*in))
+		*out = make([]*float64, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
 				in, out := &(*in)[i], &(*out)[i]
-				*out = new(int64)
+				*out = new(float64)
 				**out = **in
 			}
 		}
@@ -5850,7 +5850,7 @@ func (in *OrderedCacheBehaviorInitParameters) DeepCopyInto(out *OrderedCacheBeha
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FieldLevelEncryptionID != nil {
@@ -5881,12 +5881,12 @@ func (in *OrderedCacheBehaviorInitParameters) DeepCopyInto(out *OrderedCacheBeha
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginRequestPolicyID != nil {
@@ -6090,7 +6090,7 @@ func (in *OrderedCacheBehaviorObservation) DeepCopyInto(out *OrderedCacheBehavio
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FieldLevelEncryptionID != nil {
@@ -6121,12 +6121,12 @@ func (in *OrderedCacheBehaviorObservation) DeepCopyInto(out *OrderedCacheBehavio
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginRequestPolicyID != nil {
@@ -6235,7 +6235,7 @@ func (in *OrderedCacheBehaviorParameters) DeepCopyInto(out *OrderedCacheBehavior
 	}
 	if in.DefaultTTL != nil {
 		in, out := &in.DefaultTTL, &out.DefaultTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.FieldLevelEncryptionID != nil {
@@ -6266,12 +6266,12 @@ func (in *OrderedCacheBehaviorParameters) DeepCopyInto(out *OrderedCacheBehavior
 	}
 	if in.MaxTTL != nil {
 		in, out := &in.MaxTTL, &out.MaxTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinTTL != nil {
 		in, out := &in.MinTTL, &out.MinTTL
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.OriginRequestPolicyID != nil {
@@ -6868,12 +6868,12 @@ func (in *OriginInitParameters) DeepCopyInto(out *OriginInitParameters) {
 	*out = *in
 	if in.ConnectionAttempts != nil {
 		in, out := &in.ConnectionAttempts, &out.ConnectionAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ConnectionTimeout != nil {
 		in, out := &in.ConnectionTimeout, &out.ConnectionTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CustomHeader != nil {
@@ -6934,12 +6934,12 @@ func (in *OriginObservation) DeepCopyInto(out *OriginObservation) {
 	*out = *in
 	if in.ConnectionAttempts != nil {
 		in, out := &in.ConnectionAttempts, &out.ConnectionAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ConnectionTimeout != nil {
 		in, out := &in.ConnectionTimeout, &out.ConnectionTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CustomHeader != nil {
@@ -7007,12 +7007,12 @@ func (in *OriginParameters) DeepCopyInto(out *OriginParameters) {
 	*out = *in
 	if in.ConnectionAttempts != nil {
 		in, out := &in.ConnectionAttempts, &out.ConnectionAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ConnectionTimeout != nil {
 		in, out := &in.ConnectionTimeout, &out.ConnectionTimeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CustomHeader != nil {
@@ -8482,7 +8482,7 @@ func (in *RealtimeLogConfigInitParameters) DeepCopyInto(out *RealtimeLogConfigIn
 	}
 	if in.SamplingRate != nil {
 		in, out := &in.SamplingRate, &out.SamplingRate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8567,7 +8567,7 @@ func (in *RealtimeLogConfigObservation) DeepCopyInto(out *RealtimeLogConfigObser
 	}
 	if in.SamplingRate != nil {
 		in, out := &in.SamplingRate, &out.SamplingRate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -8615,7 +8615,7 @@ func (in *RealtimeLogConfigParameters) DeepCopyInto(out *RealtimeLogConfigParame
 	}
 	if in.SamplingRate != nil {
 		in, out := &in.SamplingRate, &out.SamplingRate
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -9607,7 +9607,7 @@ func (in *StrictTransportSecurityInitParameters) DeepCopyInto(out *StrictTranspo
 	*out = *in
 	if in.AccessControlMaxAgeSec != nil {
 		in, out := &in.AccessControlMaxAgeSec, &out.AccessControlMaxAgeSec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IncludeSubdomains != nil {
@@ -9642,7 +9642,7 @@ func (in *StrictTransportSecurityObservation) DeepCopyInto(out *StrictTransportS
 	*out = *in
 	if in.AccessControlMaxAgeSec != nil {
 		in, out := &in.AccessControlMaxAgeSec, &out.AccessControlMaxAgeSec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IncludeSubdomains != nil {
@@ -9677,7 +9677,7 @@ func (in *StrictTransportSecurityParameters) DeepCopyInto(out *StrictTransportSe
 	*out = *in
 	if in.AccessControlMaxAgeSec != nil {
 		in, out := &in.AccessControlMaxAgeSec, &out.AccessControlMaxAgeSec
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IncludeSubdomains != nil {

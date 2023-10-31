@@ -26,7 +26,7 @@ type UserGroupInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The precedence of the user group.
-	Precedence *int64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
+	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
 }
 
 type UserGroupObservation struct {
@@ -40,7 +40,7 @@ type UserGroupObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The precedence of the user group.
-	Precedence *int64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
+	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
 
 	// The ARN of the IAM role to be associated with the user group.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -61,7 +61,7 @@ type UserGroupParameters struct {
 
 	// The precedence of the user group.
 	// +kubebuilder:validation:Optional
-	Precedence *int64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
+	Precedence *float64 `json:"precedence,omitempty" tf:"precedence,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

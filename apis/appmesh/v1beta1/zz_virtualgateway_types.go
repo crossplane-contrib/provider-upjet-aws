@@ -325,108 +325,108 @@ type FormatParameters struct {
 type GRPCInitParameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type GRPCObservation struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type GRPCParameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxRequests *int64 `json:"maxRequests" tf:"max_requests,omitempty"`
+	MaxRequests *float64 `json:"maxRequests" tf:"max_requests,omitempty"`
 }
 
 type HTTPInitParameters struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
-	MaxConnections *int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 
 	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
-	MaxPendingRequests *int64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
+	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type HTTPObservation struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
-	MaxConnections *int64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
+	MaxConnections *float64 `json:"maxConnections,omitempty" tf:"max_connections,omitempty"`
 
 	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
-	MaxPendingRequests *int64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
+	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type HTTPParameters struct {
 
 	// Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxConnections *int64 `json:"maxConnections" tf:"max_connections,omitempty"`
+	MaxConnections *float64 `json:"maxConnections" tf:"max_connections,omitempty"`
 
 	// Number of overflowing requests after max_connections Envoy will queue to upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxPendingRequests *int64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
+	MaxPendingRequests *float64 `json:"maxPendingRequests,omitempty" tf:"max_pending_requests,omitempty"`
 }
 
 type HealthCheckInitParameters struct {
 
 	// Number of consecutive successful health checks that must occur before declaring listener healthy.
-	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time period in milliseconds between each health check execution.
-	IntervalMillis *int64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
+	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time to wait when receiving a response from the health check, in milliseconds.
-	TimeoutMillis *int64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
+	TimeoutMillis *float64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
 
 	// Number of consecutive failed health checks that must occur before declaring a virtual gateway unhealthy.
-	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckObservation struct {
 
 	// Number of consecutive successful health checks that must occur before declaring listener healthy.
-	HealthyThreshold *int64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold,omitempty" tf:"healthy_threshold,omitempty"`
 
 	// Time period in milliseconds between each health check execution.
-	IntervalMillis *int64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
+	IntervalMillis *float64 `json:"intervalMillis,omitempty" tf:"interval_millis,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Port used for the port mapping.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time to wait when receiving a response from the health check, in milliseconds.
-	TimeoutMillis *int64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
+	TimeoutMillis *float64 `json:"timeoutMillis,omitempty" tf:"timeout_millis,omitempty"`
 
 	// Number of consecutive failed health checks that must occur before declaring a virtual gateway unhealthy.
-	UnhealthyThreshold *int64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type HealthCheckParameters struct {
 
 	// Number of consecutive successful health checks that must occur before declaring listener healthy.
 	// +kubebuilder:validation:Optional
-	HealthyThreshold *int64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
+	HealthyThreshold *float64 `json:"healthyThreshold" tf:"healthy_threshold,omitempty"`
 
 	// Time period in milliseconds between each health check execution.
 	// +kubebuilder:validation:Optional
-	IntervalMillis *int64 `json:"intervalMillis" tf:"interval_millis,omitempty"`
+	IntervalMillis *float64 `json:"intervalMillis" tf:"interval_millis,omitempty"`
 
 	// File path to write access logs to. You can use /dev/stdout to send access logs to standard out. Must be between 1 and 255 characters in length.
 	// +kubebuilder:validation:Optional
@@ -434,7 +434,7 @@ type HealthCheckParameters struct {
 
 	// Port used for the port mapping.
 	// +kubebuilder:validation:Optional
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	// +kubebuilder:validation:Optional
@@ -442,30 +442,30 @@ type HealthCheckParameters struct {
 
 	// Amount of time to wait when receiving a response from the health check, in milliseconds.
 	// +kubebuilder:validation:Optional
-	TimeoutMillis *int64 `json:"timeoutMillis" tf:"timeout_millis,omitempty"`
+	TimeoutMillis *float64 `json:"timeoutMillis" tf:"timeout_millis,omitempty"`
 
 	// Number of consecutive failed health checks that must occur before declaring a virtual gateway unhealthy.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *int64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
 }
 
 type Http2InitParameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type Http2Observation struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
-	MaxRequests *int64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
+	MaxRequests *float64 `json:"maxRequests,omitempty" tf:"max_requests,omitempty"`
 }
 
 type Http2Parameters struct {
 
 	// Maximum number of inflight requests Envoy can concurrently support across hosts in upstream cluster. Minimum value of 1.
 	// +kubebuilder:validation:Optional
-	MaxRequests *int64 `json:"maxRequests" tf:"max_requests,omitempty"`
+	MaxRequests *float64 `json:"maxRequests" tf:"max_requests,omitempty"`
 }
 
 type JSONInitParameters struct {
@@ -607,7 +607,7 @@ type LoggingParameters struct {
 type PortMappingInitParameters struct {
 
 	// Port used for the port mapping.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -616,7 +616,7 @@ type PortMappingInitParameters struct {
 type PortMappingObservation struct {
 
 	// Port used for the port mapping.
-	Port *int64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
@@ -626,7 +626,7 @@ type PortMappingParameters struct {
 
 	// Port used for the port mapping.
 	// +kubebuilder:validation:Optional
-	Port *int64 `json:"port" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// Protocol used for the port mapping. Valid values are http, http2, tcp and grpc.
 	// +kubebuilder:validation:Optional
@@ -738,7 +738,7 @@ type TLSInitParameters struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
-	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	Validation []ValidationInitParameters `json:"validation,omitempty" tf:"validation,omitempty"`
@@ -753,7 +753,7 @@ type TLSObservation struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
-	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	Validation []ValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
@@ -771,7 +771,7 @@ type TLSParameters struct {
 
 	// One or more ports that the policy is enforced for.
 	// +kubebuilder:validation:Optional
-	Ports []*int64 `json:"ports,omitempty" tf:"ports,omitempty"`
+	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
 	// +kubebuilder:validation:Optional

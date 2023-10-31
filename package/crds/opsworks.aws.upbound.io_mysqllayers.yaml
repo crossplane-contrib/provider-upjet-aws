@@ -87,14 +87,11 @@ spec:
                           items:
                             properties:
                               batchCount:
-                                format: int64
-                                type: integer
+                                type: number
                               batchSize:
-                                format: int64
-                                type: integer
+                                type: number
                               bufferDuration:
-                                format: int64
-                                type: integer
+                                type: number
                               datetimeFormat:
                                 type: string
                               encoding:
@@ -239,23 +236,20 @@ spec:
                           type: boolean
                         iops:
                           description: For PIOPS volumes, the IOPS per disk.
-                          format: int64
-                          type: integer
+                          type: number
                         mountPoint:
                           description: The path to mount the EBS volume on the layer's
                             instances.
                           type: string
                         numberOfDisks:
                           description: The number of disks to use for the EBS volume.
-                          format: int64
-                          type: integer
+                          type: number
                         raidLevel:
                           description: The RAID level to use for the volume.
                           type: string
                         size:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         type:
                           description: The type of volume to create. This may be standard
                             (the default), io1 or gp2.
@@ -273,8 +267,7 @@ spec:
                   instanceShutdownTimeout:
                     description: The time, in seconds, that OpsWorks will wait for
                       Chef to complete after triggering the Shutdown event.
-                    format: int64
-                    type: integer
+                    type: number
                   loadBasedAutoScaling:
                     items:
                       properties:
@@ -288,18 +281,15 @@ spec:
                               cpuThreshold:
                                 type: number
                               ignoreMetricsTime:
-                                format: int64
-                                type: integer
+                                type: number
                               instanceCount:
-                                format: int64
-                                type: integer
+                                type: number
                               loadThreshold:
                                 type: number
                               memoryThreshold:
                                 type: number
                               thresholdsWaitTime:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         enable:
@@ -314,18 +304,15 @@ spec:
                               cpuThreshold:
                                 type: number
                               ignoreMetricsTime:
-                                format: int64
-                                type: integer
+                                type: number
                               instanceCount:
-                                format: int64
-                                type: integer
+                                type: number
                               loadThreshold:
                                 type: number
                               memoryThreshold:
                                 type: number
                               thresholdsWaitTime:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -463,14 +450,11 @@ spec:
                           items:
                             properties:
                               batchCount:
-                                format: int64
-                                type: integer
+                                type: number
                               batchSize:
-                                format: int64
-                                type: integer
+                                type: number
                               bufferDuration:
-                                format: int64
-                                type: integer
+                                type: number
                               datetimeFormat:
                                 type: string
                               encoding:
@@ -532,23 +516,20 @@ spec:
                           type: boolean
                         iops:
                           description: For PIOPS volumes, the IOPS per disk.
-                          format: int64
-                          type: integer
+                          type: number
                         mountPoint:
                           description: The path to mount the EBS volume on the layer's
                             instances.
                           type: string
                         numberOfDisks:
                           description: The number of disks to use for the EBS volume.
-                          format: int64
-                          type: integer
+                          type: number
                         raidLevel:
                           description: The RAID level to use for the volume.
                           type: string
                         size:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         type:
                           description: The type of volume to create. This may be standard
                             (the default), io1 or gp2.
@@ -566,8 +547,7 @@ spec:
                   instanceShutdownTimeout:
                     description: The time, in seconds, that OpsWorks will wait for
                       Chef to complete after triggering the Shutdown event.
-                    format: int64
-                    type: integer
+                    type: number
                   loadBasedAutoScaling:
                     items:
                       properties:
@@ -581,18 +561,15 @@ spec:
                               cpuThreshold:
                                 type: number
                               ignoreMetricsTime:
-                                format: int64
-                                type: integer
+                                type: number
                               instanceCount:
-                                format: int64
-                                type: integer
+                                type: number
                               loadThreshold:
                                 type: number
                               memoryThreshold:
                                 type: number
                               thresholdsWaitTime:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         enable:
@@ -607,18 +584,15 @@ spec:
                               cpuThreshold:
                                 type: number
                               ignoreMetricsTime:
-                                format: int64
-                                type: integer
+                                type: number
                               instanceCount:
-                                format: int64
-                                type: integer
+                                type: number
                               loadThreshold:
                                 type: number
                               memoryThreshold:
                                 type: number
                               thresholdsWaitTime:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -836,14 +810,11 @@ spec:
                           items:
                             properties:
                               batchCount:
-                                format: int64
-                                type: integer
+                                type: number
                               batchSize:
-                                format: int64
-                                type: integer
+                                type: number
                               bufferDuration:
-                                format: int64
-                                type: integer
+                                type: number
                               datetimeFormat:
                                 type: string
                               encoding:
@@ -911,23 +882,20 @@ spec:
                           type: boolean
                         iops:
                           description: For PIOPS volumes, the IOPS per disk.
-                          format: int64
-                          type: integer
+                          type: number
                         mountPoint:
                           description: The path to mount the EBS volume on the layer's
                             instances.
                           type: string
                         numberOfDisks:
                           description: The number of disks to use for the EBS volume.
-                          format: int64
-                          type: integer
+                          type: number
                         raidLevel:
                           description: The RAID level to use for the volume.
                           type: string
                         size:
                           description: The size of the volume in gigabytes.
-                          format: int64
-                          type: integer
+                          type: number
                         type:
                           description: The type of volume to create. This may be standard
                             (the default), io1 or gp2.
@@ -948,8 +916,7 @@ spec:
                   instanceShutdownTimeout:
                     description: The time, in seconds, that OpsWorks will wait for
                       Chef to complete after triggering the Shutdown event.
-                    format: int64
-                    type: integer
+                    type: number
                   loadBasedAutoScaling:
                     items:
                       properties:
@@ -963,18 +930,15 @@ spec:
                               cpuThreshold:
                                 type: number
                               ignoreMetricsTime:
-                                format: int64
-                                type: integer
+                                type: number
                               instanceCount:
-                                format: int64
-                                type: integer
+                                type: number
                               loadThreshold:
                                 type: number
                               memoryThreshold:
                                 type: number
                               thresholdsWaitTime:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         enable:
@@ -989,18 +953,15 @@ spec:
                               cpuThreshold:
                                 type: number
                               ignoreMetricsTime:
-                                format: int64
-                                type: integer
+                                type: number
                               instanceCount:
-                                format: int64
-                                type: integer
+                                type: number
                               loadThreshold:
                                 type: number
                               memoryThreshold:
                                 type: number
                               thresholdsWaitTime:
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object

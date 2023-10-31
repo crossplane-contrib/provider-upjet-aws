@@ -44,7 +44,7 @@ type WorkspaceSAMLConfigurationInitParameters struct {
 	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
 
 	// The login validity duration.
-	LoginValidityDuration *int64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
+	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
 	// The name assertion.
 	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
@@ -85,7 +85,7 @@ type WorkspaceSAMLConfigurationObservation struct {
 	LoginAssertion *string `json:"loginAssertion,omitempty" tf:"login_assertion,omitempty"`
 
 	// The login validity duration.
-	LoginValidityDuration *int64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
+	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
 	// The name assertion.
 	NameAssertion *string `json:"nameAssertion,omitempty" tf:"name_assertion,omitempty"`
@@ -139,7 +139,7 @@ type WorkspaceSAMLConfigurationParameters struct {
 
 	// The login validity duration.
 	// +kubebuilder:validation:Optional
-	LoginValidityDuration *int64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
+	LoginValidityDuration *float64 `json:"loginValidityDuration,omitempty" tf:"login_validity_duration,omitempty"`
 
 	// The name assertion.
 	// +kubebuilder:validation:Optional

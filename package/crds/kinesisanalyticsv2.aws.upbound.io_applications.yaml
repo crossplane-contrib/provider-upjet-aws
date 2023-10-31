@@ -338,8 +338,7 @@ spec:
                                     checkpointInterval:
                                       description: Describes the interval in milliseconds
                                         between checkpoint operations.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     checkpointingEnabled:
                                       description: Describes whether checkpointing
                                         is enabled for a Flink-based Kinesis Data
@@ -360,8 +359,7 @@ spec:
                                       description: Describes the minimum time in milliseconds
                                         after a checkpoint operation completes that
                                         a new checkpoint operation can start.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               monitoringConfiguration:
@@ -419,15 +417,13 @@ spec:
                                       description: Describes the initial number of
                                         parallel tasks that a Flink-based Kinesis
                                         Data Analytics application can perform.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     parallelismPerKpu:
                                       description: Describes the number of parallel
                                         tasks that a Flink-based Kinesis Data Analytics
                                         application can perform per Kinesis Processing
                                         Unit (KPU) used by the application.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -487,8 +483,7 @@ spec:
                                           count:
                                             description: The number of in-application
                                               streams to create.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     inputProcessingConfiguration:
@@ -1498,8 +1493,7 @@ spec:
                                     checkpointInterval:
                                       description: Describes the interval in milliseconds
                                         between checkpoint operations.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     checkpointingEnabled:
                                       description: Describes whether checkpointing
                                         is enabled for a Flink-based Kinesis Data
@@ -1520,8 +1514,7 @@ spec:
                                       description: Describes the minimum time in milliseconds
                                         after a checkpoint operation completes that
                                         a new checkpoint operation can start.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               monitoringConfiguration:
@@ -1579,15 +1572,13 @@ spec:
                                       description: Describes the initial number of
                                         parallel tasks that a Flink-based Kinesis
                                         Data Analytics application can perform.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     parallelismPerKpu:
                                       description: Describes the number of parallel
                                         tasks that a Flink-based Kinesis Data Analytics
                                         application can perform per Kinesis Processing
                                         Unit (KPU) used by the application.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -1647,8 +1638,7 @@ spec:
                                           count:
                                             description: The number of in-application
                                               streams to create.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     inputProcessingConfiguration:
@@ -2278,8 +2268,7 @@ spec:
                                     checkpointInterval:
                                       description: Describes the interval in milliseconds
                                         between checkpoint operations.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     checkpointingEnabled:
                                       description: Describes whether checkpointing
                                         is enabled for a Flink-based Kinesis Data
@@ -2300,8 +2289,7 @@ spec:
                                       description: Describes the minimum time in milliseconds
                                         after a checkpoint operation completes that
                                         a new checkpoint operation can start.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               monitoringConfiguration:
@@ -2359,15 +2347,13 @@ spec:
                                       description: Describes the initial number of
                                         parallel tasks that a Flink-based Kinesis
                                         Data Analytics application can perform.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     parallelismPerKpu:
                                       description: Describes the number of parallel
                                         tasks that a Flink-based Kinesis Data Analytics
                                         application can perform per Kinesis Processing
                                         Unit (KPU) used by the application.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
@@ -2434,8 +2420,7 @@ spec:
                                           count:
                                             description: The number of in-application
                                               streams to create.
-                                            format: int64
-                                            type: integer
+                                            type: number
                                         type: object
                                       type: array
                                     inputProcessingConfiguration:
@@ -2873,8 +2858,7 @@ spec:
                   versionId:
                     description: The current application version. Kinesis Data Analytics
                       updates the version_id each time the application is updated.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

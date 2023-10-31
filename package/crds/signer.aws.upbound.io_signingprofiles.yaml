@@ -82,8 +82,7 @@ spec:
                         type:
                           type: string
                         value:
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -117,8 +116,7 @@ spec:
                         type:
                           type: string
                         value:
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   tags:
@@ -329,8 +327,7 @@ spec:
                         type:
                           type: string
                         value:
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   status:

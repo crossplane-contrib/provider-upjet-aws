@@ -23,10 +23,10 @@ type CPUOptionsInitParameters struct {
 	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CoreCount *int64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	ThreadsPerCore *int64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type CPUOptionsObservation struct {
@@ -35,10 +35,10 @@ type CPUOptionsObservation struct {
 	AmdSevSnp *string `json:"amdSevSnp,omitempty" tf:"amd_sev_snp,omitempty"`
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CoreCount *int64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	ThreadsPerCore *int64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type CPUOptionsParameters struct {
@@ -49,11 +49,11 @@ type CPUOptionsParameters struct {
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
 	// +kubebuilder:validation:Optional
-	CoreCount *int64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	// +kubebuilder:validation:Optional
-	ThreadsPerCore *int64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
+	ThreadsPerCore *float64 `json:"threadsPerCore,omitempty" tf:"threads_per_core,omitempty"`
 }
 
 type CapacityReservationSpecificationInitParameters struct {
@@ -164,7 +164,7 @@ type InstanceEBSBlockDeviceInitParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
@@ -173,10 +173,10 @@ type InstanceEBSBlockDeviceInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume in gibibytes (GiB).
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -194,7 +194,7 @@ type InstanceEBSBlockDeviceObservation struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -206,13 +206,13 @@ type InstanceEBSBlockDeviceObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// ID of the volume. For example, the ID can be accessed like this, aws_instance.web.ebs_block_device.2.volume_id.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
 	// Size of the volume in gibibytes (GiB).
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -234,7 +234,7 @@ type InstanceEBSBlockDeviceParameters struct {
 
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -259,11 +259,11 @@ type InstanceEBSBlockDeviceParameters struct {
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume in gibibytes (GiB).
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	// +kubebuilder:validation:Optional
@@ -321,13 +321,13 @@ type InstanceInitParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CPUCoreCount *int64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	// The CPU options for the instance. See CPU Options below for more details.
 	CPUOptions []CPUOptionsInitParameters `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	CPUThreadsPerCore *int64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	CapacityReservationSpecification []CapacityReservationSpecificationInitParameters `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -369,7 +369,7 @@ type InstanceInitParameters struct {
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
 	// Number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
-	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
@@ -402,7 +402,7 @@ type InstanceInitParameters struct {
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
-	PlacementPartitionNumber *int64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// Options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
 	PrivateDNSNameOptions []PrivateDNSNameOptionsInitParameters `json:"privateDnsNameOptions,omitempty" tf:"private_dns_name_options,omitempty"`
@@ -444,10 +444,10 @@ type InstanceNetworkInterfaceInitParameters struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Integer index of the network interface attachment. Limited by instance type.
-	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Integer index of the network card. Limited by instance type. The default index is 0.
-	NetworkCardIndex *int64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 }
 
 type InstanceNetworkInterfaceObservation struct {
@@ -456,10 +456,10 @@ type InstanceNetworkInterfaceObservation struct {
 	DeleteOnTermination *bool `json:"deleteOnTermination,omitempty" tf:"delete_on_termination,omitempty"`
 
 	// Integer index of the network interface attachment. Limited by instance type.
-	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Integer index of the network card. Limited by instance type. The default index is 0.
-	NetworkCardIndex *int64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// ID of the network interface to attach.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
@@ -473,11 +473,11 @@ type InstanceNetworkInterfaceParameters struct {
 
 	// Integer index of the network interface attachment. Limited by instance type.
 	// +kubebuilder:validation:Optional
-	DeviceIndex *int64 `json:"deviceIndex" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex" tf:"device_index,omitempty"`
 
 	// Integer index of the network card. Limited by instance type. The default index is 0.
 	// +kubebuilder:validation:Optional
-	NetworkCardIndex *int64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
+	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// ID of the network interface to attach.
 	// +crossplane:generate:reference:type=NetworkInterface
@@ -508,13 +508,13 @@ type InstanceObservation struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
-	CPUCoreCount *int64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	// The CPU options for the instance. See CPU Options below for more details.
 	CPUOptions []CPUOptionsObservation `json:"cpuOptions,omitempty" tf:"cpu_options,omitempty"`
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
-	CPUThreadsPerCore *int64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	CapacityReservationSpecification []CapacityReservationSpecificationObservation `json:"capacityReservationSpecification,omitempty" tf:"capacity_reservation_specification,omitempty"`
@@ -559,7 +559,7 @@ type InstanceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
-	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
@@ -601,7 +601,7 @@ type InstanceObservation struct {
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
-	PlacementPartitionNumber *int64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// ID of the instance's primary network interface.
 	PrimaryNetworkInterfaceID *string `json:"primaryNetworkInterfaceId,omitempty" tf:"primary_network_interface_id,omitempty"`
@@ -677,7 +677,7 @@ type InstanceParameters struct {
 
 	// Sets the number of CPU cores for an instance. This option is only supported on creation of instance type that support CPU Options CPU Cores and Threads Per CPU Core Per Instance Type - specifying this option for unsupported instance types will return an error from the EC2 API.
 	// +kubebuilder:validation:Optional
-	CPUCoreCount *int64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	// The CPU options for the instance. See CPU Options below for more details.
 	// +kubebuilder:validation:Optional
@@ -685,7 +685,7 @@ type InstanceParameters struct {
 
 	// If set to 1, hyperthreading is disabled on the launched instance. Defaults to 2 if not set. See Optimizing CPU Options for more information.
 	// +kubebuilder:validation:Optional
-	CPUThreadsPerCore *int64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
+	CPUThreadsPerCore *float64 `json:"cpuThreadsPerCore,omitempty" tf:"cpu_threads_per_core,omitempty"`
 
 	// Describes an instance's Capacity Reservation targeting option. See Capacity Reservation Specification below for more details.
 	// +kubebuilder:validation:Optional
@@ -741,7 +741,7 @@ type InstanceParameters struct {
 
 	// Number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
 	// +kubebuilder:validation:Optional
-	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface
 	// +kubebuilder:validation:Optional
@@ -785,7 +785,7 @@ type InstanceParameters struct {
 
 	// Number of the partition the instance is in. Valid only if the  strategy argument is set to "partition".
 	// +kubebuilder:validation:Optional
-	PlacementPartitionNumber *int64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
+	PlacementPartitionNumber *float64 `json:"placementPartitionNumber,omitempty" tf:"placement_partition_number,omitempty"`
 
 	// Options for the instance hostname. The default values are inherited from the subnet. See Private DNS Name Options below for more details.
 	// +kubebuilder:validation:Optional
@@ -929,7 +929,7 @@ type MetadataOptionsInitParameters struct {
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -944,7 +944,7 @@ type MetadataOptionsObservation struct {
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -961,7 +961,7 @@ type MetadataOptionsParameters struct {
 
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	// +kubebuilder:validation:Optional
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
 	// +kubebuilder:validation:Optional
@@ -1020,16 +1020,16 @@ type RootBlockDeviceInitParameters struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Map of tags to assign to the device.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume in gibibytes (GiB).
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -1047,7 +1047,7 @@ type RootBlockDeviceObservation struct {
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -1056,13 +1056,13 @@ type RootBlockDeviceObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// ID of the volume. For example, the ID can be accessed like this, aws_instance.web.root_block_device.0.volume_id.
 	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
 
 	// Size of the volume in gibibytes (GiB).
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -1080,7 +1080,7 @@ type RootBlockDeviceParameters struct {
 
 	// Amount of provisioned IOPS. Only valid for volume_type of io1, io2 or gp3.
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Amazon Resource Name (ARN) of the KMS Key to use when encrypting the volume. Must be configured to perform drift detection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -1101,11 +1101,11 @@ type RootBlockDeviceParameters struct {
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of the volume in gibibytes (GiB).
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
 	// +kubebuilder:validation:Optional

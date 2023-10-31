@@ -440,8 +440,7 @@ spec:
                   timeoutMilliseconds:
                     description: Custom timeout between 50 and 29,000 milliseconds.
                       The default value is 29,000 milliseconds.
-                    format: int64
-                    type: integer
+                    type: number
                   tlsConfig:
                     description: TLS configuration. See below.
                     items:
@@ -626,8 +625,7 @@ spec:
                   timeoutMilliseconds:
                     description: Custom timeout between 50 and 29,000 milliseconds.
                       The default value is 29,000 milliseconds.
-                    format: int64
-                    type: integer
+                    type: number
                   tlsConfig:
                     description: TLS configuration. See below.
                     items:
@@ -899,8 +897,7 @@ spec:
                   timeoutMilliseconds:
                     description: Custom timeout between 50 and 29,000 milliseconds.
                       The default value is 29,000 milliseconds.
-                    format: int64
-                    type: integer
+                    type: number
                   tlsConfig:
                     description: TLS configuration. See below.
                     items:

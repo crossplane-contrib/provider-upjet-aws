@@ -98,8 +98,7 @@ spec:
                     description: 'Version of Lambda Layer, which you want to grant
                       access to. Note: permissions only apply to a single version
                       of a layer.'
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -142,8 +141,7 @@ spec:
                     description: 'Version of Lambda Layer, which you want to grant
                       access to. Note: permissions only apply to a single version
                       of a layer.'
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -370,8 +368,7 @@ spec:
                     description: 'Version of Lambda Layer, which you want to grant
                       access to. Note: permissions only apply to a single version
                       of a layer.'
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

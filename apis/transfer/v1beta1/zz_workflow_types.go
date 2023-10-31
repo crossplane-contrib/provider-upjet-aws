@@ -165,7 +165,7 @@ type CustomStepDetailsInitParameters struct {
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Timeout, in seconds, for the step.
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type CustomStepDetailsObservation struct {
@@ -180,7 +180,7 @@ type CustomStepDetailsObservation struct {
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Timeout, in seconds, for the step.
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type CustomStepDetailsParameters struct {
@@ -199,7 +199,7 @@ type CustomStepDetailsParameters struct {
 
 	// Timeout, in seconds, for the step.
 	// +kubebuilder:validation:Optional
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type DecryptStepDetailsDestinationFileLocationEFSFileLocationInitParameters struct {
@@ -649,7 +649,7 @@ type StepsCustomStepDetailsInitParameters struct {
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
 	// Timeout, in seconds, for the step.
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type StepsCustomStepDetailsObservation struct {
@@ -664,7 +664,7 @@ type StepsCustomStepDetailsObservation struct {
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Timeout, in seconds, for the step.
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type StepsCustomStepDetailsParameters struct {
@@ -693,7 +693,7 @@ type StepsCustomStepDetailsParameters struct {
 
 	// Timeout, in seconds, for the step.
 	// +kubebuilder:validation:Optional
-	TimeoutSeconds *int64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
+	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
 
 type StepsDecryptStepDetailsDestinationFileLocationInitParameters struct {

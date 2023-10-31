@@ -73,8 +73,7 @@ spec:
                       this amount is in terabytes (TB) of data transferred between
                       Regions in cross-account sharing. The value must be a positive
                       number.
-                    format: int64
-                    type: integer
+                    type: number
                   breachAction:
                     description: The action that Amazon Redshift Serverless takes
                       when the limit is reached. Valid values are log, emit-metric,
@@ -193,8 +192,7 @@ spec:
                       this amount is in terabytes (TB) of data transferred between
                       Regions in cross-account sharing. The value must be a positive
                       number.
-                    format: int64
-                    type: integer
+                    type: number
                   breachAction:
                     description: The action that Amazon Redshift Serverless takes
                       when the limit is reached. Valid values are log, emit-metric,
@@ -390,8 +388,7 @@ spec:
                       this amount is in terabytes (TB) of data transferred between
                       Regions in cross-account sharing. The value must be a positive
                       number.
-                    format: int64
-                    type: integer
+                    type: number
                   arn:
                     description: Amazon Resource Name (ARN) of the Redshift Serverless
                       Usage Limit.

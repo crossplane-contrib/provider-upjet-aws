@@ -105,7 +105,7 @@ type SAMLOptionsInitParameters struct {
 	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
 
 	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
-	SessionTimeoutMinutes *int64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
 
 	// Element of the SAML assertion to use for username. Default is NameID.
 	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
@@ -126,7 +126,7 @@ type SAMLOptionsObservation struct {
 	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
 
 	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
-	SessionTimeoutMinutes *int64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
 
 	// Element of the SAML assertion to use for username. Default is NameID.
 	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
@@ -156,7 +156,7 @@ type SAMLOptionsParameters struct {
 
 	// Duration of a session in minutes after a user logs in. Default is 60. Maximum value is 1,440.
 	// +kubebuilder:validation:Optional
-	SessionTimeoutMinutes *int64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
+	SessionTimeoutMinutes *float64 `json:"sessionTimeoutMinutes,omitempty" tf:"session_timeout_minutes,omitempty"`
 
 	// Element of the SAML assertion to use for username. Default is NameID.
 	// +kubebuilder:validation:Optional

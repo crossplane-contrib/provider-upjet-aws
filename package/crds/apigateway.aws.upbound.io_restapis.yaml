@@ -159,8 +159,7 @@ spec:
                       extension. If the argument value (except -1) is provided and
                       is different than the OpenAPI value, the argument value will
                       override the OpenAPI value.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Name of the REST API. If importing an OpenAPI specification
                       via the body argument, this corresponds to the info.title field.
@@ -302,8 +301,7 @@ spec:
                       extension. If the argument value (except -1) is provided and
                       is different than the OpenAPI value, the argument value will
                       override the OpenAPI value.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Name of the REST API. If importing an OpenAPI specification
                       via the body argument, this corresponds to the info.title field.
@@ -613,8 +611,7 @@ spec:
                       extension. If the argument value (except -1) is provided and
                       is different than the OpenAPI value, the argument value will
                       override the OpenAPI value.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Name of the REST API. If importing an OpenAPI specification
                       via the body argument, this corresponds to the info.title field.

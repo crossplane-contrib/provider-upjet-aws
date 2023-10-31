@@ -106,8 +106,7 @@ spec:
                           description: The size in bytes that you want to compare
                             against the size of the specified field_to_match. Valid
                             values are between 0 - 21474836480 bytes (0 - 20 GB).
-                          format: int64
-                          type: integer
+                          type: number
                         textTransformation:
                           description: 'Text transformations used to eliminate unusual
                             formatting that attackers use in web requests in an effort
@@ -170,8 +169,7 @@ spec:
                           description: The size in bytes that you want to compare
                             against the size of the specified field_to_match. Valid
                             values are between 0 - 21474836480 bytes (0 - 20 GB).
-                          format: int64
-                          type: integer
+                          type: number
                         textTransformation:
                           description: 'Text transformations used to eliminate unusual
                             formatting that attackers use in web requests in an effort
@@ -396,8 +394,7 @@ spec:
                           description: The size in bytes that you want to compare
                             against the size of the specified field_to_match. Valid
                             values are between 0 - 21474836480 bytes (0 - 20 GB).
-                          format: int64
-                          type: integer
+                          type: number
                         textTransformation:
                           description: 'Text transformations used to eliminate unusual
                             formatting that attackers use in web requests in an effort

@@ -100,7 +100,7 @@ type EventSourceMappingInitParameters struct {
 	AmazonManagedKafkaEventSourceConfig []AmazonManagedKafkaEventSourceConfigInitParameters `json:"amazonManagedKafkaEventSourceConfig,omitempty" tf:"amazon_managed_kafka_event_source_config,omitempty"`
 
 	// The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to 100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
-	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
 	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
@@ -124,16 +124,16 @@ type EventSourceMappingInitParameters struct {
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
 	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
-	MaximumBatchingWindowInSeconds *int64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
+	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// The maximum age of a record that Lambda sends to a function for processing. Only available for stream sources (DynamoDB and Kinesis). Must be either -1 (forever, and the default value) or between 60 and 604800 (inclusive).
-	MaximumRecordAgeInSeconds *int64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
+	MaximumRecordAgeInSeconds *float64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
 
 	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
-	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
-	ParallelizationFactor *int64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
@@ -160,7 +160,7 @@ type EventSourceMappingInitParameters struct {
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 
 	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
-	TumblingWindowInSeconds *int64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
 }
 
 type EventSourceMappingObservation struct {
@@ -169,7 +169,7 @@ type EventSourceMappingObservation struct {
 	AmazonManagedKafkaEventSourceConfig []AmazonManagedKafkaEventSourceConfigObservation `json:"amazonManagedKafkaEventSourceConfig,omitempty" tf:"amazon_managed_kafka_event_source_config,omitempty"`
 
 	// The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to 100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
-	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
 	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
@@ -207,16 +207,16 @@ type EventSourceMappingObservation struct {
 	LastProcessingResult *string `json:"lastProcessingResult,omitempty" tf:"last_processing_result,omitempty"`
 
 	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
-	MaximumBatchingWindowInSeconds *int64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
+	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// The maximum age of a record that Lambda sends to a function for processing. Only available for stream sources (DynamoDB and Kinesis). Must be either -1 (forever, and the default value) or between 60 and 604800 (inclusive).
-	MaximumRecordAgeInSeconds *int64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
+	MaximumRecordAgeInSeconds *float64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
 
 	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
-	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
-	ParallelizationFactor *int64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
@@ -249,7 +249,7 @@ type EventSourceMappingObservation struct {
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 
 	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
-	TumblingWindowInSeconds *int64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
 
 	// The UUID of the created event source mapping.
 	UUID *string `json:"uuid,omitempty" tf:"uuid,omitempty"`
@@ -263,7 +263,7 @@ type EventSourceMappingParameters struct {
 
 	// The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to 100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
 	// +kubebuilder:validation:Optional
-	BatchSize *int64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -309,19 +309,19 @@ type EventSourceMappingParameters struct {
 
 	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
 	// +kubebuilder:validation:Optional
-	MaximumBatchingWindowInSeconds *int64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
+	MaximumBatchingWindowInSeconds *float64 `json:"maximumBatchingWindowInSeconds,omitempty" tf:"maximum_batching_window_in_seconds,omitempty"`
 
 	// The maximum age of a record that Lambda sends to a function for processing. Only available for stream sources (DynamoDB and Kinesis). Must be either -1 (forever, and the default value) or between 60 and 604800 (inclusive).
 	// +kubebuilder:validation:Optional
-	MaximumRecordAgeInSeconds *int64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
+	MaximumRecordAgeInSeconds *float64 `json:"maximumRecordAgeInSeconds,omitempty" tf:"maximum_record_age_in_seconds,omitempty"`
 
 	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
 	// +kubebuilder:validation:Optional
-	MaximumRetryAttempts *int64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
+	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	// +kubebuilder:validation:Optional
-	ParallelizationFactor *int64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	// +kubebuilder:validation:Optional
@@ -362,7 +362,7 @@ type EventSourceMappingParameters struct {
 
 	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
 	// +kubebuilder:validation:Optional
-	TumblingWindowInSeconds *int64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
+	TumblingWindowInSeconds *float64 `json:"tumblingWindowInSeconds,omitempty" tf:"tumbling_window_in_seconds,omitempty"`
 }
 
 type FilterCriteriaInitParameters struct {
@@ -425,20 +425,20 @@ type OnFailureParameters struct {
 type ScalingConfigInitParameters struct {
 
 	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
-	MaximumConcurrency *int64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
+	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type ScalingConfigObservation struct {
 
 	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
-	MaximumConcurrency *int64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
+	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type ScalingConfigParameters struct {
 
 	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
 	// +kubebuilder:validation:Optional
-	MaximumConcurrency *int64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
+	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type SelfManagedEventSourceInitParameters struct {

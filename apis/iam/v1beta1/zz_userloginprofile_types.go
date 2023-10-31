@@ -20,7 +20,7 @@ import (
 type UserLoginProfileInitParameters struct {
 
 	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
-	PasswordLength *int64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
+	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
 
 	// Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation.
 	PasswordResetRequired *bool `json:"passwordResetRequired,omitempty" tf:"password_reset_required,omitempty"`
@@ -43,7 +43,7 @@ type UserLoginProfileObservation struct {
 	Password *string `json:"password,omitempty" tf:"password,omitempty"`
 
 	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
-	PasswordLength *int64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
+	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
 
 	// Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation.
 	PasswordResetRequired *bool `json:"passwordResetRequired,omitempty" tf:"password_reset_required,omitempty"`
@@ -59,7 +59,7 @@ type UserLoginProfileParameters struct {
 
 	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
 	// +kubebuilder:validation:Optional
-	PasswordLength *int64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
+	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
 
 	// Whether the user should be forced to reset the generated password on resource creation. Only applies on resource creation.
 	// +kubebuilder:validation:Optional

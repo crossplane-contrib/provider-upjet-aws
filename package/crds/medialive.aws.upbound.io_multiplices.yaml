@@ -79,20 +79,16 @@ spec:
                       properties:
                         maximumVideoBufferDelayMilliseconds:
                           description: Maximum video buffer delay.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamBitrate:
                           description: Transport stream bit rate.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamId:
                           description: Unique ID for each multiplex.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamReservedBitrate:
                           description: Transport stream reserved bit rate.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -138,20 +134,16 @@ spec:
                       properties:
                         maximumVideoBufferDelayMilliseconds:
                           description: Maximum video buffer delay.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamBitrate:
                           description: Transport stream bit rate.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamId:
                           description: Unique ID for each multiplex.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamReservedBitrate:
                           description: Transport stream reserved bit rate.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -358,20 +350,16 @@ spec:
                       properties:
                         maximumVideoBufferDelayMilliseconds:
                           description: Maximum video buffer delay.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamBitrate:
                           description: Transport stream bit rate.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamId:
                           description: Unique ID for each multiplex.
-                          format: int64
-                          type: integer
+                          type: number
                         transportStreamReservedBitrate:
                           description: Transport stream reserved bit rate.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:

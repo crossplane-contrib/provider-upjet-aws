@@ -239,7 +239,7 @@ func (in *LicenseConfigurationInitParameters) DeepCopyInto(out *LicenseConfigura
 	}
 	if in.LicenseCount != nil {
 		in, out := &in.LicenseCount, &out.LicenseCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LicenseCountHardLimit != nil {
@@ -348,7 +348,7 @@ func (in *LicenseConfigurationObservation) DeepCopyInto(out *LicenseConfiguratio
 	}
 	if in.LicenseCount != nil {
 		in, out := &in.LicenseCount, &out.LicenseCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LicenseCountHardLimit != nil {
@@ -436,7 +436,7 @@ func (in *LicenseConfigurationParameters) DeepCopyInto(out *LicenseConfiguration
 	}
 	if in.LicenseCount != nil {
 		in, out := &in.LicenseCount, &out.LicenseCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LicenseCountHardLimit != nil {

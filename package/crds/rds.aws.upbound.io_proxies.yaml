@@ -204,8 +204,7 @@ spec:
                       can be inactive before the proxy disconnects it. You can set
                       this value higher or lower than the connection timeout limit
                       for the associated database.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -455,8 +454,7 @@ spec:
                       can be inactive before the proxy disconnects it. You can set
                       this value higher or lower than the connection timeout limit
                       for the associated database.
-                    format: int64
-                    type: integer
+                    type: number
                   requireTls:
                     description: A Boolean parameter that specifies whether Transport
                       Layer Security (TLS) encryption is required for connections
@@ -723,8 +721,7 @@ spec:
                       can be inactive before the proxy disconnects it. You can set
                       this value higher or lower than the connection timeout limit
                       for the associated database.
-                    format: int64
-                    type: integer
+                    type: number
                   requireTls:
                     description: A Boolean parameter that specifies whether Transport
                       Layer Security (TLS) encryption is required for connections

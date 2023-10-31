@@ -111,8 +111,7 @@ spec:
                       to set for the specified role. If you do not specify a value
                       for this setting, the default maximum of one hour is applied.
                       This setting can have a value from 1 hour to 12 hours.
-                    format: int64
-                    type: integer
+                    type: number
                   path:
                     description: Path to the role. See IAM Identifiers for more information.
                     type: string
@@ -183,8 +182,7 @@ spec:
                       to set for the specified role. If you do not specify a value
                       for this setting, the default maximum of one hour is applied.
                       This setting can have a value from 1 hour to 12 hours.
-                    format: int64
-                    type: integer
+                    type: number
                   path:
                     description: Path to the role. See IAM Identifiers for more information.
                     type: string
@@ -422,8 +420,7 @@ spec:
                       to set for the specified role. If you do not specify a value
                       for this setting, the default maximum of one hour is applied.
                       This setting can have a value from 1 hour to 12 hours.
-                    format: int64
-                    type: integer
+                    type: number
                   path:
                     description: Path to the role. See IAM Identifiers for more information.
                     type: string

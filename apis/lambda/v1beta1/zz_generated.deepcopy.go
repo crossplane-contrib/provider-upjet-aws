@@ -655,7 +655,7 @@ func (in *CorsInitParameters) DeepCopyInto(out *CorsInitParameters) {
 	}
 	if in.MaxAge != nil {
 		in, out := &in.MaxAge, &out.MaxAge
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -724,7 +724,7 @@ func (in *CorsObservation) DeepCopyInto(out *CorsObservation) {
 	}
 	if in.MaxAge != nil {
 		in, out := &in.MaxAge, &out.MaxAge
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -793,7 +793,7 @@ func (in *CorsParameters) DeepCopyInto(out *CorsParameters) {
 	}
 	if in.MaxAge != nil {
 		in, out := &in.MaxAge, &out.MaxAge
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1187,7 +1187,7 @@ func (in *EphemeralStorageInitParameters) DeepCopyInto(out *EphemeralStorageInit
 	*out = *in
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1207,7 +1207,7 @@ func (in *EphemeralStorageObservation) DeepCopyInto(out *EphemeralStorageObserva
 	*out = *in
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1227,7 +1227,7 @@ func (in *EphemeralStorageParameters) DeepCopyInto(out *EphemeralStorageParamete
 	*out = *in
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1281,7 +1281,7 @@ func (in *EventSourceMappingInitParameters) DeepCopyInto(out *EventSourceMapping
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BisectBatchOnFunctionError != nil {
@@ -1333,22 +1333,22 @@ func (in *EventSourceMappingInitParameters) DeepCopyInto(out *EventSourceMapping
 	}
 	if in.MaximumBatchingWindowInSeconds != nil {
 		in, out := &in.MaximumBatchingWindowInSeconds, &out.MaximumBatchingWindowInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRecordAgeInSeconds != nil {
 		in, out := &in.MaximumRecordAgeInSeconds, &out.MaximumRecordAgeInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRetryAttempts != nil {
 		in, out := &in.MaximumRetryAttempts, &out.MaximumRetryAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParallelizationFactor != nil {
 		in, out := &in.ParallelizationFactor, &out.ParallelizationFactor
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Queues != nil {
@@ -1413,7 +1413,7 @@ func (in *EventSourceMappingInitParameters) DeepCopyInto(out *EventSourceMapping
 	}
 	if in.TumblingWindowInSeconds != nil {
 		in, out := &in.TumblingWindowInSeconds, &out.TumblingWindowInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1472,7 +1472,7 @@ func (in *EventSourceMappingObservation) DeepCopyInto(out *EventSourceMappingObs
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BisectBatchOnFunctionError != nil {
@@ -1549,22 +1549,22 @@ func (in *EventSourceMappingObservation) DeepCopyInto(out *EventSourceMappingObs
 	}
 	if in.MaximumBatchingWindowInSeconds != nil {
 		in, out := &in.MaximumBatchingWindowInSeconds, &out.MaximumBatchingWindowInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRecordAgeInSeconds != nil {
 		in, out := &in.MaximumRecordAgeInSeconds, &out.MaximumRecordAgeInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRetryAttempts != nil {
 		in, out := &in.MaximumRetryAttempts, &out.MaximumRetryAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParallelizationFactor != nil {
 		in, out := &in.ParallelizationFactor, &out.ParallelizationFactor
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Queues != nil {
@@ -1639,7 +1639,7 @@ func (in *EventSourceMappingObservation) DeepCopyInto(out *EventSourceMappingObs
 	}
 	if in.TumblingWindowInSeconds != nil {
 		in, out := &in.TumblingWindowInSeconds, &out.TumblingWindowInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.UUID != nil {
@@ -1671,7 +1671,7 @@ func (in *EventSourceMappingParameters) DeepCopyInto(out *EventSourceMappingPara
 	}
 	if in.BatchSize != nil {
 		in, out := &in.BatchSize, &out.BatchSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.BisectBatchOnFunctionError != nil {
@@ -1738,22 +1738,22 @@ func (in *EventSourceMappingParameters) DeepCopyInto(out *EventSourceMappingPara
 	}
 	if in.MaximumBatchingWindowInSeconds != nil {
 		in, out := &in.MaximumBatchingWindowInSeconds, &out.MaximumBatchingWindowInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRecordAgeInSeconds != nil {
 		in, out := &in.MaximumRecordAgeInSeconds, &out.MaximumRecordAgeInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRetryAttempts != nil {
 		in, out := &in.MaximumRetryAttempts, &out.MaximumRetryAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ParallelizationFactor != nil {
 		in, out := &in.ParallelizationFactor, &out.ParallelizationFactor
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Queues != nil {
@@ -1823,7 +1823,7 @@ func (in *EventSourceMappingParameters) DeepCopyInto(out *EventSourceMappingPara
 	}
 	if in.TumblingWindowInSeconds != nil {
 		in, out := &in.TumblingWindowInSeconds, &out.TumblingWindowInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2233,12 +2233,12 @@ func (in *FunctionEventInvokeConfigInitParameters) DeepCopyInto(out *FunctionEve
 	}
 	if in.MaximumEventAgeInSeconds != nil {
 		in, out := &in.MaximumEventAgeInSeconds, &out.MaximumEventAgeInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRetryAttempts != nil {
 		in, out := &in.MaximumRetryAttempts, &out.MaximumRetryAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Qualifier != nil {
@@ -2312,12 +2312,12 @@ func (in *FunctionEventInvokeConfigObservation) DeepCopyInto(out *FunctionEventI
 	}
 	if in.MaximumEventAgeInSeconds != nil {
 		in, out := &in.MaximumEventAgeInSeconds, &out.MaximumEventAgeInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRetryAttempts != nil {
 		in, out := &in.MaximumRetryAttempts, &out.MaximumRetryAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Qualifier != nil {
@@ -2354,12 +2354,12 @@ func (in *FunctionEventInvokeConfigParameters) DeepCopyInto(out *FunctionEventIn
 	}
 	if in.MaximumEventAgeInSeconds != nil {
 		in, out := &in.MaximumEventAgeInSeconds, &out.MaximumEventAgeInSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumRetryAttempts != nil {
 		in, out := &in.MaximumRetryAttempts, &out.MaximumRetryAttempts
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Qualifier != nil {
@@ -2501,7 +2501,7 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 	}
 	if in.MemorySize != nil {
 		in, out := &in.MemorySize, &out.MemorySize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PackageType != nil {
@@ -2521,7 +2521,7 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 	}
 	if in.ReservedConcurrentExecutions != nil {
 		in, out := &in.ReservedConcurrentExecutions, &out.ReservedConcurrentExecutions
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Runtime != nil {
@@ -2574,7 +2574,7 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TracingConfig != nil {
@@ -2740,7 +2740,7 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 	}
 	if in.MemorySize != nil {
 		in, out := &in.MemorySize, &out.MemorySize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PackageType != nil {
@@ -2781,7 +2781,7 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 	}
 	if in.ReservedConcurrentExecutions != nil {
 		in, out := &in.ReservedConcurrentExecutions, &out.ReservedConcurrentExecutions
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Role != nil {
@@ -2838,7 +2838,7 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 	}
 	if in.SourceCodeSize != nil {
 		in, out := &in.SourceCodeSize, &out.SourceCodeSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -2875,7 +2875,7 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TracingConfig != nil {
@@ -3006,7 +3006,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	}
 	if in.MemorySize != nil {
 		in, out := &in.MemorySize, &out.MemorySize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PackageType != nil {
@@ -3054,7 +3054,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	}
 	if in.ReservedConcurrentExecutions != nil {
 		in, out := &in.ReservedConcurrentExecutions, &out.ReservedConcurrentExecutions
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Role != nil {
@@ -3137,7 +3137,7 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 	}
 	if in.Timeout != nil {
 		in, out := &in.Timeout, &out.Timeout
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TracingConfig != nil {
@@ -4072,7 +4072,7 @@ func (in *LayerVersionObservation) DeepCopyInto(out *LayerVersionObservation) {
 	}
 	if in.SourceCodeSize != nil {
 		in, out := &in.SourceCodeSize, &out.SourceCodeSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Version != nil {
@@ -4236,7 +4236,7 @@ func (in *LayerVersionPermissionInitParameters) DeepCopyInto(out *LayerVersionPe
 	}
 	if in.VersionNumber != nil {
 		in, out := &in.VersionNumber, &out.VersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4328,7 +4328,7 @@ func (in *LayerVersionPermissionObservation) DeepCopyInto(out *LayerVersionPermi
 	}
 	if in.VersionNumber != nil {
 		in, out := &in.VersionNumber, &out.VersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -4378,7 +4378,7 @@ func (in *LayerVersionPermissionParameters) DeepCopyInto(out *LayerVersionPermis
 	}
 	if in.VersionNumber != nil {
 		in, out := &in.VersionNumber, &out.VersionNumber
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5009,7 +5009,7 @@ func (in *ProvisionedConcurrencyConfigInitParameters) DeepCopyInto(out *Provisio
 	}
 	if in.ProvisionedConcurrentExecutions != nil {
 		in, out := &in.ProvisionedConcurrentExecutions, &out.ProvisionedConcurrentExecutions
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Qualifier != nil {
@@ -5076,7 +5076,7 @@ func (in *ProvisionedConcurrencyConfigObservation) DeepCopyInto(out *Provisioned
 	}
 	if in.ProvisionedConcurrentExecutions != nil {
 		in, out := &in.ProvisionedConcurrentExecutions, &out.ProvisionedConcurrentExecutions
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Qualifier != nil {
@@ -5106,7 +5106,7 @@ func (in *ProvisionedConcurrencyConfigParameters) DeepCopyInto(out *ProvisionedC
 	}
 	if in.ProvisionedConcurrentExecutions != nil {
 		in, out := &in.ProvisionedConcurrentExecutions, &out.ProvisionedConcurrentExecutions
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Qualifier != nil {
@@ -5264,7 +5264,7 @@ func (in *ScalingConfigInitParameters) DeepCopyInto(out *ScalingConfigInitParame
 	*out = *in
 	if in.MaximumConcurrency != nil {
 		in, out := &in.MaximumConcurrency, &out.MaximumConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5284,7 +5284,7 @@ func (in *ScalingConfigObservation) DeepCopyInto(out *ScalingConfigObservation) 
 	*out = *in
 	if in.MaximumConcurrency != nil {
 		in, out := &in.MaximumConcurrency, &out.MaximumConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5304,7 +5304,7 @@ func (in *ScalingConfigParameters) DeepCopyInto(out *ScalingConfigParameters) {
 	*out = *in
 	if in.MaximumConcurrency != nil {
 		in, out := &in.MaximumConcurrency, &out.MaximumConcurrency
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }

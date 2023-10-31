@@ -81,21 +81,18 @@ spec:
                       want objects to stay in the CloudFront cache before CloudFront
                       sends another request to the origin to see if the object has
                       been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   maxTtl:
                     description: The maximum amount of time, in seconds, that objects
                       stay in the CloudFront cache before CloudFront sends another
                       request to the origin to see if the object has been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   minTtl:
                     description: The minimum amount of time, in seconds, that you
                       want objects to stay in the CloudFront cache before CloudFront
                       sends another request to the origin to see if the object has
                       been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: A unique name to identify the cache policy.
                     type: string
@@ -232,21 +229,18 @@ spec:
                       want objects to stay in the CloudFront cache before CloudFront
                       sends another request to the origin to see if the object has
                       been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   maxTtl:
                     description: The maximum amount of time, in seconds, that objects
                       stay in the CloudFront cache before CloudFront sends another
                       request to the origin to see if the object has been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   minTtl:
                     description: The minimum amount of time, in seconds, that you
                       want objects to stay in the CloudFront cache before CloudFront
                       sends another request to the origin to see if the object has
                       been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: A unique name to identify the cache policy.
                     type: string
@@ -540,8 +534,7 @@ spec:
                       want objects to stay in the CloudFront cache before CloudFront
                       sends another request to the origin to see if the object has
                       been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   etag:
                     description: The current version of the cache policy.
                     type: string
@@ -552,15 +545,13 @@ spec:
                     description: The maximum amount of time, in seconds, that objects
                       stay in the CloudFront cache before CloudFront sends another
                       request to the origin to see if the object has been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   minTtl:
                     description: The minimum amount of time, in seconds, that you
                       want objects to stay in the CloudFront cache before CloudFront
                       sends another request to the origin to see if the object has
                       been updated.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: A unique name to identify the cache policy.
                     type: string

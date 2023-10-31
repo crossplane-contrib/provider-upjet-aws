@@ -74,8 +74,7 @@ spec:
                       properties:
                         desiredInstances:
                           description: Desired number of streaming instances.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   description:
@@ -84,8 +83,7 @@ spec:
                   disconnectTimeoutInSeconds:
                     description: Amount of time that a streaming session remains active
                       after users disconnect.
-                    format: int64
-                    type: integer
+                    type: number
                   displayName:
                     description: Human-readable friendly name for the AppStream fleet.
                     type: string
@@ -192,8 +190,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins.
-                    format: int64
-                    type: integer
+                    type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
                     type: string
@@ -206,8 +203,7 @@ spec:
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Unique name for the fleet.
                     type: string
@@ -350,8 +346,7 @@ spec:
                       properties:
                         desiredInstances:
                           description: Desired number of streaming instances.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   description:
@@ -360,8 +355,7 @@ spec:
                   disconnectTimeoutInSeconds:
                     description: Amount of time that a streaming session remains active
                       after users disconnect.
-                    format: int64
-                    type: integer
+                    type: number
                   displayName:
                     description: Human-readable friendly name for the AppStream fleet.
                     type: string
@@ -392,8 +386,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins.
-                    format: int64
-                    type: integer
+                    type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
                     type: string
@@ -406,8 +399,7 @@ spec:
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Unique name for the fleet.
                     type: string
@@ -626,21 +618,17 @@ spec:
                         available:
                           description: Number of currently available instances that
                             can be used to stream sessions.
-                          format: int64
-                          type: integer
+                          type: number
                         desiredInstances:
                           description: Desired number of streaming instances.
-                          format: int64
-                          type: integer
+                          type: number
                         inUse:
                           description: Number of instances in use for streaming.
-                          format: int64
-                          type: integer
+                          type: number
                         running:
                           description: Total number of simultaneous streaming instances
                             that are running.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   createdTime:
@@ -653,8 +641,7 @@ spec:
                   disconnectTimeoutInSeconds:
                     description: Amount of time that a streaming session remains active
                       after users disconnect.
-                    format: int64
-                    type: integer
+                    type: number
                   displayName:
                     description: Human-readable friendly name for the AppStream fleet.
                     type: string
@@ -691,8 +678,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins.
-                    format: int64
-                    type: integer
+                    type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
                     type: string
@@ -705,8 +691,7 @@ spec:
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Unique name for the fleet.
                     type: string

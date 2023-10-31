@@ -171,7 +171,7 @@ type RulesInitParameters struct {
 
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. If you add a RATE_BASED rule, you need to set type as RATE_BASED. If you add a GROUP rule, you need to set type as GROUP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -187,7 +187,7 @@ type RulesObservation struct {
 
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Global) rule (e.g., aws_waf_rule). WAF (Regional) rules cannot be used.
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
@@ -209,7 +209,7 @@ type RulesParameters struct {
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
 	// +kubebuilder:validation:Optional
-	Priority *int64 `json:"priority" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// ID of the associated WAF (Global) rule (e.g., aws_waf_rule). WAF (Regional) rules cannot be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.Rule

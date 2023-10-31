@@ -77,18 +77,15 @@ spec:
                     type: boolean
                   fromPort:
                     description: The from port to match.
-                    format: int64
-                    type: integer
+                    type: number
                   icmpCode:
                     description: 'ICMP protocol: The ICMP code. Required if specifying
                       ICMP for the protocolE.g., -1'
-                    format: int64
-                    type: integer
+                    type: number
                   icmpType:
                     description: 'ICMP protocol: The ICMP type. Required if specifying
                       ICMP for the protocolE.g., -1'
-                    format: int64
-                    type: integer
+                    type: number
                   ipv6CidrBlock:
                     description: The IPv6 CIDR block to allow or deny.
                     type: string
@@ -182,12 +179,10 @@ spec:
                   ruleNumber:
                     description: The rule number for the entry (for example, 100).
                       ACL entries are processed in ascending order by rule number.
-                    format: int64
-                    type: integer
+                    type: number
                   toPort:
                     description: The to port to match.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -213,18 +208,15 @@ spec:
                     type: boolean
                   fromPort:
                     description: The from port to match.
-                    format: int64
-                    type: integer
+                    type: number
                   icmpCode:
                     description: 'ICMP protocol: The ICMP code. Required if specifying
                       ICMP for the protocolE.g., -1'
-                    format: int64
-                    type: integer
+                    type: number
                   icmpType:
                     description: 'ICMP protocol: The ICMP type. Required if specifying
                       ICMP for the protocolE.g., -1'
-                    format: int64
-                    type: integer
+                    type: number
                   ipv6CidrBlock:
                     description: The IPv6 CIDR block to allow or deny.
                     type: string
@@ -238,12 +230,10 @@ spec:
                   ruleNumber:
                     description: The rule number for the entry (for example, 100).
                       ACL entries are processed in ascending order by rule number.
-                    format: int64
-                    type: integer
+                    type: number
                   toPort:
                     description: The to port to match.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -433,18 +423,15 @@ spec:
                     type: boolean
                   fromPort:
                     description: The from port to match.
-                    format: int64
-                    type: integer
+                    type: number
                   icmpCode:
                     description: 'ICMP protocol: The ICMP code. Required if specifying
                       ICMP for the protocolE.g., -1'
-                    format: int64
-                    type: integer
+                    type: number
                   icmpType:
                     description: 'ICMP protocol: The ICMP type. Required if specifying
                       ICMP for the protocolE.g., -1'
-                    format: int64
-                    type: integer
+                    type: number
                   id:
                     description: The ID of the network ACL Rule
                     type: string
@@ -464,12 +451,10 @@ spec:
                   ruleNumber:
                     description: The rule number for the entry (for example, 100).
                       ACL entries are processed in ascending order by rule number.
-                    format: int64
-                    type: integer
+                    type: number
                   toPort:
                     description: The to port to match.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

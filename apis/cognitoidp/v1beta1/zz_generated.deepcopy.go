@@ -2387,7 +2387,7 @@ func (in *PasswordPolicyInitParameters) DeepCopyInto(out *PasswordPolicyInitPara
 	*out = *in
 	if in.MinimumLength != nil {
 		in, out := &in.MinimumLength, &out.MinimumLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RequireLowercase != nil {
@@ -2412,7 +2412,7 @@ func (in *PasswordPolicyInitParameters) DeepCopyInto(out *PasswordPolicyInitPara
 	}
 	if in.TemporaryPasswordValidityDays != nil {
 		in, out := &in.TemporaryPasswordValidityDays, &out.TemporaryPasswordValidityDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2432,7 +2432,7 @@ func (in *PasswordPolicyObservation) DeepCopyInto(out *PasswordPolicyObservation
 	*out = *in
 	if in.MinimumLength != nil {
 		in, out := &in.MinimumLength, &out.MinimumLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RequireLowercase != nil {
@@ -2457,7 +2457,7 @@ func (in *PasswordPolicyObservation) DeepCopyInto(out *PasswordPolicyObservation
 	}
 	if in.TemporaryPasswordValidityDays != nil {
 		in, out := &in.TemporaryPasswordValidityDays, &out.TemporaryPasswordValidityDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2477,7 +2477,7 @@ func (in *PasswordPolicyParameters) DeepCopyInto(out *PasswordPolicyParameters) 
 	*out = *in
 	if in.MinimumLength != nil {
 		in, out := &in.MinimumLength, &out.MinimumLength
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RequireLowercase != nil {
@@ -2502,7 +2502,7 @@ func (in *PasswordPolicyParameters) DeepCopyInto(out *PasswordPolicyParameters) 
 	}
 	if in.TemporaryPasswordValidityDays != nil {
 		in, out := &in.TemporaryPasswordValidityDays, &out.TemporaryPasswordValidityDays
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2527,7 +2527,7 @@ func (in *RecoveryMechanismInitParameters) DeepCopyInto(out *RecoveryMechanismIn
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2552,7 +2552,7 @@ func (in *RecoveryMechanismObservation) DeepCopyInto(out *RecoveryMechanismObser
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2577,7 +2577,7 @@ func (in *RecoveryMechanismParameters) DeepCopyInto(out *RecoveryMechanismParame
 	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3885,7 +3885,7 @@ func (in *UserGroupInitParameters) DeepCopyInto(out *UserGroupInitParameters) {
 	}
 	if in.Precedence != nil {
 		in, out := &in.Precedence, &out.Precedence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3952,7 +3952,7 @@ func (in *UserGroupObservation) DeepCopyInto(out *UserGroupObservation) {
 	}
 	if in.Precedence != nil {
 		in, out := &in.Precedence, &out.Precedence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RoleArn != nil {
@@ -3992,7 +3992,7 @@ func (in *UserGroupParameters) DeepCopyInto(out *UserGroupParameters) {
 	}
 	if in.Precedence != nil {
 		in, out := &in.Precedence, &out.Precedence
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Region != nil {
@@ -5939,7 +5939,7 @@ func (in *UserPoolObservation) DeepCopyInto(out *UserPoolObservation) {
 	}
 	if in.EstimatedNumberOfUsers != nil {
 		in, out := &in.EstimatedNumberOfUsers, &out.EstimatedNumberOfUsers
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ID != nil {

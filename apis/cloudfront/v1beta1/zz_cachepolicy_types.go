@@ -23,13 +23,13 @@ type CachePolicyInitParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The default amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// The maximum amount of time, in seconds, that objects stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// The minimum amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// A unique name to identify the cache policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -44,7 +44,7 @@ type CachePolicyObservation struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The default amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// The current version of the cache policy.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
@@ -53,10 +53,10 @@ type CachePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The maximum amount of time, in seconds, that objects stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// The minimum amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// A unique name to identify the cache policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -73,15 +73,15 @@ type CachePolicyParameters struct {
 
 	// The default amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
 	// +kubebuilder:validation:Optional
-	DefaultTTL *int64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// The maximum amount of time, in seconds, that objects stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
 	// +kubebuilder:validation:Optional
-	MaxTTL *int64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
+	MaxTTL *float64 `json:"maxTtl,omitempty" tf:"max_ttl,omitempty"`
 
 	// The minimum amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated.
 	// +kubebuilder:validation:Optional
-	MinTTL *int64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
+	MinTTL *float64 `json:"minTtl,omitempty" tf:"min_ttl,omitempty"`
 
 	// A unique name to identify the cache policy.
 	// +kubebuilder:validation:Optional

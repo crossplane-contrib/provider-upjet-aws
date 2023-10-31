@@ -256,8 +256,7 @@ spec:
                         threshold:
                           description: Number of controls that must be set when you
                             specify an ATLEAST type rule.
-                          format: int64
-                          type: integer
+                          type: number
                         type:
                           description: Rule type. Valid values are ATLEAST, AND, and
                             OR.
@@ -274,8 +273,7 @@ spec:
                   waitPeriodMs:
                     description: Evaluation period, in milliseconds (ms), during which
                       any request against the target routing controls will fail.
-                    format: int64
-                    type: integer
+                    type: number
                 required:
                 - region
                 type: object
@@ -312,8 +310,7 @@ spec:
                         threshold:
                           description: Number of controls that must be set when you
                             specify an ATLEAST type rule.
-                          format: int64
-                          type: integer
+                          type: number
                         type:
                           description: Rule type. Valid values are ATLEAST, AND, and
                             OR.
@@ -330,8 +327,7 @@ spec:
                   waitPeriodMs:
                     description: Evaluation period, in milliseconds (ms), during which
                       any request against the target routing controls will fail.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -548,8 +544,7 @@ spec:
                         threshold:
                           description: Number of controls that must be set when you
                             specify an ATLEAST type rule.
-                          format: int64
-                          type: integer
+                          type: number
                         type:
                           description: Rule type. Valid values are ATLEAST, AND, and
                             OR.
@@ -571,8 +566,7 @@ spec:
                   waitPeriodMs:
                     description: Evaluation period, in milliseconds (ms), during which
                       any request against the target routing controls will fail.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

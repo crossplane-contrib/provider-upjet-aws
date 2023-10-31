@@ -3782,7 +3782,7 @@ func (in *SelectionCriteriaInitParameters) DeepCopyInto(out *SelectionCriteriaIn
 	}
 	if in.MaxDepth != nil {
 		in, out := &in.MaxDepth, &out.MaxDepth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinStorageBytesPercentage != nil {
@@ -3812,7 +3812,7 @@ func (in *SelectionCriteriaObservation) DeepCopyInto(out *SelectionCriteriaObser
 	}
 	if in.MaxDepth != nil {
 		in, out := &in.MaxDepth, &out.MaxDepth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinStorageBytesPercentage != nil {
@@ -3842,7 +3842,7 @@ func (in *SelectionCriteriaParameters) DeepCopyInto(out *SelectionCriteriaParame
 	}
 	if in.MaxDepth != nil {
 		in, out := &in.MaxDepth, &out.MaxDepth
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinStorageBytesPercentage != nil {

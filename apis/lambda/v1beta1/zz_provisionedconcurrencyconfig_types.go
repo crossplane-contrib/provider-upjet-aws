@@ -23,7 +23,7 @@ type ProvisionedConcurrencyConfigInitParameters struct {
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// Amount of capacity to allocate. Must be greater than or equal to 1.
-	ProvisionedConcurrentExecutions *int64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
+	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
 
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -38,7 +38,7 @@ type ProvisionedConcurrencyConfigObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Amount of capacity to allocate. Must be greater than or equal to 1.
-	ProvisionedConcurrentExecutions *int64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
+	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
 
 	// Lambda Function version or Lambda Alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
@@ -52,7 +52,7 @@ type ProvisionedConcurrencyConfigParameters struct {
 
 	// Amount of capacity to allocate. Must be greater than or equal to 1.
 	// +kubebuilder:validation:Optional
-	ProvisionedConcurrentExecutions *int64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
+	ProvisionedConcurrentExecutions *float64 `json:"provisionedConcurrentExecutions,omitempty" tf:"provisioned_concurrent_executions,omitempty"`
 
 	// Lambda Function version or Lambda Alias name.
 	// +kubebuilder:validation:Optional

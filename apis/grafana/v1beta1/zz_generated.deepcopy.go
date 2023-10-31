@@ -748,7 +748,7 @@ func (in *WorkspaceAPIKeyInitParameters) DeepCopyInto(out *WorkspaceAPIKeyInitPa
 	}
 	if in.SecondsToLive != nil {
 		in, out := &in.SecondsToLive, &out.SecondsToLive
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -820,7 +820,7 @@ func (in *WorkspaceAPIKeyObservation) DeepCopyInto(out *WorkspaceAPIKeyObservati
 	}
 	if in.SecondsToLive != nil {
 		in, out := &in.SecondsToLive, &out.SecondsToLive
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.WorkspaceID != nil {
@@ -860,7 +860,7 @@ func (in *WorkspaceAPIKeyParameters) DeepCopyInto(out *WorkspaceAPIKeyParameters
 	}
 	if in.SecondsToLive != nil {
 		in, out := &in.SecondsToLive, &out.SecondsToLive
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.WorkspaceID != nil {
@@ -1495,7 +1495,7 @@ func (in *WorkspaceSAMLConfigurationInitParameters) DeepCopyInto(out *WorkspaceS
 	}
 	if in.LoginValidityDuration != nil {
 		in, out := &in.LoginValidityDuration, &out.LoginValidityDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NameAssertion != nil {
@@ -1625,7 +1625,7 @@ func (in *WorkspaceSAMLConfigurationObservation) DeepCopyInto(out *WorkspaceSAML
 	}
 	if in.LoginValidityDuration != nil {
 		in, out := &in.LoginValidityDuration, &out.LoginValidityDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NameAssertion != nil {
@@ -1728,7 +1728,7 @@ func (in *WorkspaceSAMLConfigurationParameters) DeepCopyInto(out *WorkspaceSAMLC
 	}
 	if in.LoginValidityDuration != nil {
 		in, out := &in.LoginValidityDuration, &out.LoginValidityDuration
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.NameAssertion != nil {

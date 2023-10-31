@@ -20,7 +20,7 @@ import (
 type DiskIopsConfigurationInitParameters struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -29,7 +29,7 @@ type DiskIopsConfigurationInitParameters struct {
 type DiskIopsConfigurationObservation struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -39,7 +39,7 @@ type DiskIopsConfigurationParameters struct {
 
 	// - The total number of SSD IOPS provisioned for the file system.
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// - Specifies whether the number of IOPS for the file system is using the system. Valid values are AUTOMATIC and USER_PROVISIONED. Default value is AUTOMATIC.
 	// +kubebuilder:validation:Optional
@@ -94,7 +94,7 @@ type ManagementParameters struct {
 type OntapFileSystemInitParameters struct {
 
 	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
-	AutomaticBackupRetentionDays *int64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
+	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
 	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. Requires automatic_backup_retention_days to be set.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
@@ -112,7 +112,7 @@ type OntapFileSystemInitParameters struct {
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
-	StorageCapacity *int64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
+	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// - The filesystem storage type. defaults to SSD.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
@@ -121,7 +121,7 @@ type OntapFileSystemInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
-	ThroughputCapacity *int64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
@@ -133,7 +133,7 @@ type OntapFileSystemObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
-	AutomaticBackupRetentionDays *int64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
+	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
 	// DNS name for the file system, e.g., fs-12345678.fsx.us-west-2.amazonaws.com
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
@@ -175,7 +175,7 @@ type OntapFileSystemObservation struct {
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
-	StorageCapacity *int64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
+	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// - The filesystem storage type. defaults to SSD.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
@@ -190,7 +190,7 @@ type OntapFileSystemObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
-	ThroughputCapacity *int64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// Identifier of the Virtual Private Cloud for the file system.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -203,7 +203,7 @@ type OntapFileSystemParameters struct {
 
 	// The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
 	// +kubebuilder:validation:Optional
-	AutomaticBackupRetentionDays *int64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
+	AutomaticBackupRetentionDays *float64 `json:"automaticBackupRetentionDays,omitempty" tf:"automatic_backup_retention_days,omitempty"`
 
 	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. Requires automatic_backup_retention_days to be set.
 	// +kubebuilder:validation:Optional
@@ -278,7 +278,7 @@ type OntapFileSystemParameters struct {
 
 	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
 	// +kubebuilder:validation:Optional
-	StorageCapacity *int64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
+	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// - The filesystem storage type. defaults to SSD.
 	// +kubebuilder:validation:Optional
@@ -305,7 +305,7 @@ type OntapFileSystemParameters struct {
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
 	// +kubebuilder:validation:Optional
-	ThroughputCapacity *int64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional

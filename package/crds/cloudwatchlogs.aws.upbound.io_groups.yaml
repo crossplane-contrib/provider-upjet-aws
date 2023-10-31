@@ -159,8 +159,7 @@ spec:
                       1096, 1827, 2192, 2557, 2922, 3288, 3653, and 0. If you select
                       0, the events in the log group are always retained and never
                       expire.'
-                    format: int64
-                    type: integer
+                    type: number
                   skipDestroy:
                     type: boolean
                   tags:
@@ -190,8 +189,7 @@ spec:
                       1096, 1827, 2192, 2557, 2922, 3288, 3653, and 0. If you select
                       0, the events in the log group are always retained and never
                       expire.'
-                    format: int64
-                    type: integer
+                    type: number
                   skipDestroy:
                     type: boolean
                   tags:
@@ -389,8 +387,7 @@ spec:
                       1096, 1827, 2192, 2557, 2922, 3288, 3653, and 0. If you select
                       0, the events in the log group are always retained and never
                       expire.'
-                    format: int64
-                    type: integer
+                    type: number
                   skipDestroy:
                     type: boolean
                   tags:

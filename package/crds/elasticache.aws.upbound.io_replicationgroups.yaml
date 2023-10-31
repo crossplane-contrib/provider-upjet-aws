@@ -126,15 +126,13 @@ spec:
                           description: Number of node groups (shards) for this Redis
                             replication group. Changing this number will trigger a
                             resizing operation before other settings modifications.
-                          format: int64
-                          type: integer
+                          type: number
                         replicasPerNodeGroup:
                           description: Number of replica nodes in each node group.
                             Changing this number will trigger a resizing operation
                             before other settings modifications. Valid values are
                             0 to 5.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   dataTieringEnabled:
@@ -295,22 +293,19 @@ spec:
                     type: string
                   numCacheClusters:
                     description: 00#.
-                    format: int64
-                    type: integer
+                    type: number
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
-                    format: int64
-                    type: integer
+                    type: number
                   numberCacheClusters:
                     description: Number of cache clusters (primary and replicas) this
                       replication group will have. If Multi-AZ is enabled, the value
                       of this parameter must be at least 2. Updates will occur before
                       other modifications. Conflicts with num_cache_clusters, num_node_groups,
                       or the deprecated cluster_mode. Defaults to 1.
-                    format: int64
-                    type: integer
+                    type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -322,8 +317,7 @@ spec:
                     description: –  Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
-                    format: int64
-                    type: integer
+                    type: number
                   preferredCacheClusterAzs:
                     description: List of EC2 availability zones in which the replication
                       group's cache clusters will be created. The order of the availability
@@ -340,8 +334,7 @@ spec:
                     description: Number of replica nodes in each node group. Changing
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
-                    format: int64
-                    type: integer
+                    type: number
                   replicationGroupDescription:
                     description: created description for the replication group. Must
                       not be empty.
@@ -458,8 +451,7 @@ spec:
                       zero (0), backups are turned off. Please note that setting a
                       snapshot_retention_limit is not supported on cache.t1.micro
                       cache nodes
-                    format: int64
-                    type: integer
+                    type: number
                   snapshotWindow:
                     description: 'Daily time range (in UTC) during which ElastiCache
                       will begin taking a daily snapshot of your cache cluster. The
@@ -615,15 +607,13 @@ spec:
                           description: Number of node groups (shards) for this Redis
                             replication group. Changing this number will trigger a
                             resizing operation before other settings modifications.
-                          format: int64
-                          type: integer
+                          type: number
                         replicasPerNodeGroup:
                           description: Number of replica nodes in each node group.
                             Changing this number will trigger a resizing operation
                             before other settings modifications. Valid values are
                             0 to 5.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   dataTieringEnabled:
@@ -706,22 +696,19 @@ spec:
                     type: string
                   numCacheClusters:
                     description: 00#.
-                    format: int64
-                    type: integer
+                    type: number
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
-                    format: int64
-                    type: integer
+                    type: number
                   numberCacheClusters:
                     description: Number of cache clusters (primary and replicas) this
                       replication group will have. If Multi-AZ is enabled, the value
                       of this parameter must be at least 2. Updates will occur before
                       other modifications. Conflicts with num_cache_clusters, num_node_groups,
                       or the deprecated cluster_mode. Defaults to 1.
-                    format: int64
-                    type: integer
+                    type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -733,8 +720,7 @@ spec:
                     description: –  Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
-                    format: int64
-                    type: integer
+                    type: number
                   preferredCacheClusterAzs:
                     description: List of EC2 availability zones in which the replication
                       group's cache clusters will be created. The order of the availability
@@ -747,8 +733,7 @@ spec:
                     description: Number of replica nodes in each node group. Changing
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
-                    format: int64
-                    type: integer
+                    type: number
                   replicationGroupDescription:
                     description: created description for the replication group. Must
                       not be empty.
@@ -780,8 +765,7 @@ spec:
                       zero (0), backups are turned off. Please note that setting a
                       snapshot_retention_limit is not supported on cache.t1.micro
                       cache nodes
-                    format: int64
-                    type: integer
+                    type: number
                   snapshotWindow:
                     description: 'Daily time range (in UTC) during which ElastiCache
                       will begin taking a daily snapshot of your cache cluster. The
@@ -1017,15 +1001,13 @@ spec:
                           description: Number of node groups (shards) for this Redis
                             replication group. Changing this number will trigger a
                             resizing operation before other settings modifications.
-                          format: int64
-                          type: integer
+                          type: number
                         replicasPerNodeGroup:
                           description: Number of replica nodes in each node group.
                             Changing this number will trigger a resizing operation
                             before other settings modifications. Valid values are
                             0 to 5.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   configurationEndpointAddress:
@@ -1131,22 +1113,19 @@ spec:
                     type: string
                   numCacheClusters:
                     description: 00#.
-                    format: int64
-                    type: integer
+                    type: number
                   numNodeGroups:
                     description: Number of node groups (shards) for this Redis replication
                       group. Changing this number will trigger a resizing operation
                       before other settings modifications.
-                    format: int64
-                    type: integer
+                    type: number
                   numberCacheClusters:
                     description: Number of cache clusters (primary and replicas) this
                       replication group will have. If Multi-AZ is enabled, the value
                       of this parameter must be at least 2. Updates will occur before
                       other modifications. Conflicts with num_cache_clusters, num_node_groups,
                       or the deprecated cluster_mode. Defaults to 1.
-                    format: int64
-                    type: integer
+                    type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
                       replication group. If this argument is omitted, the default
@@ -1158,8 +1137,7 @@ spec:
                     description: –  Port number on which each of the cache nodes will
                       accept connections. For Memcache the default is 11211, and for
                       Redis the default port is 6379.
-                    format: int64
-                    type: integer
+                    type: number
                   preferredCacheClusterAzs:
                     description: List of EC2 availability zones in which the replication
                       group's cache clusters will be created. The order of the availability
@@ -1180,8 +1158,7 @@ spec:
                     description: Number of replica nodes in each node group. Changing
                       this number will trigger a resizing operation before other settings
                       modifications. Valid values are 0 to 5.
-                    format: int64
-                    type: integer
+                    type: number
                   replicationGroupDescription:
                     description: created description for the replication group. Must
                       not be empty.
@@ -1221,8 +1198,7 @@ spec:
                       zero (0), backups are turned off. Please note that setting a
                       snapshot_retention_limit is not supported on cache.t1.micro
                       cache nodes
-                    format: int64
-                    type: integer
+                    type: number
                   snapshotWindow:
                     description: 'Daily time range (in UTC) during which ElastiCache
                       will begin taking a daily snapshot of your cache cluster. The

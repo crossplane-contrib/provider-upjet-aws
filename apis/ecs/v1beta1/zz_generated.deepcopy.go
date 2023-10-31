@@ -725,7 +725,7 @@ func (in *CapacityProviderStrategyInitParameters) DeepCopyInto(out *CapacityProv
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -735,7 +735,7 @@ func (in *CapacityProviderStrategyInitParameters) DeepCopyInto(out *CapacityProv
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -755,7 +755,7 @@ func (in *CapacityProviderStrategyObservation) DeepCopyInto(out *CapacityProvide
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -765,7 +765,7 @@ func (in *CapacityProviderStrategyObservation) DeepCopyInto(out *CapacityProvide
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -785,7 +785,7 @@ func (in *CapacityProviderStrategyParameters) DeepCopyInto(out *CapacityProvider
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -795,7 +795,7 @@ func (in *CapacityProviderStrategyParameters) DeepCopyInto(out *CapacityProvider
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -820,7 +820,7 @@ func (in *ClientAliasInitParameters) DeepCopyInto(out *ClientAliasInitParameters
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -845,7 +845,7 @@ func (in *ClientAliasObservation) DeepCopyInto(out *ClientAliasObservation) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -870,7 +870,7 @@ func (in *ClientAliasParameters) DeepCopyInto(out *ClientAliasParameters) {
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -944,7 +944,7 @@ func (in *ClusterCapacityProvidersDefaultCapacityProviderStrategyInitParameters)
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -954,7 +954,7 @@ func (in *ClusterCapacityProvidersDefaultCapacityProviderStrategyInitParameters)
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -974,7 +974,7 @@ func (in *ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation) De
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -984,7 +984,7 @@ func (in *ClusterCapacityProvidersDefaultCapacityProviderStrategyObservation) De
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1004,7 +1004,7 @@ func (in *ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters) Dee
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -1014,7 +1014,7 @@ func (in *ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters) Dee
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1582,7 +1582,7 @@ func (in *DefaultCapacityProviderStrategyInitParameters) DeepCopyInto(out *Defau
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -1592,7 +1592,7 @@ func (in *DefaultCapacityProviderStrategyInitParameters) DeepCopyInto(out *Defau
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1612,7 +1612,7 @@ func (in *DefaultCapacityProviderStrategyObservation) DeepCopyInto(out *DefaultC
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -1622,7 +1622,7 @@ func (in *DefaultCapacityProviderStrategyObservation) DeepCopyInto(out *DefaultC
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -1642,7 +1642,7 @@ func (in *DefaultCapacityProviderStrategyParameters) DeepCopyInto(out *DefaultCa
 	*out = *in
 	if in.Base != nil {
 		in, out := &in.Base, &out.Base
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.CapacityProvider != nil {
@@ -1652,7 +1652,7 @@ func (in *DefaultCapacityProviderStrategyParameters) DeepCopyInto(out *DefaultCa
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2015,7 +2015,7 @@ func (in *EFSVolumeConfigurationInitParameters) DeepCopyInto(out *EFSVolumeConfi
 	}
 	if in.TransitEncryptionPort != nil {
 		in, out := &in.TransitEncryptionPort, &out.TransitEncryptionPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2057,7 +2057,7 @@ func (in *EFSVolumeConfigurationObservation) DeepCopyInto(out *EFSVolumeConfigur
 	}
 	if in.TransitEncryptionPort != nil {
 		in, out := &in.TransitEncryptionPort, &out.TransitEncryptionPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2099,7 +2099,7 @@ func (in *EFSVolumeConfigurationParameters) DeepCopyInto(out *EFSVolumeConfigura
 	}
 	if in.TransitEncryptionPort != nil {
 		in, out := &in.TransitEncryptionPort, &out.TransitEncryptionPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2119,7 +2119,7 @@ func (in *EphemeralStorageInitParameters) DeepCopyInto(out *EphemeralStorageInit
 	*out = *in
 	if in.SizeInGib != nil {
 		in, out := &in.SizeInGib, &out.SizeInGib
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2139,7 +2139,7 @@ func (in *EphemeralStorageObservation) DeepCopyInto(out *EphemeralStorageObserva
 	*out = *in
 	if in.SizeInGib != nil {
 		in, out := &in.SizeInGib, &out.SizeInGib
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2159,7 +2159,7 @@ func (in *EphemeralStorageParameters) DeepCopyInto(out *EphemeralStorageParamete
 	*out = *in
 	if in.SizeInGib != nil {
 		in, out := &in.SizeInGib, &out.SizeInGib
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2526,7 +2526,7 @@ func (in *LoadBalancerInitParameters) DeepCopyInto(out *LoadBalancerInitParamete
 	}
 	if in.ContainerPort != nil {
 		in, out := &in.ContainerPort, &out.ContainerPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ELBName != nil {
@@ -2556,7 +2556,7 @@ func (in *LoadBalancerObservation) DeepCopyInto(out *LoadBalancerObservation) {
 	}
 	if in.ContainerPort != nil {
 		in, out := &in.ContainerPort, &out.ContainerPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ELBName != nil {
@@ -2591,7 +2591,7 @@ func (in *LoadBalancerParameters) DeepCopyInto(out *LoadBalancerParameters) {
 	}
 	if in.ContainerPort != nil {
 		in, out := &in.ContainerPort, &out.ContainerPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.ELBName != nil {
@@ -2751,17 +2751,17 @@ func (in *ManagedScalingInitParameters) DeepCopyInto(out *ManagedScalingInitPara
 	*out = *in
 	if in.InstanceWarmupPeriod != nil {
 		in, out := &in.InstanceWarmupPeriod, &out.InstanceWarmupPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumScalingStepSize != nil {
 		in, out := &in.MaximumScalingStepSize, &out.MaximumScalingStepSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinimumScalingStepSize != nil {
 		in, out := &in.MinimumScalingStepSize, &out.MinimumScalingStepSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Status != nil {
@@ -2771,7 +2771,7 @@ func (in *ManagedScalingInitParameters) DeepCopyInto(out *ManagedScalingInitPara
 	}
 	if in.TargetCapacity != nil {
 		in, out := &in.TargetCapacity, &out.TargetCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2791,17 +2791,17 @@ func (in *ManagedScalingObservation) DeepCopyInto(out *ManagedScalingObservation
 	*out = *in
 	if in.InstanceWarmupPeriod != nil {
 		in, out := &in.InstanceWarmupPeriod, &out.InstanceWarmupPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumScalingStepSize != nil {
 		in, out := &in.MaximumScalingStepSize, &out.MaximumScalingStepSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinimumScalingStepSize != nil {
 		in, out := &in.MinimumScalingStepSize, &out.MinimumScalingStepSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Status != nil {
@@ -2811,7 +2811,7 @@ func (in *ManagedScalingObservation) DeepCopyInto(out *ManagedScalingObservation
 	}
 	if in.TargetCapacity != nil {
 		in, out := &in.TargetCapacity, &out.TargetCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -2831,17 +2831,17 @@ func (in *ManagedScalingParameters) DeepCopyInto(out *ManagedScalingParameters) 
 	*out = *in
 	if in.InstanceWarmupPeriod != nil {
 		in, out := &in.InstanceWarmupPeriod, &out.InstanceWarmupPeriod
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MaximumScalingStepSize != nil {
 		in, out := &in.MaximumScalingStepSize, &out.MaximumScalingStepSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinimumScalingStepSize != nil {
 		in, out := &in.MinimumScalingStepSize, &out.MinimumScalingStepSize
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Status != nil {
@@ -2851,7 +2851,7 @@ func (in *ManagedScalingParameters) DeepCopyInto(out *ManagedScalingParameters) 
 	}
 	if in.TargetCapacity != nil {
 		in, out := &in.TargetCapacity, &out.TargetCapacity
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -3707,7 +3707,7 @@ func (in *ServiceConnectConfigurationServiceInitParameters) DeepCopyInto(out *Se
 	}
 	if in.IngressPortOverride != nil {
 		in, out := &in.IngressPortOverride, &out.IngressPortOverride
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PortName != nil {
@@ -3744,7 +3744,7 @@ func (in *ServiceConnectConfigurationServiceObservation) DeepCopyInto(out *Servi
 	}
 	if in.IngressPortOverride != nil {
 		in, out := &in.IngressPortOverride, &out.IngressPortOverride
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PortName != nil {
@@ -3781,7 +3781,7 @@ func (in *ServiceConnectConfigurationServiceParameters) DeepCopyInto(out *Servic
 	}
 	if in.IngressPortOverride != nil {
 		in, out := &in.IngressPortOverride, &out.IngressPortOverride
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.PortName != nil {
@@ -3894,17 +3894,17 @@ func (in *ServiceInitParameters) DeepCopyInto(out *ServiceInitParameters) {
 	}
 	if in.DeploymentMaximumPercent != nil {
 		in, out := &in.DeploymentMaximumPercent, &out.DeploymentMaximumPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeploymentMinimumHealthyPercent != nil {
 		in, out := &in.DeploymentMinimumHealthyPercent, &out.DeploymentMinimumHealthyPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DesiredCount != nil {
 		in, out := &in.DesiredCount, &out.DesiredCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EnableEcsManagedTags != nil {
@@ -3924,7 +3924,7 @@ func (in *ServiceInitParameters) DeepCopyInto(out *ServiceInitParameters) {
 	}
 	if in.HealthCheckGracePeriodSeconds != nil {
 		in, out := &in.HealthCheckGracePeriodSeconds, &out.HealthCheckGracePeriodSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.LaunchType != nil {
@@ -4108,17 +4108,17 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 	}
 	if in.DeploymentMaximumPercent != nil {
 		in, out := &in.DeploymentMaximumPercent, &out.DeploymentMaximumPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeploymentMinimumHealthyPercent != nil {
 		in, out := &in.DeploymentMinimumHealthyPercent, &out.DeploymentMinimumHealthyPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DesiredCount != nil {
 		in, out := &in.DesiredCount, &out.DesiredCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EnableEcsManagedTags != nil {
@@ -4138,7 +4138,7 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 	}
 	if in.HealthCheckGracePeriodSeconds != nil {
 		in, out := &in.HealthCheckGracePeriodSeconds, &out.HealthCheckGracePeriodSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IAMRole != nil {
@@ -4331,17 +4331,17 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 	}
 	if in.DeploymentMaximumPercent != nil {
 		in, out := &in.DeploymentMaximumPercent, &out.DeploymentMaximumPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DeploymentMinimumHealthyPercent != nil {
 		in, out := &in.DeploymentMinimumHealthyPercent, &out.DeploymentMinimumHealthyPercent
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.DesiredCount != nil {
 		in, out := &in.DesiredCount, &out.DesiredCount
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.EnableEcsManagedTags != nil {
@@ -4361,7 +4361,7 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 	}
 	if in.HealthCheckGracePeriodSeconds != nil {
 		in, out := &in.HealthCheckGracePeriodSeconds, &out.HealthCheckGracePeriodSeconds
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IAMRole != nil {
@@ -4520,12 +4520,12 @@ func (in *ServiceRegistriesInitParameters) DeepCopyInto(out *ServiceRegistriesIn
 	}
 	if in.ContainerPort != nil {
 		in, out := &in.ContainerPort, &out.ContainerPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RegistryArn != nil {
@@ -4555,12 +4555,12 @@ func (in *ServiceRegistriesObservation) DeepCopyInto(out *ServiceRegistriesObser
 	}
 	if in.ContainerPort != nil {
 		in, out := &in.ContainerPort, &out.ContainerPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RegistryArn != nil {
@@ -4590,12 +4590,12 @@ func (in *ServiceRegistriesParameters) DeepCopyInto(out *ServiceRegistriesParame
 	}
 	if in.ContainerPort != nil {
 		in, out := &in.ContainerPort, &out.ContainerPort
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RegistryArn != nil {
@@ -5012,7 +5012,7 @@ func (in *TaskDefinitionObservation) DeepCopyInto(out *TaskDefinitionObservation
 	}
 	if in.Revision != nil {
 		in, out := &in.Revision, &out.Revision
-		*out = new(int64)
+		*out = new(float64)
 		**out = **in
 	}
 	if in.RuntimePlatform != nil {

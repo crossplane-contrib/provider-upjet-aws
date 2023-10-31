@@ -212,7 +212,7 @@ type InfrastructureConfigurationParameters struct {
 type InstanceMetadataOptionsInitParameters struct {
 
 	// The number of hops that an instance can traverse to reach its destonation.
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// Whether a signed token is required for instance metadata retrieval requests. Valid values: required, optional.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -221,7 +221,7 @@ type InstanceMetadataOptionsInitParameters struct {
 type InstanceMetadataOptionsObservation struct {
 
 	// The number of hops that an instance can traverse to reach its destonation.
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// Whether a signed token is required for instance metadata retrieval requests. Valid values: required, optional.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
@@ -231,7 +231,7 @@ type InstanceMetadataOptionsParameters struct {
 
 	// The number of hops that an instance can traverse to reach its destonation.
 	// +kubebuilder:validation:Optional
-	HTTPPutResponseHopLimit *int64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
+	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
 	// Whether a signed token is required for instance metadata retrieval requests. Valid values: required, optional.
 	// +kubebuilder:validation:Optional

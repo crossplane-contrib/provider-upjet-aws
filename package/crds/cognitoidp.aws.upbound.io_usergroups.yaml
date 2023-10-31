@@ -75,8 +75,7 @@ spec:
                     type: string
                   precedence:
                     description: The precedence of the user group.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -257,8 +256,7 @@ spec:
                     type: string
                   precedence:
                     description: The precedence of the user group.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -440,8 +438,7 @@ spec:
                     type: string
                   precedence:
                     description: The precedence of the user group.
-                    format: int64
-                    type: integer
+                    type: number
                   roleArn:
                     description: The ARN of the IAM role to be associated with the
                       user group.

@@ -106,8 +106,7 @@ spec:
                         attempts:
                           description: The number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
-                          format: int64
-                          type: integer
+                          type: number
                         evaluateOnExit:
                           description: The evaluate on exit conditions under which
                             the job should be retried or failed. If this parameter
@@ -151,8 +150,7 @@ spec:
                           description: The time duration in seconds after which AWS
                             Batch terminates your jobs if they have not finished.
                             The minimum value for the timeout is 60 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   type:
@@ -208,8 +206,7 @@ spec:
                         attempts:
                           description: The number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
-                          format: int64
-                          type: integer
+                          type: number
                         evaluateOnExit:
                           description: The evaluate on exit conditions under which
                             the job should be retried or failed. If this parameter
@@ -253,8 +250,7 @@ spec:
                           description: The time duration in seconds after which AWS
                             Batch terminates your jobs if they have not finished.
                             The minimum value for the timeout is 60 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   type:
@@ -475,8 +471,7 @@ spec:
                         attempts:
                           description: The number of times to move a job to the RUNNABLE
                             status. You may specify between 1 and 10 attempts.
-                          format: int64
-                          type: integer
+                          type: number
                         evaluateOnExit:
                           description: The evaluate on exit conditions under which
                             the job should be retried or failed. If this parameter
@@ -507,8 +502,7 @@ spec:
                     type: array
                   revision:
                     description: The revision of the job definition.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -531,8 +525,7 @@ spec:
                           description: The time duration in seconds after which AWS
                             Batch terminates your jobs if they have not finished.
                             The minimum value for the timeout is 60 seconds.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   type:

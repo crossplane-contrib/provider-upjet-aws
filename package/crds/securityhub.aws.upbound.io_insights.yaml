@@ -169,8 +169,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -376,8 +375,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -450,8 +448,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -721,8 +718,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -767,8 +763,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -872,8 +867,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -1085,8 +1079,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -1161,8 +1154,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -1283,8 +1275,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -1481,8 +1472,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -1605,8 +1595,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -1802,8 +1791,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2009,8 +1997,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2083,8 +2070,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2354,8 +2340,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2400,8 +2385,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2505,8 +2489,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2718,8 +2701,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2794,8 +2776,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -2916,8 +2897,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -3114,8 +3094,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -3238,8 +3217,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -3598,8 +3576,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -3805,8 +3782,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -3879,8 +3855,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4150,8 +4125,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4196,8 +4170,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4301,8 +4274,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4514,8 +4486,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4590,8 +4561,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4712,8 +4682,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -4910,8 +4879,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:
@@ -5034,8 +5002,7 @@ spec:
                                       type: string
                                     value:
                                       description: A value for the keyword.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                               end:

@@ -242,8 +242,7 @@ spec:
                             VOICE: Minimum value of 1. Maximum value of 1. Valid Range
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -265,13 +264,11 @@ spec:
                           description: Specifies the delay, in seconds, that a contact
                             should be in the queue before they are routed to an available
                             agent
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: Specifies the order in which contacts are to
                             be handled for the queue.
-                          format: int64
-                          type: integer
+                          type: number
                         queueId:
                           description: Specifies the identifier for the queue.
                           type: string
@@ -322,8 +319,7 @@ spec:
                             VOICE: Minimum value of 1. Maximum value of 1. Valid Range
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -345,13 +341,11 @@ spec:
                           description: Specifies the delay, in seconds, that a contact
                             should be in the queue before they are routed to an available
                             agent
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: Specifies the order in which contacts are to
                             be handled for the queue.
-                          format: int64
-                          type: integer
+                          type: number
                         queueId:
                           description: Specifies the identifier for the queue.
                           type: string
@@ -577,8 +571,7 @@ spec:
                             VOICE: Minimum value of 1. Maximum value of 1. Valid Range
                             for CHAT: Minimum value of 1. Maximum value of 10. Valid
                             Range for TASK: Minimum value of 1. Maximum value of 10.'
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   name:
@@ -600,13 +593,11 @@ spec:
                           description: Specifies the delay, in seconds, that a contact
                             should be in the queue before they are routed to an available
                             agent
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: Specifies the order in which contacts are to
                             be handled for the queue.
-                          format: int64
-                          type: integer
+                          type: number
                         queueArn:
                           description: ARN for the queue.
                           type: string
@@ -630,13 +621,11 @@ spec:
                           description: Specifies the delay, in seconds, that a contact
                             should be in the queue before they are routed to an available
                             agent
-                          format: int64
-                          type: integer
+                          type: number
                         priority:
                           description: Specifies the order in which contacts are to
                             be handled for the queue.
-                          format: int64
-                          type: integer
+                          type: number
                         queueArn:
                           description: ARN for the queue.
                           type: string

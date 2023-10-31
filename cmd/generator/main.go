@@ -43,7 +43,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", *repoRoot))
 	}
-	p, err := config.GetProvider(context.Background())
+	p, err := config.GetProvider(context.Background(), true)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	dumpGeneratedResourceList(p, generatedResourceList)
 	dumpSkippedResourcesCSV(p, skippedResourcesCSV)

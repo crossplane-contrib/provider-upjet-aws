@@ -77,15 +77,13 @@ spec:
                           description: The amount of extra query capacity for an index
                             and GetQuerySuggestions capacity. For more information,
                             refer to QueryCapacityUnits.
-                          format: int64
-                          type: integer
+                          type: number
                         storageCapacityUnits:
                           description: The amount of extra storage capacity for an
                             index. A single capacity unit provides 30 GB of storage
                             space or 100,000 documents, whichever is reached first.
                             Minimum value of 0.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   description:
@@ -129,16 +127,14 @@ spec:
                                   in the search. Larger numbers provide more of a
                                   boost than smaller numbers. Minimum value of 1.
                                   Maximum value of 10.
-                                format: int64
-                                type: integer
+                                type: number
                               rankOrder:
                                 description: Determines how values should be interpreted.
                                   For more information, refer to RankOrder.
                                 type: string
                               valuesImportanceMap:
                                 additionalProperties:
-                                  format: int64
-                                  type: integer
+                                  type: number
                                 description: A list of values that should be given
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
@@ -399,15 +395,13 @@ spec:
                           description: The amount of extra query capacity for an index
                             and GetQuerySuggestions capacity. For more information,
                             refer to QueryCapacityUnits.
-                          format: int64
-                          type: integer
+                          type: number
                         storageCapacityUnits:
                           description: The amount of extra storage capacity for an
                             index. A single capacity unit provides 30 GB of storage
                             space or 100,000 documents, whichever is reached first.
                             Minimum value of 0.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   description:
@@ -451,16 +445,14 @@ spec:
                                   in the search. Larger numbers provide more of a
                                   boost than smaller numbers. Minimum value of 1.
                                   Maximum value of 10.
-                                format: int64
-                                type: integer
+                                type: number
                               rankOrder:
                                 description: Determines how values should be interpreted.
                                   For more information, refer to RankOrder.
                                 type: string
                               valuesImportanceMap:
                                 additionalProperties:
-                                  format: int64
-                                  type: integer
+                                  type: number
                                 description: A list of values that should be given
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
@@ -796,15 +788,13 @@ spec:
                           description: The amount of extra query capacity for an index
                             and GetQuerySuggestions capacity. For more information,
                             refer to QueryCapacityUnits.
-                          format: int64
-                          type: integer
+                          type: number
                         storageCapacityUnits:
                           description: The amount of extra storage capacity for an
                             index. A single capacity unit provides 30 GB of storage
                             space or 100,000 documents, whichever is reached first.
                             Minimum value of 0.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                   createdAt:
@@ -851,16 +841,14 @@ spec:
                                   in the search. Larger numbers provide more of a
                                   boost than smaller numbers. Minimum value of 1.
                                   Maximum value of 10.
-                                format: int64
-                                type: integer
+                                type: number
                               rankOrder:
                                 description: Determines how values should be interpreted.
                                   For more information, refer to RankOrder.
                                 type: string
                               valuesImportanceMap:
                                 additionalProperties:
-                                  format: int64
-                                  type: integer
+                                  type: number
                                 description: A list of values that should be given
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
@@ -933,8 +921,7 @@ spec:
                               indexedQuestionAnswersCount:
                                 description: The total number of FAQ questions and
                                   answers contained in the index.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         textDocumentStatistics:
@@ -945,12 +932,10 @@ spec:
                               indexedTextBytes:
                                 description: The total size, in bytes, of the indexed
                                   documents.
-                                format: int64
-                                type: integer
+                                type: number
                               indexedTextDocumentsCount:
                                 description: The number of text documents indexed.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object

@@ -105,7 +105,7 @@ type ProxyInitParameters struct {
 	EngineFamily *string `json:"engineFamily,omitempty" tf:"engine_family,omitempty"`
 
 	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
-	IdleClientTimeout *int64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
+	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
 	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
@@ -138,7 +138,7 @@ type ProxyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
-	IdleClientTimeout *int64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
+	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
 	// A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy. By enabling this setting, you can enforce encrypted TLS connections to the proxy.
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
@@ -175,7 +175,7 @@ type ProxyParameters struct {
 
 	// The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this value higher or lower than the connection timeout limit for the associated database.
 	// +kubebuilder:validation:Optional
-	IdleClientTimeout *int64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
+	IdleClientTimeout *float64 `json:"idleClientTimeout,omitempty" tf:"idle_client_timeout,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

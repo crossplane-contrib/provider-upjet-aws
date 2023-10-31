@@ -39,7 +39,7 @@ type ContainerServiceInitParameters struct {
 
 	// The scale specification for the container service. The scale specifies the allocated compute
 	// nodes of the container service.
-	Scale *int64 `json:"scale,omitempty" tf:"scale,omitempty"`
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -93,7 +93,7 @@ type ContainerServiceObservation struct {
 
 	// The scale specification for the container service. The scale specifies the allocated compute
 	// nodes of the container service.
-	Scale *int64 `json:"scale,omitempty" tf:"scale,omitempty"`
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
 	// The current state of the container service.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -142,7 +142,7 @@ type ContainerServiceParameters struct {
 	// The scale specification for the container service. The scale specifies the allocated compute
 	// nodes of the container service.
 	// +kubebuilder:validation:Optional
-	Scale *int64 `json:"scale,omitempty" tf:"scale,omitempty"`
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

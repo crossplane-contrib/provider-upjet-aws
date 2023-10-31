@@ -23,7 +23,7 @@ type MediaConcurrenciesInitParameters struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
-	Concurrency *int64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 }
 
 type MediaConcurrenciesObservation struct {
@@ -32,7 +32,7 @@ type MediaConcurrenciesObservation struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
-	Concurrency *int64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 }
 
 type MediaConcurrenciesParameters struct {
@@ -43,7 +43,7 @@ type MediaConcurrenciesParameters struct {
 
 	// Specifies the number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
 	// +kubebuilder:validation:Optional
-	Concurrency *int64 `json:"concurrency" tf:"concurrency,omitempty"`
+	Concurrency *float64 `json:"concurrency" tf:"concurrency,omitempty"`
 }
 
 type QueueConfigsAssociatedInitParameters struct {
@@ -55,10 +55,10 @@ type QueueConfigsAssociatedObservation struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
-	Delay *int64 `json:"delay,omitempty" tf:"delay,omitempty"`
+	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// ARN for the queue.
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
@@ -79,10 +79,10 @@ type QueueConfigsInitParameters struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
-	Delay *int64 `json:"delay,omitempty" tf:"delay,omitempty"`
+	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the identifier for the queue.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
@@ -94,10 +94,10 @@ type QueueConfigsObservation struct {
 	Channel *string `json:"channel,omitempty" tf:"channel,omitempty"`
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
-	Delay *int64 `json:"delay,omitempty" tf:"delay,omitempty"`
+	Delay *float64 `json:"delay,omitempty" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
-	Priority *int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// ARN for the queue.
 	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
@@ -117,11 +117,11 @@ type QueueConfigsParameters struct {
 
 	// Specifies the delay, in seconds, that a contact should be in the queue before they are routed to an available agent
 	// +kubebuilder:validation:Optional
-	Delay *int64 `json:"delay" tf:"delay,omitempty"`
+	Delay *float64 `json:"delay" tf:"delay,omitempty"`
 
 	// Specifies the order in which contacts are to be handled for the queue.
 	// +kubebuilder:validation:Optional
-	Priority *int64 `json:"priority" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// Specifies the identifier for the queue.
 	// +kubebuilder:validation:Optional

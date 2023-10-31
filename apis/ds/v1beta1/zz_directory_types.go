@@ -95,7 +95,7 @@ type DirectoryInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The number of domain controllers desired in the directory. Minimum value of 2. Scaling of domain controllers is only supported for MicrosoftAD directories.
-	DesiredNumberOfDomainControllers *int64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
+	DesiredNumberOfDomainControllers *float64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
 
 	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
@@ -140,7 +140,7 @@ type DirectoryObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The number of domain controllers desired in the directory. Minimum value of 2. Scaling of domain controllers is only supported for MicrosoftAD directories.
-	DesiredNumberOfDomainControllers *int64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
+	DesiredNumberOfDomainControllers *float64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
 
 	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
@@ -192,7 +192,7 @@ type DirectoryParameters struct {
 
 	// The number of domain controllers desired in the directory. Minimum value of 2. Scaling of domain controllers is only supported for MicrosoftAD directories.
 	// +kubebuilder:validation:Optional
-	DesiredNumberOfDomainControllers *int64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
+	DesiredNumberOfDomainControllers *float64 `json:"desiredNumberOfDomainControllers,omitempty" tf:"desired_number_of_domain_controllers,omitempty"`
 
 	// The MicrosoftAD edition (Standard or Enterprise). Defaults to Enterprise.
 	// +kubebuilder:validation:Optional

@@ -70,8 +70,7 @@ spec:
                   durationSeconds:
                     description: The number of seconds the vended session credentials
                       are valid for. Defaults to 3600.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: Whether or not the Profile is enabled.
                     type: boolean
@@ -200,8 +199,7 @@ spec:
                   durationSeconds:
                     description: The number of seconds the vended session credentials
                       are valid for. Defaults to 3600.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: Whether or not the Profile is enabled.
                     type: boolean
@@ -404,8 +402,7 @@ spec:
                   durationSeconds:
                     description: The number of seconds the vended session credentials
                       are valid for. Defaults to 3600.
-                    format: int64
-                    type: integer
+                    type: number
                   enabled:
                     description: Whether or not the Profile is enabled.
                     type: boolean

@@ -143,8 +143,7 @@ spec:
                                   in a single policy. AWS Network Firewall applies
                                   each stateless rule group to a packet starting with
                                   the group that has the lowest priority setting.
-                                format: int64
-                                type: integer
+                                type: number
                               resourceArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   stateless rule group.
@@ -311,8 +310,7 @@ spec:
                                   in a single policy. AWS Network Firewall applies
                                   each stateless rule group to a packet starting with
                                   the group that has the lowest priority setting.
-                                format: int64
-                                type: integer
+                                type: number
                               resourceArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   stateless rule group.
@@ -501,8 +499,7 @@ spec:
                                   in a single policy. AWS Network Firewall applies
                                   each stateless rule group to a packet starting with
                                   the group that has the lowest priority setting.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         statelessCustomAction:
@@ -585,8 +582,7 @@ spec:
                                   in a single policy. AWS Network Firewall applies
                                   each stateless rule group to a packet starting with
                                   the group that has the lowest priority setting.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -847,8 +843,7 @@ spec:
                                   in a single policy. AWS Network Firewall applies
                                   each stateless rule group to a packet starting with
                                   the group that has the lowest priority setting.
-                                format: int64
-                                type: integer
+                                type: number
                               resourceArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   stateless rule group.
@@ -935,8 +930,7 @@ spec:
                                   in a single policy. AWS Network Firewall applies
                                   each stateless rule group to a packet starting with
                                   the group that has the lowest priority setting.
-                                format: int64
-                                type: integer
+                                type: number
                               resourceArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   stateless rule group.

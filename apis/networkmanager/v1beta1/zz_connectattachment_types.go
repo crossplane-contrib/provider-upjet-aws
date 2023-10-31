@@ -35,7 +35,7 @@ type ConnectAttachmentObservation struct {
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
 	// The policy rule number associated with the attachment.
-	AttachmentPolicyRuleNumber *int64 `json:"attachmentPolicyRuleNumber,omitempty" tf:"attachment_policy_rule_number,omitempty"`
+	AttachmentPolicyRuleNumber *float64 `json:"attachmentPolicyRuleNumber,omitempty" tf:"attachment_policy_rule_number,omitempty"`
 
 	// The type of attachment.
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`

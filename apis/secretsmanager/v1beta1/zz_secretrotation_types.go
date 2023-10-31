@@ -84,7 +84,7 @@ type SecretRotationParameters struct {
 type SecretRotationRotationRulesInitParameters struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
@@ -96,7 +96,7 @@ type SecretRotationRotationRulesInitParameters struct {
 type SecretRotationRotationRulesObservation struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
-	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
@@ -109,7 +109,7 @@ type SecretRotationRotationRulesParameters struct {
 
 	// Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified.
 	// +kubebuilder:validation:Optional
-	AutomaticallyAfterDays *int64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
+	AutomaticallyAfterDays *float64 `json:"automaticallyAfterDays,omitempty" tf:"automatically_after_days,omitempty"`
 
 	// - The length of the rotation window in hours. For example, 3h for a three hour window.
 	// +kubebuilder:validation:Optional

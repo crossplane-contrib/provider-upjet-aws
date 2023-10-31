@@ -309,8 +309,7 @@ spec:
                     type: array
                   latestRevision:
                     description: Latest revision of the configuration.
-                    format: int64
-                    type: integer
+                    type: number
                   name:
                     description: Name of the configuration.
                     type: string

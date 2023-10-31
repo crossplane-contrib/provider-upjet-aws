@@ -68,30 +68,30 @@ type MagneticStoreWritePropertiesParameters struct {
 type RetentionPropertiesInitParameters struct {
 
 	// The duration for which data must be stored in the magnetic store. Minimum value of 1. Maximum value of 73000.
-	MagneticStoreRetentionPeriodInDays *int64 `json:"magneticStoreRetentionPeriodInDays,omitempty" tf:"magnetic_store_retention_period_in_days,omitempty"`
+	MagneticStoreRetentionPeriodInDays *float64 `json:"magneticStoreRetentionPeriodInDays,omitempty" tf:"magnetic_store_retention_period_in_days,omitempty"`
 
 	// The duration for which data must be stored in the memory store. Minimum value of 1. Maximum value of 8766.
-	MemoryStoreRetentionPeriodInHours *int64 `json:"memoryStoreRetentionPeriodInHours,omitempty" tf:"memory_store_retention_period_in_hours,omitempty"`
+	MemoryStoreRetentionPeriodInHours *float64 `json:"memoryStoreRetentionPeriodInHours,omitempty" tf:"memory_store_retention_period_in_hours,omitempty"`
 }
 
 type RetentionPropertiesObservation struct {
 
 	// The duration for which data must be stored in the magnetic store. Minimum value of 1. Maximum value of 73000.
-	MagneticStoreRetentionPeriodInDays *int64 `json:"magneticStoreRetentionPeriodInDays,omitempty" tf:"magnetic_store_retention_period_in_days,omitempty"`
+	MagneticStoreRetentionPeriodInDays *float64 `json:"magneticStoreRetentionPeriodInDays,omitempty" tf:"magnetic_store_retention_period_in_days,omitempty"`
 
 	// The duration for which data must be stored in the memory store. Minimum value of 1. Maximum value of 8766.
-	MemoryStoreRetentionPeriodInHours *int64 `json:"memoryStoreRetentionPeriodInHours,omitempty" tf:"memory_store_retention_period_in_hours,omitempty"`
+	MemoryStoreRetentionPeriodInHours *float64 `json:"memoryStoreRetentionPeriodInHours,omitempty" tf:"memory_store_retention_period_in_hours,omitempty"`
 }
 
 type RetentionPropertiesParameters struct {
 
 	// The duration for which data must be stored in the magnetic store. Minimum value of 1. Maximum value of 73000.
 	// +kubebuilder:validation:Optional
-	MagneticStoreRetentionPeriodInDays *int64 `json:"magneticStoreRetentionPeriodInDays" tf:"magnetic_store_retention_period_in_days,omitempty"`
+	MagneticStoreRetentionPeriodInDays *float64 `json:"magneticStoreRetentionPeriodInDays" tf:"magnetic_store_retention_period_in_days,omitempty"`
 
 	// The duration for which data must be stored in the memory store. Minimum value of 1. Maximum value of 8766.
 	// +kubebuilder:validation:Optional
-	MemoryStoreRetentionPeriodInHours *int64 `json:"memoryStoreRetentionPeriodInHours" tf:"memory_store_retention_period_in_hours,omitempty"`
+	MemoryStoreRetentionPeriodInHours *float64 `json:"memoryStoreRetentionPeriodInHours" tf:"memory_store_retention_period_in_hours,omitempty"`
 }
 
 type S3ConfigurationInitParameters struct {

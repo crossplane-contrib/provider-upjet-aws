@@ -94,7 +94,7 @@ type RemediationConfigurationInitParameters struct {
 	ExecutionControls []ExecutionControlsInitParameters `json:"executionControls,omitempty" tf:"execution_controls,omitempty"`
 
 	// Maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.
-	MaximumAutomaticAttempts *int64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
+	MaximumAutomaticAttempts *float64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
 
 	// Can be specified multiple times for each parameter. Each parameter block supports arguments below.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
@@ -103,7 +103,7 @@ type RemediationConfigurationInitParameters struct {
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.
-	RetryAttemptSeconds *int64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
+	RetryAttemptSeconds *float64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
 
 	// Target ID is the name of the public document.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
@@ -129,7 +129,7 @@ type RemediationConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.
-	MaximumAutomaticAttempts *int64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
+	MaximumAutomaticAttempts *float64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
 
 	// Can be specified multiple times for each parameter. Each parameter block supports arguments below.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
@@ -138,7 +138,7 @@ type RemediationConfigurationObservation struct {
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.
-	RetryAttemptSeconds *int64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
+	RetryAttemptSeconds *float64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
 
 	// Target ID is the name of the public document.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
@@ -162,7 +162,7 @@ type RemediationConfigurationParameters struct {
 
 	// Maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.
 	// +kubebuilder:validation:Optional
-	MaximumAutomaticAttempts *int64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
+	MaximumAutomaticAttempts *float64 `json:"maximumAutomaticAttempts,omitempty" tf:"maximum_automatic_attempts,omitempty"`
 
 	// Can be specified multiple times for each parameter. Each parameter block supports arguments below.
 	// +kubebuilder:validation:Optional
@@ -179,7 +179,7 @@ type RemediationConfigurationParameters struct {
 
 	// Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.
 	// +kubebuilder:validation:Optional
-	RetryAttemptSeconds *int64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
+	RetryAttemptSeconds *float64 `json:"retryAttemptSeconds,omitempty" tf:"retry_attempt_seconds,omitempty"`
 
 	// Target ID is the name of the public document.
 	// +kubebuilder:validation:Optional
@@ -197,30 +197,30 @@ type RemediationConfigurationParameters struct {
 type SsmControlsInitParameters struct {
 
 	// Maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. The default value is 10%.
-	ConcurrentExecutionRatePercentage *int64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
+	ConcurrentExecutionRatePercentage *float64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
 
 	// Percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. The default is 50%.
-	ErrorPercentage *int64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
+	ErrorPercentage *float64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
 }
 
 type SsmControlsObservation struct {
 
 	// Maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. The default value is 10%.
-	ConcurrentExecutionRatePercentage *int64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
+	ConcurrentExecutionRatePercentage *float64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
 
 	// Percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. The default is 50%.
-	ErrorPercentage *int64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
+	ErrorPercentage *float64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
 }
 
 type SsmControlsParameters struct {
 
 	// Maximum percentage of remediation actions allowed to run in parallel on the non-compliant resources for that specific rule. The default value is 10%.
 	// +kubebuilder:validation:Optional
-	ConcurrentExecutionRatePercentage *int64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
+	ConcurrentExecutionRatePercentage *float64 `json:"concurrentExecutionRatePercentage,omitempty" tf:"concurrent_execution_rate_percentage,omitempty"`
 
 	// Percentage of errors that are allowed before SSM stops running automations on non-compliant resources for that specific rule. The default is 50%.
 	// +kubebuilder:validation:Optional
-	ErrorPercentage *int64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
+	ErrorPercentage *float64 `json:"errorPercentage,omitempty" tf:"error_percentage,omitempty"`
 }
 
 // RemediationConfigurationSpec defines the desired state of RemediationConfiguration

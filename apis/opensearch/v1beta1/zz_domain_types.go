@@ -111,7 +111,7 @@ type ClusterConfigInitParameters struct {
 	ColdStorageOptions []ColdStorageOptionsInitParameters `json:"coldStorageOptions,omitempty" tf:"cold_storage_options,omitempty"`
 
 	// Number of dedicated main nodes in the cluster.
-	DedicatedMasterCount *int64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
+	DedicatedMasterCount *float64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
 
 	// Whether dedicated main nodes are enabled for the cluster.
 	DedicatedMasterEnabled *bool `json:"dedicatedMasterEnabled,omitempty" tf:"dedicated_master_enabled,omitempty"`
@@ -120,13 +120,13 @@ type ClusterConfigInitParameters struct {
 	DedicatedMasterType *string `json:"dedicatedMasterType,omitempty" tf:"dedicated_master_type,omitempty"`
 
 	// Number of instances in the cluster.
-	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Instance type of data nodes in the cluster.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
-	WarmCount *int64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
+	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
 
 	// Whether to enable warm storage.
 	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
@@ -147,7 +147,7 @@ type ClusterConfigObservation struct {
 	ColdStorageOptions []ColdStorageOptionsObservation `json:"coldStorageOptions,omitempty" tf:"cold_storage_options,omitempty"`
 
 	// Number of dedicated main nodes in the cluster.
-	DedicatedMasterCount *int64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
+	DedicatedMasterCount *float64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
 
 	// Whether dedicated main nodes are enabled for the cluster.
 	DedicatedMasterEnabled *bool `json:"dedicatedMasterEnabled,omitempty" tf:"dedicated_master_enabled,omitempty"`
@@ -156,13 +156,13 @@ type ClusterConfigObservation struct {
 	DedicatedMasterType *string `json:"dedicatedMasterType,omitempty" tf:"dedicated_master_type,omitempty"`
 
 	// Number of instances in the cluster.
-	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Instance type of data nodes in the cluster.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
-	WarmCount *int64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
+	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
 
 	// Whether to enable warm storage.
 	WarmEnabled *bool `json:"warmEnabled,omitempty" tf:"warm_enabled,omitempty"`
@@ -185,7 +185,7 @@ type ClusterConfigParameters struct {
 
 	// Number of dedicated main nodes in the cluster.
 	// +kubebuilder:validation:Optional
-	DedicatedMasterCount *int64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
+	DedicatedMasterCount *float64 `json:"dedicatedMasterCount,omitempty" tf:"dedicated_master_count,omitempty"`
 
 	// Whether dedicated main nodes are enabled for the cluster.
 	// +kubebuilder:validation:Optional
@@ -197,7 +197,7 @@ type ClusterConfigParameters struct {
 
 	// Number of instances in the cluster.
 	// +kubebuilder:validation:Optional
-	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Instance type of data nodes in the cluster.
 	// +kubebuilder:validation:Optional
@@ -205,7 +205,7 @@ type ClusterConfigParameters struct {
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	// +kubebuilder:validation:Optional
-	WarmCount *int64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
+	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
 
 	// Whether to enable warm storage.
 	// +kubebuilder:validation:Optional
@@ -544,7 +544,7 @@ type DurationInitParameters struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DurationObservation struct {
@@ -553,7 +553,7 @@ type DurationObservation struct {
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 
 	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
-	Value *int64 `json:"value,omitempty" tf:"value,omitempty"`
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DurationParameters struct {
@@ -564,7 +564,7 @@ type DurationParameters struct {
 
 	// An integer specifying the value of the duration of an Auto-Tune maintenance window.
 	// +kubebuilder:validation:Optional
-	Value *int64 `json:"value" tf:"value,omitempty"`
+	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type EBSOptionsInitParameters struct {
@@ -573,13 +573,13 @@ type EBSOptionsInitParameters struct {
 	EBSEnabled *bool `json:"ebsEnabled,omitempty" tf:"ebs_enabled,omitempty"`
 
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of EBS volumes attached to data nodes (in GiB).
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of EBS volumes attached to data nodes.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -591,13 +591,13 @@ type EBSOptionsObservation struct {
 	EBSEnabled *bool `json:"ebsEnabled,omitempty" tf:"ebs_enabled,omitempty"`
 
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of EBS volumes attached to data nodes (in GiB).
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of EBS volumes attached to data nodes.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -611,15 +611,15 @@ type EBSOptionsParameters struct {
 
 	// Baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the GP3 and Provisioned IOPS EBS volume types.
 	// +kubebuilder:validation:Optional
-	Iops *int64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes. Applicable only for the gp3 volume type.
 	// +kubebuilder:validation:Optional
-	Throughput *int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Size of EBS volumes attached to data nodes (in GiB).
 	// +kubebuilder:validation:Optional
-	VolumeSize *int64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
+	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
 	// Type of EBS volumes attached to data nodes.
 	// +kubebuilder:validation:Optional
@@ -795,20 +795,20 @@ type NodeToNodeEncryptionParameters struct {
 type SnapshotOptionsInitParameters struct {
 
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
-	AutomatedSnapshotStartHour *int64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
 }
 
 type SnapshotOptionsObservation struct {
 
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
-	AutomatedSnapshotStartHour *int64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour,omitempty" tf:"automated_snapshot_start_hour,omitempty"`
 }
 
 type SnapshotOptionsParameters struct {
 
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
 	// +kubebuilder:validation:Optional
-	AutomatedSnapshotStartHour *int64 `json:"automatedSnapshotStartHour" tf:"automated_snapshot_start_hour,omitempty"`
+	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour" tf:"automated_snapshot_start_hour,omitempty"`
 }
 
 type VPCOptionsInitParameters struct {
@@ -849,20 +849,20 @@ type VPCOptionsParameters struct {
 type ZoneAwarenessConfigInitParameters struct {
 
 	// Number of Availability Zones for the domain to use with zone_awareness_enabled. Defaults to 2. Valid values: 2 or 3.
-	AvailabilityZoneCount *int64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
+	AvailabilityZoneCount *float64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
 }
 
 type ZoneAwarenessConfigObservation struct {
 
 	// Number of Availability Zones for the domain to use with zone_awareness_enabled. Defaults to 2. Valid values: 2 or 3.
-	AvailabilityZoneCount *int64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
+	AvailabilityZoneCount *float64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
 }
 
 type ZoneAwarenessConfigParameters struct {
 
 	// Number of Availability Zones for the domain to use with zone_awareness_enabled. Defaults to 2. Valid values: 2 or 3.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneCount *int64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
+	AvailabilityZoneCount *float64 `json:"availabilityZoneCount,omitempty" tf:"availability_zone_count,omitempty"`
 }
 
 // DomainSpec defines the desired state of Domain

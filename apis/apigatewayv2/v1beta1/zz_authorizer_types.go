@@ -30,7 +30,7 @@ type AuthorizerInitParameters struct {
 	// Time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
 	// If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Defaults to 300.
 	// Supported only for HTTP API Lambda authorizers.
-	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// Authorizer type. Valid values: JWT, REQUEST.
 	// Specify REQUEST for a Lambda function using incoming request parameters.
@@ -70,7 +70,7 @@ type AuthorizerObservation struct {
 	// Time to live (TTL) for cached authorizer results, in seconds. If it equals 0, authorization caching is disabled.
 	// If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Defaults to 300.
 	// Supported only for HTTP API Lambda authorizers.
-	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// Authorizer type. Valid values: JWT, REQUEST.
 	// Specify REQUEST for a Lambda function using incoming request parameters.
@@ -131,7 +131,7 @@ type AuthorizerParameters struct {
 	// If it is greater than 0, API Gateway caches authorizer responses. The maximum value is 3600, or 1 hour. Defaults to 300.
 	// Supported only for HTTP API Lambda authorizers.
 	// +kubebuilder:validation:Optional
-	AuthorizerResultTTLInSeconds *int64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
+	AuthorizerResultTTLInSeconds *float64 `json:"authorizerResultTtlInSeconds,omitempty" tf:"authorizer_result_ttl_in_seconds,omitempty"`
 
 	// Authorizer type. Valid values: JWT, REQUEST.
 	// Specify REQUEST for a Lambda function using incoming request parameters.

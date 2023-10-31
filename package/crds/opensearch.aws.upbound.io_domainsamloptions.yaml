@@ -199,8 +199,7 @@ spec:
                         sessionTimeoutMinutes:
                           description: Duration of a session in minutes after a user
                             logs in. Default is 60. Maximum value is 1,440.
-                          format: int64
-                          type: integer
+                          type: number
                         subjectKey:
                           description: Element of the SAML assertion to use for username.
                             Default is NameID.
@@ -256,8 +255,7 @@ spec:
                         sessionTimeoutMinutes:
                           description: Duration of a session in minutes after a user
                             logs in. Default is 60. Maximum value is 1,440.
-                          format: int64
-                          type: integer
+                          type: number
                         subjectKey:
                           description: Element of the SAML assertion to use for username.
                             Default is NameID.
@@ -471,8 +469,7 @@ spec:
                         sessionTimeoutMinutes:
                           description: Duration of a session in minutes after a user
                             logs in. Default is 60. Maximum value is 1,440.
-                          format: int64
-                          type: integer
+                          type: number
                         subjectKey:
                           description: Element of the SAML assertion to use for username.
                             Default is NameID.

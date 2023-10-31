@@ -98,8 +98,7 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                format: int64
-                                type: integer
+                                type: number
                               userPoolArn:
                                 description: The ARN of the Cognito user pool.
                                 type: string
@@ -405,8 +404,7 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                format: int64
-                                type: integer
+                                type: number
                               tokenEndpoint:
                                 description: The token endpoint of the IdP.
                                 type: string
@@ -454,8 +452,7 @@ spec:
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
                                         seconds (7 days).
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     enabled:
                                       description: Indicates whether target group
                                         stickiness is enabled.
@@ -556,15 +553,13 @@ spec:
                                       type: object
                                     weight:
                                       description: The weight. The range is 0 to 999.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
                           type: array
                         order:
-                          format: int64
-                          type: integer
+                          type: number
                         redirect:
                           description: Information for creating a redirect action.
                             Required if type is redirect.
@@ -928,8 +923,7 @@ spec:
                       it unset will automatically set the rule with next available
                       priority after currently existing highest rule. A listener can't
                       have multiple rules with the same priority.
-                    format: int64
-                    type: integer
+                    type: number
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -985,8 +979,7 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                format: int64
-                                type: integer
+                                type: number
                             type: object
                           type: array
                         authenticateOidc:
@@ -1025,8 +1018,7 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                format: int64
-                                type: integer
+                                type: number
                               tokenEndpoint:
                                 description: The token endpoint of the IdP.
                                 type: string
@@ -1072,8 +1064,7 @@ spec:
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
                                         seconds (7 days).
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     enabled:
                                       description: Indicates whether target group
                                         stickiness is enabled.
@@ -1086,15 +1077,13 @@ spec:
                                   properties:
                                     weight:
                                       description: The weight. The range is 0 to 999.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
                           type: array
                         order:
-                          format: int64
-                          type: integer
+                          type: number
                         redirect:
                           description: Information for creating a redirect action.
                             Required if type is redirect.
@@ -1298,8 +1287,7 @@ spec:
                       it unset will automatically set the rule with next available
                       priority after currently existing highest rule. A listener can't
                       have multiple rules with the same priority.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -1511,8 +1499,7 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                format: int64
-                                type: integer
+                                type: number
                               userPoolArn:
                                 description: The ARN of the Cognito user pool.
                                 type: string
@@ -1561,8 +1548,7 @@ spec:
                               sessionTimeout:
                                 description: The maximum duration of the authentication
                                   session, in seconds.
-                                format: int64
-                                type: integer
+                                type: number
                               tokenEndpoint:
                                 description: The token endpoint of the IdP.
                                 type: string
@@ -1608,8 +1594,7 @@ spec:
                                         which requests from a client should be routed
                                         to the same target group. The range is 1-604800
                                         seconds (7 days).
-                                      format: int64
-                                      type: integer
+                                      type: number
                                     enabled:
                                       description: Indicates whether target group
                                         stickiness is enabled.
@@ -1626,15 +1611,13 @@ spec:
                                       type: string
                                     weight:
                                       description: The weight. The range is 0 to 999.
-                                      format: int64
-                                      type: integer
+                                      type: number
                                   type: object
                                 type: array
                             type: object
                           type: array
                         order:
-                          format: int64
-                          type: integer
+                          type: number
                         redirect:
                           description: Information for creating a redirect action.
                             Required if type is redirect.
@@ -1853,8 +1836,7 @@ spec:
                       it unset will automatically set the rule with next available
                       priority after currently existing highest rule. A listener can't
                       have multiple rules with the same priority.
-                    format: int64
-                    type: integer
+                    type: number
                   tags:
                     additionalProperties:
                       type: string

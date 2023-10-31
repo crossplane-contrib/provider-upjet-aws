@@ -636,8 +636,7 @@ spec:
                     type: object
                   version:
                     description: The version number for the extension.
-                    format: int64
-                    type: integer
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

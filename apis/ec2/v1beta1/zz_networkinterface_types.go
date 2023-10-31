@@ -26,7 +26,7 @@ type AttachmentObservation struct {
 	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
 
 	// Integer to define the devices index.
-	DeviceIndex *int64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
+	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// ID of the instance to attach to.
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
@@ -41,13 +41,13 @@ type NetworkInterfaceInitParameters_2 struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Number of IPv4 prefixes that AWS automatically assigns to the network interface.
-	IPv4PrefixCount *int64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
+	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes assigned to the network interface.
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// Number of IPv6 addresses to assign to a network interface. You can't use this option if specifying specific ipv6_addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
-	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// List of private IPs to assign to the ENI in sequential order.
 	IPv6AddressList []*string `json:"ipv6AddressList,omitempty" tf:"ipv6_address_list,omitempty"`
@@ -59,7 +59,7 @@ type NetworkInterfaceInitParameters_2 struct {
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// Number of IPv6 prefixes that AWS automatically assigns to the network interface.
-	IPv6PrefixCount *int64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
+	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes assigned to the network interface.
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
@@ -79,7 +79,7 @@ type NetworkInterfaceInitParameters_2 struct {
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
-	PrivateIpsCount *int64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
+	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// Whether to enable source destination checking for the ENI. Default true.
 	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
@@ -103,13 +103,13 @@ type NetworkInterfaceObservation_2 struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Number of IPv4 prefixes that AWS automatically assigns to the network interface.
-	IPv4PrefixCount *int64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
+	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes assigned to the network interface.
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// Number of IPv6 addresses to assign to a network interface. You can't use this option if specifying specific ipv6_addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
-	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// List of private IPs to assign to the ENI in sequential order.
 	IPv6AddressList []*string `json:"ipv6AddressList,omitempty" tf:"ipv6_address_list,omitempty"`
@@ -121,7 +121,7 @@ type NetworkInterfaceObservation_2 struct {
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// Number of IPv6 prefixes that AWS automatically assigns to the network interface.
-	IPv6PrefixCount *int64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
+	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes assigned to the network interface.
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
@@ -153,7 +153,7 @@ type NetworkInterfaceObservation_2 struct {
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
-	PrivateIpsCount *int64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
+	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// List of security group IDs to assign to the ENI.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
@@ -179,7 +179,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// Number of IPv4 prefixes that AWS automatically assigns to the network interface.
 	// +kubebuilder:validation:Optional
-	IPv4PrefixCount *int64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
+	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes assigned to the network interface.
 	// +kubebuilder:validation:Optional
@@ -187,7 +187,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// Number of IPv6 addresses to assign to a network interface. You can't use this option if specifying specific ipv6_addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
 	// +kubebuilder:validation:Optional
-	IPv6AddressCount *int64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
+	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// List of private IPs to assign to the ENI in sequential order.
 	// +kubebuilder:validation:Optional
@@ -203,7 +203,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// Number of IPv6 prefixes that AWS automatically assigns to the network interface.
 	// +kubebuilder:validation:Optional
-	IPv6PrefixCount *int64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
+	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes assigned to the network interface.
 	// +kubebuilder:validation:Optional
@@ -230,7 +230,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
 	// +kubebuilder:validation:Optional
-	PrivateIpsCount *int64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
+	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

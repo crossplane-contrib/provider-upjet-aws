@@ -77,8 +77,7 @@ spec:
                           description: The priority associated with the Amazon Chime
                             Voice Connector, with 1 being the highest priority. Higher
                             priority Amazon Chime Voice Connectors are attempted first.
-                          format: int64
-                          type: integer
+                          type: number
                         voiceConnectorId:
                           description: The Amazon Chime Voice Connector ID.
                           type: string
@@ -190,8 +189,7 @@ spec:
                           description: The priority associated with the Amazon Chime
                             Voice Connector, with 1 being the highest priority. Higher
                             priority Amazon Chime Voice Connectors are attempted first.
-                          format: int64
-                          type: integer
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -369,8 +367,7 @@ spec:
                           description: The priority associated with the Amazon Chime
                             Voice Connector, with 1 being the highest priority. Higher
                             priority Amazon Chime Voice Connectors are attempted first.
-                          format: int64
-                          type: integer
+                          type: number
                         voiceConnectorId:
                           description: The Amazon Chime Voice Connector ID.
                           type: string
