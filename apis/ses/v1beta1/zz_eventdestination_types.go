@@ -70,9 +70,6 @@ type EventDestinationInitParameters struct {
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
-	// The name of the event destination
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// Send the events to an SNS Topic destination
 	SnsDestination []SnsDestinationInitParameters `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
 }
@@ -99,9 +96,6 @@ type EventDestinationObservation struct {
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
-
-	// The name of the event destination
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Send the events to an SNS Topic destination
 	SnsDestination []SnsDestinationObservation `json:"snsDestination,omitempty" tf:"sns_destination,omitempty"`
@@ -137,10 +131,6 @@ type EventDestinationParameters struct {
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
 	// +kubebuilder:validation:Optional
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
-
-	// The name of the event destination
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -257,7 +247,6 @@ type EventDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.matchingTypes) || (has(self.initProvider) && has(self.initProvider.matchingTypes))",message="spec.forProvider.matchingTypes is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   EventDestinationSpec   `json:"spec"`
 	Status EventDestinationStatus `json:"status,omitempty"`
 }

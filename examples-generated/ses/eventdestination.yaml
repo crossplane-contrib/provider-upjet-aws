@@ -19,5 +19,4 @@ spec:
     matchingTypes:
     - bounce
     - send
-    name: event-destination-cloudwatch
     region: us-west-1
