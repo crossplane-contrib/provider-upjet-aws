@@ -1029,7 +1029,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Cloudwatch Log Groups can be imported using the name
 	"aws_cloudwatch_log_group": config.NameAsIdentifier,
-	// CloudWatch Log Metric Filter can be imported using the log_group_name:name
+	// CloudWatch Log Metric Filter can be imported using its name
 	"aws_cloudwatch_log_metric_filter": config.NameAsIdentifier,
 	// CloudWatch query definitions can be imported using the query definition ARN.
 	"aws_cloudwatch_query_definition": config.IdentifierFromProvider,

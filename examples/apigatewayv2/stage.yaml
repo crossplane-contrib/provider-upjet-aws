@@ -1,0 +1,30 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Stage
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+spec:
+  forProvider:
+    region: us-west-1
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: API
+metadata:
+  name: auth-api
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+spec:
+  forProvider:
+    region: us-west-1
+    name: test-http-api
+    protocolType: HTTP
