@@ -72,8 +72,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Case4: Imported by using the API identifier, route identifier and route
 	// response identifier.
 	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .external_name }}"),
-	// Imported by using the API identifier and stage name.
-	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .external_name }}"),
+	// Imported by the stage name.
+	"aws_apigatewayv2_stage": config.NameAsIdentifier,
 	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
 	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
 
