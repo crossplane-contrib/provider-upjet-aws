@@ -4221,11 +4221,6 @@ func (in *StageInitParameters) DeepCopyInto(out *StageInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.RouteSettings != nil {
 		in, out := &in.RouteSettings, &out.RouteSettings
 		*out = make([]RouteSettingsInitParameters, len(*in))
@@ -4371,11 +4366,6 @@ func (in *StageObservation) DeepCopyInto(out *StageObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.RouteSettings != nil {
 		in, out := &in.RouteSettings, &out.RouteSettings
 		*out = make([]RouteSettingsObservation, len(*in))
@@ -4502,11 +4492,6 @@ func (in *StageParameters) DeepCopyInto(out *StageParameters) {
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
