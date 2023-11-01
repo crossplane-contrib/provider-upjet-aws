@@ -1,6 +1,10 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/subnetgroup
+  labels:
+    testing.upbound.io/example-name: default
   name: sample-db-vpc
 spec:
   forProvider:
@@ -14,11 +18,15 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/subnetgroup
+  labels:
+    testing.upbound.io/example-name: default
   name: sample-db-subnet1
 spec:
   forProvider:
     region: us-west-1
-    availabilityZone: us-west-1b
+    availabilityZone: us-west-1a
     vpcIdRef:
       name: sample-db-vpc
     cidrBlock: 172.16.10.0/24
@@ -28,11 +36,15 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/subnetgroup
+  labels:
+    testing.upbound.io/example-name: default
   name: sample-db-subnet2
 spec:
   forProvider:
     region: us-west-1
-    availabilityZone: us-west-1c
+    availabilityZone: us-west-1b
     vpcIdRef:
       name: sample-db-vpc
     cidrBlock: 172.16.20.0/24
@@ -42,6 +54,10 @@ spec:
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/subnetgroup
+  labels:
+    testing.upbound.io/example-name: default
   name: example-subnetgroup
 spec:
   forProvider:
