@@ -1,12 +1,30 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketversioning
+  labels:
+    testing.upbound.io/example-name: versioning_example
+  name: versioning-example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    versioningConfiguration:
+    - status: Enabled
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketversioning
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     region: us-west-1
-    bucketSelector:
-      matchLabels:
-        testing.upbound.io/example-name: s3
-    versioningConfiguration:
-    - status: Enabled

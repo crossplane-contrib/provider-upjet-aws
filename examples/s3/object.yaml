@@ -1,7 +1,11 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Object
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/object
+  labels:
+    testing.upbound.io/example-name: object
+  name: example-object
 spec:
   forProvider:
     region: us-west-1
@@ -10,5 +14,20 @@ spec:
         testing.upbound.io/example-name: s3
     key: object_key
     contentBase64: dGhpcyBpcyBhIHRleHQg
-  providerConfigRef:
-    name: default
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/object
+  labels:
+    testing.upbound.io/example-name: s3
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+    objectLockEnabled: true
+    tags:
+      Name: SampleBucket
