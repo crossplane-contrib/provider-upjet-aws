@@ -72,8 +72,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Case4: Imported by using the API identifier, route identifier and route
 	// response identifier.
 	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .external_name }}"),
-	// Imported by using the API identifier and stage name.
-	"aws_apigatewayv2_stage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}/{{ .external_name }}"),
+	// Imported by the stage name.
+	"aws_apigatewayv2_stage": config.NameAsIdentifier,
 	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
 	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
 
@@ -1029,8 +1029,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Cloudwatch Log Groups can be imported using the name
 	"aws_cloudwatch_log_group": config.NameAsIdentifier,
-	// CloudWatch Log Metric Filter can be imported using the log_group_name:name
-	"aws_cloudwatch_log_metric_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_group_name }}:{{ .external_name }}"),
+	// CloudWatch Log Metric Filter can be imported using its name
+	"aws_cloudwatch_log_metric_filter": config.NameAsIdentifier,
 	// CloudWatch query definitions can be imported using the query definition ARN.
 	"aws_cloudwatch_query_definition": config.IdentifierFromProvider,
 	// Cloudwatch Log Stream can be imported using the stream's log_group_name and name
