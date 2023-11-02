@@ -13,6 +13,5 @@ spec:
         testing.upbound.io/example-name: example
     oidc:
     - clientId: your client_id
-      identityProviderConfigName: example
       issuerUrl: your issuer_url
     region: us-west-1

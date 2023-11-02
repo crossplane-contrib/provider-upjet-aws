@@ -393,7 +393,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefinedNameLast("fargate_profile_name", ":", "cluster_name"),
 	// It has a complex config, adding empty entry here just to enable it.
-	"aws_eks_identity_provider_config": config.IdentifierFromProvider,
+	"aws_eks_identity_provider_config": eksOIDCIdentityProvider(),
 
 	// elasticache
 	//
@@ -2912,5 +2912,36 @@ func ResourceConfigurator() config.ResourceOption {
 		// the native aws provider, and now, we need to add manually it to
 		// the identifier fields for all resources.
 		r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
+	}
+}
+
+func eksOIDCIdentityProvider() config.ExternalName {
+	return config.ExternalName{
+		SetIdentifierArgumentFn: func(base map[string]interface{}, externalName string) {
+			// max length is 1:
+			// https://github.com/hashicorp/terraform-provider-aws/blob/7ff39c5b11aafe812e3a4b414aa6d345286b95ec/internal/service/eks/identity_provider_config.go#L58
+			if arr, ok := base["oidc"].([]interface{}); ok && len(arr) == 1 {
+				if m, ok := arr[0].(map[string]interface{}); ok {
+					m["identity_provider_config_name"] = externalName
+				}
+			}
+		},
+		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
+			if id, ok := tfstate["id"]; ok {
+				return strings.Split(id.(string), ":")[1], nil
+			}
+			return "", errors.New("there is no id in tfstate")
+		},
+		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+			cl, ok := parameters["cluster_name"]
+			if !ok {
+				return "", errors.New("cluster_name cannot be empty")
+			}
+			return fmt.Sprintf("%s:%s", cl.(string), externalName), nil
+		},
+		OmittedFields: []string{
+			"oidc.identity_provider_config_name",
+			"oidc.identity_provider_config_name_prefix",
+		},
 	}
 }
