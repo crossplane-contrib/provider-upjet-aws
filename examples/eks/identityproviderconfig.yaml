@@ -10,5 +10,4 @@ spec:
     clusterName: test
     oidc:
     - clientId: test-audience
-      identityProviderConfigName: example
       issuerUrl: https://issuer.url

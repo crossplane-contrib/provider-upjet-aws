@@ -1726,11 +1726,6 @@ func (in *IdentityProviderConfigOidcInitParameters) DeepCopyInto(out *IdentityPr
 		*out = new(string)
 		**out = **in
 	}
-	if in.IdentityProviderConfigName != nil {
-		in, out := &in.IdentityProviderConfigName, &out.IdentityProviderConfigName
-		*out = new(string)
-		**out = **in
-	}
 	if in.IssuerURL != nil {
 		in, out := &in.IssuerURL, &out.IssuerURL
 		*out = new(string)
@@ -1792,11 +1787,6 @@ func (in *IdentityProviderConfigOidcObservation) DeepCopyInto(out *IdentityProvi
 		*out = new(string)
 		**out = **in
 	}
-	if in.IdentityProviderConfigName != nil {
-		in, out := &in.IdentityProviderConfigName, &out.IdentityProviderConfigName
-		*out = new(string)
-		**out = **in
-	}
 	if in.IssuerURL != nil {
 		in, out := &in.IssuerURL, &out.IssuerURL
 		*out = new(string)
@@ -1855,11 +1845,6 @@ func (in *IdentityProviderConfigOidcParameters) DeepCopyInto(out *IdentityProvid
 	}
 	if in.GroupsPrefix != nil {
 		in, out := &in.GroupsPrefix, &out.GroupsPrefix
-		*out = new(string)
-		**out = **in
-	}
-	if in.IdentityProviderConfigName != nil {
-		in, out := &in.IdentityProviderConfigName, &out.IdentityProviderConfigName
 		*out = new(string)
 		**out = **in
 	}
