@@ -22,7 +22,7 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["catalog_id"].Computed = false
 		r.TerraformResource.Schema["catalog_id"].Optional = false
 
-		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff) (*terraform.InstanceDiff, error) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "partition_index.#")
 			}

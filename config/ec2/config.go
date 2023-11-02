@@ -381,7 +381,7 @@ func Configure(p *config.Provider) {
 			},
 		}
 
-		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff) (*terraform.InstanceDiff, error) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "enclave_options.#")
 				delete(diff.Attributes, "metadata_options.#")
@@ -430,7 +430,7 @@ func Configure(p *config.Provider) {
 				params["encrypted"] = false
 			}
 		}
-		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff) (*terraform.InstanceDiff, error) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
 				delete(diff.Attributes, "ebs_block_device.#")
 			}
