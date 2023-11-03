@@ -19,69 +19,11 @@ spec:
           - ebsStorageInfo:
               - volumeSize: 1000
     clusterName: ${Rand.RFC1123Subdomain}
-    configurationInfo:
-      - arnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
-        revision: 1
-    encryptionInfo:
-      - encryptionAtRestKmsKeyArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: kms
     kafkaVersion: 2.6.0
     numberOfBrokerNodes: 2
-    openMonitoring:
-      - prometheus:
-          - jmxExporter:
-              - enabledInBroker: true
-            nodeExporter:
-              - enabledInBroker: true
     region: us-east-2
     tags:
       foo: bar
-
----
-
-apiVersion: kafka.aws.upbound.io/v1beta1
-kind: Configuration
-metadata:
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    kafkaVersions:
-      - 2.6.0
-    name: ${Rand.RFC1123Subdomain}
-    region: us-east-2
-    serverProperties: |
-      auto.create.topics.enable = true
-      delete.topic.enable = true
-
----
-
-apiVersion: kms.aws.upbound.io/v1beta1
-kind: Key
-metadata:
-  labels:
-    testing.upbound.io/example-name: kms
-  name: kms
-spec:
-  forProvider:
-    description: example
-    region: us-east-2
-
----
-
-apiVersion: s3.aws.upbound.io/v1beta1
-kind: Bucket
-metadata:
-  labels:
-    testing.upbound.io/example-name: bucket
-  name: ${Rand.RFC1123Subdomain}
-spec:
-  forProvider:
-    region: us-east-2
 
 ---
 
@@ -140,16 +82,3 @@ spec:
   forProvider:
     cidrBlock: 192.168.0.0/22
     region: us-east-2
-
----
-
-apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
-kind: Group
-metadata:
-  name: test
-spec:
-  forProvider:
-    region: us-east-2
-    tags:
-      Application: serviceA
-      Environment: production
