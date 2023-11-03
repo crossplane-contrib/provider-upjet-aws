@@ -25,6 +25,19 @@ func Configure(p *config.Provider) {
 		// aws_s3_bucket_server_side_encryption_configuration
 		// aws_s3_bucket_versioning
 		// aws_s3_bucket_website_configuration
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["id"].(string); ok {
+				conn["id"] = []byte(a)
+			}
+			if a, ok := attr["arn"].(string); ok {
+				conn["arn"] = []byte(a)
+			}
+			if a, ok := attr["region"].(string); ok {
+				conn["region"] = []byte(a)
+			}
+			return conn, nil
+		}
 		config.MoveToStatus(r.TerraformResource, "acceleration_status", "acl", "grant", "cors_rule", "lifecycle_rule",
 			"logging", "object_lock_configuration", "policy", "replication_configuration", "request_payer",
 			"server_side_encryption_configuration", "versioning", "website", "arn")
