@@ -29,13 +29,6 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: kms
     kafkaVersion: 2.6.0
-    loggingInfo:
-      - brokerLogs:
-          - firehose:
-              - deliveryStreamSelector:
-                  matchLabels:
-                    testing.upbound.io/example-name: test_stream
-                enabled: true
     numberOfBrokerNodes: 2
     openMonitoring:
       - prometheus:
@@ -64,54 +57,6 @@ spec:
     serverProperties: |
       auto.create.topics.enable = true
       delete.topic.enable = true
-
----
-
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: Role
-metadata:
-  labels:
-    testing.upbound.io/example-name: firehose_role
-  name: firehose-role
-spec:
-  forProvider:
-    assumeRolePolicy: |
-      {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Action": "sts:AssumeRole",
-          "Principal": {
-            "Service": "firehose.amazonaws.com"
-          },
-          "Effect": "Allow",
-          "Sid": ""
-        }
-        ]
-      }
-
----
-
-apiVersion: firehose.aws.upbound.io/v1beta1
-kind: DeliveryStream
-metadata:
-  labels:
-    testing.upbound.io/example-name: test_stream
-  name: example
-spec:
-  forProvider:
-    destination: extended_s3
-    region: us-east-2
-    extendedS3Configuration:
-      - bucketArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: bucket
-        roleArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: firehose_role
-    name: example
-    tags:
-      LogDeliveryEnabled: placeholder
 
 ---
 
