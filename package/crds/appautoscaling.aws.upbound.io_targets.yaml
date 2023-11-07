@@ -181,9 +181,6 @@ spec:
                     type: object
                 required:
                 - region
-                - resourceId
-                - scalableDimension
-                - serviceNamespace
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -203,6 +200,22 @@ spec:
                   minCapacity:
                     description: Min capacity of the scalable target.
                     type: number
+                  resourceId:
+                    description: 'Resource type and unique identifier string for the
+                      resource associated with the scaling policy. Documentation can
+                      be found in the ResourceId parameter at: AWS Application Auto
+                      Scaling API Reference'
+                    type: string
+                  scalableDimension:
+                    description: 'Scalable dimension of the scalable target. Documentation
+                      can be found in the ScalableDimension parameter at: AWS Application
+                      Auto Scaling API Reference'
+                    type: string
+                  serviceNamespace:
+                    description: 'AWS service namespace of the scalable target. Documentation
+                      can be found in the ServiceNamespace parameter at: AWS Application
+                      Auto Scaling API Reference'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -378,6 +391,18 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.minCapacity)
                 || (has(self.initProvider) && has(self.initProvider.minCapacity))'
+            - message: spec.forProvider.resourceId is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceId)
+                || (has(self.initProvider) && has(self.initProvider.resourceId))'
+            - message: spec.forProvider.scalableDimension is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scalableDimension)
+                || (has(self.initProvider) && has(self.initProvider.scalableDimension))'
+            - message: spec.forProvider.serviceNamespace is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceNamespace)
+                || (has(self.initProvider) && has(self.initProvider.serviceNamespace))'
           status:
             description: TargetStatus defines the observed state of Target.
             properties:
