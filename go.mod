@@ -176,6 +176,7 @@ require (
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	github.com/yuin/goldmark v1.4.13 // indirect
 	github.com/zclconf/go-cty v1.13.2 // indirect
+	github.com/zclconf/go-cty-yaml v1.0.3 // indirect
 	go.opentelemetry.io/otel v1.19.0 // indirect
 	go.opentelemetry.io/otel/trace v1.19.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
@@ -212,4 +213,4 @@ replace golang.org/x/exp => golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20231026091456-f2d38ee240d7
 
-replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231103134223-280b4b0fdd1f
+replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231110110251-9cb226a24397
