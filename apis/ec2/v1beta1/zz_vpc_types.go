@@ -62,6 +62,7 @@ type VPCInitParameters_2 struct {
 	InstanceTenancy *string `json:"instanceTenancy,omitempty" tf:"instance_tenancy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -142,9 +143,11 @@ type VPCObservation_2 struct {
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -226,6 +229,7 @@ type VPCParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

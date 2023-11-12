@@ -20,6 +20,7 @@ import (
 type VPCEndpointConnectionNotificationInitParameters struct {
 
 	// One or more endpoint events for which to receive notifications.
+	// +listType:set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
 	// The ID of the VPC Endpoint to receive notifications for.
@@ -29,6 +30,7 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 type VPCEndpointConnectionNotificationObservation struct {
 
 	// One or more endpoint events for which to receive notifications.
+	// +listType:set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
 	// The ARN of the SNS topic for the notifications.
@@ -54,6 +56,7 @@ type VPCEndpointConnectionNotificationParameters struct {
 
 	// One or more endpoint events for which to receive notifications.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
 	// The ARN of the SNS topic for the notifications.

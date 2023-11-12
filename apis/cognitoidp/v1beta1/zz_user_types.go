@@ -20,12 +20,15 @@ import (
 type UserInitParameters struct {
 
 	// A map that contains user attributes and attribute values to be set for the user.
+	// +mapType:granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// A map of custom key-value pairs that you can provide as input for any custom workflows that user creation triggers. Amazon Cognito does not store the client_metadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose. For more information, see Customizing User Pool Workflows with Lambda Triggers.
+	// +mapType:granular
 	ClientMetadata map[string]*string `json:"clientMetadata,omitempty" tf:"client_metadata,omitempty"`
 
 	// A list of mediums to the welcome message will be sent through. Allowed values are EMAIL and SMS. If it's provided, make sure you have also specified email attribute for the EMAIL medium and phone_number for the SMS. More than one value can be specified. Amazon Cognito does not store the desired_delivery_mediums value. Defaults to ["SMS"].
+	// +listType:set
 	DesiredDeliveryMediums []*string `json:"desiredDeliveryMediums,omitempty" tf:"desired_delivery_mediums,omitempty"`
 
 	// Specifies whether the user should be enabled after creation. The welcome message will be sent regardless of the enabled value. The behavior can be changed with message_action argument. Defaults to true.
@@ -38,20 +41,24 @@ type UserInitParameters struct {
 	MessageAction *string `json:"messageAction,omitempty" tf:"message_action,omitempty"`
 
 	// The user's validation data. This is an array of name-value pairs that contain user attributes and attribute values that you can use for custom validation, such as restricting the types of user accounts that can be registered. Amazon Cognito does not store the validation_data value. For more information, see Customizing User Pool Workflows with Lambda Triggers.
+	// +mapType:granular
 	ValidationData map[string]*string `json:"validationData,omitempty" tf:"validation_data,omitempty"`
 }
 
 type UserObservation struct {
 
 	// A map that contains user attributes and attribute values to be set for the user.
+	// +mapType:granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// A map of custom key-value pairs that you can provide as input for any custom workflows that user creation triggers. Amazon Cognito does not store the client_metadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose. For more information, see Customizing User Pool Workflows with Lambda Triggers.
+	// +mapType:granular
 	ClientMetadata map[string]*string `json:"clientMetadata,omitempty" tf:"client_metadata,omitempty"`
 
 	CreationDate *string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
 
 	// A list of mediums to the welcome message will be sent through. Allowed values are EMAIL and SMS. If it's provided, make sure you have also specified email attribute for the EMAIL medium and phone_number for the SMS. More than one value can be specified. Amazon Cognito does not store the desired_delivery_mediums value. Defaults to ["SMS"].
+	// +listType:set
 	DesiredDeliveryMediums []*string `json:"desiredDeliveryMediums,omitempty" tf:"desired_delivery_mediums,omitempty"`
 
 	// Specifies whether the user should be enabled after creation. The welcome message will be sent regardless of the enabled value. The behavior can be changed with message_action argument. Defaults to true.
@@ -67,6 +74,7 @@ type UserObservation struct {
 	// Set to RESEND to resend the invitation message to a user that already exists and reset the expiration limit on the user's account. Set to SUPPRESS to suppress sending the message. Only one value can be specified. Amazon Cognito does not store the message_action value.
 	MessageAction *string `json:"messageAction,omitempty" tf:"message_action,omitempty"`
 
+	// +listType:set
 	MfaSettingList []*string `json:"mfaSettingList,omitempty" tf:"mfa_setting_list,omitempty"`
 
 	PreferredMfaSetting *string `json:"preferredMfaSetting,omitempty" tf:"preferred_mfa_setting,omitempty"`
@@ -81,6 +89,7 @@ type UserObservation struct {
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// The user's validation data. This is an array of name-value pairs that contain user attributes and attribute values that you can use for custom validation, such as restricting the types of user accounts that can be registered. Amazon Cognito does not store the validation_data value. For more information, see Customizing User Pool Workflows with Lambda Triggers.
+	// +mapType:granular
 	ValidationData map[string]*string `json:"validationData,omitempty" tf:"validation_data,omitempty"`
 }
 
@@ -88,14 +97,17 @@ type UserParameters struct {
 
 	// A map that contains user attributes and attribute values to be set for the user.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// A map of custom key-value pairs that you can provide as input for any custom workflows that user creation triggers. Amazon Cognito does not store the client_metadata value. This data is available only to Lambda triggers that are assigned to a user pool to support custom workflows. If your user pool configuration does not include triggers, the ClientMetadata parameter serves no purpose. For more information, see Customizing User Pool Workflows with Lambda Triggers.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ClientMetadata map[string]*string `json:"clientMetadata,omitempty" tf:"client_metadata,omitempty"`
 
 	// A list of mediums to the welcome message will be sent through. Allowed values are EMAIL and SMS. If it's provided, make sure you have also specified email attribute for the EMAIL medium and phone_number for the SMS. More than one value can be specified. Amazon Cognito does not store the desired_delivery_mediums value. Defaults to ["SMS"].
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	DesiredDeliveryMediums []*string `json:"desiredDeliveryMediums,omitempty" tf:"desired_delivery_mediums,omitempty"`
 
 	// Specifies whether the user should be enabled after creation. The welcome message will be sent regardless of the enabled value. The behavior can be changed with message_action argument. Defaults to true.
@@ -139,6 +151,7 @@ type UserParameters struct {
 
 	// The user's validation data. This is an array of name-value pairs that contain user attributes and attribute values that you can use for custom validation, such as restricting the types of user accounts that can be registered. Amazon Cognito does not store the validation_data value. For more information, see Customizing User Pool Workflows with Lambda Triggers.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ValidationData map[string]*string `json:"validationData,omitempty" tf:"validation_data,omitempty"`
 }
 

@@ -23,6 +23,7 @@ type VaultInitParameters struct {
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,9 +45,11 @@ type VaultObservation struct {
 	RecoveryPoints *float64 `json:"recoveryPoints,omitempty" tf:"recovery_points,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -77,6 +80,7 @@ type VaultParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -692,12 +692,14 @@ type StringAttributeConstraintsParameters struct {
 type UserAttributeUpdateSettingsInitParameters struct {
 
 	// A list of attributes requiring verification before update. If set, the provided value(s) must also be set in auto_verified_attributes. Valid values: email, phone_number.
+	// +listType:set
 	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate,omitempty" tf:"attributes_require_verification_before_update,omitempty"`
 }
 
 type UserAttributeUpdateSettingsObservation struct {
 
 	// A list of attributes requiring verification before update. If set, the provided value(s) must also be set in auto_verified_attributes. Valid values: email, phone_number.
+	// +listType:set
 	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate,omitempty" tf:"attributes_require_verification_before_update,omitempty"`
 }
 
@@ -705,6 +707,7 @@ type UserAttributeUpdateSettingsParameters struct {
 
 	// A list of attributes requiring verification before update. If set, the provided value(s) must also be set in auto_verified_attributes. Valid values: email, phone_number.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AttributesRequireVerificationBeforeUpdate []*string `json:"attributesRequireVerificationBeforeUpdate" tf:"attributes_require_verification_before_update,omitempty"`
 }
 
@@ -736,9 +739,11 @@ type UserPoolInitParameters struct {
 	AdminCreateUserConfig []AdminCreateUserConfigInitParameters `json:"adminCreateUserConfig,omitempty" tf:"admin_create_user_config,omitempty"`
 
 	// Attributes supported as an alias for this user pool. Valid values: phone_number, email, or preferred_username. Conflicts with username_attributes.
+	// +listType:set
 	AliasAttributes []*string `json:"aliasAttributes,omitempty" tf:"alias_attributes,omitempty"`
 
 	// Attributes to be auto-verified. Valid values: email, phone_number.
+	// +listType:set
 	AutoVerifiedAttributes []*string `json:"autoVerifiedAttributes,omitempty" tf:"auto_verified_attributes,omitempty"`
 
 	// When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. Valid values are ACTIVE and INACTIVE, Default value is INACTIVE.
@@ -784,6 +789,7 @@ type UserPoolInitParameters struct {
 	SoftwareTokenMfaConfiguration []SoftwareTokenMfaConfigurationInitParameters `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for user attribute update settings. Detailed below.
@@ -793,6 +799,7 @@ type UserPoolInitParameters struct {
 	UserPoolAddOns []UserPoolAddOnsInitParameters `json:"userPoolAddOns,omitempty" tf:"user_pool_add_ons,omitempty"`
 
 	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
+	// +listType:set
 	UsernameAttributes []*string `json:"usernameAttributes,omitempty" tf:"username_attributes,omitempty"`
 
 	// Configuration block for username configuration. Detailed below.
@@ -811,12 +818,14 @@ type UserPoolObservation struct {
 	AdminCreateUserConfig []AdminCreateUserConfigObservation `json:"adminCreateUserConfig,omitempty" tf:"admin_create_user_config,omitempty"`
 
 	// Attributes supported as an alias for this user pool. Valid values: phone_number, email, or preferred_username. Conflicts with username_attributes.
+	// +listType:set
 	AliasAttributes []*string `json:"aliasAttributes,omitempty" tf:"alias_attributes,omitempty"`
 
 	// ARN of the user pool.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Attributes to be auto-verified. Valid values: email, phone_number.
+	// +listType:set
 	AutoVerifiedAttributes []*string `json:"autoVerifiedAttributes,omitempty" tf:"auto_verified_attributes,omitempty"`
 
 	// Date the user pool was created.
@@ -883,9 +892,11 @@ type UserPoolObservation struct {
 	SoftwareTokenMfaConfiguration []SoftwareTokenMfaConfigurationObservation `json:"softwareTokenMfaConfiguration,omitempty" tf:"software_token_mfa_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for user attribute update settings. Detailed below.
@@ -895,6 +906,7 @@ type UserPoolObservation struct {
 	UserPoolAddOns []UserPoolAddOnsObservation `json:"userPoolAddOns,omitempty" tf:"user_pool_add_ons,omitempty"`
 
 	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
+	// +listType:set
 	UsernameAttributes []*string `json:"usernameAttributes,omitempty" tf:"username_attributes,omitempty"`
 
 	// Configuration block for username configuration. Detailed below.
@@ -916,10 +928,12 @@ type UserPoolParameters struct {
 
 	// Attributes supported as an alias for this user pool. Valid values: phone_number, email, or preferred_username. Conflicts with username_attributes.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AliasAttributes []*string `json:"aliasAttributes,omitempty" tf:"alias_attributes,omitempty"`
 
 	// Attributes to be auto-verified. Valid values: email, phone_number.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AutoVerifiedAttributes []*string `json:"autoVerifiedAttributes,omitempty" tf:"auto_verified_attributes,omitempty"`
 
 	// When active, DeletionProtection prevents accidental deletion of your user pool. Before you can delete a user pool that you have protected against deletion, you must deactivate this feature. Valid values are ACTIVE and INACTIVE, Default value is INACTIVE.
@@ -985,6 +999,7 @@ type UserPoolParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for user attribute update settings. Detailed below.
@@ -997,6 +1012,7 @@ type UserPoolParameters struct {
 
 	// Whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with alias_attributes.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	UsernameAttributes []*string `json:"usernameAttributes,omitempty" tf:"username_attributes,omitempty"`
 
 	// Configuration block for username configuration. Detailed below.

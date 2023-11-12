@@ -23,9 +23,11 @@ type IntegrationResponseInitParameters struct {
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
 	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
+	// +mapType:granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// Map of templates used to transform the integration response body.
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// Regular expression pattern used to choose an integration response based on the response from the backend. Omit configuring this to make the integration the default one. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.
@@ -46,9 +48,11 @@ type IntegrationResponseObservation struct {
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
+	// +mapType:granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// Map of templates used to transform the integration response body.
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// ID of the associated REST API.
@@ -102,10 +106,12 @@ type IntegrationResponseParameters struct {
 
 	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// Map of templates used to transform the integration response body.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// ID of the associated REST API.

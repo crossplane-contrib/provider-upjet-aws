@@ -35,6 +35,7 @@ type SecurityGroupIngressRuleInitParameters struct {
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
@@ -76,9 +77,11 @@ type SecurityGroupIngressRuleObservation struct {
 	SecurityGroupRuleID *string `json:"securityGroupRuleId,omitempty" tf:"security_group_rule_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
@@ -153,6 +156,7 @@ type SecurityGroupIngressRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.

@@ -54,6 +54,7 @@ type ClusterInstanceInitParameters struct {
 	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -128,9 +129,11 @@ type ClusterInstanceObservation struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// – Boolean indicating if this instance is writable. False indicates this instance is a read replica.
@@ -203,6 +206,7 @@ type ClusterInstanceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

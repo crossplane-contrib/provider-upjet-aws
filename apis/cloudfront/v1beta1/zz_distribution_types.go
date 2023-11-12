@@ -105,6 +105,7 @@ type CustomOriginConfigInitParameters struct {
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
+	// +listType:set
 	OriginSSLProtocols []*string `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
 }
 
@@ -126,6 +127,7 @@ type CustomOriginConfigObservation struct {
 	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
+	// +listType:set
 	OriginSSLProtocols []*string `json:"originSslProtocols,omitempty" tf:"origin_ssl_protocols,omitempty"`
 }
 
@@ -153,18 +155,21 @@ type CustomOriginConfigParameters struct {
 
 	// SSL/TLS protocols that you want CloudFront to use when communicating with your origin over HTTPS. A list of one or more of SSLv3, TLSv1, TLSv1.1, and TLSv1.2.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	OriginSSLProtocols []*string `json:"originSslProtocols" tf:"origin_ssl_protocols,omitempty"`
 }
 
 type DefaultCacheBehaviorInitParameters struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
+	// +listType:set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
+	// +listType:set
 	CachedMethods []*string `json:"cachedMethods,omitempty" tf:"cached_methods,omitempty"`
 
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
@@ -219,12 +224,14 @@ type DefaultCacheBehaviorInitParameters struct {
 type DefaultCacheBehaviorObservation struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
+	// +listType:set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
+	// +listType:set
 	CachedMethods []*string `json:"cachedMethods,omitempty" tf:"cached_methods,omitempty"`
 
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
@@ -280,6 +287,7 @@ type DefaultCacheBehaviorParameters struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
@@ -288,6 +296,7 @@ type DefaultCacheBehaviorParameters struct {
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CachedMethods []*string `json:"cachedMethods" tf:"cached_methods,omitempty"`
 
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
@@ -358,6 +367,7 @@ type DefaultCacheBehaviorParameters struct {
 type DistributionInitParameters struct {
 
 	// Extra CNAMEs (alternate domain names), if any, for this distribution.
+	// +listType:set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// Any comments you want to include about the distribution.
@@ -403,6 +413,7 @@ type DistributionInitParameters struct {
 	RetainOnDelete *bool `json:"retainOnDelete,omitempty" tf:"retain_on_delete,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The SSL configuration for this distribution (maximum one).
@@ -418,6 +429,7 @@ type DistributionInitParameters struct {
 type DistributionObservation struct {
 
 	// Extra CNAMEs (alternate domain names), if any, for this distribution.
+	// +listType:set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
@@ -490,9 +502,11 @@ type DistributionObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// List of key group IDs that CloudFront can use to validate signed URLs or signed cookies. See the CloudFront User Guide for more information about this feature.
@@ -515,6 +529,7 @@ type DistributionParameters struct {
 
 	// Extra CNAMEs (alternate domain names), if any, for this distribution.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// Any comments you want to include about the distribution.
@@ -580,6 +595,7 @@ type DistributionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The SSL configuration for this distribution (maximum one).
@@ -598,12 +614,14 @@ type DistributionParameters struct {
 type FailoverCriteriaInitParameters struct {
 
 	// List of HTTP status codes for the origin group.
+	// +listType:set
 	StatusCodes []*float64 `json:"statusCodes,omitempty" tf:"status_codes,omitempty"`
 }
 
 type FailoverCriteriaObservation struct {
 
 	// List of HTTP status codes for the origin group.
+	// +listType:set
 	StatusCodes []*float64 `json:"statusCodes,omitempty" tf:"status_codes,omitempty"`
 }
 
@@ -611,6 +629,7 @@ type FailoverCriteriaParameters struct {
 
 	// List of HTTP status codes for the origin group.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	StatusCodes []*float64 `json:"statusCodes" tf:"status_codes,omitempty"`
 }
 
@@ -620,6 +639,7 @@ type ForwardedValuesCookiesInitParameters struct {
 	Forward *string `json:"forward,omitempty" tf:"forward,omitempty"`
 
 	// If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin.
+	// +listType:set
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
 
@@ -629,6 +649,7 @@ type ForwardedValuesCookiesObservation struct {
 	Forward *string `json:"forward,omitempty" tf:"forward,omitempty"`
 
 	// If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin.
+	// +listType:set
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
 
@@ -640,6 +661,7 @@ type ForwardedValuesCookiesParameters struct {
 
 	// If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
 
@@ -649,6 +671,7 @@ type ForwardedValuesInitParameters struct {
 	Cookies []ForwardedValuesCookiesInitParameters `json:"cookies,omitempty" tf:"cookies,omitempty"`
 
 	// Headers, if any, that you want CloudFront to vary upon for this cache behavior. Specify * to include all headers.
+	// +listType:set
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior.
@@ -664,6 +687,7 @@ type ForwardedValuesObservation struct {
 	Cookies []ForwardedValuesCookiesObservation `json:"cookies,omitempty" tf:"cookies,omitempty"`
 
 	// Headers, if any, that you want CloudFront to vary upon for this cache behavior. Specify * to include all headers.
+	// +listType:set
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior.
@@ -681,6 +705,7 @@ type ForwardedValuesParameters struct {
 
 	// Headers, if any, that you want CloudFront to vary upon for this cache behavior. Specify * to include all headers.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior.
@@ -724,6 +749,7 @@ type FunctionAssociationParameters struct {
 type GeoRestrictionInitParameters struct {
 
 	// ISO 3166-1-alpha-2 codes for which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist). If the type is specified as none an empty array can be used.
+	// +listType:set
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
 	// Method that you want to use to restrict distribution of your content by country: none, whitelist, or blacklist.
@@ -733,6 +759,7 @@ type GeoRestrictionInitParameters struct {
 type GeoRestrictionObservation struct {
 
 	// ISO 3166-1-alpha-2 codes for which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist). If the type is specified as none an empty array can be used.
+	// +listType:set
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
 	// Method that you want to use to restrict distribution of your content by country: none, whitelist, or blacklist.
@@ -743,6 +770,7 @@ type GeoRestrictionParameters struct {
 
 	// ISO 3166-1-alpha-2 codes for which you want CloudFront either to distribute your content (whitelist) or not distribute your content (blacklist). If the type is specified as none an empty array can be used.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
 	// Method that you want to use to restrict distribution of your content by country: none, whitelist, or blacklist.
@@ -759,6 +787,7 @@ type ItemsObservation struct {
 	KeyGroupID *string `json:"keyGroupId,omitempty" tf:"key_group_id,omitempty"`
 
 	// Set of CloudFront key pair IDs.
+	// +listType:set
 	KeyPairIds []*string `json:"keyPairIds,omitempty" tf:"key_pair_ids,omitempty"`
 }
 
@@ -868,6 +897,7 @@ type OrderedCacheBehaviorForwardedValuesCookiesInitParameters struct {
 	Forward *string `json:"forward,omitempty" tf:"forward,omitempty"`
 
 	// If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin.
+	// +listType:set
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
 
@@ -877,6 +907,7 @@ type OrderedCacheBehaviorForwardedValuesCookiesObservation struct {
 	Forward *string `json:"forward,omitempty" tf:"forward,omitempty"`
 
 	// If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin.
+	// +listType:set
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
 
@@ -888,6 +919,7 @@ type OrderedCacheBehaviorForwardedValuesCookiesParameters struct {
 
 	// If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	WhitelistedNames []*string `json:"whitelistedNames,omitempty" tf:"whitelisted_names,omitempty"`
 }
 
@@ -897,6 +929,7 @@ type OrderedCacheBehaviorForwardedValuesInitParameters struct {
 	Cookies []OrderedCacheBehaviorForwardedValuesCookiesInitParameters `json:"cookies,omitempty" tf:"cookies,omitempty"`
 
 	// Headers, if any, that you want CloudFront to vary upon for this cache behavior. Specify * to include all headers.
+	// +listType:set
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior.
@@ -912,6 +945,7 @@ type OrderedCacheBehaviorForwardedValuesObservation struct {
 	Cookies []OrderedCacheBehaviorForwardedValuesCookiesObservation `json:"cookies,omitempty" tf:"cookies,omitempty"`
 
 	// Headers, if any, that you want CloudFront to vary upon for this cache behavior. Specify * to include all headers.
+	// +listType:set
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior.
@@ -929,6 +963,7 @@ type OrderedCacheBehaviorForwardedValuesParameters struct {
 
 	// Headers, if any, that you want CloudFront to vary upon for this cache behavior. Specify * to include all headers.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Headers []*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior.
@@ -979,12 +1014,14 @@ type OrderedCacheBehaviorFunctionAssociationParameters struct {
 type OrderedCacheBehaviorInitParameters struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
+	// +listType:set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
+	// +listType:set
 	CachedMethods []*string `json:"cachedMethods,omitempty" tf:"cached_methods,omitempty"`
 
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
@@ -1088,12 +1125,14 @@ type OrderedCacheBehaviorLambdaFunctionAssociationParameters struct {
 type OrderedCacheBehaviorObservation struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
+	// +listType:set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
 	CachePolicyID *string `json:"cachePolicyId,omitempty" tf:"cache_policy_id,omitempty"`
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
+	// +listType:set
 	CachedMethods []*string `json:"cachedMethods,omitempty" tf:"cached_methods,omitempty"`
 
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
@@ -1152,6 +1191,7 @@ type OrderedCacheBehaviorParameters struct {
 
 	// Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Unique identifier of the cache policy that is attached to the cache behavior. If configuring the default_cache_behavior either cache_policy_id or forwarded_values must be set.
@@ -1160,6 +1200,7 @@ type OrderedCacheBehaviorParameters struct {
 
 	// Controls whether CloudFront caches the response to requests using the specified HTTP methods.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CachedMethods []*string `json:"cachedMethods" tf:"cached_methods,omitempty"`
 
 	// Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header (default: false).
@@ -1482,6 +1523,7 @@ type TrustedSignersItemsObservation struct {
 	AwsAccountNumber *string `json:"awsAccountNumber,omitempty" tf:"aws_account_number,omitempty"`
 
 	// Set of CloudFront key pair IDs.
+	// +listType:set
 	KeyPairIds []*string `json:"keyPairIds,omitempty" tf:"key_pair_ids,omitempty"`
 }
 

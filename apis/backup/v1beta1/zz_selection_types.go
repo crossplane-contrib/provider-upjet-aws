@@ -61,9 +61,11 @@ type SelectionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// +listType:set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// +listType:set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
@@ -85,12 +87,14 @@ type SelectionObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// +listType:set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// +listType:set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
@@ -123,6 +127,7 @@ type SelectionParameters struct {
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
@@ -145,6 +150,7 @@ type SelectionParameters struct {
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.

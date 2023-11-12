@@ -32,6 +32,7 @@ type ConnectionInitParameters struct {
 	PhysicalConnectionRequirements []PhysicalConnectionRequirementsInitParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,9 +60,11 @@ type ConnectionObservation struct {
 	PhysicalConnectionRequirements []PhysicalConnectionRequirementsObservation `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -73,6 +76,7 @@ type ConnectionParameters struct {
 
 	// value pairs used as parameters for this connection.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
 	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
@@ -98,12 +102,14 @@ type ConnectionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PhysicalConnectionRequirementsInitParameters struct {
 
 	// The security group ID list used by the connection.
+	// +listType:set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 }
 
@@ -113,6 +119,7 @@ type PhysicalConnectionRequirementsObservation struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The security group ID list used by the connection.
+	// +listType:set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
 	// The subnet ID used by the connection.
@@ -137,6 +144,7 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// The security group ID list used by the connection.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
 	// The subnet ID used by the connection.

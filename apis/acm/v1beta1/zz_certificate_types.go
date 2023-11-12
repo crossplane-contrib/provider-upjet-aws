@@ -45,9 +45,11 @@ type CertificateInitParameters struct {
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate.
+	// +listType:set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Which method to use for validation.
@@ -114,12 +116,15 @@ type CertificateObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate.
+	// +listType:set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Source of the certificate.
@@ -180,10 +185,12 @@ type CertificateParameters struct {
 
 	// Set of domains that should be SANs in the issued certificate.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Which method to use for validation.

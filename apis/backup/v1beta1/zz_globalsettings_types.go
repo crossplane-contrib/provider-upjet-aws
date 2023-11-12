@@ -20,12 +20,14 @@ import (
 type GlobalSettingsInitParameters struct {
 
 	// A list of resources along with the opt-in preferences for the account.
+	// +mapType:granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
 }
 
 type GlobalSettingsObservation struct {
 
 	// A list of resources along with the opt-in preferences for the account.
+	// +mapType:granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
 
 	// The AWS Account ID.
@@ -36,6 +38,7 @@ type GlobalSettingsParameters struct {
 
 	// A list of resources along with the opt-in preferences for the account.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	GlobalSettings map[string]*string `json:"globalSettings,omitempty" tf:"global_settings,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

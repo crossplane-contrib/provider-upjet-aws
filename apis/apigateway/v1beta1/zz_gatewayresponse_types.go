@@ -20,9 +20,11 @@ import (
 type GatewayResponseInitParameters struct {
 
 	// Map of parameters (paths, query strings and headers) of the Gateway Response.
+	// +mapType:granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// Map of templates used to transform the response body.
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// Response type of the associated GatewayResponse.
@@ -36,9 +38,11 @@ type GatewayResponseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Map of parameters (paths, query strings and headers) of the Gateway Response.
+	// +mapType:granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// Map of templates used to transform the response body.
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// Response type of the associated GatewayResponse.
@@ -60,10 +64,12 @@ type GatewayResponseParameters struct {
 
 	// Map of parameters (paths, query strings and headers) of the Gateway Response.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// Map of templates used to transform the response body.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// Response type of the associated GatewayResponse.

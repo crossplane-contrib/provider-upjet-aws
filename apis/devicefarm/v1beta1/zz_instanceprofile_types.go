@@ -23,6 +23,7 @@ type InstanceProfileInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An array of strings that specifies the list of app packages that should not be cleaned up from the device after a test run.
+	// +listType:set
 	ExcludeAppPackagesFromCleanup []*string `json:"excludeAppPackagesFromCleanup,omitempty" tf:"exclude_app_packages_from_cleanup,omitempty"`
 
 	// The name for the instance profile.
@@ -35,6 +36,7 @@ type InstanceProfileInitParameters struct {
 	RebootAfterUse *bool `json:"rebootAfterUse,omitempty" tf:"reboot_after_use,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -47,6 +49,7 @@ type InstanceProfileObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An array of strings that specifies the list of app packages that should not be cleaned up from the device after a test run.
+	// +listType:set
 	ExcludeAppPackagesFromCleanup []*string `json:"excludeAppPackagesFromCleanup,omitempty" tf:"exclude_app_packages_from_cleanup,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -61,9 +64,11 @@ type InstanceProfileObservation struct {
 	RebootAfterUse *bool `json:"rebootAfterUse,omitempty" tf:"reboot_after_use,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -75,6 +80,7 @@ type InstanceProfileParameters struct {
 
 	// An array of strings that specifies the list of app packages that should not be cleaned up from the device after a test run.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ExcludeAppPackagesFromCleanup []*string `json:"excludeAppPackagesFromCleanup,omitempty" tf:"exclude_app_packages_from_cleanup,omitempty"`
 
 	// The name for the instance profile.
@@ -96,6 +102,7 @@ type InstanceProfileParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

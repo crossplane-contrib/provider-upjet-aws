@@ -38,6 +38,7 @@ type ApplicationInitParameters struct {
 	OpsItemSnsTopicArn *string `json:"opsItemSnsTopicArn,omitempty" tf:"ops_item_sns_topic_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -68,9 +69,11 @@ type ApplicationObservation struct {
 	OpsItemSnsTopicArn *string `json:"opsItemSnsTopicArn,omitempty" tf:"ops_item_sns_topic_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -107,6 +110,7 @@ type ApplicationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

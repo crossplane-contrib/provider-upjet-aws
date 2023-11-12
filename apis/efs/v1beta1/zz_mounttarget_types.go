@@ -59,6 +59,7 @@ type MountTargetObservation struct {
 
 	// A list of up to 5 VPC security group IDs (that must
 	// be for the same VPC as subnet specified) in effect for the mount target.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The ID of the subnet to add the mount target in.
@@ -94,6 +95,7 @@ type MountTargetParameters struct {
 	// be for the same VPC as subnet specified) in effect for the mount target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.

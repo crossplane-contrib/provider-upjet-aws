@@ -149,6 +149,7 @@ type CompromisedCredentialsRiskConfigurationInitParameters struct {
 	Actions []CompromisedCredentialsRiskConfigurationActionsInitParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
+	// +listType:set
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
@@ -158,6 +159,7 @@ type CompromisedCredentialsRiskConfigurationObservation struct {
 	Actions []CompromisedCredentialsRiskConfigurationActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
+	// +listType:set
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
@@ -169,6 +171,7 @@ type CompromisedCredentialsRiskConfigurationParameters struct {
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
@@ -485,11 +488,13 @@ type RiskExceptionConfigurationInitParameters struct {
 	// Overrides the risk decision to always block the pre-authentication requests.
 	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
 	// Can contain a maximum of 200 items.
+	// +listType:set
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
 	// Risk detection isn't performed on the IP addresses in this range list.
 	// The IP range is in CIDR notation.
 	// Can contain a maximum of 200 items.
+	// +listType:set
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 
@@ -498,11 +503,13 @@ type RiskExceptionConfigurationObservation struct {
 	// Overrides the risk decision to always block the pre-authentication requests.
 	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
 	// Can contain a maximum of 200 items.
+	// +listType:set
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
 	// Risk detection isn't performed on the IP addresses in this range list.
 	// The IP range is in CIDR notation.
 	// Can contain a maximum of 200 items.
+	// +listType:set
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 
@@ -512,12 +519,14 @@ type RiskExceptionConfigurationParameters struct {
 	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
 	// Can contain a maximum of 200 items.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
 	// Risk detection isn't performed on the IP addresses in this range list.
 	// The IP range is in CIDR notation.
 	// Can contain a maximum of 200 items.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 

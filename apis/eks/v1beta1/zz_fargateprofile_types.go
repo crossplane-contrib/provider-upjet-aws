@@ -23,6 +23,7 @@ type FargateProfileInitParameters struct {
 	Selector []SelectorInitParameters `json:"selector,omitempty" tf:"selector,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -47,12 +48,15 @@ type FargateProfileObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// –  Identifiers of private EC2 Subnets to associate with the EKS Fargate Profile. These subnets must have the following resource tag: kubernetes.io/cluster/CLUSTER_NAME (where CLUSTER_NAME is replaced with the name of the EKS Cluster).
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -107,16 +111,19 @@ type FargateProfileParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SelectorInitParameters struct {
 
 	// Key-value map of Kubernetes labels for selection.
+	// +mapType:granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Kubernetes namespace for selection.
@@ -126,6 +133,7 @@ type SelectorInitParameters struct {
 type SelectorObservation struct {
 
 	// Key-value map of Kubernetes labels for selection.
+	// +mapType:granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Kubernetes namespace for selection.
@@ -136,6 +144,7 @@ type SelectorParameters struct {
 
 	// Key-value map of Kubernetes labels for selection.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Kubernetes namespace for selection.

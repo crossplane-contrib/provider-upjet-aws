@@ -38,9 +38,11 @@ type ComponentInitParameters struct {
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Set of Operating Systems (OS) supported by the component.
+	// +listType:set
 	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// S3 URI with data of the component. Exactly one of data and uri can be specified.
@@ -88,12 +90,15 @@ type ComponentObservation struct {
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Set of Operating Systems (OS) supported by the component.
+	// +listType:set
 	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Type of the component.
@@ -152,10 +157,12 @@ type ComponentParameters struct {
 
 	// Set of Operating Systems (OS) supported by the component.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// S3 URI with data of the component. Exactly one of data and uri can be specified.

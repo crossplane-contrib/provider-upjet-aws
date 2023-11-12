@@ -47,6 +47,7 @@ type ApplicationInitParameters struct {
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of application you want to start, such as spark or hive.
@@ -89,9 +90,11 @@ type ApplicationObservation struct {
 	ReleaseLabel *string `json:"releaseLabel,omitempty" tf:"release_label,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// –  The type of application you want to start, such as spark or hive.
@@ -143,6 +146,7 @@ type ApplicationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of application you want to start, such as spark or hive.
@@ -317,18 +321,22 @@ type MaximumCapacityParameters struct {
 type NetworkConfigurationInitParameters struct {
 
 	// The array of security group Ids for customer VPC connectivity.
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The array of subnet Ids for customer VPC connectivity.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
 
 	// The array of security group Ids for customer VPC connectivity.
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The array of subnet Ids for customer VPC connectivity.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -336,10 +344,12 @@ type NetworkConfigurationParameters struct {
 
 	// The array of security group Ids for customer VPC connectivity.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The array of subnet Ids for customer VPC connectivity.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 

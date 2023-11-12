@@ -70,6 +70,7 @@ type VPCEndpointInitParameters_2 struct {
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC endpoint type, Gateway, GatewayLoadBalancer, or Interface. Defaults to Gateway.
@@ -100,6 +101,7 @@ type VPCEndpointObservation_2 struct {
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// One or more network interfaces for the VPC Endpoint. Applicable for endpoints of type Interface.
+	// +listType:set
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
 	// The ID of the AWS account that owns the VPC endpoint.
@@ -119,10 +121,12 @@ type VPCEndpointObservation_2 struct {
 	RequesterManaged *bool `json:"requesterManaged,omitempty" tf:"requester_managed,omitempty"`
 
 	// One or more route table IDs. Applicable for endpoints of type Gateway.
+	// +listType:set
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
 	// The ID of one or more security groups to associate with the network interface. Applicable for endpoints of type Interface.
 	// If no security groups are specified, the VPC's default security group is associated with the endpoint.
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook).
@@ -132,12 +136,15 @@ type VPCEndpointObservation_2 struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer and Interface.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VPC endpoint type, Gateway, GatewayLoadBalancer, or Interface. Defaults to Gateway.
@@ -191,6 +198,7 @@ type VPCEndpointParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC endpoint type, Gateway, GatewayLoadBalancer, or Interface. Defaults to Gateway.

@@ -79,6 +79,7 @@ type PoolRolesAttachmentInitParameters struct {
 	RoleMapping []RoleMappingInitParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
 
 	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
+	// +mapType:granular
 	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
@@ -94,6 +95,7 @@ type PoolRolesAttachmentObservation struct {
 	RoleMapping []RoleMappingObservation `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`
 
 	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
+	// +mapType:granular
 	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
@@ -124,6 +126,7 @@ type PoolRolesAttachmentParameters struct {
 
 	// The map of roles associated with this pool. For a given role, the key will be either "authenticated" or "unauthenticated" and the value will be the Role ARN.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Roles map[string]*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 

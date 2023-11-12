@@ -78,6 +78,7 @@ type AcceleratorTotalMemoryMibParameters struct {
 type AutoscalingGroupInitParameters struct {
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
@@ -101,6 +102,7 @@ type AutoscalingGroupInitParameters struct {
 	DesiredCapacityType *string `json:"desiredCapacityType,omitempty" tf:"desired_capacity_type,omitempty"`
 
 	// List of metrics to collect. The allowed values are defined by the underlying AWS API.
+	// +listType:set
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
 	// Allows deleting the Auto Scaling Group without waiting
@@ -162,6 +164,7 @@ type AutoscalingGroupInitParameters struct {
 
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+	// +listType:set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
 	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
@@ -193,6 +196,7 @@ type AutoscalingGroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
@@ -216,6 +220,7 @@ type AutoscalingGroupObservation struct {
 	DesiredCapacityType *string `json:"desiredCapacityType,omitempty" tf:"desired_capacity_type,omitempty"`
 
 	// List of metrics to collect. The allowed values are defined by the underlying AWS API.
+	// +listType:set
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
 	// Allows deleting the Auto Scaling Group without waiting
@@ -259,6 +264,7 @@ type AutoscalingGroupObservation struct {
 
 	// List of elastic load balancer names to add to the autoscaling
 	// group names. Only valid for classic load balancers. For ALBs, use target_group_arns instead.
+	// +listType:set
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
 	// Maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 86400 and 31536000 seconds.
@@ -296,6 +302,7 @@ type AutoscalingGroupObservation struct {
 
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
+	// +listType:set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
 	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
@@ -305,12 +312,14 @@ type AutoscalingGroupObservation struct {
 	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Set of aws_alb_target_group ARNs, for use with Application or Network Load Balancing.
+	// +listType:set
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
+	// +listType:set
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
 
 	// (See also Waiting
@@ -334,6 +343,7 @@ type AutoscalingGroupParameters struct {
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled.
@@ -364,6 +374,7 @@ type AutoscalingGroupParameters struct {
 
 	// List of metrics to collect. The allowed values are defined by the underlying AWS API.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	EnabledMetrics []*string `json:"enabledMetrics,omitempty" tf:"enabled_metrics,omitempty"`
 
 	// Allows deleting the Auto Scaling Group without waiting
@@ -486,6 +497,7 @@ type AutoscalingGroupParameters struct {
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
 	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
@@ -503,6 +515,7 @@ type AutoscalingGroupParameters struct {
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
 
 	// References to Subnet in ec2 to populate vpcZoneIdentifier.
@@ -633,6 +646,7 @@ type InstanceRefreshInitParameters struct {
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
 	// Set of additional property names that will trigger an Instance Refresh. A refresh will always be triggered by a change in any of launch_configuration, launch_template, or mixed_instances_policy.
+	// +listType:set
 	Triggers []*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -645,6 +659,7 @@ type InstanceRefreshObservation struct {
 	Strategy *string `json:"strategy,omitempty" tf:"strategy,omitempty"`
 
 	// Set of additional property names that will trigger an Instance Refresh. A refresh will always be triggered by a change in any of launch_configuration, launch_template, or mixed_instances_policy.
+	// +listType:set
 	Triggers []*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -660,6 +675,7 @@ type InstanceRefreshParameters struct {
 
 	// Set of additional property names that will trigger an Instance Refresh. A refresh will always be triggered by a change in any of launch_configuration, launch_template, or mixed_instances_policy.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Triggers []*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -669,18 +685,22 @@ type InstanceRequirementsInitParameters struct {
 	AcceleratorCount []AcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType:set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
+	// +listType:set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
+	// +listType:set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType:set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -693,18 +713,22 @@ type InstanceRequirementsInitParameters struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType:set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType:set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
+	// +listType:set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
 	// List of local storage type names. Default any storage type.
+	// +listType:set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -741,18 +765,22 @@ type InstanceRequirementsObservation struct {
 	AcceleratorCount []AcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType:set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
+	// +listType:set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
+	// +listType:set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType:set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -765,18 +793,22 @@ type InstanceRequirementsObservation struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType:set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType:set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
+	// +listType:set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
 	// List of local storage type names. Default any storage type.
+	// +listType:set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -815,10 +847,12 @@ type InstanceRequirementsParameters struct {
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
@@ -827,10 +861,12 @@ type InstanceRequirementsParameters struct {
 
 	// List of accelerator types. Default is any accelerator type.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -847,14 +883,17 @@ type InstanceRequirementsParameters struct {
 
 	// List of CPU manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
@@ -863,6 +902,7 @@ type InstanceRequirementsParameters struct {
 
 	// List of local storage type names. Default any storage type.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.

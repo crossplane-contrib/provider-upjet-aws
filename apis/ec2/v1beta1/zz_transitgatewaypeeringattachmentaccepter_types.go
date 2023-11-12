@@ -20,6 +20,7 @@ import (
 type TransitGatewayPeeringAttachmentAccepterInitParameters struct {
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -37,9 +38,11 @@ type TransitGatewayPeeringAttachmentAccepterObservation struct {
 	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Peering Attachment to manage.
@@ -58,6 +61,7 @@ type TransitGatewayPeeringAttachmentAccepterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Peering Attachment to manage.

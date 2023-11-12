@@ -20,6 +20,7 @@ import (
 type VaultNotificationsInitParameters struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
+	// +listType:set
 	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
 }
 
@@ -29,6 +30,7 @@ type VaultNotificationsObservation struct {
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
+	// +listType:set
 	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
 
 	// Name of the backup vault to add notifications for.
@@ -45,6 +47,7 @@ type VaultNotificationsParameters struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
 
 	// Name of the backup vault to add notifications for.

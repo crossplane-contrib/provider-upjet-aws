@@ -20,9 +20,11 @@ import (
 type CriterionInitParameters struct {
 
 	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// +listType:set
 	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
 
 	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	// +listType:set
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
 	// The name of the field to be evaluated.
@@ -41,15 +43,18 @@ type CriterionInitParameters struct {
 	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 
 	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// +listType:set
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
 type CriterionObservation struct {
 
 	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// +listType:set
 	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
 
 	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
+	// +listType:set
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
 	// The name of the field to be evaluated.
@@ -68,6 +73,7 @@ type CriterionObservation struct {
 	Lte *string `json:"lte,omitempty" tf:"lte,omitempty"`
 
 	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
+	// +listType:set
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
@@ -75,10 +81,12 @@ type CriterionParameters struct {
 
 	// The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Eq []*string `json:"eq,omitempty" tf:"eq,omitempty"`
 
 	// The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	EqExactMatch []*string `json:"eqExactMatch,omitempty" tf:"eq_exact_match,omitempty"`
 
 	// The name of the field to be evaluated.
@@ -103,6 +111,7 @@ type CriterionParameters struct {
 
 	// The value for the property doesn't match (doesn't equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Neq []*string `json:"neq,omitempty" tf:"neq,omitempty"`
 }
 
@@ -143,6 +152,7 @@ type FindingsFilterInitParameters struct {
 	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -170,8 +180,10 @@ type FindingsFilterObservation struct {
 	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -204,6 +216,7 @@ type FindingsFilterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

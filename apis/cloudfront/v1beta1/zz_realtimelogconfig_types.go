@@ -97,6 +97,7 @@ type RealtimeLogConfigInitParameters struct {
 	Endpoint []EndpointInitParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// +listType:set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The unique name to identify this real-time log configuration.
@@ -115,6 +116,7 @@ type RealtimeLogConfigObservation struct {
 	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// +listType:set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The ID of the CloudFront real-time log configuration.
@@ -135,6 +137,7 @@ type RealtimeLogConfigParameters struct {
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The unique name to identify this real-time log configuration.

@@ -63,14 +63,17 @@ type InstancePublicPortsParameters struct {
 type PortInfoInitParameters struct {
 
 	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	// +listType:set
 	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
 
 	// Set of CIDR blocks.
+	// +listType:set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// First port in a range of open ports on an instance.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// +listType:set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
@@ -83,14 +86,17 @@ type PortInfoInitParameters struct {
 type PortInfoObservation struct {
 
 	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	// +listType:set
 	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
 
 	// Set of CIDR blocks.
+	// +listType:set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// First port in a range of open ports on an instance.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// +listType:set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
@@ -104,10 +110,12 @@ type PortInfoParameters struct {
 
 	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
 
 	// Set of CIDR blocks.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// First port in a range of open ports on an instance.
@@ -115,6 +123,7 @@ type PortInfoParameters struct {
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.

@@ -39,10 +39,12 @@ type InstanceMetadataServiceConfigurationParameters struct {
 type NotebookInstanceInitParameters struct {
 
 	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
+	// +listType:set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
+	// +listType:set
 	AdditionalCodeRepositories []*string `json:"additionalCodeRepositories,omitempty" tf:"additional_code_repositories,omitempty"`
 
 	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
@@ -64,9 +66,11 @@ type NotebookInstanceInitParameters struct {
 	RootAccess *string `json:"rootAccess,omitempty" tf:"root_access,omitempty"`
 
 	// The associated security groups.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
@@ -76,10 +80,12 @@ type NotebookInstanceInitParameters struct {
 type NotebookInstanceObservation struct {
 
 	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
+	// +listType:set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
+	// +listType:set
 	AdditionalCodeRepositories []*string `json:"additionalCodeRepositories,omitempty" tf:"additional_code_repositories,omitempty"`
 
 	// The Amazon Resource Name (ARN) assigned by AWS to this notebook instance.
@@ -119,15 +125,18 @@ type NotebookInstanceObservation struct {
 	RootAccess *string `json:"rootAccess,omitempty" tf:"root_access,omitempty"`
 
 	// The associated security groups.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC subnet ID.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The URL that you use to connect to the Jupyter notebook that is running in your notebook instance.
@@ -141,11 +150,13 @@ type NotebookInstanceParameters struct {
 
 	// A list of Elastic Inference (EI) instance types to associate with this notebook instance. See Elastic Inference Accelerator for more details. Valid values: ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in AWS CodeCommit or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AdditionalCodeRepositories []*string `json:"additionalCodeRepositories,omitempty" tf:"additional_code_repositories,omitempty"`
 
 	// The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository.
@@ -219,6 +230,7 @@ type NotebookInstanceParameters struct {
 
 	// The associated security groups.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC subnet ID.
@@ -236,6 +248,7 @@ type NotebookInstanceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.

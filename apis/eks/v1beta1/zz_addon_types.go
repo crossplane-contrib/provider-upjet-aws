@@ -39,6 +39,7 @@ type AddonInitParameters struct {
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -87,9 +88,11 @@ type AddonObservation struct {
 	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Key-value map of resource tags, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -158,6 +161,7 @@ type AddonParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

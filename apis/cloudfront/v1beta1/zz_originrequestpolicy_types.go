@@ -18,30 +18,40 @@ import (
 )
 
 type CookiesConfigCookiesInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type CookiesConfigCookiesObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type CookiesConfigCookiesParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type HeadersConfigHeadersInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type HeadersConfigHeadersObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type HeadersConfigHeadersParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -169,16 +179,21 @@ type OriginRequestPolicyQueryStringsConfigParameters struct {
 }
 
 type QueryStringsConfigQueryStringsInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type QueryStringsConfigQueryStringsObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type QueryStringsConfigQueryStringsParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 

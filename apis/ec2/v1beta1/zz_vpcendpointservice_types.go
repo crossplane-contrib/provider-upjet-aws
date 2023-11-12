@@ -44,18 +44,22 @@ type VPCEndpointServiceInitParameters struct {
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// +listType:set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// +listType:set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 
 	// The private DNS name for the service.
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
 
 	// The supported IP address types. The possible values are ipv4 and ipv6.
+	// +listType:set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -65,18 +69,22 @@ type VPCEndpointServiceObservation struct {
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// The ARNs of one or more principals allowed to discover the endpoint service.
+	// +listType:set
 	AllowedPrincipals []*string `json:"allowedPrincipals,omitempty" tf:"allowed_principals,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the VPC endpoint service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A set of Availability Zones in which the service is available.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// A set of DNS names for the service.
+	// +listType:set
 	BaseEndpointDNSNames []*string `json:"baseEndpointDnsNames,omitempty" tf:"base_endpoint_dns_names,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// +listType:set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
 	// The ID of the VPC endpoint service.
@@ -86,6 +94,7 @@ type VPCEndpointServiceObservation struct {
 	ManagesVPCEndpoints *bool `json:"managesVpcEndpoints,omitempty" tf:"manages_vpc_endpoints,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// +listType:set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 
 	// The private DNS name for the service.
@@ -104,12 +113,15 @@ type VPCEndpointServiceObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// The supported IP address types. The possible values are ipv4 and ipv6.
+	// +listType:set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -121,10 +133,12 @@ type VPCEndpointServiceParameters struct {
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
 
 	// The private DNS name for the service.
@@ -138,10 +152,12 @@ type VPCEndpointServiceParameters struct {
 
 	// The supported IP address types. The possible values are ipv4 and ipv6.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

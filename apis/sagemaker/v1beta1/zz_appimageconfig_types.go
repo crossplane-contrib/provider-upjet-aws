@@ -23,6 +23,7 @@ type AppImageConfigInitParameters struct {
 	KernelGatewayImageConfig []KernelGatewayImageConfigInitParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -38,9 +39,11 @@ type AppImageConfigObservation struct {
 	KernelGatewayImageConfig []KernelGatewayImageConfigObservation `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -57,6 +60,7 @@ type AppImageConfigParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -362,6 +362,7 @@ type HTTPRouteRetryPolicyInitParameters struct {
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -371,6 +372,7 @@ type HTTPRouteRetryPolicyInitParameters struct {
 	PerRetryTimeout []HTTPRouteRetryPolicyPerRetryTimeoutInitParameters `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
 
 	// List of TCP retry events. The only valid value is connection-error.
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -378,6 +380,7 @@ type HTTPRouteRetryPolicyObservation struct {
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -387,6 +390,7 @@ type HTTPRouteRetryPolicyObservation struct {
 	PerRetryTimeout []HTTPRouteRetryPolicyPerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
 
 	// List of TCP retry events. The only valid value is connection-error.
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -395,6 +399,7 @@ type HTTPRouteRetryPolicyParameters struct {
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -407,6 +412,7 @@ type HTTPRouteRetryPolicyParameters struct {
 
 	// List of TCP retry events. The only valid value is connection-error.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -734,6 +740,7 @@ type Http2RouteRetryPolicyInitParameters struct {
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -743,6 +750,7 @@ type Http2RouteRetryPolicyInitParameters struct {
 	PerRetryTimeout []RetryPolicyPerRetryTimeoutInitParameters `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
 
 	// List of TCP retry events. The only valid value is connection-error.
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -750,6 +758,7 @@ type Http2RouteRetryPolicyObservation struct {
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -759,6 +768,7 @@ type Http2RouteRetryPolicyObservation struct {
 	PerRetryTimeout []RetryPolicyPerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
 
 	// List of TCP retry events. The only valid value is connection-error.
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -767,6 +777,7 @@ type Http2RouteRetryPolicyParameters struct {
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -779,6 +790,7 @@ type Http2RouteRetryPolicyParameters struct {
 
 	// List of TCP retry events. The only valid value is connection-error.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -1058,10 +1070,12 @@ type RetryPolicyInitParameters struct {
 
 	// List of gRPC retry events.
 	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
+	// +listType:set
 	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -1071,6 +1085,7 @@ type RetryPolicyInitParameters struct {
 	PerRetryTimeout []PerRetryTimeoutInitParameters `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
 
 	// List of TCP retry events. The only valid value is connection-error.
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -1078,10 +1093,12 @@ type RetryPolicyObservation struct {
 
 	// List of gRPC retry events.
 	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
+	// +listType:set
 	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -1091,6 +1108,7 @@ type RetryPolicyObservation struct {
 	PerRetryTimeout []PerRetryTimeoutObservation `json:"perRetryTimeout,omitempty" tf:"per_retry_timeout,omitempty"`
 
 	// List of TCP retry events. The only valid value is connection-error.
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -1099,11 +1117,13 @@ type RetryPolicyParameters struct {
 	// List of gRPC retry events.
 	// Valid values: cancelled, deadline-exceeded, internal, resource-exhausted, unavailable.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	GRPCRetryEvents []*string `json:"grpcRetryEvents,omitempty" tf:"grpc_retry_events,omitempty"`
 
 	// List of HTTP retry events.
 	// Valid values: client-error (HTTP status code 409), gateway-error (HTTP status codes 502, 503, and 504), server-error (HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511), stream-error (retry on refused stream).
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	HTTPRetryEvents []*string `json:"httpRetryEvents,omitempty" tf:"http_retry_events,omitempty"`
 
 	// Maximum number of retries.
@@ -1116,6 +1136,7 @@ type RetryPolicyParameters struct {
 
 	// List of TCP retry events. The only valid value is connection-error.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	TCPRetryEvents []*string `json:"tcpRetryEvents,omitempty" tf:"tcp_retry_events,omitempty"`
 }
 
@@ -1160,6 +1181,7 @@ type RouteInitParameters struct {
 	Spec []RouteSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1193,9 +1215,11 @@ type RouteObservation struct {
 	Spec []RouteSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
@@ -1237,6 +1261,7 @@ type RouteParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.

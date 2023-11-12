@@ -72,6 +72,7 @@ type ReplicationGroupInitParameters struct {
 	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not considered.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Create a native Redis cluster. automatic_failover_enabled must be set to true. Cluster Mode documented below. Only 1 cluster_mode block is allowed. Note that configuring this block does not enable cluster mode, i.e., data sharding, this requires using a parameter group that has the parameter cluster-enabled set to true.
@@ -142,9 +143,11 @@ type ReplicationGroupInitParameters struct {
 	ReplicationGroupDescription *string `json:"replicationGroupDescription,omitempty" tf:"replication_group_description,omitempty"`
 
 	// List of cache security group names to associate with this replication group.
+	// +listType:set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// –  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
+	// +listType:set
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
 	// Name of a snapshot from which to restore data into the new node group. Changing the snapshot_name forces a new resource.
@@ -157,12 +160,14 @@ type ReplicationGroupInitParameters struct {
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to enable encryption in transit.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
+	// +listType:set
 	UserGroupIds []*string `json:"userGroupIds,omitempty" tf:"user_group_ids,omitempty"`
 }
 
@@ -235,6 +240,7 @@ type ReplicationGroupObservation struct {
 	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not considered.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Indicates if cluster mode is enabled.
@@ -284,6 +290,7 @@ type ReplicationGroupObservation struct {
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// Identifiers of all the nodes that are part of this replication group.
+	// +listType:set
 	MemberClusters []*string `json:"memberClusters,omitempty" tf:"member_clusters,omitempty"`
 
 	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
@@ -329,12 +336,15 @@ type ReplicationGroupObservation struct {
 	ReplicationGroupDescription *string `json:"replicationGroupDescription,omitempty" tf:"replication_group_description,omitempty"`
 
 	// One or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of cache security group names to associate with this replication group.
+	// +listType:set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// –  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
+	// +listType:set
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
 	// Name of a snapshot from which to restore data into the new node group. Changing the snapshot_name forces a new resource.
@@ -350,15 +360,18 @@ type ReplicationGroupObservation struct {
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whether to enable encryption in transit.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
+	// +listType:set
 	UserGroupIds []*string `json:"userGroupIds,omitempty" tf:"user_group_ids,omitempty"`
 }
 
@@ -388,6 +401,7 @@ type ReplicationGroupParameters struct {
 
 	// List of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not considered.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Create a native Redis cluster. automatic_failover_enabled must be set to true. Cluster Mode documented below. Only 1 cluster_mode block is allowed. Note that configuring this block does not enable cluster mode, i.e., data sharding, this requires using a parameter group that has the parameter cluster-enabled set to true.
@@ -508,14 +522,17 @@ type ReplicationGroupParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of cache security group names to associate with this replication group.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// –  List of ARNs that identify Redis RDB snapshot files stored in Amazon S3. The names object names cannot contain any commas.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
 
 	// Name of a snapshot from which to restore data into the new node group. Changing the snapshot_name forces a new resource.
@@ -545,6 +562,7 @@ type ReplicationGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to enable encryption in transit.
@@ -553,6 +571,7 @@ type ReplicationGroupParameters struct {
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	UserGroupIds []*string `json:"userGroupIds,omitempty" tf:"user_group_ids,omitempty"`
 }
 

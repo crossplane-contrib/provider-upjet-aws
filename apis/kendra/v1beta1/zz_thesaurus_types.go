@@ -29,6 +29,7 @@ type ThesaurusInitParameters struct {
 	SourceS3Path []ThesaurusSourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,9 +60,11 @@ type ThesaurusObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The unique identifiers of the thesaurus and index separated by a slash (/).
@@ -117,6 +120,7 @@ type ThesaurusParameters struct {
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

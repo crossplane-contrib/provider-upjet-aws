@@ -73,6 +73,7 @@ type BucketInventoryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
+	// +listType:set
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
 	// Specifies the schedule for generating inventory results (documented below).
@@ -102,6 +103,7 @@ type BucketInventoryObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
+	// +listType:set
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
 	// Specifies the schedule for generating inventory results (documented below).
@@ -146,6 +148,7 @@ type BucketInventoryParameters struct {
 
 	// List of optional fields that are included in the inventory results. Please refer to the S3 documentation for more details.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	OptionalFields []*string `json:"optionalFields,omitempty" tf:"optional_fields,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

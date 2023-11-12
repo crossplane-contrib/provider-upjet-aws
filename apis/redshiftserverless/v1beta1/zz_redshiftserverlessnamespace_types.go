@@ -23,9 +23,11 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
+	// +listType:set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,6 +43,7 @@ type RedshiftServerlessNamespaceObservation struct {
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
 
 	// A list of IAM roles to associate with the namespace.
+	// +listType:set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The Redshift Namespace Name.
@@ -50,15 +53,18 @@ type RedshiftServerlessNamespaceObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
+	// +listType:set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// The Redshift Namespace ID.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -103,6 +109,7 @@ type RedshiftServerlessNamespaceParameters struct {
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The ARN of the Amazon Web Services Key Management Service key used to encrypt your data.
@@ -120,6 +127,7 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -129,6 +137,7 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -76,6 +76,7 @@ type InputInitParameters struct {
 	Sources []SourcesInitParameters `json:"sources,omitempty" tf:"sources,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.
@@ -127,8 +128,10 @@ type InputObservation struct {
 	Sources []SourcesObservation `json:"sources,omitempty" tf:"sources,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.
@@ -185,6 +188,7 @@ type InputParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.

@@ -32,6 +32,7 @@ type ClusterInitParameters struct {
 	Setting []SettingInitParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,6 +42,7 @@ type ClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// List of short names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
+	// +listType:set
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// The execute command configuration for the cluster. Detailed below.
@@ -59,9 +61,11 @@ type ClusterObservation struct {
 	Setting []SettingObservation `json:"setting,omitempty" tf:"setting,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -90,6 +94,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

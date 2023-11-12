@@ -48,6 +48,7 @@ type AndInitParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -63,6 +64,7 @@ type AndObservation struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -82,6 +84,7 @@ type AndParameters struct {
 
 	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

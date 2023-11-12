@@ -68,12 +68,14 @@ type AccessLogParameters struct {
 type AcmInitParameters struct {
 
 	// One or more ACM ARNs.
+	// +listType:set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type AcmObservation struct {
 
 	// One or more ACM ARNs.
+	// +listType:set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -81,6 +83,7 @@ type AcmParameters struct {
 
 	// One or more ACM ARNs.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -661,12 +664,14 @@ type SubjectAlternativeNamesInitParameters struct {
 type SubjectAlternativeNamesMatchInitParameters struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType:set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type SubjectAlternativeNamesMatchObservation struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType:set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
@@ -674,6 +679,7 @@ type SubjectAlternativeNamesMatchParameters struct {
 
 	// Values sent must match the specified values exactly.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Exact []*string `json:"exact" tf:"exact,omitempty"`
 }
 
@@ -738,6 +744,7 @@ type TLSInitParameters struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
+	// +listType:set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -753,6 +760,7 @@ type TLSObservation struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
+	// +listType:set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -771,6 +779,7 @@ type TLSParameters struct {
 
 	// One or more ports that the policy is enforced for.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -922,12 +931,14 @@ type ValidationSubjectAlternativeNamesInitParameters struct {
 type ValidationSubjectAlternativeNamesMatchInitParameters struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType:set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type ValidationSubjectAlternativeNamesMatchObservation struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType:set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
@@ -935,6 +946,7 @@ type ValidationSubjectAlternativeNamesMatchParameters struct {
 
 	// Values sent must match the specified values exactly.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Exact []*string `json:"exact" tf:"exact,omitempty"`
 }
 
@@ -1033,6 +1045,7 @@ type VirtualGatewayInitParameters struct {
 	Spec []VirtualGatewaySpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1066,9 +1079,11 @@ type VirtualGatewayObservation struct {
 	Spec []VirtualGatewaySpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -1097,6 +1112,7 @@ type VirtualGatewayParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

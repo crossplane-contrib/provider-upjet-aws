@@ -20,9 +20,11 @@ import (
 type ReportDefinitionInitParameters struct {
 
 	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
+	// +listType:set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
 	// A list of schema elements. Valid values are: RESOURCES.
+	// +listType:set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
 	// Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet.
@@ -50,9 +52,11 @@ type ReportDefinitionInitParameters struct {
 type ReportDefinitionObservation struct {
 
 	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
+	// +listType:set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
 	// A list of schema elements. Valid values are: RESOURCES.
+	// +listType:set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
 	// The Amazon Resource Name (ARN) specifying the cur report.
@@ -89,10 +93,12 @@ type ReportDefinitionParameters struct {
 
 	// A list of additional artifacts. Valid values are: REDSHIFT, QUICKSIGHT, ATHENA. When ATHENA exists within additional_artifacts, no other artifact type can be declared and report_versioning must be OVERWRITE_REPORT.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
 	// A list of schema elements. Valid values are: RESOURCES.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
 	// Compression format for report. Valid values are: GZIP, ZIP, Parquet. If Parquet is used, then format must also be Parquet.

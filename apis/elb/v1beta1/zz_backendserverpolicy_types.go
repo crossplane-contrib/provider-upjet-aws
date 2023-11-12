@@ -23,6 +23,7 @@ type BackendServerPolicyInitParameters struct {
 	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +listType:set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 }
 
@@ -38,6 +39,7 @@ type BackendServerPolicyObservation struct {
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +listType:set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 }
 
@@ -62,6 +64,7 @@ type BackendServerPolicyParameters struct {
 
 	// List of Policy Names to apply to the backend server.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

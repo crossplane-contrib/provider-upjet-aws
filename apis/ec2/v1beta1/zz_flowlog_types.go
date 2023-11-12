@@ -83,6 +83,7 @@ type FlowLogInitParameters struct {
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
@@ -137,9 +138,11 @@ type FlowLogObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
@@ -236,6 +239,7 @@ type FlowLogParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.

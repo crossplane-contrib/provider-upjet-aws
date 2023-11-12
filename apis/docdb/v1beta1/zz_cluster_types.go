@@ -26,6 +26,7 @@ type ClusterInitParameters struct {
 
 	// A list of EC2 Availability Zones that
 	// instances in the DB cluster can be created in.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
@@ -81,6 +82,7 @@ type ClusterInitParameters struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -96,12 +98,14 @@ type ClusterObservation struct {
 
 	// A list of EC2 Availability Zones that
 	// instances in the DB cluster can be created in.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// – List of DocumentDB Instances that are a part of this cluster
+	// +listType:set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
 	// The DocumentDB Cluster Resource ID
@@ -172,13 +176,16 @@ type ClusterObservation struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// List of VPC security groups to associate
 	// with the Cluster
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
@@ -193,6 +200,7 @@ type ClusterParameters struct {
 	// A list of EC2 Availability Zones that
 	// instances in the DB cluster can be created in.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
@@ -288,6 +296,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -304,6 +313,7 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 

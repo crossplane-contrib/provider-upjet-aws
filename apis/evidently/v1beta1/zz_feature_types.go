@@ -41,12 +41,14 @@ type FeatureInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specify users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.
+	// +mapType:granular
 	EntityOverrides map[string]*string `json:"entityOverrides,omitempty" tf:"entity_overrides,omitempty"`
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION to serve the default variation to all users instead.
 	EvaluationStrategy *string `json:"evaluationStrategy,omitempty" tf:"evaluation_strategy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more blocks that contain the configuration of the feature's different variations. Detailed below
@@ -68,6 +70,7 @@ type FeatureObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specify users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.
+	// +mapType:granular
 	EntityOverrides map[string]*string `json:"entityOverrides,omitempty" tf:"entity_overrides,omitempty"`
 
 	// One or more blocks that define the evaluation rules for the feature. Detailed below
@@ -89,9 +92,11 @@ type FeatureObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Defines the type of value used to define the different feature variations. Valid Values: STRING, LONG, DOUBLE, BOOLEAN.
@@ -113,6 +118,7 @@ type FeatureParameters struct {
 
 	// Specify users that should always be served a specific variation of a feature. Each user is specified by a key-value pair . For each key, specify a user by entering their user ID, account ID, or some other identifier. For the value, specify the name of the variation that they are to be served.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	EntityOverrides map[string]*string `json:"entityOverrides,omitempty" tf:"entity_overrides,omitempty"`
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION to serve the default variation to all users instead.
@@ -140,6 +146,7 @@ type FeatureParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more blocks that contain the configuration of the feature's different variations. Detailed below

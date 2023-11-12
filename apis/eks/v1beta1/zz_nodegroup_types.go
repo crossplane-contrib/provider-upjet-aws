@@ -86,6 +86,7 @@ type NodeGroupInitParameters struct {
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
+	// +mapType:granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Configuration block with Launch Template settings. Detailed below.
@@ -101,6 +102,7 @@ type NodeGroupInitParameters struct {
 	ScalingConfig []ScalingConfigInitParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
@@ -136,6 +138,7 @@ type NodeGroupObservation struct {
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
+	// +mapType:granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Configuration block with Launch Template settings. Detailed below.
@@ -160,12 +163,15 @@ type NodeGroupObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
@@ -215,6 +221,7 @@ type NodeGroupParameters struct {
 
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Configuration block with Launch Template settings. Detailed below.
@@ -265,10 +272,12 @@ type NodeGroupParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
@@ -305,6 +314,7 @@ type RemoteAccessObservation struct {
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
 
 	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
+	// +listType:set
 	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 
@@ -327,6 +337,7 @@ type RemoteAccessParameters struct {
 	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 

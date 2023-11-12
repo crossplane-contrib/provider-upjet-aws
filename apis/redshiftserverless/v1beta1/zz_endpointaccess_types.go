@@ -38,12 +38,14 @@ type EndpointAccessObservation struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// An array of VPC subnet IDs to associate with the endpoint.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The VPC endpoint or the Redshift Serverless workgroup. See VPC Endpoint below.
 	VPCEndpoint []VPCEndpointObservation `json:"vpcEndpoint,omitempty" tf:"vpc_endpoint,omitempty"`
 
 	// An array of security group IDs to associate with the workgroup.
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// The name of the workgroup.
@@ -70,6 +72,7 @@ type EndpointAccessParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -85,6 +88,7 @@ type EndpointAccessParameters struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// The name of the workgroup.

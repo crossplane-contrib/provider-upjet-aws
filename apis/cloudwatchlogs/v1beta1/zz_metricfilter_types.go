@@ -79,6 +79,7 @@ type MetricTransformationInitParameters struct {
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
 	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
@@ -100,6 +101,7 @@ type MetricTransformationObservation struct {
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
 	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
@@ -123,6 +125,7 @@ type MetricTransformationParameters struct {
 
 	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)

@@ -33,6 +33,7 @@ type ServerCertificateInitParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -61,9 +62,11 @@ type ServerCertificateObservation struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Date and time in RFC3339 format when the server certificate was uploaded.
@@ -94,6 +97,7 @@ type ServerCertificateParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -34,6 +34,7 @@ type GroupMembershipObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of IAM User names to associate with the Group
+	// +listType:set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
@@ -69,6 +70,7 @@ type GroupMembershipParameters struct {
 	// +crossplane:generate:reference:refFieldName=UserRefs
 	// +crossplane:generate:reference:selectorFieldName=UserSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 

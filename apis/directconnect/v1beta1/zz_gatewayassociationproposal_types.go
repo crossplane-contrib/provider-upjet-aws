@@ -20,12 +20,14 @@ import (
 type GatewayAssociationProposalInitParameters struct {
 
 	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
+	// +listType:set
 	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
 }
 
 type GatewayAssociationProposalObservation struct {
 
 	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
+	// +listType:set
 	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
 
 	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
@@ -51,6 +53,7 @@ type GatewayAssociationProposalParameters struct {
 
 	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
 
 	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.

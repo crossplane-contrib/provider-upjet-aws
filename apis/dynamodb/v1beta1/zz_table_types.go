@@ -55,6 +55,7 @@ type GlobalSecondaryIndexInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
+	// +listType:set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
@@ -79,6 +80,7 @@ type GlobalSecondaryIndexObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
+	// +listType:set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
@@ -106,6 +108,7 @@ type GlobalSecondaryIndexParameters struct {
 
 	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
@@ -310,6 +313,7 @@ type TableInitParameters struct {
 	TableClass *string `json:"tableClass,omitempty" tf:"table_class,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
@@ -387,9 +391,11 @@ type TableObservation struct {
 	TableClass *string `json:"tableClass,omitempty" tf:"table_class,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.
@@ -479,6 +485,7 @@ type TableParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Number of write units for this table. If the billing_mode is PROVISIONED, this field is required.

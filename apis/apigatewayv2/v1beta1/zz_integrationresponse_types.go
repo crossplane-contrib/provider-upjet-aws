@@ -26,6 +26,7 @@ type IntegrationResponseInitParameters struct {
 	IntegrationResponseKey *string `json:"integrationResponseKey,omitempty" tf:"integration_response_key,omitempty"`
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// The template selection expression for the integration response.
@@ -50,6 +51,7 @@ type IntegrationResponseObservation struct {
 	IntegrationResponseKey *string `json:"integrationResponseKey,omitempty" tf:"integration_response_key,omitempty"`
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// The template selection expression for the integration response.
@@ -99,6 +101,7 @@ type IntegrationResponseParameters struct {
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// The template selection expression for the integration response.

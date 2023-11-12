@@ -26,6 +26,7 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Exclude a particular CIDR range from being returned by the pool.
+	// +listType:set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
@@ -41,6 +42,7 @@ type VPCIpamPoolCidrAllocationObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Exclude a particular CIDR range from being returned by the pool.
+	// +listType:set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
 	// The ID of the allocation.
@@ -77,6 +79,7 @@ type VPCIpamPoolCidrAllocationParameters struct {
 
 	// Exclude a particular CIDR range from being returned by the pool.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
 	// The ID of the pool to which you want to assign a CIDR.

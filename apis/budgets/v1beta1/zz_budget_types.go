@@ -55,6 +55,7 @@ type BudgetInitParameters struct {
 	CostFilter []CostFilterInitParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
 	// Map of CostFilters key/value pairs to apply to the budget.
+	// +mapType:granular
 	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
@@ -100,6 +101,7 @@ type BudgetObservation struct {
 	CostFilter []CostFilterObservation `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
 	// Map of CostFilters key/value pairs to apply to the budget.
+	// +mapType:granular
 	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
@@ -150,6 +152,7 @@ type BudgetParameters struct {
 
 	// Map of CostFilters key/value pairs to apply to the budget.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
@@ -360,9 +363,11 @@ type NotificationInitParameters struct {
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// E-Mail addresses to notify. Either this or subscriber_sns_topic_arns is required.
+	// +listType:set
 	SubscriberEmailAddresses []*string `json:"subscriberEmailAddresses,omitempty" tf:"subscriber_email_addresses,omitempty"`
 
 	// SNS topics to notify. Either this or subscriber_email_addresses is required.
+	// +listType:set
 	SubscriberSnsTopicArns []*string `json:"subscriberSnsTopicArns,omitempty" tf:"subscriber_sns_topic_arns,omitempty"`
 
 	// Threshold when the notification should be sent.
@@ -381,9 +386,11 @@ type NotificationObservation struct {
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// E-Mail addresses to notify. Either this or subscriber_sns_topic_arns is required.
+	// +listType:set
 	SubscriberEmailAddresses []*string `json:"subscriberEmailAddresses,omitempty" tf:"subscriber_email_addresses,omitempty"`
 
 	// SNS topics to notify. Either this or subscriber_email_addresses is required.
+	// +listType:set
 	SubscriberSnsTopicArns []*string `json:"subscriberSnsTopicArns,omitempty" tf:"subscriber_sns_topic_arns,omitempty"`
 
 	// Threshold when the notification should be sent.
@@ -405,10 +412,12 @@ type NotificationParameters struct {
 
 	// E-Mail addresses to notify. Either this or subscriber_sns_topic_arns is required.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubscriberEmailAddresses []*string `json:"subscriberEmailAddresses,omitempty" tf:"subscriber_email_addresses,omitempty"`
 
 	// SNS topics to notify. Either this or subscriber_email_addresses is required.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubscriberSnsTopicArns []*string `json:"subscriberSnsTopicArns,omitempty" tf:"subscriber_sns_topic_arns,omitempty"`
 
 	// Threshold when the notification should be sent.

@@ -23,6 +23,7 @@ type ActionInitParameters struct {
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
+	// +mapType:granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// A list of artifact names to be worked on.
@@ -59,6 +60,7 @@ type ActionObservation struct {
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
+	// +mapType:granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// A list of artifact names to be worked on.
@@ -100,6 +102,7 @@ type ActionParameters struct {
 
 	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// A list of artifact names to be worked on.
@@ -204,6 +207,7 @@ type CodepipelineInitParameters struct {
 	Stage []StageInitParameters `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -225,9 +229,11 @@ type CodepipelineObservation struct {
 	Stage []StageObservation `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -263,6 +269,7 @@ type CodepipelineParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

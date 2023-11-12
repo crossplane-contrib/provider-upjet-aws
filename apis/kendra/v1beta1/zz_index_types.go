@@ -128,6 +128,7 @@ type IndexInitParameters struct {
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The user context policy. Valid values are ATTRIBUTE_FILTER or USER_TOKEN. For more information, refer to UserContextPolicy. Defaults to ATTRIBUTE_FILTER.
@@ -182,9 +183,11 @@ type IndexObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Unix datetime that the index was last updated.
@@ -247,6 +250,7 @@ type IndexParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The user context policy. Valid values are ATTRIBUTE_FILTER or USER_TOKEN. For more information, refer to UserContextPolicy. Defaults to ATTRIBUTE_FILTER.
@@ -400,6 +404,7 @@ type RelevanceInitParameters struct {
 	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
+	// +mapType:granular
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
@@ -418,6 +423,7 @@ type RelevanceObservation struct {
 	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
+	// +mapType:granular
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
@@ -441,6 +447,7 @@ type RelevanceParameters struct {
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 

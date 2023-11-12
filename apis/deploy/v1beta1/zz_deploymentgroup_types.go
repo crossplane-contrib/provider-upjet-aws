@@ -20,6 +20,7 @@ import (
 type AlarmConfigurationInitParameters struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// +listType:set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
@@ -32,6 +33,7 @@ type AlarmConfigurationInitParameters struct {
 type AlarmConfigurationObservation struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// +listType:set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
@@ -45,6 +47,7 @@ type AlarmConfigurationParameters struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
@@ -62,6 +65,7 @@ type AutoRollbackConfigurationInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// +listType:set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
@@ -71,6 +75,7 @@ type AutoRollbackConfigurationObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// +listType:set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
@@ -82,6 +87,7 @@ type AutoRollbackConfigurationParameters struct {
 
 	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
@@ -133,6 +139,7 @@ type DeploymentGroupInitParameters struct {
 	AutoRollbackConfiguration []AutoRollbackConfigurationInitParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
 	// Autoscaling groups associated with the deployment group.
+	// +listType:set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Configuration block of the blue/green deployment options for a deployment group (documented below).
@@ -160,6 +167,7 @@ type DeploymentGroupInitParameters struct {
 	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterInitParameters `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
@@ -181,6 +189,7 @@ type DeploymentGroupObservation struct {
 	AutoRollbackConfiguration []AutoRollbackConfigurationObservation `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
 	// Autoscaling groups associated with the deployment group.
+	// +listType:set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Configuration block of the blue/green deployment options for a deployment group (documented below).
@@ -220,9 +229,11 @@ type DeploymentGroupObservation struct {
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
@@ -254,6 +265,7 @@ type DeploymentGroupParameters struct {
 
 	// Autoscaling groups associated with the deployment group.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Configuration block of the blue/green deployment options for a deployment group (documented below).
@@ -309,6 +321,7 @@ type DeploymentGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
@@ -637,12 +650,14 @@ type OnPremisesInstanceTagFilterParameters struct {
 type ProdTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType:set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type ProdTrafficRouteObservation struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType:set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
@@ -650,6 +665,7 @@ type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
 }
 
@@ -769,12 +785,14 @@ type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
 type TestTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType:set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type TestTrafficRouteObservation struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType:set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
@@ -782,12 +800,14 @@ type TestTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
 }
 
 type TriggerConfigurationInitParameters struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
+	// +listType:set
 	TriggerEvents []*string `json:"triggerEvents,omitempty" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.
@@ -797,6 +817,7 @@ type TriggerConfigurationInitParameters struct {
 type TriggerConfigurationObservation struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
+	// +listType:set
 	TriggerEvents []*string `json:"triggerEvents,omitempty" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.
@@ -810,6 +831,7 @@ type TriggerConfigurationParameters struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	TriggerEvents []*string `json:"triggerEvents" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.

@@ -131,16 +131,21 @@ type FieldLevelEncryptionProfileParameters struct {
 }
 
 type FieldPatternsInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type FieldPatternsObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type FieldPatternsParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 

@@ -29,6 +29,7 @@ type RuleInitParameters struct {
 	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
@@ -65,9 +66,11 @@ type RuleObservation struct {
 	ShareStatus *string `json:"shareStatus,omitempty" tf:"share_status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
@@ -111,6 +114,7 @@ type RuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).

@@ -319,6 +319,7 @@ type ClassificationJobInitParameters struct {
 	ScheduleFrequency []ScheduleFrequencyInitParameters `json:"scheduleFrequency,omitempty" tf:"schedule_frequency,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -363,8 +364,10 @@ type ClassificationJobObservation struct {
 	ScheduleFrequency []ScheduleFrequencyObservation `json:"scheduleFrequency,omitempty" tf:"schedule_frequency,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for job-status is USER_PAUSED.
@@ -416,6 +419,7 @@ type ClassificationJobParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

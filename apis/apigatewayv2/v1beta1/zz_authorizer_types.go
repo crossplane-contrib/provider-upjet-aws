@@ -44,6 +44,7 @@ type AuthorizerInitParameters struct {
 	// Identity sources for which authorization is requested.
 	// For REQUEST authorizers the value is a list of one or more mapping expressions of the specified request parameters.
 	// For JWT authorizers the single entry specifies where to extract the JSON Web Token (JWT) from inbound requests.
+	// +listType:set
 	IdentitySources []*string `json:"identitySources,omitempty" tf:"identity_sources,omitempty"`
 
 	// Configuration of a JWT authorizer. Required for the JWT authorizer type.
@@ -92,6 +93,7 @@ type AuthorizerObservation struct {
 	// Identity sources for which authorization is requested.
 	// For REQUEST authorizers the value is a list of one or more mapping expressions of the specified request parameters.
 	// For JWT authorizers the single entry specifies where to extract the JSON Web Token (JWT) from inbound requests.
+	// +listType:set
 	IdentitySources []*string `json:"identitySources,omitempty" tf:"identity_sources,omitempty"`
 
 	// Configuration of a JWT authorizer. Required for the JWT authorizer type.
@@ -164,6 +166,7 @@ type AuthorizerParameters struct {
 	// For REQUEST authorizers the value is a list of one or more mapping expressions of the specified request parameters.
 	// For JWT authorizers the single entry specifies where to extract the JSON Web Token (JWT) from inbound requests.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	IdentitySources []*string `json:"identitySources,omitempty" tf:"identity_sources,omitempty"`
 
 	// Configuration of a JWT authorizer. Required for the JWT authorizer type.
@@ -184,6 +187,7 @@ type AuthorizerParameters struct {
 type JwtConfigurationInitParameters struct {
 
 	// List of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
+	// +listType:set
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// Base domain of the identity provider that issues JSON Web Tokens, such as the endpoint attribute of the aws_cognito_user_pool resource.
@@ -193,6 +197,7 @@ type JwtConfigurationInitParameters struct {
 type JwtConfigurationObservation struct {
 
 	// List of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
+	// +listType:set
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// Base domain of the identity provider that issues JSON Web Tokens, such as the endpoint attribute of the aws_cognito_user_pool resource.
@@ -203,6 +208,7 @@ type JwtConfigurationParameters struct {
 
 	// List of the intended recipients of the JWT. A valid JWT must provide an aud that matches at least one entry in this list.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// Base domain of the identity provider that issues JSON Web Tokens, such as the endpoint attribute of the aws_cognito_user_pool resource.

@@ -87,6 +87,7 @@ type FirewallPolicyEncryptionConfigurationParameters struct {
 type FirewallPolicyFirewallPolicyInitParameters struct {
 
 	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
+	// +listType:set
 	StatefulDefaultActions []*string `json:"statefulDefaultActions,omitempty" tf:"stateful_default_actions,omitempty"`
 
 	// A configuration block that defines options on how the policy handles stateful rules. See Stateful Engine Options below for details.
@@ -100,10 +101,12 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 
 	// Set of actions to take on a packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
+	// +listType:set
 	StatelessDefaultActions []*string `json:"statelessDefaultActions,omitempty" tf:"stateless_default_actions,omitempty"`
 
 	// Set of actions to take on a fragmented packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
+	// +listType:set
 	StatelessFragmentDefaultActions []*string `json:"statelessFragmentDefaultActions,omitempty" tf:"stateless_fragment_default_actions,omitempty"`
 
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
@@ -113,6 +116,7 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 type FirewallPolicyFirewallPolicyObservation struct {
 
 	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
+	// +listType:set
 	StatefulDefaultActions []*string `json:"statefulDefaultActions,omitempty" tf:"stateful_default_actions,omitempty"`
 
 	// A configuration block that defines options on how the policy handles stateful rules. See Stateful Engine Options below for details.
@@ -126,10 +130,12 @@ type FirewallPolicyFirewallPolicyObservation struct {
 
 	// Set of actions to take on a packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
+	// +listType:set
 	StatelessDefaultActions []*string `json:"statelessDefaultActions,omitempty" tf:"stateless_default_actions,omitempty"`
 
 	// Set of actions to take on a fragmented packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
+	// +listType:set
 	StatelessFragmentDefaultActions []*string `json:"statelessFragmentDefaultActions,omitempty" tf:"stateless_fragment_default_actions,omitempty"`
 
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
@@ -140,6 +146,7 @@ type FirewallPolicyFirewallPolicyParameters struct {
 
 	// Set of actions to take on a packet if it does not match any stateful rules in the policy. This can only be specified if the policy has a stateful_engine_options block with a rule_order value of STRICT_ORDER. You can specify one of either or neither values of aws:drop_strict or aws:drop_established, as well as any combination of aws:alert_strict and aws:alert_established.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	StatefulDefaultActions []*string `json:"statefulDefaultActions,omitempty" tf:"stateful_default_actions,omitempty"`
 
 	// A configuration block that defines options on how the policy handles stateful rules. See Stateful Engine Options below for details.
@@ -157,11 +164,13 @@ type FirewallPolicyFirewallPolicyParameters struct {
 	// Set of actions to take on a packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	StatelessDefaultActions []*string `json:"statelessDefaultActions" tf:"stateless_default_actions,omitempty"`
 
 	// Set of actions to take on a fragmented packet if it does not match any of the stateless rules in the policy. You must specify one of the standard actions including: aws:drop, aws:pass, or aws:forward_to_sfe.
 	// In addition, you can specify custom actions that are compatible with your standard action choice. If you want non-matching packets to be forwarded for stateful inspection, specify aws:forward_to_sfe.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	StatelessFragmentDefaultActions []*string `json:"statelessFragmentDefaultActions" tf:"stateless_fragment_default_actions,omitempty"`
 
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
@@ -181,6 +190,7 @@ type FirewallPolicyInitParameters struct {
 	FirewallPolicy []FirewallPolicyFirewallPolicyInitParameters `json:"firewallPolicy,omitempty" tf:"firewall_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -202,9 +212,11 @@ type FirewallPolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A string token used when updating a firewall policy.
@@ -232,6 +244,7 @@ type FirewallPolicyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

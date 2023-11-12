@@ -20,6 +20,7 @@ import (
 type CiphertextInitParameters struct {
 
 	// An optional mapping that makes up the encryption context.
+	// +mapType:granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 }
 
@@ -29,6 +30,7 @@ type CiphertextObservation struct {
 	CiphertextBlob *string `json:"ciphertextBlob,omitempty" tf:"ciphertext_blob,omitempty"`
 
 	// An optional mapping that makes up the encryption context.
+	// +mapType:granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -41,6 +43,7 @@ type CiphertextParameters struct {
 
 	// An optional mapping that makes up the encryption context.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Globally unique key ID for the customer master key.

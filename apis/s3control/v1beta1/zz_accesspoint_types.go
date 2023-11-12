@@ -60,6 +60,7 @@ type AccessPointObservation struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// VPC endpoints for the S3 Access Point.
+	// +mapType:granular
 	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// Indicates whether this access point currently has a policy that allows public access.

@@ -68,6 +68,7 @@ type EventDestinationInitParameters struct {
 	KinesisDestination []KinesisDestinationInitParameters `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+	// +listType:set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Send the events to an SNS Topic destination
@@ -95,6 +96,7 @@ type EventDestinationObservation struct {
 	KinesisDestination []KinesisDestinationObservation `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+	// +listType:set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Send the events to an SNS Topic destination
@@ -130,6 +132,7 @@ type EventDestinationParameters struct {
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

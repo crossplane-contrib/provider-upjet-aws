@@ -26,9 +26,11 @@ type AppMonitorConfigurationInitParameters struct {
 	EnableXray *bool `json:"enableXray,omitempty" tf:"enable_xray,omitempty"`
 
 	// A list of URLs in your website or application to exclude from RUM data collection.
+	// +listType:set
 	ExcludedPages []*string `json:"excludedPages,omitempty" tf:"excluded_pages,omitempty"`
 
 	// A list of pages in the CloudWatch RUM console that are to be displayed with a "favorite" icon.
+	// +listType:set
 	FavoritePages []*string `json:"favoritePages,omitempty" tf:"favorite_pages,omitempty"`
 
 	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
@@ -38,12 +40,14 @@ type AppMonitorConfigurationInitParameters struct {
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
 	// If this app monitor is to collect data from only certain pages in your application, this structure lists those pages.
+	// +listType:set
 	IncludedPages []*string `json:"includedPages,omitempty" tf:"included_pages,omitempty"`
 
 	// Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. Default value is 0.1.
 	SessionSampleRate *float64 `json:"sessionSampleRate,omitempty" tf:"session_sample_rate,omitempty"`
 
 	// An array that lists the types of telemetry data that this app monitor is to collect. Valid values are errors, performance, and http.
+	// +listType:set
 	Telemetries []*string `json:"telemetries,omitempty" tf:"telemetries,omitempty"`
 }
 
@@ -56,9 +60,11 @@ type AppMonitorConfigurationObservation struct {
 	EnableXray *bool `json:"enableXray,omitempty" tf:"enable_xray,omitempty"`
 
 	// A list of URLs in your website or application to exclude from RUM data collection.
+	// +listType:set
 	ExcludedPages []*string `json:"excludedPages,omitempty" tf:"excluded_pages,omitempty"`
 
 	// A list of pages in the CloudWatch RUM console that are to be displayed with a "favorite" icon.
+	// +listType:set
 	FavoritePages []*string `json:"favoritePages,omitempty" tf:"favorite_pages,omitempty"`
 
 	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
@@ -68,12 +74,14 @@ type AppMonitorConfigurationObservation struct {
 	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
 
 	// If this app monitor is to collect data from only certain pages in your application, this structure lists those pages.
+	// +listType:set
 	IncludedPages []*string `json:"includedPages,omitempty" tf:"included_pages,omitempty"`
 
 	// Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. Default value is 0.1.
 	SessionSampleRate *float64 `json:"sessionSampleRate,omitempty" tf:"session_sample_rate,omitempty"`
 
 	// An array that lists the types of telemetry data that this app monitor is to collect. Valid values are errors, performance, and http.
+	// +listType:set
 	Telemetries []*string `json:"telemetries,omitempty" tf:"telemetries,omitempty"`
 }
 
@@ -89,10 +97,12 @@ type AppMonitorConfigurationParameters struct {
 
 	// A list of URLs in your website or application to exclude from RUM data collection.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ExcludedPages []*string `json:"excludedPages,omitempty" tf:"excluded_pages,omitempty"`
 
 	// A list of pages in the CloudWatch RUM console that are to be displayed with a "favorite" icon.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	FavoritePages []*string `json:"favoritePages,omitempty" tf:"favorite_pages,omitempty"`
 
 	// The ARN of the guest IAM role that is attached to the Amazon Cognito identity pool that is used to authorize the sending of data to RUM.
@@ -105,6 +115,7 @@ type AppMonitorConfigurationParameters struct {
 
 	// If this app monitor is to collect data from only certain pages in your application, this structure lists those pages.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	IncludedPages []*string `json:"includedPages,omitempty" tf:"included_pages,omitempty"`
 
 	// Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. Default value is 0.1.
@@ -113,6 +124,7 @@ type AppMonitorConfigurationParameters struct {
 
 	// An array that lists the types of telemetry data that this app monitor is to collect. Valid values are errors, performance, and http.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Telemetries []*string `json:"telemetries,omitempty" tf:"telemetries,omitempty"`
 }
 
@@ -131,6 +143,7 @@ type AppMonitorInitParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -161,9 +174,11 @@ type AppMonitorObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -192,6 +207,7 @@ type AppMonitorParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

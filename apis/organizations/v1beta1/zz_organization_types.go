@@ -68,9 +68,11 @@ type NonMasterAccountsParameters struct {
 type OrganizationInitParameters struct {
 
 	// List of AWS service principal names for which you want to enable integration with your organization. This is typically in the form of a URL, such as service-abbreviation.amazonaws.com. Organization must have feature_set set to ALL. Some services do not support enablement via this endpoint, see warning in aws docs.
+	// +listType:set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
 	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// +listType:set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
 	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
@@ -86,9 +88,11 @@ type OrganizationObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// List of AWS service principal names for which you want to enable integration with your organization. This is typically in the form of a URL, such as service-abbreviation.amazonaws.com. Organization must have feature_set set to ALL. Some services do not support enablement via this endpoint, see warning in aws docs.
+	// +listType:set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
 	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// +listType:set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
 	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
@@ -117,10 +121,12 @@ type OrganizationParameters struct {
 
 	// List of AWS service principal names for which you want to enable integration with your organization. This is typically in the form of a URL, such as service-abbreviation.amazonaws.com. Organization must have feature_set set to ALL. Some services do not support enablement via this endpoint, see warning in aws docs.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
 	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
 	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".

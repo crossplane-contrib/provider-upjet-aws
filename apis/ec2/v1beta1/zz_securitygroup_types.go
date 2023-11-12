@@ -41,6 +41,7 @@ type SecurityGroupEgressObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether the security group itself will be added as a source to this ingress rule.
@@ -77,6 +78,7 @@ type SecurityGroupIngressObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether the security group itself will be added as a source to this ingress rule.
@@ -101,6 +103,7 @@ type SecurityGroupInitParameters_2 struct {
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -131,9 +134,11 @@ type SecurityGroupObservation_2 struct {
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// VPC ID. Defaults to the region's default VPC.
@@ -161,6 +166,7 @@ type SecurityGroupParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// VPC ID. Defaults to the region's default VPC.

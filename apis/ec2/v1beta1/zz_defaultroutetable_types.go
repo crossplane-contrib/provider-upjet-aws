@@ -20,12 +20,14 @@ import (
 type DefaultRouteTableInitParameters struct {
 
 	// List of virtual gateways for propagation.
+	// +listType:set
 	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
 
 	// Configuration block of routes. Detailed below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
 	Route []RouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,15 +46,18 @@ type DefaultRouteTableObservation struct {
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// List of virtual gateways for propagation.
+	// +listType:set
 	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
 
 	// Configuration block of routes. Detailed below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
 	Route []RouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// ID of the VPC.
@@ -77,6 +82,7 @@ type DefaultRouteTableParameters struct {
 
 	// List of virtual gateways for propagation.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -90,6 +96,7 @@ type DefaultRouteTableParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

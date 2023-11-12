@@ -20,9 +20,11 @@ import (
 type SnapshotInitParameters struct {
 
 	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +listType:set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -66,6 +68,7 @@ type SnapshotObservation struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +listType:set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
@@ -83,9 +86,11 @@ type SnapshotObservation struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Provides the VPC ID associated with the DB snapshot.
@@ -115,10 +120,12 @@ type SnapshotParameters struct {
 
 	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

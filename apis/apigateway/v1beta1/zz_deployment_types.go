@@ -29,9 +29,11 @@ type DeploymentInitParameters struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Map to set on the stage managed by the stage_name argument.
+	// +mapType:granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -65,9 +67,11 @@ type DeploymentObservation struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Map to set on the stage managed by the stage_name argument.
+	// +mapType:granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -106,10 +110,12 @@ type DeploymentParameters struct {
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Map to set on the stage managed by the stage_name argument.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 

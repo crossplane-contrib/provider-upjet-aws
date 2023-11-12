@@ -32,6 +32,7 @@ type OptionGroupInitParameters struct {
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -56,9 +57,11 @@ type OptionGroupObservation struct {
 	OptionGroupDescription *string `json:"optionGroupDescription,omitempty" tf:"option_group_description,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -87,12 +90,14 @@ type OptionGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type OptionInitParameters struct {
 
 	// A list of DB Security Groups for which the option is enabled.
+	// +listType:set
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
 	// The Name of the Option (e.g., MEMCACHED).
@@ -105,6 +110,7 @@ type OptionInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// A list of VPC Security Groups for which the option is enabled.
+	// +listType:set
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
 	// The version of the option (e.g., 13.1.0.0).
@@ -114,6 +120,7 @@ type OptionInitParameters struct {
 type OptionObservation struct {
 
 	// A list of DB Security Groups for which the option is enabled.
+	// +listType:set
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
 	// The Name of the Option (e.g., MEMCACHED).
@@ -126,6 +133,7 @@ type OptionObservation struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// A list of VPC Security Groups for which the option is enabled.
+	// +listType:set
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
 	// The version of the option (e.g., 13.1.0.0).
@@ -136,6 +144,7 @@ type OptionParameters struct {
 
 	// A list of DB Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	DBSecurityGroupMemberships []*string `json:"dbSecurityGroupMemberships,omitempty" tf:"db_security_group_memberships,omitempty"`
 
 	// The Name of the Option (e.g., MEMCACHED).
@@ -152,6 +161,7 @@ type OptionParameters struct {
 
 	// A list of VPC Security Groups for which the option is enabled.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSecurityGroupMemberships []*string `json:"vpcSecurityGroupMemberships,omitempty" tf:"vpc_security_group_memberships,omitempty"`
 
 	// The version of the option (e.g., 13.1.0.0).

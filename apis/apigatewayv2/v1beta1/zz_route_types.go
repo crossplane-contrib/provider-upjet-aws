@@ -52,6 +52,7 @@ type RouteInitParameters struct {
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
 	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
+	// +listType:set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorization type for the route.
@@ -67,6 +68,7 @@ type RouteInitParameters struct {
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
 	// Request models for the route. Supported only for WebSocket APIs.
+	// +mapType:granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Request parameters for the route. Supported only for WebSocket APIs.
@@ -88,6 +90,7 @@ type RouteObservation struct {
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
 	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
+	// +listType:set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorization type for the route.
@@ -109,6 +112,7 @@ type RouteObservation struct {
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
 	// Request models for the route. Supported only for WebSocket APIs.
+	// +mapType:granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Request parameters for the route. Supported only for WebSocket APIs.
@@ -145,6 +149,7 @@ type RouteParameters struct {
 
 	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorization type for the route.
@@ -182,6 +187,7 @@ type RouteParameters struct {
 
 	// Request models for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Request parameters for the route. Supported only for WebSocket APIs.

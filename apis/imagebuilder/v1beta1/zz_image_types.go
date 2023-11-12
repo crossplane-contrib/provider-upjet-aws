@@ -47,6 +47,7 @@ type ContainersInitParameters struct {
 type ContainersObservation struct {
 
 	// Set of URIs for created containers.
+	// +listType:set
 	ImageUris []*string `json:"imageUris,omitempty" tf:"image_uris,omitempty"`
 
 	// Region of the AMI.
@@ -68,6 +69,7 @@ type ImageInitParameters struct {
 	ImageTestsConfiguration []ImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -112,9 +114,11 @@ type ImageObservation struct {
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Version of the image.
@@ -185,6 +189,7 @@ type ImageParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

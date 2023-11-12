@@ -94,6 +94,7 @@ type ExpressionInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values of an LF-Tag.
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -103,6 +104,7 @@ type ExpressionObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values of an LF-Tag.
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -114,6 +116,7 @@ type ExpressionParameters struct {
 
 	// A list of possible values of an LF-Tag.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
@@ -126,6 +129,7 @@ type LfTagInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values an attribute can take.
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -138,6 +142,7 @@ type LfTagObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values an attribute can take.
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -153,6 +158,7 @@ type LfTagParameters struct {
 
 	// A list of possible values an attribute can take.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
@@ -376,12 +382,14 @@ type TableWithColumnsInitParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Set of column names for the table.
+	// +listType:set
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Set of column names for the table to exclude.
+	// +listType:set
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
 	// Whether to use a column wildcard.
@@ -394,12 +402,14 @@ type TableWithColumnsObservation struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Set of column names for the table.
+	// +listType:set
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Set of column names for the table to exclude.
+	// +listType:set
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
 	// –  Name of the table resource.
@@ -417,6 +427,7 @@ type TableWithColumnsParameters struct {
 
 	// Set of column names for the table.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
@@ -425,6 +436,7 @@ type TableWithColumnsParameters struct {
 
 	// Set of column names for the table to exclude.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
 	// –  Name of the table resource.

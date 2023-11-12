@@ -20,6 +20,7 @@ import (
 type ExtensionAssociationInitParameters struct {
 
 	// The parameter names and values defined for the association.
+	// +mapType:granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -38,6 +39,7 @@ type ExtensionAssociationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The parameter names and values defined for the association.
+	// +mapType:granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ARN of the application, configuration profile, or environment to associate with the extension.
@@ -62,6 +64,7 @@ type ExtensionAssociationParameters struct {
 
 	// The parameter names and values defined for the association.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

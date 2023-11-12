@@ -20,9 +20,11 @@ import (
 type VoiceConnectorTerminationInitParameters struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
+	// +listType:set
 	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
+	// +listType:set
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
@@ -38,9 +40,11 @@ type VoiceConnectorTerminationInitParameters struct {
 type VoiceConnectorTerminationObservation struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
+	// +listType:set
 	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
+	// +listType:set
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
@@ -63,10 +67,12 @@ type VoiceConnectorTerminationParameters struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.

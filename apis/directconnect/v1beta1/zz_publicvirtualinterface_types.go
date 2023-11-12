@@ -38,9 +38,11 @@ type PublicVirtualInterfaceInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of routes to be advertised to the AWS network in this region.
+	// +listType:set
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VLAN ID.
@@ -82,12 +84,15 @@ type PublicVirtualInterfaceObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of routes to be advertised to the AWS network in this region.
+	// +listType:set
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VLAN ID.
@@ -140,10 +145,12 @@ type PublicVirtualInterfaceParameters struct {
 
 	// A list of routes to be advertised to the AWS network in this region.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VLAN ID.

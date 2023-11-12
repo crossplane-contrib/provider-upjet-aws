@@ -21,6 +21,7 @@ type ClusterInitParameters struct {
 
 	// List of Availability Zones in which the
 	// nodes will be created
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// –  The type of encryption the
@@ -59,6 +60,7 @@ type ClusterInitParameters struct {
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -69,6 +71,7 @@ type ClusterObservation struct {
 
 	// List of Availability Zones in which the
 	// nodes will be created
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The DNS name of the DAX cluster without the port appended
@@ -123,6 +126,7 @@ type ClusterObservation struct {
 
 	// –  One or more VPC security groups associated
 	// with the cluster
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Encrypt at rest options
@@ -133,9 +137,11 @@ type ClusterObservation struct {
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -144,6 +150,7 @@ type ClusterParameters struct {
 	// List of Availability Zones in which the
 	// nodes will be created
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// –  The type of encryption the
@@ -216,6 +223,7 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Encrypt at rest options
@@ -229,6 +237,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

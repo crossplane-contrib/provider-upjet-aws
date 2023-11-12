@@ -380,6 +380,7 @@ type FilterAndInitParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -389,6 +390,7 @@ type FilterAndObservation struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -400,6 +402,7 @@ type FilterAndParameters struct {
 
 	// Map of tags (key and value pairs) that identifies a subset of objects to which the rule applies. The rule applies only to objects having all the tags in its tagset.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

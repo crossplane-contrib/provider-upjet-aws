@@ -39,6 +39,7 @@ type ReplicaKeyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -84,9 +85,11 @@ type ReplicaKeyObservation struct {
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -137,6 +140,7 @@ type ReplicaKeyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

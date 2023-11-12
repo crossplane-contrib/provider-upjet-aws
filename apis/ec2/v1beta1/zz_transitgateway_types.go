@@ -41,9 +41,11 @@ type TransitGatewayInitParameters_2 struct {
 	MulticastSupport *string `json:"multicastSupport,omitempty" tf:"multicast_support,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
+	// +listType:set
 	TransitGatewayCidrBlocks []*string `json:"transitGatewayCidrBlocks,omitempty" tf:"transit_gateway_cidr_blocks,omitempty"`
 
 	// Whether VPN Equal Cost Multipath Protocol support is enabled. Valid values: disable, enable. Default value: enable.
@@ -89,12 +91,15 @@ type TransitGatewayObservation_2 struct {
 	PropagationDefaultRouteTableID *string `json:"propagationDefaultRouteTableId,omitempty" tf:"propagation_default_route_table_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
+	// +listType:set
 	TransitGatewayCidrBlocks []*string `json:"transitGatewayCidrBlocks,omitempty" tf:"transit_gateway_cidr_blocks,omitempty"`
 
 	// Whether VPN Equal Cost Multipath Protocol support is enabled. Valid values: disable, enable. Default value: enable.
@@ -138,10 +143,12 @@ type TransitGatewayParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	TransitGatewayCidrBlocks []*string `json:"transitGatewayCidrBlocks,omitempty" tf:"transit_gateway_cidr_blocks,omitempty"`
 
 	// Whether VPN Equal Cost Multipath Protocol support is enabled. Valid values: disable, enable. Default value: enable.

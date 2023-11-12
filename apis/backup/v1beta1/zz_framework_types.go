@@ -68,6 +68,7 @@ type FrameworkInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -98,9 +99,11 @@ type FrameworkObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -125,6 +128,7 @@ type FrameworkParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -160,24 +164,30 @@ type InputParameterParameters struct {
 type ScopeInitParameters struct {
 
 	// The ID of the only AWS resource that you want your control scope to contain. Minimum number of 1 item. Maximum number of 100 items.
+	// +listType:set
 	ComplianceResourceIds []*string `json:"complianceResourceIds,omitempty" tf:"compliance_resource_ids,omitempty"`
 
 	// Describes whether the control scope includes one or more types of resources, such as EFS or RDS.
+	// +listType:set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ScopeObservation struct {
 
 	// The ID of the only AWS resource that you want your control scope to contain. Minimum number of 1 item. Maximum number of 100 items.
+	// +listType:set
 	ComplianceResourceIds []*string `json:"complianceResourceIds,omitempty" tf:"compliance_resource_ids,omitempty"`
 
 	// Describes whether the control scope includes one or more types of resources, such as EFS or RDS.
+	// +listType:set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -185,14 +195,17 @@ type ScopeParameters struct {
 
 	// The ID of the only AWS resource that you want your control scope to contain. Minimum number of 1 item. Maximum number of 100 items.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ComplianceResourceIds []*string `json:"complianceResourceIds,omitempty" tf:"compliance_resource_ids,omitempty"`
 
 	// Describes whether the control scope includes one or more types of resources, such as EFS or RDS.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -29,6 +29,7 @@ type TransitGatewayMulticastDomainInitParameters struct {
 	StaticSourcesSupport *string `json:"staticSourcesSupport,omitempty" tf:"static_sources_support,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,9 +54,11 @@ type TransitGatewayMulticastDomainObservation struct {
 	StaticSourcesSupport *string `json:"staticSourcesSupport,omitempty" tf:"static_sources_support,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// EC2 Transit Gateway identifier. The EC2 Transit Gateway must have multicast_support enabled.
@@ -83,6 +86,7 @@ type TransitGatewayMulticastDomainParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// EC2 Transit Gateway identifier. The EC2 Transit Gateway must have multicast_support enabled.

@@ -23,6 +23,7 @@ type ReadinessCheckInitParameters struct {
 	ResourceSetName *string `json:"resourceSetName,omitempty" tf:"resource_set_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -37,9 +38,11 @@ type ReadinessCheckObservation struct {
 	ResourceSetName *string `json:"resourceSetName,omitempty" tf:"resource_set_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -56,6 +59,7 @@ type ReadinessCheckParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

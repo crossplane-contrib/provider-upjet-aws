@@ -60,6 +60,7 @@ type LBSSLNegotiationPolicyInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger a redeployment.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -84,6 +85,7 @@ type LBSSLNegotiationPolicyObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger a redeployment.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -125,6 +127,7 @@ type LBSSLNegotiationPolicyParameters struct {
 
 	// Map of arbitrary keys and values that, when changed, will trigger a redeployment.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 

@@ -20,6 +20,7 @@ import (
 type CachingConfigInitParameters struct {
 
 	// The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
+	// +listType:set
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
 	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
@@ -29,6 +30,7 @@ type CachingConfigInitParameters struct {
 type CachingConfigObservation struct {
 
 	// The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
+	// +listType:set
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
 	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.
@@ -39,6 +41,7 @@ type CachingConfigParameters struct {
 
 	// The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CachingKeys []*string `json:"cachingKeys,omitempty" tf:"caching_keys,omitempty"`
 
 	// The TTL in seconds for a resolver that has caching activated. Valid values are between 1 and 3600 seconds.

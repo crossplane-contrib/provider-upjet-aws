@@ -55,6 +55,7 @@ type EndpointsManagementObservation struct {
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the storage virtual machine endpoint.
+	// +listType:set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -70,6 +71,7 @@ type ISCSIObservation struct {
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the storage virtual machine endpoint.
+	// +listType:set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -85,6 +87,7 @@ type NFSObservation struct {
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the storage virtual machine endpoint.
+	// +listType:set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -124,6 +127,7 @@ type OntapStorageVirtualMachineInitParameters struct {
 	RootVolumeSecurityStyle *string `json:"rootVolumeSecurityStyle,omitempty" tf:"root_volume_security_style,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -154,9 +158,11 @@ type OntapStorageVirtualMachineObservation struct {
 	Subtype *string `json:"subtype,omitempty" tf:"subtype,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The SVM's UUID (universally unique identifier).
@@ -201,6 +207,7 @@ type OntapStorageVirtualMachineParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -213,6 +220,7 @@ type SMBObservation struct {
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the storage virtual machine endpoint.
+	// +listType:set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -222,6 +230,7 @@ type SMBParameters struct {
 type SelfManagedActiveDirectoryConfigurationInitParameters struct {
 
 	// A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+	// +listType:set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -240,6 +249,7 @@ type SelfManagedActiveDirectoryConfigurationInitParameters struct {
 type SelfManagedActiveDirectoryConfigurationObservation struct {
 
 	// A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+	// +listType:set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -259,6 +269,7 @@ type SelfManagedActiveDirectoryConfigurationParameters struct {
 
 	// A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.

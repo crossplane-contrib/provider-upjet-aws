@@ -744,9 +744,11 @@ type NATGatewayParameters struct {
 type NetworkInsightsAnalysisInitParameters struct {
 
 	// A list of ARNs for resources the path must traverse.
+	// +listType:set
 	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// If enabled, the resource will wait for the Network Insights Analysis status to change to succeeded or failed. Setting this to false will skip the process. Default: true.
@@ -765,6 +767,7 @@ type NetworkInsightsAnalysisObservation struct {
 	Explanations []ExplanationsObservation `json:"explanations,omitempty" tf:"explanations,omitempty"`
 
 	// A list of ARNs for resources the path must traverse.
+	// +listType:set
 	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
 
 	// The components in the path from source to destination. See the AWS documentation for details.
@@ -792,9 +795,11 @@ type NetworkInsightsAnalysisObservation struct {
 	StatusMessage *string `json:"statusMessage,omitempty" tf:"status_message,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// If enabled, the resource will wait for the Network Insights Analysis status to change to succeeded or failed. Setting this to false will skip the process. Default: true.
@@ -808,6 +813,7 @@ type NetworkInsightsAnalysisParameters struct {
 
 	// A list of ARNs for resources the path must traverse.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
 
 	// ID of the Network Insights Path to run an analysis on.
@@ -831,6 +837,7 @@ type NetworkInsightsAnalysisParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// If enabled, the resource will wait for the Network Insights Analysis status to change to succeeded or failed. Setting this to false will skip the process. Default: true.

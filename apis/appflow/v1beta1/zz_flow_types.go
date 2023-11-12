@@ -227,6 +227,7 @@ type ConnectorOperatorParameters struct {
 type CustomConnectorInitParameters struct {
 
 	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
+	// +mapType:granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
 	// Entity specified in the custom connector as a destination in the flow.
@@ -245,6 +246,7 @@ type CustomConnectorInitParameters struct {
 type CustomConnectorObservation struct {
 
 	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
+	// +mapType:granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
 	// Entity specified in the custom connector as a destination in the flow.
@@ -264,6 +266,7 @@ type CustomConnectorParameters struct {
 
 	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
 	// Entity specified in the custom connector as a destination in the flow.
@@ -657,6 +660,7 @@ type FlowInitParameters struct {
 	SourceFlowConfig []SourceFlowConfigInitParameters `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A Task that Amazon AppFlow performs while transferring the data in the flow run.
@@ -686,9 +690,11 @@ type FlowObservation struct {
 	SourceFlowConfig []SourceFlowConfigObservation `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A Task that Amazon AppFlow performs while transferring the data in the flow run.
@@ -723,6 +729,7 @@ type FlowParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A Task that Amazon AppFlow performs while transferring the data in the flow run.
@@ -1628,6 +1635,7 @@ type SnowflakeParameters struct {
 type SourceConnectorPropertiesCustomConnectorInitParameters struct {
 
 	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
+	// +mapType:granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
 	// Entity specified in the custom connector as a destination in the flow.
@@ -1637,6 +1645,7 @@ type SourceConnectorPropertiesCustomConnectorInitParameters struct {
 type SourceConnectorPropertiesCustomConnectorObservation struct {
 
 	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
+	// +mapType:granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
 	// Entity specified in the custom connector as a destination in the flow.
@@ -1647,6 +1656,7 @@ type SourceConnectorPropertiesCustomConnectorParameters struct {
 
 	// Custom properties that are specific to the connector when it's used as a destination in the flow. Maximum of 50 items.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 
 	// Entity specified in the custom connector as a destination in the flow.
@@ -2065,6 +2075,7 @@ type TaskInitParameters struct {
 	SourceFields []*string `json:"sourceFields,omitempty" tf:"source_fields,omitempty"`
 
 	// Map used to store task-related information. The execution service looks for particular information based on the TaskType. Valid keys are VALUE, VALUES, DATA_TYPE, UPPER_BOUND, LOWER_BOUND, SOURCE_DATA_TYPE, DESTINATION_DATA_TYPE, VALIDATION_ACTION, MASK_VALUE, MASK_LENGTH, TRUNCATE_LENGTH, MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP, and EXCLUDE_SOURCE_FIELDS_LIST.
+	// +mapType:granular
 	TaskProperties map[string]*string `json:"taskProperties,omitempty" tf:"task_properties,omitempty"`
 
 	// Particular task implementation that Amazon AppFlow performs. Valid values are Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, and Validate.
@@ -2083,6 +2094,7 @@ type TaskObservation struct {
 	SourceFields []*string `json:"sourceFields,omitempty" tf:"source_fields,omitempty"`
 
 	// Map used to store task-related information. The execution service looks for particular information based on the TaskType. Valid keys are VALUE, VALUES, DATA_TYPE, UPPER_BOUND, LOWER_BOUND, SOURCE_DATA_TYPE, DESTINATION_DATA_TYPE, VALIDATION_ACTION, MASK_VALUE, MASK_LENGTH, TRUNCATE_LENGTH, MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP, and EXCLUDE_SOURCE_FIELDS_LIST.
+	// +mapType:granular
 	TaskProperties map[string]*string `json:"taskProperties,omitempty" tf:"task_properties,omitempty"`
 
 	// Particular task implementation that Amazon AppFlow performs. Valid values are Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, and Validate.
@@ -2105,6 +2117,7 @@ type TaskParameters struct {
 
 	// Map used to store task-related information. The execution service looks for particular information based on the TaskType. Valid keys are VALUE, VALUES, DATA_TYPE, UPPER_BOUND, LOWER_BOUND, SOURCE_DATA_TYPE, DESTINATION_DATA_TYPE, VALIDATION_ACTION, MASK_VALUE, MASK_LENGTH, TRUNCATE_LENGTH, MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP, and EXCLUDE_SOURCE_FIELDS_LIST.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	TaskProperties map[string]*string `json:"taskProperties,omitempty" tf:"task_properties,omitempty"`
 
 	// Particular task implementation that Amazon AppFlow performs. Valid values are Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, and Validate.

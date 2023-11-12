@@ -49,6 +49,7 @@ type ApplicationSourceParameters struct {
 type CustomizedLoadMetricSpecificationInitParameters struct {
 
 	// Dimensions of the metric.
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
@@ -67,6 +68,7 @@ type CustomizedLoadMetricSpecificationInitParameters struct {
 type CustomizedLoadMetricSpecificationObservation struct {
 
 	// Dimensions of the metric.
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
@@ -86,6 +88,7 @@ type CustomizedLoadMetricSpecificationParameters struct {
 
 	// Dimensions of the metric.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
@@ -108,6 +111,7 @@ type CustomizedLoadMetricSpecificationParameters struct {
 type CustomizedScalingMetricSpecificationInitParameters struct {
 
 	// Dimensions of the metric.
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
@@ -126,6 +130,7 @@ type CustomizedScalingMetricSpecificationInitParameters struct {
 type CustomizedScalingMetricSpecificationObservation struct {
 
 	// Dimensions of the metric.
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
@@ -145,6 +150,7 @@ type CustomizedScalingMetricSpecificationParameters struct {
 
 	// Dimensions of the metric.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Name of the metric.
@@ -439,6 +445,7 @@ type TagFilterInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Tag values.
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -448,6 +455,7 @@ type TagFilterObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Tag values.
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -459,6 +467,7 @@ type TagFilterParameters struct {
 
 	// Tag values.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 

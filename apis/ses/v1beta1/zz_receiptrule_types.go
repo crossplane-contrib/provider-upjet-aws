@@ -195,6 +195,7 @@ type ReceiptRuleInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of email addresses
+	// +listType:set
 	Recipients []*string `json:"recipients,omitempty" tf:"recipients,omitempty"`
 
 	// The name of the rule set
@@ -246,6 +247,7 @@ type ReceiptRuleObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of email addresses
+	// +listType:set
 	Recipients []*string `json:"recipients,omitempty" tf:"recipients,omitempty"`
 
 	// The name of the rule set
@@ -298,6 +300,7 @@ type ReceiptRuleParameters struct {
 
 	// A list of email addresses
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Recipients []*string `json:"recipients,omitempty" tf:"recipients,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

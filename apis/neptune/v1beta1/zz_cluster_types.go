@@ -26,6 +26,7 @@ type ClusterInitParameters struct {
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// A list of EC2 Availability Zones that instances in the Neptune cluster can be created in.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
@@ -38,6 +39,7 @@ type ClusterInitParameters struct {
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit.
+	// +listType:set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
 	// The name of the database engine to be used for this Neptune cluster. Defaults to neptune.
@@ -77,6 +79,7 @@ type ClusterInitParameters struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -92,12 +95,14 @@ type ClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// A list of EC2 Availability Zones that instances in the Neptune cluster can be created in.
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// – List of Neptune Instances that are a part of this cluster
+	// +listType:set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
 
 	// The Neptune Cluster Resource ID
@@ -110,6 +115,7 @@ type ClusterObservation struct {
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit.
+	// +listType:set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
 	// The DNS address of the Neptune instance
@@ -134,6 +140,7 @@ type ClusterObservation struct {
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
 	// A List of ARNs for the IAM roles to associate to the Neptune Cluster.
+	// +listType:set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The Neptune Cluster Identifier
@@ -179,12 +186,15 @@ type ClusterObservation struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// List of VPC security groups to associate with the Cluster
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
@@ -200,6 +210,7 @@ type ClusterParameters struct {
 
 	// A list of EC2 Availability Zones that instances in the Neptune cluster can be created in.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The days to retain backups for. Default 1
@@ -216,6 +227,7 @@ type ClusterParameters struct {
 
 	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
 	// The name of the database engine to be used for this Neptune cluster. Defaults to neptune.
@@ -251,6 +263,7 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_arn, storage_encrypted needs to be set to true.
@@ -353,6 +366,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -368,6 +382,7 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 

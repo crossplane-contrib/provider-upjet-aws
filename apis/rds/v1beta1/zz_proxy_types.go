@@ -111,9 +111,11 @@ type ProxyInitParameters struct {
 	RequireTLS *bool `json:"requireTls,omitempty" tf:"require_tls,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
+	// +listType:set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
@@ -147,15 +149,19 @@ type ProxyObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// One or more VPC security group IDs to associate with the new proxy.
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
+	// +listType:set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 
@@ -202,6 +208,7 @@ type ProxyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -217,10 +224,12 @@ type ProxyParameters struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
 }
 

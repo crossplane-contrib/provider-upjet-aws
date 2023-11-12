@@ -102,6 +102,7 @@ type ImageBuilderInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the VPC configuration for the image builder. See below.
@@ -153,9 +154,11 @@ type ImageBuilderObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for the VPC configuration for the image builder. See below.
@@ -217,6 +220,7 @@ type ImageBuilderParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the VPC configuration for the image builder. See below.
@@ -227,15 +231,18 @@ type ImageBuilderParameters struct {
 type ImageBuilderVPCConfigInitParameters struct {
 
 	// Identifiers of the security groups for the image builder or image builder.
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
 
 type ImageBuilderVPCConfigObservation struct {
 
 	// Identifiers of the security groups for the image builder or image builder.
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Identifiers of the subnets to which a network interface is attached from the image builder instance or image builder instance.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -243,6 +250,7 @@ type ImageBuilderVPCConfigParameters struct {
 
 	// Identifiers of the security groups for the image builder or image builder.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -258,6 +266,7 @@ type ImageBuilderVPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 

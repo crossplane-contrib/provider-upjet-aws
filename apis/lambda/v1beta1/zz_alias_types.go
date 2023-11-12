@@ -88,12 +88,14 @@ type AliasParameters struct {
 type RoutingConfigInitParameters struct {
 
 	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
+	// +mapType:granular
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
 
 type RoutingConfigObservation struct {
 
 	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
+	// +mapType:granular
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
 
@@ -101,6 +103,7 @@ type RoutingConfigParameters struct {
 
 	// A map that defines the proportion of events that should be sent to different versions of a lambda function.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	AdditionalVersionWeights map[string]*float64 `json:"additionalVersionWeights,omitempty" tf:"additional_version_weights,omitempty"`
 }
 

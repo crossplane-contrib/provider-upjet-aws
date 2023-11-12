@@ -49,9 +49,11 @@ type IntegrationInitParameters struct {
 	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
 	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
 	// See the Amazon API Gateway Developer Guide for details.
+	// +mapType:granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. Supported only for WebSocket APIs.
+	// +mapType:granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// Mappings to transform the HTTP response from a backend integration before returning the response to clients. Supported only for HTTP APIs.
@@ -119,9 +121,11 @@ type IntegrationObservation struct {
 	// For HTTP APIs with a specified integration_subtype, a key-value map specifying parameters that are passed to AWS_PROXY integrations.
 	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
 	// See the Amazon API Gateway Developer Guide for details.
+	// +mapType:granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. Supported only for WebSocket APIs.
+	// +mapType:granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// Mappings to transform the HTTP response from a backend integration before returning the response to clients. Supported only for HTTP APIs.
@@ -240,10 +244,12 @@ type IntegrationParameters struct {
 	// For HTTP APIs without a specified integration_subtype, a key-value map specifying how to transform HTTP requests before sending them to the backend.
 	// See the Amazon API Gateway Developer Guide for details.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// Mappings to transform the HTTP response from a backend integration before returning the response to clients. Supported only for HTTP APIs.
@@ -268,6 +274,7 @@ type ResponseParametersInitParameters struct {
 
 	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
 	// See the Amazon API Gateway Developer Guide for details.
+	// +mapType:granular
 	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
 
 	// HTTP status code in the range 200-599.
@@ -278,6 +285,7 @@ type ResponseParametersObservation struct {
 
 	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
 	// See the Amazon API Gateway Developer Guide for details.
+	// +mapType:granular
 	Mappings map[string]*string `json:"mappings,omitempty" tf:"mappings,omitempty"`
 
 	// HTTP status code in the range 200-599.
@@ -289,6 +297,7 @@ type ResponseParametersParameters struct {
 	// Key-value map. The key of this map identifies the location of the request parameter to change, and how to change it. The corresponding value specifies the new data for the parameter.
 	// See the Amazon API Gateway Developer Guide for details.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Mappings map[string]*string `json:"mappings" tf:"mappings,omitempty"`
 
 	// HTTP status code in the range 200-599.

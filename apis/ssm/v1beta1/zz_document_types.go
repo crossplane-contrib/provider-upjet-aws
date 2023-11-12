@@ -71,9 +71,11 @@ type DocumentInitParameters struct {
 	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
 	// Additional Permissions to attach to the document. See Permissions below for details.
+	// +mapType:granular
 	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
@@ -128,6 +130,7 @@ type DocumentObservation struct {
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Additional Permissions to attach to the document. See Permissions below for details.
+	// +mapType:granular
 	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// A list of OS platforms compatible with this SSM document, either "Windows" or "Linux".
@@ -140,9 +143,11 @@ type DocumentObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
@@ -172,6 +177,7 @@ type DocumentParameters struct {
 
 	// Additional Permissions to attach to the document. See Permissions below for details.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -181,6 +187,7 @@ type DocumentParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)

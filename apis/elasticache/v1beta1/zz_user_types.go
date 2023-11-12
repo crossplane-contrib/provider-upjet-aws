@@ -34,6 +34,7 @@ type AuthenticationModeParameters struct {
 
 	// Specifies the passwords to use for authentication if type is set to password.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the authentication type. Possible options are: password, no-password-required or iam.
@@ -56,6 +57,7 @@ type UserInitParameters struct {
 	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The username of the user.
@@ -82,8 +84,10 @@ type UserObservation struct {
 	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The username of the user.
@@ -110,6 +114,7 @@ type UserParameters struct {
 
 	// Passwords used for this user. You can create up to two passwords for each user.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -119,6 +124,7 @@ type UserParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The username of the user.

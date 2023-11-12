@@ -18,58 +18,78 @@ import (
 )
 
 type AccessControlAllowHeadersInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowHeadersObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowHeadersParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowMethodsInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowMethodsObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowMethodsParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowOriginsInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowOriginsObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlAllowOriginsParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlExposeHeadersInitParameters struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlExposeHeadersObservation struct {
+
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type AccessControlExposeHeadersParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 

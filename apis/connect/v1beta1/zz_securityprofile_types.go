@@ -26,9 +26,11 @@ type SecurityProfileInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of permissions assigned to the security profile.
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,15 +55,18 @@ type SecurityProfileObservation struct {
 	OrganizationResourceID *string `json:"organizationResourceId,omitempty" tf:"organization_resource_id,omitempty"`
 
 	// Specifies a list of permissions assigned to the security profile.
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The identifier for the Security Profile.
 	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -91,6 +96,7 @@ type SecurityProfileParameters struct {
 
 	// Specifies a list of permissions assigned to the security profile.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -100,6 +106,7 @@ type SecurityProfileParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

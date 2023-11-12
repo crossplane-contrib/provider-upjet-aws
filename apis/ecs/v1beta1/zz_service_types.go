@@ -20,6 +20,7 @@ import (
 type AlarmsInitParameters struct {
 
 	// One or more CloudWatch alarm names.
+	// +listType:set
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -32,6 +33,7 @@ type AlarmsInitParameters struct {
 type AlarmsObservation struct {
 
 	// One or more CloudWatch alarm names.
+	// +listType:set
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -45,6 +47,7 @@ type AlarmsParameters struct {
 
 	// One or more CloudWatch alarm names.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	AlarmNames []*string `json:"alarmNames" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -239,9 +242,11 @@ type NetworkConfigurationObservation struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Subnets associated with the task or service.
+	// +listType:set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -264,6 +269,7 @@ type NetworkConfigurationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// References to Subnet in ec2 to populate subnets.
@@ -279,6 +285,7 @@ type NetworkConfigurationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -399,6 +406,7 @@ type ServiceConnectConfigurationLogConfigurationInitParameters struct {
 	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
 
 	// The configuration options to send to the log driver.
+	// +mapType:granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The secrets to pass to the log configuration. See below.
@@ -411,6 +419,7 @@ type ServiceConnectConfigurationLogConfigurationObservation struct {
 	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
 
 	// The configuration options to send to the log driver.
+	// +mapType:granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The secrets to pass to the log configuration. See below.
@@ -425,6 +434,7 @@ type ServiceConnectConfigurationLogConfigurationParameters struct {
 
 	// The configuration options to send to the log driver.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The secrets to pass to the log configuration. See below.
@@ -581,9 +591,11 @@ type ServiceInitParameters struct {
 	ServiceRegistries []ServiceRegistriesInitParameters `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.
@@ -665,15 +677,18 @@ type ServiceObservation struct {
 	ServiceRegistries []ServiceRegistriesObservation `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.
@@ -800,6 +815,7 @@ type ServiceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
@@ -817,6 +833,7 @@ type ServiceParameters struct {
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.

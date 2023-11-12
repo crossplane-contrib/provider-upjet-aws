@@ -58,6 +58,7 @@ type ProvisioningTemplateInitParameters struct {
 	PreProvisioningHook []PreProvisioningHookInitParameters `json:"preProvisioningHook,omitempty" tf:"pre_provisioning_hook,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The JSON formatted contents of the fleet provisioning template.
@@ -87,9 +88,11 @@ type ProvisioningTemplateObservation struct {
 	ProvisioningRoleArn *string `json:"provisioningRoleArn,omitempty" tf:"provisioning_role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The JSON formatted contents of the fleet provisioning template.
@@ -131,6 +134,7 @@ type ProvisioningTemplateParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The JSON formatted contents of the fleet provisioning template.

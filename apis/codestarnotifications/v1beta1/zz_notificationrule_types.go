@@ -24,6 +24,7 @@ type NotificationRuleInitParameters struct {
 
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
+	// +listType:set
 	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The name of notification rule.
@@ -33,6 +34,7 @@ type NotificationRuleInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
@@ -49,6 +51,7 @@ type NotificationRuleObservation struct {
 
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
+	// +listType:set
 	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The codestar notification rule ARN.
@@ -64,9 +67,11 @@ type NotificationRuleObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
@@ -82,6 +87,7 @@ type NotificationRuleParameters struct {
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The name of notification rule.
@@ -113,6 +119,7 @@ type NotificationRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.

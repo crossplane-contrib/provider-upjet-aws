@@ -20,6 +20,7 @@ import (
 type CreateDatabaseDefaultPermissionsInitParameters struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
@@ -29,6 +30,7 @@ type CreateDatabaseDefaultPermissionsInitParameters struct {
 type CreateDatabaseDefaultPermissionsObservation struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
@@ -39,6 +41,7 @@ type CreateDatabaseDefaultPermissionsParameters struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, and CREATE_TABLE. For more details, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
@@ -49,6 +52,7 @@ type CreateDatabaseDefaultPermissionsParameters struct {
 type CreateTableDefaultPermissionsInitParameters struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, and DESCRIBE. For more details, see Lake Formation Permissions Reference.
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
@@ -58,6 +62,7 @@ type CreateTableDefaultPermissionsInitParameters struct {
 type CreateTableDefaultPermissionsObservation struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, and DESCRIBE. For more details, see Lake Formation Permissions Reference.
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
@@ -68,6 +73,7 @@ type CreateTableDefaultPermissionsParameters struct {
 
 	// List of permissions that are granted to the principal. Valid values may include ALL, SELECT, ALTER, DROP, DELETE, INSERT, and DESCRIBE. For more details, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Principal who is granted permissions. To enforce metadata and underlying data access control only by IAM on new databases and tables set principal to IAM_ALLOWED_PRINCIPALS and permissions to ["ALL"].
@@ -78,6 +84,7 @@ type CreateTableDefaultPermissionsParameters struct {
 type DataLakeSettingsInitParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// +listType:set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
@@ -96,6 +103,7 @@ type DataLakeSettingsInitParameters struct {
 	CreateTableDefaultPermissions []CreateTableDefaultPermissionsInitParameters `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
 
 	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
+	// +listType:set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
@@ -105,6 +113,7 @@ type DataLakeSettingsInitParameters struct {
 type DataLakeSettingsObservation struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// +listType:set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
@@ -123,6 +132,7 @@ type DataLakeSettingsObservation struct {
 	CreateTableDefaultPermissions []CreateTableDefaultPermissionsObservation `json:"createTableDefaultPermissions,omitempty" tf:"create_table_default_permissions,omitempty"`
 
 	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
+	// +listType:set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -135,6 +145,7 @@ type DataLakeSettingsParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
@@ -159,6 +170,7 @@ type DataLakeSettingsParameters struct {
 
 	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

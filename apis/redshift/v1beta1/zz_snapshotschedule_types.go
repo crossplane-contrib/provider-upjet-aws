@@ -20,6 +20,7 @@ import (
 type SnapshotScheduleInitParameters struct {
 
 	// The definition of the snapshot schedule. The definition is made up of schedule expressions, for example cron(30 12 *) or rate(12 hours).
+	// +listType:set
 	Definitions []*string `json:"definitions,omitempty" tf:"definitions,omitempty"`
 
 	// The description of the snapshot schedule.
@@ -29,6 +30,7 @@ type SnapshotScheduleInitParameters struct {
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -38,6 +40,7 @@ type SnapshotScheduleObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The definition of the snapshot schedule. The definition is made up of schedule expressions, for example cron(30 12 *) or rate(12 hours).
+	// +listType:set
 	Definitions []*string `json:"definitions,omitempty" tf:"definitions,omitempty"`
 
 	// The description of the snapshot schedule.
@@ -49,9 +52,11 @@ type SnapshotScheduleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -59,6 +64,7 @@ type SnapshotScheduleParameters struct {
 
 	// The definition of the snapshot schedule. The definition is made up of schedule expressions, for example cron(30 12 *) or rate(12 hours).
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	Definitions []*string `json:"definitions,omitempty" tf:"definitions,omitempty"`
 
 	// The description of the snapshot schedule.
@@ -76,6 +82,7 @@ type SnapshotScheduleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

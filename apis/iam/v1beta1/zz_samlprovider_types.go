@@ -23,6 +23,7 @@ type SAMLProviderInitParameters struct {
 	SAMLMetadataDocument *string `json:"samlMetadataDocument,omitempty" tf:"saml_metadata_document,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -37,9 +38,11 @@ type SAMLProviderObservation struct {
 	SAMLMetadataDocument *string `json:"samlMetadataDocument,omitempty" tf:"saml_metadata_document,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The expiration date and time for the SAML provider in RFC1123 format, e.g., Mon, 02 Jan 2006 15:04:05 MST.
@@ -54,6 +57,7 @@ type SAMLProviderParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

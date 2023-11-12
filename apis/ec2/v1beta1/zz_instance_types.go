@@ -170,6 +170,7 @@ type InstanceEBSBlockDeviceInitParameters struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Map of tags to assign to the device.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
@@ -203,6 +204,7 @@ type InstanceEBSBlockDeviceObservation struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Map of tags to assign to the device.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
@@ -255,6 +257,7 @@ type InstanceEBSBlockDeviceParameters struct {
 
 	// Map of tags to assign to the device.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
@@ -414,12 +417,14 @@ type InstanceInitParameters struct {
 	RootBlockDevice []RootBlockDeviceInitParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
 	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
+	// +listType:set
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
 	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
 	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
@@ -435,6 +440,7 @@ type InstanceInitParameters struct {
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
 	// Map of tags to assign, at instance-creation time, to root and EBS volumes.
+	// +mapType:granular
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
 
@@ -625,9 +631,11 @@ type InstanceObservation struct {
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
 	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
+	// +listType:set
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
 	// List of security group names to associate with.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
@@ -637,9 +645,11 @@ type InstanceObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
@@ -655,9 +665,11 @@ type InstanceObservation struct {
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
 	// List of security group IDs to associate with.
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// Map of tags to assign, at instance-creation time, to root and EBS volumes.
+	// +mapType:granular
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
 
@@ -806,6 +818,7 @@ type InstanceParameters struct {
 
 	// List of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e., referenced in a network_interface block. Refer to the Elastic network interfaces documentation to see the maximum number of private IP addresses allowed per instance type.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecondaryPrivateIps []*string `json:"secondaryPrivateIps,omitempty" tf:"secondary_private_ips,omitempty"`
 
 	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
@@ -827,6 +840,7 @@ type InstanceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
@@ -858,10 +872,12 @@ type InstanceParameters struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// Map of tags to assign, at instance-creation time, to root and EBS volumes.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
 }
 
@@ -1023,6 +1039,7 @@ type RootBlockDeviceInitParameters struct {
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// Map of tags to assign to the device.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
@@ -1053,6 +1070,7 @@ type RootBlockDeviceObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Map of tags to assign to the device.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
@@ -1097,6 +1115,7 @@ type RootBlockDeviceParameters struct {
 
 	// Map of tags to assign to the device.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.

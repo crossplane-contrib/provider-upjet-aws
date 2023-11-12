@@ -29,6 +29,7 @@ type ParameterGroupInitParameters struct {
 	Parameter []ParameterGroupParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,9 +51,11 @@ type ParameterGroupObservation struct {
 	Parameter []ParameterGroupParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -116,6 +119,7 @@ type ParameterGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

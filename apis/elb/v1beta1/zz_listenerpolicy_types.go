@@ -23,9 +23,11 @@ type ListenerPolicyInitParameters struct {
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +listType:set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an update.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -41,9 +43,11 @@ type ListenerPolicyObservation struct {
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +listType:set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an update.
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -68,6 +72,7 @@ type ListenerPolicyParameters struct {
 
 	// List of Policy Names to apply to the backend server.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -77,6 +82,7 @@ type ListenerPolicyParameters struct {
 
 	// Map of arbitrary keys and values that, when changed, will trigger an update.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 

@@ -26,6 +26,7 @@ type TestGridProjectInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC security groups and subnets that are attached to a project. See VPC Config below.
@@ -46,9 +47,11 @@ type TestGridProjectObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VPC security groups and subnets that are attached to a project. See VPC Config below.
@@ -72,6 +75,7 @@ type TestGridProjectParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC security groups and subnets that are attached to a project. See VPC Config below.
@@ -85,9 +89,11 @@ type VPCConfigInitParameters struct {
 type VPCConfigObservation struct {
 
 	// A list of VPC security group IDs in your Amazon VPC.
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of VPC subnet IDs in your Amazon VPC.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the Amazon VPC.
@@ -109,6 +115,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -124,6 +131,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the Amazon VPC.

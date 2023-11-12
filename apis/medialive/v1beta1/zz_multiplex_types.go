@@ -32,6 +32,7 @@ type MultiplexInitParameters struct {
 	StartMultiplex *bool `json:"startMultiplex,omitempty" tf:"start_multiplex,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -104,8 +105,10 @@ type MultiplexObservation struct {
 	StartMultiplex *bool `json:"startMultiplex,omitempty" tf:"start_multiplex,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -134,6 +137,7 @@ type MultiplexParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

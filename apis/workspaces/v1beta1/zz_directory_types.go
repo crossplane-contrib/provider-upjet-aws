@@ -20,12 +20,14 @@ import (
 type DirectoryInitParameters struct {
 
 	// The identifiers of the IP access control groups associated with the directory.
+	// +listType:set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// service capabilities. Defined below.
 	SelfServicePermissions []SelfServicePermissionsInitParameters `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
@@ -44,6 +46,7 @@ type DirectoryObservation struct {
 	CustomerUserName *string `json:"customerUserName,omitempty" tf:"customer_user_name,omitempty"`
 
 	// The IP addresses of the DNS servers for the directory.
+	// +listType:set
 	DNSIPAddresses []*string `json:"dnsIpAddresses,omitempty" tf:"dns_ip_addresses,omitempty"`
 
 	// The directory identifier for registration in WorkSpaces service.
@@ -62,6 +65,7 @@ type DirectoryObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The identifiers of the IP access control groups associated with the directory.
+	// +listType:set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
@@ -71,12 +75,15 @@ type DirectoryObservation struct {
 	SelfServicePermissions []SelfServicePermissionsObservation `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
 
 	// The identifiers of the subnets where the directory resides.
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
@@ -107,6 +114,7 @@ type DirectoryParameters struct {
 
 	// The identifiers of the IP access control groups associated with the directory.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -131,10 +139,12 @@ type DirectoryParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.

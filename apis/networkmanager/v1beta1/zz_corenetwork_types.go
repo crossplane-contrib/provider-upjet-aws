@@ -23,6 +23,7 @@ type CoreNetworkInitParameters struct {
 	BasePolicyRegion *string `json:"basePolicyRegion,omitempty" tf:"base_policy_region,omitempty"`
 
 	// A list of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
+	// +listType:set
 	BasePolicyRegions []*string `json:"basePolicyRegions,omitempty" tf:"base_policy_regions,omitempty"`
 
 	// Specifies whether to create a base policy when a core network is created or updated. A base policy is created and set to LIVE to allow attachments to the core network (e.g. VPC Attachments) before applying a policy document provided using the aws_networkmanager_core_network_policy_attachment resource. This base policy is needed if your core network does not have any LIVE policies (e.g. a core network resource created without the policy_document argument) and your policy document has static routes pointing to VPC attachments and you want to attach your VPCs to the core network before applying the desired policy document. Valid values are true or false. Conflicts with policy_document. An example base policy is shown below. This base policy is overridden with the policy that you specify in the aws_networkmanager_core_network_policy_attachment resource.
@@ -35,6 +36,7 @@ type CoreNetworkInitParameters struct {
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -47,6 +49,7 @@ type CoreNetworkObservation struct {
 	BasePolicyRegion *string `json:"basePolicyRegion,omitempty" tf:"base_policy_region,omitempty"`
 
 	// A list of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
+	// +listType:set
 	BasePolicyRegions []*string `json:"basePolicyRegions,omitempty" tf:"base_policy_regions,omitempty"`
 
 	// Specifies whether to create a base policy when a core network is created or updated. A base policy is created and set to LIVE to allow attachments to the core network (e.g. VPC Attachments) before applying a policy document provided using the aws_networkmanager_core_network_policy_attachment resource. This base policy is needed if your core network does not have any LIVE policies (e.g. a core network resource created without the policy_document argument) and your policy document has static routes pointing to VPC attachments and you want to attach your VPCs to the core network before applying the desired policy document. Valid values are true or false. Conflicts with policy_document. An example base policy is shown below. This base policy is overridden with the policy that you specify in the aws_networkmanager_core_network_policy_attachment resource.
@@ -77,9 +80,11 @@ type CoreNetworkObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -91,6 +96,7 @@ type CoreNetworkParameters struct {
 
 	// A list of regions to add to the base policy. The base policy created by setting the create_base_policy argument to true requires one or more regions to be set in the edge-locations, location key. If base_policy_regions is not specified, the region used in the base policy defaults to the region specified in the provider block.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	BasePolicyRegions []*string `json:"basePolicyRegions,omitempty" tf:"base_policy_regions,omitempty"`
 
 	// Specifies whether to create a base policy when a core network is created or updated. A base policy is created and set to LIVE to allow attachments to the core network (e.g. VPC Attachments) before applying a policy document provided using the aws_networkmanager_core_network_policy_attachment resource. This base policy is needed if your core network does not have any LIVE policies (e.g. a core network resource created without the policy_document argument) and your policy document has static routes pointing to VPC attachments and you want to attach your VPCs to the core network before applying the desired policy document. Valid values are true or false. Conflicts with policy_document. An example base policy is shown below. This base policy is overridden with the policy that you specify in the aws_networkmanager_core_network_policy_attachment resource.
@@ -126,6 +132,7 @@ type CoreNetworkParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

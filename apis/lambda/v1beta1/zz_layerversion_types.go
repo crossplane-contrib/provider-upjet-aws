@@ -20,9 +20,11 @@ import (
 type LayerVersionInitParameters struct {
 
 	// List of Architectures this layer is compatible with. Currently x86_64 and arm64 can be specified.
+	// +listType:set
 	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
 
 	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
+	// +listType:set
 	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`
 
 	// Description of what your Lambda Layer does.
@@ -59,9 +61,11 @@ type LayerVersionObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// List of Architectures this layer is compatible with. Currently x86_64 and arm64 can be specified.
+	// +listType:set
 	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
 
 	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
+	// +listType:set
 	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`
 
 	// Date this resource was created.
@@ -116,10 +120,12 @@ type LayerVersionParameters struct {
 
 	// List of Architectures this layer is compatible with. Currently x86_64 and arm64 can be specified.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
 
 	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`
 
 	// Description of what your Lambda Layer does.

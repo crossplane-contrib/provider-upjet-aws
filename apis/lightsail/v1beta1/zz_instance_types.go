@@ -79,6 +79,7 @@ type InstanceInitParameters struct {
 	KeyPairName *string `json:"keyPairName,omitempty" tf:"key_pair_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Single lined launch script as a string to configure server with additional user data
@@ -138,9 +139,11 @@ type InstanceObservation struct {
 	RAMSize *float64 `json:"ramSize,omitempty" tf:"ram_size,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Single lined launch script as a string to configure server with additional user data
@@ -185,6 +188,7 @@ type InstanceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Single lined launch script as a string to configure server with additional user data

@@ -20,6 +20,7 @@ import (
 type CognitoIdentityPoolProviderPrincipalTagInitParameters struct {
 
 	// String to string map of variables.
+	// +mapType:granular
 	PrincipalTags map[string]*string `json:"principalTags,omitempty" tf:"principal_tags,omitempty"`
 
 	// :  use default (username and clientID) attribute mappings.
@@ -36,6 +37,7 @@ type CognitoIdentityPoolProviderPrincipalTagObservation struct {
 	IdentityProviderName *string `json:"identityProviderName,omitempty" tf:"identity_provider_name,omitempty"`
 
 	// String to string map of variables.
+	// +mapType:granular
 	PrincipalTags map[string]*string `json:"principalTags,omitempty" tf:"principal_tags,omitempty"`
 
 	// :  use default (username and clientID) attribute mappings.
@@ -74,6 +76,7 @@ type CognitoIdentityPoolProviderPrincipalTagParameters struct {
 
 	// String to string map of variables.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	PrincipalTags map[string]*string `json:"principalTags,omitempty" tf:"principal_tags,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

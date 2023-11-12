@@ -69,6 +69,7 @@ type BrokerNodeGroupInfoObservation struct {
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
 	// A list of subnets to connect to in client VPC (documentation).
+	// +listType:set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
 	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
@@ -81,6 +82,7 @@ type BrokerNodeGroupInfoObservation struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// A block that contains information about storage volumes attached to MSK broker nodes. See below.
@@ -96,6 +98,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// A list of subnets to connect to in client VPC (documentation).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
 	// References to Subnet in ec2 to populate clientSubnets.
@@ -121,6 +124,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
@@ -246,6 +250,7 @@ type ClusterInitParameters struct {
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -314,9 +319,11 @@ type ClusterObservation struct {
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A comma separated list of one or more hostname:port pairs to use to connect to the Apache Zookeeper cluster. The returned values are sorted alphabetically. The AWS API may not return all endpoints, so this value is not guaranteed to be stable across applies.
@@ -379,6 +386,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -816,12 +824,14 @@ type StorageInfoParameters struct {
 type TLSInitParameters struct {
 
 	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
+	// +listType:set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type TLSObservation struct {
 
 	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
+	// +listType:set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -829,6 +839,7 @@ type TLSParameters struct {
 
 	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 

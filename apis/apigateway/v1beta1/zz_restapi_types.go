@@ -23,6 +23,7 @@ type RestAPIEndpointConfigurationInitParameters struct {
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 
 	// Set of VPC Endpoint identifiers. It is only supported for PRIVATE endpoint type. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension vpcEndpointIds property. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// +listType:set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
 }
 
@@ -32,6 +33,7 @@ type RestAPIEndpointConfigurationObservation struct {
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 
 	// Set of VPC Endpoint identifiers. It is only supported for PRIVATE endpoint type. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension vpcEndpointIds property. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// +listType:set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
 }
 
@@ -43,6 +45,7 @@ type RestAPIEndpointConfigurationParameters struct {
 
 	// Set of VPC Endpoint identifiers. It is only supported for PRIVATE endpoint type. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension vpcEndpointIds property. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
 }
 
@@ -76,12 +79,14 @@ type RestAPIInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of customizations for importing the specification in the body argument. For example, to exclude DocumentationParts from an imported API, set ignore equal to documentation. Additional documentation, including other parameters such as basepath, can be found in the API Gateway Developer Guide.
+	// +mapType:granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	PutRestAPIMode *string `json:"putRestApiMode,omitempty" tf:"put_rest_api_mode,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -129,6 +134,7 @@ type RestAPIObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of customizations for importing the specification in the body argument. For example, to exclude DocumentationParts from an imported API, set ignore equal to documentation. Additional documentation, including other parameters such as basepath, can be found in the API Gateway Developer Guide.
+	// +mapType:granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// JSON formatted policy document that controls access to the API Gateway. We recommend using the aws_api_gateway_rest_api_policy resource instead. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-policy extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
@@ -141,9 +147,11 @@ type RestAPIObservation struct {
 	RootResourceID *string `json:"rootResourceId,omitempty" tf:"root_resource_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType:granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -187,6 +195,7 @@ type RestAPIParameters struct {
 
 	// Map of customizations for importing the specification in the body argument. For example, to exclude DocumentationParts from an imported API, set ignore equal to documentation. Additional documentation, including other parameters such as basepath, can be found in the API Gateway Developer Guide.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Mode of the PutRestApi operation when importing an OpenAPI specification via the body argument (create or update operation). Valid values are merge and overwrite. If unspecificed, defaults to overwrite (for backwards compatibility). This corresponds to the x-amazon-apigateway-put-integration-method extension. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
@@ -200,6 +209,7 @@ type RestAPIParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType:granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

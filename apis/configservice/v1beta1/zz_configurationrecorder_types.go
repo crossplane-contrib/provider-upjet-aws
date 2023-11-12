@@ -70,6 +70,7 @@ type RecordingGroupInitParameters struct {
 	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
 
 	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
+	// +listType:set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
@@ -82,6 +83,7 @@ type RecordingGroupObservation struct {
 	IncludeGlobalResourceTypes *bool `json:"includeGlobalResourceTypes,omitempty" tf:"include_global_resource_types,omitempty"`
 
 	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
+	// +listType:set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
@@ -97,6 +99,7 @@ type RecordingGroupParameters struct {
 
 	// A list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). See relevant part of AWS Docs for available types. In order to use this attribute, all_supported must be set to false.
 	// +kubebuilder:validation:Optional
+	// +listType:set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
