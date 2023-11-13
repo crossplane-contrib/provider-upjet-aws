@@ -29,7 +29,7 @@ If you'd like to learn how to use Upjet, see [Usage Guide](https://github.com/cr
 
 ### Add a New Resource
 
-Follow the guide [here](https://github.com/crossplane/upjet/blob/main/docs/add-new-resource-short.md).
+Follow the guide [here](https://github.com/crossplane/upjet/blob/v0.10.0/docs/add-new-resource-short.md).
 
 ## Report a Bug
 
