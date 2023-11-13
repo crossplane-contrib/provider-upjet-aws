@@ -213,4 +213,4 @@ replace golang.org/x/exp => golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20231026091456-f2d38ee240d7
 
-replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231110110251-9cb226a24397
+replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231113154741-911e290126da
