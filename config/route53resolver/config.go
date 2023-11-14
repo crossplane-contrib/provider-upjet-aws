@@ -6,16 +6,17 @@ package route53resolver
 
 import (
 	"fmt"
+	"strconv"
+
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/resource/json"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/pkg/errors"
-	"strconv"
 )
 
 // Configure adds configurations for the route53resolver group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { // nolint:gocyclo
 	p.AddResourceConfigurator("aws_route53_resolver_query_log_config", func(r *config.Resource) {
 		delete(r.References, "destination_arn")
 	})
@@ -134,9 +135,6 @@ func Configure(p *config.Provider) {
 						})
 						removeIPAddressFromDiffViaHash(createdHash)
 						delete(subnet, ipAddr.IP)
-					} else {
-						// we have a new subnet,IP pair introduced, this will show up in diff
-						// no action needed on diff
 					}
 				}
 			}
@@ -149,7 +147,8 @@ func Configure(p *config.Provider) {
 					continue
 				}
 
-				if len(ipsOfSubnetInCurrentState) > unmatchedDesiredIPCount {
+				switch {
+				case len(ipsOfSubnetInCurrentState) > unmatchedDesiredIPCount:
 					// for the particular subnet, we have more IPs present in the current state than we desire, e.g.
 					// current state for subnet1 = { subnet1_ipA, subnet1_ipB, subnet1_ipC }
 					// desired state for subnet1 = { subnet1_ipANY }
@@ -171,12 +170,12 @@ func Configure(p *config.Provider) {
 						"subnet_id": subnetId,
 					})
 					removeIPAddressFromDiffViaHash(creationHash)
-				} else if len(ipsOfSubnetInCurrentState) < unmatchedDesiredIPCount {
+				case len(ipsOfSubnetInCurrentState) < unmatchedDesiredIPCount:
 					// this might not be possible at all, due to endpoint hash function
 					for _, hash := range ipsOfSubnetInCurrentState {
 						removeIPAddressFromDiffViaHash(hash)
 					}
-				} else {
+				default:
 					// for the particular subnet, we have matching number of IPs to desired, i.e there should be no diff for these
 					// example
 					// current state for subnet2 IPs = { subnet2_ipX}
@@ -195,7 +194,6 @@ func Configure(p *config.Provider) {
 					})
 					removeIPAddressFromDiffViaHash(creationHash)
 				}
-
 			}
 			// compare the total desired IP count and current IP count
 			// adjust the diff for ipAddress.#

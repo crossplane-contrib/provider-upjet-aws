@@ -7,16 +7,17 @@ package networkfirewall
 import (
 	"bytes"
 	"fmt"
+	"strings"
+
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"strings"
 
 	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for the networkfirewall group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { // nolint:gocyclo
 	p.AddResourceConfigurator("aws_networkfirewall_firewall_policy", func(r *config.Resource) {
 		r.References = config.References{
 			"firewall_policy.stateless_rule_group_reference.resource_arn": {
