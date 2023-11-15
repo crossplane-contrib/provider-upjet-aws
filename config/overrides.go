@@ -18,12 +18,17 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// RegionAddition adds region to the spec of all resources except iam group which
-// does not have a region notion.
+// RegionAddition adds region to the spec of all resources except groups:
+// - iam
+// - opsworks
+// - organizations
+// which does not have a region notion.
 func RegionAddition() config.ResourceOption { //nolint:gocyclo
 	return func(r *config.Resource) {
-		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
-			return
+		for _, s := range []string{"iam", "opsworks", "organizations"} {
+			if r.ShortGroup == s {
+				return
+			}
 		}
 		c := "Region is the region you'd like your resource to be created in.\n"
 		comment, err := comments.New(c, comments.WithTFTag("-"))

@@ -100,17 +100,11 @@ spec:
                       account. Defaults to the Organization default Root ID. A configuration
                       must be present for this argument to perform drift detection.
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
-                required:
-                - region
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management

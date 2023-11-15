@@ -89,12 +89,6 @@ spec:
                   featureSet:
                     description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
                     type: string
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management

@@ -126,11 +126,6 @@ type OrganizationParameters struct {
 	// Specify "ALL" (default) or "CONSOLIDATED_BILLING".
 	// +kubebuilder:validation:Optional
 	FeatureSet *string `json:"featureSet,omitempty" tf:"feature_set,omitempty"`
-
-	// Region is the region you'd like your resource to be created in.
-	// +upjet:crd:field:TFTag=-
-	// +kubebuilder:validation:Required
-	Region *string `json:"region" tf:"-"`
 }
 
 type PolicyTypesInitParameters struct {

@@ -12,7 +12,6 @@ spec:
     policyIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
     targetId: <account-id>
 ---
 apiVersion: organizations.aws.upbound.io/v1beta1
@@ -36,4 +35,3 @@ spec:
         }
       }
     name: example
-    region: us-west-1

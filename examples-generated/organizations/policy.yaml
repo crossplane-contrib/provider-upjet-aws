@@ -10,4 +10,3 @@ spec:
   forProvider:
     content: ${data.aws_iam_policy_document.example.json}
     name: example
-    region: us-west-1

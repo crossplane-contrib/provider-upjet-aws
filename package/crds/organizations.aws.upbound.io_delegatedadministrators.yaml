@@ -146,16 +146,10 @@ spec:
                             type: string
                         type: object
                     type: object
-                  region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
-                    type: string
                   servicePrincipal:
                     description: The service principal of the AWS service for which
                       you want to make the member account a delegated administrator.
                     type: string
-                required:
-                - region
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
