@@ -1,0 +1,112 @@
+name: Bug Report
+description: Help us diagnose and fix bugs in Official AWS Provider
+labels: bug,needs:triage
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Thank you for helping to improve Official AWS Provider!
+
+        - If you're not currently using the most recent version of the Upbound Official AWS Provider, we recommend upgrading. This could resolve your issue, as any potential issues may have already been addressed in the latest release.
+
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: |
+        Please be sure to search for open issues before raising a new one.
+        If there is an existing issue, please vote for it by adding a 👍 reaction to it to help us prioritize it.
+      options:
+        - label: I have searched the existing issues
+          required: true
+ 
+  - type: textarea
+    id: affected
+    attributes:
+      label: Affected Resource(s)
+      description: Please fill the affected resource(s) "kind.groupname"
+      placeholder: "* kind.APIgroup=> Bucket.s3"
+    validations:
+      required: false
+
+  - type: textarea
+    id: mr
+    attributes:
+      label: Resource MRs required to reproduce the bug
+      description: Please provide the example manifests and configurations you use.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to Reproduce
+      description: Please list the steps required to reproduce the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What behavior do you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Relevant Error Output Snippet
+      description: |
+        If possible, provide a relevant log or screenshot from the error or panic output.
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: crossplane_version
+    attributes:
+      label: Crossplane Version
+      placeholder: "X.Y.Z"
+    validations:
+      required: true
+
+  - type: input
+    id: provider_version
+    attributes:
+      label: Provider Version
+      placeholder: "X.Y.Z"
+    validations:
+      required: true
+
+  - type: input
+    id: kubernetes_version
+    attributes:
+      label: Kubernetes Version
+      placeholder: "use `kubectl version`"
+    validations:
+      required: false
+
+  - type: input
+    id: kubernetes_distribution
+    attributes:
+      label: Kubernetes Distribution
+      placeholder: "EKS, AKS, GKE, OpenShift, etc."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Additional Info
+      description: The additional information you want to add, related issue(s), pull requests, reference documents, situations specific to your environment, etc.
+    validations:
+      required: false
