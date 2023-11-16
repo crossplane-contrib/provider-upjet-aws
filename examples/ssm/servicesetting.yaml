@@ -2,13 +2,12 @@ apiVersion: ssm.aws.upbound.io/v1beta1
 kind: ServiceSetting
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Require account id to be specified in settingId"
     meta.upbound.io/example-id: ssm/v1beta1/servicesetting
   labels:
     testing.upbound.io/example-name: test_setting
   name: test-setting
 spec:
   forProvider:
-    settingId: "arn:aws:ssm:us-west-1:153891904029:servicesetting/ssm/parameter-store/high-throughput-enabled"
+    settingId: "arn:aws:ssm:us-west-1:${data.aws_account_id}:servicesetting/ssm/parameter-store/high-throughput-enabled"
     region: us-west-1
     settingValue: "true"

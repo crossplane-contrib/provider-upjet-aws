@@ -10,16 +10,15 @@ import (
 	"strings"
 
 	"github.com/crossplane/crossplane-runtime/pkg/errors"
-
 	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// ExternalNameConfigs contains all external name configurations for this
-// provider.
-var ExternalNameConfigs = map[string]config.ExternalName{
-
+// NoForkExternalNameConfigs contains all external name configurations
+// belonging to Terraform resources to be reconciled under the no-fork
+// architecture for this provider.
+var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// ACM
 	// Imported using ARN that has a random substring:
 	// arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
@@ -46,7 +45,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// ID is a random UUID.
 	"aws_prometheus_workspace":            config.IdentifierFromProvider,
-	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:rulegroupsnamespace/IDstring/{{ .external_name }}"),
+	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:rulegroupsnamespace/{{ .parameters.workspace_id }}/{{ .external_name }}"),
 	// Uses the ID of workspace, workspace_id parameter.
 	"aws_prometheus_alert_manager_definition": config.IdentifierFromProvider,
 
@@ -54,25 +53,25 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_apigatewayv2_api": config.IdentifierFromProvider,
 	// Case4: Imported by using the API mapping identifier and domain name.
-	"aws_apigatewayv2_api_mapping": TemplatedStringAsIdentifierWithNoName("{{ .external_name }}/{{ .parameters.domain_name }}"),
+	"aws_apigatewayv2_api_mapping": config.IdentifierFromProvider,
 	// Case4: Imported by using the API identifier and authorizer identifier.
-	"aws_apigatewayv2_authorizer": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
+	"aws_apigatewayv2_authorizer": config.IdentifierFromProvider,
 	// Case4: Imported by using the API identifier and deployment identifier.
-	"aws_apigatewayv2_deployment":  TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
+	"aws_apigatewayv2_deployment":  config.IdentifierFromProvider,
 	"aws_apigatewayv2_domain_name": config.ParameterAsIdentifier("domain_name"),
 	// Case4: Imported by using the API identifier and integration identifier.
-	"aws_apigatewayv2_integration": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
+	"aws_apigatewayv2_integration": config.IdentifierFromProvider,
 	// Case4: Imported by using the API identifier, integration identifier and
 	// integration response identifier.
-	"aws_apigatewayv2_integration_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.integration_id }}/{{ .external_name }}"),
+	"aws_apigatewayv2_integration_response": config.IdentifierFromProvider,
 	// Case4: Imported by using the API identifier and model identifier.
-	"aws_apigatewayv2_model": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
+	"aws_apigatewayv2_model": config.IdentifierFromProvider,
 	// Case4: Imported by using the API identifier and route identifier.
-	"aws_apigatewayv2_route": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .external_name }}"),
+	"aws_apigatewayv2_route": config.IdentifierFromProvider,
 	// Case4: Imported by using the API identifier, route identifier and route
 	// response identifier.
-	"aws_apigatewayv2_route_response": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}/{{ .parameters.route_id }}/{{ .external_name }}"),
-	// Imported by the stage name.
+	"aws_apigatewayv2_route_response": config.IdentifierFromProvider,
+	// Imported by using the API identifier and stage name.
 	"aws_apigatewayv2_stage": config.NameAsIdentifier,
 	// aws_apigatewayv2_vpc_link can be imported by using the VPC Link id
 	"aws_apigatewayv2_vpc_link": config.IdentifierFromProvider,
@@ -110,8 +109,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// us-west-2_abc123
 	"aws_cognito_user_pool": config.IdentifierFromProvider,
-	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
-	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
 	// auth.example.org
 	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
 	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
@@ -187,10 +184,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Imported using a very complex format:
 	// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 	"aws_security_group_rule": config.IdentifierFromProvider,
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
 	// Imported by using the VPC CIDR Association ID: vpc-cidr-assoc-xxxxxxxx
 	"aws_vpc_ipv4_cidr_block_association": config.IdentifierFromProvider,
 	// Imported using the vpc peering id: pcx-111aaa111
@@ -205,7 +198,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_route_table": config.IdentifierFromProvider,
 	// Imported using the associated resource ID and Route Table ID separated
 	// by a forward slash (/)
-	"aws_route_table_association": routeTableAssociation(),
+	"aws_route_table_association": config.IdentifierFromProvider,
 	// No import.
 	"aws_main_route_table_association": config.IdentifierFromProvider,
 	// No import
@@ -274,7 +267,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// VPC Endpoint Subnet Associations can be imported using vpc_endpoint_id together with subnet_id
 	"aws_vpc_endpoint_subnet_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "subnet_id"),
 	// VPC Endpoint security group Associations can be imported using vpc_endpoint_id together with security_group_id
-	"aws_vpc_endpoint_security_group_association": FormattedIdentifierFromProvider("/", "vpc_endpoint_id", "security_group_id"),
+	"aws_vpc_endpoint_security_group_association": config.IdentifierFromProvider,
 	// Default VPC route tables can be imported using the vpc_id
 	"aws_default_route_table": config.IdentifierFromProvider,
 	// Hosts can be imported using the host id
@@ -913,7 +906,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// kinesis
 	//
 	// Even though the documentation says the ID is name, it uses ARN..
-	"aws_kinesis_stream": config.TemplatedStringAsIdentifier("name", " arn:aws:kinesis:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stream/{{ .external_name }}"),
+	"aws_kinesis_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesis:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stream/{{ .external_name }}"),
 	// Kinesis Stream Consumers can be imported using the Amazon Resource Name (ARN)
 	// that has a random substring.
 	"aws_kinesis_stream_consumer": config.IdentifierFromProvider,
@@ -1029,7 +1022,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// Cloudwatch Log Groups can be imported using the name
 	"aws_cloudwatch_log_group": config.NameAsIdentifier,
-	// CloudWatch Log Metric Filter can be imported using its name
+	// CloudWatch Log Metric Filter can be imported using the log_group_name:name
 	"aws_cloudwatch_log_metric_filter": config.NameAsIdentifier,
 	// CloudWatch query definitions can be imported using the query definition ARN.
 	"aws_cloudwatch_query_definition": config.IdentifierFromProvider,
@@ -1315,7 +1308,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Application AutoScaling Policy can be imported using the service-namespace, resource-id, scalable-dimension and policy-name separated by /
 	"aws_appautoscaling_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}/{{ .external_name }}"),
 	// Application AutoScaling Target can be imported using the service-namespace , resource-id and scalable-dimension separated by /
-	"aws_appautoscaling_target": TemplatedStringAsIdentifierWithNoName("{{ .parameters.service_namespace }}/{{ .parameters.resource_id }}/{{ .parameters.scalable_dimension }}"),
+	"aws_appautoscaling_target": config.IdentifierFromProvider,
 
 	// codecommit
 	//
@@ -1689,7 +1682,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// config.NameAsIdentifier did not work, the identifier for the resource turned out to be an ARN
 	// arn:aws:cloudformation:us-west-1:123456789123:stack/networking-stack/1e691240-6f2c-11ed-8f91-06094dc221f3
-	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 
@@ -1769,8 +1762,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_appconfig_application": config.IdentifierFromProvider,
 	// AppConfig Deployment Strategies can be imported by using their deployment strategy ID
 	"aws_appconfig_deployment_strategy": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	"aws_appconfig_environment": config.IdentifierFromProvider,
 	// AppConfig Configuration Profiles can be imported by using the configuration profile ID and application ID separated by a colon (:)
 	"aws_appconfig_configuration_profile": config.IdentifierFromProvider,
 	// AppConfig Hosted Configuration Versions can be imported by using the application ID, configuration profile ID, and version number separated by a slash (/)
@@ -2234,7 +2225,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ses_email_identity": config.IdentifierFromProvider,
 	// SES event destinations can be imported using configuration_set_name together with the event destination's name
 	// Example: some-configuration-set-test/event-destination-sns
-	"aws_ses_event_destination": config.TemplatedStringAsIdentifier("name", "{{ .parameters.configuration_set_name }}/{{ .external_name }}"),
+	"aws_ses_event_destination": config.NameAsIdentifier,
 	// Identity Notification Topics can be imported using the ID of the record. The ID is made up as IDENTITY|TYPE where IDENTITY is the SES Identity and TYPE is the Notification Type.
 	// Example: 'example.com|Bounce'
 	"aws_ses_identity_notification_topic": config.IdentifierFromProvider,
@@ -2258,11 +2249,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Signer signing profile permission statements can be imported using profile_name/statement_id
 	// Example: prod_profile_DdW3Mk1foYL88fajut4mTVFGpuwfd4ACO6ANL0D1uIj7lrn8adK/ProdAccountStartSigningJobStatementId
 	"aws_signer_signing_profile_permission": config.TemplatedStringAsIdentifier("", "{{ .parameters.profile_name }}/{{ .parameters.statement_id }}"),
-
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
 
 	// networkfirewall
 	//
@@ -2637,6 +2623,22 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fis_experiment_template": config.IdentifierFromProvider,
 }
 
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": config.IdentifierFromProvider,
+	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
+	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
+	// simpledb
+	//
+	// SimpleDB Domains can be imported using the name
+	"aws_simpledb_domain": config.NameAsIdentifier,
+}
+
 func lambdaFunctionURL() config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, terraformProviderConfig map[string]interface{}) (string, error) {
@@ -2771,56 +2773,6 @@ func route() config.ExternalName {
 	return e
 }
 
-func routeTableAssociation() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		rtb, ok := parameters["route_table_id"]
-		if !ok {
-			return "", errors.New("route_table_id cannot be empty")
-		}
-		switch {
-		case parameters["subnet_id"] != nil:
-			return fmt.Sprintf("%s/%s", parameters["subnet_id"].(string), rtb.(string)), nil
-		case parameters["gateway_id"] != nil:
-			return fmt.Sprintf("%s/%s", parameters["gateway_id"].(string), rtb.(string)), nil
-		}
-		return "", errors.New("gateway_id or subnet_id has to be given")
-	}
-	return e
-}
-
-func eksOIDCIdentityProvider() config.ExternalName {
-	// OmittedFields in config.ExternalName works only for the top-level fields.
-	// Hence, omitting is done in individual config override in `eks/config.go`
-	return config.ExternalName{
-		SetIdentifierArgumentFn: func(base map[string]interface{}, externalName string) {
-			if _, ok := base["oidc"]; !ok {
-				base["oidc"] = map[string]interface{}{}
-			}
-			// max length is 1:
-			// https://github.com/hashicorp/terraform-provider-aws/blob/7ff39c5b11aafe812e3a4b414aa6d345286b95ec/internal/service/eks/identity_provider_config.go#L58
-			if arr, ok := base["oidc"].([]interface{}); ok && len(arr) == 1 {
-				if m, ok := arr[0].(map[string]interface{}); ok {
-					m["identity_provider_config_name"] = externalName
-				}
-			}
-		},
-		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
-			if id, ok := tfstate["id"]; ok {
-				return strings.Split(id.(string), ":")[1], nil
-			}
-			return "", errors.New("there is no id in tfstate")
-		},
-		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-			cl, ok := parameters["cluster_name"]
-			if !ok {
-				return "", errors.New("cluster_name cannot be empty")
-			}
-			return fmt.Sprintf("%s:%s", cl.(string), externalName), nil
-		},
-	}
-}
-
 // FormattedIdentifierFromProvider is a helper function to construct Terraform
 // IDs that use elements from the parameters in a certain string format.
 // It should be used in cases where all information in the ID is gathered from
@@ -2936,19 +2888,60 @@ func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	return e
 }
 
-// ExternalNameConfigurations applies all external name configs listed in the
-// table ExternalNameConfigs and sets the version of those resources to v1beta1
-// assuming they will be tested.
-func ExternalNameConfigurations() config.ResourceOption {
+// ResourceConfigurator applies all external name configs
+// listed in the table NoForkExternalNameConfigs and
+// CLIReconciledExternalNameConfigs and sets the version
+// of those resources to v1beta1. For those resource in
+// NoForkExternalNameConfigs, it also sets
+// config.Resource.UseNoForkClient to `true`.
+func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		if e, ok := ExternalNameConfigs[r.Name]; ok {
-			r.Version = common.VersionV1Beta1
-			r.ExternalName = e
-			// Note(turkenh): This is special to provider-aws. We had injected
-			// region as a parameter for all resources to be consistent with
-			// the native aws provider, and now, we need to add manually it to
-			// the identifier fields for all resources.
-			r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
+		// if configured both for the no-fork and CLI based architectures,
+		// no-fork configuration prevails
+		e, configured := NoForkExternalNameConfigs[r.Name]
+		if !configured {
+			e, configured = CLIReconciledExternalNameConfigs[r.Name]
 		}
+		if !configured {
+			return
+		}
+		r.Version = common.VersionV1Beta1
+		r.ExternalName = e
+		// Note(turkenh): This is special to provider-aws. We had injected
+		// region as a parameter for all resources to be consistent with
+		// the native aws provider, and now, we need to add manually it to
+		// the identifier fields for all resources.
+		r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
+	}
+}
+
+func eksOIDCIdentityProvider() config.ExternalName {
+	return config.ExternalName{
+		SetIdentifierArgumentFn: func(base map[string]interface{}, externalName string) {
+			// max length is 1:
+			// https://github.com/hashicorp/terraform-provider-aws/blob/7ff39c5b11aafe812e3a4b414aa6d345286b95ec/internal/service/eks/identity_provider_config.go#L58
+			if arr, ok := base["oidc"].([]interface{}); ok && len(arr) == 1 {
+				if m, ok := arr[0].(map[string]interface{}); ok {
+					m["identity_provider_config_name"] = externalName
+				}
+			}
+		},
+		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
+			if id, ok := tfstate["id"]; ok {
+				return strings.Split(id.(string), ":")[1], nil
+			}
+			return "", errors.New("there is no id in tfstate")
+		},
+		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+			cl, ok := parameters["cluster_name"]
+			if !ok {
+				return "", errors.New("cluster_name cannot be empty")
+			}
+			return fmt.Sprintf("%s:%s", cl.(string), externalName), nil
+		},
+		OmittedFields: []string{
+			"oidc.identity_provider_config_name",
+			"oidc.identity_provider_config_name_prefix",
+		},
 	}
 }

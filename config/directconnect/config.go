@@ -34,12 +34,14 @@ func Configure(p *config.Provider) {
 		r.References["vpn_gateway_id"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_dx_gateway_association", func(r *config.Resource) {
 		r.TerraformResource.Schema["associated_gateway_id"].Required = true
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"associated_gateway_owner_account_id"},
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_dx_hosted_transit_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
@@ -81,6 +83,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"encryption_mode"},
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_dx_macsec_key_association", func(r *config.Resource) {
@@ -91,5 +94,13 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret",
 			Extractor: common.PathARNExtractor,
 		}
+	})
+
+	p.AddResourceConfigurator("aws_dx_bgp_peer", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("aws_dx_transit_virtual_interface", func(r *config.Resource) {
+		r.UseAsync = true
 	})
 }

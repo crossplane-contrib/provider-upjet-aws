@@ -3,17 +3,18 @@ kind: Instance
 metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/instance
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example-dbinstance
   name: example-dbinstance-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    name: example
     region: us-west-1
     allocatedStorage: 20
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
     instanceClass: db.t3.micro
-    name: example
     engine: postgres
     engineVersion: "13.7"
     username: adminuser
@@ -36,7 +37,6 @@ spec:
     namespace: default
 
 ---
-
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:

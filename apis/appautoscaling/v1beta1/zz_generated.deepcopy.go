@@ -1626,6 +1626,21 @@ func (in *TargetInitParameters) DeepCopyInto(out *TargetInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ResourceID != nil {
+		in, out := &in.ResourceID, &out.ResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ScalableDimension != nil {
+		in, out := &in.ScalableDimension, &out.ScalableDimension
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceNamespace != nil {
+		in, out := &in.ServiceNamespace, &out.ServiceNamespace
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

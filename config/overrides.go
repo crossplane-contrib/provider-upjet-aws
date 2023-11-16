@@ -11,6 +11,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/types"
 	"github.com/crossplane/upjet/pkg/types/comments"
 	"github.com/crossplane/upjet/pkg/types/name"
 
@@ -19,7 +20,7 @@ import (
 
 // RegionAddition adds region to the spec of all resources except iam group which
 // does not have a region notion.
-func RegionAddition() config.ResourceOption {
+func RegionAddition() config.ResourceOption { //nolint:gocyclo
 	return func(r *config.Resource) {
 		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
 			return
@@ -29,6 +30,13 @@ func RegionAddition() config.ResourceOption {
 		if err != nil {
 			panic(errors.Wrap(err, "cannot build comment for region"))
 		}
+
+		// check if the underlying Terraform resource already has "region"
+		// as a (state) attribute
+		if s, ok := r.TerraformResource.Schema["region"]; ok && types.IsObservation(s) {
+			r.SchemaElementOptions.SetAddToObservation("region")
+		}
+
 		r.TerraformResource.Schema["region"] = &schema.Schema{
 			Type:        schema.TypeString,
 			Required:    true,

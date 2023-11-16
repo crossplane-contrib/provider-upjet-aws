@@ -1,5 +1,5 @@
 run:
-  deadline: 10m
+  deadline: 20m
 
   skip-files:
   - "zz_\\..+\\.go$"

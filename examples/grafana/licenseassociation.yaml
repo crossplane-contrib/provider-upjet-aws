@@ -2,7 +2,6 @@ apiVersion: grafana.aws.upbound.io/v1beta1
 kind: LicenseAssociation
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Depends on Workspace resource with manual intervention"
     meta.upbound.io/example-id: grafana/v1beta1/licenseassociation
   labels:
     testing.upbound.io/example-name: example
@@ -21,11 +20,10 @@ apiVersion: grafana.aws.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires unique name to be specified which must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character"
     meta.upbound.io/example-id: grafana/v1beta1/licenseassociation
   labels:
     testing.upbound.io/example-name: ws
-  name: ws
+  name: uptest-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     accountAccessType: CURRENT_ACCOUNT
@@ -50,16 +48,16 @@ metadata:
 spec:
   forProvider:
     assumeRolePolicy: |-
-      ${jsonencode({
-          Version = "2012-10-17"
-          Statement = [
-            {
-              Action = "sts:AssumeRole"
-              Effect = "Allow"
-              Sid    = ""
-              Principal = {
-                Service = "grafana.amazonaws.com"
-              }
+      {
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "grafana.amazonaws.com"
             },
-          ]
-        })}
+            "Sid": ""
+          }
+        ],
+        "Version": "2012-10-17"
+      }

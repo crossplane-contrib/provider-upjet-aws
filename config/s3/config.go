@@ -42,6 +42,15 @@ func Configure(p *config.Provider) {
 			"logging", "object_lock_configuration", "policy", "replication_configuration", "request_payer",
 			"server_side_encryption_configuration", "versioning", "website", "arn")
 		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+			params["region"] = jsonMap["region"]
+			// TODO: added to prevent extra reconciliations due to
+			// late-initialization or drift. Has better be implemented
+			// via defaulting.
+			if _, ok := jsonMap["forceDestroy"]; !ok {
+				params["force_destroy"] = false
+			}
+		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_acl", func(r *config.Resource) {
@@ -63,6 +72,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_s3_object", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"etag", "kms_key_id"},
+		}
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+			// TODO: Has better be implemented via defaulting.
+			if _, ok := jsonMap["acl"]; !ok {
+				params["acl"] = "private"
+			}
 		}
 	})
 

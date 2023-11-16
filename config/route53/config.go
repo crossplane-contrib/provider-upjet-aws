@@ -56,5 +56,6 @@ func Configure(p *config.Provider) {
 		r.References["delegation_set_id"] = config.Reference{
 			Type: "DelegationSet",
 		}
+		r.UseAsync = true
 	})
 }

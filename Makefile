@@ -65,7 +65,7 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.15.0
-UP_VERSION = v0.19.2
+UP_VERSION = v0.20.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.6.1
 
@@ -217,10 +217,17 @@ local-deploy: build-provider.monolith local-deploy.monolith
 # - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
 # - UPTEST_DATASOURCE_PATH, see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
 family-e2e:
+	@$(INFO) Removing everything under $(XPKG_OUTPUT_DIR) and $(OUTPUT_DIR)/cache...
+	@rm -fR $(XPKG_OUTPUT_DIR)
+	@rm -fR $(OUTPUT_DIR)/cache
 	@(INSTALL_APIS=""; \
 	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
 	  	$(INFO) Processing the example manifest "$${m}"; \
 		for api in $$(sed -nE 's/^apiVersion: *(.+)/\1/p' "$${m}" | cut -d. -f1); do \
+		    if [[ $${api} == "v1" ]]; then \
+		        $(INFO) v1 is not a valid provider. Skipping...; \
+		        continue; \
+		    fi; \
 			if [[ $${INSTALL_APIS} =~ " $${api} " ]]; then \
 				$(INFO) Resource provider $(PROJECT_NAME)-$${api} is already installed. Skipping...; \
 				continue; \

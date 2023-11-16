@@ -18,14 +18,14 @@ metadata:
     upjet.upbound.io/manual-intervention: "The Certificate needs to be provisioned successfully which requires a real domain."
     crossplane.io/external-name: example-email.upbound-providers.io
   labels:
-    upjet.upbound.io/test-group: apigatewayv2
+    upjet.upbound.io/test-group: apigatewayv2-domainname
 spec:
   forProvider:
     region: us-west-1
     domainNameConfiguration:
       - certificateArnSelector:
           matchLabels:
-            upjet.upbound.io/test-group: apigatewayv2
+            upjet.upbound.io/test-group: apigatewayv2-domainname
         endpointType: REGIONAL
         securityPolicy: TLS_1_2
 ---
@@ -34,7 +34,7 @@ kind: Certificate
 metadata:
   name: example
   labels:
-    upjet.upbound.io/test-group: apigatewayv2
+    upjet.upbound.io/test-group: apigatewayv2-domainname
   annotations:
     upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
 spec:

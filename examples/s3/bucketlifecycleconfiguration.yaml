@@ -1,7 +1,11 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketLifecycleConfiguration
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketlifecycleconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-blc
 spec:
   forProvider:
     region: us-west-1
@@ -15,3 +19,20 @@ spec:
           - prefix: "tmp/"
         expiration:
           - days: 90
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketlifecycleconfiguration
+  labels:
+    testing.upbound.io/example-name: s3
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+    objectLockEnabled: true
+    tags:
+      Name: SampleBucket

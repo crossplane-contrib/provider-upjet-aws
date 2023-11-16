@@ -4740,6 +4740,11 @@ func (in *BucketObservation) DeepCopyInto(out *BucketObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Region != nil {
+		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
 	if in.ReplicationConfiguration != nil {
 		in, out := &in.ReplicationConfiguration, &out.ReplicationConfiguration
 		*out = make([]ReplicationConfigurationObservation, len(*in))

@@ -1,12 +1,30 @@
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketPublicAccessBlock
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketpublicaccessblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-bpab
 spec:
   forProvider:
-    region: us-west-1
     blockPublicAcls: false
     blockPublicPolicy: false
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: s3
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketpublicaccessblock
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
