@@ -48,7 +48,7 @@ export GOPRIVATE = github.com/upbound/*
 GO_REQUIRED_VERSION ?= 1.19
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
-# GOLANGCILINT_VERSION ?= 1.54.0
+GOLANGCILINT_VERSION ?= 1.55.2
 
 # SUBPACKAGES ?= $(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3)
 SUBPACKAGES ?= monolith
