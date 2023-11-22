@@ -7,6 +7,16 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_docdb_cluster", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "cluster_members")
 		r.UseAsync = true
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			if a, ok := attr["arn"].(string); ok {
+				conn["arn"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_docdb_cluster_instance", func(r *config.Resource) {
