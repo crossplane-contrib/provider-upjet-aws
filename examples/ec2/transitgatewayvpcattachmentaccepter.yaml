@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayVPCAttachmentAccepter
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewayvpcattachmentaccepter
   labels:
     testing.upbound.io/example-name: example
   name: example
