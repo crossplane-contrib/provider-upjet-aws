@@ -10,7 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/acm/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta11 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -161,6 +162,48 @@ func (mg *LBListener) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this LBListenerCertificate.
+func (mg *LBListenerCertificate) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.CertificateArnRef,
+		Selector:     mg.Spec.ForProvider.CertificateArnSelector,
+		To: reference.To{
+			List:    &v1beta12.CertificateList{},
+			Managed: &v1beta12.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CertificateArn")
+	}
+	mg.Spec.ForProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CertificateArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.ListenerArnRef,
+		Selector:     mg.Spec.ForProvider.ListenerArnSelector,
+		To: reference.To{
+			List:    &LBListenerList{},
+			Managed: &LBListener{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ListenerArn")
+	}
+	mg.Spec.ForProvider.ListenerArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ListenerArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LBListenerRule.
 func (mg *LBListenerRule) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -176,8 +219,8 @@ func (mg *LBListenerRule) ResolveReferences(ctx context.Context, c client.Reader
 				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArnRef,
 				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolArnSelector,
 				To: reference.To{
-					List:    &v1beta12.UserPoolList{},
-					Managed: &v1beta12.UserPool{},
+					List:    &v1beta13.UserPoolList{},
+					Managed: &v1beta13.UserPool{},
 				},
 			})
 			if err != nil {
@@ -196,8 +239,8 @@ func (mg *LBListenerRule) ResolveReferences(ctx context.Context, c client.Reader
 				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDRef,
 				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolClientIDSelector,
 				To: reference.To{
-					List:    &v1beta12.UserPoolClientList{},
-					Managed: &v1beta12.UserPoolClient{},
+					List:    &v1beta13.UserPoolClientList{},
+					Managed: &v1beta13.UserPoolClient{},
 				},
 			})
 			if err != nil {
@@ -216,8 +259,8 @@ func (mg *LBListenerRule) ResolveReferences(ctx context.Context, c client.Reader
 				Reference:    mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomainRef,
 				Selector:     mg.Spec.ForProvider.Action[i3].AuthenticateCognito[i4].UserPoolDomainSelector,
 				To: reference.To{
-					List:    &v1beta12.UserPoolDomainList{},
-					Managed: &v1beta12.UserPoolDomain{},
+					List:    &v1beta13.UserPoolDomainList{},
+					Managed: &v1beta13.UserPoolDomain{},
 				},
 			})
 			if err != nil {
