@@ -272,12 +272,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Elastic Beanstalk Environments can be imported using the id
 	"aws_elastic_beanstalk_environment": config.IdentifierFromProvider,
 
-	// elbv2
-	//
-	// Listener Certificates can be imported by using the listener arn and certificate arn, separated by an underscore (_)
-	// arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/test/8e4497da625e2d8a/9ab28ade35828f96/67b3d2d36dd7c26b_arn:aws:iam::123456789012:server-certificate/tf-acc-test-6453083910015726063
-	"aws_lb_listener_certificate": config.IdentifierFromProvider,
-
 	// emr
 	//
 	// EMR clusters can be imported using the id
