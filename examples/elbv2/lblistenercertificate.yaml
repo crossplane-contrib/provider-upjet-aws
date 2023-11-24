@@ -1,0 +1,48 @@
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBListenerCertificate
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificateArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    listenerArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: front_end
+    region: us-west-1
+
+---
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LB
+metadata:
+  labels:
+    testing.upbound.io/example-name: front_end
+  name: front-end
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBListener
+metadata:
+  labels:
+    testing.upbound.io/example-name: front_end
+  name: front-end
+spec:
+  forProvider:
+    region: us-west-1
