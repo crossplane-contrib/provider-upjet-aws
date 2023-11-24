@@ -20,6 +20,8 @@ kind: Certificate
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "It requires a real domain to be bought"
   name: example
 spec:
   forProvider:
