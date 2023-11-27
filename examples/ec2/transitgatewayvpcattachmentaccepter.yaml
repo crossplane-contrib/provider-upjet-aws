@@ -1,6 +1,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: TransitGatewayVPCAttachmentAccepter
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/transitgatewayvpcattachmentaccepter
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -12,3 +14,48 @@ spec:
     transitGatewayAttachmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: TransitGatewayVPCAttachment
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    subnetIdRefs:
+      - name: sample-subnet1
+    transitGatewayId: tgw-07a4690db599a7263
+    vpcIdRef:
+      name: sample-vpc
+  providerConfigRef:
+    name: peer
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+  providerConfigRef:
+    name: peer
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+  providerConfigRef:
+    name: peer
+

@@ -166,7 +166,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// tgw-attach-12345678
 	"aws_ec2_transit_gateway_vpc_attachment": config.IdentifierFromProvider,
 	// Imported by using the EC2 Transit Gateway Attachment identifier: tgw-attach-12345678
-	"aws_ec2_transit_gateway_vpc_attachment_accepter": FormattedIdentifierFromProvider("", "transit_gateway_attachment_id"),
+	"aws_ec2_transit_gateway_vpc_attachment_accepter": config.IdentifierFromProvider,
 	// Imported using the id: lt-12345678
 	"aws_launch_template": config.IdentifierFromProvider,
 	// Launch configurations can be imported using the name
