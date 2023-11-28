@@ -11,6 +11,7 @@ import (
 
 	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
+	lblistenercertificate "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenercertificate"
 	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
@@ -22,6 +23,7 @@ func Setup_elbv2(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		lb.Setup,
 		lblistener.Setup,
+		lblistenercertificate.Setup,
 		lblistenerrule.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,

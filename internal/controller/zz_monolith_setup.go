@@ -437,6 +437,7 @@ import (
 	proxyprotocolpolicy "github.com/upbound/provider-aws/internal/controller/elb/proxyprotocolpolicy"
 	lb "github.com/upbound/provider-aws/internal/controller/elbv2/lb"
 	lblistener "github.com/upbound/provider-aws/internal/controller/elbv2/lblistener"
+	lblistenercertificate "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenercertificate"
 	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
@@ -1358,6 +1359,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		proxyprotocolpolicy.Setup,
 		lb.Setup,
 		lblistener.Setup,
+		lblistenercertificate.Setup,
 		lblistenerrule.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
