@@ -1,6 +1,9 @@
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBListenerCertificate
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource requires a valid Certificate"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -15,22 +18,28 @@ spec:
     region: us-west-1
 
 ---
+
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "It requires a real domain to be bought"
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "It requires a real domain to be bought"
   name: example
 spec:
   forProvider:
     region: us-west-1
 
 ---
+
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LB
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end
@@ -39,9 +48,13 @@ spec:
     region: us-west-1
 
 ---
+
 apiVersion: elbv2.aws.upbound.io/v1beta1
 kind: LBListener
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lblistenercertificate
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: front_end
   name: front-end
