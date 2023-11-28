@@ -6,10 +6,11 @@ package clients
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"os"
 	"reflect"
 	"unsafe"
+
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 
 	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
