@@ -10,6 +10,8 @@ import (
 	"reflect"
 	"unsafe"
 
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+
 	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
@@ -254,9 +256,11 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 }
 
 func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) (xpprovider.AWSConfig, error) { //nolint:gocyclo
-	if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+	// Terraform AWS provider does not support role chaining via provider configuration
+	// https://github.com/hashicorp/terraform-provider-aws/issues/22728
+	if len(pc.Spec.AssumeRoleChain) > 1 {
 		return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client because the length of assume role chain array " +
-			"is more than 1 or endpoint configuration is not nil")
+			"is more than 1")
 	}
 
 	cfg, err := getAWSConfig(ctx, c, mg)
@@ -336,5 +340,35 @@ func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.
 
 		awsConfig.AssumeRole.Tags = tags
 	}
+
+	if pc.Spec.Endpoint != nil {
+		if pc.Spec.Endpoint.URL.Static != nil {
+			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
+				return xpprovider.AWSConfig{}, errors.New("endpoint URL cannot be empty")
+			} else {
+				awsConfig.Endpoints = make(map[string]string)
+				for _, service := range pc.Spec.Endpoint.Services {
+					awsConfig.Endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
+				}
+			}
+		} else if pc.Spec.Endpoint.URL.Dynamic != nil && cfg.EndpointResolverWithOptions != nil {
+			for _, service := range pc.Spec.Endpoint.Services {
+				svcEndpoint, err := cfg.EndpointResolverWithOptions.ResolveEndpoint(service, cfg.Region, nil)
+				if err != nil {
+					return xpprovider.AWSConfig{}, errors.Wrapf(err, "cannot resolve dynamic endpoint URL for AWS service: %s", service)
+				}
+				awsConfig.Endpoints[service] = svcEndpoint.URL
+			}
+		}
+	}
+
+	awsConfig.SkipCredsValidation = pc.Spec.SkipCredsValidation
+	awsConfig.S3UsePathStyle = pc.Spec.S3UsePathStyle
+	awsConfig.SkipRegionValidation = pc.Spec.SkipRegionValidation
+	if pc.Spec.SkipMetadataApiCheck {
+		awsConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
+	}
+	awsConfig.SkipRequestingAccountId = pc.Spec.SkipReqAccountId
+
 	return awsConfig, nil
 }
