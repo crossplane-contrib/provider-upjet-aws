@@ -256,13 +256,6 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 }
 
 func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) (xpprovider.AWSConfig, error) { //nolint:gocyclo
-	// Terraform AWS provider does not support role chaining via provider configuration
-	// https://github.com/hashicorp/terraform-provider-aws/issues/22728
-	if len(pc.Spec.AssumeRoleChain) > 1 {
-		return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client because the length of assume role chain array " +
-			"is more than 1")
-	}
-
 	cfg, err := getAWSConfig(ctx, c, mg)
 	if err != nil {
 		return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get AWS config")
@@ -302,43 +295,29 @@ func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.
 		if err != nil {
 			return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get credentials")
 		}
-		cfg, err = UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
+		cfgWithPs, err := UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
 		if err != nil {
 			return xpprovider.AWSConfig{}, errors.Wrap(err, errAWSConfig)
 		}
-		creds, err := cfg.Credentials.Retrieve(ctx)
+		creds, err := cfgWithPs.Credentials.Retrieve(ctx)
 		if err != nil {
 			return xpprovider.AWSConfig{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
 
-		awsConfig.Region = cfg.Region
+		awsConfig.Region = cfgWithPs.Region
 		awsConfig.AccessKey = creds.AccessKeyID
 		awsConfig.SecretKey = creds.SecretAccessKey
 		awsConfig.Token = creds.SessionToken
-
 	}
+
 	if len(pc.Spec.AssumeRoleChain) != 0 {
-		if pc.Spec.AssumeRoleChain[0].RoleARN == nil {
-			return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client: RoleARN cannot be nil in spec.AssumeRoleChain[0]")
+		credentials, err := cfg.Credentials.Retrieve(ctx)
+		if err != nil {
+			return xpprovider.AWSConfig{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
-		awsConfig.AssumeRole = &tfawsbase.AssumeRole{
-			RoleARN:           *pc.Spec.AssumeRoleChain[0].RoleARN,
-			TransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
-		}
-
-		if pc.Spec.AssumeRoleChain[0].ExternalID != nil {
-			awsConfig.AssumeRole.ExternalID = *pc.Spec.AssumeRoleChain[0].ExternalID
-		}
-
-		tags := make(map[string]string)
-		for i, tag := range pc.Spec.AssumeRoleChain[0].Tags {
-			if tag.Key == nil || tag.Value == nil {
-				return xpprovider.AWSConfig{}, errors.Errorf("cannot configure no-fork client: tag key or value cannot be nil in spec.AssumeRoleChain[0].Tags[%d]", i)
-			}
-			tags[*tag.Key] = *tag.Value
-		}
-
-		awsConfig.AssumeRole.Tags = tags
+		awsConfig.Token = credentials.SessionToken
+		awsConfig.SecretKey = credentials.SecretAccessKey
+		awsConfig.AccessKey = credentials.AccessKeyID
 	}
 
 	if pc.Spec.Endpoint != nil {
