@@ -104,6 +104,9 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
 			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
+		r.References["rule.destination.encryption_configuration.replica_kms_key_id"] = config.Reference{
+			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_inventory", func(r *config.Resource) {
