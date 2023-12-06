@@ -67,6 +67,126 @@ func (mg *AccountAssignment) SetWriteConnectionSecretToReference(r *xpv1.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this InstanceAccessControlAttributes.
+func (mg *InstanceAccessControlAttributes) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ManagedPolicyAttachment.
 func (mg *ManagedPolicyAttachment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -244,5 +364,65 @@ func (mg *PermissionSetInlinePolicy) SetPublishConnectionDetailsTo(r *xpv1.Publi
 
 // SetWriteConnectionSecretToReference of this PermissionSetInlinePolicy.
 func (mg *PermissionSetInlinePolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

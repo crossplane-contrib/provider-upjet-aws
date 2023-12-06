@@ -16,6 +16,24 @@ func (l *AccountAssignmentList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this CustomerManagedPolicyAttachmentList.
+func (l *CustomerManagedPolicyAttachmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this InstanceAccessControlAttributesList.
+func (l *InstanceAccessControlAttributesList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ManagedPolicyAttachmentList.
 func (l *ManagedPolicyAttachmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -36,6 +54,15 @@ func (l *PermissionSetInlinePolicyList) GetItems() []resource.Managed {
 
 // GetItems of this PermissionSetList.
 func (l *PermissionSetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PermissionsBoundaryAttachmentList.
+func (l *PermissionsBoundaryAttachmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
