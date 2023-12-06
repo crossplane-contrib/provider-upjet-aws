@@ -14,9 +14,9 @@ spec:
     - key: name
       value:
       - source:
-        - $${path:name.givenName}
+        - ${path:name.givenName}
     - key: last
       value:
       - source:
-        - $${path:name.familyName}
+        - ${path:name.familyName}
     region: us-east-1
