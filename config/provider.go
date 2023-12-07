@@ -65,7 +65,7 @@ import (
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
 	"github.com/upbound/provider-aws/config/kinesisanalytics"
-	kinesisanalytics2 "github.com/upbound/provider-aws/config/kinesisanalyticsv2"
+	"github.com/upbound/provider-aws/config/kinesisanalyticsv2"
 	"github.com/upbound/provider-aws/config/kms"
 	"github.com/upbound/provider-aws/config/lakeformation"
 	"github.com/upbound/provider-aws/config/lambda"
@@ -235,7 +235,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		kafka.Configure,
 		kinesis.Configure,
 		kinesisanalytics.Configure,
-		kinesisanalytics2.Configure,
+		kinesisanalyticsv2.Configure,
 		kms.Configure,
 		lakeformation.Configure,
 		lambda.Configure,
