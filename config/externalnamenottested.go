@@ -616,15 +616,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amazon File Cache cache can be imported using the resource id
 	"aws_fsx_file_cache": config.IdentifierFromProvider,
 
-	// identitystore
-	//
-	// An Identity Store Group can be imported using the combination identity_store_id/group_id
-	"aws_identitystore_group": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-	// aws_identitystore_group_membership can be imported using the identity_store_id/membership_id
-	"aws_identitystore_group_membership": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-	// An Identity Store User can be imported using the combination identity_store_id/user_id
-	"aws_identitystore_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-
 	// inspector2
 	//
 	// Inspector V2 Delegated Admin Account can be imported using the account_id
@@ -756,13 +747,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// ssoadmin
 	//
-	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
-	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	"aws_ssoadmin_customer_managed_policy_attachment": config.IdentifierFromProvider,
-	// SSO Account Assignments can be imported using the instance_arn
-	"aws_ssoadmin_instance_access_control_attributes": config.ParameterAsIdentifier("instance_arn"),
-	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
-	"aws_ssoadmin_permissions_boundary_attachment": config.IdentifierFromProvider,
 
 	// transcribe
 	//

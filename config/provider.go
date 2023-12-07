@@ -61,6 +61,7 @@ import (
 	"github.com/upbound/provider-aws/config/glue"
 	"github.com/upbound/provider-aws/config/grafana"
 	"github.com/upbound/provider-aws/config/iam"
+	"github.com/upbound/provider-aws/config/identitystore"
 	"github.com/upbound/provider-aws/config/kafka"
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
@@ -96,6 +97,7 @@ import (
 	"github.com/upbound/provider-aws/config/sfn"
 	"github.com/upbound/provider-aws/config/sns"
 	"github.com/upbound/provider-aws/config/sqs"
+	"github.com/upbound/provider-aws/config/ssoadmin"
 	"github.com/upbound/provider-aws/config/transfer"
 	"github.com/upbound/provider-aws/hack"
 )
@@ -273,6 +275,8 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		redshiftserverless.Configure,
 		kendra.Configure,
 		medialive.Configure,
+		ssoadmin.Configure,
+		identitystore.Configure,
 	} {
 		configure(pc)
 	}

@@ -1,0 +1,22 @@
+apiVersion: ssoadmin.aws.upbound.io/v1beta1
+kind: InstanceAccessControlAttributes
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ssoadmin/v1beta1/instanceaccesscontrolattributes
+    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
+  labels:
+    testing.upbound.io/example-name: ssoadmin-instance-access-control-attributes
+  name: ssoadmin-instance-access-control-attributes
+spec:
+  forProvider:
+    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    attribute:
+    - key: name
+      value:
+      - source:
+        - ${path:name.givenName}
+    - key: last
+      value:
+      - source:
+        - ${path:name.familyName}
+    region: us-east-1

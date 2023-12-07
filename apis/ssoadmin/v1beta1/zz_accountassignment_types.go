@@ -31,7 +31,7 @@ type AccountAssignmentObservation struct {
 	// The Amazon Resource Name (ARN) of the Permission Set that the admin wants to grant the principal access to.
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
-	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6).
+	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). This can be set to the crossplane external-name of either a Group or User in the identitystore api group, but the Ref and Selector fields will only work with a Group.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The entity type for which the assignment will be created. Valid values: USER, GROUP.
@@ -51,12 +51,33 @@ type AccountAssignmentParameters struct {
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Permission Set that the admin wants to grant the principal access to.
-	// +kubebuilder:validation:Required
-	PermissionSetArn *string `json:"permissionSetArn" tf:"permission_set_arn,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
-	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6).
-	// +kubebuilder:validation:Required
-	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
+	// Reference to a PermissionSet in ssoadmin to populate permissionSetArn.
+	// +kubebuilder:validation:Optional
+	PermissionSetArnRef *v1.Reference `json:"permissionSetArnRef,omitempty" tf:"-"`
+
+	// Selector for a PermissionSet in ssoadmin to populate permissionSetArn.
+	// +kubebuilder:validation:Optional
+	PermissionSetArnSelector *v1.Selector `json:"permissionSetArnSelector,omitempty" tf:"-"`
+
+	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). This can be set to the crossplane external-name of either a Group or User in the identitystore api group, but the Ref and Selector fields will only work with a Group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.Group
+	// +crossplane:generate:reference:refFieldName=PrincipalIDFromGroupRef
+	// +crossplane:generate:reference:selectorFieldName=PrincipalIDFromGroupSelector
+	// +kubebuilder:validation:Optional
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Reference to a Group in identitystore to populate principalId.
+	// +kubebuilder:validation:Optional
+	PrincipalIDFromGroupRef *v1.Reference `json:"principalIdFromGroupRef,omitempty" tf:"-"`
+
+	// Selector for a Group in identitystore to populate principalId.
+	// +kubebuilder:validation:Optional
+	PrincipalIDFromGroupSelector *v1.Selector `json:"principalIdFromGroupSelector,omitempty" tf:"-"`
 
 	// The entity type for which the assignment will be created. Valid values: USER, GROUP.
 	// +kubebuilder:validation:Required

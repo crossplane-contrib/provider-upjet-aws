@@ -2449,17 +2449,40 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)
 	// Example: f81d4fae-7dec-11d0-a765-00a0c91e6bf6,GROUP,1234567890,AWS_ACCOUNT,arn:aws:sso:::permissionSet/ssoins-0123456789abcdef/ps-0123456789abcdef,arn:aws:sso:::instance/ssoins-0123456789abcdef
+	// This can't really be normalized.
 	"aws_ssoadmin_account_assignment": config.TemplatedStringAsIdentifier("", "{{ .parameters.principal_id }},{{ .parameters.principal_type }},{{ .parameters.target_id }},{{ .parameters.target_type }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
 	// SSO Managed Policy Attachments can be imported using the managed_policy_arn, permission_set_arn, and instance_arn separated by a comma (,)
 	// Example: arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// This can't really be normalized.
 	"aws_ssoadmin_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_policy_arn }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn}}"),
 	// SSO Permission Sets can be imported using the arn and instance_arn separated by a comma (,)
 	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	// TODO: Normalize external_name while testing
+	// TODO: Normalize to the permission set id once breaking changes are acceptable or multiple versions are supported
 	"aws_ssoadmin_permission_set": config.IdentifierFromProvider,
+	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
+	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// This can't really be normalized.
+	"aws_ssoadmin_customer_managed_policy_attachment": config.TemplatedStringAsIdentifier("", "{{  (index .parameters.customer_managed_policy_reference 0).name }},{{ (index .parameters.customer_managed_policy_reference 0).path }},{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+	// SSO Instance Access Control Attributes can be imported using the instance_arn
+	"aws_ssoadmin_instance_access_control_attributes": config.TemplatedStringAsIdentifier("", "{{ .parameters.instance_arn }}"),
+	// The best name is the permission set id
 	// SSO Permission Set Inline Policies can be imported using the permission_set_arn and instance_arn separated by a comma (,)
 	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	// TODO: Normalize to the permission set id once breaking changes are acceptable or multiple versions are supported
 	"aws_ssoadmin_permission_set_inline_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.permission_set_arn }},{{ .parameters.instance_arn }}"),
+	// The best name is the permission set id
+	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
+	// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+	"aws_ssoadmin_permissions_boundary_attachment": PermissionSetIdAsExternalName(),
+
+	// identitystore
+	//
+	// An Identity Store Group can be imported using the combination identity_store_id/group_id
+	"aws_identitystore_group": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+	// aws_identitystore_group_membership can be imported using the identity_store_id/membership_id
+	"aws_identitystore_group_membership": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.identity_store_id }}/{{ .external_name }}"),
+	// An Identity Store User can be imported using the combination identity_store_id/user_id
+	"aws_identitystore_user": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.identity_store_id }}/{{ .external_name }}"),
 
 	// applicationinsights
 	//
@@ -2776,6 +2799,56 @@ func route() config.ExternalName {
 	return e
 }
 
+// PermissionSetIdAsExternalName uses the id of the permission set (ps-80383020jr9302rk) as the external name, with
+// the comma-separated pair permission_set_arn,instance_arn as the terraform id, when both arns are parameters and known
+// ahead of time.
+// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+func PermissionSetIdAsExternalName() config.ExternalName {
+	return config.ExternalName{
+		SetIdentifierArgumentFn: config.NopSetIdentifierArgument,
+		IdentifierFields:        []string{"instance_arn", "permission_set_arn"},
+		GetExternalNameFn:       getPermissionSetId,
+		GetIDFn: func(ctx context.Context, externalName string, parameters map[string]any, setup map[string]any) (string, error) {
+			if externalName == "" {
+				psa, ok := parameters["permission_set_arn"]
+				if !ok {
+					return "", errors.New("permission_set_arn cannot be empty")
+				}
+				psaStr, ok := psa.(string)
+				if !ok {
+					return "", errors.New("value of permission_set_arn needs to be a string")
+				}
+				externalName = strings.Split(psaStr, "/")[2]
+			}
+			ia, ok := parameters["instance_arn"]
+			if !ok {
+				return "", errors.New("instance_arn cannot be empty")
+			}
+
+			iaStr, ok := ia.(string)
+			if !ok {
+				return "", errors.New("value of instance_arn needs to be a string")
+			}
+			instanceId := strings.Split(iaStr, "/")[1]
+
+			return fmt.Sprintf("arn:aws:sso:::permissionSet/%s/%s,%s", instanceId, externalName, iaStr), nil
+		},
+		DisableNameInitializer: true,
+	}
+}
+
+// getPermissionSetId extracts the id of the permission set to use as an external name, from a terraform id formed by
+// a comma-separated pair of ARNs, permission_set_arn,instance_arn.
+// Example: arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
+func getPermissionSetId(tfstate map[string]any) (string, error) {
+	id, ok := tfstate["id"]
+	if !ok {
+		return "", errors.New("id does not exist in tfstate")
+	}
+	arn := strings.Split(id.(string), ",")[0]
+	return strings.Split(arn, "/")[2], nil
+}
+
 // FormattedIdentifierFromProvider is a helper function to construct Terraform
 // IDs that use elements from the parameters in a certain string format.
 // It should be used in cases where all information in the ID is gathered from
@@ -2880,11 +2953,32 @@ func FormattedIdentifierUserDefinedNameFirst(param, separator string, keys ...st
 	return e
 }
 
+// TemplatedStringAsProviderDefinedIdentifier uses TemplatedStringAsIdentifier but
+// without the name initializer, and with a GetIdFn that exits early if the external name is empty.
+// This allows it to be used in cases where the ID is constructed with parameters and a provider-defined value, meaning
+// no user-defined input. Since the external name is not user-defined, the name
+// initializer has to be disabled.
+func TemplatedStringAsProviderDefinedIdentifier(tmpl string) config.ExternalName {
+	e := config.TemplatedStringAsIdentifier("", tmpl)
+	e.DisableNameInitializer = true
+	getId := e.GetIDFn
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
+		if externalName == "" {
+			return "", nil
+		}
+		return getId(ctx, externalName, parameters, cfg)
+	}
+	return e
+}
+
 // TemplatedStringAsIdentifierWithNoName uses TemplatedStringAsIdentifier but
 // without the name initializer. This allows it to be used in cases where the ID
 // is constructed with parameters and a provider-defined value, meaning no
 // user-defined input. Since the external name is not user-defined, the name
 // initializer has to be disabled.
+// TODO: This seems to have some problems with handling the initial creation, when
+// the parameters in the template are defined but the external name is empty, because
+// the provider hasn't assigned its provider-defined identifier yet.
 func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	e := config.TemplatedStringAsIdentifier("", tmpl)
 	e.DisableNameInitializer = true
