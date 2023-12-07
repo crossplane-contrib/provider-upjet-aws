@@ -22,6 +22,7 @@ import (
 	thingprincipalattachment "github.com/upbound/provider-aws/internal/controller/iot/thingprincipalattachment"
 	thingtype "github.com/upbound/provider-aws/internal/controller/iot/thingtype"
 	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
+	topicruledestination "github.com/upbound/provider-aws/internal/controller/iot/topicruledestination"
 )
 
 // Setup_iot creates all controllers with the supplied logger and adds them to
@@ -41,6 +42,7 @@ func Setup_iot(mgr ctrl.Manager, o controller.Options) error {
 		thingprincipalattachment.Setup,
 		thingtype.Setup,
 		topicrule.Setup,
+		topicruledestination.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
