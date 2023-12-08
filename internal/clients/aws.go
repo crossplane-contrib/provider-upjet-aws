@@ -33,10 +33,6 @@ const (
 	keyRoleArn                   = "role_arn"
 	keySessionName               = "session_name"
 	keyWebIdentityTokenFile      = "web_identity_token_file"
-	keyAssumeRole                = "assume_role"
-	keyTags                      = "tags"
-	keyTransitiveTagKeys         = "transitive_tag_keys"
-	keyExternalID                = "external_id"
 	keySkipCredsValidation       = "skip_credentials_validation"
 	keyS3UsePathStyle            = "s3_use_path_style"
 	keySkipMetadataApiCheck      = "skip_metadata_api_check"
@@ -91,7 +87,7 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			keyAccountId: account,
 		}
 
-		if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+		if len(pc.Spec.AssumeRoleChain) > 0 || pc.Spec.Endpoint != nil {
 			err = DefaultTerraformSetupBuilder(ctx, pc, &ps, awsCfg, creds)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
@@ -117,9 +113,9 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 }
 
 func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1beta1.ProviderConfig, ps *terraform.Setup, cfg *aws.Config) error { //nolint:gocyclo
-	if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+	if len(pc.Spec.AssumeRoleChain) > 0 || pc.Spec.Endpoint != nil {
 		return errors.New("shared scheduler cannot be used because the length of assume role chain array " +
-			"is more than 1 or endpoint configuration is not nil")
+			"is more than 0 or endpoint configuration is not nil")
 	}
 
 	ps.Configuration = map[string]any{
@@ -167,14 +163,6 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1b
 			keyAccessKeyID:     creds.AccessKeyID,
 			keySecretAccessKey: creds.SecretAccessKey,
 			keySessionToken:    creds.SessionToken,
-		}
-	}
-	if len(pc.Spec.AssumeRoleChain) != 0 {
-		ps.Configuration[keyAssumeRole] = map[string]any{
-			keyRoleArn:           pc.Spec.AssumeRoleChain[0].RoleARN,
-			keyTags:              pc.Spec.AssumeRoleChain[0].Tags,
-			keyTransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
-			keyExternalID:        pc.Spec.AssumeRoleChain[0].ExternalID,
 		}
 	}
 	return nil
