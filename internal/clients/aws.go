@@ -7,16 +7,10 @@ package clients
 import (
 	"context"
 	"os"
-	"reflect"
-	"unsafe"
-
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-
-	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"k8s.io/apimachinery/pkg/types"
 
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
@@ -104,21 +98,11 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			}
 		}
 
-		awsConfig, err := configureNoForkAWSClient(ctx, c, mg, pc, &ps)
-		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "could not configure no-fork AWS client")
+		if config.TerraformProvider == nil {
+			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
-		p := config.TerraformProvider.Meta()
-		tfClient, diag := awsConfig.GetClient(ctx, &xpprovider.AWSClient{
-			// #nosec G103
-			ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
-		})
-		if diag != nil && diag.HasError() {
-			return terraform.Setup{}, errors.Errorf("failed to configure the AWS client: %v", diag)
-		}
-		ps.Meta = tfClient
 
-		return ps, nil
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, *config.TerraformProvider), "could not configure no-fork AWS client")
 	}
 }
 
@@ -255,120 +239,14 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	return cfg, nil
 }
 
-func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) (xpprovider.AWSConfig, error) { //nolint:gocyclo
-	// Terraform AWS provider does not support role chaining via provider configuration
-	// https://github.com/hashicorp/terraform-provider-aws/issues/22728
-	if len(pc.Spec.AssumeRoleChain) > 1 {
-		return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client because the length of assume role chain array " +
-			"is more than 1")
+func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, p schema.Provider) error { //nolint:gocyclo
+	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
+	diag := p.Configure(context.TODO(), &tfsdk.ResourceConfig{ //nolint:contextcheck
+		Config: ps.Configuration,
+	})
+	if diag != nil && diag.HasError() {
+		return errors.Errorf("failed to configure the provider: %v", diag)
 	}
-
-	cfg, err := getAWSConfig(ctx, c, mg)
-	if err != nil {
-		return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get AWS config")
-	}
-
-	awsConfig := xpprovider.AWSConfig{
-		Region:           cfg.Region,
-		TerraformVersion: ps.Version,
-	}
-
-	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
-	case authKeyWebIdentity:
-		if pc.Spec.Credentials.WebIdentity == nil {
-			return xpprovider.AWSConfig{}, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
-		}
-		awsConfig.AssumeRoleWithWebIdentity = &tfawsbase.AssumeRoleWithWebIdentity{
-			RoleARN:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
-			WebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
-		}
-		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
-			awsConfig.AssumeRoleWithWebIdentity.SessionName = pc.Spec.Credentials.WebIdentity.RoleSessionName
-		}
-	case authKeyUpbound:
-		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
-			return xpprovider.AWSConfig{}, errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
-		}
-		awsConfig.AssumeRoleWithWebIdentity = &tfawsbase.AssumeRoleWithWebIdentity{
-			RoleARN:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
-			WebIdentityTokenFile: upboundProviderIdentityTokenFile,
-		}
-
-		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
-			awsConfig.AssumeRoleWithWebIdentity.SessionName = pc.Spec.Credentials.WebIdentity.RoleSessionName
-		}
-	case authKeySecret:
-		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
-		if err != nil {
-			return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get credentials")
-		}
-		cfg, err = UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
-		if err != nil {
-			return xpprovider.AWSConfig{}, errors.Wrap(err, errAWSConfig)
-		}
-		creds, err := cfg.Credentials.Retrieve(ctx)
-		if err != nil {
-			return xpprovider.AWSConfig{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
-		}
-
-		awsConfig.Region = cfg.Region
-		awsConfig.AccessKey = creds.AccessKeyID
-		awsConfig.SecretKey = creds.SecretAccessKey
-		awsConfig.Token = creds.SessionToken
-
-	}
-	if len(pc.Spec.AssumeRoleChain) != 0 {
-		if pc.Spec.AssumeRoleChain[0].RoleARN == nil {
-			return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client: RoleARN cannot be nil in spec.AssumeRoleChain[0]")
-		}
-		awsConfig.AssumeRole = &tfawsbase.AssumeRole{
-			RoleARN:           *pc.Spec.AssumeRoleChain[0].RoleARN,
-			TransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
-		}
-
-		if pc.Spec.AssumeRoleChain[0].ExternalID != nil {
-			awsConfig.AssumeRole.ExternalID = *pc.Spec.AssumeRoleChain[0].ExternalID
-		}
-
-		tags := make(map[string]string)
-		for i, tag := range pc.Spec.AssumeRoleChain[0].Tags {
-			if tag.Key == nil || tag.Value == nil {
-				return xpprovider.AWSConfig{}, errors.Errorf("cannot configure no-fork client: tag key or value cannot be nil in spec.AssumeRoleChain[0].Tags[%d]", i)
-			}
-			tags[*tag.Key] = *tag.Value
-		}
-
-		awsConfig.AssumeRole.Tags = tags
-	}
-
-	if pc.Spec.Endpoint != nil {
-		if pc.Spec.Endpoint.URL.Static != nil {
-			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-				return xpprovider.AWSConfig{}, errors.New("endpoint URL cannot be empty")
-			} else {
-				awsConfig.Endpoints = make(map[string]string)
-				for _, service := range pc.Spec.Endpoint.Services {
-					awsConfig.Endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
-				}
-			}
-		} else if pc.Spec.Endpoint.URL.Dynamic != nil && cfg.EndpointResolverWithOptions != nil {
-			for _, service := range pc.Spec.Endpoint.Services {
-				svcEndpoint, err := cfg.EndpointResolverWithOptions.ResolveEndpoint(service, cfg.Region, nil)
-				if err != nil {
-					return xpprovider.AWSConfig{}, errors.Wrapf(err, "cannot resolve dynamic endpoint URL for AWS service: %s", service)
-				}
-				awsConfig.Endpoints[service] = svcEndpoint.URL
-			}
-		}
-	}
-
-	awsConfig.SkipCredsValidation = pc.Spec.SkipCredsValidation
-	awsConfig.S3UsePathStyle = pc.Spec.S3UsePathStyle
-	awsConfig.SkipRegionValidation = pc.Spec.SkipRegionValidation
-	if pc.Spec.SkipMetadataApiCheck {
-		awsConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
-	}
-	awsConfig.SkipRequestingAccountId = pc.Spec.SkipReqAccountId
-
-	return awsConfig, nil
+	ps.Meta = p.Meta()
+	return nil
 }
