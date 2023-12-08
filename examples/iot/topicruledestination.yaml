@@ -29,16 +29,11 @@ kind: Role
 metadata:
   annotations:
     meta.upbound.io/example-id: iot/v1beta1/topicruledestination
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-topicruledestination.sh
   labels:
     testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example
 spec:
-  managementPolicies:
-    - Create
-    - Update
-    - Observe
-    - LateInitialize
-    # It is necessary to orphan-delete the role so that the TopicRuleDestination has permission to clean up after itself during deletion.
   forProvider:
     assumeRolePolicy: |
       {

@@ -8,12 +8,12 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_iot_topic_rule_destination", func(r *config.Resource) {
 		r.References["vpc_configuration.security_groups"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}
 		r.References["vpc_configuration.subnet_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName:     "aws_subnet",
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
