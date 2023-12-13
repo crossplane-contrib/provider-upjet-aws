@@ -119,7 +119,7 @@ spec:
     region: eu-west-1
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
-kind: Object
+kind: BucketObject
 metadata:
   annotations:
     meta.upbound.io/example-id: cognitoidp/v1beta1/userpool
