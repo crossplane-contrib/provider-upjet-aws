@@ -6,6 +6,7 @@ package config
 
 import (
 	"context"
+
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -62,6 +63,7 @@ import (
 	"github.com/upbound/provider-aws/config/grafana"
 	"github.com/upbound/provider-aws/config/iam"
 	"github.com/upbound/provider-aws/config/identitystore"
+	"github.com/upbound/provider-aws/config/iot"
 	"github.com/upbound/provider-aws/config/kafka"
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
@@ -277,6 +279,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		medialive.Configure,
 		ssoadmin.Configure,
 		identitystore.Configure,
+		iot.Configure,
 	} {
 		configure(pc)
 	}

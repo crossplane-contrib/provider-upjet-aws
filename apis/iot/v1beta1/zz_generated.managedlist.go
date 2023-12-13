@@ -115,6 +115,15 @@ func (l *ThingTypeList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this TopicRuleDestinationList.
+func (l *TopicRuleDestinationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this TopicRuleList.
 func (l *TopicRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

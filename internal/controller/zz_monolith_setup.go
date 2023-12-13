@@ -536,6 +536,7 @@ import (
 	thingprincipalattachment "github.com/upbound/provider-aws/internal/controller/iot/thingprincipalattachment"
 	thingtype "github.com/upbound/provider-aws/internal/controller/iot/thingtype"
 	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
+	topicruledestination "github.com/upbound/provider-aws/internal/controller/iot/topicruledestination"
 	channel "github.com/upbound/provider-aws/internal/controller/ivs/channel"
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
@@ -1464,6 +1465,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		thingprincipalattachment.Setup,
 		thingtype.Setup,
 		topicrule.Setup,
+		topicruledestination.Setup,
 		channel.Setup,
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,

@@ -1076,13 +1076,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_proxy_protocol_policy": config.IdentifierFromProvider,
 
-	// iot
-	//
-	// IoT policies can be imported using the name
-	"aws_iot_policy": config.NameAsIdentifier,
-	// IOT Things can be imported using the name
-	"aws_iot_thing": config.NameAsIdentifier,
-
 	// networkmanager
 	//
 	// No import
@@ -2053,6 +2046,10 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 
 	// iot
 	//
+	// IoT policies can be imported using the name
+	"aws_iot_policy": config.NameAsIdentifier,
+	// IOT Things can be imported using the name
+	"aws_iot_thing": config.NameAsIdentifier,
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_certificate": config.IdentifierFromProvider,
@@ -2081,6 +2078,9 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iot_thing_type": config.IdentifierFromProvider,
 	// IoT Topic Rules can be imported using the name
 	"aws_iot_topic_rule": config.NameAsIdentifier,
+	// IoT topic rule destinations can be imported using the arn
+	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
+	"aws_iot_topic_rule_destination": TemplatedStringAsProviderDefinedIdentifier("arn:aws:iot:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:ruledestination/vpc/{{ .external_name }}"),
 
 	// sagemaker
 	//
