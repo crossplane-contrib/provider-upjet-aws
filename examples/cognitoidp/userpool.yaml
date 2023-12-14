@@ -55,11 +55,6 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: lambda-example
 
-    smsConfiguration:
-      - snsCallerArnSelector:
-          matchLabels:
-            testing.upbound.io/example-name: lambda-example
-
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role

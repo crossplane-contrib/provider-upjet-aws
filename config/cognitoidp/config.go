@@ -54,13 +54,6 @@ func Configure(p *config.Provider) {
 				"email_verification_subject",
 			},
 		}
-		r.References["email_configuration.configuration_set"] = config.Reference{
-			TerraformName: "aws_ses_configuration_set",
-		}
-		r.References["email_configuration.source_arn"] = config.Reference{
-			TerraformName: "aws_ses_email_identity",
-			Extractor:     common.PathARNExtractor,
-		}
 		r.References["lambda_config.create_auth_challenge"] = config.Reference{
 			TerraformName: "aws_lambda_function",
 			Extractor:     common.PathARNExtractor,
