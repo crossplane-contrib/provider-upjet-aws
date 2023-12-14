@@ -56,6 +56,7 @@ type AwsLambdaParameters struct {
 type ConfigurationInitParameters struct {
 
 	// Allowed features. Valid values: GetObject-Range, GetObject-PartNumber.
+	// +listType=set
 	AllowedFeatures []*string `json:"allowedFeatures,omitempty" tf:"allowed_features,omitempty"`
 
 	// Whether or not the CloudWatch metrics configuration is enabled.
@@ -68,6 +69,7 @@ type ConfigurationInitParameters struct {
 type ConfigurationObservation struct {
 
 	// Allowed features. Valid values: GetObject-Range, GetObject-PartNumber.
+	// +listType=set
 	AllowedFeatures []*string `json:"allowedFeatures,omitempty" tf:"allowed_features,omitempty"`
 
 	// Whether or not the CloudWatch metrics configuration is enabled.
@@ -84,6 +86,7 @@ type ConfigurationParameters struct {
 
 	// Allowed features. Valid values: GetObject-Range, GetObject-PartNumber.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedFeatures []*string `json:"allowedFeatures,omitempty" tf:"allowed_features,omitempty"`
 
 	// Whether or not the CloudWatch metrics configuration is enabled.
@@ -181,6 +184,7 @@ type ObjectLambdaAccessPointParameters struct {
 type TransformationConfigurationInitParameters struct {
 
 	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
@@ -190,6 +194,7 @@ type TransformationConfigurationInitParameters struct {
 type TransformationConfigurationObservation struct {
 
 	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.
@@ -200,6 +205,7 @@ type TransformationConfigurationParameters struct {
 
 	// The actions of an Object Lambda Access Point configuration. Valid values: GetObject.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Actions []*string `json:"actions" tf:"actions,omitempty"`
 
 	// The content transformation of an Object Lambda Access Point configuration. See Content Transformation below for more details.

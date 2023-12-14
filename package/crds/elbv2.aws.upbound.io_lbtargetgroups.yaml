@@ -234,6 +234,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetFailover:
                     description: Target failover block. Only applicable for Gateway
                       Load Balancer target groups. See target_failover for more information.
@@ -514,6 +515,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetFailover:
                     description: Target failover block. Only applicable for Gateway
                       Load Balancer target groups. See target_failover for more information.
@@ -881,6 +883,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -888,6 +891,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetFailover:
                     description: Target failover block. Only applicable for Gateway
                       Load Balancer target groups. See target_failover for more information.

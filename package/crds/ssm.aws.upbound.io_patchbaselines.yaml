@@ -121,6 +121,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   approvedPatchesComplianceLevel:
                     description: The compliance level for approved patches. This means
                       that if an approved patch is reported as missing, this is the
@@ -170,6 +171,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   rejectedPatchesAction:
                     description: The action for Patch Manager to take on patches included
                       in the rejected_patches list. Valid values are ALLOW_AS_DEPENDENCY
@@ -203,6 +205,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -272,6 +275,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   approvedPatchesComplianceLevel:
                     description: The compliance level for approved patches. This means
                       that if an approved patch is reported as missing, this is the
@@ -317,6 +321,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   rejectedPatchesAction:
                     description: The action for Patch Manager to take on patches included
                       in the rejected_patches list. Valid values are ALLOW_AS_DEPENDENCY
@@ -350,6 +355,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -575,6 +581,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   approvedPatchesComplianceLevel:
                     description: The compliance level for approved patches. This means
                       that if an approved patch is reported as missing, this is the
@@ -626,6 +633,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   rejectedPatchesAction:
                     description: The action for Patch Manager to take on patches included
                       in the rejected_patches list. Valid values are ALLOW_AS_DEPENDENCY
@@ -659,6 +667,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -666,6 +675,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -170,6 +170,7 @@ spec:
                           description: The key value pairs that describe required
                             claims in the identity token.
                           type: object
+                          x-kubernetes-map-type: granular
                         usernameClaim:
                           description: The JWT claim that the provider will use as
                             the username.
@@ -188,6 +189,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -230,6 +232,7 @@ spec:
                           description: The key value pairs that describe required
                             claims in the identity token.
                           type: object
+                          x-kubernetes-map-type: granular
                         usernameClaim:
                           description: The JWT claim that the provider will use as
                             the username.
@@ -244,6 +247,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -454,6 +458,7 @@ spec:
                           description: The key value pairs that describe required
                             claims in the identity token.
                           type: object
+                          x-kubernetes-map-type: granular
                         usernameClaim:
                           description: The JWT claim that the provider will use as
                             the username.
@@ -471,6 +476,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -478,6 +484,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

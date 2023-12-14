@@ -146,12 +146,14 @@ type OidcConfigParameters struct {
 type SourceIPConfigInitParameters struct {
 
 	// A list of up to 10 CIDR values.
+	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 }
 
 type SourceIPConfigObservation struct {
 
 	// A list of up to 10 CIDR values.
+	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 }
 
@@ -159,6 +161,7 @@ type SourceIPConfigParameters struct {
 
 	// A list of up to 10 CIDR values.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Cidrs []*string `json:"cidrs" tf:"cidrs,omitempty"`
 }
 
@@ -228,9 +231,11 @@ type WorkforceParameters struct {
 type WorkforceVPCConfigInitParameters struct {
 
 	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnets in the VPC that you want to connect.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// The ID of the VPC that the workforce uses for communication.
@@ -240,9 +245,11 @@ type WorkforceVPCConfigInitParameters struct {
 type WorkforceVPCConfigObservation struct {
 
 	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnets in the VPC that you want to connect.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// The IDs for the VPC service endpoints of your VPC workforce.
@@ -256,10 +263,12 @@ type WorkforceVPCConfigParameters struct {
 
 	// The VPC security group IDs. The security groups must be for the same VPC as specified in the subnet.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnets in the VPC that you want to connect.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// The ID of the VPC that the workforce uses for communication.

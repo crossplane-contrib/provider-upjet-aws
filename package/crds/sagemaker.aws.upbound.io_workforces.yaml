@@ -311,6 +311,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   workforceVpcConfig:
@@ -324,12 +325,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnets:
                           description: The ID of the subnets in the VPC that you want
                             to connect.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcId:
                           description: The ID of the VPC that the workforce uses for
                             communication.
@@ -407,6 +410,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   workforceVpcConfig:
@@ -420,12 +424,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnets:
                           description: The ID of the subnets in the VPC that you want
                             to connect.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcId:
                           description: The ID of the VPC that the workforce uses for
                             communication.
@@ -669,6 +675,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   subdomain:
@@ -685,12 +692,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnets:
                           description: The ID of the subnets in the VPC that you want
                             to connect.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcEndpointId:
                           description: The IDs for the VPC service endpoints of your
                             VPC workforce.

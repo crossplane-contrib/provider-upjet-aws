@@ -152,6 +152,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   name:
                     description: A name to identify the key group.
                     type: string
@@ -366,6 +367,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   name:
                     description: A name to identify the key group.
                     type: string

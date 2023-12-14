@@ -23,6 +23,7 @@ type DirectoryConfigInitParameters struct {
 	DirectoryName *string `json:"directoryName,omitempty" tf:"directory_name,omitempty"`
 
 	// Distinguished names of the organizational units for computer accounts.
+	// +listType=set
 	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
 	// Configuration block for the name of the directory and organizational unit (OU) to use to join the directory config to a Microsoft Active Directory domain. See service_account_credentials below.
@@ -41,6 +42,7 @@ type DirectoryConfigObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Distinguished names of the organizational units for computer accounts.
+	// +listType=set
 	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
 	// Configuration block for the name of the directory and organizational unit (OU) to use to join the directory config to a Microsoft Active Directory domain. See service_account_credentials below.
@@ -55,6 +57,7 @@ type DirectoryConfigParameters struct {
 
 	// Distinguished names of the organizational units for computer accounts.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OrganizationalUnitDistinguishedNames []*string `json:"organizationalUnitDistinguishedNames,omitempty" tf:"organizational_unit_distinguished_names,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

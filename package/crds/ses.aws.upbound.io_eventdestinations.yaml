@@ -337,6 +337,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -471,6 +472,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snsDestination:
                     description: Send the events to an SNS Topic destination
                     items:
@@ -694,6 +696,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snsDestination:
                     description: Send the events to an SNS Topic destination
                     items:

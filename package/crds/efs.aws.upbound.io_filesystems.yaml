@@ -194,6 +194,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   throughputMode:
                     description: 'Throughput mode for the file system. Defaults to
                       bursting. Valid values: bursting, provisioned, or elastic. When
@@ -260,6 +261,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   throughputMode:
                     description: 'Throughput mode for the file system. Defaults to
                       bursting. Valid values: bursting, provisioned, or elastic. When
@@ -523,6 +525,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -530,6 +533,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   throughputMode:
                     description: 'Throughput mode for the file system. Defaults to
                       bursting. Valid values: bursting, provisioned, or elastic. When

@@ -320,6 +320,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userPoolConfig:
                     description: Amazon Cognito User Pool configuration. Defined below.
                     items:
@@ -607,6 +608,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userPoolConfig:
                     description: Amazon Cognito User Pool configuration. Defined below.
                     items:
@@ -984,18 +986,21 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   uris:
                     additionalProperties:
                       type: string
                     description: Map of URIs associated with the APIE.g., uris["GRAPHQL"]
                       = https://ID.appsync-api.REGION.amazonaws.com/graphql
                     type: object
+                    x-kubernetes-map-type: granular
                   userPoolConfig:
                     description: Amazon Cognito User Pool configuration. Defined below.
                     items:

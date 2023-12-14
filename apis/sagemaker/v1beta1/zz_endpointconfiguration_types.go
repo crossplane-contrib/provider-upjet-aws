@@ -98,18 +98,22 @@ type AsyncInferenceConfigParameters struct {
 type CaptureContentTypeHeaderInitParameters struct {
 
 	// The CSV content type headers to capture.
+	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
 type CaptureContentTypeHeaderObservation struct {
 
 	// The CSV content type headers to capture.
+	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
@@ -117,10 +121,12 @@ type CaptureContentTypeHeaderParameters struct {
 
 	// The CSV content type headers to capture.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
@@ -275,6 +281,7 @@ type EndpointConfigurationInitParameters struct {
 	ShadowProductionVariants []ShadowProductionVariantsInitParameters `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -301,9 +308,11 @@ type EndpointConfigurationObservation struct {
 	ShadowProductionVariants []ShadowProductionVariantsObservation `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -345,6 +354,7 @@ type EndpointConfigurationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -354,6 +364,7 @@ type NotificationConfigInitParameters struct {
 	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
 
 	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	// +listType=set
 	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
@@ -366,6 +377,7 @@ type NotificationConfigObservation struct {
 	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
 
 	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	// +listType=set
 	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
@@ -380,6 +392,7 @@ type NotificationConfigParameters struct {
 
 	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.

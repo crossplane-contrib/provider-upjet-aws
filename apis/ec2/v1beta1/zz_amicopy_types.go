@@ -86,6 +86,7 @@ type AMICopyInitParameters struct {
 	SourceAMIRegion *string `json:"sourceAmiRegion,omitempty" tf:"source_ami_region,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -167,8 +168,10 @@ type AMICopyObservation struct {
 	SriovNetSupport *string `json:"sriovNetSupport,omitempty" tf:"sriov_net_support,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	TpmSupport *string `json:"tpmSupport,omitempty" tf:"tpm_support,omitempty"`
@@ -244,6 +247,7 @@ type AMICopyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

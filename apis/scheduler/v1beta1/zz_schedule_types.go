@@ -111,6 +111,7 @@ type EcsParametersInitParameters struct {
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
@@ -156,6 +157,7 @@ type EcsParametersObservation struct {
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
@@ -213,6 +215,7 @@ type EcsParametersParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
@@ -307,9 +310,11 @@ type NetworkConfigurationInitParameters struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -319,9 +324,11 @@ type NetworkConfigurationObservation struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -333,10 +340,12 @@ type NetworkConfigurationParameters struct {
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 

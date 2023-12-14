@@ -119,6 +119,7 @@ type FleetInitParameters struct {
 	StreamView *string `json:"streamView,omitempty" tf:"stream_view,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the VPC configuration for the image builder. See below.
@@ -185,8 +186,10 @@ type FleetObservation struct {
 	StreamView *string `json:"streamView,omitempty" tf:"stream_view,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for the VPC configuration for the image builder. See below.
@@ -272,6 +275,7 @@ type FleetParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the VPC configuration for the image builder. See below.

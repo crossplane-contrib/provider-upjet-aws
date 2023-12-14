@@ -20,22 +20,26 @@ import (
 type NotificationInitParameters struct {
 
 	// List of AutoScaling Group Names
+	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
+	// +listType=set
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 }
 
 type NotificationObservation struct {
 
 	// List of AutoScaling Group Names
+	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
+	// +listType=set
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
 	// Topic ARN for notifications to be sent through
@@ -46,11 +50,13 @@ type NotificationParameters struct {
 
 	// List of AutoScaling Group Names
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Notifications []*string `json:"notifications,omitempty" tf:"notifications,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

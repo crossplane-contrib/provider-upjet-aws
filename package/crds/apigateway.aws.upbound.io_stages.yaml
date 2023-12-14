@@ -109,6 +109,7 @@ spec:
                           description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
+                          x-kubernetes-map-type: granular
                         useStageCache:
                           description: Whether the canary deployment uses the stage
                             cache. Defaults to false.
@@ -292,11 +293,13 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map that defines the stage variables
                     type: object
+                    x-kubernetes-map-type: granular
                   xrayTracingEnabled:
                     description: Whether active tracing with X-ray is enabled. Defaults
                       to false.
@@ -358,6 +361,7 @@ spec:
                           description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
+                          x-kubernetes-map-type: granular
                         useStageCache:
                           description: Whether the canary deployment uses the stage
                             cache. Defaults to false.
@@ -381,11 +385,13 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map that defines the stage variables
                     type: object
+                    x-kubernetes-map-type: granular
                   xrayTracingEnabled:
                     description: Whether active tracing with X-ray is enabled. Defaults
                       to false.
@@ -606,6 +612,7 @@ spec:
                           description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
+                          x-kubernetes-map-type: granular
                         useStageCache:
                           description: Whether the canary deployment uses the stage
                             cache. Defaults to false.
@@ -647,17 +654,20 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map that defines the stage variables
                     type: object
+                    x-kubernetes-map-type: granular
                   webAclArn:
                     description: ARN of the WebAcl associated with the Stage.
                     type: string

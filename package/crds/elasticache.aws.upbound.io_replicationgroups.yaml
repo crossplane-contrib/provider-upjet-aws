@@ -113,6 +113,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clusterMode:
                     description: Create a native Redis cluster. automatic_failover_enabled
                       must be set to true. Cluster Mode documented below. Only 1 cluster_mode
@@ -424,12 +425,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityGroupNames:
                     description: List of cache security group names to associate with
                       this replication group.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotArns:
                     description: –  List of ARNs that identify Redis RDB snapshot
                       files stored in Amazon S3. The names object names cannot contain
@@ -437,6 +440,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotName:
                     description: Name of a snapshot from which to restore data into
                       the new node group. Changing the snapshot_name forces a new
@@ -539,6 +543,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitEncryptionEnabled:
                     description: Whether to enable encryption in transit.
                     type: boolean
@@ -551,6 +556,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -594,6 +600,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clusterMode:
                     description: Create a native Redis cluster. automatic_failover_enabled
                       must be set to true. Cluster Mode documented below. Only 1 cluster_mode
@@ -744,6 +751,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotArns:
                     description: –  List of ARNs that identify Redis RDB snapshot
                       files stored in Amazon S3. The names object names cannot contain
@@ -751,6 +759,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotName:
                     description: Name of a snapshot from which to restore data into
                       the new node group. Changing the snapshot_name forces a new
@@ -776,6 +785,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitEncryptionEnabled:
                     description: Whether to enable encryption in transit.
                     type: boolean
@@ -788,6 +798,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -985,6 +996,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clusterEnabled:
                     description: Indicates if cluster mode is enabled.
                     type: boolean
@@ -1097,6 +1109,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   multiAzEnabled:
                     description: Specifies whether to enable Multi-AZ Support for
                       the replication group. If true, automatic_failover_enabled must
@@ -1171,12 +1184,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityGroupNames:
                     description: List of cache security group names to associate with
                       this replication group.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotArns:
                     description: –  List of ARNs that identify Redis RDB snapshot
                       files stored in Amazon S3. The names object names cannot contain
@@ -1184,6 +1199,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotName:
                     description: Name of a snapshot from which to restore data into
                       the new node group. Changing the snapshot_name forces a new
@@ -1213,12 +1229,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitEncryptionEnabled:
                     description: Whether to enable encryption in transit.
                     type: boolean
@@ -1231,6 +1249,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

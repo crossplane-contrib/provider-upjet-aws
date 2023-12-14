@@ -110,6 +110,7 @@ spec:
                     description: Map of CostFilters key/value pairs to apply to the
                       budget.
                     type: object
+                    x-kubernetes-map-type: granular
                   costTypes:
                     description: Object containing CostTypes The types of cost included
                       in a budget, such as tax and subscriptions.
@@ -189,12 +190,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subscriberSnsTopicArns:
                           description: SNS topics to notify. Either this or subscriber_email_addresses
                             is required.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         threshold:
                           description: Threshold when the notification should be sent.
                           type: number
@@ -302,6 +305,7 @@ spec:
                     description: Map of CostFilters key/value pairs to apply to the
                       budget.
                     type: object
+                    x-kubernetes-map-type: granular
                   costTypes:
                     description: Object containing CostTypes The types of cost included
                       in a budget, such as tax and subscriptions.
@@ -381,12 +385,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subscriberSnsTopicArns:
                           description: SNS topics to notify. Either this or subscriber_email_addresses
                             is required.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         threshold:
                           description: Threshold when the notification should be sent.
                           type: number
@@ -657,6 +663,7 @@ spec:
                     description: Map of CostFilters key/value pairs to apply to the
                       budget.
                     type: object
+                    x-kubernetes-map-type: granular
                   costTypes:
                     description: Object containing CostTypes The types of cost included
                       in a budget, such as tax and subscriptions.
@@ -739,12 +746,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subscriberSnsTopicArns:
                           description: SNS topics to notify. Either this or subscriber_email_addresses
                             is required.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         threshold:
                           description: Threshold when the notification should be sent.
                           type: number

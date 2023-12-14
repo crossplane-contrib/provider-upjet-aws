@@ -54,6 +54,7 @@ type DatabaseInitParameters struct {
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Key-value map of custom metadata properties for the database definition.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
@@ -81,6 +82,7 @@ type DatabaseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of custom metadata properties for the database definition.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
@@ -122,6 +124,7 @@ type DatabaseParameters struct {
 
 	// Key-value map of custom metadata properties for the database definition.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

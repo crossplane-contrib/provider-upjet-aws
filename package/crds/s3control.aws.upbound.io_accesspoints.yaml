@@ -572,6 +572,7 @@ spec:
                       type: string
                     description: VPC endpoints for the S3 Access Point.
                     type: object
+                    x-kubernetes-map-type: granular
                   hasPublicAccessPolicy:
                     description: Indicates whether this access point currently has
                       a policy that allows public access.

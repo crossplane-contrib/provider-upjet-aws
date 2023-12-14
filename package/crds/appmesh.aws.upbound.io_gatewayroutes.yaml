@@ -662,6 +662,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   virtualGatewayName:
                     description: Name of the virtual gateway to associate the gateway
                       route with. Must be between 1 and 255 characters in length.
@@ -1240,6 +1241,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -1925,12 +1927,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   virtualGatewayName:
                     description: Name of the virtual gateway to associate the gateway
                       route with. Must be between 1 and 255 characters in length.

@@ -155,6 +155,7 @@ spec:
                       type: string
                     description: Response models for the route response.
                     type: object
+                    x-kubernetes-map-type: granular
                   routeId:
                     description: Identifier of the aws_apigatewayv2_route.
                     type: string
@@ -257,6 +258,7 @@ spec:
                       type: string
                     description: Response models for the route response.
                     type: object
+                    x-kubernetes-map-type: granular
                   routeResponseKey:
                     description: Route response key.
                     type: string
@@ -445,6 +447,7 @@ spec:
                       type: string
                     description: Response models for the route response.
                     type: object
+                    x-kubernetes-map-type: granular
                   routeId:
                     description: Identifier of the aws_apigatewayv2_route.
                     type: string

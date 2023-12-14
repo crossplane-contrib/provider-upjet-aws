@@ -20,6 +20,7 @@ import (
 type ExcludeFilterInitParameters struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -29,6 +30,7 @@ type ExcludeFilterInitParameters struct {
 type ExcludeFilterObservation struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -39,6 +41,7 @@ type ExcludeFilterParameters struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -49,6 +52,7 @@ type ExcludeFilterParameters struct {
 type IncludeFilterInitParameters struct {
 
 	// An array that defines the metrics you want to include for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -58,6 +62,7 @@ type IncludeFilterInitParameters struct {
 type IncludeFilterObservation struct {
 
 	// An array that defines the metrics you want to include for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -68,6 +73,7 @@ type IncludeFilterParameters struct {
 
 	// An array that defines the metrics you want to include for this metric namespace
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -125,6 +131,7 @@ type MetricStreamInitParameters struct {
 	StatisticsConfiguration []StatisticsConfigurationInitParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -169,9 +176,11 @@ type MetricStreamObservation struct {
 	StatisticsConfiguration []StatisticsConfigurationObservation `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -236,12 +245,14 @@ type MetricStreamParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StatisticsConfigurationInitParameters struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
+	// +listType=set
 	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.
@@ -251,6 +262,7 @@ type StatisticsConfigurationInitParameters struct {
 type StatisticsConfigurationObservation struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
+	// +listType=set
 	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.
@@ -261,6 +273,7 @@ type StatisticsConfigurationParameters struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AdditionalStatistics []*string `json:"additionalStatistics" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.

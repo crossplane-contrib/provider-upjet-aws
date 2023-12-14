@@ -59,6 +59,7 @@ type ClusterCapacityProvidersDefaultCapacityProviderStrategyParameters struct {
 type ClusterCapacityProvidersInitParameters struct {
 
 	// Set of names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
+	// +listType=set
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// Set of capacity provider strategies to use by default for the cluster. Detailed below.
@@ -68,6 +69,7 @@ type ClusterCapacityProvidersInitParameters struct {
 type ClusterCapacityProvidersObservation struct {
 
 	// Set of names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
+	// +listType=set
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// Name of the ECS cluster to manage capacity providers for.
@@ -84,6 +86,7 @@ type ClusterCapacityProvidersParameters struct {
 
 	// Set of names of one or more capacity providers to associate with the cluster. Valid values also include FARGATE and FARGATE_SPOT.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CapacityProviders []*string `json:"capacityProviders,omitempty" tf:"capacity_providers,omitempty"`
 
 	// Name of the ECS cluster to manage capacity providers for.

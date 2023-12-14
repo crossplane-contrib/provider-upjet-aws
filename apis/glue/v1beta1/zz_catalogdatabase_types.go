@@ -29,9 +29,11 @@ type CatalogDatabaseInitParameters struct {
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
 	// List of key-value pairs that define parameters and properties of the database.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for a target database for resource linking. See target_database below.
@@ -59,12 +61,15 @@ type CatalogDatabaseObservation struct {
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
 	// List of key-value pairs that define parameters and properties of the database.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for a target database for resource linking. See target_database below.
@@ -91,6 +96,7 @@ type CatalogDatabaseParameters struct {
 
 	// List of key-value pairs that define parameters and properties of the database.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -100,6 +106,7 @@ type CatalogDatabaseParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for a target database for resource linking. See target_database below.
@@ -110,6 +117,7 @@ type CatalogDatabaseParameters struct {
 type CreateTableDefaultPermissionInitParameters struct {
 
 	// The permissions that are granted to the principal.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The principal who is granted permissions.. See principal below.
@@ -119,6 +127,7 @@ type CreateTableDefaultPermissionInitParameters struct {
 type CreateTableDefaultPermissionObservation struct {
 
 	// The permissions that are granted to the principal.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The principal who is granted permissions.. See principal below.
@@ -129,6 +138,7 @@ type CreateTableDefaultPermissionParameters struct {
 
 	// The permissions that are granted to the principal.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The principal who is granted permissions.. See principal below.

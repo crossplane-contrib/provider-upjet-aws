@@ -32,6 +32,7 @@ type VPCIpamPoolInitParameters struct {
 	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
 
 	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+	// +mapType=granular
 	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
 
 	// If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
@@ -54,6 +55,7 @@ type VPCIpamPoolInitParameters struct {
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -72,6 +74,7 @@ type VPCIpamPoolObservation struct {
 	AllocationMinNetmaskLength *float64 `json:"allocationMinNetmaskLength,omitempty" tf:"allocation_min_netmask_length,omitempty"`
 
 	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
+	// +mapType=granular
 	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
 
 	// Amazon Resource Name (ARN) of IPAM
@@ -113,9 +116,11 @@ type VPCIpamPoolObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -139,6 +144,7 @@ type VPCIpamPoolParameters struct {
 
 	// Tags that are required for resources that use CIDRs from this IPAM pool. Resources that do not have these tags will not be allowed to allocate space from the pool. If the resources have their tags changed after they have allocated space or if the allocation tagging requirements are changed on the pool, the resource may be marked as noncompliant.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AllocationResourceTags map[string]*string `json:"allocationResourceTags,omitempty" tf:"allocation_resource_tags,omitempty"`
 
 	// If you include this argument, IPAM automatically imports any VPCs you have in your scope that fall
@@ -200,6 +206,7 @@ type VPCIpamPoolParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -119,6 +119,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userData:
                     description: Single lined launch script as a string to configure
                       server with additional user data
@@ -186,6 +187,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userData:
                     description: Single lined launch script as a string to configure
                       server with additional user data
@@ -451,6 +453,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -458,6 +461,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   userData:
                     description: Single lined launch script as a string to configure
                       server with additional user data

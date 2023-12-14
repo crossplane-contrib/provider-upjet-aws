@@ -76,6 +76,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -139,6 +140,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   serviceAccountCredentials:
                     description: Configuration block for the name of the directory
                       and organizational unit (OU) to use to join the directory config
@@ -352,6 +354,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   serviceAccountCredentials:
                     description: Configuration block for the name of the directory
                       and organizational unit (OU) to use to join the directory config

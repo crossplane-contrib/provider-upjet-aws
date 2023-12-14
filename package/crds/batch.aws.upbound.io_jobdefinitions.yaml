@@ -81,6 +81,7 @@ spec:
                     description: Specifies the parameter substitution placeholders
                       to set in the job definition.
                     type: object
+                    x-kubernetes-map-type: granular
                   platformCapabilities:
                     description: The platform capabilities required by the job definition.
                       If no value is specified, it defaults to EC2. To run the job
@@ -88,6 +89,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   propagateTags:
                     description: Specifies whether to propagate the tags from the
                       job definition to the corresponding Amazon ECS task. Default
@@ -140,6 +142,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeout:
                     description: Specifies the timeout for jobs so that if a job runs
                       longer, AWS Batch terminates the job. Maximum number of timeout
@@ -185,6 +188,7 @@ spec:
                     description: Specifies the parameter substitution placeholders
                       to set in the job definition.
                     type: object
+                    x-kubernetes-map-type: granular
                   platformCapabilities:
                     description: The platform capabilities required by the job definition.
                       If no value is specified, it defaults to EC2. To run the job
@@ -192,6 +196,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   propagateTags:
                     description: Specifies whether to propagate the tags from the
                       job definition to the corresponding Amazon ECS task. Default
@@ -240,6 +245,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeout:
                     description: Specifies the timeout for jobs so that if a job runs
                       longer, AWS Batch terminates the job. Maximum number of timeout
@@ -450,6 +456,7 @@ spec:
                     description: Specifies the parameter substitution placeholders
                       to set in the job definition.
                     type: object
+                    x-kubernetes-map-type: granular
                   platformCapabilities:
                     description: The platform capabilities required by the job definition.
                       If no value is specified, it defaults to EC2. To run the job
@@ -457,6 +464,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   propagateTags:
                     description: Specifies whether to propagate the tags from the
                       job definition to the corresponding Amazon ECS task. Default
@@ -508,6 +516,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -515,6 +524,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeout:
                     description: Specifies the timeout for jobs so that if a job runs
                       longer, AWS Batch terminates the job. Maximum number of timeout

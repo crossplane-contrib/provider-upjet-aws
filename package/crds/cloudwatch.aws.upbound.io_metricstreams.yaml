@@ -82,6 +82,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         namespace:
                           description: Name of the metric namespace in the filter.
                           type: string
@@ -180,6 +181,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         namespace:
                           description: Name of the metric namespace in the filter.
                           type: string
@@ -297,6 +299,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         includeMetric:
                           description: An array that defines the metrics that are
                             to have additional statistics streamed. See details below.
@@ -317,6 +320,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -347,6 +351,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         namespace:
                           description: Name of the metric namespace in the filter.
                           type: string
@@ -366,6 +371,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         namespace:
                           description: Name of the metric namespace in the filter.
                           type: string
@@ -400,6 +406,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         includeMetric:
                           description: An array that defines the metrics that are
                             to have additional statistics streamed. See details below.
@@ -420,6 +427,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -617,6 +625,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         namespace:
                           description: Name of the metric namespace in the filter.
                           type: string
@@ -642,6 +651,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         namespace:
                           description: Name of the metric namespace in the filter.
                           type: string
@@ -690,6 +700,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         includeMetric:
                           description: An array that defines the metrics that are
                             to have additional statistics streamed. See details below.
@@ -710,6 +721,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -717,6 +729,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

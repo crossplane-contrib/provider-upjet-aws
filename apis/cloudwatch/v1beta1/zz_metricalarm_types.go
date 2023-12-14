@@ -23,6 +23,7 @@ type MetricAlarmInitParameters struct {
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
 	// The description for the alarm.
@@ -35,6 +36,7 @@ type MetricAlarmInitParameters struct {
 	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Used only for alarms based on percentiles.
@@ -50,6 +52,7 @@ type MetricAlarmInitParameters struct {
 	ExtendedStatistic *string `json:"extendedStatistic,omitempty" tf:"extended_statistic,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
 	// The name for the alarm's associated metric.
@@ -64,6 +67,7 @@ type MetricAlarmInitParameters struct {
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// The period in seconds over which the specified statistic is applied.
@@ -75,6 +79,7 @@ type MetricAlarmInitParameters struct {
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The value against which the specified statistic is compared. This parameter is required for alarms based on static thresholds, but should not be used for alarms based on anomaly detection models.
@@ -96,6 +101,7 @@ type MetricAlarmObservation struct {
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
 	// The description for the alarm.
@@ -111,6 +117,7 @@ type MetricAlarmObservation struct {
 	DatapointsToAlarm *float64 `json:"datapointsToAlarm,omitempty" tf:"datapoints_to_alarm,omitempty"`
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Used only for alarms based on percentiles.
@@ -129,6 +136,7 @@ type MetricAlarmObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
 	// The name for the alarm's associated metric.
@@ -143,6 +151,7 @@ type MetricAlarmObservation struct {
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// The period in seconds over which the specified statistic is applied.
@@ -154,9 +163,11 @@ type MetricAlarmObservation struct {
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The value against which the specified statistic is compared. This parameter is required for alarms based on static thresholds, but should not be used for alarms based on anomaly detection models.
@@ -180,6 +191,7 @@ type MetricAlarmParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
 	// The description for the alarm.
@@ -196,6 +208,7 @@ type MetricAlarmParameters struct {
 
 	// The dimensions for the alarm's associated metric.  For the list of available dimensions see the AWS documentation here.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Used only for alarms based on percentiles.
@@ -215,6 +228,7 @@ type MetricAlarmParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
 	// The name for the alarm's associated metric.
@@ -233,6 +247,7 @@ type MetricAlarmParameters struct {
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// The period in seconds over which the specified statistic is applied.
@@ -252,6 +267,7 @@ type MetricAlarmParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The value against which the specified statistic is compared. This parameter is required for alarms based on static thresholds, but should not be used for alarms based on anomaly detection models.
@@ -274,6 +290,7 @@ type MetricAlarmParameters struct {
 type MetricInitParameters struct {
 
 	// The dimensions for this metric.  For the list of available dimensions see the AWS documentation here.
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name for this metric.
@@ -300,6 +317,7 @@ type MetricInitParameters struct {
 type MetricObservation struct {
 
 	// The dimensions for this metric.  For the list of available dimensions see the AWS documentation here.
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name for this metric.
@@ -327,6 +345,7 @@ type MetricParameters struct {
 
 	// The dimensions for this metric.  For the list of available dimensions see the AWS documentation here.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name for this metric.

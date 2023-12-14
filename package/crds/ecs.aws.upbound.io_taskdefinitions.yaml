@@ -239,6 +239,7 @@ spec:
                             provide the Container Network Interface (CNI) plugin,
                             specified a key-value mapping.
                           type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Proxy type. The default value is APPMESH. The
                             only supported value is APPMESH.
@@ -255,6 +256,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   runtimePlatform:
                     description: Configuration block for runtime_platform that containers
                       in your task may use.
@@ -281,6 +283,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskRoleArn:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
@@ -310,12 +313,14 @@ spec:
                                   type: string
                                 description: Map of Docker driver specific options.
                                 type: object
+                                x-kubernetes-map-type: granular
                               labels:
                                 additionalProperties:
                                   type: string
                                 description: Map of custom metadata to add to your
                                   Docker volume.
                                 type: object
+                                x-kubernetes-map-type: granular
                               scope:
                                 description: Scope for the Docker volume, which determines
                                   its lifecycle, either task or shared.  Docker volumes
@@ -543,6 +548,7 @@ spec:
                             provide the Container Network Interface (CNI) plugin,
                             specified a key-value mapping.
                           type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Proxy type. The default value is APPMESH. The
                             only supported value is APPMESH.
@@ -555,6 +561,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   runtimePlatform:
                     description: Configuration block for runtime_platform that containers
                       in your task may use.
@@ -581,6 +588,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskRoleArn:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
@@ -610,12 +618,14 @@ spec:
                                   type: string
                                 description: Map of Docker driver specific options.
                                 type: object
+                                x-kubernetes-map-type: granular
                               labels:
                                 additionalProperties:
                                   type: string
                                 description: Map of custom metadata to add to your
                                   Docker volume.
                                 type: object
+                                x-kubernetes-map-type: granular
                               scope:
                                 description: Scope for the Docker volume, which determines
                                   its lifecycle, either task or shared.  Docker volumes
@@ -1020,6 +1030,7 @@ spec:
                             provide the Container Network Interface (CNI) plugin,
                             specified a key-value mapping.
                           type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Proxy type. The default value is APPMESH. The
                             only supported value is APPMESH.
@@ -1032,6 +1043,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   revision:
                     description: Revision of the task in a particular family.
                     type: number
@@ -1061,12 +1073,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskRoleArn:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
@@ -1096,12 +1110,14 @@ spec:
                                   type: string
                                 description: Map of Docker driver specific options.
                                 type: object
+                                x-kubernetes-map-type: granular
                               labels:
                                 additionalProperties:
                                   type: string
                                 description: Map of custom metadata to add to your
                                   Docker volume.
                                 type: object
+                                x-kubernetes-map-type: granular
                               scope:
                                 description: Scope for the Docker volume, which determines
                                   its lifecycle, either task or shared.  Docker volumes

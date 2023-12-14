@@ -284,6 +284,7 @@ spec:
                       type: string
                     description: Codec options for the video parameters
                     type: object
+                    x-kubernetes-map-type: granular
                   videoWatermarks:
                     description: Watermark parameters for the video parameters (documented
                       below)
@@ -572,6 +573,7 @@ spec:
                       type: string
                     description: Codec options for the video parameters
                     type: object
+                    x-kubernetes-map-type: granular
                   videoWatermarks:
                     description: Watermark parameters for the video parameters (documented
                       below)
@@ -1025,6 +1027,7 @@ spec:
                       type: string
                     description: Codec options for the video parameters
                     type: object
+                    x-kubernetes-map-type: granular
                   videoWatermarks:
                     description: Watermark parameters for the video parameters (documented
                       below)

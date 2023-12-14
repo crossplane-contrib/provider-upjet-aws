@@ -153,6 +153,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetRole:
                     description: Indicates whether the DB proxy endpoint can be used
                       for read/write or read-only operations. The default is READ_WRITE.
@@ -241,12 +242,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   vpcSubnetIds:
                     description: One or more VPC subnet IDs to associate with the
                       new proxy.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -267,6 +270,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetRole:
                     description: Indicates whether the DB proxy endpoint can be used
                       for read/write or read-only operations. The default is READ_WRITE.
@@ -278,6 +282,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -474,10 +479,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   targetRole:
                     description: Indicates whether the DB proxy endpoint can be used
                       for read/write or read-only operations. The default is READ_WRITE.
@@ -492,12 +499,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   vpcSubnetIds:
                     description: One or more VPC subnet IDs to associate with the
                       new proxy.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

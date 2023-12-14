@@ -78,6 +78,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   name:
                     description: The name of the stack to create. The resource deployed
                       in AWS will be prefixed with serverlessrepo-
@@ -88,6 +89,7 @@ spec:
                     description: A map of Parameter structures that specify input
                       parameters for the stack.
                     type: object
+                    x-kubernetes-map-type: granular
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -101,6 +103,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -126,6 +129,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   name:
                     description: The name of the stack to create. The resource deployed
                       in AWS will be prefixed with serverlessrepo-
@@ -136,6 +140,7 @@ spec:
                     description: A map of Parameter structures that specify input
                       parameters for the stack.
                     type: object
+                    x-kubernetes-map-type: granular
                   semanticVersion:
                     description: The version of the application to deploy. If not
                       supplied, deploys the latest version.
@@ -145,6 +150,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -334,6 +340,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: A unique identifier of the stack.
                     type: string
@@ -346,12 +353,14 @@ spec:
                       type: string
                     description: A map of outputs from the stack.
                     type: object
+                    x-kubernetes-map-type: granular
                   parameters:
                     additionalProperties:
                       type: string
                     description: A map of Parameter structures that specify input
                       parameters for the stack.
                     type: object
+                    x-kubernetes-map-type: granular
                   semanticVersion:
                     description: The version of the application to deploy. If not
                       supplied, deploys the latest version.
@@ -361,6 +370,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -368,6 +378,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -33,12 +33,14 @@ type StreamInitParameters struct {
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	// +listType=set
 	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
 
 	// Indicates the capacity mode of the data stream. Detailed below.
 	StreamModeDetails []StreamModeDetailsInitParameters `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -86,15 +88,18 @@ type StreamObservation struct {
 	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 
 	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
+	// +listType=set
 	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
 
 	// Indicates the capacity mode of the data stream. Detailed below.
 	StreamModeDetails []StreamModeDetailsObservation `json:"streamModeDetails,omitempty" tf:"stream_mode_details,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -137,6 +142,7 @@ type StreamParameters struct {
 
 	// A list of shard-level CloudWatch metrics which can be enabled for the stream. See Monitoring with CloudWatch for more. Note that the value ALL should not be used; instead you should provide an explicit list of metrics you wish to enable.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ShardLevelMetrics []*string `json:"shardLevelMetrics,omitempty" tf:"shard_level_metrics,omitempty"`
 
 	// Indicates the capacity mode of the data stream. Detailed below.
@@ -145,6 +151,7 @@ type StreamParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -55,9 +55,11 @@ type DockerVolumeConfigurationInitParameters struct {
 	Driver *string `json:"driver,omitempty" tf:"driver,omitempty"`
 
 	// Map of Docker driver specific options.
+	// +mapType=granular
 	DriverOpts map[string]*string `json:"driverOpts,omitempty" tf:"driver_opts,omitempty"`
 
 	// Map of custom metadata to add to your Docker volume.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Scope for the Docker volume, which determines its lifecycle, either task or shared.  Docker volumes that are scoped to a task are automatically provisioned when the task starts and destroyed when the task stops. Docker volumes that are scoped as shared persist after the task stops.
@@ -73,9 +75,11 @@ type DockerVolumeConfigurationObservation struct {
 	Driver *string `json:"driver,omitempty" tf:"driver,omitempty"`
 
 	// Map of Docker driver specific options.
+	// +mapType=granular
 	DriverOpts map[string]*string `json:"driverOpts,omitempty" tf:"driver_opts,omitempty"`
 
 	// Map of custom metadata to add to your Docker volume.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Scope for the Docker volume, which determines its lifecycle, either task or shared.  Docker volumes that are scoped to a task are automatically provisioned when the task starts and destroyed when the task stops. Docker volumes that are scoped as shared persist after the task stops.
@@ -94,10 +98,12 @@ type DockerVolumeConfigurationParameters struct {
 
 	// Map of Docker driver specific options.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	DriverOpts map[string]*string `json:"driverOpts,omitempty" tf:"driver_opts,omitempty"`
 
 	// Map of custom metadata to add to your Docker volume.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Scope for the Docker volume, which determines its lifecycle, either task or shared.  Docker volumes that are scoped to a task are automatically provisioned when the task starts and destroyed when the task stops. Docker volumes that are scoped as shared persist after the task stops.
@@ -286,6 +292,7 @@ type ProxyConfigurationInitParameters struct {
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified a key-value mapping.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Proxy type. The default value is APPMESH. The only supported value is APPMESH.
@@ -298,6 +305,7 @@ type ProxyConfigurationObservation struct {
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified a key-value mapping.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Proxy type. The default value is APPMESH. The only supported value is APPMESH.
@@ -312,6 +320,7 @@ type ProxyConfigurationParameters struct {
 
 	// Set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified a key-value mapping.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Proxy type. The default value is APPMESH. The only supported value is APPMESH.
@@ -384,6 +393,7 @@ type TaskDefinitionInitParameters struct {
 	ProxyConfiguration []ProxyConfigurationInitParameters `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
+	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
 
 	// Configuration block for runtime_platform that containers in your task may use.
@@ -393,6 +403,7 @@ type TaskDefinitionInitParameters struct {
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
@@ -449,6 +460,7 @@ type TaskDefinitionObservation struct {
 	ProxyConfiguration []ProxyConfigurationObservation `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
+	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
 
 	// Revision of the task in a particular family.
@@ -461,9 +473,11 @@ type TaskDefinitionObservation struct {
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
@@ -540,6 +554,7 @@ type TaskDefinitionParameters struct {
 
 	// Set of launch types required by the task. The valid values are EC2 and FARGATE.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RequiresCompatibilities []*string `json:"requiresCompatibilities,omitempty" tf:"requires_compatibilities,omitempty"`
 
 	// Configuration block for runtime_platform that containers in your task may use.
@@ -552,6 +567,7 @@ type TaskDefinitionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.

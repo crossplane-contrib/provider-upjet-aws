@@ -165,6 +165,7 @@ spec:
                                 description: A map describing the logging destination
                                   for the chosen log_destination_type.
                                 type: object
+                                x-kubernetes-map-type: granular
                               logDestinationType:
                                 description: 'The location to send logs to. Valid
                                   values: S3, CloudWatchLogs, KinesisDataFirehose.'
@@ -218,6 +219,7 @@ spec:
                                 description: A map describing the logging destination
                                   for the chosen log_destination_type.
                                 type: object
+                                x-kubernetes-map-type: granular
                               logDestinationType:
                                 description: 'The location to send logs to. Valid
                                   values: S3, CloudWatchLogs, KinesisDataFirehose.'
@@ -432,6 +434,7 @@ spec:
                                 description: A map describing the logging destination
                                   for the chosen log_destination_type.
                                 type: object
+                                x-kubernetes-map-type: granular
                               logDestinationType:
                                 description: 'The location to send logs to. Valid
                                   values: S3, CloudWatchLogs, KinesisDataFirehose.'

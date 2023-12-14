@@ -354,6 +354,7 @@ type DomainEndpointOptionsParameters struct {
 type DomainInitParameters struct {
 
 	// Key-value string pairs to specify advanced configuration options.
+	// +mapType=granular
 	AdvancedOptions map[string]*string `json:"advancedOptions,omitempty" tf:"advanced_options,omitempty"`
 
 	// Configuration block for fine-grained access control. Detailed below.
@@ -393,6 +394,7 @@ type DomainInitParameters struct {
 	SnapshotOptions []SnapshotOptionsInitParameters `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for VPC related options. Adding or removing this configuration forces a new resource (documentation). Detailed below.
@@ -405,6 +407,7 @@ type DomainObservation struct {
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
 	// Key-value string pairs to specify advanced configuration options.
+	// +mapType=granular
 	AdvancedOptions map[string]*string `json:"advancedOptions,omitempty" tf:"advanced_options,omitempty"`
 
 	// Configuration block for fine-grained access control. Detailed below.
@@ -461,9 +464,11 @@ type DomainObservation struct {
 	SnapshotOptions []SnapshotOptionsObservation `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for VPC related options. Adding or removing this configuration forces a new resource (documentation). Detailed below.
@@ -474,6 +479,7 @@ type DomainParameters struct {
 
 	// Key-value string pairs to specify advanced configuration options.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdvancedOptions map[string]*string `json:"advancedOptions,omitempty" tf:"advanced_options,omitempty"`
 
 	// Configuration block for fine-grained access control. Detailed below.
@@ -531,6 +537,7 @@ type DomainParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for VPC related options. Adding or removing this configuration forces a new resource (documentation). Detailed below.
@@ -814,21 +821,26 @@ type SnapshotOptionsParameters struct {
 type VPCOptionsInitParameters struct {
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCOptionsObservation struct {
 
 	// If the domain was created inside a VPC, the names of the availability zones the configured subnet_ids were created inside.
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// If the domain was created inside a VPC, the ID of the VPC.
@@ -839,10 +851,12 @@ type VPCOptionsParameters struct {
 
 	// List of VPC Security Group IDs to be applied to the OpenSearch domain endpoints. If omitted, the default Security Group for the VPC will be used.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of VPC Subnet IDs for the OpenSearch domain endpoints to be created in.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
