@@ -88,6 +88,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   backtrackWindow:
                     description: The target backtrack window, in seconds. Only available
                       for aurora and aurora-mysql engines currently. To disable backtracking,
@@ -102,6 +103,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   copyTagsToSnapshot:
                     description: –  Copy all Cluster tags to snapshots. Default is
                       false.
@@ -228,6 +230,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   engine:
                     description: 'The name of the database engine to be used for this
                       DB cluster. Defaults to aurora. Valid Values: aurora, aurora-mysql,
@@ -787,6 +790,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
@@ -870,6 +874,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -906,6 +911,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   backtrackWindow:
                     description: The target backtrack window, in seconds. Only available
                       for aurora and aurora-mysql engines currently. To disable backtracking,
@@ -920,6 +926,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   copyTagsToSnapshot:
                     description: –  Copy all Cluster tags to snapshots. Default is
                       false.
@@ -968,6 +975,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   engine:
                     description: 'The name of the database engine to be used for this
                       DB cluster. Defaults to aurora. Valid Values: aurora, aurora-mysql,
@@ -1187,6 +1195,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -1377,6 +1386,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   backtrackWindow:
                     description: The target backtrack window, in seconds. Only available
                       for aurora and aurora-mysql engines currently. To disable backtracking,
@@ -1391,6 +1401,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clusterResourceId:
                     description: The RDS Cluster Resource ID
                     type: string
@@ -1447,6 +1458,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   endpoint:
                     description: The DNS address of the RDS instance
                     type: string
@@ -1497,6 +1509,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The RDS Cluster Identifier
                     type: string
@@ -1725,6 +1738,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1732,12 +1746,14 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSecurityGroupIds:
                     description: List of VPC security groups to associate with the
                       Cluster
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

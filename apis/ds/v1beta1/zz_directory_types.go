@@ -20,6 +20,7 @@ import (
 type ConnectSettingsInitParameters struct {
 
 	// The DNS IP addresses of the domain to connect to.
+	// +listType=set
 	CustomerDNSIps []*string `json:"customerDnsIps,omitempty" tf:"customer_dns_ips,omitempty"`
 
 	// The username corresponding to the password provided.
@@ -27,18 +28,23 @@ type ConnectSettingsInitParameters struct {
 }
 
 type ConnectSettingsObservation struct {
+
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The IP addresses of the AD Connector servers.
+	// +listType=set
 	ConnectIps []*string `json:"connectIps,omitempty" tf:"connect_ips,omitempty"`
 
 	// The DNS IP addresses of the domain to connect to.
+	// +listType=set
 	CustomerDNSIps []*string `json:"customerDnsIps,omitempty" tf:"customer_dns_ips,omitempty"`
 
 	// The username corresponding to the password provided.
 	CustomerUsername *string `json:"customerUsername,omitempty" tf:"customer_username,omitempty"`
 
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The identifier of the VPC that the directory is in.
@@ -49,6 +55,7 @@ type ConnectSettingsParameters struct {
 
 	// The DNS IP addresses of the domain to connect to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CustomerDNSIps []*string `json:"customerDnsIps" tf:"customer_dns_ips,omitempty"`
 
 	// The username corresponding to the password provided.
@@ -58,6 +65,7 @@ type ConnectSettingsParameters struct {
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -113,6 +121,7 @@ type DirectoryInitParameters struct {
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The directory type (SimpleAD, ADConnector or MicrosoftAD are accepted values). Defaults to SimpleAD.
@@ -134,6 +143,7 @@ type DirectoryObservation struct {
 	ConnectSettings []ConnectSettingsObservation `json:"connectSettings,omitempty" tf:"connect_settings,omitempty"`
 
 	// A list of IP addresses of the DNS servers for the directory or connector.
+	// +listType=set
 	DNSIPAddresses []*string `json:"dnsIpAddresses,omitempty" tf:"dns_ip_addresses,omitempty"`
 
 	// A textual description for the directory.
@@ -164,9 +174,11 @@ type DirectoryObservation struct {
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The directory type (SimpleAD, ADConnector or MicrosoftAD are accepted values). Defaults to SimpleAD.
@@ -225,6 +237,7 @@ type DirectoryParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The directory type (SimpleAD, ADConnector or MicrosoftAD are accepted values). Defaults to SimpleAD.
@@ -240,9 +253,12 @@ type VPCSettingsInitParameters struct {
 }
 
 type VPCSettingsObservation struct {
+
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The identifier of the VPC that the directory is in.
@@ -254,6 +270,7 @@ type VPCSettingsParameters struct {
 	// The identifiers of the subnets for the directory servers (2 subnets in 2 different AZs).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.

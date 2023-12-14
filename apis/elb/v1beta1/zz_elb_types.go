@@ -72,6 +72,7 @@ type ELBInitParameters struct {
 	AccessLogs []AccessLogsInitParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
 	// The AZ's to serve traffic in.
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Boolean to enable connection draining. Default: false
@@ -100,6 +101,7 @@ type ELBInitParameters struct {
 
 	// A list of security group IDs to assign to the ELB.
 	// Only valid if creating an ELB within a VPC
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The name of the security group that you can use as
@@ -108,6 +110,7 @@ type ELBInitParameters struct {
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -120,6 +123,7 @@ type ELBObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AZ's to serve traffic in.
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Boolean to enable connection draining. Default: false
@@ -147,6 +151,7 @@ type ELBObservation struct {
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
 	// A list of instance ids to place in the ELB pool.
+	// +listType=set
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// If true, ELB will be an internal ELB.
@@ -157,6 +162,7 @@ type ELBObservation struct {
 
 	// A list of security group IDs to assign to the ELB.
 	// Only valid if creating an ELB within a VPC
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The name of the security group that you can use as
@@ -170,12 +176,15 @@ type ELBObservation struct {
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
 	// A list of subnet IDs to attach to the ELB.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The canonical hosted zone ID of the ELB (to be used in a Route 53 Alias record)
@@ -190,6 +199,7 @@ type ELBParameters struct {
 
 	// The AZ's to serve traffic in.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Boolean to enable connection draining. Default: false
@@ -219,6 +229,7 @@ type ELBParameters struct {
 	// A list of instance ids to place in the ELB pool.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// References to Instance in ec2 to populate instances.
@@ -245,6 +256,7 @@ type ELBParameters struct {
 	// A list of security group IDs to assign to the ELB.
 	// Only valid if creating an ELB within a VPC
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The name of the security group that you can use as
@@ -256,6 +268,7 @@ type ELBParameters struct {
 	// A list of subnet IDs to attach to the ELB.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// References to Subnet in ec2 to populate subnets.
@@ -268,6 +281,7 @@ type ELBParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

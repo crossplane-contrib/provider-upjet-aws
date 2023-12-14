@@ -128,12 +128,14 @@ type NotificationConfigurationParameters struct {
 type OidcMemberDefinitionInitParameters struct {
 
 	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 }
 
 type OidcMemberDefinitionObservation struct {
 
 	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 }
 
@@ -141,6 +143,7 @@ type OidcMemberDefinitionParameters struct {
 
 	// A list of comma separated strings that identifies user groups in your OIDC IdP. Each user group is made up of a group of private workers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Groups []*string `json:"groups" tf:"groups,omitempty"`
 }
 
@@ -156,6 +159,7 @@ type WorkteamInitParameters struct {
 	NotificationConfiguration []NotificationConfigurationInitParameters `json:"notificationConfiguration,omitempty" tf:"notification_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -180,9 +184,11 @@ type WorkteamObservation struct {
 	Subdomain *string `json:"subdomain,omitempty" tf:"subdomain,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The name of the Workteam (must be unique).
@@ -210,6 +216,7 @@ type WorkteamParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the Workteam (must be unique).

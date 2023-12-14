@@ -23,6 +23,7 @@ type ReplicationSubnetGroupInitParameters struct {
 	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription,omitempty" tf:"replication_subnet_group_description,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -35,12 +36,15 @@ type ReplicationSubnetGroupObservation struct {
 	ReplicationSubnetGroupDescription *string `json:"replicationSubnetGroupDescription,omitempty" tf:"replication_subnet_group_description,omitempty"`
 
 	// List of at least 2 EC2 subnet IDs for the subnet group. The subnets must cover at least 2 availability zones.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the VPC the subnet group is in.
@@ -71,10 +75,12 @@ type ReplicationSubnetGroupParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

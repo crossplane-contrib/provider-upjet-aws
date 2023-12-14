@@ -297,6 +297,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
@@ -380,12 +381,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   vpcSubnetIds:
                     description: One or more VPC subnet IDs to associate with the
                       new proxy.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -466,12 +469,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSubnetIds:
                     description: One or more VPC subnet IDs to associate with the
                       new proxy.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -737,6 +742,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -744,18 +750,21 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSecurityGroupIds:
                     description: One or more VPC security group IDs to associate with
                       the new proxy.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   vpcSubnetIds:
                     description: One or more VPC subnet IDs to associate with the
                       new proxy.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

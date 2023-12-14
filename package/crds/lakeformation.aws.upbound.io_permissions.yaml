@@ -283,6 +283,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   lfTagPolicy:
@@ -308,6 +309,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         resourceType:
@@ -374,6 +376,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         databaseName:
                           description: –  Name of the database for the table with
                             columns resource. Unique to the Data Catalog.
@@ -383,6 +386,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         name:
                           description: –  Name of the table resource.
                           type: string
@@ -535,6 +539,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   lfTagPolicy:
@@ -560,6 +565,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         resourceType:
@@ -622,6 +628,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         databaseName:
                           description: –  Name of the database for the table with
                             columns resource. Unique to the Data Catalog.
@@ -631,6 +638,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         wildcard:
                           description: Whether to use a column wildcard.
                           type: boolean
@@ -872,6 +880,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   lfTagPolicy:
@@ -897,6 +906,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         resourceType:
@@ -959,6 +969,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         databaseName:
                           description: –  Name of the database for the table with
                             columns resource. Unique to the Data Catalog.
@@ -968,6 +979,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         name:
                           description: –  Name of the table resource.
                           type: string

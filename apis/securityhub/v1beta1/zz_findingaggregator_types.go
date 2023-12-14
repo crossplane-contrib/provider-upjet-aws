@@ -23,6 +23,7 @@ type FindingAggregatorInitParameters struct {
 	LinkingMode *string `json:"linkingMode,omitempty" tf:"linking_mode,omitempty"`
 
 	// List of regions to include or exclude
+	// +listType=set
 	SpecifiedRegions []*string `json:"specifiedRegions,omitempty" tf:"specified_regions,omitempty"`
 }
 
@@ -33,6 +34,7 @@ type FindingAggregatorObservation struct {
 	LinkingMode *string `json:"linkingMode,omitempty" tf:"linking_mode,omitempty"`
 
 	// List of regions to include or exclude
+	// +listType=set
 	SpecifiedRegions []*string `json:"specifiedRegions,omitempty" tf:"specified_regions,omitempty"`
 }
 
@@ -49,6 +51,7 @@ type FindingAggregatorParameters struct {
 
 	// List of regions to include or exclude
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SpecifiedRegions []*string `json:"specifiedRegions,omitempty" tf:"specified_regions,omitempty"`
 }
 

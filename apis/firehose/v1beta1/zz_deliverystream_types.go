@@ -179,6 +179,7 @@ type DeliveryStreamInitParameters struct {
 	SplunkConfiguration []SplunkConfigurationInitParameters `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
@@ -232,9 +233,11 @@ type DeliveryStreamObservation struct {
 	SplunkConfiguration []SplunkConfigurationObservation `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
@@ -306,6 +309,7 @@ type DeliveryStreamParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
@@ -1051,6 +1055,7 @@ type OpenXJSONSerDeInitParameters struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
 	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
@@ -1063,6 +1068,7 @@ type OpenXJSONSerDeObservation struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
 	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
@@ -1077,6 +1083,7 @@ type OpenXJSONSerDeParameters struct {
 
 	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
@@ -1366,9 +1373,11 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameter
 type OpensearchConfigurationVPCConfigInitParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -1378,9 +1387,11 @@ type OpensearchConfigurationVPCConfigObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -1404,10 +1415,12 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
@@ -2886,9 +2899,11 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters st
 type VPCConfigInitParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -2898,9 +2913,11 @@ type VPCConfigObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -2924,10 +2941,12 @@ type VPCConfigParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 

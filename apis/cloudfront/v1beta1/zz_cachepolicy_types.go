@@ -129,12 +129,14 @@ type CookiesConfigParameters struct {
 type CookiesInitParameters struct {
 
 	// A list of item names (cookies, headers, or query strings).
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type CookiesObservation struct {
 
 	// A list of item names (cookies, headers, or query strings).
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -142,6 +144,7 @@ type CookiesParameters struct {
 
 	// A list of item names (cookies, headers, or query strings).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -177,12 +180,14 @@ type HeadersConfigParameters struct {
 type HeadersInitParameters struct {
 
 	// A list of item names (cookies, headers, or query strings).
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type HeadersObservation struct {
 
 	// A list of item names (cookies, headers, or query strings).
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -190,6 +195,7 @@ type HeadersParameters struct {
 
 	// A list of item names (cookies, headers, or query strings).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -284,12 +290,14 @@ type QueryStringsConfigParameters struct {
 type QueryStringsInitParameters struct {
 
 	// A list of item names (cookies, headers, or query strings).
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type QueryStringsObservation struct {
 
 	// A list of item names (cookies, headers, or query strings).
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
@@ -297,6 +305,7 @@ type QueryStringsParameters struct {
 
 	// A list of item names (cookies, headers, or query strings).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 

@@ -110,6 +110,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -838,6 +839,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -1140,6 +1142,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   task:
                     description: A Task that Amazon AppFlow performs while transferring
                       the data in the flow run.
@@ -1258,6 +1261,7 @@ spec:
                             MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP,
                             and EXCLUDE_SOURCE_FIELDS_LIST.
                           type: object
+                          x-kubernetes-map-type: granular
                         taskType:
                           description: Particular task implementation that Amazon
                             AppFlow performs. Valid values are Arithmetic, Filter,
@@ -1382,6 +1386,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -2018,6 +2023,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -2232,6 +2238,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   task:
                     description: A Task that Amazon AppFlow performs while transferring
                       the data in the flow run.
@@ -2350,6 +2357,7 @@ spec:
                             MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP,
                             and EXCLUDE_SOURCE_FIELDS_LIST.
                           type: object
+                          x-kubernetes-map-type: granular
                         taskType:
                           description: Particular task implementation that Amazon
                             AppFlow performs. Valid values are Arithmetic, Filter,
@@ -2645,6 +2653,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -3287,6 +3296,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -3505,12 +3515,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   task:
                     description: A Task that Amazon AppFlow performs while transferring
                       the data in the flow run.
@@ -3629,6 +3641,7 @@ spec:
                             MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP,
                             and EXCLUDE_SOURCE_FIELDS_LIST.
                           type: object
+                          x-kubernetes-map-type: granular
                         taskType:
                           description: Particular task implementation that Amazon
                             AppFlow performs. Valid values are Arithmetic, Filter,

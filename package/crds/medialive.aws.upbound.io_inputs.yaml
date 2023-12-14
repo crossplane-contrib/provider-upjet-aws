@@ -208,6 +208,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The different types of inputs that AWS Elemental
                       MediaLive supports.
@@ -306,6 +307,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The different types of inputs that AWS Elemental
                       MediaLive supports.
@@ -591,10 +593,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The different types of inputs that AWS Elemental
                       MediaLive supports.

@@ -81,12 +81,15 @@ type PoolInitParameters struct {
 	IdentityPoolName *string `json:"identityPoolName,omitempty" tf:"identity_pool_name,omitempty"`
 
 	// Set of OpendID Connect provider ARNs.
+	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
 	// Key-Value pairs mapping provider names to provider app IDs.
+	// +mapType=granular
 	SupportedLoginProviders map[string]*string `json:"supportedLoginProviders,omitempty" tf:"supported_login_providers,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -115,18 +118,22 @@ type PoolObservation struct {
 	IdentityPoolName *string `json:"identityPoolName,omitempty" tf:"identity_pool_name,omitempty"`
 
 	// Set of OpendID Connect provider ARNs.
+	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
 
 	// Key-Value pairs mapping provider names to provider app IDs.
+	// +mapType=granular
 	SupportedLoginProviders map[string]*string `json:"supportedLoginProviders,omitempty" tf:"supported_login_providers,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -155,6 +162,7 @@ type PoolParameters struct {
 
 	// Set of OpendID Connect provider ARNs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -178,10 +186,12 @@ type PoolParameters struct {
 
 	// Key-Value pairs mapping provider names to provider app IDs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	SupportedLoginProviders map[string]*string `json:"supportedLoginProviders,omitempty" tf:"supported_login_providers,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

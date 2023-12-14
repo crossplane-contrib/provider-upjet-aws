@@ -20,6 +20,7 @@ import (
 type IPSetInitParameters struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
+	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
 
 	// A friendly description of the IP set.
@@ -35,12 +36,14 @@ type IPSetInitParameters struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IPSetObservation struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
+	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IP set.
@@ -64,9 +67,11 @@ type IPSetObservation struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -74,6 +79,7 @@ type IPSetParameters struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
 
 	// A friendly description of the IP set.
@@ -99,6 +105,7 @@ type IPSetParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

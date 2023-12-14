@@ -20,6 +20,7 @@ import (
 type CertificateValidationInitParameters struct {
 
 	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
+	// +listType=set
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 
@@ -32,6 +33,7 @@ type CertificateValidationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
+	// +listType=set
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 
@@ -57,6 +59,7 @@ type CertificateValidationParameters struct {
 
 	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 

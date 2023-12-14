@@ -76,9 +76,11 @@ type JobDefinitionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the parameter substitution placeholders to set in the job definition.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The platform capabilities required by the job definition. If no value is specified, it defaults to EC2. To run the job on Fargate resources, specify FARGATE.
+	// +listType=set
 	PlatformCapabilities []*string `json:"platformCapabilities,omitempty" tf:"platform_capabilities,omitempty"`
 
 	// Specifies whether to propagate the tags from the job definition to the corresponding Amazon ECS task. Default is false.
@@ -89,6 +91,7 @@ type JobDefinitionInitParameters struct {
 	RetryStrategy []RetryStrategyInitParameters `json:"retryStrategy,omitempty" tf:"retry_strategy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of timeout is 1. Defined below.
@@ -113,9 +116,11 @@ type JobDefinitionObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the parameter substitution placeholders to set in the job definition.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The platform capabilities required by the job definition. If no value is specified, it defaults to EC2. To run the job on Fargate resources, specify FARGATE.
+	// +listType=set
 	PlatformCapabilities []*string `json:"platformCapabilities,omitempty" tf:"platform_capabilities,omitempty"`
 
 	// Specifies whether to propagate the tags from the job definition to the corresponding Amazon ECS task. Default is false.
@@ -129,9 +134,11 @@ type JobDefinitionObservation struct {
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of timeout is 1. Defined below.
@@ -154,10 +161,12 @@ type JobDefinitionParameters struct {
 
 	// Specifies the parameter substitution placeholders to set in the job definition.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The platform capabilities required by the job definition. If no value is specified, it defaults to EC2. To run the job on Fargate resources, specify FARGATE.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PlatformCapabilities []*string `json:"platformCapabilities,omitempty" tf:"platform_capabilities,omitempty"`
 
 	// Specifies whether to propagate the tags from the job definition to the corresponding Amazon ECS task. Default is false.
@@ -176,6 +185,7 @@ type JobDefinitionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of timeout is 1. Defined below.

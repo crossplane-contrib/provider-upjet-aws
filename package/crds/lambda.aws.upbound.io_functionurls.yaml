@@ -89,6 +89,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
@@ -96,6 +97,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: 'The origins that can access the function URL.
                             You can list any number of specific origins (or the wildcard
@@ -104,6 +106,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: The HTTP headers in your function response
                             that you want to expose to origins that call the function
@@ -111,6 +114,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: The maximum amount of time, in seconds, that
                             web browsers can cache results of a preflight request.
@@ -244,6 +248,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
@@ -251,6 +256,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: 'The origins that can access the function URL.
                             You can list any number of specific origins (or the wildcard
@@ -259,6 +265,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: The HTTP headers in your function response
                             that you want to expose to origins that call the function
@@ -266,6 +273,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: The maximum amount of time, in seconds, that
                             web browsers can cache results of a preflight request.
@@ -475,6 +483,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
@@ -482,6 +491,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: 'The origins that can access the function URL.
                             You can list any number of specific origins (or the wildcard
@@ -490,6 +500,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: The HTTP headers in your function response
                             that you want to expose to origins that call the function
@@ -497,6 +508,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: The maximum amount of time, in seconds, that
                             web browsers can cache results of a preflight request.

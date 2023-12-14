@@ -81,6 +81,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   keywords:
                     description: An array that lists specific character sequences
                       (keywords), one of which must be within proximity (maximum_match_distance)
@@ -90,6 +91,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maximumMatchDistance:
                     description: The maximum number of characters that can exist between
                       text that matches the regex pattern and the character sequences
@@ -115,6 +117,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -144,6 +147,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   keywords:
                     description: An array that lists specific character sequences
                       (keywords), one of which must be within proximity (maximum_match_distance)
@@ -153,6 +157,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maximumMatchDistance:
                     description: The maximum number of characters that can exist between
                       text that matches the regex pattern and the character sequences
@@ -174,6 +179,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -367,6 +373,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   keywords:
                     description: An array that lists specific character sequences
                       (keywords), one of which must be within proximity (maximum_match_distance)
@@ -376,6 +383,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maximumMatchDistance:
                     description: The maximum number of characters that can exist between
                       text that matches the regex pattern and the character sequences
@@ -397,10 +405,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -73,6 +73,7 @@ spec:
                     description: A map that contains user attributes and attribute
                       values to be set for the user.
                     type: object
+                    x-kubernetes-map-type: granular
                   clientMetadata:
                     additionalProperties:
                       type: string
@@ -85,6 +86,7 @@ spec:
                       parameter serves no purpose. For more information, see Customizing
                       User Pool Workflows with Lambda Triggers.
                     type: object
+                    x-kubernetes-map-type: granular
                   desiredDeliveryMediums:
                     description: A list of mediums to the welcome message will be
                       sent through. Allowed values are EMAIL and SMS. If it's provided,
@@ -95,6 +97,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   enabled:
                     description: Specifies whether the user should be enabled after
                       creation. The welcome message will be sent regardless of the
@@ -249,6 +252,7 @@ spec:
                       not store the validation_data value. For more information, see
                       Customizing User Pool Workflows with Lambda Triggers.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -270,6 +274,7 @@ spec:
                     description: A map that contains user attributes and attribute
                       values to be set for the user.
                     type: object
+                    x-kubernetes-map-type: granular
                   clientMetadata:
                     additionalProperties:
                       type: string
@@ -282,6 +287,7 @@ spec:
                       parameter serves no purpose. For more information, see Customizing
                       User Pool Workflows with Lambda Triggers.
                     type: object
+                    x-kubernetes-map-type: granular
                   desiredDeliveryMediums:
                     description: A list of mediums to the welcome message will be
                       sent through. Allowed values are EMAIL and SMS. If it's provided,
@@ -292,6 +298,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   enabled:
                     description: Specifies whether the user should be enabled after
                       creation. The welcome message will be sent regardless of the
@@ -324,6 +331,7 @@ spec:
                       not store the validation_data value. For more information, see
                       Customizing User Pool Workflows with Lambda Triggers.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -496,6 +504,7 @@ spec:
                     description: A map that contains user attributes and attribute
                       values to be set for the user.
                     type: object
+                    x-kubernetes-map-type: granular
                   clientMetadata:
                     additionalProperties:
                       type: string
@@ -508,6 +517,7 @@ spec:
                       parameter serves no purpose. For more information, see Customizing
                       User Pool Workflows with Lambda Triggers.
                     type: object
+                    x-kubernetes-map-type: granular
                   creationDate:
                     type: string
                   desiredDeliveryMediums:
@@ -520,6 +530,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   enabled:
                     description: Specifies whether the user should be enabled after
                       creation. The welcome message will be sent regardless of the
@@ -550,6 +561,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   preferredMfaSetting:
                     type: string
                   status:
@@ -573,6 +585,7 @@ spec:
                       not store the validation_data value. For more information, see
                       Customizing User Pool Workflows with Lambda Triggers.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

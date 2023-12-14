@@ -73,6 +73,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   backupVaultName:
                     description: Name of the backup vault to add notifications for.
                     type: string
@@ -251,6 +252,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -431,6 +433,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   backupVaultName:
                     description: Name of the backup vault to add notifications for.
                     type: string

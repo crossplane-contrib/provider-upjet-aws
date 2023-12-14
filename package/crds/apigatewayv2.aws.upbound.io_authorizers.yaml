@@ -259,6 +259,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   jwtConfiguration:
                     description: Configuration of a JWT authorizer. Required for the
                       JWT authorizer type. Supported only for HTTP APIs.
@@ -271,6 +272,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         issuer:
                           description: Base domain of the identity provider that issues
                             JSON Web Tokens, such as the endpoint attribute of the
@@ -337,6 +339,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   jwtConfiguration:
                     description: Configuration of a JWT authorizer. Required for the
                       JWT authorizer type. Supported only for HTTP APIs.
@@ -349,6 +352,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         issuer:
                           description: Base domain of the identity provider that issues
                             JSON Web Tokens, such as the endpoint attribute of the
@@ -584,6 +588,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   jwtConfiguration:
                     description: Configuration of a JWT authorizer. Required for the
                       JWT authorizer type. Supported only for HTTP APIs.
@@ -596,6 +601,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         issuer:
                           description: Base domain of the identity provider that issues
                             JSON Web Tokens, such as the endpoint attribute of the

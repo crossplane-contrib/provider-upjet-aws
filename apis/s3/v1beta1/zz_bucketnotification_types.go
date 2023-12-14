@@ -94,6 +94,7 @@ type BucketNotificationParameters struct {
 type LambdaFunctionInitParameters struct {
 
 	// Event for which to send notifications.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -112,6 +113,7 @@ type LambdaFunctionInitParameters struct {
 type LambdaFunctionObservation struct {
 
 	// Event for which to send notifications.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -131,6 +133,7 @@ type LambdaFunctionParameters struct {
 
 	// Event for which to send notifications.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -153,6 +156,7 @@ type LambdaFunctionParameters struct {
 type QueueInitParameters struct {
 
 	// Specifies event for which to send notifications.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -168,6 +172,7 @@ type QueueInitParameters struct {
 type QueueObservation struct {
 
 	// Specifies event for which to send notifications.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -187,6 +192,7 @@ type QueueParameters struct {
 
 	// Specifies event for which to send notifications.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -219,6 +225,7 @@ type QueueParameters struct {
 type TopicInitParameters struct {
 
 	// Event for which to send notifications.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -234,6 +241,7 @@ type TopicInitParameters struct {
 type TopicObservation struct {
 
 	// Event for which to send notifications.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Object key name prefix.
@@ -253,6 +261,7 @@ type TopicParameters struct {
 
 	// Event for which to send notifications.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// Object key name prefix.

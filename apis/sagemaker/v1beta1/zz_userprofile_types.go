@@ -84,6 +84,7 @@ type UserProfileInitParameters struct {
 	SingleSignOnUserValue *string `json:"singleSignOnUserValue,omitempty" tf:"single_sign_on_user_value,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name for the User Profile.
@@ -114,9 +115,11 @@ type UserProfileObservation struct {
 	SingleSignOnUserValue *string `json:"singleSignOnUserValue,omitempty" tf:"single_sign_on_user_value,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The name for the User Profile.
@@ -157,6 +160,7 @@ type UserProfileParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name for the User Profile.
@@ -218,6 +222,7 @@ type UserSettingsInitParameters struct {
 	RStudioServerProAppSettings []UserSettingsRStudioServerProAppSettingsInitParameters `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// The security groups.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The sharing settings. See Sharing Settings below.
@@ -304,6 +309,7 @@ type UserSettingsJupyterServerAppSettingsInitParameters struct {
 	DefaultResourceSpec []UserSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -316,6 +322,7 @@ type UserSettingsJupyterServerAppSettingsObservation struct {
 	DefaultResourceSpec []UserSettingsJupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -331,6 +338,7 @@ type UserSettingsJupyterServerAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -431,6 +439,7 @@ type UserSettingsKernelGatewayAppSettingsInitParameters struct {
 	DefaultResourceSpec []UserSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -443,6 +452,7 @@ type UserSettingsKernelGatewayAppSettingsObservation struct {
 	DefaultResourceSpec []UserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -458,6 +468,7 @@ type UserSettingsKernelGatewayAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -482,6 +493,7 @@ type UserSettingsObservation struct {
 	RStudioServerProAppSettings []UserSettingsRStudioServerProAppSettingsObservation `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// The security groups.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The sharing settings. See Sharing Settings below.
@@ -519,6 +531,7 @@ type UserSettingsParameters struct {
 
 	// The security groups.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The sharing settings. See Sharing Settings below.

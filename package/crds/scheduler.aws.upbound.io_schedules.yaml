@@ -370,6 +370,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     subnets:
                                       description: Set of 1 to 16 subnets to be associated
                                         with the task. These subnets must all be in
@@ -377,6 +378,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               placementConstraints:
@@ -429,6 +431,7 @@ spec:
                                   type: string
                                 description: Key-value map of resource tags.
                                 type: object
+                                x-kubernetes-map-type: granular
                               taskCount:
                                 description: The number of tasks to create. Ranges
                                   from 1 (default) to 10.
@@ -756,6 +759,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     subnets:
                                       description: Set of 1 to 16 subnets to be associated
                                         with the task. These subnets must all be in
@@ -763,6 +767,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               placementConstraints:
@@ -815,6 +820,7 @@ spec:
                                   type: string
                                 description: Key-value map of resource tags.
                                 type: object
+                                x-kubernetes-map-type: granular
                               taskCount:
                                 description: The number of tasks to create. Ranges
                                   from 1 (default) to 10.
@@ -1241,6 +1247,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     subnets:
                                       description: Set of 1 to 16 subnets to be associated
                                         with the task. These subnets must all be in
@@ -1248,6 +1255,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               placementConstraints:
@@ -1300,6 +1308,7 @@ spec:
                                   type: string
                                 description: Key-value map of resource tags.
                                 type: object
+                                x-kubernetes-map-type: granular
                               taskCount:
                                 description: The number of tasks to create. Ranges
                                   from 1 (default) to 10.

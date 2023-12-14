@@ -283,6 +283,7 @@ spec:
                       given role, the key will be either "authenticated" or "unauthenticated"
                       and the value will be the Role ARN.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -349,6 +350,7 @@ spec:
                       given role, the key will be either "authenticated" or "unauthenticated"
                       and the value will be the Role ARN.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -580,6 +582,7 @@ spec:
                       given role, the key will be either "authenticated" or "unauthenticated"
                       and the value will be the Role ARN.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

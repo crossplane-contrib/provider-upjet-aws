@@ -434,6 +434,7 @@ spec:
                       them to the backend. See the Amazon API Gateway Developer Guide
                       for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
@@ -441,6 +442,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
+                    x-kubernetes-map-type: granular
                   responseParameters:
                     description: Mappings to transform the HTTP response from a backend
                       integration before returning the response to clients. Supported
@@ -456,6 +458,7 @@ spec:
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
+                          x-kubernetes-map-type: granular
                         statusCode:
                           description: HTTP status code in the range 200-599.
                           type: string
@@ -549,6 +552,7 @@ spec:
                       them to the backend. See the Amazon API Gateway Developer Guide
                       for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
@@ -556,6 +560,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
+                    x-kubernetes-map-type: granular
                   responseParameters:
                     description: Mappings to transform the HTTP response from a backend
                       integration before returning the response to clients. Supported
@@ -571,6 +576,7 @@ spec:
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
+                          x-kubernetes-map-type: granular
                         statusCode:
                           description: HTTP status code in the range 200-599.
                           type: string
@@ -845,6 +851,7 @@ spec:
                       them to the backend. See the Amazon API Gateway Developer Guide
                       for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
@@ -852,6 +859,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
+                    x-kubernetes-map-type: granular
                   responseParameters:
                     description: Mappings to transform the HTTP response from a backend
                       integration before returning the response to clients. Supported
@@ -867,6 +875,7 @@ spec:
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
+                          x-kubernetes-map-type: granular
                         statusCode:
                           description: HTTP status code in the range 200-599.
                           type: string

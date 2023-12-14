@@ -24,6 +24,7 @@ type ContainerInitParameters struct {
 
 	// Environment variables for the Docker container.
 	// A list of key value pairs.
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The registry path where the inference code image is stored in Amazon ECR.
@@ -46,6 +47,7 @@ type ContainerObservation struct {
 
 	// Environment variables for the Docker container.
 	// A list of key value pairs.
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The registry path where the inference code image is stored in Amazon ECR.
@@ -70,6 +72,7 @@ type ContainerParameters struct {
 	// Environment variables for the Docker container.
 	// A list of key value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The registry path where the inference code image is stored in Amazon ECR.
@@ -171,6 +174,7 @@ type ModelInitParameters struct {
 	PrimaryContainer []PrimaryContainerInitParameters `json:"primaryContainer,omitempty" tf:"primary_container,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the VPC that you want your model to connect to. VpcConfig is used in hosting services and in batch transform.
@@ -200,9 +204,11 @@ type ModelObservation struct {
 	PrimaryContainer []PrimaryContainerObservation `json:"primaryContainer,omitempty" tf:"primary_container,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies the VPC that you want your model to connect to. VpcConfig is used in hosting services and in batch transform.
@@ -248,6 +254,7 @@ type ModelParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the VPC that you want your model to connect to. VpcConfig is used in hosting services and in batch transform.
@@ -291,6 +298,7 @@ type PrimaryContainerInitParameters struct {
 
 	// Environment variables for the Docker container.
 	// A list of key value pairs.
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The registry path where the inference code image is stored in Amazon ECR.
@@ -313,6 +321,7 @@ type PrimaryContainerObservation struct {
 
 	// Environment variables for the Docker container.
 	// A list of key value pairs.
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The registry path where the inference code image is stored in Amazon ECR.
@@ -337,6 +346,7 @@ type PrimaryContainerParameters struct {
 	// Environment variables for the Docker container.
 	// A list of key value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The registry path where the inference code image is stored in Amazon ECR.
@@ -376,23 +386,31 @@ type RepositoryAuthConfigParameters struct {
 }
 
 type VPCConfigInitParameters struct {
+
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type VPCConfigObservation struct {
+
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type VPCConfigParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 

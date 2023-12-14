@@ -211,6 +211,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   customSetupRecipes:
                     items:
                       type: string
@@ -478,11 +479,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   useEbsOptimizedInstances:
                     description: Whether to use EBS-optimized instances.
                     type: boolean
@@ -675,11 +678,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   useEbsOptimizedInstances:
                     description: Whether to use EBS-optimized instances.
                     type: boolean
@@ -919,6 +924,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   customSetupRecipes:
                     items:
                       type: string
@@ -1043,15 +1049,18 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   useEbsOptimizedInstances:
                     description: Whether to use EBS-optimized instances.
                     type: boolean

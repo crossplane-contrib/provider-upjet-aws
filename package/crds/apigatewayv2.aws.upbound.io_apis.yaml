@@ -91,21 +91,25 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: Set of allowed HTTP methods.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: Set of allowed origins.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: Set of exposed HTTP headers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: Number of seconds that the browser should cache
                             preflight request results.
@@ -156,6 +160,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   target:
                     description: Part of quick create. Quick create produces an API
                       with an integration, a default catch-all route, and a default
@@ -208,21 +213,25 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: Set of allowed HTTP methods.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: Set of allowed origins.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: Set of exposed HTTP headers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: Number of seconds that the browser should cache
                             preflight request results.
@@ -269,6 +278,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   target:
                     description: Part of quick create. Quick create produces an API
                       with an integration, a default catch-all route, and a default
@@ -489,21 +499,25 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: Set of allowed HTTP methods.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: Set of allowed origins.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: Set of exposed HTTP headers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: Number of seconds that the browser should cache
                             preflight request results.
@@ -559,12 +573,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   target:
                     description: Part of quick create. Quick create produces an API
                       with an integration, a default catch-all route, and a default

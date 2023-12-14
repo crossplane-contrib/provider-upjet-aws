@@ -83,9 +83,11 @@ type HostParameters struct {
 type VPCConfigurationInitParameters struct {
 
 	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
@@ -98,9 +100,11 @@ type VPCConfigurationInitParameters struct {
 type VPCConfigurationObservation struct {
 
 	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
@@ -114,10 +118,12 @@ type VPCConfigurationParameters struct {
 
 	// ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 
 	// The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.

@@ -146,6 +146,7 @@ type ApplicationInitParameters struct {
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -188,9 +189,11 @@ type ApplicationObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The current application version. Kinesis Data Analytics updates the version_id each time the application is updated.
@@ -244,6 +247,7 @@ type ApplicationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1096,6 +1100,7 @@ type PropertyGroupInitParameters struct {
 	PropertyGroupID *string `json:"propertyGroupId,omitempty" tf:"property_group_id,omitempty"`
 
 	// Application execution property key-value map.
+	// +mapType=granular
 	PropertyMap map[string]*string `json:"propertyMap,omitempty" tf:"property_map,omitempty"`
 }
 
@@ -1105,6 +1110,7 @@ type PropertyGroupObservation struct {
 	PropertyGroupID *string `json:"propertyGroupId,omitempty" tf:"property_group_id,omitempty"`
 
 	// Application execution property key-value map.
+	// +mapType=granular
 	PropertyMap map[string]*string `json:"propertyMap,omitempty" tf:"property_map,omitempty"`
 }
 
@@ -1116,6 +1122,7 @@ type PropertyGroupParameters struct {
 
 	// Application execution property key-value map.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	PropertyMap map[string]*string `json:"propertyMap" tf:"property_map,omitempty"`
 }
 
@@ -1525,18 +1532,22 @@ type SQLApplicationConfigurationParameters struct {
 type VPCConfigurationInitParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCConfigurationObservation struct {
 
 	// The Security Group IDs used by the VPC configuration.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The application identifier.
@@ -1550,10 +1561,12 @@ type VPCConfigurationParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 

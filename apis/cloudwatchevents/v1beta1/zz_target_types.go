@@ -157,6 +157,7 @@ type EcsTargetInitParameters struct {
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// A map of tags to assign to ecs resources.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
@@ -196,6 +197,7 @@ type EcsTargetObservation struct {
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// A map of tags to assign to ecs resources.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
@@ -249,6 +251,7 @@ type EcsTargetParameters struct {
 
 	// A map of tags to assign to ecs resources.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
@@ -273,24 +276,28 @@ type EcsTargetParameters struct {
 type HTTPTargetInitParameters struct {
 
 	// Enables you to specify HTTP headers to add to the request.
+	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
 	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
 	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
+	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type HTTPTargetObservation struct {
 
 	// Enables you to specify HTTP headers to add to the request.
+	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
 	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
 	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
+	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
@@ -298,6 +305,7 @@ type HTTPTargetParameters struct {
 
 	// Enables you to specify HTTP headers to add to the request.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
 	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
@@ -306,12 +314,14 @@ type HTTPTargetParameters struct {
 
 	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type InputTransformerInitParameters struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
+	// +mapType=granular
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
@@ -321,6 +331,7 @@ type InputTransformerInitParameters struct {
 type InputTransformerObservation struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
+	// +mapType=granular
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
@@ -331,6 +342,7 @@ type InputTransformerParameters struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
@@ -363,9 +375,11 @@ type NetworkConfigurationInitParameters struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -375,9 +389,11 @@ type NetworkConfigurationObservation struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -389,10 +405,12 @@ type NetworkConfigurationParameters struct {
 
 	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 

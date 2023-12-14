@@ -445,12 +445,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: A list of subnet IDs to associate with
                                   Kinesis Firehose.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -654,6 +656,7 @@ spec:
                                                     } to map this key to a column
                                                     named ts.
                                                   type: object
+                                                  x-kubernetes-map-type: granular
                                                 convertDotsInJsonKeysToUnderscores:
                                                   description: When set to true, specifies
                                                     that the names of the keys include
@@ -1915,12 +1918,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: A list of subnet IDs to associate with
                                   Kinesis Firehose.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -2737,6 +2742,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   versionId:
                     description: Specifies the table version for the output data schema.
                       Defaults to LATEST.
@@ -2890,12 +2896,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: A list of subnet IDs to associate with
                                   Kinesis Firehose.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -3020,6 +3028,7 @@ spec:
                                                     } to map this key to a column
                                                     named ts.
                                                   type: object
+                                                  x-kubernetes-map-type: granular
                                                 convertDotsInJsonKeysToUnderscores:
                                                   description: When set to true, specifies
                                                     that the names of the keys include
@@ -3680,12 +3689,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: A list of subnet IDs to associate with
                                   Kinesis Firehose.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -4055,6 +4066,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   versionId:
                     description: Specifies the table version for the output data schema.
                       Defaults to LATEST.
@@ -4378,12 +4390,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: A list of subnet IDs to associate with
                                   Kinesis Firehose.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               vpcId:
                                 type: string
                             type: object
@@ -4513,6 +4527,7 @@ spec:
                                                     } to map this key to a column
                                                     named ts.
                                                   type: object
+                                                  x-kubernetes-map-type: granular
                                                 convertDotsInJsonKeysToUnderscores:
                                                   description: When set to true, specifies
                                                     that the names of the keys include
@@ -5203,12 +5218,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: A list of subnet IDs to associate with
                                   Kinesis Firehose.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               vpcId:
                                 type: string
                             type: object
@@ -5595,6 +5612,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -5602,6 +5620,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   versionId:
                     description: Specifies the table version for the output data schema.
                       Defaults to LATEST.

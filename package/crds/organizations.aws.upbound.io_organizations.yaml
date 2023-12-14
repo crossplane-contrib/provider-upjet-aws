@@ -77,6 +77,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   enabledPolicyTypes:
                     description: List of Organizations policy types to enable in the
                       Organization Root. Organization must have feature_set set to
@@ -86,6 +87,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   featureSet:
                     description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
                     type: string
@@ -118,6 +120,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   enabledPolicyTypes:
                     description: List of Organizations policy types to enable in the
                       Organization Root. Organization must have feature_set set to
@@ -127,6 +130,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   featureSet:
                     description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
                     type: string
@@ -332,6 +336,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   enabledPolicyTypes:
                     description: List of Organizations policy types to enable in the
                       Organization Root. Organization must have feature_set set to
@@ -341,6 +346,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   featureSet:
                     description: Specify "ALL" (default) or "CONSOLIDATED_BILLING".
                     type: string

@@ -1018,6 +1018,7 @@ type ChannelInitParameters struct {
 	StartChannel *bool `json:"startChannel,omitempty" tf:"start_channel,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Settings for the VPC outputs.
@@ -1090,8 +1091,10 @@ type ChannelObservation struct {
 	StartChannel *bool `json:"startChannel,omitempty" tf:"start_channel,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Settings for the VPC outputs.
@@ -1161,6 +1164,7 @@ type ChannelParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Settings for the VPC outputs.
@@ -5840,9 +5844,11 @@ type OutputSettingsParameters struct {
 type OutputsInitParameters struct {
 
 	// The names of the audio descriptions used as audio sources for the output.
+	// +listType=set
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
 	// The names of the caption descriptions used as caption sources for the output.
+	// +listType=set
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
 	// The name used to identify an output.
@@ -5858,9 +5864,11 @@ type OutputsInitParameters struct {
 type OutputsObservation struct {
 
 	// The names of the audio descriptions used as audio sources for the output.
+	// +listType=set
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
 	// The names of the caption descriptions used as caption sources for the output.
+	// +listType=set
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
 	// The name used to identify an output.
@@ -5877,10 +5885,12 @@ type OutputsParameters struct {
 
 	// The names of the audio descriptions used as audio sources for the output.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
 	// The names of the caption descriptions used as caption sources for the output.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
 	// The name used to identify an output.

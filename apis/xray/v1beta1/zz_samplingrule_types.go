@@ -20,6 +20,7 @@ import (
 type SamplingRuleInitParameters struct {
 
 	// Matches attributes derived from the request.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// The percentage of matching requests to instrument, after the reservoir is exhausted.
@@ -47,6 +48,7 @@ type SamplingRuleInitParameters struct {
 	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Matches the path from a request URL.
@@ -62,6 +64,7 @@ type SamplingRuleObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Matches attributes derived from the request.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// The percentage of matching requests to instrument, after the reservoir is exhausted.
@@ -92,9 +95,11 @@ type SamplingRuleObservation struct {
 	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Matches the path from a request URL.
@@ -108,6 +113,7 @@ type SamplingRuleParameters struct {
 
 	// Matches attributes derived from the request.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// The percentage of matching requests to instrument, after the reservoir is exhausted.
@@ -149,6 +155,7 @@ type SamplingRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Matches the path from a request URL.

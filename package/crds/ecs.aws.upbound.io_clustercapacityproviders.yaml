@@ -75,6 +75,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clusterName:
                     description: Name of the ECS cluster to manage capacity providers
                       for.
@@ -201,6 +202,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   defaultCapacityProviderStrategy:
                     description: Set of capacity provider strategies to use by default
                       for the cluster. Detailed below.
@@ -398,6 +400,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clusterName:
                     description: Name of the ECS cluster to manage capacity providers
                       for.

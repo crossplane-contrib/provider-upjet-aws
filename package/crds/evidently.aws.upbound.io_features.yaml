@@ -87,6 +87,7 @@ spec:
                       account ID, or some other identifier. For the value, specify
                       the name of the variation that they are to be served.
                     type: object
+                    x-kubernetes-map-type: granular
                   evaluationStrategy:
                     description: Specify ALL_RULES to activate the traffic allocation
                       specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION
@@ -178,6 +179,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   variations:
                     description: One or more blocks that contain the configuration
                       of the feature's different variations. Detailed below
@@ -253,6 +255,7 @@ spec:
                       account ID, or some other identifier. For the value, specify
                       the name of the variation that they are to be served.
                     type: object
+                    x-kubernetes-map-type: granular
                   evaluationStrategy:
                     description: Specify ALL_RULES to activate the traffic allocation
                       specified by any ongoing launches or experiments. Specify DEFAULT_VARIATION
@@ -263,6 +266,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   variations:
                     description: One or more blocks that contain the configuration
                       of the feature's different variations. Detailed below
@@ -500,6 +504,7 @@ spec:
                       account ID, or some other identifier. For the value, specify
                       the name of the variation that they are to be served.
                     type: object
+                    x-kubernetes-map-type: granular
                   evaluationRules:
                     description: One or more blocks that define the evaluation rules
                       for the feature. Detailed below
@@ -541,6 +546,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -548,6 +554,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   valueType:
                     description: 'Defines the type of value used to define the different
                       feature variations. Valid Values: STRING, LONG, DOUBLE, BOOLEAN.'

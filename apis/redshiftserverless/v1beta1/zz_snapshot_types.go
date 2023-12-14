@@ -26,9 +26,11 @@ type SnapshotInitParameters struct {
 type SnapshotObservation struct {
 
 	// All of the Amazon Web Services accounts that have access to restore a snapshot to a provisioned cluster.
+	// +listType=set
 	AccountsWithProvisionedRestoreAccess []*string `json:"accountsWithProvisionedRestoreAccess,omitempty" tf:"accounts_with_provisioned_restore_access,omitempty"`
 
 	// All of the Amazon Web Services accounts that have access to restore a snapshot to a namespace.
+	// +listType=set
 	AccountsWithRestoreAccess []*string `json:"accountsWithRestoreAccess,omitempty" tf:"accounts_with_restore_access,omitempty"`
 
 	// The username of the database within a snapshot.

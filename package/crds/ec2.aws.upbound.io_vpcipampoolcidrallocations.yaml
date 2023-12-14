@@ -81,6 +81,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipamPoolId:
                     description: The ID of the pool to which you want to assign a
                       CIDR.
@@ -193,6 +194,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   netmaskLength:
                     description: 'The netmask length of the CIDR you would like to
                       allocate to the IPAM pool. Valid Values: 0-128.'
@@ -376,6 +378,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The ID of the allocation.
                     type: string

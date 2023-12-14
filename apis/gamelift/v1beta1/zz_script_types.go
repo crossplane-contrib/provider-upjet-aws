@@ -26,6 +26,7 @@ type ScriptInitParameters struct {
 	StorageLocation []ScriptStorageLocationInitParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Version that is associated with this script.
@@ -50,9 +51,11 @@ type ScriptObservation struct {
 	StorageLocation []ScriptStorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Version that is associated with this script.
@@ -79,6 +82,7 @@ type ScriptParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Version that is associated with this script.

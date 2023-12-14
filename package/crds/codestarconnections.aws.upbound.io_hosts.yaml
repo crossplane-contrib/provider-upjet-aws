@@ -95,6 +95,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: The ID of the subnet or subnets associated
                             with the Amazon VPC connected to the infrastructure where
@@ -102,6 +103,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         tlsCertificate:
                           description: The value of the Transport Layer Security (TLS)
                             certificate associated with the infrastructure where your
@@ -153,6 +155,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: The ID of the subnet or subnets associated
                             with the Amazon VPC connected to the infrastructure where
@@ -160,6 +163,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         tlsCertificate:
                           description: The value of the Transport Layer Security (TLS)
                             certificate associated with the infrastructure where your
@@ -386,6 +390,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: The ID of the subnet or subnets associated
                             with the Amazon VPC connected to the infrastructure where
@@ -393,6 +398,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         tlsCertificate:
                           description: The value of the Transport Layer Security (TLS)
                             certificate associated with the infrastructure where your

@@ -80,6 +80,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authorizerId:
                     description: Authorizer id to be used when the authorization is
                       CUSTOM or COGNITO_USER_POOLS
@@ -181,6 +182,7 @@ spec:
                       and value is either Error, Empty (built-in models) or aws_api_gateway_model's
                       name.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestParameters:
                     additionalProperties:
                       type: boolean
@@ -192,6 +194,7 @@ spec:
                       = true} would define that the header X-Some-Header and the query
                       string some-query-param must be provided in the request.'
                     type: object
+                    x-kubernetes-map-type: granular
                   requestValidatorId:
                     description: ID of a aws_api_gateway_request_validator
                     type: string
@@ -379,6 +382,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   httpMethod:
                     description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
                       ANY)
@@ -397,6 +401,7 @@ spec:
                       and value is either Error, Empty (built-in models) or aws_api_gateway_model's
                       name.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestParameters:
                     additionalProperties:
                       type: boolean
@@ -408,6 +413,7 @@ spec:
                       = true} would define that the header X-Some-Header and the query
                       string some-query-param must be provided in the request.'
                     type: object
+                    x-kubernetes-map-type: granular
                   requestValidatorId:
                     description: ID of a aws_api_gateway_request_validator
                     type: string
@@ -599,6 +605,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authorizerId:
                     description: Authorizer id to be used when the authorization is
                       CUSTOM or COGNITO_USER_POOLS
@@ -623,6 +630,7 @@ spec:
                       and value is either Error, Empty (built-in models) or aws_api_gateway_model's
                       name.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestParameters:
                     additionalProperties:
                       type: boolean
@@ -634,6 +642,7 @@ spec:
                       = true} would define that the header X-Some-Header and the query
                       string some-query-param must be provided in the request.'
                     type: object
+                    x-kubernetes-map-type: granular
                   requestValidatorId:
                     description: ID of a aws_api_gateway_request_validator
                     type: string

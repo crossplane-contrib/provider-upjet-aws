@@ -76,6 +76,7 @@ spec:
                     description: Key-value string pairs to specify advanced configuration
                       options.
                     type: object
+                    x-kubernetes-map-type: granular
                   advancedSecurityOptions:
                     description: Configuration block for fine-grained access control.
                       Detailed below.
@@ -479,6 +480,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcOptions:
                     description: Configuration block for VPC related options. Adding
                       or removing this configuration forces a new resource (documentation).
@@ -492,12 +494,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: List of VPC Subnet IDs for the Elasticsearch
                             domain endpoints to be created in.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 required:
@@ -525,6 +529,7 @@ spec:
                     description: Key-value string pairs to specify advanced configuration
                       options.
                     type: object
+                    x-kubernetes-map-type: granular
                   advancedSecurityOptions:
                     description: Configuration block for fine-grained access control.
                       Detailed below.
@@ -822,6 +827,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcOptions:
                     description: Configuration block for VPC related options. Adding
                       or removing this configuration forces a new resource (documentation).
@@ -835,12 +841,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: List of VPC Subnet IDs for the Elasticsearch
                             domain endpoints to be created in.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -1019,6 +1027,7 @@ spec:
                     description: Key-value string pairs to specify advanced configuration
                       options.
                     type: object
+                    x-kubernetes-map-type: granular
                   advancedSecurityOptions:
                     description: Configuration block for fine-grained access control.
                       Detailed below.
@@ -1336,12 +1345,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcOptions:
                     description: Configuration block for VPC related options. Adding
                       or removing this configuration forces a new resource (documentation).
@@ -1355,6 +1366,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         securityGroupIds:
                           description: List of VPC Security Group IDs to be applied
                             to the Elasticsearch domain endpoints. If omitted, the
@@ -1362,12 +1374,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: List of VPC Subnet IDs for the Elasticsearch
                             domain endpoints to be created in.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcId:
                           description: If the domain was created inside a VPC, the
                             ID of the VPC.

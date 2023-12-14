@@ -73,6 +73,7 @@ spec:
                     description: The map of attribute mapping of user pool attributes.
                       AttributeMapping in AWS API documentation
                     type: object
+                    x-kubernetes-map-type: granular
                   idpIdentifiers:
                     description: The list of identity providers.
                     items:
@@ -83,6 +84,7 @@ spec:
                       type: string
                     description: The map of identity details, such as access token
                     type: object
+                    x-kubernetes-map-type: granular
                   providerName:
                     description: The provider name
                     type: string
@@ -190,6 +192,7 @@ spec:
                     description: The map of attribute mapping of user pool attributes.
                       AttributeMapping in AWS API documentation
                     type: object
+                    x-kubernetes-map-type: granular
                   idpIdentifiers:
                     description: The list of identity providers.
                     items:
@@ -200,6 +203,7 @@ spec:
                       type: string
                     description: The map of identity details, such as access token
                     type: object
+                    x-kubernetes-map-type: granular
                   providerName:
                     description: The provider name
                     type: string
@@ -391,6 +395,7 @@ spec:
                     description: The map of attribute mapping of user pool attributes.
                       AttributeMapping in AWS API documentation
                     type: object
+                    x-kubernetes-map-type: granular
                   id:
                     type: string
                   idpIdentifiers:
@@ -403,6 +408,7 @@ spec:
                       type: string
                     description: The map of identity details, such as access token
                     type: object
+                    x-kubernetes-map-type: granular
                   providerName:
                     description: The provider name
                     type: string

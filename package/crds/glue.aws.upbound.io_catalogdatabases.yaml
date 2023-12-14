@@ -81,6 +81,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principal:
                           description: The principal who is granted permissions..
                             See principal below.
@@ -106,6 +107,7 @@ spec:
                     description: List of key-value pairs that define parameters and
                       properties of the database.
                     type: object
+                    x-kubernetes-map-type: granular
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -115,6 +117,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetDatabase:
                     description: Configuration block for a target database for resource
                       linking. See target_database below.
@@ -157,6 +160,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principal:
                           description: The principal who is granted permissions..
                             See principal below.
@@ -182,11 +186,13 @@ spec:
                     description: List of key-value pairs that define parameters and
                       properties of the database.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetDatabase:
                     description: Configuration block for a target database for resource
                       linking. See target_database below.
@@ -380,6 +386,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principal:
                           description: The principal who is granted permissions..
                             See principal below.
@@ -408,11 +415,13 @@ spec:
                     description: List of key-value pairs that define parameters and
                       properties of the database.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -420,6 +429,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetDatabase:
                     description: Configuration block for a target database for resource
                       linking. See target_database below.

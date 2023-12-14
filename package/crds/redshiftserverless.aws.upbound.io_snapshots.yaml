@@ -344,12 +344,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   accountsWithRestoreAccess:
                     description: All of the Amazon Web Services accounts that have
                       access to restore a snapshot to a namespace.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   adminUsername:
                     description: The username of the database within a snapshot.
                     type: string

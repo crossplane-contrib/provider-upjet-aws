@@ -186,6 +186,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               policyArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   policy to be attached.
@@ -276,12 +277,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               users:
                                 description: A list of users to be attached. There
                                   must be at least one user.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         scpActionDefinition:
@@ -297,6 +300,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         ssmActionDefinition:
@@ -313,6 +317,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               region:
                                 description: The Region to run the SSM document.
                                 type: string
@@ -479,18 +484,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               roles:
                                 description: A list of roles to be attached. There
                                   must be at least one role.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               users:
                                 description: A list of users to be attached. There
                                   must be at least one user.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         scpActionDefinition:
@@ -506,6 +514,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         ssmActionDefinition:
@@ -522,6 +531,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -787,6 +797,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               policyArn:
                                 description: The Amazon Resource Name (ARN) of the
                                   policy to be attached.
@@ -797,12 +808,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               users:
                                 description: A list of users to be attached. There
                                   must be at least one user.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         scpActionDefinition:
@@ -818,6 +831,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         ssmActionDefinition:
@@ -834,6 +848,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               region:
                                 description: The Region to run the SSM document.
                                 type: string

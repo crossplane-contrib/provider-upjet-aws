@@ -73,6 +73,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -112,6 +113,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cachePolicyId:
                           description: Unique identifier of the cache policy that
                             is attached to the cache behavior. If configuring the
@@ -124,6 +126,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
@@ -163,6 +166,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               headers:
@@ -172,6 +176,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               queryString:
                                 description: Indicates whether you want CloudFront
                                   to forward query strings to the origin that is associated
@@ -329,6 +334,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cachePolicyId:
                           description: Unique identifier of the cache policy that
                             is attached to the cache behavior. If configuring the
@@ -341,6 +347,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
@@ -380,6 +387,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               headers:
@@ -389,6 +397,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               queryString:
                                 description: Indicates whether you want CloudFront
                                   to forward query strings to the origin that is associated
@@ -725,6 +734,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         domainName:
@@ -950,6 +960,7 @@ spec:
                                 items:
                                   type: number
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         member:
@@ -993,6 +1004,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               restrictionType:
                                 description: 'Method that you want to use to restrict
                                   distribution of your content by country: none, whitelist,
@@ -1011,6 +1023,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   viewerCertificate:
                     description: The SSL configuration for this distribution (maximum
                       one).
@@ -1092,6 +1105,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   comment:
                     description: Any comments you want to include about the distribution.
                     type: string
@@ -1131,6 +1145,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cachePolicyId:
                           description: Unique identifier of the cache policy that
                             is attached to the cache behavior. If configuring the
@@ -1143,6 +1158,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
@@ -1182,6 +1198,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               headers:
@@ -1191,6 +1208,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               queryString:
                                 description: Indicates whether you want CloudFront
                                   to forward query strings to the origin that is associated
@@ -1348,6 +1366,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cachePolicyId:
                           description: Unique identifier of the cache policy that
                             is attached to the cache behavior. If configuring the
@@ -1360,6 +1379,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
@@ -1399,6 +1419,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               headers:
@@ -1408,6 +1429,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               queryString:
                                 description: Indicates whether you want CloudFront
                                   to forward query strings to the origin that is associated
@@ -1578,6 +1600,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         domainName:
@@ -1636,6 +1659,7 @@ spec:
                                 items:
                                   type: number
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         member:
@@ -1675,6 +1699,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               restrictionType:
                                 description: 'Method that you want to use to restrict
                                   distribution of your content by country: none, whitelist,
@@ -1693,6 +1718,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   viewerCertificate:
                     description: The SSL configuration for this distribution (maximum
                       one).
@@ -1946,6 +1972,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   arn:
                     description: 'ARN for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5,
                       where 123456789012 is your AWS account ID.'
@@ -1993,6 +2020,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cachePolicyId:
                           description: Unique identifier of the cache policy that
                             is attached to the cache behavior. If configuring the
@@ -2005,6 +2033,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
@@ -2044,6 +2073,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               headers:
@@ -2053,6 +2083,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               queryString:
                                 description: Indicates whether you want CloudFront
                                   to forward query strings to the origin that is associated
@@ -2232,6 +2263,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cachePolicyId:
                           description: Unique identifier of the cache policy that
                             is attached to the cache behavior. If configuring the
@@ -2244,6 +2276,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         compress:
                           description: 'Whether you want CloudFront to automatically
                             compress content for web requests that include Accept-Encoding:
@@ -2283,6 +2316,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               headers:
@@ -2292,6 +2326,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               queryString:
                                 description: Indicates whether you want CloudFront
                                   to forward query strings to the origin that is associated
@@ -2468,6 +2503,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         domainName:
@@ -2535,6 +2571,7 @@ spec:
                                 items:
                                   type: number
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         member:
@@ -2574,6 +2611,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               restrictionType:
                                 description: 'Method that you want to use to restrict
                                   distribution of your content by country: none, whitelist,
@@ -2597,12 +2635,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   trustedKeyGroups:
                     description: List of key group IDs that CloudFront can use to
                       validate signed URLs or signed cookies. See the CloudFront User
@@ -2626,6 +2666,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -2652,6 +2693,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object

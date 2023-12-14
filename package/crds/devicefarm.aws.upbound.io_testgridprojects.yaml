@@ -82,6 +82,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfig:
                     description: The VPC security groups and subnets that are attached
                       to a project. See VPC Config below.
@@ -175,6 +176,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIdRefs:
                           description: References to Subnet in ec2 to populate subnetIds.
                           items:
@@ -261,6 +263,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcId:
                           description: The ID of the Amazon VPC.
                           type: string
@@ -368,6 +371,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfig:
                     description: The VPC security groups and subnets that are attached
                       to a project. See VPC Config below.
@@ -561,6 +565,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -568,6 +573,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfig:
                     description: The VPC security groups and subnets that are attached
                       to a project. See VPC Config below.
@@ -579,11 +585,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: A list of VPC subnet IDs in your Amazon VPC.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcId:
                           description: The ID of the Amazon VPC.
                           type: string

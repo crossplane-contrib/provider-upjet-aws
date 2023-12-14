@@ -20,6 +20,7 @@ import (
 type AwsCloudMapInitParameters struct {
 
 	// String map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all of the specified key/value pairs will be returned.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// attribute of the dns object to hostname.
@@ -29,6 +30,7 @@ type AwsCloudMapInitParameters struct {
 type AwsCloudMapObservation struct {
 
 	// String map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all of the specified key/value pairs will be returned.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// Name of the AWS Cloud Map namespace to use.
@@ -43,6 +45,7 @@ type AwsCloudMapParameters struct {
 
 	// String map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all of the specified key/value pairs will be returned.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// Name of the AWS Cloud Map namespace to use.
@@ -122,6 +125,7 @@ type BackendDefaultsClientPolicyTLSInitParameters struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
+	// +listType=set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -137,6 +141,7 @@ type BackendDefaultsClientPolicyTLSObservation struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
+	// +listType=set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -155,6 +160,7 @@ type BackendDefaultsClientPolicyTLSParameters struct {
 
 	// One or more ports that the policy is enforced for.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -354,6 +360,7 @@ type ClientPolicyTLSInitParameters struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
+	// +listType=set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -369,6 +376,7 @@ type ClientPolicyTLSObservation struct {
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// One or more ports that the policy is enforced for.
+	// +listType=set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -387,6 +395,7 @@ type ClientPolicyTLSParameters struct {
 
 	// One or more ports that the policy is enforced for.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ports []*float64 `json:"ports,omitempty" tf:"ports,omitempty"`
 
 	// TLS validation context.
@@ -432,12 +441,14 @@ type ClientPolicyTLSValidationSubjectAlternativeNamesInitParameters struct {
 type ClientPolicyTLSValidationSubjectAlternativeNamesMatchInitParameters struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType=set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type ClientPolicyTLSValidationSubjectAlternativeNamesMatchObservation struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType=set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
@@ -445,6 +456,7 @@ type ClientPolicyTLSValidationSubjectAlternativeNamesMatchParameters struct {
 
 	// Values sent must match the specified values exactly.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Exact []*string `json:"exact" tf:"exact,omitempty"`
 }
 
@@ -1187,12 +1199,14 @@ type ListenerTLSValidationSubjectAlternativeNamesInitParameters struct {
 type ListenerTLSValidationSubjectAlternativeNamesMatchInitParameters struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType=set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type ListenerTLSValidationSubjectAlternativeNamesMatchObservation struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType=set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
@@ -1200,6 +1214,7 @@ type ListenerTLSValidationSubjectAlternativeNamesMatchParameters struct {
 
 	// Values sent must match the specified values exactly.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Exact []*string `json:"exact" tf:"exact,omitempty"`
 }
 
@@ -1731,12 +1746,14 @@ type TLSValidationSubjectAlternativeNamesInitParameters struct {
 type TLSValidationSubjectAlternativeNamesMatchInitParameters struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType=set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
 type TLSValidationSubjectAlternativeNamesMatchObservation struct {
 
 	// Values sent must match the specified values exactly.
+	// +listType=set
 	Exact []*string `json:"exact,omitempty" tf:"exact,omitempty"`
 }
 
@@ -1744,6 +1761,7 @@ type TLSValidationSubjectAlternativeNamesMatchParameters struct {
 
 	// Values sent must match the specified values exactly.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Exact []*string `json:"exact" tf:"exact,omitempty"`
 }
 
@@ -1946,12 +1964,14 @@ type TimeoutTCPParameters struct {
 type TrustAcmInitParameters struct {
 
 	// One or more ACM ARNs.
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type TrustAcmObservation struct {
 
 	// One or more ACM ARNs.
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -1959,18 +1979,21 @@ type TrustAcmParameters struct {
 
 	// One or more ACM ARNs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns" tf:"certificate_authority_arns,omitempty"`
 }
 
 type ValidationTrustAcmInitParameters struct {
 
 	// One or more ACM ARNs.
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type ValidationTrustAcmObservation struct {
 
 	// One or more ACM ARNs.
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -1978,6 +2001,7 @@ type ValidationTrustAcmParameters struct {
 
 	// One or more ACM ARNs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -1993,6 +2017,7 @@ type VirtualNodeInitParameters struct {
 	Spec []VirtualNodeSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -2026,9 +2051,11 @@ type VirtualNodeObservation struct {
 	Spec []VirtualNodeSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -2067,6 +2094,7 @@ type VirtualNodeParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

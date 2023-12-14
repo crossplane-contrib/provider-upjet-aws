@@ -212,6 +212,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   spotPrice:
                     description: The maximum price to use for reserving spot instances.
                     type: string
@@ -237,6 +238,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -392,6 +394,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   spotPrice:
                     description: The maximum price to use for reserving spot instances.
                     type: string
@@ -417,6 +420,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -738,6 +742,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   spotPrice:
                     description: The maximum price to use for reserving spot instances.
                     type: string
@@ -763,6 +768,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

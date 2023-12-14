@@ -87,6 +87,7 @@ spec:
                                 description: Key-value map of tags to apply to the
                                   distributed AMI.
                                 type: object
+                                x-kubernetes-map-type: granular
                               description:
                                 description: Description to apply to the distributed
                                   AMI.
@@ -107,12 +108,14 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     organizationalUnitArns:
                                       description: Set of AWS Organizational Unit
                                         ARNs to assign.
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     userGroups:
                                       description: Set of EC2 launch permission user
                                         groups to assign. Use all to distribute a
@@ -120,12 +123,14 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     userIds:
                                       description: Set of AWS Account identifiers
                                         to assign.
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               name:
@@ -137,6 +142,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         containerDistributionConfiguration:
@@ -150,6 +156,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               description:
                                 description: Description of the container distribution
                                   configuration.
@@ -256,6 +263,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         region:
                           description: AWS Region for the distribution.
                           type: string
@@ -275,6 +283,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -309,6 +318,7 @@ spec:
                                 description: Key-value map of tags to apply to the
                                   distributed AMI.
                                 type: object
+                                x-kubernetes-map-type: granular
                               description:
                                 description: Description to apply to the distributed
                                   AMI.
@@ -329,12 +339,14 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     organizationalUnitArns:
                                       description: Set of AWS Organizational Unit
                                         ARNs to assign.
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     userGroups:
                                       description: Set of EC2 launch permission user
                                         groups to assign. Use all to distribute a
@@ -342,12 +354,14 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     userIds:
                                       description: Set of AWS Account identifiers
                                         to assign.
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               name:
@@ -359,6 +373,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         containerDistributionConfiguration:
@@ -372,6 +387,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               description:
                                 description: Description of the container distribution
                                   configuration.
@@ -478,6 +494,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   name:
@@ -488,6 +505,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -692,6 +710,7 @@ spec:
                                 description: Key-value map of tags to apply to the
                                   distributed AMI.
                                 type: object
+                                x-kubernetes-map-type: granular
                               description:
                                 description: Description to apply to the distributed
                                   AMI.
@@ -712,12 +731,14 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     organizationalUnitArns:
                                       description: Set of AWS Organizational Unit
                                         ARNs to assign.
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     userGroups:
                                       description: Set of EC2 launch permission user
                                         groups to assign. Use all to distribute a
@@ -725,12 +746,14 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     userIds:
                                       description: Set of AWS Account identifiers
                                         to assign.
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               name:
@@ -742,6 +765,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         containerDistributionConfiguration:
@@ -755,6 +779,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               description:
                                 description: Description of the container distribution
                                   configuration.
@@ -861,6 +886,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         region:
                           description: AWS Region for the distribution.
                           type: string
@@ -876,6 +902,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -883,6 +910,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

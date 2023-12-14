@@ -150,6 +150,7 @@ spec:
                       type: string
                     description: The parameter names and values defined for the association.
                     type: object
+                    x-kubernetes-map-type: granular
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -253,6 +254,7 @@ spec:
                       type: string
                     description: The parameter names and values defined for the association.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -438,6 +440,7 @@ spec:
                       type: string
                     description: The parameter names and values defined for the association.
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceArn:
                     description: The ARN of the application, configuration profile,
                       or environment to associate with the extension.

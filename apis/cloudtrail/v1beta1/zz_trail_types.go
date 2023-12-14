@@ -81,6 +81,7 @@ type EventSelectorInitParameters struct {
 	DataResource []DataResourceInitParameters `json:"dataResource,omitempty" tf:"data_resource,omitempty"`
 
 	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
+	// +listType=set
 	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
 
 	// Whether to include management events for your trail. Defaults to true.
@@ -96,6 +97,7 @@ type EventSelectorObservation struct {
 	DataResource []DataResourceObservation `json:"dataResource,omitempty" tf:"data_resource,omitempty"`
 
 	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
+	// +listType=set
 	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
 
 	// Whether to include management events for your trail. Defaults to true.
@@ -113,6 +115,7 @@ type EventSelectorParameters struct {
 
 	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
 
 	// Whether to include management events for your trail. Defaults to true.
@@ -258,6 +261,7 @@ type TrailInitParameters struct {
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -315,9 +319,11 @@ type TrailObservation struct {
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -415,6 +421,7 @@ type TrailParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

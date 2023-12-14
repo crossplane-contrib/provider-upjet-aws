@@ -94,6 +94,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         s3BucketName:
                           description: The unique name of the S3 bucket that receives
                             your reports.
@@ -117,12 +118,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         frameworkArns:
                           description: Specifies the Amazon Resource Names (ARNs)
                             of the frameworks a report covers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         numberOfFrameworks:
                           description: Specifies the number of frameworks a report
                             covers.
@@ -133,11 +136,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         regions:
                           description: Specifies the list of regions a report covers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         reportTemplate:
                           description: 'Identifies the report template for the report.
                             Reports are built using a report template. The report
@@ -151,6 +156,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -189,6 +195,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         s3BucketName:
                           description: The unique name of the S3 bucket that receives
                             your reports.
@@ -212,12 +219,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         frameworkArns:
                           description: Specifies the Amazon Resource Names (ARNs)
                             of the frameworks a report covers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         numberOfFrameworks:
                           description: Specifies the number of frameworks a report
                             covers.
@@ -228,11 +237,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         regions:
                           description: Specifies the list of regions a report covers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         reportTemplate:
                           description: 'Identifies the report template for the report.
                             Reports are built using a report template. The report
@@ -246,6 +257,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -463,6 +475,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         s3BucketName:
                           description: The unique name of the S3 bucket that receives
                             your reports.
@@ -486,12 +499,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         frameworkArns:
                           description: Specifies the Amazon Resource Names (ARNs)
                             of the frameworks a report covers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         numberOfFrameworks:
                           description: Specifies the number of frameworks a report
                             covers.
@@ -502,11 +517,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         regions:
                           description: Specifies the list of regions a report covers.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         reportTemplate:
                           description: 'Identifies the report template for the report.
                             Reports are built using a report template. The report
@@ -520,6 +537,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -527,6 +545,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

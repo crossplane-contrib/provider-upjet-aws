@@ -72,6 +72,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   cacheNamespace:
                     description: Integration's cache namespace.
                     type: string
@@ -276,11 +277,13 @@ spec:
                       request_parameters = { "integration.request.header.X-Some-Other-Header"
                       = "method.request.header.X-Some-Header" }'
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
                     description: Map of the integration's request templates.
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceId:
                     description: API resource ID.
                     type: string
@@ -573,6 +576,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   cacheNamespace:
                     description: Integration's cache namespace.
                     type: string
@@ -617,11 +621,13 @@ spec:
                       request_parameters = { "integration.request.header.X-Some-Other-Header"
                       = "method.request.header.X-Some-Header" }'
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
                     description: Map of the integration's request templates.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeoutMilliseconds:
                     description: Custom timeout between 50 and 29,000 milliseconds.
                       The default value is 29,000 milliseconds.
@@ -829,6 +835,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   cacheNamespace:
                     description: Integration's cache namespace.
                     type: string
@@ -883,11 +890,13 @@ spec:
                       request_parameters = { "integration.request.header.X-Some-Other-Header"
                       = "method.request.header.X-Some-Header" }'
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
                     description: Map of the integration's request templates.
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceId:
                     description: API resource ID.
                     type: string

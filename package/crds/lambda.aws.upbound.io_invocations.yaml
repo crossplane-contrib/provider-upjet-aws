@@ -160,6 +160,7 @@ spec:
                     description: Map of arbitrary keys and values that, when changed,
                       will trigger a re-invocation.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -188,6 +189,7 @@ spec:
                     description: Map of arbitrary keys and values that, when changed,
                       will trigger a re-invocation.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -380,6 +382,7 @@ spec:
                     description: Map of arbitrary keys and values that, when changed,
                       will trigger a re-invocation.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

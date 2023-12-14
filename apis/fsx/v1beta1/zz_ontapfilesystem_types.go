@@ -70,6 +70,7 @@ type InterclusterObservation struct {
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the file system endpoint.
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -85,6 +86,7 @@ type ManagementObservation struct {
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// IP addresses of the file system endpoint.
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -109,6 +111,7 @@ type OntapFileSystemInitParameters struct {
 	EndpointIPAddressRange *string `json:"endpointIpAddressRange,omitempty" tf:"endpoint_ip_address_range,omitempty"`
 
 	// Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+	// +listType=set
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
@@ -118,6 +121,7 @@ type OntapFileSystemInitParameters struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
@@ -169,9 +173,11 @@ type OntapFileSystemObservation struct {
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
 
 	// Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+	// +listType=set
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
@@ -184,9 +190,11 @@ type OntapFileSystemObservation struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
@@ -259,6 +267,7 @@ type OntapFileSystemParameters struct {
 
 	// Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -274,6 +283,7 @@ type OntapFileSystemParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
@@ -301,6 +311,7 @@ type OntapFileSystemParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.

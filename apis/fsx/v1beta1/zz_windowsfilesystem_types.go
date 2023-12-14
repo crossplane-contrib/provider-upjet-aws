@@ -59,6 +59,7 @@ type AuditLogConfigurationParameters struct {
 type SelfManagedActiveDirectoryInitParameters struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -77,6 +78,7 @@ type SelfManagedActiveDirectoryInitParameters struct {
 type SelfManagedActiveDirectoryObservation struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -96,6 +98,7 @@ type SelfManagedActiveDirectoryParameters struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -122,6 +125,7 @@ type SelfManagedActiveDirectoryParameters struct {
 type WindowsFileSystemInitParameters struct {
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See below.
@@ -158,6 +162,7 @@ type WindowsFileSystemInitParameters struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
@@ -173,6 +178,7 @@ type WindowsFileSystemObservation struct {
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// Amazon Resource Name of the file system.
@@ -206,6 +212,7 @@ type WindowsFileSystemObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Set of Elastic Network Interface identifiers from which the file system is accessible.
+	// +listType=set
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
 	// AWS account identifier that created the file system.
@@ -221,6 +228,7 @@ type WindowsFileSystemObservation struct {
 	RemoteAdministrationEndpoint *string `json:"remoteAdministrationEndpoint,omitempty" tf:"remote_administration_endpoint,omitempty"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. Detailed below.
@@ -239,9 +247,11 @@ type WindowsFileSystemObservation struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
@@ -272,6 +282,7 @@ type WindowsFileSystemParameters struct {
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See below.
@@ -334,6 +345,7 @@ type WindowsFileSystemParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. Detailed below.
@@ -369,6 +381,7 @@ type WindowsFileSystemParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.

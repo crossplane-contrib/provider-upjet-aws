@@ -204,6 +204,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               inclusionPatterns:
                                 description: A list of glob patterns for documents
                                   that should be indexed. If a document that matches
@@ -213,12 +214,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               inclusionPrefixes:
                                 description: A list of S3 prefixes for the documents
                                   that should be included in the index.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         webCrawlerConfiguration:
@@ -528,6 +531,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               urlInclusionPatterns:
                                 description: 'A list of regular expression patterns
                                   to include certain URLs to crawl. URLs that match
@@ -542,6 +546,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               urls:
                                 description: A block that specifies the seed or starting
                                   point URLs of the websites or the sitemap URLs of
@@ -581,6 +586,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           webCrawlerMode:
                                             description: 'The default mode is set
                                               to HOST_ONLY. You can choose one of
@@ -604,6 +610,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                         type: object
                                       type: array
                                   type: object
@@ -668,6 +675,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -723,6 +731,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -791,6 +800,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -870,6 +880,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -1092,6 +1103,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of data source repository. For an updated
                       list of values, refer to Valid Values for Type.
@@ -1165,6 +1177,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               inclusionPatterns:
                                 description: A list of glob patterns for documents
                                   that should be indexed. If a document that matches
@@ -1174,12 +1187,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               inclusionPrefixes:
                                 description: A list of S3 prefixes for the documents
                                   that should be included in the index.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         webCrawlerConfiguration:
@@ -1300,6 +1315,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               urlInclusionPatterns:
                                 description: 'A list of regular expression patterns
                                   to include certain URLs to crawl. URLs that match
@@ -1314,6 +1330,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               urls:
                                 description: A block that specifies the seed or starting
                                   point URLs of the websites or the sitemap URLs of
@@ -1353,6 +1370,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           webCrawlerMode:
                                             description: 'The default mode is set
                                               to HOST_ONLY. You can choose one of
@@ -1376,6 +1394,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                         type: object
                                       type: array
                                   type: object
@@ -1440,6 +1459,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -1495,6 +1515,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -1563,6 +1584,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -1642,6 +1664,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -1703,6 +1726,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of data source repository. For an updated
                       list of values, refer to Valid Values for Type.
@@ -1943,6 +1967,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               inclusionPatterns:
                                 description: A list of glob patterns for documents
                                   that should be indexed. If a document that matches
@@ -1952,12 +1977,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               inclusionPrefixes:
                                 description: A list of S3 prefixes for the documents
                                   that should be included in the index.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         webCrawlerConfiguration:
@@ -2093,6 +2120,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               urlInclusionPatterns:
                                 description: 'A list of regular expression patterns
                                   to include certain URLs to crawl. URLs that match
@@ -2107,6 +2135,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               urls:
                                 description: A block that specifies the seed or starting
                                   point URLs of the websites or the sitemap URLs of
@@ -2146,6 +2175,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           webCrawlerMode:
                                             description: 'The default mode is set
                                               to HOST_ONLY. You can choose one of
@@ -2169,6 +2199,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                         type: object
                                       type: array
                                   type: object
@@ -2236,6 +2267,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -2291,6 +2323,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -2359,6 +2392,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -2438,6 +2472,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           stringValue:
                                             type: string
                                         type: object
@@ -2528,6 +2563,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -2535,6 +2571,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of data source repository. For an updated
                       list of values, refer to Valid Values for Type.

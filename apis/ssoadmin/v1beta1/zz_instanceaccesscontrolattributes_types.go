@@ -87,12 +87,14 @@ type InstanceAccessControlAttributesParameters struct {
 type ValueInitParameters struct {
 
 	// The identity source to use when mapping a specified attribute to AWS SSO.
+	// +listType=set
 	Source []*string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type ValueObservation struct {
 
 	// The identity source to use when mapping a specified attribute to AWS SSO.
+	// +listType=set
 	Source []*string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -100,6 +102,7 @@ type ValueParameters struct {
 
 	// The identity source to use when mapping a specified attribute to AWS SSO.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Source []*string `json:"source" tf:"source,omitempty"`
 }
 

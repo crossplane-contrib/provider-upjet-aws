@@ -20,6 +20,7 @@ import (
 type ThingInitParameters struct {
 
 	// Map of attributes of the thing.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// The thing type name.
@@ -32,6 +33,7 @@ type ThingObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Map of attributes of the thing.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// The default client ID.
@@ -50,6 +52,7 @@ type ThingParameters struct {
 
 	// Map of attributes of the thing.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

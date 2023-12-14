@@ -77,6 +77,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   certificateAuthorityArn:
                     description: ARN of the CA that grants the permissions.
                     type: string
@@ -190,6 +191,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   principal:
                     description: AWS service or identity that receives the permission.
                       At this time, the only valid principal is acm.amazonaws.com.
@@ -381,6 +383,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   certificateAuthorityArn:
                     description: ARN of the CA that grants the permissions.
                     type: string
