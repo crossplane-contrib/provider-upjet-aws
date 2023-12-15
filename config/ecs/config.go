@@ -64,7 +64,8 @@ func Configure(p *config.Provider) {
 				Type: "Cluster",
 			},
 			"task_definition": config.Reference{
-				Type: "TaskDefinition",
+				Type:      "TaskDefinition",
+				Extractor: common.PathARNExtractor,
 			},
 			"iam_role": config.Reference{
 				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",

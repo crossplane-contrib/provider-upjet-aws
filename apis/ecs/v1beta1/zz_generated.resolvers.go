@@ -168,7 +168,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskDefinition),
-		Extract:      reference.ExternalName(),
+		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.ForProvider.TaskDefinitionRef,
 		Selector:     mg.Spec.ForProvider.TaskDefinitionSelector,
 		To: reference.To{
