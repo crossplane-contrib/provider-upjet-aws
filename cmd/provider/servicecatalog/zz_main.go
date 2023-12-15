@@ -6,7 +6,6 @@ package main
 
 import (
 	"context"
-	"math/rand"
 	"os"
 	"path/filepath"
 	"time"
@@ -102,9 +101,10 @@ func main() {
 	}
 
 	ctx := context.Background()
-	provider, err := config.GetProvider(ctx, false)
+	provider, awsClient, err := config.GetProvider(ctx, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	setupConfig.TerraformProvider = provider.TerraformProvider
+	setupConfig.AWSClient = awsClient
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
@@ -156,7 +156,6 @@ func main() {
 		})), "cannot create default store config")
 	}
 
-	rand.Seed(time.Now().UnixNano())
 	kingpin.FatalIfError(controller.Setup_servicecatalog(mgr, o), "Cannot setup AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }
