@@ -7,16 +7,18 @@ package clients
 import (
 	"context"
 	"os"
+	"reflect"
+	"unsafe"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"k8s.io/apimachinery/pkg/types"
-
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
+	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/provider-aws/apis/v1beta1"
@@ -48,6 +50,7 @@ type SetupConfig struct {
 	TerraformVersion      *string
 	DefaultScheduler      terraform.ProviderScheduler
 	TerraformProvider     *schema.Provider
+	AWSClient             *xpprovider.AWSClient
 }
 
 func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
@@ -108,7 +111,7 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
 
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, *config.TerraformProvider), "could not configure no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure no-fork AWS client")
 	}
 }
 
@@ -216,7 +219,8 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	return cfg, nil
 }
 
-func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, p schema.Provider) error { //nolint:gocyclo
+func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
+	p := *config.TerraformProvider
 	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
 	diag := p.Configure(context.TODO(), &tfsdk.ResourceConfig{ //nolint:contextcheck
 		Config: ps.Configuration,
@@ -225,5 +229,7 @@ func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, p schema.P
 		return errors.Errorf("failed to configure the provider: %v", diag)
 	}
 	ps.Meta = p.Meta()
+	// #nosec G103
+	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
 	return nil
 }
