@@ -10,12 +10,11 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta15 "github.com/upbound/provider-aws/apis/acm/v1beta1"
+	v1beta14 "github.com/upbound/provider-aws/apis/acm/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/kms/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
-	v1beta14 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/ses/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -231,42 +230,6 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.EmailConfiguration); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EmailConfiguration[i3].ConfigurationSet),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.EmailConfiguration[i3].ConfigurationSetRef,
-			Selector:     mg.Spec.ForProvider.EmailConfiguration[i3].ConfigurationSetSelector,
-			To: reference.To{
-				List:    &v1beta11.ConfigurationSetList{},
-				Managed: &v1beta11.ConfigurationSet{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.EmailConfiguration[i3].ConfigurationSet")
-		}
-		mg.Spec.ForProvider.EmailConfiguration[i3].ConfigurationSet = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.EmailConfiguration[i3].ConfigurationSetRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.EmailConfiguration); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EmailConfiguration[i3].SourceArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.EmailConfiguration[i3].SourceArnRef,
-			Selector:     mg.Spec.ForProvider.EmailConfiguration[i3].SourceArnSelector,
-			To: reference.To{
-				List:    &v1beta11.EmailIdentityList{},
-				Managed: &v1beta11.EmailIdentity{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.EmailConfiguration[i3].SourceArn")
-		}
-		mg.Spec.ForProvider.EmailConfiguration[i3].SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.EmailConfiguration[i3].SourceArnRef = rsp.ResolvedReference
-
-	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LambdaConfig); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LambdaConfig[i3].CreateAuthChallenge),
@@ -274,8 +237,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].CreateAuthChallengeRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].CreateAuthChallengeSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -293,8 +256,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 				Reference:    mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnSelector,
 				To: reference.To{
-					List:    &v1beta12.FunctionList{},
-					Managed: &v1beta12.Function{},
+					List:    &v1beta11.FunctionList{},
+					Managed: &v1beta11.Function{},
 				},
 			})
 			if err != nil {
@@ -312,8 +275,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].CustomMessageRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].CustomMessageSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -331,8 +294,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 				Reference:    mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnRef,
 				Selector:     mg.Spec.ForProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnSelector,
 				To: reference.To{
-					List:    &v1beta12.FunctionList{},
-					Managed: &v1beta12.Function{},
+					List:    &v1beta11.FunctionList{},
+					Managed: &v1beta11.Function{},
 				},
 			})
 			if err != nil {
@@ -350,8 +313,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].DefineAuthChallengeRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].DefineAuthChallengeSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -368,8 +331,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].KMSKeyIDSelector,
 			To: reference.To{
-				List:    &v1beta13.KeyList{},
-				Managed: &v1beta13.Key{},
+				List:    &v1beta12.KeyList{},
+				Managed: &v1beta12.Key{},
 			},
 		})
 		if err != nil {
@@ -386,8 +349,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].PostAuthenticationRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].PostAuthenticationSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -404,8 +367,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].PostConfirmationRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].PostConfirmationSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -422,8 +385,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].PreAuthenticationRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].PreAuthenticationSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -440,8 +403,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].PreSignUpRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].PreSignUpSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -458,8 +421,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].PreTokenGenerationRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].PreTokenGenerationSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -476,8 +439,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].UserMigrationRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].UserMigrationSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -494,8 +457,8 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 			Reference:    mg.Spec.ForProvider.LambdaConfig[i3].VerifyAuthChallengeResponseRef,
 			Selector:     mg.Spec.ForProvider.LambdaConfig[i3].VerifyAuthChallengeResponseSelector,
 			To: reference.To{
-				List:    &v1beta12.FunctionList{},
-				Managed: &v1beta12.Function{},
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
 			},
 		})
 		if err != nil {
@@ -541,8 +504,8 @@ func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.AnalyticsConfiguration[i3].ApplicationIDSelector,
 			To: reference.To{
-				List:    &v1beta14.AppList{},
-				Managed: &v1beta14.App{},
+				List:    &v1beta13.AppList{},
+				Managed: &v1beta13.App{},
 			},
 		})
 		if err != nil {
@@ -602,8 +565,8 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.CertificateArnRef,
 		Selector:     mg.Spec.ForProvider.CertificateArnSelector,
 		To: reference.To{
-			List:    &v1beta15.CertificateList{},
-			Managed: &v1beta15.Certificate{},
+			List:    &v1beta14.CertificateList{},
+			Managed: &v1beta14.Certificate{},
 		},
 	})
 	if err != nil {

@@ -168,6 +168,9 @@ type DeviceConfigurationParameters struct {
 
 type EmailConfigurationInitParameters struct {
 
+	// Email configuration set name from SES.
+	ConfigurationSet *string `json:"configurationSet,omitempty" tf:"configuration_set,omitempty"`
+
 	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration.
 	EmailSendingAccount *string `json:"emailSendingAccount,omitempty" tf:"email_sending_account,omitempty"`
 
@@ -176,6 +179,9 @@ type EmailConfigurationInitParameters struct {
 
 	// REPLY-TO email address.
 	ReplyToEmailAddress *string `json:"replyToEmailAddress,omitempty" tf:"reply_to_email_address,omitempty"`
+
+	// ARN of the SES verified email identity to use. Required if email_sending_account is set to DEVELOPER.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 }
 
 type EmailConfigurationObservation struct {
@@ -199,17 +205,8 @@ type EmailConfigurationObservation struct {
 type EmailConfigurationParameters struct {
 
 	// Email configuration set name from SES.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.ConfigurationSet
 	// +kubebuilder:validation:Optional
 	ConfigurationSet *string `json:"configurationSet,omitempty" tf:"configuration_set,omitempty"`
-
-	// Reference to a ConfigurationSet in ses to populate configurationSet.
-	// +kubebuilder:validation:Optional
-	ConfigurationSetRef *v1.Reference `json:"configurationSetRef,omitempty" tf:"-"`
-
-	// Selector for a ConfigurationSet in ses to populate configurationSet.
-	// +kubebuilder:validation:Optional
-	ConfigurationSetSelector *v1.Selector `json:"configurationSetSelector,omitempty" tf:"-"`
 
 	// Email delivery method to use. COGNITO_DEFAULT for the default email functionality built into Cognito or DEVELOPER to use your Amazon SES configuration.
 	// +kubebuilder:validation:Optional
@@ -224,18 +221,8 @@ type EmailConfigurationParameters struct {
 	ReplyToEmailAddress *string `json:"replyToEmailAddress,omitempty" tf:"reply_to_email_address,omitempty"`
 
 	// ARN of the SES verified email identity to use. Required if email_sending_account is set to DEVELOPER.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.EmailIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
-
-	// Reference to a EmailIdentity in ses to populate sourceArn.
-	// +kubebuilder:validation:Optional
-	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
-
-	// Selector for a EmailIdentity in ses to populate sourceArn.
-	// +kubebuilder:validation:Optional
-	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
 }
 
 type InviteMessageTemplateInitParameters struct {
