@@ -218,6 +218,8 @@ github.com/crossplane/crossplane-runtime v1.14.1 h1:TCa7R1N4bDGHjsLhiRxR/mUhwmis
 github.com/crossplane/crossplane-runtime v1.14.1/go.mod h1:aOP+5W2wKpvthVs3pFNbVOe1jwrKYbJho0ThGNCVz9o=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79 h1:HigXs5tEQxWz0fcj8hzbU2UAZgEM7wPe0XRFOsrtF8Y=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79/go.mod h1:+e4OaFlOcmr0JvINHl/yvEYBrZawzTgj6pQumOH1SS0=
+github.com/crossplane/upjet v1.1.0-rc.0.0.20231218093147-9543be90ce6b h1:1rUUZ95ZR6asQ8kS30afH/KivdMZI7B3L+A6DBa/sf8=
+github.com/crossplane/upjet v1.1.0-rc.0.0.20231218093147-9543be90ce6b/go.mod h1:t9etxIdYaxgyvFPBToikm5zBHi8RIpX8N4mTH77lQFM=
 github.com/dave/jennifer v1.4.1 h1:XyqG6cn5RQsTj3qlWQTKlRGAyrTcsk1kUmWdZBzRjDw=
 github.com/dave/jennifer v1.4.1/go.mod h1:7jEdnm+qBcxl8PC0zyp7vxcpSRnzXSt9r39tpTVGlwA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -570,8 +572,6 @@ github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/tmccombs/hcl2json v0.3.3 h1:+DLNYqpWE0CsOQiEZu+OZm5ZBImake3wtITYxQ8uLFQ=
 github.com/tmccombs/hcl2json v0.3.3/go.mod h1:Y2chtz2x9bAeRTvSibVRVgbLJhLJXKlUeIvjeVdnm4w=
-github.com/ulucinar/upbound-upjet v0.0.0-20231214122143-b674f3dd0c9f h1:5cM9XgAFbMzqFHVg5uvoAOS8tHcEZJl8XQQhSJhp/Lo=
-github.com/ulucinar/upbound-upjet v0.0.0-20231214122143-b674f3dd0c9f/go.mod h1:t9etxIdYaxgyvFPBToikm5zBHi8RIpX8N4mTH77lQFM=
 github.com/upbound/terraform-provider-aws v0.0.0-20231026091456-f2d38ee240d7 h1:hOLIvZeun8SvbrjCg78hYGQIS7a/iwsIeJDXhKd2qmQ=
 github.com/upbound/terraform-provider-aws v0.0.0-20231026091456-f2d38ee240d7/go.mod h1:VC/cWYvL0CQ2QApMzLWtf5xkbEmaabKO0Hoi49B62AE=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
