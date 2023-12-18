@@ -55,6 +55,7 @@ type CanarySettingsInitParameters struct {
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
+	// +mapType=granular
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
@@ -67,6 +68,7 @@ type CanarySettingsObservation struct {
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
+	// +mapType=granular
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
@@ -81,6 +83,7 @@ type CanarySettingsParameters struct {
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
@@ -115,9 +118,11 @@ type StageInitParameters struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map that defines the stage variables
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
 	// Whether active tracing with X-ray is enabled. Defaults to false.
@@ -172,12 +177,15 @@ type StageObservation struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Map that defines the stage variables
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
 	// ARN of the WebAcl associated with the Stage.
@@ -256,10 +264,12 @@ type StageParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map that defines the stage variables
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
 	// Whether active tracing with X-ray is enabled. Defaults to false.

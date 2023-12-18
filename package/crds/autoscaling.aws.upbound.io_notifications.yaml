@@ -72,12 +72,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   notifications:
                     description: List of Notification Types that trigger notifications.
                       Acceptable values are documented in the AWS documentation here
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -178,12 +180,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   notifications:
                     description: List of Notification Types that trigger notifications.
                       Acceptable values are documented in the AWS documentation here
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -364,6 +368,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     type: string
                   notifications:
@@ -372,6 +377,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   topicArn:
                     description: Topic ARN for notifications to be sent through
                     type: string

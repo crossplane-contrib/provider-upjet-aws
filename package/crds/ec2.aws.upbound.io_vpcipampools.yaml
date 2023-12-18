@@ -96,6 +96,7 @@ spec:
                       the allocation tagging requirements are changed on the pool,
                       the resource may be marked as noncompliant.
                     type: object
+                    x-kubernetes-map-type: granular
                   autoImport:
                     description: If you include this argument, IPAM automatically
                       imports any VPCs you have in your scope that fall within the
@@ -291,6 +292,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -335,6 +337,7 @@ spec:
                       the allocation tagging requirements are changed on the pool,
                       the resource may be marked as noncompliant.
                     type: object
+                    x-kubernetes-map-type: granular
                   autoImport:
                     description: If you include this argument, IPAM automatically
                       imports any VPCs you have in your scope that fall within the
@@ -372,6 +375,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -572,6 +576,7 @@ spec:
                       the allocation tagging requirements are changed on the pool,
                       the resource may be marked as noncompliant.
                     type: object
+                    x-kubernetes-map-type: granular
                   arn:
                     description: Amazon Resource Name (ARN) of IPAM
                     type: string
@@ -630,6 +635,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -637,6 +643,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

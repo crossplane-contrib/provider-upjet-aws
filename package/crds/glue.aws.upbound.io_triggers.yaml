@@ -79,6 +79,7 @@ spec:
                             specify arguments here that your own job-execution script
                             consumes, as well as arguments that AWS Glue itself consumes.
                           type: object
+                          x-kubernetes-map-type: granular
                         crawlerName:
                           description: The name of the crawler to be executed. Conflicts
                             with job_name.
@@ -503,6 +504,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: –  The type of trigger. Valid values are CONDITIONAL,
                       EVENT, ON_DEMAND, and SCHEDULED.
@@ -540,6 +542,7 @@ spec:
                             specify arguments here that your own job-execution script
                             consumes, as well as arguments that AWS Glue itself consumes.
                           type: object
+                          x-kubernetes-map-type: granular
                         notificationProperty:
                           description: Specifies configuration properties of a job
                             run notification. See Notification Property details below.
@@ -630,6 +633,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: –  The type of trigger. Valid values are CONDITIONAL,
                       EVENT, ON_DEMAND, and SCHEDULED.
@@ -827,6 +831,7 @@ spec:
                             specify arguments here that your own job-execution script
                             consumes, as well as arguments that AWS Glue itself consumes.
                           type: object
+                          x-kubernetes-map-type: granular
                         crawlerName:
                           description: The name of the crawler to be executed. Conflicts
                             with job_name.
@@ -944,6 +949,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -951,6 +957,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: –  The type of trigger. Valid values are CONDITIONAL,
                       EVENT, ON_DEMAND, and SCHEDULED.

@@ -73,6 +73,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   networkInsightsPathId:
                     description: ID of the Network Insights Path to run an analysis
                       on.
@@ -161,6 +162,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   waitForCompletion:
                     description: 'If enabled, the resource will wait for the Network
                       Insights Analysis status to change to succeeded or failed. Setting
@@ -186,11 +188,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   waitForCompletion:
                     description: 'If enabled, the resource will wait for the Network
                       Insights Analysis status to change to succeeded or failed. Setting
@@ -915,6 +919,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   forwardPathComponents:
                     description: The components in the path from source to destination.
                       See the AWS documentation for details.
@@ -1523,12 +1528,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   waitForCompletion:
                     description: 'If enabled, the resource will wait for the Network
                       Insights Analysis status to change to succeeded or failed. Setting

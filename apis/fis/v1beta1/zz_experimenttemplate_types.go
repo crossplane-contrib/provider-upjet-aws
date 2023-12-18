@@ -32,6 +32,7 @@ type ActionInitParameters struct {
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Set of action names that must complete before this action can be executed.
+	// +listType=set
 	StartAfter []*string `json:"startAfter,omitempty" tf:"start_after,omitempty"`
 
 	// Action's target, if applicable. See below.
@@ -53,6 +54,7 @@ type ActionObservation struct {
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Set of action names that must complete before this action can be executed.
+	// +listType=set
 	StartAfter []*string `json:"startAfter,omitempty" tf:"start_after,omitempty"`
 
 	// Action's target, if applicable. See below.
@@ -79,6 +81,7 @@ type ActionParameters struct {
 
 	// Set of action names that must complete before this action can be executed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StartAfter []*string `json:"startAfter,omitempty" tf:"start_after,omitempty"`
 
 	// Action's target, if applicable. See below.
@@ -98,6 +101,7 @@ type ExperimentTemplateInitParameters struct {
 	StopCondition []StopConditionInitParameters `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Target of an action. See below.
@@ -122,8 +126,10 @@ type ExperimentTemplateObservation struct {
 	StopCondition []StopConditionObservation `json:"stopCondition,omitempty" tf:"stop_condition,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Target of an action. See below.
@@ -165,6 +171,7 @@ type ExperimentTemplateParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Target of an action. See below.
@@ -181,6 +188,7 @@ type ExperimentTemplateTargetInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
+	// +listType=set
 	ResourceArns []*string `json:"resourceArns,omitempty" tf:"resource_arns,omitempty"`
 
 	// Tag(s) the resources need to have to be considered a valid target for an action. Conflicts with resource_arns. See below.
@@ -202,6 +210,7 @@ type ExperimentTemplateTargetObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
+	// +listType=set
 	ResourceArns []*string `json:"resourceArns,omitempty" tf:"resource_arns,omitempty"`
 
 	// Tag(s) the resources need to have to be considered a valid target for an action. Conflicts with resource_arns. See below.
@@ -226,6 +235,7 @@ type ExperimentTemplateTargetParameters struct {
 
 	// Set of ARNs of the resources to target with an action. Conflicts with resource_tag.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ResourceArns []*string `json:"resourceArns,omitempty" tf:"resource_arns,omitempty"`
 
 	// Tag(s) the resources need to have to be considered a valid target for an action. Conflicts with resource_arns. See below.
@@ -247,6 +257,7 @@ type FilterInitParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Set of attribute values for the filter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -256,6 +267,7 @@ type FilterObservation struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Set of attribute values for the filter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -267,6 +279,7 @@ type FilterParameters struct {
 
 	// Set of attribute values for the filter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 

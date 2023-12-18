@@ -22,11 +22,13 @@ type RegionSettingsInitParameters struct {
 	// A map of services along with the management preferences for the Region.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
+	// +mapType=granular
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
 	// A map of services along with the opt-in preferences for the Region.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
+	// +mapType=granular
 	ResourceTypeOptInPreference map[string]*bool `json:"resourceTypeOptInPreference,omitempty" tf:"resource_type_opt_in_preference,omitempty"`
 }
 
@@ -38,11 +40,13 @@ type RegionSettingsObservation struct {
 	// A map of services along with the management preferences for the Region.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
+	// +mapType=granular
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
 	// A map of services along with the opt-in preferences for the Region.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
+	// +mapType=granular
 	ResourceTypeOptInPreference map[string]*bool `json:"resourceTypeOptInPreference,omitempty" tf:"resource_type_opt_in_preference,omitempty"`
 }
 
@@ -57,12 +61,14 @@ type RegionSettingsParameters struct {
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResourceTypeManagementPreference map[string]*bool `json:"resourceTypeManagementPreference,omitempty" tf:"resource_type_management_preference,omitempty"`
 
 	// A map of services along with the opt-in preferences for the Region.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage Gateway, VirtualMachine
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResourceTypeOptInPreference map[string]*bool `json:"resourceTypeOptInPreference,omitempty" tf:"resource_type_opt_in_preference,omitempty"`
 }
 

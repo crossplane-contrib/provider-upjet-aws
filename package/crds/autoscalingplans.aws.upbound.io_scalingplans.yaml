@@ -87,6 +87,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -117,6 +118,7 @@ spec:
                                   type: string
                                 description: Dimensions of the metric.
                                 type: object
+                                x-kubernetes-map-type: granular
                               metricName:
                                 description: Name of the metric.
                                 type: string
@@ -222,6 +224,7 @@ spec:
                                         type: string
                                       description: Dimensions of the metric.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: Name of the metric.
                                       type: string
@@ -324,6 +327,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -350,6 +354,7 @@ spec:
                                   type: string
                                 description: Dimensions of the metric.
                                 type: object
+                                x-kubernetes-map-type: granular
                               metricName:
                                 description: Name of the metric.
                                 type: string
@@ -455,6 +460,7 @@ spec:
                                         type: string
                                       description: Dimensions of the metric.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: Name of the metric.
                                       type: string
@@ -721,6 +727,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -750,6 +757,7 @@ spec:
                                   type: string
                                 description: Dimensions of the metric.
                                 type: object
+                                x-kubernetes-map-type: granular
                               metricName:
                                 description: Name of the metric.
                                 type: string
@@ -855,6 +863,7 @@ spec:
                                         type: string
                                       description: Dimensions of the metric.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: Name of the metric.
                                       type: string

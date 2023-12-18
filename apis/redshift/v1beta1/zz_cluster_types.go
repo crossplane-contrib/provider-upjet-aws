@@ -47,6 +47,7 @@ type ClusterInitParameters struct {
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
 
 	// A list of security groups to be associated with this cluster.
+	// +listType=set
 	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
@@ -125,6 +126,7 @@ type ClusterInitParameters struct {
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -182,6 +184,7 @@ type ClusterObservation struct {
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
 
 	// A list of security groups to be associated with this cluster.
+	// +listType=set
 	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
@@ -220,6 +223,7 @@ type ClusterObservation struct {
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
 	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
+	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The Redshift Cluster ID.
@@ -275,12 +279,15 @@ type ClusterObservation struct {
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
@@ -324,6 +331,7 @@ type ClusterParameters struct {
 
 	// A list of security groups to be associated with this cluster.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
@@ -391,6 +399,7 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
@@ -479,6 +488,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -494,6 +504,7 @@ type ClusterParameters struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
@@ -510,6 +521,7 @@ type LoggingInitParameters struct {
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
 	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
+	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// The prefix applied to the log file names.
@@ -529,6 +541,7 @@ type LoggingObservation struct {
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
 	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
+	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// The prefix applied to the log file names.
@@ -552,6 +565,7 @@ type LoggingParameters struct {
 
 	// The collection of exported log types. Log types include the connection log, user log and user activity log. Required when log_destination_type is cloudwatch. Valid log types are connectionlog, userlog, and useractivitylog.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// The prefix applied to the log file names.

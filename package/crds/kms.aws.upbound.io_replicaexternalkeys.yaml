@@ -204,6 +204,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   validTo:
                     description: 'Time at which the imported key material expires.
                       When the key material expires, AWS KMS deletes the key material
@@ -259,6 +260,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   validTo:
                     description: 'Time at which the imported key material expires.
                       When the key material expires, AWS KMS deletes the key material
@@ -493,6 +495,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -500,6 +503,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   validTo:
                     description: 'Time at which the imported key material expires.
                       When the key material expires, AWS KMS deletes the key material

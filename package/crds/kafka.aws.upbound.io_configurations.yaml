@@ -76,6 +76,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   name:
                     description: Name of the configuration.
                     type: string
@@ -111,6 +112,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   name:
                     description: Name of the configuration.
                     type: string
@@ -307,6 +309,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   latestRevision:
                     description: Latest revision of the configuration.
                     type: number

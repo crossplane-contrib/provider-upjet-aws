@@ -91,6 +91,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   temporaryRestoreDays:
                     description: Specifies the number of days for which to temporarily
                       restore an archived snapshot. Required for temporary restores
@@ -208,6 +209,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   temporaryRestoreDays:
                     description: Specifies the number of days for which to temporarily
                       restore an archived snapshot. Required for temporary restores
@@ -422,6 +424,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -429,6 +432,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   temporaryRestoreDays:
                     description: Specifies the number of days for which to temporarily
                       restore an archived snapshot. Required for temporary restores

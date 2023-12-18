@@ -250,6 +250,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maximumBatchingWindowInSeconds:
                     description: The maximum amount of time to gather records before
                       invoking the function, in seconds (between 0 and 300). Records
@@ -285,6 +286,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -316,6 +318,7 @@ spec:
                             and the value should be a string with a comma separated
                             list of broker endpoints.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   selfManagedKafkaEventSourceConfig:
@@ -376,6 +379,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tumblingWindowInSeconds:
                     description: The duration in seconds of a processing window for
                       AWS Lambda streaming analytics. The range is between 1 second
@@ -501,6 +505,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maximumBatchingWindowInSeconds:
                     description: The maximum amount of time to gather records before
                       invoking the function, in seconds (between 0 and 300). Records
@@ -536,6 +541,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   scalingConfig:
                     description: Scaling configuration of the event source. Only available
                       for SQS queues. Detailed below.
@@ -563,6 +569,7 @@ spec:
                             and the value should be a string with a comma separated
                             list of broker endpoints.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   selfManagedKafkaEventSourceConfig:
@@ -623,6 +630,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tumblingWindowInSeconds:
                     description: The duration in seconds of a processing window for
                       AWS Lambda streaming analytics. The range is between 1 second
@@ -908,6 +916,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     type: string
                   lastModified:
@@ -952,6 +961,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   scalingConfig:
                     description: Scaling configuration of the event source. Only available
                       for SQS queues. Detailed below.
@@ -979,6 +989,7 @@ spec:
                             and the value should be a string with a comma separated
                             list of broker endpoints.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   selfManagedKafkaEventSourceConfig:
@@ -1046,6 +1057,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tumblingWindowInSeconds:
                     description: The duration in seconds of a processing window for
                       AWS Lambda streaming analytics. The range is between 1 second

@@ -288,6 +288,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   objectLockLegalHoldStatus:
                     description: Legal hold status that you want to apply to the specified
                       object. Valid values are ON and OFF.
@@ -325,6 +326,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   websiteRedirect:
                     description: Target URL for website redirect.
                     type: string
@@ -407,6 +409,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   objectLockLegalHoldStatus:
                     description: Legal hold status that you want to apply to the specified
                       object. Valid values are ON and OFF.
@@ -440,6 +443,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   websiteRedirect:
                     description: Target URL for website redirect.
                     type: string
@@ -692,6 +696,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   objectLockLegalHoldStatus:
                     description: Legal hold status that you want to apply to the specified
                       object. Valid values are ON and OFF.
@@ -725,12 +730,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   versionId:
                     description: Unique version ID value for the object, if bucket
                       versioning is enabled.

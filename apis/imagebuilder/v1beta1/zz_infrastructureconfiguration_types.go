@@ -26,6 +26,7 @@ type InfrastructureConfigurationInitParameters struct {
 	InstanceMetadataOptions []InstanceMetadataOptionsInitParameters `json:"instanceMetadataOptions,omitempty" tf:"instance_metadata_options,omitempty"`
 
 	// Set of EC2 Instance Types.
+	// +listType=set
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Configuration block with logging settings. Detailed below.
@@ -35,9 +36,11 @@ type InfrastructureConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
+	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
@@ -68,6 +71,7 @@ type InfrastructureConfigurationObservation struct {
 	InstanceProfileName *string `json:"instanceProfileName,omitempty" tf:"instance_profile_name,omitempty"`
 
 	// Set of EC2 Instance Types.
+	// +listType=set
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Name of EC2 Key Pair.
@@ -80,9 +84,11 @@ type InfrastructureConfigurationObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
+	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
 	// Set of EC2 Security Group identifiers.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Amazon Resource Name (ARN) of SNS Topic.
@@ -92,9 +98,11 @@ type InfrastructureConfigurationObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
@@ -126,6 +134,7 @@ type InfrastructureConfigurationParameters struct {
 
 	// Set of EC2 Instance Types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Name of EC2 Key Pair.
@@ -156,6 +165,7 @@ type InfrastructureConfigurationParameters struct {
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -171,6 +181,7 @@ type InfrastructureConfigurationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Amazon Resource Name (ARN) of SNS Topic.
@@ -202,6 +213,7 @@ type InfrastructureConfigurationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.

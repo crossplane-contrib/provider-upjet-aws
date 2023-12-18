@@ -52,6 +52,7 @@ type PosixProfileInitParameters struct {
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
@@ -64,6 +65,7 @@ type PosixProfileObservation struct {
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
@@ -78,6 +80,7 @@ type PosixProfileParameters struct {
 
 	// The secondary POSIX group IDs used for all EFS operations by this user.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// The POSIX user ID used for all EFS operations by this user.
@@ -103,6 +106,7 @@ type UserInitParameters struct {
 	PosixProfile []PosixProfileInitParameters `json:"posixProfile,omitempty" tf:"posix_profile,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -135,9 +139,11 @@ type UserObservation struct {
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -197,6 +203,7 @@ type UserParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -106,6 +106,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statefulEngineOptions:
                           description: A configuration block that defines options
                             on how the policy handles stateful rules. See Stateful
@@ -286,6 +287,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statelessFragmentDefaultActions:
                           description: 'Set of actions to take on a fragmented packet
                             if it does not match any of the stateless rules in the
@@ -298,6 +300,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statelessRuleGroupReference:
                           description: Set of configuration blocks containing references
                             to the stateless rule groups that are used in the policy.
@@ -408,6 +411,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -462,6 +466,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statefulEngineOptions:
                           description: A configuration block that defines options
                             on how the policy handles stateful rules. See Stateful
@@ -558,6 +563,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statelessFragmentDefaultActions:
                           description: 'Set of actions to take on a fragmented packet
                             if it does not match any of the stateless rules in the
@@ -570,6 +576,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statelessRuleGroupReference:
                           description: Set of configuration blocks containing references
                             to the stateless rule groups that are used in the policy.
@@ -592,6 +599,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -806,6 +814,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statefulEngineOptions:
                           description: A configuration block that defines options
                             on how the policy handles stateful rules. See Stateful
@@ -906,6 +915,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statelessFragmentDefaultActions:
                           description: 'Set of actions to take on a fragmented packet
                             if it does not match any of the stateless rules in the
@@ -918,6 +928,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         statelessRuleGroupReference:
                           description: Set of configuration blocks containing references
                             to the stateless rule groups that are used in the policy.
@@ -948,6 +959,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -955,6 +967,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   updateToken:
                     description: A string token used when updating a firewall policy.
                     type: string

@@ -258,6 +258,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userDataBase64:
                     description: Base64 encoded user data. Use this to provide commands
                       or a command script to run when you launch your build instance.
@@ -392,6 +393,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userDataBase64:
                     description: Base64 encoded user data. Use this to provide commands
                       or a command script to run when you launch your build instance.
@@ -712,6 +714,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -719,6 +722,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   userDataBase64:
                     description: Base64 encoded user data. Use this to provide commands
                       or a command script to run when you launch your build instance.

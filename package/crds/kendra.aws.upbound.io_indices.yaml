@@ -139,6 +139,7 @@ spec:
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         search:
@@ -291,6 +292,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userContextPolicy:
                     description: The user context policy. Valid values are ATTRIBUTE_FILTER
                       or USER_TOKEN. For more information, refer to UserContextPolicy.
@@ -457,6 +459,7 @@ spec:
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         search:
@@ -525,6 +528,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userContextPolicy:
                     description: The user context policy. Valid values are ATTRIBUTE_FILTER
                       or USER_TOKEN. For more information, refer to UserContextPolicy.
@@ -853,6 +857,7 @@ spec:
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         search:
@@ -974,6 +979,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -981,6 +987,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   updatedAt:
                     description: The Unix datetime that the index was last updated.
                     type: string

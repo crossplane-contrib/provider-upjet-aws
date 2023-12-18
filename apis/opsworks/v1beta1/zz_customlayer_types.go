@@ -96,9 +96,11 @@ type CustomLayerInitParameters struct {
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
 	// Names of a set of system packages to install on the layer's instances.
+	// +listType=set
 	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to use EBS-optimized instances.
@@ -133,6 +135,7 @@ type CustomLayerObservation struct {
 	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
 
 	// Ids for a set of security groups to apply to the layer's instances.
+	// +listType=set
 	CustomSecurityGroupIds []*string `json:"customSecurityGroupIds,omitempty" tf:"custom_security_group_ids,omitempty"`
 
 	CustomSetupRecipes []*string `json:"customSetupRecipes,omitempty" tf:"custom_setup_recipes,omitempty"`
@@ -172,12 +175,15 @@ type CustomLayerObservation struct {
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
 	// Names of a set of system packages to install on the layer's instances.
+	// +listType=set
 	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whether to use EBS-optimized instances.
@@ -229,6 +235,7 @@ type CustomLayerParameters struct {
 	// +crossplane:generate:reference:refFieldName=CustomSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=CustomSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CustomSecurityGroupIds []*string `json:"customSecurityGroupIds,omitempty" tf:"custom_security_group_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -288,10 +295,12 @@ type CustomLayerParameters struct {
 
 	// Names of a set of system packages to install on the layer's instances.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to use EBS-optimized instances.

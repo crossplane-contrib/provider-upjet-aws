@@ -162,6 +162,7 @@ spec:
                             metric. Up to 3 dimensions are allowed. Conflicts with
                             default_value.
                           type: object
+                          x-kubernetes-map-type: granular
                         name:
                           description: The name of the CloudWatch metric to which
                             the monitored log information should be published (e.g.,
@@ -223,6 +224,7 @@ spec:
                             metric. Up to 3 dimensions are allowed. Conflicts with
                             default_value.
                           type: object
+                          x-kubernetes-map-type: granular
                         name:
                           description: The name of the CloudWatch metric to which
                             the monitored log information should be published (e.g.,
@@ -447,6 +449,7 @@ spec:
                             metric. Up to 3 dimensions are allowed. Conflicts with
                             default_value.
                           type: object
+                          x-kubernetes-map-type: granular
                         name:
                           description: The name of the CloudWatch metric to which
                             the monitored log information should be published (e.g.,

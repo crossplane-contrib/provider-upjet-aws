@@ -113,6 +113,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpceIds:
                           description: '- An array of Amazon VPC endpoint IDs for
                             the workspace. The only VPC endpoints that can be specified
@@ -122,6 +123,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   notificationDestinations:
@@ -237,6 +239,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfiguration:
                     description: The configuration settings for an Amazon VPC that
                       contains data sources for your Grafana workspace to connect
@@ -250,12 +253,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: '- The list of Amazon EC2 subnet IDs created
                             in the Amazon VPC for your Grafana workspace to connect.'
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 required:
@@ -319,6 +324,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpceIds:
                           description: '- An array of Amazon VPC endpoint IDs for
                             the workspace. The only VPC endpoints that can be specified
@@ -328,6 +334,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   notificationDestinations:
@@ -363,6 +370,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfiguration:
                     description: The configuration settings for an Amazon VPC that
                       contains data sources for your Grafana workspace to connect
@@ -376,12 +384,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: '- The list of Amazon EC2 subnet IDs created
                             in the Amazon VPC for your Grafana workspace to connect.'
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -617,6 +627,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpceIds:
                           description: '- An array of Amazon VPC endpoint IDs for
                             the workspace. The only VPC endpoints that can be specified
@@ -626,6 +637,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   notificationDestinations:
@@ -666,12 +678,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfiguration:
                     description: The configuration settings for an Amazon VPC that
                       contains data sources for your Grafana workspace to connect
@@ -685,12 +699,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: '- The list of Amazon EC2 subnet IDs created
                             in the Amazon VPC for your Grafana workspace to connect.'
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object

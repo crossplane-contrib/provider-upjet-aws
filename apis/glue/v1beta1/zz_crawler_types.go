@@ -130,6 +130,7 @@ type CrawlerInitParameters struct {
 	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -194,9 +195,11 @@ type CrawlerObservation struct {
 	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -298,6 +301,7 @@ type CrawlerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -310,6 +314,7 @@ type DeltaTargetInitParameters struct {
 	CreateNativeDeltaTable *bool `json:"createNativeDeltaTable,omitempty" tf:"create_native_delta_table,omitempty"`
 
 	// A list of the Amazon S3 paths to the Delta tables.
+	// +listType=set
 	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.
@@ -325,6 +330,7 @@ type DeltaTargetObservation struct {
 	CreateNativeDeltaTable *bool `json:"createNativeDeltaTable,omitempty" tf:"create_native_delta_table,omitempty"`
 
 	// A list of the Amazon S3 paths to the Delta tables.
+	// +listType=set
 	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.
@@ -343,6 +349,7 @@ type DeltaTargetParameters struct {
 
 	// A list of the Amazon S3 paths to the Delta tables.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DeltaTables []*string `json:"deltaTables" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.

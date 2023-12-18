@@ -76,11 +76,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   thumbprintList:
                     description: A list of server certificate thumbprints for the
                       OpenID Connect (OIDC) identity provider's server certificate(s).
@@ -113,11 +115,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   thumbprintList:
                     description: A list of server certificate thumbprints for the
                       OpenID Connect (OIDC) identity provider's server certificate(s).
@@ -320,6 +324,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     type: string
                   tags:
@@ -327,6 +332,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -334,6 +340,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   thumbprintList:
                     description: A list of server certificate thumbprints for the
                       OpenID Connect (OIDC) identity provider's server certificate(s).

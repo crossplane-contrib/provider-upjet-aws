@@ -23,6 +23,7 @@ type UserGroupMembershipInitParameters struct {
 type UserGroupMembershipObservation struct {
 
 	// A list of IAM Groups to add the user to
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -46,6 +47,7 @@ type UserGroupMembershipParameters struct {
 	// +crossplane:generate:reference:refFieldName=GroupRefs
 	// +crossplane:generate:reference:selectorFieldName=GroupSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// The name of the IAM User to add to groups

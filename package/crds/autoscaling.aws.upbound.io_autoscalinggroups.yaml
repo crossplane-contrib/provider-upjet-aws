@@ -75,6 +75,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   capacityRebalance:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
@@ -111,6 +112,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   forceDelete:
                     description: Allows deleting the Auto Scaling Group without waiting
                       for all instances in the pool to terminate.  You can force an
@@ -217,6 +219,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   launchConfiguration:
@@ -609,12 +612,14 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           acceleratorNames:
                                             description: List of accelerator names.
                                               Default is any acclerator.
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           acceleratorTotalMemoryMib:
                                             description: Block describing the minimum
                                               and maximum total memory of the accelerators.
@@ -635,6 +640,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           allowedInstanceTypes:
                                             description: 'List of instance types to
                                               apply your specified attributes against.
@@ -657,6 +663,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           bareMetal:
                                             description: Indicate whether bare metal
                                               instace types should be included, excluded,
@@ -688,6 +695,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           excludedInstanceTypes:
                                             description: 'List of instance types to
                                               exclude. You can use strings with one
@@ -707,12 +715,14 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           instanceGenerations:
                                             description: List of instance generation
                                               names. Default is any generation.
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           localStorage:
                                             description: Indicate whether instance
                                               types with local storage volumes are
@@ -725,6 +735,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           memoryGibPerVcpu:
                                             description: Block describing the minimum
                                               and maximum amount of memory (GiB) per
@@ -1150,6 +1161,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tag:
                     description: Configuration block(s) containing resource tags.
                       Conflicts with tags. See Tag below for more details.
@@ -1191,6 +1203,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   vpcZoneIdentifierRefs:
                     description: References to Subnet in ec2 to populate vpcZoneIdentifier.
                     items:
@@ -1333,6 +1346,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   capacityRebalance:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
@@ -1369,6 +1383,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   forceDelete:
                     description: Allows deleting the Auto Scaling Group without waiting
                       for all instances in the pool to terminate.  You can force an
@@ -1475,6 +1490,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   launchTemplate:
@@ -1620,12 +1636,14 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           acceleratorNames:
                                             description: List of accelerator names.
                                               Default is any acclerator.
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           acceleratorTotalMemoryMib:
                                             description: Block describing the minimum
                                               and maximum total memory of the accelerators.
@@ -1646,6 +1664,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           allowedInstanceTypes:
                                             description: 'List of instance types to
                                               apply your specified attributes against.
@@ -1668,6 +1687,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           bareMetal:
                                             description: Indicate whether bare metal
                                               instace types should be included, excluded,
@@ -1699,6 +1719,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           excludedInstanceTypes:
                                             description: 'List of instance types to
                                               exclude. You can use strings with one
@@ -1718,12 +1739,14 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           instanceGenerations:
                                             description: List of instance generation
                                               names. Default is any generation.
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           localStorage:
                                             description: Indicate whether instance
                                               types with local storage volumes are
@@ -1736,6 +1759,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           memoryGibPerVcpu:
                                             description: Block describing the minimum
                                               and maximum amount of memory (GiB) per
@@ -1907,6 +1931,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tag:
                     description: Configuration block(s) containing resource tags.
                       Conflicts with tags. See Tag below for more details.
@@ -2169,6 +2194,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   capacityRebalance:
                     description: Whether capacity rebalance is enabled. Otherwise,
                       capacity rebalance is disabled.
@@ -2205,6 +2231,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   forceDelete:
                     description: Allows deleting the Auto Scaling Group without waiting
                       for all instances in the pool to terminate.  You can force an
@@ -2314,6 +2341,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   launchConfiguration:
@@ -2345,6 +2373,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maxInstanceLifetime:
                     description: Maximum amount of time, in seconds, that an instance
                       can be in service, values must be either equal to 0 or between
@@ -2476,12 +2505,14 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           acceleratorNames:
                                             description: List of accelerator names.
                                               Default is any acclerator.
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           acceleratorTotalMemoryMib:
                                             description: Block describing the minimum
                                               and maximum total memory of the accelerators.
@@ -2502,6 +2533,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           allowedInstanceTypes:
                                             description: 'List of instance types to
                                               apply your specified attributes against.
@@ -2524,6 +2556,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           bareMetal:
                                             description: Indicate whether bare metal
                                               instace types should be included, excluded,
@@ -2555,6 +2588,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           excludedInstanceTypes:
                                             description: 'List of instance types to
                                               exclude. You can use strings with one
@@ -2574,12 +2608,14 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           instanceGenerations:
                                             description: List of instance generation
                                               names. Default is any generation.
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           localStorage:
                                             description: Indicate whether instance
                                               types with local storage volumes are
@@ -2592,6 +2628,7 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: set
                                           memoryGibPerVcpu:
                                             description: Block describing the minimum
                                               and maximum amount of memory (GiB) per
@@ -2778,6 +2815,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tag:
                     description: Configuration block(s) containing resource tags.
                       Conflicts with tags. See Tag below for more details.
@@ -2808,6 +2846,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   terminationPolicies:
                     description: List of policies to decide how the instances in the
                       Auto Scaling Group should be terminated. The allowed values
@@ -2825,6 +2864,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   waitForCapacityTimeout:
                     description: (See also Waiting for Capacity below.
                     type: string

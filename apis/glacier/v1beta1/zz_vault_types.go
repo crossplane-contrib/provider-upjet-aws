@@ -20,12 +20,14 @@ import (
 type NotificationInitParameters struct {
 
 	// You can configure a vault to publish a notification for ArchiveRetrievalCompleted and InventoryRetrievalCompleted events.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
 type NotificationObservation struct {
 
 	// You can configure a vault to publish a notification for ArchiveRetrievalCompleted and InventoryRetrievalCompleted events.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// The SNS Topic ARN.
@@ -36,6 +38,7 @@ type NotificationParameters struct {
 
 	// You can configure a vault to publish a notification for ArchiveRetrievalCompleted and InventoryRetrievalCompleted events.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events" tf:"events,omitempty"`
 
 	// The SNS Topic ARN.
@@ -63,6 +66,7 @@ type VaultInitParameters struct {
 	Notification []NotificationInitParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -84,9 +88,11 @@ type VaultObservation struct {
 	Notification []NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -108,6 +114,7 @@ type VaultParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

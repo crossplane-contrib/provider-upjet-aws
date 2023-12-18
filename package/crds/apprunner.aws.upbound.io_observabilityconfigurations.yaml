@@ -80,6 +80,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   traceConfiguration:
                     description: Configuration of the tracing feature within this
                       observability configuration. If you don't specify it, App Runner
@@ -116,6 +117,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   traceConfiguration:
                     description: Configuration of the tracing feature within this
                       observability configuration. If you don't specify it, App Runner
@@ -328,12 +330,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   traceConfiguration:
                     description: Configuration of the tracing feature within this
                       observability configuration. If you don't specify it, App Runner

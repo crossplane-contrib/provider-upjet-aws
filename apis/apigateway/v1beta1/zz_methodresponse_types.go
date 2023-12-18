@@ -20,11 +20,13 @@ import (
 type MethodResponseInitParameters struct {
 
 	// Map of the API models used for the response's content type
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Map of response parameters that can be sent to the caller.
 	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
 	// would define that the header X-Some-Header can be provided on the response.
+	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// HTTP status code
@@ -42,11 +44,13 @@ type MethodResponseObservation struct {
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Map of the API models used for the response's content type
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Map of response parameters that can be sent to the caller.
 	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
 	// would define that the header X-Some-Header can be provided on the response.
+	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// ID of the associated REST API
@@ -93,12 +97,14 @@ type MethodResponseParameters struct {
 
 	// Map of the API models used for the response's content type
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Map of response parameters that can be sent to the caller.
 	// For example: response_parameters = { "method.response.header.X-Some-Header" = true }
 	// would define that the header X-Some-Header can be provided on the response.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
 
 	// ID of the associated REST API

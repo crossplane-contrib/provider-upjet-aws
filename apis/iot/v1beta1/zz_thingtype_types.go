@@ -29,6 +29,7 @@ type ThingTypeInitParameters struct {
 	Properties []ThingTypePropertiesInitParameters `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -49,9 +50,11 @@ type ThingTypeObservation struct {
 	Properties []ThingTypePropertiesObservation `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -76,6 +79,7 @@ type ThingTypeParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -85,6 +89,7 @@ type ThingTypePropertiesInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of searchable thing attribute names.
+	// +listType=set
 	SearchableAttributes []*string `json:"searchableAttributes,omitempty" tf:"searchable_attributes,omitempty"`
 }
 
@@ -94,6 +99,7 @@ type ThingTypePropertiesObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of searchable thing attribute names.
+	// +listType=set
 	SearchableAttributes []*string `json:"searchableAttributes,omitempty" tf:"searchable_attributes,omitempty"`
 }
 
@@ -105,6 +111,7 @@ type ThingTypePropertiesParameters struct {
 
 	// A list of searchable thing attribute names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SearchableAttributes []*string `json:"searchableAttributes,omitempty" tf:"searchable_attributes,omitempty"`
 }
 

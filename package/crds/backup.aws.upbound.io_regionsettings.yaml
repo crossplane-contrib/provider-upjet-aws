@@ -78,6 +78,7 @@ spec:
                       for the Region. \n WARNING: All parameters are required to be
                       given: EFS, DynamoDB"
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceTypeOptInPreference:
                     additionalProperties:
                       type: boolean
@@ -86,6 +87,7 @@ spec:
                       given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage
                       Gateway, VirtualMachine"
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -108,6 +110,7 @@ spec:
                       for the Region. \n WARNING: All parameters are required to be
                       given: EFS, DynamoDB"
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceTypeOptInPreference:
                     additionalProperties:
                       type: boolean
@@ -116,6 +119,7 @@ spec:
                       given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage
                       Gateway, VirtualMachine"
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -298,6 +302,7 @@ spec:
                       for the Region. \n WARNING: All parameters are required to be
                       given: EFS, DynamoDB"
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceTypeOptInPreference:
                     additionalProperties:
                       type: boolean
@@ -306,6 +311,7 @@ spec:
                       given: EFS, DynamoDB, EBS, EC2, FSx, S3, Aurora, RDS, Storage
                       Gateway, VirtualMachine"
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

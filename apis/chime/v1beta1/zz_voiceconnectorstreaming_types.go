@@ -58,6 +58,7 @@ type VoiceConnectorStreamingInitParameters struct {
 	MediaInsightsConfiguration []MediaInsightsConfigurationInitParameters `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
 
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
+	// +listType=set
 	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
 }
 
@@ -76,6 +77,7 @@ type VoiceConnectorStreamingObservation struct {
 	MediaInsightsConfiguration []MediaInsightsConfigurationObservation `json:"mediaInsightsConfiguration,omitempty" tf:"media_insights_configuration,omitempty"`
 
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
+	// +listType=set
 	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.
@@ -103,6 +105,7 @@ type VoiceConnectorStreamingParameters struct {
 
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
 
 	// The Amazon Chime Voice Connector ID.

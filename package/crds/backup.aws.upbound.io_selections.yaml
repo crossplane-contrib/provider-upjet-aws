@@ -208,6 +208,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   planId:
                     description: The backup plan ID to be associated with the selection
                       of resources.
@@ -296,6 +297,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   selectionTag:
                     description: Tag-based conditions used to specify a set of resources
                       to assign to a backup plan.
@@ -390,6 +392,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   resources:
                     description: An array of strings that either contain Amazon Resource
                       Names (ARNs) or match patterns of resources to assign to a backup
@@ -397,6 +400,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   selectionTag:
                     description: Tag-based conditions used to specify a set of resources
                       to assign to a backup plan.
@@ -657,6 +661,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   planId:
                     description: The backup plan ID to be associated with the selection
                       of resources.
@@ -668,6 +673,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   selectionTag:
                     description: Tag-based conditions used to specify a set of resources
                       to assign to a backup plan.

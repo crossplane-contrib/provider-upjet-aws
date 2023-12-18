@@ -47,6 +47,7 @@ type AssociationInitParameters struct {
 	OutputLocation []OutputLocationInitParameters `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
 
 	// A block of arbitrary string parameters to pass to the SSM document.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A cron or rate expression that specifies when the association runs.
@@ -100,6 +101,7 @@ type AssociationObservation struct {
 	OutputLocation []OutputLocationObservation `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
 
 	// A block of arbitrary string parameters to pass to the SSM document.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A cron or rate expression that specifies when the association runs.
@@ -165,6 +167,7 @@ type AssociationParameters struct {
 
 	// A block of arbitrary string parameters to pass to the SSM document.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

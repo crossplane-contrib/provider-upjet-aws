@@ -6,6 +6,9 @@ package config
 
 import (
 	"context"
+	"reflect"
+	"unsafe"
+
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -156,7 +159,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, error) {
+func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, *xpprovider.AWSClient, error) {
 	var p *schema.Provider
 	var err error
 	if generationProvider {
@@ -165,8 +168,18 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		p, err = xpprovider.GetProviderSchema(ctx)
 	}
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
+		return nil, nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
 	}
+	// we set schema.Provider's meta to nil because p.Configure modifies
+	// a singleton pointer. This further assumes that the
+	// schema.Provider.Configure calls do not modify the global state
+	// represented by the config.Provider.TerraformProvider.
+	var awsClient *xpprovider.AWSClient
+	if !generationProvider {
+		// #nosec G103
+		awsClient = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p.Meta()).Pointer()))
+	}
+	p.SetMeta(nil)
 	modulePath := "github.com/upbound/provider-aws"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
@@ -282,7 +295,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	}
 
 	pc.ConfigureResources()
-	return pc, nil
+	return pc, awsClient, nil
 }
 
 // CLIReconciledResourceList returns the list of resources that have external
@@ -292,7 +305,7 @@ func CLIReconciledResourceList() []string {
 	l := make([]string, len(CLIReconciledExternalNameConfigs))
 	i := 0
 	for name := range CLIReconciledExternalNameConfigs {
-		// Expected format is regex and we'd like to have exact matches.
+		// Expected format is regex, and we'd like to have exact matches.
 		l[i] = name + "$"
 		i++
 	}
@@ -306,7 +319,7 @@ func NoForkResourceList() []string {
 	l := make([]string, len(NoForkExternalNameConfigs))
 	i := 0
 	for name := range NoForkExternalNameConfigs {
-		// Expected format is regex and we'd like to have exact matches.
+		// Expected format is regex, and we'd like to have exact matches.
 		l[i] = name + "$"
 		i++
 	}

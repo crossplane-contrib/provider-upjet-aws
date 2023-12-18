@@ -79,6 +79,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   workflowExecutionRetentionPeriodInDays:
                     description: Length of time that SWF will continue to retain information
                       about the workflow execution after the workflow execution is
@@ -107,6 +108,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   workflowExecutionRetentionPeriodInDays:
                     description: Length of time that SWF will continue to retain information
                       about the workflow execution after the workflow execution is
@@ -298,6 +300,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -305,6 +308,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   workflowExecutionRetentionPeriodInDays:
                     description: Length of time that SWF will continue to retain information
                       about the workflow execution after the workflow execution is

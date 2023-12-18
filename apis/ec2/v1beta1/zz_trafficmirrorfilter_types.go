@@ -23,9 +23,11 @@ type TrafficMirrorFilterInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// List of amazon network services that should be mirrored. Valid values: amazon-dns.
+	// +listType=set
 	NetworkServices []*string `json:"networkServices,omitempty" tf:"network_services,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,12 +43,15 @@ type TrafficMirrorFilterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of amazon network services that should be mirrored. Valid values: amazon-dns.
+	// +listType=set
 	NetworkServices []*string `json:"networkServices,omitempty" tf:"network_services,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -58,6 +63,7 @@ type TrafficMirrorFilterParameters struct {
 
 	// List of amazon network services that should be mirrored. Valid values: amazon-dns.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	NetworkServices []*string `json:"networkServices,omitempty" tf:"network_services,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -67,6 +73,7 @@ type TrafficMirrorFilterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -20,6 +20,7 @@ import (
 type LogDestinationConfigInitParameters struct {
 
 	// A map describing the logging destination for the chosen log_destination_type.
+	// +mapType=granular
 	LogDestination map[string]*string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
@@ -32,6 +33,7 @@ type LogDestinationConfigInitParameters struct {
 type LogDestinationConfigObservation struct {
 
 	// A map describing the logging destination for the chosen log_destination_type.
+	// +mapType=granular
 	LogDestination map[string]*string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
 
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.
@@ -45,6 +47,7 @@ type LogDestinationConfigParameters struct {
 
 	// A map describing the logging destination for the chosen log_destination_type.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	LogDestination map[string]*string `json:"logDestination" tf:"log_destination,omitempty"`
 
 	// The location to send logs to. Valid values: S3, CloudWatchLogs, KinesisDataFirehose.

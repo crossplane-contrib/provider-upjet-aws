@@ -149,6 +149,7 @@ spec:
                             type: string
                           description: Key-value map of resource tags.
                           type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeSize:
@@ -298,6 +299,7 @@ spec:
                             type: string
                           description: Key-value map of resource tags.
                           type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeSize:
@@ -310,10 +312,12 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityGroups:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceDestCheck:
                     type: boolean
                   spotPrice:
@@ -404,6 +408,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenancy:
                     type: string
                   userData:
@@ -429,6 +434,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
@@ -510,6 +516,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   waitForFulfillment:
                     type: boolean
                 required:
@@ -609,6 +616,7 @@ spec:
                             type: string
                           description: Key-value map of resource tags.
                           type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeSize:
@@ -754,6 +762,7 @@ spec:
                             type: string
                           description: Key-value map of resource tags.
                           type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeSize:
@@ -766,10 +775,12 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityGroups:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceDestCheck:
                     type: boolean
                   spotPrice:
@@ -784,6 +795,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenancy:
                     type: string
                   userData:
@@ -809,6 +821,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   waitForFulfillment:
                     type: boolean
                 type: object
@@ -1061,6 +1074,7 @@ spec:
                             type: string
                           description: Key-value map of resource tags.
                           type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeId:
@@ -1237,6 +1251,7 @@ spec:
                             type: string
                           description: Key-value map of resource tags.
                           type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeId:
@@ -1252,10 +1267,12 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityGroups:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceDestCheck:
                     type: boolean
                   spotBidStatus:
@@ -1283,6 +1300,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1290,6 +1308,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenancy:
                     type: string
                   userData:
@@ -1315,10 +1334,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcSecurityGroupIds:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   waitForFulfillment:
                     type: boolean
                 type: object

@@ -76,6 +76,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: An array of up to three Git repositories to associate
                       with the notebook instance. These can be either the names of
@@ -86,6 +87,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   defaultCodeRepository:
                     description: The Git repository associated with the notebook instance
                       as its default code repository. This can be either the name
@@ -373,6 +375,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   subnetId:
                     description: The VPC subnet ID.
                     type: string
@@ -454,6 +457,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   volumeSize:
                     description: The size, in GB, of the ML storage volume to attach
                       to the notebook instance. The default value is 5 GB.
@@ -482,6 +486,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: An array of up to three Git repositories to associate
                       with the notebook instance. These can be either the names of
@@ -492,6 +497,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   directInternetAccess:
                     description: 'Set to Disabled to disable internet access to notebook.
                       Requires security_groups and subnet_id to be set. Supported
@@ -537,11 +543,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   volumeSize:
                     description: The size, in GB, of the ML storage volume to attach
                       to the notebook instance. The default value is 5 GB.
@@ -726,6 +734,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   additionalCodeRepositories:
                     description: An array of up to three Git repositories to associate
                       with the notebook instance. These can be either the names of
@@ -736,6 +745,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   arn:
                     description: The Amazon Resource Name (ARN) assigned by AWS to
                       this notebook instance.
@@ -810,6 +820,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   subnetId:
                     description: The VPC subnet ID.
                     type: string
@@ -818,6 +829,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -825,6 +837,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: The URL that you use to connect to the Jupyter notebook
                       that is running in your notebook instance.

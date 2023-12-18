@@ -78,6 +78,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitGatewayAttachmentId:
                     description: The ID of the EC2 Transit Gateway Peering Attachment
                       to manage.
@@ -177,6 +178,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -361,6 +363,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -368,6 +371,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitGatewayAttachmentId:
                     description: The ID of the EC2 Transit Gateway Peering Attachment
                       to manage.

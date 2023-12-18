@@ -77,6 +77,7 @@ spec:
                       or functions to use for the data catalog. The mapping used depends
                       on the catalog type.
                     type: object
+                    x-kubernetes-map-type: granular
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -86,6 +87,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: 'Type of data catalog: LAMBDA for a federated catalog,
                       GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.'
@@ -115,11 +117,13 @@ spec:
                       or functions to use for the data catalog. The mapping used depends
                       on the catalog type.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: 'Type of data catalog: LAMBDA for a federated catalog,
                       GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.'
@@ -319,17 +323,20 @@ spec:
                       or functions to use for the data catalog. The mapping used depends
                       on the catalog type.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: 'Type of data catalog: LAMBDA for a federated catalog,
                       GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.'

@@ -203,6 +203,7 @@ type LaunchConfigurationInitParameters struct {
 	RootBlockDevice []RootBlockDeviceInitParameters `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
 	// A list of associated security group IDS.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The maximum price to use for reserving spot instances.
@@ -218,6 +219,7 @@ type LaunchConfigurationInitParameters struct {
 	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
 
 	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
+	// +listType=set
 	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
@@ -266,6 +268,7 @@ type LaunchConfigurationObservation struct {
 	RootBlockDevice []RootBlockDeviceObservation `json:"rootBlockDevice,omitempty" tf:"root_block_device,omitempty"`
 
 	// A list of associated security group IDS.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The maximum price to use for reserving spot instances.
@@ -281,6 +284,7 @@ type LaunchConfigurationObservation struct {
 	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
 
 	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
+	// +listType=set
 	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
@@ -341,6 +345,7 @@ type LaunchConfigurationParameters struct {
 
 	// A list of associated security group IDS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The maximum price to use for reserving spot instances.
@@ -361,6 +366,7 @@ type LaunchConfigurationParameters struct {
 
 	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 

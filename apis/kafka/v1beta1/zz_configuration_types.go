@@ -23,6 +23,7 @@ type ConfigurationInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// List of Apache Kafka versions which can use this configuration.
+	// +listType=set
 	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Name of the configuration.
@@ -43,6 +44,7 @@ type ConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of Apache Kafka versions which can use this configuration.
+	// +listType=set
 	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Latest revision of the configuration.
@@ -63,6 +65,7 @@ type ConfigurationParameters struct {
 
 	// List of Apache Kafka versions which can use this configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	KafkaVersions []*string `json:"kafkaVersions,omitempty" tf:"kafka_versions,omitempty"`
 
 	// Name of the configuration.

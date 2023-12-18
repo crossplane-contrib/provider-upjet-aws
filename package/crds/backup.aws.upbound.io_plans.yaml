@@ -80,6 +80,7 @@ spec:
                             backup jobs. Set to { WindowsVSS = "enabled" } to enable
                             Windows VSS backup option and create a VSS Windows backup.
                           type: object
+                          x-kubernetes-map-type: granular
                         resourceType:
                           description: 'The type of AWS resource to be backed up.
                             For VSS Windows backups, the only supported resource type
@@ -159,6 +160,7 @@ spec:
                           description: Metadata that you can assign to help organize
                             the resources that you create.
                           type: object
+                          x-kubernetes-map-type: granular
                         ruleName:
                           description: An display name for a backup rule.
                           type: string
@@ -259,6 +261,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -287,6 +290,7 @@ spec:
                             backup jobs. Set to { WindowsVSS = "enabled" } to enable
                             Windows VSS backup option and create a VSS Windows backup.
                           type: object
+                          x-kubernetes-map-type: granular
                         resourceType:
                           description: 'The type of AWS resource to be backed up.
                             For VSS Windows backups, the only supported resource type
@@ -362,6 +366,7 @@ spec:
                           description: Metadata that you can assign to help organize
                             the resources that you create.
                           type: object
+                          x-kubernetes-map-type: granular
                         ruleName:
                           description: An display name for a backup rule.
                           type: string
@@ -380,6 +385,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -568,6 +574,7 @@ spec:
                             backup jobs. Set to { WindowsVSS = "enabled" } to enable
                             Windows VSS backup option and create a VSS Windows backup.
                           type: object
+                          x-kubernetes-map-type: granular
                         resourceType:
                           description: 'The type of AWS resource to be backed up.
                             For VSS Windows backups, the only supported resource type
@@ -649,6 +656,7 @@ spec:
                           description: Metadata that you can assign to help organize
                             the resources that you create.
                           type: object
+                          x-kubernetes-map-type: granular
                         ruleName:
                           description: An display name for a backup rule.
                           type: string
@@ -671,6 +679,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -678,6 +687,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   version:
                     description: Unique, randomly generated, Unicode, UTF-8 encoded
                       string that serves as the version ID of the backup plan.

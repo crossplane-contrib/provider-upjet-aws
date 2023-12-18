@@ -134,6 +134,7 @@ type ConditionOnValueInitParameters struct {
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -148,6 +149,7 @@ type ConditionOnValueObservation struct {
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -165,6 +167,7 @@ type ConditionOnValueParameters struct {
 
 	// A list of strings.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -285,6 +288,7 @@ type DataSourceInitParameters struct {
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
@@ -336,9 +340,11 @@ type DataSourceObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
@@ -409,6 +415,7 @@ type DataSourceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of data source repository. For an updated list of values, refer to Valid Values for Type.
@@ -483,6 +490,7 @@ type InvocationConditionConditionOnValueInitParameters struct {
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -497,6 +505,7 @@ type InvocationConditionConditionOnValueObservation struct {
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -514,6 +523,7 @@ type InvocationConditionConditionOnValueParameters struct {
 
 	// A list of strings.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -619,6 +629,7 @@ type PreExtractionHookConfigurationInvocationConditionConditionOnValueInitParame
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -633,6 +644,7 @@ type PreExtractionHookConfigurationInvocationConditionConditionOnValueObservatio
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -650,6 +662,7 @@ type PreExtractionHookConfigurationInvocationConditionConditionOnValueParameters
 
 	// A list of strings.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -777,12 +790,15 @@ type S3ConfigurationInitParameters struct {
 	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationInitParameters `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
 
 	// A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Exclusion Patterns for more examples.
+	// +listType=set
 	ExclusionPatterns []*string `json:"exclusionPatterns,omitempty" tf:"exclusion_patterns,omitempty"`
 
 	// A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Inclusion Patterns for more examples.
+	// +listType=set
 	InclusionPatterns []*string `json:"inclusionPatterns,omitempty" tf:"inclusion_patterns,omitempty"`
 
 	// A list of S3 prefixes for the documents that should be included in the index.
+	// +listType=set
 	InclusionPrefixes []*string `json:"inclusionPrefixes,omitempty" tf:"inclusion_prefixes,omitempty"`
 }
 
@@ -798,12 +814,15 @@ type S3ConfigurationObservation struct {
 	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationObservation `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`
 
 	// A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Exclusion Patterns for more examples.
+	// +listType=set
 	ExclusionPatterns []*string `json:"exclusionPatterns,omitempty" tf:"exclusion_patterns,omitempty"`
 
 	// A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Inclusion Patterns for more examples.
+	// +listType=set
 	InclusionPatterns []*string `json:"inclusionPatterns,omitempty" tf:"inclusion_patterns,omitempty"`
 
 	// A list of S3 prefixes for the documents that should be included in the index.
+	// +listType=set
 	InclusionPrefixes []*string `json:"inclusionPrefixes,omitempty" tf:"inclusion_prefixes,omitempty"`
 }
 
@@ -833,20 +852,24 @@ type S3ConfigurationParameters struct {
 
 	// A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Exclusion Patterns for more examples.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExclusionPatterns []*string `json:"exclusionPatterns,omitempty" tf:"exclusion_patterns,omitempty"`
 
 	// A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. Refer to Inclusion Patterns for more examples.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InclusionPatterns []*string `json:"inclusionPatterns,omitempty" tf:"inclusion_patterns,omitempty"`
 
 	// A list of S3 prefixes for the documents that should be included in the index.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InclusionPrefixes []*string `json:"inclusionPrefixes,omitempty" tf:"inclusion_prefixes,omitempty"`
 }
 
 type SeedURLConfigurationInitParameters struct {
 
 	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
+	// +listType=set
 	SeedUrls []*string `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
 
 	// The default mode is set to HOST_ONLY. You can choose one of the following modes:
@@ -856,6 +879,7 @@ type SeedURLConfigurationInitParameters struct {
 type SeedURLConfigurationObservation struct {
 
 	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
+	// +listType=set
 	SeedUrls []*string `json:"seedUrls,omitempty" tf:"seed_urls,omitempty"`
 
 	// The default mode is set to HOST_ONLY. You can choose one of the following modes:
@@ -866,6 +890,7 @@ type SeedURLConfigurationParameters struct {
 
 	// The list of seed or starting point URLs of the websites you want to crawl. The list can include a maximum of 100 seed URLs. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 2048.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SeedUrls []*string `json:"seedUrls" tf:"seed_urls,omitempty"`
 
 	// The default mode is set to HOST_ONLY. You can choose one of the following modes:
@@ -876,12 +901,14 @@ type SeedURLConfigurationParameters struct {
 type SiteMapsConfigurationInitParameters struct {
 
 	// The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of 3 sitemap URLs.
+	// +listType=set
 	SiteMaps []*string `json:"siteMaps,omitempty" tf:"site_maps,omitempty"`
 }
 
 type SiteMapsConfigurationObservation struct {
 
 	// The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of 3 sitemap URLs.
+	// +listType=set
 	SiteMaps []*string `json:"siteMaps,omitempty" tf:"site_maps,omitempty"`
 }
 
@@ -889,6 +916,7 @@ type SiteMapsConfigurationParameters struct {
 
 	// The list of sitemap URLs of the websites you want to crawl. The list can include a maximum of 3 sitemap URLs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SiteMaps []*string `json:"siteMaps" tf:"site_maps,omitempty"`
 }
 
@@ -901,6 +929,7 @@ type TargetDocumentAttributeValueInitParameters struct {
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -915,6 +944,7 @@ type TargetDocumentAttributeValueObservation struct {
 	LongValue *float64 `json:"longValue,omitempty" tf:"long_value,omitempty"`
 
 	// A list of strings.
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	StringValue *string `json:"stringValue,omitempty" tf:"string_value,omitempty"`
@@ -932,6 +962,7 @@ type TargetDocumentAttributeValueParameters struct {
 
 	// A list of strings.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StringListValue []*string `json:"stringListValue,omitempty" tf:"string_list_value,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -1030,9 +1061,11 @@ type WebCrawlerConfigurationInitParameters struct {
 	ProxyConfiguration []ProxyConfigurationInitParameters `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
 	// A list of regular expression patterns to exclude certain URLs to crawl. URLs that match the patterns are excluded from the index. URLs that don't match the patterns are included in the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	// +listType=set
 	URLExclusionPatterns []*string `json:"urlExclusionPatterns,omitempty" tf:"url_exclusion_patterns,omitempty"`
 
 	// A list of regular expression patterns to include certain URLs to crawl. URLs that match the patterns are included in the index. URLs that don't match the patterns are excluded from the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	// +listType=set
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
 	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
@@ -1060,9 +1093,11 @@ type WebCrawlerConfigurationObservation struct {
 	ProxyConfiguration []ProxyConfigurationObservation `json:"proxyConfiguration,omitempty" tf:"proxy_configuration,omitempty"`
 
 	// A list of regular expression patterns to exclude certain URLs to crawl. URLs that match the patterns are excluded from the index. URLs that don't match the patterns are included in the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	// +listType=set
 	URLExclusionPatterns []*string `json:"urlExclusionPatterns,omitempty" tf:"url_exclusion_patterns,omitempty"`
 
 	// A list of regular expression patterns to include certain URLs to crawl. URLs that match the patterns are included in the index. URLs that don't match the patterns are excluded from the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
+	// +listType=set
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
 	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.
@@ -1097,10 +1132,12 @@ type WebCrawlerConfigurationParameters struct {
 
 	// A list of regular expression patterns to exclude certain URLs to crawl. URLs that match the patterns are excluded from the index. URLs that don't match the patterns are included in the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	URLExclusionPatterns []*string `json:"urlExclusionPatterns,omitempty" tf:"url_exclusion_patterns,omitempty"`
 
 	// A list of regular expression patterns to include certain URLs to crawl. URLs that match the patterns are included in the index. URLs that don't match the patterns are excluded from the index. If a URL matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the URL file isn't included in the index. Array Members: Minimum number of 0 items. Maximum number of 100 items. Length Constraints: Minimum length of 1. Maximum length of 150.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	URLInclusionPatterns []*string `json:"urlInclusionPatterns,omitempty" tf:"url_inclusion_patterns,omitempty"`
 
 	// A block that specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to 3 sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling. When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. Detailed below.

@@ -150,6 +150,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -266,11 +267,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceAccessProperties:
                     description: –  Specifies which devices and operating systems
                       users can use to access their WorkSpaces. Defined below.
@@ -439,6 +442,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   selfServicePermissions:
                     description: service capabilities. Defined below.
                     items:
@@ -473,6 +477,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceAccessProperties:
                     description: –  Specifies which devices and operating systems
                       users can use to access their WorkSpaces. Defined below.
@@ -724,6 +729,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   iamRoleId:
                     description: The identifier of the IAM role. This is the role
                       that allows Amazon WorkSpaces to make calls to other services,
@@ -738,6 +744,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   registrationCode:
                     description: The registration code for the directory. This is
                       the code that users enter in their Amazon WorkSpaces client
@@ -778,11 +785,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -790,6 +799,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceAccessProperties:
                     description: –  Specifies which devices and operating systems
                       users can use to access their WorkSpaces. Defined below.

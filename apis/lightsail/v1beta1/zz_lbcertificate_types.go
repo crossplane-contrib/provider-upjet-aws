@@ -42,6 +42,7 @@ type LBCertificateInitParameters struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
+	// +listType=set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 
@@ -65,6 +66,7 @@ type LBCertificateObservation struct {
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
+	// +listType=set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
 	SupportCode *string `json:"supportCode,omitempty" tf:"support_code,omitempty"`
@@ -97,6 +99,7 @@ type LBCertificateParameters struct {
 
 	// Set of domains that should be SANs in the issued certificate. domain_name attribute is automatically added as a Subject Alternative Name.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 }
 

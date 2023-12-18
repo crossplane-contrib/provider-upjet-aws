@@ -23,6 +23,7 @@ type VPCAttachmentInitParameters struct {
 	Options []VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -65,12 +66,15 @@ type VPCAttachmentObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// The subnet ARN of the VPC attachment.
+	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ARN of the VPC.
@@ -134,6 +138,7 @@ type VPCAttachmentParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetArns.
@@ -146,6 +151,7 @@ type VPCAttachmentParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ARN of the VPC.

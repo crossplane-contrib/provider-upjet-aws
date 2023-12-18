@@ -32,6 +32,7 @@ type AuthorizerInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
+	// +listType=set
 	ProviderArns []*string `json:"providerArns,omitempty" tf:"provider_arns,omitempty"`
 
 	// Type of the authorizer. Possible values are TOKEN for a Lambda function using a single authorization token submitted in a custom header, REQUEST for a Lambda function using incoming request parameters, or COGNITO_USER_POOLS for using an Amazon Cognito user pool. Defaults to TOKEN.
@@ -66,6 +67,7 @@ type AuthorizerObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// List of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
+	// +listType=set
 	ProviderArns []*string `json:"providerArns,omitempty" tf:"provider_arns,omitempty"`
 
 	// ID of the associated REST API
@@ -124,6 +126,7 @@ type AuthorizerParameters struct {
 
 	// List of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ProviderArns []*string `json:"providerArns,omitempty" tf:"provider_arns,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

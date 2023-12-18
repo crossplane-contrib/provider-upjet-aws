@@ -20,6 +20,7 @@ import (
 type ActionsInitParameters struct {
 
 	// Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.
+	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
 	// Specifies configuration properties of a job run notification. See Notification Property details below.
@@ -54,6 +55,7 @@ type ActionsNotificationPropertyParameters struct {
 type ActionsObservation struct {
 
 	// Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.
+	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
 	// The name of the crawler to be executed. Conflicts with job_name.
@@ -76,6 +78,7 @@ type ActionsParameters struct {
 
 	// Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
 	// The name of the crawler to be executed. Conflicts with job_name.
@@ -270,6 +273,7 @@ type TriggerInitParameters struct {
 	StartOnCreation *bool `json:"startOnCreation,omitempty" tf:"start_on_creation,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
@@ -312,9 +316,11 @@ type TriggerObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
@@ -361,6 +367,7 @@ type TriggerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.

@@ -23,6 +23,7 @@ type AppInitParameters struct {
 	AutoBranchCreationConfig []AutoBranchCreationConfigInitParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
+	// +listType=set
 	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
 
 	// The build specification (build spec) for an Amplify app.
@@ -47,6 +48,7 @@ type AppInitParameters struct {
 	EnableBranchAutoDeletion *bool `json:"enableBranchAutoDeletion,omitempty" tf:"enable_branch_auto_deletion,omitempty"`
 
 	// Environment variables map for an Amplify app.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Name for an Amplify app.
@@ -59,6 +61,7 @@ type AppInitParameters struct {
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -71,6 +74,7 @@ type AppObservation struct {
 	AutoBranchCreationConfig []AutoBranchCreationConfigObservation `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
+	// +listType=set
 	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
 
 	// The build specification (build spec) for an Amplify app.
@@ -98,6 +102,7 @@ type AppObservation struct {
 	EnableBranchAutoDeletion *bool `json:"enableBranchAutoDeletion,omitempty" tf:"enable_branch_auto_deletion,omitempty"`
 
 	// Environment variables map for an Amplify app.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
@@ -119,9 +124,11 @@ type AppObservation struct {
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -137,6 +144,7 @@ type AppParameters struct {
 
 	// Automated branch creation glob patterns for an Amplify app.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
 
 	// Credentials for basic authorization for an Amplify app.
@@ -173,6 +181,7 @@ type AppParameters struct {
 
 	// Environment variables map for an Amplify app.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
@@ -212,6 +221,7 @@ type AppParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -233,6 +243,7 @@ type AutoBranchCreationConfigInitParameters struct {
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
 
 	// Environment variables for the autocreated branch.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Framework for the autocreated branch.
@@ -263,6 +274,7 @@ type AutoBranchCreationConfigObservation struct {
 	EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty" tf:"enable_pull_request_preview,omitempty"`
 
 	// Environment variables for the autocreated branch.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Framework for the autocreated branch.
@@ -303,6 +315,7 @@ type AutoBranchCreationConfigParameters struct {
 
 	// Environment variables for the autocreated branch.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Framework for the autocreated branch.

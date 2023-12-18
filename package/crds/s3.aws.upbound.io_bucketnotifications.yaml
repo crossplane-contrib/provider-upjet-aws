@@ -156,6 +156,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -180,6 +181,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -284,6 +286,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -403,6 +406,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -427,6 +431,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -448,6 +453,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -645,6 +651,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -669,6 +676,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string
@@ -693,6 +701,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filterPrefix:
                           description: Object key name prefix.
                           type: string

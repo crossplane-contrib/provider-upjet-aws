@@ -207,6 +207,7 @@ spec:
                     description: A block of arbitrary string parameters to pass to
                       the SSM document.
                     type: object
+                    x-kubernetes-map-type: granular
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -317,6 +318,7 @@ spec:
                     description: A block of arbitrary string parameters to pass to
                       the SSM document.
                     type: object
+                    x-kubernetes-map-type: granular
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
                       association runs.
@@ -585,6 +587,7 @@ spec:
                     description: A block of arbitrary string parameters to pass to
                       the SSM document.
                     type: object
+                    x-kubernetes-map-type: granular
                   scheduleExpression:
                     description: A cron or rate expression that specifies when the
                       association runs.

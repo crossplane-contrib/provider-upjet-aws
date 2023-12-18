@@ -218,27 +218,33 @@ type DefinitionParameters struct {
 type IAMActionDefinitionInitParameters struct {
 
 	// A list of groups to be attached. There must be at least one group.
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// A list of roles to be attached. There must be at least one role.
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A list of users to be attached. There must be at least one user.
+	// +listType=set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
 type IAMActionDefinitionObservation struct {
 
 	// A list of groups to be attached. There must be at least one group.
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the policy to be attached.
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
 	// A list of roles to be attached. There must be at least one role.
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A list of users to be attached. There must be at least one user.
+	// +listType=set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
@@ -246,6 +252,7 @@ type IAMActionDefinitionParameters struct {
 
 	// A list of groups to be attached. There must be at least one group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the policy to be attached.
@@ -264,10 +271,12 @@ type IAMActionDefinitionParameters struct {
 
 	// A list of roles to be attached. There must be at least one role.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A list of users to be attached. There must be at least one user.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
@@ -277,6 +286,7 @@ type ScpActionDefinitionInitParameters struct {
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
 
 	// A list of target IDs.
+	// +listType=set
 	TargetIds []*string `json:"targetIds,omitempty" tf:"target_ids,omitempty"`
 }
 
@@ -286,6 +296,7 @@ type ScpActionDefinitionObservation struct {
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
 
 	// A list of target IDs.
+	// +listType=set
 	TargetIds []*string `json:"targetIds,omitempty" tf:"target_ids,omitempty"`
 }
 
@@ -297,6 +308,7 @@ type ScpActionDefinitionParameters struct {
 
 	// A list of target IDs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TargetIds []*string `json:"targetIds" tf:"target_ids,omitempty"`
 }
 
@@ -306,6 +318,7 @@ type SsmActionDefinitionInitParameters struct {
 	ActionSubType *string `json:"actionSubType,omitempty" tf:"action_sub_type,omitempty"`
 
 	// The EC2 and RDS instance IDs.
+	// +listType=set
 	InstanceIds []*string `json:"instanceIds,omitempty" tf:"instance_ids,omitempty"`
 }
 
@@ -315,6 +328,7 @@ type SsmActionDefinitionObservation struct {
 	ActionSubType *string `json:"actionSubType,omitempty" tf:"action_sub_type,omitempty"`
 
 	// The EC2 and RDS instance IDs.
+	// +listType=set
 	InstanceIds []*string `json:"instanceIds,omitempty" tf:"instance_ids,omitempty"`
 
 	// The Region to run the SSM document.
@@ -329,6 +343,7 @@ type SsmActionDefinitionParameters struct {
 
 	// The EC2 and RDS instance IDs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InstanceIds []*string `json:"instanceIds" tf:"instance_ids,omitempty"`
 
 	// The Region to run the SSM document.

@@ -156,6 +156,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ttl:
                           description: The TTL in seconds for a resolver that has
                             caching activated. Valid values are between 1 and 3600
@@ -360,6 +361,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ttl:
                           description: The TTL in seconds for a resolver that has
                             caching activated. Valid values are between 1 and 3600
@@ -629,6 +631,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ttl:
                           description: The TTL in seconds for a resolver that has
                             caching activated. Valid values are between 1 and 3600

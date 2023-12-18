@@ -26,6 +26,7 @@ type AccessPointInitParameters struct {
 	RootDirectory []RootDirectoryInitParameters `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,9 +54,11 @@ type AccessPointObservation struct {
 	RootDirectory []RootDirectoryObservation `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -89,6 +92,7 @@ type AccessPointParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -137,6 +141,7 @@ type PosixUserInitParameters struct {
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.
@@ -149,6 +154,7 @@ type PosixUserObservation struct {
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.
@@ -163,6 +169,7 @@ type PosixUserParameters struct {
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.

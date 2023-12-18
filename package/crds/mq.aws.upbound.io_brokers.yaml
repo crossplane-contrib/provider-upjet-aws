@@ -402,6 +402,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   storageType:
                     description: Storage type of the broker. For engine_type ActiveMQ,
                       the valid values are efs and ebs, and the AWS-default is efs.
@@ -492,11 +493,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   user:
                     description: Configuration block for broker users. For engine_type
                       of RabbitMQ, Amazon MQ does not return broker users preventing
@@ -515,6 +518,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         passwordSecretRef:
                           description: Password of the user. It must be 12 to 250
                             characters long, at least 4 unique characters, and must
@@ -718,6 +722,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   user:
                     description: Configuration block for broker users. For engine_type
                       of RabbitMQ, Amazon MQ does not return broker users preventing
@@ -736,6 +741,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         username:
                           description: Username of the user.
                           type: string
@@ -1114,6 +1120,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   storageType:
                     description: Storage type of the broker. For engine_type ActiveMQ,
                       the valid values are efs and ebs, and the AWS-default is efs.
@@ -1127,11 +1134,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1139,6 +1148,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   user:
                     description: Configuration block for broker users. For engine_type
                       of RabbitMQ, Amazon MQ does not return broker users preventing
@@ -1157,6 +1167,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         username:
                           description: Username of the user.
                           type: string

@@ -20,6 +20,7 @@ import (
 type AdvancedBackupSettingInitParameters struct {
 
 	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
+	// +mapType=granular
 	BackupOptions map[string]*string `json:"backupOptions,omitempty" tf:"backup_options,omitempty"`
 
 	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
@@ -29,6 +30,7 @@ type AdvancedBackupSettingInitParameters struct {
 type AdvancedBackupSettingObservation struct {
 
 	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
+	// +mapType=granular
 	BackupOptions map[string]*string `json:"backupOptions,omitempty" tf:"backup_options,omitempty"`
 
 	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
@@ -39,6 +41,7 @@ type AdvancedBackupSettingParameters struct {
 
 	// Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Set to { WindowsVSS = "enabled" } to enable Windows VSS backup option and create a VSS Windows backup.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	BackupOptions map[string]*string `json:"backupOptions" tf:"backup_options,omitempty"`
 
 	// The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
@@ -116,6 +119,7 @@ type PlanInitParameters struct {
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -137,9 +141,11 @@ type PlanObservation struct {
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded string that serves as the version ID of the backup plan.
@@ -167,6 +173,7 @@ type PlanParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -185,6 +192,7 @@ type RuleInitParameters struct {
 	Lifecycle []RuleLifecycleInitParameters `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 
 	// Metadata that you can assign to help organize the resources that you create.
+	// +mapType=granular
 	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
 
 	// An display name for a backup rule.
@@ -241,6 +249,7 @@ type RuleObservation struct {
 	Lifecycle []RuleLifecycleObservation `json:"lifecycle,omitempty" tf:"lifecycle,omitempty"`
 
 	// Metadata that you can assign to help organize the resources that you create.
+	// +mapType=granular
 	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
 
 	// An display name for a backup rule.
@@ -276,6 +285,7 @@ type RuleParameters struct {
 
 	// Metadata that you can assign to help organize the resources that you create.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RecoveryPointTags map[string]*string `json:"recoveryPointTags,omitempty" tf:"recovery_point_tags,omitempty"`
 
 	// An display name for a backup rule.

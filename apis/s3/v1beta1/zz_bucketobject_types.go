@@ -56,6 +56,7 @@ type BucketObjectInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Legal hold status that you want to apply to the specified object. Valid values are ON and OFF.
@@ -80,6 +81,7 @@ type BucketObjectInitParameters struct {
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Target URL for website redirect.
@@ -134,6 +136,7 @@ type BucketObjectObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Legal hold status that you want to apply to the specified object. Valid values are ON and OFF.
@@ -158,9 +161,11 @@ type BucketObjectObservation struct {
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Unique version ID value for the object, if bucket versioning is enabled.
@@ -249,6 +254,7 @@ type BucketObjectParameters struct {
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Legal hold status that you want to apply to the specified object. Valid values are ON and OFF.
@@ -286,6 +292,7 @@ type BucketObjectParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Target URL for website redirect.

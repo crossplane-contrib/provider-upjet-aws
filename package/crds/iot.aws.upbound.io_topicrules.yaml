@@ -453,6 +453,7 @@ spec:
                                 description: Properties of the Apache Kafka producer
                                   client. For more info, see the AWS documentation.
                                 type: object
+                                x-kubernetes-map-type: granular
                               destinationArn:
                                 description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
                                   .
@@ -879,6 +880,7 @@ spec:
                           description: Properties of the Apache Kafka producer client.
                             For more info, see the AWS documentation.
                           type: object
+                          x-kubernetes-map-type: granular
                         destinationArn:
                           description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
                             .
@@ -1173,6 +1175,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timestream:
                     items:
                       properties:
@@ -1621,6 +1624,7 @@ spec:
                                 description: Properties of the Apache Kafka producer
                                   client. For more info, see the AWS documentation.
                                 type: object
+                                x-kubernetes-map-type: granular
                               destinationArn:
                                 description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
                                   .
@@ -1880,6 +1884,7 @@ spec:
                           description: Properties of the Apache Kafka producer client.
                             For more info, see the AWS documentation.
                           type: object
+                          x-kubernetes-map-type: granular
                         destinationArn:
                           description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
                             .
@@ -2011,6 +2016,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timestream:
                     items:
                       properties:
@@ -2626,6 +2632,7 @@ spec:
                                 description: Properties of the Apache Kafka producer
                                   client. For more info, see the AWS documentation.
                                 type: object
+                                x-kubernetes-map-type: granular
                               destinationArn:
                                 description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
                                   .
@@ -2895,6 +2902,7 @@ spec:
                           description: Properties of the Apache Kafka producer client.
                             For more info, see the AWS documentation.
                           type: object
+                          x-kubernetes-map-type: granular
                         destinationArn:
                           description: The ARN of Kafka action's VPC aws_iot_topic_rule_destination
                             .
@@ -3033,6 +3041,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -3040,6 +3049,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   timestream:
                     items:
                       properties:

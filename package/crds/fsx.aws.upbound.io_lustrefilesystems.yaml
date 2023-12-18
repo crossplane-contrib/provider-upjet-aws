@@ -272,6 +272,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         rootSquash:
                           description: You enable root squash by setting a user ID
                             (UID) and group ID (GID) for the file system in the format
@@ -364,6 +365,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
@@ -467,6 +469,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -609,6 +612,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         rootSquash:
                           description: You enable root squash by setting a user ID
                             (UID) and group ID (GID) for the file system in the format
@@ -635,6 +639,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
                       weekly maintenance, in the UTC time zone.
@@ -956,6 +961,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         rootSquash:
                           description: You enable root squash by setting a user ID
                             (UID) and group ID (GID) for the file system in the format
@@ -971,6 +977,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
@@ -997,6 +1004,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1004,6 +1012,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcId:
                     description: Identifier of the Virtual Private Cloud for the file
                       system.

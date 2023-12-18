@@ -29,6 +29,7 @@ type ScramSecretAssociationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
+	// +listType=set
 	SecretArnList []*string `json:"secretArnList,omitempty" tf:"secret_arn_list,omitempty"`
 }
 
@@ -58,6 +59,7 @@ type ScramSecretAssociationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecretArnRefs
 	// +crossplane:generate:reference:selectorFieldName=SecretArnSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecretArnList []*string `json:"secretArnList,omitempty" tf:"secret_arn_list,omitempty"`
 
 	// References to Secret in secretsmanager to populate secretArnList.
