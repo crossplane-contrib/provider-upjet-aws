@@ -41,6 +41,7 @@ type HostedPublicVirtualInterfaceInitParameters struct {
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
 	// A list of routes to be advertised to the AWS network in this region.
+	// +listType=set
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// The VLAN ID.
@@ -85,6 +86,7 @@ type HostedPublicVirtualInterfaceObservation struct {
 	OwnerAccountID *string `json:"ownerAccountId,omitempty" tf:"owner_account_id,omitempty"`
 
 	// A list of routes to be advertised to the AWS network in this region.
+	// +listType=set
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// The VLAN ID.
@@ -141,6 +143,7 @@ type HostedPublicVirtualInterfaceParameters struct {
 
 	// A list of routes to be advertised to the AWS network in this region.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RouteFilterPrefixes []*string `json:"routeFilterPrefixes,omitempty" tf:"route_filter_prefixes,omitempty"`
 
 	// The VLAN ID.

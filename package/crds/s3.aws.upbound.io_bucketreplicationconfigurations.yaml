@@ -469,6 +469,7 @@ spec:
                                         the rule applies. The rule applies only to
                                         objects having all the tags in its tagset.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               prefix:
@@ -746,6 +747,7 @@ spec:
                                         the rule applies. The rule applies only to
                                         objects having all the tags in its tagset.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               prefix:
@@ -1175,6 +1177,7 @@ spec:
                                         the rule applies. The rule applies only to
                                         objects having all the tags in its tagset.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               prefix:

@@ -70,6 +70,7 @@ type SubnetInitParameters_2 struct {
 	PrivateDNSHostnameTypeOnLaunch *string `json:"privateDnsHostnameTypeOnLaunch,omitempty" tf:"private_dns_hostname_type_on_launch,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -138,9 +139,11 @@ type SubnetObservation_2 struct {
 	PrivateDNSHostnameTypeOnLaunch *string `json:"privateDnsHostnameTypeOnLaunch,omitempty" tf:"private_dns_hostname_type_on_launch,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VPC ID.
@@ -221,6 +224,7 @@ type SubnetParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC ID.

@@ -20,6 +20,7 @@ import (
 type ReportDeliveryChannelInitParameters struct {
 
 	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
+	// +listType=set
 	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
 
 	// The unique name of the S3 bucket that receives your reports.
@@ -32,6 +33,7 @@ type ReportDeliveryChannelInitParameters struct {
 type ReportDeliveryChannelObservation struct {
 
 	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
+	// +listType=set
 	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
 
 	// The unique name of the S3 bucket that receives your reports.
@@ -45,6 +47,7 @@ type ReportDeliveryChannelParameters struct {
 
 	// A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Formats []*string `json:"formats,omitempty" tf:"formats,omitempty"`
 
 	// The unique name of the S3 bucket that receives your reports.
@@ -71,6 +74,7 @@ type ReportPlanInitParameters struct {
 	ReportSetting []ReportSettingInitParameters `json:"reportSetting,omitempty" tf:"report_setting,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -101,9 +105,11 @@ type ReportPlanObservation struct {
 	ReportSetting []ReportSettingObservation `json:"reportSetting,omitempty" tf:"report_setting,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -132,24 +138,29 @@ type ReportPlanParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ReportSettingInitParameters struct {
 
 	// Specifies the list of accounts a report covers.
+	// +listType=set
 	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
 
 	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
+	// +listType=set
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 
 	// Specifies the number of frameworks a report covers.
 	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
 
 	// Specifies the list of Organizational Units a report covers.
+	// +listType=set
 	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
 
 	// Specifies the list of regions a report covers.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
@@ -159,18 +170,22 @@ type ReportSettingInitParameters struct {
 type ReportSettingObservation struct {
 
 	// Specifies the list of accounts a report covers.
+	// +listType=set
 	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
 
 	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
+	// +listType=set
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 
 	// Specifies the number of frameworks a report covers.
 	NumberOfFrameworks *float64 `json:"numberOfFrameworks,omitempty" tf:"number_of_frameworks,omitempty"`
 
 	// Specifies the list of Organizational Units a report covers.
+	// +listType=set
 	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
 
 	// Specifies the list of regions a report covers.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.
@@ -181,10 +196,12 @@ type ReportSettingParameters struct {
 
 	// Specifies the list of accounts a report covers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
 
 	// Specifies the Amazon Resource Names (ARNs) of the frameworks a report covers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	FrameworkArns []*string `json:"frameworkArns,omitempty" tf:"framework_arns,omitempty"`
 
 	// Specifies the number of frameworks a report covers.
@@ -193,10 +210,12 @@ type ReportSettingParameters struct {
 
 	// Specifies the list of Organizational Units a report covers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OrganizationUnits []*string `json:"organizationUnits,omitempty" tf:"organization_units,omitempty"`
 
 	// Specifies the list of regions a report covers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// Identifies the report template for the report. Reports are built using a report template. The report templates are: RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT.

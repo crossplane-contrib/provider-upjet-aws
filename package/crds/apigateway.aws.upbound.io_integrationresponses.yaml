@@ -240,12 +240,14 @@ spec:
                       the backend response. For example: response_parameters = { "method.response.header.X-Some-Header"
                       = "integration.response.header.X-Some-Other-Header" }.'
                     type: object
+                    x-kubernetes-map-type: granular
                   responseTemplates:
                     additionalProperties:
                       type: string
                     description: Map of templates used to transform the integration
                       response body.
                     type: object
+                    x-kubernetes-map-type: granular
                   restApiId:
                     description: ID of the associated REST API.
                     type: string
@@ -439,12 +441,14 @@ spec:
                       the backend response. For example: response_parameters = { "method.response.header.X-Some-Header"
                       = "integration.response.header.X-Some-Other-Header" }.'
                     type: object
+                    x-kubernetes-map-type: granular
                   responseTemplates:
                     additionalProperties:
                       type: string
                     description: Map of templates used to transform the integration
                       response body.
                     type: object
+                    x-kubernetes-map-type: granular
                   selectionPattern:
                     description: Regular expression pattern used to choose an integration
                       response based on the response from the backend. Omit configuring
@@ -642,12 +646,14 @@ spec:
                       the backend response. For example: response_parameters = { "method.response.header.X-Some-Header"
                       = "integration.response.header.X-Some-Other-Header" }.'
                     type: object
+                    x-kubernetes-map-type: granular
                   responseTemplates:
                     additionalProperties:
                       type: string
                     description: Map of templates used to transform the integration
                       response body.
                     type: object
+                    x-kubernetes-map-type: granular
                   restApiId:
                     description: ID of the associated REST API.
                     type: string

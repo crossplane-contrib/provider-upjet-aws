@@ -132,6 +132,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
@@ -249,6 +250,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
@@ -528,10 +530,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.

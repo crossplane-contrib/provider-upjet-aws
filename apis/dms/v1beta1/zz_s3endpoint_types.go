@@ -137,6 +137,7 @@ type S3EndpointInitParameters struct {
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.
@@ -292,9 +293,11 @@ type S3EndpointObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.
@@ -513,6 +516,7 @@ type S3EndpointParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.

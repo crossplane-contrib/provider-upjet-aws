@@ -75,6 +75,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   associatedGatewayId:
                     description: The ID of the VGW or transit gateway with which to
                       associate the Direct Connect gateway.
@@ -335,6 +336,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -509,6 +511,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   associatedGatewayId:
                     description: The ID of the VGW or transit gateway with which to
                       associate the Direct Connect gateway.

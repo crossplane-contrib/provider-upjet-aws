@@ -260,6 +260,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   engine:
                     description: The database engine to use. For supported values,
                       see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html).
@@ -795,6 +796,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB instance is deleted. If true is specified, no
@@ -830,6 +832,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timezone:
                     description: Time zone of the DB instance. timezone is currently
                       only supported by Microsoft SQL Server. The timezone can only
@@ -921,6 +924,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 required:
                 - region
                 type: object
@@ -1040,6 +1044,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   engine:
                     description: The database engine to use. For supported values,
                       see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html).
@@ -1229,6 +1234,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB instance is deleted. If true is specified, no
@@ -1264,6 +1270,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timezone:
                     description: Time zone of the DB instance. timezone is currently
                       only supported by Microsoft SQL Server. The timezone can only
@@ -1564,6 +1571,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   endpoint:
                     description: The connection endpoint in address:port format.
                     type: string
@@ -1842,6 +1850,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB instance is deleted. If true is specified, no
@@ -1880,6 +1889,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1887,6 +1897,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   timezone:
                     description: Time zone of the DB instance. timezone is currently
                       only supported by Microsoft SQL Server. The timezone can only
@@ -1901,6 +1912,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

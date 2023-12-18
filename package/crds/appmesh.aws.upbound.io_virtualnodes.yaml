@@ -233,6 +233,7 @@ spec:
                                                   items:
                                                     type: number
                                                   type: array
+                                                  x-kubernetes-list-type: set
                                                 validation:
                                                   description: TLS validation context.
                                                   items:
@@ -256,6 +257,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                           type: object
@@ -279,6 +281,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                             file:
@@ -395,6 +398,7 @@ spec:
                                             items:
                                               type: number
                                             type: array
+                                            x-kubernetes-list-type: set
                                           validation:
                                             description: TLS validation context.
                                             items:
@@ -416,6 +420,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                     type: object
@@ -438,6 +443,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                       file:
@@ -873,6 +879,7 @@ spec:
                                                         items:
                                                           type: string
                                                         type: array
+                                                        x-kubernetes-list-type: set
                                                     type: object
                                                   type: array
                                               type: object
@@ -992,6 +999,7 @@ spec:
                                         that match all of the specified key/value
                                         pairs will be returned.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     namespaceName:
                                       description: Name of the AWS Cloud Map namespace
                                         to use. Use the aws_service_discovery_http_namespace
@@ -1117,6 +1125,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -1217,6 +1226,7 @@ spec:
                                                   items:
                                                     type: number
                                                   type: array
+                                                  x-kubernetes-list-type: set
                                                 validation:
                                                   description: TLS validation context.
                                                   items:
@@ -1240,6 +1250,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                           type: object
@@ -1263,6 +1274,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                             file:
@@ -1379,6 +1391,7 @@ spec:
                                             items:
                                               type: number
                                             type: array
+                                            x-kubernetes-list-type: set
                                           validation:
                                             description: TLS validation context.
                                             items:
@@ -1400,6 +1413,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                     type: object
@@ -1422,6 +1436,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                       file:
@@ -1857,6 +1872,7 @@ spec:
                                                         items:
                                                           type: string
                                                         type: array
+                                                        x-kubernetes-list-type: set
                                                     type: object
                                                   type: array
                                               type: object
@@ -1976,6 +1992,7 @@ spec:
                                         that match all of the specified key/value
                                         pairs will be returned.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     serviceName:
                                       description: attribute of the dns object to
                                         hostname.
@@ -2011,6 +2028,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -2290,6 +2308,7 @@ spec:
                                                   items:
                                                     type: number
                                                   type: array
+                                                  x-kubernetes-list-type: set
                                                 validation:
                                                   description: TLS validation context.
                                                   items:
@@ -2313,6 +2332,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                           type: object
@@ -2336,6 +2356,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                             file:
@@ -2452,6 +2473,7 @@ spec:
                                             items:
                                               type: number
                                             type: array
+                                            x-kubernetes-list-type: set
                                           validation:
                                             description: TLS validation context.
                                             items:
@@ -2473,6 +2495,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                     type: object
@@ -2495,6 +2518,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                       file:
@@ -2930,6 +2954,7 @@ spec:
                                                         items:
                                                           type: string
                                                         type: array
+                                                        x-kubernetes-list-type: set
                                                     type: object
                                                   type: array
                                               type: object
@@ -3049,6 +3074,7 @@ spec:
                                         that match all of the specified key/value
                                         pairs will be returned.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     namespaceName:
                                       description: Name of the AWS Cloud Map namespace
                                         to use. Use the aws_service_discovery_http_namespace
@@ -3090,12 +3116,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

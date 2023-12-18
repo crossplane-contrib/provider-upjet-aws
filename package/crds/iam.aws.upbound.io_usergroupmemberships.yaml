@@ -149,6 +149,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   user:
                     description: The name of the IAM User to add to groups
                     type: string
@@ -408,6 +409,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     type: string
                   user:

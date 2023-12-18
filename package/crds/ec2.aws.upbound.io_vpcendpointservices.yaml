@@ -78,12 +78,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   networkLoadBalancerArns:
                     description: Amazon Resource Names (ARNs) of one or more Network
                       Load Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateDnsName:
                     description: The private DNS name for the service.
                     type: string
@@ -97,11 +99,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -128,12 +132,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   networkLoadBalancerArns:
                     description: Amazon Resource Names (ARNs) of one or more Network
                       Load Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateDnsName:
                     description: The private DNS name for the service.
                     type: string
@@ -143,11 +149,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -330,6 +338,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   arn:
                     description: The Amazon Resource Name (ARN) of the VPC endpoint
                       service.
@@ -340,17 +349,20 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   baseEndpointDnsNames:
                     description: A set of DNS names for the service.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   gatewayLoadBalancerArns:
                     description: Amazon Resource Names (ARNs) of one or more Gateway
                       Load Balancers for the endpoint service.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The ID of the VPC endpoint service.
                     type: string
@@ -364,6 +376,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateDnsName:
                     description: The private DNS name for the service.
                     type: string
@@ -404,11 +417,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -416,6 +431,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

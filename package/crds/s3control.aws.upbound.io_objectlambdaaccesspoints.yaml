@@ -84,6 +84,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cloudWatchMetricsEnabled:
                           description: Whether or not the CloudWatch metrics configuration
                             is enabled.
@@ -182,6 +183,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               contentTransformation:
                                 description: The content transformation of an Object
                                   Lambda Access Point configuration. See Content Transformation
@@ -338,6 +340,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cloudWatchMetricsEnabled:
                           description: Whether or not the CloudWatch metrics configuration
                             is enabled.
@@ -354,6 +357,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               contentTransformation:
                                 description: The content transformation of an Object
                                   Lambda Access Point configuration. See Content Transformation
@@ -577,6 +581,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         cloudWatchMetricsEnabled:
                           description: Whether or not the CloudWatch metrics configuration
                             is enabled.
@@ -597,6 +602,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               contentTransformation:
                                 description: The content transformation of an Object
                                   Lambda Access Point configuration. See Content Transformation

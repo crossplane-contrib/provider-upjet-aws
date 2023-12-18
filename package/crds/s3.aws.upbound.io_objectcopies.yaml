@@ -186,6 +186,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: '- Type of grantee. Valid values are CanonicalUser,
                             Group, and AmazonCustomerByEmail.'
@@ -245,6 +246,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   metadataDirective:
                     description: Specifies whether the metadata is copied from the
                       source object or replaced with metadata provided in the request.
@@ -333,6 +335,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   websiteRedirect:
                     description: Specifies a target URL for website redirect.
                     type: string
@@ -448,6 +451,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: '- Type of grantee. Valid values are CanonicalUser,
                             Group, and AmazonCustomerByEmail.'
@@ -468,6 +472,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   metadataDirective:
                     description: Specifies whether the metadata is copied from the
                       source object or replaced with metadata provided in the request.
@@ -532,6 +537,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   websiteRedirect:
                     description: Specifies a target URL for website redirect.
                     type: string
@@ -825,6 +831,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: '- Type of grantee. Valid values are CanonicalUser,
                             Group, and AmazonCustomerByEmail.'
@@ -853,6 +860,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   metadataDirective:
                     description: Specifies whether the metadata is copied from the
                       source object or replaced with metadata provided in the request.
@@ -924,12 +932,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   versionId:
                     description: Version ID of the newly created copy.
                     type: string

@@ -1130,6 +1130,7 @@ type IotEventsParameters struct {
 type KafkaInitParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1148,6 +1149,7 @@ type KafkaInitParameters struct {
 type KafkaObservation struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1167,6 +1169,7 @@ type KafkaParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1769,6 +1772,7 @@ type TopicRuleInitParameters struct {
 	StepFunctions []TopicRuleStepFunctionsInitParameters `json:"stepFunctions,omitempty" tf:"step_functions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	Timestream []TopicRuleTimestreamInitParameters `json:"timestream,omitempty" tf:"timestream,omitempty"`
@@ -1865,6 +1869,7 @@ type TopicRuleIotEventsParameters struct {
 type TopicRuleKafkaInitParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1883,6 +1888,7 @@ type TopicRuleKafkaInitParameters struct {
 type TopicRuleKafkaObservation struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1902,6 +1908,7 @@ type TopicRuleKafkaParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -2039,9 +2046,11 @@ type TopicRuleObservation struct {
 	StepFunctions []TopicRuleStepFunctionsObservation `json:"stepFunctions,omitempty" tf:"step_functions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	Timestream []TopicRuleTimestreamObservation `json:"timestream,omitempty" tf:"timestream,omitempty"`
@@ -2130,6 +2139,7 @@ type TopicRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional

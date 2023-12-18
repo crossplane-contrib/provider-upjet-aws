@@ -23,12 +23,15 @@ type ClusterEndpointInitParameters struct {
 	CustomEndpointType *string `json:"customEndpointType,omitempty" tf:"custom_endpoint_type,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
+	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
+	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -47,18 +50,22 @@ type ClusterEndpointObservation struct {
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
+	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
 	// The RDS Cluster Endpoint Identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
+	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -84,6 +91,7 @@ type ClusterEndpointParameters struct {
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty. Conflicts with static_members.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludedMembers []*string `json:"excludedMembers,omitempty" tf:"excluded_members,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -93,10 +101,12 @@ type ClusterEndpointParameters struct {
 
 	// List of DB instance identifiers that are part of the custom endpoint group. Conflicts with excluded_members.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	StaticMembers []*string `json:"staticMembers,omitempty" tf:"static_members,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

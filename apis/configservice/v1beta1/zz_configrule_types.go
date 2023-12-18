@@ -35,6 +35,7 @@ type ConfigRuleInitParameters struct {
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -64,9 +65,11 @@ type ConfigRuleObservation struct {
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -99,6 +102,7 @@ type ConfigRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -147,6 +151,7 @@ type ScopeInitParameters struct {
 	ComplianceResourceID *string `json:"complianceResourceId,omitempty" tf:"compliance_resource_id,omitempty"`
 
 	// A list of resource types of only those AWS resources that you want to trigger an evaluation for the ruleE.g., AWS::EC2::Instance. You can only specify one type if you also specify a resource ID for compliance_resource_id. See relevant part of AWS Docs for available types.
+	// +listType=set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.
@@ -162,6 +167,7 @@ type ScopeObservation struct {
 	ComplianceResourceID *string `json:"complianceResourceId,omitempty" tf:"compliance_resource_id,omitempty"`
 
 	// A list of resource types of only those AWS resources that you want to trigger an evaluation for the ruleE.g., AWS::EC2::Instance. You can only specify one type if you also specify a resource ID for compliance_resource_id. See relevant part of AWS Docs for available types.
+	// +listType=set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.
@@ -179,6 +185,7 @@ type ScopeParameters struct {
 
 	// A list of resource types of only those AWS resources that you want to trigger an evaluation for the ruleE.g., AWS::EC2::Instance. You can only specify one type if you also specify a resource ID for compliance_resource_id. See relevant part of AWS Docs for available types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.

@@ -23,6 +23,7 @@ type RouteResponseInitParameters struct {
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
 	// Response models for the route response.
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Route response key.
@@ -41,6 +42,7 @@ type RouteResponseObservation struct {
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
 	// Response models for the route response.
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_route.
@@ -76,6 +78,7 @@ type RouteResponseParameters struct {
 
 	// Response models for the route response.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_route.

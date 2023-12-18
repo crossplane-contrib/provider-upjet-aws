@@ -182,11 +182,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: The array of subnet Ids for customer VPC connectivity.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   region:
@@ -201,6 +203,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: –  The type of application you want to start, such
                       as spark or hive.
@@ -335,11 +338,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: The array of subnet Ids for customer VPC connectivity.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   releaseLabel:
@@ -350,6 +355,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: –  The type of application you want to start, such
                       as spark or hive.
@@ -654,11 +660,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: The array of subnet Ids for customer VPC connectivity.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   releaseLabel:
@@ -669,12 +677,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: –  The type of application you want to start, such
                       as spark or hive.

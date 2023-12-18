@@ -339,6 +339,7 @@ type EventSourceParameters struct {
 type FastRestoreRuleInitParameters struct {
 
 	// The Availability Zones in which to enable fast snapshot restore.
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
@@ -354,6 +355,7 @@ type FastRestoreRuleInitParameters struct {
 type FastRestoreRuleObservation struct {
 
 	// The Availability Zones in which to enable fast snapshot restore.
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
@@ -370,6 +372,7 @@ type FastRestoreRuleParameters struct {
 
 	// The Availability Zones in which to enable fast snapshot restore.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones" tf:"availability_zones,omitempty"`
 
 	// Specifies the number of oldest AMIs to deprecate. Must be an integer between 1 and 1000.
@@ -397,6 +400,7 @@ type LifecyclePolicyInitParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -421,9 +425,11 @@ type LifecyclePolicyObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -462,6 +468,7 @@ type LifecyclePolicyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -474,6 +481,7 @@ type ParametersInitParameters struct {
 	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
 
 	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+	// +listType=set
 	SnapshotOwner []*string `json:"snapshotOwner,omitempty" tf:"snapshot_owner,omitempty"`
 }
 
@@ -486,6 +494,7 @@ type ParametersObservation struct {
 	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
 
 	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+	// +listType=set
 	SnapshotOwner []*string `json:"snapshotOwner,omitempty" tf:"snapshot_owner,omitempty"`
 }
 
@@ -501,6 +510,7 @@ type ParametersParameters struct {
 
 	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SnapshotOwner []*string `json:"snapshotOwner" tf:"snapshot_owner,omitempty"`
 }
 
@@ -528,6 +538,7 @@ type PolicyDetailsInitParameters struct {
 	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	// +mapType=granular
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
 
@@ -555,6 +566,7 @@ type PolicyDetailsObservation struct {
 	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
+	// +mapType=granular
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
 
@@ -590,6 +602,7 @@ type PolicyDetailsParameters struct {
 
 	// A map of tag keys and their values. Any resources that match the resource_types and are tagged with any of these tags will be targeted.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	TargetTags map[string]*string `json:"targetTags,omitempty" tf:"target_tags,omitempty"`
 }
 
@@ -717,9 +730,11 @@ type ScheduleInitParameters struct {
 	ShareRule []ShareRuleInitParameters `json:"shareRule,omitempty" tf:"share_rule,omitempty"`
 
 	// A map of tag keys and their values. DLM lifecycle policies will already tag the snapshot with the tags on the volume. This configuration adds extra tags on top of these.
+	// +mapType=granular
 	TagsToAdd map[string]*string `json:"tagsToAdd,omitempty" tf:"tags_to_add,omitempty"`
 
 	// A map of tag keys and variable values, where the values are determined when the policy is executed. Only $(instance-id) or $(timestamp) are valid values. Can only be used when resource_types is INSTANCE.
+	// +mapType=granular
 	VariableTags map[string]*string `json:"variableTags,omitempty" tf:"variable_tags,omitempty"`
 }
 
@@ -750,9 +765,11 @@ type ScheduleObservation struct {
 	ShareRule []ShareRuleObservation `json:"shareRule,omitempty" tf:"share_rule,omitempty"`
 
 	// A map of tag keys and their values. DLM lifecycle policies will already tag the snapshot with the tags on the volume. This configuration adds extra tags on top of these.
+	// +mapType=granular
 	TagsToAdd map[string]*string `json:"tagsToAdd,omitempty" tf:"tags_to_add,omitempty"`
 
 	// A map of tag keys and variable values, where the values are determined when the policy is executed. Only $(instance-id) or $(timestamp) are valid values. Can only be used when resource_types is INSTANCE.
+	// +mapType=granular
 	VariableTags map[string]*string `json:"variableTags,omitempty" tf:"variable_tags,omitempty"`
 }
 
@@ -792,10 +809,12 @@ type ScheduleParameters struct {
 
 	// A map of tag keys and their values. DLM lifecycle policies will already tag the snapshot with the tags on the volume. This configuration adds extra tags on top of these.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	TagsToAdd map[string]*string `json:"tagsToAdd,omitempty" tf:"tags_to_add,omitempty"`
 
 	// A map of tag keys and variable values, where the values are determined when the policy is executed. Only $(instance-id) or $(timestamp) are valid values. Can only be used when resource_types is INSTANCE.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	VariableTags map[string]*string `json:"variableTags,omitempty" tf:"variable_tags,omitempty"`
 }
 
@@ -841,6 +860,7 @@ type ScheduleRetainRuleParameters struct {
 type ShareRuleInitParameters struct {
 
 	// The IDs of the AWS accounts with which to share the snapshots.
+	// +listType=set
 	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
@@ -853,6 +873,7 @@ type ShareRuleInitParameters struct {
 type ShareRuleObservation struct {
 
 	// The IDs of the AWS accounts with which to share the snapshots.
+	// +listType=set
 	TargetAccounts []*string `json:"targetAccounts,omitempty" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.
@@ -866,6 +887,7 @@ type ShareRuleParameters struct {
 
 	// The IDs of the AWS accounts with which to share the snapshots.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TargetAccounts []*string `json:"targetAccounts" tf:"target_accounts,omitempty"`
 
 	// How often this lifecycle policy should be evaluated. 1, 2,3,4,6,8,12 or 24 are valid values.

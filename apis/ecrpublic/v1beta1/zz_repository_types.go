@@ -23,6 +23,7 @@ type CatalogDataInitParameters struct {
 	AboutText *string `json:"aboutText,omitempty" tf:"about_text,omitempty"`
 
 	// The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters: ARM, ARM 64, x86, x86-64
+	// +listType=set
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
 	// A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
@@ -32,6 +33,7 @@ type CatalogDataInitParameters struct {
 	LogoImageBlob *string `json:"logoImageBlob,omitempty" tf:"logo_image_blob,omitempty"`
 
 	// The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters: Linux, Windows
+	// +listType=set
 	OperatingSystems []*string `json:"operatingSystems,omitempty" tf:"operating_systems,omitempty"`
 
 	// Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
@@ -44,6 +46,7 @@ type CatalogDataObservation struct {
 	AboutText *string `json:"aboutText,omitempty" tf:"about_text,omitempty"`
 
 	// The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters: ARM, ARM 64, x86, x86-64
+	// +listType=set
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
 	// A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
@@ -53,6 +56,7 @@ type CatalogDataObservation struct {
 	LogoImageBlob *string `json:"logoImageBlob,omitempty" tf:"logo_image_blob,omitempty"`
 
 	// The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters: Linux, Windows
+	// +listType=set
 	OperatingSystems []*string `json:"operatingSystems,omitempty" tf:"operating_systems,omitempty"`
 
 	// Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
@@ -67,6 +71,7 @@ type CatalogDataParameters struct {
 
 	// The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters: ARM, ARM 64, x86, x86-64
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Architectures []*string `json:"architectures,omitempty" tf:"architectures,omitempty"`
 
 	// A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
@@ -79,6 +84,7 @@ type CatalogDataParameters struct {
 
 	// The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters: Linux, Windows
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OperatingSystems []*string `json:"operatingSystems,omitempty" tf:"operating_systems,omitempty"`
 
 	// Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
@@ -94,6 +100,7 @@ type RepositoryInitParameters struct {
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -117,9 +124,11 @@ type RepositoryObservation struct {
 	RepositoryURI *string `json:"repositoryUri,omitempty" tf:"repository_uri,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -139,6 +148,7 @@ type RepositoryParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -124,6 +124,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetAction:
                     description: The name of the action in a pipeline you want to
                       connect to the webhook. The action must be from the source (first)
@@ -256,6 +257,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetAction:
                     description: The name of the action in a pipeline you want to
                       connect to the webhook. The action must be from the source (first)
@@ -480,6 +482,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -487,6 +490,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetAction:
                     description: The name of the action in a pipeline you want to
                       connect to the webhook. The action must be from the source (first)

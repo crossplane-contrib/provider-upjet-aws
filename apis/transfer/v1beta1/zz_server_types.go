@@ -20,12 +20,15 @@ import (
 type EndpointDetailsInitParameters struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
+	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
 
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
@@ -35,12 +38,15 @@ type EndpointDetailsInitParameters struct {
 type EndpointDetailsObservation struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
+	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
 
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
@@ -54,14 +60,17 @@ type EndpointDetailsParameters struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
 
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
@@ -144,6 +153,7 @@ type OnUploadParameters struct {
 type ProtocolDetailsInitParameters struct {
 
 	// Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
+	// +listType=set
 	As2Transports []*string `json:"as2Transports,omitempty" tf:"as2_transports,omitempty"`
 
 	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
@@ -159,6 +169,7 @@ type ProtocolDetailsInitParameters struct {
 type ProtocolDetailsObservation struct {
 
 	// Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
+	// +listType=set
 	As2Transports []*string `json:"as2Transports,omitempty" tf:"as2_transports,omitempty"`
 
 	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
@@ -175,6 +186,7 @@ type ProtocolDetailsParameters struct {
 
 	// Indicates the transport method for the AS2 messages. Currently, only HTTP is supported.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	As2Transports []*string `json:"as2Transports,omitempty" tf:"as2_transports,omitempty"`
 
 	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.
@@ -220,12 +232,14 @@ type ServerInitParameters struct {
 	ProtocolDetails []ProtocolDetailsInitParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
 	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06 and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
@@ -283,15 +297,18 @@ type ServerObservation struct {
 	ProtocolDetails []ProtocolDetailsObservation `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
 	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06 and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
@@ -381,6 +398,7 @@ type ServerParameters struct {
 
 	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -394,6 +412,7 @@ type ServerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.

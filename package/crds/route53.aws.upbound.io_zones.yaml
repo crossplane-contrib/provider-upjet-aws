@@ -162,6 +162,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpc:
                     description: Configuration block(s) specifying VPC(s) to associate
                       with a private hosted zone. Conflicts with the delegation_set_id
@@ -282,6 +283,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpc:
                     description: Configuration block(s) specifying VPC(s) to associate
                       with a private hosted zone. Conflicts with the delegation_set_id
@@ -498,6 +500,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -505,6 +508,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpc:
                     description: Configuration block(s) specifying VPC(s) to associate
                       with a private hosted zone. Conflicts with the delegation_set_id

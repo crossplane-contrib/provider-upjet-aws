@@ -93,6 +93,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   connectionDraining:
                     description: 'Boolean to enable connection draining. Default:
                       false'
@@ -143,6 +144,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   instancesRefs:
                     description: References to Instance in ec2 to populate instances.
                     items:
@@ -258,6 +260,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceSecurityGroup:
                     description: The name of the security group that you can use as
                       part of your inbound rules for your load balancer's back-end
@@ -268,6 +271,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   subnetsRefs:
                     description: References to Subnet in ec2 to populate subnets.
                     items:
@@ -350,6 +354,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -391,6 +396,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   connectionDraining:
                     description: 'Boolean to enable connection draining. Default:
                       false'
@@ -470,6 +476,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceSecurityGroup:
                     description: The name of the security group that you can use as
                       part of your inbound rules for your load balancer's back-end
@@ -480,6 +487,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -680,6 +688,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   connectionDraining:
                     description: 'Boolean to enable connection draining. Default:
                       false'
@@ -736,6 +745,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   internal:
                     description: If true, ELB will be an internal ELB.
                     type: boolean
@@ -770,6 +780,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceSecurityGroup:
                     description: The name of the security group that you can use as
                       part of your inbound rules for your load balancer's back-end
@@ -786,11 +797,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -798,6 +811,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneId:
                     description: The canonical hosted zone ID of the ELB (to be used
                       in a Route 53 Alias record)

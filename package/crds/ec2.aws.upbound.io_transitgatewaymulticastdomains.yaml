@@ -93,6 +93,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitGatewayId:
                     description: EC2 Transit Gateway identifier. The EC2 Transit Gateway
                       must have multicast_support enabled.
@@ -206,6 +207,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -405,6 +407,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -412,6 +415,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitGatewayId:
                     description: EC2 Transit Gateway identifier. The EC2 Transit Gateway
                       must have multicast_support enabled.

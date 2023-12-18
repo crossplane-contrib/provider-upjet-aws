@@ -175,6 +175,7 @@ spec:
                       Kubernetes labels applied to the EKS Node Group will not be
                       managed.
                     type: object
+                    x-kubernetes-map-type: granular
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
                       Detailed below.
@@ -390,6 +391,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   scalingConfig:
@@ -494,11 +496,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   taint:
                     description: The Kubernetes taints to be applied to the nodes
                       in the node group. Maximum of 50 taints per node group. Detailed
@@ -652,6 +656,7 @@ spec:
                       Kubernetes labels applied to the EKS Node Group will not be
                       managed.
                     type: object
+                    x-kubernetes-map-type: granular
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
                       Detailed below.
@@ -718,6 +723,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   taint:
                     description: The Kubernetes taints to be applied to the nodes
                       in the node group. Maximum of 50 taints per node group. Detailed
@@ -962,6 +968,7 @@ spec:
                       Kubernetes labels applied to the EKS Node Group will not be
                       managed.
                     type: object
+                    x-kubernetes-map-type: granular
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
                       Detailed below.
@@ -1018,6 +1025,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   resources:
@@ -1069,11 +1077,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1081,6 +1091,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   taint:
                     description: The Kubernetes taints to be applied to the nodes
                       in the node group. Maximum of 50 taints per node group. Detailed

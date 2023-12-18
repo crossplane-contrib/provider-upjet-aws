@@ -20,6 +20,7 @@ import (
 type LocationS3InitParameters struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
+	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
 	// Configuration block containing information for connecting to S3.
@@ -32,12 +33,14 @@ type LocationS3InitParameters struct {
 	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LocationS3Observation struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
+	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
 	// Amazon Resource Name (ARN) of the DataSync Location.
@@ -59,9 +62,11 @@ type LocationS3Observation struct {
 	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
@@ -71,6 +76,7 @@ type LocationS3Parameters struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -106,6 +112,7 @@ type LocationS3Parameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

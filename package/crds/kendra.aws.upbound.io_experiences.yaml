@@ -84,6 +84,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               directPutContent:
                                 description: Whether to use documents you indexed
                                   directly using the BatchPutDocument API. Defaults
@@ -96,6 +97,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         userIdentityConfiguration:
@@ -310,6 +312,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               directPutContent:
                                 description: Whether to use documents you indexed
                                   directly using the BatchPutDocument API. Defaults
@@ -322,6 +325,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         userIdentityConfiguration:
@@ -535,6 +539,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               directPutContent:
                                 description: Whether to use documents you indexed
                                   directly using the BatchPutDocument API. Defaults
@@ -547,6 +552,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         userIdentityConfiguration:

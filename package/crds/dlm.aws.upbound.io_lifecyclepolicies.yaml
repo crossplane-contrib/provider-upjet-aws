@@ -255,6 +255,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               type:
@@ -555,6 +556,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     count:
                                       description: Specifies the number of oldest
                                         AMIs to deprecate. Must be an integer between
@@ -611,6 +613,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     unshareInterval:
                                       description: How often this lifecycle policy
                                         should be evaluated. 1, 2,3,4,6,8,12 or 24
@@ -632,6 +635,7 @@ spec:
                                   with the tags on the volume. This configuration
                                   adds extra tags on top of these.
                                 type: object
+                                x-kubernetes-map-type: granular
                               variableTags:
                                 additionalProperties:
                                   type: string
@@ -641,6 +645,7 @@ spec:
                                   are valid values. Can only be used when resource_types
                                   is INSTANCE.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         targetTags:
@@ -650,6 +655,7 @@ spec:
                             that match the resource_types and are tagged with any
                             of these tags will be targeted.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   region:
@@ -666,6 +672,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -792,6 +799,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               type:
@@ -1002,6 +1010,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     count:
                                       description: Specifies the number of oldest
                                         AMIs to deprecate. Must be an integer between
@@ -1058,6 +1067,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     unshareInterval:
                                       description: How often this lifecycle policy
                                         should be evaluated. 1, 2,3,4,6,8,12 or 24
@@ -1079,6 +1089,7 @@ spec:
                                   with the tags on the volume. This configuration
                                   adds extra tags on top of these.
                                 type: object
+                                x-kubernetes-map-type: granular
                               variableTags:
                                 additionalProperties:
                                   type: string
@@ -1088,6 +1099,7 @@ spec:
                                   are valid values. Can only be used when resource_types
                                   is INSTANCE.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         targetTags:
@@ -1097,6 +1109,7 @@ spec:
                             that match the resource_types and are tagged with any
                             of these tags will be targeted.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   state:
@@ -1109,6 +1122,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -1405,6 +1419,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               type:
@@ -1621,6 +1636,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     count:
                                       description: Specifies the number of oldest
                                         AMIs to deprecate. Must be an integer between
@@ -1677,6 +1693,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                     unshareInterval:
                                       description: How often this lifecycle policy
                                         should be evaluated. 1, 2,3,4,6,8,12 or 24
@@ -1698,6 +1715,7 @@ spec:
                                   with the tags on the volume. This configuration
                                   adds extra tags on top of these.
                                 type: object
+                                x-kubernetes-map-type: granular
                               variableTags:
                                 additionalProperties:
                                   type: string
@@ -1707,6 +1725,7 @@ spec:
                                   are valid values. Can only be used when resource_types
                                   is INSTANCE.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         targetTags:
@@ -1716,6 +1735,7 @@ spec:
                             that match the resource_types and are tagged with any
                             of these tags will be targeted.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   state:
@@ -1728,6 +1748,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1735,6 +1756,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

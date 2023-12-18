@@ -154,6 +154,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   volumeId:
                     description: The ID of the volume to back up. Required if backing
                       up a ONTAP Volume.
@@ -178,6 +179,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   volumeId:
                     description: The ID of the volume to back up. Required if backing
                       up a ONTAP Volume.
@@ -371,6 +373,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -378,6 +381,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of the file system backup.
                     type: string

@@ -171,12 +171,14 @@ spec:
                       not cause the resource to recreate (redeploy the REST API) with
                       upstream configuration changes.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map to set on the stage managed by the stage_name
                       argument.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -214,12 +216,14 @@ spec:
                       not cause the resource to recreate (redeploy the REST API) with
                       upstream configuration changes.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map to set on the stage managed by the stage_name
                       argument.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -426,12 +430,14 @@ spec:
                       not cause the resource to recreate (redeploy the REST API) with
                       upstream configuration changes.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map to set on the stage managed by the stage_name
                       argument.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

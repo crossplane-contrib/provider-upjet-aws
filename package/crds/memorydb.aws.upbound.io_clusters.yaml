@@ -283,6 +283,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   snapshotArns:
                     description: List of ARN-s that uniquely identify RDB snapshot
                       files stored in S3. The snapshot files will be used to populate
@@ -392,6 +393,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tlsEnabled:
                     description: A flag to enable in-transit encryption on the cluster.
                       When set to false, the acl_name must be open-access. Defaults
@@ -494,6 +496,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tlsEnabled:
                     description: A flag to enable in-transit encryption on the cluster.
                       When set to false, the acl_name must be open-access. Defaults
@@ -758,6 +761,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   shards:
                     description: Set of shards in this cluster.
                     items:
@@ -838,6 +842,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -845,6 +850,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   tlsEnabled:
                     description: A flag to enable in-transit encryption on the cluster.
                       When set to false, the acl_name must be open-access. Defaults

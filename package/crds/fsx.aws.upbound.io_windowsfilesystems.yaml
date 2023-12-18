@@ -152,6 +152,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   auditLogConfiguration:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
@@ -378,6 +379,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   selfManagedActiveDirectory:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
@@ -394,6 +396,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         domainName:
                           description: The fully qualified domain name of the self-managed
                             AD directory. For example, corp.example.com.
@@ -550,6 +553,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   throughputCapacity:
                     description: Throughput (megabytes per second) of the file system
                       in power of 2 increments. Minimum of 8 and maximum of 2048.
@@ -580,6 +584,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   auditLogConfiguration:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
@@ -657,6 +662,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         domainName:
                           description: The fully qualified domain name of the self-managed
                             AD directory. For example, corp.example.com.
@@ -708,6 +714,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   throughputCapacity:
                     description: Throughput (megabytes per second) of the file system
                       in power of 2 increments. Minimum of 8 and maximum of 2048.
@@ -899,6 +906,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   arn:
                     description: Amazon Resource Name of the file system.
                     type: string
@@ -975,6 +983,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ownerId:
                     description: AWS account identifier that created the file system.
                     type: string
@@ -1000,6 +1009,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   selfManagedActiveDirectory:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
@@ -1016,6 +1026,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         domainName:
                           description: The fully qualified domain name of the self-managed
                             AD directory. For example, corp.example.com.
@@ -1074,6 +1085,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1081,6 +1093,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   throughputCapacity:
                     description: Throughput (megabytes per second) of the file system
                       in power of 2 increments. Minimum of 8 and maximum of 2048.

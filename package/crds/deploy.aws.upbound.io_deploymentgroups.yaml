@@ -79,6 +79,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Indicates whether the alarm configuration is
                             enabled. This option is useful when you want to temporarily
@@ -185,6 +186,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   autoscalingGroups:
@@ -193,6 +195,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   blueGreenDeploymentConfig:
                     description: Configuration block of the blue/green deployment
                       options for a deployment group (documented below).
@@ -614,6 +617,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               targetGroup:
@@ -729,6 +733,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                             type: object
@@ -837,6 +842,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   triggerConfiguration:
                     description: Configuration block(s) of the triggers for the deployment
                       group (documented below).
@@ -851,6 +857,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         triggerName:
                           description: The name of the notification trigger.
                           type: string
@@ -963,6 +970,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Indicates whether the alarm configuration is
                             enabled. This option is useful when you want to temporarily
@@ -993,6 +1001,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   autoscalingGroups:
@@ -1001,6 +1010,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   blueGreenDeploymentConfig:
                     description: Configuration block of the blue/green deployment
                       options for a deployment group (documented below).
@@ -1172,6 +1182,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               targetGroup:
@@ -1191,6 +1202,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                             type: object
@@ -1219,6 +1231,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   triggerConfiguration:
                     description: Configuration block(s) of the triggers for the deployment
                       group (documented below).
@@ -1233,6 +1246,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         triggerName:
                           description: The name of the notification trigger.
                           type: string
@@ -1416,6 +1430,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Indicates whether the alarm configuration is
                             enabled. This option is useful when you want to temporarily
@@ -1452,6 +1467,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   autoscalingGroups:
@@ -1460,6 +1476,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   blueGreenDeploymentConfig:
                     description: Configuration block of the blue/green deployment
                       options for a deployment group (documented below).
@@ -1658,6 +1675,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               targetGroup:
@@ -1689,6 +1707,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                             type: object
@@ -1720,6 +1739,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1727,6 +1747,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   triggerConfiguration:
                     description: Configuration block(s) of the triggers for the deployment
                       group (documented below).
@@ -1741,6 +1762,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         triggerName:
                           description: The name of the notification trigger.
                           type: string

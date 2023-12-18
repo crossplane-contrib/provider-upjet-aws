@@ -386,18 +386,22 @@ type EncryptionParameters struct {
 type ExcludeInitParameters struct {
 
 	// List of S3 bucket ARNs.
+	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
 	// List of AWS Regions.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
 type ExcludeObservation struct {
 
 	// List of S3 bucket ARNs.
+	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
 	// List of AWS Regions.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
@@ -405,28 +409,34 @@ type ExcludeParameters struct {
 
 	// List of S3 bucket ARNs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
 	// List of AWS Regions.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
 type IncludeInitParameters struct {
 
 	// List of S3 bucket ARNs.
+	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
 	// List of AWS Regions.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
 type IncludeObservation struct {
 
 	// List of S3 bucket ARNs.
+	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
 	// List of AWS Regions.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
@@ -434,10 +444,12 @@ type IncludeParameters struct {
 
 	// List of S3 bucket ARNs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
 	// List of AWS Regions.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 }
 
@@ -615,6 +627,7 @@ type StorageLensConfigurationInitParameters struct {
 	StorageLensConfiguration []StorageLensConfigurationStorageLensConfigurationInitParameters `json:"storageLensConfiguration,omitempty" tf:"storage_lens_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -635,9 +648,11 @@ type StorageLensConfigurationObservation struct {
 	StorageLensConfiguration []StorageLensConfigurationStorageLensConfigurationObservation `json:"storageLensConfiguration,omitempty" tf:"storage_lens_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -662,6 +677,7 @@ type StorageLensConfigurationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

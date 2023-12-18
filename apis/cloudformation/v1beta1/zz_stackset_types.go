@@ -124,6 +124,7 @@ type StackSetInitParameters struct {
 	CallAs *string `json:"callAs,omitempty" tf:"call_as,omitempty"`
 
 	// A list of capabilities. Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND.
+	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// Description of the StackSet.
@@ -136,12 +137,14 @@ type StackSetInitParameters struct {
 	OperationPreferences []OperationPreferencesInitParameters `json:"operationPreferences,omitempty" tf:"operation_preferences,omitempty"`
 
 	// Key-value map of input parameters for the StackSet template. All template parameters, including those with a Default, must be configured or ignored with lifecycle configuration block ignore_changes argument. All NoEcho template parameters must be ignored with the lifecycle configuration block ignore_changes argument.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Describes how the IAM roles required for your StackSet are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.
 	PermissionModel *string `json:"permissionModel,omitempty" tf:"permission_model,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// String containing the CloudFormation template body. Maximum size: 51,200 bytes. Conflicts with template_url.
@@ -166,6 +169,7 @@ type StackSetObservation struct {
 	CallAs *string `json:"callAs,omitempty" tf:"call_as,omitempty"`
 
 	// A list of capabilities. Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND.
+	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// Description of the StackSet.
@@ -181,6 +185,7 @@ type StackSetObservation struct {
 	OperationPreferences []OperationPreferencesObservation `json:"operationPreferences,omitempty" tf:"operation_preferences,omitempty"`
 
 	// Key-value map of input parameters for the StackSet template. All template parameters, including those with a Default, must be configured or ignored with lifecycle configuration block ignore_changes argument. All NoEcho template parameters must be ignored with the lifecycle configuration block ignore_changes argument.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Describes how the IAM roles required for your StackSet are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.
@@ -190,9 +195,11 @@ type StackSetObservation struct {
 	StackSetID *string `json:"stackSetId,omitempty" tf:"stack_set_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// String containing the CloudFormation template body. Maximum size: 51,200 bytes. Conflicts with template_url.
@@ -228,6 +235,7 @@ type StackSetParameters struct {
 
 	// A list of capabilities. Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// Description of the StackSet.
@@ -244,6 +252,7 @@ type StackSetParameters struct {
 
 	// Key-value map of input parameters for the StackSet template. All template parameters, including those with a Default, must be configured or ignored with lifecycle configuration block ignore_changes argument. All NoEcho template parameters must be ignored with the lifecycle configuration block ignore_changes argument.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Describes how the IAM roles required for your StackSet are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.
@@ -257,6 +266,7 @@ type StackSetParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// String containing the CloudFormation template body. Maximum size: 51,200 bytes. Conflicts with template_url.

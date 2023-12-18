@@ -237,6 +237,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateSelectionExpression:
                     description: The template selection expression for the integration
                       response.
@@ -270,6 +271,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateSelectionExpression:
                     description: The template selection expression for the integration
                       response.
@@ -468,6 +470,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateSelectionExpression:
                     description: The template selection expression for the integration
                       response.

@@ -113,17 +113,20 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               complianceResourceTypes:
                                 description: Describes whether the control scope includes
                                   one or more types of resources, such as EFS or RDS.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               tags:
                                 additionalProperties:
                                   type: string
                                 description: Key-value map of resource tags.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                       type: object
@@ -146,6 +149,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -207,17 +211,20 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               complianceResourceTypes:
                                 description: Describes whether the control scope includes
                                   one or more types of resources, such as EFS or RDS.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               tags:
                                 additionalProperties:
                                   type: string
                                 description: Key-value map of resource tags.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                       type: object
@@ -236,6 +243,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -460,17 +468,20 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               complianceResourceTypes:
                                 description: Describes whether the control scope includes
                                   one or more types of resources, such as EFS or RDS.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               tags:
                                 additionalProperties:
                                   type: string
                                 description: Key-value map of resource tags.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                       type: object
@@ -508,6 +519,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -515,6 +527,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

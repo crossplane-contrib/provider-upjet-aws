@@ -137,12 +137,14 @@ type UserPoolClientInitParameters struct {
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
 	// List of allowed OAuth flows (code, implicit, client_credentials).
+	// +listType=set
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
 	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
 	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
 
 	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
+	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
 	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
@@ -152,6 +154,7 @@ type UserPoolClientInitParameters struct {
 	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
 
 	// List of allowed callback URLs for the identity providers.
+	// +listType=set
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
 
 	// Default redirect URI. Must be in the list of callback URLs.
@@ -164,6 +167,7 @@ type UserPoolClientInitParameters struct {
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
 	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
+	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
 	// Should an application secret be generated.
@@ -175,6 +179,7 @@ type UserPoolClientInitParameters struct {
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
 	// List of allowed logout URLs for the identity providers.
+	// +listType=set
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
 
 	// Name of the application client.
@@ -184,6 +189,7 @@ type UserPoolClientInitParameters struct {
 	PreventUserExistenceErrors *string `json:"preventUserExistenceErrors,omitempty" tf:"prevent_user_existence_errors,omitempty"`
 
 	// List of user pool attributes the application client can read from.
+	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
@@ -192,12 +198,14 @@ type UserPoolClientInitParameters struct {
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
 	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
+	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 
 	// Configuration block for units in which the validity times are represented in. Detailed below.
 	TokenValidityUnits []TokenValidityUnitsInitParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
 	// List of user pool attributes the application client can write to.
+	// +listType=set
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`
 }
 
@@ -209,12 +217,14 @@ type UserPoolClientObservation struct {
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
 	// List of allowed OAuth flows (code, implicit, client_credentials).
+	// +listType=set
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
 	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
 	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
 
 	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
+	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
 	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
@@ -224,6 +234,7 @@ type UserPoolClientObservation struct {
 	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
 
 	// List of allowed callback URLs for the identity providers.
+	// +listType=set
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
 
 	// Default redirect URI. Must be in the list of callback URLs.
@@ -236,6 +247,7 @@ type UserPoolClientObservation struct {
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
 	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
+	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
 	// Should an application secret be generated.
@@ -250,6 +262,7 @@ type UserPoolClientObservation struct {
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
 	// List of allowed logout URLs for the identity providers.
+	// +listType=set
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
 
 	// Name of the application client.
@@ -259,6 +272,7 @@ type UserPoolClientObservation struct {
 	PreventUserExistenceErrors *string `json:"preventUserExistenceErrors,omitempty" tf:"prevent_user_existence_errors,omitempty"`
 
 	// List of user pool attributes the application client can read from.
+	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
@@ -267,6 +281,7 @@ type UserPoolClientObservation struct {
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
 	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
+	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 
 	// Configuration block for units in which the validity times are represented in. Detailed below.
@@ -276,6 +291,7 @@ type UserPoolClientObservation struct {
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// List of user pool attributes the application client can write to.
+	// +listType=set
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`
 }
 
@@ -289,6 +305,7 @@ type UserPoolClientParameters struct {
 
 	// List of allowed OAuth flows (code, implicit, client_credentials).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
 	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
@@ -297,6 +314,7 @@ type UserPoolClientParameters struct {
 
 	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
 	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
@@ -309,6 +327,7 @@ type UserPoolClientParameters struct {
 
 	// List of allowed callback URLs for the identity providers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
 
 	// Default redirect URI. Must be in the list of callback URLs.
@@ -325,6 +344,7 @@ type UserPoolClientParameters struct {
 
 	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
 	// Should an application secret be generated.
@@ -339,6 +359,7 @@ type UserPoolClientParameters struct {
 
 	// List of allowed logout URLs for the identity providers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
 
 	// Name of the application client.
@@ -351,6 +372,7 @@ type UserPoolClientParameters struct {
 
 	// List of user pool attributes the application client can read from.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
 	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
@@ -366,6 +388,7 @@ type UserPoolClientParameters struct {
 
 	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 
 	// Configuration block for units in which the validity times are represented in. Detailed below.
@@ -387,6 +410,7 @@ type UserPoolClientParameters struct {
 
 	// List of user pool attributes the application client can write to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`
 }
 

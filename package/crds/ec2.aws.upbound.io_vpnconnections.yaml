@@ -183,6 +183,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitGatewayId:
                     description: The ID of the EC2 Transit Gateway.
                     type: string
@@ -287,6 +288,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1InsideCidr:
                     description: The CIDR block of the inside IP addresses for the
                       first VPN tunnel. Valid value is a size /30 CIDR block from
@@ -332,6 +334,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the first VPN tunnel for phase 1 IKE negotiations.
@@ -339,6 +342,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1IntegrityAlgorithms:
                     description: One or more integrity algorithms that are permitted
                       for the first VPN tunnel for phase 1 IKE negotiations. Valid
@@ -346,6 +350,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1LifetimeSeconds:
                     description: The lifetime for phase 1 of the IKE negotiation for
                       the first VPN tunnel, in seconds. Valid value is between 900
@@ -359,6 +364,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the first VPN tunnel for phase 2 IKE negotiations.
@@ -366,6 +372,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2IntegrityAlgorithms:
                     description: List of one or more integrity algorithms that are
                       permitted for the first VPN tunnel for phase 2 IKE negotiations.
@@ -373,6 +380,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2LifetimeSeconds:
                     description: The lifetime for phase 2 of the IKE negotiation for
                       the first VPN tunnel, in seconds. Valid value is between 900
@@ -443,6 +451,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2InsideCidr:
                     description: The CIDR block of the inside IP addresses for the
                       second VPN tunnel. Valid value is a size /30 CIDR block from
@@ -488,6 +497,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the second VPN tunnel for phase 1 IKE negotiations.
@@ -495,6 +505,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1IntegrityAlgorithms:
                     description: One or more integrity algorithms that are permitted
                       for the second VPN tunnel for phase 1 IKE negotiations. Valid
@@ -502,6 +513,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1LifetimeSeconds:
                     description: The lifetime for phase 1 of the IKE negotiation for
                       the second VPN tunnel, in seconds. Valid value is between 900
@@ -515,6 +527,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the second VPN tunnel for phase 2 IKE negotiations.
@@ -522,6 +535,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2IntegrityAlgorithms:
                     description: List of one or more integrity algorithms that are
                       permitted for the second VPN tunnel for phase 2 IKE negotiations.
@@ -529,6 +543,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2LifetimeSeconds:
                     description: The lifetime for phase 2 of the IKE negotiation for
                       the second VPN tunnel, in seconds. Valid value is between 900
@@ -785,6 +800,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   transportTransitGatewayAttachmentId:
                     description: . The attachment ID of the Transit Gateway attachment
                       to Direct Connect Gateway. The ID is obtained through a data
@@ -811,6 +827,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1InsideCidr:
                     description: The CIDR block of the inside IP addresses for the
                       first VPN tunnel. Valid value is a size /30 CIDR block from
@@ -856,6 +873,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the first VPN tunnel for phase 1 IKE negotiations.
@@ -863,6 +881,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1IntegrityAlgorithms:
                     description: One or more integrity algorithms that are permitted
                       for the first VPN tunnel for phase 1 IKE negotiations. Valid
@@ -870,6 +889,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1LifetimeSeconds:
                     description: The lifetime for phase 1 of the IKE negotiation for
                       the first VPN tunnel, in seconds. Valid value is between 900
@@ -883,6 +903,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the first VPN tunnel for phase 2 IKE negotiations.
@@ -890,6 +911,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2IntegrityAlgorithms:
                     description: List of one or more integrity algorithms that are
                       permitted for the first VPN tunnel for phase 2 IKE negotiations.
@@ -897,6 +919,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2LifetimeSeconds:
                     description: The lifetime for phase 2 of the IKE negotiation for
                       the first VPN tunnel, in seconds. Valid value is between 900
@@ -947,6 +970,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2InsideCidr:
                     description: The CIDR block of the inside IP addresses for the
                       second VPN tunnel. Valid value is a size /30 CIDR block from
@@ -992,6 +1016,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the second VPN tunnel for phase 1 IKE negotiations.
@@ -999,6 +1024,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1IntegrityAlgorithms:
                     description: One or more integrity algorithms that are permitted
                       for the second VPN tunnel for phase 1 IKE negotiations. Valid
@@ -1006,6 +1032,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1LifetimeSeconds:
                     description: The lifetime for phase 1 of the IKE negotiation for
                       the second VPN tunnel, in seconds. Valid value is between 900
@@ -1019,6 +1046,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the second VPN tunnel for phase 2 IKE negotiations.
@@ -1026,6 +1054,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2IntegrityAlgorithms:
                     description: List of one or more integrity algorithms that are
                       permitted for the second VPN tunnel for phase 2 IKE negotiations.
@@ -1033,6 +1062,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2LifetimeSeconds:
                     description: The lifetime for phase 2 of the IKE negotiation for
                       the second VPN tunnel, in seconds. Valid value is between 900
@@ -1297,6 +1327,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1304,6 +1335,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   transitGatewayAttachmentId:
                     description: When associated with an EC2 Transit Gateway (transit_gateway_id
                       argument), the attachment ID. See also the aws_ec2_tag resource
@@ -1351,6 +1383,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1InsideCidr:
                     description: The CIDR block of the inside IP addresses for the
                       first VPN tunnel. Valid value is a size /30 CIDR block from
@@ -1396,6 +1429,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the first VPN tunnel for phase 1 IKE negotiations.
@@ -1403,6 +1437,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1IntegrityAlgorithms:
                     description: One or more integrity algorithms that are permitted
                       for the first VPN tunnel for phase 1 IKE negotiations. Valid
@@ -1410,6 +1445,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase1LifetimeSeconds:
                     description: The lifetime for phase 1 of the IKE negotiation for
                       the first VPN tunnel, in seconds. Valid value is between 900
@@ -1423,6 +1459,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the first VPN tunnel for phase 2 IKE negotiations.
@@ -1430,6 +1467,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2IntegrityAlgorithms:
                     description: List of one or more integrity algorithms that are
                       permitted for the first VPN tunnel for phase 2 IKE negotiations.
@@ -1437,6 +1475,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel1Phase2LifetimeSeconds:
                     description: The lifetime for phase 2 of the IKE negotiation for
                       the first VPN tunnel, in seconds. Valid value is between 900
@@ -1504,6 +1543,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2InsideCidr:
                     description: The CIDR block of the inside IP addresses for the
                       second VPN tunnel. Valid value is a size /30 CIDR block from
@@ -1549,6 +1589,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the second VPN tunnel for phase 1 IKE negotiations.
@@ -1556,6 +1597,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1IntegrityAlgorithms:
                     description: One or more integrity algorithms that are permitted
                       for the second VPN tunnel for phase 1 IKE negotiations. Valid
@@ -1563,6 +1605,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase1LifetimeSeconds:
                     description: The lifetime for phase 1 of the IKE negotiation for
                       the second VPN tunnel, in seconds. Valid value is between 900
@@ -1576,6 +1619,7 @@ spec:
                     items:
                       type: number
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2EncryptionAlgorithms:
                     description: List of one or more encryption algorithms that are
                       permitted for the second VPN tunnel for phase 2 IKE negotiations.
@@ -1583,6 +1627,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2IntegrityAlgorithms:
                     description: List of one or more integrity algorithms that are
                       permitted for the second VPN tunnel for phase 2 IKE negotiations.
@@ -1590,6 +1635,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tunnel2Phase2LifetimeSeconds:
                     description: The lifetime for phase 2 of the IKE negotiation for
                       the second VPN tunnel, in seconds. Valid value is between 900

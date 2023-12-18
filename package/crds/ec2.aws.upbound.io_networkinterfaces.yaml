@@ -85,6 +85,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6AddressCount:
                     description: Number of IPv6 addresses to assign to a network interface.
                       You can't use this option if specifying specific ipv6_addresses.
@@ -110,6 +111,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6PrefixCount:
                     description: Number of IPv6 prefixes that AWS automatically assigns
                       to the network interface.
@@ -120,6 +122,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateIp:
                     type: string
                   privateIpList:
@@ -139,6 +142,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateIpsCount:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
@@ -230,6 +234,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceDestCheck:
                     description: Whether to enable source destination checking for
                       the ENI. Default true.
@@ -315,6 +320,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -348,6 +354,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6AddressCount:
                     description: Number of IPv6 addresses to assign to a network interface.
                       You can't use this option if specifying specific ipv6_addresses.
@@ -373,6 +380,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6PrefixCount:
                     description: Number of IPv6 prefixes that AWS automatically assigns
                       to the network interface.
@@ -383,6 +391,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateIp:
                     type: string
                   privateIpList:
@@ -402,6 +411,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateIpsCount:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
@@ -416,6 +426,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -622,6 +633,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6AddressCount:
                     description: Number of IPv6 addresses to assign to a network interface.
                       You can't use this option if specifying specific ipv6_addresses.
@@ -647,6 +659,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ipv6PrefixCount:
                     description: Number of IPv6 prefixes that AWS automatically assigns
                       to the network interface.
@@ -657,6 +670,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   macAddress:
                     description: MAC address of the network interface.
                     type: string
@@ -688,6 +702,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   privateIpsCount:
                     description: Number of secondary private IPs to assign to the
                       ENI. The total number of private IPs will be 1 + private_ips_count,
@@ -698,6 +713,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   sourceDestCheck:
                     description: Whether to enable source destination checking for
                       the ENI. Default true.
@@ -710,12 +726,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

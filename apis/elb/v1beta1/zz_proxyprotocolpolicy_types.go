@@ -21,6 +21,7 @@ type ProxyProtocolPolicyInitParameters struct {
 
 	// List of instance ports to which the policy
 	// should be applied. This can be specified if the protocol is SSL or TCP.
+	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 }
 
@@ -31,6 +32,7 @@ type ProxyProtocolPolicyObservation struct {
 
 	// List of instance ports to which the policy
 	// should be applied. This can be specified if the protocol is SSL or TCP.
+	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 
 	// The load balancer to which the policy
@@ -43,6 +45,7 @@ type ProxyProtocolPolicyParameters struct {
 	// List of instance ports to which the policy
 	// should be applied. This can be specified if the protocol is SSL or TCP.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
 
 	// The load balancer to which the policy

@@ -32,6 +32,7 @@ type SubnetGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// –  A list of VPC subnet IDs for the subnet group.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// – VPC ID of the subnet group.
@@ -62,6 +63,7 @@ type SubnetGroupParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 

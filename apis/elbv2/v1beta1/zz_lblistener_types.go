@@ -20,6 +20,7 @@ import (
 type AuthenticateCognitoInitParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
@@ -47,6 +48,7 @@ type AuthenticateCognitoInitParameters struct {
 type AuthenticateCognitoObservation struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
@@ -75,6 +77,7 @@ type AuthenticateCognitoParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
@@ -109,6 +112,7 @@ type AuthenticateCognitoParameters struct {
 type AuthenticateOidcInitParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
@@ -142,6 +146,7 @@ type AuthenticateOidcInitParameters struct {
 type AuthenticateOidcObservation struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
@@ -176,6 +181,7 @@ type AuthenticateOidcParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
@@ -403,6 +409,7 @@ type LBListenerInitParameters struct {
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -436,9 +443,11 @@ type LBListenerObservation struct {
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -488,6 +497,7 @@ type LBListenerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

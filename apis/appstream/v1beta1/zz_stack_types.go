@@ -101,6 +101,7 @@ type StackInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+	// +listType=set
 	EmbedHostDomains []*string `json:"embedHostDomains,omitempty" tf:"embed_host_domains,omitempty"`
 
 	// URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed. .
@@ -121,6 +122,7 @@ type StackInitParameters struct {
 	StreamingExperienceSettings []StreamingExperienceSettingsInitParameters `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
@@ -151,6 +153,7 @@ type StackObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+	// +listType=set
 	EmbedHostDomains []*string `json:"embedHostDomains,omitempty" tf:"embed_host_domains,omitempty"`
 
 	// URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed. .
@@ -174,8 +177,10 @@ type StackObservation struct {
 	StreamingExperienceSettings []StreamingExperienceSettingsObservation `json:"streamingExperienceSettings,omitempty" tf:"streaming_experience_settings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.
@@ -205,6 +210,7 @@ type StackParameters struct {
 
 	// Domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EmbedHostDomains []*string `json:"embedHostDomains,omitempty" tf:"embed_host_domains,omitempty"`
 
 	// URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed. .
@@ -236,6 +242,7 @@ type StackParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the actions that are enabled or disabled for users during their streaming sessions. If not provided, these settings are configured automatically by AWS.

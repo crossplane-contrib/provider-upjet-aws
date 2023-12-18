@@ -23,15 +23,18 @@ type EventSubscriptionInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
+	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
 	// Ids of sources to listen to.
+	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +47,7 @@ type EventSubscriptionObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
+	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -52,15 +56,18 @@ type EventSubscriptionObservation struct {
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
 	// Ids of sources to listen to.
+	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -72,6 +79,7 @@ type EventSubscriptionParameters struct {
 
 	// List of event categories to listen for, see DescribeEventCategories for a canonical list.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EventCategories []*string `json:"eventCategories,omitempty" tf:"event_categories,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -95,6 +103,7 @@ type EventSubscriptionParameters struct {
 
 	// Ids of sources to listen to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
@@ -103,6 +112,7 @@ type EventSubscriptionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

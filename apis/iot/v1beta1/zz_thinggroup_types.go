@@ -20,12 +20,14 @@ import (
 type AttributePayloadInitParameters struct {
 
 	// Key-value map.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
 type AttributePayloadObservation struct {
 
 	// Key-value map.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
@@ -33,6 +35,7 @@ type AttributePayloadParameters struct {
 
 	// Key-value map.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
@@ -101,6 +104,7 @@ type ThingGroupInitParameters struct {
 	Properties []PropertiesInitParameters `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -121,8 +125,10 @@ type ThingGroupObservation struct {
 	Properties []PropertiesObservation `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The current version of the Thing Group record in the registry.
@@ -155,6 +161,7 @@ type ThingGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

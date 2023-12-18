@@ -32,6 +32,7 @@ type CertificateAuthorityParameters struct {
 type ClusterInitParameters struct {
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
+	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
 
 	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
@@ -44,6 +45,7 @@ type ClusterInitParameters struct {
 	OutpostConfig []OutpostConfigInitParameters `json:"outpostConfig,omitempty" tf:"outpost_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
@@ -68,6 +70,7 @@ type ClusterObservation struct {
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
+	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
 
 	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
@@ -98,9 +101,11 @@ type ClusterObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
@@ -114,6 +119,7 @@ type ClusterParameters struct {
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
 
 	// Configuration block with encryption configuration for the cluster. Only available on Kubernetes 1.13 and above clusters created after March 6, 2020. Detailed below.
@@ -149,6 +155,7 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
@@ -185,6 +192,7 @@ type EncryptionConfigInitParameters struct {
 	Provider []ProviderInitParameters `json:"provider,omitempty" tf:"provider,omitempty"`
 
 	// List of strings with resources to be encrypted. Valid values: secrets.
+	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
@@ -194,6 +202,7 @@ type EncryptionConfigObservation struct {
 	Provider []ProviderObservation `json:"provider,omitempty" tf:"provider,omitempty"`
 
 	// List of strings with resources to be encrypted. Valid values: secrets.
+	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
@@ -205,6 +214,7 @@ type EncryptionConfigParameters struct {
 
 	// List of strings with resources to be encrypted. Valid values: secrets.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Resources []*string `json:"resources" tf:"resources,omitempty"`
 }
 
@@ -274,6 +284,7 @@ type OutpostConfigInitParameters struct {
 	ControlPlanePlacement []ControlPlanePlacementInitParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
+	// +listType=set
 	OutpostArns []*string `json:"outpostArns,omitempty" tf:"outpost_arns,omitempty"`
 }
 
@@ -287,6 +298,7 @@ type OutpostConfigObservation struct {
 	ControlPlanePlacement []ControlPlanePlacementObservation `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
+	// +listType=set
 	OutpostArns []*string `json:"outpostArns,omitempty" tf:"outpost_arns,omitempty"`
 }
 
@@ -303,6 +315,7 @@ type OutpostConfigParameters struct {
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OutpostArns []*string `json:"outpostArns" tf:"outpost_arns,omitempty"`
 }
 
@@ -334,6 +347,7 @@ type VPCConfigInitParameters struct {
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
+	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 }
 
@@ -349,12 +363,15 @@ type VPCConfigObservation struct {
 	EndpointPublicAccess *bool `json:"endpointPublicAccess,omitempty" tf:"endpoint_public_access,omitempty"`
 
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
+	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 
 	// account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// ID of the VPC associated with your cluster.
@@ -373,6 +390,7 @@ type VPCConfigParameters struct {
 
 	// List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled. EKS defaults this to a list with 0.0.0.0/0.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PublicAccessCidrs []*string `json:"publicAccessCidrs,omitempty" tf:"public_access_cidrs,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -388,6 +406,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -403,6 +422,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 

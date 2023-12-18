@@ -77,6 +77,7 @@ type EmailIdentityInitParameters struct {
 	DKIMSigningAttributes []DKIMSigningAttributesInitParameters `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -97,8 +98,10 @@ type EmailIdentityObservation struct {
 	IdentityType *string `json:"identityType,omitempty" tf:"identity_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies whether or not the identity is verified.
@@ -131,6 +134,7 @@ type EmailIdentityParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

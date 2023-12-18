@@ -102,6 +102,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
                     type: string
@@ -223,6 +224,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -426,6 +428,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   voiceConnectorId:
                     description: The Amazon Chime Voice Connector ID.
                     type: string

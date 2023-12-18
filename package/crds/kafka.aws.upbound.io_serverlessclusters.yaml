@@ -103,6 +103,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfig:
                     description: VPC configuration information. See below.
                     items:
@@ -195,6 +196,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIdRefs:
                           description: References to Subnet in ec2 to populate subnetIds.
                           items:
@@ -282,6 +284,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 required:
@@ -332,6 +335,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfig:
                     description: VPC configuration information. See below.
                     items:
@@ -554,6 +558,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -561,6 +566,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpcConfig:
                     description: VPC configuration information. See below.
                     items:
@@ -571,12 +577,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: A list of subnets in at least two different
                             Availability Zones that host your client applications.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object

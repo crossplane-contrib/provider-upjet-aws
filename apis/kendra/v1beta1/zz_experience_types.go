@@ -20,24 +20,28 @@ import (
 type ContentSourceConfigurationInitParameters struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
 
 	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
 	DirectPutContent *bool `json:"directPutContent,omitempty" tf:"direct_put_content,omitempty"`
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 
 type ContentSourceConfigurationObservation struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
 
 	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
 	DirectPutContent *bool `json:"directPutContent,omitempty" tf:"direct_put_content,omitempty"`
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 
@@ -45,6 +49,7 @@ type ContentSourceConfigurationParameters struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
 
 	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
@@ -53,6 +58,7 @@ type ContentSourceConfigurationParameters struct {
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 

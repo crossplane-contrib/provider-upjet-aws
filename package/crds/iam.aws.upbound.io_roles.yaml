@@ -106,6 +106,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
@@ -124,6 +125,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -177,6 +179,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
@@ -195,6 +198,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -415,6 +419,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   maxSessionDuration:
                     description: Maximum session duration (in seconds) that you want
                       to set for the specified role. If you do not specify a value
@@ -446,6 +451,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -453,6 +459,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   uniqueId:
                     description: Stable and unique string identifying the role.
                     type: string

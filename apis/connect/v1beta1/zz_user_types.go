@@ -74,9 +74,11 @@ type UserInitParameters struct {
 	PhoneConfig []UserPhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -111,12 +113,15 @@ type UserObservation struct {
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The identifier for the user.
@@ -184,10 +189,12 @@ type UserParameters struct {
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

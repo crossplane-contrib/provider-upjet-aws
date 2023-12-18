@@ -91,6 +91,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -126,6 +127,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -378,6 +380,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Type of grantee to apply for. Valid values
                             are CanonicalUser and Group. AmazonCustomerByEmail is
@@ -470,6 +473,7 @@ spec:
                             type: string
                           description: Specifies object tags key and value.
                           type: object
+                          x-kubernetes-map-type: granular
                         transition:
                           description: Specifies a period in the object's transitions.
                             See Transition below for details.
@@ -678,6 +682,7 @@ spec:
                                         rule applies only to objects having all the
                                         tags in its tagset.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               id:
@@ -777,12 +782,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   versioning:
                     description: Configuration of the S3 bucket versioning state.
                       See Versioning below for details. Use the resource aws_s3_bucket_versioning

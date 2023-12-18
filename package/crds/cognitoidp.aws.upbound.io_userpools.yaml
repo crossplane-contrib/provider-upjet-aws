@@ -128,12 +128,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   autoVerifiedAttributes:
                     description: 'Attributes to be auto-verified. Valid values: email,
                       phone_number.'
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   deletionProtection:
                     description: When active, DeletionProtection prevents accidental
                       deletion of your user pool. Before you can delete a user pool
@@ -526,6 +528,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userAttributeUpdateSettings:
                     description: Configuration block for user attribute update settings.
                       Detailed below.
@@ -539,6 +542,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   userPoolAddOns:
@@ -558,6 +562,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   usernameConfiguration:
                     description: Configuration block for username configuration. Detailed
                       below.
@@ -678,12 +683,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   autoVerifiedAttributes:
                     description: 'Attributes to be auto-verified. Valid values: email,
                       phone_number.'
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   deletionProtection:
                     description: When active, DeletionProtection prevents accidental
                       deletion of your user pool. Before you can delete a user pool
@@ -992,6 +999,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userAttributeUpdateSettings:
                     description: Configuration block for user attribute update settings.
                       Detailed below.
@@ -1005,6 +1013,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   userPoolAddOns:
@@ -1024,6 +1033,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   usernameConfiguration:
                     description: Configuration block for username configuration. Detailed
                       below.
@@ -1300,6 +1310,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   arn:
                     description: ARN of the user pool.
                     type: string
@@ -1309,6 +1320,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   creationDate:
                     description: Date the user pool was created.
                     type: string
@@ -1647,6 +1659,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1654,6 +1667,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   userAttributeUpdateSettings:
                     description: Configuration block for user attribute update settings.
                       Detailed below.
@@ -1667,6 +1681,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   userPoolAddOns:
@@ -1686,6 +1701,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   usernameConfiguration:
                     description: Configuration block for username configuration. Detailed
                       below.

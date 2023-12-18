@@ -101,6 +101,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         target:
                           description: Action's target, if applicable. See below.
                           items:
@@ -219,6 +220,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   target:
                     description: Target of an action. See below.
                     items:
@@ -238,6 +240,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         name:
@@ -249,6 +252,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         resourceTag:
                           description: Tag(s) the resources need to have to be considered
                             a valid target for an action. Conflicts with resource_arns.
@@ -325,6 +329,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         target:
                           description: Action's target, if applicable. See below.
                           items:
@@ -362,6 +367,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   target:
                     description: Target of an action. See below.
                     items:
@@ -381,6 +387,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         name:
@@ -392,6 +399,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         resourceTag:
                           description: Tag(s) the resources need to have to be considered
                             a valid target for an action. Conflicts with resource_arns.
@@ -632,6 +640,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         target:
                           description: Action's target, if applicable. See below.
                           items:
@@ -676,10 +685,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   target:
                     description: Target of an action. See below.
                     items:
@@ -699,6 +710,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         name:
@@ -710,6 +722,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         resourceTag:
                           description: Tag(s) the resources need to have to be considered
                             a valid target for an action. Conflicts with resource_arns.

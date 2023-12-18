@@ -241,6 +241,7 @@ type ImageRecipeInitParameters struct {
 	SystemsManagerAgent []SystemsManagerAgentInitParameters `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.
@@ -288,9 +289,11 @@ type ImageRecipeObservation struct {
 	SystemsManagerAgent []SystemsManagerAgentObservation `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.
@@ -336,6 +339,7 @@ type ImageRecipeParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.

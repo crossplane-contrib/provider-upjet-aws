@@ -160,6 +160,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityGroupsRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroups.
                     items:
@@ -543,6 +544,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   subnetId:
                     description: The ID of the subnet to add the mount target in.
                     type: string

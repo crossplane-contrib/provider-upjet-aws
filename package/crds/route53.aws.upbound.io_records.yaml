@@ -246,6 +246,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: An AWS region from which to measure latency. See
                       http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
@@ -462,6 +463,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,
@@ -770,6 +772,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,

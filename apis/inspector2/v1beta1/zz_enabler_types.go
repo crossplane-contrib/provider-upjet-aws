@@ -21,11 +21,13 @@ type EnablerInitParameters struct {
 
 	// Set of account IDs.
 	// Can contain one of: the Organization's Administrator Account, or one or more Member Accounts.
+	// +listType=set
 	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	// Type of resources to scan.
 	// Valid values are EC2, ECR, and LAMBDA.
 	// At least one item is required.
+	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
@@ -33,6 +35,7 @@ type EnablerObservation struct {
 
 	// Set of account IDs.
 	// Can contain one of: the Organization's Administrator Account, or one or more Member Accounts.
+	// +listType=set
 	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -40,6 +43,7 @@ type EnablerObservation struct {
 	// Type of resources to scan.
 	// Valid values are EC2, ECR, and LAMBDA.
 	// At least one item is required.
+	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 
@@ -48,6 +52,7 @@ type EnablerParameters struct {
 	// Set of account IDs.
 	// Can contain one of: the Organization's Administrator Account, or one or more Member Accounts.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AccountIds []*string `json:"accountIds,omitempty" tf:"account_ids,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -59,6 +64,7 @@ type EnablerParameters struct {
 	// Valid values are EC2, ECR, and LAMBDA.
 	// At least one item is required.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 }
 

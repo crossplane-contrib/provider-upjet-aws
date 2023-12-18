@@ -39,12 +39,14 @@ type DeadLetterConfigParameters struct {
 type EnvironmentInitParameters struct {
 
 	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type EnvironmentObservation struct {
 
 	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -52,6 +54,7 @@ type EnvironmentParameters struct {
 
 	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -178,6 +181,7 @@ type FunctionInitParameters struct {
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
@@ -258,6 +262,7 @@ type FunctionObservation struct {
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
@@ -296,9 +301,11 @@ type FunctionObservation struct {
 	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
@@ -407,6 +414,7 @@ type FunctionParameters struct {
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
@@ -465,6 +473,7 @@ type FunctionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
@@ -566,9 +575,11 @@ type VPCConfigInitParameters struct {
 type VPCConfigObservation struct {
 
 	// List of security group IDs associated with the Lambda function.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of subnet IDs associated with the Lambda function.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// ID of the VPC.
@@ -590,6 +601,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -605,6 +617,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 

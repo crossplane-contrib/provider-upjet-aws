@@ -20,6 +20,7 @@ import (
 type IntegrationInitParameters struct {
 
 	// List of cache key parameters for the integration.
+	// +listType=set
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
 	// Integration's cache namespace.
@@ -46,9 +47,11 @@ type IntegrationInitParameters struct {
 
 	// Map of request query string parameters and headers that should be passed to the backend responder.
 	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of the integration's request templates.
+	// +mapType=granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// TLS configuration. See below.
@@ -64,6 +67,7 @@ type IntegrationInitParameters struct {
 type IntegrationObservation struct {
 
 	// List of cache key parameters for the integration.
+	// +listType=set
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
 	// Integration's cache namespace.
@@ -99,9 +103,11 @@ type IntegrationObservation struct {
 
 	// Map of request query string parameters and headers that should be passed to the backend responder.
 	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of the integration's request templates.
+	// +mapType=granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// API resource ID.
@@ -129,6 +135,7 @@ type IntegrationParameters struct {
 
 	// List of cache key parameters for the integration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
 	// Integration's cache namespace.
@@ -196,10 +203,12 @@ type IntegrationParameters struct {
 	// Map of request query string parameters and headers that should be passed to the backend responder.
 	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of the integration's request templates.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// API resource ID.

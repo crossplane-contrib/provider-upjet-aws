@@ -90,6 +90,7 @@ type GraphQLAPIInitParameters struct {
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amazon Cognito User Pool configuration. Defined below.
@@ -168,12 +169,15 @@ type GraphQLAPIObservation struct {
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Map of URIs associated with the APIE.g., uris["GRAPHQL"] = https://ID.appsync-api.REGION.amazonaws.com/graphql
+	// +mapType=granular
 	Uris map[string]*string `json:"uris,omitempty" tf:"uris,omitempty"`
 
 	// Amazon Cognito User Pool configuration. Defined below.
@@ -269,6 +273,7 @@ type GraphQLAPIParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amazon Cognito User Pool configuration. Defined below.
