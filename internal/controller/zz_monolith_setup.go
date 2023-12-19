@@ -789,6 +789,7 @@ import (
 	devicesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/device"
 	devicefleet "github.com/upbound/provider-aws/internal/controller/sagemaker/devicefleet"
 	domainsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
+	endpointsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/endpoint"
 	endpointconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/endpointconfiguration"
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
@@ -1718,6 +1719,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		devicesagemaker.Setup,
 		devicefleet.Setup,
 		domainsagemaker.Setup,
+		endpointsagemaker.Setup,
 		endpointconfiguration.Setup,
 		featuregroup.Setup,
 		imagesagemaker.Setup,

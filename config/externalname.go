@@ -2119,6 +2119,8 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_sagemaker_workforce": config.ParameterAsIdentifier("workforce_name"),
 	// SageMaker Workteams can be imported using the workteam_name
 	"aws_sagemaker_workteam": config.ParameterAsIdentifier("workteam_name"),
+	// Endpoints can be imported using the name
+	"aws_sagemaker_endpoint": config.NameAsIdentifier,
 	// Endpoint configurations can be imported using the name
 	"aws_sagemaker_endpoint_configuration": config.NameAsIdentifier,
 	// SageMaker Code Images can be imported using the name
