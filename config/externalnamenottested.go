@@ -496,17 +496,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Example: s-12345678/S-1-1-12-1234567890-123456789-1234567890-1234
 	"aws_transfer_access": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/{{ .parameters.external_id }}"),
 
-	// wafv2
-	//
-	// WAFv2 Web ACLs can be imported using ID/Name/Scope
-	"aws_wafv2_web_acl": config.IdentifierFromProvider,
-	// WAFv2 Web ACL Association can be imported using WEB_ACL_ARN,RESOURCE_ARN
-	// Example: arn:aws:wafv2:...7ce849ea,arn:aws:apigateway:...ages/name
-	"aws_wafv2_web_acl_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.web_acl_arn }},{{ .parameters.resource_arn }}"),
-	// WAFv2 Web ACL Logging Configurations can be imported using the WAFv2 Web ACL ARN
-	// Example: arn:aws:wafv2:us-west-2:123456789012:regional/webacl/test-logs/a1b2c3d4-5678-90ab-cdef
-	"aws_wafv2_web_acl_logging_configuration": config.IdentifierFromProvider,
-
 	// worklink
 	//
 	// WorkLink can be imported using the ARN
