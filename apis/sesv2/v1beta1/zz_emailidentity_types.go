@@ -19,9 +19,6 @@ import (
 
 type DKIMSigningAttributesInitParameters struct {
 
-	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
-	DomainSigningPrivateKey *string `json:"domainSigningPrivateKey,omitempty" tf:"domain_signing_private_key,omitempty"`
-
 	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
 	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
 
@@ -33,9 +30,6 @@ type DKIMSigningAttributesObservation struct {
 
 	// [Easy DKIM] The key length of the DKIM key pair in use.
 	CurrentSigningKeyLength *string `json:"currentSigningKeyLength,omitempty" tf:"current_signing_key_length,omitempty"`
-
-	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
-	DomainSigningPrivateKey *string `json:"domainSigningPrivateKey,omitempty" tf:"domain_signing_private_key,omitempty"`
 
 	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
 	DomainSigningSelector *string `json:"domainSigningSelector,omitempty" tf:"domain_signing_selector,omitempty"`
@@ -60,7 +54,7 @@ type DKIMSigningAttributesParameters struct {
 
 	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature. The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using base64 encoding.
 	// +kubebuilder:validation:Optional
-	DomainSigningPrivateKey *string `json:"domainSigningPrivateKey,omitempty" tf:"domain_signing_private_key,omitempty"`
+	DomainSigningPrivateKeySecretRef *v1.SecretKeySelector `json:"domainSigningPrivateKeySecretRef,omitempty" tf:"-"`
 
 	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a domain.
 	// +kubebuilder:validation:Optional
@@ -113,6 +107,7 @@ type EmailIdentityObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 

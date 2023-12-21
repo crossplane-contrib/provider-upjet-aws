@@ -165,6 +165,8 @@ type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventCategories) || (has(self.initProvider) && has(self.initProvider.eventCategories))",message="spec.forProvider.eventCategories is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceIds) || (has(self.initProvider) && has(self.initProvider.sourceIds))",message="spec.forProvider.sourceIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceType) || (has(self.initProvider) && has(self.initProvider.sourceType))",message="spec.forProvider.sourceType is a required parameter"
 	Spec   EventSubscriptionSpec   `json:"spec"`
 	Status EventSubscriptionStatus `json:"status,omitempty"`
 }

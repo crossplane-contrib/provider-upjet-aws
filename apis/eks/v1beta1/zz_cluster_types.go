@@ -299,7 +299,7 @@ type OutpostConfigInitParameters struct {
 	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
-	// The following arguments are supported in the control_plane_placement configuration block:
+	// The control_plane_placement configuration block supports the following arguments:
 	ControlPlanePlacement []ControlPlanePlacementInitParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
@@ -313,7 +313,7 @@ type OutpostConfigObservation struct {
 	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
-	// The following arguments are supported in the control_plane_placement configuration block:
+	// The control_plane_placement configuration block supports the following arguments:
 	ControlPlanePlacement []ControlPlanePlacementObservation `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
@@ -328,7 +328,7 @@ type OutpostConfigParameters struct {
 	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
-	// The following arguments are supported in the control_plane_placement configuration block:
+	// The control_plane_placement configuration block supports the following arguments:
 	// +kubebuilder:validation:Optional
 	ControlPlanePlacement []ControlPlanePlacementParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 

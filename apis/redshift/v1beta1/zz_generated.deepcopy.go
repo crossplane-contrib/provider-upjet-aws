@@ -252,17 +252,6 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ClusterSecurityGroups != nil {
-		in, out := &in.ClusterSecurityGroups, &out.ClusterSecurityGroups
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
 		*out = new(string)
@@ -373,9 +362,19 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManageMasterPassword != nil {
+		in, out := &in.ManageMasterPassword, &out.ManageMasterPassword
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ManualSnapshotRetentionPeriod != nil {
 		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
 		*out = new(float64)
+		**out = **in
+	}
+	if in.MasterPasswordSecretKMSKeyID != nil {
+		in, out := &in.MasterPasswordSecretKMSKeyID, &out.MasterPasswordSecretKMSKeyID
+		*out = new(string)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -416,6 +415,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	if in.SkipFinalSnapshot != nil {
 		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
 		*out = new(bool)
+		**out = **in
+	}
+	if in.SnapshotArn != nil {
+		in, out := &in.SnapshotArn, &out.SnapshotArn
+		*out = new(string)
 		**out = **in
 	}
 	if in.SnapshotClusterIdentifier != nil {
@@ -616,6 +620,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ClusterNamespaceArn != nil {
+		in, out := &in.ClusterNamespaceArn, &out.ClusterNamespaceArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterNodes != nil {
 		in, out := &in.ClusterNodes, &out.ClusterNodes
 		*out = make([]ClusterNodesObservation, len(*in))
@@ -637,17 +646,6 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		in, out := &in.ClusterRevisionNumber, &out.ClusterRevisionNumber
 		*out = new(string)
 		**out = **in
-	}
-	if in.ClusterSecurityGroups != nil {
-		in, out := &in.ClusterSecurityGroups, &out.ClusterSecurityGroups
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
 	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
@@ -737,9 +735,24 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManageMasterPassword != nil {
+		in, out := &in.ManageMasterPassword, &out.ManageMasterPassword
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ManualSnapshotRetentionPeriod != nil {
 		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
 		*out = new(float64)
+		**out = **in
+	}
+	if in.MasterPasswordSecretArn != nil {
+		in, out := &in.MasterPasswordSecretArn, &out.MasterPasswordSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.MasterPasswordSecretKMSKeyID != nil {
+		in, out := &in.MasterPasswordSecretKMSKeyID, &out.MasterPasswordSecretKMSKeyID
+		*out = new(string)
 		**out = **in
 	}
 	if in.MasterUsername != nil {
@@ -780,6 +793,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	if in.SkipFinalSnapshot != nil {
 		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
 		*out = new(bool)
+		**out = **in
+	}
+	if in.SnapshotArn != nil {
+		in, out := &in.SnapshotArn, &out.SnapshotArn
+		*out = new(string)
 		**out = **in
 	}
 	if in.SnapshotClusterIdentifier != nil {
@@ -902,17 +920,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.ClusterSecurityGroups != nil {
-		in, out := &in.ClusterSecurityGroups, &out.ClusterSecurityGroups
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.ClusterSubnetGroupName != nil {
 		in, out := &in.ClusterSubnetGroupName, &out.ClusterSubnetGroupName
 		*out = new(string)
@@ -1023,9 +1030,19 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManageMasterPassword != nil {
+		in, out := &in.ManageMasterPassword, &out.ManageMasterPassword
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ManualSnapshotRetentionPeriod != nil {
 		in, out := &in.ManualSnapshotRetentionPeriod, &out.ManualSnapshotRetentionPeriod
 		*out = new(float64)
+		**out = **in
+	}
+	if in.MasterPasswordSecretKMSKeyID != nil {
+		in, out := &in.MasterPasswordSecretKMSKeyID, &out.MasterPasswordSecretKMSKeyID
+		*out = new(string)
 		**out = **in
 	}
 	if in.MasterPasswordSecretRef != nil {
@@ -1076,6 +1093,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.SkipFinalSnapshot != nil {
 		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
 		*out = new(bool)
+		**out = **in
+	}
+	if in.SnapshotArn != nil {
+		in, out := &in.SnapshotArn, &out.SnapshotArn
+		*out = new(string)
 		**out = **in
 	}
 	if in.SnapshotClusterIdentifier != nil {

@@ -72,9 +72,9 @@ spec:
                       you want to create an access point.
                     type: string
                   bucket:
-                    description: Name of an AWS Partition S3 Bucket or the ARN of
-                      S3 on Outposts Bucket that you want to associate this access
-                      point with.
+                    description: Name of an AWS Partition S3 General Purpose Bucket
+                      or the ARN of S3 on Outposts Bucket that you want to associate
+                      this access point with.
                     type: string
                   bucketAccountId:
                     description: AWS account ID associated with the S3 bucket associated
@@ -712,9 +712,9 @@ spec:
                     description: ARN of the S3 Access Point.
                     type: string
                   bucket:
-                    description: Name of an AWS Partition S3 Bucket or the ARN of
-                      S3 on Outposts Bucket that you want to associate this access
-                      point with.
+                    description: Name of an AWS Partition S3 General Purpose Bucket
+                      or the ARN of S3 on Outposts Bucket that you want to associate
+                      this access point with.
                     type: string
                   bucketAccountId:
                     description: AWS account ID associated with the S3 bucket associated

@@ -60,7 +60,7 @@ type EnvironmentObservation struct {
 	// AppConfig environment ID.
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
-	// AppConfig environment ID and application ID separated by a colon (:).
+	// (Deprecated) AppConfig environment ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Set of Amazon CloudWatch alarms to monitor during the deployment process. Maximum of 5. See Monitor below for more details.

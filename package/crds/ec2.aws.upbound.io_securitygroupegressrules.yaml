@@ -83,7 +83,9 @@ spec:
                     type: number
                   ipProtocol:
                     description: The IP protocol name or number. Use -1 to specify
-                      all protocols.
+                      all protocols. Note that if ip_protocol is set to -1, it translates
+                      to all protocols, all port ranges, and from_port and to_port
+                      values should not be defined.
                     type: string
                   prefixListId:
                     description: The ID of the destination prefix list.
@@ -360,7 +362,9 @@ spec:
                     type: number
                   ipProtocol:
                     description: The IP protocol name or number. Use -1 to specify
-                      all protocols.
+                      all protocols. Note that if ip_protocol is set to -1, it translates
+                      to all protocols, all port ranges, and from_port and to_port
+                      values should not be defined.
                     type: string
                   prefixListId:
                     description: The ID of the destination prefix list.
@@ -796,7 +800,9 @@ spec:
                     type: string
                   ipProtocol:
                     description: The IP protocol name or number. Use -1 to specify
-                      all protocols.
+                      all protocols. Note that if ip_protocol is set to -1, it translates
+                      to all protocols, all port ranges, and from_port and to_port
+                      values should not be defined.
                     type: string
                   prefixListId:
                     description: The ID of the destination prefix list.

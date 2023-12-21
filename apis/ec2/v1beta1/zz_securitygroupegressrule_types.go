@@ -31,7 +31,7 @@ type SecurityGroupEgressRuleInitParameters struct {
 	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The IP protocol name or number. Use -1 to specify all protocols.
+	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
 	// The ID of the destination prefix list.
@@ -97,7 +97,7 @@ type SecurityGroupEgressRuleObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The IP protocol name or number. Use -1 to specify all protocols.
+	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
 	// The ID of the destination prefix list.
@@ -142,7 +142,7 @@ type SecurityGroupEgressRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
-	// The IP protocol name or number. Use -1 to specify all protocols.
+	// The IP protocol name or number. Use -1 to specify all protocols. Note that if ip_protocol is set to -1, it translates to all protocols, all port ranges, and from_port and to_port values should not be defined.
 	// +kubebuilder:validation:Optional
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 

@@ -67,6 +67,13 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: 'A value that indicates whether major version upgrades
+                      are allowed. Constraints: You must allow major version upgrades
+                      when specifying a value for the EngineVersion parameter that
+                      is a different major version than the DB cluster''s current
+                      version.'
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
@@ -178,7 +185,7 @@ spec:
                     type: array
                   engine:
                     description: 'The name of the database engine to be used for this
-                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                      DB cluster. Defaults to docdb. Valid values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version. Updating this argument
@@ -318,11 +325,18 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
                       default is false.
                     type: boolean
+                  storageType:
+                    description: 'The storage type to associate with the DB cluster.
+                      Valid values: standard, iopt1.'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -428,6 +442,13 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: 'A value that indicates whether major version upgrades
+                      are allowed. Constraints: You must allow major version upgrades
+                      when specifying a value for the EngineVersion parameter that
+                      is a different major version than the DB cluster''s current
+                      version.'
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
@@ -539,7 +560,7 @@ spec:
                     type: array
                   engine:
                     description: 'The name of the database engine to be used for this
-                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                      DB cluster. Defaults to docdb. Valid values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version. Updating this argument
@@ -656,11 +677,18 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
                       default is false.
                     type: boolean
+                  storageType:
+                    description: 'The storage type to associate with the DB cluster.
+                      Valid values: standard, iopt1.'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -917,6 +945,13 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: 'A value that indicates whether major version upgrades
+                      are allowed. Constraints: You must allow major version upgrades
+                      when specifying a value for the EngineVersion parameter that
+                      is a different major version than the DB cluster''s current
+                      version.'
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
@@ -969,7 +1004,7 @@ spec:
                     type: string
                   engine:
                     description: 'The name of the database engine to be used for this
-                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                      DB cluster. Defaults to docdb. Valid values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version. Updating this argument
@@ -1023,11 +1058,18 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
                       default is false.
                     type: boolean
+                  storageType:
+                    description: 'The storage type to associate with the DB cluster.
+                      Valid values: standard, iopt1.'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

@@ -104,7 +104,7 @@ type OntapFileSystemInitParameters struct {
 	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
+	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration below.
 	DiskIopsConfiguration []DiskIopsConfigurationInitParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
 	// Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.
@@ -202,7 +202,7 @@ type OntapFileSystemObservation struct {
 	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
+	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration below.
 	DiskIopsConfiguration []DiskIopsConfigurationObservation `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
 	// Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.
@@ -275,7 +275,7 @@ type OntapFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
-	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration Below.
+	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration below.
 	// +kubebuilder:validation:Optional
 	DiskIopsConfiguration []DiskIopsConfigurationParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 

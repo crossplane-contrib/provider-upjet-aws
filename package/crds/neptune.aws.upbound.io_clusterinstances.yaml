@@ -163,7 +163,8 @@ spec:
                       neptune instance. Defaults to neptune. Valid Values: neptune.'
                     type: string
                   engineVersion:
-                    description: The neptune engine version.
+                    description: The neptune engine version. Currently configuring
+                      this argumnet has no effect.
                     type: string
                   instanceClass:
                     description: The instance class to use.
@@ -465,7 +466,8 @@ spec:
                       neptune instance. Defaults to neptune. Valid Values: neptune.'
                     type: string
                   engineVersion:
-                    description: The neptune engine version.
+                    description: The neptune engine version. Currently configuring
+                      this argumnet has no effect.
                     type: string
                   instanceClass:
                     description: The instance class to use.
@@ -860,7 +862,8 @@ spec:
                       neptune instance. Defaults to neptune. Valid Values: neptune.'
                     type: string
                   engineVersion:
-                    description: The neptune engine version.
+                    description: The neptune engine version. Currently configuring
+                      this argumnet has no effect.
                     type: string
                   id:
                     description: The Instance identifier

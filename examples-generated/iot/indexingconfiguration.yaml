@@ -20,6 +20,9 @@ spec:
       - name: deviceDefender.securityProfile1.NUMBER_VALUE_BEHAVIOR.lastViolationValue.number
         type: Number
       deviceDefenderIndexingMode: VIOLATIONS
+      filter:
+      - namedShadowNames:
+        - thing1shadow
       namedShadowIndexingMode: "ON"
       thingConnectivityIndexingMode: STATUS
       thingIndexingMode: REGISTRY_AND_SHADOW

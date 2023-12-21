@@ -71,7 +71,7 @@ spec:
                   action:
                     description: 'An AWS Signer action permitted as part of cross-account
                       permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile,
-                      or signer:RevokeSignature.'
+                      signer:RevokeSignature, or signer:SignPayload.'
                     type: string
                   principal:
                     description: The AWS principal to be granted a cross-account permission.
@@ -262,7 +262,7 @@ spec:
                   action:
                     description: 'An AWS Signer action permitted as part of cross-account
                       permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile,
-                      or signer:RevokeSignature.'
+                      signer:RevokeSignature, or signer:SignPayload.'
                     type: string
                   principal:
                     description: The AWS principal to be granted a cross-account permission.
@@ -528,7 +528,7 @@ spec:
                   action:
                     description: 'An AWS Signer action permitted as part of cross-account
                       permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile,
-                      or signer:RevokeSignature.'
+                      signer:RevokeSignature, or signer:SignPayload.'
                     type: string
                   id:
                     type: string

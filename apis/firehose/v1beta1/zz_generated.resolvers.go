@@ -63,6 +63,46 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].BucketArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].BucketArnRef,
+				Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+				To: reference.To{
+					List:    &v1beta12.BucketList{},
+					Managed: &v1beta12.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ElasticsearchConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ElasticsearchConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ElasticsearchConfiguration[i3].VPCConfig[i4].RoleArn),
@@ -180,6 +220,46 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].BucketArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].BucketArnRef,
+				Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+				To: reference.To{
+					List:    &v1beta12.BucketList{},
+					Managed: &v1beta12.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.HTTPEndpointConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].DomainArn),
@@ -217,6 +297,46 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].BucketArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].BucketArnRef,
+				Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+				To: reference.To{
+					List:    &v1beta12.BucketList{},
+					Managed: &v1beta12.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OpensearchConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArn),
@@ -233,6 +353,64 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			}
 			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].BucketArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].BucketArnRef,
+				Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+				To: reference.To{
+					List:    &v1beta12.BucketList{},
+					Managed: &v1beta12.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
 
 		}
 	}
@@ -294,41 +472,85 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 
 		}
 	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].BucketArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.S3Configuration[i3].BucketArnRef,
-			Selector:     mg.Spec.ForProvider.S3Configuration[i3].BucketArnSelector,
-			To: reference.To{
-				List:    &v1beta12.BucketList{},
-				Managed: &v1beta12.Bucket{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.S3Configuration[i3].BucketArn")
-		}
-		mg.Spec.ForProvider.S3Configuration[i3].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.S3Configuration[i3].BucketArnRef = rsp.ResolvedReference
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].BucketArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].BucketArnRef,
+				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+				To: reference.To{
+					List:    &v1beta12.BucketList{},
+					Managed: &v1beta12.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
 
+		}
 	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3Configuration); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Configuration[i3].RoleArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.S3Configuration[i3].RoleArnRef,
-			Selector:     mg.Spec.ForProvider.S3Configuration[i3].RoleArnSelector,
-			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.S3Configuration[i3].RoleArn")
-		}
-		mg.Spec.ForProvider.S3Configuration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.S3Configuration[i3].RoleArnRef = rsp.ResolvedReference
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.RedshiftConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
 
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SplunkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].BucketArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].BucketArnRef,
+				Selector:     mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+				To: reference.To{
+					List:    &v1beta12.BucketList{},
+					Managed: &v1beta12.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SplunkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ElasticsearchConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

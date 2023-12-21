@@ -729,6 +729,9 @@ spec:
                   clusterName:
                     description: The name of the serverless cluster.
                     type: string
+                  clusterUuid:
+                    description: UUID of the serverless cluster, for use in IAM policies.
+                    type: string
                   id:
                     type: string
                   tags:

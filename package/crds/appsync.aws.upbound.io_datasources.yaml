@@ -149,18 +149,24 @@ spec:
                     description: Description of the data source.
                     type: string
                   dynamodbConfig:
-                    description: DynamoDB settings. See below
+                    description: DynamoDB settings. See DynamoDB Config
                     items:
                       properties:
                         deltaSyncConfig:
+                          description: The DeltaSyncConfig for a versioned data source.
+                            See Delta Sync Config
                           items:
                             properties:
                               baseTableTtl:
+                                description: The number of minutes that an Item is
+                                  stored in the data source.
                                 type: number
                               deltaSyncTableName:
-                                description: User-supplied name for the data source.
+                                description: The table name.
                                 type: string
                               deltaSyncTableTtl:
+                                description: The number of minutes that a Delta Sync
+                                  log entry is stored in the Delta Sync table.
                                 type: number
                             type: object
                           type: array
@@ -254,24 +260,27 @@ spec:
                             with this data source.
                           type: boolean
                         versioned:
+                          description: Detects Conflict Detection and Resolution with
+                            this data source.
                           type: boolean
                       type: object
                     type: array
                   elasticsearchConfig:
-                    description: Amazon Elasticsearch settings. See below
+                    description: Amazon Elasticsearch settings. See ElasticSearch
+                      Config
                     items:
                       properties:
                         endpoint:
                           description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                         region:
-                          description: AWS region of Elasticsearch domain. Defaults
+                          description: AWS region of the DynamoDB table. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
                   eventBridgeConfig:
-                    description: AWS EventBridge settings. See below
+                    description: AWS EventBridge settings. See Event Bridge Config
                     items:
                       properties:
                         eventBusArn:
@@ -280,7 +289,7 @@ spec:
                       type: object
                     type: array
                   httpConfig:
-                    description: HTTP settings. See below
+                    description: HTTP settings. See HTTP Config
                     items:
                       properties:
                         authorizationConfig:
@@ -309,12 +318,12 @@ spec:
                             type: object
                           type: array
                         endpoint:
-                          description: HTTP URL.
+                          description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                       type: object
                     type: array
                   lambdaConfig:
-                    description: AWS Lambda settings. See below
+                    description: AWS Lambda settings. See Lambda Config
                     items:
                       properties:
                         functionArn:
@@ -323,20 +332,21 @@ spec:
                       type: object
                     type: array
                   opensearchserviceConfig:
-                    description: Amazon OpenSearch Service settings. See below
+                    description: Amazon OpenSearch Service settings. See OpenSearch
+                      Service Config
                     items:
                       properties:
                         endpoint:
-                          description: HTTP endpoint of the OpenSearch domain.
+                          description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                         region:
-                          description: AWS region of the OpenSearch domain. Defaults
+                          description: AWS region of the DynamoDB table. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
                   region:
-                    description: AWS Region for RDS HTTP endpoint. Defaults to current
+                    description: AWS region of the DynamoDB table. Defaults to current
                       region. Region is the region you'd like your resource to be
                       created in.
                     type: string
@@ -359,7 +369,7 @@ spec:
                                 description: Amazon RDS cluster identifier.
                                 type: string
                               region:
-                                description: AWS Region for RDS HTTP endpoint. Defaults
+                                description: AWS region of the DynamoDB table. Defaults
                                   to current region.
                                 type: string
                               schema:
@@ -374,7 +384,9 @@ spec:
                       type: object
                     type: array
                   serviceRoleArn:
-                    description: IAM service role ARN for the data source.
+                    description: IAM service role ARN for the data source. Required
+                      if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH,
+                      AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
                     type: string
                   serviceRoleArnRef:
                     description: Reference to a Role in iam to populate serviceRoleArn.
@@ -452,7 +464,7 @@ spec:
                   type:
                     description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
                       AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE,
-                      AMAZON_EVENTBRIDGE.'
+                      AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.'
                     type: string
                 required:
                 - region
@@ -473,18 +485,24 @@ spec:
                     description: Description of the data source.
                     type: string
                   dynamodbConfig:
-                    description: DynamoDB settings. See below
+                    description: DynamoDB settings. See DynamoDB Config
                     items:
                       properties:
                         deltaSyncConfig:
+                          description: The DeltaSyncConfig for a versioned data source.
+                            See Delta Sync Config
                           items:
                             properties:
                               baseTableTtl:
+                                description: The number of minutes that an Item is
+                                  stored in the data source.
                                 type: number
                               deltaSyncTableName:
-                                description: User-supplied name for the data source.
+                                description: The table name.
                                 type: string
                               deltaSyncTableTtl:
+                                description: The number of minutes that a Delta Sync
+                                  log entry is stored in the Delta Sync table.
                                 type: number
                             type: object
                           type: array
@@ -574,11 +592,14 @@ spec:
                             with this data source.
                           type: boolean
                         versioned:
+                          description: Detects Conflict Detection and Resolution with
+                            this data source.
                           type: boolean
                       type: object
                     type: array
                   elasticsearchConfig:
-                    description: Amazon Elasticsearch settings. See below
+                    description: Amazon Elasticsearch settings. See ElasticSearch
+                      Config
                     items:
                       properties:
                         endpoint:
@@ -587,7 +608,7 @@ spec:
                       type: object
                     type: array
                   eventBridgeConfig:
-                    description: AWS EventBridge settings. See below
+                    description: AWS EventBridge settings. See Event Bridge Config
                     items:
                       properties:
                         eventBusArn:
@@ -596,7 +617,7 @@ spec:
                       type: object
                     type: array
                   httpConfig:
-                    description: HTTP settings. See below
+                    description: HTTP settings. See HTTP Config
                     items:
                       properties:
                         authorizationConfig:
@@ -625,12 +646,12 @@ spec:
                             type: object
                           type: array
                         endpoint:
-                          description: HTTP URL.
+                          description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                       type: object
                     type: array
                   lambdaConfig:
-                    description: AWS Lambda settings. See below
+                    description: AWS Lambda settings. See Lambda Config
                     items:
                       properties:
                         functionArn:
@@ -639,11 +660,12 @@ spec:
                       type: object
                     type: array
                   opensearchserviceConfig:
-                    description: Amazon OpenSearch Service settings. See below
+                    description: Amazon OpenSearch Service settings. See OpenSearch
+                      Service Config
                     items:
                       properties:
                         endpoint:
-                          description: HTTP endpoint of the OpenSearch domain.
+                          description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                       type: object
                     type: array
@@ -755,7 +777,7 @@ spec:
                   type:
                     description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
                       AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE,
-                      AMAZON_EVENTBRIDGE.'
+                      AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.'
                     type: string
                 type: object
               managementPolicies:
@@ -938,18 +960,24 @@ spec:
                     description: Description of the data source.
                     type: string
                   dynamodbConfig:
-                    description: DynamoDB settings. See below
+                    description: DynamoDB settings. See DynamoDB Config
                     items:
                       properties:
                         deltaSyncConfig:
+                          description: The DeltaSyncConfig for a versioned data source.
+                            See Delta Sync Config
                           items:
                             properties:
                               baseTableTtl:
+                                description: The number of minutes that an Item is
+                                  stored in the data source.
                                 type: number
                               deltaSyncTableName:
-                                description: User-supplied name for the data source.
+                                description: The table name.
                                 type: string
                               deltaSyncTableTtl:
+                                description: The number of minutes that a Delta Sync
+                                  log entry is stored in the Delta Sync table.
                                 type: number
                             type: object
                           type: array
@@ -965,24 +993,27 @@ spec:
                             with this data source.
                           type: boolean
                         versioned:
+                          description: Detects Conflict Detection and Resolution with
+                            this data source.
                           type: boolean
                       type: object
                     type: array
                   elasticsearchConfig:
-                    description: Amazon Elasticsearch settings. See below
+                    description: Amazon Elasticsearch settings. See ElasticSearch
+                      Config
                     items:
                       properties:
                         endpoint:
                           description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                         region:
-                          description: AWS region of Elasticsearch domain. Defaults
+                          description: AWS region of the DynamoDB table. Defaults
                             to current region.
                           type: string
                       type: object
                     type: array
                   eventBridgeConfig:
-                    description: AWS EventBridge settings. See below
+                    description: AWS EventBridge settings. See Event Bridge Config
                     items:
                       properties:
                         eventBusArn:
@@ -991,7 +1022,7 @@ spec:
                       type: object
                     type: array
                   httpConfig:
-                    description: HTTP settings. See below
+                    description: HTTP settings. See HTTP Config
                     items:
                       properties:
                         authorizationConfig:
@@ -1020,14 +1051,14 @@ spec:
                             type: object
                           type: array
                         endpoint:
-                          description: HTTP URL.
+                          description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                       type: object
                     type: array
                   id:
                     type: string
                   lambdaConfig:
-                    description: AWS Lambda settings. See below
+                    description: AWS Lambda settings. See Lambda Config
                     items:
                       properties:
                         functionArn:
@@ -1036,14 +1067,15 @@ spec:
                       type: object
                     type: array
                   opensearchserviceConfig:
-                    description: Amazon OpenSearch Service settings. See below
+                    description: Amazon OpenSearch Service settings. See OpenSearch
+                      Service Config
                     items:
                       properties:
                         endpoint:
-                          description: HTTP endpoint of the OpenSearch domain.
+                          description: HTTP endpoint of the Elasticsearch domain.
                           type: string
                         region:
-                          description: AWS region of the OpenSearch domain. Defaults
+                          description: AWS region of the DynamoDB table. Defaults
                             to current region.
                           type: string
                       type: object
@@ -1067,7 +1099,7 @@ spec:
                                 description: Amazon RDS cluster identifier.
                                 type: string
                               region:
-                                description: AWS Region for RDS HTTP endpoint. Defaults
+                                description: AWS region of the DynamoDB table. Defaults
                                   to current region.
                                 type: string
                               schema:
@@ -1082,12 +1114,14 @@ spec:
                       type: object
                     type: array
                   serviceRoleArn:
-                    description: IAM service role ARN for the data source.
+                    description: IAM service role ARN for the data source. Required
+                      if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH,
+                      AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
                     type: string
                   type:
                     description: 'Type of the Data Source. Valid values: AWS_LAMBDA,
                       AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE,
-                      AMAZON_EVENTBRIDGE.'
+                      AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.'
                     type: string
                 type: object
               conditions:

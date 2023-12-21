@@ -77,7 +77,7 @@ spec:
                     x-kubernetes-list-type: set
                   compatibleRuntimes:
                     description: List of Runtimes this layer is compatible with. Up
-                      to 5 runtimes can be specified.
+                      to 15 runtimes can be specified.
                     items:
                       type: string
                     type: array
@@ -151,7 +151,7 @@ spec:
                     x-kubernetes-list-type: set
                   compatibleRuntimes:
                     description: List of Runtimes this layer is compatible with. Up
-                      to 5 runtimes can be specified.
+                      to 15 runtimes can be specified.
                     items:
                       type: string
                     type: array
@@ -380,7 +380,7 @@ spec:
                     x-kubernetes-list-type: set
                   compatibleRuntimes:
                     description: List of Runtimes this layer is compatible with. Up
-                      to 5 runtimes can be specified.
+                      to 15 runtimes can be specified.
                     items:
                       type: string
                     type: array

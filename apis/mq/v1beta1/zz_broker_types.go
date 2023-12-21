@@ -31,7 +31,7 @@ type BrokerInitParameters struct {
 	// Name of the broker.
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
@@ -43,7 +43,7 @@ type BrokerInitParameters struct {
 	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
 	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
-	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.15.0.
+	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.17.6.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Broker's instance type. For example, mq.t3.micro, mq.m5.large.
@@ -119,7 +119,7 @@ type BrokerObservation struct {
 	// Name of the broker.
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
@@ -131,7 +131,7 @@ type BrokerObservation struct {
 	// Type of broker engine. Valid values are ActiveMQ and RabbitMQ.
 	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
-	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.15.0.
+	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.17.6.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Broker's instance type. For example, mq.t3.micro, mq.m5.large.
@@ -196,7 +196,7 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerName *string `json:"brokerName,omitempty" tf:"broker_name,omitempty"`
 
-	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ only. Detailed below.
+	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -212,7 +212,7 @@ type BrokerParameters struct {
 	// +kubebuilder:validation:Optional
 	EngineType *string `json:"engineType,omitempty" tf:"engine_type,omitempty"`
 
-	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.15.0.
+	// Version of the broker engine. See the AmazonMQ Broker Engine docs for supported versions. For example, 5.17.6.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -573,6 +573,9 @@ type UserInitParameters struct {
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	// Whether to set set replication user. Defaults to false.
+	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
+
 	// Username of the user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -585,6 +588,9 @@ type UserObservation struct {
 	// List of groups (20 maximum) to which the ActiveMQ user belongs. Applies to engine_type of ActiveMQ only.
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+
+	// Whether to set set replication user. Defaults to false.
+	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	// Username of the user.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -604,6 +610,10 @@ type UserParameters struct {
 	// Password of the user. It must be 12 to 250 characters long, at least 4 unique characters, and must not contain commas.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Whether to set set replication user. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	// Username of the user.
 	// +kubebuilder:validation:Optional

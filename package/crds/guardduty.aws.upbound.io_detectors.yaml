@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Detector is the Schema for the Detectors API. Provides a resource
-          to manage a GuardDuty detector
+          to manage an Amazon GuardDuty detector
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -69,7 +69,8 @@ spec:
                 properties:
                   datasources:
                     description: Describes which data sources will be enabled for
-                      the detector. See Data Sources below for more details.
+                      the detector. See Data Sources below for more details. Deprecated
+                      in favor of aws_guardduty_detector_feature resources.
                     items:
                       properties:
                         kubernetes:
@@ -176,7 +177,8 @@ spec:
                 properties:
                   datasources:
                     description: Describes which data sources will be enabled for
-                      the detector. See Data Sources below for more details.
+                      the detector. See Data Sources below for more details. Deprecated
+                      in favor of aws_guardduty_detector_feature resources.
                     items:
                       properties:
                         kubernetes:
@@ -436,7 +438,8 @@ spec:
                     type: string
                   datasources:
                     description: Describes which data sources will be enabled for
-                      the detector. See Data Sources below for more details.
+                      the detector. See Data Sources below for more details. Deprecated
+                      in favor of aws_guardduty_detector_feature resources.
                     items:
                       properties:
                         kubernetes:

@@ -76,6 +76,9 @@ type ProvisioningTemplateInitParameters struct {
 
 	// The JSON formatted contents of the fleet provisioning template.
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+
+	// The type you define in a provisioning template.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProvisioningTemplateObservation struct {
@@ -110,6 +113,9 @@ type ProvisioningTemplateObservation struct {
 
 	// The JSON formatted contents of the fleet provisioning template.
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+
+	// The type you define in a provisioning template.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProvisioningTemplateParameters struct {
@@ -153,6 +159,10 @@ type ProvisioningTemplateParameters struct {
 	// The JSON formatted contents of the fleet provisioning template.
 	// +kubebuilder:validation:Optional
 	TemplateBody *string `json:"templateBody,omitempty" tf:"template_body,omitempty"`
+
+	// The type you define in a provisioning template.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ProvisioningTemplateSpec defines the desired state of ProvisioningTemplate

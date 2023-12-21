@@ -100,7 +100,8 @@ spec:
                     type: boolean
                   enableCloudwatchLogsExports:
                     description: A list of the log types this DB cluster is configured
-                      to export to Cloudwatch Logs. Currently only supports audit.
+                      to export to Cloudwatch Logs. Currently only supports audit
+                      and slowquery.
                     items:
                       type: string
                     type: array
@@ -567,7 +568,9 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a Neptune cluster snapshot, or the ARN when specifying a Neptune
-                      snapshot.
+                      snapshot. Automated snapshots should not be used for this attribute,
+                      unless from a different cluster. Automated snapshots are deleted
+                      as part of cluster destruction when the resource is replaced.
                     type: string
                   snapshotIdentifierRef:
                     description: Reference to a ClusterSnapshot to populate snapshotIdentifier.
@@ -784,7 +787,8 @@ spec:
                     type: boolean
                   enableCloudwatchLogsExports:
                     description: A list of the log types this DB cluster is configured
-                      to export to Cloudwatch Logs. Currently only supports audit.
+                      to export to Cloudwatch Logs. Currently only supports audit
+                      and slowquery.
                     items:
                       type: string
                     type: array
@@ -1628,7 +1632,8 @@ spec:
                     type: boolean
                   enableCloudwatchLogsExports:
                     description: A list of the log types this DB cluster is configured
-                      to export to Cloudwatch Logs. Currently only supports audit.
+                      to export to Cloudwatch Logs. Currently only supports audit
+                      and slowquery.
                     items:
                       type: string
                     type: array
@@ -1734,7 +1739,9 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a Neptune cluster snapshot, or the ARN when specifying a Neptune
-                      snapshot.
+                      snapshot. Automated snapshots should not be used for this attribute,
+                      unless from a different cluster. Automated snapshots are deleted
+                      as part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the Neptune cluster is encrypted.

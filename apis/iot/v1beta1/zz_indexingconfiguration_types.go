@@ -46,6 +46,28 @@ type CustomFieldParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type FilterInitParameters struct {
+
+	// List of shadow names that you select to index.
+	// +listType=set
+	NamedShadowNames []*string `json:"namedShadowNames,omitempty" tf:"named_shadow_names,omitempty"`
+}
+
+type FilterObservation struct {
+
+	// List of shadow names that you select to index.
+	// +listType=set
+	NamedShadowNames []*string `json:"namedShadowNames,omitempty" tf:"named_shadow_names,omitempty"`
+}
+
+type FilterParameters struct {
+
+	// List of shadow names that you select to index.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	NamedShadowNames []*string `json:"namedShadowNames,omitempty" tf:"named_shadow_names,omitempty"`
+}
+
 type IndexingConfigurationInitParameters struct {
 
 	// Thing group indexing configuration. See below.
@@ -186,6 +208,9 @@ type ThingIndexingConfigurationInitParameters struct {
 	// Device Defender indexing mode. Valid values: VIOLATIONS, OFF. Default: OFF.
 	DeviceDefenderIndexingMode *string `json:"deviceDefenderIndexingMode,omitempty" tf:"device_defender_indexing_mode,omitempty"`
 
+	// Required if named_shadow_indexing_mode is ON. Enables to add named shadows filtered by filter to fleet indexing configuration.
+	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
 	ManagedField []ThingIndexingConfigurationManagedFieldInitParameters `json:"managedField,omitempty" tf:"managed_field,omitempty"`
 
@@ -236,6 +261,9 @@ type ThingIndexingConfigurationObservation struct {
 	// Device Defender indexing mode. Valid values: VIOLATIONS, OFF. Default: OFF.
 	DeviceDefenderIndexingMode *string `json:"deviceDefenderIndexingMode,omitempty" tf:"device_defender_indexing_mode,omitempty"`
 
+	// Required if named_shadow_indexing_mode is ON. Enables to add named shadows filtered by filter to fleet indexing configuration.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
 	ManagedField []ThingIndexingConfigurationManagedFieldObservation `json:"managedField,omitempty" tf:"managed_field,omitempty"`
 
@@ -258,6 +286,10 @@ type ThingIndexingConfigurationParameters struct {
 	// Device Defender indexing mode. Valid values: VIOLATIONS, OFF. Default: OFF.
 	// +kubebuilder:validation:Optional
 	DeviceDefenderIndexingMode *string `json:"deviceDefenderIndexingMode,omitempty" tf:"device_defender_indexing_mode,omitempty"`
+
+	// Required if named_shadow_indexing_mode is ON. Enables to add named shadows filtered by filter to fleet indexing configuration.
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. See below.
 	// +kubebuilder:validation:Optional

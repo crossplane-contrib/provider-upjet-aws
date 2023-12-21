@@ -73,6 +73,12 @@ spec:
                       data transfer quota for a bucket. Use the get-bucket-bundles
                       cli command to get a list of bundle IDs that you can specify.'
                     type: string
+                  forceDelete:
+                    description: AWS by default will not delete an s3 bucket which
+                      is not empty, to prevent losing bucket data and affecting other
+                      resources in lightsail. If force_delete is set to true the bucket
+                      will be deleted even when not empty.
+                    type: boolean
                   region:
                     description: The Amazon Web Services Region name. Region is the
                       region you'd like your resource to be created in.
@@ -104,6 +110,12 @@ spec:
                       data transfer quota for a bucket. Use the get-bucket-bundles
                       cli command to get a list of bundle IDs that you can specify.'
                     type: string
+                  forceDelete:
+                    description: AWS by default will not delete an s3 bucket which
+                      is not empty, to prevent losing bucket data and affecting other
+                      resources in lightsail. If force_delete is set to true the bucket
+                      will be deleted even when not empty.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -297,6 +309,12 @@ spec:
                   createdAt:
                     description: The timestamp when the bucket was created.
                     type: string
+                  forceDelete:
+                    description: AWS by default will not delete an s3 bucket which
+                      is not empty, to prevent losing bucket data and affecting other
+                      resources in lightsail. If force_delete is set to true the bucket
+                      will be deleted even when not empty.
+                    type: boolean
                   id:
                     description: The name used for this bucket (matches name).
                     type: string

@@ -181,6 +181,9 @@ spec:
                     description: The JSON formatted contents of the fleet provisioning
                       template.
                     type: string
+                  type:
+                    description: The type you define in a provisioning template.
+                    type: string
                 required:
                 - region
                 type: object
@@ -305,6 +308,9 @@ spec:
                   templateBody:
                     description: The JSON formatted contents of the fleet provisioning
                       template.
+                    type: string
+                  type:
+                    description: The type you define in a provisioning template.
                     type: string
                 type: object
               managementPolicies:
@@ -530,6 +536,9 @@ spec:
                   templateBody:
                     description: The JSON formatted contents of the fleet provisioning
                       template.
+                    type: string
+                  type:
+                    description: The type you define in a provisioning template.
                     type: string
                 type: object
               conditions:

@@ -47,7 +47,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    provider: aws.alternate
+    provider: ${aws.alternate}
     region: us-west-1
     vpcIdSelector:
       matchLabels:
@@ -71,7 +71,7 @@ spec:
     cidrBlock: 10.7.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
-    provider: aws.alternate
+    provider: ${aws.alternate}
     region: us-west-1
 
 ---

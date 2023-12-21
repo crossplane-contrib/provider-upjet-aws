@@ -82,7 +82,7 @@ type CsvClassifierInitParameters struct {
 	// Indicates whether the CSV file contains a header. This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
 	ContainsHeader *string `json:"containsHeader,omitempty" tf:"contains_header,omitempty"`
 
-	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+	// Enables the custom datatype to be configured.
 	CustomDatatypeConfigured *bool `json:"customDatatypeConfigured,omitempty" tf:"custom_datatype_configured,omitempty"`
 
 	// A list of supported custom datatypes. Valid values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT, INT, LONG, SHORT, STRING, TIMESTAMP.
@@ -109,7 +109,7 @@ type CsvClassifierObservation struct {
 	// Indicates whether the CSV file contains a header. This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
 	ContainsHeader *string `json:"containsHeader,omitempty" tf:"contains_header,omitempty"`
 
-	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+	// Enables the custom datatype to be configured.
 	CustomDatatypeConfigured *bool `json:"customDatatypeConfigured,omitempty" tf:"custom_datatype_configured,omitempty"`
 
 	// A list of supported custom datatypes. Valid values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT, INT, LONG, SHORT, STRING, TIMESTAMP.
@@ -138,7 +138,7 @@ type CsvClassifierParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainsHeader *string `json:"containsHeader,omitempty" tf:"contains_header,omitempty"`
 
-	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+	// Enables the custom datatype to be configured.
 	// +kubebuilder:validation:Optional
 	CustomDatatypeConfigured *bool `json:"customDatatypeConfigured,omitempty" tf:"custom_datatype_configured,omitempty"`
 

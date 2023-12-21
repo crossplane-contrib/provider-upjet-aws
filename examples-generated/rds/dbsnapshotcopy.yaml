@@ -28,12 +28,14 @@ spec:
   forProvider:
     allocatedStorage: 10
     backupRetentionPeriod: 0
+    dbName: baz
     engine: mysql
     engineVersion: 5.6.21
     instanceClass: db.t2.micro
     maintenanceWindow: Fri:09:00-Fri:09:30
-    name: baz
-    parameterGroupName: default.mysql5.6
+    parameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     passwordSecretRef:
       key: example-key
       name: example-secret

@@ -125,6 +125,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -183,6 +186,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -209,7 +215,7 @@ spec:
                     type: array
                   defaultUserSettings:
                     description: The default user settings. See Default User Settings
-                      below.* domain_name -  The domain name.
+                      below.
                     items:
                       properties:
                         canvasAppSettings:
@@ -217,6 +223,60 @@ spec:
                             below.
                           items:
                             properties:
+                              directDeploySettings:
+                                description: The model deployment settings for the
+                                  SageMaker Canvas application. See Direct Deploy
+                                  Settings below.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Describes whether model deployment
+                                        permissions are enabled or disabled in the
+                                        Canvas application. Valid values are ENABLED
+                                        and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                              identityProviderOauthSettings:
+                                description: The settings for connecting to an external
+                                  data source with OAuth. See Identity Provider OAuth
+                                  Settings below.
+                                items:
+                                  properties:
+                                    dataSourceName:
+                                      description: The name of the data source that
+                                        you're connecting to. Canvas currently supports
+                                        OAuth for Snowflake and Salesforce Data Cloud.
+                                        Valid values are SalesforceGenie and Snowflake.
+                                      type: string
+                                    secretArn:
+                                      description: The ARN of an Amazon Web Services
+                                        Secrets Manager secret that stores the credentials
+                                        from your identity provider, such as the client
+                                        ID and secret, authorization URL, and token
+                                        URL.
+                                      type: string
+                                    status:
+                                      description: Describes whether OAuth for a data
+                                        source is enabled or disabled in the Canvas
+                                        application. Valid values are ENABLED and
+                                        DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                              kendraSettings:
+                                description: The settings for document querying. See
+                                  Kendra Settings below.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Describes whether the document
+                                        querying feature is enabled or disabled in
+                                        the Canvas application. Valid values are ENABLED
+                                        and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
                                   Canvas application. See Model Register Settings
@@ -234,7 +294,7 @@ spec:
                                     status:
                                       description: Describes whether the integration
                                         to the model registry is enabled or disabled
-                                        in the Canvas application.. Valid values are
+                                        in the Canvas application. Valid values are
                                         ENABLED and DISABLED.
                                       type: string
                                   type: object
@@ -266,8 +326,120 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              workspaceSettings:
+                                description: The workspace settings for the SageMaker
+                                  Canvas application. See Workspace Settings below.
+                                items:
+                                  properties:
+                                    s3ArtifactPath:
+                                      description: The Amazon S3 bucket used to store
+                                        artifacts generated by Canvas. Updating the
+                                        Amazon S3 location impacts existing configuration
+                                        settings, and Canvas users no longer have
+                                        access to their artifacts. Canvas users must
+                                        log out and log back in to apply the new location.
+                                      type: string
+                                    s3KmsKeyId:
+                                      description: The Amazon Web Services Key Management
+                                        Service (KMS) encryption key ID that is used
+                                        to encrypt artifacts generated by Canvas in
+                                        the Amazon S3 bucket.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
+                        codeEditorAppSettings:
+                          description: The Code Editor application settings. See Code
+                            Editor App Settings below.
+                          items:
+                            properties:
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        customFileSystemConfig:
+                          description: The settings for assigning a custom file system
+                            to a user profile. Permitted users can access this file
+                            system in Amazon SageMaker Studio. See Custom File System
+                            Config below.
+                          items:
+                            properties:
+                              efsFileSystemConfig:
+                                description: The default EBS storage settings for
+                                  a private space. See EFS File System Config below.
+                                items:
+                                  properties:
+                                    fileSystemId:
+                                      description: The ID of your Amazon EFS file
+                                        system.
+                                      type: string
+                                    fileSystemPath:
+                                      description: The path to the file system directory
+                                        that is accessible in Amazon SageMaker Studio.
+                                        Permitted users can access only this directory
+                                        and below.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        customPosixUserConfig:
+                          description: Details about the POSIX identity that is used
+                            for file system operations. See Custom Posix User Config
+                            below.
+                          items:
+                            properties:
+                              gid:
+                                description: The POSIX group ID.
+                                type: number
+                              uid:
+                                description: The POSIX user ID.
+                                type: number
+                            type: object
+                          type: array
+                        defaultLandingUri:
+                          description: 'The default experience that the user is directed
+                            to when accessing the domain. The supported values are:
+                            studio::: Indicates that Studio is the default experience.
+                            This value can only be passed if StudioWebPortal is set
+                            to ENABLED. app:JupyterServer:: Indicates that Studio
+                            Classic is the default experience.'
+                          type: string
                         executionRole:
                           description: The execution role ARN for the user.
                           type: string
@@ -347,6 +519,78 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        jupyterLabAppSettings:
+                          description: The settings for the JupyterLab application.
+                            See Jupyter Lab App Settings below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see Code Repository below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  Custom Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         jupyterServerAppSettings:
                           description: The Jupyter server's app settings. See Jupyter
                             Server App Settings below.
@@ -382,6 +626,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -609,6 +856,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -666,6 +916,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -725,6 +978,35 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        spaceStorageSettings:
+                          description: The storage settings for a private space. See
+                            Space Storage Settings below.
+                          items:
+                            properties:
+                              defaultEbsStorageSettings:
+                                description: The default EBS storage settings for
+                                  a private space. See Default EBS Storage Settings
+                                  below.
+                                items:
+                                  properties:
+                                    defaultEbsVolumeSizeInGb:
+                                      description: The default size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                    maximumEbsVolumeSizeInGb:
+                                      description: The maximum size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        studioWebPortal:
+                          description: Whether the user can access Studio. If this
+                            value is set to DISABLED, the user cannot access Studio,
+                            even if that is the default experience for the domain.
+                            Valid values are ENABLED and DISABLED.
+                          type: string
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See TensorBoard
                             App Settings below.
@@ -750,6 +1032,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -761,6 +1046,7 @@ spec:
                       type: object
                     type: array
                   domainName:
+                    description: The domain name.
                     type: string
                   domainSettings:
                     description: The domain settings. See Domain Settings below.
@@ -796,6 +1082,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1161,6 +1450,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -1219,6 +1511,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -1245,7 +1540,7 @@ spec:
                     type: array
                   defaultUserSettings:
                     description: The default user settings. See Default User Settings
-                      below.* domain_name -  The domain name.
+                      below.
                     items:
                       properties:
                         canvasAppSettings:
@@ -1253,6 +1548,60 @@ spec:
                             below.
                           items:
                             properties:
+                              directDeploySettings:
+                                description: The model deployment settings for the
+                                  SageMaker Canvas application. See Direct Deploy
+                                  Settings below.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Describes whether model deployment
+                                        permissions are enabled or disabled in the
+                                        Canvas application. Valid values are ENABLED
+                                        and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                              identityProviderOauthSettings:
+                                description: The settings for connecting to an external
+                                  data source with OAuth. See Identity Provider OAuth
+                                  Settings below.
+                                items:
+                                  properties:
+                                    dataSourceName:
+                                      description: The name of the data source that
+                                        you're connecting to. Canvas currently supports
+                                        OAuth for Snowflake and Salesforce Data Cloud.
+                                        Valid values are SalesforceGenie and Snowflake.
+                                      type: string
+                                    secretArn:
+                                      description: The ARN of an Amazon Web Services
+                                        Secrets Manager secret that stores the credentials
+                                        from your identity provider, such as the client
+                                        ID and secret, authorization URL, and token
+                                        URL.
+                                      type: string
+                                    status:
+                                      description: Describes whether OAuth for a data
+                                        source is enabled or disabled in the Canvas
+                                        application. Valid values are ENABLED and
+                                        DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                              kendraSettings:
+                                description: The settings for document querying. See
+                                  Kendra Settings below.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Describes whether the document
+                                        querying feature is enabled or disabled in
+                                        the Canvas application. Valid values are ENABLED
+                                        and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
                                   Canvas application. See Model Register Settings
@@ -1270,7 +1619,7 @@ spec:
                                     status:
                                       description: Describes whether the integration
                                         to the model registry is enabled or disabled
-                                        in the Canvas application.. Valid values are
+                                        in the Canvas application. Valid values are
                                         ENABLED and DISABLED.
                                       type: string
                                   type: object
@@ -1302,6 +1651,190 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              workspaceSettings:
+                                description: The workspace settings for the SageMaker
+                                  Canvas application. See Workspace Settings below.
+                                items:
+                                  properties:
+                                    s3ArtifactPath:
+                                      description: The Amazon S3 bucket used to store
+                                        artifacts generated by Canvas. Updating the
+                                        Amazon S3 location impacts existing configuration
+                                        settings, and Canvas users no longer have
+                                        access to their artifacts. Canvas users must
+                                        log out and log back in to apply the new location.
+                                      type: string
+                                    s3KmsKeyId:
+                                      description: The Amazon Web Services Key Management
+                                        Service (KMS) encryption key ID that is used
+                                        to encrypt artifacts generated by Canvas in
+                                        the Amazon S3 bucket.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        codeEditorAppSettings:
+                          description: The Code Editor application settings. See Code
+                            Editor App Settings below.
+                          items:
+                            properties:
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        customFileSystemConfig:
+                          description: The settings for assigning a custom file system
+                            to a user profile. Permitted users can access this file
+                            system in Amazon SageMaker Studio. See Custom File System
+                            Config below.
+                          items:
+                            properties:
+                              efsFileSystemConfig:
+                                description: The default EBS storage settings for
+                                  a private space. See EFS File System Config below.
+                                items:
+                                  properties:
+                                    fileSystemId:
+                                      description: The ID of your Amazon EFS file
+                                        system.
+                                      type: string
+                                    fileSystemPath:
+                                      description: The path to the file system directory
+                                        that is accessible in Amazon SageMaker Studio.
+                                        Permitted users can access only this directory
+                                        and below.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        customPosixUserConfig:
+                          description: Details about the POSIX identity that is used
+                            for file system operations. See Custom Posix User Config
+                            below.
+                          items:
+                            properties:
+                              gid:
+                                description: The POSIX group ID.
+                                type: number
+                              uid:
+                                description: The POSIX user ID.
+                                type: number
+                            type: object
+                          type: array
+                        defaultLandingUri:
+                          description: 'The default experience that the user is directed
+                            to when accessing the domain. The supported values are:
+                            studio::: Indicates that Studio is the default experience.
+                            This value can only be passed if StudioWebPortal is set
+                            to ENABLED. app:JupyterServer:: Indicates that Studio
+                            Classic is the default experience.'
+                          type: string
+                        jupyterLabAppSettings:
+                          description: The settings for the JupyterLab application.
+                            See Jupyter Lab App Settings below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see Code Repository below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  Custom Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         executionRole:
@@ -1418,6 +1951,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1645,6 +2181,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -1702,6 +2241,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -1761,6 +2303,35 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        spaceStorageSettings:
+                          description: The storage settings for a private space. See
+                            Space Storage Settings below.
+                          items:
+                            properties:
+                              defaultEbsStorageSettings:
+                                description: The default EBS storage settings for
+                                  a private space. See Default EBS Storage Settings
+                                  below.
+                                items:
+                                  properties:
+                                    defaultEbsVolumeSizeInGb:
+                                      description: The default size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                    maximumEbsVolumeSizeInGb:
+                                      description: The maximum size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        studioWebPortal:
+                          description: Whether the user can access Studio. If this
+                            value is set to DISABLED, the user cannot access Studio,
+                            even if that is the default experience for the domain.
+                            Valid values are ENABLED and DISABLED.
+                          type: string
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See TensorBoard
                             App Settings below.
@@ -1786,6 +2357,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -1797,6 +2371,7 @@ spec:
                       type: object
                     type: array
                   domainName:
+                    description: The domain name.
                     type: string
                   domainSettings:
                     description: The domain settings. See Domain Settings below.
@@ -1832,6 +2407,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2361,6 +2939,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -2419,6 +3000,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -2445,7 +3029,7 @@ spec:
                     type: array
                   defaultUserSettings:
                     description: The default user settings. See Default User Settings
-                      below.* domain_name -  The domain name.
+                      below.
                     items:
                       properties:
                         canvasAppSettings:
@@ -2453,6 +3037,60 @@ spec:
                             below.
                           items:
                             properties:
+                              directDeploySettings:
+                                description: The model deployment settings for the
+                                  SageMaker Canvas application. See Direct Deploy
+                                  Settings below.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Describes whether model deployment
+                                        permissions are enabled or disabled in the
+                                        Canvas application. Valid values are ENABLED
+                                        and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                              identityProviderOauthSettings:
+                                description: The settings for connecting to an external
+                                  data source with OAuth. See Identity Provider OAuth
+                                  Settings below.
+                                items:
+                                  properties:
+                                    dataSourceName:
+                                      description: The name of the data source that
+                                        you're connecting to. Canvas currently supports
+                                        OAuth for Snowflake and Salesforce Data Cloud.
+                                        Valid values are SalesforceGenie and Snowflake.
+                                      type: string
+                                    secretArn:
+                                      description: The ARN of an Amazon Web Services
+                                        Secrets Manager secret that stores the credentials
+                                        from your identity provider, such as the client
+                                        ID and secret, authorization URL, and token
+                                        URL.
+                                      type: string
+                                    status:
+                                      description: Describes whether OAuth for a data
+                                        source is enabled or disabled in the Canvas
+                                        application. Valid values are ENABLED and
+                                        DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
+                              kendraSettings:
+                                description: The settings for document querying. See
+                                  Kendra Settings below.
+                                items:
+                                  properties:
+                                    status:
+                                      description: Describes whether the document
+                                        querying feature is enabled or disabled in
+                                        the Canvas application. Valid values are ENABLED
+                                        and DISABLED.
+                                      type: string
+                                  type: object
+                                type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
                                   Canvas application. See Model Register Settings
@@ -2470,7 +3108,7 @@ spec:
                                     status:
                                       description: Describes whether the integration
                                         to the model registry is enabled or disabled
-                                        in the Canvas application.. Valid values are
+                                        in the Canvas application. Valid values are
                                         ENABLED and DISABLED.
                                       type: string
                                   type: object
@@ -2502,11 +3140,195 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              workspaceSettings:
+                                description: The workspace settings for the SageMaker
+                                  Canvas application. See Workspace Settings below.
+                                items:
+                                  properties:
+                                    s3ArtifactPath:
+                                      description: The Amazon S3 bucket used to store
+                                        artifacts generated by Canvas. Updating the
+                                        Amazon S3 location impacts existing configuration
+                                        settings, and Canvas users no longer have
+                                        access to their artifacts. Canvas users must
+                                        log out and log back in to apply the new location.
+                                      type: string
+                                    s3KmsKeyId:
+                                      description: The Amazon Web Services Key Management
+                                        Service (KMS) encryption key ID that is used
+                                        to encrypt artifacts generated by Canvas in
+                                        the Amazon S3 bucket.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
+                        codeEditorAppSettings:
+                          description: The Code Editor application settings. See Code
+                            Editor App Settings below.
+                          items:
+                            properties:
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        customFileSystemConfig:
+                          description: The settings for assigning a custom file system
+                            to a user profile. Permitted users can access this file
+                            system in Amazon SageMaker Studio. See Custom File System
+                            Config below.
+                          items:
+                            properties:
+                              efsFileSystemConfig:
+                                description: The default EBS storage settings for
+                                  a private space. See EFS File System Config below.
+                                items:
+                                  properties:
+                                    fileSystemId:
+                                      description: The ID of your Amazon EFS file
+                                        system.
+                                      type: string
+                                    fileSystemPath:
+                                      description: The path to the file system directory
+                                        that is accessible in Amazon SageMaker Studio.
+                                        Permitted users can access only this directory
+                                        and below.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        customPosixUserConfig:
+                          description: Details about the POSIX identity that is used
+                            for file system operations. See Custom Posix User Config
+                            below.
+                          items:
+                            properties:
+                              gid:
+                                description: The POSIX group ID.
+                                type: number
+                              uid:
+                                description: The POSIX user ID.
+                                type: number
+                            type: object
+                          type: array
+                        defaultLandingUri:
+                          description: 'The default experience that the user is directed
+                            to when accessing the domain. The supported values are:
+                            studio::: Indicates that Studio is the default experience.
+                            This value can only be passed if StudioWebPortal is set
+                            to ENABLED. app:JupyterServer:: Indicates that Studio
+                            Classic is the default experience.'
+                          type: string
                         executionRole:
                           description: The execution role ARN for the user.
                           type: string
+                        jupyterLabAppSettings:
+                          description: The settings for the JupyterLab application.
+                            See Jupyter Lab App Settings below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see Code Repository below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  Custom Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see Default Resource Spec below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         jupyterServerAppSettings:
                           description: The Jupyter server's app settings. See Jupyter
                             Server App Settings below.
@@ -2543,6 +3365,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -2600,6 +3425,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2659,6 +3487,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -2717,6 +3548,35 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        spaceStorageSettings:
+                          description: The storage settings for a private space. See
+                            Space Storage Settings below.
+                          items:
+                            properties:
+                              defaultEbsStorageSettings:
+                                description: The default EBS storage settings for
+                                  a private space. See Default EBS Storage Settings
+                                  below.
+                                items:
+                                  properties:
+                                    defaultEbsVolumeSizeInGb:
+                                      description: The default size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                    maximumEbsVolumeSizeInGb:
+                                      description: The maximum size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        studioWebPortal:
+                          description: Whether the user can access Studio. If this
+                            value is set to DISABLED, the user cannot access Studio,
+                            even if that is the default experience for the domain.
+                            Valid values are ENABLED and DISABLED.
+                          type: string
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See TensorBoard
                             App Settings below.
@@ -2742,6 +3602,9 @@ spec:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -2753,6 +3616,7 @@ spec:
                       type: object
                     type: array
                   domainName:
+                    description: The domain name.
                     type: string
                   domainSettings:
                     description: The domain settings. See Domain Settings below.
@@ -2788,6 +3652,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The ARN of the SageMaker image
                                         that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -2847,6 +3714,11 @@ spec:
                   securityGroupIdForDomainBoundary:
                     description: The ID of the security group that authorizes traffic
                       between the RSessionGateway apps and the RStudioServerPro app.
+                    type: string
+                  singleSignOnApplicationArn:
+                    description: The ARN of the application managed by SageMaker in
+                      IAM Identity Center. This value is only returned for domains
+                      created after September 19, 2023.
                     type: string
                   singleSignOnManagedApplicationInstanceId:
                     description: The SSO managed application instance ID.

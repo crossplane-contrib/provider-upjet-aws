@@ -180,6 +180,9 @@ type CodeRepositoryInitParameters struct {
 
 	// Version that should be used within the source code repository. See Source Code Version below for more details.
 	SourceCodeVersion []SourceCodeVersionInitParameters `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
+
+	// The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+	SourceDirectory *string `json:"sourceDirectory,omitempty" tf:"source_directory,omitempty"`
 }
 
 type CodeRepositoryObservation struct {
@@ -192,6 +195,9 @@ type CodeRepositoryObservation struct {
 
 	// Version that should be used within the source code repository. See Source Code Version below for more details.
 	SourceCodeVersion []SourceCodeVersionObservation `json:"sourceCodeVersion,omitempty" tf:"source_code_version,omitempty"`
+
+	// The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+	SourceDirectory *string `json:"sourceDirectory,omitempty" tf:"source_directory,omitempty"`
 }
 
 type CodeRepositoryParameters struct {
@@ -207,11 +213,15 @@ type CodeRepositoryParameters struct {
 	// Version that should be used within the source code repository. See Source Code Version below for more details.
 	// +kubebuilder:validation:Optional
 	SourceCodeVersion []SourceCodeVersionParameters `json:"sourceCodeVersion" tf:"source_code_version,omitempty"`
+
+	// The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+	// +kubebuilder:validation:Optional
+	SourceDirectory *string `json:"sourceDirectory,omitempty" tf:"source_directory,omitempty"`
 }
 
 type EgressConfigurationInitParameters struct {
 
-	// Type of egress configuration.Set to DEFAULT for access to resources hosted on public networks.Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
+	// The type of egress configuration. Valid values are: DEFAULT and VPC.
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 
 	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
@@ -230,20 +240,20 @@ type EgressConfigurationInitParameters struct {
 
 type EgressConfigurationObservation struct {
 
-	// Type of egress configuration.Set to DEFAULT for access to resources hosted on public networks.Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
+	// The type of egress configuration. Valid values are: DEFAULT and VPC.
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 
-	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
 }
 
 type EgressConfigurationParameters struct {
 
-	// Type of egress configuration.Set to DEFAULT for access to resources hosted on public networks.Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
+	// The type of egress configuration. Valid values are: DEFAULT and VPC.
 	// +kubebuilder:validation:Optional
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
 
-	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.VPCConnector
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -506,6 +516,9 @@ type NetworkConfigurationInitParameters struct {
 	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
 	EgressConfiguration []EgressConfigurationInitParameters `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
 
+	// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
 	IngressConfiguration []IngressConfigurationInitParameters `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
 }
@@ -514,6 +527,9 @@ type NetworkConfigurationObservation struct {
 
 	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
 	EgressConfiguration []EgressConfigurationObservation `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
+
+	// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
 	IngressConfiguration []IngressConfigurationObservation `json:"ingressConfiguration,omitempty" tf:"ingress_configuration,omitempty"`
@@ -524,6 +540,10 @@ type NetworkConfigurationParameters struct {
 	// Network configuration settings for outbound message traffic. See Egress Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	EgressConfiguration []EgressConfigurationParameters `json:"egressConfiguration,omitempty" tf:"egress_configuration,omitempty"`
+
+	// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network configuration. Valid values: IPV4, DUAL_STACK. Default: IPV4.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Network configuration settings for inbound network traffic. See Ingress Configuration below for more details.
 	// +kubebuilder:validation:Optional
@@ -538,7 +558,7 @@ type ServiceInitParameters struct {
 	// (Forces new resource) An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See Encryption Configuration below for more details.
 	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// (Forces new resource) Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
 	HealthCheckConfiguration []HealthCheckConfigurationInitParameters `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
 
 	// The runtime configuration of instances (scaling units) of the App Runner service. See Instance Configuration below for more details.
@@ -621,7 +641,7 @@ type ServiceObservation struct {
 	// (Forces new resource) An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK. See Encryption Configuration below for more details.
 	EncryptionConfiguration []EncryptionConfigurationObservation `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// (Forces new resource) Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
 	HealthCheckConfiguration []HealthCheckConfigurationObservation `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -669,7 +689,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionConfiguration []EncryptionConfigurationParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
-	// (Forces new resource) Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
+	// Settings of the health check that AWS App Runner performs to monitor the health of your service. See Health Check Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	HealthCheckConfiguration []HealthCheckConfigurationParameters `json:"healthCheckConfiguration,omitempty" tf:"health_check_configuration,omitempty"`
 

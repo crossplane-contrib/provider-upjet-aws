@@ -125,9 +125,6 @@ type CertificateAuthorityObservation struct {
 	// Serial number of the certificate authority. Only available after the certificate authority certificate has been imported.
 	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
-	// (Deprecated use the enabled attribute instead) Status of the certificate authority.
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

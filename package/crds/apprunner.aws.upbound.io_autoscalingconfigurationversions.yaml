@@ -313,8 +313,12 @@ spec:
                   autoScalingConfigurationRevision:
                     description: The revision of this auto scaling configuration.
                     type: number
+                  hasAssociatedService:
+                    type: boolean
                   id:
                     type: string
+                  isDefault:
+                    type: boolean
                   latest:
                     description: Whether the auto scaling configuration has the highest
                       auto_scaling_configuration_revision among all configurations

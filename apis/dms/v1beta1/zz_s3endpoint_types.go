@@ -109,6 +109,9 @@ type S3EndpointInitParameters struct {
 	// JSON document that describes how AWS DMS should interpret the data.
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
+	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
+	GlueCatalogGeneration *bool `json:"glueCatalogGeneration,omitempty" tf:"glue_catalog_generation,omitempty"`
+
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. (AWS default is 0.)
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
 
@@ -288,6 +291,9 @@ type S3EndpointObservation struct {
 
 	// JSON document that describes how AWS DMS should interpret the data.
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
+
+	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
+	GlueCatalogGeneration *bool `json:"glueCatalogGeneration,omitempty" tf:"glue_catalog_generation,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -469,6 +475,10 @@ type S3EndpointParameters struct {
 	// JSON document that describes how AWS DMS should interpret the data.
 	// +kubebuilder:validation:Optional
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
+
+	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
+	// +kubebuilder:validation:Optional
+	GlueCatalogGeneration *bool `json:"glueCatalogGeneration,omitempty" tf:"glue_catalog_generation,omitempty"`
 
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. (AWS default is 0.)
 	// +kubebuilder:validation:Optional

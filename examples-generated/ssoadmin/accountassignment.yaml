@@ -17,5 +17,5 @@ spec:
         testing.upbound.io/example-name: aws_identitystore_group
     principalType: GROUP
     region: us-west-1
-    targetId: "012347678910"
+    targetId: "123456789012"
     targetType: AWS_ACCOUNT

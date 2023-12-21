@@ -367,7 +367,7 @@ func (mg *WorkspaceAPIKey) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WorkspaceAPIKey
 func (tr *WorkspaceAPIKey) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"key": "status.atProvider.key"}
 }
 
 // GetObservation of this WorkspaceAPIKey

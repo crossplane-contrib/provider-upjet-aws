@@ -537,6 +537,11 @@ func (in *ConfigurationProfileInitParameters) DeepCopyInto(out *ConfigurationPro
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.LocationURI != nil {
 		in, out := &in.LocationURI, &out.LocationURI
 		*out = new(string)
@@ -662,6 +667,11 @@ func (in *ConfigurationProfileObservation) DeepCopyInto(out *ConfigurationProfil
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.LocationURI != nil {
 		in, out := &in.LocationURI, &out.LocationURI
 		*out = new(string)
@@ -753,6 +763,11 @@ func (in *ConfigurationProfileParameters) DeepCopyInto(out *ConfigurationProfile
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
 		*out = new(string)
 		**out = **in
 	}
@@ -1079,6 +1094,16 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -1208,6 +1233,21 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 	}
 	if in.EnvironmentIDSelector != nil {
 		in, out := &in.EnvironmentIDSelector, &out.EnvironmentIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifierRef != nil {
+		in, out := &in.KMSKeyIdentifierRef, &out.KMSKeyIdentifierRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifierSelector != nil {
+		in, out := &in.KMSKeyIdentifierSelector, &out.KMSKeyIdentifierSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

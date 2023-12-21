@@ -1917,7 +1917,7 @@ type SourceConnectorPropertiesS3Parameters struct {
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
-	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
+	BucketPrefix *string `json:"bucketPrefix" tf:"bucket_prefix,omitempty"`
 
 	// When you use Amazon S3 as the source, the configuration format that you provide the flow input data. See S3 Input Format Config for details.
 	// +kubebuilder:validation:Optional

@@ -2404,22 +2404,6 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.GatewayIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.InstanceIDRef,
-		Selector:     mg.Spec.ForProvider.InstanceIDSelector,
-		To: reference.To{
-			List:    &InstanceList{},
-			Managed: &Instance{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.InstanceID")
-	}
-	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NATGatewayID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.NATGatewayIDRef,

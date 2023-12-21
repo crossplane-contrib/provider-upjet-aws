@@ -51,6 +51,9 @@ type BucketLoggingInitParameters struct {
 	// Set of configuration blocks with information for granting permissions. See below.
 	TargetGrant []TargetGrantInitParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 
+	// Amazon S3 key format for log objects. See below.
+	TargetObjectKeyFormat []TargetObjectKeyFormatInitParameters `json:"targetObjectKeyFormat,omitempty" tf:"target_object_key_format,omitempty"`
+
 	// Prefix for all log object keys.
 	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
 }
@@ -71,6 +74,9 @@ type BucketLoggingObservation struct {
 
 	// Set of configuration blocks with information for granting permissions. See below.
 	TargetGrant []TargetGrantObservation `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
+
+	// Amazon S3 key format for log objects. See below.
+	TargetObjectKeyFormat []TargetObjectKeyFormatObservation `json:"targetObjectKeyFormat,omitempty" tf:"target_object_key_format,omitempty"`
 
 	// Prefix for all log object keys.
 	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
@@ -119,9 +125,41 @@ type BucketLoggingParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetGrant []TargetGrantParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`
 
+	// Amazon S3 key format for log objects. See below.
+	// +kubebuilder:validation:Optional
+	TargetObjectKeyFormat []TargetObjectKeyFormatParameters `json:"targetObjectKeyFormat,omitempty" tf:"target_object_key_format,omitempty"`
+
 	// Prefix for all log object keys.
 	// +kubebuilder:validation:Optional
 	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
+}
+
+type PartitionedPrefixInitParameters struct {
+
+	// Specifies the partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
+	PartitionDateSource *string `json:"partitionDateSource,omitempty" tf:"partition_date_source,omitempty"`
+}
+
+type PartitionedPrefixObservation struct {
+
+	// Specifies the partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
+	PartitionDateSource *string `json:"partitionDateSource,omitempty" tf:"partition_date_source,omitempty"`
+}
+
+type PartitionedPrefixParameters struct {
+
+	// Specifies the partition date source for the partitioned prefix. Valid values: EventTime, DeliveryTime.
+	// +kubebuilder:validation:Optional
+	PartitionDateSource *string `json:"partitionDateSource" tf:"partition_date_source,omitempty"`
+}
+
+type SimplePrefixInitParameters struct {
+}
+
+type SimplePrefixObservation struct {
+}
+
+type SimplePrefixParameters struct {
 }
 
 type TargetGrantGranteeInitParameters struct {
@@ -201,6 +239,35 @@ type TargetGrantParameters struct {
 	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, READ, WRITE.
 	// +kubebuilder:validation:Optional
 	Permission *string `json:"permission" tf:"permission,omitempty"`
+}
+
+type TargetObjectKeyFormatInitParameters struct {
+
+	// Partitioned S3 key for log objects. See below.
+	PartitionedPrefix []PartitionedPrefixInitParameters `json:"partitionedPrefix,omitempty" tf:"partitioned_prefix,omitempty"`
+
+	// Use the simple format for S3 keys for log objects. To use, set simple_prefix {}.
+	SimplePrefix []SimplePrefixInitParameters `json:"simplePrefix,omitempty" tf:"simple_prefix,omitempty"`
+}
+
+type TargetObjectKeyFormatObservation struct {
+
+	// Partitioned S3 key for log objects. See below.
+	PartitionedPrefix []PartitionedPrefixObservation `json:"partitionedPrefix,omitempty" tf:"partitioned_prefix,omitempty"`
+
+	// Use the simple format for S3 keys for log objects. To use, set simple_prefix {}.
+	SimplePrefix []SimplePrefixParameters `json:"simplePrefix,omitempty" tf:"simple_prefix,omitempty"`
+}
+
+type TargetObjectKeyFormatParameters struct {
+
+	// Partitioned S3 key for log objects. See below.
+	// +kubebuilder:validation:Optional
+	PartitionedPrefix []PartitionedPrefixParameters `json:"partitionedPrefix,omitempty" tf:"partitioned_prefix,omitempty"`
+
+	// Use the simple format for S3 keys for log objects. To use, set simple_prefix {}.
+	// +kubebuilder:validation:Optional
+	SimplePrefix []SimplePrefixParameters `json:"simplePrefix,omitempty" tf:"simple_prefix,omitempty"`
 }
 
 // BucketLoggingSpec defines the desired state of BucketLogging

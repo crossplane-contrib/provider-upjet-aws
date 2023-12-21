@@ -28,7 +28,7 @@ type GroupObservation struct {
 	// The ARN assigned by AWS for this group.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The group's ID.
+	// The group's name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Path in which to create the group.

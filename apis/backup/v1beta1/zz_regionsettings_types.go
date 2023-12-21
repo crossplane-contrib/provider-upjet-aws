@@ -19,7 +19,7 @@ import (
 
 type RegionSettingsInitParameters struct {
 
-	// A map of services along with the management preferences for the Region.
+	// A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +mapType=granular
@@ -37,7 +37,7 @@ type RegionSettingsObservation struct {
 	// The AWS region.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of services along with the management preferences for the Region.
+	// A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +mapType=granular
@@ -57,7 +57,7 @@ type RegionSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A map of services along with the management preferences for the Region.
+	// A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +kubebuilder:validation:Optional

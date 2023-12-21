@@ -906,6 +906,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.MonitoringRoleArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ParameterGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ParameterGroupList{},
+			Managed: &ParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ParameterGroupName")
+	}
+	mg.Spec.ForProvider.ParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ParameterGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ReplicateSourceDB),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ReplicateSourceDBRef,
@@ -1045,7 +1061,7 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
 		To: reference.To{
@@ -1331,7 +1347,7 @@ func (mg *ProxyTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
 		To: reference.To{
@@ -1405,7 +1421,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.ForProvider.DBInstanceIdentifierSelector,
 		To: reference.To{

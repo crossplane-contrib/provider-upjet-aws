@@ -23,7 +23,7 @@ type LayerVersionInitParameters struct {
 	// +listType=set
 	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
 
-	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
+	// List of Runtimes this layer is compatible with. Up to 15 runtimes can be specified.
 	// +listType=set
 	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`
 
@@ -64,7 +64,7 @@ type LayerVersionObservation struct {
 	// +listType=set
 	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
 
-	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
+	// List of Runtimes this layer is compatible with. Up to 15 runtimes can be specified.
 	// +listType=set
 	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`
 
@@ -123,7 +123,7 @@ type LayerVersionParameters struct {
 	// +listType=set
 	CompatibleArchitectures []*string `json:"compatibleArchitectures,omitempty" tf:"compatible_architectures,omitempty"`
 
-	// List of Runtimes this layer is compatible with. Up to 5 runtimes can be specified.
+	// List of Runtimes this layer is compatible with. Up to 15 runtimes can be specified.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CompatibleRuntimes []*string `json:"compatibleRuntimes,omitempty" tf:"compatible_runtimes,omitempty"`

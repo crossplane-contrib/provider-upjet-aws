@@ -75,6 +75,10 @@ type JobDefinitionInitParameters struct {
 	// Specifies the name of the job definition.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// A valid node properties
+	// provided as a single valid JSON document. This parameter is required if the type parameter is multinode.
+	NodeProperties *string `json:"nodeProperties,omitempty" tf:"node_properties,omitempty"`
+
 	// Specifies the parameter substitution placeholders to set in the job definition.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
@@ -97,7 +101,7 @@ type JobDefinitionInitParameters struct {
 	// Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of timeout is 1. Defined below.
 	Timeout []TimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of job definition. Must be container.
+	// The type of job definition. Must be container or multinode.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -114,6 +118,10 @@ type JobDefinitionObservation struct {
 
 	// Specifies the name of the job definition.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A valid node properties
+	// provided as a single valid JSON document. This parameter is required if the type parameter is multinode.
+	NodeProperties *string `json:"nodeProperties,omitempty" tf:"node_properties,omitempty"`
 
 	// Specifies the parameter substitution placeholders to set in the job definition.
 	// +mapType=granular
@@ -144,7 +152,7 @@ type JobDefinitionObservation struct {
 	// Specifies the timeout for jobs so that if a job runs longer, AWS Batch terminates the job. Maximum number of timeout is 1. Defined below.
 	Timeout []TimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of job definition. Must be container.
+	// The type of job definition. Must be container or multinode.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -158,6 +166,11 @@ type JobDefinitionParameters struct {
 	// Specifies the name of the job definition.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A valid node properties
+	// provided as a single valid JSON document. This parameter is required if the type parameter is multinode.
+	// +kubebuilder:validation:Optional
+	NodeProperties *string `json:"nodeProperties,omitempty" tf:"node_properties,omitempty"`
 
 	// Specifies the parameter substitution placeholders to set in the job definition.
 	// +kubebuilder:validation:Optional
@@ -192,7 +205,7 @@ type JobDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Timeout []TimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// The type of job definition. Must be container.
+	// The type of job definition. Must be container or multinode.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

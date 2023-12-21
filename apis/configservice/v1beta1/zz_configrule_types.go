@@ -22,6 +22,9 @@ type ConfigRuleInitParameters struct {
 	// Description of the rule
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The modes the Config rule can be evaluated in. See Evaluation Mode for more details.
+	EvaluationMode []EvaluationModeInitParameters `json:"evaluationMode,omitempty" tf:"evaluation_mode,omitempty"`
+
 	// A string in JSON format that is passed to the AWS Config rule Lambda function.
 	InputParameters *string `json:"inputParameters,omitempty" tf:"input_parameters,omitempty"`
 
@@ -46,6 +49,9 @@ type ConfigRuleObservation struct {
 
 	// Description of the rule
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The modes the Config rule can be evaluated in. See Evaluation Mode for more details.
+	EvaluationMode []EvaluationModeObservation `json:"evaluationMode,omitempty" tf:"evaluation_mode,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -78,6 +84,10 @@ type ConfigRuleParameters struct {
 	// Description of the rule
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The modes the Config rule can be evaluated in. See Evaluation Mode for more details.
+	// +kubebuilder:validation:Optional
+	EvaluationMode []EvaluationModeParameters `json:"evaluationMode,omitempty" tf:"evaluation_mode,omitempty"`
 
 	// A string in JSON format that is passed to the AWS Config rule Lambda function.
 	// +kubebuilder:validation:Optional
@@ -143,6 +153,25 @@ type CustomPolicyDetailsParameters struct {
 	// The policy definition containing the logic for your Config Custom Policy rule.
 	// +kubebuilder:validation:Optional
 	PolicyText *string `json:"policyText" tf:"policy_text,omitempty"`
+}
+
+type EvaluationModeInitParameters struct {
+
+	// The mode of an evaluation.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type EvaluationModeObservation struct {
+
+	// The mode of an evaluation.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type EvaluationModeParameters struct {
+
+	// The mode of an evaluation.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type ScopeInitParameters struct {

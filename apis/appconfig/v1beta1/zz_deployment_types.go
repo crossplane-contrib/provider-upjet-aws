@@ -121,6 +121,12 @@ type DeploymentObservation struct {
 	// AppConfig application ID, environment ID, and deployment number separated by a slash (/).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// ARN of the KMS key used to encrypt configuration data.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this to encrypt the configuration data using a customer managed key.
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
 	// State of the deployment.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -208,6 +214,20 @@ type DeploymentParameters struct {
 	// Selector for a Environment in appconfig to populate environmentId.
 	// +kubebuilder:validation:Optional
 	EnvironmentIDSelector *v1.Selector `json:"environmentIdSelector,omitempty" tf:"-"`
+
+	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this to encrypt the configuration data using a customer managed key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifier *string `json:"kmsKeyIdentifier,omitempty" tf:"kms_key_identifier,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierRef *v1.Reference `json:"kmsKeyIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KMSKeyIdentifierSelector *v1.Selector `json:"kmsKeyIdentifierSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

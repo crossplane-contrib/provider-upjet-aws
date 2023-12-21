@@ -50,7 +50,7 @@ type HealthCheckInitParameters struct {
 	// The number of consecutive health checks that an endpoint must pass or fail.
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
-	// The fully qualified domain name of the endpoint to be checked.
+	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// The IP address of the endpoint to be checked.
@@ -123,7 +123,7 @@ type HealthCheckObservation struct {
 	// The number of consecutive health checks that an endpoint must pass or fail.
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
-	// The fully qualified domain name of the endpoint to be checked.
+	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// The id of the health check
@@ -216,7 +216,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
-	// The fully qualified domain name of the endpoint to be checked.
+	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	// +kubebuilder:validation:Optional
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 

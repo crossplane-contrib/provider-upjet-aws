@@ -27,6 +27,7 @@ spec:
       - key: filterkey2
         type: KEY_AND_VALUE
         value: filtervalue
+    outdatedInstancesStrategy: UPDATE
     region: us-west-1
     serviceRoleArnSelector:
       matchLabels:

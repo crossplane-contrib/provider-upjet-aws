@@ -30,6 +30,9 @@ type ElasticsearchSettingsInitParameters struct {
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Enable to migrate documentation using the documentation type _doc. OpenSearch and an Elasticsearch clusters only support the _doc documentation type in versions 7.x and later. The default value is false.
+	UseNewMappingType *bool `json:"useNewMappingType,omitempty" tf:"use_new_mapping_type,omitempty"`
 }
 
 type ElasticsearchSettingsObservation struct {
@@ -45,6 +48,9 @@ type ElasticsearchSettingsObservation struct {
 
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Enable to migrate documentation using the documentation type _doc. OpenSearch and an Elasticsearch clusters only support the _doc documentation type in versions 7.x and later. The default value is false.
+	UseNewMappingType *bool `json:"useNewMappingType,omitempty" tf:"use_new_mapping_type,omitempty"`
 }
 
 type ElasticsearchSettingsParameters struct {
@@ -64,6 +70,10 @@ type ElasticsearchSettingsParameters struct {
 	// ARN of the IAM Role with permissions to write to the OpenSearch cluster.
 	// +kubebuilder:validation:Optional
 	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn" tf:"service_access_role_arn,omitempty"`
+
+	// Enable to migrate documentation using the documentation type _doc. OpenSearch and an Elasticsearch clusters only support the _doc documentation type in versions 7.x and later. The default value is false.
+	// +kubebuilder:validation:Optional
+	UseNewMappingType *bool `json:"useNewMappingType,omitempty" tf:"use_new_mapping_type,omitempty"`
 }
 
 type EndpointInitParameters struct {
@@ -80,7 +90,7 @@ type EndpointInitParameters struct {
 	// Type of endpoint. Valid values are source, target.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
@@ -108,8 +118,14 @@ type EndpointInitParameters struct {
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings []MongodbSettingsInitParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
+	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
+	PauseReplicationTasks *bool `json:"pauseReplicationTasks,omitempty" tf:"pause_replication_tasks,omitempty"`
+
 	// Port used by the endpoint database.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Configuration block for Postgres settings. See below.
+	PostgresSettings []PostgresSettingsInitParameters `json:"postgresSettings,omitempty" tf:"postgres_settings,omitempty"`
 
 	RedisSettings []RedisSettingsInitParameters `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
 
@@ -180,7 +196,7 @@ type EndpointObservation struct {
 	// Type of endpoint. Valid values are source, target.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
 	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
@@ -200,8 +216,14 @@ type EndpointObservation struct {
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings []MongodbSettingsObservation `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
+	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
+	PauseReplicationTasks *bool `json:"pauseReplicationTasks,omitempty" tf:"pause_replication_tasks,omitempty"`
+
 	// Port used by the endpoint database.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Configuration block for Postgres settings. See below.
+	PostgresSettings []PostgresSettingsObservation `json:"postgresSettings,omitempty" tf:"postgres_settings,omitempty"`
 
 	RedisSettings []RedisSettingsObservation `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
 
@@ -257,7 +279,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
+	// Type of engine for the endpoint. Valid values are aurora, aurora-postgresql, azuredb, azure-sql-managed-instance, babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift, s3, sqlserver, sybase. Please note that some of engine names are available only for target endpoint type (e.g. redshift).
 	// +kubebuilder:validation:Optional
 	EngineName *string `json:"engineName,omitempty" tf:"engine_name,omitempty"`
 
@@ -295,9 +317,17 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
+	// +kubebuilder:validation:Optional
+	PauseReplicationTasks *bool `json:"pauseReplicationTasks,omitempty" tf:"pause_replication_tasks,omitempty"`
+
 	// Port used by the endpoint database.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Configuration block for Postgres settings. See below.
+	// +kubebuilder:validation:Optional
+	PostgresSettings []PostgresSettingsParameters `json:"postgresSettings,omitempty" tf:"postgres_settings,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RedisSettings []RedisSettingsParameters `json:"redisSettings,omitempty" tf:"redis_settings,omitempty"`
@@ -711,6 +741,175 @@ type MongodbSettingsParameters struct {
 	NestingLevel *string `json:"nestingLevel,omitempty" tf:"nesting_level,omitempty"`
 }
 
+type PostgresSettingsInitParameters struct {
+
+	// For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.
+	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
+	BabelfishDatabaseName *string `json:"babelfishDatabaseName,omitempty" tf:"babelfish_database_name,omitempty"`
+
+	// To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts.
+	CaptureDdls *bool `json:"captureDdls,omitempty" tf:"capture_ddls,omitempty"`
+
+	// Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.
+	DatabaseMode *string `json:"databaseMode,omitempty" tf:"database_mode,omitempty"`
+
+	// Sets the schema in which the operational DDL database artifacts are created. Default is public.
+	DdlArtifactsSchema *string `json:"ddlArtifactsSchema,omitempty" tf:"ddl_artifacts_schema,omitempty"`
+
+	// Sets the client statement timeout for the PostgreSQL instance, in seconds. Default value is 60.
+	ExecuteTimeout *float64 `json:"executeTimeout,omitempty" tf:"execute_timeout,omitempty"`
+
+	// When set to true, this value causes a task to fail if the actual size of a LOB column is greater than the specified LobMaxSize. Default is false.
+	FailTasksOnLobTruncation *bool `json:"failTasksOnLobTruncation,omitempty" tf:"fail_tasks_on_lob_truncation,omitempty"`
+
+	// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this, it prevents idle logical replication slots from holding onto old WAL logs, which can result in storage full situations on the source.
+	HeartbeatEnable *bool `json:"heartbeatEnable,omitempty" tf:"heartbeat_enable,omitempty"`
+
+	// Sets the WAL heartbeat frequency (in minutes). Default value is 5.
+	HeartbeatFrequency *float64 `json:"heartbeatFrequency,omitempty" tf:"heartbeat_frequency,omitempty"`
+
+	// Sets the schema in which the heartbeat artifacts are created. Default value is public.
+	HeartbeatSchema *string `json:"heartbeatSchema,omitempty" tf:"heartbeat_schema,omitempty"`
+
+	// You can use PostgreSQL endpoint settings to map a boolean as a boolean from your PostgreSQL source to a Amazon Redshift target. Default value is false.
+	MapBooleanAsBoolean *bool `json:"mapBooleanAsBoolean,omitempty" tf:"map_boolean_as_boolean,omitempty"`
+
+	// Optional When true, DMS migrates JSONB values as CLOB.
+	MapJsonbAsClob *bool `json:"mapJsonbAsClob,omitempty" tf:"map_jsonb_as_clob,omitempty"`
+
+	// Optional When true, DMS migrates LONG values as VARCHAR.
+	MapLongVarcharAs *string `json:"mapLongVarcharAs,omitempty" tf:"map_long_varchar_as,omitempty"`
+
+	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
+	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
+
+	// Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.
+	SlotName *string `json:"slotName,omitempty" tf:"slot_name,omitempty"`
+}
+
+type PostgresSettingsObservation struct {
+
+	// For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.
+	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
+	BabelfishDatabaseName *string `json:"babelfishDatabaseName,omitempty" tf:"babelfish_database_name,omitempty"`
+
+	// To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts.
+	CaptureDdls *bool `json:"captureDdls,omitempty" tf:"capture_ddls,omitempty"`
+
+	// Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.
+	DatabaseMode *string `json:"databaseMode,omitempty" tf:"database_mode,omitempty"`
+
+	// Sets the schema in which the operational DDL database artifacts are created. Default is public.
+	DdlArtifactsSchema *string `json:"ddlArtifactsSchema,omitempty" tf:"ddl_artifacts_schema,omitempty"`
+
+	// Sets the client statement timeout for the PostgreSQL instance, in seconds. Default value is 60.
+	ExecuteTimeout *float64 `json:"executeTimeout,omitempty" tf:"execute_timeout,omitempty"`
+
+	// When set to true, this value causes a task to fail if the actual size of a LOB column is greater than the specified LobMaxSize. Default is false.
+	FailTasksOnLobTruncation *bool `json:"failTasksOnLobTruncation,omitempty" tf:"fail_tasks_on_lob_truncation,omitempty"`
+
+	// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this, it prevents idle logical replication slots from holding onto old WAL logs, which can result in storage full situations on the source.
+	HeartbeatEnable *bool `json:"heartbeatEnable,omitempty" tf:"heartbeat_enable,omitempty"`
+
+	// Sets the WAL heartbeat frequency (in minutes). Default value is 5.
+	HeartbeatFrequency *float64 `json:"heartbeatFrequency,omitempty" tf:"heartbeat_frequency,omitempty"`
+
+	// Sets the schema in which the heartbeat artifacts are created. Default value is public.
+	HeartbeatSchema *string `json:"heartbeatSchema,omitempty" tf:"heartbeat_schema,omitempty"`
+
+	// You can use PostgreSQL endpoint settings to map a boolean as a boolean from your PostgreSQL source to a Amazon Redshift target. Default value is false.
+	MapBooleanAsBoolean *bool `json:"mapBooleanAsBoolean,omitempty" tf:"map_boolean_as_boolean,omitempty"`
+
+	// Optional When true, DMS migrates JSONB values as CLOB.
+	MapJsonbAsClob *bool `json:"mapJsonbAsClob,omitempty" tf:"map_jsonb_as_clob,omitempty"`
+
+	// Optional When true, DMS migrates LONG values as VARCHAR.
+	MapLongVarcharAs *string `json:"mapLongVarcharAs,omitempty" tf:"map_long_varchar_as,omitempty"`
+
+	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
+	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
+
+	// Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.
+	SlotName *string `json:"slotName,omitempty" tf:"slot_name,omitempty"`
+}
+
+type PostgresSettingsParameters struct {
+
+	// For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.
+	// +kubebuilder:validation:Optional
+	AfterConnectScript *string `json:"afterConnectScript,omitempty" tf:"after_connect_script,omitempty"`
+
+	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
+	// +kubebuilder:validation:Optional
+	BabelfishDatabaseName *string `json:"babelfishDatabaseName,omitempty" tf:"babelfish_database_name,omitempty"`
+
+	// To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts.
+	// +kubebuilder:validation:Optional
+	CaptureDdls *bool `json:"captureDdls,omitempty" tf:"capture_ddls,omitempty"`
+
+	// Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.
+	// +kubebuilder:validation:Optional
+	DatabaseMode *string `json:"databaseMode,omitempty" tf:"database_mode,omitempty"`
+
+	// Sets the schema in which the operational DDL database artifacts are created. Default is public.
+	// +kubebuilder:validation:Optional
+	DdlArtifactsSchema *string `json:"ddlArtifactsSchema,omitempty" tf:"ddl_artifacts_schema,omitempty"`
+
+	// Sets the client statement timeout for the PostgreSQL instance, in seconds. Default value is 60.
+	// +kubebuilder:validation:Optional
+	ExecuteTimeout *float64 `json:"executeTimeout,omitempty" tf:"execute_timeout,omitempty"`
+
+	// When set to true, this value causes a task to fail if the actual size of a LOB column is greater than the specified LobMaxSize. Default is false.
+	// +kubebuilder:validation:Optional
+	FailTasksOnLobTruncation *bool `json:"failTasksOnLobTruncation,omitempty" tf:"fail_tasks_on_lob_truncation,omitempty"`
+
+	// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this, it prevents idle logical replication slots from holding onto old WAL logs, which can result in storage full situations on the source.
+	// +kubebuilder:validation:Optional
+	HeartbeatEnable *bool `json:"heartbeatEnable,omitempty" tf:"heartbeat_enable,omitempty"`
+
+	// Sets the WAL heartbeat frequency (in minutes). Default value is 5.
+	// +kubebuilder:validation:Optional
+	HeartbeatFrequency *float64 `json:"heartbeatFrequency,omitempty" tf:"heartbeat_frequency,omitempty"`
+
+	// Sets the schema in which the heartbeat artifacts are created. Default value is public.
+	// +kubebuilder:validation:Optional
+	HeartbeatSchema *string `json:"heartbeatSchema,omitempty" tf:"heartbeat_schema,omitempty"`
+
+	// You can use PostgreSQL endpoint settings to map a boolean as a boolean from your PostgreSQL source to a Amazon Redshift target. Default value is false.
+	// +kubebuilder:validation:Optional
+	MapBooleanAsBoolean *bool `json:"mapBooleanAsBoolean,omitempty" tf:"map_boolean_as_boolean,omitempty"`
+
+	// Optional When true, DMS migrates JSONB values as CLOB.
+	// +kubebuilder:validation:Optional
+	MapJsonbAsClob *bool `json:"mapJsonbAsClob,omitempty" tf:"map_jsonb_as_clob,omitempty"`
+
+	// Optional When true, DMS migrates LONG values as VARCHAR.
+	// +kubebuilder:validation:Optional
+	MapLongVarcharAs *string `json:"mapLongVarcharAs,omitempty" tf:"map_long_varchar_as,omitempty"`
+
+	// Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL. Default is 32,768 KB.
+	// +kubebuilder:validation:Optional
+	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
+
+	// Specifies the plugin to use to create a replication slot. Valid values: pglogical, test_decoding.
+	// +kubebuilder:validation:Optional
+	PluginName *string `json:"pluginName,omitempty" tf:"plugin_name,omitempty"`
+
+	// Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.
+	// +kubebuilder:validation:Optional
+	SlotName *string `json:"slotName,omitempty" tf:"slot_name,omitempty"`
+}
+
 type RedisSettingsInitParameters struct {
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
@@ -917,12 +1116,11 @@ type S3SettingsInitParameters struct {
 	// JSON document that describes how AWS DMS should interpret the data.
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
+	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
+	GlueCatalogGeneration *bool `json:"glueCatalogGeneration,omitempty" tf:"glue_catalog_generation,omitempty"`
+
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
-
-	// Deprecated. This setting has no effect. Will be removed in a future version.
-	// This setting has no effect, is deprecated, and will be removed in a future version
-	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
@@ -1035,12 +1233,11 @@ type S3SettingsObservation struct {
 	// JSON document that describes how AWS DMS should interpret the data.
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
+	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
+	GlueCatalogGeneration *bool `json:"glueCatalogGeneration,omitempty" tf:"glue_catalog_generation,omitempty"`
+
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
-
-	// Deprecated. This setting has no effect. Will be removed in a future version.
-	// This setting has no effect, is deprecated, and will be removed in a future version
-	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
@@ -1177,14 +1374,13 @@ type S3SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	ExternalTableDefinition *string `json:"externalTableDefinition,omitempty" tf:"external_table_definition,omitempty"`
 
+	// Whether to integrate AWS Glue Data Catalog with an Amazon S3 target. See Using AWS Glue Data Catalog with an Amazon S3 target for AWS DMS for more information. Default is false.
+	// +kubebuilder:validation:Optional
+	GlueCatalogGeneration *bool `json:"glueCatalogGeneration,omitempty" tf:"glue_catalog_generation,omitempty"`
+
 	// When this value is set to 1, DMS ignores the first row header in a .csv file. Default is 0.
 	// +kubebuilder:validation:Optional
 	IgnoreHeaderRows *float64 `json:"ignoreHeaderRows,omitempty" tf:"ignore_header_rows,omitempty"`
-
-	// Deprecated. This setting has no effect. Will be removed in a future version.
-	// This setting has no effect, is deprecated, and will be removed in a future version
-	// +kubebuilder:validation:Optional
-	IgnoreHeadersRow *float64 `json:"ignoreHeadersRow,omitempty" tf:"ignore_headers_row,omitempty"`
 
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	// +kubebuilder:validation:Optional

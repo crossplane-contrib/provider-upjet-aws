@@ -19,31 +19,31 @@ import (
 
 type SizeConstraintSetInitParameters struct {
 
-	// The name or description of the Size Constraint Set.
+	// Name or description of the Size Constraint Set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the parts of web requests that you want to inspect the size of.
+	// Parts of web requests that you want to inspect the size of.
 	SizeConstraints []SizeConstraintsInitParameters `json:"sizeConstraints,omitempty" tf:"size_constraints,omitempty"`
 }
 
 type SizeConstraintSetObservation struct {
 
-	// Amazon Resource Name (ARN)
+	// Amazon Resource Name (ARN).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The ID of the WAF Size Constraint Set.
+	// ID of the WAF Size Constraint Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name or description of the Size Constraint Set.
+	// Name or description of the Size Constraint Set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specifies the parts of web requests that you want to inspect the size of.
+	// Parts of web requests that you want to inspect the size of.
 	SizeConstraints []SizeConstraintsObservation `json:"sizeConstraints,omitempty" tf:"size_constraints,omitempty"`
 }
 
 type SizeConstraintSetParameters struct {
 
-	// The name or description of the Size Constraint Set.
+	// Name or description of the Size Constraint Set.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -52,121 +52,88 @@ type SizeConstraintSetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Specifies the parts of web requests that you want to inspect the size of.
+	// Parts of web requests that you want to inspect the size of.
 	// +kubebuilder:validation:Optional
 	SizeConstraints []SizeConstraintsParameters `json:"sizeConstraints,omitempty" tf:"size_constraints,omitempty"`
 }
 
 type SizeConstraintsFieldToMatchInitParameters struct {
 
-	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
-	// If type is any other value, omit this field.
+	// When the type is HEADER, specify the name of the header that you want to search using the data field, for example, User-Agent or Referer. If the type is any other value, you can omit this field.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// The part of the web request that you want AWS WAF to search for a specified string.
-	// e.g., HEADER, METHOD or BODY.
-	// See docs
-	// for all supported values.
+	// Part of the web request that you want AWS WAF to search for a specified string. For example, HEADER, METHOD, or BODY. See the docs for all supported values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SizeConstraintsFieldToMatchObservation struct {
 
-	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
-	// If type is any other value, omit this field.
+	// When the type is HEADER, specify the name of the header that you want to search using the data field, for example, User-Agent or Referer. If the type is any other value, you can omit this field.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// The part of the web request that you want AWS WAF to search for a specified string.
-	// e.g., HEADER, METHOD or BODY.
-	// See docs
-	// for all supported values.
+	// Part of the web request that you want AWS WAF to search for a specified string. For example, HEADER, METHOD, or BODY. See the docs for all supported values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SizeConstraintsFieldToMatchParameters struct {
 
-	// When type is HEADER, enter the name of the header that you want to search, e.g., User-Agent or Referer.
-	// If type is any other value, omit this field.
+	// When the type is HEADER, specify the name of the header that you want to search using the data field, for example, User-Agent or Referer. If the type is any other value, you can omit this field.
 	// +kubebuilder:validation:Optional
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// The part of the web request that you want AWS WAF to search for a specified string.
-	// e.g., HEADER, METHOD or BODY.
-	// See docs
-	// for all supported values.
+	// Part of the web request that you want AWS WAF to search for a specified string. For example, HEADER, METHOD, or BODY. See the docs for all supported values.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SizeConstraintsInitParameters struct {
 
-	// The type of comparison you want to perform.
-	// e.g., EQ, NE, LT, GT.
-	// See docs for all supported values.
+	// Type of comparison you want to perform, such as EQ, NE, LT, or GT. Please refer to the documentation for a complete list of supported values.
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
-	// Specifies where in a web request to look for the size constraint.
+	// Parameter that specifies where in a web request to look for the size constraint.
 	FieldToMatch []SizeConstraintsFieldToMatchInitParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 
-	// The size in bytes that you want to compare against the size of the specified field_to_match.
-	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
+	// Size in bytes that you want to compare against the size of the specified field_to_match. Valid values for size are between 0 and 21474836480 bytes (0 and 20 GB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
-	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
-	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
-	// See docs
-	// for all supported values.
-	// Note: if you choose BODY as type, you must choose NONE because CloudFront forwards only the first 8192 bytes for inspection.
+	// Parameter is used to eliminate unusual formatting that attackers may use in web requests to bypass AWS WAF. When a transformation is specified, AWS WAF performs the transformation on the field_to_match before inspecting the request for a match. Some examples of supported transformations are CMD_LINE, HTML_ENTITY_DECODE, and NONE. You can find a complete list of supported values in the AWS WAF API Reference.
+	// Note: If you choose BODY as the type, you must also choose NONE because CloudFront only forwards the first 8192 bytes for inspection.
 	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 type SizeConstraintsObservation struct {
 
-	// The type of comparison you want to perform.
-	// e.g., EQ, NE, LT, GT.
-	// See docs for all supported values.
+	// Type of comparison you want to perform, such as EQ, NE, LT, or GT. Please refer to the documentation for a complete list of supported values.
 	ComparisonOperator *string `json:"comparisonOperator,omitempty" tf:"comparison_operator,omitempty"`
 
-	// Specifies where in a web request to look for the size constraint.
+	// Parameter that specifies where in a web request to look for the size constraint.
 	FieldToMatch []SizeConstraintsFieldToMatchObservation `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 
-	// The size in bytes that you want to compare against the size of the specified field_to_match.
-	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
+	// Size in bytes that you want to compare against the size of the specified field_to_match. Valid values for size are between 0 and 21474836480 bytes (0 and 20 GB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
-	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
-	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
-	// See docs
-	// for all supported values.
-	// Note: if you choose BODY as type, you must choose NONE because CloudFront forwards only the first 8192 bytes for inspection.
+	// Parameter is used to eliminate unusual formatting that attackers may use in web requests to bypass AWS WAF. When a transformation is specified, AWS WAF performs the transformation on the field_to_match before inspecting the request for a match. Some examples of supported transformations are CMD_LINE, HTML_ENTITY_DECODE, and NONE. You can find a complete list of supported values in the AWS WAF API Reference.
+	// Note: If you choose BODY as the type, you must also choose NONE because CloudFront only forwards the first 8192 bytes for inspection.
 	TextTransformation *string `json:"textTransformation,omitempty" tf:"text_transformation,omitempty"`
 }
 
 type SizeConstraintsParameters struct {
 
-	// The type of comparison you want to perform.
-	// e.g., EQ, NE, LT, GT.
-	// See docs for all supported values.
+	// Type of comparison you want to perform, such as EQ, NE, LT, or GT. Please refer to the documentation for a complete list of supported values.
 	// +kubebuilder:validation:Optional
 	ComparisonOperator *string `json:"comparisonOperator" tf:"comparison_operator,omitempty"`
 
-	// Specifies where in a web request to look for the size constraint.
+	// Parameter that specifies where in a web request to look for the size constraint.
 	// +kubebuilder:validation:Optional
 	FieldToMatch []SizeConstraintsFieldToMatchParameters `json:"fieldToMatch" tf:"field_to_match,omitempty"`
 
-	// The size in bytes that you want to compare against the size of the specified field_to_match.
-	// Valid values are between 0 - 21474836480 bytes (0 - 20 GB).
+	// Size in bytes that you want to compare against the size of the specified field_to_match. Valid values for size are between 0 and 21474836480 bytes (0 and 20 GB).
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size" tf:"size,omitempty"`
 
-	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
-	// If you specify a transformation, AWS WAF performs the transformation on field_to_match before inspecting a request for a match.
-	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
-	// See docs
-	// for all supported values.
-	// Note: if you choose BODY as type, you must choose NONE because CloudFront forwards only the first 8192 bytes for inspection.
+	// Parameter is used to eliminate unusual formatting that attackers may use in web requests to bypass AWS WAF. When a transformation is specified, AWS WAF performs the transformation on the field_to_match before inspecting the request for a match. Some examples of supported transformations are CMD_LINE, HTML_ENTITY_DECODE, and NONE. You can find a complete list of supported values in the AWS WAF API Reference.
+	// Note: If you choose BODY as the type, you must also choose NONE because CloudFront only forwards the first 8192 bytes for inspection.
 	// +kubebuilder:validation:Optional
 	TextTransformation *string `json:"textTransformation" tf:"text_transformation,omitempty"`
 }
@@ -196,7 +163,7 @@ type SizeConstraintSetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SizeConstraintSet is the Schema for the SizeConstraintSets API. Provides a AWS WAF Size Constraint Set resource.
+// SizeConstraintSet is the Schema for the SizeConstraintSets API. The
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

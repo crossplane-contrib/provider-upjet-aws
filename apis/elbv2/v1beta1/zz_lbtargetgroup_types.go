@@ -28,16 +28,22 @@ type HealthCheckInitParameters struct {
 	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. For lambda target groups, it needs to be greater than the timeout of the underlying lambda. Defaults to 30.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
+	// separated individual values (e.g., "200,202") or a range of values (e.g., "200-299").
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
 	// (May be required) Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port the load balancer uses when performing health checks on targets. Default is traffic-port.
+	// The port the load balancer uses when performing health checks on targets.
+	// Valid values are either traffic-port, to use the same port as the target group, or a valid port number between 1 and 65536.
+	// Default is traffic-port.
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol the load balancer uses when performing health checks on targets. Must be either TCP, HTTP, or HTTPS. The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS. Defaults to HTTP.
+	// Protocol the load balancer uses when performing health checks on targets.
+	// Must be one of TCP, HTTP, or HTTPS.
+	// The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS.
+	// Default is HTTP.
+	// Cannot be specified when the target_type is lambda.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
@@ -58,16 +64,22 @@ type HealthCheckObservation struct {
 	// Approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300. For lambda target groups, it needs to be greater than the timeout of the underlying lambda. Defaults to 30.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
+	// separated individual values (e.g., "200,202") or a range of values (e.g., "200-299").
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
 	// (May be required) Destination for the health check request. Required for HTTP/HTTPS ALB and HTTP NLB. Only applies to HTTP/HTTPS.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port the load balancer uses when performing health checks on targets. Default is traffic-port.
+	// The port the load balancer uses when performing health checks on targets.
+	// Valid values are either traffic-port, to use the same port as the target group, or a valid port number between 1 and 65536.
+	// Default is traffic-port.
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol the load balancer uses when performing health checks on targets. Must be either TCP, HTTP, or HTTPS. The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS. Defaults to HTTP.
+	// Protocol the load balancer uses when performing health checks on targets.
+	// Must be one of TCP, HTTP, or HTTPS.
+	// The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS.
+	// Default is HTTP.
+	// Cannot be specified when the target_type is lambda.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Amount of time, in seconds, during which no response from a target means a failed health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If the target type is lambda, the default is 30 seconds.
@@ -91,7 +103,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// 299" or "0-99"). Required for HTTP/HTTPS/GRPC ALB. Only applies to Application Load Balancers (i.e., HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
+	// separated individual values (e.g., "200,202") or a range of values (e.g., "200-299").
 	// +kubebuilder:validation:Optional
 	Matcher *string `json:"matcher,omitempty" tf:"matcher,omitempty"`
 
@@ -99,11 +111,17 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port the load balancer uses when performing health checks on targets. Default is traffic-port.
+	// The port the load balancer uses when performing health checks on targets.
+	// Valid values are either traffic-port, to use the same port as the target group, or a valid port number between 1 and 65536.
+	// Default is traffic-port.
 	// +kubebuilder:validation:Optional
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Protocol the load balancer uses when performing health checks on targets. Must be either TCP, HTTP, or HTTPS. The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS. Defaults to HTTP.
+	// Protocol the load balancer uses when performing health checks on targets.
+	// Must be one of TCP, HTTP, or HTTPS.
+	// The TCP protocol is not supported for health checks if the protocol of the target group is HTTP or HTTPS.
+	// Default is HTTP.
+	// Cannot be specified when the target_type is lambda.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -148,7 +166,10 @@ type LBTargetGroupInitParameters struct {
 	// Whether client IP preservation is enabled. See doc for more information.
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
-	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets. Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
+	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets.
+	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP.
+	// Required when target_type is instance, ip, or alb.
+	// Does not apply when target_type is lambda.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Only applicable when protocol is HTTP or HTTPS. The protocol version. Specify GRPC to send requests to targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2. The default is HTTP1, which sends requests to targets using HTTP/1.1
@@ -170,7 +191,12 @@ type LBTargetGroupInitParameters struct {
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	TargetFailover []TargetFailoverInitParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
-	// (May be required, Forces new resource) Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
+	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
+	TargetHealthState []TargetHealthStateInitParameters `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
+
+	// Type of target that you must specify when registering targets with this target group.
+	// See doc for supported values.
+	// The default is instance.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
 	// Identifier of the VPC in which to create the target group. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
@@ -227,7 +253,10 @@ type LBTargetGroupObservation struct {
 	// Whether client IP preservation is enabled. See doc for more information.
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
-	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets. Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
+	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets.
+	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP.
+	// Required when target_type is instance, ip, or alb.
+	// Does not apply when target_type is lambda.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Only applicable when protocol is HTTP or HTTPS. The protocol version. Specify GRPC to send requests to targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2. The default is HTTP1, which sends requests to targets using HTTP/1.1
@@ -253,7 +282,12 @@ type LBTargetGroupObservation struct {
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	TargetFailover []TargetFailoverObservation `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
-	// (May be required, Forces new resource) Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
+	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
+	TargetHealthState []TargetHealthStateObservation `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
+
+	// Type of target that you must specify when registering targets with this target group.
+	// See doc for supported values.
+	// The default is instance.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
 	// Identifier of the VPC in which to create the target group. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
@@ -302,7 +336,10 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PreserveClientIP *string `json:"preserveClientIp,omitempty" tf:"preserve_client_ip,omitempty"`
 
-	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets. Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
+	// (May be required, Forces new resource) Protocol to use for routing traffic to the targets.
+	// Should be one of GENEVE, HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP.
+	// Required when target_type is instance, ip, or alb.
+	// Does not apply when target_type is lambda.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -336,7 +373,13 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetFailover []TargetFailoverParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
-	// (May be required, Forces new resource) Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
+	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
+	// +kubebuilder:validation:Optional
+	TargetHealthState []TargetHealthStateParameters `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
+
+	// Type of target that you must specify when registering targets with this target group.
+	// See doc for supported values.
+	// The default is instance.
 	// +kubebuilder:validation:Optional
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
@@ -430,6 +473,25 @@ type TargetFailoverParameters struct {
 	// Indicates how the GWLB handles existing flows when a target is unhealthy. Possible values are rebalance and no_rebalance. Must match the attribute value set for on_deregistration. Default: no_rebalance.
 	// +kubebuilder:validation:Optional
 	OnUnhealthy *string `json:"onUnhealthy" tf:"on_unhealthy,omitempty"`
+}
+
+type TargetHealthStateInitParameters struct {
+
+	// Indicates whether the load balancer terminates connections to unhealthy targets. Possible values are true or false. Default: true.
+	EnableUnhealthyConnectionTermination *bool `json:"enableUnhealthyConnectionTermination,omitempty" tf:"enable_unhealthy_connection_termination,omitempty"`
+}
+
+type TargetHealthStateObservation struct {
+
+	// Indicates whether the load balancer terminates connections to unhealthy targets. Possible values are true or false. Default: true.
+	EnableUnhealthyConnectionTermination *bool `json:"enableUnhealthyConnectionTermination,omitempty" tf:"enable_unhealthy_connection_termination,omitempty"`
+}
+
+type TargetHealthStateParameters struct {
+
+	// Indicates whether the load balancer terminates connections to unhealthy targets. Possible values are true or false. Default: true.
+	// +kubebuilder:validation:Optional
+	EnableUnhealthyConnectionTermination *bool `json:"enableUnhealthyConnectionTermination" tf:"enable_unhealthy_connection_termination,omitempty"`
 }
 
 // LBTargetGroupSpec defines the desired state of LBTargetGroup
