@@ -7,6 +7,8 @@ on:
 jobs:
   e2e:
     uses: upbound/uptest/.github/workflows/pr-comment-trigger.yml@main
+    with:
+      go-version: 1.21
     secrets:
       UPTEST_CLOUD_CREDENTIALS: ${{ secrets.UPTEST_CLOUD_CREDENTIALS }}
       UPTEST_DATASOURCE: ${{ secrets.UPTEST_DATASOURCE }}
