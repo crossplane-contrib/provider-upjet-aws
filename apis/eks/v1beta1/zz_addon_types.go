@@ -72,6 +72,24 @@ type AddonInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
 
+	// The Amazon Resource Name (ARN) of an
+	// existing IAM role to bind to the add-on's service account. The role must be
+	// assigned the IAM permissions required by the add-on. If you don't specify
+	// an existing IAM role, then the add-on uses the permissions assigned to the node
+	// IAM role. For more information, see Amazon EKS node IAM role
+	// in the Amazon EKS User Guide.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceAccountRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRoleArnRef *v1.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceAccountRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -233,13 +251,14 @@ type AddonStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Addon is the Schema for the Addons API. Manages an EKS add-on
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Addon struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -21,6 +21,7 @@ import (
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/controller/handler"
 	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
@@ -55,6 +56,14 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
 	}
+
+	// register webhooks for the kind v1beta1.UserPoolClient
+	if err := ctrl.NewWebhookManagedBy(mgr).
+		For(&v1beta1.UserPoolClient{}).
+		Complete(); err != nil {
+		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.UserPoolClient")
+	}
+
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.UserPoolClient_GroupVersionKind), opts...)
 
 	return ctrl.NewControllerManagedBy(mgr).
