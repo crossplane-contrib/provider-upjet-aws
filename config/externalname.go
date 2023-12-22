@@ -1767,9 +1767,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// AppConfig Extension Associations can be imported using their extension association ID
 	// ID is a provider-generated
 	"aws_appconfig_extension_association": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
 
 	// appintegrations
 	//
@@ -2666,6 +2663,9 @@ var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SimpleDB Domains can be imported using the name
 	"aws_simpledb_domain": config.NameAsIdentifier,
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": config.IdentifierFromProvider,
 }
 
 // cognitoUserPoolClient
