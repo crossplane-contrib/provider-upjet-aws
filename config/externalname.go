@@ -1767,6 +1767,9 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// AppConfig Extension Associations can be imported using their extension association ID
 	// ID is a provider-generated
 	"aws_appconfig_extension_association": config.IdentifierFromProvider,
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": config.IdentifierFromProvider,
 
 	// appintegrations
 	//
@@ -2654,9 +2657,6 @@ var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
 	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
 	// simpledb
