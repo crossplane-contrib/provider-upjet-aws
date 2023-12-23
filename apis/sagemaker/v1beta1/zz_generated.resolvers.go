@@ -263,6 +263,32 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	return nil
 }
 
+// ResolveReferences of this Endpoint.
+func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EndpointConfigName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EndpointConfigNameRef,
+		Selector:     mg.Spec.ForProvider.EndpointConfigNameSelector,
+		To: reference.To{
+			List:    &EndpointConfigurationList{},
+			Managed: &EndpointConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EndpointConfigName")
+	}
+	mg.Spec.ForProvider.EndpointConfigName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EndpointConfigNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this EndpointConfiguration.
 func (mg *EndpointConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
