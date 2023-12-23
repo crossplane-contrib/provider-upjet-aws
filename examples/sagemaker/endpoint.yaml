@@ -6,6 +6,7 @@ metadata:
     meta.upbound.io/example-id: sagemaker/v1beta1/endpoint
   labels:
     testing.upbound.io/example-name: e
+    upjet.upbound.io/manual-intervention: "It requires an image which can be create/deleted only using AWS CLI"
   name: e
 spec:
   forProvider:
