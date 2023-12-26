@@ -381,8 +381,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// sagemaker
 	//
-	// Endpoints can be imported using the name
-	"aws_sagemaker_endpoint": config.NameAsIdentifier,
 	// SageMaker Flow Definitions can be imported using the flow_definition_name
 	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
 	// SageMaker Human Task UIs can be imported using the human_task_ui_name
@@ -738,9 +736,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
 	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
-
-	// ssoadmin
-	//
 
 	// transcribe
 	//
