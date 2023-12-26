@@ -5,7 +5,8 @@ metadata:
     meta.upbound.io/example-id: sesv2/v1beta1/emailidentity
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: v2-example
 spec:
   forProvider:
     region: us-west-1
+    email: v2-example@example.com

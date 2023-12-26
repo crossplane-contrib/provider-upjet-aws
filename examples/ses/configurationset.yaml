@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: ses/v1beta1/configurationset
   labels:
     testing.upbound.io/example-name: test
-  name: test
+  name: v1-test
 spec:
   forProvider:
     region: us-east-1
