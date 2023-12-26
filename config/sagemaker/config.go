@@ -16,7 +16,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_sagemaker_endpoint", func(r *config.Resource) {
 		r.References["endpoint_config_name"] = config.Reference{
-			Type: "EndpointConfiguration",
+			TerraformName: "aws_sagemaker_endpoint_configuration",
 		}
 		r.UseAsync = true
 	})

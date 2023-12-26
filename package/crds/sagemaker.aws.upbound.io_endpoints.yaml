@@ -181,8 +181,8 @@ spec:
                     description: The name of the endpoint configuration to use.
                     type: string
                   endpointConfigNameRef:
-                    description: Reference to a EndpointConfiguration to populate
-                      endpointConfigName.
+                    description: Reference to a EndpointConfiguration in sagemaker
+                      to populate endpointConfigName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -216,8 +216,8 @@ spec:
                     - name
                     type: object
                   endpointConfigNameSelector:
-                    description: Selector for a EndpointConfiguration to populate
-                      endpointConfigName.
+                    description: Selector for a EndpointConfiguration in sagemaker
+                      to populate endpointConfigName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
