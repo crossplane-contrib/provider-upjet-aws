@@ -53,7 +53,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     primaryContainer:
-      - image: 683313688378.dkr.ecr.us-east-1.amazonaws.com/sagemaker-scikit-learn:0.23-1-cpu-py3
+      - image: ${data.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/sagemaker-scikit-learn:latest
     region: us-east-1
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
