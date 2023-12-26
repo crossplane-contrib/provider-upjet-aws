@@ -6,10 +6,8 @@ package ecs
 
 import (
 	"context"
-	"path/filepath"
-	"strings"
-
 	"github.com/pkg/errors"
+	"path/filepath"
 
 	"github.com/crossplane/upjet/pkg/config"
 
@@ -19,15 +17,6 @@ import (
 // Configure adds configurations for the ecs group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecs_cluster", func(r *config.Resource) {
-		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-			// expected id format: arn:aws:ecs:us-west-2:123456789123:cluster/example-cluster
-			w := strings.Split(tfstate["id"].(string), "/")
-			if len(w) != 2 {
-				return "", errors.New("terraform ID should be the ARN of the cluster")
-			}
-			return w[len(w)-1], nil
-		}
-
 		// Mutually exclusive with aws_ecs_cluster_capacity_providers
 		config.MoveToStatus(r.TerraformResource, "capacity_providers")
 
@@ -44,14 +33,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_ecs_service", func(r *config.Resource) {
-		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
-			// expected id format: arn:aws:ecs:us-east-2:123456789123:service/sample-cluster/sample-service
-			w := strings.Split(tfstate["id"].(string), "/")
-			if len(w) != 3 {
-				return "", errors.New("terraform ID should be the ARN of the service")
-			}
-			return w[len(w)-1], nil
-		}
 		r.ExternalName.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 			cl, ok := parameters["cluster"].(string)
 			if !ok {
