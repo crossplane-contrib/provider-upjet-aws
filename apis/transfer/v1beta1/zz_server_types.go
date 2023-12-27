@@ -264,6 +264,19 @@ type ServerInitParameters struct {
 	// Amazon Resource Name (ARN) of the IAM role used to authenticate the user account with an identity_provider_type of API_GATEWAY.
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
+	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
+
+	// Reference to a Role in iam to populate loggingRole.
+	// +kubebuilder:validation:Optional
+	LoggingRoleRef *v1.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate loggingRole.
+	// +kubebuilder:validation:Optional
+	LoggingRoleSelector *v1.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
+
 	// The protocol settings that are configured for your server.
 	ProtocolDetails []ProtocolDetailsInitParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 

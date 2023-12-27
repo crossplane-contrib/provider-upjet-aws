@@ -36,6 +36,20 @@ type CompositeAlarmInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
+	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +listType=set
+	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
+
+	// References to Topic in sns to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+
 	// The description for the composite alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 

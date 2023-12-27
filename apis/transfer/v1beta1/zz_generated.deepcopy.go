@@ -2437,6 +2437,21 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoggingRole != nil {
+		in, out := &in.LoggingRole, &out.LoggingRole
+		*out = new(string)
+		**out = **in
+	}
+	if in.LoggingRoleRef != nil {
+		in, out := &in.LoggingRoleRef, &out.LoggingRoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LoggingRoleSelector != nil {
+		in, out := &in.LoggingRoleSelector, &out.LoggingRoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ProtocolDetails != nil {
 		in, out := &in.ProtocolDetails, &out.ProtocolDetails
 		*out = make([]ProtocolDetailsInitParameters, len(*in))

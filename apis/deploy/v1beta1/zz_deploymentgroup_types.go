@@ -179,6 +179,19 @@ type DeploymentGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
+	// The service role ARN that allows deployments.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
