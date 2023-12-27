@@ -288,6 +288,11 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -477,6 +482,9 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                 required:
                 - region
                 type: object
@@ -710,6 +718,11 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -899,6 +912,9 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                 type: object
               managementPolicies:
                 default:
@@ -1292,6 +1308,11 @@ spec:
                           description: Whether the Amazon EKS public API server endpoint
                             is enabled. Default is true.
                           type: boolean
+                        index:
+                          default: "0"
+                          description: This is an injected field with a default value
+                            for being able to merge items of the parent object list.
+                          type: string
                         publicAccessCidrs:
                           description: List of CIDR blocks. Indicates which CIDR blocks
                             can access the Amazon EKS public API server endpoint when
@@ -1321,6 +1342,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - index
+                    x-kubernetes-list-type: map
                 type: object
               conditions:
                 description: Conditions of the resource.
