@@ -23,8 +23,34 @@ type VPCEndpointConnectionNotificationInitParameters struct {
 	// +listType=set
 	ConnectionEvents []*string `json:"connectionEvents,omitempty" tf:"connection_events,omitempty"`
 
+	// The ARN of the SNS topic for the notifications.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ConnectionNotificationArn *string `json:"connectionNotificationArn,omitempty" tf:"connection_notification_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate connectionNotificationArn.
+	// +kubebuilder:validation:Optional
+	ConnectionNotificationArnRef *v1.Reference `json:"connectionNotificationArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate connectionNotificationArn.
+	// +kubebuilder:validation:Optional
+	ConnectionNotificationArnSelector *v1.Selector `json:"connectionNotificationArnSelector,omitempty" tf:"-"`
+
 	// The ID of the VPC Endpoint to receive notifications for.
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// The ID of the VPC Endpoint Service to receive notifications for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpointService
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
+
+	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointConnectionNotificationObservation struct {

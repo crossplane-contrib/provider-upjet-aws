@@ -22,6 +22,19 @@ type DNSConfigInitParameters struct {
 	// An array that contains one DnsRecord object for each resource record set.
 	DNSRecords []DNSRecordsInitParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
 
+	// The ID of the namespace to use for DNS configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicediscovery/v1beta1.PrivateDNSNamespace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Reference to a PrivateDNSNamespace in servicediscovery to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateDNSNamespace in servicediscovery to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+
 	// The routing policy that you want to apply to all records that Route 53 creates when you register an instance and specify the service. Valid Values: MULTIVALUE, WEIGHTED
 	RoutingPolicy *string `json:"routingPolicy,omitempty" tf:"routing_policy,omitempty"`
 }

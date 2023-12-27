@@ -27,6 +27,18 @@ type SubnetCidrReservationInitParameters struct {
 
 	// The type of reservation to create. Valid values: explicit, prefix
 	ReservationType *string `json:"reservationType,omitempty" tf:"reservation_type,omitempty"`
+
+	// The ID of the subnet to create the reservation for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetCidrReservationObservation struct {

@@ -25,6 +25,18 @@ type AMILaunchPermissionInitParameters struct {
 	// Name of the group for the launch permission. Valid values: "all".
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
+	// ID of the AMI.
+	// +crossplane:generate:reference:type=AMI
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// Reference to a AMI to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDRef *v1.Reference `json:"imageIdRef,omitempty" tf:"-"`
+
+	// Selector for a AMI to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDSelector *v1.Selector `json:"imageIdSelector,omitempty" tf:"-"`
+
 	// ARN of an organization for the launch permission.
 	OrganizationArn *string `json:"organizationArn,omitempty" tf:"organization_arn,omitempty"`
 

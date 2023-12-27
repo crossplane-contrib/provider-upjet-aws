@@ -264,6 +264,21 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ParameterGroupName != nil {
+		in, out := &in.ParameterGroupName, &out.ParameterGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -284,6 +299,44 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.PreferredOutpostArn, &out.PreferredOutpostArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.ReplicationGroupID != nil {
+		in, out := &in.ReplicationGroupID, &out.ReplicationGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ReplicationGroupIDRef != nil {
+		in, out := &in.ReplicationGroupIDRef, &out.ReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ReplicationGroupIDSelector != nil {
+		in, out := &in.ReplicationGroupIDSelector, &out.ReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.SecurityGroupNames != nil {
 		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
@@ -321,6 +374,21 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		in, out := &in.SnapshotWindow, &out.SnapshotWindow
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetGroupName != nil {
+		in, out := &in.SubnetGroupName, &out.SubnetGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetGroupNameRef != nil {
+		in, out := &in.SubnetGroupNameRef, &out.SubnetGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetGroupNameSelector != nil {
+		in, out := &in.SubnetGroupNameSelector, &out.SubnetGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1533,6 +1601,21 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LogDeliveryConfiguration != nil {
 		in, out := &in.LogDeliveryConfiguration, &out.LogDeliveryConfiguration
 		*out = make([]ReplicationGroupLogDeliveryConfigurationInitParameters, len(*in))
@@ -1606,6 +1689,29 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SecurityGroupNames != nil {
 		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
 		*out = make([]*string, len(*in))
@@ -1642,6 +1748,21 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		in, out := &in.SnapshotWindow, &out.SnapshotWindow
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetGroupName != nil {
+		in, out := &in.SubnetGroupName, &out.SubnetGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetGroupNameRef != nil {
+		in, out := &in.SubnetGroupNameRef, &out.SubnetGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetGroupNameSelector != nil {
+		in, out := &in.SubnetGroupNameSelector, &out.SubnetGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -2490,6 +2611,29 @@ func (in *SubnetGroupInitParameters) DeepCopyInto(out *SubnetGroupInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2798,6 +2942,29 @@ func (in *UserGroupInitParameters) DeepCopyInto(out *UserGroupInitParameters) {
 				**out = **in
 			}
 			(*out)[key] = outVal
+		}
+	}
+	if in.UserIDRefs != nil {
+		in, out := &in.UserIDRefs, &out.UserIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.UserIDSelector != nil {
+		in, out := &in.UserIDSelector, &out.UserIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserIds != nil {
+		in, out := &in.UserIds, &out.UserIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 }

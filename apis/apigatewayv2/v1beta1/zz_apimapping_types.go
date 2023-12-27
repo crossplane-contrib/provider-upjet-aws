@@ -19,8 +19,45 @@ import (
 
 type APIMappingInitParameters struct {
 
+	// API identifier.
+	// +crossplane:generate:reference:type=API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// The API mapping key. Refer to REST API, HTTP API or WebSocket API.
 	APIMappingKey *string `json:"apiMappingKey,omitempty" tf:"api_mapping_key,omitempty"`
+
+	// Domain name. Use the aws_apigatewayv2_domain_name resource to configure a domain name.
+	// +crossplane:generate:reference:type=DomainName
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Reference to a DomainName to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// Selector for a DomainName to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
+
+	// API stage. Use the aws_apigatewayv2_stage resource to configure an API stage.
+	// +crossplane:generate:reference:type=Stage
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+
+	// Reference to a Stage to populate stage.
+	// +kubebuilder:validation:Optional
+	StageRef *v1.Reference `json:"stageRef,omitempty" tf:"-"`
+
+	// Selector for a Stage to populate stage.
+	// +kubebuilder:validation:Optional
+	StageSelector *v1.Selector `json:"stageSelector,omitempty" tf:"-"`
 }
 
 type APIMappingObservation struct {

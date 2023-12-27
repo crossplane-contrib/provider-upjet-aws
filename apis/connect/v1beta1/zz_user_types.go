@@ -67,11 +67,37 @@ type UserInitParameters struct {
 	// A block that contains information about the identity of the user. Documented below.
 	IdentityInfo []IdentityInfoInitParameters `json:"identityInfo,omitempty" tf:"identity_info,omitempty"`
 
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
 	// The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A block that contains information about the phone settings for the user. Documented below.
 	PhoneConfig []UserPhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
+
+	// The identifier of the routing profile for the user.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.RoutingProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
+	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
+
+	// Reference to a RoutingProfile in connect to populate routingProfileId.
+	// +kubebuilder:validation:Optional
+	RoutingProfileIDRef *v1.Reference `json:"routingProfileIdRef,omitempty" tf:"-"`
+
+	// Selector for a RoutingProfile in connect to populate routingProfileId.
+	// +kubebuilder:validation:Optional
+	RoutingProfileIDSelector *v1.Selector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
 	// +listType=set

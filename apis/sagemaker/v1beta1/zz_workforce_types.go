@@ -18,6 +18,32 @@ import (
 )
 
 type CognitoConfigInitParameters struct {
+
+	// The client ID for your Amazon Cognito user pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+
+	// ID for your Amazon Cognito user pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_pool_id",false)
+	UserPool *string `json:"userPool,omitempty" tf:"user_pool,omitempty"`
+
+	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
+	// +kubebuilder:validation:Optional
+	UserPoolRef *v1.Reference `json:"userPoolRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
+	// +kubebuilder:validation:Optional
+	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type CognitoConfigObservation struct {

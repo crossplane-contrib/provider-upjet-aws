@@ -57,6 +57,19 @@ type AuthenticationConfigurationParameters struct {
 
 type BasicAuthenticationInitParameters struct {
 
+	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate credentials.
+	// +kubebuilder:validation:Optional
+	CredentialsRef *v1.Reference `json:"credentialsRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate credentials.
+	// +kubebuilder:validation:Optional
+	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
+
 	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
@@ -278,11 +291,37 @@ type DataSourceInitParameters struct {
 	// A description for the Data Source connector.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The identifier of the index for your Amazon Kendra data_source.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
+
+	// Reference to a Index in kendra to populate indexId.
+	// +kubebuilder:validation:Optional
+	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+
+	// Selector for a Index in kendra to populate indexId.
+	// +kubebuilder:validation:Optional
+	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+
 	// The code for a language. This allows you to support a language for all documents when creating the Data Source connector. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// A name for your Data Source connector.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a role with permission to access the data source connector. For more information, see IAM roles for Amazon Kendra. You can't specify the role_arn parameter when the type parameter is set to CUSTOM. The role_arn parameter is required for all other data sources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Sets the frequency for Amazon Kendra to check the documents in your Data Source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
@@ -737,6 +776,19 @@ type PreExtractionHookConfigurationParameters struct {
 
 type ProxyConfigurationInitParameters struct {
 
+	// Your secret ARN, which you can create in AWS Secrets Manager. You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate credentials.
+	// +kubebuilder:validation:Optional
+	CredentialsRef *v1.Reference `json:"credentialsRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate credentials.
+	// +kubebuilder:validation:Optional
+	CredentialsSelector *v1.Selector `json:"credentialsSelector,omitempty" tf:"-"`
+
 	// The name of the website host you want to connect to using authentication credentials. For example, the host name of https://a.example.com/page1.html is "a.example.com".
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
@@ -785,6 +837,19 @@ type S3ConfigurationInitParameters struct {
 
 	// A block that provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see Access control for S3 data sources. Detailed below.
 	AccessControlListConfiguration []AccessControlListConfigurationInitParameters `json:"accessControlListConfiguration,omitempty" tf:"access_control_list_configuration,omitempty"`
+
+	// The name of the bucket that contains the documents.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// A block that defines the Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document. Detailed below.
 	DocumentsMetadataConfiguration []DocumentsMetadataConfigurationInitParameters `json:"documentsMetadataConfiguration,omitempty" tf:"documents_metadata_configuration,omitempty"`

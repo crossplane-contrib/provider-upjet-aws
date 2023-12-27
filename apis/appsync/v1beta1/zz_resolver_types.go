@@ -76,6 +76,18 @@ type ResolverInitParameters struct {
 	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
+	// Data source name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// Reference to a Datasource in appsync to populate dataSource.
+	// +kubebuilder:validation:Optional
+	DataSourceRef *v1.Reference `json:"dataSourceRef,omitempty" tf:"-"`
+
+	// Selector for a Datasource in appsync to populate dataSource.
+	// +kubebuilder:validation:Optional
+	DataSourceSelector *v1.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
+
 	// Resolver type. Valid values are UNIT and PIPELINE.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 

@@ -18,6 +18,32 @@ import (
 )
 
 type LBListenerCertificateInitParameters struct {
+
+	// The ARN of the certificate to attach to the listener.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Reference to a Certificate in acm to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate in acm to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the listener to which to attach the certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
+
+	// Reference to a LBListener in elbv2 to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBListener in elbv2 to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 }
 
 type LBListenerCertificateObservation struct {

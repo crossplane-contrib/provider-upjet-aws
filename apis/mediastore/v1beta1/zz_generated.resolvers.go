@@ -35,5 +35,21 @@ func (mg *ContainerPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ContainerNameRef,
+		Selector:     mg.Spec.InitProvider.ContainerNameSelector,
+		To: reference.To{
+			List:    &ContainerList{},
+			Managed: &Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerName")
+	}
+	mg.Spec.InitProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerNameRef = rsp.ResolvedReference
+
 	return nil
 }

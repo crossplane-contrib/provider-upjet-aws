@@ -19,9 +19,34 @@ import (
 
 type HostedTransitVirtualInterfaceAccepterInitParameters struct {
 
+	// The ID of the Direct Connect gateway to which to connect the virtual interface.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Direct Connect virtual interface to accept.
+	// +crossplane:generate:reference:type=HostedTransitVirtualInterface
+	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
+
+	// Reference to a HostedTransitVirtualInterface to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a HostedTransitVirtualInterface to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedTransitVirtualInterfaceAccepterObservation struct {

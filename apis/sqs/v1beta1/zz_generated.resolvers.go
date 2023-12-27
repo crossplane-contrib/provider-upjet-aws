@@ -36,6 +36,22 @@ func (mg *QueuePolicy) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueURL),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.QueueURLRef,
+		Selector:     mg.Spec.InitProvider.QueueURLSelector,
+		To: reference.To{
+			List:    &QueueList{},
+			Managed: &Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.QueueURL")
+	}
+	mg.Spec.InitProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.QueueURLRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -62,6 +78,22 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueURL),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.QueueURLRef,
+		Selector:     mg.Spec.InitProvider.QueueURLSelector,
+		To: reference.To{
+			List:    &QueueList{},
+			Managed: &Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.QueueURL")
+	}
+	mg.Spec.InitProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.QueueURLRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -87,6 +119,22 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.QueueURLRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueURL),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.QueueURLRef,
+		Selector:     mg.Spec.InitProvider.QueueURLSelector,
+		To: reference.To{
+			List:    &QueueList{},
+			Managed: &Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.QueueURL")
+	}
+	mg.Spec.InitProvider.QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.QueueURLRef = rsp.ResolvedReference
 
 	return nil
 }

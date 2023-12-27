@@ -19,6 +19,19 @@ import (
 
 type DomainNameInitParameters struct {
 
+	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when an edge-optimized domain name is desired. Conflicts with certificate_name, certificate_body, certificate_chain, certificate_private_key, regional_certificate_arn, and regional_certificate_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.CertificateValidation
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("certificate_arn",false)
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Reference to a CertificateValidation in acm to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateValidation in acm to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+
 	// Certificate issued for the domain name being registered, in PEM format. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
 
@@ -39,6 +52,19 @@ type DomainNameInitParameters struct {
 
 	// ARN of the AWS-issued certificate used to validate custom domain ownership (when certificate_arn is issued via an ACM Private CA or mutual_tls_authentication is configured with an ACM-imported certificate.)
 	OwnershipVerificationCertificateArn *string `json:"ownershipVerificationCertificateArn,omitempty" tf:"ownership_verification_certificate_arn,omitempty"`
+
+	// ARN for an AWS-managed certificate. AWS Certificate Manager is the only supported source. Used when a regional domain name is desired. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.CertificateValidation
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("certificate_arn",false)
+	RegionalCertificateArn *string `json:"regionalCertificateArn,omitempty" tf:"regional_certificate_arn,omitempty"`
+
+	// Reference to a CertificateValidation in acm to populate regionalCertificateArn.
+	// +kubebuilder:validation:Optional
+	RegionalCertificateArnRef *v1.Reference `json:"regionalCertificateArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateValidation in acm to populate regionalCertificateArn.
+	// +kubebuilder:validation:Optional
+	RegionalCertificateArnSelector *v1.Selector `json:"regionalCertificateArnSelector,omitempty" tf:"-"`
 
 	// User-friendly name of the certificate that will be used by regional endpoint for this domain name. Conflicts with certificate_arn, certificate_name, certificate_body, certificate_chain, and certificate_private_key.
 	RegionalCertificateName *string `json:"regionalCertificateName,omitempty" tf:"regional_certificate_name,omitempty"`

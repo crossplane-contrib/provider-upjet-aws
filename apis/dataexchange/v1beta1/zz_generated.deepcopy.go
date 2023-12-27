@@ -311,6 +311,21 @@ func (in *RevisionInitParameters) DeepCopyInto(out *RevisionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DataSetID != nil {
+		in, out := &in.DataSetID, &out.DataSetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataSetIDRef != nil {
+		in, out := &in.DataSetIDRef, &out.DataSetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataSetIDSelector != nil {
+		in, out := &in.DataSetIDSelector, &out.DataSetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

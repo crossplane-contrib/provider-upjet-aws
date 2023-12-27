@@ -57,6 +57,19 @@ type ProvisioningTemplateInitParameters struct {
 	// Creates a pre-provisioning hook template. Details below.
 	PreProvisioningHook []PreProvisioningHookInitParameters `json:"preProvisioningHook,omitempty" tf:"pre_provisioning_hook,omitempty"`
 
+	// The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ProvisioningRoleArn *string `json:"provisioningRoleArn,omitempty" tf:"provisioning_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate provisioningRoleArn.
+	// +kubebuilder:validation:Optional
+	ProvisioningRoleArnRef *v1.Reference `json:"provisioningRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate provisioningRoleArn.
+	// +kubebuilder:validation:Optional
+	ProvisioningRoleArnSelector *v1.Selector `json:"provisioningRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

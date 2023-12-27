@@ -19,11 +19,49 @@ import (
 
 type IntegrationInitParameters struct {
 
+	// API identifier.
+	// +crossplane:generate:reference:type=API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
+	// ID of the VPC link for a private integration. Supported only for HTTP APIs. Must be between 1 and 1024 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.VPCLink
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// Reference to a VPCLink in apigatewayv2 to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCLink in apigatewayv2 to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+
 	// Type of the network connection to the integration endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// How to handle response payload content type conversions. Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT. Supported only for WebSocket APIs.
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
+
+	// Credentials required for the integration, if any.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	CredentialsArn *string `json:"credentialsArn,omitempty" tf:"credentials_arn,omitempty"`
+
+	// Reference to a Role in iam to populate credentialsArn.
+	// +kubebuilder:validation:Optional
+	CredentialsArnRef *v1.Reference `json:"credentialsArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate credentialsArn.
+	// +kubebuilder:validation:Optional
+	CredentialsArnSelector *v1.Selector `json:"credentialsArnSelector,omitempty" tf:"-"`
 
 	// Description of the integration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -37,6 +75,20 @@ type IntegrationInitParameters struct {
 	// Integration type of an integration.
 	// Valid values: AWS (supported only for WebSocket APIs), AWS_PROXY, HTTP (supported only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.
 	IntegrationType *string `json:"integrationType,omitempty" tf:"integration_type,omitempty"`
+
+	// URI of the Lambda function for a Lambda proxy integration, when integration_type is AWS_PROXY.
+	// For an HTTP integration, specify a fully-qualified URL. For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)
+	IntegrationURI *string `json:"integrationUri,omitempty" tf:"integration_uri,omitempty"`
+
+	// Reference to a Function in lambda to populate integrationUri.
+	// +kubebuilder:validation:Optional
+	IntegrationURIRef *v1.Reference `json:"integrationUriRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate integrationUri.
+	// +kubebuilder:validation:Optional
+	IntegrationURISelector *v1.Selector `json:"integrationUriSelector,omitempty" tf:"-"`
 
 	// Pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the request_templates attribute.
 	// Valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, NEVER. Default is WHEN_NO_MATCH. Supported only for WebSocket APIs.

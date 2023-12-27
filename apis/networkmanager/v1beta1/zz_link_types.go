@@ -54,8 +54,33 @@ type LinkInitParameters struct {
 	// A description of the link.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the global network.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
+	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
+	// +kubebuilder:validation:Optional
+	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
+	// +kubebuilder:validation:Optional
+	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+
 	// The provider of the link.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
+
+	// The ID of the site.
+	// +crossplane:generate:reference:type=Site
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
+
+	// Reference to a Site to populate siteId.
+	// +kubebuilder:validation:Optional
+	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
+
+	// Selector for a Site to populate siteId.
+	// +kubebuilder:validation:Optional
+	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

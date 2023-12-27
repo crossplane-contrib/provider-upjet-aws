@@ -39,6 +39,22 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.BucketRef,
+		Selector:     mg.Spec.InitProvider.BucketSelector,
+		To: reference.To{
+			List:    &v1beta1.BucketList{},
+			Managed: &v1beta1.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Bucket")
+	}
+	mg.Spec.InitProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BucketRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -81,6 +97,38 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Workgroup = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkgroupRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DatabaseRef,
+		Selector:     mg.Spec.InitProvider.DatabaseSelector,
+		To: reference.To{
+			List:    &DatabaseList{},
+			Managed: &Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Database")
+	}
+	mg.Spec.InitProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Workgroup),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WorkgroupRef,
+		Selector:     mg.Spec.InitProvider.WorkgroupSelector,
+		To: reference.To{
+			List:    &WorkgroupList{},
+			Managed: &Workgroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Workgroup")
+	}
+	mg.Spec.InitProvider.Workgroup = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkgroupRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -109,6 +157,28 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 				}
 				mg.Spec.ForProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 				mg.Spec.ForProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Configuration[i3].ResultConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnRef,
+					Selector:     mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnSelector,
+					To: reference.To{
+						List:    &v1beta11.KeyList{},
+						Managed: &v1beta11.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArn")
+				}
+				mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Configuration[i3].ResultConfiguration[i4].EncryptionConfiguration[i5].KMSKeyArnRef = rsp.ResolvedReference
 
 			}
 		}

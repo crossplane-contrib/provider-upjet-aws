@@ -25,6 +25,19 @@ type SMSPreferencesInitParameters struct {
 	// A string, such as your business brand, that is displayed as the sender on the receiving device.
 	DefaultSenderID *string `json:"defaultSenderId,omitempty" tf:"default_sender_id,omitempty"`
 
+	// The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	DeliveryStatusIAMRoleArn *string `json:"deliveryStatusIamRoleArn,omitempty" tf:"delivery_status_iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate deliveryStatusIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DeliveryStatusIAMRoleArnRef *v1.Reference `json:"deliveryStatusIamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate deliveryStatusIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DeliveryStatusIAMRoleArnSelector *v1.Selector `json:"deliveryStatusIamRoleArnSelector,omitempty" tf:"-"`
+
 	// The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value must be between 0 and 100.
 	DeliveryStatusSuccessSamplingRate *string `json:"deliveryStatusSuccessSamplingRate,omitempty" tf:"delivery_status_success_sampling_rate,omitempty"`
 

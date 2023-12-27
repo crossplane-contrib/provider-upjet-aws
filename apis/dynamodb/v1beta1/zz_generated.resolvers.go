@@ -39,6 +39,22 @@ func (mg *ContributorInsights) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TableNameRef,
+		Selector:     mg.Spec.InitProvider.TableNameSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
+	}
+	mg.Spec.InitProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -81,6 +97,38 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.StreamArnRef,
+		Selector:     mg.Spec.InitProvider.StreamArnSelector,
+		To: reference.To{
+			List:    &v1beta1.StreamList{},
+			Managed: &v1beta1.Stream{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamArn")
+	}
+	mg.Spec.InitProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TableNameRef,
+		Selector:     mg.Spec.InitProvider.TableNameSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
+	}
+	mg.Spec.InitProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -106,6 +154,22 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TableNameRef,
+		Selector:     mg.Spec.InitProvider.TableNameSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
+	}
+	mg.Spec.InitProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -148,6 +212,38 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalTableArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.GlobalTableArnRef,
+		Selector:     mg.Spec.InitProvider.GlobalTableArnSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GlobalTableArn")
+	}
+	mg.Spec.InitProvider.GlobalTableArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GlobalTableArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
 
 	return nil
 }

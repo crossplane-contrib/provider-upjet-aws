@@ -21,6 +21,19 @@ type ResourcePolicyInitParameters struct {
 
 	// The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1.Snapshot
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a Snapshot in redshiftserverless to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Snapshot in redshiftserverless to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type ResourcePolicyObservation struct {

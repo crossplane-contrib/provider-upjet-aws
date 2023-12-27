@@ -146,6 +146,19 @@ type CrossRegionCopyParameters struct {
 
 type CrossRegionCopyRuleInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of the AWS KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	CmkArn *string `json:"cmkArn,omitempty" tf:"cmk_arn,omitempty"`
+
+	// Reference to a Key in kms to populate cmkArn.
+	// +kubebuilder:validation:Optional
+	CmkArnRef *v1.Reference `json:"cmkArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate cmkArn.
+	// +kubebuilder:validation:Optional
+	CmkArnSelector *v1.Selector `json:"cmkArnSelector,omitempty" tf:"-"`
+
 	// Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
 	CopyTags *bool `json:"copyTags,omitempty" tf:"copy_tags,omitempty"`
 
@@ -392,6 +405,19 @@ type LifecyclePolicyInitParameters struct {
 
 	// A description for the DLM lifecycle policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ARN of an IAM role that is able to be assumed by the DLM service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// See the policy_details configuration block. Max of 1.
 	PolicyDetails []PolicyDetailsInitParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`

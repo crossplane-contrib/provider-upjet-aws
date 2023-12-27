@@ -35,5 +35,21 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.KeyspaceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyspaceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyspaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KeyspaceNameRef,
+		Selector:     mg.Spec.InitProvider.KeyspaceNameSelector,
+		To: reference.To{
+			List:    &KeyspaceList{},
+			Managed: &Keyspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyspaceName")
+	}
+	mg.Spec.InitProvider.KeyspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyspaceNameRef = rsp.ResolvedReference
+
 	return nil
 }

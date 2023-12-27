@@ -56,6 +56,40 @@ func (mg *Codepipeline) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ArtifactStore); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ArtifactStore[i3].Location),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.ArtifactStore[i3].LocationRef,
+			Selector:     mg.Spec.InitProvider.ArtifactStore[i3].LocationSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ArtifactStore[i3].Location")
+		}
+		mg.Spec.InitProvider.ArtifactStore[i3].Location = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ArtifactStore[i3].LocationRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -81,6 +115,22 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.TargetPipeline = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetPipelineRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetPipeline),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TargetPipelineRef,
+		Selector:     mg.Spec.InitProvider.TargetPipelineSelector,
+		To: reference.To{
+			List:    &CodepipelineList{},
+			Managed: &Codepipeline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetPipeline")
+	}
+	mg.Spec.InitProvider.TargetPipeline = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetPipelineRef = rsp.ResolvedReference
 
 	return nil
 }

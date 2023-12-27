@@ -61,6 +61,24 @@ func (mg *BotAssociation) ResolveReferences(ctx context.Context, c client.Reader
 		mg.Spec.ForProvider.LexBot[i3].NameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LexBot); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LexBot[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.LexBot[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.LexBot[i3].NameSelector,
+			To: reference.To{
+				List:    &v1beta1.BotList{},
+				Managed: &v1beta1.Bot{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LexBot[i3].Name")
+		}
+		mg.Spec.InitProvider.LexBot[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LexBot[i3].NameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -88,6 +106,22 @@ func (mg *ContactFlow) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -113,6 +147,22 @@ func (mg *ContactFlowModule) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -140,6 +190,22 @@ func (mg *HoursOfOperation) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -165,6 +231,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DirectoryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DirectoryIDRef,
+		Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &v1beta11.DirectoryList{},
+			Managed: &v1beta11.Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DirectoryID")
+	}
+	mg.Spec.InitProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DirectoryIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -296,6 +378,126 @@ func (mg *InstanceStorageConfig) ResolveReferences(ctx context.Context, c client
 			}
 		}
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig[i4].FirehoseArn),
+				Extract:      resource.ExtractParamPath("arn", false),
+				Reference:    mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig[i4].FirehoseArnRef,
+				Selector:     mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig[i4].FirehoseArnSelector,
+				To: reference.To{
+					List:    &v1beta12.DeliveryStreamList{},
+					Managed: &v1beta12.DeliveryStream{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig[i4].FirehoseArn")
+			}
+			mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig[i4].FirehoseArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfig[i3].KinesisFirehoseConfig[i4].FirehoseArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig[i4].StreamArn),
+				Extract:      resource.ExtractParamPath("arn", false),
+				Reference:    mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig[i4].StreamArnRef,
+				Selector:     mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig[i4].StreamArnSelector,
+				To: reference.To{
+					List:    &v1beta13.StreamList{},
+					Managed: &v1beta13.Stream{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig[i4].StreamArn")
+			}
+			mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig[i4].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfig[i3].KinesisStreamConfig[i4].StreamArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig[i5].KeyID),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig[i5].KeyIDRef,
+					Selector:     mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig[i5].KeyIDSelector,
+					To: reference.To{
+						List:    &v1beta14.KeyList{},
+						Managed: &v1beta14.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig[i5].KeyID")
+				}
+				mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig[i5].KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.StorageConfig[i3].KinesisVideoStreamConfig[i4].EncryptionConfig[i5].KeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageConfig[i3].S3Config); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].BucketName),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].BucketNameRef,
+				Selector:     mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].BucketNameSelector,
+				To: reference.To{
+					List:    &v1beta15.BucketList{},
+					Managed: &v1beta15.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].BucketName")
+			}
+			mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].BucketNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageConfig[i3].S3Config); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig[i5].KeyID),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig[i5].KeyIDRef,
+					Selector:     mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig[i5].KeyIDSelector,
+					To: reference.To{
+						List:    &v1beta14.KeyList{},
+						Managed: &v1beta14.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig[i5].KeyID")
+				}
+				mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig[i5].KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.StorageConfig[i3].S3Config[i4].EncryptionConfig[i5].KeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }
@@ -365,6 +567,22 @@ func (mg *PhoneNumber) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.TargetArnRef,
+		Selector:     mg.Spec.InitProvider.TargetArnSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArn")
+	}
+	mg.Spec.InitProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -407,6 +625,38 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HoursOfOperationID),
+		Extract:      resource.ExtractParamPath("hours_of_operation_id", true),
+		Reference:    mg.Spec.InitProvider.HoursOfOperationIDRef,
+		Selector:     mg.Spec.InitProvider.HoursOfOperationIDSelector,
+		To: reference.To{
+			List:    &HoursOfOperationList{},
+			Managed: &HoursOfOperation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HoursOfOperationID")
+	}
+	mg.Spec.InitProvider.HoursOfOperationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HoursOfOperationIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -432,6 +682,22 @@ func (mg *QuickConnect) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -475,6 +741,38 @@ func (mg *RoutingProfile) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultOutboundQueueID),
+		Extract:      resource.ExtractParamPath("queue_id", true),
+		Reference:    mg.Spec.InitProvider.DefaultOutboundQueueIDRef,
+		Selector:     mg.Spec.InitProvider.DefaultOutboundQueueIDSelector,
+		To: reference.To{
+			List:    &QueueList{},
+			Managed: &Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DefaultOutboundQueueID")
+	}
+	mg.Spec.InitProvider.DefaultOutboundQueueID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DefaultOutboundQueueIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -500,6 +798,22 @@ func (mg *SecurityProfile) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -543,6 +857,38 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RoutingProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoutingProfileIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoutingProfileID),
+		Extract:      resource.ExtractParamPath("routing_profile_id", true),
+		Reference:    mg.Spec.InitProvider.RoutingProfileIDRef,
+		Selector:     mg.Spec.InitProvider.RoutingProfileIDSelector,
+		To: reference.To{
+			List:    &RoutingProfileList{},
+			Managed: &RoutingProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoutingProfileID")
+	}
+	mg.Spec.InitProvider.RoutingProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoutingProfileIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -569,6 +915,22 @@ func (mg *UserHierarchyStructure) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -594,6 +956,22 @@ func (mg *Vocabulary) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 
 	return nil
 }

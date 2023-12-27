@@ -1358,6 +1358,32 @@ type SnsInitParameters struct {
 
 	// The message format of the message to publish. Accepted values are "JSON" and "RAW".
 	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the SNS topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type SnsObservation struct {
@@ -2238,6 +2264,32 @@ type TopicRuleSnsInitParameters struct {
 
 	// The message format of the message to publish. Accepted values are "JSON" and "RAW".
 	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the SNS topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleSnsObservation struct {

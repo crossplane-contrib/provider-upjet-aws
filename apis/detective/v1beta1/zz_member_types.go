@@ -28,6 +28,19 @@ type MemberInitParameters struct {
 	// Email address for the account.
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
+	// ARN of the behavior graph to invite the member accounts to contribute their data to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
+
+	// Reference to a Graph in detective to populate graphArn.
+	// +kubebuilder:validation:Optional
+	GraphArnRef *v1.Reference `json:"graphArnRef,omitempty" tf:"-"`
+
+	// Selector for a Graph in detective to populate graphArn.
+	// +kubebuilder:validation:Optional
+	GraphArnSelector *v1.Selector `json:"graphArnSelector,omitempty" tf:"-"`
+
 	// A custom message to include in the invitation. Amazon Detective adds this message to the standard content that it sends for an invitation.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }

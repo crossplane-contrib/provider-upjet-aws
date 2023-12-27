@@ -19,6 +19,19 @@ import (
 
 type APIDestinationInitParameters struct {
 
+	// ARN of the EventBridge Connection to use for the API Destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Connection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
+
+	// Reference to a Connection in cloudwatchevents to populate connectionArn.
+	// +kubebuilder:validation:Optional
+	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in cloudwatchevents to populate connectionArn.
+	// +kubebuilder:validation:Optional
+	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
+
 	// The description of the new API Destination. Maximum of 512 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

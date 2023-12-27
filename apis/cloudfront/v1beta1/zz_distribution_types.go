@@ -979,6 +979,19 @@ type OrderedCacheBehaviorFunctionAssociationInitParameters struct {
 
 	// Specific event to trigger this function. Valid values: viewer-request, origin-request, viewer-response, origin-response.
 	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// ARN of the CloudFront function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in cloudfront to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in cloudfront to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorFunctionAssociationObservation struct {
@@ -1083,6 +1096,19 @@ type OrderedCacheBehaviorLambdaFunctionAssociationInitParameters struct {
 
 	// When set to true it exposes the request body to the lambda function. Defaults to false. Valid values: true, false.
 	IncludeBody *bool `json:"includeBody,omitempty" tf:"include_body,omitempty"`
+
+	// ARN of the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("qualified_arn",true)
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 }
 
 type OrderedCacheBehaviorLambdaFunctionAssociationObservation struct {
@@ -1328,6 +1354,19 @@ type OriginInitParameters struct {
 	// DNS domain name of either the S3 bucket, or web site of your custom origin.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
+	// Unique identifier of a CloudFront origin access control for this origin.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	OriginAccessControlID *string `json:"originAccessControlId,omitempty" tf:"origin_access_control_id,omitempty"`
+
+	// Reference to a OriginAccessControl in cloudfront to populate originAccessControlId.
+	// +kubebuilder:validation:Optional
+	OriginAccessControlIDRef *v1.Reference `json:"originAccessControlIdRef,omitempty" tf:"-"`
+
+	// Selector for a OriginAccessControl in cloudfront to populate originAccessControlId.
+	// +kubebuilder:validation:Optional
+	OriginAccessControlIDSelector *v1.Selector `json:"originAccessControlIdSelector,omitempty" tf:"-"`
+
 	// Unique identifier for the origin.
 	OriginID *string `json:"originId,omitempty" tf:"origin_id,omitempty"`
 
@@ -1471,6 +1510,19 @@ type RestrictionsParameters struct {
 }
 
 type S3OriginConfigInitParameters struct {
+
+	// The CloudFront origin access identity to associate with the origin.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.OriginAccessIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cloudfront_access_identity_path",true)
+	OriginAccessIdentity *string `json:"originAccessIdentity,omitempty" tf:"origin_access_identity,omitempty"`
+
+	// Reference to a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
+	// +kubebuilder:validation:Optional
+	OriginAccessIdentityRef *v1.Reference `json:"originAccessIdentityRef,omitempty" tf:"-"`
+
+	// Selector for a OriginAccessIdentity in cloudfront to populate originAccessIdentity.
+	// +kubebuilder:validation:Optional
+	OriginAccessIdentitySelector *v1.Selector `json:"originAccessIdentitySelector,omitempty" tf:"-"`
 }
 
 type S3OriginConfigObservation struct {

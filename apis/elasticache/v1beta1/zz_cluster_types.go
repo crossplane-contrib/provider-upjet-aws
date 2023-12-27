@@ -94,6 +94,18 @@ type ClusterInitParameters struct {
 	// Specify the outpost mode that will apply to the cache cluster creation. Valid values are "single-outpost" and "cross-outpost", however AWS currently only supports "single-outpost" mode.
 	OutpostMode *string `json:"outpostMode,omitempty" tf:"outpost_mode,omitempty"`
 
+	// –  The name of the parameter group to associate with this cache cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.ParameterGroup
+	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in elasticache to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in elasticache to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+
 	// create the resource.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -102,6 +114,34 @@ type ClusterInitParameters struct {
 
 	// The outpost ARN in which the cache cluster will be created.
 	PreferredOutpostArn *string `json:"preferredOutpostArn,omitempty" tf:"preferred_outpost_arn,omitempty"`
+
+	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
+
+	// Reference to a ReplicationGroup in elasticache to populate replicationGroupId.
+	// +kubebuilder:validation:Optional
+	ReplicationGroupIDRef *v1.Reference `json:"replicationGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ReplicationGroup in elasticache to populate replicationGroupId.
+	// +kubebuilder:validation:Optional
+	ReplicationGroupIDSelector *v1.Selector `json:"replicationGroupIdSelector,omitempty" tf:"-"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// –  One or more VPC security groups associated with the cache cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// create the resource.
 	// +listType=set
@@ -118,6 +158,18 @@ type ClusterInitParameters struct {
 
 	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
+
+	// create the resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup
+	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
+
+	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
+	// +kubebuilder:validation:Optional
+	SubnetGroupNameRef *v1.Reference `json:"subnetGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
+	// +kubebuilder:validation:Optional
+	SubnetGroupNameSelector *v1.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

@@ -18,6 +18,30 @@ import (
 )
 
 type AttachmentInitParameters struct {
+
+	// The name of the ELB.
+	// +crossplane:generate:reference:type=ELB
+	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
+
+	// Reference to a ELB to populate elb.
+	// +kubebuilder:validation:Optional
+	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
+
+	// Selector for a ELB to populate elb.
+	// +kubebuilder:validation:Optional
+	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
+
+	// Instance ID to place in the ELB pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// Reference to a Instance in ec2 to populate instance.
+	// +kubebuilder:validation:Optional
+	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in ec2 to populate instance.
+	// +kubebuilder:validation:Optional
+	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 }
 
 type AttachmentObservation struct {

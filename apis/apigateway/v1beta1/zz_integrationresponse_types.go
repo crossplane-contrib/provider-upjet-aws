@@ -22,6 +22,32 @@ type IntegrationResponseInitParameters struct {
 	// How to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT. If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.
 	ContentHandling *string `json:"contentHandling,omitempty" tf:"content_handling,omitempty"`
 
+	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("http_method",false)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// Reference to a Method in apigateway to populate httpMethod.
+	// +kubebuilder:validation:Optional
+	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+
+	// Selector for a Method in apigateway to populate httpMethod.
+	// +kubebuilder:validation:Optional
+	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
+
+	// API resource ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
 	// Map of response parameters that can be read from the backend response. For example: response_parameters = { "method.response.header.X-Some-Header" = "integration.response.header.X-Some-Other-Header" }.
 	// +mapType=granular
 	ResponseParameters map[string]*string `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
@@ -30,8 +56,34 @@ type IntegrationResponseInitParameters struct {
 	// +mapType=granular
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
+	// ID of the associated REST API.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+
 	// Regular expression pattern used to choose an integration response based on the response from the backend. Omit configuring this to make the integration the default one. If the backend is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS backends, the HTTP status code is matched.
 	SelectionPattern *string `json:"selectionPattern,omitempty" tf:"selection_pattern,omitempty"`
+
+	// HTTP status code.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.MethodResponse
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("status_code",false)
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+
+	// Reference to a MethodResponse in apigateway to populate statusCode.
+	// +kubebuilder:validation:Optional
+	StatusCodeRef *v1.Reference `json:"statusCodeRef,omitempty" tf:"-"`
+
+	// Selector for a MethodResponse in apigateway to populate statusCode.
+	// +kubebuilder:validation:Optional
+	StatusCodeSelector *v1.Selector `json:"statusCodeSelector,omitempty" tf:"-"`
 }
 
 type IntegrationResponseObservation struct {

@@ -19,6 +19,32 @@ import (
 
 type BucketReplicationConfigurationInitParameters struct {
 
+	// Name of the source S3 bucket you want Amazon S3 to monitor.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// ARN of the IAM role for Amazon S3 to assume when replicating the objects.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// Reference to a Role in iam to populate role.
+	// +kubebuilder:validation:Optional
+	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate role.
+	// +kubebuilder:validation:Optional
+	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketReplicationConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
@@ -461,6 +487,19 @@ type RuleDestinationInitParameters struct {
 
 	// Account ID to specify the replica ownership. Must be used in conjunction with access_control_translation override configuration.
 	Account *string `json:"account,omitempty" tf:"account,omitempty"`
+
+	// ARN of the bucket where you want Amazon S3 to store the results.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Configuration block that provides information about encryption. See below. If source_selection_criteria is specified, you must specify this element.
 	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`

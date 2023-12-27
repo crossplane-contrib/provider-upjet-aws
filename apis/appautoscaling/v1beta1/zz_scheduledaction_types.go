@@ -54,11 +54,50 @@ type ScheduledActionInitParameters struct {
 	// Name of the scheduled action.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Identifier of the resource associated with the scheduled action. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_id",false)
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Target in appautoscaling to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Target in appautoscaling to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
+	// Scalable dimension. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference Example: ecs:service:DesiredCount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("scalable_dimension",false)
+	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
+
+	// Reference to a Target in appautoscaling to populate scalableDimension.
+	// +kubebuilder:validation:Optional
+	ScalableDimensionRef *v1.Reference `json:"scalableDimensionRef,omitempty" tf:"-"`
+
+	// Selector for a Target in appautoscaling to populate scalableDimension.
+	// +kubebuilder:validation:Optional
+	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
+
 	// New minimum and maximum capacity. You can set both values or just one. See below
 	ScalableTargetAction []ScalableTargetActionInitParameters `json:"scalableTargetAction,omitempty" tf:"scalable_target_action,omitempty"`
 
 	// Schedule for this action. The following formats are supported: At expressions - at(yyyy-mm-ddThh:mm:ss), Rate expressions - rate(valueunit), Cron expressions - cron(fields). Times for at expressions and cron expressions are evaluated using the time zone configured in timezone. Documentation can be found in the Timezone parameter at: AWS Application Auto Scaling API Reference
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Namespace of the AWS service. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference Example: ecs
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("service_namespace",false)
+	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+
+	// Reference to a Target in appautoscaling to populate serviceNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceNamespaceRef *v1.Reference `json:"serviceNamespaceRef,omitempty" tf:"-"`
+
+	// Selector for a Target in appautoscaling to populate serviceNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceNamespaceSelector *v1.Selector `json:"serviceNamespaceSelector,omitempty" tf:"-"`
 
 	// Date and time for the scheduled action to start in RFC 3339 format. The timezone is not affected by the setting of timezone.
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`

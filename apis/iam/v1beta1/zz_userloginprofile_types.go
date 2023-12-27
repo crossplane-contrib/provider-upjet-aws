@@ -27,6 +27,18 @@ type UserLoginProfileInitParameters struct {
 
 	// Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Only applies on resource creation. Drift detection is not possible with this argument.
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
+
+	// The IAM user's name.
+	// +crossplane:generate:reference:type=User
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
+
+	// Reference to a User to populate user.
+	// +kubebuilder:validation:Optional
+	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+
+	// Selector for a User to populate user.
+	// +kubebuilder:validation:Optional
+	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type UserLoginProfileObservation struct {

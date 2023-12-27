@@ -121,6 +121,19 @@ type ApplicationInitParameters struct {
 	// A short, machine-readable name for the application. This can only be defined on resource creation and ignored on resource update.
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
+	// ID of the stack the application will belong to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Reference to a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDRef *v1.Reference `json:"stackIdRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
+
 	// Opsworks application type. One of aws-flow-ruby, java, rails, php, nodejs, static or other.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

@@ -747,6 +747,19 @@ type NetworkInsightsAnalysisInitParameters struct {
 	// +listType=set
 	FilterInArns []*string `json:"filterInArns,omitempty" tf:"filter_in_arns,omitempty"`
 
+	// ID of the Network Insights Path to run an analysis on.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInsightsPath
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NetworkInsightsPathID *string `json:"networkInsightsPathId,omitempty" tf:"network_insights_path_id,omitempty"`
+
+	// Reference to a NetworkInsightsPath in ec2 to populate networkInsightsPathId.
+	// +kubebuilder:validation:Optional
+	NetworkInsightsPathIDRef *v1.Reference `json:"networkInsightsPathIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInsightsPath in ec2 to populate networkInsightsPathId.
+	// +kubebuilder:validation:Optional
+	NetworkInsightsPathIDSelector *v1.Selector `json:"networkInsightsPathIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

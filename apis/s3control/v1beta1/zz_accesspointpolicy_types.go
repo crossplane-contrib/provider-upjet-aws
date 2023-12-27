@@ -19,6 +19,19 @@ import (
 
 type AccessPointPolicyInitParameters struct {
 
+	// The ARN of the access point that you want to associate with the specified policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	AccessPointArn *string `json:"accessPointArn,omitempty" tf:"access_point_arn,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnRef *v1.Reference `json:"accessPointArnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPointArn.
+	// +kubebuilder:validation:Optional
+	AccessPointArnSelector *v1.Selector `json:"accessPointArnSelector,omitempty" tf:"-"`
+
 	// The policy that you want to apply to the specified access point.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }

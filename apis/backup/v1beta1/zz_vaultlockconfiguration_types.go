@@ -19,6 +19,18 @@ import (
 
 type VaultLockConfigurationInitParameters struct {
 
+	// Name of the backup vault to add a lock configuration for.
+	// +crossplane:generate:reference:type=Vault
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// Reference to a Vault to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+
 	// The number of days before the lock date. If omitted creates a vault lock in governance mode, otherwise it will create a vault lock in compliance mode.
 	ChangeableForDays *float64 `json:"changeableForDays,omitempty" tf:"changeable_for_days,omitempty"`
 

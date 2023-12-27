@@ -97,6 +97,40 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.ForProvider.Trigger[i3].DestinationArnRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RepositoryNameRef,
+		Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
+		To: reference.To{
+			List:    &RepositoryList{},
+			Managed: &Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RepositoryName")
+	}
+	mg.Spec.InitProvider.RepositoryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RepositoryNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Trigger); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Trigger[i3].DestinationArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Trigger[i3].DestinationArnRef,
+			Selector:     mg.Spec.InitProvider.Trigger[i3].DestinationArnSelector,
+			To: reference.To{
+				List:    &v1beta1.TopicList{},
+				Managed: &v1beta1.Topic{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Trigger[i3].DestinationArn")
+		}
+		mg.Spec.InitProvider.Trigger[i3].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Trigger[i3].DestinationArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

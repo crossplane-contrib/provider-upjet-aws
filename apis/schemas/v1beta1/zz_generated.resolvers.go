@@ -37,6 +37,22 @@ func (mg *Discoverer) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.SourceArnRef,
+		Selector:     mg.Spec.InitProvider.SourceArnSelector,
+		To: reference.To{
+			List:    &v1beta1.BusList{},
+			Managed: &v1beta1.Bus{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceArn")
+	}
+	mg.Spec.InitProvider.SourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -62,6 +78,22 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.RegistryName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegistryNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RegistryNameRef,
+		Selector:     mg.Spec.InitProvider.RegistryNameSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RegistryName")
+	}
+	mg.Spec.InitProvider.RegistryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RegistryNameRef = rsp.ResolvedReference
 
 	return nil
 }

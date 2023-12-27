@@ -312,6 +312,19 @@ type StatefulRuleGroupReferenceInitParameters struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.RuleGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatefulRuleGroupReferenceObservation struct {
@@ -384,6 +397,19 @@ type StatelessRuleGroupReferenceInitParameters struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule groups in a single policy. AWS Network Firewall applies each stateless rule group to a packet starting with the group that has the lowest priority setting.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the stateless rule group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.RuleGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a RuleGroup in networkfirewall to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a RuleGroup in networkfirewall to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type StatelessRuleGroupReferenceObservation struct {

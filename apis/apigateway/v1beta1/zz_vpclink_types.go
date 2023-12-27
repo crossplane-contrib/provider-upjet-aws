@@ -28,6 +28,21 @@ type VPCLinkInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// References to LB in elbv2 to populate targetArns.
+	// +kubebuilder:validation:Optional
+	TargetArnRefs []v1.Reference `json:"targetArnRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LB in elbv2 to populate targetArns.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+
+	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:refFieldName=TargetArnRefs
+	// +crossplane:generate:reference:selectorFieldName=TargetArnSelector
+	TargetArns []*string `json:"targetArns,omitempty" tf:"target_arns,omitempty"`
 }
 
 type VPCLinkObservation struct {

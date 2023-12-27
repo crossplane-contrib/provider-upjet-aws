@@ -63,6 +63,19 @@ type ReplicationConfigurationInitParameters struct {
 
 	// A destination configuration block (documented below).
 	Destination []DestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// The ID of the file system that is to be replicated.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.FileSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceFileSystemID *string `json:"sourceFileSystemId,omitempty" tf:"source_file_system_id,omitempty"`
+
+	// Reference to a FileSystem in efs to populate sourceFileSystemId.
+	// +kubebuilder:validation:Optional
+	SourceFileSystemIDRef *v1.Reference `json:"sourceFileSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem in efs to populate sourceFileSystemId.
+	// +kubebuilder:validation:Optional
+	SourceFileSystemIDSelector *v1.Selector `json:"sourceFileSystemIdSelector,omitempty" tf:"-"`
 }
 
 type ReplicationConfigurationObservation struct {

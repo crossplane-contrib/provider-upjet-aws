@@ -35,5 +35,21 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CertificateArnRef,
+		Selector:     mg.Spec.InitProvider.CertificateArnSelector,
+		To: reference.To{
+			List:    &CertificateList{},
+			Managed: &Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateArn")
+	}
+	mg.Spec.InitProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateArnRef = rsp.ResolvedReference
+
 	return nil
 }

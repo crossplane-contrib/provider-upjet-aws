@@ -301,6 +301,18 @@ type TableInitParameters struct {
 	// Specifies how the encryption key for encryption at rest is managed for the table. More information can be found in the Developer Guide.
 	EncryptionSpecification []EncryptionSpecificationInitParameters `json:"encryptionSpecification,omitempty" tf:"encryption_specification,omitempty"`
 
+	// The name of the keyspace that the table is going to be created in.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/keyspaces/v1beta1.Keyspace
+	KeyspaceName *string `json:"keyspaceName,omitempty" tf:"keyspace_name,omitempty"`
+
+	// Reference to a Keyspace in keyspaces to populate keyspaceName.
+	// +kubebuilder:validation:Optional
+	KeyspaceNameRef *v1.Reference `json:"keyspaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Keyspace in keyspaces to populate keyspaceName.
+	// +kubebuilder:validation:Optional
+	KeyspaceNameSelector *v1.Selector `json:"keyspaceNameSelector,omitempty" tf:"-"`
+
 	// Specifies if point-in-time recovery is enabled or disabled for the table. More information can be found in the Developer Guide.
 	PointInTimeRecovery []PointInTimeRecoveryInitParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 

@@ -36,5 +36,21 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DataSetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DataSetIDRef,
+		Selector:     mg.Spec.InitProvider.DataSetIDSelector,
+		To: reference.To{
+			List:    &DataSetList{},
+			Managed: &DataSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DataSetID")
+	}
+	mg.Spec.InitProvider.DataSetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DataSetIDRef = rsp.ResolvedReference
+
 	return nil
 }

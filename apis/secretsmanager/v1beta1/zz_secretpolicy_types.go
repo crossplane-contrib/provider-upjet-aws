@@ -24,6 +24,19 @@ type SecretPolicyInitParameters struct {
 
 	// Valid JSON document representing a resource policy. Unlike aws_secretsmanager_secret, where policy can be set to "{}" to delete the policy, "{}" is not a valid policy since policy is required.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Secret ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnRef *v1.Reference `json:"secretArnRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretArn.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type SecretPolicyObservation struct {

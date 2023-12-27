@@ -23,6 +23,30 @@ type ActionsInitParameters struct {
 	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
+	// The name of the crawler to be executed. Conflicts with job_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Crawler
+	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
+
+	// Reference to a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+
+	// The name of a job to be executed. Conflicts with crawler_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
+	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+
+	// Reference to a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
+
 	// Specifies configuration properties of a job run notification. See Notification Property details below.
 	NotificationProperty []ActionsNotificationPropertyInitParameters `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
 
@@ -124,6 +148,30 @@ type ConditionsInitParameters struct {
 
 	// The condition crawl state. Currently, the values supported are RUNNING, SUCCEEDED, CANCELLED, and FAILED. If this is specified, crawler_name must also be specified. Conflicts with state.
 	CrawlState *string `json:"crawlState,omitempty" tf:"crawl_state,omitempty"`
+
+	// The name of the crawler to be executed. Conflicts with job_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Crawler
+	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
+
+	// Reference to a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+
+	// The name of a job to be executed. Conflicts with crawler_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
+	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+
+	// Reference to a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// A logical operator. Defaults to EQUALS.
 	LogicalOperator *string `json:"logicalOperator,omitempty" tf:"logical_operator,omitempty"`

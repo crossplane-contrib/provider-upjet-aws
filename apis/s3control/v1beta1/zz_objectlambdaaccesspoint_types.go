@@ -19,6 +19,19 @@ import (
 
 type AwsLambdaInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
+
 	// Additional JSON that provides supplemental data to the Lambda function used to transform objects.
 	FunctionPayload *string `json:"functionPayload,omitempty" tf:"function_payload,omitempty"`
 }
@@ -61,6 +74,19 @@ type ConfigurationInitParameters struct {
 
 	// Whether or not the CloudWatch metrics configuration is enabled.
 	CloudWatchMetricsEnabled *bool `json:"cloudWatchMetricsEnabled,omitempty" tf:"cloud_watch_metrics_enabled,omitempty"`
+
+	// Standard access point associated with the Object Lambda Access Point.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SupportingAccessPoint *string `json:"supportingAccessPoint,omitempty" tf:"supporting_access_point,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate supportingAccessPoint.
+	// +kubebuilder:validation:Optional
+	SupportingAccessPointRef *v1.Reference `json:"supportingAccessPointRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate supportingAccessPoint.
+	// +kubebuilder:validation:Optional
+	SupportingAccessPointSelector *v1.Selector `json:"supportingAccessPointSelector,omitempty" tf:"-"`
 
 	// List of transformation configurations for the Object Lambda Access Point. See Transformation Configuration below for more details.
 	TransformationConfiguration []TransformationConfigurationInitParameters `json:"transformationConfiguration,omitempty" tf:"transformation_configuration,omitempty"`

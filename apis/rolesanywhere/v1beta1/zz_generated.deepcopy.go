@@ -74,6 +74,29 @@ func (in *ProfileInitParameters) DeepCopyInto(out *ProfileInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.RoleArns != nil {
+		in, out := &in.RoleArns, &out.RoleArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.RoleArnsRefs != nil {
+		in, out := &in.RoleArnsRefs, &out.RoleArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RoleArnsSelector != nil {
+		in, out := &in.RoleArnsSelector, &out.RoleArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SessionPolicy != nil {
 		in, out := &in.SessionPolicy, &out.SessionPolicy
 		*out = new(string)

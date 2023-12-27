@@ -142,6 +142,19 @@ type HTTPRouteActionWeightedTargetInitParameters struct {
 	// The port number to match from the request.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Reference to a VirtualNode in appmesh to populate virtualNode.
+	// +kubebuilder:validation:Optional
+	VirtualNodeRef *v1.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNode in appmesh to populate virtualNode.
+	// +kubebuilder:validation:Optional
+	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
+
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
@@ -1171,6 +1184,19 @@ type RetryPolicyPerRetryTimeoutParameters struct {
 
 type RouteInitParameters struct {
 
+	// Name of the service mesh in which to create the route. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// Reference to a Mesh in appmesh to populate meshName.
+	// +kubebuilder:validation:Optional
+	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+
+	// Selector for a Mesh in appmesh to populate meshName.
+	// +kubebuilder:validation:Optional
+	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
@@ -1183,6 +1209,19 @@ type RouteInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Name of the virtual router in which to create the route. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualRouter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
+
+	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
+	// +kubebuilder:validation:Optional
+	VirtualRouterNameRef *v1.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
+	// +kubebuilder:validation:Optional
+	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type RouteObservation struct {
@@ -1716,6 +1755,19 @@ type TCPRouteActionWeightedTargetInitParameters struct {
 
 	// The port number to match from the request.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Virtual node to associate with the weighted target. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	VirtualNode *string `json:"virtualNode,omitempty" tf:"virtual_node,omitempty"`
+
+	// Reference to a VirtualNode in appmesh to populate virtualNode.
+	// +kubebuilder:validation:Optional
+	VirtualNodeRef *v1.Reference `json:"virtualNodeRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNode in appmesh to populate virtualNode.
+	// +kubebuilder:validation:Optional
+	VirtualNodeSelector *v1.Selector `json:"virtualNodeSelector,omitempty" tf:"-"`
 
 	// Relative weight of the weighted target. An integer between 0 and 100.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`

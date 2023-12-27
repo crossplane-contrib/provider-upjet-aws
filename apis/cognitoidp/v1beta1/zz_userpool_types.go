@@ -67,6 +67,19 @@ type AdminCreateUserConfigParameters struct {
 
 type CustomEmailSenderInitParameters struct {
 
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send email notifications to users.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
+
 	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom email Lambda function. The only supported value is V1_0.
 	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
 }
@@ -102,6 +115,19 @@ type CustomEmailSenderParameters struct {
 }
 
 type CustomSMSSenderInitParameters struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnRef *v1.Reference `json:"lambdaArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate lambdaArn.
+	// +kubebuilder:validation:Optional
+	LambdaArnSelector *v1.Selector `json:"lambdaArnSelector,omitempty" tf:"-"`
 
 	// The Lambda version represents the signature of the "request" attribute in the "event" information Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
 	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
@@ -266,11 +292,154 @@ type InviteMessageTemplateParameters struct {
 
 type LambdaConfigInitParameters struct {
 
+	// ARN of the lambda creating an authentication challenge.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	CreateAuthChallenge *string `json:"createAuthChallenge,omitempty" tf:"create_auth_challenge,omitempty"`
+
+	// Reference to a Function in lambda to populate createAuthChallenge.
+	// +kubebuilder:validation:Optional
+	CreateAuthChallengeRef *v1.Reference `json:"createAuthChallengeRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate createAuthChallenge.
+	// +kubebuilder:validation:Optional
+	CreateAuthChallengeSelector *v1.Selector `json:"createAuthChallengeSelector,omitempty" tf:"-"`
+
 	// A custom email sender AWS Lambda trigger. See custom_email_sender Below.
 	CustomEmailSender []CustomEmailSenderInitParameters `json:"customEmailSender,omitempty" tf:"custom_email_sender,omitempty"`
 
+	// Custom Message AWS Lambda trigger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	CustomMessage *string `json:"customMessage,omitempty" tf:"custom_message,omitempty"`
+
+	// Reference to a Function in lambda to populate customMessage.
+	// +kubebuilder:validation:Optional
+	CustomMessageRef *v1.Reference `json:"customMessageRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate customMessage.
+	// +kubebuilder:validation:Optional
+	CustomMessageSelector *v1.Selector `json:"customMessageSelector,omitempty" tf:"-"`
+
 	// A custom SMS sender AWS Lambda trigger. See custom_sms_sender Below.
 	CustomSMSSender []CustomSMSSenderInitParameters `json:"customSmsSender,omitempty" tf:"custom_sms_sender,omitempty"`
+
+	// Defines the authentication challenge.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	DefineAuthChallenge *string `json:"defineAuthChallenge,omitempty" tf:"define_auth_challenge,omitempty"`
+
+	// Reference to a Function in lambda to populate defineAuthChallenge.
+	// +kubebuilder:validation:Optional
+	DefineAuthChallengeRef *v1.Reference `json:"defineAuthChallengeRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate defineAuthChallenge.
+	// +kubebuilder:validation:Optional
+	DefineAuthChallengeSelector *v1.Selector `json:"defineAuthChallengeSelector,omitempty" tf:"-"`
+
+	// The Amazon Resource Name of Key Management Service Customer master keys. Amazon Cognito uses the key to encrypt codes and temporary passwords sent to CustomEmailSender and CustomSMSSender.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
+	// Post-authentication AWS Lambda trigger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PostAuthentication *string `json:"postAuthentication,omitempty" tf:"post_authentication,omitempty"`
+
+	// Reference to a Function in lambda to populate postAuthentication.
+	// +kubebuilder:validation:Optional
+	PostAuthenticationRef *v1.Reference `json:"postAuthenticationRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate postAuthentication.
+	// +kubebuilder:validation:Optional
+	PostAuthenticationSelector *v1.Selector `json:"postAuthenticationSelector,omitempty" tf:"-"`
+
+	// Post-confirmation AWS Lambda trigger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PostConfirmation *string `json:"postConfirmation,omitempty" tf:"post_confirmation,omitempty"`
+
+	// Reference to a Function in lambda to populate postConfirmation.
+	// +kubebuilder:validation:Optional
+	PostConfirmationRef *v1.Reference `json:"postConfirmationRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate postConfirmation.
+	// +kubebuilder:validation:Optional
+	PostConfirmationSelector *v1.Selector `json:"postConfirmationSelector,omitempty" tf:"-"`
+
+	// Pre-authentication AWS Lambda trigger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PreAuthentication *string `json:"preAuthentication,omitempty" tf:"pre_authentication,omitempty"`
+
+	// Reference to a Function in lambda to populate preAuthentication.
+	// +kubebuilder:validation:Optional
+	PreAuthenticationRef *v1.Reference `json:"preAuthenticationRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate preAuthentication.
+	// +kubebuilder:validation:Optional
+	PreAuthenticationSelector *v1.Selector `json:"preAuthenticationSelector,omitempty" tf:"-"`
+
+	// Pre-registration AWS Lambda trigger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PreSignUp *string `json:"preSignUp,omitempty" tf:"pre_sign_up,omitempty"`
+
+	// Reference to a Function in lambda to populate preSignUp.
+	// +kubebuilder:validation:Optional
+	PreSignUpRef *v1.Reference `json:"preSignUpRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate preSignUp.
+	// +kubebuilder:validation:Optional
+	PreSignUpSelector *v1.Selector `json:"preSignUpSelector,omitempty" tf:"-"`
+
+	// Allow to customize identity token claims before token generation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PreTokenGeneration *string `json:"preTokenGeneration,omitempty" tf:"pre_token_generation,omitempty"`
+
+	// Reference to a Function in lambda to populate preTokenGeneration.
+	// +kubebuilder:validation:Optional
+	PreTokenGenerationRef *v1.Reference `json:"preTokenGenerationRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate preTokenGeneration.
+	// +kubebuilder:validation:Optional
+	PreTokenGenerationSelector *v1.Selector `json:"preTokenGenerationSelector,omitempty" tf:"-"`
+
+	// User migration Lambda config type.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	UserMigration *string `json:"userMigration,omitempty" tf:"user_migration,omitempty"`
+
+	// Reference to a Function in lambda to populate userMigration.
+	// +kubebuilder:validation:Optional
+	UserMigrationRef *v1.Reference `json:"userMigrationRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate userMigration.
+	// +kubebuilder:validation:Optional
+	UserMigrationSelector *v1.Selector `json:"userMigrationSelector,omitempty" tf:"-"`
+
+	// Verifies the authentication challenge response.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	VerifyAuthChallengeResponse *string `json:"verifyAuthChallengeResponse,omitempty" tf:"verify_auth_challenge_response,omitempty"`
+
+	// Reference to a Function in lambda to populate verifyAuthChallengeResponse.
+	// +kubebuilder:validation:Optional
+	VerifyAuthChallengeResponseRef *v1.Reference `json:"verifyAuthChallengeResponseRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate verifyAuthChallengeResponse.
+	// +kubebuilder:validation:Optional
+	VerifyAuthChallengeResponseSelector *v1.Selector `json:"verifyAuthChallengeResponseSelector,omitempty" tf:"-"`
 }
 
 type LambdaConfigObservation struct {
@@ -611,6 +780,19 @@ type SMSConfigurationInitParameters struct {
 
 	// External ID used in IAM role trust relationships. For more information about using external IDs, see How to Use an External ID When Granting Access to Your AWS Resources to a Third Party.
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
+
+	// ARN of the Amazon SNS caller. This is usually the IAM role that you've given Cognito permission to assume.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SnsCallerArn *string `json:"snsCallerArn,omitempty" tf:"sns_caller_arn,omitempty"`
+
+	// Reference to a Role in iam to populate snsCallerArn.
+	// +kubebuilder:validation:Optional
+	SnsCallerArnRef *v1.Reference `json:"snsCallerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate snsCallerArn.
+	// +kubebuilder:validation:Optional
+	SnsCallerArnSelector *v1.Selector `json:"snsCallerArnSelector,omitempty" tf:"-"`
 
 	// The AWS Region to use with Amazon SNS integration. You can choose the same Region as your user pool, or a supported Legacy Amazon SNS alternate Region. Amazon Cognito resources in the Asia Pacific (Seoul) AWS Region must use your Amazon SNS configuration in the Asia Pacific (Tokyo) Region. For more information, see SMS message settings for Amazon Cognito user pools.
 	SnsRegion *string `json:"snsRegion,omitempty" tf:"sns_region,omitempty"`

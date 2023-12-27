@@ -37,6 +37,19 @@ type NetworkProfileInitParameters struct {
 	// The name for the network profile.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ARN of the project for the network profile.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
+
+	// Reference to a Project in devicefarm to populate projectArn.
+	// +kubebuilder:validation:Optional
+	ProjectArnRef *v1.Reference `json:"projectArnRef,omitempty" tf:"-"`
+
+	// Selector for a Project in devicefarm to populate projectArn.
+	// +kubebuilder:validation:Optional
+	ProjectArnSelector *v1.Selector `json:"projectArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

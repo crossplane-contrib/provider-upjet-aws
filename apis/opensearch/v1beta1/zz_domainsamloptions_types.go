@@ -19,6 +19,19 @@ import (
 
 type DomainSAMLOptionsInitParameters struct {
 
+	// Name of the domain.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain_name",false)
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Reference to a Domain in opensearch to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in opensearch to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
+
 	// SAML authentication options for an AWS OpenSearch Domain.
 	SAMLOptions []SAMLOptionsInitParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 }

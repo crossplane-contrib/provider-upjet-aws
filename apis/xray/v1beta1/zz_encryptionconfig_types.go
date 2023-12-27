@@ -19,6 +19,19 @@ import (
 
 type EncryptionConfigInitParameters struct {
 
+	// An AWS KMS customer master key (CMK) ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key in kms to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+
 	// The type of encryption. Set to KMS to use your own key for encryption. Set to NONE for default encryption.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

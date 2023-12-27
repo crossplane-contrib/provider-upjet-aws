@@ -86,6 +86,19 @@ type EndpointInitParameters struct {
 	// Additional attributes associated with the connection. For available attributes for a source Endpoint, see Sources for data migration. For available attributes for a target Endpoint, see Targets for data migration.
 	ExtraConnectionAttributes *string `json:"extraConnectionAttributes,omitempty" tf:"extra_connection_attributes,omitempty"`
 
+	// ARN for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region. To encrypt an S3 target with a KMS Key, use the parameter s3_settings.server_side_encryption_kms_key_id. When engine_name is redshift, kms_key_arn is the KMS Key for the Redshift target and the parameter redshift_settings.server_side_encryption_kms_key_id encrypts the S3 intermediate storage.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// Configuration block for Kafka settings. See below.
 	KafkaSettings []KafkaSettingsInitParameters `json:"kafkaSettings,omitempty" tf:"kafka_settings,omitempty"`
 
@@ -110,11 +123,37 @@ type EndpointInitParameters struct {
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
+	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in SecretsManagerSecret.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SecretsManagerAccessRoleArn *string `json:"secretsManagerAccessRoleArn,omitempty" tf:"secrets_manager_access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate secretsManagerAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	SecretsManagerAccessRoleArnRef *v1.Reference `json:"secretsManagerAccessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate secretsManagerAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
+
 	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
 	// Host name of the server.
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// ARN used by the service access IAM role for dynamodb endpoints.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceAccessRole *string `json:"serviceAccessRole,omitempty" tf:"service_access_role,omitempty"`
+
+	// Reference to a Role in iam to populate serviceAccessRole.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleRef *v1.Reference `json:"serviceAccessRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceAccessRole.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleSelector *v1.Selector `json:"serviceAccessRoleSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

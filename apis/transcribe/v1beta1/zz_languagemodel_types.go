@@ -19,6 +19,19 @@ import (
 
 type InputDataConfigInitParameters struct {
 
+	// IAM role with access to S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DataAccessRoleArn *string `json:"dataAccessRoleArn,omitempty" tf:"data_access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate dataAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	DataAccessRoleArnRef *v1.Reference `json:"dataAccessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate dataAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	DataAccessRoleArnSelector *v1.Selector `json:"dataAccessRoleArnSelector,omitempty" tf:"-"`
+
 	// S3 URI where training data is located.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 

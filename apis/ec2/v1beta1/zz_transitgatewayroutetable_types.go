@@ -22,6 +22,18 @@ type TransitGatewayRouteTableInitParameters_2 struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of EC2 Transit Gateway.
+	// +crossplane:generate:reference:type=TransitGateway
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayRouteTableObservation_2 struct {

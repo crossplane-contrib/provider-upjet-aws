@@ -18,6 +18,45 @@ import (
 )
 
 type CognitoMemberDefinitionInitParameters struct {
+
+	// An identifier for an application client. You must create the app client ID using Amazon Cognito.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+
+	// An identifier for a user group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
+
+	// Reference to a UserGroup in cognitoidp to populate userGroup.
+	// +kubebuilder:validation:Optional
+	UserGroupRef *v1.Reference `json:"userGroupRef,omitempty" tf:"-"`
+
+	// Selector for a UserGroup in cognitoidp to populate userGroup.
+	// +kubebuilder:validation:Optional
+	UserGroupSelector *v1.Selector `json:"userGroupSelector,omitempty" tf:"-"`
+
+	// An identifier for a user pool. The user pool must be in the same region as the service that you are calling.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_pool_id",false)
+	UserPool *string `json:"userPool,omitempty" tf:"user_pool,omitempty"`
+
+	// Reference to a UserPoolDomain in cognitoidp to populate userPool.
+	// +kubebuilder:validation:Optional
+	UserPoolRef *v1.Reference `json:"userPoolRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolDomain in cognitoidp to populate userPool.
+	// +kubebuilder:validation:Optional
+	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
 type CognitoMemberDefinitionObservation struct {
@@ -161,6 +200,19 @@ type WorkteamInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The name of the Workteam (must be unique).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkforceName *string `json:"workforceName,omitempty" tf:"workforce_name,omitempty"`
+
+	// Reference to a Workforce in sagemaker to populate workforceName.
+	// +kubebuilder:validation:Optional
+	WorkforceNameRef *v1.Reference `json:"workforceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Workforce in sagemaker to populate workforceName.
+	// +kubebuilder:validation:Optional
+	WorkforceNameSelector *v1.Selector `json:"workforceNameSelector,omitempty" tf:"-"`
 }
 
 type WorkteamObservation struct {

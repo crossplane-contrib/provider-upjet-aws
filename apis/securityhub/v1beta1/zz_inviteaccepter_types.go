@@ -18,6 +18,19 @@ import (
 )
 
 type InviteAccepterInitParameters struct {
+
+	// The account ID of the master Security Hub account whose invitation you're accepting.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/securityhub/v1beta1.Member
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("master_id",true)
+	MasterID *string `json:"masterId,omitempty" tf:"master_id,omitempty"`
+
+	// Reference to a Member in securityhub to populate masterId.
+	// +kubebuilder:validation:Optional
+	MasterIDRef *v1.Reference `json:"masterIdRef,omitempty" tf:"-"`
+
+	// Selector for a Member in securityhub to populate masterId.
+	// +kubebuilder:validation:Optional
+	MasterIDSelector *v1.Selector `json:"masterIdSelector,omitempty" tf:"-"`
 }
 
 type InviteAccepterObservation struct {

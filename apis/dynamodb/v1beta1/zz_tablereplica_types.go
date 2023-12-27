@@ -19,6 +19,31 @@ import (
 
 type TableReplicaInitParameters_2 struct {
 
+	// ARN of the main or global table which this resource will replicate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	GlobalTableArn *string `json:"globalTableArn,omitempty" tf:"global_table_arn,omitempty"`
+
+	// Reference to a Table in dynamodb to populate globalTableArn.
+	// +kubebuilder:validation:Optional
+	GlobalTableArnRef *v1.Reference `json:"globalTableArnRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate globalTableArn.
+	// +kubebuilder:validation:Optional
+	GlobalTableArnSelector *v1.Selector `json:"globalTableArnSelector,omitempty" tf:"-"`
+
+	// ARN of the CMK that should be used for the AWS KMS encryption. This argument should only be used if the key is different from the default KMS-managed DynamoDB key, alias/aws/dynamodb. Note: This attribute will not be populated with the ARN of default keys.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// Whether to enable Point In Time Recovery for the replica. Default is false.
 	PointInTimeRecovery *bool `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 

@@ -37,6 +37,22 @@ func (mg *AssessmentTarget) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.ResourceGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceGroupArnRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupArnSelector,
+		To: reference.To{
+			List:    &ResourceGroupList{},
+			Managed: &ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupArn")
+	}
+	mg.Spec.InitProvider.ResourceGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -80,6 +96,40 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EventSubscription); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSubscription[i3].TopicArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.EventSubscription[i3].TopicArnRef,
+			Selector:     mg.Spec.InitProvider.EventSubscription[i3].TopicArnSelector,
+			To: reference.To{
+				List:    &v1beta1.TopicList{},
+				Managed: &v1beta1.Topic{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EventSubscription[i3].TopicArn")
+		}
+		mg.Spec.InitProvider.EventSubscription[i3].TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EventSubscription[i3].TopicArnRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.TargetArnRef,
+		Selector:     mg.Spec.InitProvider.TargetArnSelector,
+		To: reference.To{
+			List:    &AssessmentTargetList{},
+			Managed: &AssessmentTarget{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArn")
+	}
+	mg.Spec.InitProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetArnRef = rsp.ResolvedReference
 
 	return nil
 }

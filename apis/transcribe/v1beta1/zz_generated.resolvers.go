@@ -39,6 +39,24 @@ func (mg *LanguageModel) ResolveReferences(ctx context.Context, c client.Reader)
 		mg.Spec.ForProvider.InputDataConfig[i3].DataAccessRoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.InputDataConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArnRef,
+			Selector:     mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArn")
+		}
+		mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.InputDataConfig[i3].DataAccessRoleArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

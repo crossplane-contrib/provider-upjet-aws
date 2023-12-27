@@ -19,9 +19,35 @@ import (
 
 type ExtensionAssociationInitParameters struct {
 
+	// The ARN of the extension defined in the association.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Extension
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ExtensionArn *string `json:"extensionArn,omitempty" tf:"extension_arn,omitempty"`
+
+	// Reference to a Extension in appconfig to populate extensionArn.
+	// +kubebuilder:validation:Optional
+	ExtensionArnRef *v1.Reference `json:"extensionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Extension in appconfig to populate extensionArn.
+	// +kubebuilder:validation:Optional
+	ExtensionArnSelector *v1.Selector `json:"extensionArnSelector,omitempty" tf:"-"`
+
 	// The parameter names and values defined for the association.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The ARN of the application, configuration profile, or environment to associate with the extension.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a Application in appconfig to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Application in appconfig to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type ExtensionAssociationObservation struct {

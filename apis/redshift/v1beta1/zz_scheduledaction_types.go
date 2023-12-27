@@ -125,6 +125,19 @@ type ScheduledActionInitParameters struct {
 	// The end time in UTC when the schedule is active, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ).
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
+	// The IAM role to assume to run the scheduled action.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
+
+	// Reference to a Role in iam to populate iamRole.
+	// +kubebuilder:validation:Optional
+	IAMRoleRef *v1.Reference `json:"iamRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRole.
+	// +kubebuilder:validation:Optional
+	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+
 	// The schedule of action. The schedule is defined format of "at expression" or "cron expression", for example at(2016-03-04T17:27:00) or cron(0 10 ? * MON *). See Scheduled Action for more information.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 

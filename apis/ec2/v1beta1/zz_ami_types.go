@@ -286,6 +286,20 @@ type EBSBlockDeviceInitParameters struct {
 	// ARN of the Outpost on which the snapshot is stored.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
 
+	// ID of an EBS snapshot that will be used to initialize the created
+	// EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
+	// snapshot.
+	// +crossplane:generate:reference:type=EBSSnapshot
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Reference to a EBSSnapshot to populate snapshotId.
+	// +kubebuilder:validation:Optional
+	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+
+	// Selector for a EBSSnapshot to populate snapshotId.
+	// +kubebuilder:validation:Optional
+	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
+
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 

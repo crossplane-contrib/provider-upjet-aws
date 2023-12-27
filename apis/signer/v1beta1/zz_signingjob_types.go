@@ -114,6 +114,18 @@ type SigningJobInitParameters struct {
 	// Set this argument to true to ignore signing job failures and retrieve failed status and reason. Default false.
 	IgnoreSigningJobFailure *bool `json:"ignoreSigningJobFailure,omitempty" tf:"ignore_signing_job_failure,omitempty"`
 
+	// The name of the profile to initiate the signing operation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta1.SigningProfile
+	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
+
+	// Reference to a SigningProfile in signer to populate profileName.
+	// +kubebuilder:validation:Optional
+	ProfileNameRef *v1.Reference `json:"profileNameRef,omitempty" tf:"-"`
+
+	// Selector for a SigningProfile in signer to populate profileName.
+	// +kubebuilder:validation:Optional
+	ProfileNameSelector *v1.Selector `json:"profileNameSelector,omitempty" tf:"-"`
+
 	// The S3 bucket that contains the object to sign. See Source below for details.
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 }

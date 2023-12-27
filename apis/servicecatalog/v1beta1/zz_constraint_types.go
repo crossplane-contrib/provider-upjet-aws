@@ -28,6 +28,32 @@ type ConstraintInitParameters struct {
 	// Constraint parameters in JSON format. The syntax depends on the constraint type. See details below.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Portfolio identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Reference to a Portfolio in servicecatalog to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+
+	// Selector for a Portfolio in servicecatalog to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+
+	// Product identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Reference to a Product in servicecatalog to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
+
+	// Selector for a Product in servicecatalog to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+
 	// Type of constraint. Valid values are LAUNCH, NOTIFICATION, RESOURCE_UPDATE, STACKSET, and TEMPLATE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

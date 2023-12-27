@@ -648,6 +648,19 @@ type EncryptAtRestParameters struct {
 
 type LogPublishingOptionsInitParameters struct {
 
+	// ARN of the Cloudwatch log group to which log needs to be published.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+
 	// Whether given log publishing option is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

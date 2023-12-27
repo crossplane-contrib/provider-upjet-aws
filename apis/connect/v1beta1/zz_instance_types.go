@@ -28,6 +28,19 @@ type InstanceInitParameters struct {
 	// Specifies whether contact lens is enabled. Defaults to true.
 	ContactLensEnabled *bool `json:"contactLensEnabled,omitempty" tf:"contact_lens_enabled,omitempty"`
 
+	// The identifier for the directory if identity_management_type is EXISTING_DIRECTORY.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
+	// Reference to a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+
 	// Specifies whether early media for outbound calls is enabled . Defaults to true if outbound calls is enabled.
 	EarlyMediaEnabled *bool `json:"earlyMediaEnabled,omitempty" tf:"early_media_enabled,omitempty"`
 

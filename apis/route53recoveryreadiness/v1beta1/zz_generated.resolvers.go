@@ -39,6 +39,24 @@ func (mg *ResourceSet) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.Resources[i3].ResourceArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Resources); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resources[i3].ResourceArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Resources[i3].ResourceArnRef,
+			Selector:     mg.Spec.InitProvider.Resources[i3].ResourceArnSelector,
+			To: reference.To{
+				List:    &v1beta1.MetricAlarmList{},
+				Managed: &v1beta1.MetricAlarm{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Resources[i3].ResourceArn")
+		}
+		mg.Spec.InitProvider.Resources[i3].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Resources[i3].ResourceArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

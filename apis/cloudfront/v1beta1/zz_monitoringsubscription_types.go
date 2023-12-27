@@ -19,6 +19,19 @@ import (
 
 type MonitoringSubscriptionInitParameters struct {
 
+	// The ID of the distribution that you are enabling metrics for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.Distribution
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DistributionID *string `json:"distributionId,omitempty" tf:"distribution_id,omitempty"`
+
+	// Reference to a Distribution in cloudfront to populate distributionId.
+	// +kubebuilder:validation:Optional
+	DistributionIDRef *v1.Reference `json:"distributionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Distribution in cloudfront to populate distributionId.
+	// +kubebuilder:validation:Optional
+	DistributionIDSelector *v1.Selector `json:"distributionIdSelector,omitempty" tf:"-"`
+
 	// A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
 	MonitoringSubscription []MonitoringSubscriptionMonitoringSubscriptionInitParameters `json:"monitoringSubscription,omitempty" tf:"monitoring_subscription,omitempty"`
 }

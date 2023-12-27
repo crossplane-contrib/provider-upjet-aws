@@ -75,6 +75,58 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.Target[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Target); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].Arn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Target[i3].ArnRef,
+			Selector:     mg.Spec.InitProvider.Target[i3].ArnSelector,
+			To: reference.To{
+				List:    &v1beta11.QueueList{},
+				Managed: &v1beta11.Queue{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Target[i3].Arn")
+		}
+		mg.Spec.InitProvider.Target[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Target[i3].ArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Target); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Target[i3].RoleArnRef,
+			Selector:     mg.Spec.InitProvider.Target[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta12.RoleList{},
+				Managed: &v1beta12.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Target[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Target[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Target[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

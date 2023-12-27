@@ -61,6 +61,32 @@ type QueueInitParameters struct {
 	// Specifies the description of the Queue.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the identifier of the Hours of Operation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.HoursOfOperation
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("hours_of_operation_id",true)
+	HoursOfOperationID *string `json:"hoursOfOperationId,omitempty" tf:"hours_of_operation_id,omitempty"`
+
+	// Reference to a HoursOfOperation in connect to populate hoursOfOperationId.
+	// +kubebuilder:validation:Optional
+	HoursOfOperationIDRef *v1.Reference `json:"hoursOfOperationIdRef,omitempty" tf:"-"`
+
+	// Selector for a HoursOfOperation in connect to populate hoursOfOperationId.
+	// +kubebuilder:validation:Optional
+	HoursOfOperationIDSelector *v1.Selector `json:"hoursOfOperationIdSelector,omitempty" tf:"-"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
 	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 

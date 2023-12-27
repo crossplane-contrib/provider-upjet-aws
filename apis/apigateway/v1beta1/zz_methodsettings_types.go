@@ -22,8 +22,34 @@ type MethodSettingsInitParameters struct {
 	// Method path defined as {resource_path}/{http_method} for an individual method override, or */* for overriding all methods in the stage. Ensure to trim any leading forward slashes in the path (e.g., trimprefix(aws_api_gateway_resource.example.path, "/")).
 	MethodPath *string `json:"methodPath,omitempty" tf:"method_path,omitempty"`
 
+	// ID of the REST API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+
 	// Settings block, see below.
 	Settings []SettingsInitParameters `json:"settings,omitempty" tf:"settings,omitempty"`
+
+	// Name of the stage
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Stage
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("stage_name",false)
+	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
+
+	// Reference to a Stage in apigateway to populate stageName.
+	// +kubebuilder:validation:Optional
+	StageNameRef *v1.Reference `json:"stageNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stage in apigateway to populate stageName.
+	// +kubebuilder:validation:Optional
+	StageNameSelector *v1.Selector `json:"stageNameSelector,omitempty" tf:"-"`
 }
 
 type MethodSettingsObservation struct {

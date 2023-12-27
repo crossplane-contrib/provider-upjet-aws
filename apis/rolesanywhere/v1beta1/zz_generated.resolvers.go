@@ -37,5 +37,21 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.RoleArns = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.RoleArnsRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.RoleArns),
+		Extract:       common.ARNExtractor(),
+		References:    mg.Spec.InitProvider.RoleArnsRefs,
+		Selector:      mg.Spec.InitProvider.RoleArnsSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArns")
+	}
+	mg.Spec.InitProvider.RoleArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.RoleArnsRefs = mrsp.ResolvedReferences
+
 	return nil
 }

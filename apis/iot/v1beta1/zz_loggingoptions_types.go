@@ -24,6 +24,19 @@ type LoggingOptionsInitParameters struct {
 
 	// If true all logs are disabled. The default is false.
 	DisableAllLogs *bool `json:"disableAllLogs,omitempty" tf:"disable_all_logs,omitempty"`
+
+	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type LoggingOptionsObservation struct {

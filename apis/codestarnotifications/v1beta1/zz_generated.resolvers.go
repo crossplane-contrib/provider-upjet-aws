@@ -56,6 +56,40 @@ func (mg *NotificationRule) ResolveReferences(ctx context.Context, c client.Read
 		mg.Spec.ForProvider.Target[i3].AddressRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Resource),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceRef,
+		Selector:     mg.Spec.InitProvider.ResourceSelector,
+		To: reference.To{
+			List:    &v1beta1.RepositoryList{},
+			Managed: &v1beta1.Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Resource")
+	}
+	mg.Spec.InitProvider.Resource = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Target); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].Address),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Target[i3].AddressRef,
+			Selector:     mg.Spec.InitProvider.Target[i3].AddressSelector,
+			To: reference.To{
+				List:    &v1beta11.TopicList{},
+				Managed: &v1beta11.Topic{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Target[i3].Address")
+		}
+		mg.Spec.InitProvider.Target[i3].Address = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Target[i3].AddressRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

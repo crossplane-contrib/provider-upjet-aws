@@ -19,8 +19,33 @@ import (
 
 type FunctionInitParameters struct {
 
+	// ID of the associated AppSync API.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a GraphQLAPI in appsync to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a GraphQLAPI in appsync to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// The function code that contains the request and response functions. When code is used, the runtime is required. The runtime value must be APPSYNC_JS.
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+
+	// Function data source name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
+	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
+
+	// Reference to a Datasource in appsync to populate dataSource.
+	// +kubebuilder:validation:Optional
+	DataSourceRef *v1.Reference `json:"dataSourceRef,omitempty" tf:"-"`
+
+	// Selector for a Datasource in appsync to populate dataSource.
+	// +kubebuilder:validation:Optional
+	DataSourceSelector *v1.Selector `json:"dataSourceSelector,omitempty" tf:"-"`
 
 	// Function description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

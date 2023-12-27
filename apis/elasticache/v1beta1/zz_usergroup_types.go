@@ -25,6 +25,21 @@ type UserGroupInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// References to User to populate userIds.
+	// +kubebuilder:validation:Optional
+	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of User to populate userIds.
+	// +kubebuilder:validation:Optional
+	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
+
+	// The list of user IDs that belong to the user group.
+	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:refFieldName=UserIDRefs
+	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
+	// +listType=set
+	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
 type UserGroupObservation struct {

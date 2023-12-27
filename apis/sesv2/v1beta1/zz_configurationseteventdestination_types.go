@@ -38,6 +38,18 @@ type CloudWatchDestinationParameters struct {
 
 type ConfigurationSetEventDestinationInitParameters struct {
 
+	// The name of the configuration set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sesv2/v1beta1.ConfigurationSet
+	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
+
+	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
+	// +kubebuilder:validation:Optional
+	ConfigurationSetNameRef *v1.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConfigurationSet in sesv2 to populate configurationSetName.
+	// +kubebuilder:validation:Optional
+	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+
 	// A name that identifies the event destination within the configuration set.
 	EventDestination []EventDestinationInitParameters `json:"eventDestination,omitempty" tf:"event_destination,omitempty"`
 
@@ -198,6 +210,32 @@ type EventDestinationParameters struct {
 }
 
 type KinesisFirehoseDestinationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate deliveryStreamArn.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamArnRef *v1.Reference `json:"deliveryStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStreamArn.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamArnSelector *v1.Selector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisFirehoseDestinationObservation struct {
@@ -241,6 +279,18 @@ type KinesisFirehoseDestinationParameters struct {
 }
 
 type PinpointDestinationInitParameters struct {
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
+
+	// Reference to a App in pinpoint to populate applicationArn.
+	// +kubebuilder:validation:Optional
+	ApplicationArnRef *v1.Reference `json:"applicationArnRef,omitempty" tf:"-"`
+
+	// Selector for a App in pinpoint to populate applicationArn.
+	// +kubebuilder:validation:Optional
+	ApplicationArnSelector *v1.Selector `json:"applicationArnSelector,omitempty" tf:"-"`
 }
 
 type PinpointDestinationObservation struct {
@@ -264,6 +314,19 @@ type PinpointDestinationParameters struct {
 }
 
 type SnsDestinationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type SnsDestinationObservation struct {

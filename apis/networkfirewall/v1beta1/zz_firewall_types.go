@@ -72,6 +72,19 @@ type FirewallInitParameters struct {
 	// KMS encryption configuration settings. See Encryption Configuration below for details.
 	EncryptionConfiguration []EncryptionConfigurationInitParameters `json:"encryptionConfiguration,omitempty" tf:"encryption_configuration,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.FirewallPolicy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
+
+	// Reference to a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
+	// +kubebuilder:validation:Optional
+	FirewallPolicyArnRef *v1.Reference `json:"firewallPolicyArnRef,omitempty" tf:"-"`
+
+	// Selector for a FirewallPolicy in networkfirewall to populate firewallPolicyArn.
+	// +kubebuilder:validation:Optional
+	FirewallPolicyArnSelector *v1.Selector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
+
 	// (Option) A boolean flag indicating whether it is possible to change the associated firewall policy. Defaults to false.
 	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
 
@@ -87,6 +100,18 @@ type FirewallInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The unique identifier of the VPC where AWS Network Firewall should create the firewall.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallObservation struct {
@@ -223,6 +248,19 @@ type SubnetMappingInitParameters struct {
 
 	// The subnet's IP address type. Valida values: "DUALSTACK", "IPV4".
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
+	// The unique identifier for the subnet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetMappingObservation struct {

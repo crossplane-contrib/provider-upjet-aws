@@ -24,6 +24,19 @@ type ConditionInitParameters struct {
 
 	// Type of condition. Value values: StringEquals.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Value for the key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// Reference to a Organization in organizations to populate value.
+	// +kubebuilder:validation:Optional
+	ValueRef *v1.Reference `json:"valueRef,omitempty" tf:"-"`
+
+	// Selector for a Organization in organizations to populate value.
+	// +kubebuilder:validation:Optional
+	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type ConditionObservation struct {
@@ -70,6 +83,19 @@ type PermissionInitParameters struct {
 
 	// Configuration block to limit the event bus permissions you are granting to only accounts that fulfill the condition. Specified below.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The name of the event bus to set the permissions on.
+	// If you omit this, the permissions are set on the default event bus.
+	// +crossplane:generate:reference:type=Bus
+	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
+
+	// Reference to a Bus to populate eventBusName.
+	// +kubebuilder:validation:Optional
+	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bus to populate eventBusName.
+	// +kubebuilder:validation:Optional
+	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
 	// The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify * to permit any account to put events to your default event bus, optionally limited by condition.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`

@@ -120,6 +120,19 @@ type OntapStorageVirtualMachineInitParameters struct {
 	// Configuration block that Amazon FSx uses to join the FSx ONTAP Storage Virtual Machine(SVM) to your Microsoft Active Directory (AD) directory. Detailed below.
 	ActiveDirectoryConfiguration []ActiveDirectoryConfigurationInitParameters `json:"activeDirectoryConfiguration,omitempty" tf:"active_directory_configuration,omitempty"`
 
+	// The ID of the Amazon FSx ONTAP File System that this SVM will be created on.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.OntapFileSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// Reference to a OntapFileSystem in fsx to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a OntapFileSystem in fsx to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+
 	// The name of the SVM. You can use a maximum of 47 alphanumeric characters, plus the underscore (_) special character.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -68,6 +68,19 @@ type BlockDeviceMappingParameters struct {
 
 type ContainerRecipeComponentInitParameters struct {
 
+	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.Component
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
+
+	// Reference to a Component in imagebuilder to populate componentArn.
+	// +kubebuilder:validation:Optional
+	ComponentArnRef *v1.Reference `json:"componentArnRef,omitempty" tf:"-"`
+
+	// Selector for a Component in imagebuilder to populate componentArn.
+	// +kubebuilder:validation:Optional
+	ComponentArnSelector *v1.Selector `json:"componentArnSelector,omitempty" tf:"-"`
+
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 }
@@ -121,6 +134,18 @@ type ContainerRecipeInitParameters struct {
 
 	// Configuration block used to configure an instance for building and testing container images. Detailed below.
 	InstanceConfiguration []InstanceConfigurationInitParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+
+	// The KMS key used to encrypt the container image.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// The name of the container recipe.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -434,6 +459,18 @@ type ParameterParameters struct {
 }
 
 type TargetRepositoryInitParameters struct {
+
+	// The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecr/v1beta1.Repository
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Reference to a Repository in ecr to populate repositoryName.
+	// +kubebuilder:validation:Optional
+	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+
+	// Selector for a Repository in ecr to populate repositoryName.
+	// +kubebuilder:validation:Optional
+	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
 	// The service in which this image is registered. Valid values: ECR.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`

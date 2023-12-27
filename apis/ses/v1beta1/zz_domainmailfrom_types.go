@@ -22,6 +22,18 @@ type DomainMailFromInitParameters struct {
 	// The action that you want Amazon SES to take if it cannot successfully read the required MX record when you send an email. Defaults to UseDefaultValue. See the SES API documentation for more information.
 	BehaviorOnMxFailure *string `json:"behaviorOnMxFailure,omitempty" tf:"behavior_on_mx_failure,omitempty"`
 
+	// Verified domain name or email identity to generate DKIM tokens for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.DomainIdentity
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// Reference to a DomainIdentity in ses to populate domain.
+	// +kubebuilder:validation:Optional
+	DomainRef *v1.Reference `json:"domainRef,omitempty" tf:"-"`
+
+	// Selector for a DomainIdentity in ses to populate domain.
+	// +kubebuilder:validation:Optional
+	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
+
 	// Subdomain (of above domain) which is to be used as MAIL FROM address
 	MailFromDomain *string `json:"mailFromDomain,omitempty" tf:"mail_from_domain,omitempty"`
 }

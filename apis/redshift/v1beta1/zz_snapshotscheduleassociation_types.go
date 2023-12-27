@@ -18,6 +18,32 @@ import (
 )
 
 type SnapshotScheduleAssociationInitParameters struct {
+
+	// The cluster identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// Reference to a Cluster in redshift to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in redshift to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+
+	// The snapshot schedule identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.SnapshotSchedule
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ScheduleIdentifier *string `json:"scheduleIdentifier,omitempty" tf:"schedule_identifier,omitempty"`
+
+	// Reference to a SnapshotSchedule in redshift to populate scheduleIdentifier.
+	// +kubebuilder:validation:Optional
+	ScheduleIdentifierRef *v1.Reference `json:"scheduleIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a SnapshotSchedule in redshift to populate scheduleIdentifier.
+	// +kubebuilder:validation:Optional
+	ScheduleIdentifierSelector *v1.Selector `json:"scheduleIdentifierSelector,omitempty" tf:"-"`
 }
 
 type SnapshotScheduleAssociationObservation struct {

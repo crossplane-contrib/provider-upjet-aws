@@ -21,6 +21,19 @@ type AuthenticationConfigurationInitParameters struct {
 
 	// ARN of the IAM role that grants the App Runner service access to a source repository. Required for ECR image repositories (but not for ECR Public)
 	AccessRoleArn *string `json:"accessRoleArn,omitempty" tf:"access_role_arn,omitempty"`
+
+	// ARN of the App Runner connection that enables the App Runner service to connect to a source repository. Required for GitHub code repositories.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.Connection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
+
+	// Reference to a Connection in apprunner to populate connectionArn.
+	// +kubebuilder:validation:Optional
+	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in apprunner to populate connectionArn.
+	// +kubebuilder:validation:Optional
+	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationObservation struct {
@@ -200,6 +213,19 @@ type EgressConfigurationInitParameters struct {
 
 	// Type of egress configuration.Set to DEFAULT for access to resources hosted on public networks.Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
+
+	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.VPCConnector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
+
+	// Reference to a VPCConnector in apprunner to populate vpcConnectorArn.
+	// +kubebuilder:validation:Optional
+	VPCConnectorArnRef *v1.Reference `json:"vpcConnectorArnRef,omitempty" tf:"-"`
+
+	// Selector for a VPCConnector in apprunner to populate vpcConnectorArn.
+	// +kubebuilder:validation:Optional
+	VPCConnectorArnSelector *v1.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
 }
 
 type EgressConfigurationObservation struct {
@@ -536,6 +562,19 @@ type ServiceInitParameters struct {
 }
 
 type ServiceObservabilityConfigurationInitParameters struct {
+
+	// ARN of the observability configuration that is associated with the service. Specified only when observability_enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.ObservabilityConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn,omitempty" tf:"observability_configuration_arn,omitempty"`
+
+	// Reference to a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArnRef *v1.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArnSelector *v1.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
 
 	// When true, an observability configuration resource is associated with the service.
 	ObservabilityEnabled *bool `json:"observabilityEnabled,omitempty" tf:"observability_enabled,omitempty"`

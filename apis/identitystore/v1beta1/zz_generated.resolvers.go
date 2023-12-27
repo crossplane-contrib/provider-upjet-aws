@@ -52,5 +52,37 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.MemberID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MemberIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GroupID),
+		Extract:      resource.ExtractParamPath("group_id", true),
+		Reference:    mg.Spec.InitProvider.GroupIDRef,
+		Selector:     mg.Spec.InitProvider.GroupIDSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GroupID")
+	}
+	mg.Spec.InitProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberID),
+		Extract:      resource.ExtractParamPath("user_id", true),
+		Reference:    mg.Spec.InitProvider.MemberIDRef,
+		Selector:     mg.Spec.InitProvider.MemberIDSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MemberID")
+	}
+	mg.Spec.InitProvider.MemberID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MemberIDRef = rsp.ResolvedReference
+
 	return nil
 }

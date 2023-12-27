@@ -19,6 +19,19 @@ import (
 
 type VPCInitParameters struct {
 
+	// ID of the VPC to associate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
+
 	// Region of the VPC to associate. Defaults to AWS provider region.
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 }
@@ -57,6 +70,18 @@ type ZoneInitParameters struct {
 
 	// A comment for the hosted zone.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts with vpc as delegation sets can only be used for public zones.
+	// +crossplane:generate:reference:type=DelegationSet
+	DelegationSetID *string `json:"delegationSetId,omitempty" tf:"delegation_set_id,omitempty"`
+
+	// Reference to a DelegationSet to populate delegationSetId.
+	// +kubebuilder:validation:Optional
+	DelegationSetIDRef *v1.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
+
+	// Selector for a DelegationSet to populate delegationSetId.
+	// +kubebuilder:validation:Optional
+	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 

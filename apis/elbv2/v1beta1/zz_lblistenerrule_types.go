@@ -34,6 +34,45 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// The maximum duration of the authentication session, in seconds.
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// The ARN of the Cognito user pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
+
+	// Reference to a UserPool in cognitoidp to populate userPoolArn.
+	// +kubebuilder:validation:Optional
+	UserPoolArnRef *v1.Reference `json:"userPoolArnRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool in cognitoidp to populate userPoolArn.
+	// +kubebuilder:validation:Optional
+	UserPoolArnSelector *v1.Selector `json:"userPoolArnSelector,omitempty" tf:"-"`
+
+	// The ID of the Cognito user pool client.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate userPoolClientId.
+	// +kubebuilder:validation:Optional
+	UserPoolClientIDRef *v1.Reference `json:"userPoolClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate userPoolClientId.
+	// +kubebuilder:validation:Optional
+	UserPoolClientIDSelector *v1.Selector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
+
+	// The domain prefix or fully-qualified domain name of the Cognito user pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",false)
+	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
+
+	// Reference to a UserPoolDomain in cognitoidp to populate userPoolDomain.
+	// +kubebuilder:validation:Optional
+	UserPoolDomainRef *v1.Reference `json:"userPoolDomainRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolDomain in cognitoidp to populate userPoolDomain.
+	// +kubebuilder:validation:Optional
+	UserPoolDomainSelector *v1.Selector `json:"userPoolDomainSelector,omitempty" tf:"-"`
 }
 
 type ActionAuthenticateCognitoObservation struct {
@@ -333,6 +372,19 @@ type ActionInitParameters struct {
 	// Information for creating a redirect action. Required if type is redirect.
 	Redirect []ActionRedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
+	// The ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+
 	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -576,6 +628,19 @@ type ForwardStickinessParameters struct {
 
 type ForwardTargetGroupInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of the target group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
 	// The weight. The range is 0 to 999.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
@@ -693,6 +758,19 @@ type LBListenerRuleInitParameters struct {
 
 	// A Condition block. Multiple condition blocks of different types can be set and all must be satisfied for the rule to match. Condition blocks are documented below.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The ARN of the listener to which to attach the rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
+
+	// Reference to a LBListener in elbv2 to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBListener in elbv2 to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 
 	// The priority for the rule between 1 and 50000. Leaving it unset will automatically set the rule with next available priority after currently existing highest rule. A listener can't have multiple rules with the same priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`

@@ -18,6 +18,31 @@ import (
 )
 
 type ThingPrincipalAttachmentInitParameters struct {
+
+	// The AWS IoT Certificate ARN or Amazon Cognito Identity ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Reference to a Certificate in iot to populate principal.
+	// +kubebuilder:validation:Optional
+	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate in iot to populate principal.
+	// +kubebuilder:validation:Optional
+	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
+
+	// The name of the thing.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Thing
+	Thing *string `json:"thing,omitempty" tf:"thing,omitempty"`
+
+	// Reference to a Thing in iot to populate thing.
+	// +kubebuilder:validation:Optional
+	ThingRef *v1.Reference `json:"thingRef,omitempty" tf:"-"`
+
+	// Selector for a Thing in iot to populate thing.
+	// +kubebuilder:validation:Optional
+	ThingSelector *v1.Selector `json:"thingSelector,omitempty" tf:"-"`
 }
 
 type ThingPrincipalAttachmentObservation struct {

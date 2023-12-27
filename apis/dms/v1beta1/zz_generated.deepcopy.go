@@ -408,6 +408,21 @@ func (in *EndpointInitParameters) DeepCopyInto(out *EndpointInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.KafkaSettings != nil {
 		in, out := &in.KafkaSettings, &out.KafkaSettings
 		*out = make([]KafkaSettingsInitParameters, len(*in))
@@ -460,6 +475,21 @@ func (in *EndpointInitParameters) DeepCopyInto(out *EndpointInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecretsManagerAccessRoleArn != nil {
+		in, out := &in.SecretsManagerAccessRoleArn, &out.SecretsManagerAccessRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretsManagerAccessRoleArnRef != nil {
+		in, out := &in.SecretsManagerAccessRoleArnRef, &out.SecretsManagerAccessRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecretsManagerAccessRoleArnSelector != nil {
+		in, out := &in.SecretsManagerAccessRoleArnSelector, &out.SecretsManagerAccessRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecretsManagerArn != nil {
 		in, out := &in.SecretsManagerArn, &out.SecretsManagerArn
 		*out = new(string)
@@ -469,6 +499,21 @@ func (in *EndpointInitParameters) DeepCopyInto(out *EndpointInitParameters) {
 		in, out := &in.ServerName, &out.ServerName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServiceAccessRole != nil {
+		in, out := &in.ServiceAccessRole, &out.ServiceAccessRole
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccessRoleRef != nil {
+		in, out := &in.ServiceAccessRoleRef, &out.ServiceAccessRoleRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccessRoleSelector != nil {
+		in, out := &in.ServiceAccessRoleSelector, &out.ServiceAccessRoleSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -971,6 +1016,21 @@ func (in *EventSubscriptionInitParameters) DeepCopyInto(out *EventSubscriptionIn
 				**out = **in
 			}
 		}
+	}
+	if in.SnsTopicArn != nil {
+		in, out := &in.SnsTopicArn, &out.SnsTopicArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.SnsTopicArnRef != nil {
+		in, out := &in.SnsTopicArnRef, &out.SnsTopicArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SnsTopicArnSelector != nil {
+		in, out := &in.SnsTopicArnSelector, &out.SnsTopicArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceIds != nil {
 		in, out := &in.SourceIds, &out.SourceIds
@@ -2190,6 +2250,21 @@ func (in *ReplicationInstanceInitParameters) DeepCopyInto(out *ReplicationInstan
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MultiAz != nil {
 		in, out := &in.MultiAz, &out.MultiAz
 		*out = new(bool)
@@ -2210,6 +2285,21 @@ func (in *ReplicationInstanceInitParameters) DeepCopyInto(out *ReplicationInstan
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReplicationSubnetGroupID != nil {
+		in, out := &in.ReplicationSubnetGroupID, &out.ReplicationSubnetGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ReplicationSubnetGroupIDRef != nil {
+		in, out := &in.ReplicationSubnetGroupIDRef, &out.ReplicationSubnetGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ReplicationSubnetGroupIDSelector != nil {
+		in, out := &in.ReplicationSubnetGroupIDSelector, &out.ReplicationSubnetGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2224,6 +2314,29 @@ func (in *ReplicationInstanceInitParameters) DeepCopyInto(out *ReplicationInstan
 				**out = **in
 			}
 			(*out)[key] = outVal
+		}
+	}
+	if in.VPCSecurityGroupIDRefs != nil {
+		in, out := &in.VPCSecurityGroupIDRefs, &out.VPCSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.VPCSecurityGroupIDSelector != nil {
+		in, out := &in.VPCSecurityGroupIDSelector, &out.VPCSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VPCSecurityGroupIds != nil {
+		in, out := &in.VPCSecurityGroupIds, &out.VPCSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 }
@@ -2629,6 +2742,29 @@ func (in *ReplicationSubnetGroupInitParameters) DeepCopyInto(out *ReplicationSub
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -2911,10 +3047,40 @@ func (in *ReplicationTaskInitParameters) DeepCopyInto(out *ReplicationTaskInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReplicationInstanceArn != nil {
+		in, out := &in.ReplicationInstanceArn, &out.ReplicationInstanceArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ReplicationInstanceArnRef != nil {
+		in, out := &in.ReplicationInstanceArnRef, &out.ReplicationInstanceArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ReplicationInstanceArnSelector != nil {
+		in, out := &in.ReplicationInstanceArnSelector, &out.ReplicationInstanceArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ReplicationTaskSettings != nil {
 		in, out := &in.ReplicationTaskSettings, &out.ReplicationTaskSettings
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceEndpointArn != nil {
+		in, out := &in.SourceEndpointArn, &out.SourceEndpointArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceEndpointArnRef != nil {
+		in, out := &in.SourceEndpointArnRef, &out.SourceEndpointArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceEndpointArnSelector != nil {
+		in, out := &in.SourceEndpointArnSelector, &out.SourceEndpointArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StartReplicationTask != nil {
 		in, out := &in.StartReplicationTask, &out.StartReplicationTask
@@ -2941,6 +3107,21 @@ func (in *ReplicationTaskInitParameters) DeepCopyInto(out *ReplicationTaskInitPa
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TargetEndpointArn != nil {
+		in, out := &in.TargetEndpointArn, &out.TargetEndpointArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetEndpointArnRef != nil {
+		in, out := &in.TargetEndpointArnRef, &out.TargetEndpointArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetEndpointArnSelector != nil {
+		in, out := &in.TargetEndpointArnSelector, &out.TargetEndpointArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3429,6 +3610,21 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaxFileSize != nil {
 		in, out := &in.MaxFileSize, &out.MaxFileSize
 		*out = new(float64)
@@ -3463,6 +3659,36 @@ func (in *S3EndpointInitParameters) DeepCopyInto(out *S3EndpointInitParameters) 
 		in, out := &in.SSLMode, &out.SSLMode
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServerSideEncryptionKMSKeyID != nil {
+		in, out := &in.ServerSideEncryptionKMSKeyID, &out.ServerSideEncryptionKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServerSideEncryptionKMSKeyIDRef != nil {
+		in, out := &in.ServerSideEncryptionKMSKeyIDRef, &out.ServerSideEncryptionKMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServerSideEncryptionKMSKeyIDSelector != nil {
+		in, out := &in.ServerSideEncryptionKMSKeyIDSelector, &out.ServerSideEncryptionKMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccessRoleArn != nil {
+		in, out := &in.ServiceAccessRoleArn, &out.ServiceAccessRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccessRoleArnRef != nil {
+		in, out := &in.ServiceAccessRoleArnRef, &out.ServiceAccessRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccessRoleArnSelector != nil {
+		in, out := &in.ServiceAccessRoleArnSelector, &out.ServiceAccessRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

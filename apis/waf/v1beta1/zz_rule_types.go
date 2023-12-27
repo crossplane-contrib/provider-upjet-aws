@@ -86,6 +86,19 @@ type RuleParameters struct {
 
 type RulePredicatesInitParameters struct {
 
+	// A unique identifier for a predicate in the rule, such as Byte Match Set ID or IPSet ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/waf/v1beta1.IPSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
+
+	// Reference to a IPSet in waf to populate dataId.
+	// +kubebuilder:validation:Optional
+	DataIDRef *v1.Reference `json:"dataIdRef,omitempty" tf:"-"`
+
+	// Selector for a IPSet in waf to populate dataId.
+	// +kubebuilder:validation:Optional
+	DataIDSelector *v1.Selector `json:"dataIdSelector,omitempty" tf:"-"`
+
 	// Set this to false if you want to allow, block, or count requests
 	// based on the settings in the specified waf_byte_match_set, waf_ipset, aws_waf_size_constraint_set, aws_waf_sql_injection_match_set or aws_waf_xss_match_set.
 	// For example, if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow or block requests based on that IP address.

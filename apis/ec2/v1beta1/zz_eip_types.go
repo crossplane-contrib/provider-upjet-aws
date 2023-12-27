@@ -28,8 +28,32 @@ type EIPInitParameters struct {
 	// ID  of a customer-owned address pool. For more on customer owned IP addressed check out Customer-owned IP addresses guide.
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
 
+	// EC2 instance ID.
+	// +crossplane:generate:reference:type=Instance
+	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// Reference to a Instance to populate instance.
+	// +kubebuilder:validation:Optional
+	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
+
+	// Selector for a Instance to populate instance.
+	// +kubebuilder:validation:Optional
+	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
+
 	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
+
+	// Network interface ID to associate with.
+	// +crossplane:generate:reference:type=NetworkInterface
+	NetworkInterface *string `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterface.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceRef *v1.Reference `json:"networkInterfaceRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterface.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceSelector *v1.Selector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 
 	// EC2 IPv4 address pool identifier or amazon.
 	// This option is only available for VPC EIPs.

@@ -22,6 +22,45 @@ type GatewayAssociationProposalInitParameters struct {
 	// VPC prefixes (CIDRs) to advertise to the Direct Connect gateway. Defaults to the CIDR block of the VPC associated with the Virtual Gateway. To enable drift detection, must be configured.
 	// +listType=set
 	AllowedPrefixes []*string `json:"allowedPrefixes,omitempty" tf:"allowed_prefixes,omitempty"`
+
+	// The ID of the VGW or transit gateway with which to associate the Direct Connect gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AssociatedGatewayID *string `json:"associatedGatewayId,omitempty" tf:"associated_gateway_id,omitempty"`
+
+	// Reference to a VPNGateway in ec2 to populate associatedGatewayId.
+	// +kubebuilder:validation:Optional
+	AssociatedGatewayIDRef *v1.Reference `json:"associatedGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNGateway in ec2 to populate associatedGatewayId.
+	// +kubebuilder:validation:Optional
+	AssociatedGatewayIDSelector *v1.Selector `json:"associatedGatewayIdSelector,omitempty" tf:"-"`
+
+	// Direct Connect Gateway identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDRef *v1.Reference `json:"dxGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayId.
+	// +kubebuilder:validation:Optional
+	DxGatewayIDSelector *v1.Selector `json:"dxGatewayIdSelector,omitempty" tf:"-"`
+
+	// AWS Account identifier of the Direct Connect Gateway's owner.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Gateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("owner_account_id",true)
+	DxGatewayOwnerAccountID *string `json:"dxGatewayOwnerAccountId,omitempty" tf:"dx_gateway_owner_account_id,omitempty"`
+
+	// Reference to a Gateway in directconnect to populate dxGatewayOwnerAccountId.
+	// +kubebuilder:validation:Optional
+	DxGatewayOwnerAccountIDRef *v1.Reference `json:"dxGatewayOwnerAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Gateway in directconnect to populate dxGatewayOwnerAccountId.
+	// +kubebuilder:validation:Optional
+	DxGatewayOwnerAccountIDSelector *v1.Selector `json:"dxGatewayOwnerAccountIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayAssociationProposalObservation struct {

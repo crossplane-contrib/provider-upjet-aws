@@ -477,6 +477,19 @@ type S3BucketDestinationInitParameters struct {
 	// The account ID of the owner of the S3 Storage Lens metrics export bucket.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
 	// Encryption of the metrics exports in this bucket. See Encryption below for more details.
 	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 

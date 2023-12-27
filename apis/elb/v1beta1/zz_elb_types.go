@@ -93,6 +93,19 @@ type ELBInitParameters struct {
 	// The time in seconds that the connection is allowed to be idle. Default: 60
 	IdleTimeout *float64 `json:"idleTimeout,omitempty" tf:"idle_timeout,omitempty"`
 
+	// A list of instance ids to place in the ELB pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +listType=set
+	Instances []*string `json:"instances,omitempty" tf:"instances,omitempty"`
+
+	// References to Instance in ec2 to populate instances.
+	// +kubebuilder:validation:Optional
+	InstancesRefs []v1.Reference `json:"instancesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in ec2 to populate instances.
+	// +kubebuilder:validation:Optional
+	InstancesSelector *v1.Selector `json:"instancesSelector,omitempty" tf:"-"`
+
 	// If true, ELB will be an internal ELB.
 	Internal *bool `json:"internal,omitempty" tf:"internal,omitempty"`
 
@@ -108,6 +121,19 @@ type ELBInitParameters struct {
 	// part of your inbound rules for your load balancer's back-end application
 	// instances. Use this for Classic or Default VPC only.
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
+
+	// A list of subnet IDs to attach to the ELB.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +listType=set
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// References to Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetsRefs []v1.Reference `json:"subnetsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetsSelector *v1.Selector `json:"subnetsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

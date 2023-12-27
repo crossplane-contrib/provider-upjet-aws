@@ -100,6 +100,18 @@ type RootToParentGroupsParameters struct {
 
 type ThingGroupInitParameters struct {
 
+	// The name of the parent Thing Group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.ThingGroup
+	ParentGroupName *string `json:"parentGroupName,omitempty" tf:"parent_group_name,omitempty"`
+
+	// Reference to a ThingGroup in iot to populate parentGroupName.
+	// +kubebuilder:validation:Optional
+	ParentGroupNameRef *v1.Reference `json:"parentGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ThingGroup in iot to populate parentGroupName.
+	// +kubebuilder:validation:Optional
+	ParentGroupNameSelector *v1.Selector `json:"parentGroupNameSelector,omitempty" tf:"-"`
+
 	// The Thing Group properties. Defined below.
 	Properties []PropertiesInitParameters `json:"properties,omitempty" tf:"properties,omitempty"`
 

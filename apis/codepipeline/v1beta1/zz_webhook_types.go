@@ -86,6 +86,18 @@ type WebhookInitParameters struct {
 
 	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
 	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
+
+	// The name of the pipeline.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codepipeline/v1beta1.Codepipeline
+	TargetPipeline *string `json:"targetPipeline,omitempty" tf:"target_pipeline,omitempty"`
+
+	// Reference to a Codepipeline in codepipeline to populate targetPipeline.
+	// +kubebuilder:validation:Optional
+	TargetPipelineRef *v1.Reference `json:"targetPipelineRef,omitempty" tf:"-"`
+
+	// Selector for a Codepipeline in codepipeline to populate targetPipeline.
+	// +kubebuilder:validation:Optional
+	TargetPipelineSelector *v1.Selector `json:"targetPipelineSelector,omitempty" tf:"-"`
 }
 
 type WebhookObservation struct {

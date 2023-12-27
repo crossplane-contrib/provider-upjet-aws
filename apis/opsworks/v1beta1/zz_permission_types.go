@@ -27,6 +27,32 @@ type PermissionInitParameters struct {
 
 	// The users permission level. Mus be one of deny, show, deploy, manage, iam_only
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The stack to set the permissions for
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Reference to a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDRef *v1.Reference `json:"stackIdRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
+
+	// The user's IAM ARN to set permissions for
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
+
+	// Reference to a User in iam to populate userArn.
+	// +kubebuilder:validation:Optional
+	UserArnRef *v1.Reference `json:"userArnRef,omitempty" tf:"-"`
+
+	// Selector for a User in iam to populate userArn.
+	// +kubebuilder:validation:Optional
+	UserArnSelector *v1.Selector `json:"userArnSelector,omitempty" tf:"-"`
 }
 
 type PermissionObservation struct {

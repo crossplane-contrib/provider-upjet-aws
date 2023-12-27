@@ -82,6 +82,19 @@ type VPCPeeringConnectionOptionsInitParameters struct {
 	// (https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) options to be set for the VPC that requests
 	// the peering connection (a maximum of one).
 	Requester []VPCPeeringConnectionOptionsRequesterInitParameters `json:"requester,omitempty" tf:"requester,omitempty"`
+
+	// The ID of the requester VPC peering connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCPeeringConnection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
+
+	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
+	// +kubebuilder:validation:Optional
+	VPCPeeringConnectionIDRef *v1.Reference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
+	// +kubebuilder:validation:Optional
+	VPCPeeringConnectionIDSelector *v1.Selector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionOptionsObservation struct {

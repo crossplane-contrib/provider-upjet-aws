@@ -125,6 +125,19 @@ type WorkspaceInitParameters struct {
 	// The permission type of the workspace. If SERVICE_MANAGED is specified, the IAM roles and IAM policy attachments are generated automatically. If CUSTOMER_MANAGED is specified, the IAM roles and IAM policy attachments will not be created.
 	PermissionType *string `json:"permissionType,omitempty" tf:"permission_type,omitempty"`
 
+	// The IAM role ARN that the workspace assumes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The AWS CloudFormation stack set name that provisions IAM roles to be used by the workspace.
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 

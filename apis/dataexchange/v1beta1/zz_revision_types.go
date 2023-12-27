@@ -22,6 +22,19 @@ type RevisionInitParameters struct {
 	// An optional comment about the revision.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// The dataset id.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dataexchange/v1beta1.DataSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataSetID *string `json:"dataSetId,omitempty" tf:"data_set_id,omitempty"`
+
+	// Reference to a DataSet in dataexchange to populate dataSetId.
+	// +kubebuilder:validation:Optional
+	DataSetIDRef *v1.Reference `json:"dataSetIdRef,omitempty" tf:"-"`
+
+	// Selector for a DataSet in dataexchange to populate dataSetId.
+	// +kubebuilder:validation:Optional
+	DataSetIDSelector *v1.Selector `json:"dataSetIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

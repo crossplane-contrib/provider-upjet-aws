@@ -40,6 +40,24 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.AppversionLifecycle[i3].ServiceRoleRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AppversionLifecycle); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRole),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRoleRef,
+			Selector:     mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRoleSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRole")
+		}
+		mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRole = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AppversionLifecycle[i3].ServiceRoleRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -83,6 +101,38 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.Key = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.BucketRef,
+		Selector:     mg.Spec.InitProvider.BucketSelector,
+		To: reference.To{
+			List:    &v1beta11.BucketList{},
+			Managed: &v1beta11.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Bucket")
+	}
+	mg.Spec.InitProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BucketRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Key),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyRef,
+		Selector:     mg.Spec.InitProvider.KeySelector,
+		To: reference.To{
+			List:    &v1beta11.ObjectList{},
+			Managed: &v1beta11.Object{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Key")
+	}
+	mg.Spec.InitProvider.Key = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -108,6 +158,22 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.ForProvider.Application = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Application),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ApplicationRef,
+		Selector:     mg.Spec.InitProvider.ApplicationSelector,
+		To: reference.To{
+			List:    &ApplicationList{},
+			Managed: &Application{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Application")
+	}
+	mg.Spec.InitProvider.Application = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationRef = rsp.ResolvedReference
 
 	return nil
 }

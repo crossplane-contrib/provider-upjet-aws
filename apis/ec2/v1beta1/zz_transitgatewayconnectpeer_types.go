@@ -35,6 +35,19 @@ type TransitGatewayConnectPeerInitParameters struct {
 
 	// The IP address assigned to Transit Gateway, which will be used as tunnel endpoint. This address must be from associated Transit Gateway CIDR block. The address must be from the same address family as peer_address. If not set explicitly, it will be selected from associated Transit Gateway CIDR blocks
 	TransitGatewayAddress *string `json:"transitGatewayAddress,omitempty" tf:"transit_gateway_address,omitempty"`
+
+	// The Transit Gateway Connect
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayConnect
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Reference to a TransitGatewayConnect in ec2 to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGatewayConnect in ec2 to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayConnectPeerObservation struct {

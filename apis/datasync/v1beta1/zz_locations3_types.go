@@ -23,6 +23,19 @@ type LocationS3InitParameters struct {
 	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
+	// Amazon Resource Name (ARN) of the S3 Bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketArn.
+	// +kubebuilder:validation:Optional
+	S3BucketArnRef *v1.Reference `json:"s3BucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketArn.
+	// +kubebuilder:validation:Optional
+	S3BucketArnSelector *v1.Selector `json:"s3BucketArnSelector,omitempty" tf:"-"`
+
 	// Configuration block containing information for connecting to S3.
 	S3Config []S3ConfigInitParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
 
@@ -117,6 +130,19 @@ type LocationS3Parameters struct {
 }
 
 type S3ConfigInitParameters struct {
+
+	// ARN of the IAM Role used to connect to the S3 Bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate bucketAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	BucketAccessRoleArnRef *v1.Reference `json:"bucketAccessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate bucketAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	BucketAccessRoleArnSelector *v1.Selector `json:"bucketAccessRoleArnSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigObservation struct {

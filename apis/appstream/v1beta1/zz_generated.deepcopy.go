@@ -680,6 +680,21 @@ func (in *FleetInitParameters) DeepCopyInto(out *FleetInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IAMRoleArn != nil {
+		in, out := &in.IAMRoleArn, &out.IAMRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.IAMRoleArnRef != nil {
+		in, out := &in.IAMRoleArnRef, &out.IAMRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IAMRoleArnSelector != nil {
+		in, out := &in.IAMRoleArnSelector, &out.IAMRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IdleDisconnectTimeoutInSeconds != nil {
 		in, out := &in.IdleDisconnectTimeoutInSeconds, &out.IdleDisconnectTimeoutInSeconds
 		*out = new(float64)
@@ -1430,6 +1445,21 @@ func (in *ImageBuilderInitParameters) DeepCopyInto(out *ImageBuilderInitParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.IAMRoleArn != nil {
+		in, out := &in.IAMRoleArn, &out.IAMRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.IAMRoleArnRef != nil {
+		in, out := &in.IAMRoleArnRef, &out.IAMRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IAMRoleArnSelector != nil {
+		in, out := &in.IAMRoleArnSelector, &out.IAMRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ImageArn != nil {
 		in, out := &in.ImageArn, &out.ImageArn
 		*out = new(string)
@@ -1777,6 +1807,29 @@ func (in *ImageBuilderVPCConfigInitParameters) DeepCopyInto(out *ImageBuilderVPC
 	*out = *in
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {
@@ -3082,6 +3135,29 @@ func (in *VPCConfigInitParameters) DeepCopyInto(out *VPCConfigInitParameters) {
 	*out = *in
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SubnetIDRefs != nil {
+		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {

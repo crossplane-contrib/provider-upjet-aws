@@ -19,6 +19,18 @@ import (
 
 type PolicyAttributeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("policy_name",false)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// Reference to a Policy in elb to populate value.
+	// +kubebuilder:validation:Optional
+	ValueRef *v1.Reference `json:"valueRef,omitempty" tf:"-"`
+
+	// Selector for a Policy in elb to populate value.
+	// +kubebuilder:validation:Optional
+	ValueSelector *v1.Selector `json:"valueSelector,omitempty" tf:"-"`
 }
 
 type PolicyAttributeObservation struct {
@@ -47,6 +59,18 @@ type PolicyAttributeParameters struct {
 }
 
 type PolicyInitParameters struct {
+
+	// The load balancer on which the policy is defined.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// Reference to a ELB in elb to populate loadBalancerName.
+	// +kubebuilder:validation:Optional
+	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate loadBalancerName.
+	// +kubebuilder:validation:Optional
+	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
 
 	// Policy attribute to apply to the policy.
 	PolicyAttribute []PolicyAttributeInitParameters `json:"policyAttribute,omitempty" tf:"policy_attribute,omitempty"`

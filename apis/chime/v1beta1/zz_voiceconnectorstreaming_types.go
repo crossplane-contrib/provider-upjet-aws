@@ -60,6 +60,19 @@ type VoiceConnectorStreamingInitParameters struct {
 	// The streaming notification targets. Valid Values: EventBridge | SNS | SQS
 	// +listType=set
 	StreamingNotificationTargets []*string `json:"streamingNotificationTargets,omitempty" tf:"streaming_notification_targets,omitempty"`
+
+	// The Amazon Chime Voice Connector ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
+
+	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDRef *v1.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+
+	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 type VoiceConnectorStreamingObservation struct {

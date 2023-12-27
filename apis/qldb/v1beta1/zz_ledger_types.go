@@ -22,6 +22,18 @@ type LedgerInitParameters struct {
 	// The deletion protection for the QLDB Ledger instance. By default it is true.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
+	// The key in AWS Key Management Service (AWS KMS) to use for encryption of data at rest in the ledger. For more information, see the AWS documentation. Valid values are "AWS_OWNED_KMS_KEY" to use an AWS KMS key that is owned and managed by AWS on your behalf, or the ARN of a valid symmetric customer managed KMS key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
+
 	// The permissions mode for the QLDB ledger instance. Specify either ALLOW_ALL or STANDARD.
 	PermissionsMode *string `json:"permissionsMode,omitempty" tf:"permissions_mode,omitempty"`
 

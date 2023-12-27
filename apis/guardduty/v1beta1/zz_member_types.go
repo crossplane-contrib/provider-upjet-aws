@@ -19,6 +19,32 @@ import (
 
 type MemberInitParameters struct {
 
+	// AWS account ID for member account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("account_id",true)
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Reference to a Detector in guardduty to populate accountId.
+	// +kubebuilder:validation:Optional
+	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Detector in guardduty to populate accountId.
+	// +kubebuilder:validation:Optional
+	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
+
+	// The detector ID of the GuardDuty account where you want to create member accounts.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/guardduty/v1beta1.Detector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DetectorID *string `json:"detectorId,omitempty" tf:"detector_id,omitempty"`
+
+	// Reference to a Detector in guardduty to populate detectorId.
+	// +kubebuilder:validation:Optional
+	DetectorIDRef *v1.Reference `json:"detectorIdRef,omitempty" tf:"-"`
+
+	// Selector for a Detector in guardduty to populate detectorId.
+	// +kubebuilder:validation:Optional
+	DetectorIDSelector *v1.Selector `json:"detectorIdSelector,omitempty" tf:"-"`
+
 	// Boolean whether an email notification is sent to the accounts. Defaults to false.
 	DisableEmailNotification *bool `json:"disableEmailNotification,omitempty" tf:"disable_email_notification,omitempty"`
 

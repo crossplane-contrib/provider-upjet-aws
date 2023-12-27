@@ -19,6 +19,19 @@ import (
 
 type EntryInitParameters struct {
 
+	// CIDR block of this entry.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIPv4CidrBlockAssociation
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// Reference to a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
+	// +kubebuilder:validation:Optional
+	CidrRef *v1.Reference `json:"cidrRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIPv4CidrBlockAssociation in ec2 to populate cidr.
+	// +kubebuilder:validation:Optional
+	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
+
 	// Description of this entry. Due to API limitations, updating only the description of an existing entry requires temporarily removing and re-adding the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }

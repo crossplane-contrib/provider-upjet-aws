@@ -23,6 +23,21 @@ func (in *DNSConfigInitParameters) DeepCopyInto(out *DNSConfigInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.NamespaceID != nil {
+		in, out := &in.NamespaceID, &out.NamespaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NamespaceIDRef != nil {
+		in, out := &in.NamespaceIDRef, &out.NamespaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NamespaceIDSelector != nil {
+		in, out := &in.NamespaceIDSelector, &out.NamespaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoutingPolicy != nil {
 		in, out := &in.RoutingPolicy, &out.RoutingPolicy
 		*out = new(string)
@@ -647,6 +662,21 @@ func (in *PrivateDNSNamespaceInitParameters) DeepCopyInto(out *PrivateDNSNamespa
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.VPC != nil {
+		in, out := &in.VPC, &out.VPC
+		*out = new(string)
+		**out = **in
+	}
+	if in.VPCRef != nil {
+		in, out := &in.VPCRef, &out.VPCRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VPCSelector != nil {
+		in, out := &in.VPCSelector, &out.VPCSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

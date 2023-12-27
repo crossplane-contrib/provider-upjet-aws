@@ -35,6 +35,18 @@ type IdentityProviderInitParameters struct {
 
 	// The provider type.  See AWS API for valid values
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// The user pool id
+	// +crossplane:generate:reference:type=UserPool
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type IdentityProviderObservation struct {

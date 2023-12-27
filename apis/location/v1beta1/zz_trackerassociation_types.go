@@ -18,6 +18,31 @@ import (
 )
 
 type TrackerAssociationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.GeofenceCollection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
+	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
+
+	// Reference to a GeofenceCollection in location to populate consumerArn.
+	// +kubebuilder:validation:Optional
+	ConsumerArnRef *v1.Reference `json:"consumerArnRef,omitempty" tf:"-"`
+
+	// Selector for a GeofenceCollection in location to populate consumerArn.
+	// +kubebuilder:validation:Optional
+	ConsumerArnSelector *v1.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
+
+	// The name of the tracker resource to be associated with a geofence collection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.Tracker
+	TrackerName *string `json:"trackerName,omitempty" tf:"tracker_name,omitempty"`
+
+	// Reference to a Tracker in location to populate trackerName.
+	// +kubebuilder:validation:Optional
+	TrackerNameRef *v1.Reference `json:"trackerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Tracker in location to populate trackerName.
+	// +kubebuilder:validation:Optional
+	TrackerNameSelector *v1.Selector `json:"trackerNameSelector,omitempty" tf:"-"`
 }
 
 type TrackerAssociationObservation struct {

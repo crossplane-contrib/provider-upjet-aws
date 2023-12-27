@@ -19,6 +19,18 @@ import (
 
 type GroupTagInitParameters struct {
 
+	// Name of the Autoscaling Group to apply the tag to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
+
+	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
+	// +kubebuilder:validation:Optional
+	AutoscalingGroupNameRef *v1.Reference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
+	// +kubebuilder:validation:Optional
+	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
+
 	// Tag to create. The tag block is documented below.
 	Tag []GroupTagTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }

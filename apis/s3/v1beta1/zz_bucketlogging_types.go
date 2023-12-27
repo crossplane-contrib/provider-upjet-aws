@@ -19,8 +19,34 @@ import (
 
 type BucketLoggingInitParameters struct {
 
+	// Name of the bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Account ID of the expected bucket owner.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
+
+	// Name of the bucket where you want Amazon S3 to store server access logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate targetBucket.
+	// +kubebuilder:validation:Optional
+	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate targetBucket.
+	// +kubebuilder:validation:Optional
+	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
 	// Set of configuration blocks with information for granting permissions. See below.
 	TargetGrant []TargetGrantInitParameters `json:"targetGrant,omitempty" tf:"target_grant,omitempty"`

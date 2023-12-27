@@ -19,9 +19,38 @@ import (
 
 type EIPAssociationInitParameters struct {
 
+	// The allocation ID. This is required for EC2-VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// Reference to a EIP in ec2 to populate allocationId.
+	// +kubebuilder:validation:Optional
+	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
+
+	// Selector for a EIP in ec2 to populate allocationId.
+	// +kubebuilder:validation:Optional
+	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
+
 	// Whether to allow an Elastic IP to
 	// be re-associated. Defaults to true in VPC.
 	AllowReassociation *bool `json:"allowReassociation,omitempty" tf:"allow_reassociation,omitempty"`
+
+	// The ID of the instance. This is required for
+	// EC2-Classic. For EC2-VPC, you can specify either the instance ID or the
+	// network interface ID, but not both. The operation fails if you specify an
+	// instance ID unless exactly one network interface is attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in ec2 to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in ec2 to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the network interface. If the
 	// instance has more than one network interface, you must specify a network

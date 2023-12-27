@@ -19,6 +19,18 @@ import (
 
 type ListenerPolicyInitParameters struct {
 
+	// The load balancer to attach the policy to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// Reference to a ELB in elb to populate loadBalancerName.
+	// +kubebuilder:validation:Optional
+	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate loadBalancerName.
+	// +kubebuilder:validation:Optional
+	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+
 	// The load balancer listener port to apply the policy to.
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 

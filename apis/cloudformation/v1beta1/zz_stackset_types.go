@@ -117,6 +117,19 @@ type OperationPreferencesParameters struct {
 
 type StackSetInitParameters struct {
 
+	// Amazon Resource Number (ARN) of the IAM Role in the administrator account. This must be defined when using the SELF_MANAGED permission model.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	AdministrationRoleArn *string `json:"administrationRoleArn,omitempty" tf:"administration_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate administrationRoleArn.
+	// +kubebuilder:validation:Optional
+	AdministrationRoleArnRef *v1.Reference `json:"administrationRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate administrationRoleArn.
+	// +kubebuilder:validation:Optional
+	AdministrationRoleArnSelector *v1.Selector `json:"administrationRoleArnSelector,omitempty" tf:"-"`
+
 	// Configuration block containing the auto-deployment model for your StackSet. This can only be defined when using the SERVICE_MANAGED permission model.
 	AutoDeployment []AutoDeploymentInitParameters `json:"autoDeployment,omitempty" tf:"auto_deployment,omitempty"`
 

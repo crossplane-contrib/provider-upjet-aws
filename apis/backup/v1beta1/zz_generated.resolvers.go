@@ -41,6 +41,24 @@ func (mg *Plan) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.Rule[i3].TargetVaultNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].TargetVaultName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Rule[i3].TargetVaultNameRef,
+			Selector:     mg.Spec.InitProvider.Rule[i3].TargetVaultNameSelector,
+			To: reference.To{
+				List:    &VaultList{},
+				Managed: &Vault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Rule[i3].TargetVaultName")
+		}
+		mg.Spec.InitProvider.Rule[i3].TargetVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Rule[i3].TargetVaultNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -84,6 +102,38 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.PlanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PlanIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
+		Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRoleArn")
+	}
+	mg.Spec.InitProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PlanID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PlanIDRef,
+		Selector:     mg.Spec.InitProvider.PlanIDSelector,
+		To: reference.To{
+			List:    &PlanList{},
+			Managed: &Plan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PlanID")
+	}
+	mg.Spec.InitProvider.PlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PlanIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -110,6 +160,22 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -135,6 +201,22 @@ func (mg *VaultLockConfiguration) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BackupVaultNameRef,
+		Selector:     mg.Spec.InitProvider.BackupVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackupVaultName")
+	}
+	mg.Spec.InitProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupVaultNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -178,6 +260,38 @@ func (mg *VaultNotifications) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SnsTopicArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BackupVaultNameRef,
+		Selector:     mg.Spec.InitProvider.BackupVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackupVaultName")
+	}
+	mg.Spec.InitProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnsTopicArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.SnsTopicArnRef,
+		Selector:     mg.Spec.InitProvider.SnsTopicArnSelector,
+		To: reference.To{
+			List:    &v1beta12.TopicList{},
+			Managed: &v1beta12.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SnsTopicArn")
+	}
+	mg.Spec.InitProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SnsTopicArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -203,6 +317,22 @@ func (mg *VaultPolicy) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BackupVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BackupVaultNameRef,
+		Selector:     mg.Spec.InitProvider.BackupVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BackupVaultName")
+	}
+	mg.Spec.InitProvider.BackupVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BackupVaultNameRef = rsp.ResolvedReference
 
 	return nil
 }

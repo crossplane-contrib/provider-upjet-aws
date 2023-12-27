@@ -19,12 +19,40 @@ import (
 
 type DirectoryInitParameters struct {
 
+	// The directory identifier for registration in WorkSpaces service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
+	// Reference to a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+
 	// The identifiers of the IP access control groups associated with the directory.
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// service capabilities. Defined below.
 	SelfServicePermissions []SelfServicePermissionsInitParameters `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// The identifiers of the subnets where the directory resides.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -305,6 +333,19 @@ type WorkspaceAccessPropertiesParameters struct {
 }
 
 type WorkspaceCreationPropertiesInitParameters struct {
+
+	// –  The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup in ec2 to populate customSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDRef *v1.Reference `json:"customSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in ec2 to populate customSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDSelector *v1.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// –  The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
 	DefaultOu *string `json:"defaultOu,omitempty" tf:"default_ou,omitempty"`

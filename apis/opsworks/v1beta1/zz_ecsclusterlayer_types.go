@@ -222,6 +222,21 @@ type EcsClusterLayerInitParameters struct {
 	// Custom JSON attributes to apply to the layer.
 	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate customSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDRefs []v1.Reference `json:"customSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate customSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDSelector *v1.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// Ids for a set of security groups to apply to the layer's instances.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=CustomSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=CustomSecurityGroupIDSelector
+	// +listType=set
+	CustomSecurityGroupIds []*string `json:"customSecurityGroupIds,omitempty" tf:"custom_security_group_ids,omitempty"`
+
 	CustomSetupRecipes []*string `json:"customSetupRecipes,omitempty" tf:"custom_setup_recipes,omitempty"`
 
 	CustomShutdownRecipes []*string `json:"customShutdownRecipes,omitempty" tf:"custom_shutdown_recipes,omitempty"`
@@ -233,6 +248,19 @@ type EcsClusterLayerInitParameters struct {
 
 	// ebs_volume blocks, as described below, will each create an EBS volume and connect it to the layer's instances.
 	EBSVolume []EcsClusterLayerEBSVolumeInitParameters `json:"ebsVolume,omitempty" tf:"ebs_volume,omitempty"`
+
+	// The ECS Cluster ARN of the layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	EcsClusterArn *string `json:"ecsClusterArn,omitempty" tf:"ecs_cluster_arn,omitempty"`
+
+	// Reference to a Cluster in ecs to populate ecsClusterArn.
+	// +kubebuilder:validation:Optional
+	EcsClusterArnRef *v1.Reference `json:"ecsClusterArnRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in ecs to populate ecsClusterArn.
+	// +kubebuilder:validation:Optional
+	EcsClusterArnSelector *v1.Selector `json:"ecsClusterArnSelector,omitempty" tf:"-"`
 
 	// Name of an Elastic Load Balancer to attach to this layer
 	ElasticLoadBalancer *string `json:"elasticLoadBalancer,omitempty" tf:"elastic_load_balancer,omitempty"`
@@ -247,6 +275,19 @@ type EcsClusterLayerInitParameters struct {
 
 	// A human-readable name for the layer.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the stack the layer will belong to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Reference to a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDRef *v1.Reference `json:"stackIdRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
 
 	// Names of a set of system packages to install on the layer's instances.
 	// +listType=set

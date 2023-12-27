@@ -25,6 +25,18 @@ type PermissionInitParameters struct {
 	// The Event Source Token to validate.  Used with Alexa Skills.
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
+	// Name of the Lambda function whose resource policy you are updating
+	// +crossplane:generate:reference:type=Function
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Reference to a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+
 	// Lambda Function URLs authentication type. Valid values are: AWS_IAM or NONE. Only supported for lambda:InvokeFunctionUrl action.
 	FunctionURLAuthType *string `json:"functionUrlAuthType,omitempty" tf:"function_url_auth_type,omitempty"`
 
@@ -33,6 +45,18 @@ type PermissionInitParameters struct {
 
 	// The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
+
+	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
+	// +crossplane:generate:reference:type=Alias
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// Reference to a Alias to populate qualifier.
+	// +kubebuilder:validation:Optional
+	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
+
+	// Selector for a Alias to populate qualifier.
+	// +kubebuilder:validation:Optional
+	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
 	// This parameter is used when allowing cross-account access, or for S3 and SES. The AWS account ID (without a hyphen) of the source owner.
 	SourceAccount *string `json:"sourceAccount,omitempty" tf:"source_account,omitempty"`

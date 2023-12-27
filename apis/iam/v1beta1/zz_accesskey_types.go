@@ -24,6 +24,18 @@ type AccessKeyInitParameters struct {
 
 	// Access key status to apply. Defaults to Active. Valid values are Active and Inactive.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// IAM user to associate with this access key.
+	// +crossplane:generate:reference:type=User
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
+
+	// Reference to a User to populate user.
+	// +kubebuilder:validation:Optional
+	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+
+	// Selector for a User to populate user.
+	// +kubebuilder:validation:Optional
+	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type AccessKeyObservation struct {

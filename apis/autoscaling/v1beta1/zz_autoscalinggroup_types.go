@@ -135,6 +135,18 @@ type AutoscalingGroupInitParameters struct {
 	// when this Auto Scaling Group is updated. Defined below.
 	InstanceRefresh []InstanceRefreshInitParameters `json:"instanceRefresh,omitempty" tf:"instance_refresh,omitempty"`
 
+	// Name of the launch configuration to use.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.LaunchConfiguration
+	LaunchConfiguration *string `json:"launchConfiguration,omitempty" tf:"launch_configuration,omitempty"`
+
+	// Reference to a LaunchConfiguration in autoscaling to populate launchConfiguration.
+	// +kubebuilder:validation:Optional
+	LaunchConfigurationRef *v1.Reference `json:"launchConfigurationRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchConfiguration in autoscaling to populate launchConfiguration.
+	// +kubebuilder:validation:Optional
+	LaunchConfigurationSelector *v1.Selector `json:"launchConfigurationSelector,omitempty" tf:"-"`
+
 	// Nested argument with Launch template specification to use to launch instances. See Launch Template below for more details.
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
@@ -158,9 +170,35 @@ type AutoscalingGroupInitParameters struct {
 	// Configuration block containing settings to define launch targets for Auto Scaling groups. See Mixed Instances Policy below for more details.
 	MixedInstancesPolicy []MixedInstancesPolicyInitParameters `json:"mixedInstancesPolicy,omitempty" tf:"mixed_instances_policy,omitempty"`
 
+	// Name of the placement group into which you'll launch your instances, if any.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.PlacementGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
+
+	// Reference to a PlacementGroup in ec2 to populate placementGroup.
+	// +kubebuilder:validation:Optional
+	PlacementGroupRef *v1.Reference `json:"placementGroupRef,omitempty" tf:"-"`
+
+	// Selector for a PlacementGroup in ec2 to populate placementGroup.
+	// +kubebuilder:validation:Optional
+	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
+
 	// in protection
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ProtectFromScaleIn *bool `json:"protectFromScaleIn,omitempty" tf:"protect_from_scale_in,omitempty"`
+
+	// linked role that the ASG will use to call other AWS services
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceLinkedRoleArn *string `json:"serviceLinkedRoleArn,omitempty" tf:"service_linked_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceLinkedRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceLinkedRoleArnRef *v1.Reference `json:"serviceLinkedRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceLinkedRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceLinkedRoleArnSelector *v1.Selector `json:"serviceLinkedRoleArnSelector,omitempty" tf:"-"`
 
 	// List of processes to suspend for the Auto Scaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer, InstanceRefresh.
 	// Note that if you suspend either the Launch or Terminate process types, it can prevent your Auto Scaling Group from functioning properly.
@@ -175,6 +213,19 @@ type AutoscalingGroupInitParameters struct {
 
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
+
+	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +listType=set
+	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
+
+	// References to Subnet in ec2 to populate vpcZoneIdentifier.
+	// +kubebuilder:validation:Optional
+	VPCZoneIdentifierRefs []v1.Reference `json:"vpcZoneIdentifierRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate vpcZoneIdentifier.
+	// +kubebuilder:validation:Optional
+	VPCZoneIdentifierSelector *v1.Selector `json:"vpcZoneIdentifierSelector,omitempty" tf:"-"`
 
 	// (See also Waiting
 	// for Capacity below.
@@ -1032,6 +1083,19 @@ type InstancesDistributionParameters struct {
 
 type LaunchTemplateInitParameters struct {
 
+	// ID of the launch template. Conflicts with name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
 	// Name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -1077,6 +1141,19 @@ type LaunchTemplateParameters struct {
 }
 
 type LaunchTemplateSpecificationInitParameters struct {
+
+	// ID of the launch template. Conflicts with launch_template_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with launch_template_id.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`
@@ -1312,6 +1389,19 @@ type OverrideInitParameters struct {
 }
 
 type OverrideLaunchTemplateSpecificationInitParameters struct {
+
+	// ID of the launch template. Conflicts with launch_template_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LaunchTemplateID *string `json:"launchTemplateId,omitempty" tf:"launch_template_id,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate launchTemplateId.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDRef *v1.Reference `json:"launchTemplateIdRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate launchTemplateId.
+	// +kubebuilder:validation:Optional
+	LaunchTemplateIDSelector *v1.Selector `json:"launchTemplateIdSelector,omitempty" tf:"-"`
 
 	// Name of the launch template. Conflicts with launch_template_id.
 	LaunchTemplateName *string `json:"launchTemplateName,omitempty" tf:"launch_template_name,omitempty"`

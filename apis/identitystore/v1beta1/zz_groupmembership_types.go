@@ -18,6 +18,32 @@ import (
 )
 
 type GroupMembershipInitParameters struct {
+
+	// The identifier for a group in the Identity Store.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("group_id",true)
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// Reference to a Group in identitystore to populate groupId.
+	// +kubebuilder:validation:Optional
+	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
+
+	// Selector for a Group in identitystore to populate groupId.
+	// +kubebuilder:validation:Optional
+	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
+
+	// The identifier for a user in the Identity Store.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_id",true)
+	MemberID *string `json:"memberId,omitempty" tf:"member_id,omitempty"`
+
+	// Reference to a User in identitystore to populate memberId.
+	// +kubebuilder:validation:Optional
+	MemberIDRef *v1.Reference `json:"memberIdRef,omitempty" tf:"-"`
+
+	// Selector for a User in identitystore to populate memberId.
+	// +kubebuilder:validation:Optional
+	MemberIDSelector *v1.Selector `json:"memberIdSelector,omitempty" tf:"-"`
 }
 
 type GroupMembershipObservation struct {

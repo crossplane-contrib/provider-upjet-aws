@@ -29,6 +29,18 @@ type ClusterInstanceInitParameters struct {
 	// The EC2 Availability Zone that the neptune instance is created in.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
+	// The identifier of the aws_neptune_cluster in which to launch this instance.
+	// +crossplane:generate:reference:type=Cluster
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// Reference to a Cluster to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -37,6 +49,30 @@ type ClusterInstanceInitParameters struct {
 
 	// The instance class to use.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
+
+	// The name of the neptune parameter group to associate with this instance.
+	// +crossplane:generate:reference:type=ParameterGroup
+	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup to populate neptuneParameterGroupName.
+	// +kubebuilder:validation:Optional
+	NeptuneParameterGroupNameRef *v1.Reference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup to populate neptuneParameterGroupName.
+	// +kubebuilder:validation:Optional
+	NeptuneParameterGroupNameSelector *v1.Selector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
+
+	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
+	// +crossplane:generate:reference:type=SubnetGroup
+	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
+
+	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
+	// +kubebuilder:validation:Optional
+	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
+	// +kubebuilder:validation:Optional
+	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// The port on which the DB accepts connections. Defaults to 8182.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`

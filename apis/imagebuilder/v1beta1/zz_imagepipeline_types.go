@@ -60,8 +60,34 @@ type ImagePipelineInitParameters struct {
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
+	// Amazon Resource Name (ARN) of the image recipe.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.ImageRecipe
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
+
+	// Reference to a ImageRecipe in imagebuilder to populate imageRecipeArn.
+	// +kubebuilder:validation:Optional
+	ImageRecipeArnRef *v1.Reference `json:"imageRecipeArnRef,omitempty" tf:"-"`
+
+	// Selector for a ImageRecipe in imagebuilder to populate imageRecipeArn.
+	// +kubebuilder:validation:Optional
+	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
+
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.InfrastructureConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
+
+	// Reference to a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
+	// +kubebuilder:validation:Optional
+	InfrastructureConfigurationArnRef *v1.Reference `json:"infrastructureConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
+	// +kubebuilder:validation:Optional
+	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
 
 	// Name of the image pipeline.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

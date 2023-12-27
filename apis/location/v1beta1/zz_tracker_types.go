@@ -22,6 +22,18 @@ type TrackerInitParameters struct {
 	// The optional description for the tracker resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// A key identifier for an AWS KMS customer managed key assigned to the Amazon Location resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// The position filtering method of the tracker resource. Valid values: TimeBased, DistanceBased, AccuracyBased. Default: TimeBased.
 	PositionFiltering *string `json:"positionFiltering,omitempty" tf:"position_filtering,omitempty"`
 

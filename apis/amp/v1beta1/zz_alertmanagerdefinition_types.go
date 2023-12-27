@@ -21,6 +21,19 @@ type AlertManagerDefinitionInitParameters struct {
 
 	// the alert manager definition that you want to be applied. See more in AWS Docs.
 	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// ID of the prometheus workspace the alert manager definition should be linked to
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amp/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in amp to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in amp to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type AlertManagerDefinitionObservation struct {

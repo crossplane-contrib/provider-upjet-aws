@@ -29,6 +29,19 @@ type VolumeAttachmentInitParameters struct {
 	// Detaching an Amazon EBS Volume from an Instance for more information.
 	ForceDetach *bool `json:"forceDetach,omitempty" tf:"force_detach,omitempty"`
 
+	// ID of the Instance to attach to
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in ec2 to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in ec2 to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
 	// This is
 	// useful when destroying an instance which has volumes created by some other
 	// means attached.
@@ -37,6 +50,19 @@ type VolumeAttachmentInitParameters struct {
 	// Set this to true to ensure that the target instance is stopped
 	// before trying to detach the volume. Stops the instance, if it is not already stopped.
 	StopInstanceBeforeDetaching *bool `json:"stopInstanceBeforeDetaching,omitempty" tf:"stop_instance_before_detaching,omitempty"`
+
+	// ID of the Volume to be attached
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSVolume
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VolumeID *string `json:"volumeId,omitempty" tf:"volume_id,omitempty"`
+
+	// Reference to a EBSVolume in ec2 to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDRef *v1.Reference `json:"volumeIdRef,omitempty" tf:"-"`
+
+	// Selector for a EBSVolume in ec2 to populate volumeId.
+	// +kubebuilder:validation:Optional
+	VolumeIDSelector *v1.Selector `json:"volumeIdSelector,omitempty" tf:"-"`
 }
 
 type VolumeAttachmentObservation struct {

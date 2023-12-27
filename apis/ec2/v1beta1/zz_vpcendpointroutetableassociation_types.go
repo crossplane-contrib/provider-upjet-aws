@@ -18,6 +18,32 @@ import (
 )
 
 type VPCEndpointRouteTableAssociationInitParameters struct {
+
+	// Identifier of the EC2 Route Table to be associated with the VPC Endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// Reference to a RouteTable in ec2 to populate routeTableId.
+	// +kubebuilder:validation:Optional
+	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a RouteTable in ec2 to populate routeTableId.
+	// +kubebuilder:validation:Optional
+	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
+
+	// Identifier of the VPC Endpoint with which the EC2 Route Table will be associated.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
+
+	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointRouteTableAssociationObservation struct {

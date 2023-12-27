@@ -19,6 +19,18 @@ import (
 
 type CognitoIdentityProvidersInitParameters struct {
 
+	// The client ID for the Amazon Cognito Identity User Pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
+	// +kubebuilder:validation:Optional
+	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
+
 	// The provider name for an Amazon Cognito Identity User Pool.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
@@ -83,6 +95,19 @@ type PoolInitParameters struct {
 	// Set of OpendID Connect provider ARNs.
 	// +listType=set
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
+
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.SAMLProvider
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
+
+	// References to SAMLProvider in iam to populate samlProviderArns.
+	// +kubebuilder:validation:Optional
+	SAMLProviderArnsRefs []v1.Reference `json:"samlProviderArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SAMLProvider in iam to populate samlProviderArns.
+	// +kubebuilder:validation:Optional
+	SAMLProviderArnsSelector *v1.Selector `json:"samlProviderArnsSelector,omitempty" tf:"-"`
 
 	// Key-Value pairs mapping provider names to provider app IDs.
 	// +mapType=granular

@@ -60,6 +60,18 @@ type DeviceInitParameters struct {
 
 	// The device to register with SageMaker Edge Manager. See Device details below.
 	Device []DeviceDeviceInitParameters `json:"device,omitempty" tf:"device,omitempty"`
+
+	// The name of the Device Fleet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.DeviceFleet
+	DeviceFleetName *string `json:"deviceFleetName,omitempty" tf:"device_fleet_name,omitempty"`
+
+	// Reference to a DeviceFleet in sagemaker to populate deviceFleetName.
+	// +kubebuilder:validation:Optional
+	DeviceFleetNameRef *v1.Reference `json:"deviceFleetNameRef,omitempty" tf:"-"`
+
+	// Selector for a DeviceFleet in sagemaker to populate deviceFleetName.
+	// +kubebuilder:validation:Optional
+	DeviceFleetNameSelector *v1.Selector `json:"deviceFleetNameSelector,omitempty" tf:"-"`
 }
 
 type DeviceObservation struct {

@@ -100,6 +100,19 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 
 type BucketCorsConfigurationInitParameters struct {
 
+	// Name of the bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Set of origins and methods (cross-origin access that you want to allow). See below. You can configure up to 100 rules.
 	CorsRule []BucketCorsConfigurationCorsRuleInitParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 

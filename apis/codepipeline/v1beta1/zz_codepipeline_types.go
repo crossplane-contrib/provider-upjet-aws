@@ -151,6 +151,18 @@ type ArtifactStoreInitParameters struct {
 	// The encryption key block AWS CodePipeline uses to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If you don't specify a key, AWS CodePipeline uses the default key for Amazon Simple Storage Service (Amazon S3). An encryption_key block is documented below.
 	EncryptionKey []EncryptionKeyInitParameters `json:"encryptionKey,omitempty" tf:"encryption_key,omitempty"`
 
+	// The location where AWS CodePipeline stores artifacts for a pipeline; currently only S3 is supported.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Bucket in s3 to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+
 	// The type of the artifact store, such as Amazon S3
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -202,6 +214,19 @@ type CodepipelineInitParameters struct {
 
 	// One or more artifact_store blocks. Artifact stores are documented below.
 	ArtifactStore []ArtifactStoreInitParameters `json:"artifactStore,omitempty" tf:"artifact_store,omitempty"`
+
+	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// (Minimum of at least two stage blocks is required) A stage block. Stages are documented below.
 	Stage []StageInitParameters `json:"stage,omitempty" tf:"stage,omitempty"`

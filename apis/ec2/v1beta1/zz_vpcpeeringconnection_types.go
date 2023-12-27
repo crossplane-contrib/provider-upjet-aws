@@ -76,9 +76,33 @@ type VPCPeeringConnectionInitParameters_2 struct {
 	// and use the aws_vpc_peering_connection_accepter to manage the accepter side.
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
+	// The ID of the VPC with which you are creating the VPC Peering Connection.
+	// +crossplane:generate:reference:type=VPC
+	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
+
+	// Reference to a VPC to populate peerVpcId.
+	// +kubebuilder:validation:Optional
+	PeerVPCIDRef *v1.Reference `json:"peerVpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC to populate peerVpcId.
+	// +kubebuilder:validation:Optional
+	PeerVPCIDSelector *v1.Selector `json:"peerVpcIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the requester VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionObservation_2 struct {
