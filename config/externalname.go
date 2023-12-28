@@ -15,9 +15,20 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
+// TerraformPluginFrameworkExternalNameConfigs contains all external
+// name configurations belonging to Terraform Plugin Framework
+// resources to be reconciled under the no-fork architecture for this
+// provider.
+var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+}
+
 // NoForkExternalNameConfigs contains all external name configurations
-// belonging to Terraform resources to be reconciled under the no-fork
-// architecture for this provider.
+// belonging to Terraform Plugin SDKv2 resources to be reconciled
+// under the no-fork architecture for this provider.
 var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// ACM
 	// Imported using ARN that has a random substring:
@@ -3011,19 +3022,22 @@ func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	return e
 }
 
-// ResourceConfigurator applies all external name configs
-// listed in the table NoForkExternalNameConfigs and
-// CLIReconciledExternalNameConfigs and sets the version
-// of those resources to v1beta1. For those resource in
-// NoForkExternalNameConfigs, it also sets
-// config.Resource.UseNoForkClient to `true`.
+// ResourceConfigurator applies all external name configs listed in
+// the table NoForkExternalNameConfigs,
+// CLIReconciledExternalNameConfigs, and
+// TerraformPluginFrameworkExternalNameConfigs and sets the version of
+// those resources to v1beta1.
 func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		// if configured both for the no-fork and CLI based architectures,
-		// no-fork configuration prevails
-		e, configured := NoForkExternalNameConfigs[r.Name]
+		// If an external name is configured for multiple architectures,
+		// Terraform Plugin Framework takes precedence over Terraform
+		// Plugin SDKv2, which takes precedence over CLI architecture.
+		e, configured := TerraformPluginFrameworkExternalNameConfigs[r.Name]
 		if !configured {
-			e, configured = CLIReconciledExternalNameConfigs[r.Name]
+			e, configured = NoForkExternalNameConfigs[r.Name]
+			if !configured {
+				e, configured = CLIReconciledExternalNameConfigs[r.Name]
+			}
 		}
 		if !configured {
 			return
