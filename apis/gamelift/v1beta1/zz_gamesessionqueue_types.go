@@ -25,6 +25,19 @@ type GameSessionQueueInitParameters struct {
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
+	// An SNS topic ARN that is set up to receive game session placement notifications.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	NotificationTarget *string `json:"notificationTarget,omitempty" tf:"notification_target,omitempty"`
+
+	// Reference to a Topic in sns to populate notificationTarget.
+	// +kubebuilder:validation:Optional
+	NotificationTargetRef *v1.Reference `json:"notificationTargetRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate notificationTarget.
+	// +kubebuilder:validation:Optional
+	NotificationTargetSelector *v1.Selector `json:"notificationTargetSelector,omitempty" tf:"-"`
+
 	// One or more policies used to choose fleet based on player latency. See below.
 	PlayerLatencyPolicy []PlayerLatencyPolicyInitParameters `json:"playerLatencyPolicy,omitempty" tf:"player_latency_policy,omitempty"`
 

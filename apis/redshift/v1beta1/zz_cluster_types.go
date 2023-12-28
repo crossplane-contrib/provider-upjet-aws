@@ -64,6 +64,19 @@ type ClusterInitParameters struct {
 	// If you do not provide a name, Amazon Redshift will create a default database called dev.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate defaultIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArnRef *v1.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate defaultIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArnSelector *v1.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
+
 	// The Elastic IP (EIP) address for the cluster.
 	ElasticIP *string `json:"elasticIp,omitempty" tf:"elastic_ip,omitempty"`
 
@@ -78,6 +91,33 @@ type ClusterInitParameters struct {
 
 	// The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, skip_final_snapshot must be false.
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
+
+	// References to Role in iam to populate iamRoles.
+	// +kubebuilder:validation:Optional
+	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate iamRoles.
+	// +kubebuilder:validation:Optional
+	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+
+	// A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
+	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
+	// +listType=set
+	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
+
+	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// Logging, documented below.
 	Logging []LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
@@ -128,6 +168,21 @@ type ClusterInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
+	// +listType=set
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
 type ClusterNodesInitParameters struct {

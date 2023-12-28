@@ -36,6 +36,22 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CertificateAuthorityArnRef,
+		Selector:     mg.Spec.InitProvider.CertificateAuthorityArnSelector,
+		To: reference.To{
+			List:    &CertificateAuthorityList{},
+			Managed: &CertificateAuthority{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateAuthorityArn")
+	}
+	mg.Spec.InitProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -61,6 +77,22 @@ func (mg *CertificateAuthorityCertificate) ResolveReferences(ctx context.Context
 	}
 	mg.Spec.ForProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CertificateAuthorityArnRef,
+		Selector:     mg.Spec.InitProvider.CertificateAuthorityArnSelector,
+		To: reference.To{
+			List:    &CertificateAuthorityList{},
+			Managed: &CertificateAuthority{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateAuthorityArn")
+	}
+	mg.Spec.InitProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -88,6 +120,22 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.CertificateAuthorityArnRef,
+		Selector:     mg.Spec.InitProvider.CertificateAuthorityArnSelector,
+		To: reference.To{
+			List:    &CertificateAuthorityList{},
+			Managed: &CertificateAuthority{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateAuthorityArn")
+	}
+	mg.Spec.InitProvider.CertificateAuthorityArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateAuthorityArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -113,6 +161,22 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceArnRef,
+		Selector:     mg.Spec.InitProvider.ResourceArnSelector,
+		To: reference.To{
+			List:    &CertificateAuthorityList{},
+			Managed: &CertificateAuthority{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
+	}
+	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
 
 	return nil
 }

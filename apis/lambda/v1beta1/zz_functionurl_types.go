@@ -106,6 +106,18 @@ type FunctionURLInitParameters struct {
 	// The cross-origin resource sharing (CORS) settings for the function URL. Documented below.
 	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
+	// The name (or ARN) of the Lambda function.
+	// +crossplane:generate:reference:type=Function
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Reference to a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+
 	// Determines how the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM. See more in Configuring a Lambda function to stream responses.
 	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`
 

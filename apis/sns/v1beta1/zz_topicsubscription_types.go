@@ -25,8 +25,21 @@ type TopicSubscriptionInitParameters struct {
 	// JSON String with the delivery policy (retries, backoff, etc.) that will be used in the subscription - this only applies to HTTP/S subscriptions. Refer to the SNS docs for more details.
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
+	// Endpoint to send data to. The contents vary with the protocol. See details below.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
 	// Whether the endpoint is capable of auto confirming subscription (e.g., PagerDuty). Default is false.
 	EndpointAutoConfirms *bool `json:"endpointAutoConfirms,omitempty" tf:"endpoint_auto_confirms,omitempty"`
+
+	// Reference to a Queue in sqs to populate endpoint.
+	// +kubebuilder:validation:Optional
+	EndpointRef *v1.Reference `json:"endpointRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate endpoint.
+	// +kubebuilder:validation:Optional
+	EndpointSelector *v1.Selector `json:"endpointSelector,omitempty" tf:"-"`
 
 	// JSON String with the filter policy that will be used in the subscription to filter messages seen by the target resource. Refer to the SNS docs for more details.
 	FilterPolicy *string `json:"filterPolicy,omitempty" tf:"filter_policy,omitempty"`
@@ -42,6 +55,32 @@ type TopicSubscriptionInitParameters struct {
 
 	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
+
+	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate subscriptionRoleArn.
+	// +kubebuilder:validation:Optional
+	SubscriptionRoleArnRef *v1.Reference `json:"subscriptionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate subscriptionRoleArn.
+	// +kubebuilder:validation:Optional
+	SubscriptionRoleArnSelector *v1.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
+
+	// ARN of the SNS topic to subscribe to.
+	// +crossplane:generate:reference:type=Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type TopicSubscriptionObservation struct {

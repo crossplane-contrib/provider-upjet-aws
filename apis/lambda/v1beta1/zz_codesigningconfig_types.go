@@ -18,6 +18,20 @@ import (
 )
 
 type AllowedPublishersInitParameters struct {
+
+	// The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta1.SigningProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +listType=set
+	SigningProfileVersionArns []*string `json:"signingProfileVersionArns,omitempty" tf:"signing_profile_version_arns,omitempty"`
+
+	// References to SigningProfile in signer to populate signingProfileVersionArns.
+	// +kubebuilder:validation:Optional
+	SigningProfileVersionArnsRefs []v1.Reference `json:"signingProfileVersionArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SigningProfile in signer to populate signingProfileVersionArns.
+	// +kubebuilder:validation:Optional
+	SigningProfileVersionArnsSelector *v1.Selector `json:"signingProfileVersionArnsSelector,omitempty" tf:"-"`
 }
 
 type AllowedPublishersObservation struct {

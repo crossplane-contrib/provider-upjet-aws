@@ -56,6 +56,38 @@ func (mg *CompositeAlarm) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.OkActions = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.OkActionsRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AlarmActions),
+		Extract:       resource.ExtractParamPath("arn", true),
+		References:    mg.Spec.InitProvider.AlarmActionsRefs,
+		Selector:      mg.Spec.InitProvider.AlarmActionsSelector,
+		To: reference.To{
+			List:    &v1beta1.TopicList{},
+			Managed: &v1beta1.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AlarmActions")
+	}
+	mg.Spec.InitProvider.AlarmActions = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AlarmActionsRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OkActions),
+		Extract:       resource.ExtractParamPath("arn", true),
+		References:    mg.Spec.InitProvider.OkActionsRefs,
+		Selector:      mg.Spec.InitProvider.OkActionsSelector,
+		To: reference.To{
+			List:    &v1beta1.TopicList{},
+			Managed: &v1beta1.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.OkActions")
+	}
+	mg.Spec.InitProvider.OkActions = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.OkActionsRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -97,6 +129,38 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirehoseArn),
+		Extract:      resource.ExtractParamPath("arn", false),
+		Reference:    mg.Spec.InitProvider.FirehoseArnRef,
+		Selector:     mg.Spec.InitProvider.FirehoseArnSelector,
+		To: reference.To{
+			List:    &v1beta11.DeliveryStreamList{},
+			Managed: &v1beta11.DeliveryStream{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FirehoseArn")
+	}
+	mg.Spec.InitProvider.FirehoseArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FirehoseArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

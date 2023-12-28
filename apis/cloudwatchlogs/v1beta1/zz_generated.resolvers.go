@@ -55,6 +55,38 @@ func (mg *Destination) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.TargetArnRef,
+		Selector:     mg.Spec.InitProvider.TargetArnSelector,
+		To: reference.To{
+			List:    &v1beta11.StreamList{},
+			Managed: &v1beta11.Stream{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArn")
+	}
+	mg.Spec.InitProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -80,6 +112,22 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -107,6 +155,22 @@ func (mg *MetricFilter) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LogGroupNameRef,
+		Selector:     mg.Spec.InitProvider.LogGroupNameSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LogGroupName")
+	}
+	mg.Spec.InitProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -132,6 +196,22 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LogGroupNameRef,
+		Selector:     mg.Spec.InitProvider.LogGroupNameSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LogGroupName")
+	}
+	mg.Spec.InitProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -174,6 +254,38 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.DestinationArnRef,
+		Selector:     mg.Spec.InitProvider.DestinationArnSelector,
+		To: reference.To{
+			List:    &v1beta11.StreamList{},
+			Managed: &v1beta11.Stream{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DestinationArn")
+	}
+	mg.Spec.InitProvider.DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DestinationArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

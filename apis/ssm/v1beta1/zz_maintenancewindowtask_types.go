@@ -157,14 +157,53 @@ type MaintenanceWindowTaskInitParameters struct {
 	// The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+
 	// The targets (either instances or window target ids). Instances are specified using Key=InstanceIds,Values=instanceid1,instanceid2. Window target ids are specified using Key=WindowTargetIds,Values=window target id1, window target id2.
 	Targets []MaintenanceWindowTaskTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
+
+	// The ARN of the task to execute.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TaskArn *string `json:"taskArn,omitempty" tf:"task_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate taskArn.
+	// +kubebuilder:validation:Optional
+	TaskArnRef *v1.Reference `json:"taskArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate taskArn.
+	// +kubebuilder:validation:Optional
+	TaskArnSelector *v1.Selector `json:"taskArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with parameters for task execution.
 	TaskInvocationParameters []TaskInvocationParametersInitParameters `json:"taskInvocationParameters,omitempty" tf:"task_invocation_parameters,omitempty"`
 
 	// The type of task being registered. Valid values: AUTOMATION, LAMBDA, RUN_COMMAND or STEP_FUNCTIONS.
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
+
+	// The Id of the maintenance window to register the task with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
+
+	// Reference to a MaintenanceWindow in ssm to populate windowId.
+	// +kubebuilder:validation:Optional
+	WindowIDRef *v1.Reference `json:"windowIdRef,omitempty" tf:"-"`
+
+	// Selector for a MaintenanceWindow in ssm to populate windowId.
+	// +kubebuilder:validation:Optional
+	WindowIDSelector *v1.Selector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTaskObservation struct {
@@ -327,6 +366,19 @@ type MaintenanceWindowTaskTargetsParameters struct {
 
 type NotificationConfigInitParameters struct {
 
+	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate notificationArn.
+	// +kubebuilder:validation:Optional
+	NotificationArnRef *v1.Reference `json:"notificationArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate notificationArn.
+	// +kubebuilder:validation:Optional
+	NotificationArnSelector *v1.Selector `json:"notificationArnSelector,omitempty" tf:"-"`
+
 	// The different events for which you can receive notifications. Valid values: All, InProgress, Success, TimedOut, Cancelled, and Failed
 	NotificationEvents []*string `json:"notificationEvents,omitempty" tf:"notification_events,omitempty"`
 
@@ -391,11 +443,37 @@ type RunCommandParametersInitParameters struct {
 	// Configurations for sending notifications about command status changes on a per-instance basis. Documented below.
 	NotificationConfig []NotificationConfigInitParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
 
+	// The name of the Amazon S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	OutputS3Bucket *string `json:"outputS3Bucket,omitempty" tf:"output_s3_bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate outputS3Bucket.
+	// +kubebuilder:validation:Optional
+	OutputS3BucketRef *v1.Reference `json:"outputS3BucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate outputS3Bucket.
+	// +kubebuilder:validation:Optional
+	OutputS3BucketSelector *v1.Selector `json:"outputS3BucketSelector,omitempty" tf:"-"`
+
 	// The Amazon S3 bucket subfolder.
 	OutputS3KeyPrefix *string `json:"outputS3KeyPrefix,omitempty" tf:"output_s3_key_prefix,omitempty"`
 
 	// The parameters for the RUN_COMMAND task execution. Documented below.
 	Parameter []RunCommandParametersParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
 	// If this time is reached and the command has not already started executing, it doesn't run.
 	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`

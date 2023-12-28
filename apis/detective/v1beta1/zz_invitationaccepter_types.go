@@ -18,6 +18,19 @@ import (
 )
 
 type InvitationAccepterInitParameters struct {
+
+	// ARN of the behavior graph that the member account is accepting the invitation for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/detective/v1beta1.Graph
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("graph_arn",true)
+	GraphArn *string `json:"graphArn,omitempty" tf:"graph_arn,omitempty"`
+
+	// Reference to a Graph in detective to populate graphArn.
+	// +kubebuilder:validation:Optional
+	GraphArnRef *v1.Reference `json:"graphArnRef,omitempty" tf:"-"`
+
+	// Selector for a Graph in detective to populate graphArn.
+	// +kubebuilder:validation:Optional
+	GraphArnSelector *v1.Selector `json:"graphArnSelector,omitempty" tf:"-"`
 }
 
 type InvitationAccepterObservation struct {

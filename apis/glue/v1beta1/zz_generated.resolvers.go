@@ -86,6 +86,42 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PhysicalConnectionRequirements); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZone),
+			Extract:      resource.ExtractParamPath("availability_zone", false),
+			Reference:    mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef,
+			Selector:     mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZone")
+		}
+		mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZone = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PhysicalConnectionRequirements); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -183,6 +219,92 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CatalogTarget); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogTarget[i3].DatabaseName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.CatalogTarget[i3].DatabaseNameRef,
+			Selector:     mg.Spec.InitProvider.CatalogTarget[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &CatalogDatabaseList{},
+				Managed: &CatalogDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CatalogTarget[i3].DatabaseName")
+		}
+		mg.Spec.InitProvider.CatalogTarget[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CatalogTarget[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DatabaseNameRef,
+		Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &CatalogDatabaseList{},
+			Managed: &CatalogDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseName")
+	}
+	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.JdbcTarget); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.JdbcTarget[i3].ConnectionName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.JdbcTarget[i3].ConnectionNameRef,
+			Selector:     mg.Spec.InitProvider.JdbcTarget[i3].ConnectionNameSelector,
+			To: reference.To{
+				List:    &ConnectionList{},
+				Managed: &Connection{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.JdbcTarget[i3].ConnectionName")
+		}
+		mg.Spec.InitProvider.JdbcTarget[i3].ConnectionName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.JdbcTarget[i3].ConnectionNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.MongodbTarget); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MongodbTarget[i3].ConnectionName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.MongodbTarget[i3].ConnectionNameRef,
+			Selector:     mg.Spec.InitProvider.MongodbTarget[i3].ConnectionNameSelector,
+			To: reference.To{
+				List:    &ConnectionList{},
+				Managed: &Connection{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.MongodbTarget[i3].ConnectionName")
+		}
+		mg.Spec.InitProvider.MongodbTarget[i3].ConnectionName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.MongodbTarget[i3].ConnectionNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleRef,
+		Selector:     mg.Spec.InitProvider.RoleSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Role")
+	}
+	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -233,6 +355,46 @@ func (mg *DataCatalogEncryptionSettings) ResolveReferences(ctx context.Context, 
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataCatalogEncryptionSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef,
+				Selector:     mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta12.KeyList{},
+					Managed: &v1beta12.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID")
+			}
+			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].ConnectionPasswordEncryption[i4].AwsKMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataCatalogEncryptionSettings); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyID),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef,
+				Selector:     mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDSelector,
+				To: reference.To{
+					List:    &v1beta12.KeyList{},
+					Managed: &v1beta12.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyID")
+			}
+			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.DataCatalogEncryptionSettings[i3].EncryptionAtRest[i4].SseAwsKMSKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -260,6 +422,22 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -285,6 +463,22 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.RegistryArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegistryArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.RegistryArnRef,
+		Selector:     mg.Spec.InitProvider.RegistryArnSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RegistryArn")
+	}
+	mg.Spec.InitProvider.RegistryArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RegistryArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -353,6 +547,66 @@ func (mg *SecurityConfiguration) ResolveReferences(ctx context.Context, c client
 			}
 			mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta12.KeyList{},
+					Managed: &v1beta12.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn")
+			}
+			mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.EncryptionConfiguration[i3].CloudwatchEncryption[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta12.KeyList{},
+					Managed: &v1beta12.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn")
+			}
+			mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.EncryptionConfiguration[i3].JobBookmarksEncryption[i4].KMSKeyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnSelector,
+				To: reference.To{
+					List:    &v1beta12.KeyList{},
+					Managed: &v1beta12.Key{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn")
+			}
+			mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.EncryptionConfiguration[i3].S3Encryption[i4].KMSKeyArnRef = rsp.ResolvedReference
 
 		}
 	}
@@ -440,6 +694,82 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobName = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Predicate[i3].Conditions[i4].JobNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Actions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].CrawlerName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Actions[i3].CrawlerNameRef,
+			Selector:     mg.Spec.InitProvider.Actions[i3].CrawlerNameSelector,
+			To: reference.To{
+				List:    &CrawlerList{},
+				Managed: &Crawler{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].CrawlerName")
+		}
+		mg.Spec.InitProvider.Actions[i3].CrawlerName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Actions[i3].CrawlerNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Actions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].JobName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Actions[i3].JobNameRef,
+			Selector:     mg.Spec.InitProvider.Actions[i3].JobNameSelector,
+			To: reference.To{
+				List:    &JobList{},
+				Managed: &Job{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].JobName")
+		}
+		mg.Spec.InitProvider.Actions[i3].JobName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Actions[i3].JobNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Predicate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Predicate[i3].Conditions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerNameRef,
+				Selector:     mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerNameSelector,
+				To: reference.To{
+					List:    &CrawlerList{},
+					Managed: &Crawler{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerName")
+			}
+			mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Predicate[i3].Conditions[i4].CrawlerNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Predicate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Predicate[i3].Conditions); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobNameRef,
+				Selector:     mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobNameSelector,
+				To: reference.To{
+					List:    &JobList{},
+					Managed: &Job{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobName")
+			}
+			mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Predicate[i3].Conditions[i4].JobNameRef = rsp.ResolvedReference
 
 		}
 	}

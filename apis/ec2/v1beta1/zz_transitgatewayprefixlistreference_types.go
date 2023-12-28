@@ -21,6 +21,45 @@ type TransitGatewayPrefixListReferenceInitParameters struct {
 
 	// Indicates whether to drop traffic that matches the Prefix List. Defaults to false.
 	Blackhole *bool `json:"blackhole,omitempty" tf:"blackhole,omitempty"`
+
+	// Identifier of EC2 Prefix List.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
+
+	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
+	// +kubebuilder:validation:Optional
+	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
+	// +kubebuilder:validation:Optional
+	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+
+	// Identifier of EC2 Transit Gateway Attachment.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("association_default_route_table_id",true)
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate transitGatewayRouteTableId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate transitGatewayRouteTableId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayPrefixListReferenceObservation struct {

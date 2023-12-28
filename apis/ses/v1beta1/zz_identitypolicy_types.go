@@ -19,6 +19,19 @@ import (
 
 type IdentityPolicyInitParameters struct {
 
+	// Name or Amazon Resource Name (ARN) of the SES Identity.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.DomainIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Reference to a DomainIdentity in ses to populate identity.
+	// +kubebuilder:validation:Optional
+	IdentityRef *v1.Reference `json:"identityRef,omitempty" tf:"-"`
+
+	// Selector for a DomainIdentity in ses to populate identity.
+	// +kubebuilder:validation:Optional
+	IdentitySelector *v1.Selector `json:"identitySelector,omitempty" tf:"-"`
+
 	// Name of the policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

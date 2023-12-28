@@ -19,6 +19,18 @@ import (
 
 type AccessPointInitParameters struct {
 
+	// ID of the file system for which the access point is intended.
+	// +crossplane:generate:reference:type=FileSystem
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// Reference to a FileSystem to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+
 	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
 	PosixUser []PosixUserInitParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
 

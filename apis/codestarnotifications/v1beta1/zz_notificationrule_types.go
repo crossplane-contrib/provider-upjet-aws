@@ -30,6 +30,19 @@ type NotificationRuleInitParameters struct {
 	// The name of notification rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ARN of the resource to associate with the notification rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codecommit/v1beta1.Repository
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// Reference to a Repository in codecommit to populate resource.
+	// +kubebuilder:validation:Optional
+	ResourceRef *v1.Reference `json:"resourceRef,omitempty" tf:"-"`
+
+	// Selector for a Repository in codecommit to populate resource.
+	// +kubebuilder:validation:Optional
+	ResourceSelector *v1.Selector `json:"resourceSelector,omitempty" tf:"-"`
+
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -128,6 +141,19 @@ type NotificationRuleParameters struct {
 }
 
 type TargetInitParameters struct {
+
+	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// Reference to a Topic in sns to populate address.
+	// +kubebuilder:validation:Optional
+	AddressRef *v1.Reference `json:"addressRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate address.
+	// +kubebuilder:validation:Optional
+	AddressSelector *v1.Selector `json:"addressSelector,omitempty" tf:"-"`
 
 	// The type of the notification target. Default value is SNS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

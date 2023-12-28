@@ -27,6 +27,19 @@ type UserProfileInitParameters struct {
 
 	// The ssh username, with witch this user wants to log in
 	SSHUsername *string `json:"sshUsername,omitempty" tf:"ssh_username,omitempty"`
+
+	// The user's IAM ARN
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
+
+	// Reference to a User in iam to populate userArn.
+	// +kubebuilder:validation:Optional
+	UserArnRef *v1.Reference `json:"userArnRef,omitempty" tf:"-"`
+
+	// Selector for a User in iam to populate userArn.
+	// +kubebuilder:validation:Optional
+	UserArnSelector *v1.Selector `json:"userArnSelector,omitempty" tf:"-"`
 }
 
 type UserProfileObservation struct {

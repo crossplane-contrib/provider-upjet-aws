@@ -21,6 +21,18 @@ type RepositoryPolicyInitParameters struct {
 
 	// The policy document. This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Name of the repository to apply the policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecrpublic/v1beta1.Repository
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Reference to a Repository in ecrpublic to populate repositoryName.
+	// +kubebuilder:validation:Optional
+	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+
+	// Selector for a Repository in ecrpublic to populate repositoryName.
+	// +kubebuilder:validation:Optional
+	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 }
 
 type RepositoryPolicyObservation struct {

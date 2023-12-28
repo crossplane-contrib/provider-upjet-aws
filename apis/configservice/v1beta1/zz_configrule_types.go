@@ -246,6 +246,19 @@ type SourceInitParameters struct {
 
 	// Provides the source and type of the event that causes AWS Config to evaluate your AWS resources. Only valid if owner is CUSTOM_LAMBDA or CUSTOM_POLICY. See Source Detail Below.
 	SourceDetail []SourceDetailInitParameters `json:"sourceDetail,omitempty" tf:"source_detail,omitempty"`
+
+	// For AWS Config managed rules, a predefined identifier, e.g IAM_PASSWORD_POLICY. For custom Lambda rules, the identifier is the ARN of the Lambda Function, such as arn:aws:lambda:us-east-1:123456789012:function:custom_rule_name or the arn attribute of the aws_lambda_function resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SourceIdentifier *string `json:"sourceIdentifier,omitempty" tf:"source_identifier,omitempty"`
+
+	// Reference to a Function in lambda to populate sourceIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceIdentifierRef *v1.Reference `json:"sourceIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate sourceIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceIdentifierSelector *v1.Selector `json:"sourceIdentifierSelector,omitempty" tf:"-"`
 }
 
 type SourceObservation struct {

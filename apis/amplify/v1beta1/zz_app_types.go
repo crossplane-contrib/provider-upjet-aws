@@ -51,6 +51,19 @@ type AppInitParameters struct {
 	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
+	// AWS Identity and Access Management (IAM) service role for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamServiceRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMServiceRoleArnRef *v1.Reference `json:"iamServiceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamServiceRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMServiceRoleArnSelector *v1.Selector `json:"iamServiceRoleArnSelector,omitempty" tf:"-"`
+
 	// Name for an Amplify app.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

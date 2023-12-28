@@ -19,6 +19,19 @@ import (
 
 type EnvironmentInitParameters struct {
 
+	// AppConfig application ID. Must be between 4 and 7 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Reference to a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+
 	// Description of the environment. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -109,6 +122,32 @@ type EnvironmentParameters struct {
 }
 
 type MonitorInitParameters struct {
+
+	// ARN of the Amazon CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	AlarmArn *string `json:"alarmArn,omitempty" tf:"alarm_arn,omitempty"`
+
+	// Reference to a MetricAlarm in cloudwatch to populate alarmArn.
+	// +kubebuilder:validation:Optional
+	AlarmArnRef *v1.Reference `json:"alarmArnRef,omitempty" tf:"-"`
+
+	// Selector for a MetricAlarm in cloudwatch to populate alarmArn.
+	// +kubebuilder:validation:Optional
+	AlarmArnSelector *v1.Selector `json:"alarmArnSelector,omitempty" tf:"-"`
+
+	// ARN of an IAM role for AWS AppConfig to monitor alarm_arn.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	AlarmRoleArn *string `json:"alarmRoleArn,omitempty" tf:"alarm_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate alarmRoleArn.
+	// +kubebuilder:validation:Optional
+	AlarmRoleArnRef *v1.Reference `json:"alarmRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate alarmRoleArn.
+	// +kubebuilder:validation:Optional
+	AlarmRoleArnSelector *v1.Selector `json:"alarmRoleArnSelector,omitempty" tf:"-"`
 }
 
 type MonitorObservation struct {

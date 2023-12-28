@@ -21,6 +21,19 @@ type PolicyInitParameters struct {
 
 	// JSON-formatted IAM policy to attach to the specified private CA resource.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// ARN of the private CA to associate with the policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acmpca/v1beta1.CertificateAuthority
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a CertificateAuthority in acmpca to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateAuthority in acmpca to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type PolicyObservation struct {

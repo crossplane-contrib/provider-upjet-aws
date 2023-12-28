@@ -38,6 +38,22 @@ func (mg *App) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.IAMServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMServiceRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMServiceRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.IAMServiceRoleArnRef,
+		Selector:     mg.Spec.InitProvider.IAMServiceRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMServiceRoleArn")
+	}
+	mg.Spec.InitProvider.IAMServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMServiceRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -131,6 +147,38 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.BranchName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BranchNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AppIDRef,
+		Selector:     mg.Spec.InitProvider.AppIDSelector,
+		To: reference.To{
+			List:    &AppList{},
+			Managed: &App{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AppID")
+	}
+	mg.Spec.InitProvider.AppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AppIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BranchName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BranchNameRef,
+		Selector:     mg.Spec.InitProvider.BranchNameSelector,
+		To: reference.To{
+			List:    &BranchList{},
+			Managed: &Branch{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BranchName")
+	}
+	mg.Spec.InitProvider.BranchName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BranchNameRef = rsp.ResolvedReference
 
 	return nil
 }

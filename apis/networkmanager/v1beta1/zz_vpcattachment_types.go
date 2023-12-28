@@ -19,12 +19,51 @@ import (
 
 type VPCAttachmentInitParameters struct {
 
+	// The ID of a core network for the VPC attachment.
+	// +crossplane:generate:reference:type=CoreNetwork
+	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
+
+	// Reference to a CoreNetwork to populate coreNetworkId.
+	// +kubebuilder:validation:Optional
+	CoreNetworkIDRef *v1.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a CoreNetwork to populate coreNetworkId.
+	// +kubebuilder:validation:Optional
+	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
+
 	// Options for the VPC attachment.
 	Options []VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
+
+	// The subnet ARN of the VPC attachment.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +listType=set
+	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetArns.
+	// +kubebuilder:validation:Optional
+	SubnetArnsRefs []v1.Reference `json:"subnetArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetArns.
+	// +kubebuilder:validation:Optional
+	SubnetArnsSelector *v1.Selector `json:"subnetArnsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ARN of the VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcArn.
+	// +kubebuilder:validation:Optional
+	VPCArnRef *v1.Reference `json:"vpcArnRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcArn.
+	// +kubebuilder:validation:Optional
+	VPCArnSelector *v1.Selector `json:"vpcArnSelector,omitempty" tf:"-"`
 }
 
 type VPCAttachmentObservation struct {

@@ -157,6 +157,18 @@ type EndpointInitParameters struct {
 	// The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations. See Deployment Config.
 	DeploymentConfig []DeploymentConfigInitParameters `json:"deploymentConfig,omitempty" tf:"deployment_config,omitempty"`
 
+	// The name of the endpoint configuration to use.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.EndpointConfiguration
+	EndpointConfigName *string `json:"endpointConfigName,omitempty" tf:"endpoint_config_name,omitempty"`
+
+	// Reference to a EndpointConfiguration in sagemaker to populate endpointConfigName.
+	// +kubebuilder:validation:Optional
+	EndpointConfigNameRef *v1.Reference `json:"endpointConfigNameRef,omitempty" tf:"-"`
+
+	// Selector for a EndpointConfiguration in sagemaker to populate endpointConfigName.
+	// +kubebuilder:validation:Optional
+	EndpointConfigNameSelector *v1.Selector `json:"endpointConfigNameSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

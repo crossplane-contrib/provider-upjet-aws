@@ -153,6 +153,19 @@ type Tunnel2LogOptionsParameters struct {
 
 type VPNConnectionInitParameters_2 struct {
 
+	// The ID of the customer gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CustomerGatewayID *string `json:"customerGatewayId,omitempty" tf:"customer_gateway_id,omitempty"`
+
+	// Reference to a CustomerGateway in ec2 to populate customerGatewayId.
+	// +kubebuilder:validation:Optional
+	CustomerGatewayIDRef *v1.Reference `json:"customerGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a CustomerGateway in ec2 to populate customerGatewayId.
+	// +kubebuilder:validation:Optional
+	CustomerGatewayIDSelector *v1.Selector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
+
 	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	EnableAcceleration *bool `json:"enableAcceleration,omitempty" tf:"enable_acceleration,omitempty"`
 
@@ -177,6 +190,19 @@ type VPNConnectionInitParameters_2 struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the EC2 Transit Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
 	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
@@ -311,6 +337,31 @@ type VPNConnectionInitParameters_2 struct {
 
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
+
+	// The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("type",false)
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Reference to a CustomerGateway in ec2 to populate type.
+	// +kubebuilder:validation:Optional
+	TypeRef *v1.Reference `json:"typeRef,omitempty" tf:"-"`
+
+	// Selector for a CustomerGateway in ec2 to populate type.
+	// +kubebuilder:validation:Optional
+	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
+
+	// The ID of the Virtual Private Gateway.
+	// +crossplane:generate:reference:type=VPNGateway
+	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
+
+	// Reference to a VPNGateway to populate vpnGatewayId.
+	// +kubebuilder:validation:Optional
+	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNGateway to populate vpnGatewayId.
+	// +kubebuilder:validation:Optional
+	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VPNConnectionObservation_2 struct {

@@ -42,6 +42,22 @@ func (mg *IdentityProvider) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -68,6 +84,22 @@ func (mg *ResourceServer) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -93,6 +125,22 @@ func (mg *RiskConfiguration) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -162,6 +210,38 @@ func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -219,6 +299,54 @@ func (mg *UserInGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UsernameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GroupName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.GroupNameRef,
+		Selector:     mg.Spec.InitProvider.GroupNameSelector,
+		To: reference.To{
+			List:    &UserGroupList{},
+			Managed: &UserGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GroupName")
+	}
+	mg.Spec.InitProvider.GroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Username),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UsernameRef,
+		Selector:     mg.Spec.InitProvider.UsernameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Username")
+	}
+	mg.Spec.InitProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UsernameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -486,6 +614,262 @@ func (mg *UserPool) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.SMSConfiguration[i3].SnsCallerArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].CreateAuthChallenge),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].CreateAuthChallengeRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].CreateAuthChallengeSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].CreateAuthChallenge")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].CreateAuthChallenge = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].CreateAuthChallengeRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnRef,
+				Selector:     mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta11.FunctionList{},
+					Managed: &v1beta11.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArn")
+			}
+			mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LambdaConfig[i3].CustomEmailSender[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].CustomMessage),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].CustomMessageRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].CustomMessageSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].CustomMessage")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].CustomMessage = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].CustomMessageRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnRef,
+				Selector:     mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta11.FunctionList{},
+					Managed: &v1beta11.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArn")
+			}
+			mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LambdaConfig[i3].CustomSMSSender[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].DefineAuthChallenge),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].DefineAuthChallengeRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].DefineAuthChallengeSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].DefineAuthChallenge")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].DefineAuthChallenge = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].DefineAuthChallengeRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].KMSKeyID),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].KMSKeyIDRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].KMSKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta12.KeyList{},
+				Managed: &v1beta12.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].KMSKeyID")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].PostAuthentication),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].PostAuthenticationRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].PostAuthenticationSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].PostAuthentication")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].PostAuthentication = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].PostAuthenticationRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].PostConfirmation),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].PostConfirmationRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].PostConfirmationSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].PostConfirmation")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].PostConfirmation = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].PostConfirmationRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].PreAuthentication),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].PreAuthenticationRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].PreAuthenticationSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].PreAuthentication")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].PreAuthentication = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].PreAuthenticationRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].PreSignUp),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].PreSignUpRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].PreSignUpSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].PreSignUp")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].PreSignUp = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].PreSignUpRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].PreTokenGeneration),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].PreTokenGenerationRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].PreTokenGenerationSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].PreTokenGeneration")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].PreTokenGeneration = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].PreTokenGenerationRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].UserMigration),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].UserMigrationRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].UserMigrationSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].UserMigration")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].UserMigration = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].UserMigrationRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LambdaConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaConfig[i3].VerifyAuthChallengeResponse),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.LambdaConfig[i3].VerifyAuthChallengeResponseRef,
+			Selector:     mg.Spec.InitProvider.LambdaConfig[i3].VerifyAuthChallengeResponseSelector,
+			To: reference.To{
+				List:    &v1beta11.FunctionList{},
+				Managed: &v1beta11.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LambdaConfig[i3].VerifyAuthChallengeResponse")
+		}
+		mg.Spec.InitProvider.LambdaConfig[i3].VerifyAuthChallengeResponse = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LambdaConfig[i3].VerifyAuthChallengeResponseRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SMSConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SMSConfiguration[i3].SnsCallerArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.SMSConfiguration[i3].SnsCallerArnRef,
+			Selector:     mg.Spec.InitProvider.SMSConfiguration[i3].SnsCallerArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SMSConfiguration[i3].SnsCallerArn")
+		}
+		mg.Spec.InitProvider.SMSConfiguration[i3].SnsCallerArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SMSConfiguration[i3].SnsCallerArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -549,6 +933,58 @@ func (mg *UserPoolClient) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AnalyticsConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AnalyticsConfiguration[i3].ApplicationID),
+			Extract:      resource.ExtractParamPath("application_id", true),
+			Reference:    mg.Spec.InitProvider.AnalyticsConfiguration[i3].ApplicationIDRef,
+			Selector:     mg.Spec.InitProvider.AnalyticsConfiguration[i3].ApplicationIDSelector,
+			To: reference.To{
+				List:    &v1beta13.AppList{},
+				Managed: &v1beta13.App{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AnalyticsConfiguration[i3].ApplicationID")
+		}
+		mg.Spec.InitProvider.AnalyticsConfiguration[i3].ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AnalyticsConfiguration[i3].ApplicationIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AnalyticsConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AnalyticsConfiguration[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.AnalyticsConfiguration[i3].RoleArnRef,
+			Selector:     mg.Spec.InitProvider.AnalyticsConfiguration[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta1.RoleList{},
+				Managed: &v1beta1.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AnalyticsConfiguration[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.AnalyticsConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AnalyticsConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -591,6 +1027,38 @@ func (mg *UserPoolDomain) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.CertificateArnRef,
+		Selector:     mg.Spec.InitProvider.CertificateArnSelector,
+		To: reference.To{
+			List:    &v1beta14.CertificateList{},
+			Managed: &v1beta14.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateArn")
+	}
+	mg.Spec.InitProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -632,6 +1100,38 @@ func (mg *UserPoolUICustomization) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClientID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ClientIDRef,
+		Selector:     mg.Spec.InitProvider.ClientIDSelector,
+		To: reference.To{
+			List:    &UserPoolClientList{},
+			Managed: &UserPoolClient{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClientID")
+	}
+	mg.Spec.InitProvider.ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClientIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
+		To: reference.To{
+			List:    &UserPoolList{},
+			Managed: &UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
+	}
+	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
 
 	return nil
 }

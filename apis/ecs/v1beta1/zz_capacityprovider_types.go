@@ -19,6 +19,19 @@ import (
 
 type AutoScalingGroupProviderInitParameters struct {
 
+	// - ARN of the associated auto scaling group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
+
+	// Reference to a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
+	// +kubebuilder:validation:Optional
+	AutoScalingGroupArnRef *v1.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
+	// +kubebuilder:validation:Optional
+	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
+
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	ManagedScaling []ManagedScalingInitParameters `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 

@@ -166,6 +166,19 @@ type DeploymentGroupInitParameters struct {
 	// On premise tag filters associated with the group. See the AWS docs for details.
 	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterInitParameters `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
 
+	// The service role ARN that allows deployments.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -485,6 +498,18 @@ type EC2TagSetParameters struct {
 }
 
 type ELBInfoInitParameters struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a ELB in elb to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type ELBInfoObservation struct {
@@ -510,6 +535,30 @@ type ELBInfoParameters struct {
 }
 
 type EcsServiceInitParameters struct {
+
+	// The name of the ECS cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Cluster
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Reference to a Cluster in ecs to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in ecs to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+
+	// The name of the ECS service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Service
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// Reference to a Service in ecs to populate serviceName.
+	// +kubebuilder:validation:Optional
+	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Service in ecs to populate serviceName.
+	// +kubebuilder:validation:Optional
+	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 }
 
 type EcsServiceObservation struct {
@@ -689,6 +738,19 @@ type TargetGroupInfoParameters struct {
 }
 
 type TargetGroupInitParameters struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupObservation struct {
@@ -812,6 +874,19 @@ type TriggerConfigurationInitParameters struct {
 
 	// The name of the notification trigger.
 	TriggerName *string `json:"triggerName,omitempty" tf:"trigger_name,omitempty"`
+
+	// The ARN of the SNS topic through which notifications are sent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TriggerTargetArn *string `json:"triggerTargetArn,omitempty" tf:"trigger_target_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate triggerTargetArn.
+	// +kubebuilder:validation:Optional
+	TriggerTargetArnRef *v1.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate triggerTargetArn.
+	// +kubebuilder:validation:Optional
+	TriggerTargetArnSelector *v1.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
 }
 
 type TriggerConfigurationObservation struct {

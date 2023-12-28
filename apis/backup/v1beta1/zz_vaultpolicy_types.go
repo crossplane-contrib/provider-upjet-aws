@@ -19,6 +19,18 @@ import (
 
 type VaultPolicyInitParameters struct {
 
+	// Name of the backup vault to add policy for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// Reference to a Vault in backup to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in backup to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+
 	// The backup vault access policy document in JSON format.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }

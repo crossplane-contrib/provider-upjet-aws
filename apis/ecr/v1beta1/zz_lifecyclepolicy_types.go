@@ -21,6 +21,18 @@ type LifecyclePolicyInitParameters struct {
 
 	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Name of the repository to apply the policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecr/v1beta1.Repository
+	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
+
+	// Reference to a Repository in ecr to populate repository.
+	// +kubebuilder:validation:Optional
+	RepositoryRef *v1.Reference `json:"repositoryRef,omitempty" tf:"-"`
+
+	// Selector for a Repository in ecr to populate repository.
+	// +kubebuilder:validation:Optional
+	RepositorySelector *v1.Selector `json:"repositorySelector,omitempty" tf:"-"`
 }
 
 type LifecyclePolicyObservation struct {

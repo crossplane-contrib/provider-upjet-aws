@@ -18,6 +18,18 @@ import (
 )
 
 type ClusterSnapshotInitParameters struct {
+
+	// The DB Cluster Identifier from which to take the snapshot.
+	// +crossplane:generate:reference:type=Cluster
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// Reference to a Cluster to populate dbClusterIdentifier.
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifierRef *v1.Reference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate dbClusterIdentifier.
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
 }
 
 type ClusterSnapshotObservation struct {

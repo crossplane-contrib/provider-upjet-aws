@@ -19,6 +19,18 @@ import (
 
 type DeliveryChannelInitParameters struct {
 
+	// The name of the S3 bucket used to store the configuration history.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+
 	// The ARN of the AWS KMS key used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
 	S3KMSKeyArn *string `json:"s3KmsKeyArn,omitempty" tf:"s3_kms_key_arn,omitempty"`
 

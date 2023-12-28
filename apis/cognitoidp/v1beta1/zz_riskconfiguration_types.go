@@ -422,6 +422,19 @@ type RiskConfigurationInitParameters struct {
 
 	// The configuration to override the risk decision. See details below.
 	RiskExceptionConfiguration []RiskExceptionConfigurationInitParameters `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
+
+	// The user pool ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type RiskConfigurationObservation struct {

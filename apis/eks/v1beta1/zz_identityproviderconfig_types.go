@@ -19,6 +19,18 @@ import (
 
 type IdentityProviderConfigInitParameters struct {
 
+	// –  Name of the EKS Cluster.
+	// +crossplane:generate:reference:type=Cluster
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Reference to a Cluster to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+
 	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
 	Oidc []IdentityProviderConfigOidcInitParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
 

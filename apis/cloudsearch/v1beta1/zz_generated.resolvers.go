@@ -36,5 +36,21 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DomainNameRef,
+		Selector:     mg.Spec.InitProvider.DomainNameSelector,
+		To: reference.To{
+			List:    &DomainList{},
+			Managed: &Domain{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainName")
+	}
+	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
+
 	return nil
 }

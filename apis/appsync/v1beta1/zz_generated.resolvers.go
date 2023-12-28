@@ -40,6 +40,22 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.APIIDRef,
+		Selector:     mg.Spec.InitProvider.APIIDSelector,
+		To: reference.To{
+			List:    &GraphQLAPIList{},
+			Managed: &GraphQLAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.APIID")
+	}
+	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -126,6 +142,40 @@ func (mg *Datasource) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceRoleArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DynamodbConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DynamodbConfig[i3].TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DynamodbConfig[i3].TableNameRef,
+			Selector:     mg.Spec.InitProvider.DynamodbConfig[i3].TableNameSelector,
+			To: reference.To{
+				List:    &v1beta1.TableList{},
+				Managed: &v1beta1.Table{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DynamodbConfig[i3].TableName")
+		}
+		mg.Spec.InitProvider.DynamodbConfig[i3].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DynamodbConfig[i3].TableNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceRoleArn")
+	}
+	mg.Spec.InitProvider.ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -167,6 +217,38 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSourceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.APIIDRef,
+		Selector:     mg.Spec.InitProvider.APIIDSelector,
+		To: reference.To{
+			List:    &GraphQLAPIList{},
+			Managed: &GraphQLAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.APIID")
+	}
+	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSource),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DataSourceRef,
+		Selector:     mg.Spec.InitProvider.DataSourceSelector,
+		To: reference.To{
+			List:    &DatasourceList{},
+			Managed: &Datasource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DataSource")
+	}
+	mg.Spec.InitProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DataSourceRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -214,6 +296,42 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.UserPoolConfig[i3].UserPoolIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfig[i3].CloudwatchLogsRoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.LogConfig[i3].CloudwatchLogsRoleArnRef,
+			Selector:     mg.Spec.InitProvider.LogConfig[i3].CloudwatchLogsRoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LogConfig[i3].CloudwatchLogsRoleArn")
+		}
+		mg.Spec.InitProvider.LogConfig[i3].CloudwatchLogsRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LogConfig[i3].CloudwatchLogsRoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.UserPoolConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolConfig[i3].UserPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.UserPoolConfig[i3].UserPoolIDRef,
+			Selector:     mg.Spec.InitProvider.UserPoolConfig[i3].UserPoolIDSelector,
+			To: reference.To{
+				List:    &v1beta12.UserPoolList{},
+				Managed: &v1beta12.UserPool{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolConfig[i3].UserPoolID")
+		}
+		mg.Spec.InitProvider.UserPoolConfig[i3].UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.UserPoolConfig[i3].UserPoolIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -256,6 +374,22 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSourceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSource),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DataSourceRef,
+		Selector:     mg.Spec.InitProvider.DataSourceSelector,
+		To: reference.To{
+			List:    &DatasourceList{},
+			Managed: &Datasource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DataSource")
+	}
+	mg.Spec.InitProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DataSourceRef = rsp.ResolvedReference
 
 	return nil
 }

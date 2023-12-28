@@ -28,6 +28,18 @@ type PrivateDNSNamespaceInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of VPC that you want to associate the namespace with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPC *string `json:"vpc,omitempty" tf:"vpc,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpc.
+	// +kubebuilder:validation:Optional
+	VPCRef *v1.Reference `json:"vpcRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpc.
+	// +kubebuilder:validation:Optional
+	VPCSelector *v1.Selector `json:"vpcSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSNamespaceObservation struct {

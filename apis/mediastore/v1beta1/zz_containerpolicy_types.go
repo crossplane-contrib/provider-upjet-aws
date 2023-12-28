@@ -19,6 +19,18 @@ import (
 
 type ContainerPolicyInitParameters struct {
 
+	// The name of the container.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mediastore/v1beta1.Container
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// Reference to a Container in mediastore to populate containerName.
+	// +kubebuilder:validation:Optional
+	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in mediastore to populate containerName.
+	// +kubebuilder:validation:Optional
+	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
+
 	// The contents of the policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }

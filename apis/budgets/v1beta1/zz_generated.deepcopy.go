@@ -253,12 +253,42 @@ func (in *BudgetActionInitParameters) DeepCopyInto(out *BudgetActionInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.BudgetName != nil {
+		in, out := &in.BudgetName, &out.BudgetName
+		*out = new(string)
+		**out = **in
+	}
+	if in.BudgetNameRef != nil {
+		in, out := &in.BudgetNameRef, &out.BudgetNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BudgetNameSelector != nil {
+		in, out := &in.BudgetNameSelector, &out.BudgetNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Definition != nil {
 		in, out := &in.Definition, &out.Definition
 		*out = make([]DefinitionInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ExecutionRoleArn != nil {
+		in, out := &in.ExecutionRoleArn, &out.ExecutionRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ExecutionRoleArnRef != nil {
+		in, out := &in.ExecutionRoleArnRef, &out.ExecutionRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ExecutionRoleArnSelector != nil {
+		in, out := &in.ExecutionRoleArnSelector, &out.ExecutionRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NotificationType != nil {
 		in, out := &in.NotificationType, &out.NotificationType
@@ -1402,6 +1432,21 @@ func (in *IAMActionDefinitionInitParameters) DeepCopyInto(out *IAMActionDefiniti
 				**out = **in
 			}
 		}
+	}
+	if in.PolicyArn != nil {
+		in, out := &in.PolicyArn, &out.PolicyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.PolicyArnRef != nil {
+		in, out := &in.PolicyArnRef, &out.PolicyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PolicyArnSelector != nil {
+		in, out := &in.PolicyArnSelector, &out.PolicyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Roles != nil {
 		in, out := &in.Roles, &out.Roles

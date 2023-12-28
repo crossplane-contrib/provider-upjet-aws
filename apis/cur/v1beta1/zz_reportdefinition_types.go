@@ -39,6 +39,18 @@ type ReportDefinitionInitParameters struct {
 	// Overwrite the previous version of each report or to deliver the report in addition to the previous versions. Valid values are: CREATE_NEW_REPORT and OVERWRITE_REPORT.
 	ReportVersioning *string `json:"reportVersioning,omitempty" tf:"report_versioning,omitempty"`
 
+	// Name of the existing S3 bucket to hold generated reports.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
+
 	// Report path prefix. Limited to 256 characters.
 	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 

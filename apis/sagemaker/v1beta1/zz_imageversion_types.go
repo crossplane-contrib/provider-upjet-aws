@@ -21,6 +21,19 @@ type ImageVersionInitParameters struct {
 
 	// The registry path of the container image on which this image version is based.
 	BaseImage *string `json:"baseImage,omitempty" tf:"base_image,omitempty"`
+
+	// The name of the image. Must be unique to your account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Image
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Reference to a Image in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
+
+	// Selector for a Image in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 }
 
 type ImageVersionObservation struct {

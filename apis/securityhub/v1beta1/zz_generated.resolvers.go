@@ -36,5 +36,21 @@ func (mg *InviteAccepter) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.MasterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MasterIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterID),
+		Extract:      resource.ExtractParamPath("master_id", true),
+		Reference:    mg.Spec.InitProvider.MasterIDRef,
+		Selector:     mg.Spec.InitProvider.MasterIDSelector,
+		To: reference.To{
+			List:    &MemberList{},
+			Managed: &Member{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MasterID")
+	}
+	mg.Spec.InitProvider.MasterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MasterIDRef = rsp.ResolvedReference
+
 	return nil
 }

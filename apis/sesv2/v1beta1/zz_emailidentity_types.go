@@ -73,6 +73,18 @@ type DKIMSigningAttributesParameters struct {
 
 type EmailIdentityInitParameters struct {
 
+	// The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sesv2/v1beta1.ConfigurationSet
+	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
+
+	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
+	// +kubebuilder:validation:Optional
+	ConfigurationSetNameRef *v1.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConfigurationSet in sesv2 to populate configurationSetName.
+	// +kubebuilder:validation:Optional
+	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+
 	// The configuration of the DKIM authentication settings for an email domain identity.
 	DKIMSigningAttributes []DKIMSigningAttributesInitParameters `json:"dkimSigningAttributes,omitempty" tf:"dkim_signing_attributes,omitempty"`
 

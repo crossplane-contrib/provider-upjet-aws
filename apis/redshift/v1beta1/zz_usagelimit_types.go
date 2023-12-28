@@ -25,6 +25,19 @@ type UsageLimitInitParameters struct {
 	// The action that Amazon Redshift takes when the limit is reached. The default is log. Valid values are log, emit-metric, and disable.
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
 
+	// The identifier of the cluster that you want to limit usage.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// Reference to a Cluster in redshift to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in redshift to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+
 	// The Amazon Redshift feature that you want to limit. Valid values are spectrum, concurrency-scaling, and cross-region-datasharing.
 	FeatureType *string `json:"featureType,omitempty" tf:"feature_type,omitempty"`
 

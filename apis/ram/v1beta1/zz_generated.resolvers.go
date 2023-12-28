@@ -53,6 +53,38 @@ func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceShareArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Principal),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.PrincipalRef,
+		Selector:     mg.Spec.InitProvider.PrincipalSelector,
+		To: reference.To{
+			List:    &v1beta1.OrganizationList{},
+			Managed: &v1beta1.Organization{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Principal")
+	}
+	mg.Spec.InitProvider.Principal = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrincipalRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceShareArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceShareArnRef,
+		Selector:     mg.Spec.InitProvider.ResourceShareArnSelector,
+		To: reference.To{
+			List:    &ResourceShareList{},
+			Managed: &ResourceShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceShareArn")
+	}
+	mg.Spec.InitProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceShareArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -79,6 +111,22 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceShareArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceShareArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceShareArnRef,
+		Selector:     mg.Spec.InitProvider.ResourceShareArnSelector,
+		To: reference.To{
+			List:    &ResourceShareList{},
+			Managed: &ResourceShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceShareArn")
+	}
+	mg.Spec.InitProvider.ResourceShareArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceShareArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -104,6 +152,22 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.ForProvider.ShareArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareArn),
+		Extract:      resource.ExtractParamPath("resource_share_arn", false),
+		Reference:    mg.Spec.InitProvider.ShareArnRef,
+		Selector:     mg.Spec.InitProvider.ShareArnSelector,
+		To: reference.To{
+			List:    &PrincipalAssociationList{},
+			Managed: &PrincipalAssociation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ShareArn")
+	}
+	mg.Spec.InitProvider.ShareArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ShareArnRef = rsp.ResolvedReference
 
 	return nil
 }

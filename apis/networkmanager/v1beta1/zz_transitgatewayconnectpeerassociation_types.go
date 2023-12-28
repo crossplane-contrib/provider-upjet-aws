@@ -19,6 +19,19 @@ import (
 
 type TransitGatewayConnectPeerAssociationInitParameters struct {
 
+	// The ID of the device.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// Reference to a Device in networkmanager to populate deviceId.
+	// +kubebuilder:validation:Optional
+	DeviceIDRef *v1.Reference `json:"deviceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Device in networkmanager to populate deviceId.
+	// +kubebuilder:validation:Optional
+	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
+
 	// The ID of the link.
 	LinkID *string `json:"linkId,omitempty" tf:"link_id,omitempty"`
 }

@@ -19,6 +19,19 @@ import (
 
 type BucketNotificationInitParameters struct {
 
+	// Name of the bucket for notification configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Whether to enable Amazon EventBridge notifications.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
@@ -167,6 +180,19 @@ type QueueInitParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// SQS queue ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	QueueArn *string `json:"queueArn,omitempty" tf:"queue_arn,omitempty"`
+
+	// Reference to a Queue in sqs to populate queueArn.
+	// +kubebuilder:validation:Optional
+	QueueArnRef *v1.Reference `json:"queueArnRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate queueArn.
+	// +kubebuilder:validation:Optional
+	QueueArnSelector *v1.Selector `json:"queueArnSelector,omitempty" tf:"-"`
 }
 
 type QueueObservation struct {
@@ -236,6 +262,19 @@ type TopicInitParameters struct {
 
 	// Unique identifier for each of the notification configurations.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// SNS topic ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type TopicObservation struct {

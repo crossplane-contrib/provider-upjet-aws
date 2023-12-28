@@ -28,6 +28,19 @@ type SchemaInitParameters struct {
 	// –  A description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ARN of the Glue Registry to create the schema in.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Registry
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
+
+	// Reference to a Registry in glue to populate registryArn.
+	// +kubebuilder:validation:Optional
+	RegistryArnRef *v1.Reference `json:"registryArnRef,omitempty" tf:"-"`
+
+	// Selector for a Registry in glue to populate registryArn.
+	// +kubebuilder:validation:Optional
+	RegistryArnSelector *v1.Selector `json:"registryArnSelector,omitempty" tf:"-"`
+
 	// The schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 

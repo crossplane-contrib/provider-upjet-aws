@@ -60,8 +60,33 @@ type BudgetActionInitParameters struct {
 	// This specifies if the action needs manual or automatic approval. Valid values are AUTOMATIC and MANUAL.
 	ApprovalModel *string `json:"approvalModel,omitempty" tf:"approval_model,omitempty"`
 
+	// The name of a budget.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
+	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
+
+	// Reference to a Budget in budgets to populate budgetName.
+	// +kubebuilder:validation:Optional
+	BudgetNameRef *v1.Reference `json:"budgetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Budget in budgets to populate budgetName.
+	// +kubebuilder:validation:Optional
+	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
+
 	// Specifies all of the type-specific parameters. See Definition.
 	Definition []DefinitionInitParameters `json:"definition,omitempty" tf:"definition,omitempty"`
+
+	// The role passed for action execution and reversion. Roles and actions must be in the same account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
 
 	// The type of a notification. Valid values are ACTUAL or FORECASTED.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
@@ -220,6 +245,19 @@ type IAMActionDefinitionInitParameters struct {
 	// A list of groups to be attached. There must be at least one group.
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the policy to be attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
+
+	// Reference to a Policy in iam to populate policyArn.
+	// +kubebuilder:validation:Optional
+	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Policy in iam to populate policyArn.
+	// +kubebuilder:validation:Optional
+	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// A list of roles to be attached. There must be at least one role.
 	// +listType=set

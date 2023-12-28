@@ -39,6 +39,24 @@ func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader)
 		mg.Spec.ForProvider.Predicates[i3].DataIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Predicates); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicates[i3].DataID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Predicates[i3].DataIDRef,
+			Selector:     mg.Spec.InitProvider.Predicates[i3].DataIDSelector,
+			To: reference.To{
+				List:    &IPSetList{},
+				Managed: &IPSet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Predicates[i3].DataID")
+		}
+		mg.Spec.InitProvider.Predicates[i3].DataID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Predicates[i3].DataIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -68,6 +86,24 @@ func (mg *RegexMatchSet) ResolveReferences(ctx context.Context, c client.Reader)
 		mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.RegexMatchTuple); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
+			Selector:     mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
+			To: reference.To{
+				List:    &RegexPatternSetList{},
+				Managed: &RegexPatternSet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID")
+		}
+		mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -95,6 +131,24 @@ func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
 		}
 		mg.Spec.ForProvider.Predicates[i3].DataID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Predicates[i3].DataIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Predicates); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicates[i3].DataID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Predicates[i3].DataIDRef,
+			Selector:     mg.Spec.InitProvider.Predicates[i3].DataIDSelector,
+			To: reference.To{
+				List:    &IPSetList{},
+				Managed: &IPSet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Predicates[i3].DataID")
+		}
+		mg.Spec.InitProvider.Predicates[i3].DataID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Predicates[i3].DataIDRef = rsp.ResolvedReference
 
 	}
 
@@ -142,6 +196,42 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 		mg.Spec.ForProvider.Rules[i3].RuleID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Rules[i3].RuleIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestination),
+			Extract:      resource.ExtractParamPath("arn", false),
+			Reference:    mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationRef,
+			Selector:     mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationSelector,
+			To: reference.To{
+				List:    &v1beta1.DeliveryStreamList{},
+				Managed: &v1beta1.DeliveryStream{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestination")
+		}
+		mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestination = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rules); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rules[i3].RuleID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Rules[i3].RuleIDRef,
+			Selector:     mg.Spec.InitProvider.Rules[i3].RuleIDSelector,
+			To: reference.To{
+				List:    &RuleList{},
+				Managed: &Rule{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Rules[i3].RuleID")
+		}
+		mg.Spec.InitProvider.Rules[i3].RuleID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Rules[i3].RuleIDRef = rsp.ResolvedReference
 
 	}
 

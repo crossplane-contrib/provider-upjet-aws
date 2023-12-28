@@ -19,6 +19,18 @@ import (
 
 type MetricFilterInitParameters struct {
 
+	// The name of the log group to associate the metric filter with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	MetricTransformation []MetricTransformationInitParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
 

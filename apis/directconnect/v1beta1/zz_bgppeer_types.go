@@ -35,6 +35,19 @@ type BGPPeerInitParameters struct {
 	// The IPv4 CIDR destination address to which Amazon should send traffic.
 	// Required for IPv4 BGP peers on public virtual interfaces.
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
+
+	// The ID of the Direct Connect virtual interface on which to create the BGP peer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.PrivateVirtualInterface
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
+
+	// Reference to a PrivateVirtualInterface in directconnect to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateVirtualInterface in directconnect to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type BGPPeerObservation struct {

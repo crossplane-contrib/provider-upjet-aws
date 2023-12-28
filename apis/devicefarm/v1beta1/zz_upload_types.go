@@ -25,6 +25,19 @@ type UploadInitParameters struct {
 	// The upload's file name. The name should not contain any forward slashes (/). If you are uploading an iOS app, the file name must end with the .ipa extension. If you are uploading an Android app, the file name must end with the .apk extension. For all others, the file name must end with the .zip file extension.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ARN of the project for the upload.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/devicefarm/v1beta1.Project
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ProjectArn *string `json:"projectArn,omitempty" tf:"project_arn,omitempty"`
+
+	// Reference to a Project in devicefarm to populate projectArn.
+	// +kubebuilder:validation:Optional
+	ProjectArnRef *v1.Reference `json:"projectArnRef,omitempty" tf:"-"`
+
+	// Selector for a Project in devicefarm to populate projectArn.
+	// +kubebuilder:validation:Optional
+	ProjectArnSelector *v1.Selector `json:"projectArnSelector,omitempty" tf:"-"`
+
 	// The upload's upload type. See AWS Docs for valid list of values.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

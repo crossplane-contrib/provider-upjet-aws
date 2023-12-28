@@ -27,6 +27,18 @@ type TableItemInitParameters struct {
 
 	// Range key to use for lookups and identification of the item. Required if there is range key defined in the table.
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
+
+	// Name of the table to contain the item.
+	// +crossplane:generate:reference:type=Table
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type TableItemObservation struct {

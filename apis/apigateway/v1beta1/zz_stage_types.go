@@ -108,11 +108,37 @@ type StageInitParameters struct {
 	// Identifier of a client certificate for the stage.
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
+	// ID of the deployment that the stage points to
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Deployment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
+
+	// Reference to a Deployment in apigateway to populate deploymentId.
+	// +kubebuilder:validation:Optional
+	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
+
+	// Selector for a Deployment in apigateway to populate deploymentId.
+	// +kubebuilder:validation:Optional
+	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
+
 	// Description of the stage.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Version of the associated API documentation
 	DocumentationVersion *string `json:"documentationVersion,omitempty" tf:"documentation_version,omitempty"`
+
+	// ID of the associated REST API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Name of the stage
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`

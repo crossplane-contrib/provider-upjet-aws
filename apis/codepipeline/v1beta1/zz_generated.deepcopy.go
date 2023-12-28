@@ -312,6 +312,21 @@ func (in *ArtifactStoreInitParameters) DeepCopyInto(out *ArtifactStoreInitParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.LocationRef != nil {
+		in, out := &in.LocationRef, &out.LocationRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LocationSelector != nil {
+		in, out := &in.LocationSelector, &out.LocationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -514,6 +529,21 @@ func (in *CodepipelineInitParameters) DeepCopyInto(out *CodepipelineInitParamete
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.RoleArn != nil {
+		in, out := &in.RoleArn, &out.RoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Stage != nil {
 		in, out := &in.Stage, &out.Stage
@@ -1815,6 +1845,21 @@ func (in *WebhookInitParameters) DeepCopyInto(out *WebhookInitParameters) {
 		in, out := &in.TargetAction, &out.TargetAction
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetPipeline != nil {
+		in, out := &in.TargetPipeline, &out.TargetPipeline
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetPipelineRef != nil {
+		in, out := &in.TargetPipelineRef, &out.TargetPipelineRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetPipelineSelector != nil {
+		in, out := &in.TargetPipelineSelector, &out.TargetPipelineSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

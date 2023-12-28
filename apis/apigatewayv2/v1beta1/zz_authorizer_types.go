@@ -19,6 +19,18 @@ import (
 
 type AuthorizerInitParameters struct {
 
+	// API identifier.
+	// +crossplane:generate:reference:type=API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// Required credentials as an IAM role for API Gateway to invoke the authorizer.
 	// Supported only for REQUEST authorizers.
 	AuthorizerCredentialsArn *string `json:"authorizerCredentialsArn,omitempty" tf:"authorizer_credentials_arn,omitempty"`
@@ -36,6 +48,21 @@ type AuthorizerInitParameters struct {
 	// Specify REQUEST for a Lambda function using incoming request parameters.
 	// For HTTP APIs, specify JWT to use JSON Web Tokens.
 	AuthorizerType *string `json:"authorizerType,omitempty" tf:"authorizer_type,omitempty"`
+
+	// Authorizer's Uniform Resource Identifier (URI).
+	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
+	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()
+	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
+
+	// Reference to a Function in lambda to populate authorizerUri.
+	// +kubebuilder:validation:Optional
+	AuthorizerURIRef *v1.Reference `json:"authorizerUriRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate authorizerUri.
+	// +kubebuilder:validation:Optional
+	AuthorizerURISelector *v1.Selector `json:"authorizerUriSelector,omitempty" tf:"-"`
 
 	// Whether a Lambda authorizer returns a response in a simple format. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy.
 	// Supported only for HTTP APIs.

@@ -368,6 +368,19 @@ type TaskDefinitionInitParameters struct {
 	// The amount of ephemeral storage to allocate for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on AWS Fargate. See Ephemeral Storage.
 	EphemeralStorage []EphemeralStorageInitParameters `json:"ephemeralStorage,omitempty" tf:"ephemeral_storage,omitempty"`
 
+	// ARN of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+
 	// A unique name for your task definition.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 

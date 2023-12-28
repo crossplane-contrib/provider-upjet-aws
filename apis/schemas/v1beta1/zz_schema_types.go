@@ -28,6 +28,18 @@ type SchemaInitParameters struct {
 	// The name of the schema. Maximum of 385 characters consisting of lower case letters, upper case letters, ., -, _, @.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the registry in which this schema belongs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/schemas/v1beta1.Registry
+	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
+
+	// Reference to a Registry in schemas to populate registryName.
+	// +kubebuilder:validation:Optional
+	RegistryNameRef *v1.Reference `json:"registryNameRef,omitempty" tf:"-"`
+
+	// Selector for a Registry in schemas to populate registryName.
+	// +kubebuilder:validation:Optional
+	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

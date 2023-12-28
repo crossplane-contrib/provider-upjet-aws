@@ -38,6 +38,19 @@ type ReplicaExternalKeyInitParameters struct {
 	// The key policy to attach to the KMS key. If you do not specify a key policy, AWS KMS attaches the default key policy to the KMS key.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
+	// +crossplane:generate:reference:type=ExternalKey
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
+
+	// Reference to a ExternalKey to populate primaryKeyArn.
+	// +kubebuilder:validation:Optional
+	PrimaryKeyArnRef *v1.Reference `json:"primaryKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a ExternalKey to populate primaryKeyArn.
+	// +kubebuilder:validation:Optional
+	PrimaryKeyArnSelector *v1.Selector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

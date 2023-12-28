@@ -96,8 +96,46 @@ type BuildParameters struct {
 
 type StorageLocationInitParameters struct {
 
+	// Name of your S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// Name of the zip file containing your build files.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Reference to a Object in s3 to populate key.
+	// +kubebuilder:validation:Optional
+	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate key.
+	// +kubebuilder:validation:Optional
+	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
+
 	// A specific version of the file. If not set, the latest version of the file is retrieved.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
+
+	// ARN of the access role that allows Amazon GameLift to access your S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type StorageLocationObservation struct {

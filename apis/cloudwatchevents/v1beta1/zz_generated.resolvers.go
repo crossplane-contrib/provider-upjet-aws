@@ -40,6 +40,22 @@ func (mg *APIDestination) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ConnectionArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConnectionArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ConnectionArnRef,
+		Selector:     mg.Spec.InitProvider.ConnectionArnSelector,
+		To: reference.To{
+			List:    &ConnectionList{},
+			Managed: &Connection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ConnectionArn")
+	}
+	mg.Spec.InitProvider.ConnectionArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ConnectionArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -66,6 +82,22 @@ func (mg *Archive) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.EventSourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventSourceArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.EventSourceArnRef,
+		Selector:     mg.Spec.InitProvider.EventSourceArnSelector,
+		To: reference.To{
+			List:    &BusList{},
+			Managed: &Bus{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventSourceArn")
+	}
+	mg.Spec.InitProvider.EventSourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventSourceArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -91,6 +123,22 @@ func (mg *BusPolicy) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.ForProvider.EventBusName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventBusNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventBusName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventBusNameRef,
+		Selector:     mg.Spec.InitProvider.EventBusNameSelector,
+		To: reference.To{
+			List:    &BusList{},
+			Managed: &Bus{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventBusName")
+	}
+	mg.Spec.InitProvider.EventBusName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventBusNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -136,6 +184,40 @@ func (mg *Permission) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.EventBusName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventBusNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Condition); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Condition[i3].Value),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Condition[i3].ValueRef,
+			Selector:     mg.Spec.InitProvider.Condition[i3].ValueSelector,
+			To: reference.To{
+				List:    &v1beta1.OrganizationList{},
+				Managed: &v1beta1.Organization{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Condition[i3].Value")
+		}
+		mg.Spec.InitProvider.Condition[i3].Value = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Condition[i3].ValueRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventBusName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventBusNameRef,
+		Selector:     mg.Spec.InitProvider.EventBusNameSelector,
+		To: reference.To{
+			List:    &BusList{},
+			Managed: &Bus{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventBusName")
+	}
+	mg.Spec.InitProvider.EventBusName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventBusNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -177,6 +259,38 @@ func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventBusName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventBusNameRef,
+		Selector:     mg.Spec.InitProvider.EventBusNameSelector,
+		To: reference.To{
+			List:    &BusList{},
+			Managed: &Bus{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventBusName")
+	}
+	mg.Spec.InitProvider.EventBusName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventBusNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -253,6 +367,72 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.Rule = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RuleRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EcsTarget); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsTarget[i3].TaskDefinitionArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.EcsTarget[i3].TaskDefinitionArnRef,
+			Selector:     mg.Spec.InitProvider.EcsTarget[i3].TaskDefinitionArnSelector,
+			To: reference.To{
+				List:    &v1beta12.TaskDefinitionList{},
+				Managed: &v1beta12.TaskDefinition{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EcsTarget[i3].TaskDefinitionArn")
+		}
+		mg.Spec.InitProvider.EcsTarget[i3].TaskDefinitionArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EcsTarget[i3].TaskDefinitionArnRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventBusName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventBusNameRef,
+		Selector:     mg.Spec.InitProvider.EventBusNameSelector,
+		To: reference.To{
+			List:    &BusList{},
+			Managed: &Bus{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventBusName")
+	}
+	mg.Spec.InitProvider.EventBusName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventBusNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RuleRef,
+		Selector:     mg.Spec.InitProvider.RuleSelector,
+		To: reference.To{
+			List:    &RuleList{},
+			Managed: &Rule{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Rule")
+	}
+	mg.Spec.InitProvider.Rule = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RuleRef = rsp.ResolvedReference
 
 	return nil
 }

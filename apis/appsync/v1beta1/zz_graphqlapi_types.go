@@ -295,6 +295,19 @@ type GraphQLAPIUserPoolConfigInitParameters struct {
 
 	// Action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// User pool ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type GraphQLAPIUserPoolConfigObservation struct {
@@ -381,6 +394,19 @@ type LambdaAuthorizerConfigParameters struct {
 }
 
 type LogConfigInitParameters struct {
+
+	// Amazon Resource Name of the service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	CloudwatchLogsRoleArn *string `json:"cloudwatchLogsRoleArn,omitempty" tf:"cloudwatch_logs_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate cloudwatchLogsRoleArn.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogsRoleArnRef *v1.Reference `json:"cloudwatchLogsRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate cloudwatchLogsRoleArn.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogsRoleArnSelector *v1.Selector `json:"cloudwatchLogsRoleArnSelector,omitempty" tf:"-"`
 
 	// Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging  level. Valid values: true, false. Default value: false
 	ExcludeVerboseContent *bool `json:"excludeVerboseContent,omitempty" tf:"exclude_verbose_content,omitempty"`

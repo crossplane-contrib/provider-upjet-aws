@@ -43,6 +43,18 @@ type AssociationInitParameters struct {
 	// The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify a number, for example 10, or a percentage of the target set, for example 10%.
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
+	// The name of the SSM document to apply.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.Document
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Document in ssm to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a Document in ssm to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// An output location block. Output Location is documented below.
 	OutputLocation []OutputLocationInitParameters `json:"outputLocation,omitempty" tf:"output_location,omitempty"`
 

@@ -19,6 +19,18 @@ import (
 
 type NamedQueryInitParameters struct {
 
+	// Database to which the query belongs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/athena/v1beta1.Database
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// Reference to a Database in athena to populate database.
+	// +kubebuilder:validation:Optional
+	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+
+	// Selector for a Database in athena to populate database.
+	// +kubebuilder:validation:Optional
+	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
+
 	// Brief explanation of the query. Maximum length of 1024.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -27,6 +39,19 @@ type NamedQueryInitParameters struct {
 
 	// Text of the query itself. In other words, all query statements. Maximum length of 262144.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// Workgroup to which the query belongs. Defaults to primary
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/athena/v1beta1.Workgroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Workgroup *string `json:"workgroup,omitempty" tf:"workgroup,omitempty"`
+
+	// Reference to a Workgroup in athena to populate workgroup.
+	// +kubebuilder:validation:Optional
+	WorkgroupRef *v1.Reference `json:"workgroupRef,omitempty" tf:"-"`
+
+	// Selector for a Workgroup in athena to populate workgroup.
+	// +kubebuilder:validation:Optional
+	WorkgroupSelector *v1.Selector `json:"workgroupSelector,omitempty" tf:"-"`
 }
 
 type NamedQueryObservation struct {

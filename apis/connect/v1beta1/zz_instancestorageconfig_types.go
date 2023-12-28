@@ -21,6 +21,19 @@ type EncryptionConfigInitParameters struct {
 
 	// The type of encryption. Valid Values: KMS.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key in kms to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigObservation struct {
@@ -54,6 +67,19 @@ type EncryptionConfigParameters struct {
 }
 
 type InstanceStorageConfigInitParameters struct {
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
@@ -111,6 +137,19 @@ type InstanceStorageConfigParameters struct {
 }
 
 type KinesisFirehoseConfigInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the delivery stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate firehoseArn.
+	// +kubebuilder:validation:Optional
+	FirehoseArnRef *v1.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate firehoseArn.
+	// +kubebuilder:validation:Optional
+	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisFirehoseConfigObservation struct {
@@ -137,6 +176,19 @@ type KinesisFirehoseConfigParameters struct {
 }
 
 type KinesisStreamConfigInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the data stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamConfigObservation struct {
@@ -205,6 +257,19 @@ type S3ConfigEncryptionConfigInitParameters struct {
 
 	// The type of encryption. Valid Values: KMS.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// The full ARN of the encryption key. Be sure to provide the full ARN of the encryption key, not just the ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key in kms to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigEncryptionConfigObservation struct {
@@ -238,6 +303,19 @@ type S3ConfigEncryptionConfigParameters struct {
 }
 
 type S3ConfigInitParameters struct {
+
+	// The S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The S3 bucket prefix.
 	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`

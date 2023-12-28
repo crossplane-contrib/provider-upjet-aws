@@ -87,6 +87,18 @@ type EC2InboundPermissionParameters struct {
 
 type FleetInitParameters struct {
 
+	// ID of the GameLift Build to be deployed on the fleet.
+	// +crossplane:generate:reference:type=Build
+	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
+
+	// Reference to a Build to populate buildId.
+	// +kubebuilder:validation:Optional
+	BuildIDRef *v1.Reference `json:"buildIdRef,omitempty" tf:"-"`
+
+	// Selector for a Build to populate buildId.
+	// +kubebuilder:validation:Optional
+	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
+
 	// Prompts GameLift to generate a TLS/SSL certificate for the fleet. See certificate_configuration.
 	CertificateConfiguration []CertificateConfigurationInitParameters `json:"certificateConfiguration,omitempty" tf:"certificate_configuration,omitempty"`
 
@@ -101,6 +113,19 @@ type FleetInitParameters struct {
 
 	// Type of fleet. This value must be ON_DEMAND or SPOT. Defaults to ON_DEMAND.
 	FleetType *string `json:"fleetType,omitempty" tf:"fleet_type,omitempty"`
+
+	// ARN of an IAM role that instances in the fleet can assume.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate instanceRoleArn.
+	// +kubebuilder:validation:Optional
+	InstanceRoleArnRef *v1.Reference `json:"instanceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate instanceRoleArn.
+	// +kubebuilder:validation:Optional
+	InstanceRoleArnSelector *v1.Selector `json:"instanceRoleArnSelector,omitempty" tf:"-"`
 
 	// List of names of metric groups to add this fleet to. A metric group tracks metrics across all fleets in the group. Defaults to default.
 	MetricGroups []*string `json:"metricGroups,omitempty" tf:"metric_groups,omitempty"`

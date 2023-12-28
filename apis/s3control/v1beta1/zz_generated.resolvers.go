@@ -57,6 +57,40 @@ func (mg *AccessPoint) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.VPCConfiguration[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.BucketRef,
+		Selector:     mg.Spec.InitProvider.BucketSelector,
+		To: reference.To{
+			List:    &v1beta1.BucketList{},
+			Managed: &v1beta1.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Bucket")
+	}
+	mg.Spec.InitProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BucketRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCConfiguration[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.VPCConfiguration[i3].VPCIDRef,
+			Selector:     mg.Spec.InitProvider.VPCConfiguration[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta11.VPCList{},
+				Managed: &v1beta11.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfiguration[i3].VPCID")
+		}
+		mg.Spec.InitProvider.VPCConfiguration[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VPCConfiguration[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -83,6 +117,22 @@ func (mg *AccessPointPolicy) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccessPointArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccessPointArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.AccessPointArnRef,
+		Selector:     mg.Spec.InitProvider.AccessPointArnSelector,
+		To: reference.To{
+			List:    &AccessPointList{},
+			Managed: &AccessPoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AccessPointArn")
+	}
+	mg.Spec.InitProvider.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccessPointArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -167,6 +217,48 @@ func (mg *ObjectLambdaAccessPoint) ResolveReferences(ctx context.Context, c clie
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Configuration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].SupportingAccessPoint),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Configuration[i3].SupportingAccessPointRef,
+			Selector:     mg.Spec.InitProvider.Configuration[i3].SupportingAccessPointSelector,
+			To: reference.To{
+				List:    &AccessPointList{},
+				Managed: &AccessPoint{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Configuration[i3].SupportingAccessPoint")
+		}
+		mg.Spec.InitProvider.Configuration[i3].SupportingAccessPoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Configuration[i3].SupportingAccessPointRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Configuration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn),
+						Extract:      resource.ExtractParamPath("arn", true),
+						Reference:    mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnRef,
+						Selector:     mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnSelector,
+						To: reference.To{
+							List:    &v1beta12.FunctionList{},
+							Managed: &v1beta12.Function{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn")
+					}
+					mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.Configuration[i3].TransformationConfiguration[i4].ContentTransformation[i5].AwsLambda[i6].FunctionArnRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
 
 	return nil
 }
@@ -193,6 +285,22 @@ func (mg *ObjectLambdaAccessPointPolicy) ResolveReferences(ctx context.Context, 
 	}
 	mg.Spec.ForProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Name),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.NameRef,
+		Selector:     mg.Spec.InitProvider.NameSelector,
+		To: reference.To{
+			List:    &ObjectLambdaAccessPointList{},
+			Managed: &ObjectLambdaAccessPoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Name")
+	}
+	mg.Spec.InitProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -222,6 +330,28 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 				}
 				mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn = reference.ToPtrValue(rsp.ResolvedValue)
 				mg.Spec.ForProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLensConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnRef,
+					Selector:     mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketList{},
+						Managed: &v1beta1.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn")
+				}
+				mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.StorageLensConfiguration[i3].DataExport[i4].S3BucketDestination[i5].ArnRef = rsp.ResolvedReference
 
 			}
 		}

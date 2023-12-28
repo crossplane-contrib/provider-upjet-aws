@@ -65,6 +65,18 @@ type LexBotInitParameters struct {
 
 	// The Region that the Amazon Lex (V1) bot was created in. Defaults to current region.
 	LexRegion *string `json:"lexRegion,omitempty" tf:"lex_region,omitempty"`
+
+	// The name of the Amazon Lex (V1) bot.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lexmodels/v1beta1.Bot
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Bot in lexmodels to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a Bot in lexmodels to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type LexBotObservation struct {

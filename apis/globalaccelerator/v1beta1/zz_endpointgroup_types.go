@@ -76,6 +76,18 @@ type EndpointGroupInitParameters struct {
 	// The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the listener.
+	// +crossplane:generate:reference:type=Listener
+	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
+
+	// Reference to a Listener to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Listener to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
+
 	// Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. Fields documented below.
 	PortOverride []PortOverrideInitParameters `json:"portOverride,omitempty" tf:"port_override,omitempty"`
 

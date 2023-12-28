@@ -64,6 +64,48 @@ func (mg *GatewayRoute) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.VirtualGatewayName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualGatewayNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target); i6++ {
+					for i7 := 0; i7 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService); i7++ {
+						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService[i7].VirtualServiceName),
+							Extract:      resource.ExtractParamPath("name", false),
+							Reference:    mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService[i7].VirtualServiceNameRef,
+							Selector:     mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService[i7].VirtualServiceNameSelector,
+							To: reference.To{
+								List:    &VirtualServiceList{},
+								Managed: &VirtualService{},
+							},
+						})
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService[i7].VirtualServiceName")
+						}
+						mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService[i7].VirtualServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].Target[i6].VirtualService[i7].VirtualServiceNameRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualGatewayName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.VirtualGatewayNameRef,
+		Selector:     mg.Spec.InitProvider.VirtualGatewayNameSelector,
+		To: reference.To{
+			List:    &VirtualGatewayList{},
+			Managed: &VirtualGateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualGatewayName")
+	}
+	mg.Spec.InitProvider.VirtualGatewayName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualGatewayNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -154,6 +196,86 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.VirtualRouterName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualRouterNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MeshNameRef,
+		Selector:     mg.Spec.InitProvider.MeshNameSelector,
+		To: reference.To{
+			List:    &MeshList{},
+			Managed: &Mesh{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MeshName")
+	}
+	mg.Spec.InitProvider.MeshName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MeshNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNode),
+						Extract:      resource.ExtractParamPath("name", false),
+						Reference:    mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNodeRef,
+						Selector:     mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNodeSelector,
+						To: reference.To{
+							List:    &VirtualNodeList{},
+							Managed: &VirtualNode{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNode")
+					}
+					mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNode = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.Spec[i3].HTTPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNodeRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].TCPRoute); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNode),
+						Extract:      resource.ExtractParamPath("name", false),
+						Reference:    mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNodeRef,
+						Selector:     mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNodeSelector,
+						To: reference.To{
+							List:    &VirtualNodeList{},
+							Managed: &VirtualNode{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNode")
+					}
+					mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNode = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.Spec[i3].TCPRoute[i4].Action[i5].WeightedTarget[i6].VirtualNodeRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualRouterName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.VirtualRouterNameRef,
+		Selector:     mg.Spec.InitProvider.VirtualRouterNameSelector,
+		To: reference.To{
+			List:    &VirtualRouterList{},
+			Managed: &VirtualRouter{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualRouterName")
+	}
+	mg.Spec.InitProvider.VirtualRouterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualRouterNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -184,6 +306,32 @@ func (mg *VirtualGateway) ResolveReferences(ctx context.Context, c client.Reader
 						}
 						mg.Spec.ForProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 						mg.Spec.ForProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArnRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].Listener); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate); i6++ {
+					for i7 := 0; i7 < len(mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm); i7++ {
+						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArn),
+							Extract:      resource.ExtractParamPath("arn", true),
+							Reference:    mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArnRef,
+							Selector:     mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArnSelector,
+							To: reference.To{
+								List:    &v1beta1.CertificateList{},
+								Managed: &v1beta1.Certificate{},
+							},
+						})
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArn")
+						}
+						mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.InitProvider.Spec[i3].Listener[i4].TLS[i5].Certificate[i6].Acm[i7].CertificateArnRef = rsp.ResolvedReference
 
 					}
 				}
@@ -239,6 +387,44 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 			}
 		}
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MeshNameRef,
+		Selector:     mg.Spec.InitProvider.MeshNameSelector,
+		To: reference.To{
+			List:    &MeshList{},
+			Managed: &Mesh{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MeshName")
+	}
+	mg.Spec.InitProvider.MeshName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MeshNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].ServiceDiscovery); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap[i5].NamespaceName),
+					Extract:      resource.ExtractParamPath("name", false),
+					Reference:    mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap[i5].NamespaceNameRef,
+					Selector:     mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap[i5].NamespaceNameSelector,
+					To: reference.To{
+						List:    &v1beta11.HTTPNamespaceList{},
+						Managed: &v1beta11.HTTPNamespace{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap[i5].NamespaceName")
+				}
+				mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap[i5].NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Spec[i3].ServiceDiscovery[i4].AwsCloudMap[i5].NamespaceNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }
@@ -265,6 +451,22 @@ func (mg *VirtualRouter) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.MeshName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MeshNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MeshNameRef,
+		Selector:     mg.Spec.InitProvider.MeshNameSelector,
+		To: reference.To{
+			List:    &MeshList{},
+			Managed: &Mesh{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MeshName")
+	}
+	mg.Spec.InitProvider.MeshName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MeshNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -332,6 +534,66 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 				}
 				mg.Spec.ForProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterName = reference.ToPtrValue(rsp.ResolvedValue)
 				mg.Spec.ForProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MeshName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MeshNameRef,
+		Selector:     mg.Spec.InitProvider.MeshNameSelector,
+		To: reference.To{
+			List:    &MeshList{},
+			Managed: &Mesh{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MeshName")
+	}
+	mg.Spec.InitProvider.MeshName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MeshNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].Provider); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode[i5].VirtualNodeName),
+					Extract:      resource.ExtractParamPath("name", false),
+					Reference:    mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode[i5].VirtualNodeNameRef,
+					Selector:     mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode[i5].VirtualNodeNameSelector,
+					To: reference.To{
+						List:    &VirtualNodeList{},
+						Managed: &VirtualNode{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode[i5].VirtualNodeName")
+				}
+				mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode[i5].VirtualNodeName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualNode[i5].VirtualNodeNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Spec); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Spec[i3].Provider); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterName),
+					Extract:      resource.ExtractParamPath("name", false),
+					Reference:    mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterNameRef,
+					Selector:     mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterNameSelector,
+					To: reference.To{
+						List:    &VirtualRouterList{},
+						Managed: &VirtualRouter{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterName")
+				}
+				mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Spec[i3].Provider[i4].VirtualRouter[i5].VirtualRouterNameRef = rsp.ResolvedReference
 
 			}
 		}

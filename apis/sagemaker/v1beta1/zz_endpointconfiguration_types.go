@@ -274,6 +274,18 @@ type EndpointConfigurationInitParameters struct {
 	// Specifies the parameters to capture input/output of SageMaker models endpoints. Fields are documented below.
 	DataCaptureConfig []DataCaptureConfigInitParameters `json:"dataCaptureConfig,omitempty" tf:"data_capture_config,omitempty"`
 
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
 	ProductionVariants []ProductionVariantsInitParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
 
@@ -425,6 +437,18 @@ type ProductionVariantsInitParameters struct {
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+
+	// The name of the model to use.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Model
+	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
+
+	// Reference to a Model in sagemaker to populate modelName.
+	// +kubebuilder:validation:Optional
+	ModelNameRef *v1.Reference `json:"modelNameRef,omitempty" tf:"-"`
+
+	// Selector for a Model in sagemaker to populate modelName.
+	// +kubebuilder:validation:Optional
+	ModelNameSelector *v1.Selector `json:"modelNameSelector,omitempty" tf:"-"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`

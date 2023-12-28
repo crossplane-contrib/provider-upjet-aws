@@ -22,6 +22,18 @@ type CertificateInitParameters struct {
 	// Specifies X.509 certificate information to be included in the issued certificate. To use with API Passthrough templates
 	APIPassthrough *string `json:"apiPassthrough,omitempty" tf:"api_passthrough,omitempty"`
 
+	// ARN of the certificate authority.
+	// +crossplane:generate:reference:type=CertificateAuthority
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// Reference to a CertificateAuthority to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateAuthority to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+
 	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA.
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 

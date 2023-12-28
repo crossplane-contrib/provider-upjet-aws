@@ -37,6 +37,22 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -62,6 +78,22 @@ func (mg *StreamConsumer) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.StreamArnRef,
+		Selector:     mg.Spec.InitProvider.StreamArnSelector,
+		To: reference.To{
+			List:    &StreamList{},
+			Managed: &Stream{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamArn")
+	}
+	mg.Spec.InitProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamArnRef = rsp.ResolvedReference
 
 	return nil
 }

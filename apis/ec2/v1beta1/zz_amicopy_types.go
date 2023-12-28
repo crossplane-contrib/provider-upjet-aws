@@ -78,8 +78,33 @@ type AMICopyInitParameters struct {
 
 	EphemeralBlockDevice []AMICopyEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
 
+	// Full ARN of the KMS Key to use when encrypting the snapshots of an image during a copy operation. If not specified, then the default AWS KMS Key will be used
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// Region-unique name for the AMI.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Id of the AMI to copy. This id must be valid in the region
+	// given by source_ami_region.
+	// +crossplane:generate:reference:type=AMI
+	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
+
+	// Reference to a AMI to populate sourceAmiId.
+	// +kubebuilder:validation:Optional
+	SourceAMIIDRef *v1.Reference `json:"sourceAmiIdRef,omitempty" tf:"-"`
+
+	// Selector for a AMI to populate sourceAmiId.
+	// +kubebuilder:validation:Optional
+	SourceAMIIDSelector *v1.Selector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
 
 	// Region from which the AMI will be copied. This may be the
 	// same as the AWS provider region in order to create a copy within the same region.

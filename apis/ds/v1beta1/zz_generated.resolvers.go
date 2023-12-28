@@ -120,6 +120,78 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.ForProvider.VPCSettings[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ConnectSettings); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ConnectSettings[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.ConnectSettings[i3].SubnetIdsRefs,
+			Selector:      mg.Spec.InitProvider.ConnectSettings[i3].SubnetIdsSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ConnectSettings[i3].SubnetIds")
+		}
+		mg.Spec.InitProvider.ConnectSettings[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.ConnectSettings[i3].SubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ConnectSettings); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectSettings[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ConnectSettings[i3].VPCIDRef,
+			Selector:     mg.Spec.InitProvider.ConnectSettings[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta1.VPCList{},
+				Managed: &v1beta1.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ConnectSettings[i3].VPCID")
+		}
+		mg.Spec.InitProvider.ConnectSettings[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ConnectSettings[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCSettings); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSettings[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.VPCSettings[i3].SubnetIdsRefs,
+			Selector:      mg.Spec.InitProvider.VPCSettings[i3].SubnetIdsSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCSettings[i3].SubnetIds")
+		}
+		mg.Spec.InitProvider.VPCSettings[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCSettings[i3].SubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCSettings); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCSettings[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.VPCSettings[i3].VPCIDRef,
+			Selector:     mg.Spec.InitProvider.VPCSettings[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta1.VPCList{},
+				Managed: &v1beta1.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCSettings[i3].VPCID")
+		}
+		mg.Spec.InitProvider.VPCSettings[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VPCSettings[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -146,6 +218,22 @@ func (mg *SharedDirectory) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DirectoryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DirectoryIDRef,
+		Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &DirectoryList{},
+			Managed: &Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DirectoryID")
+	}
+	mg.Spec.InitProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DirectoryIDRef = rsp.ResolvedReference
 
 	return nil
 }

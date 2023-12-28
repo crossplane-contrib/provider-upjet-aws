@@ -25,6 +25,19 @@ type MappingRuleInitParameters struct {
 	// The match condition that specifies how closely the claim value in the IdP token must match Value.
 	MatchType *string `json:"matchType,omitempty" tf:"match_type,omitempty"`
 
+	// The role ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// A brief string that the claim must match, for example, "paid" or "yes".
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -74,6 +87,19 @@ type MappingRuleParameters struct {
 }
 
 type PoolRolesAttachmentInitParameters struct {
+
+	// An identity pool ID in the format REGION_GUID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidentity/v1beta1.Pool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IdentityPoolID *string `json:"identityPoolId,omitempty" tf:"identity_pool_id,omitempty"`
+
+	// Reference to a Pool in cognitoidentity to populate identityPoolId.
+	// +kubebuilder:validation:Optional
+	IdentityPoolIDRef *v1.Reference `json:"identityPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a Pool in cognitoidentity to populate identityPoolId.
+	// +kubebuilder:validation:Optional
+	IdentityPoolIDSelector *v1.Selector `json:"identityPoolIdSelector,omitempty" tf:"-"`
 
 	// A List of Role Mapping.
 	RoleMapping []RoleMappingInitParameters `json:"roleMapping,omitempty" tf:"role_mapping,omitempty"`

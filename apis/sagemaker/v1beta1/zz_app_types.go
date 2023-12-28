@@ -25,6 +25,19 @@ type AppInitParameters struct {
 	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
+	// The domain ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
+
+	// Reference to a Domain in sagemaker to populate domainId.
+	// +kubebuilder:validation:Optional
+	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in sagemaker to populate domainId.
+	// +kubebuilder:validation:Optional
+	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.See Resource Spec below.
 	ResourceSpec []ResourceSpecInitParameters `json:"resourceSpec,omitempty" tf:"resource_spec,omitempty"`
 
@@ -34,6 +47,19 @@ type AppInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The user profile name. At least one of user_profile_name or space_name required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.UserProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_profile_name",false)
+	UserProfileName *string `json:"userProfileName,omitempty" tf:"user_profile_name,omitempty"`
+
+	// Reference to a UserProfile in sagemaker to populate userProfileName.
+	// +kubebuilder:validation:Optional
+	UserProfileNameRef *v1.Reference `json:"userProfileNameRef,omitempty" tf:"-"`
+
+	// Selector for a UserProfile in sagemaker to populate userProfileName.
+	// +kubebuilder:validation:Optional
+	UserProfileNameSelector *v1.Selector `json:"userProfileNameSelector,omitempty" tf:"-"`
 }
 
 type AppObservation struct {

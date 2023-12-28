@@ -22,8 +22,34 @@ type AnalyticsConfigurationInitParameters struct {
 	// Application ARN for an Amazon Pinpoint application. Conflicts with external_id and role_arn.
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
+	// Application ID for an Amazon Pinpoint application.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("application_id",true)
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Reference to a App in pinpoint to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a App in pinpoint to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+
 	// ID for the Analytics Configuration. Conflicts with application_arn.
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
+
+	// ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics. Conflicts with application_arn.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// If set to true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
 	UserDataShared *bool `json:"userDataShared,omitempty" tf:"user_data_shared,omitempty"`
@@ -203,6 +229,18 @@ type UserPoolClientInitParameters struct {
 
 	// Configuration block for units in which the validity times are represented in. Detailed below.
 	TokenValidityUnits []TokenValidityUnitsInitParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
+
+	// User pool the client belongs to.
+	// +crossplane:generate:reference:type=UserPool
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
 	// List of user pool attributes the application client can write to.
 	// +listType=set

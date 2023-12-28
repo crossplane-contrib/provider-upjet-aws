@@ -100,6 +100,24 @@ type InstanceInitParameters struct {
 	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
+	// Name of DB subnet group. DB instance will
+	// be created in the VPC associated with the DB subnet group. If unspecified, will
+	// be created in the default VPC, or in EC2 Classic, if available. When working
+	// with read replicas, it should be specified only if the source database
+	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
+	// action CreateDBInstanceReadReplica
+	// for additional read replica contraints.
+	// +crossplane:generate:reference:type=SubnetGroup
+	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
+
+	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// +kubebuilder:validation:Optional
+	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// +kubebuilder:validation:Optional
+	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
 
@@ -140,6 +158,20 @@ type InstanceInitParameters struct {
 	// See the RDS User Guide for details.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// The ARN for the KMS encryption key. If creating an
+	// encrypted replica, set this to the destination KMS ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// License model information for this DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
@@ -153,6 +185,19 @@ type InstanceInitParameters struct {
 	// Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided.
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key_id",true)
+	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate masterUserSecretKmsKeyId.
+	// +kubebuilder:validation:Optional
+	MasterUserSecretKMSKeyIDRef *v1.Reference `json:"masterUserSecretKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate masterUserSecretKmsKeyId.
+	// +kubebuilder:validation:Optional
+	MasterUserSecretKMSKeyIDSelector *v1.Selector `json:"masterUserSecretKmsKeyIdSelector,omitempty" tf:"-"`
+
 	// When configured, the upper limit to which Amazon RDS can automatically scale the storage of the DB instance. Configuring this will automatically ignore differences to allocated_storage. Must be greater than or equal to allocated_storage or 0 to disable Storage Autoscaling.
 	MaxAllocatedStorage *float64 `json:"maxAllocatedStorage,omitempty" tf:"max_allocated_storage,omitempty"`
 
@@ -161,6 +206,23 @@ type InstanceInitParameters struct {
 	// collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid
 	// Values: 0, 1, 5, 10, 15, 30, 60.
 	MonitoringInterval *float64 `json:"monitoringInterval,omitempty" tf:"monitoring_interval,omitempty"`
+
+	// The ARN for the IAM role that permits RDS
+	// to send enhanced monitoring metrics to CloudWatch Logs. You can find more
+	// information on the AWS
+	// Documentation
+	// what IAM permissions are needed to allow Enhanced Monitoring for RDS Instances.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	MonitoringRoleArn *string `json:"monitoringRoleArn,omitempty" tf:"monitoring_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate monitoringRoleArn.
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnRef *v1.Reference `json:"monitoringRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate monitoringRoleArn.
+	// +kubebuilder:validation:Optional
+	MonitoringRoleArnSelector *v1.Selector `json:"monitoringRoleArnSelector,omitempty" tf:"-"`
 
 	// Specifies if the RDS instance is multi-AZ
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
@@ -201,6 +263,26 @@ type InstanceInitParameters struct {
 	// Specifies whether the replica is in either mounted or open-read-only mode. This attribute
 	// is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.
 	ReplicaMode *string `json:"replicaMode,omitempty" tf:"replica_mode,omitempty"`
+
+	// Specifies that this resource is a Replicate
+	// database, and to use this value as the source database. This correlates to the
+	// identifier of another Amazon RDS Database to replicate (if replicating within
+	// a single region) or ARN of the Amazon RDS Database to replicate (if replicating
+	// cross-region). Note that if you are
+	// creating a cross-region replica of an encrypted database you will also need to
+	// specify a kms_key_id. See DB Instance Replication and Working with
+	// PostgreSQL and MySQL Read Replicas
+	// for more information on using Replication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
+
+	// Reference to a Instance in rds to populate replicateSourceDb.
+	// +kubebuilder:validation:Optional
+	ReplicateSourceDBRef *v1.Reference `json:"replicateSourceDbRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in rds to populate replicateSourceDb.
+	// +kubebuilder:validation:Optional
+	ReplicateSourceDBSelector *v1.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
 	RestoreToPointInTime []RestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
@@ -253,6 +335,22 @@ type InstanceInitParameters struct {
 
 	// Username for the master DB user. Cannot be specified for a replica.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// List of VPC security groups to
+	// associate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
+	// +listType=set
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
 type InstanceObservation struct {

@@ -21,6 +21,19 @@ type KinesisConfigurationInitParameters struct {
 
 	// Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the number of records sent per API call. Default: true.
 	AggregationEnabled *bool `json:"aggregationEnabled,omitempty" tf:"aggregation_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisConfigurationObservation struct {
@@ -63,6 +76,32 @@ type StreamInitParameters struct {
 
 	// The configuration settings of the Kinesis Data Streams destination for your stream request. Documented below.
 	KinesisConfiguration []KinesisConfigurationInitParameters `json:"kinesisConfiguration,omitempty" tf:"kinesis_configuration,omitempty"`
+
+	// The name of the QLDB ledger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/qldb/v1beta1.Ledger
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	LedgerName *string `json:"ledgerName,omitempty" tf:"ledger_name,omitempty"`
+
+	// Reference to a Ledger in qldb to populate ledgerName.
+	// +kubebuilder:validation:Optional
+	LedgerNameRef *v1.Reference `json:"ledgerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Ledger in qldb to populate ledgerName.
+	// +kubebuilder:validation:Optional
+	LedgerNameSelector *v1.Selector `json:"ledgerNameSelector,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.  Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in the Amazon QLDB Developer Guide.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`

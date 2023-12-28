@@ -19,6 +19,18 @@ import (
 
 type HostedZoneDNSSECInitParameters struct {
 
+	// Identifier of the Route 53 Hosted Zone.
+	// +crossplane:generate:reference:type=Zone
+	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
+
+	// Reference to a Zone to populate hostedZoneId.
+	// +kubebuilder:validation:Optional
+	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a Zone to populate hostedZoneId.
+	// +kubebuilder:validation:Optional
+	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
+
 	// Hosted Zone signing status. Valid values: SIGNING, NOT_SIGNING. Defaults to SIGNING.
 	SigningStatus *string `json:"signingStatus,omitempty" tf:"signing_status,omitempty"`
 }

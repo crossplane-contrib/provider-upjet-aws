@@ -45,6 +45,18 @@ type VPCIpamPoolInitParameters struct {
 	// A description for the IPAM pool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the scope in which you would like to create the IPAM pool.
+	// +crossplane:generate:reference:type=VPCIpamScope
+	IpamScopeID *string `json:"ipamScopeId,omitempty" tf:"ipam_scope_id,omitempty"`
+
+	// Reference to a VPCIpamScope to populate ipamScopeId.
+	// +kubebuilder:validation:Optional
+	IpamScopeIDRef *v1.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpamScope to populate ipamScopeId.
+	// +kubebuilder:validation:Optional
+	IpamScopeIDSelector *v1.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
+
 	// The locale in which you would like to create the IPAM pool. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. Possible values: Any AWS region, such as us-east-1.
 	Locale *string `json:"locale,omitempty" tf:"locale,omitempty"`
 
@@ -53,6 +65,19 @@ type VPCIpamPoolInitParameters struct {
 
 	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
+
+	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceIpamPoolID *string `json:"sourceIpamPoolId,omitempty" tf:"source_ipam_pool_id,omitempty"`
+
+	// Reference to a VPCIpamPool in ec2 to populate sourceIpamPoolId.
+	// +kubebuilder:validation:Optional
+	SourceIpamPoolIDRef *v1.Reference `json:"sourceIpamPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpamPool in ec2 to populate sourceIpamPoolId.
+	// +kubebuilder:validation:Optional
+	SourceIpamPoolIDSelector *v1.Selector `json:"sourceIpamPoolIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

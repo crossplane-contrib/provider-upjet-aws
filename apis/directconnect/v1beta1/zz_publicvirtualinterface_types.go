@@ -31,6 +31,18 @@ type PublicVirtualInterfaceInitParameters struct {
 	// The authentication key for BGP configuration.
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
+	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
+	// +crossplane:generate:reference:type=Connection
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// Reference to a Connection to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Connection to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+
 	// The IPv4 CIDR destination address to which Amazon should send traffic. Required for IPv4 BGP peers.
 	CustomerAddress *string `json:"customerAddress,omitempty" tf:"customer_address,omitempty"`
 

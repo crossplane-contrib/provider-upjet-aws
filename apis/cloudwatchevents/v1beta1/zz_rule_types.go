@@ -22,11 +22,37 @@ type RuleInitParameters struct {
 	// The description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name or ARN of the event bus to associate with this rule.
+	// If you omit this, the default event bus is used.
+	// +crossplane:generate:reference:type=Bus
+	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
+
+	// Reference to a Bus to populate eventBusName.
+	// +kubebuilder:validation:Optional
+	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bus to populate eventBusName.
+	// +kubebuilder:validation:Optional
+	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
 	// Whether the rule should be enabled (defaults to true).
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// The Amazon Resource Name (ARN) associated with the role that is used for target invocation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes). At least one of schedule_expression or event_pattern is required. Can only be used on the default event bus. For more information, refer to the AWS documentation Schedule Expressions for Rules.
 	ScheduleExpression *string `json:"scheduleExpression,omitempty" tf:"schedule_expression,omitempty"`

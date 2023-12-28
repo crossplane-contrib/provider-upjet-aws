@@ -29,6 +29,19 @@ type VPCIpamPoolCidrAllocationInitParameters struct {
 	// +listType=set
 	DisallowedCidrs []*string `json:"disallowedCidrs,omitempty" tf:"disallowed_cidrs,omitempty"`
 
+	// The ID of the pool to which you want to assign a CIDR.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
+
+	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
+	// +kubebuilder:validation:Optional
+	IpamPoolIDRef *v1.Reference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
+	// +kubebuilder:validation:Optional
+	IpamPoolIDSelector *v1.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+
 	// The netmask length of the CIDR you would like to allocate to the IPAM pool. Valid Values: 0-128.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 }

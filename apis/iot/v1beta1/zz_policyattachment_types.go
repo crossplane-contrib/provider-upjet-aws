@@ -18,6 +18,31 @@ import (
 )
 
 type PolicyAttachmentInitParameters struct {
+
+	// The name of the policy to attach.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Policy
+	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Reference to a Policy in iot to populate policy.
+	// +kubebuilder:validation:Optional
+	PolicyRef *v1.Reference `json:"policyRef,omitempty" tf:"-"`
+
+	// Selector for a Policy in iot to populate policy.
+	// +kubebuilder:validation:Optional
+	PolicySelector *v1.Selector `json:"policySelector,omitempty" tf:"-"`
+
+	// The identity to which the policy is attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Reference to a Certificate in iot to populate target.
+	// +kubebuilder:validation:Optional
+	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate in iot to populate target.
+	// +kubebuilder:validation:Optional
+	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 type PolicyAttachmentObservation struct {

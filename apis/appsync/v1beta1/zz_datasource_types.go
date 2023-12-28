@@ -101,6 +101,19 @@ type DatasourceInitParameters struct {
 	// AWS RDS settings. See Relational Database Config
 	RelationalDatabaseConfig []RelationalDatabaseConfigInitParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
+	// IAM service role ARN for the data source.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+
 	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -252,6 +265,18 @@ type DeltaSyncConfigParameters struct {
 
 type DynamodbConfigInitParameters struct {
 	DeltaSyncConfig []DeltaSyncConfigInitParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
+
+	// Name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Set to true to use Amazon Cognito credentials with this data source.
 	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`

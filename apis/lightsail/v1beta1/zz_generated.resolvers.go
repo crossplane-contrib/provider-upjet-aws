@@ -52,6 +52,38 @@ func (mg *DiskAttachment) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiskName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DiskNameRef,
+		Selector:     mg.Spec.InitProvider.DiskNameSelector,
+		To: reference.To{
+			List:    &DiskList{},
+			Managed: &Disk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DiskName")
+	}
+	mg.Spec.InitProvider.DiskName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DiskNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.InstanceNameRef,
+		Selector:     mg.Spec.InitProvider.InstanceNameSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceName")
+	}
+	mg.Spec.InitProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -104,6 +136,22 @@ func (mg *InstancePublicPorts) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.InstanceNameRef,
+		Selector:     mg.Spec.InitProvider.InstanceNameSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceName")
+	}
+	mg.Spec.InitProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -145,6 +193,38 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.LBName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LBNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.InstanceNameRef,
+		Selector:     mg.Spec.InitProvider.InstanceNameSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceName")
+	}
+	mg.Spec.InitProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LBName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LBNameRef,
+		Selector:     mg.Spec.InitProvider.LBNameSelector,
+		To: reference.To{
+			List:    &LBList{},
+			Managed: &LB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LBName")
+	}
+	mg.Spec.InitProvider.LBName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LBNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -213,6 +293,38 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.StaticIPName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StaticIPNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InstanceNameRef,
+		Selector:     mg.Spec.InitProvider.InstanceNameSelector,
+		To: reference.To{
+			List:    &InstanceList{},
+			Managed: &Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceName")
+	}
+	mg.Spec.InitProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StaticIPName),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StaticIPNameRef,
+		Selector:     mg.Spec.InitProvider.StaticIPNameSelector,
+		To: reference.To{
+			List:    &StaticIPList{},
+			Managed: &StaticIP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StaticIPName")
+	}
+	mg.Spec.InitProvider.StaticIPName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StaticIPNameRef = rsp.ResolvedReference
 
 	return nil
 }

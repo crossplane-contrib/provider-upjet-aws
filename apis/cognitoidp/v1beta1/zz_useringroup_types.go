@@ -18,6 +18,44 @@ import (
 )
 
 type UserInGroupInitParameters struct {
+
+	// The name of the group to which the user is to be added.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// Reference to a UserGroup in cognitoidp to populate groupName.
+	// +kubebuilder:validation:Optional
+	GroupNameRef *v1.Reference `json:"groupNameRef,omitempty" tf:"-"`
+
+	// Selector for a UserGroup in cognitoidp to populate groupName.
+	// +kubebuilder:validation:Optional
+	GroupNameSelector *v1.Selector `json:"groupNameSelector,omitempty" tf:"-"`
+
+	// The user pool ID of the user and group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
+
+	// The username of the user to be added to the group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.User
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// Reference to a User in cognitoidp to populate username.
+	// +kubebuilder:validation:Optional
+	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+
+	// Selector for a User in cognitoidp to populate username.
+	// +kubebuilder:validation:Optional
+	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type UserInGroupObservation struct {

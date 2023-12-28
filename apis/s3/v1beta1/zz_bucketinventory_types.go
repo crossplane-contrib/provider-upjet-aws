@@ -57,6 +57,19 @@ type BucketInventoryFilterParameters struct {
 
 type BucketInventoryInitParameters struct {
 
+	// Name of the source bucket that inventory lists the objects for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Contains information about where to publish the inventory results (documented below).
 	Destination []BucketInventoryDestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
@@ -165,6 +178,19 @@ type DestinationBucketInitParameters struct {
 
 	// ID of the account that owns the destination bucket. Recommended to be set to prevent problems if the destination bucket ownership changes.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Amazon S3 bucket ARN of the destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// Contains the type of server-side encryption to use to encrypt the inventory (documented below).
 	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`

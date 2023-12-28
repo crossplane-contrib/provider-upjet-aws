@@ -36,6 +36,22 @@ func (mg *SigningJob) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ProfileName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ProfileNameRef,
+		Selector:     mg.Spec.InitProvider.ProfileNameSelector,
+		To: reference.To{
+			List:    &SigningProfileList{},
+			Managed: &SigningProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProfileName")
+	}
+	mg.Spec.InitProvider.ProfileName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProfileNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -77,6 +93,22 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.ProfileVersion = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileVersionRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileVersion),
+		Extract:      resource.ExtractParamPath("version", true),
+		Reference:    mg.Spec.InitProvider.ProfileVersionRef,
+		Selector:     mg.Spec.InitProvider.ProfileVersionSelector,
+		To: reference.To{
+			List:    &SigningProfileList{},
+			Managed: &SigningProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProfileVersion")
+	}
+	mg.Spec.InitProvider.ProfileVersion = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProfileVersionRef = rsp.ResolvedReference
 
 	return nil
 }

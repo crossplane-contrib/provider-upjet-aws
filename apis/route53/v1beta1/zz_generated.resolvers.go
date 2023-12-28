@@ -38,6 +38,22 @@ func (mg *HealthCheck) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.CloudwatchAlarmName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchAlarmNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchAlarmName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CloudwatchAlarmNameRef,
+		Selector:     mg.Spec.InitProvider.CloudwatchAlarmNameSelector,
+		To: reference.To{
+			List:    &v1beta1.MetricAlarmList{},
+			Managed: &v1beta1.MetricAlarm{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchAlarmName")
+	}
+	mg.Spec.InitProvider.CloudwatchAlarmName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CloudwatchAlarmNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -63,6 +79,22 @@ func (mg *HostedZoneDNSSEC) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.HostedZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HostedZoneIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HostedZoneID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.HostedZoneIDRef,
+		Selector:     mg.Spec.InitProvider.HostedZoneIDSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HostedZoneID")
+	}
+	mg.Spec.InitProvider.HostedZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HostedZoneIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -106,6 +138,38 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HealthCheckID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.HealthCheckIDRef,
+		Selector:     mg.Spec.InitProvider.HealthCheckIDSelector,
+		To: reference.To{
+			List:    &HealthCheckList{},
+			Managed: &HealthCheck{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HealthCheckID")
+	}
+	mg.Spec.InitProvider.HealthCheckID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HealthCheckIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ZoneIDRef,
+		Selector:     mg.Spec.InitProvider.ZoneIDSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
+	}
+	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -131,6 +195,22 @@ func (mg *ResolverConfig) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.VPCList{},
+			Managed: &v1beta11.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -174,6 +254,38 @@ func (mg *TrafficPolicyInstance) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.TrafficPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TrafficPolicyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HostedZoneID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.HostedZoneIDRef,
+		Selector:     mg.Spec.InitProvider.HostedZoneIDSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HostedZoneID")
+	}
+	mg.Spec.InitProvider.HostedZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HostedZoneIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TrafficPolicyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TrafficPolicyIDRef,
+		Selector:     mg.Spec.InitProvider.TrafficPolicyIDSelector,
+		To: reference.To{
+			List:    &TrafficPolicyList{},
+			Managed: &TrafficPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TrafficPolicyID")
+	}
+	mg.Spec.InitProvider.TrafficPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TrafficPolicyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -215,6 +327,38 @@ func (mg *VPCAssociationAuthorization) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCIDRef,
+		Selector:     mg.Spec.InitProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &v1beta11.VPCList{},
+			Managed: &v1beta11.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ZoneIDRef,
+		Selector:     mg.Spec.InitProvider.ZoneIDSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
+	}
+	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -260,6 +404,40 @@ func (mg *Zone) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.VPC[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegationSetID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DelegationSetIDRef,
+		Selector:     mg.Spec.InitProvider.DelegationSetIDSelector,
+		To: reference.To{
+			List:    &DelegationSetList{},
+			Managed: &DelegationSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DelegationSetID")
+	}
+	mg.Spec.InitProvider.DelegationSetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DelegationSetIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPC); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPC[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.VPC[i3].VPCIDRef,
+			Selector:     mg.Spec.InitProvider.VPC[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta11.VPCList{},
+				Managed: &v1beta11.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPC[i3].VPCID")
+		}
+		mg.Spec.InitProvider.VPC[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VPC[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -302,6 +480,38 @@ func (mg *ZoneAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCIDRef,
+		Selector:     mg.Spec.InitProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &v1beta11.VPCList{},
+			Managed: &v1beta11.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+		Extract:      resource.ExtractParamPath("zone_id", true),
+		Reference:    mg.Spec.InitProvider.ZoneIDRef,
+		Selector:     mg.Spec.InitProvider.ZoneIDSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
+	}
+	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
 
 	return nil
 }

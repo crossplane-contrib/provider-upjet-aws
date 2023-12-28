@@ -79,6 +79,64 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnRef,
+				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnSelector,
+				To: reference.To{
+					List:    &VPCConnectorList{},
+					Managed: &VPCConnector{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn")
+			}
+			mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkConfiguration[i3].EgressConfiguration[i4].VPCConnectorArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ObservabilityConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnRef,
+			Selector:     mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnSelector,
+			To: reference.To{
+				List:    &ObservabilityConfigurationList{},
+				Managed: &ObservabilityConfiguration{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn")
+		}
+		mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ObservabilityConfiguration[i3].ObservabilityConfigurationArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SourceConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef,
+				Selector:     mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnSelector,
+				To: reference.To{
+					List:    &ConnectionList{},
+					Managed: &Connection{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn")
+			}
+			mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SourceConfiguration[i3].AuthenticationConfiguration[i4].ConnectionArnRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -121,6 +179,38 @@ func (mg *VPCConnector) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SecurityGroupRefs,
+		Selector:      mg.Spec.InitProvider.SecurityGroupSelector,
+		To: reference.To{
+			List:    &v1beta1.SecurityGroupList{},
+			Managed: &v1beta1.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroups")
+	}
+	mg.Spec.InitProvider.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Subnets),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SubnetRefs,
+		Selector:      mg.Spec.InitProvider.SubnetSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Subnets")
+	}
+	mg.Spec.InitProvider.Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SubnetRefs = mrsp.ResolvedReferences
 
 	return nil
 }

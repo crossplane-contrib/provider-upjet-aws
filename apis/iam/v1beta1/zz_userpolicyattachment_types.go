@@ -18,6 +18,31 @@ import (
 )
 
 type UserPolicyAttachmentInitParameters struct {
+
+	// The ARN of the policy you want to apply
+	// +crossplane:generate:reference:type=Policy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
+
+	// Reference to a Policy to populate policyArn.
+	// +kubebuilder:validation:Optional
+	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Policy to populate policyArn.
+	// +kubebuilder:validation:Optional
+	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
+
+	// The user the policy should be applied to
+	// +crossplane:generate:reference:type=User
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
+
+	// Reference to a User to populate user.
+	// +kubebuilder:validation:Optional
+	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+
+	// Selector for a User to populate user.
+	// +kubebuilder:validation:Optional
+	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type UserPolicyAttachmentObservation struct {

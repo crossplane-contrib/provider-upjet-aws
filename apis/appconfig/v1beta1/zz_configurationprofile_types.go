@@ -19,6 +19,19 @@ import (
 
 type ConfigurationProfileInitParameters struct {
 
+	// Application ID. Must be between 4 and 7 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Reference to a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+
 	// Description of the configuration profile. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -27,6 +40,19 @@ type ConfigurationProfileInitParameters struct {
 
 	// Name for the configuration profile. Must be between 1 and 64 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RetrievalRoleArn *string `json:"retrievalRoleArn,omitempty" tf:"retrieval_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate retrievalRoleArn.
+	// +kubebuilder:validation:Optional
+	RetrievalRoleArnRef *v1.Reference `json:"retrievalRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate retrievalRoleArn.
+	// +kubebuilder:validation:Optional
+	RetrievalRoleArnSelector *v1.Selector `json:"retrievalRoleArnSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

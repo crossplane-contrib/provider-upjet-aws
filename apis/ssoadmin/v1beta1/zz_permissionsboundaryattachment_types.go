@@ -70,6 +70,18 @@ type PermissionsBoundaryAttachmentParameters struct {
 
 type PermissionsBoundaryCustomerManagedPolicyReferenceInitParameters struct {
 
+	// Name of the customer managed IAM Policy to be attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Policy in iam to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a Policy in iam to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// The path to the IAM policy to be attached. The default is /. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }

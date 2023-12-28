@@ -18,6 +18,34 @@ import (
 )
 
 type ScramSecretAssociationInitParameters struct {
+
+	// Amazon Resource Name (ARN) of the MSK cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
+	// Reference to a Cluster in kafka to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnRef *v1.Reference `json:"clusterArnRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in kafka to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
+
+	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:refFieldName=SecretArnRefs
+	// +crossplane:generate:reference:selectorFieldName=SecretArnSelector
+	// +listType=set
+	SecretArnList []*string `json:"secretArnList,omitempty" tf:"secret_arn_list,omitempty"`
+
+	// References to Secret in secretsmanager to populate secretArnList.
+	// +kubebuilder:validation:Optional
+	SecretArnRefs []v1.Reference `json:"secretArnRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Secret in secretsmanager to populate secretArnList.
+	// +kubebuilder:validation:Optional
+	SecretArnSelector *v1.Selector `json:"secretArnSelector,omitempty" tf:"-"`
 }
 
 type ScramSecretAssociationObservation struct {

@@ -22,6 +22,31 @@ type PrincipalPortfolioAssociationInitParameters struct {
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
+	// Portfolio identifier.
+	// +crossplane:generate:reference:type=Portfolio
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Reference to a Portfolio to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+
+	// Selector for a Portfolio to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+
+	// Principal ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// Reference to a User in iam to populate principalArn.
+	// +kubebuilder:validation:Optional
+	PrincipalArnRef *v1.Reference `json:"principalArnRef,omitempty" tf:"-"`
+
+	// Selector for a User in iam to populate principalArn.
+	// +kubebuilder:validation:Optional
+	PrincipalArnSelector *v1.Selector `json:"principalArnSelector,omitempty" tf:"-"`
+
 	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 }

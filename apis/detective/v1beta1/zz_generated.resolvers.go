@@ -36,6 +36,22 @@ func (mg *InvitationAccepter) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.GraphArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GraphArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GraphArn),
+		Extract:      resource.ExtractParamPath("graph_arn", true),
+		Reference:    mg.Spec.InitProvider.GraphArnRef,
+		Selector:     mg.Spec.InitProvider.GraphArnSelector,
+		To: reference.To{
+			List:    &GraphList{},
+			Managed: &Graph{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GraphArn")
+	}
+	mg.Spec.InitProvider.GraphArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GraphArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -61,6 +77,22 @@ func (mg *Member) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.GraphArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GraphArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GraphArn),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.GraphArnRef,
+		Selector:     mg.Spec.InitProvider.GraphArnSelector,
+		To: reference.To{
+			List:    &GraphList{},
+			Managed: &Graph{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GraphArn")
+	}
+	mg.Spec.InitProvider.GraphArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GraphArnRef = rsp.ResolvedReference
 
 	return nil
 }

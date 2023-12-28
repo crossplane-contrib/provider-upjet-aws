@@ -19,6 +19,18 @@ import (
 
 type DelegatedAdministratorInitParameters struct {
 
+	// The account ID number of the member account in the organization to register as a delegated administrator.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Account
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// Reference to a Account in organizations to populate accountId.
+	// +kubebuilder:validation:Optional
+	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in organizations to populate accountId.
+	// +kubebuilder:validation:Optional
+	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
+
 	// The service principal of the AWS service for which you want to make the member account a delegated administrator.
 	ServicePrincipal *string `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 }

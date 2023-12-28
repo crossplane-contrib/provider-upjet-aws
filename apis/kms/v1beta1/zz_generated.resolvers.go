@@ -38,6 +38,22 @@ func (mg *Alias) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.TargetKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetKeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TargetKeyIDRef,
+		Selector:     mg.Spec.InitProvider.TargetKeyIDSelector,
+		To: reference.To{
+			List:    &KeyList{},
+			Managed: &Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetKeyID")
+	}
+	mg.Spec.InitProvider.TargetKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetKeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -63,6 +79,22 @@ func (mg *Ciphertext) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyIDSelector,
+		To: reference.To{
+			List:    &KeyList{},
+			Managed: &Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyID")
+	}
+	mg.Spec.InitProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -106,6 +138,38 @@ func (mg *Grant) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GranteePrincipal),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.GranteePrincipalRef,
+		Selector:     mg.Spec.InitProvider.GranteePrincipalSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GranteePrincipal")
+	}
+	mg.Spec.InitProvider.GranteePrincipal = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GranteePrincipalRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.KeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyIDSelector,
+		To: reference.To{
+			List:    &KeyList{},
+			Managed: &Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyID")
+	}
+	mg.Spec.InitProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -132,6 +196,22 @@ func (mg *ReplicaExternalKey) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.PrimaryKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryKeyArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryKeyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.PrimaryKeyArnRef,
+		Selector:     mg.Spec.InitProvider.PrimaryKeyArnSelector,
+		To: reference.To{
+			List:    &ExternalKeyList{},
+			Managed: &ExternalKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryKeyArn")
+	}
+	mg.Spec.InitProvider.PrimaryKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrimaryKeyArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -157,6 +237,22 @@ func (mg *ReplicaKey) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.PrimaryKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryKeyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.PrimaryKeyArnRef,
+		Selector:     mg.Spec.InitProvider.PrimaryKeyArnSelector,
+		To: reference.To{
+			List:    &KeyList{},
+			Managed: &Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryKeyArn")
+	}
+	mg.Spec.InitProvider.PrimaryKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrimaryKeyArnRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -32,6 +32,19 @@ type CoreNetworkInitParameters struct {
 	// Description of the Core Network.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the global network that a core network will be a part of.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
+
+	// Reference to a GlobalNetwork in networkmanager to populate globalNetworkId.
+	// +kubebuilder:validation:Optional
+	GlobalNetworkIDRef *v1.Reference `json:"globalNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a GlobalNetwork in networkmanager to populate globalNetworkId.
+	// +kubebuilder:validation:Optional
+	GlobalNetworkIDSelector *v1.Selector `json:"globalNetworkIdSelector,omitempty" tf:"-"`
+
 	// Policy document for creating a core network. Note that updating this argument will result in the new policy document version being set as the LATEST and LIVE policy document. Refer to the Core network policies documentation for more information. Conflicts with create_base_policy.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
 

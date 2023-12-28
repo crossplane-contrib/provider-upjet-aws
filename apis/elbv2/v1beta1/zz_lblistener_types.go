@@ -245,6 +245,18 @@ type DefaultActionInitParameters struct {
 	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
 	Redirect []RedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
+	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// +crossplane:generate:reference:type=LBTargetGroup
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -398,6 +410,18 @@ type LBListenerInitParameters struct {
 
 	// Configuration block for default actions. Detailed below.
 	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// ARN of the load balancer.
+	// +crossplane:generate:reference:type=LB
+	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
+
+	// Reference to a LB to populate loadBalancerArn.
+	// +kubebuilder:validation:Optional
+	LoadBalancerArnRef *v1.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
+
+	// Selector for a LB to populate loadBalancerArn.
+	// +kubebuilder:validation:Optional
+	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -600,6 +624,18 @@ type StickinessParameters struct {
 }
 
 type TargetGroupInitParameters struct {
+
+	// ARN of the target group.
+	// +crossplane:generate:reference:type=LBTargetGroup
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a LBTargetGroup to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Weight. The range is 0 to 999.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`

@@ -42,6 +42,24 @@ func (mg *ConfigRule) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.Source[i3].SourceIdentifierRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].SourceIdentifier),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Source[i3].SourceIdentifierRef,
+			Selector:     mg.Spec.InitProvider.Source[i3].SourceIdentifierSelector,
+			To: reference.To{
+				List:    &v1beta1.FunctionList{},
+				Managed: &v1beta1.Function{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].SourceIdentifier")
+		}
+		mg.Spec.InitProvider.Source[i3].SourceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source[i3].SourceIdentifierRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -71,6 +89,24 @@ func (mg *ConfigurationAggregator) ResolveReferences(ctx context.Context, c clie
 		mg.Spec.ForProvider.OrganizationAggregationSource[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrganizationAggregationSource); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArnRef,
+			Selector:     mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OrganizationAggregationSource[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -98,6 +134,22 @@ func (mg *ConfigurationRecorder) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -123,6 +175,22 @@ func (mg *DeliveryChannel) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.S3BucketName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.S3BucketNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3BucketName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.S3BucketNameRef,
+		Selector:     mg.Spec.InitProvider.S3BucketNameSelector,
+		To: reference.To{
+			List:    &v1beta12.BucketList{},
+			Managed: &v1beta12.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.S3BucketName")
+	}
+	mg.Spec.InitProvider.S3BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.S3BucketNameRef = rsp.ResolvedReference
 
 	return nil
 }

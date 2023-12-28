@@ -18,6 +18,19 @@ import (
 )
 
 type ModelPackageGroupPolicyInitParameters struct {
+
+	// The name of the model package group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ModelPackageGroup
+	ModelPackageGroupName *string `json:"modelPackageGroupName,omitempty" tf:"model_package_group_name,omitempty"`
+
+	// Reference to a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
+	// +kubebuilder:validation:Optional
+	ModelPackageGroupNameRef *v1.Reference `json:"modelPackageGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
+	// +kubebuilder:validation:Optional
+	ModelPackageGroupNameSelector *v1.Selector `json:"modelPackageGroupNameSelector,omitempty" tf:"-"`
+
 	ResourcePolicy *string `json:"resourcePolicy,omitempty" tf:"resource_policy,omitempty"`
 }
 

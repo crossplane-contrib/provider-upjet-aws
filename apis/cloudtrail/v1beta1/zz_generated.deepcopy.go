@@ -563,6 +563,21 @@ func (in *EventDataStoreInitParameters) DeepCopyInto(out *EventDataStoreInitPara
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MultiRegionEnabled != nil {
 		in, out := &in.MultiRegionEnabled, &out.MultiRegionEnabled
 		*out = new(bool)
@@ -1349,6 +1364,21 @@ func (in *TrailInitParameters) DeepCopyInto(out *TrailInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CloudWatchLogsRoleArn != nil {
+		in, out := &in.CloudWatchLogsRoleArn, &out.CloudWatchLogsRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.CloudWatchLogsRoleArnRef != nil {
+		in, out := &in.CloudWatchLogsRoleArnRef, &out.CloudWatchLogsRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CloudWatchLogsRoleArnSelector != nil {
+		in, out := &in.CloudWatchLogsRoleArnSelector, &out.CloudWatchLogsRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.EnableLogFileValidation != nil {
 		in, out := &in.EnableLogFileValidation, &out.EnableLogFileValidation
 		*out = new(bool)
@@ -1387,6 +1417,36 @@ func (in *TrailInitParameters) DeepCopyInto(out *TrailInitParameters) {
 		in, out := &in.IsOrganizationTrail, &out.IsOrganizationTrail
 		*out = new(bool)
 		**out = **in
+	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketName != nil {
+		in, out := &in.S3BucketName, &out.S3BucketName
+		*out = new(string)
+		**out = **in
+	}
+	if in.S3BucketNameRef != nil {
+		in, out := &in.S3BucketNameRef, &out.S3BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketNameSelector != nil {
+		in, out := &in.S3BucketNameSelector, &out.S3BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.S3KeyPrefix != nil {
 		in, out := &in.S3KeyPrefix, &out.S3KeyPrefix

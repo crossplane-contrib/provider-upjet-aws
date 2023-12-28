@@ -61,6 +61,44 @@ func (mg *LifecyclePolicy) ResolveReferences(ctx context.Context, c client.Reade
 			}
 		}
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ExecutionRoleArn")
+	}
+	mg.Spec.InitProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PolicyDetails); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PolicyDetails[i3].Schedule); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef,
+					Selector:     mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnSelector,
+					To: reference.To{
+						List:    &v1beta11.KeyList{},
+						Managed: &v1beta11.Key{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArn")
+				}
+				mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.PolicyDetails[i3].Schedule[i4].CrossRegionCopyRule[i5].CmkArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

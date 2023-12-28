@@ -35,5 +35,21 @@ func (mg *RepositoryPolicy) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.RepositoryName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RepositoryNameRef,
+		Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
+		To: reference.To{
+			List:    &RepositoryList{},
+			Managed: &Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RepositoryName")
+	}
+	mg.Spec.InitProvider.RepositoryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RepositoryNameRef = rsp.ResolvedReference
+
 	return nil
 }

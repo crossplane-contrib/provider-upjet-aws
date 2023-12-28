@@ -51,6 +51,19 @@ type BucketMetricFilterParameters struct {
 
 type BucketMetricInitParameters struct {
 
+	// Name of the bucket to put metric configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Object filtering that accepts a prefix, tags, or a logical AND of prefix and tags (documented below).
 	Filter []BucketMetricFilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 

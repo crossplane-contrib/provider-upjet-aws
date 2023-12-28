@@ -78,6 +78,60 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.StorageLocation[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Bucket),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.StorageLocation[i3].BucketRef,
+			Selector:     mg.Spec.InitProvider.StorageLocation[i3].BucketSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Bucket")
+		}
+		mg.Spec.InitProvider.StorageLocation[i3].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageLocation[i3].BucketRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Key),
+			Extract:      resource.ExtractParamPath("key", false),
+			Reference:    mg.Spec.InitProvider.StorageLocation[i3].KeyRef,
+			Selector:     mg.Spec.InitProvider.StorageLocation[i3].KeySelector,
+			To: reference.To{
+				List:    &v1beta1.ObjectList{},
+				Managed: &v1beta1.Object{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Key")
+		}
+		mg.Spec.InitProvider.StorageLocation[i3].Key = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageLocation[i3].KeyRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef,
+			Selector:     mg.Spec.InitProvider.StorageLocation[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.StorageLocation[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -121,6 +175,38 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.InstanceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BuildID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BuildIDRef,
+		Selector:     mg.Spec.InitProvider.BuildIDSelector,
+		To: reference.To{
+			List:    &BuildList{},
+			Managed: &Build{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BuildID")
+	}
+	mg.Spec.InitProvider.BuildID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BuildIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.InstanceRoleArnRef,
+		Selector:     mg.Spec.InitProvider.InstanceRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceRoleArn")
+	}
+	mg.Spec.InitProvider.InstanceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -146,6 +232,22 @@ func (mg *GameSessionQueue) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.NotificationTarget = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NotificationTargetRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NotificationTarget),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.NotificationTargetRef,
+		Selector:     mg.Spec.InitProvider.NotificationTargetSelector,
+		To: reference.To{
+			List:    &v1beta12.TopicList{},
+			Managed: &v1beta12.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NotificationTarget")
+	}
+	mg.Spec.InitProvider.NotificationTarget = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NotificationTargetRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -209,6 +311,60 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 		mg.Spec.ForProvider.StorageLocation[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageLocation[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Bucket),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.StorageLocation[i3].BucketRef,
+			Selector:     mg.Spec.InitProvider.StorageLocation[i3].BucketSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Bucket")
+		}
+		mg.Spec.InitProvider.StorageLocation[i3].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageLocation[i3].BucketRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Key),
+			Extract:      resource.ExtractParamPath("key", false),
+			Reference:    mg.Spec.InitProvider.StorageLocation[i3].KeyRef,
+			Selector:     mg.Spec.InitProvider.StorageLocation[i3].KeySelector,
+			To: reference.To{
+				List:    &v1beta1.ObjectList{},
+				Managed: &v1beta1.Object{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Key")
+		}
+		mg.Spec.InitProvider.StorageLocation[i3].Key = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageLocation[i3].KeyRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef,
+			Selector:     mg.Spec.InitProvider.StorageLocation[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.StorageLocation[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef = rsp.ResolvedReference
 
 	}
 

@@ -85,6 +85,21 @@ func (in *ReportDefinitionInitParameters) DeepCopyInto(out *ReportDefinitionInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.S3Bucket != nil {
+		in, out := &in.S3Bucket, &out.S3Bucket
+		*out = new(string)
+		**out = **in
+	}
+	if in.S3BucketRef != nil {
+		in, out := &in.S3BucketRef, &out.S3BucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.S3BucketSelector != nil {
+		in, out := &in.S3BucketSelector, &out.S3BucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.S3Prefix != nil {
 		in, out := &in.S3Prefix, &out.S3Prefix
 		*out = new(string)

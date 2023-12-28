@@ -19,8 +19,34 @@ import (
 
 type ManagedPrefixListEntryInitParameters struct {
 
+	// CIDR block of this entry.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
+	Cidr *string `json:"cidr,omitempty" tf:"cidr,omitempty"`
+
+	// Reference to a VPC in ec2 to populate cidr.
+	// +kubebuilder:validation:Optional
+	CidrRef *v1.Reference `json:"cidrRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate cidr.
+	// +kubebuilder:validation:Optional
+	CidrSelector *v1.Selector `json:"cidrSelector,omitempty" tf:"-"`
+
 	// Description of this entry. Due to API limitations, updating only the description of an entry requires recreating the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// CIDR block of this entry.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
+
+	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
+	// +kubebuilder:validation:Optional
+	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
+	// +kubebuilder:validation:Optional
+	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 }
 
 type ManagedPrefixListEntryObservation struct {

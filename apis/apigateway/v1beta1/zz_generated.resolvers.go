@@ -41,6 +41,22 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.CloudwatchRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.CloudwatchRoleArnRef,
+		Selector:     mg.Spec.InitProvider.CloudwatchRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchRoleArn")
+	}
+	mg.Spec.InitProvider.CloudwatchRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CloudwatchRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -98,6 +114,54 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerCredentials),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.AuthorizerCredentialsRef,
+		Selector:     mg.Spec.InitProvider.AuthorizerCredentialsSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AuthorizerCredentials")
+	}
+	mg.Spec.InitProvider.AuthorizerCredentials = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AuthorizerCredentialsRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerURI),
+		Extract:      resource.ExtractParamPath("invoke_arn", true),
+		Reference:    mg.Spec.InitProvider.AuthorizerURIRef,
+		Selector:     mg.Spec.InitProvider.AuthorizerURISelector,
+		To: reference.To{
+			List:    &v1beta11.FunctionList{},
+			Managed: &v1beta11.Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AuthorizerURI")
+	}
+	mg.Spec.InitProvider.AuthorizerURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AuthorizerURIRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -157,6 +221,54 @@ func (mg *BasePathMapping) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.StageName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StageNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.APIIDRef,
+		Selector:     mg.Spec.InitProvider.APIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.APIID")
+	}
+	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
+		Extract:      resource.ExtractParamPath("domain_name", false),
+		Reference:    mg.Spec.InitProvider.DomainNameRef,
+		Selector:     mg.Spec.InitProvider.DomainNameSelector,
+		To: reference.To{
+			List:    &DomainNameList{},
+			Managed: &DomainName{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainName")
+	}
+	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StageName),
+		Extract:      resource.ExtractParamPath("stage_name", false),
+		Reference:    mg.Spec.InitProvider.StageNameRef,
+		Selector:     mg.Spec.InitProvider.StageNameSelector,
+		To: reference.To{
+			List:    &StageList{},
+			Managed: &Stage{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StageName")
+	}
+	mg.Spec.InitProvider.StageName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StageNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -182,6 +294,22 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -209,6 +337,22 @@ func (mg *DocumentationPart) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -234,6 +378,22 @@ func (mg *DocumentationVersion) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -277,6 +437,38 @@ func (mg *DomainName) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.RegionalCertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegionalCertificateArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateArn),
+		Extract:      resource.ExtractParamPath("certificate_arn", false),
+		Reference:    mg.Spec.InitProvider.CertificateArnRef,
+		Selector:     mg.Spec.InitProvider.CertificateArnSelector,
+		To: reference.To{
+			List:    &v1beta12.CertificateValidationList{},
+			Managed: &v1beta12.CertificateValidation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateArn")
+	}
+	mg.Spec.InitProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegionalCertificateArn),
+		Extract:      resource.ExtractParamPath("certificate_arn", false),
+		Reference:    mg.Spec.InitProvider.RegionalCertificateArnRef,
+		Selector:     mg.Spec.InitProvider.RegionalCertificateArnSelector,
+		To: reference.To{
+			List:    &v1beta12.CertificateValidationList{},
+			Managed: &v1beta12.CertificateValidation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RegionalCertificateArn")
+	}
+	mg.Spec.InitProvider.RegionalCertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RegionalCertificateArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -302,6 +494,22 @@ func (mg *GatewayResponse) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -393,6 +601,86 @@ func (mg *Integration) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.URI = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.URIRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ConnectionIDRef,
+		Selector:     mg.Spec.InitProvider.ConnectionIDSelector,
+		To: reference.To{
+			List:    &VPCLinkList{},
+			Managed: &VPCLink{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ConnectionID")
+	}
+	mg.Spec.InitProvider.ConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ConnectionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPMethod),
+		Extract:      resource.ExtractParamPath("http_method", false),
+		Reference:    mg.Spec.InitProvider.HTTPMethodRef,
+		Selector:     mg.Spec.InitProvider.HTTPMethodSelector,
+		To: reference.To{
+			List:    &MethodList{},
+			Managed: &Method{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HTTPMethod")
+	}
+	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ResourceList{},
+			Managed: &Resource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.URI),
+		Extract:      resource.ExtractParamPath("invoke_arn", true),
+		Reference:    mg.Spec.InitProvider.URIRef,
+		Selector:     mg.Spec.InitProvider.URISelector,
+		To: reference.To{
+			List:    &v1beta11.FunctionList{},
+			Managed: &v1beta11.Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.URI")
+	}
+	mg.Spec.InitProvider.URI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.URIRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -467,6 +755,70 @@ func (mg *IntegrationResponse) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.StatusCode = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StatusCodeRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPMethod),
+		Extract:      resource.ExtractParamPath("http_method", false),
+		Reference:    mg.Spec.InitProvider.HTTPMethodRef,
+		Selector:     mg.Spec.InitProvider.HTTPMethodSelector,
+		To: reference.To{
+			List:    &MethodList{},
+			Managed: &Method{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HTTPMethod")
+	}
+	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ResourceList{},
+			Managed: &Resource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StatusCode),
+		Extract:      resource.ExtractParamPath("status_code", false),
+		Reference:    mg.Spec.InitProvider.StatusCodeRef,
+		Selector:     mg.Spec.InitProvider.StatusCodeSelector,
+		To: reference.To{
+			List:    &MethodResponseList{},
+			Managed: &MethodResponse{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StatusCode")
+	}
+	mg.Spec.InitProvider.StatusCode = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StatusCodeRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -524,6 +876,54 @@ func (mg *Method) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AuthorizerIDRef,
+		Selector:     mg.Spec.InitProvider.AuthorizerIDSelector,
+		To: reference.To{
+			List:    &AuthorizerList{},
+			Managed: &Authorizer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AuthorizerID")
+	}
+	mg.Spec.InitProvider.AuthorizerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AuthorizerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ResourceList{},
+			Managed: &Resource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -583,6 +983,54 @@ func (mg *MethodResponse) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPMethod),
+		Extract:      resource.ExtractParamPath("http_method", false),
+		Reference:    mg.Spec.InitProvider.HTTPMethodRef,
+		Selector:     mg.Spec.InitProvider.HTTPMethodSelector,
+		To: reference.To{
+			List:    &MethodList{},
+			Managed: &Method{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HTTPMethod")
+	}
+	mg.Spec.InitProvider.HTTPMethod = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HTTPMethodRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ResourceList{},
+			Managed: &Resource{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -625,6 +1073,38 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StageName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StageNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StageName),
+		Extract:      resource.ExtractParamPath("stage_name", false),
+		Reference:    mg.Spec.InitProvider.StageNameRef,
+		Selector:     mg.Spec.InitProvider.StageNameSelector,
+		To: reference.To{
+			List:    &StageList{},
+			Managed: &Stage{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StageName")
+	}
+	mg.Spec.InitProvider.StageName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StageNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -651,6 +1131,22 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -676,6 +1172,22 @@ func (mg *RequestValidator) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -719,6 +1231,38 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParentID),
+		Extract:      resource.ExtractParamPath("root_resource_id", true),
+		Reference:    mg.Spec.InitProvider.ParentIDRef,
+		Selector:     mg.Spec.InitProvider.ParentIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ParentID")
+	}
+	mg.Spec.InitProvider.ParentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ParentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -744,6 +1288,22 @@ func (mg *RestAPIPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -786,6 +1346,38 @@ func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RestAPIIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeploymentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DeploymentIDRef,
+		Selector:     mg.Spec.InitProvider.DeploymentIDSelector,
+		To: reference.To{
+			List:    &DeploymentList{},
+			Managed: &Deployment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DeploymentID")
+	}
+	mg.Spec.InitProvider.DeploymentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeploymentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestAPIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RestAPIIDRef,
+		Selector:     mg.Spec.InitProvider.RestAPIIDSelector,
+		To: reference.To{
+			List:    &RestAPIList{},
+			Managed: &RestAPI{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RestAPIID")
+	}
+	mg.Spec.InitProvider.RestAPIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RestAPIIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -833,6 +1425,42 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.ForProvider.APIStages[i3].StageRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.APIStages); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIStages[i3].APIID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.APIStages[i3].APIIDRef,
+			Selector:     mg.Spec.InitProvider.APIStages[i3].APIIDSelector,
+			To: reference.To{
+				List:    &RestAPIList{},
+				Managed: &RestAPI{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.APIStages[i3].APIID")
+		}
+		mg.Spec.InitProvider.APIStages[i3].APIID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.APIStages[i3].APIIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.APIStages); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIStages[i3].Stage),
+			Extract:      resource.ExtractParamPath("stage_name", false),
+			Reference:    mg.Spec.InitProvider.APIStages[i3].StageRef,
+			Selector:     mg.Spec.InitProvider.APIStages[i3].StageSelector,
+			To: reference.To{
+				List:    &StageList{},
+				Managed: &Stage{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.APIStages[i3].Stage")
+		}
+		mg.Spec.InitProvider.APIStages[i3].Stage = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.APIStages[i3].StageRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -876,6 +1504,38 @@ func (mg *UsagePlanKey) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.UsagePlanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UsagePlanIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyIDSelector,
+		To: reference.To{
+			List:    &APIKeyList{},
+			Managed: &APIKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyID")
+	}
+	mg.Spec.InitProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UsagePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.UsagePlanIDRef,
+		Selector:     mg.Spec.InitProvider.UsagePlanIDSelector,
+		To: reference.To{
+			List:    &UsagePlanList{},
+			Managed: &UsagePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UsagePlanID")
+	}
+	mg.Spec.InitProvider.UsagePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UsagePlanIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -901,6 +1561,22 @@ func (mg *VPCLink) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.TargetArns = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.TargetArnRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.TargetArns),
+		Extract:       common.ARNExtractor(),
+		References:    mg.Spec.InitProvider.TargetArnRefs,
+		Selector:      mg.Spec.InitProvider.TargetArnSelector,
+		To: reference.To{
+			List:    &v1beta13.LBList{},
+			Managed: &v1beta13.LB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArns")
+	}
+	mg.Spec.InitProvider.TargetArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.TargetArnRefs = mrsp.ResolvedReferences
 
 	return nil
 }

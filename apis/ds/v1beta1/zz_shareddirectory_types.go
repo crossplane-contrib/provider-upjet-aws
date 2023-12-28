@@ -19,6 +19,19 @@ import (
 
 type SharedDirectoryInitParameters struct {
 
+	// Identifier of the Managed Microsoft AD directory that you want to share with other accounts.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
+	// Reference to a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+
 	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 

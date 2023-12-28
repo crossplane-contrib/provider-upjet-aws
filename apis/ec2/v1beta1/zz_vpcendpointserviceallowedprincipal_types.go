@@ -21,6 +21,19 @@ type VPCEndpointServiceAllowedPrincipalInitParameters struct {
 
 	// The ARN of the principal to allow permissions.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
+
+	// The ID of the VPC endpoint service to allow permission.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpointService
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPCEndpointServiceID *string `json:"vpcEndpointServiceId,omitempty" tf:"vpc_endpoint_service_id,omitempty"`
+
+	// Reference to a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointServiceIDRef *v1.Reference `json:"vpcEndpointServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCEndpointService in ec2 to populate vpcEndpointServiceId.
+	// +kubebuilder:validation:Optional
+	VPCEndpointServiceIDSelector *v1.Selector `json:"vpcEndpointServiceIdSelector,omitempty" tf:"-"`
 }
 
 type VPCEndpointServiceAllowedPrincipalObservation struct {

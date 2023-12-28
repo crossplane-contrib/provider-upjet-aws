@@ -23,6 +23,19 @@ type ProxyProtocolPolicyInitParameters struct {
 	// should be applied. This can be specified if the protocol is SSL or TCP.
 	// +listType=set
 	InstancePorts []*string `json:"instancePorts,omitempty" tf:"instance_ports,omitempty"`
+
+	// The load balancer to which the policy
+	// should be attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Reference to a ELB in elb to populate loadBalancer.
+	// +kubebuilder:validation:Optional
+	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate loadBalancer.
+	// +kubebuilder:validation:Optional
+	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
 }
 
 type ProxyProtocolPolicyObservation struct {

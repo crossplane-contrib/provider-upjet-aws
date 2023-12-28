@@ -1031,6 +1031,21 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.KeyspaceName != nil {
+		in, out := &in.KeyspaceName, &out.KeyspaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyspaceNameRef != nil {
+		in, out := &in.KeyspaceNameRef, &out.KeyspaceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyspaceNameSelector != nil {
+		in, out := &in.KeyspaceNameSelector, &out.KeyspaceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PointInTimeRecovery != nil {
 		in, out := &in.PointInTimeRecovery, &out.PointInTimeRecovery
 		*out = make([]PointInTimeRecoveryInitParameters, len(*in))

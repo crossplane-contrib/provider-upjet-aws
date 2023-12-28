@@ -55,6 +55,38 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences(ctx context
 	mg.Spec.ForProvider.IdentityProviderName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentityProviderNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
+		Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
+		To: reference.To{
+			List:    &PoolList{},
+			Managed: &Pool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityPoolID")
+	}
+	mg.Spec.InitProvider.IdentityPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IdentityPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityProviderName),
+		Extract:      resource.ExtractParamPath("endpoint", true),
+		Reference:    mg.Spec.InitProvider.IdentityProviderNameRef,
+		Selector:     mg.Spec.InitProvider.IdentityProviderNameSelector,
+		To: reference.To{
+			List:    &v1beta1.UserPoolList{},
+			Managed: &v1beta1.UserPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityProviderName")
+	}
+	mg.Spec.InitProvider.IdentityProviderName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IdentityProviderNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -100,6 +132,40 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.SAMLProviderArns = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SAMLProviderArnsRefs = mrsp.ResolvedReferences
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CognitoIdentityProviders); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDRef,
+			Selector:     mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDSelector,
+			To: reference.To{
+				List:    &v1beta1.UserPoolClientList{},
+				Managed: &v1beta1.UserPoolClient{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID")
+		}
+		mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDRef = rsp.ResolvedReference
+
+	}
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SAMLProviderArns),
+		Extract:       common.ARNExtractor(),
+		References:    mg.Spec.InitProvider.SAMLProviderArnsRefs,
+		Selector:      mg.Spec.InitProvider.SAMLProviderArnsSelector,
+		To: reference.To{
+			List:    &v1beta11.SAMLProviderList{},
+			Managed: &v1beta11.SAMLProvider{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SAMLProviderArns")
+	}
+	mg.Spec.InitProvider.SAMLProviderArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SAMLProviderArnsRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -143,6 +209,42 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 			}
 			mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
+		Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
+		To: reference.To{
+			List:    &PoolList{},
+			Managed: &Pool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityPoolID")
+	}
+	mg.Spec.InitProvider.IdentityPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IdentityPoolIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.RoleMapping); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.RoleMapping[i3].MappingRule); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef = rsp.ResolvedReference
 
 		}
 	}

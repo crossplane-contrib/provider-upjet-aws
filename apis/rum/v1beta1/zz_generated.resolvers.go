@@ -53,5 +53,37 @@ func (mg *MetricsDestination) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppMonitorName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.AppMonitorNameRef,
+		Selector:     mg.Spec.InitProvider.AppMonitorNameSelector,
+		To: reference.To{
+			List:    &AppMonitorList{},
+			Managed: &AppMonitor{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AppMonitorName")
+	}
+	mg.Spec.InitProvider.AppMonitorName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AppMonitorNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
+		Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRoleArn")
+	}
+	mg.Spec.InitProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }

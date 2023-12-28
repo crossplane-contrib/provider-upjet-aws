@@ -27,6 +27,18 @@ type VaultLockInitParameters struct {
 
 	// JSON string containing the IAM policy to apply as the Glacier Vault Lock policy.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The name of the Glacier Vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glacier/v1beta1.Vault
+	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
+
+	// Reference to a Vault in glacier to populate vaultName.
+	// +kubebuilder:validation:Optional
+	VaultNameRef *v1.Reference `json:"vaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in glacier to populate vaultName.
+	// +kubebuilder:validation:Optional
+	VaultNameSelector *v1.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
 }
 
 type VaultLockObservation struct {

@@ -39,6 +39,24 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogPublishingOptions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef,
+			Selector:     mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnSelector,
+			To: reference.To{
+				List:    &v1beta1.GroupList{},
+				Managed: &v1beta1.Group{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn")
+		}
+		mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -65,6 +83,22 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DomainName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DomainNameRef,
+		Selector:     mg.Spec.InitProvider.DomainNameSelector,
+		To: reference.To{
+			List:    &DomainList{},
+			Managed: &Domain{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DomainName")
+	}
+	mg.Spec.InitProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DomainNameRef = rsp.ResolvedReference
 
 	return nil
 }

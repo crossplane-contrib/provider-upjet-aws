@@ -188,6 +188,18 @@ type RouteSettingsParameters struct {
 
 type StageInitParameters struct {
 
+	// API identifier.
+	// +crossplane:generate:reference:type=API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// Settings for logging access in this stage.
 	// Use the aws_api_gateway_account resource to configure permissions for CloudWatch Logging.
 	AccessLogSettings []AccessLogSettingsInitParameters `json:"accessLogSettings,omitempty" tf:"access_log_settings,omitempty"`
@@ -201,6 +213,18 @@ type StageInitParameters struct {
 
 	// Default route settings for the stage.
 	DefaultRouteSettings []DefaultRouteSettingsInitParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
+
+	// Deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
+	// +crossplane:generate:reference:type=Deployment
+	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
+
+	// Reference to a Deployment to populate deploymentId.
+	// +kubebuilder:validation:Optional
+	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
+
+	// Selector for a Deployment to populate deploymentId.
+	// +kubebuilder:validation:Optional
+	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
 	// Description for the stage. Must be less than or equal to 1024 characters in length.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

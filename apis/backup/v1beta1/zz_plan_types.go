@@ -203,6 +203,18 @@ type RuleInitParameters struct {
 
 	// The amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
+
+	// The name of a logical container where backups are stored.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
+	TargetVaultName *string `json:"targetVaultName,omitempty" tf:"target_vault_name,omitempty"`
+
+	// Reference to a Vault in backup to populate targetVaultName.
+	// +kubebuilder:validation:Optional
+	TargetVaultNameRef *v1.Reference `json:"targetVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in backup to populate targetVaultName.
+	// +kubebuilder:validation:Optional
+	TargetVaultNameSelector *v1.Selector `json:"targetVaultNameSelector,omitempty" tf:"-"`
 }
 
 type RuleLifecycleInitParameters struct {

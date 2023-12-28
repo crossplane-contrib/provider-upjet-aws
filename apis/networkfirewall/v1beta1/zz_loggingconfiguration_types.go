@@ -61,6 +61,19 @@ type LogDestinationConfigParameters struct {
 
 type LoggingConfigurationInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.Firewall
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
+
+	// Reference to a Firewall in networkfirewall to populate firewallArn.
+	// +kubebuilder:validation:Optional
+	FirewallArnRef *v1.Reference `json:"firewallArnRef,omitempty" tf:"-"`
+
+	// Selector for a Firewall in networkfirewall to populate firewallArn.
+	// +kubebuilder:validation:Optional
+	FirewallArnSelector *v1.Selector `json:"firewallArnSelector,omitempty" tf:"-"`
+
 	// A configuration block describing how AWS Network Firewall performs logging for a firewall. See Logging Configuration below for details.
 	LoggingConfiguration []LoggingConfigurationLoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 }

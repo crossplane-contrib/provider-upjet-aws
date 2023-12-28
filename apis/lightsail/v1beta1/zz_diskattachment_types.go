@@ -19,8 +19,32 @@ import (
 
 type DiskAttachmentInitParameters struct {
 
+	// The name of the Lightsail Disk.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Disk
+	DiskName *string `json:"diskName,omitempty" tf:"disk_name,omitempty"`
+
+	// Reference to a Disk in lightsail to populate diskName.
+	// +kubebuilder:validation:Optional
+	DiskNameRef *v1.Reference `json:"diskNameRef,omitempty" tf:"-"`
+
+	// Selector for a Disk in lightsail to populate diskName.
+	// +kubebuilder:validation:Optional
+	DiskNameSelector *v1.Selector `json:"diskNameSelector,omitempty" tf:"-"`
+
 	// The disk path to expose to the instance.
 	DiskPath *string `json:"diskPath,omitempty" tf:"disk_path,omitempty"`
+
+	// The name of the Lightsail Instance to attach to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// Reference to a Instance in lightsail to populate instanceName.
+	// +kubebuilder:validation:Optional
+	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in lightsail to populate instanceName.
+	// +kubebuilder:validation:Optional
+	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 }
 
 type DiskAttachmentObservation struct {

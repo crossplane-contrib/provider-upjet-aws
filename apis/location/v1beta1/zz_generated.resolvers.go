@@ -37,6 +37,22 @@ func (mg *GeofenceCollection) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -62,6 +78,22 @@ func (mg *Tracker) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -104,6 +136,38 @@ func (mg *TrackerAssociation) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.TrackerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TrackerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConsumerArn),
+		Extract:      resource.ExtractParamPath("collection_arn", true),
+		Reference:    mg.Spec.InitProvider.ConsumerArnRef,
+		Selector:     mg.Spec.InitProvider.ConsumerArnSelector,
+		To: reference.To{
+			List:    &GeofenceCollectionList{},
+			Managed: &GeofenceCollection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ConsumerArn")
+	}
+	mg.Spec.InitProvider.ConsumerArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ConsumerArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TrackerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TrackerNameRef,
+		Selector:     mg.Spec.InitProvider.TrackerNameSelector,
+		To: reference.To{
+			List:    &TrackerList{},
+			Managed: &Tracker{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TrackerName")
+	}
+	mg.Spec.InitProvider.TrackerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TrackerNameRef = rsp.ResolvedReference
 
 	return nil
 }

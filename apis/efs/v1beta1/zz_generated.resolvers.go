@@ -39,6 +39,22 @@ func (mg *AccessPoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FileSystemIDRef,
+		Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemID")
+	}
+	mg.Spec.InitProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -64,6 +80,22 @@ func (mg *BackupPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FileSystemIDRef,
+		Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemID")
+	}
+	mg.Spec.InitProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -91,6 +123,22 @@ func (mg *FileSystem) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -116,6 +164,22 @@ func (mg *FileSystemPolicy) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FileSystemIDRef,
+		Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemID")
+	}
+	mg.Spec.InitProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -176,6 +240,54 @@ func (mg *MountTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FileSystemIDRef,
+		Selector:     mg.Spec.InitProvider.FileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemID")
+	}
+	mg.Spec.InitProvider.FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SecurityGroupsRefs,
+		Selector:      mg.Spec.InitProvider.SecurityGroupsSelector,
+		To: reference.To{
+			List:    &v1beta11.SecurityGroupList{},
+			Managed: &v1beta11.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroups")
+	}
+	mg.Spec.InitProvider.SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityGroupsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SubnetIDRef,
+		Selector:     mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
+	}
+	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -201,6 +313,22 @@ func (mg *ReplicationConfiguration) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.SourceFileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceFileSystemIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceFileSystemID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SourceFileSystemIDRef,
+		Selector:     mg.Spec.InitProvider.SourceFileSystemIDSelector,
+		To: reference.To{
+			List:    &FileSystemList{},
+			Managed: &FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceFileSystemID")
+	}
+	mg.Spec.InitProvider.SourceFileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceFileSystemIDRef = rsp.ResolvedReference
 
 	return nil
 }

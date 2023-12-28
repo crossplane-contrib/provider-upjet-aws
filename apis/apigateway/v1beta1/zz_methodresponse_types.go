@@ -19,6 +19,32 @@ import (
 
 type MethodResponseInitParameters struct {
 
+	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("http_method",false)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// Reference to a Method in apigateway to populate httpMethod.
+	// +kubebuilder:validation:Optional
+	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+
+	// Selector for a Method in apigateway to populate httpMethod.
+	// +kubebuilder:validation:Optional
+	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
+
+	// API resource ID
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
 	// Map of the API models used for the response's content type
 	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
@@ -28,6 +54,19 @@ type MethodResponseInitParameters struct {
 	// would define that the header X-Some-Header can be provided on the response.
 	// +mapType=granular
 	ResponseParameters map[string]*bool `json:"responseParameters,omitempty" tf:"response_parameters,omitempty"`
+
+	// ID of the associated REST API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// HTTP status code
 	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`

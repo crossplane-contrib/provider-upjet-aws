@@ -167,6 +167,19 @@ type ModelInitParameters struct {
 	// Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
 	EnableNetworkIsolation *bool `json:"enableNetworkIsolation,omitempty" tf:"enable_network_isolation,omitempty"`
 
+	// A role that SageMaker can assume to access model artifacts and docker images for deployment.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnRef *v1.Reference `json:"executionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate executionRoleArn.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArnSelector *v1.Selector `json:"executionRoleArnSelector,omitempty" tf:"-"`
+
 	// Specifies details of how containers in a multi-container endpoint are called. see Inference Execution Config.
 	InferenceExecutionConfig []InferenceExecutionConfigInitParameters `json:"inferenceExecutionConfig,omitempty" tf:"inference_execution_config,omitempty"`
 

@@ -18,6 +18,19 @@ import (
 )
 
 type EBSDefaultKMSKeyInitParameters struct {
+
+	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	KeyArn *string `json:"keyArn,omitempty" tf:"key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate keyArn.
+	// +kubebuilder:validation:Optional
+	KeyArnRef *v1.Reference `json:"keyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate keyArn.
+	// +kubebuilder:validation:Optional
+	KeyArnSelector *v1.Selector `json:"keyArnSelector,omitempty" tf:"-"`
 }
 
 type EBSDefaultKMSKeyObservation struct {

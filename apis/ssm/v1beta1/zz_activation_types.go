@@ -25,6 +25,19 @@ type ActivationInitParameters struct {
 	// UTC timestamp in RFC3339 format by which this activation request should expire. The default value is 24 hours from resource creation time.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// The IAM Role to attach to the managed instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
+
+	// Reference to a Role in iam to populate iamRole.
+	// +kubebuilder:validation:Optional
+	IAMRoleRef *v1.Reference `json:"iamRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRole.
+	// +kubebuilder:validation:Optional
+	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+
 	// The default name of the registered managed instance.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -65,6 +65,50 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DestinationFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketName),
+					Extract:      resource.ExtractParamPath("bucket", false),
+					Reference:    mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameRef,
+					Selector:     mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketPolicyList{},
+						Managed: &v1beta1.BucketPolicy{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketName")
+				}
+				mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.DestinationFlowConfig[i3].DestinationConnectorProperties[i4].S3[i5].BucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SourceFlowConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketName),
+					Extract:      resource.ExtractParamPath("bucket", false),
+					Reference:    mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameRef,
+					Selector:     mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameSelector,
+					To: reference.To{
+						List:    &v1beta1.BucketPolicyList{},
+						Managed: &v1beta1.BucketPolicy{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketName")
+				}
+				mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.SourceFlowConfig[i3].SourceConnectorProperties[i4].S3[i5].BucketNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

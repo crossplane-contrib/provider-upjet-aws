@@ -47,6 +47,19 @@ type ProviderParameters struct {
 }
 
 type ProviderVirtualNodeInitParameters struct {
+
+	// Name of the virtual node that is acting as a service provider. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualNode
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	VirtualNodeName *string `json:"virtualNodeName,omitempty" tf:"virtual_node_name,omitempty"`
+
+	// Reference to a VirtualNode in appmesh to populate virtualNodeName.
+	// +kubebuilder:validation:Optional
+	VirtualNodeNameRef *v1.Reference `json:"virtualNodeNameRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNode in appmesh to populate virtualNodeName.
+	// +kubebuilder:validation:Optional
+	VirtualNodeNameSelector *v1.Selector `json:"virtualNodeNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualNodeObservation struct {
@@ -73,6 +86,19 @@ type ProviderVirtualNodeParameters struct {
 }
 
 type ProviderVirtualRouterInitParameters struct {
+
+	// Name of the virtual router that is acting as a service provider. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.VirtualRouter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	VirtualRouterName *string `json:"virtualRouterName,omitempty" tf:"virtual_router_name,omitempty"`
+
+	// Reference to a VirtualRouter in appmesh to populate virtualRouterName.
+	// +kubebuilder:validation:Optional
+	VirtualRouterNameRef *v1.Reference `json:"virtualRouterNameRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualRouter in appmesh to populate virtualRouterName.
+	// +kubebuilder:validation:Optional
+	VirtualRouterNameSelector *v1.Selector `json:"virtualRouterNameSelector,omitempty" tf:"-"`
 }
 
 type ProviderVirtualRouterObservation struct {
@@ -99,6 +125,19 @@ type ProviderVirtualRouterParameters struct {
 }
 
 type VirtualServiceInitParameters_2 struct {
+
+	// Name of the service mesh in which to create the virtual service. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// Reference to a Mesh in appmesh to populate meshName.
+	// +kubebuilder:validation:Optional
+	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+
+	// Selector for a Mesh in appmesh to populate meshName.
+	// +kubebuilder:validation:Optional
+	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
 
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`

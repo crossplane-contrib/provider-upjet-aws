@@ -19,6 +19,19 @@ import (
 
 type ConnectionPasswordEncryptionInitParameters struct {
 
+	// A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	AwsKMSKeyID *string `json:"awsKmsKeyId,omitempty" tf:"aws_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate awsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	AwsKMSKeyIDRef *v1.Reference `json:"awsKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate awsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	AwsKMSKeyIDSelector *v1.Selector `json:"awsKmsKeyIdSelector,omitempty" tf:"-"`
+
 	// When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.
 	ReturnConnectionPasswordEncrypted *bool `json:"returnConnectionPasswordEncrypted,omitempty" tf:"return_connection_password_encrypted,omitempty"`
 }
@@ -123,6 +136,19 @@ type EncryptionAtRestInitParameters struct {
 
 	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
+
+	// The ARN of the AWS KMS key to use for encryption at rest.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SseAwsKMSKeyID *string `json:"sseAwsKmsKeyId,omitempty" tf:"sse_aws_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate sseAwsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	SseAwsKMSKeyIDRef *v1.Reference `json:"sseAwsKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate sseAwsKmsKeyId.
+	// +kubebuilder:validation:Optional
+	SseAwsKMSKeyIDSelector *v1.Selector `json:"sseAwsKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionAtRestObservation struct {

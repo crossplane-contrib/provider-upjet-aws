@@ -47,6 +47,18 @@ type NotebookInstanceInitParameters struct {
 	// +listType=set
 	AdditionalCodeRepositories []*string `json:"additionalCodeRepositories,omitempty" tf:"additional_code_repositories,omitempty"`
 
+	// The Git repository associated with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in AWS CodeCommit or in any other Git repository.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.CodeRepository
+	DefaultCodeRepository *string `json:"defaultCodeRepository,omitempty" tf:"default_code_repository,omitempty"`
+
+	// Reference to a CodeRepository in sagemaker to populate defaultCodeRepository.
+	// +kubebuilder:validation:Optional
+	DefaultCodeRepositoryRef *v1.Reference `json:"defaultCodeRepositoryRef,omitempty" tf:"-"`
+
+	// Selector for a CodeRepository in sagemaker to populate defaultCodeRepository.
+	// +kubebuilder:validation:Optional
+	DefaultCodeRepositorySelector *v1.Selector `json:"defaultCodeRepositorySelector,omitempty" tf:"-"`
+
 	// Set to Disabled to disable internet access to notebook. Requires security_groups and subnet_id to be set. Supported values: Enabled (Default) or Disabled. If set to Disabled, the notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC.
 	DirectInternetAccess *string `json:"directInternetAccess,omitempty" tf:"direct_internet_access,omitempty"`
 
@@ -56,11 +68,36 @@ type NotebookInstanceInitParameters struct {
 	// The name of ML compute instance type.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// The name of a lifecycle configuration to associate with the notebook instance.
 	LifecycleConfigName *string `json:"lifecycleConfigName,omitempty" tf:"lifecycle_config_name,omitempty"`
 
 	// The platform identifier of the notebook instance runtime environment. This value can be either notebook-al1-v1, notebook-al2-v1, or  notebook-al2-v2, depending on which version of Amazon Linux you require.
 	PlatformIdentifier *string `json:"platformIdentifier,omitempty" tf:"platform_identifier,omitempty"`
+
+	// The ARN of the IAM role to be used by the notebook instance which allows SageMaker to call other services on your behalf.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Whether root access is Enabled or Disabled for users of the notebook instance. The default value is Enabled.
 	RootAccess *string `json:"rootAccess,omitempty" tf:"root_access,omitempty"`
@@ -68,6 +105,18 @@ type NotebookInstanceInitParameters struct {
 	// The associated security groups.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The VPC subnet ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

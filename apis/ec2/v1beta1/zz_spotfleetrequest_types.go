@@ -421,6 +421,19 @@ type LaunchSpecificationInitParameters struct {
 
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
+	// takes aws_iam_instance_profile attribute arn as input.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	IAMInstanceProfileArn *string `json:"iamInstanceProfileArn,omitempty" tf:"iam_instance_profile_arn,omitempty"`
+
+	// Reference to a InstanceProfile in iam to populate iamInstanceProfileArn.
+	// +kubebuilder:validation:Optional
+	IAMInstanceProfileArnRef *v1.Reference `json:"iamInstanceProfileArnRef,omitempty" tf:"-"`
+
+	// Selector for a InstanceProfile in iam to populate iamInstanceProfileArn.
+	// +kubebuilder:validation:Optional
+	IAMInstanceProfileArnSelector *v1.Selector `json:"iamInstanceProfileArnSelector,omitempty" tf:"-"`
+
 	// The type of instance to request.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -679,8 +692,34 @@ type LaunchTemplateConfigParameters struct {
 
 type LaunchTemplateSpecificationInitParameters struct {
 
+	// The ID of the launch template. Conflicts with name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
 	// The name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("latest_version",true)
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate version.
+	// +kubebuilder:validation:Optional
+	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate version.
+	// +kubebuilder:validation:Optional
+	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type LaunchTemplateSpecificationObservation struct {

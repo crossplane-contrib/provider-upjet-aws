@@ -19,6 +19,18 @@ import (
 
 type ListenerInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of your accelerator.
+	// +crossplane:generate:reference:type=Accelerator
+	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
+
+	// Reference to a Accelerator to populate acceleratorArn.
+	// +kubebuilder:validation:Optional
+	AcceleratorArnRef *v1.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
+
+	// Selector for a Accelerator to populate acceleratorArn.
+	// +kubebuilder:validation:Optional
+	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
+
 	// Direct all requests from a user to the same endpoint. Valid values are NONE, SOURCE_IP. Default: NONE. If NONE, Global Accelerator uses the "five-tuple" properties of source IP address, source port, destination IP address, destination port, and protocol to select the hash value. If SOURCE_IP, Global Accelerator uses the "two-tuple" properties of source (client) IP address and destination IP address to select the hash value.
 	ClientAffinity *string `json:"clientAffinity,omitempty" tf:"client_affinity,omitempty"`
 

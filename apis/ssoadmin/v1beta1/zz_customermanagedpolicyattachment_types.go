@@ -70,8 +70,22 @@ type CustomerManagedPolicyAttachmentParameters struct {
 
 type CustomerManagedPolicyReferenceInitParameters struct {
 
+	// Name of the customer managed IAM Policy to be attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:refFieldName=PolicyNameRef
+	// +crossplane:generate:reference:selectorFieldName=PolicyNameSelector
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The path to the IAM policy to be attached. The default is /. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Reference to a Policy in iam to populate name.
+	// +kubebuilder:validation:Optional
+	PolicyNameRef *v1.Reference `json:"policyNameRef,omitempty" tf:"-"`
+
+	// Selector for a Policy in iam to populate name.
+	// +kubebuilder:validation:Optional
+	PolicyNameSelector *v1.Selector `json:"policyNameSelector,omitempty" tf:"-"`
 }
 
 type CustomerManagedPolicyReferenceObservation struct {
