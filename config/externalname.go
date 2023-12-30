@@ -2676,7 +2676,7 @@ var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
 func cognitoUserPoolClient() config.ExternalName {
 	e := config.IdentifierFromProvider
 	// TODO: Uncomment when it's acceptable to remove fields from spec.initProvider (major release)
-	//e.IdentifierFields = []string{"user_pool_id"}
+	// e.IdentifierFields = []string{"user_pool_id"}
 	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
 		if externalName == "" {
 			return "invalidnonemptystring", nil
