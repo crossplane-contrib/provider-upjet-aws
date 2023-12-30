@@ -1,0 +1,35 @@
+---
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPool
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "900"
+  labels:
+    testing.upbound.io/example-name: observe
+  name: observe
+spec:
+  forProvider:
+    name: example
+    region: us-west-1
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolClient
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "900"
+    crossplane.io/external-name: anything
+  labels:
+    testing.upbound.io/example-name: observe
+  name: observe
+spec:
+  managementPolicies:
+    - Observe
+  forProvider:
+    name: name
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: observe
+
