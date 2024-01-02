@@ -1734,7 +1734,7 @@ spec:
                       properties:
                         arn:
                           description: The Amazon Resource Name (ARN) of the instance
-                            profile.
+                            profile. Conflicts with name.
                           type: string
                         arnRef:
                           description: Reference to a InstanceProfile in iam to populate

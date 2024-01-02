@@ -81,6 +81,9 @@ spec:
                       customer owned IP addressed check out Customer-owned IP addresses
                       guide.
                     type: string
+                  domain:
+                    description: Indicates if this EIP is for use in VPC (vpc).
+                    type: string
                   instance:
                     description: EC2 instance ID.
                     type: string
@@ -252,8 +255,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpc:
-                    description: Boolean if the EIP is in a VPC or not. Defaults to
-                      true unless the region supports EC2-Classic.
+                    description: Boolean if the EIP is in a VPC or not. Use domain
+                      instead. Defaults to true unless the region supports EC2-Classic.
                     type: boolean
                 required:
                 - region
@@ -284,6 +287,9 @@ spec:
                     description: ID  of a customer-owned address pool. For more on
                       customer owned IP addressed check out Customer-owned IP addresses
                       guide.
+                    type: string
+                  domain:
+                    description: Indicates if this EIP is for use in VPC (vpc).
                     type: string
                   instance:
                     description: EC2 instance ID.
@@ -452,8 +458,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpc:
-                    description: Boolean if the EIP is in a VPC or not. Defaults to
-                      true unless the region supports EC2-Classic.
+                    description: Boolean if the EIP is in a VPC or not. Use domain
+                      instead. Defaults to true unless the region supports EC2-Classic.
                     type: boolean
                 type: object
               managementPolicies:
@@ -651,8 +657,7 @@ spec:
                       guide.
                     type: string
                   domain:
-                    description: Indicates if this EIP is for use in VPC (vpc) or
-                      EC2-Classic (standard).
+                    description: Indicates if this EIP is for use in VPC (vpc).
                     type: string
                   id:
                     description: Contains the EIP allocation ID.
@@ -699,8 +704,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpc:
-                    description: Boolean if the EIP is in a VPC or not. Defaults to
-                      true unless the region supports EC2-Classic.
+                    description: Boolean if the EIP is in a VPC or not. Use domain
+                      instead. Defaults to true unless the region supports EC2-Classic.
                     type: boolean
                 type: object
               conditions:

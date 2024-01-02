@@ -17,24 +17,52 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionsSuppressorInitParameters struct {
+
+	// Can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+	Alarm *string `json:"alarm,omitempty" tf:"alarm,omitempty"`
+
+	// The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.
+	ExtensionPeriod *float64 `json:"extensionPeriod,omitempty" tf:"extension_period,omitempty"`
+
+	// The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the ALARM state. After this time, the composite alarm performs its actions.
+	WaitPeriod *float64 `json:"waitPeriod,omitempty" tf:"wait_period,omitempty"`
+}
+
+type ActionsSuppressorObservation struct {
+
+	// Can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+	Alarm *string `json:"alarm,omitempty" tf:"alarm,omitempty"`
+
+	// The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.
+	ExtensionPeriod *float64 `json:"extensionPeriod,omitempty" tf:"extension_period,omitempty"`
+
+	// The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the ALARM state. After this time, the composite alarm performs its actions.
+	WaitPeriod *float64 `json:"waitPeriod,omitempty" tf:"wait_period,omitempty"`
+}
+
+type ActionsSuppressorParameters struct {
+
+	// Can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm.
+	// +kubebuilder:validation:Optional
+	Alarm *string `json:"alarm" tf:"alarm,omitempty"`
+
+	// The maximum time in seconds that the composite alarm waits after suppressor alarm goes out of the ALARM state. After this time, the composite alarm performs its actions.
+	// +kubebuilder:validation:Optional
+	ExtensionPeriod *float64 `json:"extensionPeriod" tf:"extension_period,omitempty"`
+
+	// The maximum time in seconds that the composite alarm waits for the suppressor alarm to go into the ALARM state. After this time, the composite alarm performs its actions.
+	// +kubebuilder:validation:Optional
+	WaitPeriod *float64 `json:"waitPeriod" tf:"wait_period,omitempty"`
+}
+
 type CompositeAlarmInitParameters struct {
 
 	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
-	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
-	// +listType=set
-	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
-
-	// References to Topic in sns to populate alarmActions.
-	// +kubebuilder:validation:Optional
-	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
-
-	// Selector for a list of Topic in sns to populate alarmActions.
-	// +kubebuilder:validation:Optional
-	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+	// Actions will be suppressed if the suppressor alarm is in the ALARM state.
+	ActionsSuppressor []ActionsSuppressorInitParameters `json:"actionsSuppressor,omitempty" tf:"actions_suppressor,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
@@ -84,6 +112,9 @@ type CompositeAlarmObservation struct {
 	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
+	// Actions will be suppressed if the suppressor alarm is in the ALARM state.
+	ActionsSuppressor []ActionsSuppressorObservation `json:"actionsSuppressor,omitempty" tf:"actions_suppressor,omitempty"`
+
 	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
@@ -122,6 +153,10 @@ type CompositeAlarmParameters struct {
 	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
 	// +kubebuilder:validation:Optional
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
+
+	// Actions will be suppressed if the suppressor alarm is in the ALARM state.
+	// +kubebuilder:validation:Optional
+	ActionsSuppressor []ActionsSuppressorParameters `json:"actionsSuppressor,omitempty" tf:"actions_suppressor,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic

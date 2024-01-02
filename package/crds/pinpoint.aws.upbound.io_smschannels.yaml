@@ -172,7 +172,7 @@ spec:
                   like an autoscaler.
                 properties:
                   applicationId:
-                    description: The application ID.
+                    description: ID of the application.
                     type: string
                   applicationIdRef:
                     description: Reference to a App in pinpoint to populate applicationId.

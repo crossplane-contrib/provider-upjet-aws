@@ -75,22 +75,6 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.LBTargetGroupArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ALBTargetGroupArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.ALBTargetGroupArnRef,
-		Selector:     mg.Spec.InitProvider.ALBTargetGroupArnSelector,
-		To: reference.To{
-			List:    &v1beta1.LBTargetGroupList{},
-			Managed: &v1beta1.LBTargetGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ALBTargetGroupArn")
-	}
-	mg.Spec.InitProvider.ALBTargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ALBTargetGroupArnRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutoscalingGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AutoscalingGroupNameRef,
@@ -112,8 +96,8 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.InitProvider.ELBRef,
 		Selector:     mg.Spec.InitProvider.ELBSelector,
 		To: reference.To{
-			List:    &v1beta11.ELBList{},
-			Managed: &v1beta11.ELB{},
+			List:    &v1beta1.ELBList{},
+			Managed: &v1beta1.ELB{},
 		},
 	})
 	if err != nil {
@@ -128,8 +112,8 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.InitProvider.LBTargetGroupArnRef,
 		Selector:     mg.Spec.InitProvider.LBTargetGroupArnSelector,
 		To: reference.To{
-			List:    &v1beta1.LBTargetGroupList{},
-			Managed: &v1beta1.LBTargetGroup{},
+			List:    &v1beta11.LBTargetGroupList{},
+			Managed: &v1beta11.LBTargetGroup{},
 		},
 	})
 	if err != nil {

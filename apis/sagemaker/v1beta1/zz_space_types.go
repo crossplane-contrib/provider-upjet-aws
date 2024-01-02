@@ -32,6 +32,9 @@ type SpaceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
+	// The name of the space that appears in the SageMaker Studio UI.
+	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
+
 	// The name of the space.
 	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
 
@@ -57,6 +60,9 @@ type SpaceObservation struct {
 	// The space's Amazon Resource Name (ARN).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the space that appears in the SageMaker Studio UI.
+	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
+
 	// The name of the space.
 	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
 
@@ -70,6 +76,9 @@ type SpaceObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Returns the URL of the space. If the space is created with Amazon Web Services IAM Identity Center (Successor to Amazon Web Services Single Sign-On) authentication, users can navigate to the URL after appending the respective redirect parameter for the application type to be federated through Amazon Web Services IAM Identity Center.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type SpaceParameters struct {
@@ -92,6 +101,10 @@ type SpaceParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// The name of the space that appears in the SageMaker Studio UI.
+	// +kubebuilder:validation:Optional
+	SpaceDisplayName *string `json:"spaceDisplayName,omitempty" tf:"space_display_name,omitempty"`
 
 	// The name of the space.
 	// +kubebuilder:validation:Optional
@@ -146,6 +159,9 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters stru
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
+	// The SageMaker Image Version Alias.
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
+
 	// The ARN of the image version created on the instance.
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
@@ -160,6 +176,9 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecObservation struct 
 
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The SageMaker Image Version Alias.
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
@@ -178,6 +197,10 @@ type SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecParameters struct {
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The SageMaker Image Version Alias.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
 	// +kubebuilder:validation:Optional
@@ -276,6 +299,9 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters stru
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
+	// The SageMaker Image Version Alias.
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
+
 	// The ARN of the image version created on the instance.
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
@@ -290,6 +316,9 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation struct 
 
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The SageMaker Image Version Alias.
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
@@ -308,6 +337,10 @@ type SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The SageMaker Image Version Alias.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
 	// +kubebuilder:validation:Optional

@@ -1977,7 +1977,7 @@ spec:
                     type: string
                   indexId:
                     description: The identifier of the index for your Amazon Kendra
-                      data_source.
+                      data source.
                     type: string
                   indexIdRef:
                     description: Reference to a Index in kendra to populate indexId.

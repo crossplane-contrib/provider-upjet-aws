@@ -10,9 +10,10 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
+	v1beta12 "github.com/upbound/provider-aws/apis/cloudwatch/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+	v1beta13 "github.com/upbound/provider-aws/apis/sns/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -179,6 +180,22 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.EnvironmentIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyIdentifier),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.KMSKeyIdentifierRef,
+		Selector:     mg.Spec.ForProvider.KMSKeyIdentifierSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyIdentifier")
+	}
+	mg.Spec.ForProvider.KMSKeyIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.InitProvider.ApplicationIDRef,
@@ -258,6 +275,22 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.EnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EnvironmentIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyIdentifier),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.KMSKeyIdentifierRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyIdentifierSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyIdentifier")
+	}
+	mg.Spec.InitProvider.KMSKeyIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIdentifierRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -291,8 +324,8 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 			Reference:    mg.Spec.ForProvider.Monitor[i3].AlarmArnRef,
 			Selector:     mg.Spec.ForProvider.Monitor[i3].AlarmArnSelector,
 			To: reference.To{
-				List:    &v1beta11.MetricAlarmList{},
-				Managed: &v1beta11.MetricAlarm{},
+				List:    &v1beta12.MetricAlarmList{},
+				Managed: &v1beta12.MetricAlarm{},
 			},
 		})
 		if err != nil {
@@ -343,8 +376,8 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 			Reference:    mg.Spec.InitProvider.Monitor[i3].AlarmArnRef,
 			Selector:     mg.Spec.InitProvider.Monitor[i3].AlarmArnSelector,
 			To: reference.To{
-				List:    &v1beta11.MetricAlarmList{},
-				Managed: &v1beta11.MetricAlarm{},
+				List:    &v1beta12.MetricAlarmList{},
+				Managed: &v1beta12.MetricAlarm{},
 			},
 		})
 		if err != nil {
@@ -411,8 +444,8 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 				Reference:    mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URIRef,
 				Selector:     mg.Spec.ForProvider.ActionPoint[i3].Action[i4].URISelector,
 				To: reference.To{
-					List:    &v1beta12.TopicList{},
-					Managed: &v1beta12.Topic{},
+					List:    &v1beta13.TopicList{},
+					Managed: &v1beta13.Topic{},
 				},
 			})
 			if err != nil {
@@ -451,8 +484,8 @@ func (mg *Extension) ResolveReferences(ctx context.Context, c client.Reader) err
 				Reference:    mg.Spec.InitProvider.ActionPoint[i3].Action[i4].URIRef,
 				Selector:     mg.Spec.InitProvider.ActionPoint[i3].Action[i4].URISelector,
 				To: reference.To{
-					List:    &v1beta12.TopicList{},
-					Managed: &v1beta12.Topic{},
+					List:    &v1beta13.TopicList{},
+					Managed: &v1beta13.Topic{},
 				},
 			})
 			if err != nil {

@@ -348,7 +348,7 @@ spec:
                     description: Description for a block list.
                     type: string
                   indexId:
-                    description: The identifier of the index for a block list.
+                    description: Identifier of the index for a block list.
                     type: string
                   indexIdRef:
                     description: Reference to a Index in kendra to populate indexId.
@@ -427,8 +427,8 @@ spec:
                     description: Name for the block list.
                     type: string
                   roleArn:
-                    description: The IAM (Identity and Access Management) role used
-                      to access the block list text file in S3.
+                    description: IAM (Identity and Access Management) role used to
+                      access the block list text file in S3.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -509,8 +509,7 @@ spec:
                     items:
                       properties:
                         bucket:
-                          description: The name of the S3 bucket that contains the
-                            file.
+                          description: Name of the S3 bucket that contains the file.
                           type: string
                         bucketRef:
                           description: Reference to a Bucket in s3 to populate bucket.

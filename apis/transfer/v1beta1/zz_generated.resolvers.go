@@ -151,55 +151,20 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Certificate),
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingRole),
 		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.InitProvider.CertificateRef,
-		Selector:     mg.Spec.InitProvider.CertificateSelector,
+		Reference:    mg.Spec.ForProvider.LoggingRoleRef,
+		Selector:     mg.Spec.ForProvider.LoggingRoleSelector,
 		To: reference.To{
-			List:    &v1beta1.CertificateList{},
-			Managed: &v1beta1.Certificate{},
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
 		},
 	})
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Certificate")
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoggingRole")
 	}
-	mg.Spec.InitProvider.Certificate = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.CertificateRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.DirectoryIDRef,
-		Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
-		To: reference.To{
-			List:    &v1beta11.DirectoryList{},
-			Managed: &v1beta11.Directory{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.DirectoryID")
-	}
-	mg.Spec.InitProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.DirectoryIDRef = rsp.ResolvedReference
-
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.EndpointDetails); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EndpointDetails[i3].VPCID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.EndpointDetails[i3].VPCIDRef,
-			Selector:     mg.Spec.InitProvider.EndpointDetails[i3].VPCIDSelector,
-			To: reference.To{
-				List:    &v1beta12.VPCList{},
-				Managed: &v1beta12.VPC{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.EndpointDetails[i3].VPCID")
-		}
-		mg.Spec.InitProvider.EndpointDetails[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.EndpointDetails[i3].VPCIDRef = rsp.ResolvedReference
-
-	}
+	mg.Spec.ForProvider.LoggingRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoggingRoleRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Certificate),

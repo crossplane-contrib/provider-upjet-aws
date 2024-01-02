@@ -1018,6 +1018,22 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.MonitoringRoleArnRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ParameterGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ParameterGroupList{},
+			Managed: &ParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ParameterGroupName")
+	}
+	mg.Spec.InitProvider.ParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ParameterGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicateSourceDB),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ReplicateSourceDBRef,
@@ -1093,7 +1109,7 @@ func (mg *InstanceRoleAssociation) ResolveReferences(ctx context.Context, c clie
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.InitProvider.DBInstanceIdentifierSelector,
 		To: reference.To{
@@ -1379,7 +1395,7 @@ func (mg *ProxyTarget) ResolveReferences(ctx context.Context, c client.Reader) e
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.InitProvider.DBInstanceIdentifierSelector,
 		To: reference.To{
@@ -1437,7 +1453,7 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBInstanceIdentifier),
-		Extract:      resource.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.DBInstanceIdentifierRef,
 		Selector:     mg.Spec.InitProvider.DBInstanceIdentifierSelector,
 		To: reference.To{

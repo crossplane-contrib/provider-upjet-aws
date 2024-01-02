@@ -699,7 +699,9 @@ spec:
                       type: object
                     type: array
                   serviceRoleArn:
-                    description: IAM service role ARN for the data source.
+                    description: IAM service role ARN for the data source. Required
+                      if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH,
+                      AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
                     type: string
                   serviceRoleArnRef:
                     description: Reference to a Role in iam to populate serviceRoleArn.

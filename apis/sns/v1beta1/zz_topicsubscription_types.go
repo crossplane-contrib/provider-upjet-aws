@@ -56,6 +56,9 @@ type TopicSubscriptionInitParameters struct {
 	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
+	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
+
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -127,6 +130,9 @@ type TopicSubscriptionObservation struct {
 	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
+	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
+
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
 	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
 
@@ -186,6 +192,10 @@ type TopicSubscriptionParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
+	// +kubebuilder:validation:Optional
+	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
 
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role

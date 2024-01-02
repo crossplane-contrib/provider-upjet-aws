@@ -196,15 +196,20 @@ type Ac3SettingsParameters struct {
 }
 
 type AncillarySourceSettingsInitParameters struct {
+
+	// Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
 	SourceAncillaryChannelNumber *float64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
 }
 
 type AncillarySourceSettingsObservation struct {
+
+	// Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
 	SourceAncillaryChannelNumber *float64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
 }
 
 type AncillarySourceSettingsParameters struct {
 
+	// Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
 	// +kubebuilder:validation:Optional
 	SourceAncillaryChannelNumber *float64 `json:"sourceAncillaryChannelNumber,omitempty" tf:"source_ancillary_channel_number,omitempty"`
 }
@@ -325,12 +330,30 @@ type ArchiveS3SettingsParameters struct {
 	CannedACL *string `json:"cannedAcl,omitempty" tf:"canned_acl,omitempty"`
 }
 
+type AribDestinationSettingsInitParameters struct {
+}
+
+type AribDestinationSettingsObservation struct {
+}
+
+type AribDestinationSettingsParameters struct {
+}
+
+type AribSourceSettingsInitParameters struct {
+}
+
+type AribSourceSettingsObservation struct {
+}
+
+type AribSourceSettingsParameters struct {
+}
+
 type AudioDescriptionsInitParameters struct {
 
 	// Advanced audio normalization settings. See Audio Normalization Settings for more details.
 	AudioNormalizationSettings []AudioNormalizationSettingsInitParameters `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
 	// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
@@ -345,7 +368,7 @@ type AudioDescriptionsInitParameters struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []CodecSettingsInitParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	LanguageCodeControl *string `json:"languageCodeControl,omitempty" tf:"language_code_control,omitempty"`
@@ -365,7 +388,7 @@ type AudioDescriptionsObservation struct {
 	// Advanced audio normalization settings. See Audio Normalization Settings for more details.
 	AudioNormalizationSettings []AudioNormalizationSettingsObservation `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
 	// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
@@ -380,7 +403,7 @@ type AudioDescriptionsObservation struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []CodecSettingsObservation `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	LanguageCodeControl *string `json:"languageCodeControl,omitempty" tf:"language_code_control,omitempty"`
@@ -401,7 +424,7 @@ type AudioDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioNormalizationSettings []AudioNormalizationSettingsParameters `json:"audioNormalizationSettings,omitempty" tf:"audio_normalization_settings,omitempty"`
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	// +kubebuilder:validation:Optional
 	AudioSelectorName *string `json:"audioSelectorName" tf:"audio_selector_name,omitempty"`
 
@@ -421,7 +444,7 @@ type AudioDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CodecSettings []CodecSettingsParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
@@ -443,7 +466,7 @@ type AudioDescriptionsParameters struct {
 
 type AudioHlsRenditionSelectionInitParameters struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// Name of the Channel.
@@ -452,7 +475,7 @@ type AudioHlsRenditionSelectionInitParameters struct {
 
 type AudioHlsRenditionSelectionObservation struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// Name of the Channel.
@@ -461,7 +484,7 @@ type AudioHlsRenditionSelectionObservation struct {
 
 type AudioHlsRenditionSelectionParameters struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
 
@@ -472,26 +495,29 @@ type AudioHlsRenditionSelectionParameters struct {
 
 type AudioLanguageSelectionInitParameters struct {
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
+	// When set to “strict”, the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If “loose”, then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can’t find one with the same language.
 	LanguageSelectionPolicy *string `json:"languageSelectionPolicy,omitempty" tf:"language_selection_policy,omitempty"`
 }
 
 type AudioLanguageSelectionObservation struct {
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
+	// When set to “strict”, the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If “loose”, then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can’t find one with the same language.
 	LanguageSelectionPolicy *string `json:"languageSelectionPolicy,omitempty" tf:"language_selection_policy,omitempty"`
 }
 
 type AudioLanguageSelectionParameters struct {
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
 
+	// When set to “strict”, the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If “loose”, then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can’t find one with the same language.
 	// +kubebuilder:validation:Optional
 	LanguageSelectionPolicy *string `json:"languageSelectionPolicy,omitempty" tf:"language_selection_policy,omitempty"`
 }
@@ -537,7 +563,7 @@ type AudioNormalizationSettingsParameters struct {
 
 type AudioOnlyHlsSettingsInitParameters struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
 	AudioGroupID *string `json:"audioGroupId,omitempty" tf:"audio_group_id,omitempty"`
 
 	AudioOnlyImage []AudioOnlyImageInitParameters `json:"audioOnlyImage,omitempty" tf:"audio_only_image,omitempty"`
@@ -549,7 +575,7 @@ type AudioOnlyHlsSettingsInitParameters struct {
 
 type AudioOnlyHlsSettingsObservation struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
 	AudioGroupID *string `json:"audioGroupId,omitempty" tf:"audio_group_id,omitempty"`
 
 	AudioOnlyImage []AudioOnlyImageObservation `json:"audioOnlyImage,omitempty" tf:"audio_only_image,omitempty"`
@@ -561,7 +587,7 @@ type AudioOnlyHlsSettingsObservation struct {
 
 type AudioOnlyHlsSettingsParameters struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
 	// +kubebuilder:validation:Optional
 	AudioGroupID *string `json:"audioGroupId,omitempty" tf:"audio_group_id,omitempty"`
 
@@ -580,7 +606,7 @@ type AudioOnlyImageInitParameters struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -592,7 +618,7 @@ type AudioOnlyImageObservation struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -605,7 +631,7 @@ type AudioOnlyImageParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 
@@ -616,19 +642,19 @@ type AudioOnlyImageParameters struct {
 
 type AudioPidSelectionInitParameters struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type AudioPidSelectionObservation struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type AudioPidSelectionParameters struct {
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	Pid *float64 `json:"pid" tf:"pid,omitempty"`
 }
@@ -638,7 +664,7 @@ type AudioSelectorInitParameters struct {
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// The audio selector settings. See Audio Selector Settings for more details.
 	SelectorSettings []SelectorSettingsInitParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
@@ -647,7 +673,7 @@ type AudioSelectorObservation struct {
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// The audio selector settings. See Audio Selector Settings for more details.
 	SelectorSettings []SelectorSettingsObservation `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
@@ -657,49 +683,67 @@ type AudioSelectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// The audio selector settings. See Audio Selector Settings for more details.
 	// +kubebuilder:validation:Optional
 	SelectorSettings []SelectorSettingsParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type AudioSilenceSettingsInitParameters struct {
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioSilenceSettingsObservation struct {
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	AudioSelectorName *string `json:"audioSelectorName,omitempty" tf:"audio_selector_name,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioSilenceSettingsParameters struct {
 
-	// The name of the audio selector used as the source for this AudioDescription.
+	// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
 	// +kubebuilder:validation:Optional
 	AudioSelectorName *string `json:"audioSelectorName" tf:"audio_selector_name,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
 	// +kubebuilder:validation:Optional
 	AudioSilenceThresholdMsec *float64 `json:"audioSilenceThresholdMsec,omitempty" tf:"audio_silence_threshold_msec,omitempty"`
 }
 
 type AudioTrackSelectionInitParameters struct {
-	Track []TrackInitParameters `json:"track,omitempty" tf:"track,omitempty"`
+
+	// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337. See Dolby E Decode for more details.
+	DolbyEDecode []DolbyEDecodeInitParameters `json:"dolbyEDecode,omitempty" tf:"dolby_e_decode,omitempty"`
+
+	// Selects one or more unique audio tracks from within a source. See Audio Tracks for more details.
+	Tracks []TracksInitParameters `json:"tracks,omitempty" tf:"tracks,omitempty"`
 }
 
 type AudioTrackSelectionObservation struct {
-	Track []TrackObservation `json:"track,omitempty" tf:"track,omitempty"`
+
+	// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337. See Dolby E Decode for more details.
+	DolbyEDecode []DolbyEDecodeObservation `json:"dolbyEDecode,omitempty" tf:"dolby_e_decode,omitempty"`
+
+	// Selects one or more unique audio tracks from within a source. See Audio Tracks for more details.
+	Tracks []TracksObservation `json:"tracks,omitempty" tf:"tracks,omitempty"`
 }
 
 type AudioTrackSelectionParameters struct {
 
+	// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337. See Dolby E Decode for more details.
 	// +kubebuilder:validation:Optional
-	Track []TrackParameters `json:"track" tf:"track,omitempty"`
+	DolbyEDecode []DolbyEDecodeParameters `json:"dolbyEDecode,omitempty" tf:"dolby_e_decode,omitempty"`
+
+	// Selects one or more unique audio tracks from within a source. See Audio Tracks for more details.
+	// +kubebuilder:validation:Optional
+	Tracks []TracksParameters `json:"tracks" tf:"tracks,omitempty"`
 }
 
 type AudioWatermarkSettingsInitParameters struct {
@@ -722,39 +766,50 @@ type AudioWatermarkSettingsParameters struct {
 }
 
 type AutomaticInputFailoverSettingsInitParameters struct {
+
+	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
+	// A list of failover conditions. If any of these conditions occur, MediaLive will perform a failover to the other input. See Failover Condition Block for more details.
 	FailoverCondition []FailoverConditionInitParameters `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
+	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The ID of the input.
+	// The input ID of the secondary input in the automatic input failover pair.
 	SecondaryInputID *string `json:"secondaryInputId,omitempty" tf:"secondary_input_id,omitempty"`
 }
 
 type AutomaticInputFailoverSettingsObservation struct {
+
+	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
+	// A list of failover conditions. If any of these conditions occur, MediaLive will perform a failover to the other input. See Failover Condition Block for more details.
 	FailoverCondition []FailoverConditionObservation `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
+	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The ID of the input.
+	// The input ID of the secondary input in the automatic input failover pair.
 	SecondaryInputID *string `json:"secondaryInputId,omitempty" tf:"secondary_input_id,omitempty"`
 }
 
 type AutomaticInputFailoverSettingsParameters struct {
 
+	// This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
 	// +kubebuilder:validation:Optional
 	ErrorClearTimeMsec *float64 `json:"errorClearTimeMsec,omitempty" tf:"error_clear_time_msec,omitempty"`
 
+	// A list of failover conditions. If any of these conditions occur, MediaLive will perform a failover to the other input. See Failover Condition Block for more details.
 	// +kubebuilder:validation:Optional
 	FailoverCondition []FailoverConditionParameters `json:"failoverCondition,omitempty" tf:"failover_condition,omitempty"`
 
+	// Input preference when deciding which input to make active when a previously failed input has recovered.
 	// +kubebuilder:validation:Optional
 	InputPreference *string `json:"inputPreference,omitempty" tf:"input_preference,omitempty"`
 
-	// The ID of the input.
+	// The input ID of the secondary input in the automatic input failover pair.
 	// +kubebuilder:validation:Optional
 	SecondaryInputID *string `json:"secondaryInputId" tf:"secondary_input_id,omitempty"`
 }
@@ -764,7 +819,7 @@ type AvailBlankingImageInitParameters struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -776,7 +831,7 @@ type AvailBlankingImageObservation struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -789,7 +844,7 @@ type AvailBlankingImageParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 
@@ -827,21 +882,271 @@ type AvailBlankingParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
+type BurnInDestinationSettingsInitParameters struct {
+
+	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
+	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
+
+	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
+	Font []FontInitParameters `json:"font,omitempty" tf:"font,omitempty"`
+
+	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
+
+	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
+	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
+	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
+	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
+
+	// Sub/Burn-in outputs.
+	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
+}
+
+type BurnInDestinationSettingsObservation struct {
+
+	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
+	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
+
+	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
+	Font []FontObservation `json:"font,omitempty" tf:"font,omitempty"`
+
+	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
+
+	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
+	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
+	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
+	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
+
+	// Sub/Burn-in outputs.
+	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
+}
+
+type BurnInDestinationSettingsParameters struct {
+
+	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
+
+	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
+	// +kubebuilder:validation:Optional
+	Font []FontParameters `json:"font,omitempty" tf:"font,omitempty"`
+
+	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
+
+	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	OutlineColor *string `json:"outlineColor" tf:"outline_color,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
+
+	// Sub/Burn-in outputs.
+	// +kubebuilder:validation:Optional
+	TeletextGridControl *string `json:"teletextGridControl" tf:"teletext_grid_control,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
+}
+
+type CaptionDescriptionsInitParameters struct {
+
+	// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
+	Accessibility *string `json:"accessibility,omitempty" tf:"accessibility,omitempty"`
+
+	// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
+	CaptionSelectorName *string `json:"captionSelectorName,omitempty" tf:"caption_selector_name,omitempty"`
+
+	// Additional settings for captions destination that depend on the destination type. See Destination Settings for more details.
+	DestinationSettings []DestinationSettingsInitParameters `json:"destinationSettings,omitempty" tf:"destination_settings,omitempty"`
+
+	// Selects a specific three-letter language code from within an audio source.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// Human readable information to indicate captions available for players (eg. English, or Spanish).
+	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
+
+	// Name of the Channel.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CaptionDescriptionsObservation struct {
+
+	// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
+	Accessibility *string `json:"accessibility,omitempty" tf:"accessibility,omitempty"`
+
+	// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
+	CaptionSelectorName *string `json:"captionSelectorName,omitempty" tf:"caption_selector_name,omitempty"`
+
+	// Additional settings for captions destination that depend on the destination type. See Destination Settings for more details.
+	DestinationSettings []DestinationSettingsObservation `json:"destinationSettings,omitempty" tf:"destination_settings,omitempty"`
+
+	// Selects a specific three-letter language code from within an audio source.
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// Human readable information to indicate captions available for players (eg. English, or Spanish).
+	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
+
+	// Name of the Channel.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CaptionDescriptionsParameters struct {
+
+	// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
+	// +kubebuilder:validation:Optional
+	Accessibility *string `json:"accessibility,omitempty" tf:"accessibility,omitempty"`
+
+	// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
+	// +kubebuilder:validation:Optional
+	CaptionSelectorName *string `json:"captionSelectorName" tf:"caption_selector_name,omitempty"`
+
+	// Additional settings for captions destination that depend on the destination type. See Destination Settings for more details.
+	// +kubebuilder:validation:Optional
+	DestinationSettings []DestinationSettingsParameters `json:"destinationSettings,omitempty" tf:"destination_settings,omitempty"`
+
+	// Selects a specific three-letter language code from within an audio source.
+	// +kubebuilder:validation:Optional
+	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
+
+	// Human readable information to indicate captions available for players (eg. English, or Spanish).
+	// +kubebuilder:validation:Optional
+	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
+
+	// Name of the Channel.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type CaptionLanguageMappingsInitParameters struct {
 	CaptionChannel *float64 `json:"captionChannel,omitempty" tf:"caption_channel,omitempty"`
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
+	// Human readable information to indicate captions available for players (eg. English, or Spanish).
 	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
 }
 
 type CaptionLanguageMappingsObservation struct {
 	CaptionChannel *float64 `json:"captionChannel,omitempty" tf:"caption_channel,omitempty"`
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
+	// Human readable information to indicate captions available for players (eg. English, or Spanish).
 	LanguageDescription *string `json:"languageDescription,omitempty" tf:"language_description,omitempty"`
 }
 
@@ -850,41 +1155,42 @@ type CaptionLanguageMappingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CaptionChannel *float64 `json:"captionChannel" tf:"caption_channel,omitempty"`
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode" tf:"language_code,omitempty"`
 
+	// Human readable information to indicate captions available for players (eg. English, or Spanish).
 	// +kubebuilder:validation:Optional
 	LanguageDescription *string `json:"languageDescription" tf:"language_description,omitempty"`
 }
 
 type CaptionSelectorInitParameters struct {
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// The audio selector settings. See Audio Selector Settings for more details.
 	SelectorSettings []CaptionSelectorSelectorSettingsInitParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type CaptionSelectorObservation struct {
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// The audio selector settings. See Audio Selector Settings for more details.
 	SelectorSettings []CaptionSelectorSelectorSettingsObservation `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type CaptionSelectorParameters struct {
 
-	// When specified this field indicates the three letter language code of the caption track to extract from the source.
+	// Selects a specific three-letter language code from within an audio source.
 	// +kubebuilder:validation:Optional
 	LanguageCode *string `json:"languageCode,omitempty" tf:"language_code,omitempty"`
 
@@ -892,76 +1198,86 @@ type CaptionSelectorParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// The audio selector settings. See Audio Selector Settings for more details.
 	// +kubebuilder:validation:Optional
 	SelectorSettings []CaptionSelectorSelectorSettingsParameters `json:"selectorSettings,omitempty" tf:"selector_settings,omitempty"`
 }
 
 type CaptionSelectorSelectorSettingsInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Ancillary Source Settings. See Ancillary Source Settings for more details.
 	AncillarySourceSettings []AncillarySourceSettingsInitParameters `json:"ancillarySourceSettings,omitempty" tf:"ancillary_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
-	DvbTdtSettings []SelectorSettingsDvbTdtSettingsInitParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
+	// ARIB Source Settings.
+	AribSourceSettings []AribSourceSettingsInitParameters `json:"aribSourceSettings,omitempty" tf:"arib_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// DVB Sub Source Settings. See DVB Sub Source Settings for more details.
+	DvbSubSourceSettings []DvbSubSourceSettingsInitParameters `json:"dvbSubSourceSettings,omitempty" tf:"dvb_sub_source_settings,omitempty"`
+
+	// Embedded Source Settings. See Embedded Source Settings for more details.
 	EmbeddedSourceSettings []EmbeddedSourceSettingsInitParameters `json:"embeddedSourceSettings,omitempty" tf:"embedded_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// SCTE20 Source Settings. See SCTE 20 Source Settings for more details.
 	Scte20SourceSettings []Scte20SourceSettingsInitParameters `json:"scte20SourceSettings,omitempty" tf:"scte20_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// SCTE27 Source Settings. See SCTE 27 Source Settings for more details.
 	Scte27SourceSettings []Scte27SourceSettingsInitParameters `json:"scte27SourceSettings,omitempty" tf:"scte27_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Teletext Source Settings. See Teletext Source Settings for more details.
 	TeletextSourceSettings []TeletextSourceSettingsInitParameters `json:"teletextSourceSettings,omitempty" tf:"teletext_source_settings,omitempty"`
 }
 
 type CaptionSelectorSelectorSettingsObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Ancillary Source Settings. See Ancillary Source Settings for more details.
 	AncillarySourceSettings []AncillarySourceSettingsObservation `json:"ancillarySourceSettings,omitempty" tf:"ancillary_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
-	DvbTdtSettings []SelectorSettingsDvbTdtSettingsObservation `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
+	// ARIB Source Settings.
+	AribSourceSettings []AribSourceSettingsParameters `json:"aribSourceSettings,omitempty" tf:"arib_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// DVB Sub Source Settings. See DVB Sub Source Settings for more details.
+	DvbSubSourceSettings []DvbSubSourceSettingsObservation `json:"dvbSubSourceSettings,omitempty" tf:"dvb_sub_source_settings,omitempty"`
+
+	// Embedded Source Settings. See Embedded Source Settings for more details.
 	EmbeddedSourceSettings []EmbeddedSourceSettingsObservation `json:"embeddedSourceSettings,omitempty" tf:"embedded_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// SCTE20 Source Settings. See SCTE 20 Source Settings for more details.
 	Scte20SourceSettings []Scte20SourceSettingsObservation `json:"scte20SourceSettings,omitempty" tf:"scte20_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// SCTE27 Source Settings. See SCTE 27 Source Settings for more details.
 	Scte27SourceSettings []Scte27SourceSettingsObservation `json:"scte27SourceSettings,omitempty" tf:"scte27_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Teletext Source Settings. See Teletext Source Settings for more details.
 	TeletextSourceSettings []TeletextSourceSettingsObservation `json:"teletextSourceSettings,omitempty" tf:"teletext_source_settings,omitempty"`
 }
 
 type CaptionSelectorSelectorSettingsParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Ancillary Source Settings. See Ancillary Source Settings for more details.
 	// +kubebuilder:validation:Optional
 	AncillarySourceSettings []AncillarySourceSettingsParameters `json:"ancillarySourceSettings,omitempty" tf:"ancillary_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// ARIB Source Settings.
 	// +kubebuilder:validation:Optional
-	DvbTdtSettings []SelectorSettingsDvbTdtSettingsParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
+	AribSourceSettings []AribSourceSettingsParameters `json:"aribSourceSettings,omitempty" tf:"arib_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// DVB Sub Source Settings. See DVB Sub Source Settings for more details.
+	// +kubebuilder:validation:Optional
+	DvbSubSourceSettings []DvbSubSourceSettingsParameters `json:"dvbSubSourceSettings,omitempty" tf:"dvb_sub_source_settings,omitempty"`
+
+	// Embedded Source Settings. See Embedded Source Settings for more details.
 	// +kubebuilder:validation:Optional
 	EmbeddedSourceSettings []EmbeddedSourceSettingsParameters `json:"embeddedSourceSettings,omitempty" tf:"embedded_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// SCTE20 Source Settings. See SCTE 20 Source Settings for more details.
 	// +kubebuilder:validation:Optional
 	Scte20SourceSettings []Scte20SourceSettingsParameters `json:"scte20SourceSettings,omitempty" tf:"scte20_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// SCTE27 Source Settings. See SCTE 27 Source Settings for more details.
 	// +kubebuilder:validation:Optional
 	Scte27SourceSettings []Scte27SourceSettingsParameters `json:"scte27SourceSettings,omitempty" tf:"scte27_source_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Teletext Source Settings. See Teletext Source Settings for more details.
 	// +kubebuilder:validation:Optional
 	TeletextSourceSettings []TeletextSourceSettingsParameters `json:"teletextSourceSettings,omitempty" tf:"teletext_source_settings,omitempty"`
 }
@@ -1034,7 +1350,7 @@ type ChannelInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Settings for the VPC outputs.
+	// Settings for the VPC outputs. See VPC for more details.
 	VPC []VPCInitParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
@@ -1110,7 +1426,7 @@ type ChannelObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Settings for the VPC outputs.
+	// Settings for the VPC outputs. See VPC for more details.
 	VPC []VPCObservation `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
 
@@ -1180,7 +1496,7 @@ type ChannelParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Settings for the VPC outputs.
+	// Settings for the VPC outputs. See VPC for more details.
 	// +kubebuilder:validation:Optional
 	VPC []VPCParameters `json:"vpc,omitempty" tf:"vpc,omitempty"`
 }
@@ -1334,7 +1650,7 @@ type ColorSpaceSettingsParameters struct {
 
 type ContainerSettingsInitParameters struct {
 
-	// M2ts Settings. See M2ts Settings for more details.
+	// M2TS Settings. See M2TS Settings for more details.
 	M2TsSettings []M2TsSettingsInitParameters `json:"m2tsSettings,omitempty" tf:"m2ts_settings,omitempty"`
 
 	// Raw Settings. This can be set as an empty block.
@@ -1346,7 +1662,7 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
@@ -1377,7 +1693,7 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []M2TsSettingsDvbTdtSettingsInitParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
@@ -1388,15 +1704,15 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -1416,12 +1732,12 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
@@ -1443,13 +1759,13 @@ type ContainerSettingsM2TsSettingsInitParameters struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -1458,7 +1774,7 @@ type ContainerSettingsM2TsSettingsObservation struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
@@ -1489,7 +1805,7 @@ type ContainerSettingsM2TsSettingsObservation struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []M2TsSettingsDvbTdtSettingsObservation `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
@@ -1500,15 +1816,15 @@ type ContainerSettingsM2TsSettingsObservation struct {
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -1528,12 +1844,12 @@ type ContainerSettingsM2TsSettingsObservation struct {
 
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
@@ -1555,13 +1871,13 @@ type ContainerSettingsM2TsSettingsObservation struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -1573,7 +1889,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
@@ -1617,7 +1933,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DvbTdtSettings []M2TsSettingsDvbTdtSettingsParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
@@ -1633,18 +1949,18 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
@@ -1673,14 +1989,14 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
@@ -1712,7 +2028,7 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
@@ -1720,14 +2036,14 @@ type ContainerSettingsM2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
 type ContainerSettingsObservation struct {
 
-	// M2ts Settings. See M2ts Settings for more details.
+	// M2TS Settings. See M2TS Settings for more details.
 	M2TsSettings []M2TsSettingsObservation `json:"m2tsSettings,omitempty" tf:"m2ts_settings,omitempty"`
 
 	// Raw Settings. This can be set as an empty block.
@@ -1736,7 +2052,7 @@ type ContainerSettingsObservation struct {
 
 type ContainerSettingsParameters struct {
 
-	// M2ts Settings. See M2ts Settings for more details.
+	// M2TS Settings. See M2TS Settings for more details.
 	// +kubebuilder:validation:Optional
 	M2TsSettings []M2TsSettingsParameters `json:"m2tsSettings,omitempty" tf:"m2ts_settings,omitempty"`
 
@@ -1762,6 +2078,145 @@ type DestinationParameters struct {
 	// Reference ID for the destination.
 	// +kubebuilder:validation:Optional
 	DestinationRefID *string `json:"destinationRefId" tf:"destination_ref_id,omitempty"`
+}
+
+type DestinationSettingsInitParameters struct {
+
+	// ARIB Destination Settings.
+	AribDestinationSettings []AribDestinationSettingsInitParameters `json:"aribDestinationSettings,omitempty" tf:"arib_destination_settings,omitempty"`
+
+	// Burn In Destination Settings. See Burn In Destination Settings for more details.
+	BurnInDestinationSettings []BurnInDestinationSettingsInitParameters `json:"burnInDestinationSettings,omitempty" tf:"burn_in_destination_settings,omitempty"`
+
+	// DVB Sub Destination Settings. See DVB Sub Destination Settings for more details.
+	DvbSubDestinationSettings []DvbSubDestinationSettingsInitParameters `json:"dvbSubDestinationSettings,omitempty" tf:"dvb_sub_destination_settings,omitempty"`
+
+	// EBU TT D Destination Settings. See EBU TT D Destination Settings for more details.
+	EbuTtDDestinationSettings []EbuTtDDestinationSettingsInitParameters `json:"ebuTtDDestinationSettings,omitempty" tf:"ebu_tt_d_destination_settings,omitempty"`
+
+	// Embedded Destination Settings.
+	EmbeddedDestinationSettings []EmbeddedDestinationSettingsInitParameters `json:"embeddedDestinationSettings,omitempty" tf:"embedded_destination_settings,omitempty"`
+
+	// Embedded Plus SCTE20 Destination Settings.
+	EmbeddedPlusScte20DestinationSettings []EmbeddedPlusScte20DestinationSettingsInitParameters `json:"embeddedPlusScte20DestinationSettings,omitempty" tf:"embedded_plus_scte20_destination_settings,omitempty"`
+
+	// RTMP Caption Info Destination Settings.
+	RtmpCaptionInfoDestinationSettings []RtmpCaptionInfoDestinationSettingsInitParameters `json:"rtmpCaptionInfoDestinationSettings,omitempty" tf:"rtmp_caption_info_destination_settings,omitempty"`
+
+	// SCTE20 Plus Embedded Destination Settings.
+	Scte20PlusEmbeddedDestinationSettings []Scte20PlusEmbeddedDestinationSettingsInitParameters `json:"scte20PlusEmbeddedDestinationSettings,omitempty" tf:"scte20_plus_embedded_destination_settings,omitempty"`
+
+	// –  SCTE27 Destination Settings.
+	Scte27DestinationSettings []Scte27DestinationSettingsInitParameters `json:"scte27DestinationSettings,omitempty" tf:"scte27_destination_settings,omitempty"`
+
+	// –  SMPTE TT Destination Settings.
+	SmpteTtDestinationSettings []SmpteTtDestinationSettingsInitParameters `json:"smpteTtDestinationSettings,omitempty" tf:"smpte_tt_destination_settings,omitempty"`
+
+	// –  Teletext Destination Settings.
+	TeletextDestinationSettings []TeletextDestinationSettingsInitParameters `json:"teletextDestinationSettings,omitempty" tf:"teletext_destination_settings,omitempty"`
+
+	// –  TTML Destination Settings. See TTML Destination Settings for more details.
+	TtmlDestinationSettings []TtmlDestinationSettingsInitParameters `json:"ttmlDestinationSettings,omitempty" tf:"ttml_destination_settings,omitempty"`
+
+	// WebVTT Destination Settings. See WebVTT Destination Settings for more details.
+	WebvttDestinationSettings []WebvttDestinationSettingsInitParameters `json:"webvttDestinationSettings,omitempty" tf:"webvtt_destination_settings,omitempty"`
+}
+
+type DestinationSettingsObservation struct {
+
+	// ARIB Destination Settings.
+	AribDestinationSettings []AribDestinationSettingsParameters `json:"aribDestinationSettings,omitempty" tf:"arib_destination_settings,omitempty"`
+
+	// Burn In Destination Settings. See Burn In Destination Settings for more details.
+	BurnInDestinationSettings []BurnInDestinationSettingsObservation `json:"burnInDestinationSettings,omitempty" tf:"burn_in_destination_settings,omitempty"`
+
+	// DVB Sub Destination Settings. See DVB Sub Destination Settings for more details.
+	DvbSubDestinationSettings []DvbSubDestinationSettingsObservation `json:"dvbSubDestinationSettings,omitempty" tf:"dvb_sub_destination_settings,omitempty"`
+
+	// EBU TT D Destination Settings. See EBU TT D Destination Settings for more details.
+	EbuTtDDestinationSettings []EbuTtDDestinationSettingsObservation `json:"ebuTtDDestinationSettings,omitempty" tf:"ebu_tt_d_destination_settings,omitempty"`
+
+	// Embedded Destination Settings.
+	EmbeddedDestinationSettings []EmbeddedDestinationSettingsParameters `json:"embeddedDestinationSettings,omitempty" tf:"embedded_destination_settings,omitempty"`
+
+	// Embedded Plus SCTE20 Destination Settings.
+	EmbeddedPlusScte20DestinationSettings []EmbeddedPlusScte20DestinationSettingsParameters `json:"embeddedPlusScte20DestinationSettings,omitempty" tf:"embedded_plus_scte20_destination_settings,omitempty"`
+
+	// RTMP Caption Info Destination Settings.
+	RtmpCaptionInfoDestinationSettings []RtmpCaptionInfoDestinationSettingsParameters `json:"rtmpCaptionInfoDestinationSettings,omitempty" tf:"rtmp_caption_info_destination_settings,omitempty"`
+
+	// SCTE20 Plus Embedded Destination Settings.
+	Scte20PlusEmbeddedDestinationSettings []Scte20PlusEmbeddedDestinationSettingsParameters `json:"scte20PlusEmbeddedDestinationSettings,omitempty" tf:"scte20_plus_embedded_destination_settings,omitempty"`
+
+	// –  SCTE27 Destination Settings.
+	Scte27DestinationSettings []Scte27DestinationSettingsParameters `json:"scte27DestinationSettings,omitempty" tf:"scte27_destination_settings,omitempty"`
+
+	// –  SMPTE TT Destination Settings.
+	SmpteTtDestinationSettings []SmpteTtDestinationSettingsParameters `json:"smpteTtDestinationSettings,omitempty" tf:"smpte_tt_destination_settings,omitempty"`
+
+	// –  Teletext Destination Settings.
+	TeletextDestinationSettings []TeletextDestinationSettingsParameters `json:"teletextDestinationSettings,omitempty" tf:"teletext_destination_settings,omitempty"`
+
+	// –  TTML Destination Settings. See TTML Destination Settings for more details.
+	TtmlDestinationSettings []TtmlDestinationSettingsObservation `json:"ttmlDestinationSettings,omitempty" tf:"ttml_destination_settings,omitempty"`
+
+	// WebVTT Destination Settings. See WebVTT Destination Settings for more details.
+	WebvttDestinationSettings []WebvttDestinationSettingsObservation `json:"webvttDestinationSettings,omitempty" tf:"webvtt_destination_settings,omitempty"`
+}
+
+type DestinationSettingsParameters struct {
+
+	// ARIB Destination Settings.
+	// +kubebuilder:validation:Optional
+	AribDestinationSettings []AribDestinationSettingsParameters `json:"aribDestinationSettings,omitempty" tf:"arib_destination_settings,omitempty"`
+
+	// Burn In Destination Settings. See Burn In Destination Settings for more details.
+	// +kubebuilder:validation:Optional
+	BurnInDestinationSettings []BurnInDestinationSettingsParameters `json:"burnInDestinationSettings,omitempty" tf:"burn_in_destination_settings,omitempty"`
+
+	// DVB Sub Destination Settings. See DVB Sub Destination Settings for more details.
+	// +kubebuilder:validation:Optional
+	DvbSubDestinationSettings []DvbSubDestinationSettingsParameters `json:"dvbSubDestinationSettings,omitempty" tf:"dvb_sub_destination_settings,omitempty"`
+
+	// EBU TT D Destination Settings. See EBU TT D Destination Settings for more details.
+	// +kubebuilder:validation:Optional
+	EbuTtDDestinationSettings []EbuTtDDestinationSettingsParameters `json:"ebuTtDDestinationSettings,omitempty" tf:"ebu_tt_d_destination_settings,omitempty"`
+
+	// Embedded Destination Settings.
+	// +kubebuilder:validation:Optional
+	EmbeddedDestinationSettings []EmbeddedDestinationSettingsParameters `json:"embeddedDestinationSettings,omitempty" tf:"embedded_destination_settings,omitempty"`
+
+	// Embedded Plus SCTE20 Destination Settings.
+	// +kubebuilder:validation:Optional
+	EmbeddedPlusScte20DestinationSettings []EmbeddedPlusScte20DestinationSettingsParameters `json:"embeddedPlusScte20DestinationSettings,omitempty" tf:"embedded_plus_scte20_destination_settings,omitempty"`
+
+	// RTMP Caption Info Destination Settings.
+	// +kubebuilder:validation:Optional
+	RtmpCaptionInfoDestinationSettings []RtmpCaptionInfoDestinationSettingsParameters `json:"rtmpCaptionInfoDestinationSettings,omitempty" tf:"rtmp_caption_info_destination_settings,omitempty"`
+
+	// SCTE20 Plus Embedded Destination Settings.
+	// +kubebuilder:validation:Optional
+	Scte20PlusEmbeddedDestinationSettings []Scte20PlusEmbeddedDestinationSettingsParameters `json:"scte20PlusEmbeddedDestinationSettings,omitempty" tf:"scte20_plus_embedded_destination_settings,omitempty"`
+
+	// –  SCTE27 Destination Settings.
+	// +kubebuilder:validation:Optional
+	Scte27DestinationSettings []Scte27DestinationSettingsParameters `json:"scte27DestinationSettings,omitempty" tf:"scte27_destination_settings,omitempty"`
+
+	// –  SMPTE TT Destination Settings.
+	// +kubebuilder:validation:Optional
+	SmpteTtDestinationSettings []SmpteTtDestinationSettingsParameters `json:"smpteTtDestinationSettings,omitempty" tf:"smpte_tt_destination_settings,omitempty"`
+
+	// –  Teletext Destination Settings.
+	// +kubebuilder:validation:Optional
+	TeletextDestinationSettings []TeletextDestinationSettingsParameters `json:"teletextDestinationSettings,omitempty" tf:"teletext_destination_settings,omitempty"`
+
+	// –  TTML Destination Settings. See TTML Destination Settings for more details.
+	// +kubebuilder:validation:Optional
+	TtmlDestinationSettings []TtmlDestinationSettingsParameters `json:"ttmlDestinationSettings,omitempty" tf:"ttml_destination_settings,omitempty"`
+
+	// WebVTT Destination Settings. See WebVTT Destination Settings for more details.
+	// +kubebuilder:validation:Optional
+	WebvttDestinationSettings []WebvttDestinationSettingsParameters `json:"webvttDestinationSettings,omitempty" tf:"webvtt_destination_settings,omitempty"`
 }
 
 type DestinationsInitParameters struct {
@@ -1811,6 +2266,25 @@ type DestinationsParameters struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	// +kubebuilder:validation:Optional
 	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
+}
+
+type DolbyEDecodeInitParameters struct {
+
+	// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
+	ProgramSelection *string `json:"programSelection,omitempty" tf:"program_selection,omitempty"`
+}
+
+type DolbyEDecodeObservation struct {
+
+	// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
+	ProgramSelection *string `json:"programSelection,omitempty" tf:"program_selection,omitempty"`
+}
+
+type DolbyEDecodeParameters struct {
+
+	// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
+	// +kubebuilder:validation:Optional
+	ProgramSelection *string `json:"programSelection" tf:"program_selection,omitempty"`
 }
 
 type DolbyVision81SettingsInitParameters struct {
@@ -1897,6 +2371,253 @@ type DvbSdtSettingsParameters struct {
 	// Name of the Channel.
 	// +kubebuilder:validation:Optional
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
+}
+
+type DvbSubDestinationSettingsFontInitParameters struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Username for destination.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type DvbSubDestinationSettingsFontObservation struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Username for destination.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type DvbSubDestinationSettingsFontParameters struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	// +kubebuilder:validation:Optional
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri" tf:"uri,omitempty"`
+
+	// Username for destination.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type DvbSubDestinationSettingsInitParameters struct {
+
+	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
+	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
+
+	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
+	Font []DvbSubDestinationSettingsFontInitParameters `json:"font,omitempty" tf:"font,omitempty"`
+
+	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
+
+	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
+	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
+	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
+	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
+
+	// Sub/Burn-in outputs.
+	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
+}
+
+type DvbSubDestinationSettingsObservation struct {
+
+	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
+	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
+
+	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
+	Font []DvbSubDestinationSettingsFontObservation `json:"font,omitempty" tf:"font,omitempty"`
+
+	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
+
+	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
+	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
+	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
+	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
+
+	// Sub/Burn-in outputs.
+	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
+}
+
+type DvbSubDestinationSettingsParameters struct {
+
+	// justify live subtitles and center-justify pre-recorded subtitles. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	Alignment *string `json:"alignment,omitempty" tf:"alignment,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	BackgroundColor *string `json:"backgroundColor,omitempty" tf:"background_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	BackgroundOpacity *float64 `json:"backgroundOpacity,omitempty" tf:"background_opacity,omitempty"`
+
+	// in. File extension must be ‘ttf’ or ‘tte’. Although the user can select output fonts for many different types of input captions, embedded, STL and teletext sources use a strict grid system. Using external fonts with these caption sources could cause unexpected display of proportional fonts. All burn-in and DVB-Sub font settings must match. See Font for more details.
+	// +kubebuilder:validation:Optional
+	Font []DvbSubDestinationSettingsFontParameters `json:"font,omitempty" tf:"font,omitempty"`
+
+	// in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontColor *string `json:"fontColor,omitempty" tf:"font_color,omitempty"`
+
+	// in captions. 255 is opaque; 0 is transparent. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontOpacity *float64 `json:"fontOpacity,omitempty" tf:"font_opacity,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontResolution *float64 `json:"fontResolution,omitempty" tf:"font_resolution,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	FontSize *string `json:"fontSize,omitempty" tf:"font_size,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	OutlineColor *string `json:"outlineColor,omitempty" tf:"outline_color,omitempty"`
+
+	// defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	OutlineSize *float64 `json:"outlineSize,omitempty" tf:"outline_size,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowColor *string `json:"shadowColor,omitempty" tf:"shadow_color,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowOpacity *float64 `json:"shadowOpacity,omitempty" tf:"shadow_opacity,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowXOffset *float64 `json:"shadowXOffset,omitempty" tf:"shadow_x_offset,omitempty"`
+
+	// 2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	ShadowYOffset *float64 `json:"shadowYOffset,omitempty" tf:"shadow_y_offset,omitempty"`
+
+	// Sub/Burn-in outputs.
+	// +kubebuilder:validation:Optional
+	TeletextGridControl *string `json:"teletextGridControl,omitempty" tf:"teletext_grid_control,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	XPosition *float64 `json:"xPosition,omitempty" tf:"x_position,omitempty"`
+
+	// in and DVB-Sub font settings must match.
+	// +kubebuilder:validation:Optional
+	YPosition *float64 `json:"yPosition,omitempty" tf:"y_position,omitempty"`
+}
+
+type DvbSubSourceSettingsInitParameters struct {
+
+	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
+	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
+
+	// Selects a specific PID from within a source.
+	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+}
+
+type DvbSubSourceSettingsObservation struct {
+
+	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
+	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
+
+	// Selects a specific PID from within a source.
+	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
+}
+
+type DvbSubSourceSettingsParameters struct {
+
+	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
+	// +kubebuilder:validation:Optional
+	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
+
+	// Selects a specific PID from within a source.
+	// +kubebuilder:validation:Optional
+	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type DvbTdtSettingsInitParameters struct {
@@ -2180,39 +2901,110 @@ type Eac3SettingsParameters struct {
 	SurroundMode *string `json:"surroundMode,omitempty" tf:"surround_mode,omitempty"`
 }
 
+type EbuTtDDestinationSettingsInitParameters struct {
+
+	// –  Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
+	CopyrightHolder *string `json:"copyrightHolder,omitempty" tf:"copyright_holder,omitempty"`
+
+	// line captions). - enabled: Fill with the captions background color (as specified in the input captions). - disabled: Leave the gap unfilled.
+	FillLineGap *string `json:"fillLineGap,omitempty" tf:"fill_line_gap,omitempty"`
+
+	// TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to “monospaced”. (If styleControl is set to exclude, the font family is always set to “monospaced”.) You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size. - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font). - Leave blank to set the family to “monospace”.
+	FontFamily *string `json:"fontFamily,omitempty" tf:"font_family,omitempty"`
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type EbuTtDDestinationSettingsObservation struct {
+
+	// –  Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
+	CopyrightHolder *string `json:"copyrightHolder,omitempty" tf:"copyright_holder,omitempty"`
+
+	// line captions). - enabled: Fill with the captions background color (as specified in the input captions). - disabled: Leave the gap unfilled.
+	FillLineGap *string `json:"fillLineGap,omitempty" tf:"fill_line_gap,omitempty"`
+
+	// TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to “monospaced”. (If styleControl is set to exclude, the font family is always set to “monospaced”.) You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size. - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font). - Leave blank to set the family to “monospace”.
+	FontFamily *string `json:"fontFamily,omitempty" tf:"font_family,omitempty"`
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type EbuTtDDestinationSettingsParameters struct {
+
+	// –  Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
+	// +kubebuilder:validation:Optional
+	CopyrightHolder *string `json:"copyrightHolder,omitempty" tf:"copyright_holder,omitempty"`
+
+	// line captions). - enabled: Fill with the captions background color (as specified in the input captions). - disabled: Leave the gap unfilled.
+	// +kubebuilder:validation:Optional
+	FillLineGap *string `json:"fillLineGap,omitempty" tf:"fill_line_gap,omitempty"`
+
+	// TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to “monospaced”. (If styleControl is set to exclude, the font family is always set to “monospaced”.) You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size. - Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font). - Leave blank to set the family to “monospace”.
+	// +kubebuilder:validation:Optional
+	FontFamily *string `json:"fontFamily,omitempty" tf:"font_family,omitempty"`
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	// +kubebuilder:validation:Optional
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type EmbeddedDestinationSettingsInitParameters struct {
+}
+
+type EmbeddedDestinationSettingsObservation struct {
+}
+
+type EmbeddedDestinationSettingsParameters struct {
+}
+
+type EmbeddedPlusScte20DestinationSettingsInitParameters struct {
+}
+
+type EmbeddedPlusScte20DestinationSettingsObservation struct {
+}
+
+type EmbeddedPlusScte20DestinationSettingsParameters struct {
+}
+
 type EmbeddedSourceSettingsInitParameters struct {
+
+	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
+	// Set to “auto” to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
 	Scte20Detection *string `json:"scte20Detection,omitempty" tf:"scte20_detection,omitempty"`
 
+	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
-
-	Source608TrackNumber *float64 `json:"source608TrackNumber,omitempty" tf:"source_608_track_number,omitempty"`
 }
 
 type EmbeddedSourceSettingsObservation struct {
+
+	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
+	// Set to “auto” to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
 	Scte20Detection *string `json:"scte20Detection,omitempty" tf:"scte20_detection,omitempty"`
 
+	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
-
-	Source608TrackNumber *float64 `json:"source608TrackNumber,omitempty" tf:"source_608_track_number,omitempty"`
 }
 
 type EmbeddedSourceSettingsParameters struct {
 
+	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	// +kubebuilder:validation:Optional
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
+	// Set to “auto” to handle streams with intermittent and/or non-aligned SCTE-20 and Embedded captions.
 	// +kubebuilder:validation:Optional
 	Scte20Detection *string `json:"scte20Detection,omitempty" tf:"scte20_detection,omitempty"`
 
+	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	// +kubebuilder:validation:Optional
 	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Source608TrackNumber *float64 `json:"source608TrackNumber,omitempty" tf:"source_608_track_number,omitempty"`
 }
 
 type EncoderSettingsInitParameters struct {
@@ -2222,6 +3014,18 @@ type EncoderSettingsInitParameters struct {
 
 	// Settings for ad avail blanking. See Avail Blanking for more details.
 	AvailBlanking []AvailBlankingInitParameters `json:"availBlanking,omitempty" tf:"avail_blanking,omitempty"`
+
+	// Caption Descriptions. See Caption Descriptions for more details.
+	CaptionDescriptions []CaptionDescriptionsInitParameters `json:"captionDescriptions,omitempty" tf:"caption_descriptions,omitempty"`
+
+	// Configuration settings that apply to the event as a whole. See Global Configuration for more details.
+	GlobalConfiguration []GlobalConfigurationInitParameters `json:"globalConfiguration,omitempty" tf:"global_configuration,omitempty"`
+
+	// Settings for motion graphics. See Motion Graphics Configuration for more details.
+	MotionGraphicsConfiguration []MotionGraphicsConfigurationInitParameters `json:"motionGraphicsConfiguration,omitempty" tf:"motion_graphics_configuration,omitempty"`
+
+	// Nielsen configuration settings. See Nielsen Configuration for more details.
+	NielsenConfiguration []NielsenConfigurationInitParameters `json:"nielsenConfiguration,omitempty" tf:"nielsen_configuration,omitempty"`
 
 	// Output groups for the channel. See Output Groups for more details.
 	OutputGroups []OutputGroupsInitParameters `json:"outputGroups,omitempty" tf:"output_groups,omitempty"`
@@ -2240,6 +3044,18 @@ type EncoderSettingsObservation struct {
 
 	// Settings for ad avail blanking. See Avail Blanking for more details.
 	AvailBlanking []AvailBlankingObservation `json:"availBlanking,omitempty" tf:"avail_blanking,omitempty"`
+
+	// Caption Descriptions. See Caption Descriptions for more details.
+	CaptionDescriptions []CaptionDescriptionsObservation `json:"captionDescriptions,omitempty" tf:"caption_descriptions,omitempty"`
+
+	// Configuration settings that apply to the event as a whole. See Global Configuration for more details.
+	GlobalConfiguration []GlobalConfigurationObservation `json:"globalConfiguration,omitempty" tf:"global_configuration,omitempty"`
+
+	// Settings for motion graphics. See Motion Graphics Configuration for more details.
+	MotionGraphicsConfiguration []MotionGraphicsConfigurationObservation `json:"motionGraphicsConfiguration,omitempty" tf:"motion_graphics_configuration,omitempty"`
+
+	// Nielsen configuration settings. See Nielsen Configuration for more details.
+	NielsenConfiguration []NielsenConfigurationObservation `json:"nielsenConfiguration,omitempty" tf:"nielsen_configuration,omitempty"`
 
 	// Output groups for the channel. See Output Groups for more details.
 	OutputGroups []OutputGroupsObservation `json:"outputGroups,omitempty" tf:"output_groups,omitempty"`
@@ -2261,6 +3077,22 @@ type EncoderSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailBlanking []AvailBlankingParameters `json:"availBlanking,omitempty" tf:"avail_blanking,omitempty"`
 
+	// Caption Descriptions. See Caption Descriptions for more details.
+	// +kubebuilder:validation:Optional
+	CaptionDescriptions []CaptionDescriptionsParameters `json:"captionDescriptions,omitempty" tf:"caption_descriptions,omitempty"`
+
+	// Configuration settings that apply to the event as a whole. See Global Configuration for more details.
+	// +kubebuilder:validation:Optional
+	GlobalConfiguration []GlobalConfigurationParameters `json:"globalConfiguration,omitempty" tf:"global_configuration,omitempty"`
+
+	// Settings for motion graphics. See Motion Graphics Configuration for more details.
+	// +kubebuilder:validation:Optional
+	MotionGraphicsConfiguration []MotionGraphicsConfigurationParameters `json:"motionGraphicsConfiguration,omitempty" tf:"motion_graphics_configuration,omitempty"`
+
+	// Nielsen configuration settings. See Nielsen Configuration for more details.
+	// +kubebuilder:validation:Optional
+	NielsenConfiguration []NielsenConfigurationParameters `json:"nielsenConfiguration,omitempty" tf:"nielsen_configuration,omitempty"`
+
 	// Output groups for the channel. See Output Groups for more details.
 	// +kubebuilder:validation:Optional
 	OutputGroups []OutputGroupsParameters `json:"outputGroups" tf:"output_groups,omitempty"`
@@ -2276,58 +3108,58 @@ type EncoderSettingsParameters struct {
 
 type FailoverConditionInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Failover condition type-specific settings. See Failover Condition Settings for more details.
 	FailoverConditionSettings []FailoverConditionSettingsInitParameters `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Failover condition type-specific settings. See Failover Condition Settings for more details.
 	FailoverConditionSettings []FailoverConditionSettingsObservation `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// Failover condition type-specific settings. See Failover Condition Settings for more details.
 	// +kubebuilder:validation:Optional
 	FailoverConditionSettings []FailoverConditionSettingsParameters `json:"failoverConditionSettings,omitempty" tf:"failover_condition_settings,omitempty"`
 }
 
 type FailoverConditionSettingsInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
 	AudioSilenceSettings []AudioSilenceSettingsInitParameters `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
 	InputLossSettings []InputLossSettingsInitParameters `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
 	VideoBlackSettings []VideoBlackSettingsInitParameters `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
 
 type FailoverConditionSettingsObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
 	AudioSilenceSettings []AudioSilenceSettingsObservation `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
 	InputLossSettings []InputLossSettingsObservation `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
 	VideoBlackSettings []VideoBlackSettingsObservation `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
 
 type FailoverConditionSettingsParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if the specified audio selector is silent for the specified period. See Audio Silence Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	AudioSilenceSettings []AudioSilenceSettingsParameters `json:"audioSilenceSettings,omitempty" tf:"audio_silence_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is not detected in this input for the specified period. See Input Loss Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	InputLossSettings []InputLossSettingsParameters `json:"inputLossSettings,omitempty" tf:"input_loss_settings,omitempty"`
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// MediaLive will perform a failover if content is considered black for the specified period. See Video Black Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	VideoBlackSettings []VideoBlackSettingsParameters `json:"videoBlackSettings,omitempty" tf:"video_black_settings,omitempty"`
 }
@@ -2445,6 +3277,45 @@ type Fmp4HlsSettingsParameters struct {
 
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
+}
+
+type FontInitParameters struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Username for destination.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type FontObservation struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Username for destination.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type FontParameters struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	// +kubebuilder:validation:Optional
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri" tf:"uri,omitempty"`
+
+	// Username for destination.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type FrameCaptureCdnSettingsInitParameters struct {
@@ -2588,6 +3459,75 @@ type FrameCaptureSettingsParameters struct {
 	// Unit for the frame capture interval.
 	// +kubebuilder:validation:Optional
 	CaptureIntervalUnits *string `json:"captureIntervalUnits,omitempty" tf:"capture_interval_units,omitempty"`
+}
+
+type GlobalConfigurationInitParameters struct {
+
+	// –  Value to set the initial audio gain for the Live Event.
+	InitialAudioGain *float64 `json:"initialAudioGain,omitempty" tf:"initial_audio_gain,omitempty"`
+
+	// of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input. When “none” is configured the encoder will transcode either black, a solid color, or a user specified slate images per the “Input Loss Behavior” configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
+	InputEndAction *string `json:"inputEndAction,omitempty" tf:"input_end_action,omitempty"`
+
+	// Settings for system actions when input is lost. See Input Loss Behavior for more details.
+	InputLossBehavior []InputLossBehaviorInitParameters `json:"inputLossBehavior,omitempty" tf:"input_loss_behavior,omitempty"`
+
+	// MediaLive will attempt to synchronize the output of each pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
+	OutputLockingMode *string `json:"outputLockingMode,omitempty" tf:"output_locking_mode,omitempty"`
+
+	// –  Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
+	OutputTimingSource *string `json:"outputTimingSource,omitempty" tf:"output_timing_source,omitempty"`
+
+	// –  Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
+	SupportLowFramerateInputs *string `json:"supportLowFramerateInputs,omitempty" tf:"support_low_framerate_inputs,omitempty"`
+}
+
+type GlobalConfigurationObservation struct {
+
+	// –  Value to set the initial audio gain for the Live Event.
+	InitialAudioGain *float64 `json:"initialAudioGain,omitempty" tf:"initial_audio_gain,omitempty"`
+
+	// of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input. When “none” is configured the encoder will transcode either black, a solid color, or a user specified slate images per the “Input Loss Behavior” configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
+	InputEndAction *string `json:"inputEndAction,omitempty" tf:"input_end_action,omitempty"`
+
+	// Settings for system actions when input is lost. See Input Loss Behavior for more details.
+	InputLossBehavior []InputLossBehaviorObservation `json:"inputLossBehavior,omitempty" tf:"input_loss_behavior,omitempty"`
+
+	// MediaLive will attempt to synchronize the output of each pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
+	OutputLockingMode *string `json:"outputLockingMode,omitempty" tf:"output_locking_mode,omitempty"`
+
+	// –  Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
+	OutputTimingSource *string `json:"outputTimingSource,omitempty" tf:"output_timing_source,omitempty"`
+
+	// –  Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
+	SupportLowFramerateInputs *string `json:"supportLowFramerateInputs,omitempty" tf:"support_low_framerate_inputs,omitempty"`
+}
+
+type GlobalConfigurationParameters struct {
+
+	// –  Value to set the initial audio gain for the Live Event.
+	// +kubebuilder:validation:Optional
+	InitialAudioGain *float64 `json:"initialAudioGain,omitempty" tf:"initial_audio_gain,omitempty"`
+
+	// of-file). When switchAndLoopInputs is configured the encoder will restart at the beginning of the first input. When “none” is configured the encoder will transcode either black, a solid color, or a user specified slate images per the “Input Loss Behavior” configuration until the next input switch occurs (which is controlled through the Channel Schedule API).
+	// +kubebuilder:validation:Optional
+	InputEndAction *string `json:"inputEndAction,omitempty" tf:"input_end_action,omitempty"`
+
+	// Settings for system actions when input is lost. See Input Loss Behavior for more details.
+	// +kubebuilder:validation:Optional
+	InputLossBehavior []InputLossBehaviorParameters `json:"inputLossBehavior,omitempty" tf:"input_loss_behavior,omitempty"`
+
+	// MediaLive will attempt to synchronize the output of each pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
+	// +kubebuilder:validation:Optional
+	OutputLockingMode *string `json:"outputLockingMode,omitempty" tf:"output_locking_mode,omitempty"`
+
+	// –  Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
+	// +kubebuilder:validation:Optional
+	OutputTimingSource *string `json:"outputTimingSource,omitempty" tf:"output_timing_source,omitempty"`
+
+	// –  Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
+	// +kubebuilder:validation:Optional
+	SupportLowFramerateInputs *string `json:"supportLowFramerateInputs,omitempty" tf:"support_low_framerate_inputs,omitempty"`
 }
 
 type H264SettingsInitParameters struct {
@@ -3310,6 +4250,15 @@ type H265SettingsParameters struct {
 	// Determines how timecodes should be inserted into the video elementary stream.
 	// +kubebuilder:validation:Optional
 	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+}
+
+type HTMLMotionGraphicsSettingsInitParameters struct {
+}
+
+type HTMLMotionGraphicsSettingsObservation struct {
+}
+
+type HTMLMotionGraphicsSettingsParameters struct {
 }
 
 type Hdr10SettingsInitParameters struct {
@@ -4138,7 +5087,7 @@ type HlsWebdavSettingsParameters struct {
 
 type InputAttachmentsInitParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsInitParameters `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
 	// User-specified name for the attachment.
@@ -4157,13 +5106,13 @@ type InputAttachmentsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
 
-	// Settings of an input. See Input Settings for more details
+	// Settings of an input. See Input Settings for more details.
 	InputSettings []InputSettingsInitParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputAttachmentsObservation struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsObservation `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
 	// User-specified name for the attachment.
@@ -4172,13 +5121,13 @@ type InputAttachmentsObservation struct {
 	// The ID of the input.
 	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
 
-	// Settings of an input. See Input Settings for more details
+	// Settings of an input. See Input Settings for more details.
 	InputSettings []InputSettingsObservation `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
 
 type InputAttachmentsParameters struct {
 
-	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
+	// User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input. See Automatic Input Failover Settings for more details.
 	// +kubebuilder:validation:Optional
 	AutomaticInputFailoverSettings []AutomaticInputFailoverSettingsParameters `json:"automaticInputFailoverSettings,omitempty" tf:"automatic_input_failover_settings,omitempty"`
 
@@ -4200,7 +5149,7 @@ type InputAttachmentsParameters struct {
 	// +kubebuilder:validation:Optional
 	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
 
-	// Settings of an input. See Input Settings for more details
+	// Settings of an input. See Input Settings for more details.
 	// +kubebuilder:validation:Optional
 	InputSettings []InputSettingsParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
@@ -4226,16 +5175,102 @@ type InputChannelLevelsParameters struct {
 	InputChannel *float64 `json:"inputChannel" tf:"input_channel,omitempty"`
 }
 
+type InputLossBehaviorInitParameters struct {
+	BlackFrameMsec *float64 `json:"blackFrameMsec,omitempty" tf:"black_frame_msec,omitempty"`
+
+	InputLossImageColor *string `json:"inputLossImageColor,omitempty" tf:"input_loss_image_color,omitempty"`
+
+	InputLossImageSlate []InputLossImageSlateInitParameters `json:"inputLossImageSlate,omitempty" tf:"input_loss_image_slate,omitempty"`
+
+	InputLossImageType *string `json:"inputLossImageType,omitempty" tf:"input_loss_image_type,omitempty"`
+
+	RepeatFrameMsec *float64 `json:"repeatFrameMsec,omitempty" tf:"repeat_frame_msec,omitempty"`
+}
+
+type InputLossBehaviorObservation struct {
+	BlackFrameMsec *float64 `json:"blackFrameMsec,omitempty" tf:"black_frame_msec,omitempty"`
+
+	InputLossImageColor *string `json:"inputLossImageColor,omitempty" tf:"input_loss_image_color,omitempty"`
+
+	InputLossImageSlate []InputLossImageSlateObservation `json:"inputLossImageSlate,omitempty" tf:"input_loss_image_slate,omitempty"`
+
+	InputLossImageType *string `json:"inputLossImageType,omitempty" tf:"input_loss_image_type,omitempty"`
+
+	RepeatFrameMsec *float64 `json:"repeatFrameMsec,omitempty" tf:"repeat_frame_msec,omitempty"`
+}
+
+type InputLossBehaviorParameters struct {
+
+	// +kubebuilder:validation:Optional
+	BlackFrameMsec *float64 `json:"blackFrameMsec,omitempty" tf:"black_frame_msec,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InputLossImageColor *string `json:"inputLossImageColor,omitempty" tf:"input_loss_image_color,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InputLossImageSlate []InputLossImageSlateParameters `json:"inputLossImageSlate,omitempty" tf:"input_loss_image_slate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	InputLossImageType *string `json:"inputLossImageType,omitempty" tf:"input_loss_image_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RepeatFrameMsec *float64 `json:"repeatFrameMsec,omitempty" tf:"repeat_frame_msec,omitempty"`
+}
+
+type InputLossImageSlateInitParameters struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Username for destination.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type InputLossImageSlateObservation struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Username for destination.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type InputLossImageSlateParameters struct {
+
+	// Key used to extract the password from EC2 Parameter store.
+	// +kubebuilder:validation:Optional
+	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
+
+	// –  Path to a file accessible to the live stream.
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri" tf:"uri,omitempty"`
+
+	// Username for destination.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type InputLossSettingsInitParameters struct {
+
+	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputLossSettingsObservation struct {
+
+	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
 
 type InputLossSettingsParameters struct {
 
+	// The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.
 	// +kubebuilder:validation:Optional
 	InputLossThresholdMsec *float64 `json:"inputLossThresholdMsec,omitempty" tf:"input_loss_threshold_msec,omitempty"`
 }
@@ -4387,7 +5422,7 @@ type KeyProviderServerInitParameters struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -4399,7 +5434,7 @@ type KeyProviderServerObservation struct {
 	// Key used to extract the password from EC2 Parameter store.
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Username for destination.
@@ -4412,7 +5447,7 @@ type KeyProviderServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PasswordParam *string `json:"passwordParam,omitempty" tf:"password_param,omitempty"`
 
-	// Path to a file accessible to the live stream.
+	// –  Path to a file accessible to the live stream.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
 
@@ -4536,7 +5571,7 @@ type M2TsSettingsInitParameters struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
@@ -4567,7 +5602,7 @@ type M2TsSettingsInitParameters struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []DvbTdtSettingsInitParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
@@ -4578,15 +5613,15 @@ type M2TsSettingsInitParameters struct {
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -4606,12 +5641,12 @@ type M2TsSettingsInitParameters struct {
 
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
@@ -4633,13 +5668,13 @@ type M2TsSettingsInitParameters struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -4648,7 +5683,7 @@ type M2TsSettingsObservation struct {
 
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
 	AribCaptionsPidControl *string `json:"aribCaptionsPidControl,omitempty" tf:"arib_captions_pid_control,omitempty"`
@@ -4679,7 +5714,7 @@ type M2TsSettingsObservation struct {
 	// Destination settings for a standard output; one destination for each redundant encoder. See Settings for more details.
 	DvbTdtSettings []DvbTdtSettingsObservation `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
 	Ebif *string `json:"ebif,omitempty" tf:"ebif,omitempty"`
@@ -4690,15 +5725,15 @@ type M2TsSettingsObservation struct {
 
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
 	FragmentTime *float64 `json:"fragmentTime,omitempty" tf:"fragment_time,omitempty"`
@@ -4718,12 +5753,12 @@ type M2TsSettingsObservation struct {
 
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
@@ -4745,13 +5780,13 @@ type M2TsSettingsObservation struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -4763,7 +5798,7 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arib *string `json:"arib,omitempty" tf:"arib,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	AribCaptionsPid *string `json:"aribCaptionsPid,omitempty" tf:"arib_captions_pid,omitempty"`
 
@@ -4807,7 +5842,7 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DvbTdtSettings []DvbTdtSettingsParameters `json:"dvbTdtSettings,omitempty" tf:"dvb_tdt_settings,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	DvbTeletextPid *string `json:"dvbTeletextPid,omitempty" tf:"dvb_teletext_pid,omitempty"`
 
@@ -4823,18 +5858,18 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	EbpPlacement *string `json:"ebpPlacement,omitempty" tf:"ebp_placement,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EsRateInPes *string `json:"esRateInPes,omitempty" tf:"es_rate_in_pes,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EtvPlatformPid *string `json:"etvPlatformPid,omitempty" tf:"etv_platform_pid,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EtvSignalPid *string `json:"etvSignalPid,omitempty" tf:"etv_signal_pid,omitempty"`
 
@@ -4863,14 +5898,14 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
@@ -4902,7 +5937,7 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
@@ -4910,7 +5945,7 @@ type M2TsSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
@@ -4920,7 +5955,7 @@ type M3U8SettingsInitParameters struct {
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	NielsenId3Behavior *string `json:"nielsenId3Behavior,omitempty" tf:"nielsen_id3_behavior,omitempty"`
@@ -4931,12 +5966,12 @@ type M3U8SettingsInitParameters struct {
 
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
@@ -4948,13 +5983,13 @@ type M3U8SettingsInitParameters struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -4963,7 +5998,7 @@ type M3U8SettingsObservation struct {
 
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
 	NielsenId3Behavior *string `json:"nielsenId3Behavior,omitempty" tf:"nielsen_id3_behavior,omitempty"`
@@ -4974,12 +6009,12 @@ type M3U8SettingsObservation struct {
 
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
 	ProgramNum *float64 `json:"programNum,omitempty" tf:"program_num,omitempty"`
@@ -4991,13 +6026,13 @@ type M3U8SettingsObservation struct {
 
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
 	// User-specified id. Ths is used in an output group or an output.
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
 
@@ -5009,7 +6044,7 @@ type M3U8SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioPids *string `json:"audioPids,omitempty" tf:"audio_pids,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	EcmPid *string `json:"ecmPid,omitempty" tf:"ecm_pid,omitempty"`
 
@@ -5025,14 +6060,14 @@ type M3U8SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PcrPeriod *float64 `json:"pcrPeriod,omitempty" tf:"pcr_period,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	PcrPid *string `json:"pcrPid,omitempty" tf:"pcr_pid,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PmtInterval *float64 `json:"pmtInterval,omitempty" tf:"pmt_interval,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	PmtPid *string `json:"pmtPid,omitempty" tf:"pmt_pid,omitempty"`
 
@@ -5049,7 +6084,7 @@ type M3U8SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TimedMetadataBehavior *string `json:"timedMetadataBehavior,omitempty" tf:"timed_metadata_behavior,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	TimedMetadataPid *string `json:"timedMetadataPid,omitempty" tf:"timed_metadata_pid,omitempty"`
 
@@ -5057,7 +6092,7 @@ type M3U8SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	TransportStreamID *float64 `json:"transportStreamId,omitempty" tf:"transport_stream_id,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	VideoPid *string `json:"videoPid,omitempty" tf:"video_pid,omitempty"`
 }
@@ -5155,6 +6190,54 @@ type MediaPackageSettingsParameters struct {
 	// ID of the channel in MediaPackage that is the destination for this output group.
 	// +kubebuilder:validation:Optional
 	ChannelID *string `json:"channelId" tf:"channel_id,omitempty"`
+}
+
+type MotionGraphicsConfigurationInitParameters struct {
+
+	// –  Motion Graphics Insertion.
+	MotionGraphicsInsertion *string `json:"motionGraphicsInsertion,omitempty" tf:"motion_graphics_insertion,omitempty"`
+
+	// –  Motion Graphics Settings. See Motion Graphics Settings for more details.
+	MotionGraphicsSettings []MotionGraphicsSettingsInitParameters `json:"motionGraphicsSettings,omitempty" tf:"motion_graphics_settings,omitempty"`
+}
+
+type MotionGraphicsConfigurationObservation struct {
+
+	// –  Motion Graphics Insertion.
+	MotionGraphicsInsertion *string `json:"motionGraphicsInsertion,omitempty" tf:"motion_graphics_insertion,omitempty"`
+
+	// –  Motion Graphics Settings. See Motion Graphics Settings for more details.
+	MotionGraphicsSettings []MotionGraphicsSettingsObservation `json:"motionGraphicsSettings,omitempty" tf:"motion_graphics_settings,omitempty"`
+}
+
+type MotionGraphicsConfigurationParameters struct {
+
+	// –  Motion Graphics Insertion.
+	// +kubebuilder:validation:Optional
+	MotionGraphicsInsertion *string `json:"motionGraphicsInsertion,omitempty" tf:"motion_graphics_insertion,omitempty"`
+
+	// –  Motion Graphics Settings. See Motion Graphics Settings for more details.
+	// +kubebuilder:validation:Optional
+	MotionGraphicsSettings []MotionGraphicsSettingsParameters `json:"motionGraphicsSettings" tf:"motion_graphics_settings,omitempty"`
+}
+
+type MotionGraphicsSettingsInitParameters struct {
+
+	// –  Html Motion Graphics Settings.
+	HTMLMotionGraphicsSettings []HTMLMotionGraphicsSettingsInitParameters `json:"htmlMotionGraphicsSettings,omitempty" tf:"html_motion_graphics_settings,omitempty"`
+}
+
+type MotionGraphicsSettingsObservation struct {
+
+	// –  Html Motion Graphics Settings.
+	HTMLMotionGraphicsSettings []HTMLMotionGraphicsSettingsParameters `json:"htmlMotionGraphicsSettings,omitempty" tf:"html_motion_graphics_settings,omitempty"`
+}
+
+type MotionGraphicsSettingsParameters struct {
+
+	// –  Html Motion Graphics Settings.
+	// +kubebuilder:validation:Optional
+	HTMLMotionGraphicsSettings []HTMLMotionGraphicsSettingsParameters `json:"htmlMotionGraphicsSettings,omitempty" tf:"html_motion_graphics_settings,omitempty"`
 }
 
 type Mp2SettingsInitParameters struct {
@@ -5544,6 +6627,35 @@ type NielsenCbetSettingsParameters struct {
 	Csid *string `json:"csid" tf:"csid,omitempty"`
 }
 
+type NielsenConfigurationInitParameters struct {
+
+	// –  Enter the Distributor ID assigned to your organization by Nielsen.
+	DistributorID *string `json:"distributorId,omitempty" tf:"distributor_id,omitempty"`
+
+	// –  Enables Nielsen PCM to ID3 tagging.
+	NielsenPcmToId3Tagging *string `json:"nielsenPcmToId3Tagging,omitempty" tf:"nielsen_pcm_to_id3_tagging,omitempty"`
+}
+
+type NielsenConfigurationObservation struct {
+
+	// –  Enter the Distributor ID assigned to your organization by Nielsen.
+	DistributorID *string `json:"distributorId,omitempty" tf:"distributor_id,omitempty"`
+
+	// –  Enables Nielsen PCM to ID3 tagging.
+	NielsenPcmToId3Tagging *string `json:"nielsenPcmToId3Tagging,omitempty" tf:"nielsen_pcm_to_id3_tagging,omitempty"`
+}
+
+type NielsenConfigurationParameters struct {
+
+	// –  Enter the Distributor ID assigned to your organization by Nielsen.
+	// +kubebuilder:validation:Optional
+	DistributorID *string `json:"distributorId,omitempty" tf:"distributor_id,omitempty"`
+
+	// –  Enables Nielsen PCM to ID3 tagging.
+	// +kubebuilder:validation:Optional
+	NielsenPcmToId3Tagging *string `json:"nielsenPcmToId3Tagging,omitempty" tf:"nielsen_pcm_to_id3_tagging,omitempty"`
+}
+
 type NielsenNaesIiNwSettingsInitParameters struct {
 	CheckDigitString *string `json:"checkDigitString,omitempty" tf:"check_digit_string,omitempty"`
 
@@ -5737,43 +6849,49 @@ type OutputGroupsParameters struct {
 
 type OutputRectangleInitParameters struct {
 
-	// Output video height in pixels.
+	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
+	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don’t have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages. If you specify a value for one of these fields, you must specify a value for all of them. For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, "10" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame. This field corresponds to tts:origin - X in the TTML standard.
 	LeftOffset *float64 `json:"leftOffset,omitempty" tf:"left_offset,omitempty"`
 
+	// See the description in left_offset. For top_offset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, "10" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame. This field corresponds to tts:origin - Y in the TTML standard.
 	TopOffset *float64 `json:"topOffset,omitempty" tf:"top_offset,omitempty"`
 
-	// Output video width in pixels.
+	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type OutputRectangleObservation struct {
 
-	// Output video height in pixels.
+	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
+	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don’t have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages. If you specify a value for one of these fields, you must specify a value for all of them. For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, "10" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame. This field corresponds to tts:origin - X in the TTML standard.
 	LeftOffset *float64 `json:"leftOffset,omitempty" tf:"left_offset,omitempty"`
 
+	// See the description in left_offset. For top_offset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, "10" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame. This field corresponds to tts:origin - Y in the TTML standard.
 	TopOffset *float64 `json:"topOffset,omitempty" tf:"top_offset,omitempty"`
 
-	// Output video width in pixels.
+	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
 type OutputRectangleParameters struct {
 
-	// Output video height in pixels.
+	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
 	// +kubebuilder:validation:Optional
 	Height *float64 `json:"height" tf:"height,omitempty"`
 
+	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don’t have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages. If you specify a value for one of these fields, you must specify a value for all of them. For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, "10" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame. This field corresponds to tts:origin - X in the TTML standard.
 	// +kubebuilder:validation:Optional
 	LeftOffset *float64 `json:"leftOffset" tf:"left_offset,omitempty"`
 
+	// See the description in left_offset. For top_offset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, "10" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame. This field corresponds to tts:origin - Y in the TTML standard.
 	// +kubebuilder:validation:Optional
 	TopOffset *float64 `json:"topOffset" tf:"top_offset,omitempty"`
 
-	// Output video width in pixels.
+	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
 	// +kubebuilder:validation:Optional
 	Width *float64 `json:"width" tf:"width,omitempty"`
 }
@@ -5801,7 +6919,7 @@ type OutputSettingsInitParameters struct {
 	// RTMP output settings. See RTMP Output Settings for more details.
 	RtmpOutputSettings []RtmpOutputSettingsInitParameters `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details
+	// UDP output settings. See UDP Output Settings for more details.
 	UDPOutputSettings []UDPOutputSettingsInitParameters `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
 
@@ -5828,7 +6946,7 @@ type OutputSettingsObservation struct {
 	// RTMP output settings. See RTMP Output Settings for more details.
 	RtmpOutputSettings []RtmpOutputSettingsObservation `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details
+	// UDP output settings. See UDP Output Settings for more details.
 	UDPOutputSettings []UDPOutputSettingsObservation `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
 
@@ -5862,7 +6980,7 @@ type OutputSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	RtmpOutputSettings []RtmpOutputSettingsParameters `json:"rtmpOutputSettings,omitempty" tf:"rtmp_output_settings,omitempty"`
 
-	// UDP output settings. See UDP Output Settings for more details
+	// UDP output settings. See UDP Output Settings for more details.
 	// +kubebuilder:validation:Optional
 	UDPOutputSettings []UDPOutputSettingsParameters `json:"udpOutputSettings,omitempty" tf:"udp_output_settings,omitempty"`
 }
@@ -5994,6 +7112,15 @@ type RemixSettingsParameters struct {
 
 	// +kubebuilder:validation:Optional
 	ChannelsOut *float64 `json:"channelsOut,omitempty" tf:"channels_out,omitempty"`
+}
+
+type RtmpCaptionInfoDestinationSettingsInitParameters struct {
+}
+
+type RtmpCaptionInfoDestinationSettingsObservation struct {
+}
+
+type RtmpCaptionInfoDestinationSettingsParameters struct {
 }
 
 type RtmpGroupSettingsInitParameters struct {
@@ -6143,106 +7270,127 @@ type RtmpOutputSettingsParameters struct {
 	NumRetries *float64 `json:"numRetries,omitempty" tf:"num_retries,omitempty"`
 }
 
+type Scte20PlusEmbeddedDestinationSettingsInitParameters struct {
+}
+
+type Scte20PlusEmbeddedDestinationSettingsObservation struct {
+}
+
+type Scte20PlusEmbeddedDestinationSettingsParameters struct {
+}
+
 type Scte20SourceSettingsInitParameters struct {
+
+	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
+	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
 }
 
 type Scte20SourceSettingsObservation struct {
+
+	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
+	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
 }
 
 type Scte20SourceSettingsParameters struct {
 
+	// If upconvert, 608 data is both passed through via the “608 compatibility bytes” fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
 	// +kubebuilder:validation:Optional
 	Convert608To708 *string `json:"convert608To708,omitempty" tf:"convert_608_to_708,omitempty"`
 
+	// Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.
 	// +kubebuilder:validation:Optional
 	Source608ChannelNumber *float64 `json:"source608ChannelNumber,omitempty" tf:"source_608_channel_number,omitempty"`
 }
 
+type Scte27DestinationSettingsInitParameters struct {
+}
+
+type Scte27DestinationSettingsObservation struct {
+}
+
+type Scte27DestinationSettingsParameters struct {
+}
+
 type Scte27SourceSettingsInitParameters struct {
+
+	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
 	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type Scte27SourceSettingsObservation struct {
+
+	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
 	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type Scte27SourceSettingsParameters struct {
 
+	// If you will configure a WebVTT caption description that references this caption selector, use this field to provide the language to consider when translating the image-based source to text.
 	// +kubebuilder:validation:Optional
 	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
 
-	// User-specified id. Ths is used in an output group or an output.
-	// +kubebuilder:validation:Optional
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
-}
-
-type SelectorSettingsDvbTdtSettingsInitParameters struct {
-	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
-
-	// User-specified id. Ths is used in an output group or an output.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
-}
-
-type SelectorSettingsDvbTdtSettingsObservation struct {
-	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
-
-	// User-specified id. Ths is used in an output group or an output.
-	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
-}
-
-type SelectorSettingsDvbTdtSettingsParameters struct {
-
-	// +kubebuilder:validation:Optional
-	OcrLanguage *string `json:"ocrLanguage,omitempty" tf:"ocr_language,omitempty"`
-
-	// User-specified id. Ths is used in an output group or an output.
+	// Selects a specific PID from within a source.
 	// +kubebuilder:validation:Optional
 	Pid *float64 `json:"pid,omitempty" tf:"pid,omitempty"`
 }
 
 type SelectorSettingsInitParameters struct {
+
+	// Audio HLS Rendition Selection. See Audio HLS Rendition Selection for more details.
 	AudioHlsRenditionSelection []AudioHlsRenditionSelectionInitParameters `json:"audioHlsRenditionSelection,omitempty" tf:"audio_hls_rendition_selection,omitempty"`
 
+	// Audio Language Selection. See Audio Language Selection for more details.
 	AudioLanguageSelection []AudioLanguageSelectionInitParameters `json:"audioLanguageSelection,omitempty" tf:"audio_language_selection,omitempty"`
 
+	// Audio Pid Selection. See Audio PID Selection for more details.
 	AudioPidSelection []AudioPidSelectionInitParameters `json:"audioPidSelection,omitempty" tf:"audio_pid_selection,omitempty"`
 
+	// Audio Track Selection. See Audio Track Selection for more details.
 	AudioTrackSelection []AudioTrackSelectionInitParameters `json:"audioTrackSelection,omitempty" tf:"audio_track_selection,omitempty"`
 }
 
 type SelectorSettingsObservation struct {
+
+	// Audio HLS Rendition Selection. See Audio HLS Rendition Selection for more details.
 	AudioHlsRenditionSelection []AudioHlsRenditionSelectionObservation `json:"audioHlsRenditionSelection,omitempty" tf:"audio_hls_rendition_selection,omitempty"`
 
+	// Audio Language Selection. See Audio Language Selection for more details.
 	AudioLanguageSelection []AudioLanguageSelectionObservation `json:"audioLanguageSelection,omitempty" tf:"audio_language_selection,omitempty"`
 
+	// Audio Pid Selection. See Audio PID Selection for more details.
 	AudioPidSelection []AudioPidSelectionObservation `json:"audioPidSelection,omitempty" tf:"audio_pid_selection,omitempty"`
 
+	// Audio Track Selection. See Audio Track Selection for more details.
 	AudioTrackSelection []AudioTrackSelectionObservation `json:"audioTrackSelection,omitempty" tf:"audio_track_selection,omitempty"`
 }
 
 type SelectorSettingsParameters struct {
 
+	// Audio HLS Rendition Selection. See Audio HLS Rendition Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioHlsRenditionSelection []AudioHlsRenditionSelectionParameters `json:"audioHlsRenditionSelection,omitempty" tf:"audio_hls_rendition_selection,omitempty"`
 
+	// Audio Language Selection. See Audio Language Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioLanguageSelection []AudioLanguageSelectionParameters `json:"audioLanguageSelection,omitempty" tf:"audio_language_selection,omitempty"`
 
+	// Audio Pid Selection. See Audio PID Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioPidSelection []AudioPidSelectionParameters `json:"audioPidSelection,omitempty" tf:"audio_pid_selection,omitempty"`
 
+	// Audio Track Selection. See Audio Track Selection for more details.
 	// +kubebuilder:validation:Optional
 	AudioTrackSelection []AudioTrackSelectionParameters `json:"audioTrackSelection,omitempty" tf:"audio_track_selection,omitempty"`
 }
@@ -6296,6 +7444,15 @@ type SettingsParameters struct {
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
+type SmpteTtDestinationSettingsInitParameters struct {
+}
+
+type SmpteTtDestinationSettingsObservation struct {
+}
+
+type SmpteTtDestinationSettingsParameters struct {
+}
+
 type StandardHlsSettingsInitParameters struct {
 	AudioRenditionSets *string `json:"audioRenditionSets,omitempty" tf:"audio_rendition_sets,omitempty"`
 
@@ -6341,23 +7498,40 @@ type StaticKeySettingsParameters struct {
 	StaticKeyValue *string `json:"staticKeyValue" tf:"static_key_value,omitempty"`
 }
 
+type TeletextDestinationSettingsInitParameters struct {
+}
+
+type TeletextDestinationSettingsObservation struct {
+}
+
+type TeletextDestinationSettingsParameters struct {
+}
+
 type TeletextSourceSettingsInitParameters struct {
+
+	// Optionally defines a region where TTML style captions will be displayed. See Caption Rectangle for more details.
 	OutputRectangle []OutputRectangleInitParameters `json:"outputRectangle,omitempty" tf:"output_rectangle,omitempty"`
 
+	// Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no “0x” prefix.
 	PageNumber *string `json:"pageNumber,omitempty" tf:"page_number,omitempty"`
 }
 
 type TeletextSourceSettingsObservation struct {
+
+	// Optionally defines a region where TTML style captions will be displayed. See Caption Rectangle for more details.
 	OutputRectangle []OutputRectangleObservation `json:"outputRectangle,omitempty" tf:"output_rectangle,omitempty"`
 
+	// Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no “0x” prefix.
 	PageNumber *string `json:"pageNumber,omitempty" tf:"page_number,omitempty"`
 }
 
 type TeletextSourceSettingsParameters struct {
 
+	// Optionally defines a region where TTML style captions will be displayed. See Caption Rectangle for more details.
 	// +kubebuilder:validation:Optional
 	OutputRectangle []OutputRectangleParameters `json:"outputRectangle,omitempty" tf:"output_rectangle,omitempty"`
 
+	// Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no “0x” prefix.
 	// +kubebuilder:validation:Optional
 	PageNumber *string `json:"pageNumber,omitempty" tf:"page_number,omitempty"`
 }
@@ -6459,18 +7633,42 @@ type TimecodeConfigParameters struct {
 	SyncThreshold *float64 `json:"syncThreshold,omitempty" tf:"sync_threshold,omitempty"`
 }
 
-type TrackInitParameters struct {
+type TracksInitParameters struct {
+
+	// 1-based integer value that maps to a specific audio track.
 	Track *float64 `json:"track,omitempty" tf:"track,omitempty"`
 }
 
-type TrackObservation struct {
+type TracksObservation struct {
+
+	// 1-based integer value that maps to a specific audio track.
 	Track *float64 `json:"track,omitempty" tf:"track,omitempty"`
 }
 
-type TrackParameters struct {
+type TracksParameters struct {
 
+	// 1-based integer value that maps to a specific audio track.
 	// +kubebuilder:validation:Optional
 	Track *float64 `json:"track" tf:"track,omitempty"`
+}
+
+type TtmlDestinationSettingsInitParameters struct {
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type TtmlDestinationSettingsObservation struct {
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type TtmlDestinationSettingsParameters struct {
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	// +kubebuilder:validation:Optional
+	StyleControl *string `json:"styleControl" tf:"style_control,omitempty"`
 }
 
 type UDPGroupSettingsInitParameters struct {
@@ -6511,19 +7709,19 @@ type UDPGroupSettingsParameters struct {
 
 type UDPOutputSettingsContainerSettingsInitParameters struct {
 
-	// M2ts Settings. See M2ts Settings for more details.
+	// M2TS Settings. See M2TS Settings for more details.
 	M2TsSettings []ContainerSettingsM2TsSettingsInitParameters `json:"m2tsSettings,omitempty" tf:"m2ts_settings,omitempty"`
 }
 
 type UDPOutputSettingsContainerSettingsObservation struct {
 
-	// M2ts Settings. See M2ts Settings for more details.
+	// M2TS Settings. See M2TS Settings for more details.
 	M2TsSettings []ContainerSettingsM2TsSettingsObservation `json:"m2tsSettings,omitempty" tf:"m2ts_settings,omitempty"`
 }
 
 type UDPOutputSettingsContainerSettingsParameters struct {
 
-	// M2ts Settings. See M2ts Settings for more details.
+	// M2TS Settings. See M2TS Settings for more details.
 	// +kubebuilder:validation:Optional
 	M2TsSettings []ContainerSettingsM2TsSettingsParameters `json:"m2tsSettings,omitempty" tf:"m2ts_settings,omitempty"`
 }
@@ -6597,52 +7795,81 @@ type UDPOutputSettingsParameters struct {
 }
 
 type VPCInitParameters struct {
+
+	// List of public address allocation ids to associate with ENIs that will be created in Output VPC. Must specify one for SINGLE_PIPELINE, two for STANDARD channels.
 	PublicAddressAllocationIds []*string `json:"publicAddressAllocationIds,omitempty" tf:"public_address_allocation_ids,omitempty"`
 
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces. If none are specified then the VPC default security group will be used.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// A list of VPC subnet IDs from the same VPC. If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCObservation struct {
+
+	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
 
+	// +listType=set
+	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// List of public address allocation ids to associate with ENIs that will be created in Output VPC. Must specify one for SINGLE_PIPELINE, two for STANDARD channels.
 	PublicAddressAllocationIds []*string `json:"publicAddressAllocationIds,omitempty" tf:"public_address_allocation_ids,omitempty"`
 
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces. If none are specified then the VPC default security group will be used.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// A list of VPC subnet IDs from the same VPC. If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCParameters struct {
 
+	// List of public address allocation ids to associate with ENIs that will be created in Output VPC. Must specify one for SINGLE_PIPELINE, two for STANDARD channels.
 	// +kubebuilder:validation:Optional
 	PublicAddressAllocationIds []*string `json:"publicAddressAllocationIds" tf:"public_address_allocation_ids,omitempty"`
 
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces. If none are specified then the VPC default security group will be used.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// A list of VPC subnet IDs from the same VPC. If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
 type VideoBlackSettingsInitParameters struct {
+
+	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoBlackSettingsObservation struct {
+
+	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
 
 type VideoBlackSettingsParameters struct {
 
+	// A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.
 	// +kubebuilder:validation:Optional
 	BlackDetectThreshold *float64 `json:"blackDetectThreshold,omitempty" tf:"black_detect_threshold,omitempty"`
 
+	// The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
 	// +kubebuilder:validation:Optional
 	VideoBlackThresholdMsec *float64 `json:"videoBlackThresholdMsec,omitempty" tf:"video_black_threshold_msec,omitempty"`
 }
@@ -6691,7 +7918,7 @@ type VideoDescriptionsInitParameters struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []VideoDescriptionsCodecSettingsInitParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// Output video height in pixels.
+	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
 	// Name of the Channel.
@@ -6706,7 +7933,7 @@ type VideoDescriptionsInitParameters struct {
 	// Changes the strength of the anti-alias filter used for scaling.
 	Sharpness *float64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
 
-	// Output video width in pixels.
+	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
@@ -6715,7 +7942,7 @@ type VideoDescriptionsObservation struct {
 	// Audio codec settings. See Audio Codec Settings for more details.
 	CodecSettings []VideoDescriptionsCodecSettingsObservation `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// Output video height in pixels.
+	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
 	// Name of the Channel.
@@ -6730,7 +7957,7 @@ type VideoDescriptionsObservation struct {
 	// Changes the strength of the anti-alias filter used for scaling.
 	Sharpness *float64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
 
-	// Output video width in pixels.
+	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
 
@@ -6740,7 +7967,7 @@ type VideoDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	CodecSettings []VideoDescriptionsCodecSettingsParameters `json:"codecSettings,omitempty" tf:"codec_settings,omitempty"`
 
-	// Output video height in pixels.
+	// See the description in left_offset. For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, "80" means the rectangle height is 80% of the underlying frame height. The top_offset and rectangle_height must add up to 100% or less. This field corresponds to tts:extent - Y in the TTML standard.
 	// +kubebuilder:validation:Optional
 	Height *float64 `json:"height,omitempty" tf:"height,omitempty"`
 
@@ -6760,7 +7987,7 @@ type VideoDescriptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Sharpness *float64 `json:"sharpness,omitempty" tf:"sharpness,omitempty"`
 
-	// Output video width in pixels.
+	// See the description in left_offset. For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, "80" means the rectangle width is 80% of the underlying frame width. The left_offset and rectangle_width must add up to 100% or less. This field corresponds to tts:extent - X in the TTML standard.
 	// +kubebuilder:validation:Optional
 	Width *float64 `json:"width,omitempty" tf:"width,omitempty"`
 }
@@ -6818,6 +8045,25 @@ type WavSettingsParameters struct {
 	// Sample rate in Hz.
 	// +kubebuilder:validation:Optional
 	SampleRate *float64 `json:"sampleRate,omitempty" tf:"sample_rate,omitempty"`
+}
+
+type WebvttDestinationSettingsInitParameters struct {
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type WebvttDestinationSettingsObservation struct {
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	StyleControl *string `json:"styleControl,omitempty" tf:"style_control,omitempty"`
+}
+
+type WebvttDestinationSettingsParameters struct {
+
+	// TT captions. - include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext. - exclude: In the font data attached to the EBU-TT captions, set the font family to “monospaced”. Do not include any other style information.
+	// +kubebuilder:validation:Optional
+	StyleControl *string `json:"styleControl" tf:"style_control,omitempty"`
 }
 
 // ChannelSpec defines the desired state of Channel

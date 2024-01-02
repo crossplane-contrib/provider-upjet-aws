@@ -500,8 +500,8 @@ spec:
                     description: Identifier of the CA certificate for the DB instance.
                     type: string
                   clusterIdentifier:
-                    description: The identifier of the aws_rds_cluster in which to
-                      launch this instance.
+                    description: Identifier of the aws_rds_cluster in which to launch
+                      this instance.
                     type: string
                   clusterIdentifierRef:
                     description: Reference to a Cluster in rds to populate clusterIdentifier.
@@ -589,7 +589,7 @@ spec:
                       this instance.
                     type: string
                   dbSubnetGroupName:
-                    description: 'A DB subnet group to associate with this DB instance.
+                    description: 'DB subnet group to associate with this DB instance.
                       NOTE: This must match the db_subnet_group_name of the attached
                       aws_rds_cluster.'
                     type: string
@@ -686,10 +686,10 @@ spec:
                       is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60.'
                     type: number
                   monitoringRoleArn:
-                    description: The ARN for the IAM role that permits RDS to send
-                      enhanced monitoring metrics to CloudWatch Logs. You can find
-                      more information on the AWS Documentation what IAM permissions
-                      are needed to allow Enhanced Monitoring for RDS Instances.
+                    description: ARN for the IAM role that permits RDS to send enhanced
+                      monitoring metrics to CloudWatch Logs. You can find more information
+                      on the AWS Documentation what IAM permissions are needed to
+                      allow Enhanced Monitoring for RDS Instances.
                     type: string
                   monitoringRoleArnRef:
                     description: Reference to a Role in iam to populate monitoringRoleArn.

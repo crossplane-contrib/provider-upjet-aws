@@ -95,6 +95,8 @@ type CatalogTargetParameters struct {
 }
 
 type CrawlerInitParameters struct {
+
+	// List of nested AWS Glue Data Catalog target arguments. See Catalog Target below.
 	CatalogTarget []CatalogTargetInitParameters `json:"catalogTarget,omitempty" tf:"catalog_target,omitempty"`
 
 	// List of custom classifiers. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
@@ -115,6 +117,7 @@ type CrawlerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
+	// List of nested Delta Lake target arguments. See Delta Target below.
 	DeltaTarget []DeltaTargetInitParameters `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`
 
 	// Description of the crawler.
@@ -123,7 +126,13 @@ type CrawlerInitParameters struct {
 	// List of nested DynamoDB target arguments. See Dynamodb Target below.
 	DynamodbTarget []DynamodbTargetInitParameters `json:"dynamodbTarget,omitempty" tf:"dynamodb_target,omitempty"`
 
-	// List of nested JBDC target arguments. See JDBC Target below.
+	// List of nested Hudi target arguments. See Iceberg Target below.
+	HudiTarget []HudiTargetInitParameters `json:"hudiTarget,omitempty" tf:"hudi_target,omitempty"`
+
+	// List of nested Iceberg target arguments. See Iceberg Target below.
+	IcebergTarget []IcebergTargetInitParameters `json:"icebergTarget,omitempty" tf:"iceberg_target,omitempty"`
+
+	// List of nested JDBC target arguments. See JDBC Target below.
 	JdbcTarget []JdbcTargetInitParameters `json:"jdbcTarget,omitempty" tf:"jdbc_target,omitempty"`
 
 	// Specifies Lake Formation configuration settings for the crawler. See Lake Formation Configuration below.
@@ -132,7 +141,7 @@ type CrawlerInitParameters struct {
 	// Specifies data lineage configuration settings for the crawler. See Lineage Configuration below.
 	LineageConfiguration []LineageConfigurationInitParameters `json:"lineageConfiguration,omitempty" tf:"lineage_configuration,omitempty"`
 
-	// List nested MongoDB target arguments. See MongoDB Target below.
+	// List of nested MongoDB target arguments. See MongoDB Target below.
 	MongodbTarget []MongodbTargetInitParameters `json:"mongodbTarget,omitempty" tf:"mongodb_target,omitempty"`
 
 	// A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.. See Recrawl Policy below.
@@ -151,7 +160,7 @@ type CrawlerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
-	// List nested Amazon S3 target arguments. See S3 Target below.
+	// List of nested Amazon S3 target arguments. See S3 Target below.
 	S3Target []S3TargetInitParameters `json:"s3Target,omitempty" tf:"s3_target,omitempty"`
 
 	// Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
@@ -176,6 +185,7 @@ type CrawlerObservation struct {
 	// The ARN of the crawler
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// List of nested AWS Glue Data Catalog target arguments. See Catalog Target below.
 	CatalogTarget []CatalogTargetObservation `json:"catalogTarget,omitempty" tf:"catalog_target,omitempty"`
 
 	// List of custom classifiers. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
@@ -187,6 +197,7 @@ type CrawlerObservation struct {
 	// Glue database where results are written.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// List of nested Delta Lake target arguments. See Delta Target below.
 	DeltaTarget []DeltaTargetObservation `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`
 
 	// Description of the crawler.
@@ -195,10 +206,16 @@ type CrawlerObservation struct {
 	// List of nested DynamoDB target arguments. See Dynamodb Target below.
 	DynamodbTarget []DynamodbTargetObservation `json:"dynamodbTarget,omitempty" tf:"dynamodb_target,omitempty"`
 
+	// List of nested Hudi target arguments. See Iceberg Target below.
+	HudiTarget []HudiTargetObservation `json:"hudiTarget,omitempty" tf:"hudi_target,omitempty"`
+
 	// Crawler name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of nested JBDC target arguments. See JDBC Target below.
+	// List of nested Iceberg target arguments. See Iceberg Target below.
+	IcebergTarget []IcebergTargetObservation `json:"icebergTarget,omitempty" tf:"iceberg_target,omitempty"`
+
+	// List of nested JDBC target arguments. See JDBC Target below.
 	JdbcTarget []JdbcTargetObservation `json:"jdbcTarget,omitempty" tf:"jdbc_target,omitempty"`
 
 	// Specifies Lake Formation configuration settings for the crawler. See Lake Formation Configuration below.
@@ -207,7 +224,7 @@ type CrawlerObservation struct {
 	// Specifies data lineage configuration settings for the crawler. See Lineage Configuration below.
 	LineageConfiguration []LineageConfigurationObservation `json:"lineageConfiguration,omitempty" tf:"lineage_configuration,omitempty"`
 
-	// List nested MongoDB target arguments. See MongoDB Target below.
+	// List of nested MongoDB target arguments. See MongoDB Target below.
 	MongodbTarget []MongodbTargetObservation `json:"mongodbTarget,omitempty" tf:"mongodb_target,omitempty"`
 
 	// A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.. See Recrawl Policy below.
@@ -216,7 +233,7 @@ type CrawlerObservation struct {
 	// The IAM role friendly name (including path without leading slash), or ARN of an IAM role, used by the crawler to access other resources.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// List nested Amazon S3 target arguments. See S3 Target below.
+	// List of nested Amazon S3 target arguments. See S3 Target below.
 	S3Target []S3TargetObservation `json:"s3Target,omitempty" tf:"s3_target,omitempty"`
 
 	// Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
@@ -242,6 +259,7 @@ type CrawlerObservation struct {
 
 type CrawlerParameters struct {
 
+	// List of nested AWS Glue Data Catalog target arguments. See Catalog Target below.
 	// +kubebuilder:validation:Optional
 	CatalogTarget []CatalogTargetParameters `json:"catalogTarget,omitempty" tf:"catalog_target,omitempty"`
 
@@ -266,6 +284,7 @@ type CrawlerParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
+	// List of nested Delta Lake target arguments. See Delta Target below.
 	// +kubebuilder:validation:Optional
 	DeltaTarget []DeltaTargetParameters `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`
 
@@ -277,7 +296,15 @@ type CrawlerParameters struct {
 	// +kubebuilder:validation:Optional
 	DynamodbTarget []DynamodbTargetParameters `json:"dynamodbTarget,omitempty" tf:"dynamodb_target,omitempty"`
 
-	// List of nested JBDC target arguments. See JDBC Target below.
+	// List of nested Hudi target arguments. See Iceberg Target below.
+	// +kubebuilder:validation:Optional
+	HudiTarget []HudiTargetParameters `json:"hudiTarget,omitempty" tf:"hudi_target,omitempty"`
+
+	// List of nested Iceberg target arguments. See Iceberg Target below.
+	// +kubebuilder:validation:Optional
+	IcebergTarget []IcebergTargetParameters `json:"icebergTarget,omitempty" tf:"iceberg_target,omitempty"`
+
+	// List of nested JDBC target arguments. See JDBC Target below.
 	// +kubebuilder:validation:Optional
 	JdbcTarget []JdbcTargetParameters `json:"jdbcTarget,omitempty" tf:"jdbc_target,omitempty"`
 
@@ -289,7 +316,7 @@ type CrawlerParameters struct {
 	// +kubebuilder:validation:Optional
 	LineageConfiguration []LineageConfigurationParameters `json:"lineageConfiguration,omitempty" tf:"lineage_configuration,omitempty"`
 
-	// List nested MongoDB target arguments. See MongoDB Target below.
+	// List of nested MongoDB target arguments. See MongoDB Target below.
 	// +kubebuilder:validation:Optional
 	MongodbTarget []MongodbTargetParameters `json:"mongodbTarget,omitempty" tf:"mongodb_target,omitempty"`
 
@@ -316,7 +343,7 @@ type CrawlerParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
-	// List nested Amazon S3 target arguments. See S3 Target below.
+	// List of nested Amazon S3 target arguments. See S3 Target below.
 	// +kubebuilder:validation:Optional
 	S3Target []S3TargetParameters `json:"s3Target,omitempty" tf:"s3_target,omitempty"`
 
@@ -433,6 +460,110 @@ type DynamodbTargetParameters struct {
 	ScanRate *float64 `json:"scanRate,omitempty" tf:"scan_rate,omitempty"`
 }
 
+type HudiTargetInitParameters struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
+	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+
+	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
+	// +listType=set
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
+type HudiTargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
+	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+
+	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
+	// +listType=set
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
+type HudiTargetParameters struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	// +kubebuilder:validation:Optional
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	// +kubebuilder:validation:Optional
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
+	// +kubebuilder:validation:Optional
+	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth" tf:"maximum_traversal_depth,omitempty"`
+
+	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Paths []*string `json:"paths" tf:"paths,omitempty"`
+}
+
+type IcebergTargetInitParameters struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
+	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+
+	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
+	// +listType=set
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
+type IcebergTargetObservation struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
+	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth,omitempty" tf:"maximum_traversal_depth,omitempty"`
+
+	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
+	// +listType=set
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+}
+
+type IcebergTargetParameters struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	// +kubebuilder:validation:Optional
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// A list of glob patterns used to exclude from the crawl.
+	// +kubebuilder:validation:Optional
+	Exclusions []*string `json:"exclusions,omitempty" tf:"exclusions,omitempty"`
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Hudi metadata folder in your Amazon S3 path. Used to limit the crawler run time. Valid values are between 1 and 20.
+	// +kubebuilder:validation:Optional
+	MaximumTraversalDepth *float64 `json:"maximumTraversalDepth" tf:"maximum_traversal_depth,omitempty"`
+
+	// One or more Amazon S3 paths that contains Hudi metadata folders as s3://bucket/prefix.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Paths []*string `json:"paths" tf:"paths,omitempty"`
+}
+
 type JdbcTargetInitParameters struct {
 
 	// The name of the connection to use to connect to the JDBC target.
@@ -531,19 +662,19 @@ type LakeFormationConfigurationParameters struct {
 
 type LineageConfigurationInitParameters struct {
 
-	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is Disable.
+	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is DISABLE.
 	CrawlerLineageSettings *string `json:"crawlerLineageSettings,omitempty" tf:"crawler_lineage_settings,omitempty"`
 }
 
 type LineageConfigurationObservation struct {
 
-	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is Disable.
+	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is DISABLE.
 	CrawlerLineageSettings *string `json:"crawlerLineageSettings,omitempty" tf:"crawler_lineage_settings,omitempty"`
 }
 
 type LineageConfigurationParameters struct {
 
-	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is Disable.
+	// Specifies whether data lineage is enabled for the crawler. Valid values are: ENABLE and DISABLE. Default value is DISABLE.
 	// +kubebuilder:validation:Optional
 	CrawlerLineageSettings *string `json:"crawlerLineageSettings,omitempty" tf:"crawler_lineage_settings,omitempty"`
 }

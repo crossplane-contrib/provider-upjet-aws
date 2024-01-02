@@ -371,7 +371,7 @@ type HibernationOptionsParameters struct {
 
 type IAMInstanceProfileInitParameters struct {
 
-	// The Amazon Resource Name (ARN) of the instance profile.
+	// The Amazon Resource Name (ARN) of the instance profile. Conflicts with name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`

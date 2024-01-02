@@ -270,9 +270,11 @@ spec:
                   like an autoscaler.
                 properties:
                   destination:
-                    description: ID of the resource which is the source of the path.
-                      Can be an Instance, Internet Gateway, Network Interface, Transit
-                      Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+                    description: ID or ARN of the resource which is the destination
+                      of the path. Can be an Instance, Internet Gateway, Network Interface,
+                      Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN
+                      Gateway. If the resource is in another account, you must specify
+                      an ARN.
                     type: string
                   destinationIp:
                     description: IP address of the destination resource.
@@ -360,9 +362,11 @@ spec:
                       or udp.
                     type: string
                   source:
-                    description: ID of the resource which is the source of the path.
-                      Can be an Instance, Internet Gateway, Network Interface, Transit
-                      Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+                    description: ID or ARN of the resource which is the source of
+                      the path. Can be an Instance, Internet Gateway, Network Interface,
+                      Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN
+                      Gateway. If the resource is in another account, you must specify
+                      an ARN.
                     type: string
                   sourceIp:
                     description: IP address of the source resource.

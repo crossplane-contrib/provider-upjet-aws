@@ -291,7 +291,7 @@ type DataSourceInitParameters struct {
 	// A description for the Data Source connector.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The identifier of the index for your Amazon Kendra data_source.
+	// The identifier of the index for your Amazon Kendra data source.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`

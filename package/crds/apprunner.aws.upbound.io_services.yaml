@@ -782,9 +782,10 @@ spec:
                                   values are: DEFAULT and VPC.'
                                 type: string
                               vpcConnectorArn:
-                                description: ARN of the App Runner VPC connector that
-                                  you want to associate with your App Runner service.
-                                  Only valid when EgressType = VPC.
+                                description: The Amazon Resource Name (ARN) of the
+                                  App Runner VPC connector that you want to associate
+                                  with your App Runner service. Only valid when EgressType
+                                  = VPC.
                                 type: string
                               vpcConnectorArnRef:
                                 description: Reference to a VPCConnector in apprunner

@@ -986,6 +986,21 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifierRef != nil {
+		in, out := &in.KMSKeyIdentifierRef, &out.KMSKeyIdentifierRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIdentifierSelector != nil {
+		in, out := &in.KMSKeyIdentifierSelector, &out.KMSKeyIdentifierSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

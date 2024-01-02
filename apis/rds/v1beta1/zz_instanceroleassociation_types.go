@@ -21,7 +21,6 @@ type InstanceRoleAssociationInitParameters struct {
 
 	// DB Instance Identifier to associate with the IAM Role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
 	// Reference to a Instance in rds to populate dbInstanceIdentifier.

@@ -19,19 +19,6 @@ import (
 
 type AttachmentInitParameters struct {
 
-	// ARN of an ALB Target Group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
-	ALBTargetGroupArn *string `json:"albTargetGroupArn,omitempty" tf:"alb_target_group_arn,omitempty"`
-
-	// Reference to a LBTargetGroup in elbv2 to populate albTargetGroupArn.
-	// +kubebuilder:validation:Optional
-	ALBTargetGroupArnRef *v1.Reference `json:"albTargetGroupArnRef,omitempty" tf:"-"`
-
-	// Selector for a LBTargetGroup in elbv2 to populate albTargetGroupArn.
-	// +kubebuilder:validation:Optional
-	ALBTargetGroupArnSelector *v1.Selector `json:"albTargetGroupArnSelector,omitempty" tf:"-"`
-
 	// Name of ASG to associate with the ELB.
 	// +crossplane:generate:reference:type=AutoscalingGroup
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`

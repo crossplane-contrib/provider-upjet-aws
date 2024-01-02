@@ -148,6 +148,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  logGroupClass:
+                    description: 'Specified the log class of the log group. Possible
+                      values are: STANDARD or INFREQUENT_ACCESS.'
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -264,6 +268,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  logGroupClass:
+                    description: 'Specified the log class of the log group. Possible
+                      values are: STANDARD or INFREQUENT_ACCESS.'
+                    type: string
                   retentionInDays:
                     description: 'Specifies the number of days you want to retain
                       log events in the specified log group.  Possible values are:
@@ -462,6 +470,10 @@ spec:
                       data for the log group. All previously ingested data remains
                       encrypted, and AWS CloudWatch Logs requires permissions for
                       the CMK whenever the encrypted data is requested.
+                    type: string
+                  logGroupClass:
+                    description: 'Specified the log class of the log group. Possible
+                      values are: STANDARD or INFREQUENT_ACCESS.'
                     type: string
                   retentionInDays:
                     description: 'Specifies the number of days you want to retain

@@ -64,18 +64,8 @@ type StateMachineInitParameters struct {
 	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
 	LoggingConfiguration []LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
-	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
-	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
-
-	// Reference to a Role in iam to populate roleArn.
-	// +kubebuilder:validation:Optional
-	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
-
-	// Selector for a Role in iam to populate roleArn.
-	// +kubebuilder:validation:Optional
-	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+	// Set to true to publish a version of the state machine during creation. Default: false.
+	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -112,14 +102,25 @@ type StateMachineObservation struct {
 	// The Amazon States Language definition of the state machine.
 	Definition *string `json:"definition,omitempty" tf:"definition,omitempty"`
 
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ARN of the state machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
 	LoggingConfiguration []LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// Set to true to publish a version of the state machine during creation. Default: false.
+	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
+
+	// The ARN of the state machine.
+	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the state machine.
+	StateMachineVersionArn *string `json:"stateMachineVersionArn,omitempty" tf:"state_machine_version_arn,omitempty"`
 
 	// The current status of the state machine. Either ACTIVE or DELETING.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -137,6 +138,8 @@ type StateMachineObservation struct {
 
 	// Determines whether a Standard or Express state machine is created. The default is STANDARD. You cannot update the type of a state machine once it has been created. Valid values: STANDARD, EXPRESS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	VersionDescription *string `json:"versionDescription,omitempty" tf:"version_description,omitempty"`
 }
 
 type StateMachineParameters struct {
@@ -148,6 +151,10 @@ type StateMachineParameters struct {
 	// Defines what execution history events are logged and where they are logged. The logging_configuration parameter is only valid when type is set to EXPRESS. Defaults to OFF. For more information see Logging Express Workflows and Log Levels in the AWS Step Functions User Guide.
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration []LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
+
+	// Set to true to publish a version of the state machine during creation. Default: false.
+	// +kubebuilder:validation:Optional
+	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

@@ -255,7 +255,7 @@ type ImageBuilderVPCConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// Identifiers of the subnets to which a network interface is attached from the image builder instance or image builder instance.
+	// Identifier of the subnet to which a network interface is attached from the image builder instance.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector

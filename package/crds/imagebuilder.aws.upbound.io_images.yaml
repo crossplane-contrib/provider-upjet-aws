@@ -231,6 +231,39 @@ spec:
                             type: string
                         type: object
                     type: object
+                  imageScanningConfiguration:
+                    description: Configuration block with image scanning configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        ecrConfiguration:
+                          description: Configuration block with ECR configuration.
+                            Detailed below.
+                          items:
+                            properties:
+                              containerTags:
+                                description: Set of tags for Image Builder to apply
+                                  to the output container image that that Amazon Inspector
+                                  scans.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              repositoryName:
+                                description: The name of the container repository
+                                  that Amazon Inspector scans to identify findings
+                                  for your container images.
+                                type: string
+                            type: object
+                          type: array
+                        imageScanningEnabled:
+                          description: Indicates whether Image Builder keeps a snapshot
+                            of the vulnerability scans that Amazon Inspector runs
+                            against the build instance when you create a new image.
+                            Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   imageTestsConfiguration:
                     description: Configuration block with image tests configuration.
                       Detailed below.
@@ -514,6 +547,39 @@ spec:
                             type: string
                         type: object
                     type: object
+                  imageScanningConfiguration:
+                    description: Configuration block with image scanning configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        ecrConfiguration:
+                          description: Configuration block with ECR configuration.
+                            Detailed below.
+                          items:
+                            properties:
+                              containerTags:
+                                description: Set of tags for Image Builder to apply
+                                  to the output container image that that Amazon Inspector
+                                  scans.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              repositoryName:
+                                description: The name of the container repository
+                                  that Amazon Inspector scans to identify findings
+                                  for your container images.
+                                type: string
+                            type: object
+                          type: array
+                        imageScanningEnabled:
+                          description: Indicates whether Image Builder keeps a snapshot
+                            of the vulnerability scans that Amazon Inspector runs
+                            against the build instance when you create a new image.
+                            Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   imageTestsConfiguration:
                     description: Configuration block with image tests configuration.
                       Detailed below.
@@ -802,6 +868,39 @@ spec:
                   imageRecipeArn:
                     description: Amazon Resource Name (ARN) of the image recipe.
                     type: string
+                  imageScanningConfiguration:
+                    description: Configuration block with image scanning configuration.
+                      Detailed below.
+                    items:
+                      properties:
+                        ecrConfiguration:
+                          description: Configuration block with ECR configuration.
+                            Detailed below.
+                          items:
+                            properties:
+                              containerTags:
+                                description: Set of tags for Image Builder to apply
+                                  to the output container image that that Amazon Inspector
+                                  scans.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              repositoryName:
+                                description: The name of the container repository
+                                  that Amazon Inspector scans to identify findings
+                                  for your container images.
+                                type: string
+                            type: object
+                          type: array
+                        imageScanningEnabled:
+                          description: Indicates whether Image Builder keeps a snapshot
+                            of the vulnerability scans that Amazon Inspector runs
+                            against the build instance when you create a new image.
+                            Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   imageTestsConfiguration:
                     description: Configuration block with image tests configuration.
                       Detailed below.

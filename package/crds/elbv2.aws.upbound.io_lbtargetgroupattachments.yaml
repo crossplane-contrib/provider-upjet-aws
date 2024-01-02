@@ -190,7 +190,7 @@ spec:
                     type: number
                   targetGroupArn:
                     description: The ARN of the target group with which to register
-                      targets
+                      targets.
                     type: string
                   targetGroupArnRef:
                     description: Reference to a LBTargetGroup to populate targetGroupArn.

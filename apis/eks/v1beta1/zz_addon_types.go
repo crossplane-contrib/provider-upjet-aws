@@ -45,28 +45,14 @@ type AddonInitParameters struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
-	// Define how to resolve parameter value conflicts
-	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 
-	// The Amazon Resource Name (ARN) of an
-	// existing IAM role to bind to the add-on's service account. The role must be
-	// assigned the IAM permissions required by the add-on. If you don't specify
-	// an existing IAM role, then the add-on uses the permissions assigned to the node
-	// IAM role. For more information, see Amazon EKS node IAM role
-	// in the Amazon EKS User Guide.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
-	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
 
-	// Reference to a Role in iam to populate serviceAccountRoleArn.
-	// +kubebuilder:validation:Optional
-	ServiceAccountRoleArnRef *v1.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
-
-	// Selector for a Role in iam to populate serviceAccountRoleArn.
-	// +kubebuilder:validation:Optional
-	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be
@@ -122,10 +108,14 @@ type AddonObservation struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
-	// Define how to resolve parameter value conflicts
-	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
+
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
+
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be
@@ -182,11 +172,17 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Define how to resolve parameter value conflicts
-	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
 	// +kubebuilder:validation:Optional
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
+
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	// +kubebuilder:validation:Optional
+	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
+
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	// +kubebuilder:validation:Optional
+	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be

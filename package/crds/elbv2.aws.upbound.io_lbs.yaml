@@ -855,7 +855,11 @@ spec:
                     type: object
                   securityGroups:
                     description: A list of security group IDs to assign to the LB.
-                      Only valid for Load Balancers of type application.
+                      Only valid for Load Balancers of type application or network.
+                      For load balancers of type network security groups cannot be
+                      added if none are currently present, and cannot all be removed
+                      once added. If either of these conditions are met, this will
+                      force a recreation of the resource.
                     items:
                       type: string
                     type: array
@@ -1040,10 +1044,10 @@ spec:
                         type: object
                     type: object
                   subnets:
-                    description: A list of subnet IDs to attach to the LB. Subnets
-                      cannot be updated for Load Balancers of type network. Changing
-                      this value for load balancers of type network will force a recreation
-                      of the resource.
+                    description: A list of subnet IDs to attach to the LB. For Load
+                      Balancers of type network subnets can only be added (see Availability
+                      Zones), deleting a subnet for load balancers of type network
+                      will force a recreation of the resource.
                     items:
                       type: string
                     type: array

@@ -80,28 +80,28 @@ type DatasourceInitParameters struct {
 	// Description of the data source.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// DynamoDB settings. See below
+	// DynamoDB settings. See DynamoDB Config
 	DynamodbConfig []DynamodbConfigInitParameters `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
 
-	// Amazon Elasticsearch settings. See below
+	// Amazon Elasticsearch settings. See ElasticSearch Config
 	ElasticsearchConfig []ElasticsearchConfigInitParameters `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
-	// AWS EventBridge settings. See below
+	// AWS EventBridge settings. See Event Bridge Config
 	EventBridgeConfig []EventBridgeConfigInitParameters `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
 
-	// HTTP settings. See below
+	// HTTP settings. See HTTP Config
 	HTTPConfig []HTTPConfigInitParameters `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
-	// AWS Lambda settings. See below
+	// AWS Lambda settings. See Lambda Config
 	LambdaConfig []LambdaConfigInitParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Amazon OpenSearch Service settings. See below
+	// Amazon OpenSearch Service settings. See OpenSearch Service Config
 	OpensearchserviceConfig []OpensearchserviceConfigInitParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
 	// AWS RDS settings. See Relational Database Config
 	RelationalDatabaseConfig []RelationalDatabaseConfigInitParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
-	// IAM service role ARN for the data source.
+	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
@@ -114,7 +114,7 @@ type DatasourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
-	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -129,33 +129,33 @@ type DatasourceObservation struct {
 	// Description of the data source.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// DynamoDB settings. See below
+	// DynamoDB settings. See DynamoDB Config
 	DynamodbConfig []DynamodbConfigObservation `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
 
-	// Amazon Elasticsearch settings. See below
+	// Amazon Elasticsearch settings. See ElasticSearch Config
 	ElasticsearchConfig []ElasticsearchConfigObservation `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
-	// AWS EventBridge settings. See below
+	// AWS EventBridge settings. See Event Bridge Config
 	EventBridgeConfig []EventBridgeConfigObservation `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
 
-	// HTTP settings. See below
+	// HTTP settings. See HTTP Config
 	HTTPConfig []HTTPConfigObservation `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// AWS Lambda settings. See below
+	// AWS Lambda settings. See Lambda Config
 	LambdaConfig []LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Amazon OpenSearch Service settings. See below
+	// Amazon OpenSearch Service settings. See OpenSearch Service Config
 	OpensearchserviceConfig []OpensearchserviceConfigObservation `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
 	// AWS RDS settings. See Relational Database Config
 	RelationalDatabaseConfig []RelationalDatabaseConfigObservation `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
-	// IAM service role ARN for the data source.
+	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
-	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -179,31 +179,31 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// DynamoDB settings. See below
+	// DynamoDB settings. See DynamoDB Config
 	// +kubebuilder:validation:Optional
 	DynamodbConfig []DynamodbConfigParameters `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
 
-	// Amazon Elasticsearch settings. See below
+	// Amazon Elasticsearch settings. See ElasticSearch Config
 	// +kubebuilder:validation:Optional
 	ElasticsearchConfig []ElasticsearchConfigParameters `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
-	// AWS EventBridge settings. See below
+	// AWS EventBridge settings. See Event Bridge Config
 	// +kubebuilder:validation:Optional
 	EventBridgeConfig []EventBridgeConfigParameters `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
 
-	// HTTP settings. See below
+	// HTTP settings. See HTTP Config
 	// +kubebuilder:validation:Optional
 	HTTPConfig []HTTPConfigParameters `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
-	// AWS Lambda settings. See below
+	// AWS Lambda settings. See Lambda Config
 	// +kubebuilder:validation:Optional
 	LambdaConfig []LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Amazon OpenSearch Service settings. See below
+	// Amazon OpenSearch Service settings. See OpenSearch Service Config
 	// +kubebuilder:validation:Optional
 	OpensearchserviceConfig []OpensearchserviceConfigParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
-	// AWS Region for RDS HTTP endpoint. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -213,7 +213,7 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	RelationalDatabaseConfig []RelationalDatabaseConfigParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
-	// IAM service role ARN for the data source.
+	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -227,43 +227,53 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
 
-	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE.
+	// Type of the Data Source. Valid values: AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, HTTP, NONE, RELATIONAL_DATABASE, AMAZON_EVENTBRIDGE, AMAZON_OPENSEARCH_SERVICE.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DeltaSyncConfigInitParameters struct {
+
+	// The number of minutes that an Item is stored in the data source.
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// User-supplied name for the data source.
+	// The table name.
 	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
+	// The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigObservation struct {
+
+	// The number of minutes that an Item is stored in the data source.
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// User-supplied name for the data source.
+	// The table name.
 	DeltaSyncTableName *string `json:"deltaSyncTableName,omitempty" tf:"delta_sync_table_name,omitempty"`
 
+	// The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DeltaSyncConfigParameters struct {
 
+	// The number of minutes that an Item is stored in the data source.
 	// +kubebuilder:validation:Optional
 	BaseTableTTL *float64 `json:"baseTableTtl,omitempty" tf:"base_table_ttl,omitempty"`
 
-	// User-supplied name for the data source.
+	// The table name.
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableName *string `json:"deltaSyncTableName" tf:"delta_sync_table_name,omitempty"`
 
+	// The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
 	// +kubebuilder:validation:Optional
 	DeltaSyncTableTTL *float64 `json:"deltaSyncTableTtl,omitempty" tf:"delta_sync_table_ttl,omitempty"`
 }
 
 type DynamodbConfigInitParameters struct {
+
+	// The DeltaSyncConfig for a versioned data source. See Delta Sync Config
 	DeltaSyncConfig []DeltaSyncConfigInitParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// Name of the DynamoDB table.
@@ -281,10 +291,13 @@ type DynamodbConfigInitParameters struct {
 	// Set to true to use Amazon Cognito credentials with this data source.
 	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`
 
+	// Detects Conflict Detection and Resolution with this data source.
 	Versioned *bool `json:"versioned,omitempty" tf:"versioned,omitempty"`
 }
 
 type DynamodbConfigObservation struct {
+
+	// The DeltaSyncConfig for a versioned data source. See Delta Sync Config
 	DeltaSyncConfig []DeltaSyncConfigObservation `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// AWS region of the DynamoDB table. Defaults to current region.
@@ -296,11 +309,13 @@ type DynamodbConfigObservation struct {
 	// Set to true to use Amazon Cognito credentials with this data source.
 	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`
 
+	// Detects Conflict Detection and Resolution with this data source.
 	Versioned *bool `json:"versioned,omitempty" tf:"versioned,omitempty"`
 }
 
 type DynamodbConfigParameters struct {
 
+	// The DeltaSyncConfig for a versioned data source. See Delta Sync Config
 	// +kubebuilder:validation:Optional
 	DeltaSyncConfig []DeltaSyncConfigParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
@@ -325,6 +340,7 @@ type DynamodbConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	UseCallerCredentials *bool `json:"useCallerCredentials,omitempty" tf:"use_caller_credentials,omitempty"`
 
+	// Detects Conflict Detection and Resolution with this data source.
 	// +kubebuilder:validation:Optional
 	Versioned *bool `json:"versioned,omitempty" tf:"versioned,omitempty"`
 }
@@ -340,7 +356,7 @@ type ElasticsearchConfigObservation struct {
 	// HTTP endpoint of the Elasticsearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// AWS region of Elasticsearch domain. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
@@ -350,7 +366,7 @@ type ElasticsearchConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
-	// AWS region of Elasticsearch domain. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -379,7 +395,7 @@ type HTTPConfigInitParameters struct {
 	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
 	AuthorizationConfig []AuthorizationConfigInitParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// HTTP URL.
+	// HTTP endpoint of the Elasticsearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
@@ -388,7 +404,7 @@ type HTTPConfigObservation struct {
 	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
 	AuthorizationConfig []AuthorizationConfigObservation `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// HTTP URL.
+	// HTTP endpoint of the Elasticsearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
@@ -398,7 +414,7 @@ type HTTPConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationConfig []AuthorizationConfigParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// HTTP URL.
+	// HTTP endpoint of the Elasticsearch domain.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 }
@@ -429,7 +445,7 @@ type HTTPEndpointConfigObservation struct {
 	// Logical database name.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// AWS Region for RDS HTTP endpoint. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Logical schema name.
@@ -450,7 +466,7 @@ type HTTPEndpointConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// AWS Region for RDS HTTP endpoint. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -480,26 +496,26 @@ type LambdaConfigParameters struct {
 
 type OpensearchserviceConfigInitParameters struct {
 
-	// HTTP endpoint of the OpenSearch domain.
+	// HTTP endpoint of the Elasticsearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type OpensearchserviceConfigObservation struct {
 
-	// HTTP endpoint of the OpenSearch domain.
+	// HTTP endpoint of the Elasticsearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// AWS region of the OpenSearch domain. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type OpensearchserviceConfigParameters struct {
 
-	// HTTP endpoint of the OpenSearch domain.
+	// HTTP endpoint of the Elasticsearch domain.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
-	// AWS region of the OpenSearch domain. Defaults to current region.
+	// AWS region of the DynamoDB table. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
