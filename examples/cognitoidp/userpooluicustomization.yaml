@@ -56,7 +56,7 @@ metadata:
   name: main
 spec:
   forProvider:
-    domain: example-domain
+    domain: ${Rand.RFC1123Subdomain}
     region: us-west-1
     userPoolIdSelector:
       matchLabels:
