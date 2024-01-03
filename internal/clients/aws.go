@@ -130,23 +130,29 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1b
 		if pc.Spec.Credentials.WebIdentity == nil {
 			return errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
+		webIdentityConfig := map[string]any{
 			keyRoleArn:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
 			keyWebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
 		}
 		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
-			ps.Configuration[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName
+			webIdentityConfig[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName
+		}
+		ps.Configuration[keyAssumeRoleWithWebIdentity] = []any{
+			webIdentityConfig,
 		}
 	case authKeyUpbound:
 		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
 			return errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
 		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
+		webIdentityConfig := map[string]any{
 			keyRoleArn:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
 			keyWebIdentityTokenFile: upboundProviderIdentityTokenFile,
 		}
 		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
-			ps.Configuration[keySessionName] = pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName
+			webIdentityConfig[keySessionName] = pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName
+		}
+		ps.Configuration[keyAssumeRoleWithWebIdentity] = []any{
+			webIdentityConfig,
 		}
 	case authKeySecret:
 		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
