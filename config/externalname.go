@@ -2657,12 +2657,36 @@ var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
 	// terraform-plugin-framework
 	"aws_appconfig_environment": config.IdentifierFromProvider,
-	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
-	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
+	// Cognito User Pool clients can be imported using the user pool id and client id separated by a slash (/)
+	// However, the terraform id is just the client id.
+	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 	// simpledb
 	//
 	// SimpleDB Domains can be imported using the name
 	"aws_simpledb_domain": config.NameAsIdentifier,
+}
+
+// cognitoUserPoolClient
+// Note(mbbush) This resource has some unexpected behaviors that make it impossible to write a completely correct
+// ExternalName config. Specifically, the terraform id returned in the terraform state is not the same as the
+// identifier used to import it. Additionally, if the terraform id set to an empty string, the terraform
+// provider passes the empty string through to the aws query during refresh, which returns an api error.
+// This could be related to the fact that this resource is implemented using the terraform plugin framework,
+// which introduces the concept of a null value as distinct from a zero value.
+func cognitoUserPoolClient() config.ExternalName {
+	e := config.IdentifierFromProvider
+	// TODO: Uncomment when it's acceptable to remove fields from spec.initProvider (major release)
+	// e.IdentifierFields = []string{"user_pool_id"}
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
+		if externalName == "" {
+			return "invalidnonemptystring", nil
+		}
+		// Ideally, we'd return parameters.user_pool_id/external_name if this is invoked during a call to terraform import,
+		// and the externalName if this is invoked during a call to terraform refresh. But I don't know how to distinguish
+		// between them inside this function.
+		return externalName, nil
+	}
+	return e
 }
 
 func lambdaFunctionURL() config.ExternalName {
