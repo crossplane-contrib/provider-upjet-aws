@@ -3,6 +3,7 @@ kind: RoleAssociation
 metadata:
   annotations:
     meta.upbound.io/example-id: grafana/v1beta1/roleassociation
+    upjet.upbound.io/manual-intervention: "It requires a real user ID"
   labels:
     testing.upbound.io/example-name: example
   name: example-ra
@@ -24,6 +25,7 @@ kind: Workspace
 metadata:
   annotations:
     meta.upbound.io/example-id: grafana/v1beta1/roleassociation
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example-ra
   name: example-${Rand.RFC1123Subdomain}
@@ -45,6 +47,7 @@ kind: Role
 metadata:
   annotations:
     meta.upbound.io/example-id: grafana/v1beta1/roleassociation
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: assume-ra
   name: assume-ra
